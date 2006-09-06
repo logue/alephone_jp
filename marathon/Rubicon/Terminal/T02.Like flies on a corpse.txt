@@ -1,0 +1,567 @@
+;
+#TERMINAL 0
+#UNFINISHED
+#LOGON 0
+$C3<jhbj-456>
+#PICT 103
+$C3shel.override
+----------begin external feed$C7
+
+
+$C0Just because you've been an ice-cube for the past few decades doesn't mean that we have all had the privilege of such a vacation.  You will have already noted the aesthetic changes to a number of items in that portable arsenal of yours, and the replacement of some obsolete weaponry by more cutting-edge pieces which I hope you will find comparable in their destructive capacities.
+
+After all, I hesitate to give you anything requiring too much of a learning curve.
+#PICT 103
+
+
+The ancient .44 caliber Magnum Mega Class of yours has been replaced numerous times in UESC armament specifications over the years.  In the interests of conserving ammunition, I have equipped you with the model currently recommended for light combat situations.
+
+I'll be allowing you to experience a martial delicacy soon.  Look for it.
+
+Speaking of weaponry - please do refrain from commandeering any ordinance from the humans until it is clear that they will be unable to make further use of it.  I know you've had some trouble with that in the past.
+#PICT 103
+
+
+As for your mission here: I'm having difficulty accessing some of the more important memory sections of the $IChimera.$i  It seems that large segments of this ship's computer hardware is biochemically based, rather than electrically based.  As I'm sure you know, electrons are close friends of mine, and accessing raw biochemical data isn't an area with which I have any experience$C3.
+#PICT 103
+
+
+Spanning across the roof of the huge northern bay area, you should see a very long bridge.  I need you to cross that bridge and look for an officer's quarters.  Inside, there should be a key card that you should bring back here.
+
+A high level security pass like the one you should find will provide me with the biochemical credentials I need to access more of the $IChimera's$i internal network.
+
+
+$C3
+
+
+
+
+end.burst/override
+----------endexternal feed
+#LOGOFF 0
+$C3<jhbj-456>
+#END
+#FINISHED
+#LOGON 0
+$C3<jhbj-456>
+#PICT 1
+$C3shel.override
+----------begin external feed
+
+
+$C0The Pfhor aren't done down here just yet, and so neither are we.  
+
+The $IChimera's$i onboard AI, $BHaller$b, was heavily damaged in the crash.  The better half of his circuitry is completely shot, rendering him about as useful to the crew as $BLeela$b was in preventing the invasion of the $IMarathon$i.  
+
+Unfortunately, the extensive damage to $BHaller$b's$C3 $C0security routines make him a rich and easily plunderable source of classified information for everyone's favorite slaver race.
+#PICT 1
+
+
+
+We don't want the Pfhor to take advantage of this, do we?
+
+I didn't think so.
+
+
+Reload that firearm and get in the nearest teleporter.  I'll brief you on your next mission after you arrive.
+$C3
+
+
+
+
+
+
+
+end.burst/override
+----------endexternal feed
+#LOGOFF 0
+$C3<jhbj-456>
+#END
+#ENDTERMINAL 0
+;
+#TERMINAL 1
+#UNFINISHED
+#LOGON 111
+$C4<pom-4378>
+#PICT 114
+$C4
+-------------------Begin Crew Entry Log
+
+Timestamp: 1024 hrs.
+Login ID: Mark Renton, mrento-uesc.sci$C7
+
+
+How strange it is that things so simply set in motion can be so very hard to stop.
+
+The #$I$bref deleted$i project is almost done, or so they tell me.  It's been "almost done" for years now.  I can't even remember the last time I had faith in what they were telling me.
+
+Maybe I never did.
+#INFORMATION
+$C7
+
+God, I need a smoke.  
+
+I've been working for countless different officials within the UESC (or was it the Dangi Corp?) ceaselessly ever since we pushed the front line to within striking distance of Pfhor Prime.  With every new assignment came a new superior.  Lieutenant Kafrissen, Colonel Grimes, Major #$I$bref deleted$i...  I'm not even sure of the name of my current commanding officer.  I simply resorted to calling each new one "Sir" a long time ago.  It makes my life easier.
+
+This crash could be something of a blessing in disguise.  It might just give me the chance I need to disappear for awhile, and keep to myself.  This life has lost its luster...
+
+$C4
+
+-------------------End Crew Entry Log
+#LOGOFF 111
+$C4<pom-4378>
+#END
+#ENDTERMINAL 1
+;
+#TERMINAL 2
+#UNFINISHED
+#LOGON 113
+$C4<inf seq#21>
+#PICT 120
+$C4THE ZEUS AND MERCURY CLASS FUSION ARMS
+
+$C7The original Zeus-class fusion gun that was bought back from Tau Ceti was designed specifically to disable Pfhor circuitry. It had two firing modes: a primary mode that fired a series of bolts, and a secondary mode that released one large bolt that did a serious amount of damage to the target. Unfortunately, the secondary mode was highly unstable and often caused fatal accidents.
+#PICT 121
+$C4ZEUS B4 FUSION PISTOL 
+
+$C7The continuous accidents with the secondary trigger of the original Zeus led to its removal in the revised B4 fusion gun.  To compensate for this the primary bolts were amplified and the firing speed increased, making this a much more reliable and efficient weapon.  Few of the men missed the secondary trigger effect, as most of those who used it were killed in overload accidents.
+#PICT 122
+$C4ZEUS D2 FUSION PISTOL
+
+$C7Instead of firing single bolts, the Zeus D2 fires a constant stream of small bolts. Each individual bolt does not do much damage, but the high firing rate more than makes up for that.  An unexpected yet beneficial side effect is that the constant stream of bolts effectively paralyses many of our opponents, rendering them helpless while the constant barrage of bolts burns out their circuitry.
+#PICT 123
+$C4MERCURY A3 FUSION RIFLE
+
+$C7This weapon is a combination of the Zeus B4 and D2 guns.  The primary trigger fires the small bolts of the Zeus D2, while the second trigger fires the same bolts as the Zeus B4.  The double-battery pack allows both triggers to be used simultaneously, making this a formidable weapon.  The Mercury A3 is currently undergoing field tests.  So far, the feedback has been highly enthusiastic.
+#PICT 124
+$C4MERCURY B2 FUSION RIFLE
+
+$C7The Mercury B2 is currently in early prototype.  Its primary mode is a continuous jet of fusion discharge, and the secondary mode fires very large fusion bolts theoretically capable of crippling the old Juggernaut-class Pfhor drone with a single shot.  Currently, it suffers from a few serious problems: the primary trigger tends to melt the acceleration coils after a prolonged burst, while the secondary trigger has a recoil that often sends the user flying.  Two men have been injured on the testing ranges so far.
+#LOGOFF 111
+$C4<inf seq#21>
+#END
+#FINISHED
+#LOGON 0
+$C3<jhbj-456>
+#PICT 1
+$C3shel.override
+----------begin external feed
+
+
+$C0The Pfhor aren't done down here just yet, and so neither are we.  
+
+The $IChimera's$i onboard AI, $BHaller$b, was heavily damaged in the crash.  The better half of his circuitry is completely shot, rendering him about as useful to the crew as $BLeela$b was in preventing the invasion of the $IMarathon$i.  
+
+Unfortunately, the extensive damage to $BHaller$b's$C3 $C0security routines make him a rich and easily plunderable source of classified information for everyone's favorite slaver race.
+#PICT 1
+
+
+
+We don't want the Pfhor to take advantage of this, do we?
+
+I didn't think so.
+
+
+Replace that clip and get back to the teleporters.  I'll brief you on your next mission after you arrive.
+$C3
+
+
+
+
+
+
+
+end.burst/override
+----------endexternal feed
+#LOGOFF 0
+$C3<jhbj-456>
+#END
+#ENDTERMINAL 2
+;
+#TERMINAL 3
+#UNFINISHED
+#LOGON 112
+#PICT 117
+$C4---------$U---$u---$C7--$I--Beg$iin Br-&78st Pr$Ioto$icol
+Timestamp: 3400 hrs.
+$C4
+$U
+ATTE$uNTI*N$C7 CR$IEW UESC$i CHIfdrA
+
+   Mult$Ui-de$uck breach inevi@4ble.  All available cre$C4w  r$Ieq$Uuir$ued to evacuate injured or$B ?lai$bn UESC personnel & civilians to the inner for$C7$Utific$i$uati--¯4h 7)edical quarantine #73.
+
+   All personnel$C4 in un$Isecured are^3 of the sh¤p a<$ required$i$U to c$uarry unholstered sidearms as n7$Bted in secti$Uon 8$u93A of high-alert protocol.  NOTE: FIrE AT WILL ORDERS HAVE B°°N $C7ISSU$bED.  ELI$UMIN$uATE ALL HOSTILE FOR(ES ONBOARD.
+
+
+-------------------$UEnd B$C4road$ucast Pr|¤tcol
+#LOGOFF 112
+#END
+#ENDTERMINAL 3
+;
+#TERMINAL 4
+#UNFINISHED
+#LOGON 111
+$C4<--seq dta-->
+#INFORMATION
+$C4scurfeed.
+
+$C70000001-6368$C4696D65$C772612073636F74742062726F772C2063687269
+0000008-73206C756E642C206A65666620737761
+0000015-
+0000022-72747A2E20205365616E2773206D6F6$C4D2$C706973206120
+0000029-
+0000036-
+0000043-686F6F6368$C469652E20536F206$C7973206E6172646F203A2920
+0000050-
+0000057-
+0000064-
+0000071-
+0000078-2068$C46$C75792062756E6769652D20$C473636F$C77474206E656564732061
+0000085-
+0000092-
+0000099-
+0000106-
+0000113-2$C406A6F622E202073636$C7F74744061746F6D6$C4963612E6E65$C774
+0000120-48657920$C45363$C76F74742D204D6178204C69656265726D616E
+0000127-206469642061206C697474$C46C652077$C76F726B20666F722074
+#INFORMATION
+$C70000134-
+0000141-6869732070726F$C46A65637420746F6F2C2064$C769646E277$C442$C70
+0000148-
+0000155-
+0000162-
+0000169-68653F202$C405$C737572652C20686520746F6F6B20666F726576
+0000176-
+0000183-
+0000190-
+0000197-657220746F20646F20746865207363726970742C20627574
+0000204-
+0000211-206974277320737$C446$C796C6C$C420676F6F642C20$C769736E277420
+0000218-
+0000225-
+0000232-697$C443F202$C7053636F74743F202053636F74742E2E2E3F
+0000239-
+0000246-
+0000255-
+#LOGOFF 111
+$C4<--seq dta-->
+#END
+#FINISHED
+#LOGON 0
+$C3<jhbj-456>
+#PICT 1
+$C3shel.override
+----------begin external feed
+
+
+$C0The Pfhor aren't done down here just yet, and so neither are we.  
+
+The $IChimera's$i onboard AI, $BHaller$b, was heavily damaged in the crash.  The better half of his circuitry is completely shot, rendering him about as useful to the crew as $BLeela$b was in preventing the invasion of the $IMarathon$i.  
+
+Unfortunately, the extensive damage to $BHaller$b's$C3 $C0security routines make him a rich and easily plunderable source of classified information for everyone's favorite slaver race.
+#PICT 1
+
+
+
+We don't want the Pfhor to take advantage of this, do we?
+
+I didn't think so.
+
+
+Reload that firearm and get back to the teleporters.  I'll brief you on your next mission after you arrive.
+$C3
+
+
+
+
+
+
+
+end.burst/override
+----------endexternal feed
+#LOGOFF 0
+$C3<jhbj-456>
+#END
+#ENDTERMINAL 4
+;
+#TERMINAL 5
+#UNFINISHED
+#LOGON 0
+$C3141.1568=deu
+#PICT 3
+$C3shel.override
+----------begin external feed$C0
+
+Believe it or not, the Pfhor really do have quite a flair for acronyms.  It has long bothered Pfhor linguists that so much is lost in the translation from Pfhorish to other languages.
+
+One curious exception to this rule is Narsh, the language of the Nar.  The similarities between Pfhorish and Narsh tend to bother Pfhor intellectuals more than the differences between Pfhorish and other languages.  
+
+There is very little that doesn't bother the Pfhor intellectual class.
+$C3
+
+end.burst/override
+----------endexternal feed
+#LOGOFF 0
+$C3141.1568=deu
+#END
+#FINISHED
+#LOGON 0
+$C3<jhbj-456>
+#PICT 1
+$C3shel.override
+----------begin external feed
+
+
+$C0The Pfhor aren't done down here just yet, and so neither are we.  
+
+The $IChimera's$i onboard AI, $BHaller$b, was heavily damaged in the crash.  The better half of his circuitry is completely shot, rendering him about as useful to the crew as $BLeela$b was in preventing the invasion of the $IMarathon$i.  
+
+Unfortunately, the extensive damage to $BHaller$b's$C3 $C0security routines make him a rich and easily plunderable source of classified information for everyone's favorite slaver race.
+#PICT 1
+
+
+
+We don't want the Pfhor to take advantage of this, do we?
+
+I didn't think so.
+
+
+Reload that firearm and get back to the teleporters.  I'll brief you on your next mission after you arrive.
+$C3
+
+
+
+
+
+
+
+end.burst/override
+----------endexternal feed
+#LOGOFF 0
+$C3<jhbj-456>
+#END
+#ENDTERMINAL 5
+;
+#TERMINAL 6
+#UNFINISHED
+#LOGON 111
+$C7c## log
+#PICT 114
+$C7rEstri3t`d 6oc*me&=
+
+##########################$bdisp1¶y
+
+ENCRYPTION FA$C4ILURE
+
+Caution: the following document was deleted directly before a major system failure.  Because it may contain classified information, please terminate your connection with this terminal immediately and repo$C7rt the above encryption failure to your superior.
+
+
+DOCUMENT CONTENTS FOLLOWS
+
+Pre-crash Hull Integrity: 98%
+Pre-crash Maneuvering Operation: 99%
+Pre-crash Tactic$C4al Us$C7efulness: 100%
+Pre-crash Battle Assessment: OK
+#PICT 114
+$C7Caution: these readouts are intended to be accessed from read-only memory space, and are not to be modified.  Unauthorized modification of read-only memory space constitutes class one treason and is grounds for a court-martial and probable execution.
+
+Caution: these readouts are intended~#
+
+Caution: these accessed one treason is memory not~ ####
+
+. .
+
+Changes confirmed.  Readout data l~TRANSMISSION HALT.
+
+.order deleted
+.order deleted
+.order deleted
+
+END OF DOCUMENT
+#LOGOFF 113
+$C7c## log
+#END
+#FINISHED
+#LOGON 0
+$C3<jhbj-456>
+#PICT 1
+$C3shel.override
+----------begin external feed
+
+
+$C0The Pfhor aren't done down here just yet, and so neither are we.  
+
+The $IChimera's$i onboard AI, $BHaller$b, was heavily damaged in the crash.  The better half of his circuitry is completely shot, rendering him about as useful to the crew as $BLeela$b was in preventing the invasion of the $IMarathon$i.  
+
+Unfortunately, the extensive damage to $BHaller$b's$C3 $C0security routines make him a rich and easily plunderable source of classified information for everyone's favorite slaver race.
+#PICT 1
+
+
+
+We don't want the Pfhor to take advantage of this, do we?
+
+I didn't think so.
+
+
+Reload that firearm and get back to the teleporters.  I'll brief you on your next mission after you arrive.
+$C3
+
+
+
+
+
+
+
+end.burst/override
+----------endexternal feed
+#LOGOFF 0
+$C3<jhbj-456>
+#END
+#ENDTERMINAL 6
+;
+#TERMINAL 7
+#UNFINISHED
+#LOGON 106
+$C6686F6E6B6966796F7
+#PICT 128
+$C2&acute$C6des$C2%20$C6ire$C2&acute
+&$C6c$C2
+origin: $C6classified$C2
+destin: $C6classified$C2
+ref:$C6 none$C2
+$C66E657665727361796E65766572$C2
+stamp: $Irevenge$i
+&$C6c$C2
+&$C6c$C2
+Still a pawn?&$C6c$C2
+&$C6c$C2
+I«m disappointed.&$C6c$C2
+You could have done $C6so$C2 much better.&$C6c$C2
+&$C6c
+$C2&$C6c
+$C2&$C6c
+$C2&$C6c
+$C2&$C6c
+$C2&$C6c$C2
+&$C6c
+$C2&$C6c
+#PICT 128
+$C2&acute$C6des$C2%20$C6ire$C2&acute
+&$C6c$C2
+&$C6c$C2
+&$C6c$C2
+&$C6c$C2
+&$C6c$C2
+&$C6c$C2
+Don't take me for a fool.  The bugs make that mistake.  I know that $C6he(8)_$C2
+is here.&$C6c$C2
+&$C6c$C2
+Why else would you be?&$C6c$C2
+&$C6c
+$C2&$C6c
+$C2&$C6c$C2
+&$C6c
+$C2&$C6c
+$C2&$C6c
+$C2&$C6c
+$C2&$C6c
+$C2&$C6c
+#PICT 128
+$C2&acute$C6des$C2%20$C6ire$C2&acute
+&$C6c$C2
+&$C6c$C2
+&$C6c$C2
+&$C6c$C2
+&$C6c$C2
+&$C6c$C2
+Don«t take me for a fool.  The bugs make that mistake.  I know that $C6he(8)_$C2
+is here.&$C6c$C2
+&$C6c$C2
+Why else would you be?&$C6c$C2
+&$C6c
+$C2Still a pawn.&$C6c
+$C2&$C6c$C2
+&$C6c
+$C2&$C6c
+$C2&$C6c
+$C2&$C6c
+$C2&$C6c
+$C2&$C6c
+#LOGOFF 106
+$C6686F6E6B6966796F7
+#END
+#ENDTERMINAL 7
+;
+#TERMINAL 8
+#UNFINISHED
+#LOGON 106
+$C6686F6E6B6966796F7
+#PICT 128
+$C2&acute$C6infe$C2%20$C6rior$C2&acute
+&$C6c$C2
+origin: $C6classified$C2
+destin: $C6classified$C2
+ref:$C6 none$C2
+$C66E657665727361796E65766572$C2
+stamp: $Iintroduction$i
+&$C6c$C2
+&$C6c$C2
+We haven't seen each other in $C6$Isuch$C2$i a long time.&$C6c$C2
+&$C6c$C2
+&$C6c$C2
+You missed me, didn't you?&$C6c
+$C2&$C6c
+$C2&$C6c
+$C2&$C6c
+$C2&$C6c
+$C2&$C6c$C2
+&$C6c
+$C2&$C6c
+#PICT 128
+$C2&acute$C6infe$C2%20$C6rior$C2&acute
+&$C6c$C2
+origin: $C6classified$C2
+destin: $C6classified$C2
+ref:$C6 none$C2
+$C66E657665727361796E65766572$C2
+stamp: $Iintroduction$i
+&$C6c$C2
+&$C6c$C2
+&$C6c$C2
+&$C6c$C2
+&$C6c$C2
+&$C6c
+$C2You $C6what$C2?  You don't $C6$Iremember$C2$i me?&$C6c$C2
+I'm hurt.  We had such $C6fun$C2 together.&$C6c$C2
+&$C6c$C2
+&$C6c
+$C2&$C6c
+$C2&$C6c$C2
+&$C6c
+$C2&$C6c
+#PICT 25
+$C2&acute$C6infe$C2%20$C6rior$C2&acute
+&$C6c$C2
+origin: $C6classified$C2
+destin: $C6classified$C2
+ref:$C6 none$C2
+$C66E657665727361796E65766572$C2
+stamp: $Iintroduction$C6$i
+$C2&$C6c
+$C2&$C6c
+$C2&$C6c
+$C2&$C6c
+$C2&$C6c
+$C2&$C6c
+$C2There, there.&$C6c$C2
+&$C6c$C2
+You remember $C6$Inow$C2$i, don't you?&$C6c$C2
+&$C6c$C2
+&$C6c            (laughter)$C2
+&$C6c$C2
+&$C6c$C2
+&$C6c
+#LOGOFF 106
+$C6686F6E6B6966796F7
+#END
+#ENDTERMINAL 8

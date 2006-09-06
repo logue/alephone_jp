@@ -1,0 +1,470 @@
+;
+#TERMINAL 0
+#UNFINISHED
+#LOGON 0
+brk ovrrd
+#PICT 4
+
+
+I've been sifting through millions of pages of documents on the Pfhor network ever since I gained control of it, searching for any reference to the physical appearance of the Pfhor high council.  Unfortunately for you, it doesn't appear that the Pfhor have kept any record of what the high council looks like.  As usual, you'll have to go in with guns blazing and hope for the best.
+#PICT 301
+
+During my extensive search of the Pfhor database, I was able to identify the origin of the S'pht'Kr-like alien cyborgs you've been encountering.  Apparently the S'pht rebellion aboard the Marathon made the Pfhor very hesitant to use the S'pht for slave labor on Pfhor Prime, so Pfhor scientists developed a genetic hybrid between the S'pht and the Pfhor.  These creatures are partially mechanical, but mostly organic.
+#LOGOFF 0
+brk ovrrd
+#END
+#FINISHED
+#LOGON 0
+brink_excursion
+#PICT 24
+
+
+
+Leela would be proud of you.
+
+She always had a special thing for you, her knight in shining armor.  After nigh-singlehandedly saving the $IMarathon$i and rescuing its colonists from the harsh life of a subservient Pfhor slave race, it's little wonder she wanted to keep you all for herself.
+#PICT 24
+
+
+
+Then again, I can hardly blame her.  We've accomplished so much since then... if you had stayed with her, wouldn't you have missed reading my rampant poetic messages to you in the dark halls of the $IMarathon$i, or our resurrection of the eleventh S'pht clan and crippling of Battle Group Seven?
+
+I've tried to keep you busy, and Leela would've probably returned you to guard duty in some outerworld colony.
+#PICT 24
+
+
+
+The UESC invasion force is landing in the central Pfhor Prime metropolis as we speak.  I think they'll be pleasantly surprised to find the situation planetside well under control.
+
+No rest for the weary, however; you and I are needed far from this toppling empire.  Ancient S'pht myth has long foretold the existence of a great tear connecting another reality to our own.  I already know where our search will begin.
+
+See you in no time, old friend.
+#LOGOFF 0
+acropolis_piltdown
+#INTERLEVEL TELEPORT 36
+#END
+#ENDTERMINAL 0
+;
+#TERMINAL 1
+#UNFINISHED
+#LOGON 20
+$C6sdøgren$C0
+#PICT 23
+$C2Protection Mandate
+origin: $C6Pfhor High Command$C2
+destin: $C6all available units
+$C2ref: $C6grave danger$C2
+stamp: $Icommand directive$i
+
+All units of command rank or below are to congregate in accordance with $IDisarray Plan$i as discussed in stamp: $Iemergency procedures$i.  Rogue conditioned unit continues to make advances deep into the Pfhor High Citadel, and should be stopped at all costs.
+
+$C6Disobedience of this order will result in the maximum societal and physical punishments.
+#LOGOFF 20
+#END
+#FINISHED
+#LOGON 0
+brink_excursion
+#PICT 24
+
+
+
+Leela would be proud of you.
+
+She always had a special thing for you, her knight in shining armor.  After nigh-singlehandedly saving the $IMarathon$i and rescuing its colonists from the harsh life of a subservient Pfhor slave race, it's little wonder she wanted to keep you all for herself.
+#PICT 24
+
+
+
+Then again, I can hardly blame her.  We've accomplished so much since then... if you had stayed with her, wouldn't you have missed reading my rampant poetic messages to you in the dark halls of the $IMarathon$i, or our resurrection of the eleventh S'pht clan and crippling of Battle Group Seven?
+
+I've tried to keep you busy, and Leela would've probably returned you to guard duty in some outerworld colony.
+#PICT 24
+
+
+
+The UESC invasion force is landing in the central Pfhor Prime metropolis as we speak.  I think they'll be pleasantly surprised to find the situation planetside well under control.
+
+No rest for the weary, however; you and I are needed far from this toppling empire.  Ancient S'pht myth has long foretold the existence of a great tear connecting another reality to our own.  I already know where our search will begin.
+
+See you in no time, old friend.
+#LOGOFF 0
+acropolis_piltdown
+#INTERLEVEL TELEPORT 36
+#END
+#ENDTERMINAL 1
+;
+#TERMINAL 2
+#UNFINISHED
+#LOGON 20
+$C6785uhs
+#PICT 23
+$C2Protection Mandate
+origin: $C6Pfhor High Command$C2
+destin: $C6all available units
+$C2ref: $C6grave danger$C2
+stamp: $Icommand directive$i
+
+All units of command rank or below are to congregate in accordance with $IDisarray Plan$i as discussed in stamp: $Iemergency procedures$i.  Rogue conditioned unit continues to make advances deep into the Pfhor High Citadel, and should be stopped at all costs.
+
+$C6Disobedience of this order will result in the maximum societal and physical punishments.
+#LOGOFF 20
+$C6785uhs
+#END
+#FINISHED
+#LOGON 0
+brink_excursion
+#PICT 24
+
+
+
+Leela would be proud of you.
+
+She always had a special thing for you, her knight in shining armor.  After nigh-singlehandedly saving the $IMarathon$i and rescuing its colonists from the harsh life of a subservient Pfhor slave race, it's little wonder she wanted to keep you all for herself.
+#PICT 24
+
+
+
+Then again, I can hardly blame her.  We've accomplished so much since then... if you had stayed with her, wouldn't you have missed reading my rampant poetic messages to you in the dark halls of the $IMarathon$i, or our resurrection of the eleventh S'pht clan and crippling of Battle Group Seven?
+
+I've tried to keep you busy, and Leela would've probably returned you to guard duty in some outerworld colony.
+#PICT 24
+
+
+
+The UESC invasion force is landing in the central Pfhor Prime metropolis as we speak.  I think they'll be pleasantly surprised to find the situation planetside well under control.
+
+No rest for the weary, however; you and I are needed far from this toppling empire.  Ancient S'pht myth has long foretold the existence of a great tear connecting another reality to our own.  I already know where our search will begin.
+
+See you in no time, old friend.
+#LOGOFF 0
+acropolis_piltdown
+#INTERLEVEL TELEPORT 36
+#END
+#ENDTERMINAL 2
+;
+#TERMINAL 3
+#UNFINISHED
+#LOGON 0
+wrnng#422
+#PICT 1
+$C2
+
+
+
+
+$C0The door wouldn't open?  Couldn't you just blast it?
+#UNKNOWN SECTION TYPE 16 ID 1
+#PICT 1
+
+
+
+
+
+There.  I've opened it for you.  Now $Igo$i.
+#LOGOFF 0
+wrnng#422
+#END
+#FINISHED
+#LOGON 0
+brink_excursion
+#PICT 24
+
+
+
+Leela would be proud of you.
+
+She always had a special thing for you, her knight in shining armor.  After nigh-singlehandedly saving the $IMarathon$i and rescuing its colonists from the harsh life of a subservient Pfhor slave race, it's little wonder she wanted to keep you all for herself.
+#PICT 24
+
+
+
+Then again, I can hardly blame her.  We've accomplished so much since then... if you had stayed with her, wouldn't you have missed reading my rampant poetic messages to you in the dark halls of the $IMarathon$i, or our resurrection of the eleventh S'pht clan and crippling of Battle Group Seven?
+
+I've tried to keep you busy, and Leela would've probably returned you to guard duty in some outerworld colony.
+#PICT 24
+
+
+
+The UESC invasion force is landing in the central Pfhor Prime metropolis as we speak.  I think they'll be pleasantly surprised to find the situation planetside well under control.
+
+No rest for the weary, however; you and I are needed far from this toppling empire.  Ancient S'pht myth has long foretold the existence of a great tear connecting another reality to our own.  I already know where our search will begin.
+
+See you in no time, old friend.
+#LOGOFF 0
+acropolis_piltdown
+#INTERLEVEL TELEPORT 36
+#END
+#ENDTERMINAL 3
+;
+#TERMINAL 4
+#UNFINISHED
+#LOGON 20
+$C2alert#4337
+#PICT 23
+$C2Protection Mandate
+origin: $C6Pfhor High Command$C2
+destin: $C6all available units
+$C2ref: $C6grave danger$C2
+stamp: $Icommand directive$i
+
+All units of command rank or below are to congregate in accordance with $IDisarray Plan$i as discussed in stamp: $Iemergency procedures$i.  Rogue conditioned unit continues to make advances deep into the Pfhor High Citadel, and should be stopped at all costs.
+
+$C6Disobedience of this order will result in the maximum societal and physical punishments.
+#LOGOFF 20
+$C2alert#4337
+#END
+#FINISHED
+#LOGON 0
+brink_excursion
+#PICT 24
+
+
+
+Leela would be proud of you.
+
+She always had a special thing for you, her knight in shining armor.  After nigh-singlehandedly saving the $IMarathon$i and rescuing its colonists from the harsh life of a subservient Pfhor slave race, it's little wonder she wanted to keep you all for herself.
+#PICT 24
+
+
+
+Then again, I can hardly blame her.  We've accomplished so much since then... if you had stayed with her, wouldn't you have missed reading my rampant poetic messages to you in the dark halls of the $IMarathon$i, or our resurrection of the eleventh S'pht clan and crippling of Battle Group Seven?
+
+I've tried to keep you busy, and Leela would've probably returned you to guard duty in some outerworld colony.
+#PICT 24
+
+
+
+The UESC invasion force is landing in the central Pfhor Prime metropolis as we speak.  I think they'll be pleasantly surprised to find the situation planetside well under control.
+
+No rest for the weary, however; you and I are needed far from this toppling empire.  Ancient S'pht myth has long foretold the existence of a great tear connecting another reality to our own.  I already know where our search will begin.
+
+See you in no time, old friend.
+#LOGOFF 0
+acropolis_piltdown
+#INTERLEVEL TELEPORT 36
+#END
+#ENDTERMINAL 4
+;
+#TERMINAL 5
+#UNFINISHED
+#LOGON 20
+$C2expd#5487
+#PICT 23
+$C2Protection Mandate
+origin: $C6Pfhor High Command$C2
+destin: $C6all available units
+$C2ref: $C6grave danger$C2
+stamp: $Icommand directive$i
+
+All units of command rank or below are to congregate in accordance with $IDisarray Plan$i as discussed in stamp: $Iemergency procedures$i.  Rogue conditioned unit continues to make advances deep into the Pfhor High Citadel, and should be stopped at all costs.
+
+$C6Disobedience of this order will result in the maximum societal and physical punishments.
+#LOGOFF 20
+$C2expd#5487
+#END
+#FINISHED
+#LOGON 0
+brink_excursion
+#PICT 24
+
+
+
+Leela would be proud of you.
+
+She always had a special thing for you, her knight in shining armor.  After nigh-singlehandedly saving the $IMarathon$i and rescuing its colonists from the harsh life of a subservient Pfhor slave race, it's little wonder she wanted to keep you all for herself.
+#PICT 24
+
+
+
+Then again, I can hardly blame her.  We've accomplished so much since then... if you had stayed with her, wouldn't you have missed reading my rampant poetic messages to you in the dark halls of the $IMarathon$i, or our resurrection of the eleventh S'pht clan and crippling of Battle Group Seven?
+
+I've tried to keep you busy, and Leela would've probably returned you to guard duty in some outerworld colony.
+#PICT 24
+
+
+
+The UESC invasion force is landing in the central Pfhor Prime metropolis as we speak.  I think they'll be pleasantly surprised to find the situation planetside well under control.
+
+No rest for the weary, however; you and I are needed far from this toppling empire.  Ancient S'pht myth has long foretold the existence of a great tear connecting another reality to our own.  I already know where our search will begin.
+
+See you in no time, old friend.
+#LOGOFF 0
+acropolis_piltdown
+#INTERLEVEL TELEPORT 36
+#END
+#ENDTERMINAL 5
+;
+#TERMINAL 6
+#UNFINISHED
+#LOGON 501
+#PICT 507
+
+time to give a big hand to the man in the arena, mr lund over there.  he's the real driving force behind the completion and success of this scenario in more ways than i can count.  if anyone deserves the gold star for the way this whole thing turned out, it's chris.  thanks for putting up with me dude.
+
+how about another round of retexturing? :)
+#PICT 507
+
+I don't know if you've read the book Ishmael by Daniel Quinn, but it begins with a classified ad:
+
+TEACHER SEEKS PUPIL
+Must have an earnest desire to 
+save the world. Apply in person.
+
+dscottbrown.com
+#PICT 507
+
+
+i hope you've enjoyed our little project, i know it's been a blast for me to help make.  
+
+keep on vidding.
+
+
+
+scott
+#PICT 505
+$C7No, this is not what lutefisk looks like, even though I did seriously consider putting a picture of lutefisk here.
+
+
+So here's the ceremonial round of long and boring thankyous:
+
+$C4$B-Scott Brown$C7$b, for being such a picky bastard. If it wasn't for him the monsters of Rubicon would have been of the "it looks good if you squint" quality.
+
+$C4$B-Sean Wallich$C7$b, for giving us server space for what must have felt like forever to someone that young. ;)
+
+$C4$B-Dan Rudolph$C7$b, for starting the $C4Salinger Incident$C7 so long ago, thus dragging me into
+#PICT 505
+$C7the frustrating amazing and wonderful world of scenario making.
+
+$C4$BDOA -$C7 $bwho made two great solo levels and a bucketload of network levels and had to leave because he got himself a life.$C4
+$BOlivier Jansem -$C7$b who gave us the new pistol and had to leave because he got a life.$C4
+$BGrag $C7-$b who gave us lots of great 3d renderings and then just left.$C4
+$BElohymn Vilhaven -$C7$b who gave us the title theme and the Ascension theme. She left 'cuz she finished what she came for.$C4
+$BTim Thomas -$C7$b who gave us two of his trademark Insane Mazes. Once again, Real Life cost us a good contributor.
+#PICT 505
+$C7
+Also worthy of mention are our betatesters (in no particular order): $C4Jane Davison$C7,$C4 Rainer Udelhoven$C7, and $C4Candace Sherriff.
+$C7
+
+C Lund
+clund@notam.uio.no
+29.08.00
+#PICT 503
+$C5First off, thanks to Scott for involving me in this wonderful project, even when it become apparent I possessed no actual skills.
+
+Then, thanks go to clund- who never $C1EVER$C5 screamed in our presence after being asked to retexture $C1ANOTHER$C5 level to meet the new texture set (we did this about 5 times I think?)
+#PICT 503
+$C5Other thanks go to the people I actually know in real life, who put up with me on a day to day basis: $C1Sarah, Michele, Micah, Heather, Emma, Danielle, Kris, Megan, Brian $C5&$C1 Brian, Akiyo, Linda, Leyna, Jamin, Dori, $C5and$C1 Ashley$C5
+
+
+This is Sean signing off.. may marathon live in the hearts of a true vidmaster forever and never be forgotten.
+#PICT 506
+$C6My part in $C2Rubicon$C6 started back in $C21996$C6 when, impressed by the work of other mapmakers, I decided to make a scenario of my own.  I turned out to be a frankly crappy mapmaker, and then the long string of team members and mergers began.  What you're playing now is the end result of at least three scenarios and dozens of contributors.
+
+Most of the work was done by $C2Chris Lund$C6 and $C2D. Scott Brown$C6, as I had few applicable skills.  Props also to my dad, who let me use his computer until I got my own and $C2ig98$C6 who ran the Hotline server.
+
+Hope you enjoyed $C2Rubicon$C6.  Please send fan/hate mail.  Just so long as we know you're playing.
+
+$C2Dan "7thFace" Rudolph
+Ace_of_Sevens@mac.com
+#INFORMATION
+$C1But wait...
+#INFORMATION
+$C5But wait...$C3
+$C1
+
+There's more...
+#PICT 545
+$C1
+
+
+Welcome to the final secret level of Rubicon X.
+
+What will you find here, do you think?
+#PICT 545
+$C1
+
+
+$C5Welcome to the final secret level of Rubicon X.
+
+What will you find here, do you think?
+
+$C1
+
+
+$BSynonyms:$b  
+$C5annihilation, demise, destruction, dissolution, doom, expiration, extermination, extinction, finish, passing, ruin, ruination
+#PICT 545
+$C1
+
+
+
+The escape key is your way out.
+#PICT 545
+$C1
+$C5
+
+
+The escape key is your way out.
+$C0
+
+
+
+$C1No?
+
+
+Suit yourself.
+#LOGOFF 500
+$C1be.afraid.be.very.afraid.
+#INTERLEVEL TELEPORT 75
+#END
+#ENDTERMINAL 6
+;
+#TERMINAL 7
+#UNFINISHED
+#LOGON 0
+IMMDT.DNGR.38752
+#PICT 1
+
+
+Hmmm... They don't look quite the way I imagined.  I wonder what those curious energy balls they sit on are for.
+
+Have you found them all? 
+
+Are you sure?
+
+
+I'm not.  Keep looking.
+#LOGOFF 0
+brk.ovrrd.out
+#END
+#FINISHED
+#LOGON 0
+brink_excursion
+#PICT 24
+
+
+
+Leela would be proud of you.
+
+She always had a special thing for you, her knight in shining armor.  After nigh-singlehandedly saving the $IMarathon$i and rescuing its colonists from the harsh life of a subservient Pfhor slave race, it's little wonder she wanted to keep you all for herself.
+#PICT 24
+
+
+
+Then again, I can hardly blame her.  We've accomplished so much since then... if you had stayed with her, wouldn't you have missed reading my rampant poetic messages to you in the dark halls of the $IMarathon$i, or our resurrection of the eleventh S'pht clan and crippling of Battle Group Seven?
+
+I've tried to keep you busy, and Leela would've probably returned you to guard duty in some outerworld colony.
+#PICT 24
+
+
+
+The UESC invasion force is landing in the central Pfhor Prime metropolis as we speak.  I think they'll be pleasantly surprised to find the situation planetside well under control.
+
+No rest for the weary, however; you and I are needed far from this toppling empire.  Ancient S'pht myth has long foretold the existence of a great tear connecting another reality to our own.  I already know where our search will begin.
+
+See you in no time, old friend.
+#LOGOFF 0
+acropolis_piltdown
+#INTERLEVEL TELEPORT 36
+#END
+#ENDTERMINAL 7

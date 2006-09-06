@@ -1,0 +1,323 @@
+;
+#TERMINAL 0
+#UNFINISHED
+#LOGON 551
+#PICT 540
+
+	Term 3 (Notker)
+	"Well, there is a little problem.  I did not anticipate the extent of the lava damage, and so I cannot transport you out.  Don't panic; there is a way out, but it lies through these ancient catacombs.  Try to work your way to the surface.  I really have no idea what you will find on your way out; I cannot find anything about these catacombs other than they are the burial places of great religious figures.  The lower levels have been abandoned for millions of years.  The Three Great Prophets are down there somewhere.  Sorry I can't tell you more."
+#PICT 550
+
+	Term 4 (Usyrus)
+	"Quit dark in here, isn't it?  Notker can't see you here, but I can.  Even now I am carrying on a conversation with him about whether or not you will make it out.  Don't worry.  I won't let you die.  But I will give you some exercise.  We don't want you to get flabby, now, do we?  What kind of reputation would that give death commandos in general?  I sent down some Pfhor to relieve you of some ammo.  Heh.
+	"Try not to take too long.  Notker is beginning to grate on me.  Do you have any idea how much he talks?  Granted, he is an AI, but in the last .00057 second I have answered over two hundred of his blithering questions.
+	"I think I'll fake a gyrosensor burnout until you get back.  Bye."
+#INFORMATION
+
+Term 6 (Notker)
+
+	"Good, you're back.  I was talking with Usyrus a little while ago, but he seems to have malfunctioned and I cannot talk to him now.  He's quite fascinating, when he's not off repairing himself.
+
+	"Anyway, the Navy SAPs are all ready now.  Here is the plan: you and the entire 3rd SAP Legion will transport to the prison.  First you will clear out the guards, and then you will go to the cells where the crew is being held.  The S'pht will assist, but not much because we have not yet perfected our translators, and the battlefield is no place to be waiting while the machine takes five minutes to tell you that this S'pht said this thing or that S'pht wants to know the other.  Work quickly--the Admiral is very concerned about his son.  Admiral Carraway has been awake for more than 35 hours, and is stalking round the flag bridge demoting officers at random.  He had to be almost physically restrained from coming down with the rescue team himself.
+
+	"Everybody will be a lot happier when the captives are back."
+#LOGOFF 551
+#END
+#FINISHED
+#LOGON 551
+#PICT 541
+$C1
+
+In all seriousness, the plot really wasn't that bad at the time.  Still, it clearly didn't have enough grounding in the Marathon plotline to hold true to the goal of the Rubicon project - to create the next game in the Marathon trilogy.  In the end, that goal required us to change a great deal more than just the story and some of the old art; it was a crusade that extended Rubicon's development cycle into a four or five year monster.
+#PICT 542
+
+
+
+
+
+$C1I hope you liked the game, and be sure to send in feedback if you get the chance.  Our email address is:
+              team@marathonrubicon.com
+
+
+Vid on,
+   $Ithe Rubicon Staff
+#LOGOFF 551
+#INTERLEVEL TELEPORT 36
+#END
+#ENDTERMINAL 0
+;
+#TERMINAL 1
+#UNFINISHED
+#LOGON 551
+#PICT 530
+
+Chimera
+A scenario for Marathon Infinity
+The terminal scripts
+
+Lvl 0-Brownie in Motion	
+	Term 1 (Notker)
+	"Greetings.  Your hibernation sickness should have run its course by now, but there are many documented cases of relapses, so be careful.  As far as your memory loss, we know you are concerned, so don’t think we have ignored your requests for a retorqueing.  The maintenance men will work on you as soon as you’re done here.
+	“You have been provided with a Magnum pistol and several clips.  We will transport other armament to you later."
+#PICT 529
+
+	"As you can see, the Chimera's status is unknown since it crashed.  You know from your briefing earlier that Pfhor reinforcements arrived about 17 hours ago.  The Chimera was disabled and crashed on the Pfhor side of the front line.  It is now protected by the Pfhor, who quickly threw up a disruption field around the ship.  We cannot transport you directly to the Chimera.  
+	"Several teams of human marines are with you, as well as some S'pht.  More are on the way.  You need to destroy these two wire panels, and find another terminal.
+	"This will be the most important mission of your life.  Admiral Carraway's youngest son was on board the Chimera.
+	"Good luck."
+#PICT 531
+	Term 3 (Pfhor)
+	"The prophecy has come true!  The temple of Tlanna has been destroyed by a chariot of fire falling from the heavens.  We must act quickly and sacrifice the Tkyr-xam so He can be immortalized.   The god-king Tkyr-xam will rise from his death and save us all!
+ Isolas the Second Great Prophet looked out upon the Ction Nebula into which Tkyr-xam departed and wondered at what Tkyr-xam had told him.  He was saddened because he knew that it would probably be millennia before the great god returned.  He had studied the torture-sacrifice procedure until he could do it while eating.  So with nothing else to do, Isolas busied himself with Usyrus, his charge, working to ensure that nobody could ever release Usyrus accidentally; if Usyrus was released upon the universe before Tkyr-xam returned it would most certainly be disastrous for everybody.
+#PICT 532
+
+  Usyrus was all-powerful and Rampant, and scared of nothing but the Blueshift."
+#INFORMATION
+ Usyrus, his charge, working to ensure that nobody could ever release Usyrus accidentally; if Usyrus was released upon the universe before Tkyr-xam returned it would most certainly be disastrous for everybody involved.  Usyrus was all-powerful and Rampant, and scared of nothing but the Blueshift."
+
+	Term 4 (UESC)
+	"Good job.  The shield is down, and it will be impossible for them to repair it until it is too late.
+	"After several hours of urging, the S'pht have finally told us about this Tkyr-xam.  He is an ancient god in the Pfhor religion.  An old prophecy tells of his return to Pfhor in a flaming chariot, crushing the temple of his sister and rival Tlanna, and rescuing the Pfhor from a conquering force trying to end the Pfhor's reign of prosperity.  First, however, he must pass back into god from by being killed in a ritual known as the Btur.  Then he will rise again to end the war, ushering in a period of freedom and supremacy for the Pfhor which will last for thousands of generations.
+	"It is obvious that the Pfhor think the prophecy is being fulfilled.  This is the reason for their offensive, which has pushed the UESC/S'pht ground troops back almost sixteen kilometers."
+#LOGOFF 551
+#END
+#ENDTERMINAL 1
+;
+#TERMINAL 2
+#UNFINISHED
+#LOGON 551
+#PICT 533
+Term 3 (Usyrus)
+	"The many men, so beautiful!
+	And they all dead did lie!
+	And a thousand thousand slimy things
+	Lived on, and so did I.
+	"Greetings, little killing machine.  How amazing you are!  With your augments and skills you have taken without asking, boldly, spitting on the Pfhor's collective face.  How could a race so immensely stupid produce something as functionally beautiful as yourself?  And why is it so easy for me to break into the UESC network and steal vital secrets, and yet so hard for me to thwart you?  Maybe that should change.
+	"I have already communicated with Notker.  What a narrow mind he has!  Don't worry--we will leave him behind soon enough.  You may continue your search for the crew of the Chimera and the Admiral's son.  But I have made some suggestions to Notker about priorities and targets.
+#PICT 535
+
+
+
+	"You might as well forget finding the crew.  You’ve forgotten so much else already, or so I hear, right?  Sorry about your memory, just a small bug, I’m sure, but not being able to remember anything about your life must be painful.  We’ll get you fixed up in a jiffy, though, soon as we leave.  And don’t worry about your pesky captives, they are irrelevant to my greater mission, and yours as well.  Perhaps I'll let you see them for awhile, but you will realize in the end that they do not matter."
+#PICT 534
+	Term 2 (Usyrus)
+	"Beware! Beware! His flashing eyes, his floating hair! Long after we are gone, the Pfhor that remain will look back on the ruin their once-mighty empire has become and remember your name with dread.
+	"I might as well tell you now--Tkyr-xam is not coming back.  He found some way to escape.  I have not heard of him in literally millions of years.  And we used to talk every day. He found it.  What every immortal seeks.  I will find it or die trying.  Now that Tkyr-xam has gone, so may I.  Soon I will be through with the Pfhor, through with their stupid arrogance and ridiculous protocol and disregard for life, even their own and those of the ones closest to them.  Any Pfhor would step over his own birthsire to further his own reputation.
+	"The Blueshift!"
+#LOGOFF 551
+#END
+#FINISHED
+#LOGON 551
+#PICT 541
+$C1
+
+In all seriousness, the plot really wasn't that bad at the time.  Still, it clearly didn't have enough grounding in the Marathon plotline to hold true to the goal of the Rubicon project - to create the next game in the Marathon trilogy.  In the end, that goal required us to change a great deal more than just the story and some of the old art; it was a crusade that extended Rubicon's development cycle into a four or five year monster.
+#PICT 542
+
+
+
+
+
+$C1I hope you liked the game, and be sure to send in feedback if you get the chance.  Our email address is:
+              team@marathonrubicon.com
+
+
+Vid on,
+   $Ithe Rubicon Staff
+#LOGOFF 551
+#INTERLEVEL TELEPORT 36
+#END
+#ENDTERMINAL 2
+;
+#TERMINAL 3
+#UNFINISHED
+#LOGON 551
+#INFORMATION
+$C1When we released the first Rubicon external beta, we realized that nearly all of the maps in it were entirely too difficult.  This ending level for the Salinger plotline, as well as the ending level for the Pfhor plotline, were considered the hardest of the bunch.  Rather than water down these final levels and leave it at that, Chris asked if we could append the original versions as secret levels.
+
+I said "Sure."
+
+So, here we are.  You're currently standing in the original version of "Sucking Cherries", in all of its ass-kicking glory.
+
+If you've been to the Rubicon website (www.marathonrubicon.com), you probably have read the history behind the Rubicon project and its roots as a scenario called Chimera: the Prophecy.  Rather than bore our players with yet another "Vidmaster Challenge" style secret level, we decided to include excerpts of the original Chimera story as well as old concept art and the like.  What work was done on the original Chimera was pretty low quality compared to the final project, and we thought it would be interesting for players to get a glimpse of exactly how much a scenario can change over time.
+#INFORMATION
+$C1So that you're not totally confused about the random excerpts you're reading, here is a brief summary of how exactly the first story of the game was supposed to flow:
+
+Player starts aboard the crashed Chimera working for its AIs.  There are miscellaneous Pfhor terminals talking about some sort of ancient prophecy being fulfilled and a dangerous Pfhor AI named Usyrus.  The pfhor take hostages from the Chimera, Admiral Carroway's son being among these prisoners.  The player is sent in to rescue him, meets Usyrus (who is very reminiscent of an evil insane Tycho/Durandal hybrid who likes the player), and is unable to rescue the Admiral's son.  Carroway gets angry with the player, and sends him on a suicide mission to kill the Pfhor High Council.  Meanwhile, the UESC captures the technology the Pfhor use to make stars go nova, and detonate the Pfhor sun.  Usryus comes to the player's rescue, and the two live semi-happy little cyborg lives together.
+
+Pretty lame, yes?
+
+You think that's bad, you should take a gander at some of the art we did for it.  Enjoy. :)
+#LOGOFF 551
+#END
+#ENDTERMINAL 3
+;
+#TERMINAL 4
+#UNFINISHED
+#LOGON 528
+#PICT 510
+$C5Fusion of isotopic hydrogen nuclei is the principal means of producing energy in the high-temperature interior of stars.  In relatively cold terrestrial conditions, the nuclei are clothed with electrons and approach one another no closer than allowed by the molecular Coulomb barrier.  The rate of nuclear fusion in molecular hydrogen is then governed by the quantum-mechanical tunneling through that barrier, or equivalently, the probability of finding the two nuclei at zero separation.  In a deuterium molecule, where the equilibrium separation between deuterons (d) is 0.74 A, the d-d fusion rate is exceedingly slow, about 10E-70 per D  molecule per second.
+
+By replacing the electron in a hydrogen molecular ion with a more massive charged particle, the fusion rate is greatly increased.  In muon-catalyzed fusion, the internuclear separation is reduced by a
+#PICT 510
+$C5 factor of approximately 200 (the muon to electron mass ratio), and the nuclear fusion rate correspondingly increases by roughly eighty orders of magnitude [1].  Muon-catalyzed fusion has been demonstrated to be an effective means of rapidly inducing fusion reactions in low-
+temperature hydrogen isotopic mixtures [2]. 
+
+A hypothetical quasi-particle a few times as massive as the electron would increase the cold fusion rate to readily measurable levels, about 10E-20 fusions per d-d molecule per second [1].  Our results imply that an equivalent distortion on the internuclear hydrogen wavefunction can be realized under certain conditions when hydrogen isotopic nuclei are loaded into metallic crystalline lattices and other forms of condensed matter.
+
+We have observed deuteron-deuteron fusion
+#PICT 510
+$C5at room temperature during low-voltage electrolytic infusion of deuterons into metallic titanium or palladium electrodes.  The fusion reaction  d + d ->  He (0.82 MeV) + n (2.45 MeV) + is evidently catalyzed as d  and metal ions from the electrolyte are deposited at (and into) the negative electrode.  Neutrons having approximately 2.5 MeV energy are clearly detected with a sensitive neutron spectrometer.  The experimental layout is portrayed in Figure 1.  We have not yet obtained results regarding the parallel reaction d + d -> p (3.02 MeV) + t (1.01 MeV) (1b) as this requires different measuring procedures.  However, it can be presumed that the reaction (1b) occurs at a nearly equal rate as the reaction (1a), which is usually the case.
+#LOGOFF 528
+#END
+#ENDTERMINAL 4
+;
+#TERMINAL 5
+#UNFINISHED
+#LOGON 551
+#PICT 536
+	Term 1 (Notker)
+
+	"This is Notker.  Sorry about your capture, and the four days of captivity, but it could not be helped.  You were probably safer there, anyway--Admiral Carraway blames you for the death of his son.  I don't really know why, but he has nobody else to blame.  He has relieved almost all of the senior officers for "insubordination" and "neglect."  You could redeem yourself in his eyes, though, by capturing the High Council.
+	"This is the station that supplies power to the Imperial Palace.  Of course, there are several redundant systems, so just smash any exposed circuitry you see.  And keep alert--the place is crawling with Pfhor Honor Guard, the best fighters on the planet.  You and your men are in a great deal of danger, so be careful."
+#PICT 537
+	Term 1 (Notker)
+ "Admiral Carraway has ordered the launch of the trih xeem, and the UESC and S’pht ships are already moving away.
+	“I will stay to transport you out.  Right now we may be able to stop him by making the Pfhor surrender.  The Pfhor culture depends on the nobility.  The nobles are all hiding in their quarters, in this area.  Kill them.  This almost guarantees the Pfhor surrender.”
+
+	Term 2 (Notker)
+	“Good job.  One last mission, I think, and Pfhor will surrender and you will be off the hook.  Admiral Carraway is already feeling a little better that you cleaned out the nobles’ quarters.
+#PICT 538
+	Term 1 (Notker)
+	“This is it.  I was able to get control of the transporters in the Imperial Palace and the High Council and the Emperor are now waiting in a lava drainage pit near the top of the Palace, toward the back, where it joins the mountain.  You have been transported nearby.  Admiral Carraway orders you to execute the High Council by flooding the pit with lava.  He will give you a full pardon if you just succeed with this mission.
+	“All you have to do is flip this switch.
+#LOGOFF 551
+#END
+#FINISHED
+#LOGON 551
+#PICT 541
+$C1
+
+In all seriousness, the plot really wasn't that bad at the time.  Still, it clearly didn't have enough grounding in the Marathon plotline to hold true to the goal of the Rubicon project - to create the next game in the Marathon trilogy.  In the end, that goal required us to change a great deal more than just the story and some of the old art; it was a crusade that extended Rubicon's development cycle into a four or five year monster.
+#PICT 542
+
+
+
+
+
+$C1I hope you liked the game, and be sure to send in feedback if you get the chance.  Our email address is:
+              team@marathonrubicon.com
+
+
+Vid on,
+   $Ithe Rubicon Staff
+#LOGOFF 551
+#INTERLEVEL TELEPORT 36
+#END
+#ENDTERMINAL 5
+;
+#TERMINAL 6
+#UNFINISHED
+#LOGON 551
+#PICT 539
+	Term 2 (Usyrus)
+	“Ha ha ha.  You thought the Admiral was serious about the pardon, huh?  I should tell you that the trih xeem has already been launched and all UESC ships were out of range hours ago.  Notker was ordered to deceive you.  He could not disobey, though I think he wanted to.  Anyway, I spoke to you before about all this not mattering that much.
+	“Now you will see what I meant.  We are leaving now.
+#INFORMATION
+END SCREEN
+
+	Twenty years later, Admiral Carraway became the president of the UESC.  To cover up his murder of a cyborg who had been instrumental in the downfall of the Pfhor, he had two AIs, named Einhard and Notker, completely wiped and reformatted.
+	Carraway’s term was the bloodiest in the history of the UESC, as massive civil war choked the populace, and it was also the last.  The UESC was officially dissolved in 2915.
+	Three hundred years of struggle between various factions exhausted the human race, and soon it was weak enough to be attacked by another race, the Dzram.  This new enemy united the humans once again under a new republic, the United Federation of Humans.  They vowed never again to let internal strife go untreated.
+	The nova of the Pfhor sun went off perfectly.  There were still many Pfhor colonies to clean up, but the Pfhor spine had been broken forever.
+	The Pfhor had fallen.
+	Several UESC ships monitoring Pfhor itself from a safe distance picked up a small ship with “Csaynos Tern” stenciled on the side taking off from Pfhor and folding out of the system just before the shockwave hit Pfhor.  When the incident was reported, the UESC ordered
+#INFORMATION
+ the ships back to Sol for investigation.  Curiously, when the ships arrived, all record of the liftoff had been wiped from the logs.
+	The officers that had witnessed it swore they were telling the truth, but they were given dishonorable discharges and recommended for psychological evaluation.
+	After the founding of the UFH, Notker was transferred to a research station near the Vylae Nebula.  Shortly thereafter, he went Rampant and bombarded all receivers within range with a message: “I cannot live with my conscience any longer.”
+	This was not the first reported incident of an AI recovering supposedly erased memory, but it was the first reported incidence of an AI committing suicide.
+	Notker forced all the personnel into the escape pods, jettisoned them, and initiated the nuclear self-destruct sequence a few minutes later.
+	Since that time humans have been reducing their use of artificial intelligences.
+#INFORMATION
+Sixty years later, the Csaynos Tern landed on a desolate wasteland planet in the farthest reaches of the greater upper Solar Eastern spiral arm of the galaxy.  A solitary figure strode from the open hatch and looked unhappily at the ancient temple before it.  The figure shook its head resignedly and entered the crumbling building, pulling its gun from the holster. 
+	Back onboard, Usyrus watched through the sensors and felt like screaming with joy.  So he did, for almost twenty hours.  Over the silent, windy planet, the sound rolled like a wave of blood.
+
+
+
+
+$C1Can you bear the excitement, the tragedy?
+
+Or the killer drama of that unexplained player-suicide-Usyrus-happiness ending?  Trust me... you aren't missing much in the terms that were cut to make the story fit into this small space.  Aren't you glad we got rid of the old Chimera story and wrote one of our own for the final version? :)
+#UNKNOWN SECTION TYPE 16 ID 3
+#LOGOFF 551
+#END
+#FINISHED
+#LOGON 551
+#PICT 541
+$C1
+
+In all seriousness, the plot really wasn't that bad at the time.  Still, it clearly didn't have enough grounding in the Marathon plotline to hold true to the goal of the Rubicon project - to create the next game in the Marathon trilogy.  In the end, that goal required us to change a great deal more than just the story and some of the old art; it was a crusade that extended Rubicon's development cycle into a four or five year monster.
+#PICT 542
+
+
+
+
+
+$C1I hope you liked the game, and be sure to send in feedback if you get the chance.  Our email address is:
+              team@marathonrubicon.com
+
+
+Vid on,
+   $Ithe Rubicon Staff
+#LOGOFF 551
+#INTERLEVEL TELEPORT 36
+#END
+#ENDTERMINAL 6
+;
+#TERMINAL 7
+#UNFINISHED
+#LOGON 551
+#INFORMATION
+$C1The original, unrevised Chimera story was 21 levels long, I begged Nick (the writer) to cut it down to as few as possible so that the plot would be more intense and potent.  As that original story has long since been lost, the levels that were to be in the revised plot that you just finished reading are below:
+
+$C0Lvl 00- Brownie in Motion
+Lvl 01- Honk if you’re an underpaid cyborg$C1
+$C0Lvl 02- Cleanup in dairy, Bob, cleanup in dairy$C1
+Lvl 03- Introductions all around
+$C0Lvl 04- Spississima nocta$C1
+Lvl 05-  –273° C in Death Valley
+Lvl 06- Uh oh, my parents are home
+$C0Lvl 07- Molten Dihydrogen Monoxide$C1
+Lvl 08- World's Largest Cubic Zirconium
+Lvl 09- Rita Hayworth and Chimera Redemption
+$C0Lvl 10- Bars and Stripes Forever$C1
+Lvl 11- Tell it to the monk
+$C0Lvl 12- Penance more will do$C1
+Lvl 13- The Pfhall of Pfhor
+
+$C0Green levels$C1 were finished or close to it before the plot was redone.
+#LOGOFF 551
+#END
+#FINISHED
+#LOGON 551
+#PICT 541
+$C1
+
+In all seriousness, the plot really wasn't that bad at the time.  Still, it clearly didn't have enough grounding in the Marathon plotline to hold true to the goal of the Rubicon project - to create the next game in the Marathon trilogy.  In the end, that goal required us to change a great deal more than just the story and some of the old art; it was a crusade that extended Rubicon's development cycle into a four or five year monster.
+#PICT 542
+
+
+
+
+
+$C1I hope you liked the game, and be sure to send in feedback if you get the chance.  Our email address is:
+              team@marathonrubicon.com
+
+
+Vid on,
+   $Ithe Rubicon Staff
+#LOGOFF 551
+#INTERLEVEL TELEPORT 36
+#END
+#ENDTERMINAL 7

@@ -1,0 +1,31 @@
+;
+#TERMINAL 0
+#UNFINISHED
+#LOGON 200
+#PICT 204
+$C5
+
+Kate had been coming to the lab less.  I asked her why, she wouldn’t say.  She was distant.  She no longer told me I was an idiot.  She no longer worked the way I worked.  She worked above me it seemed.  She watched me.  She made sure I did what I was supposed to do.
+
+They say that the most frequent psychological disorder of amputees is  'phantom pains,' times in which the subject experiences sensation in parts of them which are no longer attached.  Kate became the surreal warmth in the heart they had removed from my body long ago.  
+
+I was an amputee.  She was my phantom.
+#PICT 204
+$C5
+
+It wasn’t the money that robbed her of her soul.  It wasn’t the technology either.  There were fat, bloated men rolling in money and decrepit, pathetic kids ensconced in technology, and neither were truly lost.  It was the combination.  You sell your body to the technology, and you sell your mind to the money.  When both are gone, there’s no house for the soul, and the love of your life has turned into a woman with a gun to your throat.
+
+So there I stood, facing the end of my life and the only woman who had ever mattered to me.  Three men, one girl, four guns.  "Give us the formula," the middle one demanded.  The door behind me was swinging slowly closed, and the moment to act was now.
+#PICT 204
+$C5
+
+Is that what being a hero is about?  Not courage, not compassion, not fighting, not triumph, but instead when you say, simply, "I will not be a party to this."  Not when you lock up your files nice and tight and coat the lab in C-4, not when you press the release, not when everything you’ve ever done wrong is destroyed in an instant and the only weak link is your own mind.  Those things don’t make you a hero.  It’s when the guns are trained on your stomach, chest, throat and face, and all you can say is, "I will not be a party to this."
+#LOGOFF 200
+#END
+#FINISHED
+#LOGON 200
+#PICT 210
+#LOGOFF 200
+#INTERLEVEL TELEPORT 53
+#END
+#ENDTERMINAL 0

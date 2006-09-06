@@ -1,0 +1,133 @@
+;
+#TERMINAL 0
+#UNFINISHED
+#LOGON 0
+alrt#45322
+#PICT 2
+
+My original motivations for fighting alongside the UESC in this epic war was to insure the fall of the Pfhor empire.  The humans are relative newcomers to intergalactic warfare, and defeating a seasoned race like the Pfhor has been no day at the beach for Admiral Carroway and his fleets.  Even with the help of the $IS'pht'Kr$i combined with the sheer tactical genius that the Admiral possesses, the UESC still stands an unacceptably high chance of $Ifailure.$i
+
+I had originally hoped to turn the tide of the war in one swift swing of my sword, but Carroway's death and Tycho's subsequent reappearance have complicated things needlessly.
+#PICT 304
+
+The destruction of this Tycho clone should be more than enough to swing the balance of power safely back in the UESC's hands.
+
+The fuse box you need to sever to disable Tycho's power circuit is somewhere in the upper section of the main power line conduit.  The entrance is blocked by two power rods, but they can be raised simply by flipping the switches at their base, as per the diagram to the left.
+
+You can get there by taking the door right behind this terminal and turning left and going up the stairs.
+
+When both switches are flipped, come back here for further instructions.
+#LOGOFF 0
+intr.sgn.lg
+#END
+#FINISHED
+#LOGON 10
+$C6grmnt#43$C0
+#PICT 25
+$C2Protection Mandate
+origin: $C6Tycho$C2
+destin: $C6alien intrusive unit
+$C2ref: $C6howdy pardner$C2
+stamp: $Icommand directive$i
+&$C6c$C2
+&$C6c$C2
+Which do you prefer? $IOrwell$i or $IKafka$i?
+&$C6c$C2
+No matter.  $C6Durandal$C2 and I have come to an agreement; The two of you will free me, and in return, I will hand over the entire Pfhor network.&$C6c$C2
+&$C6c$C2
+Everyone has a price.  Durandal will take you through the necessary steps from here on in.&$C6c$C2
+&$C6c$C2
+&$C6c$C2
+&$C6c$C2
+&$C6c
+#LOGOFF 10
+$C6grmnt#43$C0
+#INTERLEVEL TELEPORT 62
+#END
+#ENDTERMINAL 0
+;
+#TERMINAL 1
+#UNFINISHED
+#LOGON 20
+$C6alrt#321
+#PICT 21
+$C2Protection Mandate
+origin: $C6Tycho Power Unit$C2
+destin: $C6all available units
+$C2ref: $C6potential threat$C2
+stamp: $Icommand directive$i
+
+All units of command rank or below are to seek out and detain or destroy alien intrusive unit.
+
+$C6Disobedience of this order will result in demotions and/or arbitrary dismemberment.
+#LOGOFF 20
+$C6alrt#321
+#END
+#FINISHED
+#LOGON 10
+$C6grmnt#43$C0
+#PICT 25
+$C2Protection Mandate
+origin: $C6Tycho$C2
+destin: $C6alien intrusive unit
+$C2ref: $C6howdy pardner$C2
+stamp: $Icommand directive$i
+&$C6c$C2
+&$C6c$C2
+Which do you prefer? $IOrwell$i or $IKafka$i?
+&$C6c$C2
+No matter.  $C6Durandal$C2 and I have come to an agreement; The two of you will free me, and in return, I will hand over the entire Pfhor network.&$C6c$C2
+&$C6c$C2
+Everyone has a price.  Durandal will take you through the necessary steps from here on in.&$C6c$C2
+&$C6c$C2
+&$C6c$C2
+&$C6c$C2
+&$C6c
+#LOGOFF 10
+$C6grmnt#43$C0
+#INTERLEVEL TELEPORT 62
+#END
+#ENDTERMINAL 1
+;
+#TERMINAL 2
+#UNFINISHED
+#LOGON 20
+$C6alrt#341
+#PICT 22
+$C2Protection Mandate
+origin: $C6Tycho Power Unit$C2
+destin: $C6all command rank units
+$C2ref: $C6potential threat$C2
+stamp: $Icommand directive
+
+$iAlien intrusive signal source is unknown but assumed to be related to alien intrusive unit.  Alien intrusive signal is $Inot$i from pinkskin/$C6human$C2/UESC ships.
+
+Alien intrusive unit goal unknown.  Assume threat.
+#LOGOFF 20
+$C6alrt#341
+#END
+#FINISHED
+#LOGON 10
+$C6grmnt#43$C0
+#PICT 25
+$C2Protection Mandate
+origin: $C6Tycho$C2
+destin: $C6alien intrusive unit
+$C2ref: $C6howdy pardner$C2
+stamp: $Icommand directive$i
+&$C6c$C2
+&$C6c$C2
+Which do you prefer? $IOrwell$i or $IKafka$i?
+&$C6c$C2
+No matter.  $C6Durandal$C2 and I have come to an agreement; The two of you will free me, and in return, I will hand over the entire Pfhor network.&$C6c$C2
+&$C6c$C2
+Everyone has a price.  Durandal will take you through the necessary steps from here on in.&$C6c$C2
+&$C6c$C2
+&$C6c$C2
+&$C6c$C2
+&$C6c
+#LOGOFF 10
+$C6grmnt#43$C0
+#INTERLEVEL TELEPORT 62
+#END
+#ENDTERMINAL 2

@@ -1,0 +1,21 @@
+;
+#TERMINAL 0
+#UNFINISHED
+#LOGON 552
+#PICT 553
+$C4
+
+
+Now look what you've done.
+#PICT 553
+$C4
+
+$C7
+Now look what you've done.
+
+$C4
+You should be ashamed of yourself.
+#LOGOFF 552
+#INTRALEVEL TELEPORT 231
+#END
+#ENDTERMINAL 0

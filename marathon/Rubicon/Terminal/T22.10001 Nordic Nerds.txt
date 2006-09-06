@@ -1,0 +1,381 @@
+;
+#TERMINAL 0
+#UNFINISHED
+#LOGON 400
+#PICT 406
+$C1CREW_LOG_QSI  /-xx7x316-x1$C5
+$C1ENTRY_DATE:$C5 1042129
+$C1STAMP: $C5CLASSIFIED
+$C1RANK:$C5 Science Cmd_43
+
+$C1....#$bbegin entry$C5
+The design of the $C1Achilles$C5 virus was a sheer act of genius on behalf of $C1Arthur Frane$C5, head scientist for the $C1Dangi Corporation$C5.  Based on current understanding of other deadly hypercontagious diseases, he hand coded the RNA sequence responsible for the modern incarnation of the $C1Achilles $C5virus.
+
+Initial testing yielded results that far exceeded the expectation of even the most ambitious member of the board of directors.  These phase 1 results are viewable in document $C1#$bISO-53535.d$C5.
+$C1....#$bend entry
+#LOGOFF 400
+#END
+#ENDTERMINAL 0
+;
+#TERMINAL 1
+#UNFINISHED
+#LOGON 0
+#PICT 31
+I'm surprised.  The $ISalinger$i uses an entirely different logic structure for its security access codes than any other UESC vessel.  The Dangi Corporation wasn't run by fools; they understood that nothing can be kept secret forever, but the inevitable can be delayed a great deal with some clever planning and large amount of capital.
+
+Not that cracking the access codes for the Dangi sector of the Salinger took me more than a handful of microseconds.  Still, what corporate programmer was expecting his code to be worked on by someone with a brain bigger than any planet in the galaxy?
+#PICT 31
+
+
+I've done my part, now you do yours - smash the circuit panel to your right to insure that nobody is able to change the access codes again.
+#LOGOFF 0
+#END
+#FINISHED
+#LOGON 400
+#PICT 410
+$C5       @
+
+
+
+                    !aq
+
+
+     %
+
+            $C1ENCRYPTION FAILURE$C5            =
+
+
+              $C1SYSTEM HALTED$C5
+                       2
+
+
+ ~!
+
+
+                                  7-
+#LOGOFF 400
+#END
+#ENDTERMINAL 1
+;
+#TERMINAL 2
+#UNFINISHED
+#LOGON 401
+#PICT 403
+$C1
+
+
+
+$C5
+You are a painfully obedient fool.
+
+Painfully because you will suffer at my hands for your unwelcome intrusion.  Fool because you believe you will not.$C1
+
+/-Lysander.out
+#LOGOFF 401
+#END
+#ENDTERMINAL 2
+;
+#TERMINAL 3
+#UNFINISHED
+#LOGON 400
+#PICT 403
+$C1CREW_LOG_QSI  /-xx7x316-x1$C5
+$C1ENTRY_DATE:$C5 1042129
+$C1STAMP:$C5 CLASSIFIED
+$C1RANK:$C5 Science Cmd_33
+
+$C1....#$bbegin entry$C5
+$C1Phase 1$C5 of the $C1Dangi Control Seizure Plan$C5 $C1(DCSP)$C5 will begin as soon as word is received from $C1UESC $C5tactical command that the Pfhor have surrendered.  The $C1Achilles$C5 virus will be administered by upper level Dangi personnel to the seven main food distribution companies, in the form of a preserving chemical compound.  Shipments of infected food will reach every populated world within three weeks, and the virus will be activated shortly thereafter.
+
+$C1DCSP Phase 2$C5 will begin as soon as the first cases of the epidemic are reported.
+#PICT 403
+$C5The directors of the $C1Dangi Corporation$C5 will approach key members within the $C1UESC$C5 head government, offering the cure in exchange for control of specific aspects of the government.
+
+$C1DCSP Phase 3$C5 is the complete assumption of all governing power by the Dangi Corporation.  Henceforward, the planets formerly ruled by the $C1UESC$C5 would be jointly controlled by the existing $C1Dangi$C5 board of directors under law established in document $C1529-A328IGX0$C5.
+
+///transfer interrupted
+///authorization:$C1Lysander
+
+-
+-
+-
+#PICT 403
+$C1
+
+I have given you ample chance to cease your unwelcome interference here.  You have breathed your last breath aboard this ship, obedient fool.
+
+Waste away; nobody mourns the ashes of a prisoner.
+
+
+
+lysander.out
+#LOGOFF 401
+#INTERLEVEL TELEPORT 61
+#END
+#ENDTERMINAL 3
+;
+#TERMINAL 4
+#UNFINISHED
+#LOGON 400
+#PICT 403
+$C5
+$C1$B$UEntering a Restricted Sector$C5$b$u
+
+--------------To the right: $C1UESC Sector 16a$C5
+
+--------------To the left: $C1Dangi Lab 7/X$C5
+
+
+
+
+Please wait for identification...
+#PICT 403
+$C5
+$C1$B$UEntering a Restricted Sector$C5$b$u
+
+--------------To the right: $C1UESC Sector 16a$C5
+
+--------------To the left: $C1Dangi Lab 7/X$C5
+
+
+
+
+Please wait for identification...
+
+//////processing $C1UESC$C5 access request///////
+#PICT 403
+$C5
+$C1$B$UEntering a Restricted Sector$C5$b$u
+
+--------------To the right: $C1UESC Sector 16a$C5
+
+--------------To the left: $C1Dangi Lab 7/X$C5
+
+
+
+
+
+$C2UESC Identification has failed.  If you are attempting to access a UESC Sector and have a valid ID, please contact Charlie or a system operations official.
+
+This entrance attempt has been logged.
+#PICT 403
+$C5
+$C1$B$UEntering a Restricted Sector$C5$b$u
+
+--------------To the right: $C1UESC Sector 16a$C5
+
+--------------To the left: $C1Dangi Lab 7/X$C5
+
+
+
+
+Please wait for identification...
+
+//////processing $C1Dangi$C5 access request//////
+#PICT 403
+$C5
+$C1$B$UEntering a Restricted Sector$C5$b$u
+
+--------------To the right: $C1UESC Sector 16a$C5
+
+--------------To the left: $C1Dangi Lab 7/X$C5
+
+
+
+$C2
+
+Dangi Lab Identification has failed.  If you are attempting to access a Dangi Sector and have a valid ID, please contact Lysander or a system operations official.
+
+This entrance attempt has been logged.
+#LOGOFF 400
+#END
+#FINISHED
+#LOGON 400
+#PICT 403
+$C5
+$C1$B$UEntering a Restricted Sector$C5$b$u
+
+--------------To the right: $C1UESC Sector 16a$C5
+
+--------------To the left: $C1Dangi Lab 7/X$C5
+
+
+
+
+Please wait for identification...
+#PICT 403
+$C5
+$C1$B$UEntering a Restricted Sector$C5$b$u
+
+--------------To the right: $C1UESC Sector 16a$C5
+
+--------------To the left: $C1Dangi Lab 7/X$C5
+
+
+
+
+
+
+Your $C1Dangi$C5 security code has been validated and accepted.  You may now enter $C1Dangi Laboratory Sector 7/X$C5.
+#LOGOFF 400
+#END
+#ENDTERMINAL 4
+;
+#TERMINAL 5
+#UNFINISHED
+#LOGON 400
+#PICT 405
+$C5
+$C1CREW_LOG_QSI  /-xx7x316-x1$C5
+$C1ENTRY_DATE: $C51042129
+$C1STAMP:$C5 CLASSIFIED
+$C1RANK:$C5 Research Group 30A
+
+$C1....#$bbegin entry
+$C5
+We're running out of human subjects to inject with test vaccines, and the last shipment of "volunteers" from outerworld prisons is nearly two weeks past due.  Management is driven enough that I halfways expect them to start forcing lower level workers to be test patients.
+#PICT 405
+$C5
+
+The worst of it all is that we're no closer to a breakthrough than we were when $C1Research Group 25$C5 discovered a way to successfully cure infected subjects by injecting processed stem cells in the lymph nodes.  Unfortunately, dosages have to be carefully monitored - a very ineffective large-scale cure.
+
+
+$C1/end entry$C5
+#LOGOFF 400
+#END
+#ENDTERMINAL 5
+;
+#TERMINAL 6
+#UNFINISHED
+#LOGON 400
+#PICT 410
+$C5//begin pre-recorded message
+
+
+
+
+
+
+
+
+$C2This terminal is currently nonfunctional.  Please contact maintenance for more  information.
+$C5
+
+
+
+
+
+
+
+//end pre-recorded message
+//id 814162597210A-B
+#LOGOFF 400
+#END
+#ENDTERMINAL 6
+;
+#TERMINAL 7
+#UNFINISHED
+#LOGON 400
+#PICT 403
+$C5
+$C1$B$UEntering a Restricted Sector$C5$b$u
+
+--------------To the right: $C1UESC Sector 16b$C5
+
+--------------To the left: $C1Dangi Lab 7/X$C5
+
+
+
+
+Please wait for identification...
+#PICT 403
+$C5
+$C1$B$UEntering a Restricted Sector$b$u
+$C5
+--------------To the right: $C1UESC Sector 16b$C5
+
+--------------To the left: $C1Dangi Lab 7/X$C5
+
+
+
+
+Please wait for identification...
+
+//////processing $C1UESC $C5access request///////
+#PICT 403
+$C5
+$C1$B$UEntering a Restricted Sector$C5$b$u
+
+--------------To the right:$C1 UESC Sector 16b$C5
+
+--------------To the left: $C1Dangi Lab 7/X$C5
+
+
+
+
+
+$C2UESC Lab Identification has failed.  If you are attempting to access a UESC Sector and have a valid ID, please contact Charlie or a system operations official.
+
+This entrance attempt has been logged.
+#PICT 403
+$C5
+$C1$B$UEntering a Restricted Sector$C5$b$u
+
+--------------To the right: $C1UESC Sector 16b$C5
+
+--------------To the left: $C1Dangi Lab 7/X$C5
+
+
+
+
+Please wait for identification...
+
+//////processing $C1Dangi$C5 access request//////
+#PICT 403
+$C5
+$C1$B$UEntering a Restricted Sector$C5$b$u
+
+--------------To the right: $C1UESC Sector 16b$C5
+
+--------------To the left:$C1 Dangi Lab 7/X$C5
+
+
+
+$C2
+
+Dangi Lab Identification has failed.  If you are attempting to access a Dangi Sector and have a valid ID, please contact Lysander or a system operations official.
+
+This entrance attempt has been logged.
+#LOGOFF 400
+#END
+#FINISHED
+#LOGON 400
+#PICT 403
+$C5
+$C1$B$UEntering a Restricted Sector$C5$b$u
+
+--------------To the right: $C1UESC Sector 16b$C5
+
+--------------To the left: $C1Dangi Lab 7/X$C5
+
+
+
+
+Please wait for identification...
+#PICT 403
+$C5
+$C1$B$UEntering a Restricted Sector$C5$b$u
+
+--------------To the right: $C1UESC Sector 16b$C5
+
+--------------To the left: $C1Dangi Lab 7/X$C5
+
+
+
+
+
+
+Your $C1Dangi$C5 security code has been validated and accepted.  You may now enter $C1Dangi Laboratory Sector 7/X$C5.
+#LOGOFF 400
+#END
+#ENDTERMINAL 7

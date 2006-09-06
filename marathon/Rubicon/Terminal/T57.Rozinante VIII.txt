@@ -1,0 +1,14 @@
+;
+#TERMINAL 0
+#UNFINISHED
+#LOGON 0
+$C3o h5yh45ih454
+#PICT 2
+When the Pfhor attacked the $ISalinger$i, several security measures were triggered, of which the most significant was the automatic destruction of all the live samples of the Achilles virus.  However, this destruction did not include the datafiles needed to produce the virus, and I'm pretty sure at least one copy of this data was stolen by the Pfhor while you were snooping around in the Dangi labs.
+
+Knowing the Pfhor, there is nothing they'd rather do than release Achilles on humanity.  To do this, they need to get the data to a place where the virus can be produced.  Even though the data is coded, it is only a matter of time before they break the code.  We have some time, but not very much.  Don't drop the ball on this mission; a UESC victory in the war is counting on it.
+#LOGOFF 0
+$C3kjn6k uj5n6u
+#INTERLEVEL TELEPORT 28
+#END
+#ENDTERMINAL 0

@@ -1,0 +1,65 @@
+;
+#TERMINAL 0
+#UNFINISHED
+#LOGON 200
+#PICT 201
+#LOGOFF 200
+#END
+#ENDTERMINAL 0
+;
+#TERMINAL 1
+#UNFINISHED
+#LOGON 200
+#PICT 201
+#LOGOFF 200
+#END
+#ENDTERMINAL 1
+;
+#TERMINAL 2
+#UNFINISHED
+#LOGON 200
+#PICT 201
+#LOGOFF 200
+#END
+#ENDTERMINAL 2
+;
+#TERMINAL 3
+#UNFINISHED
+#LOGON 200
+#PICT 204
+$C5
+What was I saying?  Something about a knife and legs?
+
+Yeah, that's it.  Like I've been saying all along, the knife’s not real.  Hell, the legs aren’t even real, they’re just a convenient way to trick yourself into believing that you can run away forever. 
+
+I’ve been running for three days straight.  First from the place where it all began, or ended, I should say.  Then from the cameras, then the cops.  And always from the fear that what I did was real.
+
+I took the alleyway, which made sense.  Then the manhole.  Sometimes it doesn’t matter if it’s welded shut.  Then the sewer, and then the streets again, and I’ve been running for three days straight.
+#PICT 204
+$C5
+
+
+
+None it makes sense.  I shouldn’t be running, I shouldn’t be chased, and I shouldn’t be a hero.  Being a hero takes courage and I’m scared to death.  They’ll say that things this bizarre don’t make sense, reason doesn’t apply, and that the world is not a logical place.  I think the problem is not that the world isn’t logical, but that we don’t understand logic as well as we thought.  How can you possibly understand logic?  With logic?  You can’t see the eye you see with.  Or so they say.
+#LOGOFF 200
+#END
+#ENDTERMINAL 3
+;
+#TERMINAL 4
+#UNFINISHED
+#LOGON 200
+#PICT 203
+$C5
+
+
+Kate and I had been friends forever.  Almost since before we were born.  She was the kind of girl that we only see in movies – beautiful, intense, the embodiment of grace, passion, and will.  The kind you shouldn’t stand a chance with, but end up pretending that you do.  Why she liked with me, I still don’t know.  Why she at one point loved me, I don’t think I’ll ever know.  I don’t know what she wanted, and how I could possibly have had even some of it.
+#PICT 203
+$C5
+
+
+The memories I still can piece together are good ones, at least in the beginning.  So many hours at the lab the table and the computer and the walls and ceiling all blended together.  It was the time of my life.  My conscious mind was so shot from sleep-deprivation and caffeine I couldn’t see the screen as I typed.  That’s why the Wheeling Hubcap Factory higher-ups liked me.  The most frantic of the monkeys, with an infinite number of typewriters all to myself.  I didn’t know what I was creating.  I didn’t know why.  And I didn’t care, because I was in heaven.  Or hell, it didn’t matter.
+#PICT 201
+#LOGOFF 200
+#INTERLEVEL TELEPORT 4
+#END
+#ENDTERMINAL 4

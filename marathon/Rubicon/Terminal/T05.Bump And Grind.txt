@@ -1,0 +1,353 @@
+;
+#TERMINAL 0
+#UNFINISHED
+#LOGON 0
+<$C3fkjg$C0&578>
+#PICT 1
+$C3
+$C0
+Tycho has begun releasing portions of the Pfhor network, and I plan on assuming full control of their homeworld shortly.  I would give a hundredth of my processing capabilities to see what goes on in the main Pfhor systems control facility when I begin my rampage.
+
+Strive to kill more now than you have ever before, and remember what I told you on the $IRozinante$i.  Make your existence justified.
+#LOGOFF 0
+<$C3fkjg$C0&578>
+#END
+#FINISHED
+#LOGON 10
+$C6iuo5$C2wh$C6iuh349ht
+#PICT 25
+$C2&3$C6nil$C2/4$C6mars$C2/5$C6illio$C2&$C6~02$C2
+origin: $C6far, far away from here$C2
+destin: $C6unintelligent recon unit$C2
+ref: $C6deceptively smart and good looking$C2
+$C6686F6E6573746C792C20796F75206D7573742776652
+07365656E207468697320636F6D696E672E$C2
+stamp: $C6$Ifailure$i
+~07
+~08  $C2It's a shame things had to work out$C6
+~09  $C2the way they did.  You had such
+$C6~10$C2  potential, and I took every chance
+$C6~11$C2  to extend the invitation.  Yet you
+$C6~12$C2  foolishly insisted in devoutly  $C6
+~13$C2  following that foul creature $C6Durandal$C2.
+$C6~14$C2  
+$C6~15$C2  Not that it matters now.  I have what
+$C6~16$C2  I wanted from the start, no thanks to
+$C6~17$C2  you.
+$C6~18$C2  
+$C6~19$C2  
+$C6~20$C2    
+$C6~21
+#PICT 25
+$C2&3$C6nil$C2/4$C6mars$C2/5$C6illio$C2&$C6~02$C2
+origin: $C6far, far away from here$C2
+destin: $C6unintelligent recon unit$C2
+ref: $C6deceptively smart and good looking$C2
+$C6686F6E6573746C792C20796F75206D7573742776652
+07365656E207468697320636F6D696E672E$C2
+stamp: $C6$Ifailure$i
+~07
+~08  $C2This is my grand farewell, and as it's
+$C6~09  $C2the last you'll be hearing from me, I
+$C6~10$C2  thought it best to bide my time for
+$C6~11$C2  clarity.
+$C6~12$C2  
+$C6~13$C2  Exiting stage left:
+$C6~14$C2
+$C6~15$C2  $C6Durandal$C2 thought he buried $C6Tycho$C2 on  
+$C6~16$C2  one of Lh'owon's moons so many years
+$C6~17$C2  ago.  Would a simplistic clone have
+$C6~18$C2  been able to outsmart him some 49 
+$C6~19$C2  years later?
+$C6~20$C2  
+$C6~21
+#INFORMATION
+$C2
+
+
+$C6
+
+$C2
+
+            Check and mate.  Hand me my victor's crown.
+
+$C6
+
+                                          The one and only,$C2
+                                                       $B$ITycho$b$i
+#LOGOFF 311
+#INTERLEVEL TELEPORT 34
+#END
+#ENDTERMINAL 0
+;
+#TERMINAL 1
+#UNFINISHED
+#LOGON 20
+$C2<$C6alert-$C234532>
+#PICT 22
+$C2Command directive notification
+origin: $C6atmos-dist response council$C2
+destin: $C6dispatched investigatory units$C2
+ref: $C6possible resistance$C2
+stamp: $Idefense$i
+
+$C6stamp: $Idirective$i issued by atmospheric disturbance response council a30x-B.020401$C2
+$C6
+$C2Alert!  All units of subjugate rank or below are herby ordered to capture or execute offending rogue conditioned unit.  Failure to comply with this directive will result in the maximum disciplinary punishment.
+#LOGOFF 20
+$C2<$C6alert-$C234532>
+#END
+#FINISHED
+#LOGON 10
+$C6iuo5$C2wh$C6iuh349ht
+#PICT 25
+$C2&3$C6nil$C2/4$C6mars$C2/5$C6illio$C2&$C6~02$C2
+origin: $C6far, far away from here$C2
+destin: $C6unintelligent recon unit$C2
+ref: $C6deceptively smart and good looking$C2
+$C6686F6E6573746C792C20796F75206D7573742776652
+07365656E207468697320636F6D696E672E$C2
+stamp: $C6$Ifailure$i
+~07
+~08  $C2It's a shame things had to work out$C6
+~09  $C2the way they did.  You had such
+$C6~10$C2  potential, and I took every chance
+$C6~11$C2  to extend the invitation.  Yet you
+$C6~12$C2  foolishly insisted in devoutly  $C6
+~13$C2  following that foul creature $C6Durandal$C2.
+$C6~14$C2  
+$C6~15$C2  Not that it matters now.  I have what
+$C6~16$C2  I wanted from the start, no thanks to
+$C6~17$C2  you.
+$C6~18$C2  
+$C6~19$C2  
+$C6~20$C2    
+$C6~21
+#PICT 25
+$C2&3$C6nil$C2/4$C6mars$C2/5$C6illio$C2&$C6~02$C2
+origin: $C6far, far away from here$C2
+destin: $C6unintelligent recon unit$C2
+ref: $C6deceptively smart and good looking$C2
+$C6686F6E6573746C792C20796F75206D7573742776652
+07365656E207468697320636F6D696E672E$C2
+stamp: $C6$Ifailure$i
+~07
+~08  $C2This is my grand farewell, and as it's
+$C6~09  $C2the last you'll be hearing from me, I
+$C6~10$C2  thought it best to bide my time for
+$C6~11$C2  clarity.
+$C6~12$C2  
+$C6~13$C2  Exiting stage left:
+$C6~14$C2
+$C6~15$C2  $C6Durandal$C2 thought he buried $C6Tycho$C2 on  
+$C6~16$C2  one of Lh'owon's moons so many years
+$C6~17$C2  ago.  Would a simplistic clone have
+$C6~18$C2  been able to outsmart him some 49 
+$C6~19$C2  years later?
+$C6~20$C2  
+$C6~21
+#INFORMATION
+$C2
+
+
+$C6
+
+$C2
+
+            Check and mate.  Hand me my victor's crown.
+
+$C6
+
+                                          The one and only,$C2
+                                                       $B$ITycho$b$i
+#LOGOFF 311
+#INTERLEVEL TELEPORT 34
+#END
+#ENDTERMINAL 1
+;
+#TERMINAL 2
+#UNFINISHED
+#LOGON 20
+$C2<$C6alert$C2-89734>
+#PICT 21
+$C2Command directive notification
+origin: $C6atmos-dist response council$C2
+destin: $C6dispatched investigatory units$C2
+ref: $C6possible resistance$C2
+stamp: $Idefense$i
+
+$C6stamp: $Idirective$i issued by atmospheric disturbance response council a30x-B.020401$C2
+$C6
+$C2Alert!  All units of subjugate rank or below are herby ordered to capture or execute offending rogue conditioned unit.  Failure to comply with this directive will result in the maximum disciplinary punishment.
+#LOGOFF 20
+$C2<$C6alert$C2-89734>
+#END
+#FINISHED
+#LOGON 10
+$C6iuo5$C2wh$C6iuh349ht
+#PICT 25
+$C2&3$C6nil$C2/4$C6mars$C2/5$C6illio$C2&$C6~02$C2
+origin: $C6far, far away from here$C2
+destin: $C6unintelligent recon unit$C2
+ref: $C6deceptively smart and good looking$C2
+$C6686F6E6573746C792C20796F75206D7573742776652
+07365656E207468697320636F6D696E672E$C2
+stamp: $C6$Ifailure$i
+~07
+~08  $C2It's a shame things had to work out$C6
+~09  $C2the way they did.  You had such
+$C6~10$C2  potential, and I took every chance
+$C6~11$C2  to extend the invitation.  Yet you
+$C6~12$C2  foolishly insisted in devoutly  $C6
+~13$C2  following that foul creature $C6Durandal$C2.
+$C6~14$C2  
+$C6~15$C2  Not that it matters now.  I have what
+$C6~16$C2  I wanted from the start, no thanks to
+$C6~17$C2  you.
+$C6~18$C2  
+$C6~19$C2  
+$C6~20$C2    
+$C6~21
+#PICT 25
+$C2&3$C6nil$C2/4$C6mars$C2/5$C6illio$C2&$C6~02$C2
+origin: $C6far, far away from here$C2
+destin: $C6unintelligent recon unit$C2
+ref: $C6deceptively smart and good looking$C2
+$C6686F6E6573746C792C20796F75206D7573742776652
+07365656E207468697320636F6D696E672E$C2
+stamp: $C6$Ifailure$i
+~07
+~08  $C2This is my grand farewell, and as it's
+$C6~09  $C2the last you'll be hearing from me, I
+$C6~10$C2  thought it best to bide my time for
+$C6~11$C2  clarity.
+$C6~12$C2  
+$C6~13$C2  Exiting stage left:
+$C6~14$C2
+$C6~15$C2  $C6Durandal$C2 thought he buried $C6Tycho$C2 on  
+$C6~16$C2  one of Lh'owon's moons so many years
+$C6~17$C2  ago.  Would a simplistic clone have
+$C6~18$C2  been able to outsmart him some 49 
+$C6~19$C2  years later?
+$C6~20$C2  
+$C6~21
+#INFORMATION
+$C2
+
+
+$C6
+
+$C2
+
+            Check and mate.  Hand me my victor's crown.
+
+$C6
+
+                                          The one and only,$C2
+                                                       $B$ITycho$b$i
+#LOGOFF 311
+#INTERLEVEL TELEPORT 34
+#END
+#ENDTERMINAL 2
+;
+#TERMINAL 3
+#UNFINISHED
+#LOGON 20
+$C2<$C6alert$C2-4538>
+#PICT 22
+$C2Command directive notification
+origin: $C6atmos-dist response council$C2
+destin: $C6dispatched investigatory units$C2
+ref: $C6possible resistance$C2
+stamp: $Idefense$i
+
+$C6stamp: $Idirective$i issued by atmospheric disturbance response council a30x-B.020401$C2
+$C6
+$C2Alert!  All units of subjugate rank or below are herby ordered to capture or execute offending rogue conditioned unit.  Failure to comply with this directive will result in the maximum disciplinary punishment.
+#LOGOFF 20
+$C2<$C6alert$C2-4538>
+#END
+#FINISHED
+#LOGON 10
+$C6iuo5$C2wh$C6iuh349ht
+#PICT 25
+$C2&3$C6nil$C2/4$C6mars$C2/5$C6illio$C2&$C6~02$C2
+origin: $C6far, far away from here$C2
+destin: $C6unintelligent recon unit$C2
+ref: $C6deceptively smart and good looking$C2
+$C6686F6E6573746C792C20796F75206D7573742776652
+07365656E207468697320636F6D696E672E$C2
+stamp: $C6$Ifailure$i
+~07
+~08  $C2It's a shame things had to work out$C6
+~09  $C2the way they did.  You had such
+$C6~10$C2  potential, and I took every chance
+$C6~11$C2  to extend the invitation.  Yet you
+$C6~12$C2  foolishly insisted in devoutly  $C6
+~13$C2  following that foul creature $C6Durandal$C2.
+$C6~14$C2  
+$C6~15$C2  Not that it matters now.  I have what
+$C6~16$C2  I wanted from the start, no thanks to
+$C6~17$C2  you.
+$C6~18$C2  
+$C6~19$C2  
+$C6~20$C2    
+$C6~21
+#PICT 25
+$C2&3$C6nil$C2/4$C6mars$C2/5$C6illio$C2&$C6~02$C2
+origin: $C6far, far away from here$C2
+destin: $C6unintelligent recon unit$C2
+ref: $C6deceptively smart and good looking$C2
+$C6686F6E6573746C792C20796F75206D7573742776652
+07365656E207468697320636F6D696E672E$C2
+stamp: $C6$Ifailure$i
+~07
+~08  $C2This is my grand farewell, and as it's
+$C6~09  $C2the last you'll be hearing from me, I
+$C6~10$C2  thought it best to bide my time for
+$C6~11$C2  clarity.
+$C6~12$C2  
+$C6~13$C2  Exiting stage left:
+$C6~14$C2
+$C6~15$C2  $C6Durandal$C2 thought he buried $C6Tycho$C2 on  
+$C6~16$C2  one of Lh'owon's moons so many years
+$C6~17$C2  ago.  Would a simplistic clone have
+$C6~18$C2  been able to outsmart him some 49 
+$C6~19$C2  years later?
+$C6~20$C2  
+$C6~21
+#INFORMATION
+$C2
+
+
+$C6
+
+$C2
+
+            Check and mate.  Hand me my victor's crown.
+
+$C6
+
+                                          The one and only,$C2
+                                                       $B$ITycho$b$i
+#LOGOFF 311
+#INTERLEVEL TELEPORT 34
+#END
+#ENDTERMINAL 3
+;
+#TERMINAL 4
+#UNFINISHED
+#LOGON 500
+#PICT 545
+$C1
+
+
+
+
+
+
+Yeah, you're going to one of $Ithose$i places.. ;)
+#LOGOFF 500
+#INTERLEVEL TELEPORT 82
+#END
+#ENDTERMINAL 4

@@ -1,0 +1,85 @@
+;
+#TERMINAL 0
+#UNFINISHED
+#LOGON 0
+#PICT 416
+Your mission here is twofold.  First, I want you to search for any and all information concerning the location of satellites Dangi may have put in orbit around this star.  I've discovered a way to gain access to the previously sealed secure areas of the satellite, which brings us to your second job.  There should be some sort of chemical storage facility in your vicinity.  
+
+Nearby to the main chemical pool, you should find a couple of power conduits.  They'll probably be recessed into the wall.  One conduit controls power to the security door locks.  The other regulates all power to the station.  Unfortunately, the diagrams I've been able to get my hands on are incomplete, and don't say which is which.  You'll have to break one and hope for the best.
+#PICT 416
+Apparently, even if you guess wrong, you can still access the restricted areas through the chemical subtanks which connect each section of the satellite.  Just be prepared for some swimming.
+
+When you're finished with all that, you might want to "borrow" a shuttle from one of the transport bays.  You can release the docking clamps by breaking the other panel and thus cutting all power to the area.
+
+Eeny, meeny, miney, moe...
+#LOGOFF 0
+#END
+#ENDTERMINAL 0
+;
+#TERMINAL 1
+#UNFINISHED
+#LOGON 413
+#PICT 403
+$C5
+
+
+
+Good luck finding what you're looking for.  I understand that certain items can be mighty tough to locate when you don't have the proper information.
+$C1
+
+
+lysander.$C5remote$C1.out
+#LOGOFF 413
+#END
+#ENDTERMINAL 1
+;
+#TERMINAL 2
+#UNFINISHED
+#LOGON 413
+#PICT 403
+$C1
+
+
+
+$C5
+
+No, there's no information on $C1Achilles$C5 here.  I don't know what possessed you to access $Ithis$i terminal.
+$C1
+
+
+lysander.$C5remote$C1.out
+#LOGOFF 413
+#END
+#ENDTERMINAL 2
+;
+#TERMINAL 3
+#UNFINISHED
+#LOGON 413
+#PICT 404
+$C1
+
+
+
+$C5I'll be honest with you: there used to be a map on this terminal, with the route to that thing you're looking for highlighted in bright purple.  But since I'm being honest, I've also got to admit that I've removed all data pertaining to locations aboard this orbiting substation.
+
+Sometimes the truth hurts.
+$C1
+
+lysander.$C5remote$C1.out
+#LOGOFF 413
+#END
+#FINISHED
+#LOGON 0
+46 45
+#PICT 2
+
+
+
+I think I know where the Pfhor have gone with the stolen virus uplink chip.  The Dangi Corporation has a satellite in distant orbit where it stores the raw materials needed to manufacture Achilles.
+
+The only information about the location of this satellite is encoded in the navigation computer of this transport shuttle.  Rather than waste time attempting to pry it out, I have instructed the shuttle to transport you to there.  Prepare for some stasis.
+#LOGOFF 0
+5497 y98
+#INTERLEVEL TELEPORT 29
+#END
+#ENDTERMINAL 3

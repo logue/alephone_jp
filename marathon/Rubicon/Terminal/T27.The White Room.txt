@@ -1,0 +1,29 @@
+;
+#TERMINAL 0
+#UNFINISHED
+#LOGON 511
+#PICT 512
+$C1Congratulations, Marine!$C5  You've been selected from among $C1dozens$C5 of contestants to engage in a $C1heated$C5 and quite possible $C1deadly battle$C5 for a spectacular prize: the $C1brand-spanking$C5 new $C1UESC carpet mortar!$C5  That's right; this sweet little thing is valued at over $C1twenty million credits$C5, and has enough $C1firepower $C5to $C1level a small city$C5.
+
+Yes, this and other fabulous prizes can be yours, if you can survive just $C1two minutes$C5 in $C1The White Room!$C5
+
+We're all cheering for you...
+#LOGOFF 513
+#END
+#ENDTERMINAL 0
+;
+#TERMINAL 1
+#UNFINISHED
+#LOGON 511
+#PICT 512
+$C5
+
+$C1What a show you put on for us in there! $C5 Audience, let's give a big hand to our new champion!
+
+But are you a true vidmaster?  Can you survive the white room on Total Carnage, with your eyes tied behind your back and your hands blindfolded?  What about with your stomach laid open?
+
+$C1Vid on!$C5
+#LOGOFF 511
+#INTERLEVEL TELEPORT 7
+#END
+#ENDTERMINAL 1

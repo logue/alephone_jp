@@ -1,0 +1,233 @@
+;
+#TERMINAL 0
+#UNFINISHED
+#LOGON 106
+$C6758jwn5
+#PICT 25
+$C2&3$C6nil$C2/4$C6mars$C2/5$C6illio$C2&$C6~02$C2
+origin: $C6classified$C2
+destin: $C6classified$C2
+ref: $C6none$C2
+$C67D2A601E34F2755AC00D43$C2
+stamp: $C6very buisy
+~07
+~08$C2
+$C6~09$C2  The $C6pfhor$C2 were subtle as always when 
+$C6~10  $C2boarding this station; instead of 
+$C6~11  $C2breaching one of the many airlocks, 
+$C6~12  $C2they simply blew a few gaping holes in 
+$C6~13  $C2the hull and decompressed the entire $C6~14  $C2station, thus killing most of the 
+$C6~15  $C2people on board.
+$C6~16
+~17  $C2Like I care.
+$C6~18$C2
+$C6~19
+~20
+~21
+#PICT 25
+$C2&3$C6nil$C2/4$C6mars$C2/5$C6illio$C2&$C6~02$C2
+origin: $C6classified$C2
+destin: $C6classified$C2
+ref: $C6none$C2
+$C67D2A601E34F2755AC00D43$C2
+stamp: $C6very buisy
+~07
+~08$C2
+$C6~09  $C2What I do care about is that the $C6pfhor$C2
+$C6~10$C2  succeeded in acquiring the information 
+$C6~11  $C2they came for. It's stored on a chip,
+$C6~12  $C2and if this reaches $C6Pfhor Prime$C2, the
+$C6~13  pfhor$C2 will be able to synthesise this
+$C6~14  $C2virus atom by atom.
+$C6~15  
+~16  Humanity $C2will be in serious trouble if $C6
+~17  $C2that happens.$C6
+~18
+~19
+~20
+~21
+#PICT 25
+$C2&3$C6nil$C2/4$C6mars$C2/5$C6illio$C2&$C6~02$C2
+origin: $C6classified$C2
+destin: $C6classified$C2
+ref: $C6none$C2
+$C67D2A601E34F2755AC00D43$C2
+stamp: $C6very buisy
+~07
+~08$C2
+$C6~09$C2  For various reasons, most of which 
+$C6~10  $C2start with a "$C6D$C2", the $C6pfhor $C2retrieval 
+$C6~11  $C2expedition is trapped on this station 
+$C6~12  $C2until they and the chip can be picked 
+$C6~13  $C2up.
+$C6~14$C2
+$C6~15  $C2I think it's best I'm the one who 
+$C6~16  $C2picks them, up. Well, the virus chip, 
+$C6~17  $C2anyway. I don't care what happens to
+$C6~18$C2  the $C6pfhor$C2 expedition.$C6
+~19
+~20
+~21
+#PICT 25
+$C2&3$C6nil$C2/4$C6mars$C2/5$C6illio$C2&$C6~02$C2
+origin: $C6classified$C2
+destin: $C6classified$C2
+ref: $C6none$C2
+$C67D2A601E34F2755AC00D43$C2
+stamp: $C6very buisy
+~07
+~08$C2
+$C6~09$C2  When the $C6pfhor$C2 blew the hull, they 
+$C6~10  $C2triggered all sorts of security 
+$C6~11  $C2bypassees, effectively putting half 
+$C6~12  $C2the station out of your reach.
+$C6~13$C2
+$C6~14  $C2Guess which half the chip is in.$C6
+~15
+~16
+~17
+~18
+~19
+~20
+~21
+#PICT 423
+$C2&3$C6nil$C2/4$C6mars$C2/5$C6illio$C2&$C6~02$C2
+origin: $C6classified$C2
+destin: $C6classified$C2
+ref: $C6none$C2
+$C67D2A601E34F2755AC00D43$C2
+stamp: $C6very buisy
+~07
+~08$C2
+$C6~09  $C2There is however a structural flaw in 
+$C6~10  $C2one of the rooms which you can access, 
+$C6~11  $C2as detailed in the diagram to the 
+$C6~12  $C2left.  I've equipped you with a small 
+$C6~13  $C2explosive for this mission; place it 
+$C6~14  $C2where I've indicated.  It should blast $C6
+~15  $C2open the wall, letting you enter the 
+$C6~16  $C2section of the station that is 
+$C6~17  $C2currently off limits.
+$C6~18
+~19
+~20
+~21
+#LOGOFF 106
+$C6shgl$C0
+#END
+#FINISHED
+#LOGON 106
+#PICT 25
+$C2&3$C6nil$C2/4$C6mars$C2/5$C6illio$C2&$C6~02$C2
+origin: $C6classified$C2
+destin: $C6classified$C2
+ref: $C6none$C2
+$C67D2A601E34F2755AC00D43$C2
+stamp: $C6satisfied
+~07
+~08$C2
+$C6~09  $C2That was fast.
+$C6~10
+~11
+~12$C2
+$C6~13$C2
+$C6~14
+~15
+~16
+~17
+~18
+~19
+~20
+~21
+#LOGOFF 106
+#INTERLEVEL TELEPORT 68
+#END
+#ENDTERMINAL 0
+;
+#TERMINAL 1
+#UNFINISHED
+#LOGON 414
+#PICT 403
+$C1
+
+
+
+$C5
+Having difficulty breathing?  Does the skin on your neck chafe when your leash is tightened?$C1
+
+
+lysander.out
+#LOGOFF 414
+#END
+#FINISHED
+#LOGON 106
+#PICT 25
+$C2&3$C6nil$C2/4$C6mars$C2/5$C6illio$C2&$C6~02$C2
+origin: $C6classified$C2
+destin: $C6classified$C2
+ref: $C6none$C2
+$C67D2A601E34F2755AC00D43$C2
+stamp: $C6satisfied
+~07
+~08$C2
+$C6~09  $C2That was fast.
+$C6~10
+~11
+~12$C2
+$C6~13$C2
+$C6~14
+~15
+~16
+~17
+~18
+~19
+~20
+~21
+#LOGOFF 106
+#INTERLEVEL TELEPORT 68
+#END
+#ENDTERMINAL 1
+;
+#TERMINAL 2
+#UNFINISHED
+#LOGON 414
+#PICT 403
+$C1
+
+
+
+$C5
+Having difficulty breathing?  Does the skin on your neck chafe when your leash is tightened?$C1
+
+
+lysander.out
+#LOGOFF 414
+#END
+#FINISHED
+#LOGON 500
+#INFORMATION
+$C7yeah,
+
+                                       this
+
+     is
+
+
+                            one
+
+                                                         of
+
+
+        those
+                                   secret
+
+                    level
+
+                                                       thingies
+
+
+                                                                 again
+#LOGOFF 500
+#INTERLEVEL TELEPORT 17
+#END
+#ENDTERMINAL 2

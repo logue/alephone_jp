@@ -1,0 +1,44 @@
+;
+#TERMINAL 0
+#UNFINISHED
+#LOGON 200
+#PICT 207
+$C5
+After you’ve been running for three straight days you being to wonder if the world passing by you is real.  The lab wasn’t real.  The work wasn’t real.  It was all just a form of running away.  "You know why you don’t think?" Kate said to me.  "Because thought is painful.  If you stop to think you’ll kill yourself."
+
+Then there was the moment I finally stopped to think.  The three men in dark coats were staring at me from the opposite side of a big black desk.  Kate was standing by their side.  "Give us the formula," the middle one demanded.  Why was it that moment I decided to stop?  Continuing would have been so much easier.  It’s not motion or the lack of motion, it’s change that is so painful.
+#LOGOFF 200
+#END
+#ENDTERMINAL 0
+;
+#TERMINAL 1
+#UNFINISHED
+#LOGON 200
+#PICT 213
+#LOGOFF 200
+#INTERLEVEL TELEPORT 8
+#END
+#ENDTERMINAL 1
+;
+#TERMINAL 2
+#UNFINISHED
+#LOGON 200
+#PICT 212
+#LOGOFF 200
+#END
+#ENDTERMINAL 2
+;
+#TERMINAL 3
+#UNFINISHED
+#LOGON 200
+#PICT 207
+$C5
+
+Kate had been coming to the lab less.  I asked her why, she wouldn’t say.  She was distant.  She no longer told me I was an idiot.  She no longer worked the way I worked.  She worked above me it seemed.  She watched me.  She made sure I did what I was supposed to do.
+
+They say that the most frequent psychological disorder of amputees is  'phantom pains,' times in which the subject experiences sensation in parts of them which are no longer attached.  Kate became the surreal warmth in the heart they had removed from my body long ago.  
+
+I was an amputee.  She was my phantom.
+#LOGOFF 200
+#END
+#ENDTERMINAL 3

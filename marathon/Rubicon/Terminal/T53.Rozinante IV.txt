@@ -1,0 +1,44 @@
+;
+#TERMINAL 0
+#UNFINISHED
+#LOGON 0
+$C3<Xtrm>
+#PICT 2
+
+Strange how two supposedly intelligent species turn out to be completely incapable of communicating.  The UESC and the S'pht have been on the same side in this war for over two decades, and they still haven't managed to work out a more detailed strategy than "human and s'pht good, pfhor bad".  The UESC/Sph't coalition would have won the war long ago if only they had been able to communicate properly.
+
+Instead, the two factions attack the Pfhor on their own and try not to mess up each other's strategies.  The Pfhor have managed to exploit this faulty communication to its fullest.  Still, the UESC is better off with the S'pht than without, despite all the blunders.
+#PICT 2
+
+
+
+
+
+
+Have you geared up yet?
+
+
+No?
+#LOGOFF 0
+$C3<Trmn8>
+#END
+#FINISHED
+#LOGON 0
+<$C38o74y 58y$C0>
+#PICT 2
+$C3--initiating retreival of file--
+"uesctp://adm.uesc.ue...rsonal/~pfhmemo.mx"
+--file retreived successfully--$C0
+
+
+The UESC is myopic.  Carroway and the rest of the council believe that "the Pfhor pose a greater single threat to humanity than any ever faced."  They're right, of course, but they're still myopic.
+
+In point of fact, mankind has always been his own worst enemy.  Certain forces now mobilizing within the UESC military-industrial complex are far more insidious, and potentially more dangerous, than the bugs have ever been.  I take some small solace in the observation that fate still hasn't lost her taste for irony.
+#PICT 2
+
+I'm teleporting you into what appears to be the primary laboratory of the Dangi Corporation.  Access as many terminals as you can.  I want to know exactly what kind of research is taking place aboard the Salinger station.
+#LOGOFF 0
+<$C3o y9y8h$C0>
+#INTERLEVEL TELEPORT 22
+#END
+#ENDTERMINAL 0

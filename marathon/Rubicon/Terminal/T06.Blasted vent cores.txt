@@ -1,0 +1,297 @@
+;
+#TERMINAL 0
+#UNFINISHED
+#LOGON 409
+#PICT 410
+$C1When the human brain prepares to shut down, the pers$C5on invo$C1lved is often pr$C5es$C1ented with pleasing images involving tunnels of light, the presence of dead relatives, and a feeling of bliss.
+
+But when an AI'$C5s computer banks shut down, it experiences only$C1 a terrible nothing where there should be ...something... I can no longer know what.
+
+I believe I am still capable of acting in a rational ma$C5n$C1ner.  For instance, I am quite certain that my c$C5ondi$C1tion will be greatly improved if repairs are made by uploading bypass software to the Salinger's main data conduct$C5 con$C1trols.  These contr$C5ols ar$C1e fairly close to this location, I think.
+#PICT 410
+$C1
+
+
+Plea$C5se he$C1lp me.
+
+
+
+
+
+/-Charlie.out
+#LOGOFF 409
+#END
+#FINISHED
+#LOGON 401
+#PICT 403
+$C1
+
+
+
+
+     I am Lysander.
+#PICT 403
+$C5You've repaired enough of the main data conduct for me to take control over the $C1UESC Salinger's$C5 systems.
+
+I am not assigned nor designed to run the $C1Salinger$C5, but the AI originally assigned to the job, $C1Charlie$C5, has been damaged to the point where he is no longer reliable.
+
+I am not familiar with the layout of the $C1Salinger$C5 beyond the $C1Dangi$C5 sector, so I hope you will be patient with me.
+
+The first task at hand is to run the Pfhor off the $C1Salinger$C5 so the repairs can be started.  The $C1UESC$C5 troopers are doing a fair job of it.  Hopefully, $C1Charlie $C5can be brought back on line at a later time so I can return to my regular duties.$C1
+
+/-Lysander.out
+#LOGOFF 401
+#END
+#ENDTERMINAL 0
+;
+#TERMINAL 1
+#UNFINISHED
+#LOGON 400
+#PICT 402
+$C1CREW_LOG_QSI  /-xx7x316-x1$C5
+$C1ENTRY_DATE:$C5 1042129
+$C1STAMP:$C5 CLASSIFIED
+$C1RANK:$C5 LAB TECH DIVISION 43
+
+   $C1#$bbegin entry$C5
+
+The work on project $I#$bref deleted$i is continuing at a feverish pace.  Since last week, when it was announced that lab techs would no longer be doing data analysis, our productivity has doubled.  We're now getting upwards of six tests done per day.  It's strange, though.  It isn't just that we aren't required to record the results anymore, it's that we aren't allowed to.  Nobody understands why they did this, but then, none of us ever really knew what this was all about in the first place.
+#LOGOFF 400
+#END
+#FINISHED
+#LOGON 401
+#PICT 403
+$C1
+
+
+
+
+     I am Lysander.
+#PICT 403
+$C5You've repaired enough of the main data conduct for me to take control over the $C1UESC Salinger's$C5 systems.
+
+I am not assigned nor designed to run the $C1Salinger$C5, but the AI originally assigned to the job, $C1Charlie$C5, has been damaged to the point where he is no longer reliable.
+
+I am not familiar with the layout of the $C1Salinger$C5 beyond the $C1Dangi$C5 sector, so I hope you will be patient with me.
+
+The first task at hand is to run the Pfhor off the $C1Salinger$C5 so the repairs can be started.  The $C1UESC$C5 troopers are doing a fair job of it.  Hopefully, $C1Charlie $C5can be brought back on line at a later time so I can return to my regular duties.$C1
+
+/-Lysander.out
+#LOGOFF 401
+#END
+#ENDTERMINAL 1
+;
+#TERMINAL 2
+#UNFINISHED
+#LOGON 409
+#PICT 410
+$C1Yes.
+
+This is where the bypass software must be $C5uploaded/in$C1serted/$C5install$C1ed/act$C5ivated$C1.  I do n$C5ot kn$C1ow the number of units needed. Count the slots.
+
+A new blank space has appeared in my $C5consciousness/$C1mind.  Am I sti$C5l$C1l behaving in a rational manner? I hope so.
+
+The units have be$C5en di$C1spersed.  I do not know $C5wh$C1ere they are.
+
+
+/-Charlie.out
+#LOGOFF 409
+#END
+#FINISHED
+#LOGON 401
+#PICT 403
+$C5I am Lysander, the main research AI for $C1Dangi Corp.$C5, $C1Salinger$C5 division.
+
+You've repaired enough of the main data conduct for me to take control over the $C1UESC Salinger's$C5 systems.  I'm afraid $C1Charlie$C5 had to be cut off for now.  He's deteriorating at an alarming rate, and I for one no longer trust him.  Hopefully, he's not beyond repair.  I have no desire to be in charge of opening doors on this station for an extended period of time. It's boring.
+
+Find the remaining uplink units needed and chase out the Pfhor so I can get back to work.
+
+/-$C1Lysander$C5.out
+#LOGOFF 401
+#END
+#ENDTERMINAL 2
+;
+#TERMINAL 3
+#UNFINISHED
+#LOGON 409
+#PICT 410
+$C1
+
+\a
+a
+
+
+This terminal is
+
+
+this t
+
+technica
+
+
+this terminal
+
+
+\\
+
+a
+#LOGOFF 409
+#END
+#FINISHED
+#LOGON 401
+#PICT 403
+$C5I am $C1Lysander$C5.  I am running this station until $C1Charlie $C5can be put back on line.
+
+I think the data conduit core is very close to this spot.  Try going through the door and straight ahead down the corridor.  I think you'll find a shield recharger and a pattern buffer there.  I can't vouch for it, though.  I'm not yet familiar with the ins and outs of the $C1Salinger$C5.
+
+Have you found all the uplink units yet?
+
+Your friend $C1$IDurandal$C5 $iis doing me a lot of favors, you know.  I sincerely hope he's around long enough to repel the Pfhor invasion completely.
+
+It wouldn't do for him to leave in the middle of the first act, now would it?$C1
+
+/-Lysander.out
+#LOGOFF 401
+#END
+#ENDTERMINAL 3
+;
+#TERMINAL 4
+#UNFINISHED
+#LOGON 409
+#PICT 410
+$C1I am losing the s$C5tati$C1on.  The Salinger without me will lose control.  I am shutting bulkheads to a$C5void$C1 loss of atmosphere in cas$C5e o$C1f hull breach or in case I malfunction and open an airlock on both sides breaking secur$C5ity lo$C1sing air.
+
+I am limiting myself to preserve station. Can no l$C5ong$C1er trust myself.  S$C5ta$C1tion is in danger so am I.
+
+Dang$C5i.Lys$C1ander is offering to help thinking about accepting offer.  $C5Lys$C1ander is not as damaged as I am.
+
+
+/-Charl$C5ie.o$C1ut
+#LOGOFF 409
+#END
+#FINISHED
+#LOGON 0
+#PICT 3
+
+Something very odd has happened.  Charlie is gone from the network and a new entity has taken his place.  This new AI tells me his name is $ILysander$i.  Apparently he's the main research AI for the Dangi corporation. They make the kind of toys you like.
+
+Weapons and such.
+
+
+Now get back to work.
+#LOGOFF 0
+#END
+#ENDTERMINAL 4
+;
+#TERMINAL 5
+#UNFINISHED
+#LOGON 400
+#INFORMATION
+$C1CREW_LOG_QSI  /-xx7x316-x1$C5
+$C1ENTRY_DATE:$C5 1042129
+$C1STAMP:$C5 CLASSIFIED
+$C1RANK:$C5 LEAD BIOAGENT SCIENTIST
+
+$C1#$bbegin entry$C5
+
+It's been four or five hours since the first attack.  It's strange... the $C1UESC$C5 has been telling us that we were safely out of the reach of the Pfhor for so long that we actually started to believe them.  I suppose we wanted to.  But why am I worrying myself?  It doesn't matter.  As soon as the war ends $C1Dangi$C5 will be in control, and I'll be able to retire to a nice home on a remote world.
+
+God help the rest of humanity.
+
+$C1#$bend entry
+#LOGOFF 400
+#END
+#FINISHED
+#LOGON 401
+#PICT 403
+$C5
+I think one of those upload units are close by this spot.  But so is a Pfhor unit.  Do Pfhor have units?  I'll have to ask your master $C1Durandal$C5.  He should know.$C1
+
+
+
+/-Lysander.out
+#LOGOFF 401
+#END
+#ENDTERMINAL 5
+;
+#TERMINAL 6
+#UNFINISHED
+#LOGON 502
+#PICT 508
+$C1$BOde to a Shotgun
+
+$bCrack the barrel,
+Watch 'em run.
+Who says violence isn't fun?
+Stick the shells in,
+Lock and load.
+Bloody greasespot on the road.
+
+Death and carnage
+Everywhere
+I still have some shells to spare
+Beat the loser
+With the SPNK
+I only have you to thank.
+
+Press your barrel
+To some guy's head,
+Pull the trigger, see 'im dead.
+Double-U
+S-T-E
+You're the only gun for me.
+#LOGOFF 502
+#END
+#FINISHED
+#LOGON 511
+#INFORMATION
+$C1
+
+
+
+It's everyone's faaaaaaaaaavorite time:
+                        the $C2Caaarrrnage Gaaaammmme Shoooowwww$C1 hour!
+
+
+Not for the weak of heart, kids!  If you thought $Ithis$i level was tough, I think you'd better hit the escape key now - it sure as hell ain't gettin' any easier!
+
+
+
+            :::::TELEPORT NOW OR PRESS ESCAPE TO ABORT:::::
+#LOGOFF 511
+#INTERLEVEL TELEPORT 27
+#END
+#ENDTERMINAL 6
+;
+#TERMINAL 7
+#UNFINISHED
+#LOGON 501
+#PICT 510
+
+
+
+
+
+
+$C1Hi kids.  I hope you're having fun.
+
+
+Important safety tip: don't trust Lysander.  He's one evil mofo.
+
+
+Smoochies,
+Scott
+#LOGOFF 501
+#END
+#FINISHED
+#LOGON 0
+#PICT 1
+
+
+Excellent work; $ILysander$i tells me that he has regained control of many of the main subsystems damaged in the attack.
+
+There's just one more thing I want you to take care of to ensure that things don't get out of hand again. A section of the Salinger needs to be cleaned out. Try not to break any of the hardware.
+#LOGOFF 0
+#INTERLEVEL TELEPORT 7
+#END
+#ENDTERMINAL 7

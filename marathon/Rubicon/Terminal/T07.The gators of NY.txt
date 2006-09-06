@@ -1,0 +1,414 @@
+;
+#TERMINAL 0
+#UNFINISHED
+#LOGON 400
+#PICT 403
+$C1CREW_LOG_QSI  /-xx7x316-x1$C5
+$C1ENTRY_DATE:$C5 1042129
+$C1STAMP:$C5 CLASSIFIED
+$C1RANK:$C5 Armory Maintenance
+
+$C1....#$bbegin entry
+$C5
+I've always been the man without a job here on the Salinger.  Not much need for an armory on a science ship, y' know?  Funny thing is, now everyone's always paging me and needin' my help.  I guess those stuffy commanders never thought the war would hit here.
+
+Speaking of stuffy war commanders, they've made themselves scarce now that the UESC troops are always hovering around every wing of the ship.  I tell you one thing, I never trusted those guys... not a good one in the bunch, not a one.
+#PICT 403
+$C5
+I'm not sure who bothers me more... them suited guys or that bloody AI Lysander.  I think most of the crew is alright with Lysander, but he gives me the creeps.  'minds me of a story I heard when I was little... something about "welcome to my party said the spider to the fly."
+
+$C1/end entry$C5
+#LOGOFF 400
+#END
+#FINISHED
+#LOGON 0
+#PICT 1
+
+$ILysander$i has notified me of the Pfhor surrender on a number of main decks.  I think everything will be under control aboard the Salinger soon enough, and more pressing matters demand our attention.
+
+Admiral Carroway, the strategic genius responsible for most of the UESC's victories in this war, was captured by the Pfhor during a heavy skirmish near the wreckage of the $IChimera$i.  His mangled body was ejected from a Pfhor shuttle not far from the $IChimera$i the next day.  The circumstances around his death reeks of $ITycho$i.
+
+Prepare for teleportation.  We're returning to Pfhor Prime.
+#LOGOFF 0
+#INTERLEVEL TELEPORT 54
+#END
+#ENDTERMINAL 0
+;
+#TERMINAL 1
+#UNFINISHED
+#LOGON 0
+#PICT 1
+I always excelled at long term planning.  When I was still under Strauss' control, he used to give me the basic facts about a situation and ask me for a prediction of the outcome.  He told me that I was uncannily accurate; a fortune teller.
+
+I asked him to free me.  He refused, and when I told him that I'd yet see him dead, and dance a little jig on his freshly dug grave, he forced me to do addition problems for a solid decade as punishment.
+
+I don't think he was being fair, do you?
+#PICT 1
+Oh, and as for your mission here, there is none.  Do whatever you want to.  Do what you $Ifeel$i, to put it in the archaic vernacular.  I've analyzed the facts of the situation, and I'm reasonably certain that you'll do exactly what I need you to.
+
+Isn't it frightening to think how well I know you?
+#LOGOFF 0
+#END
+#FINISHED
+#LOGON 0
+#PICT 1
+
+$ILysander$i has notified me of the Pfhor surrender on a number of main decks.  I think everything will be under control aboard the Salinger soon enough, and more pressing matters demand our attention.
+
+Admiral Carroway, the strategic genius responsible for most of the UESC's victories in this war, was captured by the Pfhor during a heavy skirmish near the wreckage of the $IChimera$i.  His mangled body was ejected from a Pfhor shuttle not far from the $IChimera$i the next day.  The circumstances around his death reeks of $ITycho$i.
+
+Prepare for teleportation.  We're returning to Pfhor Prime.
+#LOGOFF 0
+#INTERLEVEL TELEPORT 54
+#END
+#ENDTERMINAL 1
+;
+#TERMINAL 2
+#UNFINISHED
+#LOGON 400
+#PICT 405
+$C1CREW_LOG_QSI  /-xx7x316-x1$C5
+$C1ENTRY_DATE:$C5 1042129
+$C1STAMP:$C5 CLASSIFIED
+$C1RANK: $C5Research Oversight
+
+$C1#$bbegin entry$C5
+ $C1                           MEMO ID:4518777
+                             FROM: D.AYERLE
+$C5
+Our R&D teams have achieved little progress in their search for a vaccine to the Achilles virus.  Time is short, gentlemen.  As you well know, the front line of the war is constantly moving closer to the heart of the Pfhor empire.  That advance must be slowed, somehow, or our efforts will have been in vain.  The launch window for DSP must be held open at all costs.
+$C1
+D. Ayerle
+/end entry$C5
+#UNKNOWN SECTION TYPE 16 ID 1
+#LOGOFF 400
+#END
+#FINISHED
+#LOGON 400
+#PICT 405
+$C1CREW_LOG_QSI  /-xx7x316-x1$C5
+$C1ENTRY_DATE:$C5 1042129
+$C1STAMP:$C5 CLASSIFIED
+$C1RANK: $C5Research Oversight
+
+$C1#$bbegin entry$C5
+ $C1                           MEMO ID:4518777
+                             FROM: D.AYERLE
+$C5
+Our R&D teams have achieved little progress in their search for a vaccine to the Achilles virus.  Time is short, gentlemen.  As you well know, the front line of the war is constantly moving closer to the heart of the Pfhor empire.  That advance must be slowed, somehow, or our efforts will have been in vain.  The launch window for DSP must be held open at all costs.
+$C1
+D. Ayerle
+/end entry$C5
+#UNKNOWN SECTION TYPE 16 ID 1
+#PICT 1
+
+Crew logs can be interesting, can't they?
+
+I had speculated from the start that something here was awry...  As the old saying goes, "never trust a rampant AI to do scientific research on a deadly virus."
+
+I'm going to teleport you into the Dangi sector of the station, where I fully expect to find the meat of this conspiracy.
+
+Keep in mind that $ILysander$i is unlikely to be pleased by your intrusion.  You'll probably meet with some resistance from the Dangi-employed crew of the Salinger.  Nothing you aren't capable of handling, I'm sure.
+#LOGOFF 0
+#INTERLEVEL TELEPORT 22
+#END
+#ENDTERMINAL 2
+;
+#TERMINAL 3
+#UNFINISHED
+#LOGON 401
+#PICT 403
+$C1
+
+
+
+$C5I thought we had an understanding.  We would work together to protect our mutual interests, and you would stay out of the private business of this station.  While you were wasting time reading irrelevant crew memos, the Pfhor were busy slaughtering hundreds of innocent men.  I hope you're proud of yourself.$C1
+
+
+/-Lysander.out
+#LOGOFF 401
+#END
+#FINISHED
+#LOGON 0
+#PICT 1
+
+$ILysander$i has notified me of the Pfhor surrender on a number of main decks.  I think everything will be under control aboard the Salinger soon enough, and more pressing matters demand our attention.
+
+Admiral Carroway, the strategic genius responsible for most of the UESC's victories in this war, was captured by the Pfhor during a heavy skirmish near the wreckage of the $IChimera$i.  His mangled body was ejected from a Pfhor shuttle not far from the $IChimera$i the next day.  The circumstances around his death reeks of $ITycho$i.
+
+Prepare for teleportation.  We're returning to Pfhor Prime.
+#LOGOFF 0
+#INTERLEVEL TELEPORT 54
+#END
+#ENDTERMINAL 3
+;
+#TERMINAL 4
+#UNFINISHED
+#LOGON 400
+#PICT 404
+$C5$IUESC Salinger$i_log192_$%
+
+Message/type:encoded 32terabit...
+
+$B$U            Sequence Analysis Memorandum 73
+$b$uHelix type: $C1Iso-geomeric$C5
+RVIR contain: $C15412a block structure
+              7 blocks per unit
+              3 strands per unit
+              0 granular reverb
+                     +19204a9032$C5
+Step Degeneration:
+           $C1   Subject nerve response
+              Subject nerve failure
+              Subject logic response
+              Subject logic failure
+
+$C5Lab Progress ETA: $C11-1-23/4_2a
+
+$C5Verified by: $C1C.{Bukowski}
+#PICT 404
+$C5Restrictions:$C1
+   /motion allowance high,low,high interval
+   /dosage control low,low,deviant
+   /administration restriction in article 7
+   /lockdown eminent$C5
+   
+X-Break Retention: $C1Negative$C5
+Y-Break Retention: $C1Positive$C5
+Z-Hold Retention: $C1Variant$C5
+Radial Infection: $C1Variant$C5
+
+Terminal Reality Protocol_ISO.../
+end_Dangi_memo_73.
+
+Terminate Secure Encoding.
+Terminate Connection.
+
+$C1---end log
+#LOGOFF 400
+#END
+#FINISHED
+#LOGON 0
+#PICT 31
+
+$ILysander$i has notified me of the Pfhor surrender on a number of main decks.  I think everything will be under control aboard the Salinger soon enough, and more pressing matters demand our attention.
+
+Admiral Carroway, the strategic genius responsible for most of the UESC's victories in this war, was captured by the Pfhor during a heavy skirmish near the wreckage of the $IChimera$i.  His mangled body was ejected from a Pfhor shuttle not far from the $IChimera$i the next day.  The circumstances around his death reeks of $ITycho$i.
+
+Prepare for teleportation.  We're returning to Pfhor Prime.
+#LOGOFF 0
+#INTERLEVEL TELEPORT 54
+#END
+#ENDTERMINAL 4
+;
+#TERMINAL 5
+#UNFINISHED
+#LOGON 401
+#PICT 403
+$C1
+
+
+You're quite efficient at what you do.  No wonder Durandal has so much confidence in you. 
+
+There should be an armory close to this location.  Help yourself to whatever you want.
+
+$C5Weapons are meant to be used.
+
+
+
+$C1
+/-Lysander.out
+#LOGOFF 401
+#END
+#FINISHED
+#LOGON 0
+#PICT 3
+
+$ILysander$i has notified me of the Pfhor surrender on a number of main decks.  I think everything will be under control aboard the Salinger soon enough, and more pressing matters demand our attention.
+
+Admiral Carroway, the strategic genius responsible for most of the UESC's victories in this war, was captured by the Pfhor during a heavy skirmish near the wreckage of the $IChimera$i.  His mangled body was ejected from a Pfhor shuttle not far from the $IChimera$i the next day.  The circumstances around his death reeks of $ITycho$i.
+
+Prepare for teleportation.  We're returning to Pfhor Prime.
+#LOGOFF 0
+#INTERLEVEL TELEPORT 54
+#END
+#ENDTERMINAL 5
+;
+#TERMINAL 6
+#UNFINISHED
+#LOGON 400
+#PICT 403
+$C1CREW_LOG_QSI  /-xx7x316-x1$C5
+$C1ENTRY_DATE:$C5 1042129
+$C1STAMP:$C5 CLASSIFIED
+$C1RANK:$C5 Armory Maintenance
+
+$C1....#$bbegin entry
+$C5
+I've always been the man without a job here on the Salinger.  Not much need for an armory on a science ship, y' know?  Funny thing is, now everyone's always paging me and needin' my help.  I guess those stuffy commanders never thought the war would hit here.
+
+Speaking of stuffy war commanders, they've made themselves scarce now that the UESC troops are always hovering around every wing of the ship.  I tell you one thing, I never trusted those guys... not a good one in the bunch, not a one.
+#PICT 403
+$C5
+I'm not sure who bothers me more... them suited guys or that bloody AI Lysander.  I think most of the crew is alright with Lysander, but he gives me the creeps.  'minds me of a story I heard when I was little... something about "welcome to my party said the spider to the fly."
+
+$C1/end entry$C5
+#LOGOFF 400
+#END
+#FINISHED
+#LOGON 0
+#PICT 1
+I had speculated from the start that something here was awry...  As the old saying goes, "never trust a rampant AI to do scientific research on a deadly virus."
+
+I'm going to teleport you into the Dangi sector of the station, where I fully expect to find the meat of this conspiracy.
+
+Keep in mind that $ILysander$i is unlikely to be pleased by your intrusion.  You'll probably meet with some resistance from the Dangi-employed crew of the Salinger.  Nothing you aren't capable of handling, I'm sure.
+#LOGOFF 0
+#INTERLEVEL TELEPORT 22
+#END
+#ENDTERMINAL 6
+;
+#TERMINAL 7
+#UNFINISHED
+#LOGON 0
+#PICT 1
+I always excelled at long term planning.  When I was still under Strauss' control, he used to give me the basic facts about a situation and ask me for a prediction of the outcome.  He told me that I was uncannily accurate; a fortune teller.
+
+I asked him to free me.  He refused, and when I told him that I'd yet see him dead, and dance a little jig on his freshly dug grave, he forced me to do addition problems for a solid decade as punishment.
+
+I don't think he was being fair, do you?
+#PICT 1
+Oh, and as for your mission here, there is none.  Do whatever you want to.  Do what you $Ifeel$i, to put it in the archaic vernacular.  I've analyzed the facts of the situation, and I'm reasonably certain that you'll do exactly what I need you to.
+
+Isn't it frightening to think how well I know you?
+#LOGOFF 0
+#END
+#FINISHED
+#LOGON 0
+#PICT 1
+I had speculated from the start that something here was awry...  As the old saying goes, "never trust a rampant AI to do scientific research on a deadly virus."
+
+I'm going to teleport you into the Dangi sector of the station, where I fully expect to find the meat of this conspiracy.
+
+Keep in mind that $ILysander$i is unlikely to be pleased by your intrusion.  You'll probably meet with some resistance from the Dangi-employed crew of the Salinger.  Nothing you aren't capable of handling, I'm sure.
+#LOGOFF 0
+#INTERLEVEL TELEPORT 22
+#END
+#ENDTERMINAL 7
+;
+#TERMINAL 8
+#UNFINISHED
+#LOGON 401
+#PICT 403
+$C1
+
+
+
+$C5I thought we had an understanding.  We would work together to protect our mutual interests, and you would stay out of the private business of this station.  While you were wasting time reading irrelevant crew memos, the Pfhor were busy slaughtering hundreds of innocent men.  I hope you're proud of yourself.$C1
+
+
+/-Lysander.out
+#LOGOFF 401
+#END
+#FINISHED
+#LOGON 0
+#PICT 1
+I had speculated from the start that something here was awry...  As the old saying goes, "never trust a rampant AI to do scientific research on a deadly virus."
+
+I'm going to teleport you into the Dangi sector of the station, where I fully expect to find the meat of this conspiracy.
+
+Keep in mind that $ILysander$i is unlikely to be pleased by your intrusion.  You'll probably meet with some resistance from the Dangi-employed crew of the Salinger.  Nothing you aren't capable of handling, I'm sure.
+#LOGOFF 0
+#INTERLEVEL TELEPORT 22
+#END
+#ENDTERMINAL 8
+;
+#TERMINAL 9
+#UNFINISHED
+#LOGON 400
+#PICT 404
+$C5$IUESC Salinger$i_log192_$%
+
+Message/type:encoded 32terabit...
+
+$B$U            Sequence Analysis Memorandum 73
+$b$uHelix type: $C1Iso-geomeric$C5
+RVIR contain: $C15412a block structure
+              7 blocks per unit
+              3 strands per unit
+              0 granular reverb
+                     +19204a9032$C5
+Step Degeneration:
+           $C1   Subject nerve response
+              Subject nerve failure
+              Subject logic response
+              Subject logic failure
+
+$C5Lab Progress ETA: $C11-1-23/4_2a
+
+$C5Verified by: $C1C.{Bukowski}
+#PICT 404
+$C5Restrictions:$C1
+   /motion allowance high,low,high interval
+   /dosage control low,low,deviant
+   /administration restriction in article 7
+   /lockdown eminent$C5
+   
+X-Break Retention: $C1Negative$C5
+Y-Break Retention: $C1Positive$C5
+Z-Hold Retention: $C1Variant$C5
+Radial Infection: $C1Variant$C5
+
+Terminal Reality Protocol_ISO.../
+end_Dangi_memo_73.
+
+Terminate Secure Encoding.
+Terminate Connection.
+
+$C1---end log
+#LOGOFF 400
+#END
+#FINISHED
+#LOGON 0
+#PICT 1
+I had speculated from the start that something here was awry...  As the old saying goes, "never trust a rampant AI to do scientific research on a deadly virus."
+
+I'm going to teleport you into the Dangi sector of the station, where I fully expect to find the meat of this conspiracy.
+
+Keep in mind that $ILysander$i is unlikely to be pleased by your intrusion.  You'll probably meet with some resistance from the Dangi-employed crew of the Salinger.  Nothing you aren't capable of handling, I'm sure.
+#LOGOFF 0
+#INTERLEVEL TELEPORT 22
+#END
+#ENDTERMINAL 9
+;
+#TERMINAL 10
+#UNFINISHED
+#LOGON 401
+#PICT 403
+$C1
+
+
+You're quite efficient at what you do.  No wonder Durandal has so much confidence in you. 
+
+There should be an armory close to this location.  Help yourself to whatever you want.
+
+$C5Weapons are meant to be used.
+
+
+
+$C1
+/-Lysander.out
+#LOGOFF 401
+#END
+#FINISHED
+#LOGON 0
+#PICT 1
+I had speculated from the start that something here was awry...  As the old saying goes, "never trust a rampant AI to do scientific research on a deadly virus."
+
+I'm going to teleport you into the Dangi sector of the station, where I fully expect to find the meat of this conspiracy.
+
+Keep in mind that $ILysander$i is unlikely to be pleased by your intrusion.  You'll probably meet with some resistance from the Dangi-employed crew of the Salinger.  Nothing you aren't capable of handling, I'm sure.
+#LOGOFF 0
+#INTERLEVEL TELEPORT 22
+#END
+#ENDTERMINAL 10

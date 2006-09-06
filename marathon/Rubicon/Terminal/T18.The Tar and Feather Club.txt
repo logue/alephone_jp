@@ -1,0 +1,360 @@
+;
+#TERMINAL 0
+#UNFINISHED
+#LOGON 400
+#INFORMATION
+$C1Internal DANGI Memo ID#2521.413
+REFERENCE: $C5/classified$C1
+SUBJECT: $C5  /classified$C1
+CONTENTS: $C5 /classified
+
+Of principal interest to the Dangi Corporation during the early half of the Human / Pfhor war was the Pfhor-developed "assimilated" human androids.  As the Dangi Corporation improved its relations with the Pfhor trafficking contacts, we learned much about this useful technology.  According to the information given by the Pfhor oversight committee responsible for all Dangi-Pfhor dealings, these androids were manufactured to deter slave revolts via subversion and self-destruction.  Their logical and speech facilities were very limited compared to what we have been able to achieve in the first prototype line of Autonomous Military Dangi Droids (AMDDs).  Indeed, these initial prototypes are virtually indistinguishable from human soldiers in all respects, granted two exceptions.
+
+The first of these exceptions is obviously the unwavering loyalty of the android's hardcoded programming compared to the ebb and flow of human relations.  A properly configured AMDD will always remain
+#INFORMATION
+$C5
+steadfast in its complete devotion to following the commands of its superior.  In that sense, AMDDs make the perfect personal bodyguards for the Dangi board of directors, and it is my recommendation that a limited run of these prototypes be produced and tested for that very purpose.
+
+The second notable difference between a standard human soldier and an AMDD is that the AMDD has a gray biochemical fluid instead of blood.  This makes it unsuitable for AMDD units to be mixed during combat with human marines, as if an AMDD were to be wounded the human marines in its regimen would possibly mutiny (likelihood: 32%) or report the abnormal circumstances back to the UESC (likelihood: 97%) as well as turn in the AMDD cadaver for study (likelihood: 84%).  Because of these factors, I recommend that only a limited run of AMDDs be produced, and that the manufactured units be kept separate from existing marines.
+
+$C1.:-memo sectionheader end
+.:-encryption stopped
+.:-----------$C5------------------------------
+#LOGOFF 400
+#END
+#FINISHED
+#LOGON 0
+#PICT 1
+The Salinger network is wide open to any takers.  There are still several security blocks that need to be broken down, but time is on my side.
+
+I have some corners to sweep out before the UESC reinforcements arrive, and you are my broom.
+
+Which corners would those be?  Well, it appears that Lysander started an automatic process at the time when you were destroying his circuitry.  I can't identify what exactly he initiated, and I don't want to risk ignoring it.  He may well have started large-scale production of the $IAchilles$i virus, and we wouldn't want that, now would we?
+#LOGOFF 0
+#INTERLEVEL TELEPORT 44
+#END
+#ENDTERMINAL 0
+;
+#TERMINAL 1
+#UNFINISHED
+#LOGON 0
+#PICT 1
+
+
+
+Could you be just a tad more careful about who you're shooting?  I want the Salinger scientists alive.
+
+Let me put it in simpler terms: don't kill anyone who isn't shooting at you.
+#LOGOFF 0
+#END
+#FINISHED
+#LOGON 0
+#PICT 1
+The Salinger network is wide open to any takers.  There are still several security blocks that need to be broken down, but time is on my side.
+
+I have some corners to sweep out before the UESC reinforcements arrive, and you are my broom.
+
+Which corners would those be?  Well, it appears that Lysander started an automatic process at the time when you were destroying his circuitry.  I can't identify what exactly he initiated, and I don't want to risk ignoring it.  He may well have started large-scale production of the $IAchilles$i virus, and we wouldn't want that, now would we?
+#LOGOFF 0
+#INTERLEVEL TELEPORT 44
+#END
+#ENDTERMINAL 1
+;
+#TERMINAL 2
+#UNFINISHED
+#LOGON 400
+#INFORMATION
+$C5
+
+
+
+        F
+                           #
+                                                                     ¶
+               45%                        ^
+                                                              )
+              $C1Lysander cannot be accessed at this time.
+                      Please try again later.$C5
+           /
+@                                                        .
+
+                                             X
+#LOGOFF 400
+#END
+#FINISHED
+#LOGON 0
+#PICT 1
+The Salinger network is wide open to any takers.  There are still several security blocks that need to be broken down, but time is on my side.
+
+I have some corners to sweep out before the UESC reinforcements arrive, and you are my broom.
+
+Which corners would those be?  Well, it appears that Lysander started an automatic process at the time when you were destroying his circuitry.  I can't identify what exactly he initiated, and I don't want to risk ignoring it.  He may well have started large-scale production of the $IAchilles$i virus, and we wouldn't want that, now would we?
+#LOGOFF 0
+#INTERLEVEL TELEPORT 44
+#END
+#ENDTERMINAL 2
+;
+#TERMINAL 3
+#UNFINISHED
+#LOGON 400
+#INFORMATION
+$C5
+
+
+
+        F
+                           #
+                                                                     ¶
+               45%                        ^
+                                                              )
+              $C1Lysander cannot be accessed at this time.
+                      Please try again later.$C5
+           /
+@                                                        .
+
+                                             X
+#LOGOFF 400
+#END
+#FINISHED
+#LOGON 0
+#PICT 1
+The Salinger network is wide open to any takers.  There are still several security blocks that need to be broken down, but time is on my side.
+
+I have some corners to sweep out before the UESC reinforcements arrive, and you are my broom.
+
+Which corners would those be?  Well, it appears that Lysander started an automatic process at the time when you were destroying his circuitry.  I can't identify what exactly he initiated, and I don't want to risk ignoring it.  He may well have started large-scale production of the $IAchilles$i virus, and we wouldn't want that, now would we?
+#LOGOFF 0
+#INTERLEVEL TELEPORT 44
+#END
+#ENDTERMINAL 3
+;
+#TERMINAL 4
+#UNFINISHED
+#LOGON 400
+#PICT 403
+$C1Internal DANGI Memo ID#2521.412
+REFERENCE: $C5/classified$C1
+SUBJECT: $C5  /classified$C1
+CONTENTS: $C5 /classified$C1
+
+$C5The plan must be aborted.  Most of the key research staff is gathered in the gym along with a fairly heavy guard force, waiting for evacuation.  Their shuttle should be along shortly.  Most of the other directors and execs have already left.  We will regroup on the safe outerworld specified in the contingency plan.
+
+Hurry, time is short.$C1
+
+
+                    ~Director Lisa Carroway
+#LOGOFF 400
+#END
+#FINISHED
+#LOGON 0
+#PICT 1
+The Salinger network is wide open to any takers.  There are still several security blocks that need to be broken down, but time is on my side.
+
+I have some corners to sweep out before the UESC reinforcements arrive, and you are my broom.
+
+Which corners would those be?  Well, it appears that Lysander started an automatic process at the time when you were destroying his circuitry.  I can't identify what exactly he initiated, and I don't want to risk ignoring it.  He may well have started large-scale production of the $IAchilles$i virus, and we wouldn't want that, now would we?
+#LOGOFF 0
+#INTERLEVEL TELEPORT 44
+#END
+#ENDTERMINAL 4
+;
+#TERMINAL 5
+#UNFINISHED
+#LOGON 400
+#PICT 403
+$C1$ULysander contingency #21b status report$C5$u
+
+
+
+$C1$U                     Status$C5$u
+Production line 02a:$C0 $C3GREEN$C5
+Production line 09t:$C0 $C3GREEN$C5
+Production line 12e:$C2 $C6RED$C5
+Production line 23b:$C0 $C3GREEN$C0
+
+
+
+$C1$U                     Efficiency$C5$u
+Production line 02a: $C393%$C5
+Production line 09t: $C382%$C5
+Production line 12e: $C6NA$C5
+Production line 23b: $C395%$C5
+#PICT 403
+$C1
+*** Booting production line 12e$C5
+
+$C1---$C5 Boot initiated
+
+$C1*** Loading vectors ¥¥¥¥¥$C5
+
+$C1--- $C5Vectors loaded
+$C1
+*** Initiating production line 12e$C5
+
+$C1---$C5 Line 12e initiated
+
+$C1***$C5 Production line $C112e$C5 active
+#PICT 403
+$C1$ULysander contingency #21b status report$C5$u
+
+
+
+$C1$U                     Status$C5$u
+Production line 02a:$C0 $C3GREEN$C5
+Production line 09t:$C0 $C3GREEN$C5
+Production line 12e:$C2 $C3GREEN$C5
+Production line 23b:$C0 $C3GREEN$C0
+
+
+
+$C1$U                     Efficiency$C5$u
+Production line 02a: $C391%$C5
+Production line 09t: $C384%$C5
+Production line 12e: $C376%$C5
+Production line 23b: $C396%$C5
+#LOGOFF 400
+#END
+#FINISHED
+#LOGON 0
+#PICT 1
+The Salinger network is wide open to any takers.  There are still several security blocks that need to be broken down, but time is on my side.
+
+I have some corners to sweep out before the UESC reinforcements arrive, and you are my broom.
+
+Which corners would those be?  Well, it appears that Lysander started an automatic process at the time when you were destroying his circuitry.  I can't identify what exactly he initiated, and I don't want to risk ignoring it.  He may well have started large-scale production of the $IAchilles$i virus, and we wouldn't want that, now would we?
+#LOGOFF 0
+#INTERLEVEL TELEPORT 44
+#END
+#ENDTERMINAL 5
+;
+#TERMINAL 6
+#UNFINISHED
+#LOGON 400
+#INFORMATION
+$C5
+
+
+
+        F
+                           #
+                                                                     ¶
+               45%                        ^
+                                                              )
+              $C1Lysander cannot be accessed at this time.
+                      Please try again later.$C5
+           /
+@                                                        .
+
+                                             X
+#LOGOFF 400
+#END
+#FINISHED
+#LOGON 0
+#PICT 1
+The Salinger network is wide open to any takers.  There are still several security blocks that need to be broken down, but time is on my side.
+
+I have some corners to sweep out before the UESC reinforcements arrive, and you are my broom.
+
+Which corners would those be?  Well, it appears that Lysander started an automatic process at the time when you were destroying his circuitry.  I can't identify what exactly he initiated, and I don't want to risk ignoring it.  He may well have started large-scale production of the $IAchilles$i virus, and we wouldn't want that, now would we?
+#LOGOFF 0
+#INTERLEVEL TELEPORT 44
+#END
+#ENDTERMINAL 6
+;
+#TERMINAL 7
+#UNFINISHED
+#LOGON 400
+#PICT 403
+$C1Internal DANGI Memo ID#2521.412
+REFERENCE: $C5/classified$C1
+SUBJECT: $C5  /classified$C1
+CONTENTS: $C5 /classified$C1
+
+$C5The plan must be aborted.  Most of the key research staff is gathered in the gym along with a fairly heavy guard force, waiting for evacuation.  Their shuttle should be along shortly.  Most of the other directors and execs have already left.  We will regroup on the safe outerworld specified in the contingency plan.
+
+Hurry, time is short.$C1
+
+
+                    ~Director Lisa Carroway
+#LOGOFF 400
+#END
+#FINISHED
+#LOGON 0
+#PICT 1
+The Salinger network is wide open to any takers.  There are still several security blocks that need to be broken down, but time is on my side.
+
+I have some corners to sweep out before the UESC reinforcements arrive, and you are my broom.
+
+Which corners would those be?  Well, it appears that Lysander started an automatic process at the time when you were destroying his circuitry.  I can't identify what exactly he initiated, and I don't want to risk ignoring it.  He may well have started large-scale production of the $IAchilles$i virus, and we wouldn't want that, now would we?
+#LOGOFF 0
+#INTERLEVEL TELEPORT 44
+#END
+#ENDTERMINAL 7
+;
+#TERMINAL 8
+#UNFINISHED
+#LOGON 400
+#INFORMATION
+$C5
+
+
+
+        F
+                           #
+                                                                     ¶
+               45%                        ^
+                                                              )
+             $C1 Lysander cannot be accessed at this time.
+                      Please try again later.$C5
+           /
+@                                                        .
+
+                                             X
+#LOGOFF 400
+#END
+#FINISHED
+#LOGON 0
+#PICT 1
+The Salinger network is wide open to any takers.  There are still several security blocks that need to be broken down, but time is on my side.
+
+I have some corners to sweep out before the UESC reinforcements arrive, and you are my broom.
+
+Which corners would those be?  Well, it appears that Lysander started an automatic process at the time when you were destroying his circuitry.  I can't identify what exactly he initiated, and I don't want to risk ignoring it.  He may well have started large-scale production of the $IAchilles$i virus, and we wouldn't want that, now would we?
+#LOGOFF 0
+#INTERLEVEL TELEPORT 44
+#END
+#ENDTERMINAL 8
+;
+#TERMINAL 9
+#UNFINISHED
+#LOGON 400
+#INFORMATION
+$C5
+
+
+
+        F
+                           #
+                                                                     ¶
+               45%                        ^
+                                                              )
+              $C1Lysander cannot be accessed at this time.
+                      Please try again later.$C5
+           /
+@                                                        .
+
+                                             X
+#LOGOFF 400
+#END
+#FINISHED
+#LOGON 0
+#PICT 1
+The Salinger network is wide open to any takers.  There are still several security blocks that need to be broken down, but time is on my side.
+
+I have some corners to sweep out before the UESC reinforcements arrive, and you are my broom.
+
+Which corners would those be?  Well, it appears that Lysander started an automatic process at the time when you were destroying his circuitry.  I can't identify what exactly he initiated, and I don't want to risk ignoring it.  He may well have started large-scale production of the $IAchilles$i virus, and we wouldn't want that, now would we?
+#LOGOFF 0
+#INTERLEVEL TELEPORT 44
+#END
+#ENDTERMINAL 9

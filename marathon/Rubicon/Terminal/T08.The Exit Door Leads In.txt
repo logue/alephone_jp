@@ -1,0 +1,241 @@
+;
+#TERMINAL 0
+#UNFINISHED
+#LOGON 20
+#PICT 21
+$C2Aggregate Patrol Units
+origin: $C6localized command $C2
+destin: $C6aggregate patrol units
+$C2ref: $C6rogue conditioned unit
+$C2stamp: $Icontainment
+$i
+
+Rogue conditioned unit has escaped with assistance from artificial intelligence entity.  Patrol units 45 & 46 have been subjected to ($C6granted?$C2) partial dismemberment in accordance with penal code subsection 2827-A3 of the cruiser guard unit conduct chart ($C6?manual$C2).
+
+Localized command hereby authorizes the recapture and imprisonment of aforementioned rogue conditioned unit.
+#LOGOFF 20
+#END
+#FINISHED
+#LOGON 28
+#PICT 30
+$C2All Available Units
+origin: $C6a very angry localized command $C2
+destin: $C6all available units
+$C2ref: $C6rogue conditioned unit
+$C2stamp: $Iinterference
+$i
+
+Currently at large rogue conditioned unit, same mentioned in previous communications, has damaged ($C6abused?$C2) shipwide computer interface.  Offensive ($C6irritating?$C2) artificial intelligence entity has assumed partial control of Khi'Prih internal ship network.  Rogue conditioned unit believed to be located on main bridge.
+
+Unless rogue conditioned unit is apprehended, Khi'Prih Guard units 13, 17-23, 25, 29, and 80-93 will be summarily 
+reassigned ($C6?demoted$C2) to Ship Waste Disposal Unit 8, rank management.
+#LOGOFF 28
+#END
+#ENDTERMINAL 0
+;
+#TERMINAL 1
+#UNFINISHED
+#LOGON 20
+#PICT 21
+$C2Aggregate Patrol Units
+origin: $C6localized command $C2
+destin: $C6aggregate patrol units
+$C2ref: $C6rogue conditioned unit
+$C2stamp: $Icontainment
+$i
+
+Rogue conditioned unit has escaped with assistance from artificial intelligence entity.  Patrol units 45 & 46 have been subjected to ($C6granted?$C2) partial dismemberment in accordance with penal code subsection 2827-A3 of the cruiser guard unit conduct chart ($C6?manual$C2).
+
+Localized command hereby authorizes the recapture and imprisonment of aforementioned rogue conditioned unit.
+#LOGOFF 20
+#END
+#FINISHED
+#LOGON 0
+#PICT 4
+That last raid managed to annoy $ILysander$i rather badly, if his decision to teleport you into the brig of a nearby Pfhor cruiser is any indication.  That's where you are right now, by the way, and as the bugs are unlikely to be particularly hospitable towards you, of all people, I suggest that you pay close attention.
+
+As you will have already noticed, I managed to short-circuit your cell door.  I wiped its drivers from the ship's memory, and replaced them with pointers to some code of my own devising; if you recall, doors were something of a specialty of mine back on the $IMarathon$i.
+#PICT 4
+Although I'm sure you'd like to stay here and chat with your old tri-optic pals, there is still the small matter of a certain blitheringly sociopathic cybernetic entity to be taken care of.  The Pfhor have erected a powerful magnetic field around the ship, preventing me from locking onto you long enough to pull off a teleport.  No doubt it's because they just love you so very much that they can't bear to let you go.  Alack and alas, it is to be a love unrequited.
+
+Find your way to the lower starboard airlock.  It will take you to the exterior of the ship, where you can locate and disable the wiring that enables the magnetic field.  I think the wires are at the rear end of the ship.  Once the you've ripped out the wiring, go to the bow of the ship and I'll try to pull off a transport.
+#PICT 4
+
+Unfortunately, you can't just jump off the ship and into space.  A move like that would make you an easy target for ships in the vicinity, and by the time you reached safe distance from that magnetic shield I'd be teleporting in nothing more than a smoldering pile of remains.
+
+Try not to attract too much attention.  You know how I worry.
+#LOGOFF 0
+#END
+#ENDTERMINAL 1
+;
+#TERMINAL 2
+#UNFINISHED
+#LOGON 20
+#PICT 21
+$C2Aggregate Patrol Units
+origin: $C6localized command $C2
+destin: $C6aggregate patrol units
+$C2ref: $C6rogue conditioned unit
+$C2stamp: $Icontainment
+$i
+
+Rogue conditioned unit has escaped with assistance from artificial intelligence entity.  Patrol units 45 & 46 have been subjected to ($C6granted?$C2) partial dismemberment in accordance with penal code subsection 2827-A3 of the cruiser guard unit conduct chart ($C6?manual$C2).
+
+Localized command hereby authorizes the recapture and imprisonment of aforementioned rogue conditioned unit.
+#LOGOFF 20
+#END
+#FINISHED
+#LOGON 28
+#PICT 30
+$C2All Available Units
+origin: $C6a very angry localized command $C2
+destin: $C6all available units
+$C2ref: $C6rogue conditioned unit
+$C2stamp: $Iinterference
+$i
+
+Currently at large rogue conditioned unit, same mentioned in previous communications, has damaged ($C6abused?$C2) shipwide computer interface.  Offensive ($C6irritating?$C2) artificial intelligence entity has assumed partial control of Khi'Prih internal ship network.  Rogue conditioned unit believed to be located on main bridge.
+
+Unless rogue conditioned unit is apprehended, Khi'Prih Guard units 13, 17-23, 25, 29, and 80-93 will be summarily 
+reassigned ($C6?demoted$C2) to Ship Waste Disposal Unit 8, rank management.
+#LOGOFF 28
+#END
+#ENDTERMINAL 2
+;
+#TERMINAL 3
+#UNFINISHED
+#LOGON 20
+#PICT 21
+$C2Aggregate Patrol Units
+origin: $C6localized command $C2
+destin: $C6aggregate patrol units
+$C2ref: $C6rogue conditioned unit
+$C2stamp: $Icontainment
+$i
+
+Rogue conditioned unit has escaped with assistance from artificial intelligence entity.  Patrol units 45 & 46 have been subjected to ($C6granted?$C2) partial dismemberment in accordance with penal code subsection 2827-A3 of the cruiser guard unit conduct chart ($C6?manual$C2).
+
+Localized command hereby authorizes the recapture and imprisonment of aforementioned rogue conditioned unit.
+#LOGOFF 20
+#END
+#FINISHED
+#LOGON 0
+#PICT 3
+That last raid managed to annoy $ILysander$i rather badly, if his decision to teleport you into the brig of a nearby Pfhor cruiser is any indication.  That's where you are right now, by the way, and as the bugs are unlikely to be particularly hospitable towards you, of all people, I suggest that you pay close attention.
+
+As you will have already noticed, I managed to short-circuit your cell door.  I wiped its drivers from the ship's memory, and replaced them with pointers to some code of my own devising; if you recall, doors were something of a specialty of mine back on the $IMarathon$i.
+#PICT 3
+Although I'm sure you'd like to stay here and chat with your old tri-optic pals, there is still the small matter of a certain blitheringly sociopathic cybernetic entity to be taken care of.  The Pfhor have erected a powerful magnetic field around the ship, preventing me from locking onto you long enough to pull off a teleport.  No doubt it's because they just love you so very much that they can't bear to let you go.  Alack and alas, but it is to be a love unrequited.
+
+Find your way to the lower starboard airlock.  It will take you to the exterior of the ship, where you can locate and disable the wiring that enables the magnetic field.  I think the wires are at the rear end of the ship.  Once the you've ripped out the wiring, go to the bow of the ship and I'll try to pull off a transport.
+#PICT 3
+
+Unfortunately, you can't just jump off the ship and into space.  A move like that would make you an easy target for ships in the vicinity, and by the time you reached safe distance from that magnetic shield I'd be teleporting in nothing more than a smoldering pile of remains.
+
+Try not to attract too much attention.  You know how I worry.
+#LOGOFF 0
+#END
+#ENDTERMINAL 3
+;
+#TERMINAL 4
+#UNFINISHED
+#LOGON 20
+#PICT 21
+$C2Aggregate Patrol Units
+origin: $C6localized command $C2
+destin: $C6aggregate patrol units
+$C2ref: $C6rogue conditioned unit
+$C2stamp: $Icontainment
+$i
+
+Rogue conditioned unit has escaped with assistance from artificial intelligence entity.  Patrol units 45 & 46 have been subjected to ($C6granted?$C2) partial dismemberment in accordance with penal code subsection 2827-A3 of the cruiser guard unit conduct chart ($C6?manual$C2).
+
+Localized command hereby authorizes the recapture and imprisonment of aforementioned rogue conditioned unit.
+#LOGOFF 20
+#END
+#FINISHED
+#LOGON 28
+#PICT 30
+$C2All Available Units
+origin: $C6a very angry localized command $C2
+destin: $C6all available units
+$C2ref: $C6rogue conditioned unit
+$C2stamp: $Iinterference
+$i
+
+Currently at large rogue conditioned unit, same mentioned in previous communications, has damaged ($C6abused?$C2) shipwide computer interface.  Offensive ($C6irritating?$C2) artificial intelligence entity has assumed partial control of Khi'Prih internal ship network.  Rogue conditioned unit believed to be located on main bridge.
+
+Unless rogue conditioned unit is apprehended, Khi'Prih Guard units 13, 17-23, 25, 29, and 80-93 will be summarily 
+reassigned ($C6?demoted$C2) to Ship Waste Disposal Unit 8, rank management.
+#LOGOFF 28
+#END
+#ENDTERMINAL 4
+;
+#TERMINAL 5
+#UNFINISHED
+#LOGON 20
+#PICT 21
+$C2Aggregate Patrol Units
+origin: $C6localized command $C2
+destin: $C6aggregate patrol units
+$C2ref: $C6rogue conditioned unit
+$C2stamp: $Icontainment
+$i
+
+Rogue conditioned unit has escaped with assistance from artificial intelligence entity.  Patrol units 45 & 46 have been subjected to ($C6granted?$C2) partial dismemberment in accordance with penal code subsection 2827-A3 of the cruiser guard unit conduct chart ($C6?manual$C2).
+
+Localized command hereby authorizes the recapture and imprisonment of aforementioned rogue conditioned unit.
+#LOGOFF 20
+#END
+#FINISHED
+#LOGON 0
+#PICT 3
+That last raid managed to annoy $ILysander$i rather badly, if his decision to teleport you into the brig of a nearby Pfhor cruiser is any indication.  That's where you are right now, by the way, and as the bugs are unlikely to be particularly hospitable towards you, of all people, I suggest that you pay close attention.
+
+As you will have already noticed, I managed to short-circuit your cell door.  I wiped its drivers from the ship's memory, and replaced them with pointers to some code of my own devising; if you recall, doors were something of a specialty of mine back on the $IMarathon$i.
+#PICT 3
+Although I'm sure you'd like to stay here and chat with your old tri-optic pals, there is still the small matter of a certain blitheringly sociopathic cybernetic entity to be taken care of.  The Pfhor have erected a powerful magnetic field around the ship, preventing me from locking onto you long enough to pull off a teleport.  No doubt it's because they just love you so very much that they can't bear to let you go.  Alack and alas, but it is to be a love unrequited.
+
+Find your way to the lower starboard airlock.  It will take you to the exterior of the ship, where you can locate and disable the wiring that enables the magnetic field.  I think the wires are at the rear end of the ship.  Once you've ripped out the wiring, go to the bow of the ship and I'll try to pull off a transport.
+#PICT 3
+
+Unfortunately, you can't just jump off the ship and into space.  A move like that would make you an easy target for ships in the vicinity, and by the time you reached safe distance from that magnetic shield I'd be teleporting in nothing more than a smoldering pile of remains.
+
+Try not to attract too much attention.  You know how I worry.
+#LOGOFF 0
+#END
+#ENDTERMINAL 5
+;
+#TERMINAL 6
+#UNFINISHED
+#LOGON 20
+#PICT 21
+$C2Aggregate Patrol Units
+origin: $C6localized command $C2
+destin: $C6aggregate patrol units
+$C2ref: $C6rogue conditioned unit
+$C2stamp: $Icontainment
+$i
+
+Rogue conditioned unit has escaped with assistance from artificial intelligence entity.  Patrol units 45 & 46 have been subjected to ($C6granted?$C2) partial dismemberment in accordance with penal code subsection 2827-A3 of the cruiser guard unit conduct chart ($C6?manual$C2).
+
+Localized command hereby authorizes the recapture and imprisonment of aforementioned rogue conditioned unit.
+#LOGOFF 20
+#END
+#FINISHED
+#LOGON 28
+#PICT 30
+$C2All Available Units
+origin: $C6a very angry localized command $C2
+destin: $C6all available units
+$C2ref: $C6rogue conditioned unit
+$C2stamp: $Iinterference
+$i
+
+Currently at large rogue conditioned unit, same mentioned in previous communications, has damaged ($C6abused?$C2) shipwide computer interface.  Offensive ($C6irritating?$C2) artificial intelligence entity has assumed partial control of Khi'Prih internal ship network.  Rogue conditioned unit believed to be located on main bridge.
+
+Unless rogue conditioned unit is apprehended, Khi'Prih Guard units 13, 17-23, 25, 29, and 80-93 will be summarily 
+reassigned ($C6?demoted$C2) to Ship Waste Disposal Unit 8, rank management.
+#LOGOFF 28
+#END
+#ENDTERMINAL 6

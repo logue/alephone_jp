@@ -1,0 +1,89 @@
+;
+#TERMINAL 0
+#UNFINISHED
+#LOGON 0
+hj-000
+#PICT 138
+
+
+
+
+The crash has severed this terminal from the ship's main systems. Haller, the Chimera's onboard AI, is therefore not available at this location.
+
+The doors' control circuits were also damaged by the crash. There should be an override chip somewhere around here. If it's placed in the appropriate uplink slot - which I believe is in a cabinet in a nearby room - it should open some of the doors.
+#PICT 138
+
+
+
+
+I find the absence of the UESC troops disturbing. They should be all over the place.
+
+It could be they've decided that this section of the ship was rendered indefensible due to all the hull breaches. I hope the crew haven't followed the example set by the crew of the UESC Daphne after it crashed on Rokkar III; they booby-trapped entire ship sectors, killing large numbers of $Ipfhor$i as they tried to make their way into the ship.
+#LOGOFF 0
+$C3dhs
+#END
+#FINISHED
+#LOGON 0
+$C3efte
+#PICT 31
+
+
+The $Ipfhor$i are coming, and in massive numbers. No surprize there.
+#PICT 31
+$C3
+
+The $Ipfhor$i are coming, and in massive numbers. No surprize there.
+$C0
+
+ I wouldn't wait for them if I were you. You aren't equipped to fight them off.
+#PICT 31
+$C3
+
+The $Ipfhor$i are coming, and in massive numbers. No surprize there.
+
+
+ I wouldn't wait for them if I were you. You aren't equipped to fight them off.
+
+
+$C0My sensors indicate that there is a narrow crevice between the hull and the rock nearby. Find it and jump down. You should be able to find your way to where I need you to be from there.
+#PICT 31
+$C3
+
+The $Ipfhor$i are coming, and in massive numbers. No surprize there.
+
+
+ I wouldn't wait for them if I were you. You aren't equipped to fight them off.
+
+
+My sensors indicate that there is a narrow crevice between the hull and the rock nearby. Find it and jump down. You should be able to find your way to where I need you to be from there.$C0
+
+
+And don't waste your time fighting the $Ipfhor$i! Hurry!
+#LOGOFF 0
+$C3run
+#END
+#ENDTERMINAL 0
+;
+#TERMINAL 1
+#UNFINISHED
+#LOGON 112
+#PICT 117
+$C7*** ma$C4lfu$C7nction ***
+
+> syserr #$bew2
+> syser$C4r$C7 #$bew2
+> syserr #$bew2
+>
+> * network error $C4#251$C7 *
+> (networ$C4k i$C7s down or un#$$bDFWdsd &%/#":..
+> 
+>
+>
+$C4>$C7
+>
+>
+>
+> $C4brrk
+#LOGOFF 112
+#END
+#ENDTERMINAL 1

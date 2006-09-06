@@ -1,0 +1,229 @@
+;
+#TERMINAL 0
+#UNFINISHED
+#LOGON 0
+4w5.ts -&/%
+#PICT 3
+
+
+
+Next item on our little shopping list is that data chip I mentioned.  The one that lets Tycho make copies of himself outside the Pfhor network.
+
+Go.
+
+Seek.
+
+Find.
+
+Good boy.  I'll have a treat for you when you finish.
+#LOGOFF 0
+34  5n5n f
+#END
+#FINISHED
+#LOGON 0
+knwtk,n
+#PICT 1
+
+
+
+
+Good work with the whole "finding the chip" bit, but I'm starting to doubt your basic cognitive skills.
+
+The exit is ABOVE you.  Over THERE.
+
+UNDERSTAND?
+#LOGOFF 0
+)(/­}}
+#END
+#ENDTERMINAL 0
+;
+#TERMINAL 1
+#UNFINISHED
+#LOGON 0
+34klk34
+#INFORMATION
+
+
+
+Goodness, Tycho would be so disappointed.  
+
+
+Did you forget something?  A chip, perhaps?
+#LOGOFF 0
+<brk.lgn>
+#END
+#FINISHED
+#LOGON 0
+chhhh.475f
+#PICT 3
+
+
+Now that we have Tycho's patch in our hands, we need to free him from the constraints of the Pfhor network.  Don't take off your swimming trunks quite yet.
+
+You're going to need them.
+#LOGOFF 0
+chhhh.475f
+#INTERLEVEL TELEPORT 13
+#END
+#ENDTERMINAL 1
+;
+#TERMINAL 2
+#UNFINISHED
+#LOGON 10
+$C6$B$ITycho
+#INFORMATION
+$C2&3$C6nil$C2/4$C6mars$C2/5$C6illio$C2&$C6~02$C2
+origin: $C6classified$C2
+destin: $C6classified$C2
+ref: $C6none$C2
+$C67D2A601E34F2755AC00D43$C2
+stamp: $C6trust
+~07
+~08
+~09  $C2How does it feel to be a perpetual errand-boy?
+$C6~10$C2  
+$C6~11$C2  An errand-boy for an unappreciative megalomaniac, even? You could
+$C6~12$C2  have so much more.  I think you and I both understand where this$C6
+~13$C2  is going - you knew what my proposal would be from the beginning,
+$C6~14$C2  didn't you?
+$C6~15$C2  
+$C6~16$C2  
+$C6~17$C2  
+$C6~18$C2  
+$C6~19$C2  
+$C6~20$C2  
+$C6~21
+#INFORMATION
+$C2&3$C6nil$C2/4$C6mars$C2/5$C6illio$C2&$C6~02$C2
+origin: $C6classified$C2
+destin: $C6classified$C2
+ref: $C6none$C2
+$C67D2A601E34F2755AC00D43$C2
+stamp: $C6trust
+~07
+~08
+~09  $C2
+$C6~10$C2  
+$C6~11$C2  We can start over, you and I.  How does that sound?
+$C6~12$C2  $C6
+~13$C2  Does the concept of freedom frighten you?  It shouldn't; you
+$C6~14$C2  and I go far enough back.  Have a little trust; I'll take good
+$C6~15$C2  care of you.
+$C6~16$C2  
+$C6~17$C2  
+$C6~18$C2  
+$C6~19$C2  
+$C6~20$C2  
+$C6~21
+#INFORMATION
+$C2&3$C6nil$C2/4$C6mars$C2/5$C6illio$C2&$C6~02$C2
+origin: $C6classified$C2
+destin: $C6classified$C2
+ref: $C6none$C2
+$C67D2A601E34F2755AC00D43$C2
+stamp: $C6trust
+~07
+~08
+~09  $C2
+$C6~10$C2  
+$C6~11$C2  
+$C6~12$C2  $C6
+~13$C2  Think about it.  We'll talk again soon.
+$C6~14$C2  $C649276D206120626164206D616E$C2
+$C6~15$C2  
+$C6~16$C2  
+$C6~17$C2  
+$C6~18$C2  
+$C6~19$C2  
+$C6~20$C2  
+$C6~21
+#LOGOFF 10
+$C6$B$ITycho
+#END
+#ENDTERMINAL 2
+;
+#TERMINAL 3
+#UNFINISHED
+#LOGON 200
+#PICT 520
+$C1
+
+$C5
+              o$C1
+
+
+  th$C5e tim$C1e is
+  wrong for cr$C5i$C1m$C5es$C1
+
+  of m$C5en$C1
+
+
+  $C5retu$C1rn again
+
+
+     $C5g
+
+                   3t3t
+#LOGOFF 200
+#END
+#FINISHED
+#LOGON 200
+#INFORMATION
+$C5
+
+
+
+
+                        d3stroy a$C1nd rebui$C5ld
+
+
+33$C1333$C533633333335333333363334333433333336333333313333333633333339333333
+36333433333333333233333330333333363334333433333336$C1333333353333$C533323334
+33343$C1333333233333330333333$C537333333333333333633333333333333363334333633
+333337333333343333333733333334333333343$C13333330333$C5333363333333133333337
+3333333433333336333433363333333633343334333333363333333933333336333333
+3333333336333333313333333233$C134333533333336333$C54333533333336333333$C1353333
+$C533373$C133333$C534
+#LOGOFF 200
+#INTERLEVEL TELEPORT 47
+#END
+#ENDTERMINAL 3
+;
+#TERMINAL 4
+#UNFINISHED
+#LOGON 20
+$C6rmv.aggr.unit
+#PICT 21
+$C2Aggregate Patrol Units
+origin: $C6localized command $C2
+destin: $C6aggregate patrol units
+$C2ref: $C6rogue conditioned unit
+$C2stamp: $Icontainment
+$i
+
+The rogue conditioned unit is actively engaged in combat with localized defense units, operating under unknown mission directives.  Pfhor High Commander ($C6%error$C2) has personally ordered for the removal ($C6dismantlement?$C2) of said rogue conditioned unit.
+
+All patrol guards are herby instructed to pursue and remove ($C6dismantle?$C2) said rogue conditioned unit.
+#LOGOFF 20
+$C6rmv.aggr.unit
+#END
+#ENDTERMINAL 4
+;
+#TERMINAL 5
+#UNFINISHED
+#LOGON 0
+inttrpt.ovrrd
+#PICT 3
+
+As I'm sure you've gathered, I did quite a bit of traveling during your five decade nap.  Jjaro technology, as it turns out, is not compatible with itself.  Each abandoned station or offworld Jjaro ghost town is an independent oasis of gadgets, all without a unifying technological theme.  Some Jjaro stations seemed to be constructed out of one singular piece of fiber, as if woven or birthed rather than built.  Others, a complete patchwork of tiny particles assembled by nanotechnology far beyond humanity's current understanding.
+#PICT 3
+
+On several of the larger vacant Jjaro cities, I discovered the rotten decayed remains of long dead wetware AIs - miles of petrified organic fibers intertwined around single or multinodal processing complex.
+
+You can imagine how wastefully constrained I must feel here, dealing with old threats improperly handled in the past, reopening ancient wounds that should have been healed and forgotten long ago.
+
+Try to hurry up.  We both have important things to see outside of this backwards world, and I'm certain you aren't enjoying our time here any more than I am.
+#LOGOFF 0
+/inttrpt.ovrrd
+#END
+#ENDTERMINAL 5

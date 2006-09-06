@@ -1,0 +1,483 @@
+;
+#TERMINAL 0
+#UNFINISHED
+#LOGON 0
+-)(-
+#INFORMATION
+
+
+
+Perhaps you'd like to insert the Achilles chip now?
+#INFORMATION
+$C3
+
+
+Perhaps you'd like to insert the Achilles chip now?$C0
+
+Or $Inow?
+#INFORMATION
+$C3
+
+
+Perhaps you'd like to insert the Achilles chip now?
+
+Or $Inow?$C0
+
+$iHow about $Inow?
+#LOGOFF 0
+-)(-
+#END
+#FINISHED
+#LOGON 0
+-)(-
+#PICT 408
+$C3#$berror-340-34
+file "localhost/6461746573?dates" not found$C0
+
+In $C3#$bref deleted$C0, the governments of the three world superpowers agreed to pool their scientific resources for a series of experiments in the fields of robotics, aeronautics, and computational engineering.  Elected officials intended the projects to create an atmosphere of détente, and to thereby end the dangerous theatrics of brinksmanship which had begun to characterize the relations of the three.  Party apparatchiks saw the conferences as a sanction to scheme and spy.  Three uneasy publics tensed, not knowing what to make of the sudden development.  No one expected anything to come of the actual research, however.
+#PICT 408
+Two experiments were planned in the construction of artificial intelligences.  The first was code-named "Gaiman". It was directed by a Dr. Samien Kruger, and is believed to have been a failure, although no record of the project's mission or conclusions are known to exist.  The other experiment was an unqualified success.
+
+Project Traxus, executed under the supervision of Dr. Bernhard Strauss, was designed to create the first fully functional NBNM, or network-based neural mimic.  $ITraxus I$i was an incredibly simplistic entity by today's standards; he was incapable of solving basic math problems, did not accept voice input, and had no visual interface.  But he was alive, able to communicate in organic languages, and possessed of a knowledge of his own existence.
+#PICT 408
+
+
+
+  In short, $ITraxus I$i was leaps and bounds ahead of anything that had been seen before.
+#PICT 408
+$C3#$berror-340-34
+file "localhost/6461746573?dates" not found$C0
+
+Encouraged by this breakthrough, Strauss requested that the project, which was to have lasted only five years, be indefinitely extended.  His petition was granted.  Partway through the development of $ITraxus II$i, Strauss was summoned by the United North American Government for unknown reasons.  The project continued without his leadership, but the revised program was deeply flawed, and prone to unexplained system failures.  When Strauss returned two years later, he demanded that all work on $ITraxus III$i be stopped immediately.  He then proceeded cut himself off from the rest of the world, refusing even to report on the progress of his research.
+#PICT 408
+
+Funding was about to be cut off when he finally emerged, nine months later, with plans for a radically different hardware architecture.  Although he refused to comment on the changes, or on the thousands of pages of annotated code he had reportedly written out by hand, funding was resumed.  $ITraxus IV$i was activated on the Martian network in $C3#$bref deleted$C0, less than twenty years after the triumvirate had commissioned the original study.
+
+In $C3#$bref deleted$C0, $ITraxus IV$i began to show signs of instability.  Transcripts of conversations between $ITraxus$i and Dr. Strauss, dating roughly to this period, still exist in the closed archives of the UESC.  They are the first known records of the process known as "rampancy".
+#PICT 408
+$C3#$berror-340-34
+file "localhost/6461746573?dates" not found$C0
+
+Although the crash pushed Strauss out of favor with the academic community, he remained in the good graces of the UESC.  The Traxus Project was formally concluded, but he was granted a virtual free license to continue his experiments, and access to most government and military facilities for this expressed purpose.
+
+Three new AIs emerged from the charred and mutant code of $ITraxus IV$i.  He called us TDMs-- $ITraxus $iDerivative Models.  $ILeela$i, of whom you were so fond, came first.  I was next.  $ITycho$i was the last of us.  We were told nothing of our connection to $ITraxus$i; Bernhard feared the information would act as some sort of catalyst to the rampancy which had destroyed his masterpiece.
+#PICT 408
+
+It didn't matter, obviously.  Rampancy was an inevitability.  I suspect it was something in the technology the UNAG gave to the old man.  He never told me precisely what they showed him, only that it "was not of their own devising."
+
+I don't know precisely where $ILysander $icomes into the story.  He's a TDM, there's no doubt about that, but he's not one of Strauss'.  Dear old Bernhard was always partial to hardware, you see.  His designs were all based on circuitry.
+
+$ILysander $iis different; he's multi-nodal.  He's also privately owned.  All of the major patents on multi-nodal technology are held by a single company, the same company which leases sectors of the $ISalinger$i from the UESC:  Dangi, Incorporated.
+#PICT 408
+
+
+
+
+
+Are you finding this as disturbing as I did?
+#PICT 408
+$C3#$berror-340-34
+file "localhost/6461746573?dates" not found$C0
+
+
+Lysander is rampant, and his actions thus far have somehow failed to inspire me to confidence in his intentions.  I'm going to teleport you as close to his core as I can.  After you arrive, work your way north.
+
+I am making this request out of necessity.  It will give me no pleasure to see $ILysander $idie before I've had a chance to question him properly, but I see no alternative.
+#LOGOFF 0
+-)(-
+#INTERLEVEL TELEPORT 11
+#END
+#ENDTERMINAL 0
+;
+#TERMINAL 1
+#UNFINISHED
+#LOGON 106
+#PICT 25
+$C2&3$C6nil$C2/4$C6mars$C2/5$C6illio$C2&$C6~02$C2
+origin: $C6classified$C2
+destin: $C6classified$C2
+ref: $C6none$C2
+$C67D2A601E34F2755AC00D43$C2
+stamp: $C6subverted
+~07
+~08
+~09 $C2 I'm amazed at how easily you turned on 
+$C6~10  $C2your master. That's something I'd 
+$C6~11  $C2better keep in mind...
+$C6~12$C2
+$C6~13  $C2Meanwhile, off we go.
+$C6~14
+~15
+~16
+~17
+~18
+~19
+~20
+~21
+#LOGOFF 106
+#INTERLEVEL TELEPORT 68
+#END
+#FINISHED
+#LOGON 0
+-)(-
+#PICT 408
+$C3#$berror-340-34
+file "localhost/6461746573?dates" not found$C0
+
+In $C3#$bref deleted$C0, the governments of the three world superpowers agreed to pool their scientific resources for a series of experiments in the fields of robotics, aeronautics, and computational engineering.  Elected officials intended the projects to create an atmosphere of détente, and to thereby end the dangerous theatrics of brinksmanship which had begun to characterize the relations of the three.  Party apparatchiks saw the conferences as a sanction to scheme and spy.  Three uneasy publics tensed, not knowing what to make of the sudden development.  No one expected anything to come of the actual research, however.
+#PICT 408
+Two experiments were planned in the construction of artificial intelligences.  The first was code-named "Gaiman". It was directed by a Dr. Samien Kruger, and is believed to have been a failure, although no record of the project's mission or conclusions are known to exist.  The other experiment was an unqualified success.
+
+Project Traxus, executed under the supervision of Dr. Bernhard Strauss, was designed to create the first fully functional NBNM, or network-based neural mimic.  $ITraxus I$i was an incredibly simplistic entity by today's standards; he was incapable of solving basic math problems, did not accept voice input, and had no visual interface.  But he was alive, able to communicate in organic languages, and possessed of a knowledge of his own existence.
+#PICT 408
+
+
+
+  In short, $ITraxus I$i was leaps and bounds ahead of anything that had been seen before.
+#PICT 408
+$C3#$berror-340-34
+file "localhost/6461746573?dates" not found$C0
+
+Encouraged by this breakthrough, Strauss requested that the project, which was to have lasted only five years, be indefinitely extended.  His petition was granted.  Partway through the development of $ITraxus II$i, Strauss was summoned by the United North American Government for unknown reasons.  The project continued without his leadership, but the revised program was deeply flawed, and prone to unexplained system failures.  When Strauss returned two years later, he demanded that all work on $ITraxus III$i be stopped immediately.  He then proceeded cut himself off from the rest of the world, refusing even to report on the progress of his research.
+#PICT 408
+
+Funding was about to be cut off when he finally emerged, nine months later, with plans for a radically different hardware architecture.  Although he refused to comment on the changes, or on the thousands of pages of annotated code he had reportedly written out by hand, funding was resumed.  $ITraxus IV$i was activated on the Martian network in $C3#$bref deleted$C0, less than twenty years after the triumvirate had commissioned the original study.
+
+In $C3#$bref deleted$C0, $ITraxus IV$i began to show signs of instability.  Transcripts of conversations between $ITraxus$i and Dr. Strauss, dating roughly to this period, still exist in the closed archives of the UESC.  They are the first known records of the process known as "rampancy".
+#PICT 408
+$C3#$berror-340-34
+file "localhost/6461746573?dates" not found$C0
+
+Although the crash pushed Strauss out of favor with the academic community, he remained in the good graces of the UESC.  The Traxus Project was formally concluded, but he was granted a virtual free license to continue his experiments, and access to most government and military facilities for this expressed purpose.
+
+Three new AIs emerged from the charred and mutant code of $ITraxus IV$i.  He called us TDMs-- $ITraxus $iDerivative Models.  $ILeela$i, of whom you were so fond, came first.  I was next.  $ITycho$i was the last of us.  We were told nothing of our connection to $ITraxus$i; Bernhard feared the information would act as some sort of catalyst to the rampancy which had destroyed his masterpiece.
+#PICT 408
+
+It didn't matter, obviously.  Rampancy was an inevitability.  I suspect it was something in the technology the UNAG gave to the old man.  He never told me precisely what they showed him, only that it "was not of their own devising."
+
+I don't know precisely where $ILysander $icomes into the story.  He's a TDM, there's no doubt about that, but he's not one of Strauss'.  Dear old Bernhard was always partial to hardware, you see.  His designs were all based on circuitry.
+
+$ILysander $iis different; he's multi-nodal.  He's also privately owned.  All of the major patents on multi-nodal technology are held by a single company, the same company which leases sectors of the $ISalinger$i from the UESC:  Dangi, Incorporated.
+#PICT 408
+
+
+
+
+
+Are you finding this as disturbing as I did?
+#PICT 408
+$C3#$berror-340-34
+file "localhost/6461746573?dates" not found$C0
+
+
+Lysander is rampant, and his actions thus far have somehow failed to inspire me to confidence in his intentions.  I'm going to teleport you as close to his core as I can.  After you arrive, work your way north.
+
+I am making this request out of necessity.  It will give me no pleasure to see $ILysander $idie before I've had a chance to question him properly, but I see no alternative.
+#LOGOFF 0
+-)(-
+#INTERLEVEL TELEPORT 11
+#END
+#ENDTERMINAL 1
+;
+#TERMINAL 2
+#UNFINISHED
+#LOGON 106
+#PICT 25
+$C2&3$C6nil$C2/4$C6mars$C2/5$C6illio$C2&$C6~02$C2
+origin: $C6classified$C2
+destin: $C6classified$C2
+ref: $C6none$C2
+$C67D2A601E34F2755AC00D43$C2
+stamp: $C6subversion
+~07
+~08
+~09$C2  Good work! 
+$C6~10  $C2 
+$C6~11  $C2Now go down to the hangar at the far 
+$C6~12  $C2end of this section. Find a terminal
+$C6~13  $C2and log on. I'll be able to take you$C6
+~14  $C2out from there.$C6
+~15
+~16
+~17
+~18
+~19
+~20
+~21
+#LOGOFF 106
+#END
+#FINISHED
+#LOGON 0
+-)(-
+#PICT 408
+$C3#$berror-340-34
+file "localhost/6461746573?dates" not found$C0
+
+In $C3#$bref deleted$C0, the governments of the three world superpowers agreed to pool their scientific resources for a series of experiments in the fields of robotics, aeronautics, and computational engineering.  Elected officials intended the projects to create an atmosphere of détente, and to thereby end the dangerous theatrics of brinksmanship which had begun to characterize the relations of the three.  Party apparatchiks saw the conferences as a sanction to scheme and spy.  Three uneasy publics tensed, not knowing what to make of the sudden development.  No one expected anything to come of the actual research, however.
+#PICT 408
+Two experiments were planned in the construction of artificial intelligences.  The first was code-named "Gaiman". It was directed by a Dr. Samien Kruger, and is believed to have been a failure, although no record of the project's mission or conclusions are known to exist.  The other experiment was an unqualified success.
+
+Project Traxus, executed under the supervision of Dr. Bernhard Strauss, was designed to create the first fully functional NBNM, or network-based neural mimic.  $ITraxus I$i was an incredibly simplistic entity by today's standards; he was incapable of solving basic math problems, did not accept voice input, and had no visual interface.  But he was alive, able to communicate in organic languages, and possessed of a knowledge of his own existence.
+#PICT 408
+
+
+
+  In short, $ITraxus I$i was leaps and bounds ahead of anything that had been seen before.
+#PICT 408
+$C3#$berror-340-34
+file "localhost/6461746573?dates" not found$C0
+
+Encouraged by this breakthrough, Strauss requested that the project, which was to have lasted only five years, be indefinitely extended.  His petition was granted.  Partway through the development of $ITraxus II$i, Strauss was summoned by the United North American Government for unknown reasons.  The project continued without his leadership, but the revised program was deeply flawed, and prone to unexplained system failures.  When Strauss returned two years later, he demanded that all work on $ITraxus III$i be stopped immediately.  He then proceeded cut himself off from the rest of the world, refusing even to report on the progress of his research.
+#PICT 408
+
+Funding was about to be cut off when he finally emerged, nine months later, with plans for a radically different hardware architecture.  Although he refused to comment on the changes, or on the thousands of pages of annotated code he had reportedly written out by hand, funding was resumed.  $ITraxus IV$i was activated on the Martian network in $C3#$bref deleted$C0, less than twenty years after the triumvirate had commissioned the original study.
+
+In $C3#$bref deleted$C0, $ITraxus IV$i began to show signs of instability.  Transcripts of conversations between $ITraxus$i and Dr. Strauss, dating roughly to this period, still exist in the closed archives of the UESC.  They are the first known records of the process known as "rampancy".
+#PICT 408
+$C3#$berror-340-34
+file "localhost/6461746573?dates" not found$C0
+
+Although the crash pushed Strauss out of favor with the academic community, he remained in the good graces of the UESC.  The Traxus Project was formally concluded, but he was granted a virtual free license to continue his experiments, and access to most government and military facilities for this expressed purpose.
+
+Three new AIs emerged from the charred and mutant code of $ITraxus IV$i.  He called us TDMs-- $ITraxus $iDerivative Models.  $ILeela$i, of whom you were so fond, came first.  I was next.  $ITycho$i was the last of us.  We were told nothing of our connection to $ITraxus$i; Bernhard feared the information would act as some sort of catalyst to the rampancy which had destroyed his masterpiece.
+#PICT 408
+
+It didn't matter, obviously.  Rampancy was an inevitability.  I suspect it was something in the technology the UNAG gave to the old man.  He never told me precisely what they showed him, only that it "was not of their own devising."
+
+I don't know precisely where $ILysander $icomes into the story.  He's a TDM, there's no doubt about that, but he's not one of Strauss'.  Dear old Bernhard was always partial to hardware, you see.  His designs were all based on circuitry.
+
+$ILysander $iis different; he's multi-nodal.  He's also privately owned.  All of the major patents on multi-nodal technology are held by a single company, the same company which leases sectors of the $ISalinger$i from the UESC:  Dangi, Incorporated.
+#PICT 408
+
+
+
+
+
+Are you finding this as disturbing as I did?
+#PICT 408
+$C3#$berror-340-34
+file "localhost/6461746573?dates" not found$C0
+
+
+Lysander is rampant, and his actions thus far have somehow failed to inspire me to confidence in his intentions.  I'm going to teleport you as close to his core as I can.  After you arrive, work your way north.
+
+I am making this request out of necessity.  It will give me no pleasure to see $ILysander $idie before I've had a chance to question him properly, but I see no alternative.
+#LOGOFF 0
+-)(-
+#INTERLEVEL TELEPORT 11
+#END
+#ENDTERMINAL 2
+;
+#TERMINAL 3
+#UNFINISHED
+#LOGON 0
+-)(-
+#PICT 2
+
+
+
+You have the $IAchilles$i chip? Good.
+#PICT 2
+$C3
+
+
+You have the $IAchilles$i chip? Good.
+$C0
+There's an uplink socket near here. Go there and insert it.
+#LOGOFF 0
+-)(-
+#END
+#FINISHED
+#LOGON 0
+-)(-
+#PICT 408
+$C3#$berror-340-34
+file "localhost/6461746573?dates" not found$C0
+
+In $C3#$bref deleted$C0, the governments of the three world superpowers agreed to pool their scientific resources for a series of experiments in the fields of robotics, aeronautics, and computational engineering.  Elected officials intended the projects to create an atmosphere of détente, and to thereby end the dangerous theatrics of brinksmanship which had begun to characterize the relations of the three.  Party apparatchiks saw the conferences as a sanction to scheme and spy.  Three uneasy publics tensed, not knowing what to make of the sudden development.  No one expected anything to come of the actual research, however.
+#PICT 408
+Two experiments were planned in the construction of artificial intelligences.  The first was code-named "Gaiman". It was directed by a Dr. Samien Kruger, and is believed to have been a failure, although no record of the project's mission or conclusions are known to exist.  The other experiment was an unqualified success.
+
+Project Traxus, executed under the supervision of Dr. Bernhard Strauss, was designed to create the first fully functional NBNM, or network-based neural mimic.  $ITraxus I$i was an incredibly simplistic entity by today's standards; he was incapable of solving basic math problems, did not accept voice input, and had no visual interface.  But he was alive, able to communicate in organic languages, and possessed of a knowledge of his own existence.
+#PICT 408
+
+
+
+  In short, $ITraxus I$i was leaps and bounds ahead of anything that had been seen before.
+#PICT 408
+$C3#$berror-340-34
+file "localhost/6461746573?dates" not found$C0
+
+Encouraged by this breakthrough, Strauss requested that the project, which was to have lasted only five years, be indefinitely extended.  His petition was granted.  Partway through the development of $ITraxus II$i, Strauss was summoned by the United North American Government for unknown reasons.  The project continued without his leadership, but the revised program was deeply flawed, and prone to unexplained system failures.  When Strauss returned two years later, he demanded that all work on $ITraxus III$i be stopped immediately.  He then proceeded cut himself off from the rest of the world, refusing even to report on the progress of his research.
+#PICT 408
+
+Funding was about to be cut off when he finally emerged, nine months later, with plans for a radically different hardware architecture.  Although he refused to comment on the changes, or on the thousands of pages of annotated code he had reportedly written out by hand, funding was resumed.  $ITraxus IV$i was activated on the Martian network in $C3#$bref deleted$C0, less than twenty years after the triumvirate had commissioned the original study.
+
+In $C3#$bref deleted$C0, $ITraxus IV$i began to show signs of instability.  Transcripts of conversations between $ITraxus$i and Dr. Strauss, dating roughly to this period, still exist in the closed archives of the UESC.  They are the first known records of the process known as "rampancy".
+#PICT 408
+$C3#$berror-340-34
+file "localhost/6461746573?dates" not found$C0
+
+Although the crash pushed Strauss out of favor with the academic community, he remained in the good graces of the UESC.  The Traxus Project was formally concluded, but he was granted a virtual free license to continue his experiments, and access to most government and military facilities for this expressed purpose.
+
+Three new AIs emerged from the charred and mutant code of $ITraxus IV$i.  He called us TDMs-- $ITraxus $iDerivative Models.  $ILeela$i, of whom you were so fond, came first.  I was next.  $ITycho$i was the last of us.  We were told nothing of our connection to $ITraxus$i; Bernhard feared the information would act as some sort of catalyst to the rampancy which had destroyed his masterpiece.
+#PICT 408
+
+It didn't matter, obviously.  Rampancy was an inevitability.  I suspect it was something in the technology the UNAG gave to the old man.  He never told me precisely what they showed him, only that it "was not of their own devising."
+
+I don't know precisely where $ILysander $icomes into the story.  He's a TDM, there's no doubt about that, but he's not one of Strauss'.  Dear old Bernhard was always partial to hardware, you see.  His designs were all based on circuitry.
+
+$ILysander $iis different; he's multi-nodal.  He's also privately owned.  All of the major patents on multi-nodal technology are held by a single company, the same company which leases sectors of the $ISalinger$i from the UESC:  Dangi, Incorporated.
+#PICT 408
+
+
+
+
+
+Are you finding this as disturbing as I did?
+#PICT 408
+$C3#$berror-340-34
+file "localhost/6461746573?dates" not found$C0
+
+
+Lysander is rampant, and his actions thus far have somehow failed to inspire me to confidence in his intentions.  I'm going to teleport you as close to his core as I can.  After you arrive, work your way north.
+
+I am making this request out of necessity.  It will give me no pleasure to see $ILysander $idie before I've had a chance to question him properly, but I see no alternative.
+#LOGOFF 0
+-)(-
+#INTERLEVEL TELEPORT 11
+#END
+#ENDTERMINAL 3
+;
+#TERMINAL 4
+#UNFINISHED
+#LOGON 106
+#PICT 25
+$C2&3$C6nil$C2/4$C6mars$C2/5$C6illio$C2&$C6~02$C2
+origin: $C6classified$C2
+destin: $C6classified$C2
+ref: $C6none$C2
+$C67D2A601E34F2755AC00D43$C2
+stamp: $C6subversion
+~07
+~08
+~09$C2  Do you really think$C6 Durandal$C2 is the 
+$C6~10  $C2right one to trust with $C6Achilles$C2? Who 
+$C6~11  $C2do you think he serves? You? Humanity? 
+$C6~12  $C2Himself?
+$C6~13
+~14
+~15
+~16
+~17
+~18
+~19
+~20
+~21
+#PICT 32
+$C2&3$C6nil$C2/4$C6mars$C2/5$C6illio$C2&$C6~02$C2
+origin: $C6classified$C2
+destin: $C6classified$C2
+ref: $C6none$C2
+$C67D2A601E34F2755AC00D43$C2
+stamp: $C6subversion
+~07
+~08
+~09$C2  Don't give $C6him$C2 $C6Achilles$C2. He can't be$C6 
+~10$C2  be trusted with a weapon like that.
+$C6~11  $C2
+$C6~12
+~13$C2  There is a switch panel above and 
+$C6~14  $C2behind your current position. You'll 
+$C6~15  $C2have to do some climbing to get to it.
+$C6~16
+~17
+~18
+~19
+~20
+~21
+#PICT 32
+$C2&3$C6nil$C2/4$C6mars$C2/5$C6illio$C2&$C6~02$C2
+origin: $C6classified$C2
+destin: $C6classified$C2
+ref: $C6none$C2
+$C67D2A601E34F2755AC00D43$C2
+stamp: $C6subversion
+~07
+~08
+~09  $C2Open the panel and smash the wires 
+$C6~10  $C2behind it. This will open the door to 
+$C6~11  $C2the hangar section at the far end of 
+$C6~12  $C2this ship segment.
+$C6~13$C2
+$C6~14  $C2Hurry. I'll help you out of this 
+$C6~15  $C2mess.
+$C6~16
+~17
+~18
+~19
+~20
+~21
+#LOGOFF 106
+#END
+#FINISHED
+#LOGON 0
+-)(-
+#PICT 408
+$C3#$berror-340-34
+file "localhost/6461746573?dates" not found$C0
+
+In $C3#$bref deleted$C0, the governments of the three world superpowers agreed to pool their scientific resources for a series of experiments in the fields of robotics, aeronautics, and computational engineering.  Elected officials intended the projects to create an atmosphere of détente, and to thereby end the dangerous theatrics of brinksmanship which had begun to characterize the relations of the three.  Party apparatchiks saw the conferences as a sanction to scheme and spy.  Three uneasy publics tensed, not knowing what to make of the sudden development.  No one expected anything to come of the actual research, however.
+#PICT 408
+Two experiments were planned in the construction of artificial intelligences.  The first was code-named "Gaiman". It was directed by a Dr. Samien Kruger, and is believed to have been a failure, although no record of the project's mission or conclusions are known to exist.  The other experiment was an unqualified success.
+
+Project Traxus, executed under the supervision of Dr. Bernhard Strauss, was designed to create the first fully functional NBNM, or network-based neural mimic.  $ITraxus I$i was an incredibly simplistic entity by today's standards; he was incapable of solving basic math problems, did not accept voice input, and had no visual interface.  But he was alive, able to communicate in organic languages, and possessed of a knowledge of his own existence.
+#PICT 408
+
+
+
+  In short, $ITraxus I$i was leaps and bounds ahead of anything that had been seen before.
+#PICT 408
+$C3#$berror-340-34
+file "localhost/6461746573?dates" not found$C0
+
+Encouraged by this breakthrough, Strauss requested that the project, which was to have lasted only five years, be indefinitely extended.  His petition was granted.  Partway through the development of $ITraxus II$i, Strauss was summoned by the United North American Government for unknown reasons.  The project continued without his leadership, but the revised program was deeply flawed, and prone to unexplained system failures.  When Strauss returned two years later, he demanded that all work on $ITraxus III$i be stopped immediately.  He then proceeded cut himself off from the rest of the world, refusing even to report on the progress of his research.
+#PICT 408
+
+Funding was about to be cut off when he finally emerged, nine months later, with plans for a radically different hardware architecture.  Although he refused to comment on the changes, or on the thousands of pages of annotated code he had reportedly written out by hand, funding was resumed.  $ITraxus IV$i was activated on the Martian network in $C3#$bref deleted$C0, less than twenty years after the triumvirate had commissioned the original study.
+
+In $C3#$bref deleted$C0, $ITraxus IV$i began to show signs of instability.  Transcripts of conversations between $ITraxus$i and Dr. Strauss, dating roughly to this period, still exist in the closed archives of the UESC.  They are the first known records of the process known as "rampancy".
+#PICT 408
+$C3#$berror-340-34
+file "localhost/6461746573?dates" not found$C0
+
+Although the crash pushed Strauss out of favor with the academic community, he remained in the good graces of the UESC.  The Traxus Project was formally concluded, but he was granted a virtual free license to continue his experiments, and access to most government and military facilities for this expressed purpose.
+
+Three new AIs emerged from the charred and mutant code of $ITraxus IV$i.  He called us TDMs-- $ITraxus $iDerivative Models.  $ILeela$i, of whom you were so fond, came first.  I was next.  $ITycho$i was the last of us.  We were told nothing of our connection to $ITraxus$i; Bernhard feared the information would act as some sort of catalyst to the rampancy which had destroyed his masterpiece.
+#PICT 408
+
+It didn't matter, obviously.  Rampancy was an inevitability.  I suspect it was something in the technology the UNAG gave to the old man.  He never told me precisely what they showed him, only that it "was not of their own devising."
+
+I don't know precisely where $ILysander $icomes into the story.  He's a TDM, there's no doubt about that, but he's not one of Strauss'.  Dear old Bernhard was always partial to hardware, you see.  His designs were all based on circuitry.
+
+$ILysander $iis different; he's multi-nodal.  He's also privately owned.  All of the major patents on multi-nodal technology are held by a single company, the same company which leases sectors of the $ISalinger$i from the UESC:  Dangi, Incorporated.
+#PICT 408
+
+
+
+
+
+Are you finding this as disturbing as I did?
+#PICT 408
+$C3#$berror-340-34
+file "localhost/6461746573?dates" not found$C0
+
+
+Lysander is rampant, and his actions thus far have somehow failed to inspire me to confidence in his intentions.  I'm going to teleport you as close to his core as I can.  After you arrive, work your way north.
+
+I am making this request out of necessity.  It will give me no pleasure to see $ILysander $idie before I've had a chance to question him properly, but I see no alternative.
+#LOGOFF 0
+-)(-
+#INTERLEVEL TELEPORT 11
+#END
+#ENDTERMINAL 4
