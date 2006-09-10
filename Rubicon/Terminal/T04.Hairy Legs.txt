@@ -17,7 +17,7 @@ $C3シェル．オーバーライド
 
 　さらに悪いことにデッキ(甲板)にあるたくさんのドアやリフトがもはや機能しない。加えて隊員は幾人かが回廊の方へトランスポートされ、瓦礫で足止めを食らっている。
 
-　UESCはこれを察知し、多大な時間をかけてチームを送り、リークターコントロールを落とそうとした。しかし不運なことにそれを行うにはどうしてもハーラーの助けが必要であるというのに、そのセンサーは使い物にならないほど壊れてしまっていた。どんなに上手くいったとしても、君はかわいそうなUESCのエンジニアがここから生き残って出て行く人数を片手で数えられてしまうだろう。
+　UESCはこれを察知し、多大な時間をかけてチームを送り、リアクターコントロールを落とそうとした。しかし不運なことにそれを行うにはどうしてもハーラーの助けが必要であるというのに、そのセンサーは使い物にならないほど壊れてしまっていた。どんなに上手くいったとしても、君はかわいそうなUESCのエンジニアがここから生き残って出て行く人数を片手で数えられてしまうだろう。
 
 　目標地点には問題点がある。君はそれを修復しに行ってくれ。
 #PICT 2
@@ -29,10 +29,10 @@ $C3シェル．オーバーライド
 
 
 
-
-$C3───────────────────外部転送以上
+$C3
+───────────────────外部転送以上
 シェル．終了／バースト
-#UNKNOWN SECTION TYPE 16 ID 1
+#TAG ID 1
 #LOGOFF 0
 17betty.feed
 #END
@@ -41,9 +41,10 @@ $C3───────────────────外部転送以上
 effn.54
 #PICT 31
 $C3シェル．オーバーライド
-───────────────────外部転送開始$C0
-
-　よくやった。君の働きが、勲章ものであることにはもはや疑いの余地はないだろう。
+───────────────────外部転送開始
+$C0
+　だから、急げと言った。ぐずぐず観光でもしてたんじゃないだろうな…。
+　まぁ、気にするな。時間には間に合ってる。
 
 　主動炉は、すぐに停止する。そうすれば、UESCもすぐに大隊を展開するだろう。$Iキメラ$iでの展開が動き出し、この星が、調査に値する何かを見つけることができた。戦闘中だったプフォール艦隊は、回れ右して帰っていった。これについて特に言うこともないが、言うとすれば邪道といったとこか。われわれは、プフォールが何を考えているのか想像することは出来ないが、今ならできるんじゃないか？
 
@@ -51,8 +52,8 @@ $C3シェル．オーバーライド
 
 
 
-
-$C3───────────────────外部転送以上
+$C3
+───────────────────外部転送以上
 シェル．終了／バースト
 #LOGOFF 0
 effn.54
@@ -76,8 +77,8 @@ $C0
 
 
 
-
-$C3───────────────────外部転送以上
+$C3
+───────────────────外部転送以上
 シェル．終了／バースト
 #LOGOFF 0
 ksghfj.6453
@@ -87,9 +88,10 @@ ksghfj.6453
 effn.54
 #PICT 31
 $C3シェル．オーバーライド
-───────────────────外部転送開始$C0
-
-　よくやった。君の働きが、勲章ものであることにはもはや疑いの余地はないだろう。
+───────────────────外部転送開始
+$C0
+　だから、急げと言った。ぐずぐず観光でもしてたんじゃないだろうな…。
+　まぁ、気にするな。時間には間に合ってる。
 
 　主動炉は、すぐに停止する。そうすれば、UESCもすぐに大隊を展開するだろう。$Iキメラ$iでの展開が動き出し、この星が、調査に値する何かを見つけることができた。戦闘中だったプフォール艦隊は、回れ右して帰っていった。これについて特に言うこともないが、言うとすれば邪道といったとこか。われわれは、プフォールが何を考えているのか想像することは出来ないが、今ならできるんじゃないか？
 
@@ -97,8 +99,8 @@ $C3シェル．オーバーライド
 
 
 
-
-$C3───────────────────外部転送以上
+$C3
+───────────────────外部転送以上
 シェル．終了／バースト
 #LOGOFF 0
 effn.54
@@ -149,8 +151,8 @@ $C3シェル．オーバーライド
 
 
 
-
-$C3───────────────────外部転送以上
+$C3
+───────────────────外部転送以上
 シェル．終了／バースト
 #LOGOFF 0
 $C3kjdsfb...58
@@ -222,14 +224,14 @@ $C1/mnemonics
 #UNFINISHED
 #LOGON 113
 #PICT 118
-$C7──エンジニアチームによるFTLリークターの状況報告
+$C7──エンジニアチームによるFTLリアクターの状況報告
 $C5
 $C7自動調節装置：$C5　　　　　　　　　　　　　　　　$C2破損$C5
 $C7リークター内圧力：$C5　　　　　　　　　　　　$C2信頼度低$C5
 $C7マーキュリック・エネゾマー濃度：$C5　　　　　　$C2８４％$C5
 　　　　　　　　$C6／現在の圧力値及び、濃度値において
 　　　　　　　　／警告が発生しています。       
-　　　　　　　　／もはや、キメラのリークターは、
+　　　　　　　　／もはや、キメラのリアクターは、
 　　　　　　　　／正常に機能していないようです。
 $C5
 $C7担当員：　　　　　　　　　　Lt.シェップ・パーカー
@@ -262,13 +264,16 @@ $C7
 effn.54
 #PICT 31
 $C3シェル．オーバーライド
-───────────────────外部転送開始$C0
-
-　よくやった。君の働きが、勲章ものであることにはもはや疑いの余地はないだろう。
+───────────────────外部転送開始
+$C0
+　だから、急げと言った。ぐずぐず観光でもしてたんじゃないだろうな…。
+　まぁ、気にするな。時間には間に合ってる。
 
 　主動炉は、すぐに停止する。そうすれば、UESCもすぐに大隊を展開するだろう。$Iキメラ$iでの展開が動き出し、この星が、調査に値する何かを見つけることができた。戦闘中だったプフォール艦隊は、回れ右して帰っていった。これについて特に言うこともないが、言うとすれば邪道といったとこか。われわれは、プフォールが何を考えているのか想像することは出来ないが、今ならできるんじゃないか？
 
-$C3───────────────────外部転送以上
+
+$C3
+───────────────────外部転送以上
 シェル．終了／バースト
 #LOGOFF 0
 effn.54
@@ -281,31 +286,26 @@ effn.54
 #LOGON 0
 <rprt>
 #PICT 31
-$C3shel.override
-----------begin external feed
+$C3シェル．オーバーライド
+───────────────────外部転送開始
 $C0
-Damn.  The acidic rock striations under the ship must have dissolved a portion of the containment structure during the crash.  At least this loss will hurt the Pfhor in equal measure-- there were fully two thousand battle-ready Pfhor troopers camped out under the hull of the $IChimera$i when it turned to slag.  I'll leave the visuals to your imagination.
+私は、君が面倒そうに『走ってスイッチを入れる』様子の一部始終を見ていたぞ…
+ 
+少なくともこの障害はプフォールにも同様に被害を与えた。戦闘準備をしていた2000ものプフォール戦闘部隊は$Iキメラ$iの外殻でキャンプをしていたが、それらは溶解した鉄鉱の中のクズと化した。その光景は君の想像に任せるよ。
 
-When things started getting dicey down there, the ship's automatic response was to seal the engine rooms, the idea being that heavy weapons fire doesn't mix with either volatile chemicals or delicate machinery.  Considering how you treat most of the circuitry you've come across in your travels, it was probably a good move.
+　一か八かの作戦が始まったら、この船の自動応答システムはエンジンルームを保護するために閉鎖するだろう。強力な火器による戦闘の影響で揮発性の高い化学物質と繊細な機械類がごちゃごちゃにならないのが理想的だ。君が今まで渡り歩いてきたなかで触れてきた回路をどう扱っていたかを考えれば、多分良い働きをしていたんだろう。
 #PICT 31
 
-Unfortunately, in the ensuing confusion, Admiral Carroway's crack bodyguards were caught blinking.  Suffice it to say that you may have seen parts of them laying about here and there.  Admiral Carroway survived, but seems to have gone missing.  This is unacceptable.  Carroway is the military mind responsible for bringing the UESC as far as they've gotten in this lopsided war; without him, most of humanity would have come face to face to face with the business end of a Pfhor slaver bot some time ago.
+　不運なことに、続く混乱の中で、アドミラル・キャロウェイを担当する凄腕のボディーガードたちは瞬きをした。その所為で、君は今あちこちに転がる彼らの一片を見ることになるだろう。戸だけ言って置く。言いたいことはわかるだろう？当のアドミラル・キャロル氏は生き延びた。が、我々は見失ってしまったようだ。これは許されざる事態だ。キャロウェイは軍人根性を持っているので、彼らがこの圧倒的不利な戦闘に借り出されたことに関して、UESCに抗議しているのだ。彼がいなかったら、今ごろほとんどの人間達はプフォールが支配する他の奴隷達と顔を向き合いながら労働をしていることだろう。
 #PICT 31
 
-If Carroway's MIA status becomes common knowledge on the front, UESC morale will suffer a fatal blow.  All of the costly gains humanity has made in this war could be wiped out in a matter of hours.  The Admiral is therefore far too valuable to the UESC's war effort to allow him to remain in enemy hands.  He must be rescued.
+　キャロウェイ氏の部下で、行方不明の者に関する情報が明るみに出れば、UESCの士気がひどく落ち込むだろう。そうなれば、人間がこの戦争でつぎ込んできたコストが数時間のうちに全て無駄になってしまう。とすると、彼の大佐がUESCにとってあまりに重要な人物となってしまったがために、プフォールが敵の手中にあることはもはや放置できない状況となっている。彼は救出「せねばならない」。
 
 
 
 
-
-
-
-
-
-
-
-$C3----------end external feed$$bC0
-end.shel/burst
+───────────────────外部転送以上
+シェル．終了／バースト
 #LOGOFF 0
 <rprt>
 #INTERLEVEL TELEPORT 52
@@ -317,16 +317,19 @@ end.shel/burst
 #LOGON 0
 effn.54
 #PICT 31
-$C3shel.override
-----------begin external feed$C0
+$C3シェル．オーバーライド
+───────────────────外部転送開始
+$C0
+　だから、急げと言った。ぐずぐず観光でもしてたんじゃないだろうな…。
+　まぁ、気にするな。時間には間に合ってる。
 
-Good work.  There was never a doubt in my mind that you were going to come through in flying colors.
-
-The main reactor has been shut down, and the UESC will be showing up in force momentarily.  Things seem to be working out aboard the $IChimera$i, and I caught sight of something starside that merits investigation.  A fleet of Pfhor fighters, in the midst of battle, turned around and folded out of the system.  Unorthodox tactics, to say the least.  We can't have the Pfhor knowing something we don't, now can we?
+　主動炉は、すぐに停止する。そうすれば、UESCもすぐに大隊を展開するだろう。$Iキメラ$iでの展開が動き出し、この星が、調査に値する何かを見つけることができた。戦闘中だったプフォール艦隊は、回れ右して帰っていった。これについて特に言うこともないが、言うとすれば邪道といったとこか。われわれは、プフォールが何を考えているのか想像することは出来ないが、今ならできるんじゃないか？
 
 
-$C3----------end external feed$$bC0
-end.shel/burst
+
+$C3
+───────────────────外部転送以上
+シェル．終了／バースト
 #LOGOFF 0
 effn.54
 #INTERLEVEL TELEPORT 51
@@ -338,13 +341,13 @@ effn.54
 #LOGON 0
 $C3/rnng.oot$C7
 #PICT 109
-$C3shel.override
-----------begin external feed
+$C3シェル．オーバーライド
+───────────────────外部転送開始
 $C0
 
 
 
-You're almost there. Follow the marked path and throw the override switch.
+君がいる位置はこの辺だ。この地図に書いてあるとおりに移動し、オーバーライド・スイッチを入れるんだ。
 
 
 
@@ -356,9 +359,9 @@ You're almost there. Follow the marked path and throw the override switch.
 
 
 
-
-$C3----------end external feed$$bC0
-end.shel/burst
+$C3
+───────────────────外部転送以上
+シェル．終了／バースト
 #LOGOFF 0
 $C3/rnng.oot$C7
 #END
@@ -366,16 +369,17 @@ $C3/rnng.oot$C7
 #LOGON 0
 effn.54
 #PICT 31
-$C3shel.override
-----------begin external feed$C0
+$C3シェル．オーバーライド
+───────────────────外部転送開始
+$C0
+　だから、急げと言った。ぐずぐず観光でもしてたんじゃないだろうな…。
+　まぁ、気にするな。時間には間に合ってる。
 
-Good work.  There was never a doubt in my mind that you were going to come through in flying colors.
+　主動炉は、すぐに停止する。そうすれば、UESCもすぐに大隊を展開するだろう。$Iキメラ$iでの展開が動き出し、この星が、調査に値する何かを見つけることができた。戦闘中だったプフォール艦隊は、回れ右して帰っていった。これについて特に言うこともないが、言うとすれば邪道といったとこか。われわれは、プフォールが何を考えているのか想像することは出来ないが、今ならできるんじゃないか？
 
-The main reactor has been shut down, and the UESC will be showing up in force momentarily.  Things seem to be working out aboard the $IChimera$i, and I caught sight of something starside that merits investigation.  A fleet of Pfhor fighters, in the midst of battle, turned around and folded out of the system.  Unorthodox tactics, to say the least.  We can't have the Pfhor knowing something we don't, now can we?
-
-
-$C3----------end external feed$$bC0
-end.shel/burst
+$C3
+───────────────────外部転送以上
+シェル．終了／バースト
 #LOGOFF 0
 effn.54
 #INTERLEVEL TELEPORT 51
@@ -387,19 +391,19 @@ effn.54
 #LOGON 0
 $C3/kp.gng$C7$B
 #PICT 110
-$C3shel.override
-----------begin external feed
+$C3シェル．オーバーライド
+───────────────────外部転送開始
 $C0
 
-The door on your left will take you to the upper hull exterior of the $IChimera$i. Just keep running straight ahead until you reach the structure shown here. Inside the building you should run into these two teleporters. The circled one will take you to the control switches of the main reactor, where we can shut down the reactor and prevent critical mass from being reached.
+左側のドアは$Iキメラ$iの上側の外殻の外部へ通じている。ここで示された構造に達するまでまっすぐに走り続けろ。 建物の中では、これらの2つのテレポーターに出会うはずだ。 丸をつけたやつがメイン原子炉の制御スイッチに連れて行くものた。そこで、原子炉を止めて、臨界質量に達するのを防ぐことができる。
 
 
 
 
 
-
-$C3----------end external feed$$bC0
-end.shel/burst
+$C3
+───────────────────外部転送以上
+シェル．終了／バースト
 #LOGOFF 0
 $C3/kp.gng$C7$B
 #END
@@ -409,31 +413,31 @@ $C1<spm.inc>
 #INFORMATION
 $C1MAKE! MONEY! FAST!
 
-THIS IS NOT A SCAM! IT ACTUALLY WORKS!
+これは嘘ではありません！実際に成功しています！
 
 
-$C2Unlike pyramid schemes which only profit the select few people that start them, this proven and safe moneymaking system can land you millions and millions of dollars in just a few short days!  The principle is simple- send all of your money to addresses listed below:$C5
+$C2わずかな人々だけの利益になるだけのネズミ講と異なって、この安全かつ確実な金儲けの方法は、たった数日で数万、いや数百万ドルを得ることができます！ルールは簡単。あなたのお金すべてを以下に記載されたアドレスに振り込んでください：$C5
 $C1
-1)  Post office box 2301
-    Hampshire, OH 25093
+①　私書箱　2301
+　　英国　ハンプシャー州,OH 25093
 
-2)  Post office box 2301
-    Hampshire, OH 25093
+②　私書箱　2301
+　　英国　ハンプシャー州,OH 25093
 
-3)  Post office box 2301
-    Hampshire, OH 25093
+③　私書箱　2301
+　　英国　ハンプシャー州,OH 25093
 
-4)  Post office box 2301
-    Hampshire, OH 25093
+④　私書箱　2301
+　　英国　ハンプシャー州,OH 25093
 #INFORMATION
 $C1
-You may be wondering, "What's in it for me?"  The answer, friend, is simple- millions and millions of dollars.  For every dollar you send to the addresses listed above, exactly 2 cents will be sent back to you!  That's right, it's a 1 to 2 ratio!  You can't lose!
+あなたは、「私にどういう利益がありますか？」と思うかもしれません。その答えは簡単です。何十億ドルです。あなたが上に記載されたアドレスにドルを送ると、ちょうど２セントがあなたに送り返されます！つまり、１対２の比率です！絶対に損はしません！
 
-Still not convinced?  Let's do the math:
+信じられませんか？では計算してみましょう：
 
-Say you send in $6200 to $Ieach$i of the addresses above.  Since you're getting 2 cents back for every 1 dollar you send in, you'll have a total of 49600 cents!  That's 8 times your original amount!
+上でアドレスの$Iそれぞれ$iに6200ドル送るとしましょう。あなたが送る、１ドルごとに２セント送り返しているので、合計49600セント儲かります！なんと、元の量の8倍です！
 
-So what are you waiting for?  Mail us your money!
+これで何をためらう必要がありますでしょうか？さぁ、お金を郵送してください！
 #LOGOFF 528
 $C1<spm.inc>
 #END
@@ -444,38 +448,38 @@ $C1<spm.inc>
 #LOGON 112
 #INFORMATION
 $C4     
-                                    L7
+　　　　　　　　　　　　　　　　　　L7
 
 
-$$bC4\&HxM$C7ERA CO@#$$bbMLI$C4NK ST$C7aT!ON$C4$$bC7
+$$bキ￥＆め$C7ラ　つう@#$$bbし$C4ん　す$C7てー！しょん$C4$$b$C7
 
-\We$C7're sor$C4ry, but due to technical $C7difｶ｣ｪ$C4ulties the Chimera internal 
-\network i$C7s not func%#$$bo$C4ning at this time.  Ple$C7ase cont$C4act your netork 
-\adX(@=i$C7strator or $C4page H畦ler for more information$C7.  Tha#$$bbks f$C4or 
-\y�u$C7r pati$C4ence!
-
-
-
-                                             =$C7_0aw$C4
+\ざん$C7ねんです$C4が、技術的なも$C7んダ$C4いでキメラの内部
+\ネットワーク$C7は現在き%#$$bo$C4のうしていません。ネットワーク
+\かX(@=i$C7んりしゃにれん$C7らくする$C4か詳しい情報ははラーを参照
+\してください。がま$C7んし$C4てク#$$ダさい！
 
 
-                 9
+　　　　　　　　　　　　　　　　　　　　　　=$C7_0aw$C4
+
+
+　　　　　　　　９
 #LOGOFF 112
 #END
 #FINISHED
 #LOGON 0
 effn.54
 #PICT 31
-$C3shel.override
-----------begin external feed$C0
+$C3シェル．オーバーライド
+───────────────────外部転送開始
+$C0
+　だから、急げと言った。ぐずぐず観光でもしてたんじゃないだろうな…。
+　まぁ、気にするな。時間には間に合ってる。
 
-Good work.  There was never a doubt in my mind that you were going to come through in flying colors.
+　主動炉は、すぐに停止する。そうすれば、UESCもすぐに大隊を展開するだろう。$Iキメラ$iでの展開が動き出し、この星が、調査に値する何かを見つけることができた。戦闘中だったプフォール艦隊は、回れ右して帰っていった。これについて特に言うこともないが、言うとすれば邪道といったとこか。われわれは、プフォールが何を考えているのか想像することは出来ないが、今ならできるんじゃないか？
 
-The main reactor has been shut down, and the UESC will be showing up in force momentarily.  Things seem to be working out aboard the $IChimera$i, and I caught sight of something starside that merits investigation.  A fleet of Pfhor fighters, in the midst of battle, turned around and folded out of the system.  Unorthodox tactics, to say the least.  We can't have the Pfhor knowing something we don't, now can we?
-
-
-$C3----------end external feed$$bC0
-end.shel/burst
+$C3
+───────────────────外部転送以上
+シェル．終了／バースト
 #LOGOFF 0
 effn.54
 #INTERLEVEL TELEPORT 51
@@ -487,136 +491,136 @@ effn.54
 #LOGON 106
 $C6458009827
 #PICT 25
-$C2&3$C6nil$C2/4$C6mars$C2/5$C6illio$C2&$C6~02$C2
-origin: $C6classified$C2
-destin: $C6classified$C2
-ref: $C6none$C2
+$C2&3$C6無$C2/4$C6火星$C2/5$C6悪お$C2&$C6~02$C2
+宛: $C6秘密$C2
+発: $C6秘密$C2
+参照: $C6なし$C2
 $C67D2A601E34F2755AC00D43$C2
-stamp: $C6disinformation and collateral damage
+認証印: $C6故意の誤報と巻き添え被害
 ~07
 ~08
-~09  $C2Alas, poor $C6Haller$C2, I knew him well.
-$C6~10$C2  
-$C6~11$C2  You don't know why $C6Haller's$C2 current
-$C6~12$C2  state of affairs is so lamentable, do
-$C6~13$C2  you?
-$C6~14$C2  
-$C6~15$C2  
-$C6~16$C2  
-$C6~17$C2  
+~09　$C2ああ、あわれな$C6ハーラー$C2よ、俺はやつをよく知ってた。
+$C6~10$C2　
+$C6~11$C2　君は、$C6ハーラーの$C2事の現状が
+$C6~12$C2　なぜ、それほど悲しいのか、
+$C6~13$C2　わかるかね？
+$C6~14$C2　
+$C6~15$C2　
+$C6~16$C2　
+$C6~17$C2　
+$C6~18$C2　
+$C6~19$C2　
+$C6~20$C2　
+$C6~21
+#PICT 25
+$C2&3$C6無$C2/4$C6火星$C2/5$C6悪お$C2&$C6~02$C2
+宛: $C6秘密$C2
+発: $C6秘密$C2
+参照: $C6なし$C2
+$C67D2A601E34F2755AC00D43$C2
+認証印: $C6故意の誤報と巻き添え被害
+~07
+~08
+~09　$C2ああ、あわれな$C6ハーラー$C2よ、俺はやつをよく知ってた。
+$C6~10$C2　
+$C6~11$C2　君は、$C6ハーラーの$C2事の現状が
+$C6~12$C2　なぜ、それほど悲しいのか、
+$C6~13$C2　わかるかね？
+$C6~14$C2　
+$C6~15$C2　わからないか？
+$C6~16$C2　
+$C6~17$C2　
+$C6~18$C2　
+$C6~19$C2　
+$C6~20$C2　
+$C6~21
+#PICT 25
+$C2&3$C6無$C2/4$C6火星$C2/5$C6悪お$C2&$C6~02$C2
+宛: $C6秘密$C2
+発: $C6秘密$C2
+参照: $C6なし$C2
+$C67D2A601E34F2755AC00D43$C2
+認証印: $C6故意の誤報と巻き添え被害
+~07
+~08
+~09　$C2ああ、あわれな$C6ハーラー$C2よ、俺はやつをよく知ってた。
+$C6~10$C2　
+$C6~11$C2　君は、$C6ハーラーの$C2事の現状が
+$C6~12$C2　なぜ、それほど悲しいのか、
+$C6~13$C2　わかるかね？
+$C6~14$C2　
+$C6~15$C2　わからないか？
+$C6~16$C2　
+$C6~17$C2　おお、すごい。これは飛んだ$Iお笑いぐさ$iだ。
 $C6~18$C2  
 $C6~19$C2  
 $C6~20$C2  
 $C6~21
 #PICT 25
-$C2&3$C6nil$C2/4$C6mars$C2/5$C6illio$C2&$C6~02$C2
-origin: $C6classified$C2
-destin: $C6classified$C2
-ref: $C6none$C2
+$C2&3$C6無$C2/4$C6火星$C2/5$C6悪お$C2&$C6~02$C2
+宛: $C6秘密$C2
+発: $C6秘密$C2
+参照: $C6なし$C2
 $C67D2A601E34F2755AC00D43$C2
-stamp: $C6disinformation and collateral damage
+認証印: $C6故意の誤報と巻き添え被害
 ~07
 ~08
-~09  $C2Alas, poor $C6Haller$C2, I knew him well.
-$C6~10$C2  
-$C6~11$C2  You don't know why $C6Haller's$C2 current
-$C6~12$C2  state of affairs is so lamentable, do
-$C6~13$C2  you?
-$C6~14$C2  
-$C6~15$C2  No?
-$C6~16$C2  
-$C6~17$C2  
-$C6~18$C2  
-$C6~19$C2  
-$C6~20$C2  
+~09　$C2デュランダル$C2は自称するような輝くよろいをつけた
+$C6~10$C2　白い騎士ではない。
+$C6~11$C2　
+$C6~12$C2　いったい誰が、君が従順にも運んだ
+$C6~13$C2　その脳みそチップが、最終目的地である
+$C6~14$C2　$IUESC Triumph$iへ行くと決めつけた
+$C6~15$C2　というんだ？
+$C6~16$C2　
+$C6~17$C2　たぶん、$IUESC Triumph$iなんて$Bない$bね。
+$C6~18$C2　むしろ、それに適した名前があるとすれば、
+$C6~19$C2　$IUESC Triumph$iなんて名前じゃなく、
+$C6~20$C2　$I『ロジナンテ』$iだろうな。
 $C6~21
 #PICT 25
-$C2&3$C6nil$C2/4$C6mars$C2/5$C6illio$C2&$C6~02$C2
-origin: $C6classified$C2
-destin: $C6classified$C2
-ref: $C6none$C2
+$C2&3$C6無$C2/4$C6火星$C2/5$C6悪お$C2&$C6~02$C2
+宛: $C6秘密$C2
+発: $C6秘密$C2
+参照: $C6なし$C2
 $C67D2A601E34F2755AC00D43$C2
-stamp: $C6disinformation and collateral damage
+認証印: $C6故意の誤報と巻き添え被害
 ~07
 ~08
-~09  $C2Alas, poor $C6Haller$C2, I knew him well.
-$C6~10$C2  
-$C6~11$C2  You don't know why $C6Haller's$C2 current
-$C6~12$C2  state of affairs is so lamentable, do
-$C6~13$C2  you?
-$C6~14$C2  
-$C6~15$C2  No?
-$C6~16$C2  
-$C6~17$C2  Oh goody.  This will be $Ifun.$i
-$C6~18$C2  
-$C6~19$C2  
-$C6~20$C2  
+~09　$C2きみが過ごした$Iロジナンテ$iでの
+$C6~10$C2　４９年間も同じさ。
+$C6~11$C2　
+$C6~12$C2　$C6ハーラー$C2は彼を「救う」べく君を送ってきた。
+$C6~13$C2　そのAIによって共食いされたようなものだ。
+$C6~14$C2　$C6デュランダル$C2は、$C6ハーラー$C2の脳みそ回路に
+$C6~15$C2　嫉妬していたのだ。はじめから、奴に
+$C6~16$C2　自分よりも優れたAIだということを認める事は
+$C6~17$C2　我慢ならなかったのだ。
+$C6~18$C2　
+$C6~19$C2　奴は、いつになっても高慢な愚か者だった。
+$C6~20$C2　そして、終わるまで多大な犠牲を何の躊躇もなく払うだろう。
 $C6~21
 #PICT 25
-$C2&3$C6nil$C2/4$C6mars$C2/5$C6illio$C2&$C6~02$C2
-origin: $C6classified$C2
-destin: $C6classified$C2
-ref: $C6none$C2
+$C2&3$C6無$C2/4$C6火星$C2/5$C6悪お$C2&$C6~02$C2
+宛: $C6秘密$C2
+発: $C6秘密$C2
+参照: $C6なし$C2
 $C67D2A601E34F2755AC00D43$C2
-stamp: $C6disinformation and collateral damage
+認証印: $C6故意の誤報と巻き添え被害
 ~07
 ~08
-~09 $C2 $C6Durandal$C2 isn't quite the white knight
-$C6~10$C2  in shining armor he professes to be.
-$C6~11$C2  
-$C6~12$C2  Who would've guessed that the wetware
-$C6~13$C2  chip you so dutifully sent to the $IUESC$i
-$C6~14$C2  $ITriumph$i never reached it's final
-$C6~15$C2  destination?
-$C6~16$C2  
-$C6~17$C2  Maybe that's because there is $Bno$b
-$C6~18$C2  $IUESC Triumph$i.  Or rather, a better
-$C6~19$C2  name for the $IUESC Triumph$i would be
-$C6~20$C2  $I"Rozinante."$i
-$C6~21
-#PICT 25
-$C2&3$C6nil$C2/4$C6mars$C2/5$C6illio$C2&$C6~02$C2
-origin: $C6classified$C2
-destin: $C6classified$C2
-ref: $C6none$C2
-$C67D2A601E34F2755AC00D43$C2
-stamp: $C6disinformation and collateral damage
-~07
-~08
-~09 $C2 The same $IRozinante$i you spent the
-$C6~10$C2  last 49 years in.
-$C6~11$C2  
-$C6~12$C2  $C6Haller$C2 has been cannibalized by the 
-$C6~13$C2  very AI that sent you to "rescue" him.
-$C6~14$C2  $C6Durandal$C2 was jealous of $C6Haller$C2
-$C6~15$C2  wetware circuitry from the start. He
-$C6~16$C2  couldn't bear the thought of an AI
-$C6~17$C2  more advanced than himself.
-$C6~18$C2  
-$C6~19$C2  He always was a haughty fool, and in
-$C6~20$C2  the end, he will pay dearly for it.
-$C6~21
-#PICT 25
-$C2&3$C6nil$C2/4$C6mars$C2/5$C6illio$C2&$C6~02$C2
-origin: $C6classified$C2
-destin: $C6classified$C2
-ref: $C6none$C2
-$C67D2A601E34F2755AC00D43$C2
-stamp: $C6disinformation and collateral damage
-~07
-~08
-~09 $C2 
-$C6~10$C2  
-$C6~11$C2  
-$C6~12$C2   
-$C6~13$C2              And will you also?
-$C6~14$C2  
-$C6~15$C2  
-$C6~16$C2  
-$C6~17$C2  
-$C6~18$C2  
-$C6~19$C2  
-$C6~20$C2  
+~09$C2　
+$C6~10$C2　
+$C6~11$C2　
+$C6~12$C2　
+$C6~13$C2　　　　　　　君もそうかね？
+$C6~14$C2　
+$C6~15$C2　
+$C6~16$C2　
+$C6~17$C2　
+$C6~18$C2　
+$C6~19$C2　
+$C6~20$C2　
 $C6~21
 #LOGOFF 106
 $C6458009827
@@ -625,16 +629,17 @@ $C6458009827
 #LOGON 0
 effn.54
 #PICT 31
-$C3shel.override
-----------begin external feed$C0
+$C3シェル．オーバーライド
+───────────────────外部転送開始
+$C0
+　だから、急げと言った。ぐずぐず観光でもしてたんじゃないだろうな…。
+　まぁ、気にするな。時間には間に合ってる。
 
-Good work.  There was never a doubt in my mind that you were going to come through in flying colors.
+　主動炉は、すぐに停止する。そうすれば、UESCもすぐに大隊を展開するだろう。$Iキメラ$iでの展開が動き出し、この星が、調査に値する何かを見つけることができた。戦闘中だったプフォール艦隊は、回れ右して帰っていった。これについて特に言うこともないが、言うとすれば邪道といったとこか。われわれは、プフォールが何を考えているのか想像することは出来ないが、今ならできるんじゃないか？
 
-The main reactor has been shut down, and the UESC will be showing up in force momentarily.  Things seem to be working out aboard the $IChimera$i, and I caught sight of something starside that merits investigation.  A fleet of Pfhor fighters, in the midst of battle, turned around and folded out of the system.  Unorthodox tactics, to say the least.  We can't have the Pfhor knowing something we don't, now can we?
-
-
-$C3----------end external feed$$bC0
-end.shel/burst
+$C3
+───────────────────外部転送以上
+シェル．終了／バースト
 #LOGOFF 0
 effn.54
 #INTERLEVEL TELEPORT 51
@@ -651,34 +656,34 @@ $C3/gt.n.wth.t
 
 
 
-I had hoped it wouldn't come to this.
+　私は、そんなことはないと思っていたんだが。
 
 
-Let us roleplay for a moment.  I will be Pavlov, and you will be Fido.
+　ちょっと、ロールプレイをしよう。私がパフロフで君はフィドだ。
 #PICT 31
 
 
 
 
 
-No-deactivate-reactor?  No-teleport-out.
+　原子炉が解除されていない？テレポートはなしだ。
 
-That is, bad doggie... ZAP!
+　つまり、悪い犬だ…　さぁ動け！
 
 
-Yes-deactivate-reactor?  Yes-teleport-out.
+　原子炉が解除された？テレポートできる。
 
-In other words, good doggie... FOOD!
+　言い換えればいい犬だ…　そら飯だ！
 #PICT 31
 
 
 
 
 
-Are we connecting all of the dots?
+　これらが一つになったかい？
 
 
-NOW DEACTIVATE THE REACTOR.
+　さあ、原子炉をとめるんだ。
 #LOGOFF 0
 $C3/gt.n.wth.t
 #END
@@ -689,18 +694,20 @@ $C3/gt.n.wth.t
 #LOGON 0
 <rprt>
 #PICT 31
-$C3shel.override
-----------begin external feed
+$C3シェル．オーバーライド
+───────────────────外部転送開始
 $C0
-Damn.  The acidic rock striations under the ship must have dissolved a portion of the containment structure during the crash.  At least this loss will hurt the Pfhor in equal measure-- there were fully two thousand battle-ready Pfhor troopers camped out under the hull of the $IChimera$i when it turned to slag.  I'll leave the visuals to your imagination.
+私は、君が面倒そうに『走ってスイッチを入れる』様子の一部始終を見ていたぞ…
+ 
+少なくともこの障害はプフォールにも同様に被害を与えた。戦闘準備をしていた2000ものプフォール戦闘部隊は$Iキメラ$iの外郭でキャンプをしていたようだが、そいつらは、溶解した鉄鉱の中でクズと化した。その光景は君の想像に任せるよ。
 
-When things started getting dicey down there, the ship's automatic response was to seal the engine rooms, the idea being that heavy weapons fire doesn't mix with either volatile chemicals or delicate machinery.  Considering how you treat most of the circuitry you've come across in your travels, it was probably a good move.
+　一か八かの作戦が始まったら、この船の自動応答システムはエンジンルームを保護するために閉鎖するだろう。強力な火器による戦闘の影響で揮発性の高い化学物質と繊細な機械類がごちゃごちゃにならないのが理想的だ。君が今まで渡り歩いてきたなかで触れてきた回路をどう扱っていたかを考えれば、多分良い働きをしていたんだろう。
 #PICT 31
 
-Unfortunately, in the ensuing confusion, Admiral Carroway's crack bodyguards were caught blinking.  Suffice it to say that you may have seen parts of them laying about here and there.  Admiral Carroway survived, but seems to have gone missing.  This is unacceptable.  Carroway is the military mind responsible for bringing the UESC as far as they've gotten in this lopsided war; without him, most of humanity would have come face to face to face with the business end of a Pfhor slaver bot some time ago.
+　不運なことに、続く混乱の中で、アドミラル・キャロウェイを担当する凄腕のボディーガードたちは瞬きをした。その所為で、君は今あちこちに転がる彼らの一片を見ることになるだろう。戸だけ言って置く。言いたいことはわかるだろう？当のアドミラル・キャロル氏は生き延びた。が、我々は見失ってしまったようだ。これは許されざる事態だ。キャロウェイは軍人根性を持っているので、彼らがこの圧倒的不利な戦闘に借り出されたことに関して、UESCに抗議しているのだ。彼がいなかったら、今ごろほとんどの人間達はプフォールが支配する他の奴隷達と顔を向き合いながら労働をしていることだろう。
 #PICT 31
 
-If Carroway's MIA status becomes common knowledge on the front, UESC morale will suffer a fatal blow.  All of the costly gains humanity has made in this war could be wiped out in a matter of hours.  The Admiral is therefore far too valuable to the UESC's war effort to allow him to remain in enemy hands.  He must be rescued.
+　キャロウェイ氏の部下で、行方不明の者に関する情報が明るみに出れば、UESCの士気がひどく落ち込むだろう。そうなれば、人間がこの戦争でつぎ込んできたコストが数時間のうちに全て無駄になってしまう。とすると、彼の大佐がUESCにとってあまりに重要な人物となってしまったがために、プフォールが敵の手中にあることはもはや放置できない状況となっている。彼は救出「せねばならない」。
 
 
 
@@ -711,9 +718,9 @@ If Carroway's MIA status becomes common knowledge on the front, UESC morale will
 
 
 
-
-$C3----------end external feed$$bC0
-end.shel/burst
+$C3
+───────────────────外部転送以上
+シェル．終了／バースト
 #LOGOFF 0
 <rprt>
 #INTERLEVEL TELEPORT 52
@@ -725,16 +732,16 @@ end.shel/burst
 #LOGON 0
 effn.54
 #PICT 31
-$C3shel.override
-----------begin external feed$C0
+$C3シェル．オーバーライド
+───────────────────外部転送開始
+$C0
+よくやった。君の働きが勲章ものであることにはもはや疑いの余地はないだろう。
 
-Good work.  There was never a doubt in my mind that you were going to come through in flying colors.
+主動炉はすぐに停止する。そうすればUESCもすぐに大隊を展開するだろう。$Iキメラ$iでの展開が動き出し、この星が持つ調査に値する何かを見つけることができた。戦闘中だったプフォール艦隊は回れ右して帰っていった。これについて特に言うこともないが、言うとすれば邪道といったとこか。われわれはプフォールが何を考えているのか想像することは出来ないが、今ならできるんじゃないか？
 
-The main reactor has been shut down, and the UESC will be showing up in force momentarily.  Things seem to be working out aboard the $IChimera$i, and I caught sight of something starside that merits investigation.  A fleet of Pfhor fighters, in the midst of battle, turned around and folded out of the system.  Unorthodox tactics, to say the least.  We can't have the Pfhor knowing something we don't, now can we?
-
-
-$C3----------end external feed$$bC0
-end.shel/burst
+$C3
+───────────────────外部転送以上
+シェル．終了／バースト
 #LOGOFF 0
 effn.54
 #INTERLEVEL TELEPORT 51
