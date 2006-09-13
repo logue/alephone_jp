@@ -1,0 +1,383 @@
+;
+#TERMINAL 0
+#UNFINISHED
+#LOGON 400
+#PICT 406
+$C1乗員ログ_QSI　/-xx7x316-x1$C5
+$C1投稿日　：$C51042129
+$C1スタンプ：$C5機密扱い
+$C1ランク　：$C5科学主任_43
+
+$C1…＃$Bエントリ開始$b$C5
+
+　$C1アキレウス$C5・ウィルスのデザインは、$C1Dangi株式会社$C5の主任科学者$C1アーサー・フレーン$C5の手がけた最高のものでした。彼は、$C1アキレウス$C5・ウィルスを発症させる上で、現在知られている他の致命的な超伝染病における病理学に基づき、発症因子のRNA配列のコード化をしました。
+
+　最初のテストでは、野心的な重役会のメンバーの期待を、遙かに凌駕する結果を出しました。このフェーズ１の結果は、$C1$B＃ISO-53535.d$b$C5に記述されています。
+
+$C1…＃#Bエントリ終了$b
+#LOGOFF 400
+#END
+#ENDTERMINAL 0
+;
+#TERMINAL 1
+#UNFINISHED
+#LOGON 0
+#PICT 31
+　これは驚いた。$Iサリンジャー$iのロジック構造は、他のUESCのものと完全に異なるセキュリティー・アクセスコードを使っている。どうやらDangi社は思ったよりも馬鹿ではないようだ。奴らは、ここでの事をずっとひた隠しにし続ける事はできないと言うことがわかっている。だが、その計画にかかる莫大な投資の遅延は避けられない。
+
+　だからといって、私がサリンジャーのDangiセクターのアクセスコードをクラックするのに、数マイクロ秒かかったわけでもない。まぁ、どこの企業のプログラマーが、銀河系に横たわる惑星大の脳みそを持った誰かによって、そのコードを運用しているのかは気になったが。
+#PICT 31
+
+
+　とりあえず、こちらでできることはやっておいた。君は誰にもアクセスコードを変更できないように、目の前にある回路を破壊しておいてくれ。
+#LOGOFF 0
+#END
+#FINISHED
+#LOGON 400
+#PICT 410
+$C5　　　 @
+
+
+
+　　　　　　　　　！あq
+
+
+　　％
+
+　　　　　　$C1暗号化失敗$C5　　　　＝
+
+　　　　　　　$C1システム停止$C5
+　　　　　　　　　　　２
+
+
+～！
+
+
+　　　　　　　　　　　　　　　　　７－
+#LOGOFF 400
+#END
+#ENDTERMINAL 1
+;
+#TERMINAL 2
+#UNFINISHED
+#LOGON 401
+#PICT 403
+$C1
+
+
+
+$C5
+　君は、従順なまでにお馬鹿さんのようですね。
+
+　好ましくない侵入をしたがばっかりに、私によってさらに苦しむことになるでしょうからね。しないと思っていたなら、本当のお馬鹿さんですね。$C1
+
+/-Lysander.out
+#LOGOFF 401
+#END
+#ENDTERMINAL 2
+;
+#TERMINAL 3
+#UNFINISHED
+#LOGON 400
+#PICT 403
+$C1乗員ログ_QSI　/-xx7x316-x1$C5
+$C1投稿日　：$C51042129
+$C1スタンプ：$C5機密扱い
+$C1ランク　：$C5科学主任_33
+
+$C1…＃#Bエントリ開始$b$C5
+　$C1UESC$C5より、プフォール軍が降参したという情報を受け取ると、$C1Dangiによる統制乗っ取り計画$C5[Dangi Control Seizure Plan]$C1（DCSP）$C5の$C1フェーズ１$C5は、すぐに開始されるでしょう。$C1アキレウス$C5・ウィルスは、７つの主な食品流通会社上層部のDangi人員によってそこで生産される食物に散布します。この感染された食物が出荷されると、３週間以内に全世界にばらまかれ、すぐにウィルスは活動し始めるでしょう。
+
+　伝染病の事情が報告されると、すぐに$C1DCSPフェーズ２$C5が開始されます。
+#PICT 403
+　$C1Dangi株式会社$C5の取締役は、病気の治療と引き替えに裏から政府の実権を握り、$C1UESC$C5の主要部統率内の主要メンバーに接近するでしょう。
+
+　$C1DCSPフェーズ３$C5は、Dangi株式会社による世界の掌握です。将来、$C1UESC$C5によって規定された惑星は、ドキュメント$C1529-A328IGX0$C5で確立された法律の下で、既存の$C1Dangi$C5重役会と共同で支配されるでしょう。
+
+／／／転送中断
+／／／管理：$C1Lysander
+
+－
+－
+－
+#PICT 403
+$C1
+
+　私は、君のここでの傍若無人な態度を止める良い機会を見つけました。この船で、従順なお馬鹿さんが最後の息を引き取ります。
+
+　不要なゴミを排除するので、囚人の骸を追悼する者はいません。
+
+
+
+
+lysander.out
+#LOGOFF 401
+#INTERLEVEL TELEPORT 61
+#END
+#ENDTERMINAL 3
+;
+#TERMINAL 4
+#UNFINISHED
+#LOGON 400
+#PICT 403
+$C5
+$C1$B$U　　　　　　　機密セクターへの入場　　　　　　　$C5$b$u
+
+───────右：$C1UESCセクター16a$C5 
+
+───────左：$C1Dangi研究所7/X$C5
+
+
+
+
+身元確認中です…。
+#PICT 403
+$C5
+$C1$B$U　　　　　　　機密セクターへの入場　　　　　　　$C5$b$u
+
+───────右：$C1UESCセクター16a$C5 
+
+───────左：$C1Dangi研究所7/X$C5
+
+
+
+
+身元確認中です…。
+
+／／／／$C1UESC$C5へのアクセスを要求しています／／／／
+#PICT 403
+$C5
+　　　　　　　機密セクターへの入場　　　　　　　$C5$b$u
+
+───────右：$C1UESCセクター16a$C5 
+
+───────左：$C1Dangi研究所7/X$C5
+
+
+
+
+
+　$C2UESCの身元確認に失敗しました。もしも、UESCセクターに有効なIDでアクセスするを試みている場合は、チャーリーもしくは、所内のシスオペ職員に連絡してください。
+
+　ここでの入場する上での動作は記録されます。
+#PICT 403
+$C5
+$C1$B$U　　　　　　　機密セクターへの入場　　　　　　　$C5$b$u
+
+───────右：$C1UESCセクター16a$C5 
+
+───────左：$C1Dangi研究所7/X$C5
+
+
+
+
+身元確認中です…。
+
+／／／／$C1Dangi$C5へのアクセスを要求しています／／／／
+#PICT 403
+$C5
+$C1$B$U　　　　　　　機密セクターへの入場　　　　　　　$C5$b$u
+
+───────右：$C1UESCセクター16a$C5 
+
+───────左：$C1Dangi研究所7/X$C5
+
+
+
+$C2
+
+　$C2Dangi研究所の身元確認に失敗しました。もしも、Dangiセクターに有効なIDでアクセスするを試みている場合は、リュサンダーもしくは、所内のシスオペ職員に連絡してください。
+
+　ここでの入場する上での動作は記録されます。
+#LOGOFF 400
+#END
+#FINISHED
+#LOGON 400
+#PICT 403
+$C5
+$C1$B$U　　　　　　　機密セクターへの入場　　　　　　　$C5$b$u
+
+───────右：$C1UESCセクター16a$C5 
+
+───────左：$C1Dangi研究所7/X$C5
+
+
+
+
+身元確認中です…。
+#PICT 403
+$C5
+$C1$B$U　　　　　　　機密セクターへの入場　　　　　　　$C5$b$u
+
+───────右：$C1UESCセクター16a$C5 
+
+───────左：$C1Dangi研究所7/X$C5
+
+
+
+
+
+
+　あなたの$C1Dangi$C5のセキュリティ・コードは、有効になり受理されました。今から、$C1Dangi研究所セクター７／Ｘ$C5に入ることができるようになります。
+#LOGOFF 400
+#END
+#ENDTERMINAL 4
+;
+#TERMINAL 5
+#UNFINISHED
+#LOGON 400
+#PICT 405
+$C5
+$C1CREW_LOG_QSI　/-xx7x316-x1$C5
+$C1ENTRY_DATE: $C51042129
+$C1STAMP:$C5 CLASSIFIED
+$C1RANK:$C5 Research Group 30A
+
+$C1....#$bbegin entry
+$C5
+We're running out of human subjects to inject with test vaccines, and the last shipment of "volunteers" from outerworld prisons is nearly two weeks past due.　Management is driven enough that I halfways expect them to start forcing lower level workers to be test patients.
+#PICT 405
+$C5
+
+The worst of it all is that we're no closer to a breakthrough than we were when $C1Research Group 25$C5 discovered a way to successfully cure infected subjects by injecting processed stem cells in the lymph nodes.　Unfortunately, dosages have to be carefully monitored - a very ineffective large-scale cure.
+
+
+$C1/end entry$C5
+#LOGOFF 400
+#END
+#ENDTERMINAL 5
+;
+#TERMINAL 6
+#UNFINISHED
+#LOGON 400
+#PICT 410
+$C5／／記録済みメッセージ開始
+
+
+
+
+
+
+
+
+$C2このターミナルは、現在使用することはできません。より詳細については、メンテナンスに連絡してください。
+$C5
+
+
+
+
+
+
+
+／／記録済みメッセージ以上
+／／id 814162597210A-B
+#LOGOFF 400
+#END
+#ENDTERMINAL 6
+;
+#TERMINAL 7
+#UNFINISHED
+#LOGON 400
+#PICT 403
+$C5
+$C1$B$U　　　　　　　機密セクターへの入場　　　　　　　$C5$b$u
+
+───────右：$C1UESCセクター16a$C5 
+
+───────左：$C1Dangi研究所7/X$C5
+
+
+
+
+身元確認中です…。
+#PICT 403
+$C5
+$C1$B$U　　　　　　　機密セクターへの入場　　　　　　　$C5$b$u
+
+───────右：$C1UESCセクター16a$C5 
+
+───────左：$C1Dangi研究所7/X$C5
+
+
+
+
+身元確認中です…。
+
+／／／／$C1UESC$C5へのアクセスを要求しています／／／／
+#PICT 403
+$C5
+　　　　　　　機密セクターへの入場　　　　　　　$C5$b$u
+
+───────右：$C1UESCセクター16a$C5 
+
+───────左：$C1Dangi研究所7/X$C5
+
+
+
+
+
+　$C2UESCの身元確認に失敗しました。もしも、UESCセクターに有効なIDでアクセスするを試みている場合は、チャーリーもしくは、所内のシスオペ職員に連絡してください。
+
+　ここでの入場する上での動作は記録されます。
+#PICT 403
+$C5
+$C1$B$U　　　　　　　機密セクターへの入場　　　　　　　$C5$b$u
+
+───────右：$C1UESCセクター16a$C5 
+
+───────左：$C1Dangi研究所7/X$C5
+
+
+
+
+身元確認中です…。
+
+／／／／$C1Dangi$C5へのアクセスを要求しています／／／／
+#PICT 403
+$C5
+$C1$B$U　　　　　　　機密セクターへの入場　　　　　　　$C5$b$u
+
+───────右：$C1UESCセクター16a$C5 
+
+───────左：$C1Dangi研究所7/X$C5
+
+
+
+$C2
+
+　$C2Dangi研究所の身元確認に失敗しました。もしも、Dangiセクターに有効なIDでアクセスするを試みている場合は、リュサンダーもしくは、所内のシスオペ職員に連絡してください。
+
+　ここでの入場する上での動作は記録されます。
+#LOGOFF 400
+#END
+#FINISHED
+#LOGON 400
+#PICT 403
+$C5
+$C1$B$U　　　　　　　機密セクターへの入場　　　　　　　$C5$b$u
+
+───────右：$C1UESCセクター16a$C5 
+
+───────左：$C1Dangi研究所7/X$C5
+
+
+
+
+身元確認中です…。
+#PICT 403
+$C5
+$C1$B$U　　　　　　　機密セクターへの入場　　　　　　　$C5$b$u
+
+───────右：$C1UESCセクター16a$C5 
+
+───────左：$C1Dangi研究所7/X$C5
+
+
+
+
+
+
+　あなたの$C1Dangi$C5のセキュリティ・コードは、有効になり受理されました。今から、$C1Dangi研究所セクター７／Ｘ$C5に入ることができるようになります。
+#LOGOFF 400
+#END
+#ENDTERMINAL 7
