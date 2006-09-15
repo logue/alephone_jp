@@ -228,18 +228,18 @@ $C1$B$U　　　　　　　機密セクターへの入場　　　　　　　$C5$b$u
 #LOGON 400
 #PICT 405
 $C5
-$C1CREW_LOG_QSI　/-xx7x316-x1$C5
-$C1ENTRY_DATE: $C51042129
-$C1STAMP:$C5 CLASSIFIED
-$C1RANK:$C5 Research Group 30A
+$C1乗員ログ_QSI　-xx7x316-x1$C5
+$C1投稿日　：$C51042129
+$C1スタンプ：$C5機密扱い
+$C1ランク　：$C5研究グループ_30A
 
-$C1....#$bbegin entry
+$C1…＃$Bエントリ開始$b$C5
 $C5
-We're running out of human subjects to inject with test vaccines, and the last shipment of "volunteers" from outerworld prisons is nearly two weeks past due.　Management is driven enough that I halfways expect them to start forcing lower level workers to be test patients.
+私たちは、もうテスト・ワクチンを注入できる人間の被験者を使い果たしており、外界の刑務所からの“ボランティア”の最後の出荷も、予定よりも２週間も遅れています。私は中途半端であっても、低レベル労働者をテスト患者として使わなければならなくなる事態になるということを推測します。
 #PICT 405
 $C5
 
-The worst of it all is that we're no closer to a breakthrough than we were when $C1Research Group 25$C5 discovered a way to successfully cure infected subjects by injecting processed stem cells in the lymph nodes.　Unfortunately, dosages have to be carefully monitored - a very ineffective large-scale cure.
+　もっとも最悪である事態は、$C1研究グループ２５$C5が、リンパ節中への処理された幹細胞の注入によって、感染した対象をうまく直す方法を発見したときのように、私たちが突破口の切り札になるとは限らないという事です。不本意ですが、効果が見込めない割に大規模な治療のための投薬を、注意深く観察しなければなりません。
 
 
 $C1/end entry$C5
