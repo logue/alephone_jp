@@ -1,6 +1,7 @@
 #pragma once
 
 #include <math.h>
+#include "AlephOne/map.h"
 
 template<class T>
 int sgn(T n)
@@ -13,9 +14,22 @@ int sgn(T n)
         return 0;
     }
 }
-bool isPointInRect(double px, double py, 
-                          double rx0, double ry0,
-                          double rx1, double ry1);
+template<class T>
+bool isPointInRect(T px, T py, 
+                          T rx0, T ry0,
+                          T rx1, T ry1)
+{
+    T left = (rx0<rx1?rx0:rx1);
+    T right = (rx0<rx1?rx1:rx0);
+    T top = (ry0<ry1?ry0:ry1);
+    T bottom = (ry0<ry1?ry1:ry0);
+
+    if( left <= px && px <= right &&
+    top <= py && py <= bottom){
+        return true;
+    }
+    return false;
+}
 
 //点が線分に近づいたかどうか判断
 bool isNearbyPointToLine(double px, double py, 
@@ -32,3 +46,13 @@ bool isNearbyPoints(double px0, double py0,
 
 double radianToDegree(double rad);
 double degreeToRadian(double deg);
+
+/**線が矩形内かチェック**/
+bool isLineInRect(int lx0, int ly0, int lx1, int ly1,
+                    int rx0, int ry0,
+                    int rx1, int ry1);
+
+/**ポリゴンが矩形内かチェック*/
+bool isPolygonInRect(int **points, int point_num,
+                    int rx0, int ry0,
+                    int rx1, int ry1);

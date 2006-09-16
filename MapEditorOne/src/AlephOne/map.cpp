@@ -423,12 +423,19 @@ void initialize_map_for_new_level(
     }
 
 	//* Note that these pointers just point into a larger structure, so this is not a bad thing *
-	// map_polygons= NULL;
-	// map_sides= NULL;
-	// map_lines= NULL;
-	// map_endpoints= NULL;
-	// automap_lines= NULL;
-	// automap_polygons= NULL;
+    PolygonList.clear();
+    LineList.clear();
+    EndpointList.clear();
+    SavedObjectList.clear();
+    MapAnnotationList.clear();
+
+	/* map_polygons= NULL;
+	 map_sides= NULL;
+	 map_lines= NULL;
+	 map_endpoints= NULL;
+	 automap_lines= NULL;
+	 automap_polygons= NULL;
+     */
 }
 /**/
 bool collection_in_environment(

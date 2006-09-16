@@ -13,6 +13,8 @@
 #define new DEBUG_NEW
 #endif
 
+int SELECT_GROUP_DISTANCE_THRESHOLD = 2;
+
 
 // CMapEditorSDIView
 
@@ -40,6 +42,9 @@ BEGIN_MESSAGE_MAP(CMapEditorSDIView, CView)
     ON_COMMAND(ID_32789, &CMapEditorSDIView::On32789)
     ON_COMMAND(ID_32786, &CMapEditorSDIView::On32786)
     ON_COMMAND(ID_32790, &CMapEditorSDIView::On32790)
+    ON_WM_SIZE()
+    ON_WM_CREATE()
+    ON_COMMAND(ID_FILE_NEW, &CMapEditorSDIView::OnFileNew)
 END_MESSAGE_MAP()
 
 // CMapEditorSDIView コンストラクション/デストラクション
@@ -74,7 +79,7 @@ void CMapEditorSDIView::OnDraw(CDC* pDC)
 
 	// TODO: この場所にネイティブ データ用の描画コードを追加します。
     CPen redSmallPen, blackSmallPen, yellowSmallPen, graySmallPen,
-        redMidiumPen, grayMidiumPen, blueSmallPen;
+        redMidiumPen, grayMidiumPen, blueSmallPen, selectPen;
     redSmallPen.CreatePen(PS_SOLID, 1, RGB(255,0,0));
     blackSmallPen.CreatePen(PS_SOLID, 1, RGB(0,0,0));
     yellowSmallPen.CreatePen(PS_SOLID, 1, RGB(255,255,0));
@@ -82,6 +87,7 @@ void CMapEditorSDIView::OnDraw(CDC* pDC)
     blueSmallPen.CreatePen(PS_SOLID, 1, RGB(0,0,255));
     graySmallPen.CreatePen(PS_SOLID, 1, RGB(200,200,200));
     grayMidiumPen.CreatePen(PS_SOLID, 2, RGB(200,200,200));
+    selectPen.CreatePen(PS_DASH, 1, RGB(255,0,0));
 
     CBrush grayBrush, redBrush, yellowBrush, nullBrush, netBrush;
     CBrush polygonBrushes[NUMBER_OF_POLYGON_TYPE];
@@ -119,14 +125,20 @@ void CMapEditorSDIView::OnDraw(CDC* pDC)
     int DIV = theApp.zoomDivision;
     int ICON_SIZE = 16;
 
-    pDC->SetBkColor(RGB(200,200,200));
+    CDC *cdc = &theApp.doubleBufferDC;
+    cdc->SetBkColor(RGB(200,200,200));
     //CDC doubleBufferDC;
     //doubleBufferDC.CreateCompatibleDC(pDC);
 
     CRect winRect;
     GetClientRect(&winRect);
 
-    CDC *cdc = pDC;
+    //背景
+    {
+        cdc->SelectObject(&grayBrush);
+        cdc->Rectangle(&winRect);
+    }
+
     //範囲
     {
         cdc->SelectObject(blackSmallPen);
@@ -187,15 +199,27 @@ void CMapEditorSDIView::OnDraw(CDC* pDC)
         struct polygon_data* polygon = &PolygonList[i];
         int type = polygon->type;
         cdc->SelectObject(&polygonBrushes[type]);
+        bool selected = false;
         if(theApp.selectType == _selected_polygon && theApp.selectIndex == i){
+            selected = true;
+        }
+        if(theApp.selectGroupInformation.isSelected()){
+            for(int k = 0; k < (int)theApp.selectGroupInformation.polygonIndexList.size(); k ++){
+                if(theApp.selectGroupInformation.polygonIndexList[k] == i){
+                    selected = true;
+                    break;
+                }
+            }
+        }
+        if(selected){
             cdc->SelectObject(&netBrush);
         }
         int flags = polygon->flags;
         int vertexCount = polygon->vertex_count;
         for(int j = 0; j < vertexCount; j ++){
-            endpoint_data* point = &EndpointList[polygon->endpoint_indexes[j]];
-            points[j].x = (point->vertex.x + OFFSET_X_WORLD) / DIV + OFFSET_X_VIEW;
-            points[j].y = (point->vertex.y + OFFSET_Y_WORLD) / DIV + OFFSET_Y_VIEW;
+            endpoint_data* ep = &EndpointList[polygon->endpoint_indexes[j]];
+            points[j].x = (ep->vertex.x + OFFSET_X_WORLD) / DIV + OFFSET_X_VIEW;
+            points[j].y = (ep->vertex.y + OFFSET_Y_WORLD) / DIV + OFFSET_Y_VIEW;
         }
         Polygon(cdc->m_hDC, points, vertexCount);
     }
@@ -212,7 +236,19 @@ void CMapEditorSDIView::OnDraw(CDC* pDC)
         int y1 = (end->vertex.y + OFFSET_Y_WORLD) / DIV + OFFSET_Y_VIEW;
 
         //選択中は太い赤線で
+        bool selected = false;
         if(theApp.selectType == _selected_line && theApp.selectIndex == i){
+            selected = true;
+        }
+        if(theApp.selectGroupInformation.isSelected()){
+            for(int k = 0; k < (int)theApp.selectGroupInformation.lineIndexList.size(); k ++){
+                if(theApp.selectGroupInformation.lineIndexList[k] == i){
+                    selected = true;
+                    break;
+                }
+            }
+        }
+        if(selected){
             cdc->SelectObject(&redMidiumPen);
         }
 
@@ -224,9 +260,9 @@ void CMapEditorSDIView::OnDraw(CDC* pDC)
     cdc->SelectObject(&blueSmallPen);
     cdc->SelectObject(&yellowBrush);
     for(int i = 0; i < (int)EndpointList.size(); i ++){
-        endpoint_data* point = &EndpointList[i];
-        int x = point->vertex.x;
-        int y = point->vertex.y;
+        endpoint_data* ep = &EndpointList[i];
+        int x = ep->vertex.x;
+        int y = ep->vertex.y;
         int drawX = (x + OFFSET_X_WORLD)/DIV + OFFSET_X_VIEW;
         int drawY = (y + OFFSET_Y_WORLD)/DIV + OFFSET_Y_VIEW;
         RECT rect;
@@ -242,19 +278,29 @@ void CMapEditorSDIView::OnDraw(CDC* pDC)
         cdc->Rectangle(&rect);
 
         //選択中はしるしを。
-        if(theApp.selectType == _selected_point){
-            if( theApp.selectIndex == i){
-                cdc->SelectObject(&redMidiumPen);
-                cdc->SetBkMode(TRANSPARENT);
-                cdc->SelectObject(&nullBrush);
-                RECT rect;
-                int SIZE = 5;
-                rect.left = drawX - SIZE;
-                rect.right = rect.left + SIZE * 2;
-                rect.top = drawY - SIZE;
-                rect.bottom = rect.top + SIZE * 2;
-                cdc->Rectangle(&rect);
+        bool selected = false;
+        if(theApp.selectType == _selected_point && theApp.selectIndex == i){
+            selected = true;
+        }
+        if(theApp.selectGroupInformation.isSelected()){
+            for(int k = 0; k < (int)theApp.selectGroupInformation.endpointIndexList.size(); k ++){
+                if(theApp.selectGroupInformation.endpointIndexList[k] == i){
+                    selected = true;
+                    break;
+                }
             }
+        }
+        if( selected){
+            cdc->SelectObject(&redMidiumPen);
+            cdc->SetBkMode(TRANSPARENT);
+            cdc->SelectObject(&nullBrush);
+            RECT rect;
+            int SIZE = 5;
+            rect.left = drawX - SIZE;
+            rect.right = rect.left + SIZE * 2;
+            rect.top = drawY - SIZE;
+            rect.bottom = rect.top + SIZE * 2;
+            cdc->Rectangle(&rect);
         }
     }
 
@@ -286,7 +332,7 @@ void CMapEditorSDIView::OnDraw(CDC* pDC)
         }
         if(handle != NULL){
             memDC.SelectObject(handle);
-            ::TransparentBlt(pDC->m_hDC, drawX - ICON_SIZE / 2, drawY - ICON_SIZE / 2,
+            ::TransparentBlt(cdc->m_hDC, drawX - ICON_SIZE / 2, drawY - ICON_SIZE / 2,
                 ICON_SIZE, ICON_SIZE, memDC.m_hDC,
                 0, 0, ICON_SIZE, ICON_SIZE, RGB(255,255,255));
         }
@@ -313,11 +359,11 @@ void CMapEditorSDIView::OnDraw(CDC* pDC)
             cdc->Polygon(points, 3);
         }
 
+        cdc->SetBkMode(TRANSPARENT);
         //選択中はしるしを。
         if(theApp.selectType == _selected_object){
             if( theApp.selectIndex == i){
                 cdc->SelectObject(&redMidiumPen);
-                cdc->SetBkMode(TRANSPARENT);
                 cdc->SelectObject(&nullBrush);
                 RECT rect;
                 int SIZE = 10;
@@ -343,9 +389,29 @@ void CMapEditorSDIView::OnDraw(CDC* pDC)
         RECT clientRect;
         GetClientRect(&clientRect);
         cdc->TextOut(drawX, drawY, msg, msg.GetLength());
-            
-
     }
+
+    //選択範囲
+    if(theApp.isSelectingGroup){
+        bool selecting = true;
+        /*if(!isNearbyPoints(theApp.selectStartPoint.x, theApp.selectStartPoint.y,
+            theApp.nowMousePoint.x, theApp.nowMousePoint.y, SELECT_GROUP_DISTANCE_THRESHOLD))
+        {
+            selecting = true;
+        }*/
+        if(selecting){
+            cdc->SelectObject(&nullBrush);
+            cdc->SelectObject(&selectPen);
+
+            cdc->Rectangle(theApp.selectStartPoint.x, theApp.selectStartPoint.y,
+                theApp.nowMousePoint.x, theApp.nowMousePoint.y);
+        }
+    }
+
+    //裏画面をメインへ転送
+    pDC->BitBlt(0,0,winRect.Width(), winRect.Height(), 
+        cdc, 0, 0, SRCCOPY);
+
     cdc->SelectObject(&oldPen);
     cdc->SelectObject(&oldBrush);
 
@@ -356,6 +422,7 @@ void CMapEditorSDIView::OnDraw(CDC* pDC)
     graySmallPen.DeleteObject();
     grayMidiumPen.DeleteObject();
     blueSmallPen.DeleteObject();
+    selectPen.DeleteObject();
 
     grayBrush.DeleteObject();
     redBrush.DeleteObject();
@@ -449,10 +516,6 @@ void CMapEditorSDIView::OnFileOpen()
         //レベル1を読み込んでみる
         {
             theApp.editLevelIndex = 0;
-            build_trig_tables();
-            if(dynamic_world == NULL){
-                allocate_map_memory();
-            }
             bool check = load_level_from_map(theApp.editLevelIndex);
             if(!check){
                 MessageBox(L"failed");
@@ -485,7 +548,7 @@ void CMapEditorSDIView::OnFileOpen()
         }
 
         theApp.zoomDivision = ZOOM_DIVISION_DEFAULT;
-        this->RedrawWindow();
+        this->Invalidate(FALSE);
     }
 }
 
@@ -518,7 +581,7 @@ void CMapEditorSDIView::On32776()
         //選択無し
         theApp.selectType = _no_selected;
 
-        this->RedrawWindow();
+        this->Invalidate(FALSE);
     }
 }
 
@@ -565,7 +628,7 @@ void CMapEditorSDIView::OnZoomIn()
 {
     // TODO: ここにコマンド ハンドラ コードを追加します。
     addZoom(-ZOOM_DIVISION_STEP);
-    this->RedrawWindow();
+    this->Invalidate(FALSE);
 }
 
 //縮小
@@ -573,7 +636,7 @@ void CMapEditorSDIView::OnZoomOut()
 {
     // TODO: ここにコマンド ハンドラ コードを追加します。
     addZoom(ZOOM_DIVISION_STEP);
-    this->RedrawWindow();
+    this->Invalidate(FALSE);
 }
 
 //マウス移動
@@ -588,45 +651,36 @@ void CMapEditorSDIView::OnMouseMove(UINT nFlags, CPoint point)
         int deltaY = point.y - theApp.oldMousePoint.y;
         theApp.offset.x += deltaX;
         theApp.offset.y += deltaY;
-        this->RedrawWindow();
+        this->Invalidate(FALSE);
     }else if(nFlags & MK_LBUTTON && !(nFlags & MK_SHIFT) && !(nFlags & MK_CONTROL)){
         //選択物の移動
         int x = (point.x - theApp.offset.x) * theApp.zoomDivision - OFFSET_X_WORLD;
         int y = (point.y - theApp.offset.y) * theApp.zoomDivision - OFFSET_Y_WORLD;
-        if(theApp.selectType == _selected_object){
-            SavedObjectList[theApp.selectIndex].location.x = x;
-            SavedObjectList[theApp.selectIndex].location.y = y;
-            //オブジェクト情報更新
-            theApp.objectPropertyDialog->setupDialog(theApp.selectIndex);
-        }else if(theApp.selectType == _selected_point){
-            EndpointList[theApp.selectIndex].vertex.x = x;
-            EndpointList[theApp.selectIndex].vertex.y = y;
-        }else if(theApp.selectType == _selected_line){
-            EndpointList[LineList[theApp.selectIndex].endpoint_indexes[0]].vertex.x = 
-                (world_distance)(x + theApp.polygonPoints[0].x * theApp.zoomDivision);
-            EndpointList[LineList[theApp.selectIndex].endpoint_indexes[0]].vertex.y = 
-                (world_distance)(y + theApp.polygonPoints[0].y * theApp.zoomDivision);
-            EndpointList[LineList[theApp.selectIndex].endpoint_indexes[1]].vertex.x = 
-                (world_distance)(x + theApp.polygonPoints[1].x * theApp.zoomDivision);
-            EndpointList[LineList[theApp.selectIndex].endpoint_indexes[1]].vertex.y = 
-                (world_distance)(y + theApp.polygonPoints[1].y * theApp.zoomDivision);
-            
+        if(!theApp.isSelectingGroup && theApp.selectType != _no_selected){
+            if(theApp.selectType == _selected_object){
+                SavedObjectList[theApp.selectIndex].location.x = x;
+                SavedObjectList[theApp.selectIndex].location.y = y;
+                //オブジェクト情報更新
+                theApp.objectPropertyDialog->setupDialog(theApp.selectIndex);
+            }else if(theApp.selectType == _selected_point){
+                EndpointList[theApp.selectIndex].vertex.x = x;
+                EndpointList[theApp.selectIndex].vertex.y = y;
+            }else if(theApp.selectType == _selected_line){
+                EndpointList[LineList[theApp.selectIndex].endpoint_indexes[0]].vertex.x = 
+                    (world_distance)(x + theApp.polygonPoints[0].x * theApp.zoomDivision);
+                EndpointList[LineList[theApp.selectIndex].endpoint_indexes[0]].vertex.y = 
+                    (world_distance)(y + theApp.polygonPoints[0].y * theApp.zoomDivision);
+                EndpointList[LineList[theApp.selectIndex].endpoint_indexes[1]].vertex.x = 
+                    (world_distance)(x + theApp.polygonPoints[1].x * theApp.zoomDivision);
+                EndpointList[LineList[theApp.selectIndex].endpoint_indexes[1]].vertex.y = 
+                    (world_distance)(y + theApp.polygonPoints[1].y * theApp.zoomDivision);
+            }
         }
-        RedrawWindow();
+        Invalidate(FALSE);
     }
     theApp.oldMousePoint = point;
 
     CView::OnMouseMove(nFlags, point);
-}
-
-static void noSelected()
-{
-    //選択されなかった
-    theApp.selectType = _no_selected;
-    theApp.objectPropertyDialog->setupDialog(-1);
-    //プロパティダイアログ消す
-    theApp.objectPropertyDialog->ShowWindow(FALSE);
-    theApp.isObjectPropertyDialogShow = FALSE;
 }
 
 //左ボタン下げ
@@ -645,9 +699,11 @@ void CMapEditorSDIView::OnLButtonDown(UINT nFlags, CPoint point)
     int OFFSET_Y_VIEW = theApp.offset.y;
     int DIV = theApp.zoomDivision;
 
-    if(!(nFlags & MK_SHIFT)){
+    if(!(nFlags & MK_SHIFT) && !(nFlags & MK_CONTROL)){
         //shiftを押さずにクリック→選択
         bool selected = false;
+
+        theApp.isSelectingGroup = false;
 
         {
             int DISTANCE_EPSILON = 8;
@@ -681,8 +737,16 @@ void CMapEditorSDIView::OnLButtonDown(UINT nFlags, CPoint point)
         if(selected){
             theApp.objectPropertyDialog->ShowWindow(TRUE);
             theApp.isObjectPropertyDialogShow = TRUE;
+
+            //線プロパティ消す
+            //ポリゴンプロパティ消す
         }else{
-            noSelected();
+            //選択されなかった
+            theApp.selectType = _no_selected;
+            theApp.objectPropertyDialog->setupDialog(-1);
+            //プロパティダイアログ消す
+            theApp.objectPropertyDialog->ShowWindow(FALSE);
+            theApp.isObjectPropertyDialogShow = FALSE;
         }
 
         if(!selected){
@@ -705,13 +769,11 @@ void CMapEditorSDIView::OnLButtonDown(UINT nFlags, CPoint point)
             }
         }
         if(selected){
-        }else{
-            noSelected();
         }
 
         if(!selected){
             //線
-            int DISTANCE_EPSILON = 10;
+            int DISTANCE_EPSILON = 5;
             for(int i = 0; i < (int)LineList.size(); i ++){
                 line_data* line = &LineList[i];
                 endpoint_data* begin = &EndpointList[line->endpoint_indexes[0]];
@@ -739,24 +801,49 @@ void CMapEditorSDIView::OnLButtonDown(UINT nFlags, CPoint point)
             }
         }
 
-        if(!selected){
-            noSelected();
+        if(selected){
+            //線プロパティ表示
+        }else{
+            //非表示
         }
 
         if(!selected){
             //ポリゴン
             for(int i = 0; i < (int)PolygonList.size(); i ++){
                 struct world_point2d world_point;
-                world_point.x = (point.x - OFFSET_X_VIEW) * DIV - OFFSET_X_WORLD;
-                world_point.y = (point.y - OFFSET_Y_VIEW) * DIV - OFFSET_Y_WORLD;
+                world_point.x = (world_distance)((point.x - OFFSET_X_VIEW) * DIV - OFFSET_X_WORLD);
+                world_point.y = (world_distance)((point.y - OFFSET_Y_VIEW) * DIV - OFFSET_Y_WORLD);
 
                 if(point_in_polygon(i, &world_point)){
                     theApp.selectType = _selected_polygon;
                     theApp.selectIndex = i;
+                    selected = true;
                 }
             }
         }
-        this->RedrawWindow();
+        
+        if(selected){
+            //ポリゴンプロパティ
+        }else{
+            //非表示
+        }
+
+
+        //////////////////////////////////
+        //ここからの処理はほかよりも後に書く
+        if(!selected){
+            theApp.selectType = _no_selected;
+            //範囲選択
+            //始点登録
+            theApp.selectStartPoint.x = point.x;
+            theApp.selectStartPoint.y = point.y;
+            theApp.isSelectingGroup = true;
+
+            theApp.selectGroupInformation.clear();
+        }else{
+            theApp.isSelectingGroup = false;
+        }
+        this->Invalidate(FALSE);
     }
     CView::OnLButtonDown(nFlags, point);
     SetCapture();
@@ -766,8 +853,92 @@ void CMapEditorSDIView::OnLButtonUp(UINT nFlags, CPoint point)
 {
     // TODO: ここにメッセージ ハンドラ コードを追加するか、既定の処理を呼び出します。
     theApp.isPressLButtonWithShift = false;
-    CView::OnLButtonUp(nFlags, point);
+    bool okSelect = false;
+    if(theApp.isSelectingGroup){
+        /*if(isNearbyPoints(point.x, point.y, 
+            theApp.selectStartPoint.x, theApp.selectStartPoint.y, SELECT_GROUP_DISTANCE_THRESHOLD))
+        {
+            //
+            theApp.selectGroupInformation.setSelected(false);
+        }else{
+            okSelect = true;
+        }*/
+        okSelect = true;
+    }
+    if(okSelect){
+        theApp.selectType = _no_selected;
+
+        int DIV = theApp.zoomDivision;
+        int OFFSET_X_VIEW = theApp.offset.x;
+        int OFFSET_Y_VIEW = theApp.offset.y;
+        //選択されているものをリストに登録する
+        //点
+        for(int i = 0; i < (int)EndpointList.size(); i ++){
+            endpoint_data* ep = &EndpointList[i];
+            int x = ep->vertex.x;
+            int y = ep->vertex.y;
+            int drawX = (x + OFFSET_X_WORLD)/DIV + OFFSET_X_VIEW;
+            int drawY = (y + OFFSET_Y_WORLD)/DIV + OFFSET_Y_VIEW;
+            //チェック
+            if(isPointInRect<int>(drawX, drawY, point.x, point.y,
+                theApp.selectStartPoint.x, theApp.selectStartPoint.y))
+            {
+                //追加
+                theApp.selectGroupInformation.endpointIndexList.push_back(i);
+            }
+        }
+        //線
+        for(int i = 0; i < (int)LineList.size(); i ++){
+            line_data* line = &LineList[i];
+            endpoint_data* begin = &EndpointList[line->endpoint_indexes[0]];
+            endpoint_data* end = &EndpointList[line->endpoint_indexes[1]];
+            int x0 = (begin->vertex.x + OFFSET_X_WORLD) / DIV + OFFSET_X_VIEW;
+            int y0 = (begin->vertex.y + OFFSET_Y_WORLD) / DIV + OFFSET_Y_VIEW;
+            int x1 = (end->vertex.x + OFFSET_X_WORLD) / DIV + OFFSET_X_VIEW;
+            int y1 = (end->vertex.y + OFFSET_Y_WORLD) / DIV + OFFSET_Y_VIEW;
+            if(isLineInRect(x0, y0, x1, y1, point.x, point.y,
+                theApp.selectStartPoint.x, theApp.selectStartPoint.y))
+            {
+                theApp.selectGroupInformation.lineIndexList.push_back(i);
+            }
+        }
+
+        //ポリゴン
+        //POINT points[MAXIMUM_VERTICES_PER_POLYGON][2];
+        for(int i = 0; i < (int)PolygonList.size(); i ++){
+            struct polygon_data* polygon = &PolygonList[i];
+            int vertexCount = polygon->vertex_count;
+            bool inner = true;
+            if(vertexCount == 0){
+                inner = false;
+            }
+            for(int j = 0; j < vertexCount && inner; j ++){
+                endpoint_data* ep = &EndpointList[polygon->endpoint_indexes[j]];
+                int drawX = (ep->vertex.x + OFFSET_X_WORLD) / DIV + OFFSET_X_VIEW;
+                int drawY = (ep->vertex.y + OFFSET_Y_WORLD) / DIV + OFFSET_Y_VIEW;
+                if(!isPointInRect<int>(drawX, drawY, point.x, point.y,
+                    theApp.selectStartPoint.x, theApp.selectStartPoint.y))
+                {
+                    inner = false;
+                    break;
+                }
+            }
+            if(inner){
+                //登録
+                theApp.selectGroupInformation.polygonIndexList.push_back(i);
+            }
+        }
+
+        if(theApp.selectGroupInformation.endpointIndexList.size() > 0){
+            theApp.selectGroupInformation.setSelected(true);
+        }
+    }
+
+    theApp.isSelectingGroup = false;
+    Invalidate(FALSE);
     ReleaseCapture();
+
+    CView::OnLButtonUp(nFlags, point);
 }
 //中心へ移動
 void CMapEditorSDIView::OnItemCentering()
@@ -775,14 +946,14 @@ void CMapEditorSDIView::OnItemCentering()
     // TODO: ここにコマンド ハンドラ コードを追加します。
     theApp.offset.x = 0;
     theApp.offset.y = 0;
-    RedrawWindow();
+    Invalidate(FALSE);
 }
 //拡大標準
 void CMapEditorSDIView::OnItemZoomDefault()
 {
     // TODO: ここにコマンド ハンドラ コードを追加します。
     theApp.zoomDivision = ZOOM_DIVISION_DEFAULT;
-    RedrawWindow();
+    Invalidate(FALSE);
 }
 //ホイール
 BOOL CMapEditorSDIView::OnMouseWheel(UINT nFlags, short zDelta, CPoint pt)
@@ -793,7 +964,7 @@ BOOL CMapEditorSDIView::OnMouseWheel(UINT nFlags, short zDelta, CPoint pt)
     // TODO: ここにメッセージ ハンドラ コードを追加するか、既定の処理を呼び出します。
     if(nFlags & MK_CONTROL){
         addZoom( -1 * sgn<int>(zDelta) * ZOOM_DIVISION_STEP);
-        RedrawWindow();
+        Invalidate(FALSE);
     }
     return CView::OnMouseWheel(nFlags, zDelta, pt);
 }
@@ -833,12 +1004,8 @@ void CMapEditorSDIView::OnInitialUpdate()
         //theApp.heightDialog->ModifyStyleEx(0, WS_EX_TOPMOST);
         
         //ダブルバッファリング準備
-        /*CClientDC dc(this);
-        CRect rect;
-        GetClientRect(&rect);
-        theApp.doubleBufferDC.CreateCompatibleDC(&dc);
-        theApp.doubleBuffserBitmap.CreateCompatibleBitmap(
-            theApp.doubleBufferDC*/
+        //createDoubleBuffer();
+
         isFirst = false;
     }
 
@@ -881,5 +1048,62 @@ void CMapEditorSDIView::On32790()
     if(dlg.DoModal() == IDOK){
         //変更を保存
 
+    }
+}
+
+void CMapEditorSDIView::OnSize(UINT nType, int cx, int cy)
+{
+    CView::OnSize(nType, cx, cy);
+
+    // TODO: ここにメッセージ ハンドラ コードを追加します。
+    //裏画面を作り直す
+    
+    CSize size = theApp.doubleBuffserBitmap.GetBitmapDimension();
+    if(cx != size.cx || cy != size.cy){
+        theApp.doubleBufferDC.DeleteDC();
+        theApp.doubleBuffserBitmap.DeleteObject();
+        
+        createDoubleBuffer();
+    }
+
+}
+void CMapEditorSDIView::createDoubleBuffer()
+{
+    CClientDC dc(this);
+    CRect rect;
+    GetClientRect(&rect);
+    
+    theApp.doubleBufferDC.CreateCompatibleDC(&dc);
+    theApp.doubleBuffserBitmap.CreateCompatibleBitmap(
+        &dc, rect.Width(), rect.Height());
+    theApp.doubleBufferDC.SelectObject(&theApp.doubleBuffserBitmap);
+}
+
+int CMapEditorSDIView::OnCreate(LPCREATESTRUCT lpCreateStruct)
+{
+    if (CView::OnCreate(lpCreateStruct) == -1)
+        return -1;
+
+    createDoubleBuffer();
+    build_trig_tables();
+    if(dynamic_world == NULL){
+        allocate_map_memory();
+    }
+    return 0;
+}
+
+void CMapEditorSDIView::OnFileNew()
+{
+    // TODO: ここにコマンド ハンドラ コードを追加します。
+    //確認ダイアログ
+    //マップ情報ダイアログ表示
+    CLevelParameterDialog dlg(this, true);
+    if(dlg.DoModal() == IDOK){
+        //マップ情報削除
+        initialize_map_for_new_level();
+        //レベル一覧削除
+        theApp.LevelNameList.RemoveAll();
+        //
+        Invalidate(FALSE);
     }
 }

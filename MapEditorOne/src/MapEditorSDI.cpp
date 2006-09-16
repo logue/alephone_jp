@@ -145,6 +145,8 @@ CMapEditorSDIApp::CMapEditorSDIApp()
 
     AfxInitRichEdit();
 
+    selectGroupInformation.clear();
+    isSelectingGroup = false;
 }
 
 

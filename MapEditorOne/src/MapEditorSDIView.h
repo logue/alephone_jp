@@ -27,6 +27,7 @@ protected:
 	virtual void OnBeginPrinting(CDC* pDC, CPrintInfo* pInfo);
 	virtual void OnEndPrinting(CDC* pDC, CPrintInfo* pInfo);
     void addZoom(int step);
+    void createDoubleBuffer();
 
 // 実装
 public:
@@ -75,6 +76,12 @@ public:
     afx_msg void On32786();
 public:
     afx_msg void On32790();
+public:
+    afx_msg void OnSize(UINT nType, int cx, int cy);
+public:
+    afx_msg int OnCreate(LPCREATESTRUCT lpCreateStruct);
+public:
+    afx_msg void OnFileNew();
 };
 
 #ifndef _DEBUG  // MapEditorSDIView.cpp のデバッグ バージョン

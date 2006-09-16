@@ -379,6 +379,19 @@ bool load_level_from_map(
 	return (!error_pending());
 }
 
+//HogePiyo added
+/**
+    export level
+    @ref process_map,export_physics_wad_data
+*/
+static struct wad_data* export_level_wad_data()
+{
+    //empty wad
+    struct wad_data* wad = create_empty_wad();
+
+    size_t offset, alloc_size;
+}
+
 
 //HogePiyo added
 bool save_level(const char* filename){
@@ -387,7 +400,9 @@ bool save_level(const char* filename){
 	OpenedFile OFile;
 	struct wad_header header;
 	struct wad_data *wad;
-
+    if(open_wad_file_for_writing(mapFileSpecifier, OFile)){
+        wad = export_level_wad_data();
+    }
     return false;
 }
 
@@ -1284,6 +1299,8 @@ bool process_map_wad(
 	    count = data_length/SIZEOF_map_annotation;
 	    assert(data_length == count*SIZEOF_map_annotation);
 	    load_annotations(data, count);
+    }else{
+        MapAnnotationList.clear();
     }
 
 	/* Extract the objects */

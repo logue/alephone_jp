@@ -12,21 +12,6 @@ static double getInnerProduct(double x0, double y0, double x1, double y1)
     return num;
 }
 
-bool isPointInRect(double px, double py, 
-                          double rx0, double ry0,
-                          double rx1, double ry1)
-{
-    double left = (rx0<rx1?rx0:rx1);
-    double right = (rx0<rx1?rx1:rx0);
-    double top = (ry0<ry1?ry0:ry1);
-    double bottom = (ry0<ry1?ry1:ry0);
-
-    if( left <= px && px <= right &&
-    top <= py && py <= bottom){
-        return true;
-    }
-    return false;
-}
 
 double getPointDistanceFromLine(double px, double py, 
                          double lx0, double ly0, double lx1, double ly1)
@@ -41,8 +26,8 @@ double getPointDistanceFromLine(double px, double py,
     double startToPointDeltaX = px - lx0;
     double startToPointDeltaY = py - ly0;
 
-    double linevectorDistance = getLength(startToPointDeltaX, startToPointDeltaY);
-    double pointvectorDistance = getLength(lineDeltaX, lineDeltaY);
+    double linevectorDistance = getLength(lineDeltaX, lineDeltaY);
+    double pointvectorDistance = getLength(startToPointDeltaX, startToPointDeltaY);
     
     //線の長さが0
     if( linevectorDistance == 0){
@@ -81,7 +66,7 @@ static bool isCrossPointLine(double px, double py,
     double lineDeltaY = ly1 - ly0;
 
     //線が垂直、水平
-    if(lineDeltaX == 0){
+    if((int)lineDeltaX == 0){
         double top = (ly0 < ly1 ? ly0:ly1);
         double bottom = (ly0 < ly1 ? ly1:ly0);
         if(top <= py && py <= bottom){
@@ -90,7 +75,7 @@ static bool isCrossPointLine(double px, double py,
             return false;
         }
     }
-    if(lineDeltaY == 0){
+    if((int)lineDeltaY == 0){
         double left = (lx0 < lx1 ? lx0:lx1);
         double right = (lx0 < lx1 ? lx1:lx0);
         if(left <= px && px <= right){
@@ -174,4 +159,31 @@ double degreeToRadian(double deg)
 {
     double rad = deg * 2.0 * PI / 180.0;
     return rad;
+}
+
+/**線が矩形内かチェック**/
+bool isLineInRect(int lx0, int ly0, int lx1, int ly1,
+                    int rx0, int ry0,
+                    int rx1, int ry1)
+{
+    if(isPointInRect(lx0, ly0, rx0,ry0,rx1,ry1) && isPointInRect(lx1, ly1, rx0,ry0,rx1,ry1)){
+        return true;
+    }else{
+        return false;
+    }
+}
+
+/**ポリゴンが矩形内かチェック*/
+bool isPolygonInRect(int **points, int point_num,
+                    int rx0, int ry0,
+                    int rx1, int ry1)
+{
+    for(int i = 0; i < point_num; i ++){
+        if(!isPointInRect(points[i][0], points[i][1],
+            rx0,ry0,rx1,ry1))
+        {
+            return false;
+        }
+    }
+    return true;
 }

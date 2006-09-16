@@ -69,6 +69,38 @@ typedef struct InformationBinded_tag{
     int bind;
 }InformationBinded;
 
+struct selectInformation{
+    bool isSelected(){
+        return isSelected_;
+    }
+    void setSelected(bool sel){
+        isSelected_ = sel;
+    }
+    void clear(){
+        endpointIndexList.clear();
+        lineIndexList.clear();
+        polygonIndexList.clear();
+        objectIndexList.clear();
+        setSelected(false);
+    }
+    //点のリスト
+    vector<int> endpointIndexList;
+
+    //線のリスト
+    vector<int> lineIndexList;
+
+    //ポリゴンのリスト
+    vector<int> polygonIndexList;
+
+    vector<int> objectIndexList;
+private:
+    bool isSelected_;
+
+};
+
+/**
+    MapEditorOneメインアプリケーション
+*/
 class CMapEditorSDIApp : public CWinApp
 {
 public:
@@ -160,8 +192,15 @@ public:
     POINT polygonPoints[8];
     int polygonPointNum;
 
-	DECLARE_MESSAGE_MAP()
+    //選択範囲始点
+    POINT selectStartPoint;
+    bool isSelectingGroup;
 
+    //複数選択時の選択物リスト
+    struct selectInformation selectGroupInformation;
+
+
+	DECLARE_MESSAGE_MAP()
 public:
     afx_msg void OnFileOpen();
 };
