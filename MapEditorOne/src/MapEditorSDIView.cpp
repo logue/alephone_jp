@@ -292,7 +292,7 @@ void CMapEditorSDIView::OnDraw(CDC* pDC)
         }
         if( selected){
             cdc->SelectObject(&redMidiumPen);
-            cdc->SetBkMode(TRANSPARENT);
+            //cdc->SetBkMode(TRANSPARENT);
             cdc->SelectObject(&nullBrush);
             RECT rect;
             int SIZE = 5;
@@ -340,9 +340,9 @@ void CMapEditorSDIView::OnDraw(CDC* pDC)
         if(type == _saved_monster || type == _saved_player){
             cdc->SelectObject(blackSmallPen);
             if(type == _saved_monster){
-                pDC->SelectObject(&redBrush);
+                cdc->SelectObject(&redBrush);
             }else{
-                pDC->SelectObject(&yellowBrush);
+                cdc->SelectObject(&yellowBrush);
             }
             int facing = obj->facing;
             double degree = (double)facing / (1<<ANGULAR_BITS) * 360.0;
@@ -554,10 +554,17 @@ void CMapEditorSDIView::OnFileOpen()
 
 void CMapEditorSDIView::OnFileSave()
 {
-    CFileDialog dlg(FALSE, L"*.map", L"hoge", OFN_HIDEREADONLY | OFN_OVERWRITEPROMPT,
-		L"MarathonMapFile (*.map)|*.map|Any format (*.*)|*.*||", this);
+    CFileDialog dlg(FALSE, L"*.sceA", L"hoge", OFN_HIDEREADONLY | OFN_OVERWRITEPROMPT,
+		L"MarathonMapFile (*.sceA)|*.sceA|Any format (*.*)|*.*||", this);
 	if( dlg.DoModal() == IDOK){
 		CString filename = dlg.GetPathName();
+        char cstr[256];
+        strToChar(filename, cstr);
+
+        //•Û‘¶
+        if(!save_level(cstr)){
+            MessageBox(L"Ž¸”s");
+        }
     }
 }
 

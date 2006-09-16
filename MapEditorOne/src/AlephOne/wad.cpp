@@ -590,6 +590,8 @@ struct wad_data *append_data_to_wad(
 	wad->tag_data[index].data= (uint8 *) malloc(size);
 	if(!wad->tag_data[index].data)
 	{
+        MessageBox(NULL, L"out of memory", L"error", MB_OK);
+        return NULL;
 		//alert_user(fatalError, strERRORS, outOfMemory, memory_error());
 	}
 	assert(wad->tag_data[index].data);

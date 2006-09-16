@@ -161,6 +161,9 @@ static void complete_restoring_level(struct wad_data *wad);
 //static void load_redundant_map_data(short *redundant_data, size_t count);
 static void allocate_map_structure_for_map(struct wad_data *wad);
 static struct wad_data *build_save_game_wad(struct wad_header *header, long *length);
+static uint8 *tag_to_global_array_and_size(uint32 tag, 
+	size_t *size
+	);
 
 static void allocate_map_for_counts(size_t polygon_count, size_t side_count,
 	size_t endpoint_count, size_t line_count);
@@ -390,6 +393,197 @@ static struct wad_data* export_level_wad_data()
     struct wad_data* wad = create_empty_wad();
 
     size_t offset, alloc_size;
+    Uint8 *data;
+    size_t count;
+
+    offset = 0;
+
+    //points
+    count = EndpointList.size();
+    alloc_size = SIZEOF_endpoint_data * count;
+    data = new Uint8[alloc_size];
+	pack_endpoint_data(data, map_endpoints, count);
+	append_data_to_wad(wad, ENDPOINT_DATA_TAG, data, alloc_size, offset);
+	offset += alloc_size;
+    delete data;
+
+    //lines
+    count = LineList.size();
+    alloc_size = SIZEOF_line_data * count;
+    data = new Uint8[alloc_size];
+    pack_line_data(data, map_lines, count);
+	append_data_to_wad(wad, LINE_TAG, data, alloc_size, offset);
+	offset += alloc_size;
+    delete data;
+
+    //side
+    count = SideList.size();
+    alloc_size = SIZEOF_side_data * count;
+    data = new Uint8[alloc_size];
+    pack_side_data(data, map_sides, count);
+	append_data_to_wad(wad, SIDE_TAG, data, alloc_size, offset);
+	offset += alloc_size;
+    delete data;
+
+    //polygon
+    count = PolygonList.size();
+    alloc_size = SIZEOF_polygon_data * count;
+    data = new Uint8[alloc_size];
+    pack_polygon_data(data, map_polygons, count);
+	append_data_to_wad(wad, POLYGON_TAG, data, alloc_size, offset);
+	offset += alloc_size;
+    delete data;
+
+    //light
+    count = LightList.size();
+    if(count > 0){
+        alloc_size = SIZEOF_static_light_data * count;
+        data = new Uint8[alloc_size];
+        struct static_light_data* slights = new struct static_light_data[count];
+        for(size_t i = 0; i < count; i ++){
+            memcpy(&slights[i], &LightList[i].static_data, SIZEOF_static_light_data);
+        }
+        pack_static_light_data(data, slights, count);
+        delete slights;
+        append_data_to_wad(wad, LIGHTSOURCE_TAG, data, alloc_size, offset);
+	    offset += alloc_size;
+        delete data;
+    }
+
+    //annotations
+    count = MapAnnotationList.size();
+    if(count > 0){
+        alloc_size = SIZEOF_map_annotation * count;
+        data = new Uint8[alloc_size];
+        pack_map_annotation(data, map_annotations, count);
+        append_data_to_wad(wad, LIGHTSOURCE_TAG, data, alloc_size, offset);
+	    offset += alloc_size;
+        delete data;
+    }
+
+    //objects
+    count = SavedObjectList.size();
+    if(count > 0){
+        alloc_size = SIZEOF_map_object * count;
+        data = new Uint8[alloc_size];
+        pack_map_object(data, saved_objects, count);
+        append_data_to_wad(wad, OBJECT_TAG, data, alloc_size, offset);
+	    offset += alloc_size;
+        delete data;
+    }
+
+    //map info
+    /*
+	int16 environment_code;
+	
+	int16 physics_model;
+	int16 song_index;
+	int16 mission_flags;
+	int16 environment_flags;
+	
+	int16 unused[4];
+
+	char level_name[LEVEL_NAME_LENGTH];
+	uint32 entry_point_flags;
+    */
+    //static_world->physics_model = 0;
+    /*count = 1;
+    alloc_size = SIZEOF_static_data * count;
+    data = new Uint8[alloc_size];
+    pack_static_data(data, static_world, count);
+    */
+    data = tag_to_global_array_and_size(MAP_INFO_TAG, &count);
+    append_data_to_wad(wad, MAP_INFO_TAG, data, count, offset);
+	offset += alloc_size;
+    delete data;
+
+    //object placement
+    /*count = 2 * MAXIMUM_OBJECT_TYPES;
+    alloc_size = SIZEOF_object_frequency_definition * count;
+    object_frequency_definition* objectPlacementData =
+        new object_frequency_definition[count * SIZEOF_object_frequency_definition];
+    //copy them
+    memcpy(objectPlacementData, item_placement_info, alloc_size / 2);
+    memcpy(objectPlacementData + alloc_size / 2,
+        monster_placement_info, alloc_size / 2);
+    data = new Uint8[alloc_size];
+    */
+    data = tag_to_global_array_and_size(ITEM_PLACEMENT_STRUCTURE_TAG, &count);
+    //pack_object_frequency_definition(data, objectPlacementData, count);
+    //delete objectPlacementData;
+    append_data_to_wad(wad, ITEM_PLACEMENT_STRUCTURE_TAG, data, count, offset);
+	offset += count;
+    delete data;
+
+    //terminal
+    count = map_terminal_text.size();
+    if(count > 0){
+        alloc_size = calculate_packed_terminal_data_length();
+        data = new Uint8[alloc_size];
+        pack_map_terminal_data(data, count);
+        append_data_to_wad(wad, TERMINAL_DATA_TAG, data, alloc_size, offset);
+	    offset += alloc_size;
+        delete data;
+    }
+
+    //media
+    count = MediaList.size();
+    if(count > 0){
+        alloc_size = SIZEOF_media_data * count;
+        data = new Uint8[alloc_size];
+        pack_media_data(data, medias, count);
+        append_data_to_wad(wad, MEDIA_TAG, data, alloc_size, offset);
+	    offset += alloc_size;
+        delete data;
+    }
+
+    //ambient sound images
+    count = AmbientSoundImageList.size();
+    if(count > 0){
+        alloc_size = SIZEOF_ambient_sound_image_data * count;
+        data = new Uint8[alloc_size];
+        pack_ambient_sound_image_data(data, ambient_sound_images, count);
+        append_data_to_wad(wad, AMBIENT_SOUND_TAG, data, alloc_size, offset);
+        offset += alloc_size;
+        delete data;
+    }
+
+    //random sound images
+    count = RandomSoundImageList.size();
+    if(count > 0){
+        alloc_size = SIZEOF_random_sound_image_data * count;
+        data = new Uint8[alloc_size];
+        pack_random_sound_image_data(data, random_sound_images, count);
+        append_data_to_wad(wad, RANDOM_SOUND_TAG, data, alloc_size, offset);
+        offset += alloc_size;
+        delete data;
+    }
+
+    //physics models (disable)
+
+    //platforms
+    count = PlatformList.size();
+    if(count > 0){
+        alloc_size = SIZEOF_platform_data * count;
+        data = new Uint8[alloc_size];
+        pack_platform_data(data, platforms, count);
+        append_data_to_wad(wad, PLATFORM_STRUCTURE_TAG, data, alloc_size, offset);
+        offset += alloc_size;
+        delete data;
+    }
+
+    //map_index
+    count = MapIndexList.size();
+    if(count > 0){
+        //alloc_size = count;
+        //data = new Uint8[alloc_size];
+        data = tag_to_global_array_and_size(MAP_INDEXES_TAG, &count);
+        //ListToStream<int16>(data, (int16*)map_indexes, count);
+        append_data_to_wad(wad, MAP_INDEXES_TAG, data, count, offset);
+        offset += count;
+        delete data;
+    }
+    return wad;
 }
 
 
@@ -400,10 +594,52 @@ bool save_level(const char* filename){
 	OpenedFile OFile;
 	struct wad_header header;
 	struct wad_data *wad;
-    if(open_wad_file_for_writing(mapFileSpecifier, OFile)){
-        wad = export_level_wad_data();
+
+    struct directory_entry entry = {0,0,0};
+    struct wad_header head;
+
+    //デフォルトにする
+    fill_default_wad_header(mapFileSpecifier, WADFILE_HAS_DIRECTORY_ENTRY,
+        EDITOR_MAP_VERSION,
+        1, 0, &head);
+    //WADの長さ計算
+
+    wad = export_level_wad_data();
+    if(!wad){
+        return false;
     }
-    return false;
+    long wad_length = calculate_wad_length(&head, wad);
+    long offset = SIZEOF_wad_header;
+    //エントリーデータセット
+    set_indexed_directory_offset_and_length(&head, 
+		&entry, 0, offset, wad_length, 0);
+
+    if(!open_wad_file_for_writing(mapFileSpecifier, OFile)){
+        return false;
+    }
+
+    if(!write_wad_header(OFile, &header)){
+        return false;
+    }
+    //recalculate_map_counts();
+
+	if(!write_wad(OFile, &head, wad, offset)){
+		//不成功
+        return false;
+	}
+
+    //新しいヘッダへ更新
+    offset+= wad_length;
+	head.directory_offset= offset;
+    head.parent_checksum = 0;
+	write_wad_header( OFile, &head);
+	write_directorys( OFile, &head, &entry);
+    //calculate_and_store_wadfile_checksum(OFile);
+
+	//printf("Header.checksum=%d\n",Header.checksum);
+	close_wad_file(OFile);
+    free_wad(wad);
+    return true;
 }
 
 /* Hopefully this is in the correct order of initialization... */
@@ -1528,7 +1764,7 @@ bool process_map_wad(
 		assert(is_preprocessed_map&&map_index_count || !is_preprocessed_map&&!map_index_count);
 
 		data= (uint8 *)extract_type_from_wad(wad, PLATFORM_STATIC_DATA_TAG, &data_length);
-        if(data){
+        //if(data){
 		    count= data_length/SIZEOF_static_platform_data;
 		    assert(count*SIZEOF_static_platform_data==data_length);
     		
@@ -1539,7 +1775,7 @@ bool process_map_wad(
 		    complete_loading_level((short *) map_index_data, map_index_count,
 			    data, count, platform_structures,
 			    platform_structure_count, version);
-        }
+        //}
 	}
 	
 	/* ... and bail */
