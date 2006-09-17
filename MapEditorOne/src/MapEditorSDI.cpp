@@ -88,6 +88,10 @@ CMapEditorSDIApp::CMapEditorSDIApp()
     loadInformations("data/TerminalGroupTypes.txt", NUMBER_OF_GROUP_TYPES,
         terminalGroupTypeInformations);
 
+    //polygon type
+    loadInformations("data/PolygonType.txt", NUMBER_OF_POLYGON_TYPE,
+        polygonTypeInformations);
+
     //色設定
     //ファイルから読み込み
     const int LENGTH = 1024*10;

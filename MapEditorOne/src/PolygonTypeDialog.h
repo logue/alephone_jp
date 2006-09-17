@@ -20,6 +20,7 @@ public:
     virtual void PostNcDestroy();
 public:
     afx_msg void OnClose();
+    CImageList imageList;
 
 protected:
 	virtual void DoDataExchange(CDataExchange* pDX);    // DDX/DDV サポート

@@ -177,6 +177,9 @@ public:
     //ターミナルグループ
     Information terminalGroupTypeInformations[NUMBER_OF_GROUP_TYPES];
 
+    //ポリゴンタイプ
+    Information polygonTypeInformations[NUMBER_OF_POLYGON_TYPE];
+
 // 実装
 	afx_msg void OnAppAbout();
     BOOL isObjectPropertyDialogShow;

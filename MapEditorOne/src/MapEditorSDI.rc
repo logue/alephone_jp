@@ -67,8 +67,30 @@ END
 // remains consistent on all systems.
 IDR_MAINFRAME           ICON                    "res\\MapEditorSDI.ico"
 IDR_MapEditorSDITYPE    ICON                    "res\\MapEditorSDIDoc.ico"
-IDI_ICON_POLYGON_NORMAL ICON                    "res\\icon1.ico"
-IDI_ICON_POLYGON_ITEM_IMPASSABLE ICON                    "res\\ico00001.ico"
+IDI_ICON0_POLYGON_NORMAL ICON                    "res\\icon1.ico"
+IDI_ICON1_POLYGON_ITEM_IMPASSABLE ICON                    "res\\ico00001.ico"
+IDI_ICON2_POLYGON_MONTER_IMPASSIBLE ICON                    "res\\ico00002.ico"
+IDI_ICON3_POLYGON_HILL  ICON                    "res\\ico00003.ico"
+IDI_ICON4_POLYGON_BASE  ICON                    "res\\ico00004.ico"
+IDI_ICON5_POLYGON_PLATFORM ICON                    "res\\ico00005.ico"
+IDI_ICON6_POLYGON_ENLIGHT ICON                    "res\\ico00006.ico"
+IDI_ICON7_POLYGON_ENPLATFORM ICON                    "res\\ico00007.ico"
+IDI_ICON8_POLYGON_DISLIGHT ICON                    "res\\ico00008.ico"
+IDI_ICON9_POLYGON_DISPLATFORM ICON                    "res\\ico00009.ico"
+IDI_ICON10_POLYGON_TELEPORTER ICON                    "res\\ico00010.ico"
+IDI_ICON11_POLYGON_ZONE_BORDER ICON                    "res\\ico00011.ico"
+IDI_ICON12_POLYGON_GOAL ICON                    "res\\ico00012.ico"
+IDI_ICON13_POLYGON_VISIBLE_TRIGGER ICON                    "res\\ico00013.ico"
+IDI_ICON14_POLYGON_INVISIBLE_TRIGGER ICON                    "res\\ico00014.ico"
+IDI_ICON15_POLYGON_DUAL_TRIGGER ICON                    "res\\ico00015.ico"
+IDI_ICON16_POLYGON_ITEM_TRIGGER ICON                    "res\\ico00016.ico"
+IDI_ICON17_POLYGON_EXPLORE ICON                    "res\\ico00017.ico"
+IDI_ICON18_POLYGON_EXIT ICON                    "res\\ico00018.ico"
+IDI_ICON19_POLYGON_MINOR ICON                    "res\\ico00019.ico"
+IDI_ICON20_POLYGON_MAJOR ICON                    "res\\icon2.ico"
+IDI_ICON21_POLIGON_GLUE ICON                    "res\\ico00020.ico"
+IDI_ICON22_POLYGON_GLUE_TRIGGER ICON                    "res\\ico00021.ico"
+IDI_ICON23_POLYGON_SUPER_GLUE ICON                    "res\\ico00022.ico"
 
 /////////////////////////////////////////////////////////////////////////////
 //
@@ -232,7 +254,7 @@ STYLE DS_SETFONT | DS_MODALFRAME | DS_FIXEDSYS | WS_POPUP | WS_CAPTION | WS_SYSM
 CAPTION "ポリゴンタイプ"
 FONT 8, "MS Shell Dlg", 400, 0, 0x1
 BEGIN
-    CONTROL         "",IDC_LIST2,"SysListView32",LVS_SINGLESEL | LVS_SHOWSELALWAYS | LVS_ALIGNLEFT | WS_BORDER | WS_TABSTOP,6,6,144,198
+    CONTROL         "",IDC_LIST2,"SysListView32",LVS_SMALLICON | LVS_SINGLESEL | LVS_SHOWSELALWAYS | LVS_ALIGNLEFT | WS_BORDER | WS_TABSTOP,6,6,144,198
 END
 
 IDD_DIALOG3 DIALOGEX 0, 0, 172, 242

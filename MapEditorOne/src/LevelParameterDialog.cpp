@@ -60,13 +60,19 @@ BOOL CLevelParameterDialog::OnInitDialog()
     // TODO:  ここに初期化を追加してください
 
     //コンボボックスへ流し込み
-
+    
     if(isNew){
         //新規レベル
         //標準
-
+        //レベル名
+        levelName.SetWindowText(L"new level");
+        //環境
+        environment.SetCurSel(0);
     }else{
         //レベル情報を取得
+        levelName.SetWindowText(CString(static_world->level_name));
+        //環境
+        
     }
 
     return TRUE;  // return TRUE unless you set the focus to a control
