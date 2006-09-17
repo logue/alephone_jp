@@ -119,7 +119,7 @@ void export_definition_structures(const char *filename)
 {
 	struct wad_data *wad;
     if(strcmp(filename, DEFAULT_PHYSICS_FILE_NAME) == 0){
-        MessageBox(NULL, L"そのファイルには保存できません", L"エラー", MB_OK | MB_ICONEXCLAMATION);
+        MessageBox(NULL, L"cannot save beacuse of it's filename", L"error", MB_OK | MB_ICONEXCLAMATION);
         return;
     }
 	//格納されているデータをwadデータに流し込み

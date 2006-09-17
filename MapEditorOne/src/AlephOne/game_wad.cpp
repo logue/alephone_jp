@@ -398,21 +398,21 @@ static struct wad_data* export_level_wad_data()
 
     offset = 0;
 
-    //points
-    count = EndpointList.size();
-    alloc_size = SIZEOF_endpoint_data * count;
-    data = new Uint8[alloc_size];
-	pack_endpoint_data(data, map_endpoints, count);
-	append_data_to_wad(wad, ENDPOINT_DATA_TAG, data, alloc_size, offset);
-	offset += alloc_size;
-    delete data;
-
     //lines
     count = LineList.size();
     alloc_size = SIZEOF_line_data * count;
     data = new Uint8[alloc_size];
     pack_line_data(data, map_lines, count);
 	append_data_to_wad(wad, LINE_TAG, data, alloc_size, offset);
+	offset += alloc_size;
+    delete data;
+
+    //points
+    count = EndpointList.size();
+    alloc_size = SIZEOF_endpoint_data * count;
+    data = new Uint8[alloc_size];
+	pack_endpoint_data(data, map_endpoints, count);
+	append_data_to_wad(wad, ENDPOINT_DATA_TAG, data, alloc_size, offset);
 	offset += alloc_size;
     delete data;
 
@@ -595,45 +595,49 @@ bool save_level(const char* filename){
 	struct wad_header header;
 	struct wad_data *wad;
 
-    struct directory_entry entry = {0,0,0};
-    struct wad_header head;
+    struct directory_entry entry = {0,1,0};
 
-    //デフォルトにする
-    fill_default_wad_header(mapFileSpecifier, WADFILE_HAS_DIRECTORY_ENTRY,
-        EDITOR_MAP_VERSION,
-        1, 0, &head);
-    //WADの長さ計算
 
     wad = export_level_wad_data();
     if(!wad){
         return false;
     }
-    long wad_length = calculate_wad_length(&head, wad);
+    //デフォルトにする
+    fill_default_wad_header(mapFileSpecifier, WADFILE_HAS_DIRECTORY_ENTRY,
+        EDITOR_MAP_VERSION,
+        1, 0, &header);
+    //WADの長さ計算
+    long wad_length = calculate_wad_length(&header, wad);
     long offset = SIZEOF_wad_header;
     //エントリーデータセット
-    set_indexed_directory_offset_and_length(&head, 
+    set_indexed_directory_offset_and_length(&header, 
 		&entry, 0, offset, wad_length, 0);
-
+    //entry.index = 0;
+    //entry.length = wad_length;
+    //entry.offset_to_start = offset;
+    
     if(!open_wad_file_for_writing(mapFileSpecifier, OFile)){
         return false;
     }
 
+
     if(!write_wad_header(OFile, &header)){
         return false;
     }
+    //calculate_and_store_wadfile_checksum(OFile);
     //recalculate_map_counts();
 
-	if(!write_wad(OFile, &head, wad, offset)){
+	if(!write_wad(OFile, &header, wad, offset)){
 		//不成功
         return false;
 	}
 
     //新しいヘッダへ更新
     offset+= wad_length;
-	head.directory_offset= offset;
-    head.parent_checksum = 0;
-	write_wad_header( OFile, &head);
-	write_directorys( OFile, &head, &entry);
+	header.directory_offset= offset;
+    header.parent_checksum = 0;
+	write_wad_header( OFile, &header);
+	write_directorys( OFile, &header, &entry);
     //calculate_and_store_wadfile_checksum(OFile);
 
 	//printf("Header.checksum=%d\n",Header.checksum);
