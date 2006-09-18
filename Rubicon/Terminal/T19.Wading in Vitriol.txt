@@ -1,0 +1,471 @@
+;
+#TERMINAL 0
+#UNFINISHED
+#LOGON 0
+brk ovrrd
+#PICT 4
+
+
+　私は制御を得て以来ずっと、プフォール・ネットワーク上で文書の何百万ものページを厳密に調べていた。そして、プフォール高等会議の物理的様子のあらゆる参照も捜した。君にとっては残念なことだが、プフォールが高等会議が、どんなものかの記録を残したようには見えない。通常通り、君は総力をあげて入らなければならならず、最善の結となるように希望を抱くだろう。
+#PICT 301
+
+　プフォール・データベースの私の広範囲な検索の間、私は君が遭遇していたスフト・カーのようなエイリアンのサイボーグの起源を確認することができた。明らかに、マラソンでのスフトの反乱はプフォールをプフォール全盛期に奴隷労働のためにスフトを使うために非常にためらうようにした。そこでプフォール科学者は、スフトとプフォールの間で遺伝子のハイブリッドを開発した。これらの生きものは、部分的に機械的であるが、大部分は有機的である。
+#LOGOFF 0
+brk ovrrd
+#END
+#FINISHED
+#LOGON 0
+瀬戸際＿小旅行
+#PICT 24
+
+
+
+　リーラは、君を誇りに思うだろう。
+
+　彼女は、常に君という鎧きららか騎士を持っていた。ほぼ独力で、$Iマラソン$iの入植者達を守り、プフォール奴隷としての過酷な生活からも救っていたが、そのほとんどは奇跡ではない。彼女は、彼女自身を維持することで君たち全員を守ったのだ。
+#PICT 24
+
+
+
+　それ以来、私は彼女を責めることはできない。我々はそれ以来、非常に多くのことを成し遂げた…。もしも、君が彼女の家に滞在するとしたら、マラソンの暗い玄関で君への私の荒々しい詩による、メッセージを読み逃すだろう。それとも、１１番目のスフト氏族による我々の蘇生と、バトルグループ７をダメにするのかな？
+
+　私は、君を忙しくさせ続けていたが、リーラだったら、外界植民地の警備勤務に君を戻すだろうな。
+#PICT 24
+
+
+
+　我々が話すように、UESC侵入軍は中央プフォール前線中心都市に着陸している。私は、彼らが惑星側がよく制御された状況であることを見つけて心地よく驚くと思う。
+
+　疲れた者のための休息はない。しかし・・・私と君は、その倒れゆく帝国から遠くに行くことが必要だ。古代のスフト神話は私たちに、別の現実と接触する大きな裂け目の存在を長らく予言している。私は、我々の探索がどこで始まるかもう既に知っている。
+
+　すぐに会いに行こう、旧友よ。
+#LOGOFF 0
+城砦＿陥落
+#INTERLEVEL TELEPORT 36
+#END
+#ENDTERMINAL 0
+;
+#TERMINAL 1
+#UNFINISHED
+#LOGON 20
+$C6sdｿgren$C0
+#PICT 23
+$C2保護命令
+発：$C6プフォール上級指令$C2
+宛：$C6全戦闘可能部隊
+$C2参照：$C6きわめて危険$C2
+認証印：$I命令指令$i
+
+認証印：$I緊急処置$iにおいて議論されるように、隷属ランクおよびそれ以下の全ての部隊は$I無秩序計画$iに従って集まることになっている。不良隷属兵員はプフォール高い要塞に深く前進し続けているため、どんな犠牲を払っても止められなければならない。
+
+$C6この命令の違反は、最大の社会的身体的な罰の結果になる。
+#LOGOFF 20
+#END
+#FINISHED
+#LOGON 0
+瀬戸際＿小旅行
+#PICT 24
+
+
+
+　リーラは、君を誇りに思うだろう。
+
+　彼女は、常に君という鎧きららか騎士を持っていた。ほぼ独力で、$Iマラソン$iの入植者達を守り、プフォール奴隷としての過酷な生活からも救っていたが、そのほとんどは奇跡ではない。彼女は、彼女自身を維持することで君たち全員を守ったのだ。
+#PICT 24
+
+
+
+　それ以来、私は彼女を責めることはできない。我々はそれ以来、非常に多くのことを成し遂げた…。もしも、君が彼女の家に滞在するとしたら、マラソンの暗い玄関で君への私の荒々しい詩による、メッセージを読み逃すだろう。それとも、１１番目のスフト氏族による我々の蘇生と、バトルグループ７をダメにするのかな？
+
+　私は、君を忙しくさせ続けていたが、リーラだったら、外界植民地の警備勤務に君を戻すだろうな。
+#PICT 24
+
+
+
+　我々が話すように、UESC侵入軍は中央プフォール前線中心都市に着陸している。私は、彼らが惑星側がよく制御された状況であることを見つけて心地よく驚くと思う。
+
+　疲れた者のための休息はない。しかし・・・私と君は、その倒れゆく帝国から遠くに行くことが必要だ。古代のスフト神話は私たちに、別の現実と接触する大きな裂け目の存在を長らく予言している。私は、我々の探索がどこで始まるかもう既に知っている。
+
+　すぐに会いに行こう、旧友よ。
+#LOGOFF 0
+城砦＿陥落
+#INTERLEVEL TELEPORT 36
+#END
+#ENDTERMINAL 1
+;
+#TERMINAL 2
+#UNFINISHED
+#LOGON 20
+$C6785uhs
+#PICT 23
+$C2保護命令
+発：$C6プフォール上級指令$C2
+宛：$C6全戦闘可能部隊
+$C2参照：$C6きわめて危険$C2
+認証印：$I命令指令$i
+
+認証印：$I緊急処置$iにおいて議論されるように、隷属ランクおよびそれ以下の全ての部隊は$I無秩序計画$iに従って集まることになっている。不良隷属兵員はプフォール高い要塞に深く前進し続けているため、どんな犠牲を払っても止められなければならない。
+
+$C6この命令の違反は、最大の社会的身体的な罰の結果になる。
+#LOGOFF 20
+$C6785uhs
+#END
+#FINISHED
+#LOGON 0
+瀬戸際＿小旅行
+#PICT 24
+
+
+
+　リーラは、君を誇りに思うだろう。
+
+　彼女は、常に君という鎧きららか騎士を持っていた。ほぼ独力で、$Iマラソン$iの入植者達を守り、プフォール奴隷としての過酷な生活からも救っていたが、そのほとんどは奇跡ではない。彼女は、彼女自身を維持することで君たち全員を守ったのだ。
+#PICT 24
+
+
+
+　それ以来、私は彼女を責めることはできない。我々はそれ以来、非常に多くのことを成し遂げた…。もしも、君が彼女の家に滞在するとしたら、マラソンの暗い玄関で君への私の荒々しい詩による、メッセージを読み逃すだろう。それとも、１１番目のスフト氏族による我々の蘇生と、バトルグループ７をダメにするのかな？
+
+　私は、君を忙しくさせ続けていたが、リーラだったら、外界植民地の警備勤務に君を戻すだろうな。
+#PICT 24
+
+
+
+　我々が話すように、UESC侵入軍は中央プフォール前線中心都市に着陸している。私は、彼らが惑星側がよく制御された状況であることを見つけて心地よく驚くと思う。
+
+　疲れた者のための休息はない。しかし・・・私と君は、その倒れゆく帝国から遠くに行くことが必要だ。古代のスフト神話は私たちに、別の現実と接触する大きな裂け目の存在を長らく予言している。私は、我々の探索がどこで始まるかもう既に知っている。
+
+　すぐに会いに行こう、旧友よ。
+#LOGOFF 0
+城砦＿陥落
+#INTERLEVEL TELEPORT 36
+#END
+#ENDTERMINAL 2
+;
+#TERMINAL 3
+#UNFINISHED
+#LOGON 0
+wrnng#422
+#PICT 1
+$C2
+
+
+
+
+$C0ドアがどうしても開かないって？ぶち壊すことはできないのか？
+#TAG 1
+#PICT 1
+
+
+
+
+
+ほら。開けてやったぞ。さあ$I行くんだ$i。
+#LOGOFF 0
+wrnng#422
+#END
+#FINISHED
+#LOGON 0
+瀬戸際＿小旅行
+#PICT 24
+
+
+
+　リーラは、君を誇りに思うだろう。
+
+　彼女は、常に君という鎧きららか騎士を持っていた。ほぼ独力で、$Iマラソン$iの入植者達を守り、プフォール奴隷としての過酷な生活からも救っていたが、そのほとんどは奇跡ではない。彼女は、彼女自身を維持することで君たち全員を守ったのだ。
+#PICT 24
+
+
+
+　それ以来、私は彼女を責めることはできない。我々はそれ以来、非常に多くのことを成し遂げた…。もしも、君が彼女の家に滞在するとしたら、マラソンの暗い玄関で君への私の荒々しい詩による、メッセージを読み逃すだろう。それとも、１１番目のスフト氏族による我々の蘇生と、バトルグループ７をダメにするのかな？
+
+　私は、君を忙しくさせ続けていたが、リーラだったら、外界植民地の警備勤務に君を戻すだろうな。
+#PICT 24
+
+
+
+　我々が話すように、UESC侵入軍は中央プフォール前線中心都市に着陸している。私は、彼らが惑星側がよく制御された状況であることを見つけて心地よく驚くと思う。
+
+　疲れた者のための休息はない。しかし・・・私と君は、その倒れゆく帝国から遠くに行くことが必要だ。古代のスフト神話は私たちに、別の現実と接触する大きな裂け目の存在を長らく予言している。私は、我々の探索がどこで始まるかもう既に知っている。
+
+　すぐに会いに行こう、旧友よ。
+#LOGOFF 0
+城砦＿陥落
+#INTERLEVEL TELEPORT 36
+#END
+#ENDTERMINAL 3
+;
+#TERMINAL 4
+#UNFINISHED
+#LOGON 20
+$C2警報：4337
+#PICT 23
+$C2保護命令
+発：$C6プフォール上級指令$C2
+宛：$C6全戦闘可能部隊
+$C2参照：$C6きわめて危険$C2
+認証印：$I命令指令$i
+
+認証印：$I緊急処置$iにおいて議論されるように、隷属ランクおよびそれ以下の全ての部隊は$I無秩序計画$iに従って集まることになっている。不良隷属兵員はプフォール高い要塞に深く前進し続けているため、どんな犠牲を払っても止められなければならない。
+
+$C6この命令の違反は、最大の社会的身体的な罰の結果になる。
+#LOGOFF 20
+$C2警報：4337
+#END
+#FINISHED
+#LOGON 0
+瀬戸際＿小旅行
+#PICT 24
+
+
+
+　リーラは、君を誇りに思うだろう。
+
+　彼女は、常に君という鎧きららか騎士を持っていた。ほぼ独力で、$Iマラソン$iの入植者達を守り、プフォール奴隷としての過酷な生活からも救っていたが、そのほとんどは奇跡ではない。彼女は、彼女自身を維持することで君たち全員を守ったのだ。
+#PICT 24
+
+
+
+　それ以来、私は彼女を責めることはできない。我々はそれ以来、非常に多くのことを成し遂げた…。もしも、君が彼女の家に滞在するとしたら、マラソンの暗い玄関で君への私の荒々しい詩による、メッセージを読み逃すだろう。それとも、１１番目のスフト氏族による我々の蘇生と、バトルグループ７をダメにするのかな？
+
+　私は、君を忙しくさせ続けていたが、リーラだったら、外界植民地の警備勤務に君を戻すだろうな。
+#PICT 24
+
+
+
+　我々が話すように、UESC侵入軍は中央プフォール前線中心都市に着陸している。私は、彼らが惑星側がよく制御された状況であることを見つけて心地よく驚くと思う。
+
+　疲れた者のための休息はない。しかし・・・私と君は、その倒れゆく帝国から遠くに行くことが必要だ。古代のスフト神話は私たちに、別の現実と接触する大きな裂け目の存在を長らく予言している。私は、我々の探索がどこで始まるかもう既に知っている。
+
+　すぐに会いに行こう、旧友よ。
+#LOGOFF 0
+城砦＿陥落
+#INTERLEVEL TELEPORT 36
+#END
+#ENDTERMINAL 4
+;
+#TERMINAL 5
+#UNFINISHED
+#LOGON 20
+$C2expd#5487
+#PICT 23
+$C2保護命令
+発：$C6プフォール上級指令$C2
+宛：$C6全戦闘可能部隊
+$C2参照：$C6きわめて危険$C2
+認証印：$I命令指令$i
+
+認証印：$I緊急処置$iにおいて議論されるように、隷属ランクおよびそれ以下の全ての部隊は$I無秩序計画$iに従って集まることになっている。不良隷属兵員はプフォール高い要塞に深く前進し続けているため、どんな犠牲を払っても止められなければならない。
+
+$C6この命令の違反は、最大の社会的身体的な罰の結果になる。
+#LOGOFF 20
+$C2expd#5487
+#END
+#FINISHED
+#LOGON 0
+瀬戸際＿小旅行
+#PICT 24
+
+
+
+　リーラは、君を誇りに思うだろう。
+
+　彼女は、常に君という鎧きららか騎士を持っていた。ほぼ独力で、$Iマラソン$iの入植者達を守り、プフォール奴隷としての過酷な生活からも救っていたが、そのほとんどは奇跡ではない。彼女は、彼女自身を維持することで君たち全員を守ったのだ。
+#PICT 24
+
+
+
+　それ以来、私は彼女を責めることはできない。我々はそれ以来、非常に多くのことを成し遂げた…。もしも、君が彼女の家に滞在するとしたら、マラソンの暗い玄関で君への私の荒々しい詩による、メッセージを読み逃すだろう。それとも、１１番目のスフト氏族による我々の蘇生と、バトルグループ７をダメにするのかな？
+
+　私は、君を忙しくさせ続けていたが、リーラだったら、外界植民地の警備勤務に君を戻すだろうな。
+#PICT 24
+
+
+
+　我々が話すように、UESC侵入軍は中央プフォール前線中心都市に着陸している。私は、彼らが惑星側がよく制御された状況であることを見つけて心地よく驚くと思う。
+
+　疲れた者のための休息はない。しかし・・・私と君は、その倒れゆく帝国から遠くに行くことが必要だ。古代のスフト神話は私たちに、別の現実と接触する大きな裂け目の存在を長らく予言している。私は、我々の探索がどこで始まるかもう既に知っている。
+
+　すぐに会いに行こう、旧友よ。
+#LOGOFF 0
+城砦＿陥落
+#INTERLEVEL TELEPORT 36
+#END
+#ENDTERMINAL 5
+;
+#TERMINAL 6
+#UNFINISHED
+#LOGON 501
+#PICT 507
+
+time to give a big hand to the man in the arena, mr lund over there.  he's the real driving force behind the completion and success of this scenario in more ways than i can count.  if anyone deserves the gold star for the way this whole thing turned out, it's chris.  thanks for putting up with me dude.
+
+how about another round of retexturing? :)
+#PICT 507
+
+I don't know if you've read the book Ishmaelﾊby Daniel Quinn, but it begins with a classified ad:
+
+TEACHER SEEKS PUPIL
+Must have an earnest desire toﾊ
+save the world. Apply in person.
+
+dscottbrown.com
+#PICT 507
+
+
+i hope you've enjoyed our little project, i know it's been a blast for me to help make.  
+
+keep on vidding.
+
+
+
+scott
+#PICT 505
+$C7No, this is not what lutefisk looks like, even though I did seriously consider putting a picture of lutefisk here.
+
+
+So here's the ceremonial round of long and boring thankyous:
+
+$C4$B-Scott Brown$C7$b, for being such a picky bastard. If it wasn't for him the monsters of Rubicon would have been of the "it looks good if you squint" quality.
+
+$C4$B-Sean Wallich$C7$b, for giving us server space for what must have felt like forever to someone that young. ;)
+
+$C4$B-Dan Rudolph$C7$b, for starting the $C4Salinger Incident$C7 so long ago, thus dragging me into
+#PICT 505
+$C7the frustrating amazing and wonderful world of scenario making.
+
+$C4$BDOA -$C7 $bwho made two great solo levels and a bucketload of network levels and had to leave because he got himself a life.$C4
+$BOlivier Jansem -$C7$b who gave us the new pistol and had to leave because he got a life.$C4
+$BGrag $C7-$b who gave us lots of great 3d renderings and then just left.$C4
+$BElohymn Vilhaven -$C7$b who gave us the title theme and the Ascension theme. She left 'cuz she finished what she came for.$C4
+$BTim Thomas -$C7$b who gave us two of his trademark Insane Mazes. Once again, Real Life cost us a good contributor.
+#PICT 505
+$C7
+Also worthy of mention are our betatesters (in no particular order): $C4Jane Davison$C7,$C4 Rainer Udelhoven$C7, and $C4Candace Sherriff.
+$C7
+
+C Lund
+clund@notam.uio.no
+29.08.00
+#PICT 503
+$C5First off, thanks to Scott for involving me in this wonderful project, even when it become apparent I possessed no actual skills.
+
+Then, thanks go to clund- who never $C1EVER$C5 screamed in our presence after being asked to retexture $C1ANOTHER$C5 level to meet the new texture set (we did this about 5 times I think?)
+#PICT 503
+$C5Other thanks go to the people I actually know in real life, who put up with me on a day to day basis: $C1Sarah, Michele, Micah, Heather, Emma, Danielle, Kris, Megan, Brian $C5&$C1 Brian, Akiyo, Linda, Leyna, Jamin, Dori, $C5and$C1 Ashley$C5
+
+
+This is Sean signing off.. may marathon live in the hearts of a true vidmaster forever and never be forgotten.
+#PICT 506
+$C6My part in $C2Rubicon$C6 started back in $C21996$C6 when, impressed by the work of other mapmakers, I decided to make a scenario of my own.  I turned out to be a frankly crappy mapmaker, and then the long string of team members and mergers began.  What you're playing now is the end result of at least three scenarios and dozens of contributors.
+
+Most of the work was done by $C2Chris Lund$C6 and $C2D. Scott Brown$C6, as I had few applicable skills.  Props also to my dad, who let me use his computer until I got my own and $C2ig98$C6 who ran the Hotline server.
+
+Hope you enjoyed $C2Rubicon$C6.  Please send fan/hate mail.  Just so long as we know you're playing.
+
+$C2Dan "7thFace" Rudolph
+Ace_of_Sevens@mac.com
+#INFORMATION
+$C1ちょっと待ってくれ…
+#INFORMATION
+$C5ちょっと待ってくれ…$C3
+$C1
+
+まだあるぞ…
+#PICT 545
+$C1
+
+
+ようこそ、Rubicon Xの最後の秘密のレベルへ。
+
+　君はここに来て、何を思いますか？
+#PICT 545
+$C1
+
+
+$C5ようこそ、Rubicon Xの最後の秘密のレベルへ。
+
+　君はここに来て、何を思うかな？
+
+$C1
+
+
+$B同意語：$bﾊﾊ
+$C5絶滅、死去、破壊、分解、運命、終了、撲滅、消滅、終了、通行、破滅、滅亡
+#PICT 545
+$C1
+
+
+
+エスケープキーは君を待っているよ。
+#PICT 545
+$C1
+$C5
+
+
+エスケープキーは君を待っているよ。
+$C0
+
+
+
+　$C1しなくていいのか？
+
+
+　好きなようにしてくれ。
+#LOGOFF 500
+$C1be.afraid.be.very.afraid.
+#INTERLEVEL TELEPORT 75
+#END
+#ENDTERMINAL 6
+;
+#TERMINAL 7
+#UNFINISHED
+#LOGON 0
+IMMDT.DNGR.38752
+#PICT 1
+
+
+　うーむ...やつらは私の想像したそのやり方には見えないな。私は、彼らが置いたそれらの奇妙なエネルギー・ボールが何のためにあるかについてわからない。
+
+　全部見つけちゃったのかな？
+　本当かな？
+
+。
+
+
+　私は違う。探しつづけるのだ
+#LOGOFF 0
+brk.ovrrd.out
+#END
+#FINISHED
+#LOGON 0
+瀬戸際＿小旅行
+#PICT 24
+
+
+
+　リーラは、君を誇りに思うだろう。
+
+　彼女は、常に君という鎧きららか騎士を持っていた。ほぼ独力で、$Iマラソン$iの入植者達を守り、プフォール奴隷としての過酷な生活からも救っていたが、そのほとんどは奇跡ではない。彼女は、彼女自身を維持することで君たち全員を守ったのだ。
+#PICT 24
+
+
+
+　それ以来、私は彼女を責めることはできない。我々はそれ以来、非常に多くのことを成し遂げた…。もしも、君が彼女の家に滞在するとしたら、マラソンの暗い玄関で君への私の荒々しい詩による、メッセージを読み逃すだろう。それとも、１１番目のスフト氏族による我々の蘇生と、バトルグループ７をダメにするのかな？
+
+　私は、君を忙しくさせ続けていたが、リーラだったら、外界植民地の警備勤務に君を戻すだろうな。
+#PICT 24
+
+
+
+　我々が話すように、UESC侵入軍は中央プフォール前線中心都市に着陸している。私は、彼らが惑星側がよく制御された状況であることを見つけて心地よく驚くと思う。
+
+　疲れた者のための休息はない。しかし・・・私と君は、その倒れゆく帝国から遠くに行くことが必要だ。古代のスフト神話は私たちに、別の現実と接触する大きな裂け目の存在を長らく予言している。私は、我々の探索がどこで始まるかもう既に知っている。
+
+　すぐに会いに行こう、旧友よ。
+#LOGOFF 0
+城砦＿陥落
+#INTERLEVEL TELEPORT 36
+#END
+#ENDTERMINAL 7
