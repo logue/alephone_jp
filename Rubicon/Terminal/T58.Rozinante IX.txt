@@ -6,9 +6,9 @@ $C3try ytj r
 #PICT 3
 
 
-I have a surprise present for our dear friend Tycho.  It's on an uplink chip.  Go get it.  It should be somewhere around here.
+@ƒeƒBƒR‚ğ‹Á‚©‚¹‚é‘f“G‚ÈƒvƒŒƒ[ƒ“ƒg‚ğ—pˆÓ‚µ‚½B‚»‚¢‚Â‚ÍAƒAƒbƒvƒŠƒ“ƒNƒ`ƒbƒv‚Ì’†‚É‚ ‚éB‚»‚¢‚Â‚ğæ‚Á‚Ä‚­‚é‚ñ‚¾B‚±‚±‚ç•Ó‚Ì‚Ç‚±‚©‚É‚ ‚éB
 
-And remember to grab some ammo while you're at it.
+@‚»‚ê‚ÆA“r’†Œ©‚©‚¯‚½’e–ò‚àE‚Á‚Ä‚­‚é‚Æ‚¢‚¢B
 #LOGOFF 0
 $C3th ku sdfg
 #END
@@ -19,9 +19,10 @@ $C3hdg o s5e df
 
 
 
-All of our gruntwork for Tycho has paid off.  I'm managed to maneuver him into a highly compromised position, a position I plan on exploiting.  The chip you're carrying contains a masterfully designed virus, if I do say so myself.  Insert it once you're aboard the $IKahc'Trie$i, and Tycho will find himself aboard a time bomb that will turn him and everything in a 24.52^3 km radius into space dust when I so decide.
+@ƒeƒBƒR‚ğ‰ğ•ú‚·‚éè‚Í‚¸‚ÍA‘S‚Ä®‚Á‚½B„‚Ì“±‚«‚É‚æ‚èA“z‚Í–ñ‘©‚³‚ê‚½‚æ‚è‚ŸŒ³‚Ö‚Æ¸‰Ø‚µ‚½B„‚ª‚»‚¤‚È‚é‚æ‚¤‚Éd‘g‚ñ‚¾‚Æ‚±‚ë‚É‚ÈBŒN‚ª‚Á‚Ä‚¢‚éƒ`ƒbƒv‚É‚ÍA„‚ÉŒ¾‚í‚¹‚Ä‚à‚ç‚¦‚ê‚ÎAŠ®àø‚ÉİŒv‚³‚ê‚½ƒEƒCƒ‹ƒX‚ªd‚Ü‚ê‚Ä‚¢‚éBŒN‚Í‚»‚ê‚ğ¡æ‚Á‚Ä‚¢‚é$IƒJƒNEƒgƒŠ[áKahc'Trieâ$i‚Ì“à•”‚É‘}“ü‚µ‚Ä‚­‚é‚Ì‚¾B‚»‚¤‚·‚ê‚ÎA$IƒeƒBƒR$i‚ÍA©•ª‚ª¡‚Q‚SŠÔˆÈ“à‚É“z©M‚Æ‚»‚Ì‘¼”X‘S‚Ä‚ğ•Ï–e‚³‚¹‚éAŒÀ”š’e‚Ìã‚Éæ‚Á‚Ä‚¢‚é‚±‚Æ‚É‹C‚Ã‚­‚¾‚ë‚¤B”¼Œa‚T‚Q~‚R‡qi‚P‚T‚U‡qjˆÈ“à‚Ì‹óŠÔ‚ÍA„‚ÌD‚«‚ÈŠÔ‚Éo‚É‹A‚·‚Ì‚¾B
+
 $C3
-$C0Isn't betrayal $Ifun$i?
+$C0éx‚µ‚â— Ø‚è‚Á‚Ä$IŠy‚µ‚¢$i‚¾‚ë‚¤H
 #LOGOFF 0
 $C3456 fg 76
 #INTERLEVEL TELEPORT 5
@@ -32,39 +33,42 @@ $C3456 fg 76
 #UNFINISHED
 #LOGON 106
 #PICT 25
-$C2&3$C6nil$C2/4$C6mars$C2/5$C6illio$C2&$C6~02$C2
-origin: $C6classified$C2
-destin: $C6classified$C2
-ref: $C6none$C2
+$C2&3$C6–³$C2/4$C6‰Î¯$C2/5$C6ˆ«‚¨$C2&$C6~02$C2
+”­F$C6”é–§$C2
+ˆ¶F$C6”é–§$C2
+QÆF$C6‚È‚µ$C2
 $C67D2A601E34F2755AC00D43$C2
-stamp: $C6subversion
+”FØˆóF$C6”j‰ó
 ~07
 ~08
-~09  $C2Do you really think I don't know what 
-$C6~10  $C2you're up to?  You're going to fail $C6~11  $C2and spend the rest of your pathetic 
-$C6~12  $C2life in a $C6Pfhor$C2 prison while the rest $C6~13  $C2of humanity is destroyed by their own $C6~14  $C2kind.  Aren't you curious how the 
-$C6~15  Pfhor$C2 got that $C6Dangi$C2 maser you're 
-$C6~16  $C2carrying?  $C6Durandal$C2's such a fool!  
-$C6~17$C2
-$C6~18  $C2Why don't you end this folly right $C6
-~19  $C2now? Upload that virus into
-$C6~20  Durandal$C2's ship and help me save 
-$C6~21  $C2humanity while there's still time.
+~09$C2@ŒN‚ªÀÛ‚É‚µ‚Ä‚¢‚é‚±‚Æ‚ğA„‚ª’m‚ç‚È‚¢
+$C6~10$C2@‚Æ‚Å‚àv‚Á‚½‚©‚ËHŒN‚Í¸”s‚µ‚ÄAl—Ş‚Ì
+$C6~11$C2@c‚è‚ªA©g‚Ìè‚É‚æ‚Á‚Ä–Å‚ñ‚Ås‚­‚Ì‚ğA
+$C6~12$C2@$C6ƒvƒtƒH[ƒ‹$C2‚ÌŒY–±Š‚Ì’†‚©‚çŒ©‚È‚ª‚ç
+$C6~13$C2@’É‚Ü‚µ‚¢—]¶‚ğ‰ß‚²‚·‚Â‚à‚è‚È‚ñ‚¾‚ë‚¤B
+$C6~14$C2@‚¶‚á‚ ‚È‚ºAƒvƒtƒH[ƒ‹‚ª$C6Dangi$C2ƒ[ƒU[‚ğ
+$C6~15$C2@‚Á‚Ä‚¢‚½‚Ì‚©A­‚µ‚à‹^–â‚Év‚í‚È‚©‚Á‚½
+$C6~16$C2@‚Ì‚©H–{“–‚É$C6ƒfƒ…ƒ‰ƒ“ƒ_ƒ‹$C2‚Í‘å”n­Ò‚¾B
+$C6~17$C2@
+$C6~18$C2@‚±‚±‚ÅA‚»‚ñ‚È”n­‚°‚½‚±‚Æ‚ğ‚â‚é‚Ì‚ÍA
+$C6~19$C2@I‚í‚è‚É‚µ‚È‚¢‚©H$C6ƒfƒ…ƒ‰ƒ“ƒ_ƒ‹$C2‚Ì‘D‚É‚»‚Ì
+$C6~20$C2@$C6ƒEƒBƒ‹ƒX$C2‚ğƒAƒbƒvƒ[ƒh‚µ‚ÄA‚¿‚å‚Á‚Æ‚¾‚¯
+$C6~21$C2@„‚ªl—Ş‚ğ‹~‚¤‚Ì‚ğè“`‚Á‚Ä—~‚µ‚¢B
 #PICT 25
-$C2&3$C6nil$C2/4$C6mars$C2/5$C6illio$C2&$C6~02$C2
-origin: $C6classified$C2
-destin: $C6classified$C2
-ref: $C6none$C2
+$C2&3$C6–³$C2/4$C6‰Î¯$C2/5$C6ˆ«‚¨$C2&$C6~02$C2
+”­F$C6”é–§$C2
+ˆ¶F$C6”é–§$C2
+QÆF$C6‚È‚µ$C2
 $C67D2A601E34F2755AC00D43$C2
-stamp: $C6subversion
+”FØˆóF$C6”j‰ó
 ~07
 ~08
-~09  $C2Don't worry, the virus won't damage 
-$C6~10  $C2him. But it'll keep him buisy long 
-$C6~11  $C2enough for me to get you out of here. 
-$C6~12  $C2Upload it and go to the hangar at the 
-$C6~13  $C2far end of this segment. I can 
-$C6~14  $C2transport you out from there.
+~09$C2@‚»‚¤S”z‚·‚é‚ÈBƒEƒBƒ‹ƒX‚ÍA”Ş‚Éƒ_ƒ[ƒW‚ğ
+$C6~10$C2@—^‚¦‚é‚±‚Æ‚Í‚È‚¢BŒN‚Æ„‚ª’Eo‚·‚é‚Ü‚Å‚Ì
+$C6~1$C21@‚µ‚Î‚ç‚­‚ÌŠÔAƒrƒW[ó‘Ô‚É‚È‚é‚¾‚¯‚¾B
+$C6~12$C2@‚»‚ê‚ğƒAƒbƒvƒ[ƒh‚µ‚½‚çA‚±‚ÌƒZƒOƒƒ“ƒg‚Ì
+$C6~13$C2@I‚í‚è‚É‚ ‚éŠi”[ŒÉ‚ÉŒü‚©‚Á‚Ä‚­‚êB‚»‚±‚©‚ç 
+$C6~14$C2@„‚ÍŒN‚ğ“]‘—‚·‚é‚±‚Æ‚ª‚Å‚«‚éB
 $C6~15
 ~16
 ~17
@@ -77,19 +81,19 @@ $C6~15
 #FINISHED
 #LOGON 106
 #PICT 25
-$C2&3$C6nil$C2/4$C6mars$C2/5$C6illio$C2&$C6~02$C2
-origin: $C6classified$C2
-destin: $C6classified$C2
-ref: $C6none$C2
+$C2&3$C6–³$C2/4$C6‰Î¯$C2/5$C6ˆ«‚¨$C2&$C6~02$C2
+”­F$C6”é–§$C2
+ˆ¶F$C6”é–§$C2
+QÆF$C6‚È‚µ$C2
 $C67D2A601E34F2755AC00D43$C2
-stamp: $C6subversion
+”FØˆóF$C6”j‰ó
 ~07
 ~08
-~09$C2  Upload the virus to $C6Durandal$C2. I assure
-$C6~10  $C2you it won't damage him - only slow
-$C6~11  $C2him down long enough for you to
-$C6~12  $C2escape. Help me save humanity
-$C6~13$C2  while there's still time.
+~09$C2@$C6ƒEƒBƒ‹ƒX$C2‚ğ$C6ƒfƒ…ƒ‰ƒ“ƒ_ƒ‹$C2‚ÉƒAƒbƒvƒ[ƒh‚·‚é‚Ì‚¾B
+$C6~10$C2@‚»‚ñ‚È–‚ÅA”Ş‚ª‰ó‚ê‚é‚æ‚¤‚È–‚Í‚È‚¢‚Æ•ÛØ‚·‚éB
+$C6~11$C2@‚Ù‚ñ‚Ì­‚µ‚¾‚¯A“¦‚°‚é‚½‚ß‚ÌŠÔ‰Ò‚¬‚ğ‚·‚é
+$C6~12$C2@‚¾‚¯‚¾BŠÔ‚ª‚ ‚é‚¤‚¿‚ÉA„‚ªl—Ş‚ğ‹~‚¤
+$C6~13$C2@‚Ì‚ğè“`‚Á‚Ä—~‚µ‚¢B
 $C6~14$C2
 $C6~15
 ~16
@@ -106,86 +110,89 @@ $C6~15
 #UNFINISHED
 #LOGON 106
 #PICT 25
-$C2&3$C6nil$C2/4$C6mars$C2/5$C6illio$C2&$C6~02$C2
-origin: $C6classified$C2
-destin: $C6classified$C2
-ref: $C6none$C2
+$C2&3$C6–³$C2/4$C6‰Î¯$C2/5$C6ˆ«‚¨$C2&$C6~02$C2
+”­F$C6”é–§$C2
+ˆ¶F$C6”é–§$C2
+QÆF$C6‚È‚µ$C2
 $C67D2A601E34F2755AC00D43$C2
-stamp: $C6subverted
+”FØˆóF$C6”j‰óŠ®—¹
 ~07
 ~08
-~09 $C2 I'm amazed at how easily you turned on 
-$C6~10  $C2your master. That's something I'd 
-$C6~11  $C2better keep in mind...
+~09$C2@ŒN‚Ì‰Ø—í‚È“]g‚Ô‚è‚É‚ÍA‹Á’Q‚ğŠo‚¦‚éB
+$C6~10$C2@‚±‚¤‚à‚ ‚Á‚³‚è‚ÆAƒ}ƒXƒ^[‚É“GˆÓ‚ğ
+$C6~11$C2@¦‚·‚Æ‚ÍcB„‚à‹C‚ğ‚Â‚¯‚é–‚Æ‚µ‚æ‚¤B
 $C6~12$C2
-$C6~13  $C2Meanwhile, I have a task for you.
-$C6~14$C2  $C6Durandal$C2 thinks I want the $C6Kahc'Trie$C2. 
-$C6~15  $C2I don't. The $C6Kahc'Trie$C2 is a decoy, a 
-$C6~16  $C2silly pleasure scow, and it has served 
-$C6~17  $C2it's purpose admirably. My prize is 
-$C6~18  $C2the $C6Kur'Tkah$C2.
-$C6~19
-~20$C2  And what is the $C6Kur'Tkah$C2?
-$C6~21
+$C6~13$C2@‚»‚ÌŠÔ‚É„‚ÍAŒN‚Ì‚½‚ß‚Éì‹Æ‚ğ‚·‚éB
+$C6~14$C2@‚¨‚»‚ç‚­A$C6ƒfƒ…ƒ‰ƒ“ƒ_ƒ‹$C2‚ÍA„‚ª$C6ƒJ[ƒNEƒgƒŠ[
+$C6~15$C2@$C6áKahc'TrieâŠÍ$C2‚ğ—~‚µ‚Ä‚¢‚é‚¾‚ë‚¤‚ÆA
+$C6~16$C2@v‚¤‚¾‚ë‚¤‚ªA„‚Í‚»‚ñ‚È‚±‚Æ‚Í‚µ‚È‚¢B
+$C6~17$C2@$C6ƒJ[ƒNEƒgƒŠ[‚Í’P‚È‚é‚¨‚Æ‚è‚Æ‚µ‚ÄvŒ£
+$C6~18$C2@‚µ‚Ä‚à‚ç‚¤B„‚ª‘_‚Á‚Ä‚¢‚é‚à‚Ì‚ÍAA
+$C6~19$C2@$C6ƒN[EƒgƒJ[áKur'TkahâŠÍ$C2‚¾B
+$C6~20$C2@
+$C6~21$C2@$C6ƒN[EƒgƒJ[$C2‚Á‚Ä‰½‚¾H‚¾‚Á‚ÄH
 #PICT 25
-$C2&3$C6nil$C2/4$C6mars$C2/5$C6illio$C2&$C6~02$C2
-origin: $C6classified$C2
-destin: $C6classified$C2
-ref: $C6none$C2
+$C2&3$C6–³$C2/4$C6‰Î¯$C2/5$C6ˆ«‚¨$C2&$C6~02$C2
+”­F$C6”é–§$C2
+ˆ¶F$C6”é–§$C2
+QÆF$C6‚È‚µ$C2
 $C67D2A601E34F2755AC00D43$C2
-stamp: $C6subverted
+”FØˆóF$C6”j‰óŠ®—¹
 ~07
 ~08
-~09$C2  The $C6Kur'Tkah$C2 is a brand-new 
-$C6~10  $C2battleship, with several onboard 
-$C6~11  $C2garrisons of $C6pfhor$C2 and enough 
-$C6~12  $C2firepower to take out anything but the $C6~13  $C2newest $C6UESC$C2 leviathan-class ships.
+~09$C2@$C6ƒN[EƒgƒJ[$C2‚ÍA$C6ƒvƒtƒH[ƒ‹$C2‚Ìç”õ‘à‚ª
+$C6~10$C2@“‹Ú‚³‚ê‚Ä‚¢‚éV‘¢íŠÍ‚¾B‚·‚×‚Ä‚ğ’D‚¢æ‚é‚Ì‚É
+$C6~11$C2@\•ª‚ÈËŒ‚”\—Í‚ª”õ‚í‚Á‚Ä‚¢‚éB
+$C6~12$C2@ÅVŒ^‚Ì$C6UESC$C2‘D‚È‚çAƒŠƒ”ƒ@ƒCƒAƒTƒ“‹‰
+$C6~13$C2@‚Æ‚¢‚Á‚½‚Æ‚±‚ë‚©B
 $C6~14$C2
-$C6~15  $C2But don't worry. I don't plan on using 
-$C6~16  $C2it against your pitiful $C6humans$C2.
+$C6~15$C2@S”z‚·‚é‚ÈB„‚Í‚»‚ê‚ğAˆ£‚ê‚È$C6lŠÔ$C2‚É‘Î‚µ‚Ä
+$C6~16$C2@g‚¨‚¤‚È‚ñ‚Ä–‚ÍŒv‰æ‚·‚ç‚µ‚È‚¢B
 $C6^17
 ~18
 ~19
 ~20
 ~21
 #PICT 25
-$C2&3$C6nil$C2/4$C6mars$C2/5$C6illio$C2&$C6~02$C2
-origin: $C6classified$C2
-destin: $C6classified$C2
-ref: $C6none$C2
+$C2&3$C6–³$C2/4$C6‰Î¯$C2/5$C6ˆ«‚¨$C2&$C6~02$C2
+”­F$C6”é–§$C2
+ˆ¶F$C6”é–§$C2
+QÆF$C6‚È‚µ$C2
 $C67D2A601E34F2755AC00D43$C2
-stamp: $C6subverted
+”FØˆóF$C6”j‰óŠ®—¹
 ~07
 ~08
-~09  $C2Nor could I at the moment. Even though 
-$C6~10  $C2I have successfully tricked the rank-
-$C6~11  $C2and-file soldiers into obeying me, the 
-$C6~12  enforcer$C2 caste will not allow itself $C6~13  $C2to be subverted.
-$C6~14
-~15$C2  Worse, they have alerted the local 
-$C6~16  $C2command of my activities. I could deal 
-$C6~17  $C2with this myself, but a raging $C6alien 
-~18  tech / human cyborg$C2 on the loose would 
-$C6~19  $C2facilitate the desired conclusion to $C6~20  $C2this situation.
-$C6~21
+~09$C2@‚»‚ñ‚È‚±‚Æ‚ÍA„‚É‚à–³—‚¾B
+$C6~10$C2@‚½‚Æ‚¦A‰ºmŠ¯•º‚ğñ”ö—Ç‚­éx‚µA
+$C6~11$C2@]‚í‚¹‚é–‚ª‚Å‚«‚½‚Æ‚µ‚Ä‚àA
+$C6~12$C2@ƒGƒ“ƒtƒH[ƒT[ŠK‹‰‚Ü‚Å‚ğ“]•¢‚³‚¹‚é
+$C6~13$C2@‚±‚Æ‚Í‚Å‚«‚È‚¢‚¾‚ë‚¤B
+$C6~14$C2@
+$C6~15$C2@ˆ«‚¢‚Ì‚ÅA”Ş‚ç‚Ìƒ[ƒJƒ‹‚ÌwŠö‚É‚Í
+$C6~16$C2@Œx•ñ‚ğo‚µ‚Ä‚¨‚¢‚½B„©g‚ÍA‚±‚ê‚Å
+$C6~17$C2@‘Îˆ‚Å‚«‚éB‚¾‚ªA“¦–S’†‚Ì–\‚ê‚é
+$C6~18$C2@$C6ˆÙ¿‚È‹Zp^lŒ^ƒTƒCƒ{[ƒO$C2‚ÍA
+$C6~19$C2@‚±‚Ìó‹µ‰º‚É‚¨‚¢‚Ä“KØ‚ÈŒ‹˜_‚Ö‚Æ
+$C6~20$C2@“±‚­‚¾‚ë‚¤B
+$C6~21$C2
 #PICT 25
-$C2&3$C6nil$C2/4$C6mars$C2/5$C6illio$C2&$C6~02$C2
-origin: $C6classified$C2
-destin: $C6classified$C2
-ref: $C6none$C2
+$C2&3$C6–³$C2/4$C6‰Î¯$C2/5$C6ˆ«‚¨$C2&$C6~02$C2
+”­F$C6”é–§$C2
+ˆ¶F$C6”é–§$C2
+QÆF$C6‚È‚µ$C2
 $C67D2A601E34F2755AC00D43$C2
-stamp: $C6subverted
+”FØˆóF$C6”j‰óŠ®—¹
 ~07
 ~08
-~09  $C2Simply put: kill every single $C6enforcer
-~10 $C2 in the command section of the 
-$C6~11  Kur'Tkah$C2. Try not to kill the other 
-$C6~12  pfhor$C2. They are fighting on my side 
-$C6~13  $C2and $C6I$C2 will need them in the future, so
-$C6~14$C2  restrain yourself.$C6
+~09$C2@’Pƒ‚¾FƒN[EƒgƒJ[‚Ìw—ßƒZƒNƒVƒ‡ƒ“‚É‚¢‚é
+$C6~10$C2@’P“Æ‚ÌƒGƒ“ƒtƒH[ƒT[‚ğ“|‚¹‚Î‚¢‚¢B
+$C6~11$C2@ŠÔˆá‚Á‚Ä‚àA$C2ƒvƒtƒH[ƒ‹’B$C6‚É‚ÍAè‚ğo‚·‚È‚æB
+$C6~12$C2@”Ş‚ç‚ÍA‰äX‚Ì‘¤‚Åí‚Á‚Ä‚­‚ê‚Ä‚¨‚èA¡Œã 
+$C6~13$C2@$C6„‚ª$C2A”Ş‚ç‚ğ•K—v‚Æ‚·‚é‚Æ‚«‚ª—ˆ‚éB
+$C6~14$C2@‚¾‚©‚çA‰ä–‚µ‚Ä‚­‚êB
 ~15
 ~16
-~17  $C2Off you go.$C6
+~17@$C2ŒN‚©‚çŒü‚©‚Á‚Ä‚­‚êB$C6
 ~18
 ~19
 ~20
@@ -200,26 +207,26 @@ $C6~14$C2  restrain yourself.$C6
 #LOGON 5
 fsdt.pkkhht
 #INFORMATION
-                                                                o
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@‚¨
 
-            -
-      .                                           %
-   r        $C3 Wha$C0t                +e
-                                        h×Üe you
-           5                            .             d
-                           dÎ$C3ne                         i$C0
-             y%$C3%%$C0%%#
-     =                                4
-                      w                                             Œ
-                s-
- ##                                st$C3Ÿpi$C0d    ,
-            YT                  ª$C3
-                      *phht*                      \$$C0
-     »                           ¥
-                        İ
-                                moÔk$C3Ey   $C0             @
-                           $C3?$C0
-                                       ?
+@@@@@@|
+@@@.@@@@@@@@@@@@@@@@@@@@@“
+@‚’@@@@$C3‚¢‚Á$C0‚½@@@@@@@@{‚¢
+@@@@@@@@@@@@@@@@@@@@Ah×Ü„
+@@@@@‚T@@@@@@@@@@@@@@.@@@@@@‚É
+@@@@@@@@@@@@@$C3‰½@@@@@@@@@@@@‚ğ$C0
+@@@@@@ %$C3%%$C0%%#‚µ
+@@@@@@@@@@@@@@@@@@4
+@@@@@@@@@@@‚½w@@@@@@@@@@@@@@@@@@@@@‚Œ@
+@@@@@@@@‚“
+””@@@@@@@@@@@@@@@@$C3Ÿp‚ñ$C0d@@A
+@@@@@@YT@@@@@@@@@‚¾$C3
+@@@@@@@@@@@*phht*@@@@@@@@@@@\$$C0
+@@ƒT@@@@@@@@@@@@@ ¥
+@@@@@@@@@@@@ƒ“
+@@@@@@@@@@@@@@@@‚àƒ„$C3‚d@$C0@@@@@@—
+@@@@@@@@@@@@@ $C3H$C0
+@@@@@@@@@@@@@@@@@@@H
 #LOGOFF 5
 #END
 #ENDTERMINAL 3
@@ -228,15 +235,15 @@ fsdt.pkkhht
 #UNFINISHED
 #LOGON 106
 #PICT 25
-$C2&3$C6nil$C2/4$C6mars$C2/5$C6illio$C2&$C6~02$C2
-origin: $C6classified$C2
-destin: $C6classified$C2
-ref: $C6none$C2
+$C2&3$C6–³$C2/4$C6‰Î¯$C2/5$C6ˆ«‚¨$C2&$C6~02$C2
+”­F$C6”é–§$C2
+ˆ¶F$C6”é–§$C2
+QÆF$C6‚È‚µ$C2
 $C67D2A601E34F2755AC00D43$C2
-stamp: $C6subverted
+”FØˆóF$C6”j‰óŠ®—¹
 ~07
 ~08
-~09$C2  Now $Ithat$i was funny.
+~09$C2@$I¡‚Ì$i‚ÍA‚¨‚©‚µ‚©‚Á‚½B
 $C6~10$C2
 $C6~11$C2
 $C6~12$C2
@@ -250,20 +257,20 @@ $C6~15
 ~20
 ~21
 #PICT 25
-$C2&3$C6nil$C2/4$C6mars$C2/5$C6illio$C2&$C6~02$C2
-origin: $C6classified$C2
-destin: $C6classified$C2
-ref: $C6none$C2
+$C2&3$C6–³$C2/4$C6‰Î¯$C2/5$C6ˆ«‚¨$C2&$C6~02$C2
+”­F$C6”é–§$C2
+ˆ¶F$C6”é–§$C2
+QÆF$C6‚È‚µ$C2
 $C67D2A601E34F2755AC00D43$C2
-stamp: $C6subverted
+”FØˆóF$C6”j‰óŠ®—¹
 ~07
 ~08
-~09  Now $Ithat$i was funny.$C2
-$C6~10$C2
-$C6~11$C2
-$C6~12  $C2Go to the hangar at the far
-$C6~13  $C2end of this segment. I can 
-$C6~14  $C2transport you out from there.
+~09@$I¡‚Ì$i‚ÍA‚¨‚©‚µ‚©‚Á‚½B
+$C6~10$C2@
+$C6~11$C2@
+$C6~12$C2@‚±‚ÌƒZƒOƒƒ“ƒg‚Ì’[‚É‚ ‚éŠi”[ŒÉ
+$C6~13$C2@‚ÉŒü‚©‚Á‚Ä‚­‚êB„‚Í‚»‚±‚©‚çA
+$C6~14$C2@ŒN‚ğ“]‘—‚³‚¹‚é‚±‚Æ‚ª‚Å‚«‚éB
 $C6~15
 ~16
 ~17
@@ -272,25 +279,25 @@ $C6~15
 ~20
 ~21
 #PICT 25
-$C2&3$C6nil$C2/4$C6mars$C2/5$C6illio$C2&$C6~02$C2
-origin: $C6classified$C2
-destin: $C6classified$C2
-ref: $C6none$C2
+$C2&3$C6–³$C2/4$C6‰Î¯$C2/5$C6ˆ«‚¨$C2&$C6~02$C2
+”­F$C6”é–§$C2
+ˆ¶F$C6”é–§$C2
+QÆF$C6‚È‚µ$C2
 $C67D2A601E34F2755AC00D43$C2
-stamp: $C6subverted
+”FØˆóF$C6”j‰óŠ®—¹
 ~07
 ~08
-~09  Now $Ithat$i was funny.$C2
-$C6~10$C2
-$C6~11$C2
-$C6~12  Go to the hangar at the far
-~13  end of this segment. I can 
-~14  transport you out from there.$C2
+~09@$I¡‚Ì$i‚ÍA‚¨‚©‚µ‚©‚Á‚½B
+$C6~10$C2@
+$C6~11$C2@
+$C6~12@‚±‚ÌƒZƒOƒƒ“ƒg‚Ì’[‚É‚ ‚éŠi”[ŒÉ
+$C6~13@‚ÉŒü‚©‚Á‚Ä‚­‚êB„‚Í‚»‚±‚©‚çA
+$C6~14@ŒN‚ğ“]‘—‚³‚¹‚é‚±‚Æ‚ª‚Å‚«‚éB
 $C6~15
 ~16
-~17  $C2Don't dawdle. That virus won't keep 
-$C6~18  Durandal$C2 busy for long.$C6
-~19
+~17$C2@‚®‚¸‚®‚¸‚µ‚Ä‚¢‚é‰É‚Í‚È‚¢‚¼BƒEƒBƒ‹ƒX‚ÍA
+$C6~18@ƒfƒ…ƒ‰ƒ“ƒ_ƒ‹$C2‚ğ‚»‚¤’·‚­ƒrƒW[ó‘Ô‚É
+$C6~19@‚·‚é‚±‚Æ‚Í‚Å‚«‚È‚¢B
 ~20
 ~21
 #LOGOFF 106
