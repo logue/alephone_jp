@@ -1,8 +1,8 @@
-#ifndef __SHAPE_DEFINITIONS_H
-#define __SHAPE_DEFINITIONS_H
-#include "header.h"
+#ifndef __SCREEN_DEFINITIONS_H
+#define __SCREEN_DEFINITIONS_H
+
 /*
-SHAPE_DEFINITIONS.H
+	screen_definitions.h
 
 	Copyright (C) 1991-2001 and beyond by Bungie Studios, Inc.
 	and the "Aleph One" developers.
@@ -21,32 +21,24 @@ SHAPE_DEFINITIONS.H
 	which is included with this source code; it is available online at
 	http://www.gnu.org/licenses/gpl.html
 
-Tuesday, August 29, 1995 9:56:56 AM  (Jason)
+	Tuesday, July 11, 1995 5:32:20 PM- rdm created.
 
-Aug 14, 2000 (Loren Petrich):
-	Turned collection and shading-table handles into pointers,
-	because handles are needlessly MacOS-specific,
-	and because these are variable-format objects.
 */
 
-/* ---------- structures */
-
-struct collection_header /* 32 bytes on disk */
-{
-	int16 status;
-	uint16 flags;
-
-	int32 offset, length;
-	int32 offset16, length16;
-
-	// LP: handles to pointers
-	collection_definition *collection;
-	byte *shading_tables;
+/* -------- this contains the ids for the 8 bit picts */
+/* the 16 bit versions are these ids + 10000 */
+/* the 32 bit versions are these ids + 20000 */
+enum {
+	INTRO_SCREEN_BASE= 1000,
+	MAIN_MENU_BASE= 1100,
+	PROLOGUE_SCREEN_BASE= 1200,
+	EPILOGUE_SCREEN_BASE= 1300,
+	CREDIT_SCREEN_BASE= 1400,
+	CHAPTER_SCREEN_BASE= 1500,
+	COMPUTER_INTERFACE_BASE= 1600,
+	INTERFACE_PANEL_BASE= 1700,
+	FINAL_SCREEN_BASE= 1800
 };
-const int SIZEOF_collection_header = 32;
-
-/* ---------- globals */
-
-static struct collection_header collection_headers[MAXIMUM_COLLECTIONS];
 
 #endif
+

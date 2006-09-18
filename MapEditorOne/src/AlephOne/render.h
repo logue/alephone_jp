@@ -39,8 +39,12 @@ Nov 12, 2000 (Loren Petrich):
 	Added automap reset function
 */
 
-#include "world.h"	
 #include "textures.h"
+#include "header.h"
+
+#include <vector>
+using namespace std;
+#include "world.h"	
 // Stuff to control the view
 //#include "ViewControl.h"
 

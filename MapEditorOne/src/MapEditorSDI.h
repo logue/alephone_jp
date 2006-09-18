@@ -22,11 +22,15 @@
 
 //#include "AlephOne/placement.h"
 
+
+#include "SDLToWin32/SDLToWin32.h"
+
 #include "MonsterPropertyDialog.h"
 #include "PolygonTypeDialog.h"
 #include "HeightDialog.h"
 #include "LevelParameterDialog.h"
 #include "TerminalDialog.h"
+#include "VisualDialog.h"
 
 // CMapEditorSDIApp:
 // このクラスの実装については、MapEditorSDI.cpp を参照してください。

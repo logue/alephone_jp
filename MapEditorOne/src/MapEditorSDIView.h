@@ -82,6 +82,8 @@ public:
     afx_msg int OnCreate(LPCREATESTRUCT lpCreateStruct);
 public:
     afx_msg void OnFileNew();
+public:
+    afx_msg void On32796();
 };
 
 #ifndef _DEBUG  // MapEditorSDIView.cpp のデバッグ バージョン

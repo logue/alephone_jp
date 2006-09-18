@@ -45,6 +45,7 @@ BEGIN_MESSAGE_MAP(CMapEditorSDIView, CView)
     ON_WM_SIZE()
     ON_WM_CREATE()
     ON_COMMAND(ID_FILE_NEW, &CMapEditorSDIView::OnFileNew)
+    ON_COMMAND(ID_32796, &CMapEditorSDIView::On32796)
 END_MESSAGE_MAP()
 
 // CMapEditorSDIView コンストラクション/デストラクション
@@ -135,6 +136,7 @@ void CMapEditorSDIView::OnDraw(CDC* pDC)
 
     //背景
     {
+        cdc->SelectObject(&blackSmallPen);
         cdc->SelectObject(&grayBrush);
         cdc->Rectangle(&winRect);
     }
@@ -1112,5 +1114,13 @@ void CMapEditorSDIView::OnFileNew()
         theApp.LevelNameList.RemoveAll();
         //
         Invalidate(FALSE);
+    }
+}
+//visual mode dialog
+void CMapEditorSDIView::On32796()
+{
+    // TODO: ここにコマンド ハンドラ コードを追加します。
+    CVisualDialog dlg(this);
+    if(dlg.DoModal() == IDOK){
     }
 }

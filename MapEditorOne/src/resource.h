@@ -50,8 +50,9 @@
 #define IDI_ICON20_POLYGON_MAJOR        164
 #define IDI_ICON21_POLIGON_GLUE         165
 #define IDI_ICON22_POLYGON_GLUE_TRIGGER 166
-#define IDI_ICON1                       167
 #define IDI_ICON23_POLYGON_SUPER_GLUE   167
+#define IDD_DIALOG4                     168
+#define IDD_DIALOG_VISUAL               168
 #define IDC_LIST1                       1000
 #define IDC_LIST2                       1002
 #define IDC_COMBO1                      1003
@@ -118,7 +119,7 @@
 // 
 #ifdef APSTUDIO_INVOKED
 #ifndef APSTUDIO_READONLY_SYMBOLS
-#define _APS_NEXT_RESOURCE_VALUE        168
+#define _APS_NEXT_RESOURCE_VALUE        169
 #define _APS_NEXT_COMMAND_VALUE         32797
 #define _APS_NEXT_CONTROL_VALUE         1030
 #define _APS_NEXT_SYMED_VALUE           104

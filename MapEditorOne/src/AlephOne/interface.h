@@ -55,6 +55,7 @@ May 16, 2002 (Woody Zenfell):
 */
 
 //#include "XML_ElementParser.h"
+#include "textures.h"
 
 class FileSpecifier;
 
@@ -429,7 +430,7 @@ bool get_default_theme_spec(FileSpecifier& File);
 void get_default_file_specs(FileSpecifier* outMapSpec, FileSpecifier* outShapesSpec, FileSpecifier* outSoundsSpec, FileSpecifier* outPhysicsSpec);
 
 // LP change: resets field of view to whatever the player had had when reviving
-void ResetFieldOfView();
+//void ResetFieldOfView();
 
 // LP change: modification of Josh Elsasser's dont-switch-weapons patch
 bool dont_switch_to_new_weapon();
