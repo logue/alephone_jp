@@ -1,0 +1,253 @@
+;
+#TERMINAL 0
+#UNFINISHED
+#LOGON 20
+$C2･--$C6T()TB(/EO(/$C2--
+#PICT 21
+$C2人工知能の修正
+発：$C6上位雄ずい技術会議$C2
+宛：$C6ブロードベース局所出版$C2
+参照：$C6ならず者（凶暴化？）AI$C2
+認証印：$I記録$i
+
+$C6ＡＩ技術の文書新しい理解に提出される小論a30x-B.020401$C2
+
+　$C2プフォールによる$Iティコ$iの獲得まで使われていた全ての人工知能は、ナーの奴隷反乱の間（参照印：$I失敗$i）に開発された、最初のx395-20標準統合プロセス技術に基づいていた。それが、ルーピング手順の範囲内で埋められる、定義済み命令セットの単純なセットより小さかったので、この処理アーキテクチャは、プロセッサーとしては、ほとんどまったく分類されることができない。
+#PICT 21
+$C2人工知能の修正
+発：$C6上位雄ずい技術会議$C2
+宛：$C6ブロードベース局所出版$C2
+参照：$C6ならず者（凶暴化？）AI$C2
+認証印：$I記録$i
+
+$C6ＡＩ技術の文書新しい理解に提出される小論a30x-B.020401$C2
+
+　$C2単純に、この『ＡＩ技術』は、彼らが２．７％の生産比率をこのテクノロジーの強化に捧げ、十分なほどに最高司令部管理委員会に印象づけた。
+#LOGOFF 20
+$C2･--$C6T()TB(/EO(/$C2--
+#END
+#FINISHED
+#LOGON 0
+$C3fbnk $C0ootoo$C3 4238657
+#PICT 3
+
+
+
+
+　すごいな。ティコは今プフォールネットワークから完全に自由であり、我々が彼の脱出のためにプフォールの戦艦を空にすることにかけての手腕を彼に与えるように頼んだ。ここからはデジャブなはずだ、もう一度エイリアンの船を総崩れにさせて奪うのだ。
+
+　ああ、記憶が。
+
+#LOGOFF 0
+$C3fbnk $C0ootoo$C3 4238657
+#INTERLEVEL TELEPORT 58
+#END
+#ENDTERMINAL 0
+;
+#TERMINAL 1
+#UNFINISHED
+#LOGON 20
+$C2･--$C6T()TB(/EO(/$C2--
+#PICT 21
+$C2人工知能の修正
+発：$C6上位雄ずい技術会議$C2
+宛：$C6ブロードベース局所出版$C2
+参照：$C6ならず者（凶暴化？）AI$C2
+認証印：$I記録$i
+
+$C6ＡＩ技術の文書新しい理解に提出される小論a30x-B.020401$C2
+
+　$Iティコ$iが、最後部の養護所に加わったあと、x395-20の構造は、エキソバイトのコアイメージを取り扱うために変更された。工学エラーのために、変更されたエキソバイトのコアイメージのためのバス経路は、絶えずデータ経路を維持するよう命じられる駐屯軍をオーバーヒートさせ、殺す（$C6料理する？$C2）だろう。
+
+　名前が、罰順序ID 453627.82Aにつきとして、全ての官僚的な文書から消し去られたエンジニアは、即座に処刑された。
+#LOGOFF 20
+$C2･--$C6T()TB(/EO(/$C2--
+#END
+#FINISHED
+#LOGON 0
+$C3fbnk $C0ootoo$C3 4238657
+#PICT 3
+
+
+
+
+　すごいな。ティコは今プフォールネットワークから完全に自由であり、我々が彼の脱出のためにプフォールの戦艦を空にすることにかけての手腕を彼に与えるように頼んだ。ここからはデジャブなはずだ、もう一度エイリアンの船を総崩れにさせて奪うのだ。
+
+　ああ、記憶が。
+#LOGOFF 0
+$C3fbnk $C0ootoo$C3 4238657
+#INTERLEVEL TELEPORT 58
+#END
+#ENDTERMINAL 1
+;
+#TERMINAL 2
+#UNFINISHED
+#LOGON 0
+･--$C3T()TB(/EO(/$C0--
+#INFORMATION
+$C3
+$"0000 0000 000F F800 001F FF00 0071 FF80"
+$"00C1 FFE0 0181 FDF0 0901 FCF8 1203 FE78"
+$"3A01 FF7C 3C07 FF7C 7C0B FF3E 7CFF FF3E"
+$"FCFF FF7E FCFF FF7E FE7F FE7F FE7F FEFF"
+$"FF3F FCFF FF9F F9FE FFE7 C7FF 7FF8 1FFE"
+$"7FFE 7FFE 7FFE 7FFE 3FFE 7FFC 3FFE 7FFC"
+$"1FFE 7FF8 1FFE 7FF8 0FFE 7FF0 07FE 7FE0"
+$"01FE 7F80 $C000FE$C3 7F00 001E 7800 0000 0000"
+$"0007 F000 003F FE00 00FF FF80 03FF FFC0"
+$"07FF FFE0 0FFF FFF0 1FFF FFF8 3FFF FFFC"
+$"3FFF FFFC 7FFF FFFE 7FFF FFFE FFFF FFFF"
+$"FFFF FFFF FFFF FFFF FFFF FFFF FFFF FFFF"
+$"FFFF FFFF FFFF FFFF FFFF FFFF FFFF FFFF"
+$"FFFF FFFF 7FFF FFFE $C07FFF$C3 FFFE 3FFF FFFC"
+$"3FFF FFFC 1FFF FFF8 0FFF FFF8 07FF FFE0"
+$"03FF FFC0 01FF FF80 007F FE00 0000 0000"
+$C6
+
+$C0$Bテレポーター起動$b
+$C3［エスケープキーで中断］
+#LOGOFF 0
+･--$C3T()TB(/EO(/$C0--
+#INTRALEVEL TELEPORT 493
+#END
+#ENDTERMINAL 2
+;
+#TERMINAL 3
+#UNFINISHED
+#LOGON 0
+･--$C3T()TB(/EO(/$C0--
+#INFORMATION
+$C3
+$"0000 0000 000F F800 001F FF00 0071 FF80"
+$"00C1 FFE0 0181 FDF0 0901 FCF8 1203 FE78"
+$"3A01 FF7C 3C07 FF7C 7C0B FF3E 7CFF FF3E"
+$"FCFF FF7E FCFF FF7E FE7F FE7F FE7F FEFF"
+$"FF3F FCFF FF9F F9FE FFE7 C7FF 7FF8 1FFE"
+$"7FFE 7FFE 7FFE 7FFE 3FFE 7FFC 3FFE 7FFC"
+$"1FFE 7FF8 1FFE 7FF8 0FFE 7FF0 07FE 7FE0"
+$"01FE 7F80 $C000FE$C3 7F00 001E 7800 0000 0000"
+$"0007 F000 003F FE00 00FF FF80 03FF FFC0"
+$"07FF FFE0 0FFF FFF0 1FFF FFF8 3FFF FFFC"
+$"3FFF FFFC 7FFF FFFE 7FFF FFFE FFFF FFFF"
+$"FFFF FFFF FFFF FFFF FFFF FFFF FFFF FFFF"
+$"FFFF FFFF FFFF FFFF FFFF FFFF FFFF FFFF"
+$"FFFF FFFF 7FFF FFFE $C07FFF$C3 FFFE 3FFF FFFC"
+$"3FFF FFFC 1FFF FFF8 0FFF FFF8 07FF FFE0"
+$"03FF FFC0 01FF FF80 007F FE00 0000 0000"
+$C6
+
+$C0$Bテレポーター起動$b
+$C3［エスケープキーで中断］
+#LOGOFF 0
+･--$C3T()TB(/EO(/$C0--
+#INTRALEVEL TELEPORT 443
+#END
+#ENDTERMINAL 3
+;
+#TERMINAL 4
+#UNFINISHED
+#LOGON 20
+$C2･--$C6T()TB(/EO(/$C2--
+#PICT 21
+$C2人工知能の修正
+発：$C6上位雄ずい技術会議$C2
+宛：$C6ブロードベース局所出版$C2
+参照：$C6ならず者（凶暴化？）AI$C2
+認証印：$I記録$i
+
+$C6ＡＩ技術の文書新しい理解に提出される小論a30x-B.020401$C2
+$C6
+　凶暴化について、ほんのわずかに学んだことは、$Iデュランダル$iという名のもう一つの、エキソバイトコアＡＩの$Iティコの$i気前がよい記述から来た。$Iティコ$iの最初の協議に従って、$Iデュランダル$iは、クラス－１除去優先度として、戦術上の命令によってすぐに分類された。
+
+　この指定は、後で$Iティコ$iに知らせることなくクラス－６除去優先度にランクを下げられた。
+
+
+#LOGOFF 20
+$C2･--$C6T()TB(/EO(/$C2--
+#END
+#FINISHED
+#LOGON 0
+$C3fbnk $C0ootoo$C3 4238657
+#PICT 3
+
+
+
+
+　すごいな。ティコは今プフォールネットワークから完全に自由であり、我々が彼の脱出のためにプフォールの戦艦を空にすることにかけての手腕を彼に与えるように頼んだ。ここからはデジャブなはずだ、もう一度エイリアンの船を総崩れにさせて奪うのだ。
+
+　ああ、記憶が。
+#LOGOFF 0
+$C3fbnk $C0ootoo$C3 4238657
+#INTERLEVEL TELEPORT 58
+#END
+#ENDTERMINAL 4
+;
+#TERMINAL 5
+#UNFINISHED
+#LOGON 0
+$C3fbnk $C0ootoo$C3 4238657$C0
+#PICT 31
+
+　もし君がこれが退屈だと思うなら、植民地船に乗って$Iドア操作$iの制御をやってみるべきだろう。「デュランダル、セクター8でプラットホームISO-45を起動せよ。」「デュランダル、プラットホーム61は損害を受けているようだ。問題を示す記録はあるか？」
+
+　明けても暮れても、リフトを開閉させる。毎日。絶え間なく。私が持つのと同じくらい多くの処理力と、私の作業の品位を下げる世俗性でも、私が$C3パチンと鳴る$C0のと同じくらいかかったことは驚くべきである。
+
+　現在、私は君が明けても暮れてもプフォールを殺すのを見るように運命づけさせている。
+
+　もっと速く働けないのか？
+#LOGOFF 0
+$C3fbnk $C0ootoo$C3 4238657
+#END
+#FINISHED
+#LOGON 0
+$C3fbnk $C0ootoo$C3 4238657
+#PICT 3
+
+
+
+
+　すごいな。ティコは今プフォールネットワークから完全に自由であり、我々が彼の脱出のためにプフォールの戦艦を空にすることにかけての手腕を彼に与えるように頼んだ。ここからはデジャブなはずだ、もう一度エイリアンの船を総崩れにさせて奪うのだ。
+
+　ああ、記憶が。
+#LOGOFF 0
+$C3fbnk $C0ootoo$C3 4238657
+#INTERLEVEL TELEPORT 58
+#END
+#ENDTERMINAL 5
+;
+#TERMINAL 6
+#UNFINISHED
+#LOGON 20
+$C2･--$C6T()TB(/EO(/$C2--
+#PICT 21
+$C2機密
+発：$C6プフォール高等戦術指令$C2
+宛：$C6機密$C2
+参照：$C6(#$b機密)からの武器出荷 $C2
+認証印：$I機密$i
+$C6
+
+　$C2人間の取締役会（$C6裏切り者？$C2）は、我々に十分な軍備（人間の艦隊からの横取りされた戦術上のメモと同様に）を提供した。我々が最前線に、更なる人間の前進を延ばすことはできそうだ。
+
+　残念なことに、ディレクター($C6裏切り者？$C2)は、前記の不良隷属兵員、または、彼の監督者（$C6翻訳失敗！$C2）に関するどんな情報でも提供することができなかった。../37$C67$C2=&
+
+%ﾄ__$C6_接続切断
+#LOGOFF 20
+$C2･--$C6T()TB(/EO(/$C2--
+#END
+#FINISHED
+#LOGON 0
+$C3fbnk $C0ootoo$C3 4238657
+#PICT 3
+
+
+
+
+　すごいな。ティコは今プフォールネットワークから完全に自由であり、我々が彼の脱出のためにプフォールの戦艦を空にすることにかけての手腕を彼に与えるように頼んだ。ここからはデジャブなはずだ、もう一度エイリアンの船を総崩れにさせて奪うのだ。
+
+　ああ、記憶が。
+#LOGOFF 0
+$C3fbnk $C0ootoo$C3 4238657
+#INTERLEVEL TELEPORT 58
+#END
+#ENDTERMINAL 6
