@@ -18,6 +18,7 @@ CPolygonTypeDialog::CPolygonTypeDialog(CWnd* pParent /*=NULL*/)
 
 CPolygonTypeDialog::~CPolygonTypeDialog()
 {
+    imageList.DeleteImageList();
 }
 
 void CPolygonTypeDialog::DoDataExchange(CDataExchange* pDX)
@@ -31,11 +32,6 @@ BEGIN_MESSAGE_MAP(CPolygonTypeDialog, CDialog)
     ON_WM_CLOSE()
 END_MESSAGE_MAP()
 
-static void loadIcon(int id, CImageList* imageList){
-    HICON icon;
-    icon = LoadIcon(AfxGetInstanceHandle(), MAKEINTRESOURCE(id));
-    imageList->Add(icon);
-}
 
 // CPolygonTypeDialog メッセージ ハンドラ
 

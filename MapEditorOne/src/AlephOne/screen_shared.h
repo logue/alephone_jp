@@ -38,6 +38,7 @@ Jan 25, 2002 (Br'fin (Jeremy Parsons)):
 */
 
 #include "shell.h"
+#include "fades.h"
 
 #include <stdarg.h>
 #ifndef HAVE_SNPRINTF
@@ -127,7 +128,7 @@ static struct bitmap_definition *world_pixels_structure;
 static short PrevBufferWidth = INT16_MIN, PrevBufferHeight = INT16_MIN,
 	PrevOffsetWidth = INT16_MIN, PrevOffsetHeight = INT16_MIN;
 
-static struct screen_mode_data screen_mode;
+extern struct screen_mode_data screen_mode;
 
 #define FRAME_SAMPLE_SIZE 20
 static bool displaying_fps= false;
@@ -408,11 +409,7 @@ void start_extravision_effect(
 void start_tunnel_vision_effect(bool out);
 
 //CP addition: returns the screen info
-/*screen_mode_data *get_screen_mode(
-	void)
-{
-	return 0;//&screen_mode;
-}*/
+*/
 
 // LP: gets a size ID's related size ID's that show or hide the HUD, respectively
 /*
@@ -439,17 +436,8 @@ short GetSizeWithoutHUD(short Size)
 }
 */
 
-/*void change_gamma_level(
-	short gamma_level)
-{
-	screen_mode.gamma_level= gamma_level;
-	gamma_correct_color_table(uncorrected_color_table, world_color_table, gamma_level);
-	stop_fade();
-	obj_copy(*visible_color_table, *world_color_table);
-	assert_world_color_table(interface_color_table, world_color_table);
-	change_screen_mode(&screen_mode, false);
-	set_fade_effect(NONE);
-}
+void change_gamma_level(
+	short gamma_level);
 
 /* ---------- private code */
 

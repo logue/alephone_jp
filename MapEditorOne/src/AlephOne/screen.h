@@ -59,6 +59,8 @@ Jan 25, 2002 (Br'fin (Jeremy Parsons)):
 	Included Steve Bytnar's OSX QDPort flushing code
 */
 
+extern struct screen_mode_data screen_mode;
+
 /* ---------- constants */
 
 // New screen-size definitions
@@ -155,7 +157,7 @@ void exit_screen(void);
 void darken_world_window(void);
 void validate_world_window(void);
 
-void change_gamma_level(short gamma_level);
+//void change_gamma_level(short gamma_level);
 
 void assert_world_color_table(struct color_table *world_color_table, struct color_table *interface_color_table);
 
@@ -163,7 +165,7 @@ void assert_world_color_table(struct color_table *world_color_table, struct colo
 void reset_screen();
 
 // CP addition: added function to return the the game size
-//screen_mode_data *get_screen_mode(void);//{	return &screen_mode;}
+screen_mode_data *get_screen_mode(void);//{	return &screen_mode;}
 
 
 // LP: gets a size ID's related size ID's that show or hide the HUD, respectively

@@ -53,6 +53,58 @@
 #define IDI_ICON23_POLYGON_SUPER_GLUE   167
 #define IDD_DIALOG4                     168
 #define IDD_DIALOG_VISUAL               168
+#define IDB_BITMAP3                     169
+#define IDB_BITMAP4                     170
+#define IDB_BITMAP5                     171
+#define IDB_BITMAP6                     172
+#define IDB_BITMAP7                     173
+#define IDB_BITMAP8                     174
+#define IDB_BITMAP9                     175
+#define IDB_BITMAP10                    176
+#define IDB_BITMAP11                    177
+#define IDB_BITMAP12                    178
+#define IDB_BITMAP13                    179
+#define IDB_BITMAP14                    180
+#define IDB_BITMAP15                    181
+#define IDB_BITMAP16                    182
+#define IDB_BITMAP17                    183
+#define IDB_BITMAP18                    184
+#define IDB_BITMAP19                    185
+#define IDB_BITMAP20                    186
+#define IDB_BITMAP21                    187
+#define IDB_BITMAP22                    188
+#define IDB_BITMAP23                    189
+#define IDB_BITMAP24                    190
+#define IDB_BITMAP25                    191
+#define IDB_BITMAP26                    192
+#define IDB_BITMAP27                    193
+#define IDB_BITMAP28                    194
+#define IDB_BITMAP29                    195
+#define IDB_BITMAP30                    196
+#define IDB_BITMAP31                    197
+#define IDB_BITMAP32                    198
+#define IDB_BITMAP33                    199
+#define IDB_BITMAP34                    200
+#define IDB_BITMAP35                    201
+#define IDB_BITMAP36                    202
+#define IDB_BITMAP37                    203
+#define IDB_BITMAP38                    204
+#define IDB_BITMAP39                    205
+#define IDB_BITMAP40                    206
+#define IDB_BITMAP41                    207
+#define IDB_BITMAP42                    208
+#define IDB_BITMAP43                    209
+#define IDB_BITMAP44                    210
+#define IDB_BITMAP45                    211
+#define IDB_BITMAP46                    212
+#define IDB_BITMAP47                    213
+#define IDB_BITMAP48                    214
+#define IDB_BITMAP49                    215
+#define IDB_BITMAP50                    216
+#define IDB_BITMAP51                    217
+#define IDB_BITMAP52                    218
+#define IDD_DIALOG_TOOL                 219
+#define IDB_BITMAP53                    220
 #define IDC_LIST1                       1000
 #define IDC_LIST2                       1002
 #define IDC_COMBO1                      1003
@@ -119,9 +171,9 @@
 // 
 #ifdef APSTUDIO_INVOKED
 #ifndef APSTUDIO_READONLY_SYMBOLS
-#define _APS_NEXT_RESOURCE_VALUE        169
+#define _APS_NEXT_RESOURCE_VALUE        221
 #define _APS_NEXT_COMMAND_VALUE         32797
-#define _APS_NEXT_CONTROL_VALUE         1030
+#define _APS_NEXT_CONTROL_VALUE         1031
 #define _APS_NEXT_SYMED_VALUE           104
 #endif
 #endif

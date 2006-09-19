@@ -15,6 +15,8 @@
 #include "screen_shared.h"
 #include "cscluts.h"
 #include "sdl_cseries.h"
+#include "csmisc.h"
+
 //#include "world.h"
 
 

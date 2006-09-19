@@ -81,6 +81,8 @@ SDL_Surface *Term_Buffer = NULL;
 static bool PrevFullscreen = false;
 static bool in_game = false;	// Flag: menu (fixed 640x480) or in-game (variable size) display
 
+struct screen_mode_data screen_mode;
+
 #ifdef HAVE_OPENGL
 // This is defined in overhead_map.c
 // It indicates whether to render the overhead map in OpenGL
@@ -96,10 +98,10 @@ static bool option_nogamma = true;
 
 #include "screen_shared.h"
 
-short bit_depth = 32;
+short bit_depth = 8;
 
 // Prototypes
-//static void change_screen_mode(int width, int height, int depth, bool nogl);
+void change_screen_mode(int width, int height, int depth, bool nogl);
 static void build_sdl_color_table(const color_table *color_table, SDL_Color *colors);
 static void reallocate_world_pixels(int width, int height);
 static void update_screen(SDL_Rect &source, SDL_Rect &destination, bool hi_rez);
@@ -120,6 +122,11 @@ static void DrawHUD(SDL_Rect &dest_rect);
 /*
  *  Initialize screen management
  */
+struct screen_mode_data *get_screen_mode(
+	void)
+{
+	return &screen_mode;
+}
 
 void initialize_screen(struct screen_mode_data *mode, bool ShowFreqDialog)
 {
@@ -162,11 +169,11 @@ void initialize_screen(struct screen_mode_data *mode, bool ShowFreqDialog)
 	world_pixels = NULL;
 
 	// Set screen to 640x480 without OpenGL for menu
-	//screen_mode = *mode;
+	screen_mode = *mode;
 #if defined(SDL_FORCERES_HACK)
 	change_screen_mode(get_screen_mode(), true);
 #else
-//	change_screen_mode(640, 480, bit_depth, true);
+	change_screen_mode(640, 480, bit_depth, true);
 #endif
 	screen_initialized = true;
 }
@@ -250,7 +257,7 @@ void exit_screen(void)
 #if defined(SDL_FORCERES_HACK)
 	change_screen_mode(get_screen_mode(), true);
 #else
-//	change_screen_mode(640, 480, bit_depth, true);
+	change_screen_mode(640, 480, bit_depth, true);
 #endif
 
 #ifdef HAVE_OPENGL
@@ -262,7 +269,7 @@ void exit_screen(void)
 /*
  *  Change screen mode
  */
-/*
+
 static void change_screen_mode(int width, int height, int depth, bool nogl)
 {
 	uint32 flags = (screen_mode.fullscreen ? SDL_FULLSCREEN : 0);
@@ -371,12 +378,24 @@ void change_screen_mode(struct screen_mode_data *mode, bool redraw)
 		assert(msize >= 0 && msize < NUMBER_OF_VIEW_SIZES);
 		change_screen_mode(ViewSizes[msize].OverallWidth, ViewSizes[msize].OverallHeight, mode->bit_depth, false);
 		clear_screen();
-		recenter_mouse();
+		//recenter_mouse();
 	}
 
 	frame_count = frame_index = 0;
 }
+void change_gamma_level(
+	short gamma_level)
+{
+	screen_mode.gamma_level= gamma_level;
+	gamma_correct_color_table(uncorrected_color_table, world_color_table, gamma_level);
+	stop_fade();
+	obj_copy(*visible_color_table, *world_color_table);
+	assert_world_color_table(interface_color_table, world_color_table);
+	change_screen_mode(&screen_mode, false);
+	set_fade_effect(NONE);
+}
 
+/*
 void toggle_fullscreen(bool fs)
 {
 	if (fs != screen_mode.fullscreen) {
@@ -539,12 +558,12 @@ void render_screen(short ticks_elapsed)
 		//dirty_terminal_view(current_player_index);
 	}
 
-/*	switch (screen_mode.acceleration) {
+	switch (screen_mode.acceleration) {
 		case _opengl_acceleration:
 			// If we're using the overhead map, fall through to no acceleration
 			if (!world_view->overhead_map_active && !world_view->terminal_mode_active)
 				break;
-		case _no_acceleration:*/
+		case _no_acceleration:
 			world_pixels_structure->width = world_view->screen_width;
 			world_pixels_structure->height = world_view->screen_height;
 			world_pixels_structure->bytes_per_row = world_pixels->pitch;
@@ -555,11 +574,11 @@ void render_screen(short ticks_elapsed)
 			//!! set world_pixels to VoidColor to avoid smearing?
 
 			precalculate_bitmap_row_addresses(world_pixels_structure);
-/*			break;
+			break;
 		default:
 			assert(false);
 			break;
-	}*/
+	}
 
 	world_view->origin = current_player->camera_location;
 	world_view->origin_polygon_index = current_player->camera_polygon_index;
@@ -820,7 +839,7 @@ void change_screen_clut(struct color_table *color_table)
 		build_direct_color_table(uncorrected_color_table, bit_depth);
 	memcpy(interface_color_table, uncorrected_color_table, sizeof(struct color_table));
 
-//	gamma_correct_color_table(uncorrected_color_table, world_color_table, screen_mode.gamma_level);
+	gamma_correct_color_table(uncorrected_color_table, world_color_table, screen_mode.gamma_level);
 	memcpy(visible_color_table, world_color_table, sizeof(struct color_table));
 
 	assert_world_color_table(interface_color_table, world_color_table);

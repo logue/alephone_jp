@@ -146,11 +146,74 @@ CMapEditorSDIApp::CMapEditorSDIApp()
     this->isObjectPropertyDialogShow = TRUE;
     this->isPolygonTypeDialogShow = TRUE;
     this->isHeightDialogShow = TRUE;
+    this->isToolDialogShow = TRUE;
 
     AfxInitRichEdit();
 
     selectGroupInformation.clear();
     isSelectingGroup = false;
+
+    //ビットマップ読み込み
+    COLORREF key = RGB(221,221,221);
+    mapIconImageList.Create(32, 32, ILC_MASK, 
+        NUMBER_OF_DEFINED_ITEMS + NUMBER_OF_MAP_ICONS, 2);
+
+    //
+    int idAssignment[] ={
+        //items
+        //start by IDB_BITMAP21=AlienWeapon sorted by names
+        //look items.h for order 
+        0,  //knife = fist = none
+        IDB_BITMAP39,   //magnum
+        IDB_BITMAP40,
+        IDB_BITMAP33,   //plasma
+        IDB_BITMAP32,
+        IDB_BITMAP24,   //rifle
+        IDB_BITMAP23,
+        IDB_BITMAP36,
+        IDB_BITMAP44,   //missile
+        IDB_BITMAP45,
+        IDB_BITMAP28,   //invisible
+        IDB_BITMAP37,   //invincible
+        IDB_BITMAP29,   //infravision
+        IDB_BITMAP21,   //alien
+        IDB_BITMAP21,   //alien ammo (none)
+        IDB_BITMAP31,   //frame
+        IDB_BITMAP30,   
+        IDB_BITMAP52,   //extravision
+        IDB_BITMAP34,   //oxygen
+        IDB_BITMAP43,   //energy
+        IDB_BITMAP20,
+        IDB_BITMAP42,
+        IDB_BITMAP48,   //shotgun
+        IDB_BITMAP47,
+        IDB_BITMAP38,   //spht
+        IDB_BITMAP36,   //chip
+
+        IDB_BITMAP49,   //balls(unused except red one)
+        IDB_BITMAP49,   //red (used)
+        IDB_BITMAP49,
+        IDB_BITMAP49,
+        IDB_BITMAP49,
+        IDB_BITMAP49,
+        IDB_BITMAP49,
+        IDB_BITMAP49,
+        
+        IDB_BITMAP50,   //smg
+        IDB_BITMAP53,
+
+        //other icons
+        IDB_BITMAP26,   //center x
+        IDB_BITMAP35,   //goal
+        IDB_BITMAP46,   //scenery
+        IDB_BITMAP51,   //sound
+
+        0   //terminater
+    };
+
+    for(int i = 0; i < NUMBER_OF_DEFINED_ITEMS + NUMBER_OF_MAP_ICONS; i ++){
+        loadBitmap(i, &mapIconImageList, key);
+    }
 
 }
 
@@ -159,6 +222,7 @@ CMapEditorSDIApp::~CMapEditorSDIApp()
     if(m_SDLToWindows)delete m_SDLToWindows;
     shutdown_shape_handler();
     exit_screen();
+    mapIconImageList.DeleteImageList();
 }
 
 // 唯一の CMapEditorSDIApp オブジェクトです。
@@ -287,4 +351,17 @@ void CMapEditorSDIApp::OnFileOpen()
     
     // TODO: ここにコマンド ハンドラ コードを追加します。
     //開くダイアログ
+}
+
+void loadIcon(int id, CImageList* imageList){
+    HICON icon;
+    icon = LoadIcon(AfxGetInstanceHandle(), MAKEINTRESOURCE(id));
+    imageList->Add(icon);
+}
+void loadBitmap(int id, CImageList* imageList, COLORREF key)
+{
+    CBitmap image;
+    image.LoadBitmap(id);
+    imageList->Add(&image, key);
+    image.DeleteObject();
 }

@@ -34,6 +34,7 @@
 #include "LevelParameterDialog.h"
 #include "TerminalDialog.h"
 #include "VisualDialog.h"
+#include "ToolDialog.h"
 
 // CMapEditorSDIApp:
 // このクラスの実装については、MapEditorSDI.cpp を参照してください。
@@ -56,6 +57,17 @@ const int NUMBER_OF_LANDSPACES = 4;
 //点とクリック地点の距離がこれ以下であれば選択する。
 //リスト順に探索する
 const int POINT_DISTANCE_EPSILON = 5;
+
+//map icons
+enum
+{
+    MI_CenterX = 0,
+    MI_Goal,
+    MI_Scenery,
+    MI_Sound,
+    NUMBER_OF_MAP_ICONS
+};
+
 
 //選択したものの種類
 enum{
@@ -154,6 +166,8 @@ public:
     CPolygonTypeDialog *polygonTypeDialog;
     //モードレス表示高度ダイアログ
     CHeightDialog *heightDialog;
+    //
+    CToolDialog *toolDialog;
 
     //大別
     Information objectTypeInformations[NUMBER_OF_MAP_OBJECT_TYPES];
@@ -192,6 +206,7 @@ public:
     BOOL isObjectPropertyDialogShow;
     BOOL isHeightDialogShow;
     BOOL isPolygonTypeDialogShow;
+    BOOL isToolDialogShow;
 
     //ダブルバッファリング
     CDC doubleBufferDC;
@@ -209,7 +224,11 @@ public:
     //複数選択時の選択物リスト
     struct selectInformation selectGroupInformation;
 
+    //SDL surface to win api device context
 	SDLToWindows *m_SDLToWindows;
+
+    //icons
+    CImageList mapIconImageList;
 
 	DECLARE_MESSAGE_MAP()
 public:
@@ -217,3 +236,6 @@ public:
 };
 
 extern CMapEditorSDIApp theApp;
+
+void loadIcon(int id, CImageList* imageList);
+void loadBitmap(int id, CImageList* imageList, COLORREF key);

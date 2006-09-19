@@ -995,25 +995,22 @@ void CMapEditorSDIView::OnInitialUpdate()
 
     if(isFirst){
         theApp.objectPropertyDialog = new CMonsterPropertyDialog;
-        //theApp.objectPropertyDialog->Create(CMonsterPropertyDialog::IDD, this);
         theApp.objectPropertyDialog->Create(this);
         //隠す
         theApp.isObjectPropertyDialogShow = FALSE;
         theApp.objectPropertyDialog->ShowWindow(FALSE);
-
-        //theApp.objectPropertyDialog->SetFocus();
-        ///theApp.objectPropertyDialog->ModifyStyleEx(0, WS_EX_TOPMOST);
         theApp.polygonTypeDialog = new CPolygonTypeDialog;
         theApp.polygonTypeDialog->Create(this);
-        //theApp.polygonTypeDialog->SetFocus();
-        //theApp.polygonTypeDialog->ModifyStyleEx(0, WS_EX_TOPMOST);
+        theApp.isPolygonTypeDialogShow = FALSE;
+        theApp.polygonTypeDialog->ShowWindow(FALSE);
         theApp.heightDialog = new CHeightDialog;
         theApp.heightDialog->Create(this);
-        //theApp.heightDialog->SetFocus();
-        //theApp.heightDialog->ModifyStyleEx(0, WS_EX_TOPMOST);
         
-        //ダブルバッファリング準備
-        //createDoubleBuffer();
+        //tool
+        theApp.toolDialog = new CToolDialog;
+        theApp.toolDialog->Create(this);
+        theApp.isToolDialogShow = TRUE;
+        theApp.toolDialog->ShowWindow(TRUE);
 
         isFirst = false;
     }
@@ -1113,7 +1110,7 @@ int CMapEditorSDIView::OnCreate(LPCREATESTRUCT lpCreateStruct)
     scr.bit_depth = bit_depth;
     scr.draw_every_other_line = 0;
     scr.fullscreen = 0;
-    scr.gamma_level = 0;
+    scr.gamma_level = 4;
     scr.high_resolution = 1;
     scr.size = 2;
     initialize_screen(&scr, false);
