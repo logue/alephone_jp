@@ -90,7 +90,8 @@ void CMapEditorSDIView::OnDraw(CDC* pDC)
     grayMidiumPen.CreatePen(PS_SOLID, 2, RGB(200,200,200));
     selectPen.CreatePen(PS_DASH, 1, RGB(255,0,0));
 
-    CBrush grayBrush, redBrush, yellowBrush, nullBrush, netBrush;
+    CBrush grayBrush, redBrush, yellowBrush, nullBrush,
+        netBrush, blueBrush;
     CBrush polygonBrushes[NUMBER_OF_POLYGON_TYPE];
     for(int i = 0; i < NUMBER_OF_POLYGON_TYPE; i ++){
         polygonBrushes[i].CreateSolidBrush(theApp.polygonTypeColor[i]);
@@ -98,6 +99,7 @@ void CMapEditorSDIView::OnDraw(CDC* pDC)
     grayBrush.CreateSolidBrush(RGB(100, 100, 100));
     redBrush.CreateSolidBrush(RGB(255,0,0));
     yellowBrush.CreateSolidBrush(RGB(255,255,0));
+    blueBrush.CreateSolidBrush(RGB(0,0,255));
     LOGBRUSH logBrush = {
         BS_NULL, 0, 0};
     nullBrush.CreateBrushIndirect(&logBrush);
@@ -108,18 +110,20 @@ void CMapEditorSDIView::OnDraw(CDC* pDC)
 
     CPen* oldPen = pDC->SelectObject(&blackSmallPen);
     CBrush* oldBrush = pDC->SelectObject(&grayBrush);
-
+    
     //ビットマップ読み込み
-    CBitmap monsterBitmap, itemBitmap, scenaryBitmap, goalBitmap;
+    /*CBitmap monsterBitmap, itemBitmap, scenaryBitmap, goalBitmap;
     CBitmap soundBitmap;
     monsterBitmap.LoadBitmapW(IDB_BITMAP1);
     itemBitmap.LoadBitmapW(IDB_BITMAP_ITEM);
     scenaryBitmap.LoadBitmapW(IDB_BITMAP_SCENARY);
     goalBitmap.LoadBitmapW(IDB_BITMAP_GOAL);
     soundBitmap.LoadBitmapW(IDB_BITMAP_SOUND);
+    */
     CDC memDC;
     memDC.CreateCompatibleDC(pDC);
     CBitmap* oldBitmap = memDC.GetCurrentBitmap();
+
 
     int OFFSET_X_VIEW = theApp.offset.x;
     int OFFSET_Y_VIEW = theApp.offset.y;
@@ -320,30 +324,55 @@ void CMapEditorSDIView::OnDraw(CDC* pDC)
         int drawY = (y + OFFSET_Y_WORLD)/DIV + OFFSET_Y_VIEW;
 
         //bitmap表示
-        CBitmap* handle;
+        int index = -1;
         if(type == _saved_monster || type == _saved_player){
-            handle = NULL;
+            index = -1;
         }else if(type == _saved_item){
-            handle = &itemBitmap;
+            index = obj->index;
         }else if(type == _saved_object){
-            handle = &scenaryBitmap;
+            //scenery
+            index = NUMBER_OF_DEFINED_ITEMS + MI_Scenery;
         }else if(type == _saved_goal){
-            handle = &goalBitmap;
+            index = NUMBER_OF_DEFINED_ITEMS + MI_Goal;
         }else{
-            handle = &soundBitmap;
+            //sound
+            index = NUMBER_OF_DEFINED_ITEMS + MI_Sound;
         }
-        if(handle != NULL){
-            memDC.SelectObject(handle);
-            ::TransparentBlt(cdc->m_hDC, drawX - ICON_SIZE / 2, drawY - ICON_SIZE / 2,
-                ICON_SIZE, ICON_SIZE, memDC.m_hDC,
-                0, 0, ICON_SIZE, ICON_SIZE, RGB(255,255,255));
+        if(index >= 0){
+            IMAGEINFO info;
+            //theApp.mapIconImageList.GetImageInfo(index, &info);
+            CBitmap* bitmap = theApp.bitmapList[index];
+            BITMAP bmp;
+            CSize sz = bitmap->GetBitmap(&bmp);
+            sz.cx = bmp.bmWidth;
+            sz.cy = bmp.bmHeight;
+            //COLORREF clrBk = RGB(221,221,221);
+            //COLORREF clrFg = RGB(255,255,255);
+            //theApp.mapIconImageList.Draw(cdc,
+            //    index, pt, ILD_TRANSPARENT);
+            memDC.SelectObject(bitmap);
+            ::TransparentBlt(cdc->m_hDC, drawX - sz.cx / 2, drawY - sz.cy / 2,
+                sz.cx, sz.cy, memDC.m_hDC,
+                0, 0, sz.cx, sz.cy, RGB(221,221,221));
+
         }
 
         if(type == _saved_monster || type == _saved_player){
             cdc->SelectObject(blackSmallPen);
             if(type == _saved_monster){
-                cdc->SelectObject(&redBrush);
+                if(obj->index >= _civilian_crew &&
+                    obj->index <= _civilian_security ||
+                    obj->index >= _civilian_fusion_crew &&
+                    obj->index <= _civilian_fusion_security)
+                {
+                    //青
+                    cdc->SelectObject(&blueBrush);
+                }else{
+                    //赤
+                    cdc->SelectObject(&redBrush);
+                }
             }else{
+                //プレイヤーは黄色
                 cdc->SelectObject(&yellowBrush);
             }
             int facing = obj->facing;
@@ -429,6 +458,7 @@ void CMapEditorSDIView::OnDraw(CDC* pDC)
     grayBrush.DeleteObject();
     redBrush.DeleteObject();
     yellowBrush.DeleteObject();
+    blueBrush.DeleteObject();
     for(int i = 0; i < NUMBER_OF_POLYGON_TYPE; i ++){
         polygonBrushes[i].DeleteObject();
     }
@@ -436,12 +466,14 @@ void CMapEditorSDIView::OnDraw(CDC* pDC)
     netBrush.DeleteObject();
 
     memDC.SelectObject(oldBitmap);
+    memDC.DeleteDC();
+/*    
     monsterBitmap.DeleteObject();
     itemBitmap.DeleteObject();
     scenaryBitmap.DeleteObject();
     goalBitmap.DeleteObject();
     soundBitmap.DeleteObject();
-    
+  */  
 }
 
 
@@ -1013,6 +1045,72 @@ void CMapEditorSDIView::OnInitialUpdate()
         theApp.toolDialog->ShowWindow(TRUE);
 
         isFirst = false;
+        //
+        //ビットマップ読み込み
+        COLORREF key = RGB(221,221,221);
+        theApp.mapIconImageList.Create(16, 16, ILC_MASK|ILC_COLOR32, 
+        NUMBER_OF_DEFINED_ITEMS + NUMBER_OF_MAP_ICONS, 2);
+        int idAssignment[] ={
+            //items
+            //start by IDB_BITMAP21=AlienWeapon sorted by names
+            //look items.h for order 
+            IDB_BITMAP39,   //knife = fist = none 0
+            IDB_BITMAP39,   //magnum
+            IDB_BITMAP40,
+            IDB_BITMAP33,   //plasma
+            IDB_BITMAP32,
+            IDB_BITMAP24,   //rifle
+            IDB_BITMAP23,
+            IDB_BITMAP36,
+            IDB_BITMAP44,   //missile
+            IDB_BITMAP45,
+            IDB_BITMAP28,   //invisible 10
+
+            IDB_BITMAP37,   //invincible
+            IDB_BITMAP29,   //infravision
+            IDB_BITMAP21,   //alien
+            IDB_BITMAP21,   //alien ammo (none)
+            IDB_BITMAP31,   //frame
+            IDB_BITMAP30,   
+            IDB_BITMAP52,   //extravision
+            IDB_BITMAP34,   //oxygen
+            IDB_BITMAP43,   //energy
+            IDB_BITMAP20,                   //20
+            
+            IDB_BITMAP42,
+            IDB_BITMAP48,   //shotgun
+            IDB_BITMAP47,
+            IDB_BITMAP38,   //spht
+            IDB_BITMAP36,   //chip
+
+            IDB_BITMAP49,   //balls(unused except red one)
+            IDB_BITMAP49,   //red (used)
+            IDB_BITMAP49,
+            IDB_BITMAP49,
+            IDB_BITMAP49,                   //30
+            
+            IDB_BITMAP49,
+            IDB_BITMAP49,
+            IDB_BITMAP49,
+            
+            IDB_BITMAP50,   //smg
+            IDB_BITMAP53,
+
+            //other icons
+            IDB_BITMAP26,   //center x
+            IDB_BITMAP35,   //goal
+            IDB_BITMAP46,   //scenery
+            IDB_BITMAP51,   //sound
+
+            0   //terminater
+        };
+
+        for(int i = 0; i < NUMBER_OF_DEFINED_ITEMS + NUMBER_OF_MAP_ICONS; i ++){
+            //loadBitmap(idAssignment[i], &(theApp.mapIconImageList), key);
+            CBitmap *bitmap = new CBitmap();
+            bitmap->LoadBitmap(idAssignment[i]);
+            theApp.bitmapList.push_back(bitmap);
+        }
     }
 
 }
@@ -1105,6 +1203,7 @@ int CMapEditorSDIView::OnCreate(LPCREATESTRUCT lpCreateStruct)
     initialize_view_data(&view);
     initialize_screen
     */
+    /*    */
     struct screen_mode_data scr;
     scr.acceleration = 0;
     scr.bit_depth = bit_depth;
@@ -1114,6 +1213,7 @@ int CMapEditorSDIView::OnCreate(LPCREATESTRUCT lpCreateStruct)
     scr.high_resolution = 1;
     scr.size = 2;
     initialize_screen(&scr, false);
+
     initialize_shape_handler();
     FileSpecifier ShapesFile("Shapes");
     if(!ShapesFile.Exists()){

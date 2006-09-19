@@ -173,7 +173,7 @@ void initialize_screen(struct screen_mode_data *mode, bool ShowFreqDialog)
 #if defined(SDL_FORCERES_HACK)
 	change_screen_mode(get_screen_mode(), true);
 #else
-	change_screen_mode(640, 480, bit_depth, true);
+	//change_screen_mode(640, 480, bit_depth, true);
 #endif
 	screen_initialized = true;
 }
@@ -257,7 +257,7 @@ void exit_screen(void)
 #if defined(SDL_FORCERES_HACK)
 	change_screen_mode(get_screen_mode(), true);
 #else
-	change_screen_mode(640, 480, bit_depth, true);
+	//change_screen_mode(640, 480, bit_depth, true);
 #endif
 
 #ifdef HAVE_OPENGL

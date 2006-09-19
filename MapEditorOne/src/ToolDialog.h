@@ -14,6 +14,9 @@ public:
     CWnd *parent;
     BOOL Create(CWnd *par);
     virtual void PostNcDestroy();
+
+    //tool's icons
+    CImageList imageList;
 // ダイアログ データ
 	enum { IDD = IDD_DIALOG_TOOL };
     BOOL CToolDialog::DestroyWindow();
@@ -24,4 +27,8 @@ protected:
 	DECLARE_MESSAGE_MAP()
 public:
     afx_msg void OnClose();
+public:
+    virtual BOOL OnInitDialog();
+public:
+    afx_msg void OnPaint();
 };

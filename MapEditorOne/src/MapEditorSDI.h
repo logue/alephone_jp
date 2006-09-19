@@ -68,6 +68,22 @@ enum
     NUMBER_OF_MAP_ICONS
 };
 
+//tools
+enum
+{
+    TI_ARROW = 0,
+    TI_FILL,
+    TI_HAND,
+    TI_LINE,
+    TI_MAGNIFY,
+    TI_SKULL,
+    TI_TEXT,
+    TI_POLYGON,
+    NUMBER_OF_TOOLS //7
+};
+
+const int TOOL_WIDTH = 24;
+const int TOOL_HEIGHT = 21;
 
 //‘I‘ð‚µ‚½‚à‚Ì‚ÌŽí—Þ
 enum{
@@ -229,6 +245,10 @@ public:
 
     //icons
     CImageList mapIconImageList;
+    vector<CBitmap*> bitmapList;
+
+    //select tool
+    int selectingToolType;
 
 	DECLARE_MESSAGE_MAP()
 public:
