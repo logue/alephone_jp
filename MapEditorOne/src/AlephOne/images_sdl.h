@@ -39,8 +39,8 @@
 extern short interface_bit_depth;
 
 // From screen_drawing_sdl.cpp
-extern bool draw_clip_rect_active;
-extern screen_rectangle draw_clip_rect;
+static bool draw_clip_rect_active = true;
+static screen_rectangle draw_clip_rect = {0,0,0,0};
 
 
 /*
@@ -805,7 +805,7 @@ struct color_table *build_8bit_system_color_table(void)
  */
 
 #define SCROLLING_SPEED (MACHINE_TICKS_PER_SECOND / 20)
-
+/*
 void scroll_full_screen_pict_resource_from_scenario(int pict_resource_number, bool text_block)
 {
 	// Convert picture resource to surface, free resource
@@ -878,3 +878,4 @@ void scroll_full_screen_pict_resource_from_scenario(int pict_resource_number, bo
 	// Free surface
 	SDL_FreeSurface(s);
 }
+*/

@@ -62,7 +62,7 @@ Jul 31, 2002 (Loren Petrich)
 #include "screen.h"
 #include "wad.h"
 #include "screen_drawing.h"
-#include "Logging.h"
+//#include "Logging.h"
 
 
 // Constants
@@ -146,15 +146,21 @@ void initialize_images_manager(void)
 {
 	FileSpecifier file;
 
-  logContext("loading Images...");
+//  logContext("loading Images...");
 
 	file.SetNameWithPath(getcstr(temporary, strFILENAMES, filenameIMAGES)); // _typecode_images
 	
-	if (!file.Exists())
-		alert_user(fatalError, strERRORS, badExtraFileLocations, fnfErr);
+    if (!file.Exists()){
+		//alert_user(fatalError, strERRORS, badExtraFileLocations, fnfErr);
+        fprintf(stderr, "bad extra file location");;
+        exit(1);
+    }
 	
-	if (!ImagesFile.open_file(file))
-		alert_user(fatalError, strERRORS, badExtraFileLocations, -1);
+    if (!ImagesFile.open_file(file)){
+		//alert_user(fatalError, strERRORS, badExtraFileLocations, -1);
+        fprintf(stderr, "bad extra file location");
+        exit(1);
+    }
 
 	atexit(shutdown_images_handler);
 }

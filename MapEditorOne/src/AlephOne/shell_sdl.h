@@ -71,7 +71,7 @@ void free_and_unlock_memory(void);
 
 #endif
 
-#include "XML_Loader_SDL.h"
+//#include "XML_Loader_SDL.h"
 #include "resource_manager.h"
 #include "sdl_dialogs.h"
 #include "sdl_fonts.h"
@@ -1540,9 +1540,10 @@ void dump_screen(void)
 	} while (file.Exists());
 
 	// Without OpenGL, dumping the screen is easy
-	SDL_Surface *video = SDL_GetVideoSurface();
+	SDL_Surface *video = screenSurface;//SDL_GetVideoSurface();
 	if (!(video->flags & SDL_OPENGL)) {
-		SDL_SaveBMP(SDL_GetVideoSurface(), file.GetPath());
+		SDL_SaveBMP(screenSurface//SDL_GetVideoSurface()
+            , file.GetPath());
 		return;
 	}
 

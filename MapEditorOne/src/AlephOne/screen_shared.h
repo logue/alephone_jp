@@ -37,6 +37,8 @@ Jan 25, 2002 (Br'fin (Jeremy Parsons)):
 	Minor tweaks to screen_printf() mechanism (safer; resets when screen_reset called)
 */
 
+#include "shell.h"
+
 #include <stdarg.h>
 #ifndef HAVE_SNPRINTF
 //#include "snprintf.h"	// for platforms that don't have it
@@ -117,7 +119,7 @@ static struct color_table *visible_color_table; /* the color environment the pla
 static struct view_data *world_view; /* should be static */
 
 // Convenient package for the drawing target (contains dimensions and pixel-row pointers)
-struct bitmap_definition *world_pixels_structure;
+static struct bitmap_definition *world_pixels_structure;
 
 // LP change: added stuff for keeping track of screen sizes;
 // this is for forcing the clearing of the screen when resizing.
@@ -125,7 +127,7 @@ struct bitmap_definition *world_pixels_structure;
 static short PrevBufferWidth = INT16_MIN, PrevBufferHeight = INT16_MIN,
 	PrevOffsetWidth = INT16_MIN, PrevOffsetHeight = INT16_MIN;
 
-//static struct screen_mode_data screen_mode;
+static struct screen_mode_data screen_mode;
 
 #define FRAME_SAMPLE_SIZE 20
 static bool displaying_fps= false;
@@ -141,7 +143,7 @@ static bool HUD_RenderRequest = false;
 
 static bool screen_initialized= false;
 
-static short bit_depth= NONE;
+extern short bit_depth;
 static short interface_bit_depth= NONE;
 
 // LP addition: this is defined in overhead_map.c

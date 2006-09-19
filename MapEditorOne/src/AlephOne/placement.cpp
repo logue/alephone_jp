@@ -369,7 +369,7 @@ short get_random_player_starting_location_and_facing(
 	short team, 
 	struct object_location *location)
 {
-	int32 monster_distance, player_distance;
+	int32 monster_distance = 0, player_distance = 0;
 	uint32 best_distance;
 	short starting_location_index, maximum_starting_locations, offset, index = NONE, best_index = NONE;
 	struct object_location current_location;

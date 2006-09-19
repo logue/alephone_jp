@@ -2,7 +2,6 @@
 
 #include "AlephOne/SDL.h"
 #include "MapEditorSDI.h"
-#include "SDLToWin32/SDLToWin32.h"
 
 // CVisualDialog ダイアログ
 
@@ -15,7 +14,8 @@ public:
 	virtual ~CVisualDialog();
 
     //sdl to win api
-	SDLToWindows *m_SDLToWindows;
+    SDLToWindows *m_SDLToWindows;
+    SDL_Surface* testImage;
 
 // ダイアログ データ
 	enum { IDD = IDD_DIALOG_VISUAL };

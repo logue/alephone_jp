@@ -265,7 +265,7 @@ void pause_game(void);
 void resume_game(void);
 void portable_process_screen_click(short x, short y, bool cheatkeys_down);
 void draw_menu_button_for_command(short index);
-void update_interface_display(void);
+//void update_interface_display(void);
 void idle_game_state(void);
 void display_main_menu(void);
 void do_menu_item_command(short menu_id, short menu_item, bool cheat);
@@ -321,14 +321,14 @@ void get_shape_hotpoint(shape_descriptor texture, short *x0, short *y0);
 struct shape_animation_data *get_shape_animation_data(shape_descriptor texture);
 void process_collection_sounds(short colleciton_code, void (*process_sound)(short sound_index));
 
-/*#define mark_collection_for_loading(c) mark_collection((c), true)
+#define mark_collection_for_loading(c) mark_collection((c), true)
 #define mark_collection_for_unloading(c) mark_collection((c), false)
 void mark_collection(short collection_code, bool loading);
 void strip_collection(short collection_code);
 void load_collections(bool with_progress_bar, bool is_opengl);
 void load_replacement_collections(bool with_progress_bar, int progress_start, int progress_finish);
 void unload_all_collections(void);
-*/
+
 // LP additions:
 // Whether or not collection is present
 bool is_collection_present(short collection_index);

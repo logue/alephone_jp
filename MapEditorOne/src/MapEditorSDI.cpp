@@ -151,8 +151,15 @@ CMapEditorSDIApp::CMapEditorSDIApp()
 
     selectGroupInformation.clear();
     isSelectingGroup = false;
+
 }
 
+CMapEditorSDIApp::~CMapEditorSDIApp()
+{
+    if(m_SDLToWindows)delete m_SDLToWindows;
+    shutdown_shape_handler();
+    exit_screen();
+}
 
 // 唯一の CMapEditorSDIApp オブジェクトです。
 

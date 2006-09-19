@@ -163,7 +163,8 @@ void assert_world_color_table(struct color_table *world_color_table, struct colo
 void reset_screen();
 
 // CP addition: added function to return the the game size
-screen_mode_data *get_screen_mode(void);
+//screen_mode_data *get_screen_mode(void);//{	return &screen_mode;}
+
 
 // LP: gets a size ID's related size ID's that show or hide the HUD, respectively
 short GetSizeWithHUD(short Size);

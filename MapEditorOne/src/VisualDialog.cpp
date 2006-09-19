@@ -14,11 +14,13 @@ CVisualDialog::CVisualDialog(CWnd* pParent /*=NULL*/)
 	: CDialog(CVisualDialog::IDD, pParent)
 {
     m_SDLToWindows = NULL;
+    testImage = NULL;
 }
 
 CVisualDialog::~CVisualDialog()
 {
     if(m_SDLToWindows)delete m_SDLToWindows;
+    SDL_FreeSurface(testImage);
 }
 
 void CVisualDialog::DoDataExchange(CDataExchange* pDX)
@@ -45,6 +47,7 @@ void CVisualDialog::OnPaint()
         //drawing!
         SDL_FillRect(screen, NULL, SDL_MapRGB(screen->format, 0,0,0));
 
+        SDL_BlitSurface(testImage, NULL, screen, NULL);
         m_SDLToWindows->paint();
     }
     /*CWnd *pictBox = GetDlgItem(IDC_PICTURE);
@@ -70,9 +73,14 @@ BOOL CVisualDialog::OnInitDialog()
     CWnd *pictBox = GetDlgItem(IDC_PICTURE);
     
     pictBox->GetClientRect(&cl_rect);
-
     m_SDLToWindows=new SDLToWindows(pictBox->m_hWnd, cl_rect);
 
+    
+    int collection = BUILD_COLLECTION(12, 0);
+    int shape = BUILD_DESCRIPTOR(collection, 0);
+    unsigned char** outPointerToPixelData = (unsigned char**)malloc(sizeof(unsigned char*) * 1);
+    testImage = get_shape_surface(shape,NONE, outPointerToPixelData, 1);
+    free(outPointerToPixelData);
     return TRUE;  // return TRUE unless you set the focus to a control
     // 例外 : OCX プロパティ ページは必ず FALSE を返します。
 }

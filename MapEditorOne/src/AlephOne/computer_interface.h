@@ -106,7 +106,7 @@ uint32 build_terminal_action_flags(char *keymap);
 void dirty_terminal_view(short player_index);
 void abort_terminal_mode(short player_index);
 
-bool player_in_terminal_mode(short player_index);
+//bool player_in_terminal_mode(short player_index);
 
 // LP: to pack and unpack this data;
 // these hide the unpacked data from the outside world.

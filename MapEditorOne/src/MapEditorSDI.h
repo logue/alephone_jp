@@ -19,6 +19,9 @@
 #include "AlephOne/scenery_definitions.h"
 #include "AlephOne/mysound.h"
 #include "AlephOne/computer_interface.h"
+#include "AlephOne/render.h"
+#include "AlephOne/shapes_sdl.h"
+#include "AlephOne/shell.h"
 
 //#include "AlephOne/placement.h"
 
@@ -109,7 +112,7 @@ class CMapEditorSDIApp : public CWinApp
 {
 public:
 	CMapEditorSDIApp();
-
+    ~CMapEditorSDIApp();
 
 // オーバーライド
 public:
@@ -206,6 +209,7 @@ public:
     //複数選択時の選択物リスト
     struct selectInformation selectGroupInformation;
 
+	SDLToWindows *m_SDLToWindows;
 
 	DECLARE_MESSAGE_MAP()
 public:

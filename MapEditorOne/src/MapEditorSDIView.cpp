@@ -1098,6 +1098,37 @@ int CMapEditorSDIView::OnCreate(LPCREATESTRUCT lpCreateStruct)
     if(dynamic_world == NULL){
         allocate_map_memory();
     }
+    CRect cl_rect;
+    GetClientRect(&cl_rect);
+    theApp.m_SDLToWindows=new SDLToWindows(this->m_hWnd, cl_rect);
+    screenSurface = theApp.m_SDLToWindows->getSurface();
+    /*
+    struct view_data view;
+    view.
+    initialize_view_data(&view);
+    initialize_screen
+    */
+    struct screen_mode_data scr;
+    scr.acceleration = 0;
+    scr.bit_depth = bit_depth;
+    scr.draw_every_other_line = 0;
+    scr.fullscreen = 0;
+    scr.gamma_level = 0;
+    scr.high_resolution = 1;
+    scr.size = 2;
+    initialize_screen(&scr, false);
+    initialize_shape_handler();
+    FileSpecifier ShapesFile("Shapes");
+    if(!ShapesFile.Exists()){
+        MessageBox(L"no shapes file");
+    }else{
+        open_shapes_file(ShapesFile);
+        for(int i = 0; i < NUMBER_OF_COLLECTIONS; i ++){
+            mark_collection_for_loading(i);
+        }
+        load_collections(false, false);
+    }
+
     return 0;
 }
 

@@ -804,6 +804,7 @@ static void adjust_platform_sides(
 			
 				default:
 					//vhalt(csprintf(temporary, "wasnÕt expecting side #%d to have type #%d", side_index, side->type));
+                    fprintf(stderr, "wasnÕt expecting side #%d to have type #%d", side_index, side->type);
                     exit(1);
 					break;
 			}

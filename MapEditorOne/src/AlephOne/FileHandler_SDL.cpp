@@ -27,7 +27,7 @@
 #ifndef SDL_RFORK_HACK
 //#include "cseries.h"
 #include "FileHandler.h"
-//#include "resource_manager.h"
+#include "resource_manager.h"
 
 //#include "shell.h"
 #include "interface.h"
@@ -72,11 +72,12 @@
 #include <sys/stat.h>		// for stat()
 
 //#endif
-
+ extern bool is_applesingle(SDL_RWops *f, bool rsrc_fork, long &offset, long &length);
+extern bool is_macbinary(SDL_RWops *f, long &data_length, long &rsrc_length);
 // From shell_sdl.cpp
 //extern vector<DirectorySpecifier> data_search_path;
 //extern DirectorySpecifier local_data_dir, preferences_dir, saved_games_dir, recordings_dir;
-
+/*
 bool is_applesingle(SDL_RWops *f, bool rsrc_fork, long &offset, long &length)
 {
 	// Check header
@@ -279,7 +280,7 @@ void LoadedResource::Detach()
  *  Opened resource file
  */
 
-/*OpenedResourceFile::OpenedResourceFile() : f(NULL), saved_f(NULL), err(0) {}
+OpenedResourceFile::OpenedResourceFile() : f(NULL), saved_f(NULL), err(0) {}
 
 bool OpenedResourceFile::Push()
 {
@@ -402,7 +403,7 @@ bool FileSpecifier::Open(OpenedFile &OFile, bool Writable)
 }
 
 // Open resource file
-/*bool FileSpecifier::Open(OpenedResourceFile &OFile, bool Writable)
+bool FileSpecifier::Open(OpenedResourceFile &OFile, bool Writable)
 {
 	OFile.Close();
 
@@ -414,7 +415,7 @@ bool FileSpecifier::Open(OpenedFile &OFile, bool Writable)
 	} else
 		return true;
 }
-*/
+
 // Check for existence of file
 bool FileSpecifier::Exists()
 {
