@@ -111,7 +111,7 @@ void import_definition_structures(
 		
 		free_wad(wad);
     }else{
-        MessageBox(NULL, L"読み込み失敗(get_physics_wad_data)", L"エラー", MB_OK | MB_ICONEXCLAMATION);
+        //MessageBox(NULL, L"読み込み失敗(get_physics_wad_data)", L"エラー", MB_OK | MB_ICONEXCLAMATION);
     }
 }
 
@@ -119,7 +119,7 @@ void export_definition_structures(const char *filename)
 {
 	struct wad_data *wad;
     if(strcmp(filename, DEFAULT_PHYSICS_FILE_NAME) == 0){
-        MessageBox(NULL, L"cannot save beacuse of it's filename", L"error", MB_OK | MB_ICONEXCLAMATION);
+        //MessageBox(NULL, L"cannot save beacuse of it's filename", L"error", MB_OK | MB_ICONEXCLAMATION);
         return;
     }
 	//格納されているデータをwadデータに流し込み
@@ -149,15 +149,15 @@ void export_definition_structures(const char *filename)
 		OpenedFile of;
 		//phy.Open(of, writable);
         if(!open_wad_file_for_writing(phy, of)){
-            MessageBox(NULL, L"ファイルを開けません", L"エラー", MB_OK | MB_ICONEXCLAMATION);
+            //MessageBox(NULL, L"ファイルを開けません", L"エラー", MB_OK | MB_ICONEXCLAMATION);
             return;
         }
 
 		if(write_wad(of, &head, wad, offset)){
-			MessageBox(NULL, L"ファイルの保存に成功しました", L"", MB_OK | MB_ICONINFORMATION);
+			//MessageBox(NULL, L"ファイルの保存に成功しました", L"", MB_OK | MB_ICONINFORMATION);
     	}else{
 			//不成功
-            MessageBox(NULL, L"ファイルの保存に失敗しました", L"エラー", MB_OK | MB_ICONEXCLAMATION);
+            //MessageBox(NULL, L"ファイルの保存に失敗しました", L"エラー", MB_OK | MB_ICONEXCLAMATION);
             return ;
 		}
 
@@ -196,7 +196,7 @@ void export_definition_structures(const char *filename)
 	    }*/
 		free_wad(wad);
     }else{
-		MessageBox(NULL, L"データを作成できませんでした", L"エラー", MB_OK | MB_ICONEXCLAMATION);
+//		MessageBox(NULL, L"データを作成できませんでした", L"エラー", MB_OK | MB_ICONEXCLAMATION);
     }
 
 }
@@ -290,7 +290,7 @@ static void import_physics_wad_data(
 		PhysicsModelLoaded = true;
 		unpack_monster_definition(data,count);
     }else{
-        MessageBox(NULL, L"モンスター情報がありません", L"エラー", MB_OK | MB_ICONEXCLAMATION);
+//        MessageBox(NULL, L"モンスター情報がありません", L"エラー", MB_OK | MB_ICONEXCLAMATION);
     }
 	
 	data= (unsigned char *)extract_type_from_wad(wad, EFFECTS_PHYSICS_TAG, &data_length);

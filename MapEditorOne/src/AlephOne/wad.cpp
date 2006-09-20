@@ -219,13 +219,13 @@ struct wad_data *read_indexed_wad_from_file(
 					if(!read_wad)
 					{
 						/* Error.. */
-                        MessageBox(NULL, L"メモリエラー(read_indexed_wad_from_file-read_indexed_wad_from_file_into_buffer-convert_wad_from_raw)",
-                            L"エラー", MB_OK|MB_ICONEXCLAMATION);
+                        //MessageBox(NULL, L"メモリエラー(read_indexed_wad_from_file-read_indexed_wad_from_file_into_buffer-convert_wad_from_raw)",
+                        //    L"エラー", MB_OK|MB_ICONEXCLAMATION);
 						error= memory_error();
 					}
 				}
 			} else {
-                MessageBox(NULL, L"メモリエラー(read_indexed_wad_from_file-malloc)", L"エラー", MB_OK|MB_ICONEXCLAMATION);
+                //MessageBox(NULL, L"メモリエラー(read_indexed_wad_from_file-malloc)", L"エラー", MB_OK|MB_ICONEXCLAMATION);
 				error= memory_error();
 			}
 		}
@@ -591,7 +591,7 @@ struct wad_data *append_data_to_wad(
 	wad->tag_data[index].data= (uint8 *) malloc(size);
 	if(!wad->tag_data[index].data)
 	{
-        MessageBox(NULL, L"out of memory", L"error", MB_OK);
+//        MessageBox(NULL, L"out of memory", L"error", MB_OK);
         return NULL;
 		//alert_user(fatalError, strERRORS, outOfMemory, memory_error());
 	}
