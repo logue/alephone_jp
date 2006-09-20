@@ -1,6 +1,7 @@
 #ifndef _HEADER_
 #define _HEADER_
 //#include "stdafx.h"
+#pragma warning(disable:4996)
 
 #include <vector>
 #include <cstdio>
@@ -9,6 +10,15 @@
 #include "csstrings.h"
 #include "csalerts.h"
 #include "interface.h"
+#include "cspixels.h"
+#include "csmacros.h"
+#include "screen_shared.h"
+#include "cscluts.h"
+#include "sdl_cseries.h"
+#include "csmisc.h"
+
+//#include "world.h"
+
 
 using namespace std;
 //typedef int OSErr;

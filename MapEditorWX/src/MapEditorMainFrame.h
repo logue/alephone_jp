@@ -31,6 +31,10 @@ public:
     void OnMotion(wxMouseEvent& ev);
     void OnMouseWheel(wxMouseEvent& ev);
 
+    //centering
+    //zoom up
+    //zoom in
+    //zoom def
     DECLARE_EVENT_TABLE()
 
 };

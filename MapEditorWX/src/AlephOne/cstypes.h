@@ -21,7 +21,7 @@
 
 #ifndef _CSERIES_TYPES_
 #define _CSERIES_TYPES_
-//#include "header.h"
+//#include "stdafx.h"
 
 #include <limits.h>
 #ifdef HAVE_CONFIG_H // pick up HAVE_OPENGL

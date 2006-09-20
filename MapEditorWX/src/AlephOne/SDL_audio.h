@@ -22,7 +22,7 @@
 
 #ifdef SAVE_RCSID
 static char rcsid =
- "@(#) $Id: SDL_audio.h,v 1.1 2006-09-16 16:08:06 hogepiyo Exp $";
+ "@(#) $Id: SDL_audio.h,v 1.2 2006-09-20 15:20:05 hogepiyo Exp $";
 #endif
 
 /* Access to the raw audio mixing buffer for the SDL library */

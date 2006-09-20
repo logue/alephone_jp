@@ -127,109 +127,6 @@ Jan 25, 2002 (Br'fin (Jeremy Parsons)):
 // MH: Lua scripting
 //#include "lua_script.h"
 
-#define LABEL_INSET 3
-#define LOG_DURATION_BEFORE_TIMEOUT (2*TICKS_PER_SECOND)
-#define BORDER_HEIGHT 18
-#define BORDER_INSET 9
-#define FUDGE_FACTOR 1
-
-#define MAC_LINE_END 13
-
-enum {
-	_reading_terminal,
-	_no_terminal_state,
-	NUMBER_OF_TERMINAL_STATES
-};
-
-enum {
-	_terminal_is_dirty= 0x01
-};
-
-enum {
-	_any_abort_key_mask= _action_trigger_state,
-	_terminal_up_arrow= _moving_forward,
-	_terminal_down_arrow= _moving_backward,
-	_terminal_page_down= _turning_right,
-	_terminal_page_up= _turning_left,
-	_terminal_next_state= _left_trigger_state
-};
-
-#define strCOMPUTER_LABELS 135
-enum
-{
-	_marathon_name,
-	_computer_starting_up,
-	_computer_manufacturer,
-	_computer_address,
-	_computer_terminal,
-	_scrolling_message,
-	_acknowledgement_message,
-	_disconnecting_message,
-	_connection_terminated_message,
-	_date_format
-};
-
-#define TERMINAL_IS_DIRTY(term) ((term)->flags & _terminal_is_dirty)
-#define SET_TERMINAL_IS_DIRTY(term, v) ((void)((v)? ((term)->flags |= _terminal_is_dirty) : ((term)->flags &= ~_terminal_is_dirty)))
-
-/* Maximum face changes per text grouping.. */
-#define MAXIMUM_FACE_CHANGES_PER_TEXT_GROUPING (128)
-
-enum {
-	_text_is_encoded_flag= 0x0001
-};
-
-enum {
-	_logon_group,
-	_unfinished_group,
-	_success_group,
-	_failure_group,
-	_information_group,
-	_end_group,
-	_interlevel_teleport_group, // permutation is level to go to
-	_intralevel_teleport_group, // permutation is polygon to go to.
-	_checkpoint_group, // permutation is the goal to show
-	_sound_group, // permutation is the sound id to play
-	_movie_group, // permutation is the movie id to play
-	_track_group, // permutation is the track to play
-	_pict_group, // permutation is the pict to display
-	_logoff_group,
-	_camera_group, //  permutation is the object index
-	_static_group, // permutation is the duration of static.
-	_tag_group, // permutation is the tag to activate
-
-	NUMBER_OF_GROUP_TYPES
-};
-
-enum // flags to indicate text styles for paragraphs
-{
-	_plain_text      = 0x00,
-	_bold_text       = 0x01,
-	_italic_text     = 0x02,
-	_underline_text  = 0x04
-};
-
-enum { /* terminal grouping flags */
-	_draw_object_on_right= 0x01,  // for drawing checkpoints, picts, movies.
-	_center_object= 0x02
-};
-
-struct terminal_groupings {
-	int16 flags; /* varies.. */
-	int16 type; /* _information_text, _checkpoint_text, _briefing_text, _movie, _sound_bite, _soundtrack */
-	int16 permutation; /* checkpoint id for chkpt, level id for _briefing, movie id for movie, sound id for sound, soundtrack id for soundtrack */
-	int16 start_index;
-	int16 length;
-	int16 maximum_line_count;
-};
-const int SIZEOF_terminal_groupings = 12;
-
-struct text_face_data {
-	int16 index;
-	int16 face;
-	int16 color;
-};
-const int SIZEOF_text_face_data = 6;
 
 // This is externally visible, so its external size is defined in the header file
 struct player_terminal_data
@@ -257,41 +154,8 @@ struct font_dimensions {
 	int16 character_width;
 };
 
-/* Terminal data loaded from map (maintained by computer_interface.cpp) */
-struct terminal_text_t {	// Object describing one terminal
-	terminal_text_t() : text_length(0), text(NULL) {}
-	terminal_text_t(const terminal_text_t &other) {copy(other);}
-	~terminal_text_t() {delete[] text;}
 
-	const terminal_text_t &operator=(const terminal_text_t &other)
-	{
-		if (this != &other)
-			copy(other);
-		return *this;
-	}
-
-	void copy(const terminal_text_t &other)
-	{
-		flags = other.flags;
-		lines_per_page = other.lines_per_page;
-		groupings = other.groupings;
-		font_changes = other.font_changes;
-		text_length = other.text_length;
-		text = new uint8[text_length];
-		memcpy(text, other.text, text_length);
-	}
-
-	uint16 flags;
-	int16 lines_per_page;
-
-	vector<terminal_groupings> groupings;
-	vector<text_face_data> font_changes;
-
-	int text_length;
-	uint8 *text;
-};
-
-static vector<terminal_text_t> map_terminal_text;
+vector<terminal_text_t> map_terminal_text;
 
 /* internal global structure */
 static struct player_terminal_data *player_terminals;
@@ -380,6 +244,20 @@ static void decode_text(terminal_text_t *terminal_text);
 #elif defined(SDL)
 #include "computer_interface_sdl.h"
 extern SDL_Surface *draw_surface;
+#endif
+
+
+#ifdef PREPROCESSING_CODE
+struct static_preprocessed_terminal_data *preprocess_text(char *text, short length);
+static void pre_build_groups(struct terminal_groupings *groups,
+	short *group_count, struct text_face_data *text_faces, short *text_face_count, 
+	char *base_text, short *base_length);
+static short matches_group(char *base_text, short length, short index, short possible_group, 
+	short *permutation);
+#else
+//static terminal_text_t *get_indexed_terminal_data(short id);
+static void encode_text(terminal_text_t *terminal_text);
+static void decode_text(terminal_text_t *terminal_text);
 #endif
 
 /* ------------ code begins */
@@ -850,6 +728,59 @@ static void calculate_maximum_lines_for_groups(
 	}
 }
 #endif // End of preprocessing code
+
+    #ifndef PREPROCESSING_CODE
+// LP addition: will return NULL if no terminal data was found for this terminal number
+terminal_text_t *get_indexed_terminal_data(
+	short id)
+{
+	if (id < 0 || id >= int(map_terminal_text.size()))
+		return NULL;
+
+	terminal_text_t *t = &map_terminal_text[id];
+
+	// Note that this will only decode the text once
+	decode_text(t);
+	return t;
+}
+#endif
+
+#ifdef PREPROCESSING_CODE
+void decode_text(
+	terminal_text_t *terminal_text)
+#else
+static void decode_text(
+	terminal_text_t *terminal_text)
+#endif
+{
+	if(terminal_text->flags & _text_is_encoded_flag)
+	{
+		encode_text(terminal_text);
+		terminal_text->flags &= ~_text_is_encoded_flag;
+	}
+}
+
+#ifdef PREPROCESSING_CODE
+void encode_text(
+	terminal_text_t *terminal_text)
+#else
+static void encode_text(
+	terminal_text_t *terminal_text)
+#endif
+{
+	int length = terminal_text->text_length;
+	uint8 *p = terminal_text->text;
+
+	for (int i=0; i<length/4; i++) {
+		p += 2;
+		*p++ ^= 0xfe;
+		*p++ ^= 0xed;
+	}
+	for (int i=0; i<length%4; i++)
+		*p++ ^= 0xfe;
+
+	terminal_text->flags |= _text_is_encoded_flag;
+}
 
 static struct terminal_groupings *get_indexed_grouping(
 	terminal_text_t *data,

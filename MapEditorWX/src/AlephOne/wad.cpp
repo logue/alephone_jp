@@ -219,8 +219,8 @@ struct wad_data *read_indexed_wad_from_file(
 					if(!read_wad)
 					{
 						/* Error.. */
-                        //MessageBox(NULL, "メモリエラー(read_indexed_wad_from_file-read_indexed_wad_from_file_into_buffer-convert_wad_from_raw)",
-                        //    "エラー", MB_OK|MB_ICONEXCLAMATION);
+                        //MessageBox(NULL, L"メモリエラー(read_indexed_wad_from_file-read_indexed_wad_from_file_into_buffer-convert_wad_from_raw)",
+                        //    L"エラー", MB_OK|MB_ICONEXCLAMATION);
 						error= memory_error();
 					}
 				}
@@ -486,7 +486,7 @@ void set_indexed_directory_offset_and_length(
 	// LP: eliminating this dangerous sort of casting;
 	// should work correctly for wadfiles with size more than 1
 	/*
-	entry= (struct directory_entry *) data_ptr;
+    struct directory_entry *entry= (struct directory_entry *) data_ptr;
 	
 	entry->length= length;
 	entry->offset_to_start= offset;
@@ -494,8 +494,8 @@ void set_indexed_directory_offset_and_length(
 	if(header->version>=WADFILE_SUPPORTS_OVERLAYS)
 	{
 		entry->index= wad_index;
-	}
-	*/
+	}*/
+	
 	
 	// LP: should be correct for packing also
 	if (header->version>=WADFILE_SUPPORTS_OVERLAYS)
@@ -517,6 +517,7 @@ void set_indexed_directory_offset_and_length(
 		
 		pack_old_directory_entry(data_ptr, &entry, 1);
 	}
+    
 }
 
 // Returns raw, unswapped directory data
@@ -590,6 +591,8 @@ struct wad_data *append_data_to_wad(
 	wad->tag_data[index].data= (uint8 *) malloc(size);
 	if(!wad->tag_data[index].data)
 	{
+//        MessageBox(NULL, L"out of memory", L"error", MB_OK);
+        return NULL;
 		//alert_user(fatalError, strERRORS, outOfMemory, memory_error());
 	}
 	assert(wad->tag_data[index].data);

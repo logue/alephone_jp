@@ -141,10 +141,10 @@ struct environment_definition
 
 // LP: modified texture-environment management so as to be easier to handle with XML
 
-const int NUMBER_OF_ENVIRONMENTS = 5;
-const int NUMBER_OF_ENV_COLLECTIONS = 7;
+//const int NUMBER_OF_ENVIRONMENTS = 5;
+//const int NUMBER_OF_ENV_COLLECTIONS = 7;
 
-static short Environments[NUMBER_OF_ENVIRONMENTS][NUMBER_OF_ENV_COLLECTIONS] = 
+short Environments[NUMBER_OF_ENVIRONMENTS][NUMBER_OF_ENV_COLLECTIONS] = 
 {
 	{_collection_walls1, _collection_scenery1, NONE, NONE, NONE, NONE, NONE},	// Lh'owon Water
 	{_collection_walls2, _collection_scenery2, NONE, NONE, NONE, NONE, NONE},	// Lh'owon Lava
@@ -423,12 +423,19 @@ void initialize_map_for_new_level(
     }
 
 	//* Note that these pointers just point into a larger structure, so this is not a bad thing *
-	// map_polygons= NULL;
-	// map_sides= NULL;
-	// map_lines= NULL;
-	// map_endpoints= NULL;
-	// automap_lines= NULL;
-	// automap_polygons= NULL;
+    PolygonList.clear();
+    LineList.clear();
+    EndpointList.clear();
+    SavedObjectList.clear();
+    MapAnnotationList.clear();
+
+	/* map_polygons= NULL;
+	 map_sides= NULL;
+	 map_lines= NULL;
+	 map_endpoints= NULL;
+	 automap_lines= NULL;
+	 automap_polygons= NULL;
+     */
 }
 /**/
 bool collection_in_environment(

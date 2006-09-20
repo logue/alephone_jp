@@ -493,7 +493,7 @@ void _play_sound(short sound_index, world_location3d *source, short identifier, 
 
 void stop_sound(short identifier, short sound_index);
 void unload_all_sounds(void);
-#define stop_all_sounds() stop_sound(NONE, NONE)
+//#define stop_all_sounds() stop_sound(NONE, NONE)
 
 void orphan_sound(short identifier);
 #define orphan_all_sounds() orphan_sound(NONE, NONE)

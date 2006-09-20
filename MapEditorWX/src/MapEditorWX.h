@@ -71,15 +71,21 @@ class MapEditorWX: public wxApp
 {
 public:
     virtual bool OnInit();
+    //level names stock
     vector<string> levelNameList;
+
     //editing level index
     int editLevelIndex;
+    
     //divide map scale
     int zoomDivision;
+    
     //drawing offset
     int offsetX, offsetY;
+    
     //color for polygon type
     vector<wxColor> polygonTypeColorList;
+    
     //color for height(variables)
     vector<wxColor> heightColorList;
 };
@@ -88,3 +94,5 @@ public:
 ///disabled
 
 DECLARE_APP(MapEditorWX)
+
+void wxStringToChar(wxString& str, char* cstr);

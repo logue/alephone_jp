@@ -17,3 +17,13 @@ bool MapEditorWX::OnInit()
     
     return TRUE;
 }
+
+void wxStringToChar(wxString& str, char* cstr)
+{
+    int i = 0;
+    for(i = 0; i < (int)str.length(); i ++){
+        cstr[i] = str.GetChar(i);
+    }
+    cstr[i] = '\0';
+}
+

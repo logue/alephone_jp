@@ -1,6 +1,6 @@
 #ifndef __SHAPE_DEFINITIONS_H
 #define __SHAPE_DEFINITIONS_H
-#include "stdafx.h"
+#include "header.h"
 /*
 SHAPE_DEFINITIONS.H
 

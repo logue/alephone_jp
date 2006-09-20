@@ -62,6 +62,11 @@ Nov 19, 2000 (Loren Petrich):
 
 /* ---------- constants */
 
+const int NUMBER_OF_ENVIRONMENTS = 5;
+const int NUMBER_OF_ENV_COLLECTIONS = 7;
+
+extern short Environments[NUMBER_OF_ENVIRONMENTS][NUMBER_OF_ENV_COLLECTIONS];
+
 #define TICKS_PER_SECOND 30
 #define TICKS_PER_MINUTE (60*TICKS_PER_SECOND)
 

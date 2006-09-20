@@ -22,7 +22,7 @@
 
 #ifdef SAVE_RCSID
 static char rcsid =
- "@(#) $Id: SDL_mutex.h,v 1.1 2006-09-16 16:08:06 hogepiyo Exp $";
+ "@(#) $Id: SDL_mutex.h,v 1.2 2006-09-20 15:20:05 hogepiyo Exp $";
 #endif
 
 #ifndef _SDL_mutex_h

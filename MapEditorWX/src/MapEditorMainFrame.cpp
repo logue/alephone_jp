@@ -111,9 +111,10 @@ void MapEditorMainFrame::OnPaint(wxPaintEvent& WXUNUSED(event))
     //ポイント
     {
         wxBrush yellowBrush = wxBrush(wxColor(255,255,0));
-        wxPen yellowPen = wxPen(wxColor(255,255,0));
+        wxPen bluePen = wxPen(wxColor(0,0,255));
+        //wxPen yellowPen = wxPen(wxColor(255,255,0));
         dc.SetBrush(yellowBrush);
-        dc.SetPen(yellowPen);
+        dc.SetPen(bluePen);
         for(int i = 0; i < (int)EndpointList.size(); i ++){
             endpoint_data* point = &EndpointList[i];
             int x = point->vertex.x;
@@ -142,11 +143,11 @@ void MapEditorMainFrame::OnOpen(wxCommandEvent& WXUNUSED(event))
     if(fileDialog.ShowModal() == wxID_OK){
         wxString path = fileDialog.GetPath();
         char filename[256];
-        strcpy(filename, path.c_str());
+        wxStringToChar(path, filename);
 
         //タイトル
-        SetTitle(wxString(filename));
-
+        SetTitle(path);
+        
         FileSpecifier mapFile = FileSpecifier(filename);
         //set map file
         set_map_file(mapFile);
@@ -175,9 +176,9 @@ void MapEditorMainFrame::OnOpen(wxCommandEvent& WXUNUSED(event))
                 wxGetApp().levelNameList.push_back(string(cstr) + string(ep.level_name));
             }
         }*/
-        //標準倍率
+        //normal division
         wxGetApp().zoomDivision = ZOOM_DIVISION_DEFAULT;
-        //中心へ
+        //centering
         wxGetApp().offsetX = 0;
         wxGetApp().offsetY = 0;
 
@@ -194,9 +195,9 @@ void MapEditorMainFrame::OnMotion(wxMouseEvent &ev)
 {
     static int oldX = ev.m_x, oldY = ev.m_y;
 
-    if(ev.ButtonIsDown(wxLEFT) && ev.ShiftDown()){
+    /*if(ev.ButtonIsDown(wxLEFT) && ev.ShiftDown()){
         //平行移動
-    }
+    }*/
 }
 void MapEditorMainFrame::OnMouseWheel(wxMouseEvent &ev)
 {

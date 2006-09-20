@@ -227,12 +227,12 @@ extern WindowPtr screen_window;
 #include <stdlib.h>
 
 // LP additions for decomposition of this code:
-/*#include "RenderVisTree.h"
+#include "RenderVisTree.h"
 #include "RenderSortPoly.h"
 #include "RenderPlaceObjs.h"
 #include "RenderRasterize.h"
 #include "Rasterizer_SW.h"
-#include "Rasterizer_OGL.h"
+/*#include "Rasterizer_OGL.h"
 */
 #ifdef env68k
 #pragma segment render
@@ -292,8 +292,8 @@ static Rasterizer_OGL_Class Rasterizer_OGL;			// OpenGL rasterizer
 
 
 /* ---------- private prototypes */
-/*
 static void update_view_data(struct view_data *view);
+/*
 static void update_render_effect(struct view_data *view);
 static void shake_view_origin(struct view_data *view, world_distance delta);
 
@@ -321,15 +321,138 @@ void allocate_render_memory(
 	only grow and shrink while maintaining a constant aspect ratio, but to also change in
 	geometry without effecting the image being projected onto it.  if you don't understand
 	this, pass standard_width==width *
+    */
 void initialize_view_data(
-	struct view_data *view)
-{
+struct view_data *view){
+	double two_pi= 8.0*atan(1.0);
+	double half_cone= view->field_of_view*(two_pi/360.0)/2;
+	double adjusted_half_cone= View_FOV_FixHorizontalNotVertical() ?
+		half_cone :
+		asin(view->screen_width*sin(half_cone)/view->standard_screen_width);
+	double world_to_screen;
+	
+	view->half_screen_width= view->screen_width/2;
+	view->half_screen_height= view->screen_height/2;
+	
+	/* if thereÕs a round-off error in half_cone, we want to make the cone too big (so when we clip
+		lines Ôto the edge of the screenÕ theyÕre actually off the screen, thus +1.0) */
+	view->half_cone= (angle) (adjusted_half_cone*((double)NUMBER_OF_ANGLES)/two_pi+1.0);
+	
+	// LP change: find the adjusted yaw for the landscapes;
+	// this is the effective yaw value for the left edge.
+	// A landscape rotation can also be added if desired.
+	view->landscape_yaw = view->yaw - view->half_cone;
 
-/* origin,origin_polygon_index,yaw,pitch,roll,etc. have probably changed since last call *
+	/* calculate world_to_screen; we could calculate this with standard_screen_width/2 and
+		the old half_cone and get the same result */
+	world_to_screen= view->half_screen_width/tan(adjusted_half_cone);
+	view->world_to_screen_x= view->real_world_to_screen_x= (short) ((world_to_screen/view->horizontal_scale)+0.5);
+	view->world_to_screen_y= view->real_world_to_screen_y= (short) ((world_to_screen/view->vertical_scale)+0.5);
+	
+	/* calculate the vertical cone angle; again, overflow instead of underflow when rounding */
+	view->half_vertical_cone= (angle) (NUMBER_OF_ANGLES*atan(((double)view->half_screen_height*view->vertical_scale)/world_to_screen)/two_pi+1.0);
+
+	/* calculate left edge vector */
+	view->untransformed_left_edge.i= view->world_to_screen_x;
+	view->untransformed_left_edge.j= - view->half_screen_width;
+
+	/* calculate right edge vector (negative, so it clips in the right direction) */
+	view->untransformed_right_edge.i= - view->world_to_screen_x;
+	view->untransformed_right_edge.j= - view->half_screen_width;
+
+	/* reset any active effects */
+	// LP: this is now called in render_screen(), so we need to disable the initializing
+}
+//* origin,origin_polygon_index,yaw,pitch,roll,etc. have probably changed since last call *
 void render_view(
 	struct view_data *view,
-	struct bitmap_definition *destination)
+    struct bitmap_definition *destination){
+	update_view_data(view);
 
+	/* clear the render flags */
+	objlist_clear(render_flags, RENDER_FLAGS_BUFFER_SIZE);
+
+	//ResetOverheadMap();
+/*
+#ifdef AUTOMAP_DEBUG
+	memset(automap_lines, 0, (dynamic_world->line_count/8+((dynamic_world->line_count%8)?1:0)*sizeof(byte)));
+	memset(automap_polygons, 0, (dynamic_world->polygon_count/8+((dynamic_world->polygon_count%8)?1:0)*sizeof(byte)));
+#endif
+*/
+	
+	if(view->terminal_mode_active)
+	{
+		/* Render the computer interface. */
+		//render_computer_interface(view);
+	}
+	else
+	{
+		// LP: the render objects have a pointer to the current view in them,
+		// so that one can get rid of redundant references to it in them.
+		
+		// LP: now from the visibility-tree class
+		/* build the render tree, regardless of map mode, so the automap updates while active */
+		/*RenderVisTree.view = view;
+		RenderVisTree.build_render_tree();
+		
+		if (view->overhead_map_active)
+		{
+			//* if the overhead map is active, render it *
+			render_overhead_map(view);
+		}
+		else //* do something complicated and difficult to explain *
+		{			
+			// LP: now from the polygon-sorter class
+			//* sort the render tree (so we have a depth-ordering of polygons) and accumulate
+			//	clipping information for each polygon *
+			RenderSortPoly.view = view;
+			RenderSortPoly.sort_render_tree();
+			
+			// LP: now from the object-placement class
+			//* build the render object list by looking at the sorted render tree *
+			RenderPlaceObjs.view = view;
+			RenderPlaceObjs.build_render_object_list();
+			
+			// LP addition: set the current rasterizer to whichever is appropriate here
+			RasterizerClass *RasPtr;
+#ifdef HAVE_OPENGL
+			if (OGL_IsActive())
+				RasPtr = &Rasterizer_OGL;
+			else
+			{
+#endif
+				// The software renderer needs this but the OpenGL one doesn't...
+				Rasterizer_SW.screen = destination;
+				RasPtr = &Rasterizer_SW;
+#ifdef HAVE_OPENGL
+			}
+#endif
+			
+			// Set its view:
+			RasPtr->SetView(*view);
+			
+			// Start rendering main view
+			RasPtr->Begin();
+			
+			// LP: now from the clipping/rasterizer class
+			/* render the object list, back to front, doing clipping on each surface before passing
+				it to the texture-mapping code *
+			RenderRasterize.view = view;
+			RenderRasterize.RasPtr = RasPtr;
+			RenderRasterize.render_tree();
+			
+			// LP: won't put this into a separate class
+			/* render the playerÕs weapons, etc. *	
+			render_viewer_sprite_layer(view, RasPtr);
+			
+			// Finish rendering main view
+			RasPtr->End();
+            
+		}*/
+	}
+}
+
+/*
 void start_render_effect(
 	struct view_data *view,
 	short effect)
@@ -339,9 +462,98 @@ void start_render_effect(
 }
 
 /* ---------- private code */
-/*
+
+
 static void update_view_data(
 	struct view_data *view)
+{
+	angle theta;
+
+	// LP change: doing all the FOV changes here:
+	View_AdjustFOV(view->field_of_view,view->target_field_of_view);
+	
+	if (view->effect==NONE)
+	{
+		view->world_to_screen_x= view->real_world_to_screen_x;
+		view->world_to_screen_y= view->real_world_to_screen_y;
+	}
+	else
+	{
+		//update_render_effect(view);
+	}
+	
+	view->untransformed_left_edge.i= view->world_to_screen_x;
+	view->untransformed_right_edge.i= - view->world_to_screen_x;
+	
+	/* calculate world_to_screen_y*tan(pitch) */
+	view->dtanpitch= (view->world_to_screen_y*sine_table[view->pitch])/cosine_table[view->pitch];
+
+	/* calculate left cone vector */
+	theta= NORMALIZE_ANGLE(view->yaw-view->half_cone);
+	view->left_edge.i= cosine_table[theta], view->left_edge.j= sine_table[theta];
+	
+	/* calculate right cone vector */
+	theta= NORMALIZE_ANGLE(view->yaw+view->half_cone);
+	view->right_edge.i= cosine_table[theta], view->right_edge.j= sine_table[theta];
+	
+	/* calculate top cone vector (negative to clip the right direction) */
+	view->top_edge.i= - view->world_to_screen_y;
+	view->top_edge.j= - (view->half_screen_height + view->dtanpitch); /* ==k */
+
+	/* calculate bottom cone vector */
+	view->bottom_edge.i= view->world_to_screen_y;
+	view->bottom_edge.j= - view->half_screen_height + view->dtanpitch; /* ==k */
+
+	/* if weÕre sitting on one of the endpoints in our origin polygon, move us back slightly (±1) into
+		that polygon.  when we split rays weÕre assuming that weÕll never pass through a given
+		vertex in different directions (because if we do the tree becomes a graph) but when
+		we start on a vertex this can happen.  this is a destructive modification of the origin. */
+	{
+		short i;
+		struct polygon_data *polygon= get_polygon_data(view->origin_polygon_index);
+		
+		for (i= 0;i<polygon->vertex_count;++i)
+		{
+			struct world_point2d *vertex= &get_endpoint_data(polygon->endpoint_indexes[i])->vertex;
+			
+			if (vertex->x==view->origin.x && vertex->y==view->origin.y)
+			{
+				world_point2d *ccw_vertex= &get_endpoint_data(polygon->endpoint_indexes[WRAP_LOW(i, polygon->vertex_count-1)])->vertex;
+				world_point2d *cw_vertex= &get_endpoint_data(polygon->endpoint_indexes[WRAP_HIGH(i, polygon->vertex_count-1)])->vertex;
+				world_vector2d inset_vector;
+				
+				inset_vector.i= (ccw_vertex->x-vertex->x) + (cw_vertex->x-vertex->x);
+				inset_vector.j= (ccw_vertex->y-vertex->y) + (cw_vertex->y-vertex->y);
+				view->origin.x+= SGN(inset_vector.i);
+				view->origin.y+= SGN(inset_vector.j);
+				
+				break;
+			}
+		}
+		
+		/* determine whether we are under or over the media boundary of our polygon; we will see all
+			other media boundaries from this orientation (above or below) or fail to draw them. */
+		if (polygon->media_index==NONE)
+		{
+			view->under_media_boundary= false;
+		}
+		else
+		{
+			struct media_data *media= get_media_data(polygon->media_index);
+			
+			// LP change: idiot-proofing
+			if (media)
+			{
+				view->under_media_boundary= UNDER_MEDIA(media, view->origin.z);
+				view->under_media_index= polygon->media_index;
+			} else {
+				view->under_media_boundary= false;
+			}
+		}
+	}
+}
+
+        /*
 static void update_render_effect(
 	struct view_data *view)
 /* ---------- transfer modes */
