@@ -46,6 +46,7 @@ BEGIN_MESSAGE_MAP(CMapEditorSDIView, CView)
     ON_WM_CREATE()
     ON_COMMAND(ID_FILE_NEW, &CMapEditorSDIView::OnFileNew)
     ON_COMMAND(ID_32796, &CMapEditorSDIView::On32796)
+    ON_COMMAND(ID_32788, On32788)
 END_MESSAGE_MAP()
 
 // CMapEditorSDIView コンストラクション/デストラクション
@@ -693,7 +694,8 @@ void CMapEditorSDIView::OnMouseMove(UINT nFlags, CPoint point)
         theApp.offset.x += deltaX;
         theApp.offset.y += deltaY;
         this->Invalidate(FALSE);
-    }else if(nFlags & MK_LBUTTON && !(nFlags & MK_SHIFT) && !(nFlags & MK_CONTROL)){
+    }else if(!theApp.isPressLButtonWithShift && 
+        (nFlags & MK_LBUTTON) && !(nFlags & MK_SHIFT) && !(nFlags & MK_CONTROL)){
         //選択物の移動
         int x = (point.x - theApp.offset.x) * theApp.zoomDivision - OFFSET_X_WORLD;
         int y = (point.y - theApp.offset.y) * theApp.zoomDivision - OFFSET_Y_WORLD;
@@ -1250,5 +1252,14 @@ void CMapEditorSDIView::On32796()
     // TODO: ここにコマンド ハンドラ コードを追加します。
     CVisualDialog dlg(this);
     if(dlg.DoModal() == IDOK){
+    }
+}
+//level info
+void CMapEditorSDIView::On32788()
+{
+    // TODO : ここにコマンド ハンドラ コードを追加します。
+    CLevelParameterDialog dlg(this, false);
+    if(dlg.DoModal() == IDOK){
+        //内容を反映
     }
 }

@@ -92,6 +92,30 @@ CMapEditorSDIApp::CMapEditorSDIApp()
     loadInformations("data/PolygonType.txt", NUMBER_OF_POLYGON_TYPE,
         polygonTypeInformations);
 
+    //environments
+    loadInformations("data/Environments.txt", NUMBER_OF_ENVIRONMENTS,
+        environmentInformations);
+    //landscape
+    loadInformations("data/Landscapes.txt", NUMBER_OF_LANDSPACES,
+        landscapeInformations);
+    //game type(bind)
+    //(same order)
+    //env type(bind)
+    environmentTypeInformations[0].bind = _environment_normal;
+    environmentTypeInformations[1].bind = _environment_vacuum;
+    environmentTypeInformations[2].bind = _environment_magnetic;
+    environmentTypeInformations[3].bind = _environment_rebellion;
+    environmentTypeInformations[4].bind = _environment_low_gravity;
+    environmentTypeInformations[5].bind = _environment_network;
+    environmentTypeInformations[6].bind = _environment_single_player;
+    //mission type(bind)
+    missionTypeInformations[0].bind = _mission_none;
+    missionTypeInformations[1].bind = _mission_extermination;
+    missionTypeInformations[2].bind = _mission_exploration;
+    missionTypeInformations[3].bind = _mission_retrieval;
+    missionTypeInformations[4].bind = _mission_repair;
+    missionTypeInformations[5].bind = _mission_rescue;
+
     //色設定
     //ファイルから読み込み
     const int LENGTH = 1024*10;

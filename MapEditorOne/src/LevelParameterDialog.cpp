@@ -60,7 +60,12 @@ BOOL CLevelParameterDialog::OnInitDialog()
     // TODO:  ここに初期化を追加してください
 
     //コンボボックスへ流し込み
-    
+    for(int i = 0; i < NUMBER_OF_ENVIRONMENTS; i ++){
+        environment.InsertString(i, theApp.environmentInformations[i].jname);
+    }
+    for(int i = 0; i < NUMBER_OF_LANDSPACES; i ++){
+        landscape.InsertString(i, theApp.landscapeInformations[i].jname);
+    }
     if(isNew){
         //新規レベル
         //標準
@@ -70,10 +75,24 @@ BOOL CLevelParameterDialog::OnInitDialog()
         environment.SetCurSel(0);
     }else{
         //レベル情報を取得
-        levelName.SetWindowText(CString(static_world->level_name));
+        levelName.SetWindowText(theApp.LevelNameList.GetAt(theApp.editLevelIndex));
         //環境
-        
+        environment.SetCurSel(static_world->environment_code);
+        //landscape.SetCurSel(static_world->);
+
+        //flag -> buttons
+        //game type
+        for(int i = 0; i < NUMBER_OF_GAME_TYPES; i ++){
+        }
+        //env type
+        for(int i = 0; i < NUMBER_OF_ENV_TYPES; i ++){
+        }
+        //mission
+        for(int i = 0; i < NUMBER_OF_MISSION_TYPES; i ++){
+        }
+
     }
+    UpdateData();
 
     return TRUE;  // return TRUE unless you set the focus to a control
     // 例外 : OCX プロパティ ページは必ず FALSE を返します。

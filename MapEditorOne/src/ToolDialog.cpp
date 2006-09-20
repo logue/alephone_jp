@@ -20,7 +20,7 @@ CToolDialog::CToolDialog(CWnd* pParent /*=NULL*/)
         //unselected
         IDB_BITMAP5,
         IDB_BITMAP6,
-        IDB_BITMAP8,
+        IDB_BITMAP9,
         IDB_BITMAP12,
         IDB_BITMAP13,
         IDB_BITMAP14,
@@ -30,7 +30,7 @@ CToolDialog::CToolDialog(CWnd* pParent /*=NULL*/)
         //selected
         IDB_BITMAP4,
         IDB_BITMAP7,
-        IDB_BITMAP9,
+        IDB_BITMAP8,
         IDB_BITMAP11,
         IDB_BITMAP13,
         IDB_BITMAP15,
@@ -38,13 +38,20 @@ CToolDialog::CToolDialog(CWnd* pParent /*=NULL*/)
         IDB_BITMAP17,
     };
     for(int i = 0; i < NUMBER_OF_TOOLS * 2; i ++){
-        loadBitmap(assignment[i], &imageList, RGB(255,0,0));
+        //loadBitmap(assignment[i], &imageList, RGB(255,0,0));
+        CBitmap* bmp = new CBitmap();
+        bmp->LoadBitmap(assignment[i]);
+        bitmaps.push_back(bmp);
     }
 }
 
 CToolDialog::~CToolDialog()
 {
     imageList.DeleteImageList();
+    vector<CBitmap*>::iterator it;
+    for(it = bitmaps.begin(); it != bitmaps.end(); it ++){
+        (*it)->DeleteObject();
+    }
 }
 
 void CToolDialog::DoDataExchange(CDataExchange* pDX)
@@ -117,12 +124,23 @@ void CToolDialog::OnPaint()
     // TODO: ここにメッセージ ハンドラ コードを追加します。
     // 描画メッセージで CDialog::OnPaint() を呼び出さないでください。
     //draw tools
+    CDC memDC;
+    memDC.CreateCompatibleDC(&dc);
+
     for(int i = 0; i < NUMBER_OF_TOOLS; i ++){
         POINT pt;
 
         pt.x = (i % 2) * TOOL_WIDTH;
         pt.y = (i / 2) * TOOL_HEIGHT;
 
-        imageList.Draw(&dc, i, pt, SRCCOPY);
+        //imageList.Draw(&dc, i, pt, SRCCOPY);
+        CBitmap* bmp = bitmaps[i];
+        BITMAP bmpInfo;
+        bmp->GetBitmap(&bmpInfo);
+        memDC.SelectObject(bmp);
+        dc.BitBlt(pt.x, pt.y, TOOL_WIDTH, TOOL_HEIGHT, &memDC,
+            0, 0, SRCCOPY);
     }
+
+    memDC.DeleteDC();
 }

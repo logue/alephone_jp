@@ -84,6 +84,7 @@ public:
     afx_msg void OnFileNew();
 public:
     afx_msg void On32796();
+    afx_msg void On32788();
 };
 
 #ifndef _DEBUG  // MapEditorSDIView.cpp のデバッグ バージョン

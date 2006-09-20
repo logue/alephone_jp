@@ -35,6 +35,7 @@
 #include "TerminalDialog.h"
 #include "VisualDialog.h"
 #include "ToolDialog.h"
+#include "LevelParameterDialog.h"
 
 // CMapEditorSDIApp:
 // このクラスの実装については、MapEditorSDI.cpp を参照してください。
@@ -205,7 +206,7 @@ public:
     //背景
     Information landscapeInformations[NUMBER_OF_LANDSPACES];
     //ゲームタイプ
-    InformationBinded gameTypeInformations[NUMBER_OF_GAME_TYPES];
+    //InformationBinded gameTypeInformations[NUMBER_OF_GAME_TYPES];
     //環境タイプ
     InformationBinded environmentTypeInformations[NUMBER_OF_ENV_TYPES];
     //ミッションタイプ
