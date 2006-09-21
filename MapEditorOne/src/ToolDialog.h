@@ -33,4 +33,6 @@ public:
     virtual BOOL OnInitDialog();
 public:
     afx_msg void OnPaint();
+public:
+    afx_msg void OnLButtonDown(UINT nFlags, CPoint point);
 };

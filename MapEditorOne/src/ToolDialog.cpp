@@ -63,6 +63,7 @@ void CToolDialog::DoDataExchange(CDataExchange* pDX)
 BEGIN_MESSAGE_MAP(CToolDialog, CDialog)
     ON_WM_CLOSE()
     ON_WM_PAINT()
+    ON_WM_LBUTTONDOWN()
 END_MESSAGE_MAP()
 
 
@@ -143,4 +144,22 @@ void CToolDialog::OnPaint()
     }
 
     memDC.DeleteDC();
+}
+
+void CToolDialog::OnLButtonDown(UINT nFlags, CPoint point)
+{
+    // TODO: ここにメッセージ ハンドラ コードを追加するか、既定の処理を呼び出します。
+    for(int i = 0; i < NUMBER_OF_TOOLS; i ++){
+        CRect rect;
+        rect.left = (i % 2) * TOOL_WIDTH;
+        rect.top = (i / 2) * TOOL_HEIGHT;
+        rect.right = rect.left + TOOL_WIDTH;
+        rect.bottom = rect.top + TOOL_HEIGHT;
+        if(isPointInRect<int>(point.x, point.y,
+            rect.left, rect.top, rect.right, rect.bottom))
+        {
+
+        }
+    }
+    CDialog::OnLButtonDown(nFlags, point);
 }

@@ -186,57 +186,57 @@ IDR_MAINFRAME MENU
 BEGIN
     POPUP "ファイル(&F)"
     BEGIN
-        MENUITEM "新規作成\tCtrl+N(&N)",        ID_FILE_NEW
-        MENUITEM "開く...\tCtrl+O(&O)",         ID_FILE_OPEN
-        MENUITEM "上書き保存\tCtrl+S(&S)",      ID_FILE_SAVE
-        MENUITEM "名前を付けて保存(&A)...",     ID_FILE_SAVE_AS
+        MENUITEM "新規作成\tCtrl+N(&N)",            ID_FILE_NEW
+        MENUITEM "開く...\tCtrl+O(&O)",           ID_FILE_OPEN
+        MENUITEM "上書き保存\tCtrl+S(&S)",           ID_FILE_SAVE
+        MENUITEM "名前を付けて保存(&A)...",             ID_FILE_SAVE_AS
         MENUITEM SEPARATOR
-        MENUITEM "印刷...\tCtrl+P(&P)",         ID_FILE_PRINT
-        MENUITEM "印刷プレビュー(&V)",          ID_FILE_PRINT_PREVIEW
-        MENUITEM "プリンタの設定(&R)...",       ID_FILE_PRINT_SETUP
+        MENUITEM "印刷...\tCtrl+P(&P)",           ID_FILE_PRINT
+        MENUITEM "印刷プレビュー(&V)",                 ID_FILE_PRINT_PREVIEW
+        MENUITEM "プリンタの設定(&R)...",              ID_FILE_PRINT_SETUP
         MENUITEM SEPARATOR
-        MENUITEM "最近使ったファイル",          ID_FILE_MRU_FILE1, GRAYED
+        MENUITEM "最近使ったファイル",                   ID_FILE_MRU_FILE1, GRAYED
         MENUITEM SEPARATOR
-        MENUITEM "アプリケーションの終了(&X)",  ID_APP_EXIT
+        MENUITEM "アプリケーションの終了(&X)",             ID_APP_EXIT
     END
     POPUP "編集(&E)"
     BEGIN
-        MENUITEM "元に戻す\tCtrl+Z(&U)",        ID_EDIT_UNDO
+        MENUITEM "元に戻す\tCtrl+Z(&U)",            ID_EDIT_UNDO
         MENUITEM SEPARATOR
-        MENUITEM "切り取り\tCtrl+X(&T)",        ID_EDIT_CUT
-        MENUITEM "コピー\tCtrl+C(&C)",          ID_EDIT_COPY
-        MENUITEM "貼り付け\tCtrl+V(&P)",        ID_EDIT_PASTE
+        MENUITEM "切り取り\tCtrl+X(&T)",            ID_EDIT_CUT
+        MENUITEM "コピー\tCtrl+C(&C)",             ID_EDIT_COPY
+        MENUITEM "貼り付け\tCtrl+V(&P)",            ID_EDIT_PASTE
     END
     POPUP "表示(&V)"
     BEGIN
-        MENUITEM "ツール バー(&T)",             ID_VIEW_TOOLBAR
-        MENUITEM "ステータス バー(&S)",         ID_VIEW_STATUS_BAR
-        MENUITEM "拡大\t+ or ^",                ID_ZOOM_IN
-        MENUITEM "縮小\t-",                     ID_ZOOM_OUT
-        MENUITEM "標準",                        ID_ITEM_ZOOM_DEFAULT
-        MENUITEM "中心へ移動",                  ID_ITEM_CENTERING
+        MENUITEM "ツール バー(&T)",                  ID_VIEW_TOOLBAR
+        MENUITEM "ステータス バー(&S)",                ID_VIEW_STATUS_BAR
+        MENUITEM "拡大\t+ or ^",                  ID_ZOOM_IN
+        MENUITEM "縮小\t-",                       ID_ZOOM_OUT
+        MENUITEM "標準",                          ID_ITEM_ZOOM_DEFAULT
+        MENUITEM "中心へ移動",                       ID_ITEM_CENTERING
         MENUITEM SEPARATOR
-        MENUITEM "オブジェクト情報ダイアログの表示切り替え", ID_32784
-        MENUITEM "ポリゴンタイプダイアログの表示切替", ID_32786
-        MENUITEM "高さダイアログの表示切替",    ID_32789
+        MENUITEM "オブジェクト情報ダイアログの表示切り替え",        ID_32784
+        MENUITEM "ポリゴンタイプダイアログの表示切替",           ID_32786
+        MENUITEM "高さダイアログの表示切替",                ID_32789
         MENUITEM SEPARATOR
     END
     POPUP "モード"
     BEGIN
-        MENUITEM "ポリゴン編集",                ID_32795
-        MENUITEM "ビジュアルモード",            ID_32796
+        MENUITEM "ポリゴン編集",                      ID_32795
+        MENUITEM "ビジュアルモード",                    ID_32796
         MENUITEM SEPARATOR
-        MENUITEM "ポリゴンタイプ",              ID_32791
-        MENUITEM "高さ",                        ID_32792
-        MENUITEM "液体",                        ID_32793
-        MENUITEM "ライト",                      ID_32794
+        MENUITEM "ポリゴンタイプ",                     ID_32791
+        MENUITEM "高さ",                          ID_32792
+        MENUITEM "液体",                          ID_32793
+        MENUITEM "ライト",                         ID_32794
     END
     POPUP "レベル"
     BEGIN
         MENUITEM "Jump Level...",               ID_32776
-        MENUITEM "レベル情報",                  ID_32787
-        MENUITEM "出現頻度",                    ID_32788
-        MENUITEM "ターミナル編集",              ID_32790
+        MENUITEM "レベル情報",                       ID_32787
+        MENUITEM "出現頻度",                        ID_32788
+        MENUITEM "ターミナル編集",                     ID_32790
     END
     POPUP "ヘルプ(&H)"
     BEGIN
@@ -283,71 +283,53 @@ CAPTION "バージョン情報 MapEditorSDI"
 FONT 9, "MS UI Gothic", 0, 0, 0x1
 BEGIN
     ICON            IDR_MAINFRAME,IDC_STATIC,11,17,18,21
-    LTEXT           "MapEditorSDI Version 1.0",IDC_STATIC,40,10,119,8,
-                    SS_NOPREFIX
+    LTEXT           "MapEditorSDI Version 1.0",IDC_STATIC,40,10,119,8,SS_NOPREFIX
     LTEXT           "Copyright (C) 2006",IDC_STATIC,40,25,119,8
     DEFPUSHBUTTON   "OK",IDOK,180,7,50,16,WS_GROUP
     LTEXT           "Author HogePiyo",IDC_STATIC,36,42,119,8,SS_NOPREFIX
 END
 
 ID_DIALOG_SELECT_LEVEL DIALOGEX 0, 0, 250, 204
-STYLE DS_SETFONT | DS_MODALFRAME | DS_FIXEDSYS | WS_POPUP | WS_CAPTION | 
-    WS_SYSMENU
+STYLE DS_SETFONT | DS_MODALFRAME | DS_FIXEDSYS | WS_POPUP | WS_CAPTION | WS_SYSMENU
 CAPTION "Dialog"
 FONT 8, "MS Shell Dlg", 400, 0, 0x1
 BEGIN
     DEFPUSHBUTTON   "OK",IDOK,138,180,50,14
     PUSHBUTTON      "キャンセル",IDCANCEL,192,180,50,14
     LTEXT           "変更先のレベルを選択してください",IDC_STATIC,7,7,107,8
-    LISTBOX         IDC_LIST1,6,24,234,150,LBS_NOINTEGRALHEIGHT | WS_VSCROLL | 
-                    WS_TABSTOP
+    LISTBOX         IDC_LIST1,6,24,234,150,LBS_NOINTEGRALHEIGHT | WS_VSCROLL | WS_TABSTOP
 END
 
 IDD_DIALOG_POLYGON_TYPE DIALOGEX 0, 0, 154, 210
-STYLE DS_SETFONT | DS_MODALFRAME | DS_FIXEDSYS | WS_POPUP | WS_CAPTION | 
-    WS_SYSMENU
+STYLE DS_SETFONT | DS_MODALFRAME | DS_FIXEDSYS | WS_POPUP | WS_CAPTION | WS_SYSMENU
 CAPTION "ポリゴンタイプ"
 FONT 8, "MS Shell Dlg", 400, 0, 0x1
 BEGIN
-    CONTROL         "",IDC_LIST2,"SysListView32",LVS_SMALLICON | 
-                    LVS_SINGLESEL | LVS_SHOWSELALWAYS | LVS_ALIGNLEFT | 
-                    WS_BORDER | WS_TABSTOP,6,6,144,198
+    CONTROL         "",IDC_LIST2,"SysListView32",LVS_SMALLICON | LVS_SINGLESEL | LVS_SHOWSELALWAYS | LVS_ALIGNLEFT | WS_BORDER | WS_TABSTOP,6,6,144,198
 END
 
 IDD_DIALOG3 DIALOGEX 0, 0, 172, 242
-STYLE DS_SETFONT | DS_MODALFRAME | DS_SETFOREGROUND | DS_FIXEDSYS | WS_POPUP | 
-    WS_CAPTION | WS_SYSMENU
+STYLE DS_SETFONT | DS_MODALFRAME | DS_SETFOREGROUND | DS_FIXEDSYS | WS_POPUP | WS_CAPTION | WS_SYSMENU
 FONT 8, "MS Shell Dlg", 400, 0, 0x1
 BEGIN
     CONTROL         "",IDC_STATIC_ANGLE,"Static",SS_BLACKFRAME,54,120,78,60
-    COMBOBOX        IDC_COMBO1,42,186,48,30,CBS_DROPDOWN | CBS_SORT | 
-                    WS_VSCROLL | WS_TABSTOP
+    COMBOBOX        IDC_COMBO1,42,186,48,30,CBS_DROPDOWN | CBS_SORT | WS_VSCROLL | WS_TABSTOP
     LTEXT           "起動",IDC_STATIC,6,186,17,8
-    CONTROL         "隠れている",IDC_CHECK1,"Button",BS_AUTOCHECKBOX | 
-                    WS_TABSTOP,6,42,50,10
-    CONTROL         "天井にいる",IDC_CHECK2,"Button",BS_AUTOCHECKBOX | 
-                    WS_TABSTOP,6,54,51,10
-    CONTROL         "存在に気づかない",IDC_CHECK3,"Button",BS_AUTOCHECKBOX | 
-                    WS_TABSTOP,6,66,73,10
-    CONTROL         "音に気づかない",IDC_CHECK4,"Button",BS_AUTOCHECKBOX | 
-                    WS_TABSTOP,6,78,65,10
-    CONTROL         "空中にいる",IDC_CHECK5,"Button",BS_AUTOCHECKBOX | 
-                    WS_TABSTOP,6,90,51,10
-    CONTROL         "ネットワーク時のみ",IDC_CHECK6,"Button",BS_AUTOCHECKBOX | 
-                    WS_TABSTOP,6,102,73,10
+    CONTROL         "隠れている",IDC_CHECK1,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,6,42,50,10
+    CONTROL         "天井にいる",IDC_CHECK2,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,6,54,51,10
+    CONTROL         "存在に気づかない",IDC_CHECK3,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,6,66,73,10
+    CONTROL         "音に気づかない",IDC_CHECK4,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,6,78,65,10
+    CONTROL         "空中にいる",IDC_CHECK5,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,6,90,51,10
+    CONTROL         "ネットワーク時のみ",IDC_CHECK6,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,6,102,73,10
     LTEXT           "ポリゴンID",IDC_STATIC,84,42,32,8
-    EDITTEXT        IDC_EDIT_POLYGON_INDEX,84,54,40,14,ES_AUTOHSCROLL | 
-                    ES_READONLY
+    EDITTEXT        IDC_EDIT_POLYGON_INDEX,84,54,40,14,ES_AUTOHSCROLL | ES_READONLY
     LTEXT           "オブジェクトタイプ",IDC_STATIC,6,6,52,8
     LTEXT           "種類",IDC_STATIC,6,24,17,8
-    EDITTEXT        IDC_EDIT_OBJECT_TYPE,60,6,18,14,ES_AUTOHSCROLL | 
-                    ES_READONLY
+    EDITTEXT        IDC_EDIT_OBJECT_TYPE,60,6,18,14,ES_AUTOHSCROLL | ES_READONLY
     LTEXT           "方向",IDC_STATIC,6,120,17,8
     EDITTEXT        IDC_EDIT_TYPE,60,24,18,14,ES_AUTOHSCROLL | ES_READONLY
-    COMBOBOX        IDC_COMBO2,84,6,78,30,CBS_DROPDOWN | CBS_SORT | 
-                    WS_VSCROLL | WS_TABSTOP
-    COMBOBOX        IDC_COMBO3,84,24,78,30,CBS_DROPDOWN | CBS_SORT | 
-                    WS_VSCROLL | WS_TABSTOP
+    COMBOBOX        IDC_COMBO2,84,6,78,30,CBS_DROPDOWN | CBS_SORT | WS_VSCROLL | WS_TABSTOP
+    COMBOBOX        IDC_COMBO3,84,24,78,30,CBS_DROPDOWN | CBS_SORT | WS_VSCROLL | WS_TABSTOP
     LTEXT           "座標",IDC_STATIC,6,204,17,8
     EDITTEXT        IDC_EDIT3,42,202,48,14,ES_AUTOHSCROLL
     LTEXT           "x",IDC_STATIC,30,204,8,8
@@ -363,29 +345,23 @@ STYLE DS_SETFONT | DS_MODALFRAME | DS_FIXEDSYS | WS_CAPTION | WS_SYSMENU
 CAPTION "表示する高さ"
 FONT 8, "MS Shell Dlg", 400, 0, 0x1
 BEGIN
-    CONTROL         "",IDC_SLIDER1,"msctls_trackbar32",TBS_VERT | TBS_BOTH | 
-                    TBS_NOTICKS | WS_TABSTOP,54,18,18,120
-    CONTROL         "隠れたラインを表示",IDC_CHECK1,"Button",BS_AUTOCHECKBOX | 
-                    WS_TABSTOP,6,168,77,10
+    CONTROL         "",IDC_SLIDER1,"msctls_trackbar32",TBS_VERT | TBS_BOTH | TBS_NOTICKS | WS_TABSTOP,54,18,18,120
+    CONTROL         "隠れたラインを表示",IDC_CHECK1,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,6,168,77,10
     LTEXT           "床",IDC_STATIC,60,138,9,8
     LTEXT           "？",IDC_STATIC,18,66,9,8
-    CONTROL         "",IDC_SLIDER2,"msctls_trackbar32",TBS_VERT | TBS_BOTH | 
-                    TBS_NOTICKS | WS_TABSTOP,78,18,18,120
+    CONTROL         "",IDC_SLIDER2,"msctls_trackbar32",TBS_VERT | TBS_BOTH | TBS_NOTICKS | WS_TABSTOP,78,18,18,120
     LTEXT           "天井",IDC_STATIC,78,138,17,8
     LTEXT           "？",IDC_STATIC,114,66,9,8
 END
 
 IDD_DIALOG_OBJECT_PLACEMENT DIALOGEX 0, 0, 341, 262
-STYLE DS_SETFONT | DS_MODALFRAME | DS_FIXEDSYS | WS_POPUP | WS_CAPTION | 
-    WS_SYSMENU
+STYLE DS_SETFONT | DS_MODALFRAME | DS_FIXEDSYS | WS_POPUP | WS_CAPTION | WS_SYSMENU
 CAPTION "Dialog"
 FONT 8, "MS Shell Dlg", 400, 0, 0x1
 BEGIN
     DEFPUSHBUTTON   "OK",IDOK,284,241,50,14
-    COMBOBOX        IDC_COMBO1,6,6,54,30,CBS_DROPDOWN | CBS_SORT | 
-                    WS_VSCROLL | WS_TABSTOP
-    CONTROL         "",IDC_LIST1,"SysListView32",LVS_REPORT | LVS_ALIGNLEFT | 
-                    WS_BORDER | WS_TABSTOP,7,95,327,143
+    COMBOBOX        IDC_COMBO1,6,6,54,30,CBS_DROPDOWN | CBS_SORT | WS_VSCROLL | WS_TABSTOP
+    CONTROL         "",IDC_LIST1,"SysListView32",LVS_REPORT | LVS_ALIGNLEFT | WS_BORDER | WS_TABSTOP,7,95,327,143
     EDITTEXT        IDC_EDIT1,240,18,40,14,ES_AUTOHSCROLL
     EDITTEXT        IDC_EDIT2,240,36,40,14,ES_AUTOHSCROLL
     EDITTEXT        IDC_EDIT3,240,54,40,14,ES_AUTOHSCROLL
@@ -397,8 +373,7 @@ BEGIN
 END
 
 IDD_DIALOG_LEVEL_PARAMETER DIALOGEX 0, 0, 228, 215
-STYLE DS_SETFONT | DS_MODALFRAME | DS_FIXEDSYS | WS_POPUP | WS_CAPTION | 
-    WS_SYSMENU
+STYLE DS_SETFONT | DS_MODALFRAME | DS_FIXEDSYS | WS_POPUP | WS_CAPTION | WS_SYSMENU
 EXSTYLE WS_EX_TOPMOST | WS_EX_WINDOWEDGE
 CAPTION "Dialog"
 FONT 8, "MS Shell Dlg", 400, 0, 0x1
@@ -409,82 +384,56 @@ BEGIN
     EDITTEXT        IDC_EDIT1,42,6,162,14,ES_AUTOHSCROLL
     LTEXT           "環境",IDC_STATIC,6,30,17,8
     GROUPBOX        "環境タイプ",IDC_STATIC,132,30,66,60
-    COMBOBOX        IDC_COMBO1,30,30,78,30,CBS_DROPDOWN | CBS_SORT | 
-                    WS_VSCROLL | WS_TABSTOP
+    COMBOBOX        IDC_COMBO1,30,30,78,30,CBS_DROPDOWN | CBS_SORT | WS_VSCROLL | WS_TABSTOP
     LTEXT           "背景",IDC_STATIC,6,48,17,8
-    COMBOBOX        IDC_COMBO4,30,48,78,30,CBS_DROPDOWN | CBS_SORT | 
-                    WS_VSCROLL | WS_TABSTOP
-    CONTROL         "真空",IDC_CHECK2,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,
-                    138,42,32,10
-    CONTROL         "反逆",IDC_CHECK3,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,
-                    138,54,32,10
-    CONTROL         "低重力",IDC_CHECK4,"Button",BS_AUTOCHECKBOX | 
-                    WS_TABSTOP,138,66,40,10
-    CONTROL         "磁気",IDC_CHECK5,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,
-                    138,78,32,10
+    COMBOBOX        IDC_COMBO4,30,48,78,30,CBS_DROPDOWN | CBS_SORT | WS_VSCROLL | WS_TABSTOP
+    CONTROL         "真空",IDC_CHECK2,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,138,42,32,10
+    CONTROL         "反逆",IDC_CHECK3,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,138,54,32,10
+    CONTROL         "低重力",IDC_CHECK4,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,138,66,40,10
+    CONTROL         "磁気",IDC_CHECK5,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,138,78,32,10
     GROUPBOX        "ゲームタイプ",IDC_STATIC,6,66,90,108
-    CONTROL         "一人用",IDC_CHECK6,"Button",BS_AUTOCHECKBOX | 
-                    WS_TABSTOP,12,78,40,10
-    CONTROL         "共同プレー",IDC_CHECK7,"Button",BS_AUTOCHECKBOX | 
-                    WS_TABSTOP,12,90,51,10
-    CONTROL         "CTF",IDC_CHECK8,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,
-                    12,102,29,10
-    CONTROL         "陣地取り",IDC_CHECK9,"Button",BS_AUTOCHECKBOX | 
-                    WS_TABSTOP,12,114,45,10
+    CONTROL         "一人用",IDC_CHECK6,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,12,78,40,10
+    CONTROL         "共同プレー",IDC_CHECK7,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,12,90,51,10
+    CONTROL         "CTF",IDC_CHECK8,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,12,102,29,10
+    CONTROL         "陣地取り",IDC_CHECK9,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,12,114,45,10
     GROUPBOX        "ミッションタイプ",IDC_STATIC,132,96,66,72
-    CONTROL         "皆殺し",IDC_CHECK10,"Button",BS_AUTOCHECKBOX | 
-                    WS_TABSTOP,138,108,38,10
-    CONTROL         "探索",IDC_CHECK11,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,
-                    138,120,32,10
-    CONTROL         "獲得",IDC_CHECK12,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,
-                    138,132,32,10
-    CONTROL         "修理",IDC_CHECK13,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,
-                    138,144,32,10
-    CONTROL         "救助",IDC_CHECK14,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,
-                    138,156,32,10
-    CONTROL         "ボールの取り合い",IDC_CHECK15,"Button",BS_AUTOCHECKBOX | 
-                    WS_TABSTOP,12,126,71,10
-    CONTROL         "防衛",IDC_CHECK16,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,
-                    12,138,32,10
-    CONTROL         "ラグビー",IDC_CHECK17,"Button",BS_AUTOCHECKBOX | 
-                    WS_TABSTOP,12,150,39,10
-    CONTROL         "タッグ",IDC_CHECK18,"Button",BS_AUTOCHECKBOX | 
-                    WS_TABSTOP,12,162,32,10
+    CONTROL         "皆殺し",IDC_CHECK10,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,138,108,38,10
+    CONTROL         "探索",IDC_CHECK11,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,138,120,32,10
+    CONTROL         "獲得",IDC_CHECK12,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,138,132,32,10
+    CONTROL         "修理",IDC_CHECK13,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,138,144,32,10
+    CONTROL         "救助",IDC_CHECK14,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,138,156,32,10
+    CONTROL         "ボールの取り合い",IDC_CHECK15,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,12,126,71,10
+    CONTROL         "防衛",IDC_CHECK16,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,12,138,32,10
+    CONTROL         "ラグビー",IDC_CHECK17,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,12,150,39,10
+    CONTROL         "タッグ",IDC_CHECK18,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,12,162,32,10
 END
 
 IDD_DIALOG_TERMINAL DIALOGEX 0, 0, 411, 260
-STYLE DS_SETFONT | DS_MODALFRAME | DS_FIXEDSYS | WS_POPUP | WS_CAPTION | 
-    WS_SYSMENU
+STYLE DS_SETFONT | DS_MODALFRAME | DS_FIXEDSYS | WS_POPUP | WS_CAPTION | WS_SYSMENU
 CAPTION "Dialog"
 FONT 8, "MS Shell Dlg", 400, 0, 0x1
 BEGIN
     DEFPUSHBUTTON   "OK",IDOK,303,239,50,14
     PUSHBUTTON      "キャンセル",IDCANCEL,354,239,50,14
-    LISTBOX         IDC_LIST_TERMINALS,7,7,94,114,LBS_SORT | 
-                    LBS_NOINTEGRALHEIGHT | WS_VSCROLL | WS_TABSTOP
-    LISTBOX         IDC_LIST_GROUPS,7,121,93,73,LBS_SORT | 
-                    LBS_NOINTEGRALHEIGHT | WS_VSCROLL | WS_TABSTOP
+    LISTBOX         IDC_LIST_TERMINALS,7,7,94,114,LBS_SORT | LBS_NOINTEGRALHEIGHT | WS_VSCROLL | WS_TABSTOP
+    LISTBOX         IDC_LIST_GROUPS,7,121,93,73,LBS_SORT | LBS_NOINTEGRALHEIGHT | WS_VSCROLL | WS_TABSTOP
     CONTROL         "",IDC_PICTURE,"Static",SS_BLACKFRAME,112,7,292,112
-    EDITTEXT        IDC_EDIT1,113,120,291,115,ES_MULTILINE | ES_AUTOVSCROLL | 
-                    ES_WANTRETURN
-    LISTBOX         IDC_LIST_INFORMATION,7,199,92,54,LBS_SORT | 
-                    LBS_NOINTEGRALHEIGHT | WS_VSCROLL | WS_TABSTOP
+    EDITTEXT        IDC_EDIT1,113,120,291,115,ES_MULTILINE | ES_AUTOVSCROLL | ES_WANTRETURN
+    LISTBOX         IDC_LIST_INFORMATION,7,199,92,54,LBS_SORT | LBS_NOINTEGRALHEIGHT | WS_VSCROLL | WS_TABSTOP
 END
 
 IDD_DIALOG_VISUAL DIALOGEX 0, 0, 353, 255
-STYLE DS_SETFONT | DS_MODALFRAME | DS_FIXEDSYS | WS_POPUP | WS_CAPTION | 
-    WS_SYSMENU
+STYLE DS_SETFONT | DS_MODALFRAME | DS_FIXEDSYS | WS_POPUP | WS_CAPTION | WS_SYSMENU
 CAPTION "Dialog"
 FONT 8, "MS Shell Dlg", 400, 0, 0x1
 BEGIN
     DEFPUSHBUTTON   "OK",IDOK,244,234,50,14
     PUSHBUTTON      "キャンセル",IDCANCEL,296,234,50,14
-    CONTROL         "",IDC_PICTURE,"Static",SS_BLACKFRAME,7,7,339,227
+    CONTROL         "",IDC_PICTURE,"Static",SS_BLACKFRAME | SS_REALSIZEIMAGE,7,7,339,222
 END
 
 IDD_DIALOG_TOOL DIALOGEX 0, 0, 35, 49
-STYLE DS_SETFONT | DS_MODALFRAME | DS_FIXEDSYS | WS_POPUP | WS_CAPTION | 
-    WS_SYSMENU
+STYLE DS_SETFONT | DS_MODALFRAME | DS_FIXEDSYS | WS_POPUP | WS_CAPTION | WS_SYSMENU
 EXSTYLE WS_EX_TOOLWINDOW
 CAPTION "Tools"
 FONT 8, "MS Shell Dlg", 400, 0, 0x1

@@ -98,7 +98,7 @@ static bool option_nogamma = true;
 
 #include "screen_shared.h"
 
-short bit_depth = 8;
+short bit_depth = 32;
 
 // Prototypes
 void change_screen_mode(int width, int height, int depth, bool nogl);

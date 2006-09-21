@@ -47,8 +47,10 @@ void CVisualDialog::OnPaint()
         //drawing!
         SDL_FillRect(screen, NULL, SDL_MapRGB(screen->format, 0,0,0));
 
-        SDL_BlitSurface(testImage, NULL, screen, NULL);
+        SDL_Rect r = {0,0,testImage->w, testImage->h};
+        SDL_BlitSurface(testImage, &r, screen, &r);
         m_SDLToWindows->paint();
+        //Invalidate(FALSE);
     }
     /*CWnd *pictBox = GetDlgItem(IDC_PICTURE);
     
@@ -72,14 +74,16 @@ BOOL CVisualDialog::OnInitDialog()
     CRect cl_rect;
     CWnd *pictBox = GetDlgItem(IDC_PICTURE);
     
-    pictBox->GetClientRect(&cl_rect);
+    pictBox->GetWindowRect(&cl_rect);
     m_SDLToWindows=new SDLToWindows(pictBox->m_hWnd, cl_rect);
 
     
     int collection = BUILD_COLLECTION(12, 0);
-    int shape = BUILD_DESCRIPTOR(collection, 0);
+    shape_descriptor shape = BUILD_DESCRIPTOR(collection, 0);
     unsigned char** outPointerToPixelData = (unsigned char**)malloc(sizeof(unsigned char*) * 1);
-    testImage = get_shape_surface(0,collection, outPointerToPixelData, 20);
+    SDL_Surface *s = get_shape_surface(shape, NONE, outPointerToPixelData, 0);
+    testImage = s;//SDL_DisplayFormat(s);
+    //SDL_FreeSurface(s);
     free(outPointerToPixelData);
     return TRUE;  // return TRUE unless you set the focus to a control
     // 例外 : OCX プロパティ ページは必ず FALSE を返します。

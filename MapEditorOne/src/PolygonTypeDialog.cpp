@@ -13,7 +13,6 @@ IMPLEMENT_DYNAMIC(CPolygonTypeDialog, CDialog)
 CPolygonTypeDialog::CPolygonTypeDialog(CWnd* pParent /*=NULL*/)
 	: CDialog(CPolygonTypeDialog::IDD, pParent)
 {
-
 }
 
 CPolygonTypeDialog::~CPolygonTypeDialog()

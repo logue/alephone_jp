@@ -340,7 +340,7 @@ void CMapEditorSDIView::OnDraw(CDC* pDC)
             index = NUMBER_OF_DEFINED_ITEMS + MI_Sound;
         }
         if(index >= 0){
-            IMAGEINFO info;
+            //IMAGEINFO info;
             //theApp.mapIconImageList.GetImageInfo(index, &info);
             CBitmap* bitmap = theApp.bitmapList[index];
             BITMAP bmp;
@@ -1210,10 +1210,11 @@ int CMapEditorSDIView::OnCreate(LPCREATESTRUCT lpCreateStruct)
     scr.acceleration = 0;
     scr.bit_depth = bit_depth;
     scr.draw_every_other_line = 0;
-    scr.fullscreen = 0;
-    scr.gamma_level = 4;
+    scr.fullscreen = 1;
+    scr.gamma_level = 1;
     scr.high_resolution = 1;
     scr.size = 2;
+    //SDL_Init(SDL_INIT_VIDEO);
     initialize_screen(&scr, false);
 
     initialize_shape_handler();
@@ -1250,15 +1251,18 @@ void CMapEditorSDIView::OnFileNew()
 void CMapEditorSDIView::On32796()
 {
     // TODO: ここにコマンド ハンドラ コードを追加します。
-    CVisualDialog dlg(this);
+    setStatusBar(0, _T("start visual mode"));
+    CVisualDialog dlg = CVisualDialog(this);
+
     if(dlg.DoModal() == IDOK){
     }
 }
-//level info
+//object placement
 void CMapEditorSDIView::On32788()
 {
     // TODO : ここにコマンド ハンドラ コードを追加します。
-    CObjectPlacementDialog dlg(this);
+    CObjectPlacementDialog dlg = CObjectPlacementDialog(this);
+    setStatusBar(0, L"object placement");
     if(dlg.DoModal() == IDOK){
         //内容を反映
     }

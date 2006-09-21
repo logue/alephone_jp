@@ -26,4 +26,5 @@ void setComboAndIntegerNum(int num, int max,
 /**disable*/
 void worldToWindow(int worldX, int worldY, POINT* point);
 
+void setStatusBar(int index, CString str);
 #endif

@@ -14,7 +14,7 @@ IMPLEMENT_DYNAMIC(CObjectPlacementDialog, CDialog)
 CObjectPlacementDialog::CObjectPlacementDialog(CWnd* pParent /*=NULL*/)
 	: CDialog(CObjectPlacementDialog::IDD, pParent)
 {
-
+    int a = 0;
 }
 
 CObjectPlacementDialog::~CObjectPlacementDialog()
@@ -46,28 +46,23 @@ BOOL CObjectPlacementDialog::OnInitDialog()
     //リストコントロールに流し込む
     //カラム追加
     LV_COLUMN column;
-    column.pszText = L"type";
-    idColumn[0] = objectPlacementListCtrl.InsertColumn(0, &column);
-    objectPlacementListCtrl.SetColumnWidth(idColumn[0], 100);
-    column.pszText = L"min";
-    idColumn[1] = objectPlacementListCtrl.InsertColumn(1, &column);
-    objectPlacementListCtrl.SetColumnWidth(idColumn[1], 100);
-    column.pszText = L"max";
-    idColumn[2] = objectPlacementListCtrl.InsertColumn(2, &column);
-    objectPlacementListCtrl.SetColumnWidth(idColumn[2], 100);
-    column.pszText = L"initial";
-    idColumn[3] = objectPlacementListCtrl.InsertColumn(2, &column);
-    objectPlacementListCtrl.SetColumnWidth(idColumn[3], 100);
-    column.pszText = L"rnd count";
-    idColumn[4] = objectPlacementListCtrl.InsertColumn(2, &column);
-    objectPlacementListCtrl.SetColumnWidth(idColumn[4], 100);
-    column.pszText = L"rnd chance";
-    idColumn[5] = objectPlacementListCtrl.InsertColumn(2, &column);
-    objectPlacementListCtrl.SetColumnWidth(idColumn[5], 100);
-    column.pszText = L"flags";
-    idColumn[6] = objectPlacementListCtrl.InsertColumn(2, &column);
-    objectPlacementListCtrl.SetColumnWidth(idColumn[6], 100);
+    char columnNames[][100] ={
+        "type", "min", "max", 
+        "initial", "rnd count", "rnd chance", "flags"
+    };
+    WCHAR wwstr[256];
+    for(int i = 0; i < 7; i ++){
+        charToWChar(columnNames[i], wwstr);
+        column.pszText = wwstr;
+        idColumn[i] = objectPlacementListCtrl.InsertColumn(i, &column);
+        int width = 70;
+        if(i == 0){
+            width = 100;
+        }
+        objectPlacementListCtrl.SetColumnWidth(idColumn[i], width);
+    }
     
+    object_frequency_definition def_place;
     for(int i = 0; i < NUMBER_OF_DEFINED_ITEMS + NUMBER_OF_MONSTER_TYPES; i ++){
 
         object_frequency_definition *place;
@@ -80,8 +75,9 @@ BOOL CObjectPlacementDialog::OnInitDialog()
             place = &monster_placement_info[index];
             jname = theApp.monsterTypeInformations[index].jname;
         }
-
-        place->minimum_count;
+        if(place == NULL){
+            break;
+        }
         char cstr[256];
         WCHAR wstr[256];
         LV_ITEM item;

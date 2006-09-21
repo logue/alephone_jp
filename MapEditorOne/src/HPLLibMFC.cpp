@@ -81,3 +81,10 @@ void worldToWindow(int worldX, int worldY, POINT* point)
     exit(0);
 }
 
+void setStatusBar(int index, CString str)
+{
+    CFrameWnd* wnd = (CFrameWnd*)AfxGetApp()->m_pMainWnd;
+    CStatusBar* status = (CStatusBar*)wnd->GetMessageBar();
+    status->SetPaneText(index, str);
+}
+
