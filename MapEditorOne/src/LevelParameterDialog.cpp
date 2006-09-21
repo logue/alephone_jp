@@ -83,12 +83,27 @@ BOOL CLevelParameterDialog::OnInitDialog()
         //flag -> buttons
         //game type
         for(int i = 0; i < NUMBER_OF_GAME_TYPES; i ++){
+            if(GET_GAME_TYPE() == i){
+                gameTypes[i].SetCheck(TRUE);
+            }else{
+                gameTypes[i].SetCheck(FALSE);
+            }
         }
         //env type
-        for(int i = 0; i < NUMBER_OF_ENV_TYPES; i ++){
+        for(int i = 1; i < NUMBER_OF_ENV_TYPES; i ++){
+            if(static_world->environment_flags & theApp.environmentTypeInformations[i].bind){
+                envTypes[i-1].SetCheck(TRUE);
+            }else{
+                envTypes[i-1].SetCheck(FALSE);
+            }
         }
         //mission
-        for(int i = 0; i < NUMBER_OF_MISSION_TYPES; i ++){
+        for(int i = 1; i < NUMBER_OF_MISSION_TYPES; i ++){
+            if(static_world->mission_flags & theApp.missionTypeInformations[i].bind){
+                missionFlags[i-1].SetCheck(TRUE);
+            }else{
+                missionFlags[i-1].SetCheck(FALSE);
+            }
         }
 
     }

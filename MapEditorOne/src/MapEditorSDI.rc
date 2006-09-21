@@ -386,9 +386,14 @@ BEGIN
                     WS_VSCROLL | WS_TABSTOP
     CONTROL         "",IDC_LIST1,"SysListView32",LVS_REPORT | LVS_ALIGNLEFT | 
                     WS_BORDER | WS_TABSTOP,7,95,327,143
-    EDITTEXT        IDC_EDIT1,228,30,40,14,ES_AUTOHSCROLL
-    EDITTEXT        IDC_EDIT2,228,48,40,14,ES_AUTOHSCROLL
-    EDITTEXT        IDC_EDIT3,228,66,40,14,ES_AUTOHSCROLL
+    EDITTEXT        IDC_EDIT1,240,18,40,14,ES_AUTOHSCROLL
+    EDITTEXT        IDC_EDIT2,240,36,40,14,ES_AUTOHSCROLL
+    EDITTEXT        IDC_EDIT3,240,54,40,14,ES_AUTOHSCROLL
+    LTEXT           "minimum",IDC_STATIC,186,18,28,8
+    LTEXT           "maximum",IDC_STATIC,186,36,30,8
+    LTEXT           "random count",IDC_STATIC,186,54,48,8
+    EDITTEXT        IDC_EDIT4,240,72,40,14,ES_AUTOHSCROLL
+    LTEXT           "random count",IDC_STATIC,186,72,48,8
 END
 
 IDD_DIALOG_LEVEL_PARAMETER DIALOGEX 0, 0, 228, 215
@@ -477,7 +482,7 @@ BEGIN
     CONTROL         "",IDC_PICTURE,"Static",SS_BLACKFRAME,7,7,339,227
 END
 
-IDD_DIALOG_TOOL DIALOGEX 0, 0, 46, 63
+IDD_DIALOG_TOOL DIALOGEX 0, 0, 35, 49
 STYLE DS_SETFONT | DS_MODALFRAME | DS_FIXEDSYS | WS_POPUP | WS_CAPTION | 
     WS_SYSMENU
 EXSTYLE WS_EX_TOOLWINDOW
@@ -609,9 +614,9 @@ BEGIN
     IDD_DIALOG_TOOL, DIALOG
     BEGIN
         LEFTMARGIN, 7
-        RIGHTMARGIN, 39
+        RIGHTMARGIN, 28
         TOPMARGIN, 7
-        BOTTOMMARGIN, 56
+        BOTTOMMARGIN, 42
     END
 END
 #endif    // APSTUDIO_INVOKED
@@ -623,6 +628,13 @@ END
 //
 
 IDR_HTML_HEIGHTDIALOG   HTML                    "res\\HeightDialog.htm"
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Cursor
+//
+
+IDC_CURSOR1             CURSOR                  "res\\cursor1.cur"
 
 /////////////////////////////////////////////////////////////////////////////
 //

@@ -35,7 +35,7 @@
 #include "TerminalDialog.h"
 #include "VisualDialog.h"
 #include "ToolDialog.h"
-#include "LevelParameterDialog.h"
+#include "ObjectPlacementDialog.h"
 
 // CMapEditorSDIApp:
 // このクラスの実装については、MapEditorSDI.cpp を参照してください。

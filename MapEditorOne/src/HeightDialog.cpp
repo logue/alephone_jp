@@ -4,6 +4,7 @@
 #include "stdafx.h"
 #include "MapEditorSDI.h"
 #include "HeightDialog.h"
+#include ".\heightdialog.h"
 
 
 // CHeightDialog ダイアログ
@@ -73,3 +74,4 @@ BOOL CHeightDialog::DestroyWindow()
     ShowWindow(FALSE);
     return TRUE;//CDialog::DestroyWindow();
 }
+

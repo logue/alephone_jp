@@ -1258,7 +1258,7 @@ void CMapEditorSDIView::On32796()
 void CMapEditorSDIView::On32788()
 {
     // TODO : ここにコマンド ハンドラ コードを追加します。
-    CLevelParameterDialog dlg(this, false);
+    CObjectPlacementDialog dlg(this);
     if(dlg.DoModal() == IDOK){
         //内容を反映
     }

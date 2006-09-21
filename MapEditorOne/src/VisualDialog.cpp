@@ -79,7 +79,7 @@ BOOL CVisualDialog::OnInitDialog()
     int collection = BUILD_COLLECTION(12, 0);
     int shape = BUILD_DESCRIPTOR(collection, 0);
     unsigned char** outPointerToPixelData = (unsigned char**)malloc(sizeof(unsigned char*) * 1);
-    testImage = get_shape_surface(shape,NONE, outPointerToPixelData, 1);
+    testImage = get_shape_surface(0,collection, outPointerToPixelData, 20);
     free(outPointerToPixelData);
     return TRUE;  // return TRUE unless you set the focus to a control
     // 例外 : OCX プロパティ ページは必ず FALSE を返します。

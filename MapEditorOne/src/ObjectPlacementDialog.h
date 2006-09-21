@@ -1,5 +1,6 @@
 #pragma once
 #include "afxcmn.h"
+#include "afxwin.h"
 
 
 // CObjectPlacementDialog ダイアログ
@@ -14,7 +15,7 @@ public:
 
 // ダイアログ データ
 	enum { IDD = IDD_DIALOG_OBJECT_PLACEMENT };
-    int idColumn[3];
+    int idColumn[7];
 
 protected:
 	virtual void DoDataExchange(CDataExchange* pDX);    // DDX/DDV サポート
@@ -23,4 +24,8 @@ protected:
 public:
     virtual BOOL OnInitDialog();
     CListCtrl objectPlacementListCtrl;
+    CEdit minimumNum;
+    CEdit maximum;
+    CEdit randomCountNum;
+    afx_msg void OnLvnItemchangedList1(NMHDR *pNMHDR, LRESULT *pResult);
 };
