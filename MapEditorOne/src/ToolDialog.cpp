@@ -19,23 +19,23 @@ CToolDialog::CToolDialog(CWnd* pParent /*=NULL*/)
     int assignment[]={
         //unselected
         IDB_BITMAP5,
-        IDB_BITMAP6,
-        IDB_BITMAP9,
+        IDB_BITMAP7,
+        IDB_BITMAP8,
         IDB_BITMAP12,
         IDB_BITMAP13,
-        IDB_BITMAP14,
-        IDB_BITMAP17,
+        IDB_BITMAP15,
+        IDB_BITMAP16,
         IDB_BITMAP3,
 
         //selected
         IDB_BITMAP4,
-        IDB_BITMAP7,
-        IDB_BITMAP8,
+        IDB_BITMAP6,
+        IDB_BITMAP9,
         IDB_BITMAP11,
         IDB_BITMAP13,
-        IDB_BITMAP15,
-        IDB_BITMAP16,
+        IDB_BITMAP14,
         IDB_BITMAP17,
+        IDB_BITMAP19,
     };
     for(int i = 0; i < NUMBER_OF_TOOLS * 2; i ++){
         //loadBitmap(assignment[i], &imageList, RGB(255,0,0));
@@ -135,12 +135,17 @@ void CToolDialog::OnPaint()
         pt.y = (i / 2) * TOOL_HEIGHT;
 
         //imageList.Draw(&dc, i, pt, SRCCOPY);
-        CBitmap* bmp = bitmaps[i];
+        int index = i;
+        if(theApp.selectingToolType == i){
+            index += NUMBER_OF_TOOLS;
+        }
+        CBitmap* bmp = bitmaps[index];
         BITMAP bmpInfo;
         bmp->GetBitmap(&bmpInfo);
         memDC.SelectObject(bmp);
         dc.BitBlt(pt.x, pt.y, TOOL_WIDTH, TOOL_HEIGHT, &memDC,
             0, 0, SRCCOPY);
+
     }
 
     memDC.DeleteDC();
@@ -148,15 +153,6 @@ void CToolDialog::OnPaint()
 
 void CToolDialog::OnLButtonDown(UINT nFlags, CPoint point)
 {
-    LPWSTR cursors[] = {
-        IDC_ARROW,
-        IDC_CROSS,
-        IDC_APPSTARTING,
-        IDC_HAND,
-        IDC_CROSS,
-        IDC_APPSTARTING,
-        IDC_HAND
-    };
     // TODO: ここにメッセージ ハンドラ コードを追加するか、既定の処理を呼び出します。
     for(int i = 0; i < NUMBER_OF_TOOLS; i ++){
         CRect rect;
@@ -167,12 +163,27 @@ void CToolDialog::OnLButtonDown(UINT nFlags, CPoint point)
         if(isPointInRect<int>(point.x, point.y,
             rect.left, rect.top, rect.right, rect.bottom))
         {
-            //カーソル変化
-            HCURSOR cursor = LoadCursor(AfxGetInstanceHandle(), cursors[i]);
-            SetCursor(cursor);
             //ツール変化
             theApp.selectingToolType = i;
+            Invalidate(FALSE);
+            //
+            LPWSTR cursors[] = {
+                IDC_ARROW,
+                IDC_CROSS,
+                IDC_APPSTARTING,
+                IDC_HAND,
+                IDC_CROSS,
+                IDC_APPSTARTING,
+                IDC_HAND
+            };
+            //カーソル変化
+            HCURSOR cursor = LoadCursor(AfxGetInstanceHandle(), cursors[theApp.selectingToolType]);
+            //SetCursor(cursor);
+            SetClassLong(parent->m_hWnd, GCL_HCURSOR, (long)cursor);
+
         }
     }
     CDialog::OnLButtonDown(nFlags, point);
 }
+
+

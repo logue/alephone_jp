@@ -1,4 +1,6 @@
 #pragma once
+#include "afxcmn.h"
+#include "afxwin.h"
 
 
 // CHeightDialog ダイアログ
@@ -26,4 +28,22 @@ public:
     afx_msg void OnClose();
 public:
     virtual BOOL DestroyWindow();
+public:
+    virtual BOOL OnInitDialog();
+public:
+    CSliderCtrl maxSlider;
+public:
+    CSliderCtrl minSlider;
+public:
+    afx_msg void OnNMCustomdrawSlider2(NMHDR *pNMHDR, LRESULT *pResult);
+public:
+    afx_msg void OnNMCustomdrawSlider1(NMHDR *pNMHDR, LRESULT *pResult);
+public:
+    CEdit maxNum;
+public:
+    CEdit minNum;
+public:
+    afx_msg void OnEnChangeEdit1();
+public:
+    afx_msg void OnEnChangeEdit6();
 };

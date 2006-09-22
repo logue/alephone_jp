@@ -122,12 +122,15 @@ struct selectInformation{
     }
     //点のリスト
     vector<int> endpointIndexList;
+    vector<POINT> pointList;
 
     //線のリスト
     vector<int> lineIndexList;
+    vector<POINT[2]> linePointsList;
 
     //ポリゴンのリスト
     vector<int> polygonIndexList;
+    vector<POINT[8]> polygonPointsList;
 
     vector<int> objectIndexList;
 private:
@@ -252,6 +255,13 @@ public:
     //select tool
     int selectingToolType;
 
+    //show / hide polygons, lines. points
+    int viewHeightMax;
+    int viewHeightMin;
+
+    //save check
+    //when true, warn to save
+    bool isChanged;
 	DECLARE_MESSAGE_MAP()
 public:
     afx_msg void OnFileOpen();

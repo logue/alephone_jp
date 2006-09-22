@@ -85,6 +85,10 @@ public:
 public:
     afx_msg void On32796();
     afx_msg void On32788();
+public:
+    afx_msg void OnMenu32797();
+public:
+    afx_msg BOOL OnSetCursor(CWnd* pWnd, UINT nHitTest, UINT message);
 };
 
 #ifndef _DEBUG  // MapEditorSDIView.cpp のデバッグ バージョン

@@ -141,6 +141,7 @@
 #define IDC_CHECK16                     1019
 #define IDC_EDIT1                       1020
 #define IDC_CHECK17                     1021
+#define IDC_EDIT6                       1021
 #define IDC_CHECK18                     1022
 #define IDC_LIST_TERMINALS              1025
 #define IDC_LIST_GROUPS                 1026
@@ -169,14 +170,15 @@
 #define ID_32794                        32794
 #define ID_32795                        32795
 #define ID_32796                        32796
+#define ID_Menu32797                    32797
 
 // Next default values for new objects
 // 
 #ifdef APSTUDIO_INVOKED
 #ifndef APSTUDIO_READONLY_SYMBOLS
 #define _APS_NEXT_RESOURCE_VALUE        222
-#define _APS_NEXT_COMMAND_VALUE         32797
-#define _APS_NEXT_CONTROL_VALUE         1032
+#define _APS_NEXT_COMMAND_VALUE         32798
+#define _APS_NEXT_CONTROL_VALUE         1034
 #define _APS_NEXT_SYMED_VALUE           104
 #endif
 #endif

@@ -48,6 +48,8 @@ Oct 24, 2000 (Mark Levin)
 // LP additions:
 #include "map.h"
 #include "dynamic_limits.h"
+#include "monster_definitions.h"
+
 //#include "XML_ElementParser.h"
 #include <vector>
 

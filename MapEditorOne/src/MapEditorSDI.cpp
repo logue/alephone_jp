@@ -179,6 +179,10 @@ CMapEditorSDIApp::CMapEditorSDIApp()
 
 
     selectingToolType = TI_ARROW;
+    viewHeightMin = - SHRT_MAX;
+    viewHeightMax = -viewHeightMin;
+
+    isChanged = true;
 }
 
 CMapEditorSDIApp::~CMapEditorSDIApp()
