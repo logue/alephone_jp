@@ -148,6 +148,15 @@ void CToolDialog::OnPaint()
 
 void CToolDialog::OnLButtonDown(UINT nFlags, CPoint point)
 {
+    LPWSTR cursors[] = {
+        IDC_ARROW,
+        IDC_CROSS,
+        IDC_APPSTARTING,
+        IDC_HAND,
+        IDC_CROSS,
+        IDC_APPSTARTING,
+        IDC_HAND
+    };
     // TODO: ここにメッセージ ハンドラ コードを追加するか、既定の処理を呼び出します。
     for(int i = 0; i < NUMBER_OF_TOOLS; i ++){
         CRect rect;
@@ -158,7 +167,11 @@ void CToolDialog::OnLButtonDown(UINT nFlags, CPoint point)
         if(isPointInRect<int>(point.x, point.y,
             rect.left, rect.top, rect.right, rect.bottom))
         {
-
+            //カーソル変化
+            HCURSOR cursor = LoadCursor(AfxGetInstanceHandle(), cursors[i]);
+            SetCursor(cursor);
+            //ツール変化
+            theApp.selectingToolType = i;
         }
     }
     CDialog::OnLButtonDown(nFlags, point);

@@ -106,6 +106,7 @@
 #define IDD_DIALOG_TOOL                 219
 #define IDB_BITMAP53                    220
 #define IDC_CURSOR1                     221
+#define IDC_CURSOR_FILL                 221
 #define IDC_LIST1                       1000
 #define IDC_LIST2                       1002
 #define IDC_COMBO1                      1003
