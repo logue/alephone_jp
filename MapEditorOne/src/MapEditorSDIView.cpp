@@ -197,6 +197,7 @@ void CMapEditorSDIView::OnDraw(CDC* pDC)
         }
 
     }
+    //TODO sort by HEIGHT!
 
     //ポリゴン
     //pDC->SelectObject(&grayBrush);
@@ -228,8 +229,8 @@ void CMapEditorSDIView::OnDraw(CDC* pDC)
             selected = true;
         }
         if(theApp.selectGroupInformation.isSelected()){
-            for(int k = 0; k < (int)theApp.selectGroupInformation.polygonIndexList.size(); k ++){
-                if(theApp.selectGroupInformation.polygonIndexList[k] == i){
+            for(int k = 0; k < (int)theApp.selectGroupInformation.polygons.size(); k ++){
+                if(theApp.selectGroupInformation.polygons[k].index == i){
                     selected = true;
                     break;
                 }
@@ -264,8 +265,8 @@ void CMapEditorSDIView::OnDraw(CDC* pDC)
             selected = true;
         }
         if(theApp.selectGroupInformation.isSelected()){
-            for(int k = 0; k < (int)theApp.selectGroupInformation.lineIndexList.size(); k ++){
-                if(theApp.selectGroupInformation.lineIndexList[k] == i){
+            for(int k = 0; k < (int)theApp.selectGroupInformation.lines.size(); k ++){
+                if(theApp.selectGroupInformation.lines[k].index == i){
                     selected = true;
                     break;
                 }
@@ -312,8 +313,8 @@ void CMapEditorSDIView::OnDraw(CDC* pDC)
             selected = true;
         }
         if(theApp.selectGroupInformation.isSelected()){
-            for(int k = 0; k < (int)theApp.selectGroupInformation.endpointIndexList.size(); k ++){
-                if(theApp.selectGroupInformation.endpointIndexList[k] == i){
+            for(int k = 0; k < (int)theApp.selectGroupInformation.points.size(); k ++){
+                if(theApp.selectGroupInformation.points[k].index == i){
                     selected = true;
                     break;
                 }
@@ -343,6 +344,14 @@ void CMapEditorSDIView::OnDraw(CDC* pDC)
         int x = obj->location.x;
         int y = obj->location.y;
         int z = obj->location.z;
+
+        //check height
+        if( z < theApp.viewHeightMin ||
+            z > theApp.viewHeightMax)
+        {
+            continue;
+        }
+
         int drawX = (x + OFFSET_X_WORLD)/DIV + OFFSET_X_VIEW;
         int drawY = (y + OFFSET_Y_WORLD)/DIV + OFFSET_Y_VIEW;
 
@@ -414,19 +423,31 @@ void CMapEditorSDIView::OnDraw(CDC* pDC)
         }
 
         cdc->SetBkMode(TRANSPARENT);
+
+        bool isSelected = false;
         //選択中はしるしを。
         if(theApp.selectType == _selected_object){
             if( theApp.selectIndex == i){
-                cdc->SelectObject(&redMidiumPen);
-                cdc->SelectObject(&nullBrush);
-                RECT rect;
-                int SIZE = 10;
-                rect.left = drawX - SIZE;
-                rect.right = rect.left + SIZE * 2;
-                rect.top = drawY - SIZE;
-                rect.bottom = rect.top + SIZE * 2;
-                cdc->Rectangle(&rect);
+                isSelected = true;
             }
+        }else{
+            for(int k = 0; k < (int)theApp.selectGroupInformation.selObjects.size(); k ++){
+                if(theApp.selectGroupInformation.selObjects[k].index == i){
+                    isSelected = true;
+                    break;
+                }
+            }
+        }
+        if(isSelected){
+            cdc->SelectObject(&redMidiumPen);
+            cdc->SelectObject(&nullBrush);
+            RECT rect;
+            int SIZE = 10;
+            rect.left = drawX - SIZE;
+            rect.right = rect.left + SIZE * 2;
+            rect.top = drawY - SIZE;
+            rect.bottom = rect.top + SIZE * 2;
+            cdc->Rectangle(&rect);
         }
 
     }
@@ -581,6 +602,8 @@ void CMapEditorSDIView::OnFileOpen()
 
         //レベル1を読み込んでみる
         {
+            theApp.selectGroupInformation.clear();
+            initialize_map_for_new_level();
             theApp.editLevelIndex = 0;
             bool check = load_level_from_map(theApp.editLevelIndex);
             if(!check){
@@ -767,6 +790,9 @@ void CMapEditorSDIView::OnInitialUpdate()
         //隠す
         theApp.isObjectPropertyDialogShow = FALSE;
         theApp.objectPropertyDialog->ShowWindow(FALSE);
+        //値をデフォルトに設定
+        setObjectPropertyToDefault();
+
         theApp.polygonTypeDialog = new CPolygonTypeDialog;
         theApp.polygonTypeDialog->Create(this);
         theApp.isPolygonTypeDialogShow = FALSE;
@@ -856,6 +882,13 @@ void CMapEditorSDIView::On32784()
     // TODO: ここにコマンド ハンドラ コードを追加します。
     theApp.isObjectPropertyDialogShow = !theApp.isObjectPropertyDialogShow;
     theApp.objectPropertyDialog->ShowWindow(theApp.isObjectPropertyDialogShow);
+    int flags = MF_BYCOMMAND;
+    if(theApp.isObjectPropertyDialogShow){
+        flags |= MF_CHECKED;
+    }else{
+        flags |= MF_UNCHECKED;
+    }
+    GetMenu()->CheckMenuItem(ID_32784, flags);
 }
 //level information(same to new)
 void CMapEditorSDIView::On32787()

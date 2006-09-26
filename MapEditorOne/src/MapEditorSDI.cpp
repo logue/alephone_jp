@@ -182,7 +182,7 @@ CMapEditorSDIApp::CMapEditorSDIApp()
     viewHeightMin = - SHRT_MAX;
     viewHeightMax = -viewHeightMin;
 
-    isChanged = true;
+    isChanged = false;
 }
 
 CMapEditorSDIApp::~CMapEditorSDIApp()
@@ -336,3 +336,11 @@ void loadBitmap(int id, CImageList* imageList, COLORREF key)
     imageList->Add(&image, key);
     image.DeleteObject();
 }
+//set object property to default
+void setObjectPropertyToDefault()
+{
+    map_object obj;
+    memset(&obj, 0, sizeof(map_object));
+    theApp.objectPropertyDialog->setupDialog(&obj);
+}
+

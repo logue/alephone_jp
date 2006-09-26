@@ -168,8 +168,8 @@ void CToolDialog::OnLButtonDown(UINT nFlags, CPoint point)
             Invalidate(FALSE);
             //
             LPWSTR cursors[] = {
-                IDC_ARROW,
                 IDC_CROSS,
+                IDC_ARROW,
                 IDC_APPSTARTING,
                 IDC_HAND,
                 IDC_CROSS,

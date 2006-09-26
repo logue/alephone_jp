@@ -48,14 +48,18 @@ public:
     CEdit objectPositionY;
 public:
     CEdit objectPositionZ;
-    //index‚ª•‰‚Ìê‡‚Í‹ó‚É‚·‚é
-    void setupDialog(int index);
-public:
+    //setup dialog
+    //object == NULL ->clear
+    void setupDialog(map_object *object);
+
+    //get flags num
+    int getFlags();
+ public:
     virtual BOOL OnInitDialog();
     CEdit objectFacingNum;
     afx_msg void OnPaint();
 
-    map_object *obj;
+    map_object obj;
 public:
     virtual BOOL DestroyWindow();
 public:

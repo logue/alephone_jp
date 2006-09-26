@@ -106,37 +106,6 @@ typedef struct InformationBinded_tag{
     int bind;
 }InformationBinded;
 
-struct selectInformation{
-    bool isSelected(){
-        return isSelected_;
-    }
-    void setSelected(bool sel){
-        isSelected_ = sel;
-    }
-    void clear(){
-        endpointIndexList.clear();
-        lineIndexList.clear();
-        polygonIndexList.clear();
-        objectIndexList.clear();
-        setSelected(false);
-    }
-    //点のリスト
-    vector<int> endpointIndexList;
-    vector<POINT> pointList;
-
-    //線のリスト
-    vector<int> lineIndexList;
-    vector<POINT[2]> linePointsList;
-
-    //ポリゴンのリスト
-    vector<int> polygonIndexList;
-    vector<POINT[8]> polygonPointsList;
-
-    vector<int> objectIndexList;
-private:
-    bool isSelected_;
-
-};
 
 /**
     MapEditorOneメインアプリケーション
@@ -233,7 +202,7 @@ public:
     CDC doubleBufferDC;
     CBitmap doubleBuffserBitmap;
 
-    //ポリゴンや線を持ったときの第一ポイントからのオフセット
+    //ポリゴンや線を持ったときのマウス座標からのオフセット
     //相対座標
     POINT polygonPoints[8];
     int polygonPointNum;
@@ -271,3 +240,6 @@ extern CMapEditorSDIApp theApp;
 
 void loadIcon(int id, CImageList* imageList);
 void loadBitmap(int id, CImageList* imageList, COLORREF key);
+
+//set object property to default
+void setObjectPropertyToDefault();

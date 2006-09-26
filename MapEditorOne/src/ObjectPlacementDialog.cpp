@@ -62,7 +62,7 @@ BOOL CObjectPlacementDialog::OnInitDialog()
         objectPlacementListCtrl.SetColumnWidth(idColumn[i], width);
     }
     
-    object_frequency_definition def_place;
+    //object_frequency_definition def_place;
     for(int i = 0; i < NUMBER_OF_DEFINED_ITEMS + NUMBER_OF_MONSTER_TYPES; i ++){
 
         object_frequency_definition *place;

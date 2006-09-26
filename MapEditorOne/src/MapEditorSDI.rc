@@ -216,10 +216,10 @@ BEGIN
         MENUITEM "標準",                          ID_ITEM_ZOOM_DEFAULT
         MENUITEM "中心へ移動",                       ID_ITEM_CENTERING
         MENUITEM SEPARATOR
-        MENUITEM "オブジェクト情報ダイアログの表示切り替え",        ID_32784
-        MENUITEM "ポリゴンタイプダイアログの表示切替",           ID_32786
-        MENUITEM "高さダイアログの表示切替",                ID_32789
-        MENUITEM "ツールパレット表示切替",                 ID_Menu32797
+        MENUITEM "オブジェクト情報ダイアログ",               ID_32784
+        MENUITEM "ポリゴンタイプダイアログ",                ID_32786
+        MENUITEM "高さダイアログ",                     ID_32789
+        MENUITEM "ツールパレット",                     ID_Menu32797
         MENUITEM SEPARATOR
     END
     POPUP "モード"

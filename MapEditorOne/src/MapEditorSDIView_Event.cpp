@@ -6,12 +6,33 @@
 #include ".\mapeditorsdiview.h"
 #include "SelectLevelDialog.h"
 
+static bool checkSelectPoint(POINT& mousePoint,
+                             int offsetViewX, int offsetViewY,
+                             int offsetWorldX, int offsetWorldY,
+                             int div,
+                             int distance)
+{
+    for(int i = 0; i < (int)EndpointList.size(); i ++){
+        endpoint_data* ep = &EndpointList[i];
+        int x = ep->vertex.x;
+        int y = ep->vertex.y;
+        if(isSelectPoint(mousePoint.x, mousePoint.y, x, y,
+            offsetViewX, offsetViewY, offsetWorldX, offsetWorldY, div, distance))
+        {
+            theApp.selectType = _selected_point;
+            theApp.selectIndex = i;
+            return true;
+        }
+    }
+    return false;
+}
+
 
 //左ボタン下げ
 void CMapEditorSDIView::OnLButtonDown(UINT nFlags, CPoint point)
 {
     // TODO: ここにメッセージ ハンドラ コードを追加するか、既定の処理を呼び出します。
-    if(nFlags & MK_SHIFT){
+    if(nFlags & MK_CONTROL){
         theApp.isPressLButtonWithShift = true;
     }else{
         theApp.isPressLButtonWithShift = false;
@@ -22,153 +43,239 @@ void CMapEditorSDIView::OnLButtonDown(UINT nFlags, CPoint point)
     int OFFSET_X_VIEW = theApp.offset.x;
     int OFFSET_Y_VIEW = theApp.offset.y;
     int DIV = theApp.zoomDivision;
+    int POINT_DISTANCE_EPSILON = 5;
+    int OBJECT_DISTANCE_EPSILON = 8;
+    int LINE_DISTANCE_EPSILON = 5;
 
     if(theApp.selectingToolType == TI_ARROW){
-        if(!(nFlags & MK_SHIFT) && !(nFlags & MK_CONTROL)){
-            //shiftを押さずにクリック→選択
-            bool selected = false;
+        //selecting tool = TI_ARROW
+        if(/*!(nFlags & MK_SHIFT) && */!(nFlags & MK_CONTROL)){
+            //clik without modify key
 
-            theApp.isSelectingGroup = false;
+            //group selected
+            if(theApp.selectGroupInformation.isSelected()){
 
-            {
-                int DISTANCE_EPSILON = 8;
-                //オブジェクト
-                for(int i = 0; i < (int)SavedObjectList.size() && !selected; i ++){
-                    map_object* obj = &(SavedObjectList[i]);
-                    int type = obj->type;
-                    int facing = obj->facing;
-                    int x = obj->location.x;
-                    int y = obj->location.y;
-                    int z = obj->location.z;
-                    int drawX = (x + OFFSET_X_WORLD)/DIV + OFFSET_X_VIEW;
-                    int drawY = (y + OFFSET_Y_WORLD)/DIV + OFFSET_Y_VIEW;
+                //is point in objects/points/lines/polygons?
+                if(isPointInSelection(point.x, point.y,
+                    OFFSET_X_VIEW, OFFSET_Y_VIEW, OFFSET_X_WORLD, OFFSET_Y_WORLD,
+                    POINT_DISTANCE_EPSILON, LINE_DISTANCE_EPSILON, OBJECT_DISTANCE_EPSILON,
+                    &theApp.selectGroupInformation, theApp.viewHeightMax, theApp.viewHeightMin,
+                    DIV))
+                {
+                    //click on selecting group
+                    //->remember offset, ready to move
 
-                    POINT objPoint;
-                    objPoint.x = drawX;
-                    objPoint.y = drawY;
+                    //points
+                    for(int i = 0; i < (int)theApp.selectGroupInformation.points.size(); i ++){
+                        endpoint_data* ep = &EndpointList[theApp.selectGroupInformation.points[i].index];
+                        //set pos to view
+                        int x = ep->vertex.x;
+                        int y = ep->vertex.y;
+                        int drawX = (x + OFFSET_X_WORLD) / DIV + OFFSET_X_VIEW;
+                        int drawY = (y + OFFSET_Y_WORLD) / DIV + OFFSET_Y_VIEW;
 
-
-                    //nearby check
-                    if(isNearbyPoints(point.x,point.y, objPoint.x,objPoint.y, DISTANCE_EPSILON)){
-                        theApp.selectType = _selected_object;
-                        theApp.selectIndex = i;
-                        //選択したオブジェクトの情報を表示
-                        theApp.objectPropertyDialog->setupDialog(i);
-                        selected = true;
-                        break;
+                        //sub to offset
+                        theApp.selectGroupInformation.points[i].offset[0] = drawX - point.x;
+                        theApp.selectGroupInformation.points[i].offset[1] = drawY - point.y;
                     }
-                }
-            }
-            if(selected){
-                theApp.objectPropertyDialog->ShowWindow(TRUE);
-                theApp.isObjectPropertyDialogShow = TRUE;
 
-                //線プロパティ消す
-                //ポリゴンプロパティ消す
-            }else{
-                //選択されなかった
-                theApp.selectType = _no_selected;
-                theApp.objectPropertyDialog->setupDialog(-1);
-                //プロパティダイアログ消す
-                theApp.objectPropertyDialog->ShowWindow(FALSE);
-                theApp.isObjectPropertyDialogShow = FALSE;
-            }
+                    //lines
+                    for(int i = 0; i < (int)theApp.selectGroupInformation.lines.size(); i ++){
+                        line_data* line = &LineList[theApp.selectGroupInformation.lines[i].index];
+                        endpoint_data* begin = &EndpointList[line->endpoint_indexes[0]];
+                        endpoint_data* end = &EndpointList[line->endpoint_indexes[1]];
+                        //set offsets
+                        theApp.selectGroupInformation.lines[i].offsets[0][0] =
+                            (begin->vertex.x + OFFSET_X_WORLD) / DIV + OFFSET_X_VIEW
+                            - point.x;
+                        theApp.selectGroupInformation.lines[i].offsets[0][1] =
+                            (begin->vertex.y + OFFSET_Y_WORLD) / DIV + OFFSET_Y_VIEW
+                            - point.y;
+                        theApp.selectGroupInformation.lines[i].offsets[1][0] =
+                            (end->vertex.x + OFFSET_X_WORLD) / DIV + OFFSET_X_VIEW
+                            - point.x;
+                        theApp.selectGroupInformation.lines[i].offsets[1][1] =
+                            (end->vertex.y + OFFSET_Y_WORLD) / DIV + OFFSET_Y_VIEW
+                            - point.y;
 
-            if(!selected){
-                int DISTANCE_EPSILON = 5;
-                //ポイント
-                for(int i = 0; i < (int)EndpointList.size(); i ++){
-                    endpoint_data* ep = &EndpointList[i];
-                    int x = ep->vertex.x;
-                    int y = ep->vertex.y;
-                    int drawX = (x + OFFSET_X_WORLD)/DIV + OFFSET_X_VIEW;
-                    int drawY = (y + OFFSET_Y_WORLD)/DIV + OFFSET_Y_VIEW;
-                    if(isNearbyPoints(point.x,point.y, drawX,drawY, DISTANCE_EPSILON)){
-                        theApp.selectType = _selected_point;
-                        theApp.selectIndex = i;
-                        //選択したオブジェクトの情報を表示
-                        
-                        selected = true;
-                        break;
                     }
-                }
-            }
-            if(selected){
-            }
 
-            if(!selected){
-                //線
-                int DISTANCE_EPSILON = 5;
-                for(int i = 0; i < (int)LineList.size(); i ++){
-                    line_data* line = &LineList[i];
-                    endpoint_data* begin = &EndpointList[line->endpoint_indexes[0]];
-                    endpoint_data* end = &EndpointList[line->endpoint_indexes[1]];
-                    int x0 = (begin->vertex.x + OFFSET_X_WORLD) / DIV + OFFSET_X_VIEW;
-                    int y0 = (begin->vertex.y + OFFSET_Y_WORLD) / DIV + OFFSET_Y_VIEW;
-                    int x1 = (end->vertex.x + OFFSET_X_WORLD) / DIV + OFFSET_X_VIEW;
-                    int y1 = (end->vertex.y + OFFSET_Y_WORLD) / DIV + OFFSET_Y_VIEW;
-
-                    if(isNearbyPointToLine(point.x, point.y, x0, y0, x1, y1, DISTANCE_EPSILON)){
-                        //接近している
-                        theApp.selectType = _selected_line;
-                        theApp.selectIndex = i;
-                        selected = true;
-                        //オフセット記録
-                        theApp.polygonPointNum = 2;
-                        theApp.polygonPoints[0].x = x0 - point.x;
-                        theApp.polygonPoints[0].y = y0 - point.y;
-                        theApp.polygonPoints[1].x = x1 - point.x;
-                        theApp.polygonPoints[1].y = y1 - point.y;
-
-
-                        break;
+                    //polygons
+                    for(int i = 0; i < (int)theApp.selectGroupInformation.polygons.size(); i ++){
+                        //set offset
+                        polygon_data *polygon = &PolygonList[theApp.selectGroupInformation.polygons[i].index];
+                        int num = polygon->vertex_count;
+                        theApp.selectGroupInformation.polygons[i].num = num;
+                        for(int j = 0; j < num; j ++){
+                            int drawX = (EndpointList[polygon->endpoint_indexes[j]].vertex.x + OFFSET_X_WORLD) / DIV
+                                + OFFSET_X_VIEW;
+                            int drawY = (EndpointList[polygon->endpoint_indexes[j]].vertex.y + OFFSET_Y_WORLD) / DIV
+                                + OFFSET_Y_VIEW;
+                            theApp.selectGroupInformation.polygons[i].offsets[j][0] = drawX - point.x;
+                            theApp.selectGroupInformation.polygons[i].offsets[j][1] = drawY - point.y;
+                        }
                     }
-                }
-            }
 
-            if(selected){
-                //線プロパティ表示
-            }else{
-                //非表示
-            }
+                    //objects
+                    for(int i = 0; i < (int)theApp.selectGroupInformation.selObjects.size(); i ++){
+                        map_object* obj = &SavedObjectList[theApp.selectGroupInformation.selObjects[i].index];
+                        //set pos to view
+                        int x = obj->location.x;
+                        int y = obj->location.y;
+                        int drawX = (x + OFFSET_X_WORLD) / DIV + OFFSET_X_VIEW;
+                        int drawY = (y + OFFSET_Y_WORLD) / DIV + OFFSET_Y_VIEW;
 
-            if(!selected){
-                //ポリゴン
-                for(int i = 0; i < (int)PolygonList.size(); i ++){
-                    struct world_point2d world_point;
-                    world_point.x = (world_distance)((point.x - OFFSET_X_VIEW) * DIV - OFFSET_X_WORLD);
-                    world_point.y = (world_distance)((point.y - OFFSET_Y_VIEW) * DIV - OFFSET_Y_WORLD);
-
-                    if(point_in_polygon(i, &world_point)){
-                        theApp.selectType = _selected_polygon;
-                        theApp.selectIndex = i;
-                        selected = true;
+                        //sub to offset
+                        theApp.selectGroupInformation.selObjects[i].offset[0] = drawX - point.x;
+                        theApp.selectGroupInformation.selObjects[i].offset[1] = drawY - point.y;
                     }
+                }else{
+                    //release all selection
+                    theApp.selectGroupInformation.clear();
                 }
-            }
-            
-            if(selected){
-                //ポリゴンプロパティ
+
             }else{
-                //非表示
-            }
+                //shiftを押さずにクリック→選択
+                bool selected = false;
 
-
-            //////////////////////////////////
-            //ここからの処理はほかよりも後に書く
-            if(!selected){
-                theApp.selectType = _no_selected;
-                //範囲選択
-                //始点登録
-                theApp.selectStartPoint.x = point.x;
-                theApp.selectStartPoint.y = point.y;
-                theApp.isSelectingGroup = true;
-
-                theApp.selectGroupInformation.clear();
-            }else{
                 theApp.isSelectingGroup = false;
+
+                //objects
+                {
+                    for(int i = 0; i < (int)SavedObjectList.size() && !selected; i ++){
+                        map_object* obj = &(SavedObjectList[i]);
+                        int type = obj->type;
+                        int facing = obj->facing;
+                        int x = obj->location.x;
+                        int y = obj->location.y;
+                        int z = obj->location.z;
+                        if(isSelectPoint(point.x, point.y,
+                            x, y, OFFSET_X_VIEW, OFFSET_Y_VIEW,
+                            OFFSET_X_WORLD, OFFSET_Y_WORLD, DIV, OBJECT_DISTANCE_EPSILON)){
+
+                            theApp.selectType = _selected_object;
+                            theApp.selectIndex = i;
+                            //選択したオブジェクトの情報を表示
+                            theApp.objectPropertyDialog->setupDialog(obj);
+                            selected = true;
+                            break;
+                        }
+                    }
+                }
+                if(selected){
+                    theApp.objectPropertyDialog->ShowWindow(TRUE);
+                    theApp.isObjectPropertyDialogShow = TRUE;
+
+                    //線プロパティ消す
+                    //ポリゴンプロパティ消す
+                }else{
+                    //選択されなかった
+                    theApp.selectType = _no_selected;
+                    //theApp.objectPropertyDialog->setupDialog(-1);
+                }
+
+                ////////////////////
+                //points
+                if(!selected){
+                    selected = checkSelectPoint(point, OFFSET_X_VIEW, OFFSET_Y_VIEW,
+                        OFFSET_X_WORLD, OFFSET_Y_WORLD, DIV, POINT_DISTANCE_EPSILON);
+                }
+                if(selected){
+                }
+
+                //////////////////
+                //lines
+                if(!selected){
+                    for(int i = 0; i < (int)LineList.size(); i ++){
+                        line_data* line = &LineList[i];
+                        endpoint_data* begin = &EndpointList[line->endpoint_indexes[0]];
+                        endpoint_data* end = &EndpointList[line->endpoint_indexes[1]];
+                        if(isSelectLine(point.x, point.y, begin->vertex.x, begin->vertex.y,
+                            end->vertex.x, end->vertex.y, OFFSET_X_VIEW, OFFSET_Y_VIEW,
+                            OFFSET_X_WORLD, OFFSET_Y_WORLD, DIV, LINE_DISTANCE_EPSILON)){
+                            //接近している
+                            theApp.selectType = _selected_line;
+                            theApp.selectIndex = i;
+                            selected = true;
+                            //オフセット記録
+                            theApp.polygonPointNum = 2;
+                            theApp.polygonPoints[0].x = 
+                                (begin->vertex.x + OFFSET_X_WORLD) / DIV + OFFSET_X_VIEW
+                                - point.x;
+                            theApp.polygonPoints[0].y = 
+                                (begin->vertex.y + OFFSET_Y_WORLD) / DIV + OFFSET_Y_VIEW
+                                - point.y;
+                            theApp.polygonPoints[1].x = 
+                                (end->vertex.x + OFFSET_X_WORLD) / DIV + OFFSET_X_VIEW
+                                - point.x;
+                            theApp.polygonPoints[1].y = 
+                                (end->vertex.y + OFFSET_Y_WORLD) / DIV + OFFSET_Y_VIEW
+                                - point.y;
+
+
+                            break;
+                        }
+                    }
+                }
+
+                if(selected){
+                    //線プロパティ表示
+                }else{
+                    //非表示
+                }
+
+                /////////////////
+                //polygons
+                if(!selected){
+                    for(int i = 0; i < (int)PolygonList.size(); i ++){
+                        struct world_point2d world_point;
+                        world_point.x = (world_distance)((point.x - OFFSET_X_VIEW) * DIV - OFFSET_X_WORLD);
+                        world_point.y = (world_distance)((point.y - OFFSET_Y_VIEW) * DIV - OFFSET_Y_WORLD);
+
+                        if(point_in_polygon(i, &world_point)){
+                            theApp.selectType = _selected_polygon;
+                            theApp.selectIndex = i;
+                            selected = true;
+
+                            //set offset
+                            polygon_data *polygon = &PolygonList[i];
+                            int num = polygon->vertex_count;
+                            theApp.polygonPointNum = num;
+                            for(int j = 0; j < num; j ++){
+                                int drawX = (EndpointList[polygon->endpoint_indexes[j]].vertex.x + OFFSET_X_WORLD) / DIV
+                                    + OFFSET_X_VIEW;
+                                int drawY = (EndpointList[polygon->endpoint_indexes[j]].vertex.y + OFFSET_Y_WORLD) / DIV
+                                    + OFFSET_Y_VIEW;
+                                theApp.polygonPoints[j].x = drawX - point.x;
+                                theApp.polygonPoints[j].y = drawY - point.y;
+                            }
+                        }
+                    }
+                }
+                
+                if(selected){
+                    //ポリゴンプロパティ
+                }else{
+                    //非表示
+                }
+
+
+                //////////////////////////////////
+                //ここからの処理はほかよりも後に書く
+                if(!selected){
+                    theApp.selectType = _no_selected;
+                    //範囲選択
+                    //始点登録
+                    theApp.selectStartPoint.x = point.x;
+                    theApp.selectStartPoint.y = point.y;
+                    theApp.isSelectingGroup = true;
+
+                    theApp.selectGroupInformation.clear();
+                }else{
+                    theApp.isSelectingGroup = false;
+                }
+                this->Invalidate(FALSE);
             }
-            this->Invalidate(FALSE);
         }
     }else if(theApp.selectingToolType == TI_FILL){
     }else if(theApp.selectingToolType == TI_HAND){
@@ -181,20 +288,29 @@ void CMapEditorSDIView::OnLButtonDown(UINT nFlags, CPoint point)
             world_point.y = (world_distance)((point.y - OFFSET_Y_VIEW) * DIV - OFFSET_Y_WORLD);
 
             if(point_in_polygon(i, &world_point)){
-                //オブジェクト情報
-                int otype = theApp.objectPropertyDialog->objectTypeCmb.GetCurSel();
-                int oindex = theApp.objectPropertyDialog->objectClassedTypeCmb.GetCurSel();
-                int facing = getIntegerNum(&theApp.objectPropertyDialog->objectFacingNum);
-                int col = 0, clut = 0, sh = 0;
-                if(otype == _saved_monster){
-                    col = GET_COLLECTION(monster_definitions[oindex].collection);
-                    clut = GET_COLLECTION_CLUT(monster_definitions[oindex].collection);
+                polygon_data *polygon = &PolygonList[i];
+                //invalid height -> skip
+                if(polygon->floor_height > theApp.viewHeightMax ||
+                    polygon->ceiling_height < theApp.viewHeightMin){
+                        continue;
                 }
-                int collection = BUILD_COLLECTION(col, clut);
-                int shapes = BUILD_DESCRIPTOR(collection, sh);
-                //オブジェクト配置
-                new_map_object2d(&world_point, i, shapes,
-                    facing);
+                //オブジェクト情報
+                map_object obj;
+                obj.type = theApp.objectPropertyDialog->objectTypeCmb.GetCurSel();
+                obj.index = theApp.objectPropertyDialog->objectClassedTypeCmb.GetCurSel();
+                obj.facing = getIntegerNum(&theApp.objectPropertyDialog->objectFacingNum);
+                obj.flags = theApp.objectPropertyDialog->getFlags();
+                obj.polygon_index = i;
+                obj.location.x = world_point.x;
+                obj.location.y = world_point.y;
+                //calc height
+                if(obj.flags & _map_object_hanging_from_ceiling){
+                    obj.location.z = polygon->ceiling_height;
+                }else{
+                    obj.location.z = polygon->floor_height;
+                }
+                //追加
+                SavedObjectList.push_back(obj);
             }
         }
     }else if(theApp.selectingToolType == TI_TEXT){
@@ -205,14 +321,18 @@ void CMapEditorSDIView::OnLButtonDown(UINT nFlags, CPoint point)
     SetCapture();
 }
 
+/****************************************************************/
 //マウス移動
 void CMapEditorSDIView::OnMouseMove(UINT nFlags, CPoint point)
 {
     // TODO: ここにメッセージ ハンドラ コードを追加するか、既定の処理を呼び出します。
     theApp.nowMousePoint = point;
 
+    const int DIV = theApp.zoomDivision;
+
     if(theApp.selectingToolType == TI_ARROW){
-        if(nFlags & MK_LBUTTON && nFlags & MK_SHIFT && theApp.isPressLButtonWithShift){
+        if(nFlags & MK_LBUTTON && nFlags & MK_CONTROL && theApp.isPressLButtonWithShift){
+            //Control+L=move map view
             //差
             int deltaX = point.x - theApp.oldMousePoint.x;
             int deltaY = point.y - theApp.oldMousePoint.y;
@@ -221,20 +341,58 @@ void CMapEditorSDIView::OnMouseMove(UINT nFlags, CPoint point)
             this->Invalidate(FALSE);
             
         }else if(!theApp.isPressLButtonWithShift && 
-            (nFlags & MK_LBUTTON) && !(nFlags & MK_SHIFT) && !(nFlags & MK_CONTROL)){
+            (nFlags & MK_LBUTTON) && /*!(nFlags & MK_CONTROL) && */
+            !(nFlags & MK_CONTROL))
+        {
             //選択物の移動
+            //world position of mouse pointer
             int x = (point.x - theApp.offset.x) * theApp.zoomDivision - OFFSET_X_WORLD;
             int y = (point.y - theApp.offset.y) * theApp.zoomDivision - OFFSET_Y_WORLD;
             if(theApp.selectGroupInformation.isSelected()){
                 //グループを選択している
                 //->グループを移動
-
+                //points
+                for(int i = 0; i < (int)theApp.selectGroupInformation.points.size(); i ++){
+                    struct SelPoint *selData = &theApp.selectGroupInformation.points[i];
+                    EndpointList[selData->index].vertex.x = x + selData->offset[0] * DIV;
+                    EndpointList[selData->index].vertex.y = y + selData->offset[1] * DIV;
+                }
+                //lines
+                for(int i = 0; i < (int)theApp.selectGroupInformation.lines.size(); i ++){
+                    struct SelLine *selData = &theApp.selectGroupInformation.lines[i];
+                    EndpointList[LineList[selData->index].endpoint_indexes[0]].vertex.x =
+                        x + selData->offsets[0][0] * DIV;
+                    EndpointList[LineList[selData->index].endpoint_indexes[0]].vertex.y =
+                        y + selData->offsets[0][1] * DIV;
+                    EndpointList[LineList[selData->index].endpoint_indexes[1]].vertex.x =
+                        x + selData->offsets[1][0] * DIV;
+                    EndpointList[LineList[selData->index].endpoint_indexes[1]].vertex.y =
+                        y + selData->offsets[1][1] * DIV;
+                }
+                //polygons
+                for(int i = 0; i < (int)theApp.selectGroupInformation.polygons.size(); i ++){
+                    struct SelPolygon *selData = &theApp.selectGroupInformation.polygons[i];
+                    for(int j = 0; j < selData->num; j ++){
+                        EndpointList[PolygonList[selData->index].endpoint_indexes[j]].vertex.x =
+                            x + selData->offsets[j][0] * DIV;
+                        EndpointList[PolygonList[selData->index].endpoint_indexes[j]].vertex.y =
+                            y + selData->offsets[j][1] * DIV;
+                    }
+                }
+                //objects
+                for(int i = 0; i < (int)theApp.selectGroupInformation.selObjects.size(); i ++){
+                    struct SelObject *selData = &theApp.selectGroupInformation.selObjects[i];
+                    SavedObjectList[selData->index].location.x = x + selData->offset[0] * DIV;
+                    SavedObjectList[selData->index].location.y = y + selData->offset[1] * DIV;
+                }
             }else if(!theApp.isSelectingGroup && theApp.selectType != _no_selected){
+                //single selection
+                //->move it
                 if(theApp.selectType == _selected_object){
                     SavedObjectList[theApp.selectIndex].location.x = x;
                     SavedObjectList[theApp.selectIndex].location.y = y;
                     //オブジェクト情報更新
-                    theApp.objectPropertyDialog->setupDialog(theApp.selectIndex);
+                    theApp.objectPropertyDialog->setupDialog(&SavedObjectList[theApp.selectIndex]);
                 }else if(theApp.selectType == _selected_point){
                     EndpointList[theApp.selectIndex].vertex.x = x;
                     EndpointList[theApp.selectIndex].vertex.y = y;
@@ -247,6 +405,13 @@ void CMapEditorSDIView::OnMouseMove(UINT nFlags, CPoint point)
                         (world_distance)(x + theApp.polygonPoints[1].x * theApp.zoomDivision);
                     EndpointList[LineList[theApp.selectIndex].endpoint_indexes[1]].vertex.y = 
                         (world_distance)(y + theApp.polygonPoints[1].y * theApp.zoomDivision);
+                }else if(theApp.selectType == _selected_polygon){
+                    for(int j = 0; j < theApp.polygonPointNum; j ++){
+                        EndpointList[PolygonList[theApp.selectIndex].endpoint_indexes[j]].vertex.x =
+                            (world_distance)(x + theApp.polygonPoints[j].x * theApp.zoomDivision);
+                        EndpointList[PolygonList[theApp.selectIndex].endpoint_indexes[j]].vertex.y =
+                            (world_distance)(y + theApp.polygonPoints[j].y * theApp.zoomDivision);
+                    }
                 }
             }
             Invalidate(FALSE);
@@ -275,6 +440,7 @@ void CMapEditorSDIView::OnLButtonUp(UINT nFlags, CPoint point)
         okSelect = true;
     }
     if(okSelect){
+        theApp.selectGroupInformation.clear();
         theApp.selectType = _no_selected;
 
         int DIV = theApp.zoomDivision;
@@ -293,7 +459,10 @@ void CMapEditorSDIView::OnLButtonUp(UINT nFlags, CPoint point)
                 theApp.selectStartPoint.x, theApp.selectStartPoint.y))
             {
                 //追加
-                theApp.selectGroupInformation.endpointIndexList.push_back(i);
+                struct SelPoint selData;
+                selData.index = i;
+                //オフセットは次に左ボタンを下げたときに設定する
+                theApp.selectGroupInformation.points.push_back(selData);
             }
         }
         //線
@@ -308,7 +477,10 @@ void CMapEditorSDIView::OnLButtonUp(UINT nFlags, CPoint point)
             if(isLineInRect(x0, y0, x1, y1, point.x, point.y,
                 theApp.selectStartPoint.x, theApp.selectStartPoint.y))
             {
-                theApp.selectGroupInformation.lineIndexList.push_back(i);
+                struct SelLine selData;
+                selData.index = i;
+                //オフセットは次に左ボタンを下げたときに設定する
+                theApp.selectGroupInformation.lines.push_back(selData);
             }
         }
 
@@ -334,13 +506,40 @@ void CMapEditorSDIView::OnLButtonUp(UINT nFlags, CPoint point)
             }
             if(inner){
                 //登録
-                theApp.selectGroupInformation.polygonIndexList.push_back(i);
+                struct SelPolygon selData;
+                selData.index = i;
+                //オフセットは次に左ボタンを下げたときに設定する
+                theApp.selectGroupInformation.polygons.push_back(selData);
             }
         }
 
-        if(theApp.selectGroupInformation.endpointIndexList.size() > 0){
-            theApp.selectGroupInformation.setSelected(true);
+        //objects
+        for(int i = 0; i < (int)SavedObjectList.size(); i ++){
+            map_object* obj = &SavedObjectList[i];
+            int x = obj->location.x;
+            int y = obj->location.y;
+            int drawX = (x + OFFSET_X_WORLD)/DIV + OFFSET_X_VIEW;
+            int drawY = (y + OFFSET_Y_WORLD)/DIV + OFFSET_Y_VIEW;
+
+            //チェック
+            if(isPointInRect<int>(drawX, drawY, point.x, point.y,
+                theApp.selectStartPoint.x, theApp.selectStartPoint.y))
+            {
+                //追加
+                struct SelObject selData;
+                selData.index = i;
+                //オフセットは次に左ボタンを下げたときに設定する
+                theApp.selectGroupInformation.selObjects.push_back(selData);
+            }
         }
+
+        //選択したかどうか
+        bool isSelected = false;
+        if(theApp.selectGroupInformation.points.size() > 0 ||
+            theApp.selectGroupInformation.selObjects.size() > 0){
+                isSelected = true;
+        }
+        theApp.selectGroupInformation.setSelected(isSelected);
     }
 
     theApp.isSelectingGroup = false;

@@ -187,3 +187,130 @@ bool isPolygonInRect(int **points, int point_num,
     }
     return true;
 }
+
+/**is selecting point?
+    @param viewPX   point(mouse/view)
+    @param worldPX  point(world)
+    @param offsetViewX offset of view
+    @param offsetWorldX offset of world
+    @param div divergence of 2 * world per view
+    @param distance check distance
+*/
+bool isSelectPoint(int viewPX, int viewPY, 
+                   int worldPX, int worldPY,
+                   int offsetViewX, int offsetViewY,
+                   int offsetWorldX, int offsetWorldY,
+                   int div,
+                   int distance)
+{
+    int worldViewX = (worldPX + offsetWorldX)/div + offsetViewX;
+    int worldViewY = (worldPY + offsetWorldY)/div + offsetViewY;
+    //check
+    bool isSelect = isNearbyPoints(
+        viewPX,viewPY, worldViewX, worldViewY,
+        distance);
+    return isSelect;
+}
+
+/**
+    is view-point near world-line?
+    @param viewPX   point(mouse/view)
+    @param worldPX0 line's point(world)
+    @param offsetViewX offset of view
+    @param offsetWorldX offset of world
+    @param distance check distance
+*/
+bool isSelectLine(int viewPX, int viewPY,
+                   int worldPX0, int worldPY0,
+                   int worldPX1, int worldPY1,
+                   int offsetViewX, int offsetViewY,
+                   int offsetWorldX, int offsetWorldY,
+                   int div,
+                   int distance)
+{
+    int x0 = (worldPX0 + offsetWorldX) / div + offsetViewX;
+    int y0 = (worldPY0 + offsetWorldY) / div + offsetViewY;
+    int x1 = (worldPX1 + offsetWorldX) / div + offsetViewX;
+    int y1 = (worldPY1 + offsetWorldY) / div + offsetViewY;
+
+    bool isSelect = isNearbyPointToLine(viewPX, viewPY, x0, y0, x1, y1, distance);
+    return isSelect;
+}
+
+/**
+    is point in select groups?
+    @param px point locatin(view)
+    @param offsetViewX offset(view)
+    @param offsetWorldX offset(world)
+    @param pointDistance distance as nearby
+    @param lineDistance distance as nearby
+    @param selectInfo select group for check
+*/
+bool isPointInSelection(int px, int py,
+                        int offsetViewX, int offsetViewY,
+                        int offsetWorldX, int offsetWorldY,
+                        int pointDistance,
+                        int lineDistance,
+                        int objectDistance,
+                        struct selectInformation* selectInfo,
+                        int heightMax, int heightMin, int div)
+{
+    //objects
+    for(int i = 0; i < (int)selectInfo->selObjects.size(); i ++){
+        map_object* obj = &(SavedObjectList[selectInfo->selObjects[i].index]);
+        int type = obj->type;
+        int facing = obj->facing;
+        int x = obj->location.x;
+        int y = obj->location.y;
+        int z = obj->location.z;
+        if(z > heightMax || z < heightMin){
+            continue;
+        }
+        if(isSelectPoint(px, py,
+            x, y, offsetViewX, offsetViewY,
+            offsetWorldX, offsetWorldY, div, objectDistance))
+        {
+            return true;
+        }
+    }
+    //points
+    for(int i = 0; i < (int)selectInfo->points.size(); i ++){
+        endpoint_data* ep = &EndpointList[selectInfo->points[i].index];
+        int x = ep->vertex.x;
+        int y = ep->vertex.y;
+        int drawX = (x + offsetWorldX)/div + offsetViewX;
+        int drawY = (y + offsetWorldY)/div + offsetViewY;
+        if(isSelectPoint(px, py,
+            x, y, offsetViewX, offsetViewY,
+            offsetWorldX, offsetWorldY, div, objectDistance))
+        {
+            return true;
+        }
+    }
+
+    //lines
+    for(int i = 0; i < (int)selectInfo->lines.size(); i ++){
+        line_data* line = &LineList[selectInfo->lines[i].index];
+        endpoint_data* begin = &EndpointList[line->endpoint_indexes[0]];
+        endpoint_data* end = &EndpointList[line->endpoint_indexes[1]];
+        if(isSelectLine(px, py, begin->vertex.x, begin->vertex.y,
+            end->vertex.x, end->vertex.y, offsetViewX, offsetViewY,
+            offsetWorldX, offsetWorldY, div, lineDistance))
+        {
+            return true;
+        }
+    }
+    //polygons
+    for(int i = 0; i < (int)selectInfo->polygons.size(); i ++){
+        struct world_point2d world_point;
+        world_point.x = (world_distance)((px - offsetViewX) * div - offsetWorldX);
+        world_point.y = (world_distance)((py - offsetViewY) * div - offsetWorldY);
+
+        if(point_in_polygon(selectInfo->polygons[i].index, &world_point)){
+            return true;
+        }
+    }
+
+    //no selection
+    return false;
+}

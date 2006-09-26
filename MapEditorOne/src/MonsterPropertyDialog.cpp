@@ -15,7 +15,7 @@ CMonsterPropertyDialog::CMonsterPropertyDialog(CWnd* pParent /*=NULL*/)
 	: CDialog(CMonsterPropertyDialog::IDD, pParent)
 {
     parent = pParent;
-    obj = NULL;
+    memset(&obj, 0, sizeof(map_object));
 }
 
 CMonsterPropertyDialog::~CMonsterPropertyDialog()
@@ -86,13 +86,12 @@ void CMonsterPropertyDialog::OnClose()
     }
 }
 
-void CMonsterPropertyDialog::setupDialog(int index)
+void CMonsterPropertyDialog::setupDialog(map_object *object)
 {
-    if(index < 0){
-        obj = NULL;
+    if(object == NULL){
+        //obj = NULL;
     }else{
-        map_object *object = &SavedObjectList[index];
-        this->obj = object;
+        memcpy(&obj, object, sizeof(map_object));
 
         //ƒRƒ“ƒ{‚ð‹ó‚É‚·‚é
         //
@@ -143,7 +142,7 @@ void CMonsterPropertyDialog::setupDialog(int index)
         //object->facing
         setIntegerNum(object->facing, &objectFacingNum);
 
-        //object->flags
+        //object->flags >>> checks
         for(int i = 0; i < NUMBER_OF_OBJECT_FLAGS; i ++){
             int check = 0;
             if(object->flags & theApp.objectFlagInformations[i].bind){
@@ -221,12 +220,12 @@ void CMonsterPropertyDialog::OnPaint()
             picDC->MoveTo((LONG)x0, (LONG)y0);
             picDC->LineTo((LONG)x1, (LONG)y1);
         }
-        if(obj){
+        //if(obj){
             picDC->SelectObject(blackSmallPen);
             picDC->SelectObject(yellowBrush);
             //•`‰æ
             const double SIZE = 20;
-            int facing = obj->facing;
+            int facing = obj.facing;
             double degree = (double)facing / (1<<ANGULAR_BITS) * 360.0;
             POINT pt[3];
             pt[0].x = (LONG)(center.x + SIZE * cos(degreeToRadian(degree)));
@@ -236,7 +235,7 @@ void CMonsterPropertyDialog::OnPaint()
             pt[2].x = (LONG)(center.x + SIZE / 2 * cos(degreeToRadian(degree - 120)));
             pt[2].y = (LONG)(center.y + SIZE / 2 * sin(degreeToRadian(degree - 120)));
             Polygon(picDC->m_hDC, pt, 3);
-        }
+        //}
     }
 
     //dc.SelectObject(oldBrush);
@@ -275,4 +274,17 @@ void CMonsterPropertyDialog::clickFacing(int px, int py)
     CWnd *pictureBox = GetDlgItem(IDC_STATIC_ANGLE);
     CRect rect;
     pictureBox->GetClientRect(&rect);
+}
+
+//get flags num
+int CMonsterPropertyDialog::getFlags()
+{
+    //checkbox >>> flags
+    int flags = 0;
+    for(int i = 0; i < NUMBER_OF_OBJECT_FLAGS; i ++){
+        if(objectFlags[i].GetCheck()){
+            flags |= theApp.objectFlagInformations[i].bind;
+        }
+    }
+    return flags;
 }
