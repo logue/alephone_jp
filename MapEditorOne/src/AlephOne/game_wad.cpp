@@ -602,37 +602,41 @@ bool save_level(const char* filename){
     if(!wad){
         return false;
     }
-    //デフォルトにする
+    //set header to default
     fill_default_wad_header(mapFileSpecifier, WADFILE_HAS_DIRECTORY_ENTRY,
         EDITOR_MAP_VERSION,
         1, 0, &header);
-    //WADの長さ計算
+    //calcurate wad'd length
     long wad_length = calculate_wad_length(&header, wad);
     long offset = SIZEOF_wad_header;
-    //エントリーデータセット
+    //set entry data (bugs?)
     set_indexed_directory_offset_and_length(&header, 
 		&entry, 0, offset, wad_length, 0);
+    //when use this, then crash!
     //entry.index = 0;
     //entry.length = wad_length;
     //entry.offset_to_start = offset;
     
+    //open wad
     if(!open_wad_file_for_writing(mapFileSpecifier, OFile)){
         return false;
     }
-
-
+    
+    //write wad's header
     if(!write_wad_header(OFile, &header)){
         return false;
     }
+    //unuse
     //calculate_and_store_wadfile_checksum(OFile);
     //recalculate_map_counts();
 
+    //write wad
 	if(!write_wad(OFile, &header, wad, offset)){
 		//不成功
         return false;
 	}
 
-    //新しいヘッダへ更新
+    //construct header
     offset+= wad_length;
 	header.directory_offset= offset;
     header.parent_checksum = 0;
@@ -640,7 +644,6 @@ bool save_level(const char* filename){
 	write_directorys( OFile, &header, &entry);
     //calculate_and_store_wadfile_checksum(OFile);
 
-	//printf("Header.checksum=%d\n",Header.checksum);
 	close_wad_file(OFile);
     free_wad(wad);
     return true;

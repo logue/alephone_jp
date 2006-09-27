@@ -134,7 +134,8 @@ void CMapEditorSDIView::OnLButtonDown(UINT nFlags, CPoint point)
                     theApp.selectGroupInformation.clear();
                 }
 
-            }else{
+            }
+            if(!theApp.selectGroupInformation.isSelected()){
                 //shiftを押さずにクリック→選択
                 bool selected = false;
 
