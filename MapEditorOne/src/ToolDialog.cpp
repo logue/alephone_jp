@@ -166,21 +166,7 @@ void CToolDialog::OnLButtonDown(UINT nFlags, CPoint point)
             //ツール変化
             theApp.selectingToolType = i;
             Invalidate(FALSE);
-            //
-            LPWSTR cursors[] = {
-                IDC_CROSS,
-                IDC_ARROW,
-                IDC_APPSTARTING,
-                IDC_HAND,
-                IDC_CROSS,
-                IDC_APPSTARTING,
-                IDC_HAND
-            };
-            //カーソル変化
-            HCURSOR cursor = LoadCursor(AfxGetInstanceHandle(), cursors[theApp.selectingToolType]);
-            //SetCursor(cursor);
-            SetClassLong(parent->m_hWnd, GCL_HCURSOR, (long)cursor);
-
+            //setCursor();
         }
     }
     CDialog::OnLButtonDown(nFlags, point);

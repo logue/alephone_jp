@@ -13,6 +13,10 @@
 #endif
 
 static char* POLYGON_COLOR_FILE_NAME = "data/PolygonColor.txt";
+static char* LOG_FILE_NAME = "log.txt";
+
+//logger
+HPLLogger logger;
 
 // CMapEditorSDIApp
 
@@ -182,7 +186,11 @@ CMapEditorSDIApp::CMapEditorSDIApp()
     viewHeightMin = - SHRT_MAX;
     viewHeightMax = -viewHeightMin;
 
+    //no changes found(new)
     isChanged = false;
+
+    logger = HPLLogger(LOG_FILE_NAME);
+    logger.open();
 }
 
 CMapEditorSDIApp::~CMapEditorSDIApp()
@@ -194,6 +202,7 @@ CMapEditorSDIApp::~CMapEditorSDIApp()
     for(int i = 0; i < (int)bitmapList.size(); i ++){
         bitmapList[i]->DeleteObject();
     }
+    logger.close();
 }
 
 // 唯一の CMapEditorSDIApp オブジェクトです。
@@ -344,3 +353,39 @@ void setObjectPropertyToDefault()
     theApp.objectPropertyDialog->setupDialog(&obj);
 }
 
+int searchSelectEndpoint(int viewPX, int viewPY)
+{
+    return -1;
+}
+int searchSelectObject(int viewPX, int viewPY)
+{
+    return -1;
+}
+int searchSelectLine(int viewPX, int viewPY)
+{
+    return -1;
+}
+int searchSelectPolygon(int viewPX, int viewPY)
+{
+    return -1;
+}
+
+void setCursor()
+{
+    //
+    LPWSTR cursors[] = {
+        IDC_ARROW,
+        IDC_ARROW,
+        IDC_APPSTARTING,
+        IDC_HAND,
+        IDC_CROSS,
+        IDC_APPSTARTING,
+        IDC_HAND
+    };
+    //カーソル変化
+    HCURSOR cursor = LoadCursor(AfxGetInstanceHandle(), cursors[theApp.selectingToolType]);
+    //SetCursor(cursor);
+    SetClassLong(AfxGetMainWnd()->m_hWnd, GCL_HCURSOR, NULL);
+    //SetCursor(cursor);
+    ShowCursor(TRUE);
+}

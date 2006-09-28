@@ -38,7 +38,7 @@ Feb 3, 2000 (Loren Petrich):
 Aug 12, 2000 (Loren Petrich):
 	Using object-oriented file handler
 */
-
+#include "../HPLLogger.h"
 #include "tags.h"
 
 #define PRE_ENTRY_POINT_WADFILE_VERSION 0

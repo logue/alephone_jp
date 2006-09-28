@@ -326,6 +326,8 @@ void CMapEditorSDIView::OnLButtonDown(UINT nFlags, CPoint point)
 //マウス移動
 void CMapEditorSDIView::OnMouseMove(UINT nFlags, CPoint point)
 {
+    setCursor();
+
     // TODO: ここにメッセージ ハンドラ コードを追加するか、既定の処理を呼び出します。
     theApp.nowMousePoint = point;
 

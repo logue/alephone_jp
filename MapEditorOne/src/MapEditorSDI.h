@@ -8,6 +8,8 @@
 
 #include "resource.h"       // メイン シンボル
 #include "HPLLibMFC.h"
+#include "HPLLogger.h"      //logger for debug
+
 #include "AlephOne/header.h"
 #include "AlephOne/extensions.h"
 #include "AlephOne/FileHandler.h"
@@ -214,6 +216,10 @@ public:
     //複数選択時の選択物リスト
     struct selectInformation selectGroupInformation;
 
+    //selection group
+    //TODO use this
+    vector<struct selectInformation> selectGroupInformationList;
+
     //SDL surface to win api device context
 	SDLToWindows *m_SDLToWindows;
 
@@ -231,6 +237,9 @@ public:
     //save check
     //when true, warn to save
     bool isChanged;
+
+
+
 	DECLARE_MESSAGE_MAP()
 public:
     afx_msg void OnFileOpen();
@@ -243,3 +252,12 @@ void loadBitmap(int id, CImageList* imageList, COLORREF key);
 
 //set object property to default
 void setObjectPropertyToDefault();
+
+//@return if failure, return under 0(-1)
+//TODO construct these
+int searchSelectEndpoint(int viewPX, int viewPY);
+int searchSelectObject(int viewPX, int viewPY);
+int searchSelectLine(int viewPX, int viewPY);
+int searchSelectPolygon(int viewPX, int viewPY);
+
+void setCursor();

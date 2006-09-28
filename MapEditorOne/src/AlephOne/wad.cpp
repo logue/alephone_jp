@@ -1161,6 +1161,7 @@ static bool read_indexed_wad_from_file_into_buffer(
 	/* Read the directory entry first */
 	if (read_indexed_directory_data(OFile, header, index, &entry))
 	{
+        logEntry(&entry, *length, index);
 		/* Some sanity checks */
 		assert(*length<=entry.length);
 		assert(buffer);

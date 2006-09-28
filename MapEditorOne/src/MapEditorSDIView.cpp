@@ -1046,6 +1046,9 @@ void CMapEditorSDIView::OnMenu32797()
 BOOL CMapEditorSDIView::OnSetCursor(CWnd* pWnd, UINT nHitTest, UINT message)
 {
     // TODO: ここにメッセージ ハンドラ コードを追加するか、既定の処理を呼び出します。
+
+    setCursor();
+    return TRUE;
     //if(nHitTest == HTCLIENT){
      /*   LPWSTR cursors[] = {
             IDC_ARROW,
@@ -1061,5 +1064,5 @@ BOOL CMapEditorSDIView::OnSetCursor(CWnd* pWnd, UINT nHitTest, UINT message)
         SetCursor(cursor);
         return TRUE;*/
     //}
-    return CView::OnSetCursor(pWnd, nHitTest, message);
+    //return CView::OnSetCursor(pWnd, nHitTest, message);
 }

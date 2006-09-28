@@ -32,7 +32,7 @@ June 15, 2000 (Loren Petrich):
 Aug 12, 2000 (Loren Petrich):
 	Using object-oriented file handler
 */
-
+#include "../HPLLogger.h"
 class FileSpecifier;
 
 bool save_game_file(FileSpecifier& File);
