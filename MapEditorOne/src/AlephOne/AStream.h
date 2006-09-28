@@ -1,5 +1,5 @@
 /////////////////////////////////////////////////////////////////////////
-// $Id: AStream.h,v 1.1 2006-09-15 19:24:44 hogepiyo Exp $
+// $Id: AStream.h,v 1.2 2006-09-28 14:05:57 hogepiyo Exp $
 /////////////////////////////////////////////////////////////////////////
 
 /*
@@ -41,11 +41,11 @@ namespace AStream
 	class failure : public std::exception
 	{
 		public:
-			failure(const std::string& __str) throw();
+			failure(const std::string& __str) ;//throw();
 			failure(const failure &f);
-			~failure() throw();
+			~failure() ;//throw();
 			const char*
-			what() const throw();
+			what() const ;//throw();
 
 		private:
 			char * _M_name;
@@ -62,7 +62,7 @@ namespace AStream
 	protected:
 		T *_M_stream_pos;
 		bool
-		bound_check(uint32 __delta) throw(AStream::failure);
+		bound_check(uint32 __delta) ;//throw(AStream::failure);
 		
 		uint32
 		tell_pos() const
@@ -130,44 +130,44 @@ public:
 	{ return this->max_pos(); }
 
 	AIStream&
-		operator>>(uint8 &_val) throw(AStream::failure);
+		operator>>(uint8 &_val) ;//throw(AStream::failure);
 	
 	AIStream&
-	operator>>(int8 &_val) throw(AStream::failure);
+	operator>>(int8 &_val) ;//throw(AStream::failure);
 	
 	virtual AIStream&
-	  operator>>(bool &_val) throw(AStream::failure);
+	  operator>>(bool &_val) ;//throw(AStream::failure);
   
 	virtual AIStream&
-	operator>>(uint16 &_val) throw(AStream::failure) = 0;
+	operator>>(uint16 &_val) ;//throw(AStream::failure) = 0;
 	
 	virtual AIStream&
-	operator>>(int16 &_val) throw(AStream::failure) = 0;
+	operator>>(int16 &_val) ;//throw(AStream::failure) = 0;
 	
 	virtual AIStream&
-	operator>>(uint32 &_val) throw(AStream::failure) = 0;
+	operator>>(uint32 &_val) ;//throw(AStream::failure) = 0;
 	
 	virtual AIStream&
-	operator>>(int32 &_val) throw(AStream::failure) = 0;
+	operator>>(int32 &_val) ;//throw(AStream::failure) = 0;
 
 	AIStream&
-	read(char *__ptr, uint32 __count) throw(AStream::failure);
+	read(char *__ptr, uint32 __count) ;//throw(AStream::failure);
 	
 	AIStream&
-	read(unsigned char * __ptr, uint32 __count) throw(AStream::failure)
+	read(unsigned char * __ptr, uint32 __count) //throw(AStream::failure)
 	{ return read((char *) __ptr, __count); }
 	
 	AIStream&
-	read(signed char * __ptr, uint32 __count) throw(AStream::failure)
+	read(signed char * __ptr, uint32 __count) //throw(AStream::failure)
 	{ return read((char *) __ptr, __count); }
 	
 	AIStream&
-	ignore(uint32 __count) throw(AStream::failure);
+	ignore(uint32 __count) ;//throw(AStream::failure);
 
 	// Uses >> instead of operator>> so as to pick up friendly operator>>
 	template<class T>
 	inline AIStream&
-	read(T* __list, uint32 __count) throw(AStream::failure)
+	read(T* __list, uint32 __count) //throw(AStream::failure)
 	{
 		T* ValuePtr = __list;
 		for (unsigned int k=0; k<__count; k++)
@@ -185,16 +185,16 @@ public:
 		AIStream(__stream, __length, __offset) {};
   
 	AIStream&
-	operator>>(uint16 &_val) throw(AStream::failure);
+	operator>>(uint16 &_val) ;//throw(AStream::failure);
 	
 	AIStream&
-	operator>>(int16 &_val) throw(AStream::failure);
+	operator>>(int16 &_val) ;//throw(AStream::failure);
 	
 	AIStream&
-	operator>>(uint32 &_val) throw(AStream::failure);
+	operator>>(uint32 &_val) ;//throw(AStream::failure);
 	
 	AIStream&
-	operator>>(int32 &_val) throw(AStream::failure);
+	operator>>(int32 &_val) ;//throw(AStream::failure);
 };
 
 class AIStreamLE : public AIStream
@@ -204,16 +204,16 @@ public:
 		AIStream(__stream, __length, __offset) {};
   
 	AIStream&
-	operator>>(uint16 &_val) throw(AStream::failure);
+	operator>>(uint16 &_val) ;//throw(AStream::failure);
 	
 	AIStream&
-	operator>>(int16 &_val) throw(AStream::failure);
+	operator>>(int16 &_val) ;//throw(AStream::failure);
 	
 	AIStream&
-	operator>>(uint32 &_val) throw(AStream::failure);
+	operator>>(uint32 &_val) ;//throw(AStream::failure);
 	
 	AIStream&
-	operator>>(int32 &_val) throw(AStream::failure);
+	operator>>(int32 &_val) ;//throw(AStream::failure);
 };
 
 /* Output Streams, serializing */
@@ -233,44 +233,44 @@ public:
 	{ return this->max_pos(); }
 		
 	AOStream&
-	operator<<(uint8 _val) throw(AStream::failure);
+	operator<<(uint8 _val);//throw(AStream::failure);
 	
 	AOStream&
-	operator<<(int8 _val) throw(AStream::failure);
+	operator<<(int8 _val);//throw(AStream::failure);
 
 	virtual AOStream&
-        operator<<(bool _val) throw (AStream::failure);  
+        operator<<(bool _val);// throw (AStream::failure);  
 
 	virtual AOStream&
-	operator<<(uint16 _val) throw(AStream::failure) = 0;
+	operator<<(uint16 _val);//throw(AStream::failure) = 0;
 	
 	virtual AOStream&
-	operator<<(int16 _val) throw(AStream::failure) = 0;
+	operator<<(int16 _val);//throw(AStream::failure) = 0;
 	
 	virtual AOStream&
-	operator<<(uint32 _val) throw(AStream::failure) = 0;
+	operator<<(uint32 _val) ;//throw(AStream::failure) = 0;
 	
 	virtual AOStream&
-	operator<<(int32 _val) throw(AStream::failure) = 0;
+	operator<<(int32 _val) ;//throw(AStream::failure) = 0;
 
 
 	AOStream&
-	write(char *__ptr, uint32 __count) throw(AStream::failure);
+	write(char *__ptr, uint32 __count) ;//throw(AStream::failure);
 	
 	AOStream&
-	write(unsigned char * __ptr, uint32 __count) throw(AStream::failure)
+	write(unsigned char * __ptr, uint32 __count) //throw(AStream::failure)
 	{ return write((char *) __ptr, __count); }
 	
 	AOStream&
-	write(signed char * __ptr, uint32 __count) throw(AStream::failure)
+	write(signed char * __ptr, uint32 __count) //throw(AStream::failure)
 	{ return write((char *) __ptr, __count); }
 	
-	AOStream& ignore(uint32 __count) throw(AStream::failure);
+	AOStream& ignore(uint32 __count) ;//throw(AStream::failure);
 
 	// Uses << instead of operator>> so as to pick up friendly operator<<
 	template<class T>
 	inline AOStream&
-	write(T* __list, uint32 __count) throw(AStream::failure)
+	write(T* __list, uint32 __count) //throw(AStream::failure)
 	{
 		T* ValuePtr = __list;
 		for (unsigned int k=0; k<__count; k++)
@@ -287,16 +287,16 @@ public:
 		AOStream(__stream, __length, __offset) {};
   
 	AOStream&
-	operator<<(uint16 _val) throw(AStream::failure);
+	operator<<(uint16 _val) ;//throw(AStream::failure);
 	
 	AOStream&
-	operator<<(int16 _val) throw(AStream::failure);
+	operator<<(int16 _val) ;//throw(AStream::failure);
 	
 	AOStream&
-	operator<<(uint32 _val) throw(AStream::failure);
+	operator<<(uint32 _val) ;//throw(AStream::failure);
 	
 	AOStream&
-	operator<<(int32 _val) throw(AStream::failure);
+	operator<<(int32 _val) ;//throw(AStream::failure);
 };
 
 class AOStreamLE: public AOStream
@@ -306,16 +306,16 @@ public:
 		AOStream(__stream, __length, __offset) {}
   
 	AOStream&
-	operator<<(uint16 _val) throw(AStream::failure);
+	operator<<(uint16 _val) ;//throw(AStream::failure);
 	
 	AOStream&
-	operator<<(int16 _val) throw(AStream::failure);
+	operator<<(int16 _val) ;//throw(AStream::failure);
 	
 	AOStream&
-	operator<<(uint32 _val) throw(AStream::failure);
+	operator<<(uint32 _val) ;//throw(AStream::failure);
 	
 	AOStream&
-	operator<<(int32 _val) throw(AStream::failure);
+	operator<<(int32 _val) ;//throw(AStream::failure);
 };
 
 #endif

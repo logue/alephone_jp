@@ -397,85 +397,57 @@ static struct wad_data* export_level_wad_data()
     //empty wad
     struct wad_data* wad = create_empty_wad();
 
-    size_t offset, alloc_size;
+    size_t size;//offset, alloc_size;
     Uint8 *data;
-    size_t count;
+    //size_t count;
 
-    offset = 0;
+    //offset = 0;
 
-    //lines
-    count = LineList.size();
-    alloc_size = SIZEOF_line_data * count;
-    data = new Uint8[alloc_size];
-    pack_line_data(data, map_lines, count);
-	append_data_to_wad(wad, LINE_TAG, data, alloc_size, offset);
-	offset += alloc_size;
-    delete data;
+    //one of lines/side/polygons must be first of all !!!
+    int tags[] ={
+        LINE_TAG, ENDPOINT_DATA_TAG, SIDE_TAG, POLYGON_TAG,
+        ANNOTATION_TAG, OBJECT_TAG,
+        MAP_INFO_TAG, ITEM_PLACEMENT_STRUCTURE_TAG,
+        TERMINAL_DATA_TAG, MEDIA_TAG, AMBIENT_SOUND_TAG,
+        RANDOM_SOUND_TAG, PLATFORM_STRUCTURE_TAG,
+        MAP_INDEXES_TAG,
 
-    //points
-    count = EndpointList.size();
-    alloc_size = SIZEOF_endpoint_data * count;
-    data = new Uint8[alloc_size];
-	pack_endpoint_data(data, map_endpoints, count);
-	append_data_to_wad(wad, ENDPOINT_DATA_TAG, data, alloc_size, offset);
-	offset += alloc_size;
-    delete data;
+    };
+    for(int i = 0; i < sizeof(tags) / sizeof(int); i ++){
+        data = tag_to_global_array_and_size(tags[i], &size);
+        if(data){
+	        append_data_to_wad(wad, tags[i], data, size, 0);
+	        //offset += alloc_size;
+            delete data;
+        }
+    }
 
-    //side
-    count = SideList.size();
-    alloc_size = SIZEOF_side_data * count;
-    data = new Uint8[alloc_size];
-    pack_side_data(data, map_sides, count);
-	append_data_to_wad(wad, SIDE_TAG, data, alloc_size, offset);
-	offset += alloc_size;
-    delete data;
-
-    //polygon
-    count = PolygonList.size();
-    alloc_size = SIZEOF_polygon_data * count;
-    data = new Uint8[alloc_size];
-    pack_polygon_data(data, map_polygons, count);
-	append_data_to_wad(wad, POLYGON_TAG, data, alloc_size, offset);
-	offset += alloc_size;
-    delete data;
 
     //light
-    count = LightList.size();
+    //light's data is illigal
+    size_t count = LightList.size();
     if(count > 0){
-        alloc_size = SIZEOF_static_light_data * count;
-        data = new Uint8[alloc_size];
+        size = SIZEOF_static_light_data * count;
+        data = new Uint8[size];
         struct static_light_data* slights = new struct static_light_data[count];
         for(size_t i = 0; i < count; i ++){
             memcpy(&slights[i], &LightList[i].static_data, SIZEOF_static_light_data);
         }
         pack_static_light_data(data, slights, count);
         delete slights;
-        append_data_to_wad(wad, LIGHTSOURCE_TAG, data, alloc_size, offset);
-	    offset += alloc_size;
+        append_data_to_wad(wad, LIGHTSOURCE_TAG, data, size, 0);
         delete data;
     }
-
-    //annotations
-    count = MapAnnotationList.size();
+    //terminal
+    /*count = map_terminal_text.size();
     if(count > 0){
-        alloc_size = SIZEOF_map_annotation * count;
+        size = calculate_packed_terminal_data_length();
         data = new Uint8[alloc_size];
-        pack_map_annotation(data, map_annotations, count);
-        append_data_to_wad(wad, LIGHTSOURCE_TAG, data, alloc_size, offset);
+        pack_map_terminal_data(data, count);
+        append_data_to_wad(wad, TERMINAL_DATA_TAG, data, size, 0);
 	    offset += alloc_size;
         delete data;
-    }
-
-    //objects
-    count = SavedObjectList.size();
-    if(count > 0){
-        alloc_size = SIZEOF_map_object * count;
-        data = new Uint8[alloc_size];
-        pack_map_object(data, saved_objects, count);
-        append_data_to_wad(wad, OBJECT_TAG, data, alloc_size, offset);
-	    offset += alloc_size;
-        delete data;
-    }
+    }*/
 
     //map info
     /*
@@ -497,10 +469,6 @@ static struct wad_data* export_level_wad_data()
     data = new Uint8[alloc_size];
     pack_static_data(data, static_world, count);
     */
-    data = tag_to_global_array_and_size(MAP_INFO_TAG, &count);
-    append_data_to_wad(wad, MAP_INFO_TAG, data, count, offset);
-	offset += alloc_size;
-    delete data;
 
     //object placement
     /*count = 2 * MAXIMUM_OBJECT_TYPES;
@@ -513,61 +481,11 @@ static struct wad_data* export_level_wad_data()
         monster_placement_info, alloc_size / 2);
     data = new Uint8[alloc_size];
     */
-    data = tag_to_global_array_and_size(ITEM_PLACEMENT_STRUCTURE_TAG, &count);
-    //pack_object_frequency_definition(data, objectPlacementData, count);
-    //delete objectPlacementData;
-    append_data_to_wad(wad, ITEM_PLACEMENT_STRUCTURE_TAG, data, count, offset);
-	offset += count;
-    delete data;
-
-    //terminal
-    count = map_terminal_text.size();
-    if(count > 0){
-        alloc_size = calculate_packed_terminal_data_length();
-        data = new Uint8[alloc_size];
-        pack_map_terminal_data(data, count);
-        append_data_to_wad(wad, TERMINAL_DATA_TAG, data, alloc_size, offset);
-	    offset += alloc_size;
-        delete data;
-    }
-
-    //media
-    count = MediaList.size();
-    if(count > 0){
-        alloc_size = SIZEOF_media_data * count;
-        data = new Uint8[alloc_size];
-        pack_media_data(data, medias, count);
-        append_data_to_wad(wad, MEDIA_TAG, data, alloc_size, offset);
-	    offset += alloc_size;
-        delete data;
-    }
-
-    //ambient sound images
-    count = AmbientSoundImageList.size();
-    if(count > 0){
-        alloc_size = SIZEOF_ambient_sound_image_data * count;
-        data = new Uint8[alloc_size];
-        pack_ambient_sound_image_data(data, ambient_sound_images, count);
-        append_data_to_wad(wad, AMBIENT_SOUND_TAG, data, alloc_size, offset);
-        offset += alloc_size;
-        delete data;
-    }
-
-    //random sound images
-    count = RandomSoundImageList.size();
-    if(count > 0){
-        alloc_size = SIZEOF_random_sound_image_data * count;
-        data = new Uint8[alloc_size];
-        pack_random_sound_image_data(data, random_sound_images, count);
-        append_data_to_wad(wad, RANDOM_SOUND_TAG, data, alloc_size, offset);
-        offset += alloc_size;
-        delete data;
-    }
 
     //physics models (disable)
 
     //platforms
-    count = PlatformList.size();
+    /*count = PlatformList.size();
     if(count > 0){
         alloc_size = SIZEOF_platform_data * count;
         data = new Uint8[alloc_size];
@@ -575,10 +493,10 @@ static struct wad_data* export_level_wad_data()
         append_data_to_wad(wad, PLATFORM_STRUCTURE_TAG, data, alloc_size, offset);
         offset += alloc_size;
         delete data;
-    }
+    }*/
 
     //map_index
-    count = MapIndexList.size();
+    /*count = MapIndexList.size();
     if(count > 0){
         //alloc_size = count;
         //data = new Uint8[alloc_size];
@@ -587,7 +505,8 @@ static struct wad_data* export_level_wad_data()
         append_data_to_wad(wad, MAP_INDEXES_TAG, data, count, offset);
         offset += count;
         delete data;
-    }
+    }*/
+
     return wad;
 }
 
@@ -610,8 +529,8 @@ bool save_level(const char* filename){
         return false;
     }
     //set header to default
-    fill_default_wad_header(mapFileSpecifier, WADFILE_HAS_DIRECTORY_ENTRY,
-        MARATHON_TWO_DATA_VERSION,
+    fill_default_wad_header(mapFileSpecifier, CURRENT_WADFILE_VERSION,
+        MARATHON_INFINITY_DATA_VERSION,
         1, 0, &header);
     //calcurate wad'd length
     long wad_length = calculate_wad_length(&header, wad);
@@ -649,7 +568,7 @@ bool save_level(const char* filename){
     offset+= wad_length;
 	header.directory_offset= offset;
     header.parent_checksum = 0;
-
+    //header.entry_header_size = 16;
     logHeader(&header, MapFileSpec.GetPath());
 	write_wad_header( OFile, &header);
 	write_directorys( OFile, &header, &entry);

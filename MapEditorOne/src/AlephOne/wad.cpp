@@ -1231,6 +1231,7 @@ static struct wad_data *convert_wad_from_raw(
 	
 				for(index= 0; index<tag_count; ++index)
 				{
+                    logger.printf("WAD_FILE ver.:%d wad_entry_header.offset:%d\n", header->version, wad_entry_header.offset);
 					assert(header->version<WADFILE_SUPPORTS_OVERLAYS || wad_entry_header.offset == 0);
 					wad->tag_data[index].tag = wad_entry_header.tag;
 					wad->tag_data[index].length = wad_entry_header.length;

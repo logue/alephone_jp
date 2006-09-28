@@ -190,7 +190,11 @@ CMapEditorSDIApp::CMapEditorSDIApp()
     isChanged = false;
 
     logger = HPLLogger(LOG_FILE_NAME);
-    logger.open();
+    if(!logger.open()){
+        MessageBox(NULL, L"Cannot open log file for writing. Close it!", L"Error", 
+            MB_OK | MB_ICONEXCLAMATION);
+        exit(1);
+    }
 }
 
 CMapEditorSDIApp::~CMapEditorSDIApp()
