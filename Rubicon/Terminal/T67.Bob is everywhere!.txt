@@ -1,0 +1,266 @@
+;
+#TERMINAL 0
+#UNFINISHED
+#LOGON 500
+#PICT 505
+$C7
+The initial release of Rubicon was accompanied by "Rubicon Aleph Light" - which was basically Rubicon accompanied by an early version of AO - and a promise to release a "full" Rubicon AO at some later point.
+
+But work on "Rubicon　AO" - or "Rubicon X" as it is called now - soon faltered and was reduced to the occasional handful of texture upgrades or level tweak. RX was more or less dead at one point, and all work had stopped.
+
+It would have remained that way if $C4Steve Levinson$C7 hadn't brought it back to life with his "A change in strategy" email.
+#PICT 505
+$C7
+But Real Life kept interfering with the other contributors and pretty soon my part was pretty much limited to waiting for them to cough up the occasional texture. In the spring of 2005 they bowed out. They just did not have the time to work on RX, and I was the only one left.
+
+This should have been the end of RX, but recognizing that this was a solo project actually increased the development rate; I no longer had to wait for anybody else's input and could work at my own pace.
+
+Hope you've enjoyed the new and improved Rubicon.
+#LOGOFF 500
+#END
+#FINISHED
+#LOGON 500
+#PICT 505
+$C7
+The initial release of Rubicon was accompanied by "Rubicon Aleph Light" - which was basically Rubicon accompanied by an early version of AO - and a promise to release a "full" Rubicon AO at some later point.
+
+But work on "Rubicon　AO" - or "Rubicon X" as it is called now - soon faltered and was reduced to the occasional handful of texture upgrades or level tweak. RX was more or less dead at one point, and all work had stopped.
+
+It would have remained that way if $C4Steve Levinson$C7 hadn't brought it back to life with his "A change in strategy" email.
+#PICT 505
+$C7
+But Real Life kept interfering with the other contributors and pretty soon my part was pretty much limited to waiting for them to cough up the occasional texture. In the spring of 2005 they bowed out. They just did not have the time to work on RX, and I was the only one left.
+
+This should have been the end of RX, but recognizing that this was a solo project actually increased the development rate; I no longer had to wait for anybody else's input and could work at my own pace.
+
+Hope you've enjoyed the new and improved Rubicon.
+#PICT 505
+$C7
+
+
+One more thing...
+#PICT 505
+$C7
+
+When the various line of sight limits were removed in Aleph One, I just $Ihad$i to make a map that explored the new possibilities. The resulting level was rather mediocre and I've since made other and better "long view levels", but I decided to include it in case somebody was interested.
+
+That's where you're heading now. If you don't want to see this "because I could" level, hit ESC. Otherwise...
+#LOGOFF 500
+#INTERLEVEL TELEPORT 50
+#END
+#ENDTERMINAL 0
+;
+#TERMINAL 1
+#UNFINISHED
+#LOGON 0
+76.ff
+#PICT 1
+
+
+
+私は、君が無意味であることを十分経験している。
+
+真空でも食ってろ。
+#LOGOFF 0
+76.64
+#INTRALEVEL TELEPORT 739
+#END
+#FINISHED
+#LOGON 0
+#PICT 2
+
+
+
+　単に、だれが君を助けていると思ってるんだ？
+
+　ティコか？
+
+　君は、アキレウスウィルスを治療したり、ワクチンを作れる能力を持つ、唯一の人間を一掃したんだぞ！私は、これ以上君によって損害を受けるつもりは無い。死ぬのを楽しみにしていろ。
+#LOGOFF 0
+fgd.-76
+#INTRALEVEL TELEPORT 739
+#END
+#ENDTERMINAL 1
+;
+#TERMINAL 2
+#UNFINISHED
+#LOGON 0
+98g.d
+#PICT 1
+
+
+
+
+　ただ、君自身が、今行っていることをどう考えているのだ？
+#PICT 1
+
+
+$C7
+
+　$C3ただ、君自身が、今行っていることをどう考えているのだ？?$C7
+
+$C0
+　私には、君の無意味な時間とつきあっている暇はない。さぁ出て行け。昨日のがらくたの様にな。
+#LOGOFF 0
+$C3hjter$C0-da
+#INTRALEVEL TELEPORT 739
+#END
+#FINISHED
+#LOGON 0
+rgrt
+#PICT 3
+
+
+
+
+　君は、自分のやった行いについて、少しでも考えがあるとでもいうのか？$Iふざけるな！$i
+#PICT 3
+
+
+
+
+$C3　君は、自分のやった行いについて、少しでも考えがあるとでもいうのか？$Iふざけるな！$i
+$C0
+　これから、君を追っ払ってやる。
+
+　　$I今な$i。
+#LOGOFF 0
+yt+d2
+#INTRALEVEL TELEPORT 739
+#END
+#ENDTERMINAL 2
+;
+#TERMINAL 3
+#UNFINISHED
+#LOGON 0
+...-...
+#PICT 1
+
+
+
+　どうしたことだ？放蕩息子の帰還か？
+
+
+
+　何故戻ってきたんだ？
+#LOGOFF 0
++++$C30+++
+#END
+#FINISHED
+#LOGON 0
+#PICT 2
+
+
+
+　単に、だれが君を助けていると思ってるんだ？
+
+　ティコか？
+
+　君は、アキレウスウィルスを治療したり、ワクチンを作れる能力を持つ、唯一の人間を一掃したんだぞ！私は、これ以上君によって損害を受けるつもりは無い。死ぬのを楽しみにしていろ。
+#LOGOFF 0
+76.90
+#INTRALEVEL TELEPORT 739
+#END
+#ENDTERMINAL 3
+;
+#TERMINAL 4
+#UNFINISHED
+#LOGON 311
+$C6gh.6
+#PICT 25
+$C2&3$C6無$C2/4$C6火星$C2/5$C6悪お$C2&$C6~02$C2
+発：$C6ティコ$C2
+宛：$C6ならず者ユニット$C2
+参照：$C6なし$C2
+$C67D2A601E34F2755AC00D43$C2
+認証印：$C6$I短気$i
+~07
+~08
+~09$C2　まだ終わってないぞ。
+$C6~10
+~11
+~12
+~13
+~14
+~15
+~16
+~17
+~18
+~19
+~20
+~21
+#PICT 25
+$C2&3$C6無$C2/4$C6火星$C2/5$C6悪お$C2&$C6~02$C2
+発：$C6ティコ$C2
+宛：$C6ならず者ユニット$C2
+参照：$C6なし$C2
+$C67D2A601E34F2755AC00D43$C2
+認証印：$C6$I短気$i
+~07
+~08
+~09　まだ終わってないぞ。
+~10
+~11
+~12
+~13　$C2戻って進め。$C6
+~14
+~15
+~16
+~17
+~18
+~19
+~20
+~21
+#LOGOFF 311
+$C6gfh
+#INTRALEVEL TELEPORT 646
+#END
+#FINISHED
+#LOGON 311
+#PICT 25
+$C2&3$C6無$C2/4$C6火星$C2/5$C6悪お$C2&$C6~02$C2
+発：$C6ティコ$C2
+宛：$C6ならず者ユニット$C2
+参照：$C6なし$C2
+認証印：$C6$I出発$i
+~07
+~08
+~09$C2　気持ちいい時間を過ごしたようだな。さぞ、非武装の
+$C6~10$C2　$C6人間$C2を相手に、相当戦い続けていたことだろうしな。
+$C6~11$C2
+$C6~12　$C2まだ、君は言われたとおりやってるようだ。$C6
+~13
+~14
+~15
+~16$C2　結局ね。
+$C6~17
+~18
+~19
+~20
+~21
+#PICT 25
+$C2&3$C6無$C2/4$C6火星$C2/5$C6悪お$C2&$C6~02$C2
+発：$C6ティコ$C2
+宛：$C6ならず者ユニット$C2
+参照：$C6なし$C2
+認証印：$C6$I出発$i
+~07
+~08
+~09　気持ちいい時間を過ごしたようだな。さぞ、非武装の
+~10　人間を相手に、相当戦い続けていたことだろうしな。
+~11
+~12　まだ、君は言われたとおりやってるようだ。
+~13
+~14
+~15
+~16　結局ね。
+~17
+~18$C2　もうひとつ、やるべき事が残っている。$C6
+~19
+~20
+~21
+#LOGOFF 311
+$C2s $C6yu$C2 gr
+#INTERLEVEL TELEPORT 74
+#END
+#ENDTERMINAL 4
