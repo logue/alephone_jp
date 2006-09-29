@@ -314,3 +314,37 @@ bool isPointInSelection(int px, int py,
     //no selection
     return false;
 }
+
+
+//calcurate degree from vector
+//down to 90 degree. right to 0 degree.(right and bottom are plus)
+double getDegreeFromVector(double dx, double dy)
+{
+    if(dx == 0){
+        if(dy <= 0){
+            return 270;
+        }else{
+            return 90;
+        }
+    }
+    if(dy == 0){
+        if(dx >= 0){
+            return 0;
+        }else{
+            return 180;
+        }
+    }
+
+    double divide = dy / dx;
+    double rad = atan(divide);
+    if(dx >= 0){
+        if(rad < 0){
+            rad += 2 * PI;
+        }
+        return rad;
+    }else{
+        rad += PI;
+        return rad;
+    }
+
+}

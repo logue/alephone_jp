@@ -261,3 +261,9 @@ int searchSelectLine(int viewPX, int viewPY);
 int searchSelectPolygon(int viewPX, int viewPY);
 
 void setCursor();
+/**
+    change is this 
+*/
+object_frequency_definition *getIndexOfPlacement(int index);
+void addInitialPlacement(int objectType, int index, int num);
+void subInitialPlacement(int objectType, int index, int num);

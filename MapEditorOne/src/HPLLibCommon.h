@@ -149,10 +149,13 @@ bool isSelectLine(int viewPX, int viewPY,
     @param selectInfo select group for check
 */
 bool isPointInSelection(int px, int py,
-                        int offsetViewX, int offsetViewY,
-                        int offsetWorldX, int offsetWorldY,
-                        int pointDistance,
-                        int lineDistance,
-                        int objectDistance,
-                        struct selectInformation* selectInfo,
-                        int heightMax, int heightMin, int div);
+    int offsetViewX, int offsetViewY,
+    int offsetWorldX, int offsetWorldY,
+    int pointDistance,
+    int lineDistance,
+    int objectDistance,
+    struct selectInformation* selectInfo,
+    int heightMax, int heightMin, int div);
+
+//calcurate degree from vector
+double getDegreeFromVector(double dx, double dy);

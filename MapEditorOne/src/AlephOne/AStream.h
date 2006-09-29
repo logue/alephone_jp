@@ -1,5 +1,5 @@
 /////////////////////////////////////////////////////////////////////////
-// $Id: AStream.h,v 1.2 2006-09-28 14:05:57 hogepiyo Exp $
+// $Id: AStream.h,v 1.3 2006-09-29 15:03:50 hogepiyo Exp $
 /////////////////////////////////////////////////////////////////////////
 
 /*
@@ -26,6 +26,8 @@
 #include <string>
 #include <exception>
 #include "cstypes.h"
+
+#pragma warning(disable:4996)
 
 namespace AStream
 {

@@ -150,6 +150,10 @@ void CMapEditorSDIView::OnLButtonDown(UINT nFlags, CPoint point)
                         int x = obj->location.x;
                         int y = obj->location.y;
                         int z = obj->location.z;
+                        if(z > theApp.viewHeightMax ||
+                            z < theApp.viewHeightMin){
+                                continue;
+                        }
                         if(isSelectPoint(point.x, point.y,
                             x, y, OFFSET_X_VIEW, OFFSET_Y_VIEW,
                             OFFSET_X_WORLD, OFFSET_Y_WORLD, DIV, OBJECT_DISTANCE_EPSILON)){
@@ -157,7 +161,7 @@ void CMapEditorSDIView::OnLButtonDown(UINT nFlags, CPoint point)
                             theApp.selectType = _selected_object;
                             theApp.selectIndex = i;
                             //選択したオブジェクトの情報を表示
-                            theApp.objectPropertyDialog->setupDialog(obj);
+                            theApp.objectPropertyDialog->setupDialog(i);
                             selected = true;
                             break;
                         }
@@ -173,6 +177,9 @@ void CMapEditorSDIView::OnLButtonDown(UINT nFlags, CPoint point)
                     //選択されなかった
                     theApp.selectType = _no_selected;
                     //theApp.objectPropertyDialog->setupDialog(-1);
+
+                    //no selection
+                    theApp.objectPropertyDialog->setSelectedObjectIndex(-1);
                 }
 
                 ////////////////////
@@ -312,6 +319,16 @@ void CMapEditorSDIView::OnLButtonDown(UINT nFlags, CPoint point)
                 }
                 //追加
                 SavedObjectList.push_back(obj);
+                //add
+                addInitialPlacement(obj.type, obj.index, 1);
+                theApp.objectPropertyDialog->setupDialog((int)SavedObjectList.size() - 1);
+                //選択状態にする
+                /*theApp.selectType = _selected_object;
+                theApp.selectIndex = i;
+                //選択したオブジェクトの情報を表示
+                theApp.objectPropertyDialog->setupDialog(i);
+                //selected = true;
+                */
             }
         }
     }else if(theApp.selectingToolType == TI_TEXT){
@@ -395,7 +412,7 @@ void CMapEditorSDIView::OnMouseMove(UINT nFlags, CPoint point)
                     SavedObjectList[theApp.selectIndex].location.x = x;
                     SavedObjectList[theApp.selectIndex].location.y = y;
                     //オブジェクト情報更新
-                    theApp.objectPropertyDialog->setupDialog(&SavedObjectList[theApp.selectIndex]);
+                    theApp.objectPropertyDialog->setupDialog(theApp.selectIndex);
                 }else if(theApp.selectType == _selected_point){
                     EndpointList[theApp.selectIndex].vertex.x = x;
                     EndpointList[theApp.selectIndex].vertex.y = y;

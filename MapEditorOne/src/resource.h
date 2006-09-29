@@ -107,6 +107,8 @@
 #define IDB_BITMAP53                    220
 #define IDC_CURSOR1                     221
 #define IDC_CURSOR_FILL                 221
+#define IDB_BITMAP54                    223
+#define IDB_BITMAP55                    224
 #define IDC_LIST1                       1000
 #define IDC_LIST2                       1002
 #define IDC_COMBO1                      1003
@@ -149,6 +151,9 @@
 #define IDC_RICHEDIT21                  1028
 #define IDC_LIST_INFORMATION            1029
 #define IDC_EDIT2                       1031
+#define IDC_BUTTON1                     1034
+#define IDC_BUTTON2                     1035
+#define IDC_BUTTON3                     1036
 #define ID_32771                        32771
 #define ID_32772                        32772
 #define ID_ZOOM_IN                      32773
@@ -176,9 +181,9 @@
 // 
 #ifdef APSTUDIO_INVOKED
 #ifndef APSTUDIO_READONLY_SYMBOLS
-#define _APS_NEXT_RESOURCE_VALUE        222
+#define _APS_NEXT_RESOURCE_VALUE        225
 #define _APS_NEXT_COMMAND_VALUE         32798
-#define _APS_NEXT_CONTROL_VALUE         1034
+#define _APS_NEXT_CONTROL_VALUE         1037
 #define _APS_NEXT_SYMED_VALUE           104
 #endif
 #endif

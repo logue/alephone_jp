@@ -156,6 +156,8 @@ IDB_BITMAP50            BITMAP                  "res\\Marathon Toolbar\\Map Icon
 IDB_BITMAP51            BITMAP                  "res\\Marathon Toolbar\\Map Icons\\Sound.bmp"
 IDB_BITMAP52            BITMAP                  "res\\Marathon Toolbar\\Map Icons\\Vision.bmp"
 IDB_BITMAP53            BITMAP                  "res\\Marathon Toolbar\\Map Icons\\SMG Ammo.bmp"
+IDB_BITMAP54            BITMAP                  "res\\Marathon Toolbar\\direction circle.BMP"
+IDB_BITMAP55            BITMAP                  "res\\Marathon Toolbar\\direction marker.BMP"
 
 /////////////////////////////////////////////////////////////////////////////
 //
@@ -361,16 +363,22 @@ CAPTION "Dialog"
 FONT 8, "MS Shell Dlg", 400, 0, 0x1
 BEGIN
     DEFPUSHBUTTON   "OK",IDOK,284,241,50,14
-    COMBOBOX        IDC_COMBO1,6,6,54,30,CBS_DROPDOWN | CBS_SORT | WS_VSCROLL | WS_TABSTOP
-    CONTROL         "",IDC_LIST1,"SysListView32",LVS_REPORT | LVS_ALIGNLEFT | WS_BORDER | WS_TABSTOP,7,95,327,143
-    EDITTEXT        IDC_EDIT1,240,18,40,14,ES_AUTOHSCROLL
-    EDITTEXT        IDC_EDIT2,240,36,40,14,ES_AUTOHSCROLL
-    EDITTEXT        IDC_EDIT3,240,54,40,14,ES_AUTOHSCROLL
-    LTEXT           "minimum",IDC_STATIC,186,18,28,8
-    LTEXT           "maximum",IDC_STATIC,186,36,30,8
-    LTEXT           "random count",IDC_STATIC,186,54,48,8
-    EDITTEXT        IDC_EDIT4,240,72,40,14,ES_AUTOHSCROLL
-    LTEXT           "random count",IDC_STATIC,186,72,48,8
+    COMBOBOX        IDC_COMBO1,268,7,54,30,CBS_DROPDOWN | CBS_SORT | WS_VSCROLL | WS_TABSTOP
+    CONTROL         "",IDC_LIST1,"SysListView32",LVS_REPORT | LVS_SINGLESEL | LVS_SHOWSELALWAYS | LVS_ALIGNLEFT | LVS_NOSORTHEADER | WS_BORDER | WS_TABSTOP,7,95,327,143,WS_EX_DLGMODALFRAME | WS_EX_CLIENTEDGE
+    EDITTEXT        IDC_EDIT1,60,24,40,14,ES_AUTOHSCROLL
+    EDITTEXT        IDC_EDIT2,60,42,40,14,ES_AUTOHSCROLL
+    EDITTEXT        IDC_EDIT3,60,60,40,14,ES_AUTOHSCROLL
+    LTEXT           "minimum",IDC_STATIC,6,24,28,8
+    LTEXT           "maximum",IDC_STATIC,6,42,30,8
+    LTEXT           "random count",IDC_STATIC,6,60,48,8
+    EDITTEXT        IDC_EDIT4,60,78,40,14,ES_AUTOHSCROLL
+    LTEXT           "random chance",IDC_STATIC,6,78,50,8
+    CONTROL         "replace at random location",IDC_CHECK1,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,120,60,101,10
+    PUSHBUTTON      "Damn it! We cannot exterminate them!",IDC_BUTTON1,120,6,132,12
+    PUSHBUTTON      "Noooo! All monsters come infinity!",IDC_BUTTON2,120,24,132,12
+    PUSHBUTTON      "All monsters will be initial numbers",IDC_BUTTON3,120,42,132,12
+    EDITTEXT        IDC_EDIT5,60,6,40,14,ES_AUTOHSCROLL
+    LTEXT           "initial",IDC_STATIC,6,6,17,8
 END
 
 IDD_DIALOG_LEVEL_PARAMETER DIALOGEX 0, 0, 228, 215
@@ -433,7 +441,7 @@ BEGIN
     CONTROL         "",IDC_PICTURE,"Static",SS_BLACKFRAME | SS_REALSIZEIMAGE,7,7,339,222
 END
 
-IDD_DIALOG_TOOL DIALOGEX 0, 0, 35, 49
+IDD_DIALOG_TOOL DIALOGEX 0, 0, 31, 60
 STYLE DS_SETFONT | DS_MODALFRAME | DS_FIXEDSYS | WS_POPUP | WS_CAPTION | WS_SYSMENU
 EXSTYLE WS_EX_TOOLWINDOW
 CAPTION "Tools"
@@ -564,9 +572,9 @@ BEGIN
     IDD_DIALOG_TOOL, DIALOG
     BEGIN
         LEFTMARGIN, 7
-        RIGHTMARGIN, 28
+        RIGHTMARGIN, 24
         TOPMARGIN, 7
-        BOTTOMMARGIN, 42
+        BOTTOMMARGIN, 53
     END
 END
 #endif    // APSTUDIO_INVOKED

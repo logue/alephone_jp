@@ -352,9 +352,8 @@ void loadBitmap(int id, CImageList* imageList, COLORREF key)
 //set object property to default
 void setObjectPropertyToDefault()
 {
-    map_object obj;
-    memset(&obj, 0, sizeof(map_object));
-    theApp.objectPropertyDialog->setupDialog(&obj);
+    memset(&theApp.objectPropertyDialog->store, 0, sizeof(map_object));
+    theApp.objectPropertyDialog->setupDialogByStore();
 }
 
 int searchSelectEndpoint(int viewPX, int viewPY)
@@ -387,9 +386,50 @@ void setCursor()
         IDC_HAND
     };
     //ƒJ[ƒ\ƒ‹•Ï‰»
-    HCURSOR cursor = LoadCursor(AfxGetInstanceHandle(), cursors[theApp.selectingToolType]);
+    HCURSOR cursor = LoadCursor(AfxGetInstanceHandle(), MAKEINTRESOURCE(IDC_CURSOR_FILL));
+        //cursors[theApp.selectingToolType]);
     //SetCursor(cursor);
     SetClassLong(AfxGetMainWnd()->m_hWnd, GCL_HCURSOR, NULL);
     //SetCursor(cursor);
     ShowCursor(TRUE);
+}
+
+//get placement from index(0 ~ DEFINED_ITEMS ~ DEFINED_ITEMS + MONSTERS)
+object_frequency_definition *getIndexOfPlacement(int index)
+{
+    object_frequency_definition *place;
+    if( index < NUMBER_OF_DEFINED_ITEMS){
+        place = &item_placement_info[index];
+    }else{
+        int mons_index = index - NUMBER_OF_DEFINED_ITEMS;
+        place = &monster_placement_info[mons_index];
+    }
+    return place;
+}
+
+void addInitialPlacement(int objectType, int index, int num)
+{
+    object_frequency_definition *place;
+    if(objectType == _saved_item || objectType == _saved_monster){
+        if(objectType == _saved_item){
+            place = getIndexOfPlacement(index);
+        }else if(objectType == _saved_monster){
+            place = getIndexOfPlacement(index + NUMBER_OF_DEFINED_ITEMS);
+        }
+        //
+        place->initial_count += num;
+    }
+}
+void subInitialPlacement(int objectType, int index, int num)
+{
+    object_frequency_definition *place;
+    if(objectType == _saved_item || objectType == _saved_monster){
+        if(objectType == _saved_item){
+            place = getIndexOfPlacement(index);
+        }else if(objectType == _saved_monster){
+            place = getIndexOfPlacement(index + NUMBER_OF_DEFINED_ITEMS);
+        }
+        //
+        place->initial_count -= num;
+    }
 }

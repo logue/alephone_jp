@@ -32,6 +32,8 @@
 #define PRINTF_STYLE_ARGS(n,m)
 #endif
 
+#pragma warning(disable:4996)
+
 #include <string>
 #include <vector>
 

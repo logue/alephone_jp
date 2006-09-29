@@ -151,6 +151,7 @@ void CToolDialog::OnPaint()
     memDC.DeleteDC();
 }
 
+//click dialog to select tool
 void CToolDialog::OnLButtonDown(UINT nFlags, CPoint point)
 {
     // TODO: ここにメッセージ ハンドラ コードを追加するか、既定の処理を呼び出します。
@@ -165,8 +166,13 @@ void CToolDialog::OnLButtonDown(UINT nFlags, CPoint point)
         {
             //ツール変化
             theApp.selectingToolType = i;
+            if(i == TI_SKULL && !theApp.isObjectPropertyDialogShow){
+                //show object property's dialog
+                theApp.isObjectPropertyDialogShow = TRUE;
+                theApp.objectPropertyDialog->ShowWindow(TRUE);
+            }
             Invalidate(FALSE);
-            //setCursor();
+            setCursor();
         }
     }
     CDialog::OnLButtonDown(nFlags, point);

@@ -50,16 +50,31 @@ public:
     CEdit objectPositionZ;
     //setup dialog
     //object == NULL ->clear
-    void setupDialog(map_object *object);
+    //caution !!!! indexOfSavedObjectList is not map_object.index!!!
+    void setupDialog(int indexOfSavedObjectList);
+    void setupDialogByStore();
 
     //get flags num
     int getFlags();
+
+    //direction circle / mark
+    CBitmap directionCircleImage, directionMarkerImage;
  public:
     virtual BOOL OnInitDialog();
     CEdit objectFacingNum;
     afx_msg void OnPaint();
 
-    map_object obj;
+    //selected object' index (in SavedObjectList)
+    int selectedObjectIndex;
+    void setSelectedObjectIndex(int indexOfSavedObjectList);
+    int getSelectedObjectIndex();
+
+    //remembering nums
+    map_object store;
+
+    //store classed type (=index) combo
+    void storeClassedTypeCombo(int objectType);
+
 public:
     virtual BOOL DestroyWindow();
 public:
@@ -67,4 +82,10 @@ public:
 public:
     afx_msg void OnLButtonDown(UINT nFlags, CPoint point);
     void clickFacing(int px, int py);
+public:
+    afx_msg void OnCbnSelchangeCombo2();
+public:
+    afx_msg void OnCbnSelchangeCombo3();
+public:
+    afx_msg void OnBnClickedCheck1();
 };
