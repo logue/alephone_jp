@@ -152,13 +152,13 @@ $C1
 #UNFINISHED
 #LOGON 400
 #PICT 404
-$C5$IUESC Salinger$i_log192_$%
+$C5$IUESCサリンジャー$i＿ログ１９２＿$%
 
-Message/type:encoded 32terabit...
+メッセージ／タイプ：３２テラビット符号化…
 ───────技師昇降機維持管理記録───────
 $B$U　　　　　　　　　　　　　　期間分析メモ　７３$b$u
-螺旋タイプ　　　　　：$C1Isoジオメトリック$C5
-RVIR含有物　　　　　：$C1ブロック構造体15412a
+螺旋タイプ：　　　　　$C1Isoジオメトリック$C5
+RVIR含有物：　　　　　$C1ブロック構造体15412a
 　　　　　　　　　　　７ブロック／ユニット
 　　　　　　　　　　　３より線／ユニット
 　　　　　　　　　　　粒状反響：０
@@ -187,8 +187,8 @@ $C5制限事項：$C1
 ターミナル実存プロトコル_ISO.../
 Dangi_memo_73_以上
 
-Terminate Secure Encoding.
-Terminate Connection.
+安全な符号化を終了します。
+接続を終了します。
 
 $C1──ログ終了
 #LOGOFF 400
@@ -337,14 +337,13 @@ $C1
 #UNFINISHED
 #LOGON 400
 #PICT 404
-$C5$IUESC Salinger$i_log192_$%
+$C5$IUESCサリンジャー$i＿ログ１９２＿$%
 
-Message/type:encoded 32terabit...
-
+メッセージ／タイプ：３２テラビット符号化…
 ───────技師昇降機維持管理記録───────
 $B$U　　　　　　　　　　　　　　期間分析メモ　７３$b$u
-螺旋タイプ　　　　　：$C1Isoジオメトリック$C5
-RVIR含有物　　　　　：$C1ブロック構造体15412a
+螺旋タイプ：　　　　　$C1Isoジオメトリック$C5
+RVIR含有物：　　　　　$C1ブロック構造体15412a
 　　　　　　　　　　　７ブロック／ユニット
 　　　　　　　　　　　３より線／ユニット
 　　　　　　　　　　　粒状反響：０
@@ -365,17 +364,18 @@ $C5制限事項：$C1
 　　／項目７での管理制限
 　　／卓越した監禁$C5
 
-　　　Ｘ軸保有：$C1負$C5
-　　　Ｙ軸保有：正$C1正$C5
-　　　Ｚ軸保有：$C1変形$C5
-　　　汚染放射：$C1変形$C5
+　　　　　　Ｘ軸保有：$C1負$C5
+　　　　　　Ｙ軸保有：正$C1正$C5
+　　　　　　Ｚ軸保有：$C1変形$C5
+　　　　　　汚染放射：$C1変形$C5
 
 ターミナル実存プロトコル_ISO.../
+Dangi_memo_73_以上
 
-Terminate Secure Encoding.
-Terminate Connection.
+安全な符号化を終了します。
+接続を終了します。
 
-$C1---end log
+$C1――ログ終了
 #LOGOFF 400
 #END
 #FINISHED

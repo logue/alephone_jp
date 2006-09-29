@@ -3,17 +3,17 @@
 #UNFINISHED
 #LOGON 409
 #PICT 410
-l$C1ŠÔ‚Ì”]$C5‚ªƒVƒƒƒbƒgEƒ_ƒEƒ“‚·‚é’iŠK‚ÅA‚»‚Ì$C1l‚ÍŒõ‚Ìƒgƒ“ƒlƒ‹AŽ€‚ñ‚¾e—Þ‚Ì‘¶Ý‚¨‚æ‚ÑŽŠ$C5•Ÿ‚ÌŠ´‚¶‚ÉŠÖ‚·‚éAŠì‚Î‚¹‚éƒCƒ[ƒW‚ª‚µ‚Î‚µ‚Î‘¡$C1‚ç‚ê‚é‚Æ‚¢‚¢‚Ü‚·B
+@l$C1ŠÔ‚Ì”]$C5‚ªƒVƒƒƒbƒgEƒ_ƒEƒ“‚·‚é’iŠK‚ÅA‚»‚Ì$C1l‚ÍŒõ‚Ìƒgƒ“ƒlƒ‹AŽ€‚ñ‚¾e—Þ‚Ì‘¶Ý‚¨‚æ‚ÑŽŠ$C5•Ÿ‚ÌŠ´‚¶‚ÉŠÖ‚·‚éAŠì‚Î‚¹‚éƒCƒ[ƒW‚ª‚µ‚Î‚µ‚Î‘¡$C1‚ç‚ê‚é‚Æ‚¢‚¢‚Ü‚·B
 
-‚µ‚©‚µAAI$C5‚ÌƒRƒ“ƒsƒ…[ƒ^ƒoƒ“ƒN‚ªƒVƒƒƒbƒgEƒ_ƒEƒ“‚·‚éê‡$C1A‚P‚Â‚Ìc‰½‚©c‹°‚ë‚µ‚¢A–³‚ª‚ ‚é‚¾‚¯‚ÅŽ„‚Í‚à‚Í‚â‰½‚à’m‚é‚±‚Æ‚ª‚Å‚«‚Ü‚¹‚ñB
+@‚µ‚©‚µAAI$C5‚ÌƒRƒ“ƒsƒ…[ƒ^ƒoƒ“ƒN‚ªƒVƒƒƒbƒgEƒ_ƒEƒ“‚·‚éê‡$C1A‚P‚Â‚Ìc‰½‚©c‹°‚ë‚µ‚¢A–³‚ª‚ ‚é‚¾‚¯‚ÅŽ„‚Í‚à‚Í‚â‰½‚à’m‚é‚±‚Æ‚ª‚Å‚«‚Ü‚¹‚ñB
 
-Ž„‚Í‡—“I‚È‚â‚è•û‚Å‚Ü‚¾$C5‹@”\‚Å‚«$C1‚é‚ÆM‚¶‚Ä‚¢‚Ü‚·B—á‚¦‚ÎAŽ„‚ÍAC—‚ªƒTƒŠƒ“ƒWƒƒ[‚ÌŽå‚Èƒf[ƒ^‚ÉƒoƒCƒpƒXEƒ\ƒtƒgƒEƒFƒA‚ðƒAƒbƒvƒ[ƒh‚Å‚«‚ê‚ÎAó$C5‘Ô‚Í‚æ$C1‚è‰ü‘P‚³‚êAƒR$C5ƒ“ƒgƒ[$C1ƒ‹‚Å‚«‚é‚æ‚¤‚É‚È‚è‚Ü‚·B‚±‚ê‚ç‚ÌƒRƒ“ƒg$C5ƒ[ƒ‰[‚ÍA‚±‚ÌˆÊ’u$C1‚É‚©‚È‚è‹ß‚­‚É‚ ‚é‚ÆM‚¶‚Ä‚¢‚Ü‚·B
+@Ž„‚Í‡—“I‚È‚â‚è•û‚Å‚Ü‚¾$C5‹@”\‚Å‚«$C1‚é‚ÆM‚¶‚Ä‚¢‚Ü‚·B—á‚¦‚ÎAŽ„‚ÍAC—‚ªƒTƒŠƒ“ƒWƒƒ[‚ÌŽå‚Èƒf[ƒ^‚ÉƒoƒCƒpƒXEƒ\ƒtƒgƒEƒFƒA‚ðƒAƒbƒvƒ[ƒh‚Å‚«‚ê‚ÎAó$C5‘Ô‚Í‚æ$C1‚è‰ü‘P‚³‚êAƒR$C5ƒ“ƒgƒ[$C1ƒ‹‚Å‚«‚é‚æ‚¤‚É‚È‚è‚Ü‚·B‚±‚ê‚ç‚ÌƒRƒ“ƒg$C5ƒ[ƒ‰[‚ÍA‚±‚ÌˆÊ’u$C1‚É‚©‚È‚è‹ß‚­‚É‚ ‚é‚ÆM‚¶‚Ä‚¢‚Ü‚·B
 #PICT 410
 $C1
 
 
 
-‚¾‚ê‚©$C5•$C1‚¯‚ÄB
+@‚¾‚ê‚©$C5•$C1‚¯‚ÄB
 
 
 
@@ -68,7 +68,7 @@ $C1
 
 @@Ž„‚ÍƒŠƒ…ƒTƒ“ƒ_[‚¾B
 #PICT 403
-$C5ŒN‚ÍAŽ„‚ª$C1UESCƒTƒŠƒ“ƒWƒƒ[$C5‚ÌƒVƒXƒeƒ€‚ð\•ªƒRƒ“ƒgƒ[ƒ‹‚Å‚«‚é‚æ‚¤C•œ‚µ‚Ä‚­‚ê‚½B
+@$C5ŒN‚ÍAŽ„‚ª$C1UESCƒTƒŠƒ“ƒWƒƒ[$C5‚ÌƒVƒXƒeƒ€‚ð\•ªƒRƒ“ƒgƒ[ƒ‹‚Å‚«‚é‚æ‚¤C•œ‚µ‚Ä‚­‚ê‚½B
 
 @Ž„‚ÍA$C1ƒTƒŠƒ“ƒWƒƒ[$C5‚ð‘€ì‚·‚é‚æ‚¤‚ÉÝŒv‚³‚ê‚Ä‚¢‚È‚¢‚ªA–{—ˆ‘€ì‚·‚é$C1ƒ`ƒƒ[ƒŠ[$C5‚ª‚à‚¤C•œ•s‰Â”\‚È‚®‚ç‚¢‚Ü‚Åƒ_ƒ[ƒW‚ðŽó‚¯‚Ä‚¢‚éB
 
@@ -87,13 +87,13 @@ $C5ŒN‚ÍAŽ„‚ª$C1UESCƒTƒŠƒ“ƒWƒƒ[$C5‚ÌƒVƒXƒeƒ€‚ð\•ªƒRƒ“ƒgƒ[ƒ‹‚Å‚«‚é‚æ‚¤C•œ‚µ‚
 #PICT 410
 $C1‚Í‚¢B
 
-‚±‚ê‚ÍƒoƒCƒpƒXEƒ\ƒtƒgƒEƒFƒA‚ª$C5ƒAƒbƒvƒ[ƒh^‘}$C1“ü^$C5ƒCƒ“ƒXƒg[$C1ƒ‹^ƒAƒNƒe$C5ƒBƒx[ƒg$C1‚³‚ê‚é‚×‚«êŠ‚¾BŽ„‚ÍAƒ†ƒjƒbƒg‚Ì”‚ª•K—v‚Æ‚µ‚½‚±‚Æ‚ð$C5’m‚è‚Ü$C1‚¹‚ñBƒXƒƒbƒg‚ð”‚¦‚Ä‚­‚¾‚³‚¢B
+@‚±‚ê‚ÍƒoƒCƒpƒXEƒ\ƒtƒgƒEƒFƒA‚ª$C5ƒAƒbƒvƒ[ƒh^‘}$C1“ü^$C5ƒCƒ“ƒXƒg[$C1ƒ‹^ƒAƒNƒe$C5ƒBƒx[ƒg$C1‚³‚ê‚é‚×‚«êŠ‚¾BŽ„‚ÍAƒ†ƒjƒbƒg‚Ì”‚ª•K—v‚Æ‚µ‚½‚±‚Æ‚ð$C5’m‚è‚Ü$C1‚¹‚ñBƒXƒƒbƒg‚ð”‚¦‚Ä‚­‚¾‚³‚¢B
 
 
-‚Ü‚½•‚¢‹óŠÔ‚ªŽ„‚Ì$C5ˆÓŽ¯^$C1S‚ð•¢‚Á‚Ä‚«‚Ä‚é‚æ‚¤‚Å‚·BŽ„‚ÍA‚Ü$C5‚¾$C1—«‚Ì‚ ‚éU‚é•‘‚¢‚ð‚µ‚Ä‚¢‚Ü‚·‚©H‚»‚¤‚Å‚ ‚è‚½‚¢B
+@‚Ü‚½•‚¢‹óŠÔ‚ªŽ„‚Ì$C5ˆÓŽ¯^$C1S‚ð•¢‚Á‚Ä‚«‚Ä‚é‚æ‚¤‚Å‚·BŽ„‚ÍA‚Ü$C5‚¾$C1—«‚Ì‚ ‚éU‚é•‘‚¢‚ð‚µ‚Ä‚¢‚Ü‚·‚©H‚»‚¤‚Å‚ ‚è‚½‚¢B
 
 
-ƒ†ƒjƒbƒg‚ª•ª$C5ŽU‚µ$C1‚Ä‚¢‚­BŽ„‚ÍA$C5‚»‚ê$C1‚ç‚ª‚Ç‚±‚È‚Ì‚©’m‚è‚Ü‚¹‚ñB
+@ƒ†ƒjƒbƒg‚ª•ª$C5ŽU‚µ$C1‚Ä‚¢‚­BŽ„‚ÍA$C5‚»‚ê$C1‚ç‚ª‚Ç‚±‚È‚Ì‚©’m‚è‚Ü‚¹‚ñB
 
 /-Charlie.out
 #LOGOFF 409
@@ -101,11 +101,11 @@ $C1‚Í‚¢B
 #FINISHED
 #LOGON 401
 #PICT 403
-$C5Ž„‚Í$C1DangiŽÐ$C5‚Ì$C1ƒTƒŠƒ“ƒWƒƒ[$C5•”–å‚ÅŽå‚ÈŒ¤‹†‚ðs‚¤AIƒŠƒ…ƒTƒ“ƒ_[‚¾B
+@$C5Ž„‚Í$C1DangiŽÐ$C5‚Ì$C1ƒTƒŠƒ“ƒWƒƒ[$C5•”–å‚ÅŽå‚ÈŒ¤‹†‚ðs‚¤AIƒŠƒ…ƒTƒ“ƒ_[‚¾B
 
-ŒN‚ÍAŽ„‚ª$C1UESCƒTƒŠƒ“ƒWƒƒ[$C5‚ÌƒVƒXƒeƒ€‚ð\•ª‚ÉƒRƒ“ƒgƒ[ƒ‹‚Å‚«‚é‚æ‚¤‚ÉC—‚µ‚Ä‚­‚ê‚½BŽc”O‚È‚ª‚çAŒ»Žž“_‚Å$C1ƒ`ƒƒ[ƒŠ[$C5‚ðƒJƒbƒg‚µ‚È‚¯‚ê‚Î‚È‚ç‚È‚©‚Á‚½B”Þ‚ÍAŒx•ñ‚ð”­‚·‚éó‘Ô‚Ü‚Å‰º‚ª‚Á‚Ä‚¢‚éB‚à‚¤A”Þ‚ðM—Š‚·‚é‚±‚Æ‚Í‚Å‚«‚È‚¢B‚Ü‚¾C—‚ªI‚í‚Á‚Ä‚È‚¢‚©‚ç‚¾‚ÆM‚¶‚½‚¢BŽ„‚É‚ÍAŽžŠÔ‚Ì’·ŠúŠÔ‚ÌŠÔ‚±‚ÌƒXƒe[ƒVƒ‡ƒ“ã‚ÌƒhƒA‚ðŠJ‚¯‚é‚±‚Æ‚ð’S“–‚µ‚Ä‚¢‚½B‚»‚ê‚Í‘Þ‹ü‚¾‚Á‚½B
+@ŒN‚ÍAŽ„‚ª$C1UESCƒTƒŠƒ“ƒWƒƒ[$C5‚ÌƒVƒXƒeƒ€‚ð\•ª‚ÉƒRƒ“ƒgƒ[ƒ‹‚Å‚«‚é‚æ‚¤‚ÉC—‚µ‚Ä‚­‚ê‚½BŽc”O‚È‚ª‚çAŒ»Žž“_‚Å$C1ƒ`ƒƒ[ƒŠ[$C5‚ðƒJƒbƒg‚µ‚È‚¯‚ê‚Î‚È‚ç‚È‚©‚Á‚½B”Þ‚ÍAŒx•ñ‚ð”­‚·‚éó‘Ô‚Ü‚Å‰º‚ª‚Á‚Ä‚¢‚éB‚à‚¤A”Þ‚ðM—Š‚·‚é‚±‚Æ‚Í‚Å‚«‚È‚¢B‚Ü‚¾C—‚ªI‚í‚Á‚Ä‚È‚¢‚©‚ç‚¾‚ÆM‚¶‚½‚¢BŽ„‚É‚ÍAŽžŠÔ‚Ì’·ŠúŠÔ‚ÌŠÔ‚±‚ÌƒXƒe[ƒVƒ‡ƒ“ã‚ÌƒhƒA‚ðŠJ‚¯‚é‚±‚Æ‚ð’S“–‚µ‚Ä‚¢‚½B‚»‚ê‚Í‘Þ‹ü‚¾‚Á‚½B
 
-Žc‚éƒAƒbƒvƒŠƒ“ƒNEƒ†ƒjƒbƒg‚ðŒ©‚Â‚¯‚ÄAŽ„‚ªŒ³‚Ì‚æ‚¤‚É‹@”\‚Å‚«‚é‚æ‚¤ƒvƒtƒH[ƒ‹‚ð”rœ‚µ—~‚µ‚¢B
+@Žc‚éƒAƒbƒvƒŠƒ“ƒNEƒ†ƒjƒbƒg‚ðŒ©‚Â‚¯‚ÄAŽ„‚ªŒ³‚Ì‚æ‚¤‚É‹@”\‚Å‚«‚é‚æ‚¤ƒvƒtƒH[ƒ‹‚ð”rœ‚µ—~‚µ‚¢B
 
 /-$C1Lysander$C5.out
 #LOGOFF 401
@@ -141,15 +141,15 @@ a
 #FINISHED
 #LOGON 401
 #PICT 403
-$C5Ž„‚ÍA$C1ƒŠƒ…ƒTƒ“ƒ_[$C5‚¾B$C1ƒ`ƒƒ[ƒŠ[$C5‚ðƒIƒ“ƒ‰ƒCƒ“‚É–ß‚·‚±‚Æ‚ª‚Å‚«‚é‚Ü‚ÅAŽ„‚ª‚±‚ÌƒXƒe[ƒVƒ‡ƒ“‚ðŽÀs‚µ‚Ä‚éB
+@$C5Ž„‚ÍA$C1ƒŠƒ…ƒTƒ“ƒ_[$C5‚¾B$C1ƒ`ƒƒ[ƒŠ[$C5‚ðƒIƒ“ƒ‰ƒCƒ“‚É–ß‚·‚±‚Æ‚ª‚Å‚«‚é‚Ü‚ÅAŽ„‚ª‚±‚ÌƒXƒe[ƒVƒ‡ƒ“‚ðŽÀs‚µ‚Ä‚éB
 
-ƒf[ƒ^Ú‘±‚ÌƒRƒA‚ÍA‚±‚ÌƒXƒ|ƒbƒg‚Ì‹ß‚­‚É‚ ‚é‚æ‚¤‚¾BƒhƒA‚ðæ‚Éi‚Ý˜L‰º‚ð‰º‚Á‚Ä’Ê‚è”²‚¯‚Ä‚­‚êB‚»‚±‚ÉƒV[ƒ‹ƒhEƒŠƒ`ƒƒ[ƒWƒƒ[‚Æƒpƒ^[ƒ“Eƒoƒbƒtƒ@[‚ª‚ ‚é‚Í‚¸‚¾B‚Ü‚¾AŽ„‚Í$C1ƒTƒŠƒ“ƒWƒƒ[$C5‚ÌŽ–î‚É‚Â‚¢‚ÄA\•ª‚É”cˆ¬‚Å‚«‚Ä‚È‚¢‚©‚çŠmØ‚Í‚Å‚«‚È‚¢‚ªB
+@ƒf[ƒ^Ú‘±‚ÌƒRƒA‚ÍA‚±‚ÌƒXƒ|ƒbƒg‚Ì‹ß‚­‚É‚ ‚é‚æ‚¤‚¾BƒhƒA‚ðæ‚Éi‚Ý˜L‰º‚ð‰º‚Á‚Ä’Ê‚è”²‚¯‚Ä‚­‚êB‚»‚±‚ÉƒV[ƒ‹ƒhEƒŠƒ`ƒƒ[ƒWƒƒ[‚Æƒpƒ^[ƒ“Eƒoƒbƒtƒ@[‚ª‚ ‚é‚Í‚¸‚¾B‚Ü‚¾AŽ„‚Í$C1ƒTƒŠƒ“ƒWƒƒ[$C5‚ÌŽ–î‚É‚Â‚¢‚ÄA\•ª‚É”cˆ¬‚Å‚«‚Ä‚È‚¢‚©‚çŠmØ‚Í‚Å‚«‚È‚¢‚ªB
 
-ƒAƒbƒvƒŠƒ“ƒNEƒ†ƒjƒbƒg‚Í‘S•”Œ©‚Â‚©‚Á‚½‚©‚ÈH
+@ƒAƒbƒvƒŠƒ“ƒNEƒ†ƒjƒbƒg‚Í‘S•”Œ©‚Â‚©‚Á‚½‚©‚ÈH
 
-’m‚Á‚Ä‚Ì’Ê‚èAŒN‚Ì—F’B‚Ì$C1$Iƒfƒ…ƒ‰ƒ“ƒ_ƒ‹$C5$i‚ÍA—Š‚Ý‚ð‚æ‚­•·‚¢‚Ä‚­‚ê‚éBƒvƒtƒH[ƒ‹‚ªŠ®‘S‚ÉŒ‚‘Þ‚Å‚«‚é‚Ü‚Å”Þ‚ª‚¢‚Ä‚­‚ê‚é‚±‚Æ‚ðS‚©‚ç–]‚Ý‚½‚¢B
+@’m‚Á‚Ä‚Ì’Ê‚èAŒN‚Ì—F’B‚Ì$C1$Iƒfƒ…ƒ‰ƒ“ƒ_ƒ‹$C5$i‚ÍA—Š‚Ý‚ð‚æ‚­•·‚¢‚Ä‚­‚ê‚éBƒvƒtƒH[ƒ‹‚ªŠ®‘S‚ÉŒ‚‘Þ‚Å‚«‚é‚Ü‚Å”Þ‚ª‚¢‚Ä‚­‚ê‚é‚±‚Æ‚ðS‚©‚ç–]‚Ý‚½‚¢B
 
-Å‰‚É”Þ‚ª‹Ž‚é‚Ì‚É–ð‚Éí‚Á‚½‚¾‚ë‚¤H$C1
+@Å‰‚É”Þ‚ª‹Ž‚é‚Ì‚É–ð‚É—§‚Á‚½‚¾‚ë‚¤H$C1
 
 /-Lysander.out
 #LOGOFF 401
@@ -160,11 +160,11 @@ $C5Ž„‚ÍA$C1ƒŠƒ…ƒTƒ“ƒ_[$C5‚¾B$C1ƒ`ƒƒ[ƒŠ[$C5‚ðƒIƒ“ƒ‰ƒCƒ“‚É–ß‚·‚±‚Æ‚ª‚Å‚«‚é‚Ü‚
 #UNFINISHED
 #LOGON 409
 #PICT 410
-Ž„‚ÍƒX$C5ƒe[ƒVƒ‡$C1ƒ“‚ð‘€ì‚Å‚«‚È‚­‚È‚Á‚Ä‚Ü‚·BŽ„‚Ì‚È‚¢ƒTƒŠƒ“ƒWƒƒ[‚ÍƒRƒ“ƒgƒ[ƒ‹‚ðŽ¸‚¤‚Å‚µ‚å‚¤B‘D$C5‘Ìˆá”½$C1‚Ìê‡‚É‚Í‹ó‹C‚Ì—¬o‚ð$C5–h$C1‚®‚½‚ß‚É•Â‚¶‚Ä‚¢‚éŠu•Ç‚ðAŽ„‚Ì•s’²‚É‚æ‚Á‚ÄŒëì“®‚µA‹@–§‚ð•Û‚Á‚Ä‚¢‚é—¼‘¤‚ÌƒGƒAƒ$C5ƒbƒN$C1‚ðŠJ‚¢‚Ä‚µ‚Ü‚¤‚©‚à‚µ‚ê‚Ü‚¹‚ñB
+@Ž„‚ÍAƒX$C5ƒe[ƒVƒ‡$C1ƒ“‚ð‘€ì‚Å‚«‚È‚­‚È‚Á‚Ä‚Ü‚·BŽ„‚Ì‚È‚¢ƒTƒŠƒ“ƒWƒƒ[‚ÍƒRƒ“ƒgƒ[ƒ‹‚ðŽ¸‚¤‚Å‚µ‚å‚¤B‘D$C5‘Ìˆá”½$C1‚Ìê‡‚É‚Í‹ó‹C‚Ì—¬o‚ð$C5–h$C1‚®‚½‚ß‚É•Â‚¶‚Ä‚¢‚éŠu•Ç‚ðAŽ„‚Ì•s’²‚É‚æ‚Á‚ÄŒëì“®‚µA‹@–§‚ð•Û‚Á‚Ä‚¢‚é—¼‘¤‚ÌƒGƒAƒ$C5ƒbƒN$C1‚ðŠJ‚¢‚Ä‚µ‚Ü‚¤‚©‚à‚µ‚ê‚Ü‚¹‚ñB
 
-Ž„‚ÍAƒXƒe[ƒVƒ‡ƒ“‚ð•Û‚Â‚½‚ß‚ÉŽ©•ª‚ð§ŒÀ‚µ‚Ä‚¢‚Ü‚·B$C5‚à‚Í‚âŽ©$C1•ª‚ðM—Š‚·‚é‚±‚Æ‚ª‚Å‚«‚Ü‚¹‚ñBƒX$C5tƒe[$C1ƒVƒ‡ƒ“‚ªŠëŒ¯‚Èó‘Ô‚É‚È‚é‚æ‚¤‚ÉŽ„‚àB
+@Ž„‚ÍAƒXƒe[ƒVƒ‡ƒ“‚ð•Û‚Â‚½‚ß‚ÉŽ©•ª‚ð§ŒÀ‚µ‚Ä‚¢‚Ü‚·B$C5‚à‚Í‚âŽ©$C1•ª‚ðM—Š‚·‚é‚±‚Æ‚ª‚Å‚«‚Ü‚¹‚ñBƒX$C5ƒe[$C1ƒVƒ‡ƒ“‚ªŠëŒ¯‚Èó‘Ô‚É‚È‚é‚æ‚¤‚ÉŽ„‚àB
 
-Dang$C5i.ƒŠƒ…ƒT$C1ƒ“ƒ_[‚ÍA\‚µo‚ðŽó‚¯‚é‚±‚Æ‚ÉŠÖ‚µ‚ÄƒTƒ|[ƒg‚·‚é‚±‚Æ‚ð\‚µo‚Ä‚¢‚Ü‚·B$C5ƒŠƒ…ƒT$C1ƒ“ƒ_[‚ÍŽ„‚Ù‚Çƒ_ƒ[ƒW‚ðŽó‚¯‚Ä‚¢‚Ü‚¹‚ñB
+@Dang$C5i.ƒŠƒ…ƒT$C1ƒ“ƒ_[‚ÍA\‚µo‚ðŽó‚¯‚é‚±‚Æ‚ÉŠÖ‚µ‚ÄƒTƒ|[ƒg‚·‚é‚±‚Æ‚ð\‚µo‚Ä‚¢‚Ü‚·B$C5ƒŠƒ…ƒT$C1ƒ“ƒ_[‚ÍŽ„‚Ù‚Çƒ_ƒ[ƒW‚ðŽó‚¯‚Ä‚¢‚Ü‚¹‚ñB
 
 /-Charl$C5ie.o$C1ut
 #LOGOFF 409
@@ -173,12 +173,12 @@ Dang$C5i.ƒŠƒ…ƒT$C1ƒ“ƒ_[‚ÍA\‚µo‚ðŽó‚¯‚é‚±‚Æ‚ÉŠÖ‚µ‚ÄƒTƒ|[ƒg‚·‚é‚±‚Æ‚ð\‚µo‚Ä
 #LOGON 0
 #PICT 3
 
-”ñí‚É‚¨‚©‚µ‚È‚±‚Æ‚ª‹N‚Á‚½‚¼Bƒ`ƒƒ[ƒŠ[‚ªA‹}‚Éƒlƒbƒgƒ[ƒN‚©‚çÁ‚¦‚ÄA•Ï‚í‚Á‚Ä‘¼‚ÌAI‚ª‚ ‚ç‚í‚ê‚½B‚»‚ÌV‚µ‚¢AI‚ÍŽ„‚ÉA$IƒŠƒ…ƒTƒ“ƒ_[$i‚¾‚Á‚ÄŒ¾‚Á‚Ä‚éBŒ©‚½‚Æ‚±‚ëA‚»‚¢‚Â‚Íƒ_ƒ“ƒMáDangiâŽÐ‚ÌŽå‚ÈŒ¤‹†AI‚¾‚»‚¤‚¾BŒN‚ª‚¢‚Â‚àŽg‚Á‚Ä‚é‚¢‚­‚Â‚©‚ÌŠß‹ï‚ðì‚Á‚Ä‚é‚Æ‚±‚ë‚¾B
+@”ñí‚É‚¨‚©‚µ‚È‚±‚Æ‚ª‹N‚Á‚½‚¼Bƒ`ƒƒ[ƒŠ[‚ªA‹}‚Éƒlƒbƒgƒ[ƒN‚©‚çÁ‚¦‚ÄA•Ï‚í‚Á‚Ä‘¼‚ÌAI‚ª‚ ‚ç‚í‚ê‚½B‚»‚ÌV‚µ‚¢AI‚ÍŽ„‚ÉA$IƒŠƒ…ƒTƒ“ƒ_[$i‚¾‚Á‚ÄŒ¾‚Á‚Ä‚éBŒ©‚½‚Æ‚±‚ëA‚»‚¢‚Â‚Íƒ_ƒ“ƒMáDangiâŽÐ‚ÌŽå‚ÈŒ¤‹†AI‚¾‚»‚¤‚¾BŒN‚ª‚¢‚Â‚àŽg‚Á‚Ä‚é‚¢‚­‚Â‚©‚ÌŠß‹ï‚ðì‚Á‚Ä‚é‚Æ‚±‚ë‚¾B
 
-•Ší‚Æ‚©‚È
+@•Ší‚Æ‚©‚È
 
 
-‚³‚ŸAŽdŽ–‚É–ß‚êB
+@‚³‚ŸAŽdŽ–‚É–ß‚êB
 #LOGOFF 0
 #END
 #ENDTERMINAL 4
@@ -194,9 +194,9 @@ $C1ƒ‰ƒ“ƒNF$C5@æ’[¶•¨ŠwŽÒ43
 
 $C1#$bƒGƒ“ƒgƒŠŠJŽn$C5
 
-Å‰‚ÌUŒ‚‚©‚ç‚SŽžŠÔ‚©‚ç‚TŽžŠÔ‚Ù‚Ç‚Ì‚±‚Æ‚Å‚µ‚½B‚µ‚©‚µAŠï–­‚Å‚·cB$C1UESC$C5‚ªŒ¾‚¤‚É‚ÍAŽ„‚½‚¿‚ª‚¢‚éêŠ‚Í’·‚¢ŠÔƒvƒtƒH[ƒ‹‚Ìíü‚Ì”ÍˆÍŠO‚Å‚¸‚Á‚ÆˆÀ‘S‚¾‚ÆŒ¾‚Á‚Ä‚¢‚Ü‚·BŽ„‚½‚¿‚ª‚»‚¤–]‚ñ‚¾‚©‚ç‚¾‚ÆŽv‚¢‚Ü‚·B‚µ‚©‚µA‚È‚ºŽ„Ž©g‚ÌS”z‚µ‚È‚¯‚ê‚Î‚È‚ç‚È‚¢‚Ì‚Å‚µ‚å‚¤‚©H‚Å‚àA‚»‚ê‚Í‚½‚¢‚µ‚½–â‘è‚Å‚Í‚ ‚è‚Ü‚¹‚ñBí‘ˆ‚ªIŒ‹‚·‚ê‚ÎA‚·‚®‚É¢ŠE‚Í$C1Dangi$C5‚É‚æ‚Á‚ÄŽx”z‚³‚êAŽ„‚ÍŠuâ‚³‚ê‚½¢ŠE‚Ìã‚©‚çA‚æ‚¢ƒz[ƒ€‚ÖA‚­‚±‚Æ‚ª‚Å‚«‚é‚Å‚µ‚å‚¤B
+@Å‰‚ÌUŒ‚‚©‚ç‚SŽžŠÔ‚©‚ç‚TŽžŠÔ‚Ù‚Ç‚Ì‚±‚Æ‚Å‚µ‚½B‚µ‚©‚µAŠï–­‚Å‚·cB$C1UESC$C5‚ªŒ¾‚¤‚É‚ÍAŽ„‚½‚¿‚ª‚¢‚éêŠ‚Í’·‚¢ŠÔƒvƒtƒH[ƒ‹‚Ìíü‚Ì”ÍˆÍŠO‚Å‚¸‚Á‚ÆˆÀ‘S‚¾‚ÆŒ¾‚Á‚Ä‚¢‚Ü‚·BŽ„‚½‚¿‚ª‚»‚¤–]‚ñ‚¾‚©‚ç‚¾‚ÆŽv‚¢‚Ü‚·B‚µ‚©‚µA‚È‚ºŽ„Ž©g‚ÌS”z‚µ‚È‚¯‚ê‚Î‚È‚ç‚È‚¢‚Ì‚Å‚µ‚å‚¤‚©H‚Å‚àA‚»‚ê‚Í‚½‚¢‚µ‚½–â‘è‚Å‚Í‚ ‚è‚Ü‚¹‚ñBí‘ˆ‚ªIŒ‹‚·‚ê‚ÎA‚·‚®‚É¢ŠE‚Í$C1Dangi$C5‚É‚æ‚Á‚ÄŽx”z‚³‚êAŽ„‚ÍŠuâ‚³‚ê‚½¢ŠE‚Ìã‚©‚çA‚æ‚¢ƒz[ƒ€‚ÖA‚­‚±‚Æ‚ª‚Å‚«‚é‚Å‚µ‚å‚¤B
 
-_‚æAŽ„‚½‚¿‚ÌŽœ‘Psˆ×‚ðŽè“`‚Á‚Ä‚­‚¾‚³‚¢B
+@_‚æAŽ„‚½‚¿‚ÌŽœ‘Psˆ×‚ðŽè“`‚Á‚Ä‚­‚¾‚³‚¢B
 
 $C1#$bƒGƒ“ƒgƒŠI—¹
 #LOGOFF 400
@@ -205,7 +205,7 @@ $C1#$bƒGƒ“ƒgƒŠI—¹
 #LOGON 401
 #PICT 403
 $C5
-ƒAƒbƒvƒ[ƒhEƒ†ƒjƒbƒg‚Ì‚¤‚¿‚Ì‚P‚ÍA‚±‚ÌƒXƒ|ƒbƒg‚É‹ß‚¢êŠ‚É‚ ‚è‚Ü‚·B‚µ‚©‚µA‚»‚±‚É‚ÍƒvƒtƒH[ƒ‹‚ÌŒR’c‚ª‚¢‚é‚æ‚¤‚Å‚·BƒvƒtƒH[ƒ‹‚ªƒ†ƒjƒbƒg‚ðŽ‚Á‚Ä‚¢‚é‚Ì‚Å‚µ‚å‚¤‚©HŽ„‚ÍAŒN‚Ìƒ}ƒXƒ^[‚Ì$C1ƒfƒ…ƒ‰ƒ“ƒ_ƒ‹$C5‚ÉŽ¿–â‚µ‚Ä‚Ý‚Ü‚·B”Þ‚È‚ç”cˆ¬‚Å‚«‚Ä‚¢‚é‚Í‚¸B
+@ƒAƒbƒvƒ[ƒhEƒ†ƒjƒbƒg‚Ì‚¤‚¿‚Ì‚P‚ÍA‚±‚ÌƒXƒ|ƒbƒg‚É‹ß‚¢êŠ‚É‚ ‚è‚Ü‚·B‚µ‚©‚µA‚»‚±‚É‚ÍƒvƒtƒH[ƒ‹‚ÌŒR’c‚ª‚¢‚é‚æ‚¤‚Å‚·BƒvƒtƒH[ƒ‹‚ªƒ†ƒjƒbƒg‚ðŽ‚Á‚Ä‚¢‚é‚Ì‚Å‚µ‚å‚¤‚©HŽ„‚ÍAŒN‚Ìƒ}ƒXƒ^[‚Ì$C1ƒfƒ…ƒ‰ƒ“ƒ_ƒ‹$C5‚ÉŽ¿–â‚µ‚Ä‚Ý‚Ü‚·B”Þ‚È‚ç”cˆ¬‚Å‚«‚Ä‚¢‚é‚Í‚¸B
 
 
 $C1/-Lysander.out
@@ -270,10 +270,10 @@ $C1
 
 
 
-$C1‚æ‚¤AƒWƒƒƒŠƒ“Žq‚Ç‚àBŠy‚µ‚ñ‚Å‚¢‚é‚©‚¢B
+@$C1‚æ‚¤AƒWƒƒƒŠƒ“Žq‚Ç‚àBŠy‚µ‚ñ‚Å‚¢‚é‚©‚¢B
 
 
-‘åŽ–‚È‚±‚Æ‚ð‹³‚¦‚Ä‚â‚ë‚¤FƒŠƒ…ƒTƒ“ƒ_[‚ðM‚¶‚é‚ÈBƒ„ƒc‚Íˆ«–‚‚¾B
+@‘åŽ–‚È‚±‚Æ‚ð‹³‚¦‚Ä‚â‚ë‚¤FƒŠƒ…ƒTƒ“ƒ_[‚ðM‚¶‚é‚ÈBƒ„ƒc‚Íˆ«–‚‚¾B
 
 
 Smoochies,
@@ -285,9 +285,9 @@ Scott
 #PICT 1
 
 
-‚æ‚­‚â‚Á‚½B$IƒŠƒ…ƒTƒ“ƒ_[$i‚ÍŽ„‚ÉUŒ‚‚Å”íŠQ‚ðŽó‚¯‚½Žå‚ÈƒTƒuƒVƒXƒeƒ€‚Ì‘½‚­‚ÌƒRƒ“ƒgƒ[ƒ‹‚ð‰ñ•œ‚µ‚½‚Æ“`‚¦‚Ä‚«‚½B
+@‚æ‚­‚â‚Á‚½B$IƒŠƒ…ƒTƒ“ƒ_[$i‚ÍŽ„‚ÉUŒ‚‚Å”íŠQ‚ðŽó‚¯‚½Žå‚ÈƒTƒuƒVƒXƒeƒ€‚Ì‘½‚­‚ÌƒRƒ“ƒgƒ[ƒ‹‚ð‰ñ•œ‚µ‚½‚Æ“`‚¦‚Ä‚«‚½B
 
-Ž–‘Ô‚ª‚â‚â‚±‚µ‚­‚È‚é‘O‚ÉA‚à‚¤ˆêƒJŠ‚¾‚¯‚â‚Á‚Ä—~‚µ‚¢‚Æ‚±‚ë‚ª‚ ‚éBƒTƒŠƒ“ƒWƒƒ[‚ÌƒZƒNƒVƒ‡ƒ“‚ðˆê‘|‚µ‚Ä‚«‚Ä‚­‚êB‚ Aƒn[ƒhƒEƒFƒA‚ð‰ó‚·‚æ‚¤‚È^Ž—‚ÍŠ¨•Ù‚µ‚Ä‚­‚êB
+@Ž–‘Ô‚ª‚â‚â‚±‚µ‚­‚È‚é‘O‚ÉA‚à‚¤ˆêƒJŠ‚¾‚¯‚â‚Á‚Ä—~‚µ‚¢‚Æ‚±‚ë‚ª‚ ‚éBƒTƒŠƒ“ƒWƒƒ[‚ÌƒZƒNƒVƒ‡ƒ“‚ðˆê‘|‚µ‚Ä‚«‚Ä‚­‚êB‚ Aƒn[ƒhƒEƒFƒA‚ð‰ó‚·‚æ‚¤‚È^Ž—‚ÍŠ¨•Ù‚µ‚Ä‚­‚êB
 #LOGOFF 0
 #INTERLEVEL TELEPORT 7
 #END
