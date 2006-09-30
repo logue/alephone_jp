@@ -38,6 +38,8 @@ public:
 #endif
 
 
+public:
+    void changeMode(int mode);
 protected:
 
 // 生成された、メッセージ割り当て関数
@@ -89,6 +91,10 @@ public:
     afx_msg void OnMenu32797();
 public:
     afx_msg BOOL OnSetCursor(CWnd* pWnd, UINT nHitTest, UINT message);
+public:
+    afx_msg void On32795();
+public:
+    afx_msg void OnHeightFloor();
 };
 
 #ifndef _DEBUG  // MapEditorSDIView.cpp のデバッグ バージョン

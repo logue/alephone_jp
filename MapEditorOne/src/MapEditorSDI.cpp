@@ -195,6 +195,13 @@ CMapEditorSDIApp::CMapEditorSDIApp()
             MB_OK | MB_ICONEXCLAMATION);
         exit(1);
     }
+
+
+    //menu name to id
+    menuIDMap[EM_DRAW] = ID_32795;
+    menuIDMap[EM_VISUAL] = ID_32796;
+    setEditMode(EM_DRAW);
+
 }
 
 CMapEditorSDIApp::~CMapEditorSDIApp()
@@ -335,6 +342,15 @@ void CMapEditorSDIApp::OnFileOpen()
     
     // TODO: ここにコマンド ハンドラ コードを追加します。
     //開くダイアログ
+}
+
+void CMapEditorSDIApp::setEditMode(int mode)
+{
+    this->editMode = mode;
+}
+int CMapEditorSDIApp::getEditMode()
+{
+    return this->editMode;
 }
 
 void loadIcon(int id, CImageList* imageList){

@@ -224,15 +224,31 @@ BEGIN
         MENUITEM "ツールパレット",                     ID_Menu32797
         MENUITEM SEPARATOR
     END
-    POPUP "モード"
+    POPUP "Mode"
     BEGIN
-        MENUITEM "ポリゴン編集",                      ID_32795
-        MENUITEM "ビジュアルモード",                    ID_32796
+        MENUITEM "Draw Polygons",               ID_32795
+        MENUITEM "Visual Mode",                 ID_32796
         MENUITEM SEPARATOR
-        MENUITEM "ポリゴンタイプ",                     ID_32791
-        MENUITEM "高さ",                          ID_32792
-        MENUITEM "液体",                          ID_32793
-        MENUITEM "ライト",                         ID_32794
+        POPUP "Height"
+        BEGIN
+            MENUITEM "Floor",                       ID_HEIGHT_FLOOR
+            MENUITEM "Ceiling",                     ID_HEIGHT_CEILING
+        END
+        POPUP "Media"
+        BEGIN
+            MENUITEM "Floor",                       ID_MEDIA_FLOOR
+            MENUITEM "Ceiling",                     ID_MEDIA_CEILING
+        END
+        POPUP "Light"
+        BEGIN
+            MENUITEM "Floor",                       ID_LIGHT_FLOOR
+            MENUITEM "Ceiling",                     ID_LIGHT_CEILING
+        END
+        POPUP "Texture"
+        BEGIN
+            MENUITEM "Floor",                       ID_TEXTURE_FLOOR
+            MENUITEM "Ceiling",                     ID_TEXTURE_CEILING
+        END
     END
     POPUP "レベル"
     BEGIN
@@ -449,6 +465,58 @@ FONT 8, "MS Shell Dlg", 400, 0, 0x1
 BEGIN
 END
 
+IDD_DIALOG_POLYGON_PROPERTY DIALOGEX 0, 0, 202, 145
+STYLE DS_SETFONT | DS_MODALFRAME | DS_FIXEDSYS | WS_POPUP | WS_CAPTION | WS_SYSMENU
+EXSTYLE WS_EX_TOOLWINDOW
+CAPTION "Polygon Poperty"
+FONT 8, "MS Shell Dlg", 400, 0, 0x1
+BEGIN
+    LTEXT           "PolygonID",IDC_STATIC,6,6,34,8
+    EDITTEXT        IDC_EDIT1,48,6,42,12,ES_AUTOHSCROLL
+    LTEXT           "Type",IDC_STATIC,6,18,17,8
+    EDITTEXT        IDC_EDIT2,48,30,42,12,ES_AUTOHSCROLL | ES_READONLY
+    LTEXT           "Permutation",IDC_STATIC,6,30,40,8
+    LTEXT           "FloorLight",IDC_STATIC,6,42,32,8
+    COMBOBOX        IDC_COMBO1,48,18,42,30,CBS_DROPDOWN | CBS_SORT | WS_VSCROLL | WS_TABSTOP
+    EDITTEXT        IDC_EDIT3,48,102,42,12,ES_AUTOHSCROLL | ES_READONLY
+    LTEXT           "CeilingLight",IDC_STATIC,6,54,37,8
+    LTEXT           "Area",IDC_STATIC,6,66,16,8
+    LTEXT           "FirstObject",IDC_STATIC,6,78,36,8
+    LTEXT           "FloorExZone",IDC_STATIC,6,90,41,8
+    EDITTEXT        IDC_EDIT4,48,90,42,12,ES_AUTOHSCROLL | ES_READONLY
+    EDITTEXT        IDC_EDIT5,48,66,42,12,ES_AUTOHSCROLL | ES_READONLY
+    EDITTEXT        IDC_EDIT6,48,78,42,12,ES_AUTOHSCROLL | ES_READONLY
+    COMBOBOX        IDC_COMBO4,48,42,42,30,CBS_DROPDOWN | CBS_SORT | WS_VSCROLL | WS_TABSTOP
+    COMBOBOX        IDC_COMBO5,48,54,42,30,CBS_DROPDOWN | CBS_SORT | WS_VSCROLL | WS_TABSTOP
+    LTEXT           "LineExZone",IDC_STATIC,6,102,38,8
+    LTEXT           "FloorTrans",IDC_STATIC,6,114,35,8
+    LTEXT           "CeilingTrans",IDC_STATIC,6,126,40,8
+    EDITTEXT        IDC_EDIT7,48,126,42,12,ES_AUTOHSCROLL | ES_READONLY
+    EDITTEXT        IDC_EDIT8,48,114,42,12,ES_AUTOHSCROLL | ES_READONLY
+    LTEXT           "1stNeighbour",IDC_STATIC,96,6,48,8
+    LTEXT           "NearCount",IDC_STATIC,96,18,36,8
+    LTEXT           "Center X",IDC_STATIC,96,30,29,8
+    LTEXT           "Y",IDC_STATIC,120,42,8,8
+    LTEXT           "FloorOrigin",IDC_STATIC,96,54,37,8
+    LTEXT           "CeilingOrigin",IDC_STATIC,96,66,40,8
+    LTEXT           "Media",IDC_STATIC,96,78,20,8
+    LTEXT           "MediaLight",IDC_STATIC,96,90,35,8
+    LTEXT           "SoundSrcIdx",IDC_STATIC,96,102,42,8
+    LTEXT           "AmbSnd",IDC_STATIC,96,114,27,8
+    LTEXT           "RndSnd",IDC_STATIC,96,126,26,8
+    COMBOBOX        IDC_COMBO6,144,126,42,30,CBS_DROPDOWN | CBS_SORT | WS_VSCROLL | WS_TABSTOP
+    COMBOBOX        IDC_COMBO7,144,114,42,30,CBS_DROPDOWN | CBS_SORT | WS_VSCROLL | WS_TABSTOP
+    COMBOBOX        IDC_COMBO8,144,90,42,30,CBS_DROPDOWN | CBS_SORT | WS_VSCROLL | WS_TABSTOP
+    COMBOBOX        IDC_COMBO9,144,78,42,30,CBS_DROPDOWN | CBS_SORT | WS_VSCROLL | WS_TABSTOP
+    EDITTEXT        IDC_EDIT9,144,6,42,12,ES_AUTOHSCROLL
+    EDITTEXT        IDC_EDIT10,144,18,42,12,ES_AUTOHSCROLL
+    EDITTEXT        IDC_EDIT11,144,30,42,12,ES_AUTOHSCROLL
+    EDITTEXT        IDC_EDIT12,144,42,42,12,ES_AUTOHSCROLL
+    EDITTEXT        IDC_EDIT13,144,54,42,12,ES_AUTOHSCROLL
+    EDITTEXT        IDC_EDIT14,144,66,42,12,ES_AUTOHSCROLL
+    EDITTEXT        IDC_EDIT15,144,102,42,12,ES_AUTOHSCROLL
+END
+
 
 /////////////////////////////////////////////////////////////////////////////
 //
@@ -575,6 +643,14 @@ BEGIN
         RIGHTMARGIN, 24
         TOPMARGIN, 7
         BOTTOMMARGIN, 53
+    END
+
+    IDD_DIALOG_POLYGON_PROPERTY, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 195
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 138
     END
 END
 #endif    // APSTUDIO_INVOKED

@@ -24,9 +24,11 @@
 #include "AlephOne/render.h"
 #include "AlephOne/shapes_sdl.h"
 #include "AlephOne/shell.h"
+#include "AlephOne/editor.h"
 
 //#include "AlephOne/placement.h"
-
+#include <map>
+using namespace std;
 
 #include "SDLToWin32/SDLToWin32.h"
 
@@ -84,6 +86,21 @@ enum
     TI_TEXT,
     TI_POLYGON,
     NUMBER_OF_TOOLS //7
+};
+
+//ï“èWÉÇÅ[Éh
+enum
+{
+    EM_DRAW,
+    EM_VISUAL,
+    EM_FLOOR_HEIGHT,
+    EM_CEILING_HEIGHT,
+    EM_FLOOR_TEXTURE,
+    EM_CEILING_TEXTURE,
+    EM_FLOOR_LIGHT,
+    EM_CEILING_LIGHT,
+    EM_MEDIA,
+    EM_SOUND,
 };
 
 const int TOOL_WIDTH = 24;
@@ -238,9 +255,15 @@ public:
     //when true, warn to save
     bool isChanged;
 
-
-
-	DECLARE_MESSAGE_MAP()
+private:
+    //edit mode
+    int editMode;
+public:
+    map<int, int> menuIDMap;
+    void setEditMode(int mode);
+    int getEditMode();
+    
+    DECLARE_MESSAGE_MAP()
 public:
     afx_msg void OnFileOpen();
 };

@@ -109,16 +109,22 @@
 #define IDC_CURSOR_FILL                 221
 #define IDB_BITMAP54                    223
 #define IDB_BITMAP55                    224
+#define IDD_DIALOG_POLYGON_PROPERTY     225
 #define IDC_LIST1                       1000
 #define IDC_LIST2                       1002
 #define IDC_COMBO1                      1003
 #define IDC_CHECK1                      1004
 #define IDC_COMBO4                      1004
 #define IDC_CHECK2                      1005
+#define IDC_COMBO5                      1005
 #define IDC_CHECK3                      1006
+#define IDC_COMBO6                      1006
 #define IDC_CHECK4                      1007
+#define IDC_COMBO7                      1007
 #define IDC_CHECK5                      1008
+#define IDC_COMBO8                      1008
 #define IDC_CHECK6                      1009
+#define IDC_COMBO9                      1009
 #define IDC_EDIT_INDEX                  1010
 #define IDC_CHECK7                      1010
 #define IDC_EDIT_POLYGON_INDEX          1011
@@ -141,15 +147,24 @@
 #define IDC_CHECK15                     1018
 #define IDC_STATIC_ANGLE                1019
 #define IDC_CHECK16                     1019
+#define IDC_EDIT7                       1019
 #define IDC_EDIT1                       1020
 #define IDC_CHECK17                     1021
 #define IDC_EDIT6                       1021
 #define IDC_CHECK18                     1022
+#define IDC_EDIT8                       1022
+#define IDC_EDIT9                       1023
+#define IDC_EDIT10                      1024
 #define IDC_LIST_TERMINALS              1025
+#define IDC_EDIT11                      1025
 #define IDC_LIST_GROUPS                 1026
+#define IDC_EDIT12                      1026
 #define IDC_PICTURE                     1027
+#define IDC_EDIT13                      1027
 #define IDC_RICHEDIT21                  1028
+#define IDC_EDIT14                      1028
 #define IDC_LIST_INFORMATION            1029
+#define IDC_EDIT15                      1029
 #define IDC_EDIT2                       1031
 #define IDC_BUTTON1                     1034
 #define IDC_BUTTON2                     1035
@@ -176,13 +191,22 @@
 #define ID_32795                        32795
 #define ID_32796                        32796
 #define ID_Menu32797                    32797
+#define ID_HEIGHT_FLOOR                 32798
+#define ID_HEIGHT_CEILING               32799
+#define ID_MEDIA_FLOOR                  32800
+#define ID_MEDIA_CEILING                32801
+#define ID_LIGHT_FLOOR                  32802
+#define ID_LIGHT_CEILING                32803
+#define ID_MODE_TEXTURE                 32804
+#define ID_TEXTURE_FLOOR                32805
+#define ID_TEXTURE_CEILING              32806
 
 // Next default values for new objects
 // 
 #ifdef APSTUDIO_INVOKED
 #ifndef APSTUDIO_READONLY_SYMBOLS
-#define _APS_NEXT_RESOURCE_VALUE        225
-#define _APS_NEXT_COMMAND_VALUE         32798
+#define _APS_NEXT_RESOURCE_VALUE        226
+#define _APS_NEXT_COMMAND_VALUE         32807
 #define _APS_NEXT_CONTROL_VALUE         1037
 #define _APS_NEXT_SYMED_VALUE           104
 #endif

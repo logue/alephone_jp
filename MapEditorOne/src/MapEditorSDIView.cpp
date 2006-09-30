@@ -48,6 +48,8 @@ BEGIN_MESSAGE_MAP(CMapEditorSDIView, CView)
     ON_COMMAND(ID_32788, On32788)
     ON_COMMAND(ID_Menu32797, &CMapEditorSDIView::OnMenu32797)
     ON_WM_SETCURSOR()
+    ON_COMMAND(ID_32795, &CMapEditorSDIView::On32795)
+    ON_COMMAND(ID_HEIGHT_FLOOR, &CMapEditorSDIView::OnHeightFloor)
 END_MESSAGE_MAP()
 
 // CMapEditorSDIView コンストラクション/デストラクション
@@ -222,8 +224,26 @@ void CMapEditorSDIView::OnDraw(CDC* pDC)
             points[j].x = (ep->vertex.x + OFFSET_X_WORLD) / DIV + OFFSET_X_VIEW;
             points[j].y = (ep->vertex.y + OFFSET_Y_WORLD) / DIV + OFFSET_Y_VIEW;
         }
+        CBrush brush;
         int type = polygon->type;
-        cdc->SelectObject(&polygonBrushes[type]);
+        switch(theApp.getEditMode()){
+        case EM_DRAW:
+            cdc->SelectObject(&polygonBrushes[type]);
+            break;
+        case EM_FLOOR_HEIGHT:
+            if(polygon->floor_height < 0){
+                //divide height
+                int red = (int)(255 * (1.0 - (-(double)polygon->floor_height / MAXIMUM_FLOOR_HEIGHT)));
+                brush.CreateSolidBrush(RGB(red,0,0));
+            }else{
+                int notRed = (int)(255 * (polygon->floor_height / MAXIMUM_FLOOR_HEIGHT));
+                brush.CreateSolidBrush(RGB(255, notRed, notRed));
+            }
+            cdc->SelectObject(&brush);
+            break;
+        default:
+            cdc->SelectObject(&grayBrush);
+        }
         bool selected = false;
         if(theApp.selectType == _selected_polygon && theApp.selectIndex == i){
             selected = true;
@@ -238,8 +258,14 @@ void CMapEditorSDIView::OnDraw(CDC* pDC)
         }
         if(selected){
             cdc->SelectObject(&netBrush);
+        }else{
+            //check polygon invalidate
         }
         Polygon(cdc->m_hDC, points, vertexCount);
+
+        if(theApp.getEditMode() == EM_FLOOR_HEIGHT){
+            brush.DeleteObject();
+        }
     }
 
     //線
@@ -681,6 +707,8 @@ void CMapEditorSDIView::OnInitialUpdate()
             bitmap->LoadBitmap(idAssignment[i]);
             theApp.bitmapList.push_back(bitmap);
         }
+
+        On32795();
     }
 
 }
@@ -873,4 +901,30 @@ BOOL CMapEditorSDIView::OnSetCursor(CWnd* pWnd, UINT nHitTest, UINT message)
         return TRUE;*/
     //}
     //return CView::OnSetCursor(pWnd, nHitTest, message);
+}
+
+void CMapEditorSDIView::changeMode(int mode)
+{
+    int oldMode = theApp.getEditMode();
+    int nextMode = mode;
+    theApp.setEditMode(nextMode);
+    //チェックを変更
+    int flags = 0;
+    flags = MF_BYCOMMAND | MF_UNCHECKED;
+    //GetMenu()->CheckMenuItem(theApp.menuIDMap[oldMode], flags);
+    flags = MF_BYCOMMAND | MF_CHECKED;
+    //GetMenu()->CheckMenuItem(theApp.menuIDMap[nextMode], flags);
+    Invalidate(FALSE);
+
+}
+
+//draw polygon mode
+void CMapEditorSDIView::On32795()
+{
+    changeMode(EM_DRAW);
+}
+//height -> floor
+void CMapEditorSDIView::OnHeightFloor()
+{
+    changeMode(EM_FLOOR_HEIGHT);
 }
