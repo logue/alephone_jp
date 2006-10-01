@@ -206,8 +206,13 @@ void CMapEditorSDIView::OnDraw(CDC* pDC)
     int fillMode = WINDING;
     SetPolyFillMode(cdc->m_hDC, fillMode);
     POINT points[MAXIMUM_VERTICES_PER_POLYGON];
+    //sort order from index to height
+    int *indexes = new int[PolygonList.size()];
+    //sort it by floor
+    //sortOrderToHeight((int)PolygonList.size(), POLYGON_TAG, indexes, true);
     for(int i = 0; i < (int)PolygonList.size(); i ++){
-        struct polygon_data* polygon = &PolygonList[i];
+        int index = i;//indexes[i];
+        struct polygon_data* polygon = &PolygonList[index];
         int flags = polygon->flags;
         int vertexCount = polygon->vertex_count;
         if(vertexCount == 0){
@@ -250,7 +255,7 @@ void CMapEditorSDIView::OnDraw(CDC* pDC)
         }
         if(theApp.selectGroupInformation.isSelected()){
             for(int k = 0; k < (int)theApp.selectGroupInformation.polygons.size(); k ++){
-                if(theApp.selectGroupInformation.polygons[k].index == i){
+                if(theApp.selectGroupInformation.polygons[k].index == index){
                     selected = true;
                     break;
                 }
@@ -267,6 +272,7 @@ void CMapEditorSDIView::OnDraw(CDC* pDC)
             brush.DeleteObject();
         }
     }
+    delete indexes;
 
     //ü
     for(int i = 0; i < (int)LineList.size(); i ++){
@@ -558,11 +564,13 @@ BOOL CMapEditorSDIView::OnPreparePrinting(CPrintInfo* pInfo)
 void CMapEditorSDIView::OnBeginPrinting(CDC* /*pDC*/, CPrintInfo* /*pInfo*/)
 {
 	// TODO: ˆóü‘O‚Ì“Á•Ê‚È‰Šú‰»ˆ—‚ð’Ç‰Á‚µ‚Ä‚­‚¾‚³‚¢B
+    MessageBox(L"What document-type do you want to print?");
 }
 
 void CMapEditorSDIView::OnEndPrinting(CDC* /*pDC*/, CPrintInfo* /*pInfo*/)
 {
 	// TODO: ˆóüŒã‚ÌŒãˆ—‚ð’Ç‰Á‚µ‚Ä‚­‚¾‚³‚¢B
+    MessageBox(L"What document-type do you want to print?");
 }
 
 

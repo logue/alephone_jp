@@ -1,0 +1,10 @@
+TODO
+-set selecting when launch level-select dialog
+-change cursor
+-strange streched texture
+-cannot move over modified lines
+-check invalid polygon and draw it with red 
+-shift+click to add selection to group
+
+Done
+-Show level's name editing now

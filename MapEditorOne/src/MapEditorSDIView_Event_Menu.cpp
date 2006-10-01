@@ -72,14 +72,21 @@ void CMapEditorSDIView::OnFileOpen()
             int type = 3;
             while(get_indexed_entry_point(&ep, &index, type)){
                 sprintf(cstr, "%d,", ep.level_number);
-                theApp.LevelNameList.Add(CString(cstr) + CString(ep.level_name));
+                theApp.LevelNameList.Add(//CString(cstr) + 
+                    CString(ep.level_name));
             }
             /*sprintf(cstr, "%d", theApp.LevelNameList.GetSize());
             MessageBox(CString(cstr));*/
             theApp.selectType = _no_selected;
         }
+        //ステータスバーに表示
+        setStatusBar(0, theApp.LevelNameList.GetAt(0));
 
+        //default zoom
         theApp.zoomDivision = ZOOM_DIVISION_DEFAULT;
+        
+        //default position(center)
+        OnItemCentering();
 
         //
         theApp.isChanged = false;
@@ -126,6 +133,9 @@ void CMapEditorSDIView::On32776()
         theApp.selectType = _no_selected;
 
         this->Invalidate(FALSE);
+
+        //ステータスバーに表示
+        setStatusBar(0, theApp.LevelNameList.GetAt(theApp.editLevelIndex));
     }
 }
 

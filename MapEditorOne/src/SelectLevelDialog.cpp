@@ -63,6 +63,12 @@ BOOL CSelectLevelDialog::OnInitDialog()
         sprintf(cstr, "%d.", i+1);
         selectLevelListBox.AddString(CString(cstr) + CString(theApp.LevelNameList.GetAt(i)));
     }
+    if(theApp.LevelNameList.GetSize() == 0){
+        selectLevelListBox.AddString(L"unknown");
+    }
+    //現在編集中のアイテムを選択
+    int nowSelect = theApp.editLevelIndex;
+    selectLevelListBox.SetCurSel(nowSelect);
 
     return TRUE;  // return TRUE unless you set the focus to a control
     // 例外 : OCX プロパティ ページは必ず FALSE を返します。

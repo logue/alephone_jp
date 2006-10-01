@@ -2,6 +2,7 @@
 
 #include <math.h>
 #include "AlephOne/map.h"
+#include "AlephOne/wad.h"
 
 //////////////////////////////////////////////////////////
 // structures
@@ -159,3 +160,12 @@ bool isPointInSelection(int px, int py,
 
 //calcurate degree from vector
 double getDegreeFromVector(double dx, double dy);
+
+/**
+    sort order from index to height
+    @param type LINE_TAG, ENDPOINT_TAG ...
+    @param 
+*/
+void sortOrderToHeight(int max, int type, int *sortedOne, bool isFloor);
+
+void quickSort(int *indexes, int max);

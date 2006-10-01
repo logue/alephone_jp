@@ -348,3 +348,103 @@ double getDegreeFromVector(double dx, double dy)
     }
 
 }
+
+//sort order from index to height
+void sortOrderToHeight(int max, int type, int *sortedOne, bool isFloor)
+{
+    int *temp = new int[max];
+    if(max == 1){
+        sortedOne[0] = 0;
+    }else{
+        for(int i = 0; i < max; i ++){
+            switch(type){
+            case LINE_TAG:
+                if(isFloor){
+                    temp[i] = LineList[i].highest_adjacent_floor;
+                }else{
+                    temp[i] = LineList[i].lowest_adjacent_ceiling;
+                }
+                break;
+            }
+        }
+
+        //sort it
+        quickSort(temp, max);
+        //copy to original
+        memcpy(sortedOne, temp, sizeof(int) * max);
+    }
+    delete temp;
+}
+
+//exchange between a and b
+template<class T>
+void exchange(T *a, T *b)
+{
+    T temp = *a;
+    *a = *b;
+    *b = temp;
+}
+
+/**
+    select axis-num 
+    -find two different nums from indexes' left
+    -return bigger one
+    -if all nums are equal, return -1
+*/
+static int pivot(int *indexes, int start, int end)
+{
+    int k = start + 1;
+    while( k <= end && indexes[start] == indexes[k])k ++;
+    //all are same
+    if(k > end) return -1;
+    //if not
+    if(indexes[start] >= indexes[k]){
+        return start;
+    }else{
+        return k;
+    }
+}
+
+/**
+    divide [more than axis] and [less than axis]
+    -smaller is left, bigger is right
+    -return offset of start of biggers
+*/
+static int partition(int *indexes, int start, int end, int axis)
+{
+    int left = start, right = end;
+    while( left <= right){
+        while(left <= end && indexes[left] < axis)left ++;
+        while(right >= start && indexes[right] >= axis)right --;
+        if(left > right)break;
+        exchange(&indexes[left], &indexes[right]);
+    }
+    return left;
+}
+
+void repeatbleQuickSort(int *indexes, int start, int end)
+{
+    if( start == end){
+        return;
+    }
+    int p = pivot(indexes, start, end);
+    if(p != -1){
+        int offset = partition(indexes, start, end, indexes[p]);
+        repeatbleQuickSort(indexes, start, offset - 1);
+        repeatbleQuickSort(indexes, offset, end);
+    }
+}
+
+//sort quickly!
+//
+void quickSort(int *indexes, int max)
+{
+    int *temp = new int[max];
+    if(max == 1){
+        indexes[0] = 0;
+    }else{
+        //sort it
+        repeatbleQuickSort(indexes, 0, max);
+    }
+    delete temp;
+}
