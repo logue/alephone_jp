@@ -1,359 +1,110 @@
-loading map[V:\game\Aleph One\AlephOne-laboratory\Map]'s header
+loading map[V:\game\Aleph One\MarathonEvil\Marathon EVIL\Cursed Map.sceA]'s header
 app_spec_dir_dat_size:74
-checksum:-1475439439
+checksum:-750715489
 data_version:1
 entry_base_size:10
 entry_header_size:16
-filename:Merged Map Files
+filename:Cursed Map
 parent_checksum:0
-version:4
-wad_count:57
+version:2
+wad_count:17
 
 entry data
-length:321435
-entry.length:321435
+length:215815
+entry.length:215815
 index:0
 entry.index:0
 entry.offset_to_start:128
 
-WAD_FILE ver.:4 wad_entry_header.offset:0
-WAD_FILE ver.:4 wad_entry_header.offset:0
-WAD_FILE ver.:4 wad_entry_header.offset:0
-WAD_FILE ver.:4 wad_entry_header.offset:0
-WAD_FILE ver.:4 wad_entry_header.offset:0
-WAD_FILE ver.:4 wad_entry_header.offset:0
-WAD_FILE ver.:4 wad_entry_header.offset:0
-WAD_FILE ver.:4 wad_entry_header.offset:0
-WAD_FILE ver.:4 wad_entry_header.offset:0
-WAD_FILE ver.:4 wad_entry_header.offset:0
-WAD_FILE ver.:4 wad_entry_header.offset:0
-WAD_FILE ver.:4 wad_entry_header.offset:0
-WAD_FILE ver.:4 wad_entry_header.offset:0
-WAD_FILE ver.:4 wad_entry_header.offset:0
-WAD_FILE ver.:4 wad_entry_header.offset:0
-WAD_FILE ver.:4 wad_entry_header.offset:0
-WAD_FILE ver.:4 wad_entry_header.offset:0
-WAD_FILE ver.:4 wad_entry_header.offset:0
-WAD_FILE ver.:4 wad_entry_header.offset:0
-loading map[V:\game\Aleph One\AlephOne-laboratory\Map]'s header
+WAD_FILE ver.:2 wad_entry_header.offset:0
+WAD_FILE ver.:2 wad_entry_header.offset:0
+WAD_FILE ver.:2 wad_entry_header.offset:0
+WAD_FILE ver.:2 wad_entry_header.offset:0
+WAD_FILE ver.:2 wad_entry_header.offset:0
+WAD_FILE ver.:2 wad_entry_header.offset:0
+WAD_FILE ver.:2 wad_entry_header.offset:0
+WAD_FILE ver.:2 wad_entry_header.offset:0
+WAD_FILE ver.:2 wad_entry_header.offset:0
+WAD_FILE ver.:2 wad_entry_header.offset:0
+WAD_FILE ver.:2 wad_entry_header.offset:0
+WAD_FILE ver.:2 wad_entry_header.offset:0
+WAD_FILE ver.:2 wad_entry_header.offset:0
+WAD_FILE ver.:2 wad_entry_header.offset:0
+WAD_FILE ver.:2 wad_entry_header.offset:0
+WAD_FILE ver.:2 wad_entry_header.offset:0
+WAD_FILE ver.:2 wad_entry_header.offset:0
+WAD_FILE ver.:2 wad_entry_header.offset:0
+loading map[V:\game\Aleph One\MarathonEvil\Marathon EVIL\Cursed Map.sceA]'s header
 app_spec_dir_dat_size:74
-checksum:-1475439439
+checksum:-750715489
 data_version:1
 entry_base_size:10
 entry_header_size:16
-filename:Merged Map Files
+filename:Cursed Map
 parent_checksum:0
-version:4
-wad_count:57
+version:2
+wad_count:17
 
 entry data
-length:300149
-entry.length:300149
-index:2
-entry.index:2
-entry.offset_to_start:616043
-
-WAD_FILE ver.:4 wad_entry_header.offset:0
-WAD_FILE ver.:4 wad_entry_header.offset:0
-WAD_FILE ver.:4 wad_entry_header.offset:0
-WAD_FILE ver.:4 wad_entry_header.offset:0
-WAD_FILE ver.:4 wad_entry_header.offset:0
-WAD_FILE ver.:4 wad_entry_header.offset:0
-WAD_FILE ver.:4 wad_entry_header.offset:0
-WAD_FILE ver.:4 wad_entry_header.offset:0
-WAD_FILE ver.:4 wad_entry_header.offset:0
-WAD_FILE ver.:4 wad_entry_header.offset:0
-WAD_FILE ver.:4 wad_entry_header.offset:0
-WAD_FILE ver.:4 wad_entry_header.offset:0
-WAD_FILE ver.:4 wad_entry_header.offset:0
-WAD_FILE ver.:4 wad_entry_header.offset:0
-WAD_FILE ver.:4 wad_entry_header.offset:0
-WAD_FILE ver.:4 wad_entry_header.offset:0
-WAD_FILE ver.:4 wad_entry_header.offset:0
-WAD_FILE ver.:4 wad_entry_header.offset:0
-WAD_FILE ver.:4 wad_entry_header.offset:0
-loading map[V:\game\Aleph One\AlephOne-laboratory\Map]'s header
-app_spec_dir_dat_size:74
-checksum:-1475439439
-data_version:1
-entry_base_size:10
-entry_header_size:16
-filename:Merged Map Files
-parent_checksum:0
-version:4
-wad_count:57
-
-entry data
-length:263480
-entry.length:263480
-index:3
-entry.index:3
-entry.offset_to_start:916192
-
-WAD_FILE ver.:4 wad_entry_header.offset:0
-WAD_FILE ver.:4 wad_entry_header.offset:0
-WAD_FILE ver.:4 wad_entry_header.offset:0
-WAD_FILE ver.:4 wad_entry_header.offset:0
-WAD_FILE ver.:4 wad_entry_header.offset:0
-WAD_FILE ver.:4 wad_entry_header.offset:0
-WAD_FILE ver.:4 wad_entry_header.offset:0
-WAD_FILE ver.:4 wad_entry_header.offset:0
-WAD_FILE ver.:4 wad_entry_header.offset:0
-WAD_FILE ver.:4 wad_entry_header.offset:0
-WAD_FILE ver.:4 wad_entry_header.offset:0
-WAD_FILE ver.:4 wad_entry_header.offset:0
-WAD_FILE ver.:4 wad_entry_header.offset:0
-WAD_FILE ver.:4 wad_entry_header.offset:0
-WAD_FILE ver.:4 wad_entry_header.offset:0
-WAD_FILE ver.:4 wad_entry_header.offset:0
-WAD_FILE ver.:4 wad_entry_header.offset:0
-WAD_FILE ver.:4 wad_entry_header.offset:0
-loading map[V:\game\Aleph One\AlephOne-laboratory\Map]'s header
-app_spec_dir_dat_size:74
-checksum:-1475439439
-data_version:1
-entry_base_size:10
-entry_header_size:16
-filename:Merged Map Files
-parent_checksum:0
-version:4
-wad_count:57
-
-entry data
-length:61310
-entry.length:61310
+length:370385
+entry.length:370385
 index:4
 entry.index:4
-entry.offset_to_start:1179672
+entry.offset_to_start:1089573
 
-WAD_FILE ver.:4 wad_entry_header.offset:0
-WAD_FILE ver.:4 wad_entry_header.offset:0
-WAD_FILE ver.:4 wad_entry_header.offset:0
-WAD_FILE ver.:4 wad_entry_header.offset:0
-WAD_FILE ver.:4 wad_entry_header.offset:0
-WAD_FILE ver.:4 wad_entry_header.offset:0
-WAD_FILE ver.:4 wad_entry_header.offset:0
-WAD_FILE ver.:4 wad_entry_header.offset:0
-WAD_FILE ver.:4 wad_entry_header.offset:0
-WAD_FILE ver.:4 wad_entry_header.offset:0
-WAD_FILE ver.:4 wad_entry_header.offset:0
-WAD_FILE ver.:4 wad_entry_header.offset:0
-WAD_FILE ver.:4 wad_entry_header.offset:0
-WAD_FILE ver.:4 wad_entry_header.offset:0
-WAD_FILE ver.:4 wad_entry_header.offset:0
-WAD_FILE ver.:4 wad_entry_header.offset:0
-WAD_FILE ver.:4 wad_entry_header.offset:0
-loading map[V:\game\Aleph One\AlephOne-laboratory\Map]'s header
+WAD_FILE ver.:2 wad_entry_header.offset:0
+WAD_FILE ver.:2 wad_entry_header.offset:0
+WAD_FILE ver.:2 wad_entry_header.offset:0
+WAD_FILE ver.:2 wad_entry_header.offset:0
+WAD_FILE ver.:2 wad_entry_header.offset:0
+WAD_FILE ver.:2 wad_entry_header.offset:0
+WAD_FILE ver.:2 wad_entry_header.offset:0
+WAD_FILE ver.:2 wad_entry_header.offset:0
+WAD_FILE ver.:2 wad_entry_header.offset:0
+WAD_FILE ver.:2 wad_entry_header.offset:0
+WAD_FILE ver.:2 wad_entry_header.offset:0
+WAD_FILE ver.:2 wad_entry_header.offset:0
+WAD_FILE ver.:2 wad_entry_header.offset:0
+WAD_FILE ver.:2 wad_entry_header.offset:0
+WAD_FILE ver.:2 wad_entry_header.offset:0
+WAD_FILE ver.:2 wad_entry_header.offset:0
+WAD_FILE ver.:2 wad_entry_header.offset:0
+WAD_FILE ver.:2 wad_entry_header.offset:0
+WAD_FILE ver.:2 wad_entry_header.offset:0
+loading map[V:\game\Aleph One\MarathonEvil\Marathon EVIL\Cursed Map.sceA]'s header
 app_spec_dir_dat_size:74
-checksum:-1475439439
+checksum:-750715489
 data_version:1
 entry_base_size:10
 entry_header_size:16
-filename:Merged Map Files
+filename:Cursed Map
 parent_checksum:0
-version:4
-wad_count:57
+version:2
+wad_count:17
 
 entry data
-length:206725
-entry.length:206725
-index:5
-entry.index:5
-entry.offset_to_start:1240982
+length:517481
+entry.length:517481
+index:3
+entry.index:3
+entry.offset_to_start:572092
 
-WAD_FILE ver.:4 wad_entry_header.offset:0
-WAD_FILE ver.:4 wad_entry_header.offset:0
-WAD_FILE ver.:4 wad_entry_header.offset:0
-WAD_FILE ver.:4 wad_entry_header.offset:0
-WAD_FILE ver.:4 wad_entry_header.offset:0
-WAD_FILE ver.:4 wad_entry_header.offset:0
-WAD_FILE ver.:4 wad_entry_header.offset:0
-WAD_FILE ver.:4 wad_entry_header.offset:0
-WAD_FILE ver.:4 wad_entry_header.offset:0
-WAD_FILE ver.:4 wad_entry_header.offset:0
-WAD_FILE ver.:4 wad_entry_header.offset:0
-WAD_FILE ver.:4 wad_entry_header.offset:0
-WAD_FILE ver.:4 wad_entry_header.offset:0
-WAD_FILE ver.:4 wad_entry_header.offset:0
-WAD_FILE ver.:4 wad_entry_header.offset:0
-WAD_FILE ver.:4 wad_entry_header.offset:0
-loading map[V:\game\Aleph One\AlephOne-laboratory\Map]'s header
-app_spec_dir_dat_size:74
-checksum:-1475439439
-data_version:1
-entry_base_size:10
-entry_header_size:16
-filename:Merged Map Files
-parent_checksum:0
-version:4
-wad_count:57
-
-entry data
-length:206725
-entry.length:206725
-index:5
-entry.index:5
-entry.offset_to_start:1240982
-
-WAD_FILE ver.:4 wad_entry_header.offset:0
-WAD_FILE ver.:4 wad_entry_header.offset:0
-WAD_FILE ver.:4 wad_entry_header.offset:0
-WAD_FILE ver.:4 wad_entry_header.offset:0
-WAD_FILE ver.:4 wad_entry_header.offset:0
-WAD_FILE ver.:4 wad_entry_header.offset:0
-WAD_FILE ver.:4 wad_entry_header.offset:0
-WAD_FILE ver.:4 wad_entry_header.offset:0
-WAD_FILE ver.:4 wad_entry_header.offset:0
-WAD_FILE ver.:4 wad_entry_header.offset:0
-WAD_FILE ver.:4 wad_entry_header.offset:0
-WAD_FILE ver.:4 wad_entry_header.offset:0
-WAD_FILE ver.:4 wad_entry_header.offset:0
-WAD_FILE ver.:4 wad_entry_header.offset:0
-WAD_FILE ver.:4 wad_entry_header.offset:0
-WAD_FILE ver.:4 wad_entry_header.offset:0
-loading map[V:\game\Aleph One\AlephOne-laboratory\Map]'s header
-app_spec_dir_dat_size:74
-checksum:-1475439439
-data_version:1
-entry_base_size:10
-entry_header_size:16
-filename:Merged Map Files
-parent_checksum:0
-version:4
-wad_count:57
-
-entry data
-length:266464
-entry.length:266464
-index:6
-entry.index:6
-entry.offset_to_start:1447707
-
-WAD_FILE ver.:4 wad_entry_header.offset:0
-WAD_FILE ver.:4 wad_entry_header.offset:0
-WAD_FILE ver.:4 wad_entry_header.offset:0
-WAD_FILE ver.:4 wad_entry_header.offset:0
-WAD_FILE ver.:4 wad_entry_header.offset:0
-WAD_FILE ver.:4 wad_entry_header.offset:0
-WAD_FILE ver.:4 wad_entry_header.offset:0
-WAD_FILE ver.:4 wad_entry_header.offset:0
-WAD_FILE ver.:4 wad_entry_header.offset:0
-WAD_FILE ver.:4 wad_entry_header.offset:0
-WAD_FILE ver.:4 wad_entry_header.offset:0
-WAD_FILE ver.:4 wad_entry_header.offset:0
-WAD_FILE ver.:4 wad_entry_header.offset:0
-WAD_FILE ver.:4 wad_entry_header.offset:0
-WAD_FILE ver.:4 wad_entry_header.offset:0
-WAD_FILE ver.:4 wad_entry_header.offset:0
-WAD_FILE ver.:4 wad_entry_header.offset:0
-WAD_FILE ver.:4 wad_entry_header.offset:0
-loading map[V:\game\Aleph One\AlephOne-laboratory\Map]'s header
-app_spec_dir_dat_size:74
-checksum:-1475439439
-data_version:1
-entry_base_size:10
-entry_header_size:16
-filename:Merged Map Files
-parent_checksum:0
-version:4
-wad_count:57
-
-entry data
-length:386262
-entry.length:386262
-index:7
-entry.index:7
-entry.offset_to_start:1714171
-
-WAD_FILE ver.:4 wad_entry_header.offset:0
-WAD_FILE ver.:4 wad_entry_header.offset:0
-WAD_FILE ver.:4 wad_entry_header.offset:0
-WAD_FILE ver.:4 wad_entry_header.offset:0
-WAD_FILE ver.:4 wad_entry_header.offset:0
-WAD_FILE ver.:4 wad_entry_header.offset:0
-WAD_FILE ver.:4 wad_entry_header.offset:0
-WAD_FILE ver.:4 wad_entry_header.offset:0
-WAD_FILE ver.:4 wad_entry_header.offset:0
-WAD_FILE ver.:4 wad_entry_header.offset:0
-WAD_FILE ver.:4 wad_entry_header.offset:0
-WAD_FILE ver.:4 wad_entry_header.offset:0
-WAD_FILE ver.:4 wad_entry_header.offset:0
-WAD_FILE ver.:4 wad_entry_header.offset:0
-WAD_FILE ver.:4 wad_entry_header.offset:0
-WAD_FILE ver.:4 wad_entry_header.offset:0
-WAD_FILE ver.:4 wad_entry_header.offset:0
-WAD_FILE ver.:4 wad_entry_header.offset:0
-loading map[V:\game\Aleph One\AlephOne-laboratory\Map]'s header
-app_spec_dir_dat_size:74
-checksum:-1475439439
-data_version:1
-entry_base_size:10
-entry_header_size:16
-filename:Merged Map Files
-parent_checksum:0
-version:4
-wad_count:57
-
-entry data
-length:224960
-entry.length:224960
-index:8
-entry.index:8
-entry.offset_to_start:2100433
-
-WAD_FILE ver.:4 wad_entry_header.offset:0
-WAD_FILE ver.:4 wad_entry_header.offset:0
-WAD_FILE ver.:4 wad_entry_header.offset:0
-WAD_FILE ver.:4 wad_entry_header.offset:0
-WAD_FILE ver.:4 wad_entry_header.offset:0
-WAD_FILE ver.:4 wad_entry_header.offset:0
-WAD_FILE ver.:4 wad_entry_header.offset:0
-WAD_FILE ver.:4 wad_entry_header.offset:0
-WAD_FILE ver.:4 wad_entry_header.offset:0
-WAD_FILE ver.:4 wad_entry_header.offset:0
-WAD_FILE ver.:4 wad_entry_header.offset:0
-WAD_FILE ver.:4 wad_entry_header.offset:0
-WAD_FILE ver.:4 wad_entry_header.offset:0
-WAD_FILE ver.:4 wad_entry_header.offset:0
-WAD_FILE ver.:4 wad_entry_header.offset:0
-WAD_FILE ver.:4 wad_entry_header.offset:0
-WAD_FILE ver.:4 wad_entry_header.offset:0
-WAD_FILE ver.:4 wad_entry_header.offset:0
-WAD_FILE ver.:4 wad_entry_header.offset:0
-loading map[V:\game\Aleph One\AlephOne-laboratory\Map]'s header
-app_spec_dir_dat_size:74
-checksum:-1475439439
-data_version:1
-entry_base_size:10
-entry_header_size:16
-filename:Merged Map Files
-parent_checksum:0
-version:4
-wad_count:57
-
-entry data
-length:224960
-entry.length:224960
-index:8
-entry.index:8
-entry.offset_to_start:2100433
-
-WAD_FILE ver.:4 wad_entry_header.offset:0
-WAD_FILE ver.:4 wad_entry_header.offset:0
-WAD_FILE ver.:4 wad_entry_header.offset:0
-WAD_FILE ver.:4 wad_entry_header.offset:0
-WAD_FILE ver.:4 wad_entry_header.offset:0
-WAD_FILE ver.:4 wad_entry_header.offset:0
-WAD_FILE ver.:4 wad_entry_header.offset:0
-WAD_FILE ver.:4 wad_entry_header.offset:0
-WAD_FILE ver.:4 wad_entry_header.offset:0
-WAD_FILE ver.:4 wad_entry_header.offset:0
-WAD_FILE ver.:4 wad_entry_header.offset:0
-WAD_FILE ver.:4 wad_entry_header.offset:0
-WAD_FILE ver.:4 wad_entry_header.offset:0
-WAD_FILE ver.:4 wad_entry_header.offset:0
-WAD_FILE ver.:4 wad_entry_header.offset:0
-WAD_FILE ver.:4 wad_entry_header.offset:0
-WAD_FILE ver.:4 wad_entry_header.offset:0
-WAD_FILE ver.:4 wad_entry_header.offset:0
-WAD_FILE ver.:4 wad_entry_header.offset:0
+WAD_FILE ver.:2 wad_entry_header.offset:0
+WAD_FILE ver.:2 wad_entry_header.offset:0
+WAD_FILE ver.:2 wad_entry_header.offset:0
+WAD_FILE ver.:2 wad_entry_header.offset:0
+WAD_FILE ver.:2 wad_entry_header.offset:0
+WAD_FILE ver.:2 wad_entry_header.offset:0
+WAD_FILE ver.:2 wad_entry_header.offset:0
+WAD_FILE ver.:2 wad_entry_header.offset:0
+WAD_FILE ver.:2 wad_entry_header.offset:0
+WAD_FILE ver.:2 wad_entry_header.offset:0
+WAD_FILE ver.:2 wad_entry_header.offset:0
+WAD_FILE ver.:2 wad_entry_header.offset:0
+WAD_FILE ver.:2 wad_entry_header.offset:0
+WAD_FILE ver.:2 wad_entry_header.offset:0
+WAD_FILE ver.:2 wad_entry_header.offset:0
+WAD_FILE ver.:2 wad_entry_header.offset:0
+WAD_FILE ver.:2 wad_entry_header.offset:0
+WAD_FILE ver.:2 wad_entry_header.offset:0
+WAD_FILE ver.:2 wad_entry_header.offset:0

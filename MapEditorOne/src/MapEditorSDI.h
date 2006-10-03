@@ -41,6 +41,7 @@ using namespace std;
 #include "ToolDialog.h"
 #include "ObjectPlacementDialog.h"
 #include "SelectLevelDialog.h"
+#include "PolygonPropertyDialog.h"
 
 // CMapEditorSDIApp:
 // このクラスの実装については、MapEditorSDI.cpp を参照してください。
@@ -177,6 +178,8 @@ public:
     CHeightDialog *heightDialog;
     //
     CToolDialog *toolDialog;
+    //polygon property
+    CPolygonPropertyDialog *polygonPropertyDialog;
 
     //大別
     Information objectTypeInformations[NUMBER_OF_MAP_OBJECT_TYPES];
@@ -216,6 +219,7 @@ public:
     BOOL isHeightDialogShow;
     BOOL isPolygonTypeDialogShow;
     BOOL isToolDialogShow;
+    BOOL isPolygonPropertyDialogShow;
 
     //ダブルバッファリング
     CDC doubleBufferDC;

@@ -20,13 +20,13 @@ public:
     CWnd* parent;
     BOOL Create(CWnd* par);
     virtual void PostNcDestroy();
+    afx_msg void OnClose();
 
 protected:
 	virtual void DoDataExchange(CDataExchange* pDX);    // DDX/DDV サポート
 
 	DECLARE_MESSAGE_MAP()
 public:
-    afx_msg void OnClose();
     CComboBox objectTypeCmb;
 public:
     CEdit objectTypeNum;

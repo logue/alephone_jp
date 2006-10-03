@@ -7,4 +7,4 @@ TODO
 -shift+click to add selection to group
 
 Done
--Show level's name editing now
+-Show level's name editing now at dialog

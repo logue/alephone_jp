@@ -635,10 +635,13 @@ void CMapEditorSDIView::OnInitialUpdate()
         //値をデフォルトに設定
         setObjectPropertyToDefault();
 
+        //polygon type dialog
         theApp.polygonTypeDialog = new CPolygonTypeDialog;
         theApp.polygonTypeDialog->Create(this);
         theApp.isPolygonTypeDialogShow = FALSE;
         theApp.polygonTypeDialog->ShowWindow(FALSE);
+
+        //height dialog
         theApp.heightDialog = new CHeightDialog;
         theApp.heightDialog->Create(this);
         
@@ -647,6 +650,12 @@ void CMapEditorSDIView::OnInitialUpdate()
         theApp.toolDialog->Create(this);
         theApp.isToolDialogShow = TRUE;
         theApp.toolDialog->ShowWindow(TRUE);
+
+        //polygon property
+        theApp.polygonPropertyDialog = new CPolygonPropertyDialog;
+        theApp.polygonPropertyDialog->Create(this);
+        theApp.isPolygonPropertyDialogShow = FALSE;
+        theApp.polygonPropertyDialog->ShowWindow(FALSE);
 
         isFirst = false;
         //

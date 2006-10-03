@@ -245,8 +245,22 @@ void CMapEditorSDIView::OnLButtonDown(UINT nFlags, CPoint point)
                             theApp.selectIndex = i;
                             selected = true;
 
-                            //set offset
                             polygon_data *polygon = &PolygonList[i];
+
+                            //show polygon type dialog
+                            theApp.isPolygonTypeDialogShow = TRUE;
+                            theApp.polygonTypeDialog->ShowWindow(TRUE);
+                            //set selection
+                            theApp.polygonTypeDialog->polygonTypeListCtrl.SetItemState(
+                                polygon->type, LVIS_SELECTED | LVIS_FOCUSED,
+                                LVIS_SELECTED | LVIS_FOCUSED);
+                            
+                            //show polygon property
+                            theApp.isPolygonPropertyDialogShow = TRUE;
+                            theApp.polygonPropertyDialog->ShowWindow(TRUE);
+                            theApp.polygonPropertyDialog->setupDialog(i);
+
+                            //set offset
                             int num = polygon->vertex_count;
                             theApp.polygonPointNum = num;
                             for(int j = 0; j < num; j ++){
@@ -262,9 +276,9 @@ void CMapEditorSDIView::OnLButtonDown(UINT nFlags, CPoint point)
                 }
                 
                 if(selected){
-                    //ポリゴンプロパティ
+                    //show polygon type
+                    //show polygon property
                 }else{
-                    //非表示
                 }
 
 
