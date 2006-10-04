@@ -294,3 +294,9 @@ void setCursor();
 object_frequency_definition *getIndexOfPlacement(int index);
 void addInitialPlacement(int objectType, int index, int num);
 void subInitialPlacement(int objectType, int index, int num);
+
+/**
+   add objet on polygon
+   return added object's index
+*/
+int addObject(struct world_point2d &world_point, int polygonIndex);

@@ -316,33 +316,14 @@ void CMapEditorSDIView::OnLButtonDown(UINT nFlags, CPoint point)
                     polygon->ceiling_height < theApp.viewHeightMin){
                         continue;
                 }
-                //オブジェクト情報
-                map_object obj;
-                obj.type = theApp.objectPropertyDialog->objectTypeCmb.GetCurSel();
-                obj.index = theApp.objectPropertyDialog->objectClassedTypeCmb.GetCurSel();
-                obj.facing = getIntegerNum(&theApp.objectPropertyDialog->objectFacingNum);
-                obj.flags = theApp.objectPropertyDialog->getFlags();
-                obj.polygon_index = i;
-                obj.location.x = world_point.x;
-                obj.location.y = world_point.y;
-                //calc height
-                if(obj.flags & _map_object_hanging_from_ceiling){
-                    obj.location.z = polygon->ceiling_height;
-                }else{
-                    obj.location.z = polygon->floor_height;
-                }
-                //追加
-                SavedObjectList.push_back(obj);
-                //add
-                addInitialPlacement(obj.type, obj.index, 1);
-                theApp.objectPropertyDialog->setupDialog((int)SavedObjectList.size() - 1);
+                //add object on the polygon
+                int objectIndex = addObject(world_point, i);
+
                 //選択状態にする
-                /*theApp.selectType = _selected_object;
-                theApp.selectIndex = i;
+                theApp.selectType = _selected_object;
+                theApp.selectIndex = objectIndex;
                 //選択したオブジェクトの情報を表示
                 theApp.objectPropertyDialog->setupDialog(i);
-                //selected = true;
-                */
             }
         }
     }else if(theApp.selectingToolType == TI_TEXT){

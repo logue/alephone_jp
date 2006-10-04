@@ -449,3 +449,39 @@ void subInitialPlacement(int objectType, int index, int num)
         place->initial_count -= num;
     }
 }
+
+
+/**
+    add objet on polygon
+*/
+int addObject(struct world_point2d &world_point, int polygonIndex)
+{
+    //オブジェクト情報
+    map_object obj;
+    memcpy(&obj, &theApp.objectPropertyDialog->store, sizeof(map_object));
+    obj.polygon_index = polygonIndex;
+    obj.location.x = world_point.x;
+    obj.location.y = world_point.y;
+    //calc height(delta)
+    /*if(obj.flags & _map_object_hanging_from_ceiling){
+        obj.location.z = polygon->ceiling_height;
+    }else{
+        obj.location.z = polygon->floor_height;
+    }*/
+    //追加
+    SavedObjectList.push_back(obj);
+    int objectIndex = (int)SavedObjectList.size() - 1;
+    //add
+    addInitialPlacement(obj.type, obj.index, 1);
+    theApp.objectPropertyDialog->setupDialog(objectIndex);
+
+    //check polygon's first object
+    int firstObjectIndex = PolygonList[polygonIndex].first_object;
+    if(firstObjectIndex == NONE){
+        //set
+        PolygonList[polygonIndex].first_object = objectIndex;
+    }
+    //限界数設定
+    dynamic_world->initial_objects_count = (int)SavedObjectList.size();
+    return objectIndex;
+}

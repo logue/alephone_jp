@@ -298,6 +298,7 @@ void CMonsterPropertyDialog::OnPaint()
             Polygon(picDC->m_hDC, pt, 3);
         //}
         */
+        memDC.DeleteDC();
     }
 
     //dc.SelectObject(oldBrush);
@@ -377,7 +378,7 @@ int CMonsterPropertyDialog::getFlags()
 
 void CMonsterPropertyDialog::storeClassedTypeCombo(int objectType)
 {
-    objectClassedTypeCmb.Clear();
+    objectClassedTypeCmb.ResetContent();
     Information *informations = NULL;
     int max = 0;
     switch(objectType){
@@ -418,6 +419,7 @@ void CMonsterPropertyDialog::storeClassedTypeCombo(int objectType)
 void CMonsterPropertyDialog::OnCbnSelchangeCombo2()
 {
     // TODO: ここにコントロール通知ハンドラ コードを追加します。
+    int oldType = store.type;
     int objectType = objectTypeCmb.GetCurSel();
     store.type = objectType;
     if(selectedObjectIndex >= 0){
@@ -426,6 +428,10 @@ void CMonsterPropertyDialog::OnCbnSelchangeCombo2()
     //change object 
     setupDialogByStore();
 
+    if(oldType != store.type){
+        //set select
+        this->objectClassedTypeCmb.SetCurSel(0);
+    }
     //基本数増加
     addInitialPlacement(store.type, store.index, 1);
     UpdateData();
