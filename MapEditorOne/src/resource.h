@@ -110,7 +110,6 @@
 #define IDB_BITMAP54                    223
 #define IDB_BITMAP55                    224
 #define IDD_DIALOG_POLYGON_PROPERTY     225
-#define IDD_DIALOG5                     226
 #define IDD_DIALOG_PLATFORM             226
 #define IDC_LIST1                       1000
 #define IDC_LIST2                       1002
@@ -173,6 +172,25 @@
 #define IDC_BUTTON1                     1034
 #define IDC_BUTTON2                     1035
 #define IDC_BUTTON3                     1036
+#define IDC_RADIO1                      1037
+#define IDC_RADIO2                      1038
+#define IDC_RADIO3                      1039
+#define IDC_CHECK19                     1040
+#define IDC_CHECK20                     1041
+#define IDC_RADIO4                      1042
+#define IDC_RADIO5                      1043
+#define IDC_RADIO6                      1044
+#define IDC_CHECK21                     1045
+#define IDC_CHECK22                     1046
+#define IDC_CHECK23                     1047
+#define IDC_CHECK24                     1048
+#define IDC_CHECK25                     1049
+#define IDC_CHECK26                     1050
+#define IDC_CHECK27                     1051
+#define IDC_CHECK28                     1052
+#define IDC_CHECK29                     1053
+#define IDC_CHECK30                     1054
+#define IDC_COMBO10                     1055
 #define ID_32771                        32771
 #define ID_32772                        32772
 #define ID_ZOOM_IN                      32773
@@ -211,7 +229,7 @@
 #ifndef APSTUDIO_READONLY_SYMBOLS
 #define _APS_NEXT_RESOURCE_VALUE        227
 #define _APS_NEXT_COMMAND_VALUE         32807
-#define _APS_NEXT_CONTROL_VALUE         1037
+#define _APS_NEXT_CONTROL_VALUE         1056
 #define _APS_NEXT_SYMED_VALUE           104
 #endif
 #endif

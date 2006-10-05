@@ -52,6 +52,7 @@ void CPolygonPropertyDialog::DoDataExchange(CDataExchange* pDX)
 
 BEGIN_MESSAGE_MAP(CPolygonPropertyDialog, CDialog)
     ON_WM_CLOSE()
+    ON_BN_CLICKED(IDC_BUTTON1, &CPolygonPropertyDialog::OnBnClickedButton1)
 END_MESSAGE_MAP()
 
 
@@ -152,6 +153,27 @@ void CPolygonPropertyDialog::setupDialogByStore()
     //snd src
     setIntegerNum(store.sound_source_indexes, &soundSourceIndexNum);
 
+    BOOL enabling = TRUE;
+    if(store.type == _polygon_is_platform){
+        //ボタン有効
+    }else{
+        enabling = FALSE;
+    }
+    GetDlgItem(IDC_BUTTON1)->EnableWindow(enabling);
+
     //ambient sound
     //random sound
+
+    UpdateData();
+}
+
+//show 
+void CPolygonPropertyDialog::OnBnClickedButton1()
+{
+    CPolygonDialog dlg;
+    if(dlg.DoModal() == IDOK){
+        //値をプラットフォームデータに反映
+        platform_data* platform = searchPlatformByPolygonIndex(index);
+        //null?
+    }
 }

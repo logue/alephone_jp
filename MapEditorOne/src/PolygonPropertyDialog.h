@@ -1,6 +1,7 @@
 #pragma once
 #include "afxwin.h"
 
+#include "CPolygonDialog.h"
 
 // CPolygonPropertyDialog ダイアログ
 
@@ -77,4 +78,6 @@ public:
     CEdit floorOriginYNum;
 public:
     CEdit ceilingOriginYNum;
+public:
+    afx_msg void OnBnClickedButton1();
 };

@@ -300,3 +300,11 @@ void subInitialPlacement(int objectType, int index, int num);
    return added object's index
 */
 int addObject(struct world_point2d &world_point, int polygonIndex);
+
+/**
+    get platform_data by using polygon index
+    only platform has polygon index. not polygon have
+
+    return NULL in no exists
+*/
+platform_data *searchPlatformByPolygonIndex(int index);

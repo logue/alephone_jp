@@ -485,3 +485,16 @@ int addObject(struct world_point2d &world_point, int polygonIndex)
     dynamic_world->initial_objects_count = (int)SavedObjectList.size();
     return objectIndex;
 }
+/**
+    get platform_data by using polygon index
+    only platform has polygon index. not polygon have
+*/
+platform_data *searchPlatformByPolygonIndex(int index)
+{
+    for(int i = 0; i < (int)PlatformList.size(); i ++){
+        if(PlatformList[i].polygon_index == index){
+            return &PlatformList[i];
+        }
+    }
+    return NULL;
+}
