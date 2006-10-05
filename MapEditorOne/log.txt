@@ -83,12 +83,271 @@ version:2
 wad_count:17
 
 entry data
-length:517481
-entry.length:517481
-index:3
-entry.index:3
-entry.offset_to_start:572092
+length:495340
+entry.length:495340
+index:5
+entry.index:5
+entry.offset_to_start:1459958
 
+WAD_FILE ver.:2 wad_entry_header.offset:0
+WAD_FILE ver.:2 wad_entry_header.offset:0
+WAD_FILE ver.:2 wad_entry_header.offset:0
+WAD_FILE ver.:2 wad_entry_header.offset:0
+WAD_FILE ver.:2 wad_entry_header.offset:0
+WAD_FILE ver.:2 wad_entry_header.offset:0
+WAD_FILE ver.:2 wad_entry_header.offset:0
+WAD_FILE ver.:2 wad_entry_header.offset:0
+WAD_FILE ver.:2 wad_entry_header.offset:0
+WAD_FILE ver.:2 wad_entry_header.offset:0
+WAD_FILE ver.:2 wad_entry_header.offset:0
+WAD_FILE ver.:2 wad_entry_header.offset:0
+WAD_FILE ver.:2 wad_entry_header.offset:0
+WAD_FILE ver.:2 wad_entry_header.offset:0
+WAD_FILE ver.:2 wad_entry_header.offset:0
+WAD_FILE ver.:2 wad_entry_header.offset:0
+WAD_FILE ver.:2 wad_entry_header.offset:0
+WAD_FILE ver.:2 wad_entry_header.offset:0
+WAD_FILE ver.:2 wad_entry_header.offset:0
+loading map[V:\game\Aleph One\MarathonEvil\Marathon EVIL\Cursed Map.sceA]'s header
+app_spec_dir_dat_size:74
+checksum:-750715489
+data_version:1
+entry_base_size:10
+entry_header_size:16
+filename:Cursed Map
+parent_checksum:0
+version:2
+wad_count:17
+
+entry data
+length:159358
+entry.length:159358
+index:6
+entry.index:6
+entry.offset_to_start:1955298
+
+WAD_FILE ver.:2 wad_entry_header.offset:0
+WAD_FILE ver.:2 wad_entry_header.offset:0
+WAD_FILE ver.:2 wad_entry_header.offset:0
+WAD_FILE ver.:2 wad_entry_header.offset:0
+WAD_FILE ver.:2 wad_entry_header.offset:0
+WAD_FILE ver.:2 wad_entry_header.offset:0
+WAD_FILE ver.:2 wad_entry_header.offset:0
+WAD_FILE ver.:2 wad_entry_header.offset:0
+WAD_FILE ver.:2 wad_entry_header.offset:0
+WAD_FILE ver.:2 wad_entry_header.offset:0
+WAD_FILE ver.:2 wad_entry_header.offset:0
+WAD_FILE ver.:2 wad_entry_header.offset:0
+WAD_FILE ver.:2 wad_entry_header.offset:0
+WAD_FILE ver.:2 wad_entry_header.offset:0
+WAD_FILE ver.:2 wad_entry_header.offset:0
+WAD_FILE ver.:2 wad_entry_header.offset:0
+WAD_FILE ver.:2 wad_entry_header.offset:0
+WAD_FILE ver.:2 wad_entry_header.offset:0
+loading map[V:\game\Aleph One\MarathonEvil\Marathon EVIL\Cursed Map.sceA]'s header
+app_spec_dir_dat_size:74
+checksum:-750715489
+data_version:1
+entry_base_size:10
+entry_header_size:16
+filename:Cursed Map
+parent_checksum:0
+version:2
+wad_count:17
+
+entry data
+length:239769
+entry.length:239769
+index:7
+entry.index:7
+entry.offset_to_start:2114656
+
+WAD_FILE ver.:2 wad_entry_header.offset:0
+WAD_FILE ver.:2 wad_entry_header.offset:0
+WAD_FILE ver.:2 wad_entry_header.offset:0
+WAD_FILE ver.:2 wad_entry_header.offset:0
+WAD_FILE ver.:2 wad_entry_header.offset:0
+WAD_FILE ver.:2 wad_entry_header.offset:0
+WAD_FILE ver.:2 wad_entry_header.offset:0
+WAD_FILE ver.:2 wad_entry_header.offset:0
+WAD_FILE ver.:2 wad_entry_header.offset:0
+WAD_FILE ver.:2 wad_entry_header.offset:0
+WAD_FILE ver.:2 wad_entry_header.offset:0
+WAD_FILE ver.:2 wad_entry_header.offset:0
+WAD_FILE ver.:2 wad_entry_header.offset:0
+WAD_FILE ver.:2 wad_entry_header.offset:0
+WAD_FILE ver.:2 wad_entry_header.offset:0
+WAD_FILE ver.:2 wad_entry_header.offset:0
+WAD_FILE ver.:2 wad_entry_header.offset:0
+WAD_FILE ver.:2 wad_entry_header.offset:0
+WAD_FILE ver.:2 wad_entry_header.offset:0
+loading map[V:\game\Aleph One\MarathonEvil\Marathon EVIL\Cursed Map.sceA]'s header
+app_spec_dir_dat_size:74
+checksum:-750715489
+data_version:1
+entry_base_size:10
+entry_header_size:16
+filename:Cursed Map
+parent_checksum:0
+version:2
+wad_count:17
+
+entry data
+length:159358
+entry.length:159358
+index:6
+entry.index:6
+entry.offset_to_start:1955298
+
+WAD_FILE ver.:2 wad_entry_header.offset:0
+WAD_FILE ver.:2 wad_entry_header.offset:0
+WAD_FILE ver.:2 wad_entry_header.offset:0
+WAD_FILE ver.:2 wad_entry_header.offset:0
+WAD_FILE ver.:2 wad_entry_header.offset:0
+WAD_FILE ver.:2 wad_entry_header.offset:0
+WAD_FILE ver.:2 wad_entry_header.offset:0
+WAD_FILE ver.:2 wad_entry_header.offset:0
+WAD_FILE ver.:2 wad_entry_header.offset:0
+WAD_FILE ver.:2 wad_entry_header.offset:0
+WAD_FILE ver.:2 wad_entry_header.offset:0
+WAD_FILE ver.:2 wad_entry_header.offset:0
+WAD_FILE ver.:2 wad_entry_header.offset:0
+WAD_FILE ver.:2 wad_entry_header.offset:0
+WAD_FILE ver.:2 wad_entry_header.offset:0
+WAD_FILE ver.:2 wad_entry_header.offset:0
+WAD_FILE ver.:2 wad_entry_header.offset:0
+WAD_FILE ver.:2 wad_entry_header.offset:0
+loading map[V:\game\Aleph One\MarathonEvil\Marathon EVIL\Cursed Map.sceA]'s header
+app_spec_dir_dat_size:74
+checksum:-750715489
+data_version:1
+entry_base_size:10
+entry_header_size:16
+filename:Cursed Map
+parent_checksum:0
+version:2
+wad_count:17
+
+entry data
+length:307272
+entry.length:307272
+index:8
+entry.index:8
+entry.offset_to_start:2354425
+
+WAD_FILE ver.:2 wad_entry_header.offset:0
+WAD_FILE ver.:2 wad_entry_header.offset:0
+WAD_FILE ver.:2 wad_entry_header.offset:0
+WAD_FILE ver.:2 wad_entry_header.offset:0
+WAD_FILE ver.:2 wad_entry_header.offset:0
+WAD_FILE ver.:2 wad_entry_header.offset:0
+WAD_FILE ver.:2 wad_entry_header.offset:0
+WAD_FILE ver.:2 wad_entry_header.offset:0
+WAD_FILE ver.:2 wad_entry_header.offset:0
+WAD_FILE ver.:2 wad_entry_header.offset:0
+WAD_FILE ver.:2 wad_entry_header.offset:0
+WAD_FILE ver.:2 wad_entry_header.offset:0
+WAD_FILE ver.:2 wad_entry_header.offset:0
+WAD_FILE ver.:2 wad_entry_header.offset:0
+WAD_FILE ver.:2 wad_entry_header.offset:0
+WAD_FILE ver.:2 wad_entry_header.offset:0
+WAD_FILE ver.:2 wad_entry_header.offset:0
+WAD_FILE ver.:2 wad_entry_header.offset:0
+loading map[V:\game\Aleph One\MarathonEvil\Marathon EVIL\Cursed Map.sceA]'s header
+app_spec_dir_dat_size:74
+checksum:-750715489
+data_version:1
+entry_base_size:10
+entry_header_size:16
+filename:Cursed Map
+parent_checksum:0
+version:2
+wad_count:17
+
+entry data
+length:506454
+entry.length:506454
+index:9
+entry.index:9
+entry.offset_to_start:2661697
+
+WAD_FILE ver.:2 wad_entry_header.offset:0
+WAD_FILE ver.:2 wad_entry_header.offset:0
+WAD_FILE ver.:2 wad_entry_header.offset:0
+WAD_FILE ver.:2 wad_entry_header.offset:0
+WAD_FILE ver.:2 wad_entry_header.offset:0
+WAD_FILE ver.:2 wad_entry_header.offset:0
+WAD_FILE ver.:2 wad_entry_header.offset:0
+WAD_FILE ver.:2 wad_entry_header.offset:0
+WAD_FILE ver.:2 wad_entry_header.offset:0
+WAD_FILE ver.:2 wad_entry_header.offset:0
+WAD_FILE ver.:2 wad_entry_header.offset:0
+WAD_FILE ver.:2 wad_entry_header.offset:0
+WAD_FILE ver.:2 wad_entry_header.offset:0
+WAD_FILE ver.:2 wad_entry_header.offset:0
+WAD_FILE ver.:2 wad_entry_header.offset:0
+WAD_FILE ver.:2 wad_entry_header.offset:0
+WAD_FILE ver.:2 wad_entry_header.offset:0
+WAD_FILE ver.:2 wad_entry_header.offset:0
+WAD_FILE ver.:2 wad_entry_header.offset:0
+WAD_FILE ver.:2 wad_entry_header.offset:0
+loading map[V:\game\Aleph One\MarathonEvil\Marathon EVIL\Cursed Map.sceA]'s header
+app_spec_dir_dat_size:74
+checksum:-750715489
+data_version:1
+entry_base_size:10
+entry_header_size:16
+filename:Cursed Map
+parent_checksum:0
+version:2
+wad_count:17
+
+entry data
+length:506454
+entry.length:506454
+index:9
+entry.index:9
+entry.offset_to_start:2661697
+
+WAD_FILE ver.:2 wad_entry_header.offset:0
+WAD_FILE ver.:2 wad_entry_header.offset:0
+WAD_FILE ver.:2 wad_entry_header.offset:0
+WAD_FILE ver.:2 wad_entry_header.offset:0
+WAD_FILE ver.:2 wad_entry_header.offset:0
+WAD_FILE ver.:2 wad_entry_header.offset:0
+WAD_FILE ver.:2 wad_entry_header.offset:0
+WAD_FILE ver.:2 wad_entry_header.offset:0
+WAD_FILE ver.:2 wad_entry_header.offset:0
+WAD_FILE ver.:2 wad_entry_header.offset:0
+WAD_FILE ver.:2 wad_entry_header.offset:0
+WAD_FILE ver.:2 wad_entry_header.offset:0
+WAD_FILE ver.:2 wad_entry_header.offset:0
+WAD_FILE ver.:2 wad_entry_header.offset:0
+WAD_FILE ver.:2 wad_entry_header.offset:0
+WAD_FILE ver.:2 wad_entry_header.offset:0
+WAD_FILE ver.:2 wad_entry_header.offset:0
+WAD_FILE ver.:2 wad_entry_header.offset:0
+WAD_FILE ver.:2 wad_entry_header.offset:0
+WAD_FILE ver.:2 wad_entry_header.offset:0
+loading map[V:\game\Aleph One\MarathonEvil\Marathon EVIL\Cursed Map.sceA]'s header
+app_spec_dir_dat_size:74
+checksum:-750715489
+data_version:1
+entry_base_size:10
+entry_header_size:16
+filename:Cursed Map
+parent_checksum:0
+version:2
+wad_count:17
+
+entry data
+length:347775
+entry.length:347775
+index:10
+entry.index:10
+entry.offset_to_start:3168151
+
+WAD_FILE ver.:2 wad_entry_header.offset:0
 WAD_FILE ver.:2 wad_entry_header.offset:0
 WAD_FILE ver.:2 wad_entry_header.offset:0
 WAD_FILE ver.:2 wad_entry_header.offset:0

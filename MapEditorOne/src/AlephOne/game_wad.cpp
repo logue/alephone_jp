@@ -405,11 +405,12 @@ static struct wad_data* export_level_wad_data()
 
     //one of lines/side/polygons must be first of all !!!
     int tags[] ={
-        LINE_TAG, ENDPOINT_DATA_TAG, SIDE_TAG, POLYGON_TAG,
+        ENDPOINT_DATA_TAG, LINE_TAG, SIDE_TAG, POLYGON_TAG,
         ANNOTATION_TAG, OBJECT_TAG,
         MAP_INFO_TAG, ITEM_PLACEMENT_STRUCTURE_TAG,
         TERMINAL_DATA_TAG, MEDIA_TAG, AMBIENT_SOUND_TAG,
-        RANDOM_SOUND_TAG, PLATFORM_STRUCTURE_TAG,
+        RANDOM_SOUND_TAG, PLATFORM_STATIC_DATA_TAG,
+        PLATFORM_STRUCTURE_TAG,
         MAP_INDEXES_TAG,
 
     };

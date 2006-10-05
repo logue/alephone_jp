@@ -25,6 +25,7 @@
 #include "AlephOne/shapes_sdl.h"
 #include "AlephOne/shell.h"
 #include "AlephOne/editor.h"
+#include "AlephOne/platforms.h"
 
 //#include "AlephOne/placement.h"
 #include <map>

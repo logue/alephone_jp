@@ -1,7 +1,7 @@
 #pragma once
 #include "afxwin.h"
 
-#include "CPolygonDialog.h"
+#include "PlatformDialog.h"
 
 // CPolygonPropertyDialog ダイアログ
 

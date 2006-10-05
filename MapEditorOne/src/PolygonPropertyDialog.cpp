@@ -170,7 +170,7 @@ void CPolygonPropertyDialog::setupDialogByStore()
 //show 
 void CPolygonPropertyDialog::OnBnClickedButton1()
 {
-    CPolygonDialog dlg;
+    CPlatformDialog dlg(NULL, index);
     if(dlg.DoModal() == IDOK){
         //値をプラットフォームデータに反映
         platform_data* platform = searchPlatformByPolygonIndex(index);

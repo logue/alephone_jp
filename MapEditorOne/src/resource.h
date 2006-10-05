@@ -191,6 +191,7 @@
 #define IDC_CHECK29                     1053
 #define IDC_CHECK30                     1054
 #define IDC_COMBO10                     1055
+#define IDC_COMBO11                     1056
 #define ID_32771                        32771
 #define ID_32772                        32772
 #define ID_ZOOM_IN                      32773
@@ -229,7 +230,7 @@
 #ifndef APSTUDIO_READONLY_SYMBOLS
 #define _APS_NEXT_RESOURCE_VALUE        227
 #define _APS_NEXT_COMMAND_VALUE         32807
-#define _APS_NEXT_CONTROL_VALUE         1056
+#define _APS_NEXT_CONTROL_VALUE         1057
 #define _APS_NEXT_SYMED_VALUE           104
 #endif
 #endif
