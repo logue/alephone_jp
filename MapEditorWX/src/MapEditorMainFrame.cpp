@@ -195,7 +195,7 @@ void MapEditorMainFrame::OnMotion(wxMouseEvent &ev)
 {
     static int oldX = ev.m_x, oldY = ev.m_y;
 
-    /*if(ev.ButtonIsDown(wxLEFT) && ev.ShiftDown()){
+    /*if(ev.ButtonIsDown(wxLEFT)){// && ev.ShiftDown()){
         //ïΩçsà⁄ìÆ
     }*/
 }
