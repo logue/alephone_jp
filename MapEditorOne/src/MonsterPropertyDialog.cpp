@@ -192,8 +192,8 @@ BOOL CMonsterPropertyDialog::OnInitDialog()
         objectActivation.InsertString(i, theApp.activateTypeInformations[i].jname);
     }
     //setup bitmaps
-    directionCircleImage.LoadBitmap(IDB_BITMAP54);
-    directionMarkerImage.LoadBitmap(IDB_BITMAP55);
+    directionCircleImage.LoadBitmap(IDB_BITMAP_CIRCLE);
+    directionMarkerImage.LoadBitmap(IDB_BITMAP_MARKER);
 
     //set default(selectedObjectIndex is -1)
     memset(&store, 0, sizeof(map_object));

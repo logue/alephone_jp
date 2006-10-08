@@ -624,6 +624,11 @@ void CMapEditorSDIView::OnInitialUpdate()
 
     // TODO : ここに特定なコードを追加するか、もしくは基本クラスを呼び出してください。
 
+    const int NUMBER_OF_MAP_ICON_FILES = NUMBER_OF_DEFINED_ITEMS + NUMBER_OF_MAP_ICONS;
+    char *MAP_ICONS_DIR_NAME = "Map Icons/";
+    char *HILIGHTED_ICONS_DIR_NAME = "Highlighted/";
+    char *MAP_ICONS_IMAGE_NAME_LIST_FILE_NAME = "MapIconImageList.txt";
+    
     static bool isFirst = true;
 
     if(isFirst){
@@ -661,9 +666,18 @@ void CMapEditorSDIView::OnInitialUpdate()
         //
         //ビットマップ読み込み
         COLORREF key = RGB(221,221,221);
-        theApp.mapIconImageList.Create(16, 16, ILC_MASK|ILC_COLOR32, 
-        NUMBER_OF_DEFINED_ITEMS + NUMBER_OF_MAP_ICONS, 2);
-        int idAssignment[] ={
+        //theApp.mapIconImageList.Create(16, 16, ILC_MASK|ILC_COLOR32, 
+        //NUMBER_OF_DEFINED_ITEMS + NUMBER_OF_MAP_ICONS, 2);
+
+        //load image file name list from file
+        Information mapIconFileNameInformations[NUMBER_OF_MAP_ICON_FILES];
+        CString listPath = CString(DATA_DIR_NAME) +
+            CString(MAP_ICONS_IMAGE_NAME_LIST_FILE_NAME);
+        char cstr[256];
+        strToChar(listPath, cstr);
+        loadInformations(cstr, NUMBER_OF_MAP_ICON_FILES, mapIconFileNameInformations);
+
+        /*int idAssignment[] ={
             //items
             //start by IDB_BITMAP21=AlienWeapon sorted by names
             //look items.h for order 
@@ -716,12 +730,27 @@ void CMapEditorSDIView::OnInitialUpdate()
             IDB_BITMAP51,   //sound
 
             0   //terminater
-        };
+        };*/
 
-        for(int i = 0; i < NUMBER_OF_DEFINED_ITEMS + NUMBER_OF_MAP_ICONS; i ++){
+        for(int i = 0; i < 2 * NUMBER_OF_DEFINED_ITEMS + NUMBER_OF_MAP_ICONS; i ++){
             //loadBitmap(idAssignment[i], &(theApp.mapIconImageList), key);
-            CBitmap *bitmap = new CBitmap();
-            bitmap->LoadBitmap(idAssignment[i]);
+            //CBitmap *bitmap = new CBitmap();
+            //bitmap->LoadBitmap(idAssignment[i]);
+            CString path = CString(DATA_DIR_NAME) +
+                CString(MAP_ICONS_DIR_NAME);
+            const int SELECTED_OFFSET = NUMBER_OF_DEFINED_ITEMS + NUMBER_OF_MAP_ICONS;
+            if( i >= SELECTED_OFFSET){
+                path += CString(HILIGHTED_ICONS_DIR_NAME);
+            }
+            int index = i;
+
+            //selected
+            if(i >= SELECTED_OFFSET){
+                index -= SELECTED_OFFSET;
+            }
+            path += mapIconFileNameInformations[index].jname;
+            strToChar(path, cstr);
+            CBitmap *bitmap = loadBitmapFromFile(cstr);
             theApp.bitmapList.push_back(bitmap);
         }
 
@@ -815,6 +844,7 @@ int CMapEditorSDIView::OnCreate(LPCREATESTRUCT lpCreateStruct)
     if(dynamic_world == NULL){
         allocate_map_memory();
     }
+
     CRect cl_rect;
     GetClientRect(&cl_rect);
     theApp.m_SDLToWindows=new SDLToWindows(this->m_hWnd, cl_rect);
@@ -830,8 +860,8 @@ int CMapEditorSDIView::OnCreate(LPCREATESTRUCT lpCreateStruct)
     scr.acceleration = 0;
     scr.bit_depth = bit_depth;
     scr.draw_every_other_line = 0;
-    scr.fullscreen = 1;
-    scr.gamma_level = 1;
+    scr.fullscreen = 0;
+    scr.gamma_level = 0;
     scr.high_resolution = 1;
     scr.size = 2;
     //SDL_Init(SDL_INIT_VIDEO);

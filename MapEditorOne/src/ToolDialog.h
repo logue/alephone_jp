@@ -35,4 +35,6 @@ public:
     afx_msg void OnPaint();
 public:
     afx_msg void OnLButtonDown(UINT nFlags, CPoint point);
+public:
+    afx_msg void OnActivate(UINT nState, CWnd* pWndOther, BOOL bMinimized);
 };

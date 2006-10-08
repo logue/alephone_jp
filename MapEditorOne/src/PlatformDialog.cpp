@@ -87,8 +87,55 @@ BOOL CPlatformDialog::OnInitDialog()
     setIntegerNum(platform->delay, &delayNum);
 
     //height
+    
+    
+    //initially
+    initActivate.SetCheck(PLATFORM_IS_INITIALLY_ACTIVE(platform)?1:0);
+    initExtended.SetCheck(PLATFORM_IS_INITIALLY_EXTENDED(platform)?1:0);
+    //contracted?
 
+    //control
+    ctrlPlayer.SetCheck(PLATFORM_IS_PLAYER_CONTROLLABLE(platform)?1:0);
+    ctrlAliens.SetCheck(PLATFORM_IS_MONSTER_CONTROLLABLE(platform)?1:0);
     UpdateData();
+
+    //bites
+    biteDamage.SetCheck(PLATFORM_CAUSES_DAMAGE(platform)?1:0);
+    biteReverse.SetCheck(PLATFORM_REVERSES_DIRECTION_WHEN_OBSTRUCTED(platform)?1:0);
+
+    //door?
+    door.SetCheck(PLATFORM_IS_DOOR(platform)?1:0);
+
+    //open
+    ((CButton*)GetDlgItem(IDC_RADIO1))->SetCheck(PLATFORM_COMES_FROM_FLOOR(platform)?1:0);
+    ((CButton*)GetDlgItem(IDC_RADIO2))->SetCheck(PLATFORM_COMES_FROM_CEILING(platform)?1:0);
+    ((CButton*)GetDlgItem(IDC_RADIO3))->SetCheck(PLATFORM_GOES_BOTH_WAYS(platform)?1:0);
+    floorToCeiling.SetCheck(PLATFORM_EXTENDS_FLOOR_TO_CEILING(platform)?1:0);
+
+    //activate
+    actOnce.SetCheck(PLATFORM_ACTIVATES_ONLY_ONCE(platform)?1:0);
+    actActivateLight.SetCheck(PLATFORM_ACTIVATES_ONLY_ONCE(platform)?1:0);
+    actActivateAdj.SetCheck(PLATFORM_ACTIVATES_ADJACENT_PLATFORMS_WHEN_ACTIVATING(platform)?1:0);
+    actDeactivateAdj.SetCheck(PLATFORM_DEACTIVATES_ADJACENT_PLATFORMS_WHEN_ACTIVATING(platform)?1:0);
+    actAdj.SetCheck(PLATFORM_ACTIVATES_ADJACENT_PLATFORMS_AT_EACH_LEVEL(platform)?1:0);
+
+    //deactivate
+    ((CButton*)GetDlgItem(IDC_RADIO4))->SetCheck(
+        (!PLATFORM_DEACTIVATES_AT_EACH_LEVEL(platform) && !PLATFORM_DEACTIVATES_AT_INITIAL_LEVEL(platform))?1:0);
+    ((CButton*)GetDlgItem(IDC_RADIO5))->SetCheck(PLATFORM_DEACTIVATES_AT_EACH_LEVEL(platform)?1:0);
+    ((CButton*)GetDlgItem(IDC_RADIO6))->SetCheck(PLATFORM_DEACTIVATES_AT_INITIAL_LEVEL(platform)?1:0);
+    deDeactivateLight.SetCheck(PLATFORM_DEACTIVATES_LIGHT(platform)?1:0);
+    deDeactivateAdj.SetCheck(PLATFORM_DEACTIVATES_ADJACENT_PLATFORMS_WHEN_DEACTIVATING(platform)?1:0);
+    deActivateAdj.SetCheck(PLATFORM_ACTIVATES_ADJACENT_PLATFORMS_WHEN_DEACTIVATING(platform)?1:0);
+
+    //misc
+    miscCannotExternal.SetCheck(PLATFORM_CANNOT_BE_EXTERNALLY_DEACTIVATED(platform)?1:0);
+    miscUseNative.SetCheck(PLATFORM_USES_NATIVE_POLYGON_HEIGHTS(platform)?1:0);
+    miscDelayBeforeAct.SetCheck(PLATFORM_DELAYS_BEFORE_ACTIVATION(platform)?1:0);
+    miscNotActParent.SetCheck(PLATFORM_DOES_NOT_ACTIVATE_PARENT(platform)?1:0);
+    miscContractSlower.SetCheck(PLATFORM_CONTRACTS_SLOWER(platform)?1:0);
+    miscLocked.SetCheck(PLATFORM_IS_LOCKED(platform)?1:0);
+    miscSecret.SetCheck(PLATFORM_IS_SECRET(platform)?1:0);
 
     return TRUE;  // return TRUE unless you set the focus to a control
     // 例外 : OCX プロパティ ページは必ず FALSE を返します。

@@ -51,7 +51,15 @@ void SDLToWindows::createSurface(HWND hwnd, RECT size){
 	BITMAPINFO *bmi;
 	BITMAPINFOHEADER bh;
 	int bmsize;
-	
+
+#if 0
+    Uint32 rmask = 0xff000000;
+    Uint32 gmask = 0x00ff0000;
+    Uint32 bmask = 0x0000ff00;
+    Uint32 amask = 0x000000ff;
+#endif
+
+
     Uint32 rmask = 0x000000ff;
     Uint32 gmask = 0x0000ff00;
     Uint32 bmask = 0x00ff0000;

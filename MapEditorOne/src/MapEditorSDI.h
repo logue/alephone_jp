@@ -66,6 +66,8 @@ const int NUMBER_OF_LANDSPACES = 4;
 //ÉäÉXÉgèáÇ…íTçıÇ∑ÇÈ
 const int POINT_DISTANCE_EPSILON = 5;
 
+static char *DATA_DIR_NAME = "data/";
+
 //map icons
 enum
 {
@@ -275,8 +277,16 @@ public:
 
 extern CMapEditorSDIApp theApp;
 
+//load information list
+void loadInformations(const char* filename, int max, 
+                      Information *informations);
+
+//load bitmap/icon from resources to ImageList
 void loadIcon(int id, CImageList* imageList);
 void loadBitmap(int id, CImageList* imageList, COLORREF key);
+
+//load bitmap/icon from file
+CBitmap* loadBitmapFromFile(const char *pathName);
 
 //set object property to default
 void setObjectPropertyToDefault();

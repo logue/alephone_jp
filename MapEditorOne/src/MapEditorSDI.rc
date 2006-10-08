@@ -98,66 +98,9 @@ IDI_ICON23_POLYGON_SUPER_GLUE ICON                    "res\\ico00022.ico"
 //
 
 IDR_MAINFRAME           BITMAP                  "res\\Toolbar.bmp"
-IDB_BITMAP1             BITMAP                  "res\\bitmap1.bmp"
-IDB_BITMAP_ITEM         BITMAP                  "res\\bitmap2.bmp"
-IDB_BITMAP_SCENARY      BITMAP                  "res\\bmp00001.bmp"
-IDB_BITMAP_GOAL         BITMAP                  "res\\bmp00002.bmp"
-IDB_BITMAP_SOUND        BITMAP                  "res\\bmp00003.bmp"
-IDB_BITMAP_PALETTE      BITMAP                  "res\\bmp00004.bmp"
 IDB_BITMAP_PATTERN_SELECTED_POLYGON BITMAP                  "res\\bmp00005.bmp"
-IDB_BITMAP3             BITMAP                  "res\\Marathon Toolbar\\Triangle.bmp"
-IDB_BITMAP4             BITMAP                  "res\\Marathon Toolbar\\Arrow Selected.bmp"
-IDB_BITMAP5             BITMAP                  "res\\Marathon Toolbar\\Arrow Unselected.bmp"
-IDB_BITMAP6             BITMAP                  "res\\Marathon Toolbar\\Fill Bucket.bmp"
-IDB_BITMAP7             BITMAP                  "res\\Marathon Toolbar\\Fill Croped.bmp"
-IDB_BITMAP8             BITMAP                  "res\\Marathon Toolbar\\Hand Cropped.bmp"
-IDB_BITMAP9             BITMAP                  "res\\Marathon Toolbar\\Hand Grabber.bmp"
-IDB_BITMAP10            BITMAP                  "res\\Marathon Toolbar\\Line Cropped.bmp"
-IDB_BITMAP11            BITMAP                  "res\\Marathon Toolbar\\Line Selected.bmp"
-IDB_BITMAP12            BITMAP                  "res\\Marathon Toolbar\\Line.bmp"
-IDB_BITMAP13            BITMAP                  "res\\Marathon Toolbar\\Magnify.bmp"
-IDB_BITMAP14            BITMAP                  "res\\Marathon Toolbar\\Skull outlined.bmp"
-IDB_BITMAP15            BITMAP                  "res\\Marathon Toolbar\\Skull.bmp"
-IDB_BITMAP16            BITMAP                  "res\\Marathon Toolbar\\text croped.bmp"
-IDB_BITMAP17            BITMAP                  "res\\Marathon Toolbar\\Text.bmp"
-IDB_BITMAP18            BITMAP                  "res\\Marathon Toolbar\\Triangle Croped.bmp"
-IDB_BITMAP19            BITMAP                  "res\\Marathon Toolbar\\Triangle Selected.bmp"
-IDB_BITMAP20            BITMAP                  "res\\Marathon Toolbar\\Map Icons\\Yellow Health.bmp"
-IDB_BITMAP21            BITMAP                  "res\\Marathon Toolbar\\Map Icons\\Alien Weapon.bmp"
-IDB_BITMAP22            BITMAP                  "res\\Marathon Toolbar\\Map Icons\\Alien.bmp"
-IDB_BITMAP23            BITMAP                  "res\\Marathon Toolbar\\Map Icons\\Assult Rifle Ammo.bmp"
-IDB_BITMAP24            BITMAP                  "res\\Marathon Toolbar\\Map Icons\\Assult Rifle.bmp"
-IDB_BITMAP25            BITMAP                  "res\\Marathon Toolbar\\Map Icons\\Bob.bmp"
-IDB_BITMAP26            BITMAP                  "res\\Marathon Toolbar\\Map Icons\\Center X.bmp"
-IDB_BITMAP27            BITMAP                  "res\\Marathon Toolbar\\Map Icons\\Chip.bmp"
-IDB_BITMAP28            BITMAP                  "res\\Marathon Toolbar\\Map Icons\\Cloak.bmp"
-IDB_BITMAP29            BITMAP                  "res\\Marathon Toolbar\\Map Icons\\Detection.bmp"
-IDB_BITMAP30            BITMAP                  "res\\Marathon Toolbar\\Map Icons\\Fire.bmp"
-IDB_BITMAP31            BITMAP                  "res\\Marathon Toolbar\\Map Icons\\Flamethrower.bmp"
-IDB_BITMAP32            BITMAP                  "res\\Marathon Toolbar\\Map Icons\\Fusion Ammo.bmp"
-IDB_BITMAP33            BITMAP                  "res\\Marathon Toolbar\\Map Icons\\Fusion Pistol.bmp"
-IDB_BITMAP34            BITMAP                  "res\\Marathon Toolbar\\Map Icons\\Gas.bmp"
-IDB_BITMAP35            BITMAP                  "res\\Marathon Toolbar\\Map Icons\\Goal.bmp"
-IDB_BITMAP36            BITMAP                  "res\\Marathon Toolbar\\Map Icons\\Grenades.bmp"
-IDB_BITMAP37            BITMAP                  "res\\Marathon Toolbar\\Map Icons\\Invulnribility.bmp"
-IDB_BITMAP38            BITMAP                  "res\\Marathon Toolbar\\Map Icons\\Keycard.bmp"
-IDB_BITMAP39            BITMAP                  "res\\Marathon Toolbar\\Map Icons\\Pistal.bmp"
-IDB_BITMAP40            BITMAP                  "res\\Marathon Toolbar\\Map Icons\\Pistol Ammo.bmp"
-IDB_BITMAP41            BITMAP                  "res\\Marathon Toolbar\\Map Icons\\Player.bmp"
-IDB_BITMAP42            BITMAP                  "res\\Marathon Toolbar\\Map Icons\\Purple Health.bmp"
-IDB_BITMAP43            BITMAP                  "res\\Marathon Toolbar\\Map Icons\\Red Health.bmp"
-IDB_BITMAP44            BITMAP                  "res\\Marathon Toolbar\\Map Icons\\Rocket Launcher'.bmp"
-IDB_BITMAP45            BITMAP                  "res\\Marathon Toolbar\\Map Icons\\Rockets.bmp"
-IDB_BITMAP46            BITMAP                  "res\\Marathon Toolbar\\Map Icons\\Scenery.bmp"
-IDB_BITMAP47            BITMAP                  "res\\Marathon Toolbar\\Map Icons\\Shotgun Ammo.bmp"
-IDB_BITMAP48            BITMAP                  "res\\Marathon Toolbar\\Map Icons\\Shotgun.bmp"
-IDB_BITMAP49            BITMAP                  "res\\Marathon Toolbar\\Map Icons\\Skull.bmp"
-IDB_BITMAP50            BITMAP                  "res\\Marathon Toolbar\\Map Icons\\SMG.bmp"
-IDB_BITMAP51            BITMAP                  "res\\Marathon Toolbar\\Map Icons\\Sound.bmp"
-IDB_BITMAP52            BITMAP                  "res\\Marathon Toolbar\\Map Icons\\Vision.bmp"
-IDB_BITMAP53            BITMAP                  "res\\Marathon Toolbar\\Map Icons\\SMG Ammo.bmp"
-IDB_BITMAP54            BITMAP                  "res\\Marathon Toolbar\\direction circle.BMP"
-IDB_BITMAP55            BITMAP                  "res\\Marathon Toolbar\\direction marker.BMP"
+IDB_BITMAP_CIRCLE       BITMAP                  "res\\Marathon Toolbar\\direction circle.BMP"
+IDB_BITMAP_MARKER       BITMAP                  "res\\Marathon Toolbar\\direction marker.BMP"
 
 /////////////////////////////////////////////////////////////////////////////
 //
@@ -555,9 +498,9 @@ BEGIN
     CONTROL         "Causes Damage",IDC_CHECK9,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,132,72,67,10
     CONTROL         "Reverse",IDC_CHECK10,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,132,84,43,10
     GROUPBOX        "When Bites",IDC_STATIC,126,60,78,36
-    CONTROL         "From Floor",IDC_RADIO1,"Button",BS_AUTORADIOBUTTON,240,49,50,10
+    CONTROL         "From Floor",IDC_RADIO1,"Button",BS_AUTORADIOBUTTON | WS_GROUP,240,49,50,10
     CONTROL         "From Ceiling",IDC_RADIO2,"Button",BS_AUTORADIOBUTTON,240,60,55,10
-    CONTROL         "From Both",IDC_RADIO3,"Button",BS_AUTORADIOBUTTON,240,73,49,10
+    CONTROL         "From Both",IDC_RADIO3,"Button",BS_AUTORADIOBUTTON,240,72,49,10
     CONTROL         "Floor to Ceiling",IDC_CHECK15,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,240,84,63,10
     GROUPBOX        "Open",IDC_STATIC,234,36,72,60
     CONTROL         "Only Once",IDC_CHECK16,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,12,114,49,10
@@ -566,7 +509,7 @@ BEGIN
     CONTROL         "Deactivates Adjacent Polygon",IDC_CHECK19,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,12,150,112,10
     CONTROL         "Adjacent at Each Level",IDC_CHECK20,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,12,162,89,10
     GROUPBOX        "Activates",IDC_STATIC,6,102,120,72
-    CONTROL         "Never",IDC_RADIO4,"Button",BS_AUTORADIOBUTTON,138,114,35,10
+    CONTROL         "Never",IDC_RADIO4,"Button",BS_AUTORADIOBUTTON | WS_GROUP,138,114,35,10
     CONTROL         "At Each Level",IDC_RADIO5,"Button",BS_AUTORADIOBUTTON,138,126,59,10
     CONTROL         "At Initial Level",IDC_RADIO6,"Button",BS_AUTORADIOBUTTON,138,138,61,10
     CONTROL         "Deactivates Polygon Lights",IDC_CHECK21,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,138,150,102,10

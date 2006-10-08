@@ -33,7 +33,7 @@ END_MESSAGE_MAP()
 
 // CMapEditorSDIApp コンストラクション
 
-static void loadInformations(const char* filename, int max, 
+void loadInformations(const char* filename, int max, 
                              Information *informations)
 {
     const int LENGTH = 1024 * 10;
@@ -498,3 +498,19 @@ platform_data *searchPlatformByPolygonIndex(int index)
     }
     return NULL;
 }
+
+//load bitmap from file
+CBitmap* loadBitmapFromFile(const char *pathName)
+{
+    CBitmap *bitmap = new CBitmap;
+    HBITMAP handleBitmap = (HBITMAP)LoadImage(
+        AfxGetInstanceHandle(), CString(pathName),
+        IMAGE_BITMAP, 0, 0, LR_LOADFROMFILE);
+    if(handleBitmap == NULL){
+        AfxMessageBox(CString("Couldn't load [") + CString(pathName) + CString("]"));
+        exit(1);
+    }
+    memcpy(bitmap, CBitmap::FromHandle(handleBitmap), sizeof(CBitmap));
+    return bitmap;
+}
+
