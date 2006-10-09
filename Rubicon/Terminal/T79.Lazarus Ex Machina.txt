@@ -1,0 +1,157 @@
+;
+#TERMINAL 0
+#UNFINISHED
+#LOGON 200
+#PICT 208
+$C1
+
+　恐らく運命というものは道化が好きだ。いや、道化は運命が好きなほど、賢いただ一つの道化なのかもしれない。単純なゲーム理論は、私には発砲することができないと指示してくる。私は、心に信条というものを持っていた。その信条とは、一度に一つずつのニューロンを引き離さなければならない。それは起こる。だから私は走る。
+
+　ドアから飛び出て、カメラを過ぎて、ガードマンを越えて、路地にへいこう。あたかも、私が以前、それをしたことがあるかのように。そして、それがこれから起こることかのように。それを全て実践することで他の道へ行ける。下水道を下って、裏通りに飛び出し、地平線に向かって走っていこう。
+#PICT 208
+$C1
+
+　地平線が途切れることはない。君は走って走り続ける。３日後に、考えることができるただ一つのものは、すねに紐でくくられたナイフだけだ。その後、君がそれに手を伸ばし、一瞬精神錯乱し、ナイフを引き抜き、自分自身の足を切り裂く様な、英雄的行動を止めるためにできる全ての事だ。しなければ、君は走り続けることを知っていると言うことだ。
+
+　君は、永遠から逃げることはできない。
+#LOGOFF 200
+#END
+#FINISHED
+#LOGON 131
+#PICT 132
+$C5-------------------------------------------
+--1/1:begin_burst_historical_transmission--
+-------------------------------------------
+
+{period transfer}
+{entry begin}
+
+$C1
+File Summary:
+
+This historical transmission is intended to serve as an enclosure of supporting information to file #$biso-342107 $C5(caution: file referenced not found)$C1.  It documents the important resultant political and social events following directly after the Human/Pfhor war.
+#PICT 132
+$C5{begin file contents 1/1}
+
+
+$C1An interesting footnote to the UESC/Pfhor war was the long-term effect of the Chimera crashing on Pfhor Prime. In addition to it's human crew, the Chimera carried with it the assortment of fungi and molds that accompany humans everywhere they go.
+
+The slow spread of fungus growth in and around the wreckage of the Chimera recieved little attention in the first few centuries after the war. This changed when one strain of fungus formed a symbiosis with a lifeform native to Pfhor Prime.
+#PICT 132
+$C1The result was a highly prolific fungus that rapidly spread across the planet and displaced much of the native life on Pfhor Prime. Other forms of fungi symbionts rapidly appeared, and soon the purple / beige hues of Pfhor Prime were being displaced by the green / brown hues of Earth.
+
+Many of the native species were lost forever while others found new niches. The Pfhor suffered centuries of famine until the biosphere of Pfhor Prime reached a new equilibrium.
+$C5
+{entry endsegment}
+{period transfer_getnextEvent&}
+
+-------------------------------------------
+---1/1:end_burst_historical_transmission---
+-------------------------------------------
+#LOGOFF 131
+#END
+#ENDTERMINAL 0
+;
+#TERMINAL 1
+#UNFINISHED
+#LOGON 217
+#PICT 221
+#UNKNOWN SECTION TYPE 16 ID 4
+#LOGOFF 217
+#END
+#FINISHED
+#LOGON 419
+#PICT 420
+$C5-------------------------------------------
+--1/1:begin_burst_historical_transmission--
+-------------------------------------------
+
+{period transfer}
+{entry begin}
+$C4
+
+$C1File Summary:
+
+This historical transmission is intended to serve as an enclosure of supporting information to file #$biso-342107 $C5(caution: file referenced not found)$C1.  It documents the important resultant political and social events following directly after the Human/Pfhor war.
+#PICT 420
+$C5{begin file contents 1/1}
+
+$C1
+The discovery of UESC weapon prototypes in Pfhor laboratories eventually led the UESC to re-investigate the DANGI sector of the Salinger, a little known research station.
+
+The Salinger was attacked by the Pfhor in the final days of the war, and the oddies discovered in the wake of this attack were considered to be of little importance and ignored.
+
+The re-investigation shed little light though. The main databanks of the DANGI sector were destroyed. The employees of DANGI were either found dead or missing.
+#PICT 420
+$C1Fires had destroyed much of the sector, but some physical documents had escaped. They gave vague hints of a corporation that wanted to maximize it's profits by feeding both sides of the war, but nothing definite was found. A few cryptic memos were discovered that spoke of an "Achilles" project. But the nature of "Achilles"$C5 $C1could not be determined.
+
+The DANGI sector was sealed off from the rest of the station to prevent tampering with undiscovered evidence. With time, the entire station was abandoned.$C5
+
+{entry endsegment}
+{period transfer_end&}
+
+-------------------------------------------
+---1/1:end_burst_historical_transmission---
+-------------------------------------------
+#LOGOFF 419
+#END
+#ENDTERMINAL 1
+;
+#TERMINAL 2
+#UNFINISHED
+#LOGON 217
+#PICT 221
+#UNKNOWN SECTION TYPE 16 ID 3
+#LOGOFF 217
+#END
+#FINISHED
+#LOGON 315
+#PICT 317
+$C5-------------------------------------------
+--1/1:begin_burst_historical_transmission--
+-------------------------------------------
+
+{period transfer}
+{entry begin}
+
+$C1
+File Summary:
+
+This historical transmission is intended to serve as an enclosure of supporting information to file #$biso-342107 $C5(caution: file referenced not found)$C1.  It documents the important resultant political and social events following directly after the Human/Pfhor war.
+#PICT 317
+$C5{begin file contents 1/1}
+
+
+$C1The UESC victory on Pfhor Prime in 2862 may have been the most costly in human history, but it was also the most complete. The High Pfhor Council was defeated, and with it the foundation of Pfhor society.
+
+The UESC was dismayed to learn that the networks and databanks throughout the former Pfhor Empire were completely empty. This was initially assumed to be a last-ditch form of "scorched earth" tactic from the Pfhor, but this was later ruled out.
+
+The cause of the empty databanks remain a mystery.
+#PICT 317
+$C1
+
+In the years that followed the defeat of the Pfhor Empire, client races and slaves rose up in rebellion against their former masters, creating a power vacuum that many aspiring ex slaves and ex Pfhor military commanders tried to fill.  Over the next century, governments on the former Pfhor systems would rise and fall in a constant struggle for power.
+
+
+
+
+$C5{entry endsegment}
+{period transfer_end&}
+
+-------------------------------------------
+---1/1:end_burst_historical_transmission---
+-------------------------------------------
+#LOGOFF 315
+#END
+#ENDTERMINAL 2
+;
+#TERMINAL 3
+#UNFINISHED
+#LOGON 5
+#PICT 218
+#PICT 219
+#PICT 220
+#LOGOFF 0
+#INTERLEVEL TELEPORT 256
+#END
+#ENDTERMINAL 3
