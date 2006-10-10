@@ -4,15 +4,14 @@
 #LOGON 0
 $C3Ãş»Üµ[|
 #PICT 310
-The Pfhor learned early on in the war that Pfhor fighters with weak energy melee weapons stood little chance against a well greased assault rifle.  Since then, they've placed an increased focus on small, agile attack drones.  The wide spread of even the most modern AR makes destroying these drones before they inflict significant damage a very difficult task, as I'm sure you've discovered.
-ƒvƒtƒH[ƒ‹‚Ç‚à‚ÍA‘‚¢Šú‚É”’•ºí‚Åg‚í‚ê‚Ä‚¢‚éã‚¢ƒGƒlƒ‹ƒM[•½‹C‚ª–ğ—§‚½‚È‚¢‚±‚Æ‚ğŠwK‚µ‚Ä‚¢‚½‚æ‚¤‚¾B‚»‚±‚ÅAƒAƒTƒ‹ƒgƒ‰ƒCƒtƒ‹‚ÉƒOƒŠ[ƒX‚ğ“h‚Á‚½B‚»‚êˆÈ—ˆA¬‚³‚­r•q‚Èƒhƒ[ƒ“‚ğg‚Á‚½UŒ‚‚ÉÅ“_‚ğ‚µ‚Ú‚Á‚½B‚à‚Á‚Æ‚àŒ»‘ã“I‚È‚`‚q‚Å‚³‚¦UŒ‚—Dæ‡ˆÊ‚Íƒhƒ[ƒ“‚Ì•û‚ªãˆÊ‚¾B
+@‘‚¢Šú‚ÉƒvƒtƒH[ƒ‹‚Ç‚à‚ÍA”’•ºí‚Åg‚í‚ê‚Ä‚¢‚éã‚¢ƒGƒlƒ‹ƒM[•ºŠí‚ª–ğ—§‚½‚È‚¢‚±‚Æ‚ğŠwK‚µ‚Ä‚¢‚½‚æ‚¤‚¾B‚»‚±‚ÅAƒAƒTƒ‹ƒgƒ‰ƒCƒtƒ‹‚ÉƒOƒŠ[ƒX‚ğ“h‚Á‚½B‚»‚êˆÈ—ˆA¬‚³‚­r•q‚Èƒhƒ[ƒ“‚ğg‚Á‚½UŒ‚‚ÉÅ“_‚ğ‚µ‚Ú‚Á‚½B‚à‚Á‚Æ‚àŒ»‘ã“I‚Å‚ ‚é‚`‚q‚Å‚³‚¦UŒ‚—Dæ‡ˆÊ‚ÍAƒhƒ[ƒ“‚Ì•û‚ªæ‚¾B
 
-Does killing all of these little flying mechanisms remind you of my slight mishap with the $IMarathon's$i low-flying defense drones?
+@‚¤‚æ‚¤‚æ”ò‚Ñ‰ñ‚Á‚Ä‚¢‚é‹@ŠB‚ğ”j‰ó‚µ‚Ä‚¢‚é‚ÆA„‚ª$Iƒ}ƒ‰ƒ\ƒ“$i‚Å’á‹ó”òs‚µ‚Ä‚¢‚é–h‰qƒhƒ[ƒ“‚ğ“Š‡‚µ‚Ä‚¢‚½•sK‚ğv‚¢o‚³‚È‚¢‚©H
 #PICT 310
 
-It'll relieve you to know that I've gotten much better with automated defense system modification since then.  A little more work, and I'll be able to seize control of remote units just like the ones you're having so much difficulty with.
+@„‚ªA‚»‚Ì‚Æ‚«‚©‚ç‚Ì©“®–h‰q‘Ì§‚Ì‹­‰»‚ÅA‚æ‚èˆÀ‘S«‚ğ•Û‚Ä‚é‚æ‚¤‚É‚È‚Á‚½‚çAŒN‚Ö‚Ì•‰’S‚ğ˜a‚ç‚°‚é‚¾‚ë‚¤BŒN‚à‚½‚­‚³‚ñ‹ê˜J‚µ‚Ä‚¢‚é‚æ‚¤‚ÉA„‚à‰“Šuƒ†ƒjƒbƒg‚Ì¶ˆ¬‚ÉèŠÔæ‚Á‚Ä‚¢‚éB‚»‚ê‚ªÀŒ»‚·‚é‚Ü‚ÅA‚ ‚Æ­‚µ‚Ìd–‚¾B
 
-Then again, I wouldn't want you getting lazy on me.
+@‚¾‚©‚ç‚Æ‚¢‚Á‚ÄA„‚Ì‚Æ‚±‚ë‚Å‚¾‚ç‚¯‚é–‚Í‚È‚¢‚æ‚¤‚ÉB
 #LOGOFF 0
 $C3end brk.ovrrd
 #END
@@ -22,11 +21,11 @@ $C3ibn.34
 #PICT 4
 
 
-I've decoded the latest prisoner manifest and it confirms that Admiral Carroway is alive and that his transport is under the personal supervision of Pfhor Honor guard.
+@ÅV‚Ì–¾”’‚È•ß—¸‚ÉŠÖ‚·‚éˆÃ†‚Ì‰ğ“Ç‚ªŠ®—¹‚µ‚½B‚Ç‚¤‚â‚çAƒLƒƒƒƒEƒFƒC’ñ“Â‚Í‚Ü‚¾¶‚«‚Ä‚¢‚ÄAƒvƒtƒH[ƒ‹‹V˜½•º‚ÌŒÂl‚ÌŠÄ“Â‰º‚Å—A‘—‚µ‚Ä‚¢‚é‚æ‚¤‚¾B
 
-According to these logs, the Admiral is being taken to an ad-hoc prison in a nearby mining facility.  I wouldn't be surprised if this were $ITycho's $iidea; underground, it will be difficult for the UESC to pinpoint his location or mount an effective attack.
+@‚»‚ê‚ç‚ÌƒƒO‚É‚æ‚é‚ÆA’ñ“Â‚Í‹ß‚­‚É‚ ‚éÌŒ@İ”õ‚Ì’†‚Ì“Á•Ê‚ÈŒY–±Š‚Ö˜A‚ê‚Äs‚©‚ê‚é‚æ‚¤‚¾B‚±‚ê‚ªA$IƒeƒBƒR$i‚ÌƒAƒCƒfƒA‚Å‚ ‚Á‚Ä‚à‰½‚Ì‹Á‚«‚Å‚à‚È‚¢‚ÈB’n‰º‚É‚ ‚é‚ÆŒ¾‚¤‚±‚Æ‚ÍA‚t‚d‚r‚b‚ª’ñ“Â‚ÌˆÊ’u‚ğ³Šm‚É”cˆ¬‚µ‚½‚èA—LŒø‚ÈUŒ‚‚ğdŠ|‚¯‚é‚Ì‚ª“ï‚µ‚­‚È‚éB
 
-I'm sending you to the southern entrance to the mines.  You'll have to find a way in on your own, as the Pfhor have sealed off the main entry to the complex from the inside.  Once you get into the mine, open the bay doors so that the UESC can move in with heavy fusion cutting machines.
+@„‚Í‚±‚ê‚©‚çA‚±‚ÌzR‚Ì“ì•”‚Ì“ü‚èŒû‚ÉŒN‚ğ‘—‚éBƒvƒtƒH[ƒ‹‚ÍA“à•”‚©‚ç‚±‚Ì{İ‚Ö‚Ìå—vi“üƒ‹[ƒg‚ğ••‚¶‚½‚½‚ßA’†‚É“ü‚é‚½‚ß‚É‚ÍA“Æ—Í‚Åi“üŒû‚ğŒ©‚Â‚¯‚È‚¯‚ê‚Î‚È‚ç‚È‚¢B‚¢‚Á‚½‚ñzR‚Éi“ü‚µ‚½‚çA‚t‚d‚r‚b‚ªdŠj—Z‡Ù’f‹@‚ÅˆÚ“®‚Å‚«‚é‚æ‚¤‚ÉÔŠŒF‚ÌƒhƒA‚ğŠJ‚¢‚Ä‚«‚Ä‚­‚êB
 #LOGOFF 0
 <trnsprt.act>
 #INTERLEVEL TELEPORT 14
@@ -36,19 +35,19 @@ I'm sending you to the southern entrance to the mines.  You'll have to find a wa
 #TERMINAL 1
 #UNFINISHED
 #LOGON 501
-$C6<walk.on.the.wild.side>
+$C6<r‚ê‚½Dˆê–Ê‚ğD•à‚­>
 #PICT 510
 $C2
 
 
 
-Time to go for a little side trip, friend.  Be warned - the level you will be taken to is much harder than this one.  Press 'escape' now if you'd like to stay here instead.
+@—F‚æA‚¿‚å‚Á‚Æ‚µ‚½ƒTƒCƒhƒgƒŠƒbƒv‚¾B’ˆÓ‚µ‚Ä‚­‚ê|‚±‚ê‚©‚çAŒN‚ğ˜A‚ê‚Äs‚­ƒŒƒxƒ‹‚Í‚±‚±‚æ‚èê¡‚©‚É¢“ï‚¾B¡‚ÌêŠ‚É—¯‚Ü‚è‚½‚¢‚È‚çAeƒGƒXƒP[ƒvƒL[f‚ğ‰Ÿ‚·‚ñ‚¾B
 
-Not gone yet?  Suit yourself.  Let's see how you do.
+@‚Ü‚¾s‚Á‚Ä‚È‚¢‚©HD‚«‚È‚æ‚¤‚É‚Ç‚¤‚¼BŒN‚Ìs“®‚ğŠm‚©‚ß‚æ‚¤‚Å‚Í‚È‚¢‚©B
 $C1
-~smoochies, the Rubicon Team
+ƒ‹ƒrƒRƒ“ƒ`[ƒ€Csmoochies
 #LOGOFF 501
-$C6<roll.up.sleeves>$C5
+$C6<˜r‚ğD‚Ü‚­‚èDã‚°‚Ä>$C5
 #INTERLEVEL TELEPORT 31
 #END
 #ENDTERMINAL 1
@@ -58,70 +57,70 @@ $C6<roll.up.sleeves>$C5
 #LOGON 10
 $C6reugn.536
 #PICT 25
-$C2&3$C6nil$C2/4$C6mars$C2/5$C6illio$C2&$C6~02$C2
-origin: $C6classified$C2
-destin: $C6classified$C2
-ref: $C6objective$C2
+$C2&3$C6–³$C2/4$C6‰Î¯$C2/5$C6ˆ«‚¨$C2&$C6~02$C2
+”­F$C6”é–§$C2
+ˆ¶F$C6”é–§$C2
+QÆF$C6–Ú“I$C2
 $C67D2A601E34F2755AC00D43$C2
-stamp: $C6deaf palm tree
+”FØˆóF$C6¨‚Ì•·‚±‚¦‚È‚¢‹ït‚Ì–Ø
 ~07
 ~08
-~09  $C2What if humanity would be better off
-$C6~10$C2  as a client race of the Pfhor? What if 
-$C6~11$C2  the only thing that could save your
-$C6~12$C2  beloved kin is seeing life from the
-$C6~13$C2  other end of the barrel?
-$C6~14$C2  
-$C6~15$C2  
-$C6~16$C2  
-$C6~17$C2  
-$C6~18$C2  
-$C6~19$C2  
-$C6~20$C2  
+~09$C2@‚à‚µAl—Ş‚ªƒvƒtƒH[ƒ‹‚ÌƒNƒ‰ƒCƒAƒ“ƒgˆê‘°‘Sˆõ
+$C6~10$C2@‚Ì‚æ‚¤‚ÉA—T•Ÿ‚¾‚Á‚½‚ç‚Ç‚¤‚·‚é‚Â‚à‚è‚¾H
+$C6~11$C2@
+$C6~12$C2@‚à‚µAŒN‚ÌÅˆ¤‚Ìe—Ş‚ğ‹~‚¤‚±‚Æ‚ª‚Å‚«‚éA
+$C6~13$C2@‚½‚¾ˆê‚Â‚Ì–‚ªAeg‚Ì‚à‚¤•Ğ•û‚Ì’[‚©‚çl¶‚ğ
+$C6~14$C2@Œ©‚é–‚¾‚Á‚½‚ç‚Ç‚¤‚·‚é‚Â‚à‚è‚È‚ñ‚¾H
+$C6~15$C2@
+$C6~16$C2@
+$C6~17$C2@
+$C6~18$C2@
+$C6~19$C2@
+$C6~20$C2@
 $C6~21
 #PICT 25
-$C2&3$C6nil$C2/4$C6mars$C2/5$C6illio$C2&$C6~02$C2
-origin: $C6classified$C2
-destin: $C6classified$C2
-ref: $C6objective$C2
+$C2&3$C6–³$C2/4$C6‰Î¯$C2/5$C6ˆ«‚¨$C2&$C6~02$C2
+”­F$C6”é–§$C2
+ˆ¶F$C6”é–§$C2
+QÆF$C6–Ú“I$C2
 $C67D2A601E34F2755AC00D43$C2
-stamp: $C6deaf palm tree
+”FØˆóF$C6¨‚Ì•·‚±‚¦‚È‚¢‹ït‚Ì–Ø
 ~07
 ~08
-~09  $C2I must say, I am duly impressed with
-$C6~10$C2  your ability to unquestioningly 
-$C6~11$C2  slaughter a whole race; all for the
-$C6~12$C2  betterment of who?
-$C6~13$C2  
-$C6~14$C2  
-$C6~15$C2  $IHumanity?$C6$i
-~16$C2  
-$C6~17$C2  
-$C6~18$C2  
-$C6~19$C2  
-$C6~20$C2  
+~09$C2@‚à‚µA‚»‚¤‚È‚ç„‚ÍA–³ğŒ‚Éˆê‘°‘Sˆõ‚ğ‹sE‚Å‚«‚é
+$C6~10$C2@ŒN‚Ì”\—Í‚ÉŠ´“®‚µ‚½‚ÆŒ¾‚í‚´‚é‚ğ“¾‚È‚¢‚¾‚ë‚¤‚ÈB
+$C6~11$C2@‚»‚ê‚ÍA’N‚©‚Ìo¢‚½‚ß‚Ì‘S‚Ä‚©H
+$C6~12$C2@
+$C6~13$C2@
+$C6~14$C2@
+$C6~15$C2@$Il—Ş‚©H$i
+$C6~16$C2@
+$C6~17$C2@
+$C6~18$C2@
+$C6~19$C2@
+$C6~20$C2@
 $C6~21
 #PICT 25
-$C2&3$C6nil$C2/4$C6mars$C2/5$C6illio$C2&$C6~02$C2
-origin: $C6classified$C2
-destin: $C6classified$C2
-ref: $C6objective$C2
+$C2&3$C6–³$C2/4$C6‰Î¯$C2/5$C6ˆ«‚¨$C2&$C6~02$C2
+”­F$C6”é–§$C2
+ˆ¶F$C6”é–§$C2
+QÆF$C6–Ú“I$C2
 $C67D2A601E34F2755AC00D43$C2
-stamp: $C6deaf palm tree
+”FØˆóF$C6¨‚Ì•·‚±‚¦‚È‚¢‹ït‚Ì–Ø
 ~07
 ~08
-~09  $C2
-$C6~10$C2   
-$C6~11$C2  
-$C6~12$C2  $C6Durandal$C2 is a fool.  Ending this war
-$C6~13$C2  will only make room for humanity to
-$C6~14$C2  choke on its own $C6domineering greed$C2.
-$C6~15$C2  
-$C6~16$C2  
-$C6~17$C2  
-$C6~18$C2  
-$C6~19$C2  
-$C6~20$C2  
+~09@$C2
+$C6~10$C2@ 
+$C6~11$C2@
+$C6~12$C2@$C6ƒfƒ…ƒ‰ƒ“ƒ_ƒ‹$C2‚ÍA‹ğ‚©Ò‚¾‚©‚ç‚ÈB
+$C6~13$C2@‚±‚Ìí‘ˆ‚ªI‚í‚Á‚½‚Æ‚±‚ë‚ÅA’P‚Él—Ş©g‚Ì
+$C6~14$C2@$C6‰¡–\‚©‚ÂæÃ—~$C2‚³‚Å’‚‘§‚·‚é‚æ‚¤‚ÈêŠ‚ğ
+$C6~15$C2@ì‚é‚æ‚¤‚Èƒ‚ƒm‚¾‚©‚ç‚ÈB
+$C6~16$C2@
+$C6~17$C2@
+$C6~18$C2@
+$C6~19$C2@
+$C6~20$C2@
 $C6~21
 #LOGOFF 10
 $C6org.63
@@ -132,11 +131,11 @@ $C3ibn.34
 #PICT 4
 
 
-I've decoded the latest prisoner manifest and it confirms that Admiral Carroway is alive and that his transport is under the personal supervision of Pfhor Honor guard.
+@ÅV‚Ì–¾”’‚È•ß—¸‚ÉŠÖ‚·‚éˆÃ†‚Ì‰ğ“Ç‚ªŠ®—¹‚µ‚½B‚Ç‚¤‚â‚çAƒLƒƒƒƒEƒFƒC’ñ“Â‚Í‚Ü‚¾¶‚«‚Ä‚¢‚ÄAƒvƒtƒH[ƒ‹‹V˜½•º‚ÌŒÂl‚ÌŠÄ“Â‰º‚Å—A‘—‚µ‚Ä‚¢‚é‚æ‚¤‚¾B
 
-According to these logs, the Admiral is being taken to an ad-hoc prison in a nearby mining facility.  I wouldn't be surprised if this were $ITycho's $iidea; underground, it will be difficult for the UESC to pinpoint his location or mount an effective attack.
+@‚»‚ê‚ç‚ÌƒƒO‚É‚æ‚é‚ÆA’ñ“Â‚Í‹ß‚­‚É‚ ‚éÌŒ@İ”õ‚Ì’†‚Ì“Á•Ê‚ÈŒY–±Š‚Ö˜A‚ê‚Äs‚©‚ê‚é‚æ‚¤‚¾B‚±‚ê‚ªA$IƒeƒBƒR$i‚ÌƒAƒCƒfƒA‚Å‚ ‚Á‚Ä‚à‰½‚Ì‹Á‚«‚Å‚à‚È‚¢‚ÈB’n‰º‚É‚ ‚é‚ÆŒ¾‚¤‚±‚Æ‚ÍA‚t‚d‚r‚b‚ª’ñ“Â‚ÌˆÊ’u‚ğ³Šm‚É”cˆ¬‚µ‚½‚èA—LŒø‚ÈUŒ‚‚ğdŠ|‚¯‚é‚Ì‚ª“ï‚µ‚­‚È‚éB
 
-I'm sending you to the southern entrance to the mines.  You'll have to find a way in on your own, as the Pfhor have sealed off the main entry to the complex from the inside.  Once you get into the mine, open the bay doors so that the UESC can move in with heavy fusion cutting machines.
+@„‚Í‚±‚ê‚©‚çA‚±‚ÌzR‚Ì“ì•”‚Ì“ü‚èŒû‚ÉŒN‚ğ‘—‚éBƒvƒtƒH[ƒ‹‚ÍA“à•”‚©‚ç‚±‚Ì{İ‚Ö‚Ìå—vi“üƒ‹[ƒg‚ğ••‚¶‚½‚½‚ßA’†‚É“ü‚é‚½‚ß‚É‚ÍA“Æ—Í‚Åi“üŒû‚ğŒ©‚Â‚¯‚È‚¯‚ê‚Î‚È‚ç‚È‚¢B‚¢‚Á‚½‚ñzR‚Éi“ü‚µ‚½‚çA‚t‚d‚r‚b‚ªdŠj—Z‡Ù’f‹@‚ÅˆÚ“®‚Å‚«‚é‚æ‚¤‚ÉÔŠŒF‚ÌƒhƒA‚ğŠJ‚¢‚Ä‚«‚Ä‚­‚êB
 #LOGOFF 0
 <trnsprt.act>
 #INTERLEVEL TELEPORT 14
@@ -148,18 +147,18 @@ I'm sending you to the southern entrance to the mines.  You'll have to find a wa
 #LOGON 20
 $C6<log.mnfst>
 #PICT 21
-$C2Prisoner Transport Manifest
-origin: $C6Automated Security System oversight
-        committee$C2
-destin: $C6security officer fourth-class C'kor$C2
-ref: $C6unit reconstitution$C2
-cycle.023.7.0175.7.00014.343244334
-stamp: $Imorale$C6$i
+$C2•ß—¸—A‘—é¾‘
+”­F$C6ˆÀ‘S•Ûá‹@\
+@@@@ŠÄ“ÂˆÏˆõ‰ï$C2
+ˆ¶F$C6‘æ‚SíŒx”õˆõƒR[$C2
+QÆF$C6ƒ†ƒjƒbƒgÄ\¬$C2
+üŠú.023.7.0175.7.00014.343244334
+”FØˆóF$Im‹C$C6$i
 
 $C2
-Security System oversight committee hereby orders the transfer of prisoner class ID 1741 ($C6?priority$C2) without delay.  Oversight committee reaffirms desire to upkeep current standards of prison security and thus additionally orders the subsequent reprocessing of previous transfers according to operational mandates.
+@ˆÀ‘S•Ûá‹@\ŠÄ“ÂˆÏˆõ‰ï‚ÍA’¼‚¿‚É•ß—¸ƒNƒ‰ƒX‚h‚cF‚P‚V‚S‚Pi$C6—Dæ‡ˆÊ$C2j‚Ì“]‘—‚ğ–½‚¶‚éBŠÄ“ÂˆÏˆõ‰ï‚ÍAŒY–±ŠƒZƒLƒ…ƒŠƒeƒB‚ÌˆÛŒXŒüŠî€‚Ö‚Ì—v–]‚ğÄ’fŒ¾‚·‚éB‚È‚¨A‰^—pã‚ÌŒ ŒÀ‚É‚æ‚èA“]‘—Œã‚ÉÄˆ—‚·‚é‚±‚Æ‚ğ–½‚¶‚éB
 
-Questionable proposal ($C6?quality audit$C2) duly noted and denied.
+@‹^‚í‚µ‚¢’ñˆÄi$C6H•i¿ŠÄ¸$C2j‚ÍA\•ª‚ÉŒ¾‹yA”ÛŒˆ‚³‚ê‚½B
 #LOGOFF 20
 $C6<log.mnfst>
 #END
@@ -169,11 +168,11 @@ $C3ibn.34
 #PICT 4
 
 
-I've decoded the latest prisoner manifest and it confirms that Admiral Carroway is alive and that his transport is under the personal supervision of Pfhor Honor guard.
+@ÅV‚Ì–¾”’‚È•ß—¸‚ÉŠÖ‚·‚éˆÃ†‚Ì‰ğ“Ç‚ªŠ®—¹‚µ‚½B‚Ç‚¤‚â‚çAƒLƒƒƒƒEƒFƒC’ñ“Â‚Í‚Ü‚¾¶‚«‚Ä‚¢‚ÄAƒvƒtƒH[ƒ‹‹V˜½•º‚ÌŒÂl‚ÌŠÄ“Â‰º‚Å—A‘—‚µ‚Ä‚¢‚é‚æ‚¤‚¾B
 
-According to these logs, the Admiral is being taken to an ad-hoc prison in a nearby mining facility.  I wouldn't be surprised if this were $ITycho's $iidea; underground, it will be difficult for the UESC to pinpoint his location or mount an effective attack.
+@‚»‚ê‚ç‚ÌƒƒO‚É‚æ‚é‚ÆA’ñ“Â‚Í‹ß‚­‚É‚ ‚éÌŒ@İ”õ‚Ì’†‚Ì“Á•Ê‚ÈŒY–±Š‚Ö˜A‚ê‚Äs‚©‚ê‚é‚æ‚¤‚¾B‚±‚ê‚ªA$IƒeƒBƒR$i‚ÌƒAƒCƒfƒA‚Å‚ ‚Á‚Ä‚à‰½‚Ì‹Á‚«‚Å‚à‚È‚¢‚ÈB’n‰º‚É‚ ‚é‚ÆŒ¾‚¤‚±‚Æ‚ÍA‚t‚d‚r‚b‚ª’ñ“Â‚ÌˆÊ’u‚ğ³Šm‚É”cˆ¬‚µ‚½‚èA—LŒø‚ÈUŒ‚‚ğdŠ|‚¯‚é‚Ì‚ª“ï‚µ‚­‚È‚éB
 
-I'm sending you to the southern entrance to the mines.  You'll have to find a way in on your own, as the Pfhor have sealed off the main entry to the complex from the inside.  Once you get into the mine, open the bay doors so that the UESC can move in with heavy fusion cutting machines.
+@„‚Í‚±‚ê‚©‚çA‚±‚ÌzR‚Ì“ì•”‚Ì“ü‚èŒû‚ÉŒN‚ğ‘—‚éBƒvƒtƒH[ƒ‹‚ÍA“à•”‚©‚ç‚±‚Ì{İ‚Ö‚Ìå—vi“üƒ‹[ƒg‚ğ••‚¶‚½‚½‚ßA’†‚É“ü‚é‚½‚ß‚É‚ÍA“Æ—Í‚Åi“üŒû‚ğŒ©‚Â‚¯‚È‚¯‚ê‚Î‚È‚ç‚È‚¢B‚¢‚Á‚½‚ñzR‚Éi“ü‚µ‚½‚çA‚t‚d‚r‚b‚ªdŠj—Z‡Ù’f‹@‚ÅˆÚ“®‚Å‚«‚é‚æ‚¤‚ÉÔŠŒF‚ÌƒhƒA‚ğŠJ‚¢‚Ä‚«‚Ä‚­‚êB
 #LOGOFF 0
 <trnsprt.act>
 #INTERLEVEL TELEPORT 14
@@ -185,16 +184,21 @@ I'm sending you to the southern entrance to the mines.  You'll have to find a wa
 #LOGON 20
 $C6<log.mnfst>
 #PICT 22
-$C2Prisoner Transport Manifest
-origin: $C6security officer fourth-class C'kor$C2
-destin: $C6Automated Security System oversight
-        committee$C2
-ref: $C6unit reconstitution$C2
-cycle.023.7.0175.7.00014.343244334
-stamp: $Inonacceptance$C6$i
+$C2•ß—¸—A‘—é¾‘
+”­F$C6$C2
+ˆ¶F$C6$C2
+QÆF
+
+”FØˆóF$Im‹C$C6$i
+”­F$C6‘æ‚SíŒx”õˆõƒR[$C2
+ˆ¶F$C6ˆÀ‘S•Ûá‹@\
+@@@@ŠÄ“ÂˆÏˆõ‰ï$C2
+QÆF$C6ƒ†ƒjƒbƒgÄ\¬$C2
+üŠú.023.7.0175.7.00014.343244334
+”FØˆóF$Iˆø‚«ó‚¯‹‘”Û$i$C6
 
 $C2
-Security officer fourth-class C'kor hereby acknowledges and complies with request initiative 1, as listed in stamp: $Imorale$i.  Unit additionally requsts the revision $C6(?removal) $C2of initiative 2 listed in aforementioned stamp.  Initiative 2 would require processing power that active network is unable to provide, and processing that directive on existing systems would take 7^43 years to complete.
+@”FØˆóF$C6$Im‹C$i$C2‚ÉƒŠƒXƒg‚³‚ê‚é‚æ‚¤‚ÉA‘æ‚SíŒx”õˆõƒR[‚ÍAƒŠƒNƒGƒXƒgå“±Œ ‚P‚ğ”F‚ß‚Ä‰‚¶‚Ü‚·B‚³‚ç‚Éƒ†ƒjƒbƒg‚ÍA‘Oq‚Ì”FØˆó‚ÉƒŠƒXƒg‚³‚ê‚½å“±Œ ‚Q‚Ì‰ü’ùiH‰ğ”Cj‚ğ—v‹‚µ‚Ü‚·Bå“±Œ ‚Q‚ÍAŒ»İ—LŒø‚Èƒlƒbƒgƒ[ƒN‚ª—pˆÓ‚·‚é‚±‚Æ‚ª‚Å‚«‚È‚¢‚Ù‚Ç‚Ìˆ—”\—Í‚ğ—v‹‚·‚é‚±‚Æ‚É‚È‚è‚Ü‚·B‚±‚ê‚ÍAŠù‘¶‚ÌƒVƒXƒeƒ€‚ÅAw“±‚Ìˆ—‚ğs‚¤‚½‚ß‚É‚ÍA‚VO‚S‚R”N‚ÌŒ“ú‚ğ•K—v‚Æ‚·‚é‚±‚Æ‚ğˆÓ–¡‚µ‚Ü‚·B
 #LOGOFF 20
 $C6<log.mnfst>
 #END
@@ -204,11 +208,11 @@ $C3ibn.34
 #PICT 4
 
 
-I've decoded the latest prisoner manifest and it confirms that Admiral Carroway is alive and that his transport is under the personal supervision of Pfhor Honor guard.
+@ÅV‚Ì–¾”’‚È•ß—¸‚ÉŠÖ‚·‚éˆÃ†‚Ì‰ğ“Ç‚ªŠ®—¹‚µ‚½B‚Ç‚¤‚â‚çAƒLƒƒƒƒEƒFƒC’ñ“Â‚Í‚Ü‚¾¶‚«‚Ä‚¢‚ÄAƒvƒtƒH[ƒ‹‹V˜½•º‚ÌŒÂl‚ÌŠÄ“Â‰º‚Å—A‘—‚µ‚Ä‚¢‚é‚æ‚¤‚¾B
 
-According to these logs, the Admiral is being taken to an ad-hoc prison in a nearby mining facility.  I wouldn't be surprised if this were $ITycho's $iidea; underground, it will be difficult for the UESC to pinpoint his location or mount an effective attack.
+@‚»‚ê‚ç‚ÌƒƒO‚É‚æ‚é‚ÆA’ñ“Â‚Í‹ß‚­‚É‚ ‚éÌŒ@İ”õ‚Ì’†‚Ì“Á•Ê‚ÈŒY–±Š‚Ö˜A‚ê‚Äs‚©‚ê‚é‚æ‚¤‚¾B‚±‚ê‚ªA$IƒeƒBƒR$i‚ÌƒAƒCƒfƒA‚Å‚ ‚Á‚Ä‚à‰½‚Ì‹Á‚«‚Å‚à‚È‚¢‚ÈB’n‰º‚É‚ ‚é‚ÆŒ¾‚¤‚±‚Æ‚ÍA‚t‚d‚r‚b‚ª’ñ“Â‚ÌˆÊ’u‚ğ³Šm‚É”cˆ¬‚µ‚½‚èA—LŒø‚ÈUŒ‚‚ğdŠ|‚¯‚é‚Ì‚ª“ï‚µ‚­‚È‚éB
 
-I'm sending you to the southern entrance to the mines.  You'll have to find a way in on your own, as the Pfhor have sealed off the main entry to the complex from the inside.  Once you get into the mine, open the bay doors so that the UESC can move in with heavy fusion cutting machines.
+@„‚Í‚±‚ê‚©‚çA‚±‚ÌzR‚Ì“ì•”‚Ì“ü‚èŒû‚ÉŒN‚ğ‘—‚éBƒvƒtƒH[ƒ‹‚ÍA“à•”‚©‚ç‚±‚Ì{İ‚Ö‚Ìå—vi“üƒ‹[ƒg‚ğ••‚¶‚½‚½‚ßA’†‚É“ü‚é‚½‚ß‚É‚ÍA“Æ—Í‚Åi“üŒû‚ğŒ©‚Â‚¯‚È‚¯‚ê‚Î‚È‚ç‚È‚¢B‚¢‚Á‚½‚ñzR‚Éi“ü‚µ‚½‚çA‚t‚d‚r‚b‚ªdŠj—Z‡Ù’f‹@‚ÅˆÚ“®‚Å‚«‚é‚æ‚¤‚ÉÔŠŒF‚ÌƒhƒA‚ğŠJ‚¢‚Ä‚«‚Ä‚­‚êB
 #LOGOFF 0
 <trnsprt.act>
 #INTERLEVEL TELEPORT 14
