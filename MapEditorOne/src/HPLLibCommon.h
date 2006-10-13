@@ -123,6 +123,8 @@ bool isSelectPoint(int viewPX, int viewPY,
                    int offsetWorldX, int offsetWorldY,
                    int div,
                    int distance);
+bool isSelectPoint(world_point2d &point0, world_point2d &point1,
+                   int distance);
 /**
     is view-point near world-line?
     @param viewPX   point(mouse/view)
@@ -138,7 +140,9 @@ bool isSelectLine(int viewPX, int viewPY,
                    int offsetWorldX, int offsetWorldY,
                    int div,
                    int distance);
-
+bool isSelectLine(world_point2d &point,
+                  world_point2d &linePoint0, world_point2d &linePoint1,
+                  int distance);
 /**
     is point in select groups?
     @param px point locatin(view)

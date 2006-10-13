@@ -95,6 +95,10 @@ public:
     afx_msg void On32795();
 public:
     afx_msg void OnHeightFloor();
+public:
+    afx_msg void OnRButtonDown(UINT nFlags, CPoint point);
+public:
+    afx_msg void OnRButtonUp(UINT nFlags, CPoint point);
 };
 
 #ifndef _DEBUG  // MapEditorSDIView.cpp のデバッグ バージョン

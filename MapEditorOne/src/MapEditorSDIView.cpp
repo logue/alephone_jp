@@ -50,6 +50,8 @@ BEGIN_MESSAGE_MAP(CMapEditorSDIView, CView)
     ON_WM_SETCURSOR()
     ON_COMMAND(ID_32795, &CMapEditorSDIView::On32795)
     ON_COMMAND(ID_HEIGHT_FLOOR, &CMapEditorSDIView::OnHeightFloor)
+    ON_WM_RBUTTONDOWN()
+    ON_WM_RBUTTONUP()
 END_MESSAGE_MAP()
 
 // CMapEditorSDIView コンストラクション/デストラクション
@@ -974,4 +976,49 @@ void CMapEditorSDIView::On32795()
 void CMapEditorSDIView::OnHeightFloor()
 {
     changeMode(EM_FLOOR_HEIGHT);
+}
+
+void CMapEditorSDIView::OnRButtonDown(UINT nFlags, CPoint point)
+{
+    // TODO: ここにメッセージ ハンドラ コードを追加するか、既定の処理を呼び出します。
+
+    theApp.nowMousePoint = point;
+    theApp.oldMousePoint = point;
+
+    int OFFSET_X_VIEW = theApp.offset.x;
+    int OFFSET_Y_VIEW = theApp.offset.y;
+    int DIV = theApp.zoomDivision;
+
+    if(theApp.selectingToolType != TI_LINE){
+        theApp.isFirstOfLineToAdd = true;
+        theApp.previousPointIndex = NONE;
+    }
+
+    if(theApp.selectingToolType == TI_ARROW){
+    }else if(theApp.selectingToolType == TI_FILL){
+    }else if(theApp.selectingToolType == TI_HAND){
+    }else if( theApp.selectingToolType == TI_LINE){
+        if(nFlags & MK_RBUTTON){
+            //stop adding points
+            theApp.isFirstOfLineToAdd = true;
+            theApp.previousPointIndex = NONE;
+        }
+    }else if(theApp.selectingToolType == TI_MAGNIFY){
+    }else if(theApp.selectingToolType == TI_SKULL){
+    }else if(theApp.selectingToolType == TI_TEXT){
+    }else if(theApp.selectingToolType == TI_POLYGON){
+
+    }
+    Invalidate(FALSE);
+    CView::OnRButtonDown(nFlags, point);
+    SetCapture();
+}
+
+void CMapEditorSDIView::OnRButtonUp(UINT nFlags, CPoint point)
+{
+    // TODO: ここにメッセージ ハンドラ コードを追加するか、既定の処理を呼び出します。
+
+    Invalidate(FALSE);
+    ReleaseCapture();
+    CView::OnRButtonUp(nFlags, point);
 }

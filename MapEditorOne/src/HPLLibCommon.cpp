@@ -211,6 +211,15 @@ bool isSelectPoint(int viewPX, int viewPY,
         distance);
     return isSelect;
 }
+bool isSelectPoint(world_point2d &point0, world_point2d &point1,
+                   int distance)
+{
+    //check
+    bool isSelect = isNearbyPoints(
+        point0.x,point0.y, point1.x, point1.y,
+        distance);
+    return isSelect;
+}
 
 /**
     is view-point near world-line?
@@ -234,6 +243,14 @@ bool isSelectLine(int viewPX, int viewPY,
     int y1 = (worldPY1 + offsetWorldY) / div + offsetViewY;
 
     bool isSelect = isNearbyPointToLine(viewPX, viewPY, x0, y0, x1, y1, distance);
+    return isSelect;
+}
+bool isSelectLine(world_point2d &point,
+                  world_point2d &linePoint0, world_point2d &linePoint1,
+                  int distance)
+{
+    bool isSelect = isNearbyPointToLine(point.x, point.y,
+        linePoint0.x, linePoint0.y, linePoint1.x, linePoint1.y, distance);
     return isSelect;
 }
 

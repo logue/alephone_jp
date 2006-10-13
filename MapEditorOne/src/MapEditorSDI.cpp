@@ -389,16 +389,31 @@ int searchSelectPolygon(int viewPX, int viewPY)
     return -1;
 }
 
+//convert view <-> world point
+world_point2d getWorldPoint2DFromViewPoint(int viewPX, int viewPY)
+{
+    world_point2d point;
+    point.x = (world_distance)((viewPX - theApp.offset.x) * theApp.zoomDivision - OFFSET_X_WORLD);
+    point.y = (world_distance)((viewPY + theApp.offset.y) * theApp.zoomDivision - OFFSET_Y_WORLD);
+    return point;
+}
+void getViewPointFromWorldPoint2D(world_point2d& point, int *dest)
+{
+    dest[0] = (point.x + OFFSET_X_WORLD)/theApp.zoomDivision + theApp.offset.x;
+    dest[1] = (point.y + OFFSET_Y_WORLD)/theApp.zoomDivision + theApp.offset.y;
+}
+
+//TODO
 void setCursor()
 {
     //
     LPWSTR cursors[] = {
-        IDC_ARROW,
-        IDC_ARROW,
-        IDC_APPSTARTING,
         IDC_HAND,
-        IDC_CROSS,
-        IDC_APPSTARTING,
+        IDC_HAND,
+        IDC_HAND,
+        IDC_HAND,
+        IDC_HAND,
+        IDC_HAND,
         IDC_HAND
     };
     //カーソル変化
@@ -514,3 +529,162 @@ CBitmap* loadBitmapFromFile(const char *pathName)
     return bitmap;
 }
 
+/**
+    add point on polygon
+    if it is on line, add point to the line and polygon
+    @return added or already existed point's index
+        NONE : fail to add
+*/
+int addPoint(struct world_point2d &world_point)
+{
+    endpoint_data newPoint;
+    newPoint.vertex.x = world_point.x;
+    newPoint.vertex.y = world_point.y;
+    newPoint.flags = POINT_FLAG_SOLID;
+
+    bool isFound = false;
+
+    //点を踏んでないか確認
+    int endpointIndex = NONE;
+    for(int i = 0; i < (int)EndpointList.size(); i ++){
+        endpoint_data *point = &EndpointList[i];
+        //check height
+        if( point->highest_adjacent_floor_height > theApp.viewHeightMax ||
+            point->lowest_adjacent_ceiling_height < theApp.viewHeightMin)
+        {
+            continue;
+        }
+        if(isSelectPoint(world_point, point->vertex, POINT_DISTANCE_EPSILON * theApp.zoomDivision))
+        {
+            //追加しない
+            isFound = true;
+            endpointIndex = i;
+            break;
+        }
+    }
+    
+    if(isFound){
+        return endpointIndex;
+    }
+
+    //線を踏んでないか確認
+    int lineIndex = NONE;
+    for(int i = 0; i < (int)LineList.size(); i ++){
+        line_data *line = &LineList[i];
+        //check height
+        if(line->highest_adjacent_floor > theApp.viewHeightMax ||
+            line->lowest_adjacent_ceiling < theApp.viewHeightMin)
+        {
+            //not add on the outter height line
+            continue;
+        }
+        endpoint_data *begin = &EndpointList[line->endpoint_indexes[0]];
+        endpoint_data *end = &EndpointList[line->endpoint_indexes[1]];
+        if(isSelectLine(world_point, begin->vertex, end->vertex,
+            LINE_DISTANCE_EPSILON * theApp.zoomDivision))
+        {
+            isFound = true;
+            lineIndex = i;
+            break;
+        }
+    }
+
+    if(isFound){
+        int polygonIndex = getPolygonIndexFromLineIndex(lineIndex);
+        if(polygonIndex != NONE){
+            // there is already a polygon! delete it before add point!
+            MessageBeep(MB_OK);
+            AfxMessageBox(L"Couldn't add point because there is already a polygon. Delete it before add point");
+            return NONE;
+        }else{
+            //add point on the line (if it is included)
+
+            //old line
+            line_data* oldLine = &LineList[lineIndex];
+
+            //add point
+            newPoint.highest_adjacent_floor_height = oldLine->highest_adjacent_floor;
+            newPoint.lowest_adjacent_ceiling_height = oldLine->lowest_adjacent_ceiling;
+            newPoint.supporting_polygon_index = NONE;
+            //TODO newPoint.transformed = ;??
+            EndpointList.push_back(newPoint);
+            int newPointIndex = (int)EndpointList.size() - 1;
+
+            //set oldLine's end to newPoint
+            int oldLineEndPointIndex = oldLine->endpoint_indexes[1];
+            oldLine->endpoint_indexes[1] = newPointIndex;
+            double dx = EndpointList[oldLine->endpoint_indexes[0]].vertex.x - EndpointList[oldLine->endpoint_indexes[1]].vertex.x;
+            double dy = EndpointList[oldLine->endpoint_indexes[0]].vertex.y - EndpointList[oldLine->endpoint_indexes[1]].vertex.y;
+            oldLine->length = (world_distance)sqrt(dx * dx + dy * dy);
+
+            //add new line
+            int newLineIndex = addLine(newPointIndex, oldLineEndPointIndex);
+
+            return newPointIndex;
+        }
+        
+    }
+
+    //add point in space
+    {
+        newPoint.highest_adjacent_floor_height = theApp.viewHeightMin;
+        newPoint.lowest_adjacent_ceiling_height = theApp.viewHeightMax;
+        newPoint.supporting_polygon_index = NONE;
+        EndpointList.push_back(newPoint);
+        int newPointIndex = (int)EndpointList.size() - 1;
+        return newPointIndex;
+    }
+}
+
+int addLine(int beginPointIndex, int endPointIndex)
+{
+    line_data newLine;
+    memset(&newLine, 0, sizeof(line_data));
+    newLine.endpoint_indexes[0] = beginPointIndex;
+    newLine.endpoint_indexes[1] = endPointIndex;
+    newLine.clockwise_polygon_owner = NONE;
+    newLine.clockwise_polygon_side_index = NONE;
+    newLine.counterclockwise_polygon_owner = NONE;
+    newLine.counterclockwise_polygon_side_index = NONE;
+    newLine.flags = SOLID_LINE_BIT;
+    newLine.highest_adjacent_floor = max(EndpointList[beginPointIndex].highest_adjacent_floor_height,
+        EndpointList[endPointIndex].highest_adjacent_floor_height);
+    newLine.lowest_adjacent_ceiling = min(EndpointList[beginPointIndex].lowest_adjacent_ceiling_height,
+        EndpointList[endPointIndex].lowest_adjacent_ceiling_height);
+    double dx = EndpointList[newLine.endpoint_indexes[0]].vertex.x - EndpointList[newLine.endpoint_indexes[1]].vertex.x;
+    double dy = EndpointList[newLine.endpoint_indexes[0]].vertex.y - EndpointList[newLine.endpoint_indexes[1]].vertex.y;
+    newLine.length = (world_distance)sqrt(dx * dx + dy * dy);
+    LineList.push_back(newLine);
+    int newLineIndex = (int)LineList.size() - 1;
+    return newLineIndex;
+}
+
+/**
+    get line index from point of edge.
+    @return index of point
+        NONE : not found
+*/
+int getLineIndexFromPointIndex(int pointIndex)
+{
+    AfxMessageBox(L"not yet");
+    exit(1);
+}
+int getPolygonIndexFromLineIndex(int lineIndex)
+{
+    for(int i = 0; i < (int)PolygonList.size(); i ++){
+        polygon_data *polygon = &PolygonList[i];
+
+        int vertexCount = polygon->vertex_count;
+        for(int j = 0; j < vertexCount - 1; j ++){
+            if(polygon->line_indexes[j] == lineIndex){
+                return i;
+            }
+        }
+    }
+    return NONE;
+}
+int getPolygonIndexFromPointIndex(int pointIndex)
+{
+    AfxMessageBox(L"not yet");
+    exit(1);
+}

@@ -65,6 +65,8 @@ const int NUMBER_OF_LANDSPACES = 4;
 //点とクリック地点の距離がこれ以下であれば選択する。
 //リスト順に探索する
 const int POINT_DISTANCE_EPSILON = 5;
+const int OBJECT_DISTANCE_EPSILON = 8;
+const int LINE_DISTANCE_EPSILON = 5;
 
 static char *DATA_DIR_NAME = "data/";
 
@@ -105,6 +107,16 @@ enum
     EM_CEILING_LIGHT,
     EM_MEDIA,
     EM_SOUND,
+};
+
+//point flags
+enum
+{
+    POINT_FLAG_SOLID = 1,
+    POINT_FLAG_MULTI_HIGHEST = 2,
+    POINT_FLAG_TRANSPARENCY = 4,
+
+    NUMBER_OF_POINT_FLAGS
 };
 
 const int TOOL_WIDTH = 24;
@@ -262,6 +274,12 @@ public:
     //when true, warn to save
     bool isChanged;
 
+    //flag of first adding of lines
+    bool isFirstOfLineToAdd;
+
+    //prev point user clicked.
+    //if there is not, set NONE
+    int previousPointIndex;
 private:
     //edit mode
     int editMode;
@@ -298,6 +316,10 @@ int searchSelectObject(int viewPX, int viewPY);
 int searchSelectLine(int viewPX, int viewPY);
 int searchSelectPolygon(int viewPX, int viewPY);
 
+//convert view <-> world point
+world_point2d getWorldPoint2DFromViewPoint(int viewPX, int viewPY);
+void getViewPointFromWorldPoint2D(world_point2d& point, int *dest);
+
 void setCursor();
 /**
     change is this 
@@ -311,6 +333,24 @@ void subInitialPlacement(int objectType, int index, int num);
    return added object's index
 */
 int addObject(struct world_point2d &world_point, int polygonIndex);
+
+/**
+    add point on polygon
+    if it is on line, add point to the line and polygon
+    @return added point's index
+*/
+int addPoint(struct world_point2d &world_point);
+
+int addLine(int beginPointIndex, int endPointIndex);
+
+/**
+    get line index from point of edge.
+    @return index of point
+        NONE : not found
+*/
+int getLineIndexFromPointIndex(int pointIndex);
+int getPolygonIndexFromLineIndex(int lineIndex);
+int getPolygonIndexFromPointIndex(int pointIndex);
 
 /**
     get platform_data by using polygon index

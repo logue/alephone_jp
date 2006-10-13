@@ -6,6 +6,7 @@
 #include ".\mapeditorsdiview.h"
 #include "SelectLevelDialog.h"
 
+
 static bool checkSelectPoint(POINT& mousePoint,
                              int offsetViewX, int offsetViewY,
                              int offsetWorldX, int offsetWorldY,
@@ -24,6 +25,8 @@ static bool checkSelectPoint(POINT& mousePoint,
             return true;
         }
     }
+    theApp.selectType = _no_selected;
+    theApp.selectIndex = NONE;
     return false;
 }
 
@@ -43,9 +46,11 @@ void CMapEditorSDIView::OnLButtonDown(UINT nFlags, CPoint point)
     int OFFSET_X_VIEW = theApp.offset.x;
     int OFFSET_Y_VIEW = theApp.offset.y;
     int DIV = theApp.zoomDivision;
-    int POINT_DISTANCE_EPSILON = 5;
-    int OBJECT_DISTANCE_EPSILON = 8;
-    int LINE_DISTANCE_EPSILON = 5;
+
+    if(theApp.selectingToolType != TI_LINE){
+        theApp.isFirstOfLineToAdd = true;
+        theApp.previousPointIndex = NONE;
+    }
 
     if(theApp.selectingToolType == TI_ARROW){
         //selecting tool = TI_ARROW
@@ -302,6 +307,28 @@ void CMapEditorSDIView::OnLButtonDown(UINT nFlags, CPoint point)
     }else if(theApp.selectingToolType == TI_FILL){
     }else if(theApp.selectingToolType == TI_HAND){
     }else if( theApp.selectingToolType == TI_LINE){
+        if(nFlags & MK_LBUTTON){
+            theApp.selectIndex = NONE;
+            theApp.selectType = _no_selected;
+            theApp.selectGroupInformation.clear();
+            world_point2d worldPoint = getWorldPoint2DFromViewPoint(point.x, point.y);
+            int settledPointIndex = addPoint(worldPoint);
+            if(settledPointIndex == NONE){
+                //追加失敗
+                theApp.isFirstOfLineToAdd = true;
+            }else{
+                if(theApp.isFirstOfLineToAdd){
+                    theApp.isFirstOfLineToAdd = false;
+                    //add point(first)
+                }else{
+                    //add point and line
+                    //add line
+                    addLine(theApp.previousPointIndex, settledPointIndex);
+                }
+                theApp.previousPointIndex = settledPointIndex;
+            }
+        }
+        this->Invalidate(FALSE);
     }else if(theApp.selectingToolType == TI_MAGNIFY){
     }else if(theApp.selectingToolType == TI_SKULL){
         for(int i = 0; i < (int)PolygonList.size(); i ++){
@@ -323,9 +350,10 @@ void CMapEditorSDIView::OnLButtonDown(UINT nFlags, CPoint point)
                 theApp.selectType = _selected_object;
                 theApp.selectIndex = objectIndex;
                 //選択したオブジェクトの情報を表示
-                theApp.objectPropertyDialog->setupDialog(i);
+                theApp.objectPropertyDialog->setupDialog(objectIndex);
             }
         }
+        this->Invalidate(FALSE);
     }else if(theApp.selectingToolType == TI_TEXT){
     }else if(theApp.selectingToolType == TI_POLYGON){
 
