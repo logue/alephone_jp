@@ -78,7 +78,6 @@ BOOL CHeightDialog::DestroyWindow()
 {
     // TODO: ここに特定なコードを追加するか、もしくは基本クラスを呼び出してください。
     //表示を消すだけ
-    theApp.isHeightDialogShow = FALSE;
     ShowWindow(FALSE);
     return TRUE;//CDialog::DestroyWindow();
 }

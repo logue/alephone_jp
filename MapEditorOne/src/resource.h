@@ -53,8 +53,14 @@
 #define IDD_DIALOG_POLYGON_PROPERTY     225
 #define IDD_DIALOG_PLATFORM             226
 #define IDB_BITMAP_CIRCLE               227
-#define IDB_BITMAP3                     228
 #define IDB_BITMAP_MARKER               228
+#define IDD_DIALOG_EDITOR_INFO          229
+#define IDD_DIALOG_HEIGHT_PALLET        230
+#define IDD_DIALOG_PROPERTIES           231
+#define IDD_DIALOG_POINT_PROPERTY       232
+#define IDD_DIALOG_LINE_PROPERTY        233
+#define IDD_DIALOG_SIDE_PROPERTY        234
+#define IDD_DIALOG_COLOR_CUSTOMIZE      235
 #define IDC_LIST1                       1000
 #define IDC_LIST2                       1002
 #define IDC_COMBO1                      1003
@@ -117,8 +123,11 @@
 #define IDC_BUTTON2                     1035
 #define IDC_BUTTON3                     1036
 #define IDC_RADIO1                      1037
+#define IDC_BUTTON4                     1037
 #define IDC_RADIO2                      1038
+#define IDC_BUTTON5                     1038
 #define IDC_RADIO3                      1039
+#define IDC_BUTTON6                     1039
 #define IDC_CHECK19                     1040
 #define IDC_CHECK20                     1041
 #define IDC_RADIO4                      1042
@@ -136,6 +145,13 @@
 #define IDC_CHECK30                     1054
 #define IDC_COMBO10                     1055
 #define IDC_COMBO11                     1056
+#define IDC_PICT_BACKGROUND             1057
+#define IDC_PICT_GRID_LINE              1058
+#define IDC_PICT_LINES                  1059
+#define IDC_PICT_LINES2                 1060
+#define IDC_PICT_POLYGONS               1060
+#define IDC_PICT_STRINGS                1061
+#define IDC_PICT_POINTS                 1062
 #define ID_32771                        32771
 #define ID_32772                        32772
 #define ID_ZOOM_IN                      32773
@@ -167,14 +183,16 @@
 #define ID_MODE_TEXTURE                 32804
 #define ID_TEXTURE_FLOOR                32805
 #define ID_TEXTURE_CEILING              32806
+#define ID_MODE_POLYGONTYPE             32807
+#define ID_32808                        32808
 
 // Next default values for new objects
 // 
 #ifdef APSTUDIO_INVOKED
 #ifndef APSTUDIO_READONLY_SYMBOLS
-#define _APS_NEXT_RESOURCE_VALUE        229
-#define _APS_NEXT_COMMAND_VALUE         32807
-#define _APS_NEXT_CONTROL_VALUE         1057
+#define _APS_NEXT_RESOURCE_VALUE        236
+#define _APS_NEXT_COMMAND_VALUE         32809
+#define _APS_NEXT_CONTROL_VALUE         1058
 #define _APS_NEXT_SYMED_VALUE           104
 #endif
 #endif

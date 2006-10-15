@@ -129,48 +129,50 @@ END
 
 IDR_MAINFRAME MENU 
 BEGIN
-    POPUP "ファイル(&F)"
+    POPUP "File(&F)"
     BEGIN
-        MENUITEM "新規作成\tCtrl+N(&N)",            ID_FILE_NEW
-        MENUITEM "開く...\tCtrl+O(&O)",           ID_FILE_OPEN
-        MENUITEM "上書き保存\tCtrl+S(&S)",           ID_FILE_SAVE
-        MENUITEM "名前を付けて保存(&A)...",             ID_FILE_SAVE_AS
+        MENUITEM "New...\tCtrl+N(&N)",          ID_FILE_NEW
+        MENUITEM "Open...\tCtrl+O(&O)",         ID_FILE_OPEN
+        MENUITEM "Save...\tCtrl+S(&S)",         ID_FILE_SAVE
+        MENUITEM "Save As(&A)...",              ID_FILE_SAVE_AS
         MENUITEM SEPARATOR
         MENUITEM "印刷...\tCtrl+P(&P)",           ID_FILE_PRINT
         MENUITEM "印刷プレビュー(&V)",                 ID_FILE_PRINT_PREVIEW
         MENUITEM "プリンタの設定(&R)...",              ID_FILE_PRINT_SETUP
         MENUITEM SEPARATOR
-        MENUITEM "最近使ったファイル",                   ID_FILE_MRU_FILE1, GRAYED
+        MENUITEM "Recently used",               ID_FILE_MRU_FILE1, GRAYED
         MENUITEM SEPARATOR
-        MENUITEM "アプリケーションの終了(&X)",             ID_APP_EXIT
+        MENUITEM "Exit(&X)",                    ID_APP_EXIT
     END
-    POPUP "編集(&E)"
+    POPUP "Edit(&E)"
     BEGIN
         MENUITEM "元に戻す\tCtrl+Z(&U)",            ID_EDIT_UNDO
         MENUITEM SEPARATOR
         MENUITEM "切り取り\tCtrl+X(&T)",            ID_EDIT_CUT
         MENUITEM "コピー\tCtrl+C(&C)",             ID_EDIT_COPY
         MENUITEM "貼り付け\tCtrl+V(&P)",            ID_EDIT_PASTE
+        MENUITEM SEPARATOR
+        MENUITEM "Preferences...",              ID_32808
     END
     POPUP "Show(&V)"
     BEGIN
-        MENUITEM "ツール バー(&T)",                  ID_VIEW_TOOLBAR
-        MENUITEM "ステータス バー(&S)",                ID_VIEW_STATUS_BAR
-        MENUITEM "拡大\t+ or ^",                  ID_ZOOM_IN
-        MENUITEM "縮小\t-",                       ID_ZOOM_OUT
-        MENUITEM "標準",                          ID_ITEM_ZOOM_DEFAULT
-        MENUITEM "中心へ移動",                       ID_ITEM_CENTERING
+        MENUITEM "Tool bar(Menu)(&T)",          ID_VIEW_TOOLBAR
+        MENUITEM "Status bar(&S)",              ID_VIEW_STATUS_BAR
+        MENUITEM "Zoom in\t+ or ^",             ID_ZOOM_IN
+        MENUITEM "Zoom out\t-",                 ID_ZOOM_OUT
+        MENUITEM "Default zoom",                ID_ITEM_ZOOM_DEFAULT
+        MENUITEM "Move to center",              ID_ITEM_CENTERING
         MENUITEM SEPARATOR
-        MENUITEM "オブジェクト情報ダイアログ",               ID_32784
-        MENUITEM "ポリゴンタイプダイアログ",                ID_32786
-        MENUITEM "高さダイアログ",                     ID_32789
-        MENUITEM "ツールパレット",                     ID_Menu32797
+        MENUITEM "Object's property",           ID_32784
+        MENUITEM "Height",                      ID_32789
+        MENUITEM "Tool pallet",                 ID_Menu32797
         MENUITEM SEPARATOR
     END
     POPUP "Mode"
     BEGIN
         MENUITEM "Draw Polygons",               ID_32795
         MENUITEM "Visual Mode",                 ID_32796
+        MENUITEM "PolygonType",                 ID_MODE_POLYGONTYPE
         MENUITEM SEPARATOR
         POPUP "Height"
         BEGIN
@@ -193,16 +195,16 @@ BEGIN
             MENUITEM "Ceiling",                     ID_TEXTURE_CEILING
         END
     END
-    POPUP "レベル"
+    POPUP "Special"
     BEGIN
         MENUITEM "Jump Level...",               ID_32776
-        MENUITEM "レベル情報",                       ID_32787
-        MENUITEM "出現頻度",                        ID_32788
-        MENUITEM "ターミナル編集",                     ID_32790
+        MENUITEM "Level's info...",             ID_32787
+        MENUITEM "Object's placement and frequency...", ID_32788
+        MENUITEM "Terminal viewer...",          ID_32790
     END
-    POPUP "ヘルプ(&H)"
+    POPUP "Help(&H)"
     BEGIN
-        MENUITEM "バージョン情報 MapEditorSDI(&A)...", ID_APP_ABOUT
+        MENUITEM "About MapEditorOne(&A)...",   ID_APP_ABOUT
     END
 END
 
@@ -530,6 +532,98 @@ BEGIN
     COMBOBOX        IDC_COMBO11,318,66,48,30,CBS_DROPDOWN | CBS_SORT | WS_VSCROLL | WS_TABSTOP
 END
 
+IDD_DIALOG_EDITOR_INFO DIALOGEX 0, 0, 184, 167
+STYLE DS_SETFONT | DS_MODALFRAME | DS_FIXEDSYS | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "Dialog"
+FONT 8, "MS Shell Dlg", 400, 0, 0x1
+BEGIN
+    DEFPUSHBUTTON   "OK",IDOK,48,144,50,14
+    PUSHBUTTON      "Cancel",IDCANCEL,106,144,50,14
+    LTEXT           "grid size",IDC_STATIC,6,6,27,8
+    COMBOBOX        IDC_COMBO1,48,6,48,30,CBS_DROPDOWN | CBS_SORT | WS_VSCROLL | WS_TABSTOP
+    CONTROL         "Show grid",IDC_CHECK1,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,6,24,47,10
+    CONTROL         "Fit to grid",IDC_CHECK2,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,6,36,47,10
+    CONTROL         "Show Monsters",IDC_CHECK3,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,6,48,65,10
+    LTEXT           "Color set",IDC_STATIC,90,24,30,8
+    COMBOBOX        IDC_COMBO2,132,24,48,30,CBS_DROPDOWN | CBS_SORT | WS_VSCROLL | WS_TABSTOP
+    CONTROL         "Show Items",IDC_CHECK4,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,6,60,53,10
+    CONTROL         "Show Scenery",IDC_CHECK5,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,6,72,61,10
+    CONTROL         "Show Players",IDC_CHECK6,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,6,84,59,10
+    CONTROL         "Show Goals",IDC_CHECK7,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,6,96,53,10
+    CONTROL         "Show Sounds",IDC_CHECK8,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,6,108,59,10
+    CONTROL         "Show Annotations",IDC_CHECK9,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,6,120,74,10
+    CONTROL         "Visual mode-Crossfair",IDC_CHECK10,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,6,132,85,10
+    CONTROL         "Show Polygons",IDC_CHECK12,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,102,36,64,10
+    CONTROL         "Show Lines",IDC_CHECK13,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,102,48,51,10
+    PUSHBUTTON      "Set as Default",IDC_BUTTON1,108,126,60,14
+END
+
+IDD_DIALOG_HEIGHT_PALLET DIALOGEX 0, 0, 52, 137
+STYLE DS_SETFONT | DS_MODALFRAME | DS_FIXEDSYS | WS_POPUP | WS_CAPTION | WS_SYSMENU
+EXSTYLE WS_EX_PALETTEWINDOW
+CAPTION "Height"
+FONT 8, "MS Shell Dlg", 400, 0, 0x1
+BEGIN
+    CONTROL         "",IDC_SLIDER1,"msctls_trackbar32",TBS_VERT | TBS_BOTH | TBS_NOTICKS | WS_TABSTOP,24,6,20,114
+    CONTROL         "",IDC_STATIC,"Static",SS_BLACKFRAME,6,12,12,102
+    EDITTEXT        IDC_EDIT1,6,120,40,14,ES_AUTOHSCROLL
+END
+
+IDD_DIALOG_PROPERTIES DIALOGEX 0, 0, 135, 108
+STYLE DS_SETFONT | DS_MODALFRAME | DS_FIXEDSYS | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "Dialog"
+FONT 8, "MS Shell Dlg", 400, 0, 0x1
+BEGIN
+END
+
+IDD_DIALOG_POINT_PROPERTY DIALOGEX 0, 0, 109, 101
+STYLE DS_SETFONT | DS_MODALFRAME | DS_FIXEDSYS | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "Point property"
+FONT 8, "MS Shell Dlg", 400, 0, 0x1
+BEGIN
+END
+
+IDD_DIALOG_LINE_PROPERTY DIALOGEX 0, 0, 136, 94
+STYLE DS_SETFONT | DS_MODALFRAME | DS_FIXEDSYS | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "Line property"
+FONT 8, "MS Shell Dlg", 400, 0, 0x1
+BEGIN
+END
+
+IDD_DIALOG_SIDE_PROPERTY DIALOGEX 0, 0, 186, 95
+STYLE DS_SETFONT | DS_MODALFRAME | DS_FIXEDSYS | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "Side property"
+FONT 8, "MS Shell Dlg", 400, 0, 0x1
+BEGIN
+END
+
+IDD_DIALOG_COLOR_CUSTOMIZE DIALOGEX 0, 0, 162, 135
+STYLE DS_SETFONT | DS_MODALFRAME | DS_FIXEDSYS | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "Color Customize"
+FONT 8, "MS Shell Dlg", 400, 0, 0x1
+BEGIN
+    DEFPUSHBUTTON   "OK",IDOK,47,114,50,14
+    PUSHBUTTON      "キャンセル",IDCANCEL,105,114,50,14
+    LTEXT           "Background",IDC_STATIC,6,6,38,8
+    CONTROL         "",IDC_PICT_BACKGROUND,"Static",SS_BLACKFRAME,102,6,48,12
+    PUSHBUTTON      "Choose Color",IDC_BUTTON1,48,6,50,14
+    LTEXT           "Grid line",IDC_STATIC,6,24,26,8
+    CONTROL         "",IDC_PICT_GRID_LINE,"Static",SS_BLACKFRAME,102,24,48,12
+    PUSHBUTTON      "Choose Color",IDC_BUTTON2,48,24,50,14
+    LTEXT           "Lines",IDC_STATIC,6,42,17,8
+    CONTROL         "",IDC_PICT_LINES,"Static",SS_BLACKFRAME,102,42,48,12
+    PUSHBUTTON      "Choose Color",IDC_BUTTON3,48,42,50,14
+    LTEXT           "Polygons",IDC_STATIC,6,60,30,8
+    CONTROL         "",IDC_PICT_POLYGONS,"Static",SS_BLACKFRAME,102,60,48,12
+    PUSHBUTTON      "Choose Color",IDC_BUTTON4,48,60,50,14
+    LTEXT           "Strings",IDC_STATIC,6,78,23,8
+    CONTROL         "",IDC_PICT_STRINGS,"Static",SS_BLACKFRAME,102,78,48,12
+    PUSHBUTTON      "Choose Color",IDC_BUTTON5,48,78,50,14
+    LTEXT           "Points",IDC_STATIC,6,96,20,8
+    CONTROL         "",IDC_PICT_POINTS,"Static",SS_BLACKFRAME,102,96,48,12
+    PUSHBUTTON      "Choose Color",IDC_BUTTON6,48,96,50,14
+END
+
 
 /////////////////////////////////////////////////////////////////////////////
 //
@@ -672,6 +766,62 @@ BEGIN
         RIGHTMARGIN, 381
         TOPMARGIN, 7
         BOTTOMMARGIN, 226
+    END
+
+    IDD_DIALOG_EDITOR_INFO, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 177
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 160
+    END
+
+    IDD_DIALOG_HEIGHT_PALLET, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 45
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 130
+    END
+
+    IDD_DIALOG_PROPERTIES, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 128
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 101
+    END
+
+    IDD_DIALOG_POINT_PROPERTY, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 102
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 94
+    END
+
+    IDD_DIALOG_LINE_PROPERTY, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 129
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 87
+    END
+
+    IDD_DIALOG_SIDE_PROPERTY, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 179
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 88
+    END
+
+    IDD_DIALOG_COLOR_CUSTOMIZE, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 155
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 128
     END
 END
 #endif    // APSTUDIO_INVOKED

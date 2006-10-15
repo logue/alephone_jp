@@ -77,7 +77,6 @@ void CMapEditorSDIView::OnFileOpen()
             }
             /*sprintf(cstr, "%d", theApp.LevelNameList.GetSize());
             MessageBox(CString(cstr));*/
-            theApp.selectType = _no_selected;
         }
         //ステータスバーに表示
         setStatusBar(0, theApp.LevelNameList.GetAt(0));
@@ -130,7 +129,7 @@ void CMapEditorSDIView::On32776()
         OnItemZoomDefault();
 
         //選択無し
-        theApp.selectType = _no_selected;
+        theApp.selectGroupInformation.clear();
 
         this->Invalidate(FALSE);
 
@@ -207,4 +206,86 @@ void CMapEditorSDIView::OnItemZoomDefault()
     // TODO: ここにコマンド ハンドラ コードを追加します。
     theApp.zoomDivision = ZOOM_DIVISION_DEFAULT;
     Invalidate(FALSE);
+}
+//object info dialog on/off
+void CMapEditorSDIView::On32784()
+{
+    // TODO: ここにコマンド ハンドラ コードを追加します。
+    theApp.objectPropertyDialog->ShowWindow(!theApp.objectPropertyDialog->IsWindowVisible());
+    int flags = MF_BYCOMMAND;
+    if(theApp.objectPropertyDialog->IsWindowVisible()){
+        flags |= MF_CHECKED;
+    }else{
+        flags |= MF_UNCHECKED;
+    }
+    GetMenu()->CheckMenuItem(ID_32784, flags);
+}
+//level information(same to new)
+void CMapEditorSDIView::On32787()
+{
+    // TODO: ここにコマンド ハンドラ コードを追加します。
+    CLevelParameterDialog dlg(this, false);
+    if(dlg.DoModal() == IDOK){
+        //値設定
+    }
+}
+//show/hide height dialog
+void CMapEditorSDIView::On32789()
+{
+    // TODO: ここにコマンド ハンドラ コードを追加します。
+    theApp.heightDialog->ShowWindow(theApp.heightDialog->IsWindowVisible());
+}
+//show/hide polygon type dialog
+void CMapEditorSDIView::On32786()
+{
+    // TODO: ここにコマンド ハンドラ コードを追加します。
+    theApp.polygonTypeDialog->ShowWindow(theApp.polygonTypeDialog->IsWindowVisible());
+}
+//edit terminals
+void CMapEditorSDIView::On32790()
+{
+    // TODO: ここにコマンド ハンドラ コードを追加します。
+    CTerminalDialog dlg(this);
+    if(dlg.DoModal() == IDOK){
+        //変更を保存
+
+    }
+}
+
+void CMapEditorSDIView::changeMode(int mode)
+{
+    int oldMode = theApp.getEditMode();
+    int nextMode = mode;
+    theApp.setEditMode(nextMode);
+    //チェックを変更
+    int flags = 0;
+    flags = MF_BYCOMMAND | MF_UNCHECKED;
+    //GetMenu()->CheckMenuItem(theApp.menuIDMap[oldMode], flags);
+    flags = MF_BYCOMMAND | MF_CHECKED;
+    //GetMenu()->CheckMenuItem(theApp.menuIDMap[nextMode], flags);
+    Invalidate(FALSE);
+
+}
+//draw polygon mode
+void CMapEditorSDIView::On32795()
+{
+    changeMode(EM_DRAW);
+}
+//height -> floor
+void CMapEditorSDIView::OnHeightFloor()
+{
+    changeMode(EM_FLOOR_HEIGHT);
+}
+
+void CMapEditorSDIView::OnModePolygontype()
+{
+    changeMode(EM_POLYGON_TYPE);
+
+    //show polygon type dialog
+    theApp.polygonTypeDialog->ShowWindow(TRUE);
+
+    //hide other dialog
+    theApp.objectPropertyDialog->ShowWindow(FALSE);
+    theApp.polygonPropertyDialog->ShowWindow(FALSE);
+    
 }

@@ -115,7 +115,6 @@ void CPolygonTypeDialog::OnClose()
 BOOL CPolygonTypeDialog::DestroyWindow()
 {
     // TODO: ここに特定なコードを追加するか、もしくは基本クラスを呼び出してください。
-    theApp.isPolygonTypeDialogShow = FALSE;
     ShowWindow(FALSE);
     return TRUE;//CDialog::DestroyWindow();
 }

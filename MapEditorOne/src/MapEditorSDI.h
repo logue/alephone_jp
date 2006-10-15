@@ -43,6 +43,9 @@ using namespace std;
 #include "ObjectPlacementDialog.h"
 #include "SelectLevelDialog.h"
 #include "PolygonPropertyDialog.h"
+#include "EditorInforDialog.h"
+
+#include "MapEditorOneSetting.h"
 
 // CMapEditorSDIApp:
 // このクラスの実装については、MapEditorSDI.cpp を参照してください。
@@ -69,6 +72,7 @@ const int OBJECT_DISTANCE_EPSILON = 8;
 const int LINE_DISTANCE_EPSILON = 5;
 
 static char *DATA_DIR_NAME = "data/";
+static char *INI_FILE_NAME = "setting.ini";
 
 //map icons
 enum
@@ -107,6 +111,7 @@ enum
     EM_CEILING_LIGHT,
     EM_MEDIA,
     EM_SOUND,
+    EM_POLYGON_TYPE,
 };
 
 //point flags
@@ -141,7 +146,6 @@ typedef struct InformationBinded_tag{
     int bind;
 }InformationBinded;
 
-
 /**
     MapEditorOneメインアプリケーション
 */
@@ -163,7 +167,7 @@ public:
 
     //グリッド表示用間隔(世界距離に対応し、拡大縮小で大きさ変化)
     int gridIntervals[NUMBER_OF_GLID];
-    int nowGridInterval;
+    //int nowGridInterval;
 
     //位置オフセット
     POINT offset;
@@ -172,13 +176,13 @@ public:
     POINT oldMousePoint;
 
     //選択したものの種類
-    int selectType;
+//    int selectType;
     //選択したもののインデックス
-    int selectIndex;
+//    int selectIndex;
 
     //グリッド
     //ボタン押してる？
-    bool isPressLButtonWithShift;
+    bool isPressLButtonWithCtrl;
 
     //選択中のレベルインデックス
     int editLevelIndex;
@@ -230,20 +234,20 @@ public:
 
 // 実装
 	afx_msg void OnAppAbout();
-    BOOL isObjectPropertyDialogShow;
+    /*BOOL isObjectPropertyDialogShow;
     BOOL isHeightDialogShow;
     BOOL isPolygonTypeDialogShow;
     BOOL isToolDialogShow;
     BOOL isPolygonPropertyDialogShow;
-
+*/
     //ダブルバッファリング
     CDC doubleBufferDC;
     CBitmap doubleBuffserBitmap;
 
     //ポリゴンや線を持ったときのマウス座標からのオフセット
     //相対座標
-    POINT polygonPoints[8];
-    int polygonPointNum;
+//    POINT polygonPoints[8];
+//    int polygonPointNum;
 
     //選択範囲始点
     POINT selectStartPoint;
@@ -280,6 +284,10 @@ public:
     //prev point user clicked.
     //if there is not, set NONE
     int previousPointIndex;
+
+    //Editor setting
+    MapEditorOneSetting setting;
+
 private:
     //edit mode
     int editMode;

@@ -131,7 +131,6 @@ void CToolDialog::OnClose()
 BOOL CToolDialog::DestroyWindow()
 {
     // TODO: ここに特定なコードを追加するか、もしくは基本クラスを呼び出してください。
-    theApp.isToolDialogShow = FALSE;
     ShowWindow(FALSE);
     return TRUE;//CDialog::DestroyWindow();
 }
@@ -193,9 +192,8 @@ void CToolDialog::OnLButtonDown(UINT nFlags, CPoint point)
         {
             //ツール変化
             theApp.selectingToolType = i;
-            if(i == TI_SKULL && !theApp.isObjectPropertyDialogShow){
+            if(i == TI_SKULL){
                 //show object property's dialog
-                theApp.isObjectPropertyDialogShow = TRUE;
                 theApp.objectPropertyDialog->ShowWindow(TRUE);
             }
             Invalidate(FALSE);

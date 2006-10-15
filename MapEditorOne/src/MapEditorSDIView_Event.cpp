@@ -7,7 +7,7 @@
 #include "SelectLevelDialog.h"
 
 
-static bool checkSelectPoint(POINT& mousePoint,
+static void checkSelectPoint(POINT& mousePoint,
                              int offsetViewX, int offsetViewY,
                              int offsetWorldX, int offsetWorldY,
                              int div,
@@ -17,41 +17,28 @@ static bool checkSelectPoint(POINT& mousePoint,
         endpoint_data* ep = &EndpointList[i];
         int x = ep->vertex.x;
         int y = ep->vertex.y;
+        int drawPoint[2];
+        getViewPointFromWorldPoint2D(ep->vertex, drawPoint);
+
         if(isSelectPoint(mousePoint.x, mousePoint.y, x, y,
             offsetViewX, offsetViewY, offsetWorldX, offsetWorldY, div, distance))
         {
-            theApp.selectType = _selected_point;
-            theApp.selectIndex = i;
-            return true;
+            SelPoint pdata;
+            pdata.index = i;
+            pdata.offset[0] = drawPoint[0] - mousePoint.x;
+            pdata.offset[1] = drawPoint[1] - mousePoint.y;
+            theApp.selectGroupInformation.points.push_back(pdata);
+            theApp.selectGroupInformation.setSelected(true);
+            return;
         }
     }
-    theApp.selectType = _no_selected;
-    theApp.selectIndex = NONE;
-    return false;
 }
 
-
-//左ボタン下げ
-void CMapEditorSDIView::OnLButtonDown(UINT nFlags, CPoint point)
+static void doLButtonDownDrawMode(UINT nFlags, CPoint &point)
 {
-    // TODO: ここにメッセージ ハンドラ コードを追加するか、既定の処理を呼び出します。
-    if(nFlags & MK_CONTROL){
-        theApp.isPressLButtonWithShift = true;
-    }else{
-        theApp.isPressLButtonWithShift = false;
-    }
-    theApp.nowMousePoint = point;
-    theApp.oldMousePoint = point;
-
     int OFFSET_X_VIEW = theApp.offset.x;
     int OFFSET_Y_VIEW = theApp.offset.y;
     int DIV = theApp.zoomDivision;
-
-    if(theApp.selectingToolType != TI_LINE){
-        theApp.isFirstOfLineToAdd = true;
-        theApp.previousPointIndex = NONE;
-    }
-
     if(theApp.selectingToolType == TI_ARROW){
         //selecting tool = TI_ARROW
         if(/*!(nFlags & MK_SHIFT) && */!(nFlags & MK_CONTROL)){
@@ -142,13 +129,13 @@ void CMapEditorSDIView::OnLButtonDown(UINT nFlags, CPoint point)
             }
             if(!theApp.selectGroupInformation.isSelected()){
                 //shiftを押さずにクリック→選択
-                bool selected = false;
+                theApp.selectGroupInformation.clear();
 
                 theApp.isSelectingGroup = false;
 
                 //objects
                 {
-                    for(int i = 0; i < (int)SavedObjectList.size() && !selected; i ++){
+                    for(int i = 0; i < (int)SavedObjectList.size(); i ++){
                         map_object* obj = &(SavedObjectList[i]);
                         int type = obj->type;
                         int facing = obj->facing;
@@ -161,44 +148,45 @@ void CMapEditorSDIView::OnLButtonDown(UINT nFlags, CPoint point)
                         }
                         if(isSelectPoint(point.x, point.y,
                             x, y, OFFSET_X_VIEW, OFFSET_Y_VIEW,
-                            OFFSET_X_WORLD, OFFSET_Y_WORLD, DIV, OBJECT_DISTANCE_EPSILON)){
+                            OFFSET_X_WORLD, OFFSET_Y_WORLD, DIV, OBJECT_DISTANCE_EPSILON))
+                        {
+                            int drawX = (x + OFFSET_X_WORLD) / DIV + OFFSET_X_VIEW;
+                            int drawY = (y + OFFSET_Y_WORLD) / DIV + OFFSET_Y_VIEW;
 
-                            theApp.selectType = _selected_object;
-                            theApp.selectIndex = i;
+                            SelObject odata;
+                            odata.index = i;
+                            odata.offset[0] = drawX - point.x;
+                            odata.offset[1] = drawY - point.y;
+                            theApp.selectGroupInformation.selObjects.push_back(odata);
+                            theApp.selectGroupInformation.setSelected(true);
                             //選択したオブジェクトの情報を表示
                             theApp.objectPropertyDialog->setupDialog(i);
-                            selected = true;
                             break;
                         }
                     }
                 }
-                if(selected){
+                if(theApp.selectGroupInformation.isSelected()){
+                    //object property
                     theApp.objectPropertyDialog->ShowWindow(TRUE);
-                    theApp.isObjectPropertyDialogShow = TRUE;
 
-                    //線プロパティ消す
-                    //ポリゴンプロパティ消す
                 }else{
-                    //選択されなかった
-                    theApp.selectType = _no_selected;
-                    //theApp.objectPropertyDialog->setupDialog(-1);
-
                     //no selection
                     theApp.objectPropertyDialog->setSelectedObjectIndex(-1);
                 }
 
                 ////////////////////
                 //points
-                if(!selected){
-                    selected = checkSelectPoint(point, OFFSET_X_VIEW, OFFSET_Y_VIEW,
+                if(!theApp.selectGroupInformation.isSelected()){
+                    checkSelectPoint(point, OFFSET_X_VIEW, OFFSET_Y_VIEW,
                         OFFSET_X_WORLD, OFFSET_Y_WORLD, DIV, POINT_DISTANCE_EPSILON);
                 }
-                if(selected){
+                if(theApp.selectGroupInformation.isSelected()){
+                    //show point property dialog TODO
                 }
 
                 //////////////////
                 //lines
-                if(!selected){
+                if(!theApp.selectGroupInformation.isSelected()){
                     for(int i = 0; i < (int)LineList.size(); i ++){
                         line_data* line = &LineList[i];
                         endpoint_data* begin = &EndpointList[line->endpoint_indexes[0]];
@@ -207,31 +195,31 @@ void CMapEditorSDIView::OnLButtonDown(UINT nFlags, CPoint point)
                             end->vertex.x, end->vertex.y, OFFSET_X_VIEW, OFFSET_Y_VIEW,
                             OFFSET_X_WORLD, OFFSET_Y_WORLD, DIV, LINE_DISTANCE_EPSILON)){
                             //接近している
-                            theApp.selectType = _selected_line;
-                            theApp.selectIndex = i;
-                            selected = true;
+                            SelLine ldata;
+                            ldata.index = i;
+
                             //オフセット記録
-                            theApp.polygonPointNum = 2;
-                            theApp.polygonPoints[0].x = 
+                            ldata.offsets[0][0] = 
                                 (begin->vertex.x + OFFSET_X_WORLD) / DIV + OFFSET_X_VIEW
                                 - point.x;
-                            theApp.polygonPoints[0].y = 
+                            ldata.offsets[0][1] = 
                                 (begin->vertex.y + OFFSET_Y_WORLD) / DIV + OFFSET_Y_VIEW
                                 - point.y;
-                            theApp.polygonPoints[1].x = 
+                            ldata.offsets[1][0] = 
                                 (end->vertex.x + OFFSET_X_WORLD) / DIV + OFFSET_X_VIEW
                                 - point.x;
-                            theApp.polygonPoints[1].y = 
+                            ldata.offsets[1][1] = 
                                 (end->vertex.y + OFFSET_Y_WORLD) / DIV + OFFSET_Y_VIEW
                                 - point.y;
-
+                            theApp.selectGroupInformation.lines.push_back(ldata);
+                            theApp.selectGroupInformation.setSelected(true);
 
                             break;
                         }
                     }
                 }
 
-                if(selected){
+                if(theApp.selectGroupInformation.isSelected()){
                     //線プロパティ表示
                 }else{
                     //非表示
@@ -239,21 +227,20 @@ void CMapEditorSDIView::OnLButtonDown(UINT nFlags, CPoint point)
 
                 /////////////////
                 //polygons
-                if(!selected){
+                if(!theApp.selectGroupInformation.isSelected()){
                     for(int i = 0; i < (int)PolygonList.size(); i ++){
                         struct world_point2d world_point;
                         world_point.x = (world_distance)((point.x - OFFSET_X_VIEW) * DIV - OFFSET_X_WORLD);
                         world_point.y = (world_distance)((point.y - OFFSET_Y_VIEW) * DIV - OFFSET_Y_WORLD);
 
                         if(point_in_polygon(i, &world_point)){
-                            theApp.selectType = _selected_polygon;
-                            theApp.selectIndex = i;
-                            selected = true;
-
                             polygon_data *polygon = &PolygonList[i];
 
+                            SelPolygon polydata;
+                            polydata.index = i;
+                            polydata.num = polygon->vertex_count;
+
                             //show polygon type dialog
-                            theApp.isPolygonTypeDialogShow = TRUE;
                             theApp.polygonTypeDialog->ShowWindow(TRUE);
                             //set selection
                             theApp.polygonTypeDialog->polygonTypeListCtrl.SetItemState(
@@ -261,26 +248,26 @@ void CMapEditorSDIView::OnLButtonDown(UINT nFlags, CPoint point)
                                 LVIS_SELECTED | LVIS_FOCUSED);
                             
                             //show polygon property
-                            theApp.isPolygonPropertyDialogShow = TRUE;
                             theApp.polygonPropertyDialog->ShowWindow(TRUE);
                             theApp.polygonPropertyDialog->setupDialog(i);
 
                             //set offset
-                            int num = polygon->vertex_count;
-                            theApp.polygonPointNum = num;
-                            for(int j = 0; j < num; j ++){
+                            for(int j = 0; j < polygon->vertex_count; j ++){
                                 int drawX = (EndpointList[polygon->endpoint_indexes[j]].vertex.x + OFFSET_X_WORLD) / DIV
                                     + OFFSET_X_VIEW;
                                 int drawY = (EndpointList[polygon->endpoint_indexes[j]].vertex.y + OFFSET_Y_WORLD) / DIV
                                     + OFFSET_Y_VIEW;
-                                theApp.polygonPoints[j].x = drawX - point.x;
-                                theApp.polygonPoints[j].y = drawY - point.y;
+                                polydata.offsets[j][0] = drawX - point.x;
+                                polydata.offsets[j][1] = drawY - point.y;
                             }
+
+                            theApp.selectGroupInformation.polygons.push_back(polydata);
+                            theApp.selectGroupInformation.setSelected(true);
                         }
                     }
                 }
                 
-                if(selected){
+                if(theApp.selectGroupInformation.isSelected()){
                     //show polygon type
                     //show polygon property
                 }else{
@@ -289,8 +276,7 @@ void CMapEditorSDIView::OnLButtonDown(UINT nFlags, CPoint point)
 
                 //////////////////////////////////
                 //ここからの処理はほかよりも後に書く
-                if(!selected){
-                    theApp.selectType = _no_selected;
+                if(!theApp.selectGroupInformation.isSelected()){
                     //範囲選択
                     //始点登録
                     theApp.selectStartPoint.x = point.x;
@@ -301,15 +287,12 @@ void CMapEditorSDIView::OnLButtonDown(UINT nFlags, CPoint point)
                 }else{
                     theApp.isSelectingGroup = false;
                 }
-                this->Invalidate(FALSE);
             }
         }
     }else if(theApp.selectingToolType == TI_FILL){
     }else if(theApp.selectingToolType == TI_HAND){
     }else if( theApp.selectingToolType == TI_LINE){
         if(nFlags & MK_LBUTTON){
-            theApp.selectIndex = NONE;
-            theApp.selectType = _no_selected;
             theApp.selectGroupInformation.clear();
             world_point2d worldPoint = getWorldPoint2DFromViewPoint(point.x, point.y);
             int settledPointIndex = addPoint(worldPoint);
@@ -328,7 +311,6 @@ void CMapEditorSDIView::OnLButtonDown(UINT nFlags, CPoint point)
                 theApp.previousPointIndex = settledPointIndex;
             }
         }
-        this->Invalidate(FALSE);
     }else if(theApp.selectingToolType == TI_MAGNIFY){
     }else if(theApp.selectingToolType == TI_SKULL){
         for(int i = 0; i < (int)PolygonList.size(); i ++){
@@ -347,17 +329,74 @@ void CMapEditorSDIView::OnLButtonDown(UINT nFlags, CPoint point)
                 int objectIndex = addObject(world_point, i);
 
                 //選択状態にする
-                theApp.selectType = _selected_object;
-                theApp.selectIndex = objectIndex;
+                theApp.selectGroupInformation.clear();
+                SelObject odata;
+                odata.index = objectIndex;
+                odata.offset[0] = odata.offset[1] = 0;
+                theApp.selectGroupInformation.setSelected(true);
+                theApp.selectGroupInformation.selObjects.push_back(odata);
+
                 //選択したオブジェクトの情報を表示
                 theApp.objectPropertyDialog->setupDialog(objectIndex);
             }
         }
-        this->Invalidate(FALSE);
     }else if(theApp.selectingToolType == TI_TEXT){
     }else if(theApp.selectingToolType == TI_POLYGON){
 
     }
+}
+//左ボタン下げ
+void CMapEditorSDIView::OnLButtonDown(UINT nFlags, CPoint point)
+{
+    // TODO: ここにメッセージ ハンドラ コードを追加するか、既定の処理を呼び出します。
+    if(nFlags & MK_CONTROL){
+        theApp.isPressLButtonWithCtrl = true;
+    }else{
+        theApp.isPressLButtonWithCtrl = false;
+    }
+    theApp.nowMousePoint = point;
+    theApp.oldMousePoint = point;
+
+    int OFFSET_X_VIEW = theApp.offset.x;
+    int OFFSET_Y_VIEW = theApp.offset.y;
+    int DIV = theApp.zoomDivision;
+
+    if(theApp.selectingToolType != TI_LINE){
+        theApp.isFirstOfLineToAdd = true;
+        theApp.previousPointIndex = NONE;
+    }
+
+    switch(theApp.getEditMode()){
+    case EM_DRAW:
+        doLButtonDownDrawMode(nFlags, point);
+        break;
+    case EM_POLYGON_TYPE:
+        break;
+    case EM_FLOOR_HEIGHT:
+        //change height
+        break;
+    case EM_CEILING_HEIGHT:
+        //change height
+        break;
+    case EM_FLOOR_LIGHT:
+        //change light
+        break;
+    case EM_CEILING_LIGHT:
+        //change light
+        break;
+    case EM_MEDIA:
+        //change media
+        break;
+    case EM_FLOOR_TEXTURE:
+        //change texture
+        break;
+    case EM_CEILING_TEXTURE:
+        //change texture
+        break;
+    default:
+        AfxMessageBox(L"Illigal edit mode!");
+    }
+    this->Invalidate(FALSE);
     CView::OnLButtonDown(nFlags, point);
     SetCapture();
 }
@@ -374,16 +413,15 @@ void CMapEditorSDIView::OnMouseMove(UINT nFlags, CPoint point)
     const int DIV = theApp.zoomDivision;
 
     if(theApp.selectingToolType == TI_ARROW){
-        if(nFlags & MK_LBUTTON && nFlags & MK_CONTROL && theApp.isPressLButtonWithShift){
+        if(nFlags & MK_LBUTTON && nFlags & MK_CONTROL && theApp.isPressLButtonWithCtrl){
             //Control+L=move map view
             //差
             int deltaX = point.x - theApp.oldMousePoint.x;
             int deltaY = point.y - theApp.oldMousePoint.y;
             theApp.offset.x += deltaX;
             theApp.offset.y += deltaY;
-            this->Invalidate(FALSE);
             
-        }else if(!theApp.isPressLButtonWithShift && 
+        }else if(!theApp.isPressLButtonWithCtrl && 
             (nFlags & MK_LBUTTON) && /*!(nFlags & MK_CONTROL) && */
             !(nFlags & MK_CONTROL))
         {
@@ -428,38 +466,20 @@ void CMapEditorSDIView::OnMouseMove(UINT nFlags, CPoint point)
                     SavedObjectList[selData->index].location.x = x + selData->offset[0] * DIV;
                     SavedObjectList[selData->index].location.y = y + selData->offset[1] * DIV;
                 }
-            }else if(!theApp.isSelectingGroup && theApp.selectType != _no_selected){
-                //single selection
-                //->move it
-                if(theApp.selectType == _selected_object){
-                    SavedObjectList[theApp.selectIndex].location.x = x;
-                    SavedObjectList[theApp.selectIndex].location.y = y;
+                
+                //if selecting is only 1 object. setup property dialog
+                if(theApp.selectGroupInformation.isSelectOneObject()){
                     //オブジェクト情報更新
-                    theApp.objectPropertyDialog->setupDialog(theApp.selectIndex);
-                }else if(theApp.selectType == _selected_point){
-                    EndpointList[theApp.selectIndex].vertex.x = x;
-                    EndpointList[theApp.selectIndex].vertex.y = y;
-                }else if(theApp.selectType == _selected_line){
-                    EndpointList[LineList[theApp.selectIndex].endpoint_indexes[0]].vertex.x = 
-                        (world_distance)(x + theApp.polygonPoints[0].x * theApp.zoomDivision);
-                    EndpointList[LineList[theApp.selectIndex].endpoint_indexes[0]].vertex.y = 
-                        (world_distance)(y + theApp.polygonPoints[0].y * theApp.zoomDivision);
-                    EndpointList[LineList[theApp.selectIndex].endpoint_indexes[1]].vertex.x = 
-                        (world_distance)(x + theApp.polygonPoints[1].x * theApp.zoomDivision);
-                    EndpointList[LineList[theApp.selectIndex].endpoint_indexes[1]].vertex.y = 
-                        (world_distance)(y + theApp.polygonPoints[1].y * theApp.zoomDivision);
-                }else if(theApp.selectType == _selected_polygon){
-                    for(int j = 0; j < theApp.polygonPointNum; j ++){
-                        EndpointList[PolygonList[theApp.selectIndex].endpoint_indexes[j]].vertex.x =
-                            (world_distance)(x + theApp.polygonPoints[j].x * theApp.zoomDivision);
-                        EndpointList[PolygonList[theApp.selectIndex].endpoint_indexes[j]].vertex.y =
-                            (world_distance)(y + theApp.polygonPoints[j].y * theApp.zoomDivision);
-                    }
+                    theApp.objectPropertyDialog->setupDialog(theApp.selectGroupInformation.selObjects[0].index);
+                }else if(theApp.selectGroupInformation.isSelectOnePoint()){
+                }else if(theApp.selectGroupInformation.isSelectOneLine()){
+                }else if(theApp.selectGroupInformation.isSelectOnePolygon()){
+                    theApp.polygonPropertyDialog->setupDialog(theApp.selectGroupInformation.polygons[0].index);
                 }
             }
-            Invalidate(FALSE);
         }
     }
+    Invalidate(FALSE);
     theApp.oldMousePoint = point;
 
     CView::OnMouseMove(nFlags, point);
@@ -469,7 +489,7 @@ void CMapEditorSDIView::OnMouseMove(UINT nFlags, CPoint point)
 void CMapEditorSDIView::OnLButtonUp(UINT nFlags, CPoint point)
 {
     // TODO: ここにメッセージ ハンドラ コードを追加するか、既定の処理を呼び出します。
-    theApp.isPressLButtonWithShift = false;
+    theApp.isPressLButtonWithCtrl = false;
     bool okSelect = false;
     if(theApp.isSelectingGroup){
         /*if(isNearbyPoints(point.x, point.y, 
@@ -484,7 +504,6 @@ void CMapEditorSDIView::OnLButtonUp(UINT nFlags, CPoint point)
     }
     if(okSelect){
         theApp.selectGroupInformation.clear();
-        theApp.selectType = _no_selected;
 
         int DIV = theApp.zoomDivision;
         int OFFSET_X_VIEW = theApp.offset.x;

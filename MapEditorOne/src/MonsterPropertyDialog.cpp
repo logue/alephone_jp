@@ -100,10 +100,7 @@ void CMonsterPropertyDialog::OnClose()
 
 void CMonsterPropertyDialog::setupDialog(int indexOfSavedObjectList)
 {
-    if(!theApp.isObjectPropertyDialogShow){
-        theApp.isObjectPropertyDialogShow = TRUE;
-        ShowWindow(TRUE);
-    }
+    ShowWindow(TRUE);
     if(indexOfSavedObjectList > (int)SavedObjectList.size()){
         MessageBox(L"Out of index(object property)");
         return;
@@ -313,7 +310,6 @@ BOOL CMonsterPropertyDialog::DestroyWindow()
 {
     // TODO: ここに特定なコードを追加するか、もしくは基本クラスを呼び出してください。
     this->ShowWindow(FALSE);
-    theApp.isObjectPropertyDialogShow = FALSE;
     return TRUE;//CDialog::DestroyWindow();
 }
 ////////////////////////////////////

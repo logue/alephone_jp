@@ -52,6 +52,8 @@ BEGIN_MESSAGE_MAP(CMapEditorSDIView, CView)
     ON_COMMAND(ID_HEIGHT_FLOOR, &CMapEditorSDIView::OnHeightFloor)
     ON_WM_RBUTTONDOWN()
     ON_WM_RBUTTONUP()
+    ON_COMMAND(ID_MODE_POLYGONTYPE, &CMapEditorSDIView::OnModePolygontype)
+    ON_COMMAND(ID_32808, &CMapEditorSDIView::On32808)
 END_MESSAGE_MAP()
 
 // CMapEditorSDIView コンストラクション/デストラクション
@@ -77,141 +79,94 @@ BOOL CMapEditorSDIView::PreCreateWindow(CREATESTRUCT& cs)
 
 // CMapEditorSDIView 描画
 
-void CMapEditorSDIView::OnDraw(CDC* pDC)
+void CMapEditorSDIView::drawBackground(CDC *cdc)
 {
-	CMapEditorSDIDoc* pDoc = GetDocument();
-	ASSERT_VALID(pDoc);
-	if (!pDoc)
-		return;
+    CRect winRect;
+    GetClientRect(&winRect);
 
-	// TODO: この場所にネイティブ データ用の描画コードを追加します。
-    CPen redSmallPen, blackSmallPen, yellowSmallPen, graySmallPen,
-        redMidiumPen, grayMidiumPen, blueSmallPen, selectPen;
-    redSmallPen.CreatePen(PS_SOLID, 1, RGB(255,0,0));
-    blackSmallPen.CreatePen(PS_SOLID, 1, RGB(0,0,0));
-    yellowSmallPen.CreatePen(PS_SOLID, 1, RGB(255,255,0));
-    redMidiumPen.CreatePen(PS_SOLID, 2, RGB(255,0,0));
-    blueSmallPen.CreatePen(PS_SOLID, 1, RGB(0,0,255));
-    graySmallPen.CreatePen(PS_SOLID, 1, RGB(200,200,200));
-    grayMidiumPen.CreatePen(PS_SOLID, 2, RGB(200,200,200));
-    selectPen.CreatePen(PS_DASH, 1, RGB(255,0,0));
+    CBrush brush;
+    brush.CreateSolidBrush(theApp.setting.getColorSetting()->background);
 
-    CBrush grayBrush, redBrush, yellowBrush, nullBrush,
-        netBrush, blueBrush;
+    //cdc->SelectObject(&blackSmallPen);
+    cdc->SelectObject(brush);
+    cdc->Rectangle(&winRect);
+
+    brush.DeleteObject();
+}
+
+void CMapEditorSDIView::drawGrid(CDC *cdc)
+{
+    CPen smallPen, midiumPen;
+    smallPen.CreatePen(PS_SOLID, 1, theApp.setting.getColorSetting()->gridLine);
+    midiumPen.CreatePen(PS_SOLID, 2, theApp.setting.getColorSetting()->gridLine);
+
+    int OFFSET_X_VIEW = theApp.offset.x;
+    int OFFSET_Y_VIEW = theApp.offset.y;
+    int DIV = theApp.zoomDivision;
+
+    for(int i = OFFSET_X_WORLD / DIV; i <= OFFSET_X_WORLD * 2 / DIV;
+            i += theApp.gridIntervals[theApp.setting.getGridSizeIndex()] / DIV){
+        if( i == OFFSET_X_WORLD / DIV){
+            cdc->SelectObject(midiumPen);
+        }else{
+            cdc->SelectObject(smallPen);
+        }
+        int x0 = OFFSET_X_VIEW + i;
+        int y0 = OFFSET_Y_VIEW + i;
+
+        cdc->MoveTo(x0, OFFSET_Y_VIEW);
+        cdc->LineTo(x0, OFFSET_Y_VIEW + OFFSET_Y_WORLD * 2 / DIV);
+        cdc->MoveTo(OFFSET_X_VIEW, y0);
+        cdc->LineTo(OFFSET_X_VIEW + OFFSET_X_WORLD * 2 / DIV, y0);
+    }
+    for(int i = OFFSET_X_WORLD / DIV; i >= 0;
+        i -= theApp.gridIntervals[theApp.setting.getGridSizeIndex()] / DIV){
+        if( i == OFFSET_X_WORLD / DIV){
+            cdc->SelectObject(midiumPen);
+        }else{
+            cdc->SelectObject(smallPen);
+        }
+        int x0 = OFFSET_X_VIEW + i;
+        int y0 = OFFSET_Y_VIEW + i;
+
+        cdc->MoveTo(x0, OFFSET_Y_VIEW);
+        cdc->LineTo(x0, OFFSET_Y_VIEW + OFFSET_Y_WORLD * 2 / DIV);
+        cdc->MoveTo(OFFSET_X_VIEW, y0);
+        cdc->LineTo(OFFSET_X_VIEW + OFFSET_X_WORLD * 2 / DIV, y0);
+    }
+    smallPen.DeleteObject();
+    midiumPen.DeleteObject();
+}
+
+void CMapEditorSDIView::drawPolygons(CDC *cdc)
+{
+    CBrush nullBrush, netBrush;
+
+    //for polygon type mode
     CBrush polygonBrushes[NUMBER_OF_POLYGON_TYPE];
     for(int i = 0; i < NUMBER_OF_POLYGON_TYPE; i ++){
         polygonBrushes[i].CreateSolidBrush(theApp.polygonTypeColor[i]);
     }
-    grayBrush.CreateSolidBrush(RGB(100, 100, 100));
-    redBrush.CreateSolidBrush(RGB(255,0,0));
-    yellowBrush.CreateSolidBrush(RGB(255,255,0));
-    blueBrush.CreateSolidBrush(RGB(0,0,255));
-    LOGBRUSH logBrush = {
-        BS_NULL, 0, 0};
-    nullBrush.CreateBrushIndirect(&logBrush);
+
+    //setup selected polygon
     CBitmap bmp;
     bmp.LoadBitmap(IDB_BITMAP_PATTERN_SELECTED_POLYGON);
     netBrush.CreatePatternBrush(&bmp);
     bmp.DeleteObject();
 
-    CPen* oldPen = pDC->SelectObject(&blackSmallPen);
-    CBrush* oldBrush = pDC->SelectObject(&grayBrush);
-    
-    //ビットマップ読み込み
-    /*CBitmap monsterBitmap, itemBitmap, scenaryBitmap, goalBitmap;
-    CBitmap soundBitmap;
-    monsterBitmap.LoadBitmapW(IDB_BITMAP1);
-    itemBitmap.LoadBitmapW(IDB_BITMAP_ITEM);
-    scenaryBitmap.LoadBitmapW(IDB_BITMAP_SCENARY);
-    goalBitmap.LoadBitmapW(IDB_BITMAP_GOAL);
-    soundBitmap.LoadBitmapW(IDB_BITMAP_SOUND);
-    */
-    CDC memDC;
-    memDC.CreateCompatibleDC(pDC);
-    CBitmap* oldBitmap = memDC.GetCurrentBitmap();
+    CPen pen;
+    pen.CreatePen(PS_SOLID, 1, theApp.setting.getColorSetting()->lines);
 
-
-    int OFFSET_X_VIEW = theApp.offset.x;
-    int OFFSET_Y_VIEW = theApp.offset.y;
-    int DIV = theApp.zoomDivision;
-    int ICON_SIZE = 16;
-
-    CDC *cdc = &theApp.doubleBufferDC;
-    cdc->SetBkColor(RGB(200,200,200));
-    //CDC doubleBufferDC;
-    //doubleBufferDC.CreateCompatibleDC(pDC);
-
-    CRect winRect;
-    GetClientRect(&winRect);
-
-    //背景
-    {
-        cdc->SelectObject(&blackSmallPen);
-        cdc->SelectObject(&grayBrush);
-        cdc->Rectangle(&winRect);
-    }
-
-    //範囲
-    {
-        cdc->SelectObject(blackSmallPen);
-        cdc->SelectObject(oldBrush);
-        RECT rect;//, winRect;
-        //GetClientRect(&winRect);
-        rect.left = OFFSET_X_VIEW;
-        rect.top = OFFSET_Y_VIEW;
-        rect.right = rect.left + OFFSET_X_WORLD * 2 / DIV;
-        rect.bottom = rect.top + OFFSET_Y_WORLD * 2 / DIV;
-        cdc->Rectangle(&rect);
-    }
-    /*pDC->BitBlt(0,0,winRect.Width(), winRect.Height(),
-        &doubleBufferDC, 0,0, SRCCOPY);
-    doubleBufferDC.DeleteDC();
-*/
-
-    //グリッド
-    {
-        cdc->SelectObject(graySmallPen);
-        for(int i = OFFSET_X_WORLD / DIV; i <= OFFSET_X_WORLD * 2 / DIV; i += theApp.gridIntervals[theApp.nowGridInterval] / DIV){
-            if( i == OFFSET_X_WORLD / DIV){
-                cdc->SelectObject(grayMidiumPen);
-            }else{
-                cdc->SelectObject(graySmallPen);
-            }
-            int x0 = OFFSET_X_VIEW + i;
-            int y0 = OFFSET_Y_VIEW + i;
-
-            cdc->MoveTo(x0, OFFSET_Y_VIEW);
-            cdc->LineTo(x0, OFFSET_Y_VIEW + OFFSET_Y_WORLD * 2 / DIV);
-            cdc->MoveTo(OFFSET_X_VIEW, y0);
-            cdc->LineTo(OFFSET_X_VIEW + OFFSET_X_WORLD * 2 / DIV, y0);
-        }
-        for(int i = OFFSET_X_WORLD / DIV; i >= 0; i -= theApp.gridIntervals[theApp.nowGridInterval] / DIV){
-            if( i == OFFSET_X_WORLD / DIV){
-                cdc->SelectObject(grayMidiumPen);
-            }else{
-                cdc->SelectObject(graySmallPen);
-            }
-            int x0 = OFFSET_X_VIEW + i;
-            int y0 = OFFSET_Y_VIEW + i;
-
-            cdc->MoveTo(x0, OFFSET_Y_VIEW);
-            cdc->LineTo(x0, OFFSET_Y_VIEW + OFFSET_Y_WORLD * 2 / DIV);
-            cdc->MoveTo(OFFSET_X_VIEW, y0);
-            cdc->LineTo(OFFSET_X_VIEW + OFFSET_X_WORLD * 2 / DIV, y0);
-        }
-
-    }
-    //TODO sort by HEIGHT!
-
-    //ポリゴン
-    //pDC->SelectObject(&grayBrush);
     int fillMode = WINDING;
     SetPolyFillMode(cdc->m_hDC, fillMode);
+    cdc->SelectObject(&pen);
+
     POINT points[MAXIMUM_VERTICES_PER_POLYGON];
     //sort order from index to height
     int *indexes = new int[PolygonList.size()];
     //sort it by floor
     //sortOrderToHeight((int)PolygonList.size(), POLYGON_TAG, indexes, true);
+
     for(int i = 0; i < (int)PolygonList.size(); i ++){
         int index = i;//indexes[i];
         struct polygon_data* polygon = &PolygonList[index];
@@ -228,13 +183,20 @@ void CMapEditorSDIView::OnDraw(CDC* pDC)
         }
         for(int j = 0; j < vertexCount; j ++){
             endpoint_data* ep = &EndpointList[polygon->endpoint_indexes[j]];
-            points[j].x = (ep->vertex.x + OFFSET_X_WORLD) / DIV + OFFSET_X_VIEW;
-            points[j].y = (ep->vertex.y + OFFSET_Y_WORLD) / DIV + OFFSET_Y_VIEW;
+            int viewPoint[2];
+            getViewPointFromWorldPoint2D(ep->vertex, viewPoint);
+            points[j].x = viewPoint[0];
+            points[j].y = viewPoint[1];
         }
         CBrush brush;
-        int type = polygon->type;
+        int type = 0;
         switch(theApp.getEditMode()){
         case EM_DRAW:
+            brush.CreateSolidBrush(theApp.setting.getColorSetting()->polygons);
+            cdc->SelectObject(&brush);
+            break;
+        case EM_POLYGON_TYPE:
+            type = polygon->type;
             cdc->SelectObject(&polygonBrushes[type]);
             break;
         case EM_FLOOR_HEIGHT:
@@ -249,12 +211,10 @@ void CMapEditorSDIView::OnDraw(CDC* pDC)
             cdc->SelectObject(&brush);
             break;
         default:
-            cdc->SelectObject(&grayBrush);
+            brush.CreateSolidBrush(theApp.setting.getColorSetting()->polygons);
+            cdc->SelectObject(&brush);
         }
         bool selected = false;
-        if(theApp.selectType == _selected_polygon && theApp.selectIndex == i){
-            selected = true;
-        }
         if(theApp.selectGroupInformation.isSelected()){
             for(int k = 0; k < (int)theApp.selectGroupInformation.polygons.size(); k ++){
                 if(theApp.selectGroupInformation.polygons[k].index == index){
@@ -270,34 +230,38 @@ void CMapEditorSDIView::OnDraw(CDC* pDC)
         }
         Polygon(cdc->m_hDC, points, vertexCount);
 
-        if(theApp.getEditMode() == EM_FLOOR_HEIGHT){
-            brush.DeleteObject();
-        }
+        brush.DeleteObject();
     }
     delete indexes;
 
-    //線
+    pen.DeleteObject();
+    netBrush.DeleteObject();
+    nullBrush.DeleteObject();
+}
+
+void CMapEditorSDIView::drawLines(CDC *cdc)
+{
+    CPen pen, selectedPen;
+    pen.CreatePen(PS_SOLID, 1, theApp.setting.getColorSetting()->lines);
+    selectedPen.CreatePen(PS_SOLID, 2, RGB(255,0,0));
+
     for(int i = 0; i < (int)LineList.size(); i ++){
-        cdc->SelectObject(&blackSmallPen);
         line_data* line = &LineList[i];
         endpoint_data* begin = &EndpointList[line->endpoint_indexes[0]];
         endpoint_data* end = &EndpointList[line->endpoint_indexes[1]];
-        int x0 = (begin->vertex.x + OFFSET_X_WORLD) / DIV + OFFSET_X_VIEW;
-        int y0 = (begin->vertex.y + OFFSET_Y_WORLD) / DIV + OFFSET_Y_VIEW;
-        int x1 = (end->vertex.x + OFFSET_X_WORLD) / DIV + OFFSET_X_VIEW;
-        int y1 = (end->vertex.y + OFFSET_Y_WORLD) / DIV + OFFSET_Y_VIEW;
-        int floor = begin->highest_adjacent_floor_height;
-        int ceil = begin->lowest_adjacent_ceiling_height;
+        int floor = line->highest_adjacent_floor;
+        int ceil = line->lowest_adjacent_ceiling;
         if( floor < theApp.viewHeightMin ||
             ceil > theApp.viewHeightMax){
                 continue;
         }
 
+        int beginPoint[2], endPoint[2];
+        getViewPointFromWorldPoint2D(begin->vertex, beginPoint);
+        getViewPointFromWorldPoint2D(end->vertex, endPoint);
+
         //選択中は太い赤線で
         bool selected = false;
-        if(theApp.selectType == _selected_line && theApp.selectIndex == i){
-            selected = true;
-        }
         if(theApp.selectGroupInformation.isSelected()){
             for(int k = 0; k < (int)theApp.selectGroupInformation.lines.size(); k ++){
                 if(theApp.selectGroupInformation.lines[k].index == i){
@@ -307,16 +271,30 @@ void CMapEditorSDIView::OnDraw(CDC* pDC)
             }
         }
         if(selected){
-            cdc->SelectObject(&redMidiumPen);
+            cdc->SelectObject(&selectedPen);
+
+            if(theApp.selectGroupInformation.sideIndex != NONE){
+                //side表示
+            }
+        }else{
+            cdc->SelectObject(&pen);
         }
 
-        cdc->MoveTo(x0, y0);
-        cdc->LineTo(x1, y1);
+        cdc->MoveTo(beginPoint[0], beginPoint[1]);
+        cdc->LineTo(endPoint[0], endPoint[1]);
     }
+    pen.DeleteObject();
+    selectedPen.DeleteObject();
+}
 
-    //ポイント
-    cdc->SelectObject(&blueSmallPen);
-    cdc->SelectObject(&yellowBrush);
+void CMapEditorSDIView::drawPoints(CDC *cdc)
+{
+    CPen pen, selectedPen;
+    pen.CreatePen(PS_SOLID, 1, theApp.setting.getColorSetting()->points);
+    selectedPen.CreatePen(PS_SOLID, 2, RGB(255,0,0));
+    CBrush brush;
+    brush.CreateSolidBrush(theApp.setting.getColorSetting()->points);
+
     for(int i = 0; i < (int)EndpointList.size(); i ++){
         endpoint_data* ep = &EndpointList[i];
         int floor = ep->highest_adjacent_floor_height;
@@ -325,27 +303,24 @@ void CMapEditorSDIView::OnDraw(CDC* pDC)
             ceil > theApp.viewHeightMax){
                 continue;
         }
-        int x = ep->vertex.x;
-        int y = ep->vertex.y;
-        int drawX = (x + OFFSET_X_WORLD)/DIV + OFFSET_X_VIEW;
-        int drawY = (y + OFFSET_Y_WORLD)/DIV + OFFSET_Y_VIEW;
+        int drawPoint[2];
+        getViewPointFromWorldPoint2D(ep->vertex, drawPoint);
+        int drawX = drawPoint[0];
+        int drawY = drawPoint[1];
         RECT rect;
-        int SIZE = 1;
+        int SIZE = 2;
         rect.left = drawX - SIZE;
         rect.right = drawX + SIZE;
         rect.top = drawY - SIZE;
         rect.bottom = drawY + SIZE;
 
         //点を打つ
-        cdc->SelectObject(&blueSmallPen);
-        cdc->SelectObject(&yellowBrush);
+        cdc->SelectObject(&pen);
+        cdc->SelectObject(&brush);
         cdc->Rectangle(&rect);
 
         //選択中はしるしを。
         bool selected = false;
-        if(theApp.selectType == _selected_point && theApp.selectIndex == i){
-            selected = true;
-        }
         if(theApp.selectGroupInformation.isSelected()){
             for(int k = 0; k < (int)theApp.selectGroupInformation.points.size(); k ++){
                 if(theApp.selectGroupInformation.points[k].index == i){
@@ -355,9 +330,9 @@ void CMapEditorSDIView::OnDraw(CDC* pDC)
             }
         }
         if( selected){
-            cdc->SelectObject(&redMidiumPen);
+            cdc->SelectObject(&selectedPen);
             //cdc->SetBkMode(TRANSPARENT);
-            cdc->SelectObject(&nullBrush);
+            cdc->SelectObject(GetStockObject(NULL_BRUSH));
             RECT rect;
             int SIZE = 5;
             rect.left = drawX - SIZE;
@@ -367,10 +342,39 @@ void CMapEditorSDIView::OnDraw(CDC* pDC)
             cdc->Rectangle(&rect);
         }
     }
+    pen.DeleteObject();
+    brush.DeleteObject();
+    selectedPen.DeleteObject();
+}
+void CMapEditorSDIView::drawObjects(CDC *cdc)
+{
+    //ready for bitmap blit
+    CDC memDC;
+    memDC.CreateCompatibleDC(cdc);
+    CBitmap* oldBitmap = memDC.GetCurrentBitmap();
 
-    //オブジェクト
-    cdc->SelectObject(&blackSmallPen);
-    SetPolyFillMode(pDC->m_hDC, fillMode);
+    CPen monsterPen, selectedMonsterPen;
+    CBrush playerBrush, selectedPlayerBrush;
+    CBrush monsterBrush, selectedMonsterBrush;
+    CBrush bobBrush, selectedBobBrush;
+
+    monsterPen.CreatePen(PS_SOLID, 1, theApp.setting.getColorSetting()->lines);
+    selectedMonsterPen.CreatePen(PS_SOLID, 1, RGB(255,0,0));
+    //yellow
+    playerBrush.CreateSolidBrush(RGB(255,255,0));
+    //purple
+    selectedPlayerBrush.CreateSolidBrush(RGB(255,0,255));
+    //red
+    monsterBrush.CreateSolidBrush(RGB(255,0,0));
+    //green
+    selectedMonsterBrush.CreateSolidBrush(RGB(0,255,0));
+    //blue
+    bobBrush.CreateSolidBrush(RGB(0,0,255));
+    //gray-blue
+    selectedBobBrush.CreateSolidBrush(RGB(100,100,255));
+
+    int fillMode = WINDING;
+    SetPolyFillMode(cdc->m_hDC, fillMode);
     for(int i = 0; i < (int)SavedObjectList.size(); i ++){
         map_object* obj = &(SavedObjectList[i]);
         int type = obj->type;
@@ -386,14 +390,18 @@ void CMapEditorSDIView::OnDraw(CDC* pDC)
             continue;
         }
 
-        int drawX = (x + OFFSET_X_WORLD)/DIV + OFFSET_X_VIEW;
-        int drawY = (y + OFFSET_Y_WORLD)/DIV + OFFSET_Y_VIEW;
+        int drawPoint[2];
+        world_point2d worldPoint = {x,y};
+        getViewPointFromWorldPoint2D(worldPoint, drawPoint);
+        int drawX = drawPoint[0];
+        int drawY = drawPoint[1];
 
-        //bitmap表示
         int index = -1;
         if(type == _saved_monster || type == _saved_player){
+            //draw with pen and brush
             index = -1;
         }else if(type == _saved_item){
+            //draw with bmp
             index = obj->index;
         }else if(type == _saved_object){
             //scenery
@@ -404,42 +412,65 @@ void CMapEditorSDIView::OnDraw(CDC* pDC)
             //sound
             index = NUMBER_OF_DEFINED_ITEMS + MI_Sound;
         }
+
+        //check for selecting
+        bool isSelected = false;
+        for(int k = 0; k < (int)theApp.selectGroupInformation.selObjects.size(); k ++){
+            if(theApp.selectGroupInformation.selObjects[k].index == i){
+                isSelected = true;
+                break;
+            }
+        }
+
         if(index >= 0){
-            //IMAGEINFO info;
-            //theApp.mapIconImageList.GetImageInfo(index, &info);
+            if(isSelected){
+                //highlight!
+                index += NUMBER_OF_DEFINED_ITEMS + NUMBER_OF_MAP_ICONS;
+            }
             CBitmap* bitmap = theApp.bitmapList[index];
             BITMAP bmp;
             CSize sz = bitmap->GetBitmap(&bmp);
             sz.cx = bmp.bmWidth;
             sz.cy = bmp.bmHeight;
-            //COLORREF clrBk = RGB(221,221,221);
-            //COLORREF clrFg = RGB(255,255,255);
-            //theApp.mapIconImageList.Draw(cdc,
-            //    index, pt, ILD_TRANSPARENT);
             memDC.SelectObject(bitmap);
             ::TransparentBlt(cdc->m_hDC, drawX - sz.cx / 2, drawY - sz.cy / 2,
                 sz.cx, sz.cy, memDC.m_hDC,
                 0, 0, sz.cx, sz.cy, RGB(221,221,221));
-
-        }
-
-        if(type == _saved_monster || type == _saved_player){
-            cdc->SelectObject(blackSmallPen);
+        }else{
+            //without bmp
+            if(isSelected){
+                cdc->SelectObject(selectedMonsterPen);
+            }else{
+                cdc->SelectObject(monsterPen);
+            }
             if(type == _saved_monster){
                 if(obj->index >= _civilian_crew &&
                     obj->index <= _civilian_security ||
                     obj->index >= _civilian_fusion_crew &&
                     obj->index <= _civilian_fusion_security)
                 {
-                    //青
-                    cdc->SelectObject(&blueBrush);
+                    //bobs
+                    if(isSelected){
+                        cdc->SelectObject(&selectedBobBrush);
+                    }else{
+                        cdc->SelectObject(&bobBrush);
+                    }
                 }else{
-                    //赤
-                    cdc->SelectObject(&redBrush);
+                    //other monsters
+                    cdc->SelectObject(monsterPen);
+                    if(isSelected){
+                        cdc->SelectObject(&selectedMonsterBrush);
+                    }else{
+                        cdc->SelectObject(&monsterBrush);
+                    }
                 }
             }else{
-                //プレイヤーは黄色
-                cdc->SelectObject(&yellowBrush);
+                //player
+                if(isSelected){
+                    cdc->SelectObject(&selectedPlayerBrush);
+                }else{
+                    cdc->SelectObject(&playerBrush);
+                }
             }
             int facing = obj->facing;
             double degree = (double)facing / (1<<ANGULAR_BITS) * 360.0;
@@ -456,23 +487,9 @@ void CMapEditorSDIView::OnDraw(CDC* pDC)
             cdc->Polygon(points, 3);
         }
 
-        cdc->SetBkMode(TRANSPARENT);
+        //cdc->SetBkMode(TRANSPARENT);
 
-        bool isSelected = false;
-        //選択中はしるしを。
-        if(theApp.selectType == _selected_object){
-            if( theApp.selectIndex == i){
-                isSelected = true;
-            }
-        }else{
-            for(int k = 0; k < (int)theApp.selectGroupInformation.selObjects.size(); k ++){
-                if(theApp.selectGroupInformation.selObjects[k].index == i){
-                    isSelected = true;
-                    break;
-                }
-            }
-        }
-        if(isSelected){
+        /*if(isSelected){
             cdc->SelectObject(&redMidiumPen);
             cdc->SelectObject(&nullBrush);
             RECT rect;
@@ -482,23 +499,92 @@ void CMapEditorSDIView::OnDraw(CDC* pDC)
             rect.top = drawY - SIZE;
             rect.bottom = rect.top + SIZE * 2;
             cdc->Rectangle(&rect);
-        }
+        }*/
 
+    }
+
+    memDC.DeleteDC();
+}
+
+void CMapEditorSDIView::drawStrings(CDC *cdc)
+{
+
+    cdc->SetTextColor(theApp.setting.getColorSetting()->strings);
+    for(int i = 0; i < (int)MapAnnotationList.size(); i ++){
+        map_annotation *annotation = &MapAnnotationList[i];
+        int drawPoint[2];
+        getViewPointFromWorldPoint2D(annotation->location, drawPoint);
+
+        //message
+        CString msg(annotation->text);
+        //RECT clientRect;
+        //GetClientRect(&clientRect);
+        cdc->TextOut(drawPoint[0], drawPoint[1], msg, msg.GetLength());
+    }
+    cdc->SetTextColor(RGB(0,0,0));
+}
+
+void CMapEditorSDIView::OnDraw(CDC* pDC)
+{
+	CMapEditorSDIDoc* pDoc = GetDocument();
+	ASSERT_VALID(pDoc);
+	if (!pDoc)
+		return;
+
+	// TODO: この場所にネイティブ データ用の描画コードを追加します。
+
+
+    CDC *cdc = &theApp.doubleBufferDC;
+    cdc->SetBkColor(RGB(200,200,200));
+    //CDC doubleBufferDC;
+    //doubleBufferDC.CreateCompatibleDC(pDC);
+
+    CRect winRect;
+    GetClientRect(&winRect);
+
+    //背景
+    drawBackground(cdc);
+
+    //範囲
+    {
+        int OFFSET_X_VIEW = theApp.offset.x;
+        int OFFSET_Y_VIEW = theApp.offset.y;
+        int DIV = theApp.zoomDivision;
+        int ICON_SIZE = 16;
+
+        CPen pen;
+        pen.CreatePen(PS_SOLID, 1, theApp.setting.getColorSetting()->gridLine);
+        cdc->SelectObject(pen);
+        cdc->SelectObject(GetStockObject(NULL_BRUSH));
+        RECT rect;
+        rect.left = OFFSET_X_VIEW;
+        rect.top = OFFSET_Y_VIEW;
+        rect.right = rect.left + OFFSET_X_WORLD * 2 / DIV;
+        rect.bottom = rect.top + OFFSET_Y_WORLD * 2 / DIV;
+        cdc->Rectangle(&rect);
+        pen.DeleteObject();
+    }
+
+    //グリッド
+    drawGrid(cdc);
+
+    //TODO sort by HEIGHT!
+
+    //ポリゴン
+    drawPolygons(cdc);
+
+    //線
+    drawLines(cdc);
+
+    //ポイント
+    drawPoints(cdc);
+
+    if(theApp.getEditMode() == EM_DRAW){
+        drawObjects(cdc);
     }
 
     //アノテーション（マップに表示される文字）の描画
-    cdc->SetTextColor(RGB(0,0,0));
-    for(int i = 0; i < (int)MapAnnotationList.size(); i ++){
-        map_annotation *annotation = &MapAnnotationList[i];
-        int x = annotation->location.x;
-        int y = annotation->location.y;
-        int drawX = (x + OFFSET_X_WORLD)/DIV + OFFSET_X_VIEW;
-        int drawY = (y + OFFSET_Y_WORLD)/DIV + OFFSET_Y_VIEW;
-        CString msg(annotation->text);
-        RECT clientRect;
-        GetClientRect(&clientRect);
-        cdc->TextOut(drawX, drawY, msg, msg.GetLength());
-    }
+    drawStrings(cdc);
 
     //選択範囲
     if(theApp.isSelectingGroup){
@@ -509,11 +595,16 @@ void CMapEditorSDIView::OnDraw(CDC* pDC)
             selecting = true;
         }*/
         if(selecting){
-            cdc->SelectObject(&nullBrush);
-            cdc->SelectObject(&selectPen);
+            CPen pen;
+            pen.CreatePen(PS_DASH, 1, RGB(255,0,0));
+
+            cdc->SelectObject(GetStockObject(NULL_BRUSH));
+            cdc->SelectObject(&pen);
 
             cdc->Rectangle(theApp.selectStartPoint.x, theApp.selectStartPoint.y,
                 theApp.nowMousePoint.x, theApp.nowMousePoint.y);
+
+            pen.DeleteObject();
         }
     }
 
@@ -521,37 +612,9 @@ void CMapEditorSDIView::OnDraw(CDC* pDC)
     pDC->BitBlt(0,0,winRect.Width(), winRect.Height(), 
         cdc, 0, 0, SRCCOPY);
 
-    cdc->SelectObject(&oldPen);
+    /*cdc->SelectObject(&oldPen);
     cdc->SelectObject(&oldBrush);
-
-    redSmallPen.DeleteObject();
-    blackSmallPen.DeleteObject();
-    yellowSmallPen.DeleteObject();
-    redMidiumPen.DeleteObject();
-    graySmallPen.DeleteObject();
-    grayMidiumPen.DeleteObject();
-    blueSmallPen.DeleteObject();
-    selectPen.DeleteObject();
-
-    grayBrush.DeleteObject();
-    redBrush.DeleteObject();
-    yellowBrush.DeleteObject();
-    blueBrush.DeleteObject();
-    for(int i = 0; i < NUMBER_OF_POLYGON_TYPE; i ++){
-        polygonBrushes[i].DeleteObject();
-    }
-    nullBrush.DeleteObject();
-    netBrush.DeleteObject();
-
-    memDC.SelectObject(oldBitmap);
-    memDC.DeleteDC();
-/*    
-    monsterBitmap.DeleteObject();
-    itemBitmap.DeleteObject();
-    scenaryBitmap.DeleteObject();
-    goalBitmap.DeleteObject();
-    soundBitmap.DeleteObject();
-  */  
+    */
 }
 
 
@@ -637,7 +700,6 @@ void CMapEditorSDIView::OnInitialUpdate()
         theApp.objectPropertyDialog = new CMonsterPropertyDialog;
         theApp.objectPropertyDialog->Create(this);
         //隠す
-        theApp.isObjectPropertyDialogShow = FALSE;
         theApp.objectPropertyDialog->ShowWindow(FALSE);
         //値をデフォルトに設定
         setObjectPropertyToDefault();
@@ -645,7 +707,6 @@ void CMapEditorSDIView::OnInitialUpdate()
         //polygon type dialog
         theApp.polygonTypeDialog = new CPolygonTypeDialog;
         theApp.polygonTypeDialog->Create(this);
-        theApp.isPolygonTypeDialogShow = FALSE;
         theApp.polygonTypeDialog->ShowWindow(FALSE);
 
         //height dialog
@@ -655,13 +716,11 @@ void CMapEditorSDIView::OnInitialUpdate()
         //tool
         theApp.toolDialog = new CToolDialog;
         theApp.toolDialog->Create(this);
-        theApp.isToolDialogShow = TRUE;
         theApp.toolDialog->ShowWindow(TRUE);
 
         //polygon property
         theApp.polygonPropertyDialog = new CPolygonPropertyDialog;
         theApp.polygonPropertyDialog->Create(this);
-        theApp.isPolygonPropertyDialogShow = FALSE;
         theApp.polygonPropertyDialog->ShowWindow(FALSE);
 
         isFirst = false;
@@ -759,53 +818,6 @@ void CMapEditorSDIView::OnInitialUpdate()
         On32795();
     }
 
-}
-//object info dialog on/off
-void CMapEditorSDIView::On32784()
-{
-    // TODO: ここにコマンド ハンドラ コードを追加します。
-    theApp.isObjectPropertyDialogShow = !theApp.isObjectPropertyDialogShow;
-    theApp.objectPropertyDialog->ShowWindow(theApp.isObjectPropertyDialogShow);
-    int flags = MF_BYCOMMAND;
-    if(theApp.isObjectPropertyDialogShow){
-        flags |= MF_CHECKED;
-    }else{
-        flags |= MF_UNCHECKED;
-    }
-    GetMenu()->CheckMenuItem(ID_32784, flags);
-}
-//level information(same to new)
-void CMapEditorSDIView::On32787()
-{
-    // TODO: ここにコマンド ハンドラ コードを追加します。
-    CLevelParameterDialog dlg(this, false);
-    if(dlg.DoModal() == IDOK){
-        //値設定
-    }
-}
-//show/hide height dialog
-void CMapEditorSDIView::On32789()
-{
-    // TODO: ここにコマンド ハンドラ コードを追加します。
-    theApp.isHeightDialogShow = !theApp.isHeightDialogShow;
-    theApp.heightDialog->ShowWindow(theApp.isHeightDialogShow);
-}
-//show/hide polygon type dialog
-void CMapEditorSDIView::On32786()
-{
-    // TODO: ここにコマンド ハンドラ コードを追加します。
-    theApp.isPolygonTypeDialogShow = !theApp.isPolygonTypeDialogShow;
-    theApp.polygonTypeDialog->ShowWindow(theApp.isPolygonTypeDialogShow);
-}
-//edit terminals
-void CMapEditorSDIView::On32790()
-{
-    // TODO: ここにコマンド ハンドラ コードを追加します。
-    CTerminalDialog dlg(this);
-    if(dlg.DoModal() == IDOK){
-        //変更を保存
-
-    }
 }
 
 void CMapEditorSDIView::OnSize(UINT nType, int cx, int cy)
@@ -924,8 +936,7 @@ void CMapEditorSDIView::On32788()
 void CMapEditorSDIView::OnMenu32797()
 {
     // TODO: ここにコマンド ハンドラ コードを追加します。
-    theApp.isToolDialogShow = !theApp.isToolDialogShow;
-    theApp.toolDialog->ShowWindow(theApp.isToolDialogShow);
+    theApp.toolDialog->ShowWindow(!theApp.toolDialog->IsWindowVisible());
 }
 
 BOOL CMapEditorSDIView::OnSetCursor(CWnd* pWnd, UINT nHitTest, UINT message)
@@ -952,31 +963,6 @@ BOOL CMapEditorSDIView::OnSetCursor(CWnd* pWnd, UINT nHitTest, UINT message)
     //return CView::OnSetCursor(pWnd, nHitTest, message);
 }
 
-void CMapEditorSDIView::changeMode(int mode)
-{
-    int oldMode = theApp.getEditMode();
-    int nextMode = mode;
-    theApp.setEditMode(nextMode);
-    //チェックを変更
-    int flags = 0;
-    flags = MF_BYCOMMAND | MF_UNCHECKED;
-    //GetMenu()->CheckMenuItem(theApp.menuIDMap[oldMode], flags);
-    flags = MF_BYCOMMAND | MF_CHECKED;
-    //GetMenu()->CheckMenuItem(theApp.menuIDMap[nextMode], flags);
-    Invalidate(FALSE);
-
-}
-
-//draw polygon mode
-void CMapEditorSDIView::On32795()
-{
-    changeMode(EM_DRAW);
-}
-//height -> floor
-void CMapEditorSDIView::OnHeightFloor()
-{
-    changeMode(EM_FLOOR_HEIGHT);
-}
 
 void CMapEditorSDIView::OnRButtonDown(UINT nFlags, CPoint point)
 {
@@ -1021,4 +1007,22 @@ void CMapEditorSDIView::OnRButtonUp(UINT nFlags, CPoint point)
     Invalidate(FALSE);
     ReleaseCapture();
     CView::OnRButtonUp(nFlags, point);
+}
+
+//Preferences
+void CMapEditorSDIView::On32808()
+{
+    // TODO: ここにコマンド ハンドラ コードを追加します。
+    CEditorInforDialog dlg(AfxGetMainWnd());
+    if(dlg.DoModal() == IDOK){
+        //enable change
+        theApp.setting.setGridSizeIndex(dlg.gridIndex);
+
+        theApp.setting.setColorSetting(&dlg.colorSetting);
+
+        for(int i = 0; i < NUMBER_OF_EDITOR_FLAGS; i ++){
+            theApp.setting.flags[i] = dlg.flags[i];
+        }
+        Invalidate(FALSE);
+    }
 }

@@ -20,6 +20,14 @@ public:
 
 // オーバーライド
 public:
+    void drawBackground(CDC *cdc);
+    void drawGrid(CDC *cdc);
+    void drawPolygons(CDC *cdc);
+    void drawLines(CDC *cdc);
+    void drawPoints(CDC *cdc);
+    void drawObjects(CDC *cdc);
+    void drawStrings(CDC *cdc);
+
 	virtual void OnDraw(CDC* pDC);  // このビューを描画するためにオーバーライドされます。
 	virtual BOOL PreCreateWindow(CREATESTRUCT& cs);
 protected:
@@ -99,6 +107,10 @@ public:
     afx_msg void OnRButtonDown(UINT nFlags, CPoint point);
 public:
     afx_msg void OnRButtonUp(UINT nFlags, CPoint point);
+public:
+    afx_msg void OnModePolygontype();
+public:
+    afx_msg void On32808();
 };
 
 #ifndef _DEBUG  // MapEditorSDIView.cpp のデバッグ バージョン

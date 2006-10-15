@@ -1,8 +1,11 @@
 #pragma once
 
 #include <math.h>
+#include <vector>
 #include "AlephOne/map.h"
 #include "AlephOne/wad.h"
+
+using namespace std;
 
 //////////////////////////////////////////////////////////
 // structures
@@ -36,6 +39,47 @@ struct selectInformation{
         polygons.clear();
         selObjects.clear();
         setSelected(false);
+        sideIndex = NONE;
+    }
+    bool isSelectOneObject(){
+        if(isSelected() && points.size() == 0 && lines.size() == 0 && polygons.size() == 0 &&
+            selObjects.size() == 1)
+        {
+            return true;
+        }else
+        {
+            return false;
+        }
+    }
+    bool isSelectOnePoint(){
+        if(isSelected() && points.size() == 1 && lines.size() == 0 && polygons.size() == 0 &&
+            selObjects.size() == 0)
+        {
+            return true;
+        }else
+        {
+            return false;
+        }
+    }
+    bool isSelectOneLine(){
+        if(isSelected() && points.size() == 0 && lines.size() == 1 && polygons.size() == 0 &&
+            selObjects.size() == 0)
+        {
+            return true;
+        }else
+        {
+            return false;
+        }
+    }
+    bool isSelectOnePolygon(){
+        if(isSelected() && points.size() == 0 && lines.size() == 0 && polygons.size() == 1 &&
+            selObjects.size() == 0)
+        {
+            return true;
+        }else
+        {
+            return false;
+        }
     }
     //点のリスト
     vector<SelPoint> points;
@@ -48,6 +92,8 @@ struct selectInformation{
 
     //オブジェクトリスト
     vector<SelObject> selObjects;
+
+    int sideIndex;
 private:
     bool isSelected_;
 
@@ -173,3 +219,8 @@ double getDegreeFromVector(double dx, double dy);
 void sortOrderToHeight(int max, int type, int *sortedOne, bool isFloor);
 
 void quickSort(int *indexes, int max);
+
+/**
+	文字列の分割
+*/
+vector<string> Split( string src, const char* key);

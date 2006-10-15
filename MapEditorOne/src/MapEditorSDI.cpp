@@ -61,6 +61,13 @@ CMapEditorSDIApp::CMapEditorSDIApp()
 	// TODO: この位置に構築用コードを追加してください。
 	// ここに InitInstance 中の重要な初期化処理をすべて記述してください。
 
+    //try to load ini file
+    setting.setIniFileName(INI_FILE_NAME);
+    if(!setting.loadSetting()){
+        AfxMessageBox(L"no setting file. I'll make default one");
+        setting.setSettingToDefault();
+    }
+
     //ファイルからコンボ用文字列読み込み
     //大別
     loadInformations("data/ObjectTypes.txt", NUMBER_OF_OBJECT_TYPES,
@@ -155,7 +162,7 @@ CMapEditorSDIApp::CMapEditorSDIApp()
     //Zoom
     zoomDivision = ZOOM_DIVISION_DEFAULT;
 
-    isPressLButtonWithShift = false;
+    isPressLButtonWithCtrl = false;
 
     offset.x = 0;
     offset.y = 0;
@@ -169,13 +176,6 @@ CMapEditorSDIApp::CMapEditorSDIApp()
     for(int i = 0; i < NUMBER_OF_GLID; i ++){
         gridIntervals[i] = intervals[i];
     }
-    nowGridInterval = 0;
-
-    this->isObjectPropertyDialogShow = TRUE;
-    this->isPolygonTypeDialogShow = TRUE;
-    this->isHeightDialogShow = TRUE;
-    this->isToolDialogShow = TRUE;
-
     AfxInitRichEdit();
 
     selectGroupInformation.clear();
@@ -206,6 +206,9 @@ CMapEditorSDIApp::CMapEditorSDIApp()
 
 CMapEditorSDIApp::~CMapEditorSDIApp()
 {
+    if(!setting.saveSetting()){
+        AfxMessageBox(L"fail to save setting");
+    }
     if(m_SDLToWindows)delete m_SDLToWindows;
     shutdown_shape_handler();
     exit_screen();
