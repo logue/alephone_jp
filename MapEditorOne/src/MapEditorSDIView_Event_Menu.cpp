@@ -70,16 +70,21 @@ void CMapEditorSDIView::OnFileOpen()
             short index = 0;
             struct entry_point ep;
             int type = 3;
+            int num = 0;
             while(get_indexed_entry_point(&ep, &index, type)){
                 sprintf(cstr, "%d,", ep.level_number);
                 theApp.LevelNameList.Add(//CString(cstr) + 
                     CString(ep.level_name));
+                num ++;
+            }
+            if(num == 0){
+                theApp.LevelNameList.Add(CString("unmerged"));
             }
             /*sprintf(cstr, "%d", theApp.LevelNameList.GetSize());
             MessageBox(CString(cstr));*/
         }
         //ステータスバーに表示
-        setStatusBar(0, theApp.LevelNameList.GetAt(0));
+        //setStatusBar(0, theApp.LevelNameList.GetAt(0));
 
         //default zoom
         theApp.zoomDivision = ZOOM_DIVISION_DEFAULT;
@@ -134,7 +139,7 @@ void CMapEditorSDIView::On32776()
         this->Invalidate(FALSE);
 
         //ステータスバーに表示
-        setStatusBar(0, theApp.LevelNameList.GetAt(theApp.editLevelIndex));
+        //setStatusBar(0, theApp.LevelNameList.GetAt(theApp.editLevelIndex));
     }
 }
 

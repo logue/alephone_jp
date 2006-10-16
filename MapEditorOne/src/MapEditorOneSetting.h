@@ -76,6 +76,7 @@ public:
     void setColorSetting(int type);
     static void setColorSetting(int type, ColorSettings *setting);
     static void copyColorSetting(ColorSettings *dest, ColorSettings *src);
+    CString getFilePath();
     //flags
     bool flags[NUMBER_OF_EDITOR_FLAGS];
 };

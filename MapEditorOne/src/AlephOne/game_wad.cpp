@@ -593,7 +593,9 @@ void complete_loading_level(
 {
 	/* Scan, add the doors, recalculate, and generally tie up all loose ends */
 	/* Recalculate the redundant data.. */
-	load_redundant_map_data(_map_indexes, map_index_count);
+    if(_map_indexes){
+    	load_redundant_map_data(_map_indexes, map_index_count);
+    }
 
 	/* Add the platforms. */
 	if(_platform_data || (_platform_data==NULL && actual_platform_data==NULL))
@@ -1688,6 +1690,7 @@ bool process_map_wad(
 		uint8 *platform_structures;
 		size_t platform_structure_count;
 
+        //map indexes
 		if(version==MARATHON_ONE_DATA_VERSION)
 		{
 			/* Force precalculation */
@@ -1702,7 +1705,7 @@ bool process_map_wad(
 		assert(is_preprocessed_map&&map_index_count || !is_preprocessed_map&&!map_index_count);
 
 		data= (uint8 *)extract_type_from_wad(wad, PLATFORM_STATIC_DATA_TAG, &data_length);
-        //if(data){
+        if(data){
 		    count= data_length/SIZEOF_static_platform_data;
 		    assert(count*SIZEOF_static_platform_data==data_length);
     		
@@ -1713,7 +1716,7 @@ bool process_map_wad(
 		    complete_loading_level((short *) map_index_data, map_index_count,
 			    data, count, platform_structures,
 			    platform_structure_count, version);
-        //}
+        }
 	}
 	
 	/* ... and bail */

@@ -214,3 +214,9 @@ void MapEditorOneSetting::copyColorSetting(ColorSettings *dest, ColorSettings *s
         memcpy(dest, src, sizeof(ColorSettings));
     }
 }
+
+CString MapEditorOneSetting::getFilePath()
+{
+    CString str = CString(initialSettingFileName.c_str());
+    return str;
+}

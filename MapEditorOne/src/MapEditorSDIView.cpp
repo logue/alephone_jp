@@ -734,7 +734,7 @@ void CMapEditorSDIView::OnInitialUpdate()
         Information mapIconFileNameInformations[NUMBER_OF_MAP_ICON_FILES];
         CString listPath = CString(DATA_DIR_NAME) +
             CString(MAP_ICONS_IMAGE_NAME_LIST_FILE_NAME);
-        char cstr[256];
+        char cstr[_MAX_PATH];
         strToChar(listPath, cstr);
         loadInformations(cstr, NUMBER_OF_MAP_ICON_FILES, mapIconFileNameInformations);
 

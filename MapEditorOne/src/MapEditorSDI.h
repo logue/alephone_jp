@@ -71,8 +71,8 @@ const int POINT_DISTANCE_EPSILON = 5;
 const int OBJECT_DISTANCE_EPSILON = 8;
 const int LINE_DISTANCE_EPSILON = 5;
 
-static char *DATA_DIR_NAME = "data/";
-static char *INI_FILE_NAME = "setting.ini";
+static char *DATA_DIR_NAME = "./data/";
+static char *INI_FILE_NAME = "./setting.ini";
 
 //map icons
 enum
@@ -367,3 +367,5 @@ int getPolygonIndexFromPointIndex(int pointIndex);
     return NULL in no exists
 */
 platform_data *searchPlatformByPolygonIndex(int index);
+
+CString GetModulePathFileName(CString pName);

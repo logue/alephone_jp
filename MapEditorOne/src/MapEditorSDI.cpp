@@ -62,7 +62,16 @@ CMapEditorSDIApp::CMapEditorSDIApp()
 	// ここに InitInstance 中の重要な初期化処理をすべて記述してください。
 
     //try to load ini file
-    setting.setIniFileName(INI_FILE_NAME);
+    /*CString path = GetModulePathFileName(CString(INI_FILE_NAME));
+    char pname[_MAX_PATH];
+    strToChar(path, pname);*/
+    WCHAR buf[1024];
+    WCHAR wstr[256];
+    charToWChar(INI_FILE_NAME, wstr);
+    GetFullPathName(wstr, sizeof(wstr), buf, NULL);
+    char pname[_MAX_PATH];
+    wcharToChar(buf, pname); 
+    setting.setIniFileName(pname);
     if(!setting.loadSetting()){
         AfxMessageBox(L"no setting file. I'll make default one");
         setting.setSettingToDefault();
@@ -207,7 +216,7 @@ CMapEditorSDIApp::CMapEditorSDIApp()
 CMapEditorSDIApp::~CMapEditorSDIApp()
 {
     if(!setting.saveSetting()){
-        AfxMessageBox(L"fail to save setting");
+        AfxMessageBox(CString("fail to save setting:") + setting.getFilePath());
     }
     if(m_SDLToWindows)delete m_SDLToWindows;
     shutdown_shape_handler();
@@ -690,4 +699,26 @@ int getPolygonIndexFromPointIndex(int pointIndex)
 {
     AfxMessageBox(L"not yet");
     exit(1);
+}
+
+CString GetModulePathFileName(CString pName)
+{
+	//exeファイルのフルパスを取得
+	TCHAR path[_MAX_PATH];
+	::GetModuleFileName(NULL,path,sizeof path);
+
+	//exeファイルのパスを分解
+	TCHAR drive[_MAX_DRIVE];
+	TCHAR dir[_MAX_DIR];
+	TCHAR fname[_MAX_FNAME];
+	TCHAR ext[_MAX_EXT];
+	_splitpath((const char*)path,(char*)drive,(char*)dir,(char*)fname,(char*)ext);
+
+	//引数のファイル名をexeファイルのパスでフルパス化
+    char pname[_MAX_FNAME];
+    strToChar(pName, pname);
+	_makepath((char*)path,(const char*)drive,(const char*)dir,(const char*)pname,"");
+
+	CString str(path);
+	return str;
 }
