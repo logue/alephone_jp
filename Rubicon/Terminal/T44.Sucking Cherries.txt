@@ -76,7 +76,7 @@ $C3城砦．陥落
 #PICT 24
 
 
-　それ以来私は彼女を責めることはできない。我々はそれ以来、非常に多くのことを成し遂げた・・・。もしも、君が彼女の家に滞在するとしたら、マラソンの暗い玄関で君への私の荒々しい詩によるメッセージを読み逃すだろう。それとも、１１番目のスフト氏族による我々の蘇生と、バトルグループ７をダメにするのかな？
+　それ以来私は彼女を責めることはできない。我々はそれ以来、非常に多くのことを成し遂げた…。もしも、君が彼女の家に滞在するとしたら、マラソンの暗い玄関で君への私の荒々しい詩によるメッセージを読み逃すだろう。それとも、１１番目のスフト氏族による我々の蘇生と、バトルグループ７をダメにするのかな？
 
 　私は、君を忙しくさせ続けていたが、リーラだったら、外界植民地の警備勤務に君を戻すだろうな。
 #PICT 24
@@ -84,7 +84,7 @@ $C3城砦．陥落
 
 　アキレウス・ウィルスは、プフォール帝国が戦争に勝つための最終手段になるであろうものだった。私は、プフォールが自分達のシステムを守る事を望んだ降参の言葉を受け取った。この敗北に関するニュースがプフォール最前線に届くと、すぐに降伏宣言が出されることに違いないだろう。
 
-　疲れた者のための休息はない。しかし・・・私と君は、その倒れゆく帝国から遠くに行くことが必要だ。古代のスフト神話は私たちに、別の現実と接触する大きな裂け目の存在を長らく予言している。私は、我々の探索がどこで始まるかもう既に知っている。
+　疲れた者のための休息はない。しかし…私と君は、その倒れゆく帝国から遠くに行くことが必要だ。古代のスフト神話は私たちに、別の現実と接触する大きな裂け目の存在を長らく予言している。私は、我々の探索がどこで始まるかもう既に知っている。
 
 　すぐに会いに行こう、旧友よ。
 #LOGOFF 0
@@ -125,7 +125,7 @@ $C3城砦．陥落
 #PICT 24
 
 
-　それ以来私は彼女を責めることはできない。我々はそれ以来、非常に多くのことを成し遂げた・・・。もしも、君が彼女の家に滞在するとしたら、マラソンの暗い玄関で君への私の荒々しい詩によるメッセージを読み逃すだろう。それとも、１１番目のスフト氏族による我々の蘇生と、バトルグループ７をダメにするのかな？
+　それ以来私は彼女を責めることはできない。我々はそれ以来、非常に多くのことを成し遂げた…。もしも、君が彼女の家に滞在するとしたら、マラソンの暗い玄関で君への私の荒々しい詩によるメッセージを読み逃すだろう。それとも、１１番目のスフト氏族による我々の蘇生と、バトルグループ７をダメにするのかな？
 
 　私は、君を忙しくさせ続けていたが、リーラだったら、外界植民地の警備勤務に君を戻すだろうな。
 #PICT 24
@@ -170,7 +170,7 @@ $C3城砦．陥落
 #PICT 24
 
 
-　それ以来私は彼女を責めることはできない。我々はそれ以来、非常に多くのことを成し遂げた・・・。もしも、君が彼女の家に滞在するとしたら、マラソンの暗い玄関で君への私の荒々しい詩によるメッセージを読み逃すだろう。それとも、１１番目のスフト氏族による我々の蘇生と、バトルグループ７をダメにするのかな？
+　それ以来私は彼女を責めることはできない。我々はそれ以来、非常に多くのことを成し遂げた…。もしも、君が彼女の家に滞在するとしたら、マラソンの暗い玄関で君への私の荒々しい詩によるメッセージを読み逃すだろう。それとも、１１番目のスフト氏族による我々の蘇生と、バトルグループ７をダメにするのかな？
 
 　私は、君を忙しくさせ続けていたが、リーラだったら、外界植民地の警備勤務に君を戻すだろうな。
 #PICT 24
@@ -192,74 +192,70 @@ $C3城砦．陥落
 #LOGON 500
 #PICT 507
 
-time to give a big hand to the man in the arena, mr lund over there.  he's the real driving force behind the completion and success of this scenario in more ways than i can count.  if anyone deserves the gold star for the way this whole thing turned out, it's chris.  thanks for putting up with me dude.
+　アリーナのあそこにいるLund氏に大きな手を与える時間。彼は、私が数えることができるより多くの方法で、このシナリオを完成させ、成功させた原動力です。そして、誰かがこの全てのものが生産した行程用のゴールドスターに相当すれば、それはchrisです。気取り屋と私に我慢してくれたことを感謝します。
 
-how about another round of retexturing? :)
+　一連の再テスクチャリングはいかがだったでしょうか？（・∀・）
 #PICT 507
 
-I don't know if you've read the book Ishmaelﾊby Daniel Quinn, but it begins with a classified ad:
+私は、あなたがダニエル・クイン著のイシマエルという本を読んだことがあるかは知りません。しかし、それは部門別案内広告から始まりました：
 
-TEACHER SEEKS PUPIL
-Must have an earnest desire toﾊ
-save the world. Apply in person.
+$B教師は生徒を捜します$b
+あなたは、世界を救う熱心な望みを持っているに違いありません。
+自分で当てはめてみてください。
 
 dscottbrown.com
 #PICT 507
 
 
-i hope you've enjoyed our little project, i know it's been a blast for me to help make.  
+私は、この小さなプロジェクトで楽しんだことを望みます。この私への突風が、私が作ることを手助けしてくれた事を知っています。
 
-keep on vidding.
+さぁ、ヴィドマスターしましょう。
 
 
 
 scott
 #PICT 505
-$C7No, this is not what lutefisk looks like, even though I did seriously consider putting a picture of lutefisk here.
+$C7　いや、たとえ私がここでルーテフィスクの写真を置くことを真面目に検討したとしても、それがルーテフィスクが見えるものではありません。
 
 
-So here's the ceremonial round of long and boring thankyous:
+そこで、ここでは長く退屈な謝恩の礼式の繰り返しがあります：
 
-$C4$B-Scott Brown$C7$b, for being such a picky bastard. If it wasn't for him the monsters of Rubicon would have been of the "it looks good if you squint" quality.
+$C4$B-Scott Brown$C7$b　－　気難しい粗悪品。もし、彼がやっていなければ、ルビコンに登場するモンスターは、「目を細めてみればよく見える」程度の品質になっていたでしょう。
 
-$C4$B-Sean Wallich$C7$b, for giving us server space for what must have felt like forever to someone that young. ;)
+$C4$B-Sean Wallich$C7$b　－　私たちに共感し、サーバー・スペースを提供してくれた、永遠に若い誰かです。（´∀｀）
 
-$C4$B-Dan Rudolph$C7$b, for starting the $C4Salinger Incident$C7 so long ago, thus dragging me into
+$C4$B-Dan Rudolph$C7$b　－　$C4サリンジャーでの出来事$C7を以前に作った人。シナリオの製作をする上でフラストレーションを引き起こすほど、驚くべきで素晴らしい世界に私を引き込みました。
 #PICT 505
-$C7the frustrating amazing and wonderful world of scenario making.
-
-$C4$BDOA -$C7 $bwho made two great solo levels and a bucketload of network levels and had to leave because he got himself a life.$C4
-$BOlivier Jansem -$C7$b who gave us the new pistol and had to leave because he got a life.$C4
-$BGrag $C7-$b who gave us lots of great 3d renderings and then just left.$C4
-$BElohymn Vilhaven -$C7$b who gave us the title theme and the Ascension theme. She left 'cuz she finished what she came for.$C4
-$BTim Thomas -$C7$b who gave us two of his trademark Insane Mazes. Once again, Real Life cost us a good contributor.
+$C4$BDOA$C7　－　２つの大きなソロ・レベルおよびネットワーク・レベルのバケツ・ロードを作製しました。途中で多忙になったため去りました。$C4
+$BOlivier Jansem$C7$b　－　新しいピストルをデザインしました。同じく多忙のため去りました。$C4
+$BGrag$C7$b　－　３Ｄのレンダリングを行いました。その後すぐに去りました。$C4
+$BElohymn Vilhaven$C7$b　－　ルビコンの昇天のテーマ（Ascension theme）を作曲しました。 She left 'cuz she finished what she came for.$C4
+$BTim Thomas$C7$b　－　彼のトレードマークでもある奇想天外な迷路のうちの２つを提供してくれました。また、実生活においても良き寄与者でもありました。
 #PICT 505
 $C7
-Also worthy of mention are our betatesters (in no particular order): $C4Jane Davison$C7,$C4 Rainer Udelhoven$C7, and $C4Candace Sherriff.
-$C7
+さらに、言及に値するのは（特別な要求が無い）ベーターテスターです：$C4Jane Davison$C7，$C4Rainer Udelhoven$C7，$C4Candace Sherriff$C7
 
 C Lund
 clund@notam.uio.no
 29.08.00
 #PICT 503
-$C5First off, thanks to Scott for involving me in this wonderful project, even when it become apparent I possessed no actual skills.
+$C5　ほんのわずかな事から、このすばらしいプロジェクトにScott氏が、私を引き込んでくれました。それまで、私は実際の技術を持っていませんでした。
 
-Then, thanks go to clund- who never $C1EVER$C5 screamed in our presence after being asked to retexture $C1ANOTHER$C5 level to meet the new texture set (we did this about 5 times I think?)
+　それから、私たちの面前で、新しいテスクチャを他のレベルに適用したり、テスクチャを張り直す事について尋ねた時、$C1決して$C5絶叫しなかったClund氏に感謝します。（５回ぐらいあったかな？）
 #PICT 503
-$C5Other thanks go to the people I actually know in real life, who put up with me on a day to day basis: $C1Sarah, Michele, Micah, Heather, Emma, Danielle, Kris, Megan, Brian $C5&$C1 Brian, Akiyo, Linda, Leyna, Jamin, Dori, $C5and$C1 Ashley$C5
+　他にも、完成するまでの間、一緒に我慢してくれたリアルでもつきあいのあった人に感謝します：$C1Sarah，Michele，Micah，Heather，Emma，Danielle，Kris，Megan，Brian $C5&$C1 Brian，Akiyo，Linda，Leyna，Jamin，Dori，$C5そして$C1 Ashley$C5
 
-
-This is Sean signing off.. may marathon live in the hearts of a true vidmaster forever and never be forgotten.
+こちらは、Seanです。マラソンは、本当のヴィドマスターの中心で永久に生き続けます。永久に忘れられません。
 #PICT 506
-$C6My part in $C2Rubicon$C6 started back in $C21996$C6 when, impressed by the work of other mapmakers, I decided to make a scenario of my own.  I turned out to be a frankly crappy mapmaker, and then the long string of team members and mergers began.  What you're playing now is the end result of at least three scenarios and dozens of contributors.
+$C6　$C2Rubicon$C6で私が担当した部分は、$C2１９９６$C6年にスタートしました。そのとき、他人の作ったマップファイルを見てその出来に感動し、私は、自分の手でシナリオを作ってみることにしました。しかし、自分の作るマップは率直に低級なものだと思いました。これから、長きにわたるチームメンバーの、吸収合併が始まります。現在あなたがプレイしているものは、少なくとも３つのシナリオと、多数の寄与者による集大成です。
 
-Most of the work was done by $C2Chris Lund$C6 and $C2D. Scott Brown$C6, as I had few applicable skills.  Props also to my dad, who let me use his computer until I got my own and $C2ig98$C6 who ran the Hotline server.
+　大半の作業は、$C2Chris Lund氏$C6と$C2D氏$C6によって行われました。 $C2Scott Brown氏$C6も、私のように適用できる技術をほとんど持っていませんでした。そこで、私の父親が自分のコンピューターを私たちが$C2ig98$C6のHotlineサーバーを得るまで、使わせてくれました。
 
-Hope you enjoyed $C2Rubicon$C6.  Please send fan/hate mail.  Just so long as we know you're playing.
+　$C2Rubiocon$C6は、如何だったでしょうか。あなたがプレイしていることを私たちが知る限り、ファン／嫌がらせのメール（英語で）を是非送ってください。
 
 $C2Dan "7thFace" Rudolph
 Ace_of_Sevens@mac.com
-#TAG ID 4
+#TAG 4
 #INFORMATION
 $C3
 
@@ -270,7 +266,7 @@ $C3
 
 
 
-                An alternate exit has opened...
+　　　　　　　　異界への扉が開かれます…。
 #LOGOFF 500
 #END
 #ENDTERMINAL 4
@@ -317,7 +313,7 @@ $C3城砦．陥落
 #PICT 24
 
 
-　それ以来私は彼女を責めることはできない。我々はそれ以来、非常に多くのことを成し遂げた・・・。もしも、君が彼女の家に滞在するとしたら、マラソンの暗い玄関で君への私の荒々しい詩によるメッセージを読み逃すだろう。それとも、１１番目のスフト氏族による我々の蘇生と、バトルグループ７をダメにするのかな？
+　それ以来私は彼女を責めることはできない。我々はそれ以来、非常に多くのことを成し遂げた…。もしも、君が彼女の家に滞在するとしたら、マラソンの暗い玄関で君への私の荒々しい詩によるメッセージを読み逃すだろう。それとも、１１番目のスフト氏族による我々の蘇生と、バトルグループ７をダメにするのかな？
 
 　私は、君を忙しくさせ続けていたが、リーラだったら、外界植民地の警備勤務に君を戻すだろうな。
 #PICT 24
@@ -380,7 +376,7 @@ $C3城砦．陥落
 #PICT 24
 
 
-　それ以来私は彼女を責めることはできない。我々はそれ以来、非常に多くのことを成し遂げた・・・。もしも、君が彼女の家に滞在するとしたら、マラソンの暗い玄関で君への私の荒々しい詩によるメッセージを読み逃すだろう。それとも、１１番目のスフト氏族による我々の蘇生と、バトルグループ７をダメにするのかな？
+　それ以来私は彼女を責めることはできない。我々はそれ以来、非常に多くのことを成し遂げた…。もしも、君が彼女の家に滞在するとしたら、マラソンの暗い玄関で君への私の荒々しい詩によるメッセージを読み逃すだろう。それとも、１１番目のスフト氏族による我々の蘇生と、バトルグループ７をダメにするのかな？
 
 　私は、君を忙しくさせ続けていたが、リーラだったら、外界植民地の警備勤務に君を戻すだろうな。
 #PICT 24
@@ -453,55 +449,55 @@ $C3城砦．陥落
 #LOGON 500
 #PICT 505
 $C3
-$C7When we ($C4Jeff Schwartz$C7,$C4 Chris Wondra$C7,$C4 Tim Thomas $C7and $C4I$C7) made these levels, we made them so they would be challenging for us, so we wouldn't be able to stroll through the levels blindfolded.
+$C7　これらのレベルを作成したとき、私たち（$C4Jeff Schwartz$C7，$C4Chris Wondra$C7，$C4Tim Thomas$C7そして$C4私$C7）は、レベルの順番通りに歩き回ることができないように、そして挑戦したくなるように作りました。
 
-As it turned out, this was too tough for the betatesters.  Way too tough.  They completed the levels by cheating or by playing on kindergarden, swearing at the mapmakers every time they had their posteriour handed to them.
+　この処置は、ベーターテスターにとってはあまりに難しすぎました。行程が難しすぎます。結局、チートしたり、幼稚園レベルで遊ぶことでやっと完遂しました。行き詰まるたびにマップ作成者に毒づくと、そのレベルは後ろの方に回されていきました。
 
-So the monsters had to be pruned (meaning$C3 $C420-25%$C3 $C7of the monsters are gone in most levels), and the result are levels that won't kill you before your feet hit the ground.$C0
+　このため、モンスターの数を減らさなければならなくなりました。（ほとんどのレベルの$C4２０～４０％$C3が無くなりました）その結果、あなたの足が地に着くまでにあなたを殺さないレベルができました。
 #PICT 505
 $C3
 
-$C7But two of the levels were kept in their original lethal state, as a reward to anyone clever enough to find this terminal. 
-$C4
-You are about to enter one of those levels.
-$C0
-$C7If you're not sure you're up to it, then press $C4[esc] $C7now and return to the kinder, more gentle levels.
+　$C7しかし、この中のレベルのうち２つは、このターミナルを見つけるほど利口な誰かへの報酬としてオリジナルの致死に値する難易度の状態にしてあります。$C4
+
+　これから、あなたは、それらのレベルのうちの１つに入るところです。
+
+$C7　無理だと思ったら、すぐに$C4「エスケープ」$C7キーを押して、より親切で穏和なレベルに戻ってください。
+#PICT 505
+
+
+　$C7しかし、この中のレベルのうち２つは、このターミナルを見つけるほど利口な誰かへの報酬としてオリジナルの致死に値する難易度の状態にしてあります。$C4
+
+　これから、あなたは、それらのレベルのうちの１つに入るところです。
+
+　$C7無理だと思ったら、すぐに$C4「エスケープ」$C7キーを押して、より親切で穏和なレベルに戻ってください。
+
+　$C4続けますか？次のレベルは非常に困難ですよ。$C0
 #PICT 505
 $C3
 $C7
-But two of the levels were kept in their original lethal state, as a reward to anyone clever enough to find this terminal. 
+　しかし、この中のレベルのうち２つは、このターミナルを見つけるほど利口な誰かへの報酬としてオリジナルの致死に値する難易度の状態にしてあります。
 $C4
-You are about to enter one of those levels.$C0
+　これから、あなたは、それらのレベルのうちの１つに入るところです。
+$C7
+　無理だと思ったら、すぐに$C4「エスケープ」$C7キーを押して、より親切で穏和なレベルに戻ってください。
 
-$C7If you're not sure you're up to it, then press $C4[esc]$C7 now and return to the kinder, more gentle levels.
+　続けますか？次のレベルは非常に困難ですよ。
 $C4
-Are you sure you want to continue?  The next level is very difficult.$C0
+　何人ものベーターテスターを泣かせましたよ。$C0
 #PICT 505
 $C3
 $C7
-But two of the levels were kept in their original lethal state, as a reward to anyone clever enough to find this terminal. 
+　しかし、この中のレベルのうち２つは、このターミナルを見つけるほど利口な誰かへの報酬としてオリジナルの致死に値する難易度の状態にしてあります。 
 $C4
-You are about to enter one of those levels.
+　これから、あなたは、それらのレベルのうちの１つに入るところです。
 $C7
-If you're not sure you're up to it, then press$C3 $C4[esc]$C3 $C7now and return to the kinder, more gentle levels.
+　無理だと思ったら、すぐに$C4「エスケープ」$C7キーを押して、より親切で穏和なレベルに戻ってください。
 
-Are you sure you want to continue?  The next level is very difficult.
-$C4
-It made some of the betatesters cry.$C0
-#PICT 505
-$C3
-$C7
-But two of the levels were kept in their original lethal state, as a reward to anyone clever enough to find this terminal. 
-$C4
-You are about to enter one of those levels.$C0
-$C7
-If you're not sure you're up to it, then press$C3 $C4[esc]$C3 $C7now and return to the kinder, more gentle levels.
+　続けますか？次のレベルは非常に困難ですよ。
 
-Are you sure you want to continue?  The next level is very difficult.
+　何人ものベーターテスターを泣かせましたよ。$C4
 
-It made some of the betatesters cry.$C4
-
-So be it.  Prepare to drink vitriol.
+　いいでしょう。濃硫酸を飲む準備をしてください。
 #LOGOFF 500
 #INTERLEVEL TELEPORT 64
 #END
