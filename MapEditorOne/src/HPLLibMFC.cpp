@@ -4,12 +4,10 @@
     CString‚ðchar*‚É•ÏŠ·‚µ‚Ü‚·
 */
 void strToChar(CString& src, char* dest){
-    LPWSTR buf = new WCHAR[src.GetLength()];
-    LPBOOL ok = new BOOL[1];
-	lstrcpy(buf, src);
-    wcharToChar(buf, dest);
-    delete ok;
-    delete buf;
+    //LPWSTR buf = new WCHAR[src.GetLength()];
+	strcpy(dest, CT2A(src));
+//    delete temp;
+    //delete buf;
 }
 
 /**

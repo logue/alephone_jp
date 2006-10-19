@@ -56,11 +56,7 @@ void loadInformations(const char* filename, int max,
     f.Close();
 }
 
-CMapEditorSDIApp::CMapEditorSDIApp()
-{
-	// TODO: この位置に構築用コードを追加してください。
-	// ここに InitInstance 中の重要な初期化処理をすべて記述してください。
-
+bool CMapEditorSDIApp::initialize(){
     //try to load ini file
     /*CString path = GetModulePathFileName(CString(INI_FILE_NAME));
     char pname[_MAX_PATH];
@@ -139,35 +135,32 @@ CMapEditorSDIApp::CMapEditorSDIApp()
 
     //色設定
     //ファイルから読み込み
-    const int LENGTH = 1024*10;
-    char cstr[LENGTH];
-    
-    char *filename = POLYGON_COLOR_FILE_NAME;
-    CFile f;
-    if(!f.Open(CString(filename), CFile::modeRead)){
-        CString errMsg = CString("Couldn't open:");
-        errMsg += L"[" + CString(filename) + L"]";
-        MessageBox(NULL, errMsg, L"Error", MB_OK);
-        exit(-1);
-    }
-    f.Read(cstr, LENGTH);
-    CString str = CString(cstr);
-    CStringArray array;
-    splitString(str, "\r\n", array);
-    for(int i = 0; i < NUMBER_OF_POLYGON_TYPE; i ++){
-        //コンマで分解
-        CStringArray splits;
-        splitString((CString&)array.GetAt(i), ",", splits);
-        int col[3];
-        for(int j = 0; j < 3; j ++){
-            CString num = splits.GetAt(j);
-            char dataCStr[256];
-            strToChar(num.Trim(), dataCStr);
-            col[j] = atoi(dataCStr);
+    {
+        ifstream is;
+        const char* filename = POLYGON_COLOR_FILE_NAME;
+        is.open(filename);
+
+        if(!is.is_open()){
+            CString errMsg = CString("Couldn't open:");
+            errMsg += L"[" + CString(filename) + L"]";
+            MessageBox(NULL, errMsg, L"Error", MB_OK);
+            return false;
         }
-        this->polygonTypeColor[i] = RGB(col[0], col[1], col[2]);
+        char cstr[260];
+        while(is.getline(cstr, sizeof(cstr))){
+            string line = string(cstr);
+            if(line.compare("") == 0){
+                continue;
+            }
+            vector<string> sp = Split(line, ",");
+            int col[3];
+            for(int i = 0; i < 3; i ++){
+                col[i] = atoi(sp[i].c_str());
+            }
+            this->polygonTypeColor[i] = RGB(col[0], col[1], col[2]);
+        }
+        is.close();
     }
-    f.Close();
 
     //Zoom
     zoomDivision = ZOOM_DIVISION_DEFAULT;
@@ -203,41 +196,53 @@ CMapEditorSDIApp::CMapEditorSDIApp()
     if(!logger.open()){
         MessageBox(NULL, L"Cannot open log file for writing. Close it!", L"Error", 
             MB_OK | MB_ICONEXCLAMATION);
-        exit(1);
+        return false;
     }
 
-    bitmapList.resize(NUMBER_OF_DEFINED_ITEMS * 2 + NUMBER_OF_MAP_ICONS * 2);
-    const int NUMBER_OF_MAP_ICON_FILES = NUMBER_OF_DEFINED_ITEMS + NUMBER_OF_MAP_ICONS;
-    //load image file name list from file
-    Information mapIconFileNameInformations[NUMBER_OF_MAP_ICON_FILES];
+    {
+        char cstr[260];
+        //load image file name list from file
+        bitmapList.resize(NUMBER_OF_DEFINED_ITEMS * 2 + NUMBER_OF_MAP_ICONS * 2);
+        const int NUMBER_OF_MAP_ICON_FILES = NUMBER_OF_DEFINED_ITEMS + NUMBER_OF_MAP_ICONS;
+        Information mapIconFileNameInformations[NUMBER_OF_MAP_ICON_FILES];
 
-    sprintf(cstr, "%s%s", DATA_DIR_NAME, MAP_ICONS_IMAGE_NAME_LIST_FILE_NAME);
-    loadInformations(cstr, NUMBER_OF_MAP_ICON_FILES, mapIconFileNameInformations);
+        sprintf(cstr, "%s%s", DATA_DIR_NAME, MAP_ICONS_IMAGE_NAME_LIST_FILE_NAME);
+        loadInformations(cstr, NUMBER_OF_MAP_ICON_FILES, mapIconFileNameInformations);
 
-    for(int i = 0; i < 2 * NUMBER_OF_DEFINED_ITEMS + 2 * NUMBER_OF_MAP_ICONS; i ++){
-        string path = string(DATA_DIR_NAME) +
-            string(MAP_ICONS_DIR_NAME);
-        const int SELECTED_OFFSET = NUMBER_OF_DEFINED_ITEMS + NUMBER_OF_MAP_ICONS;
-        if( i >= SELECTED_OFFSET){
-            path += string(HILIGHTED_ICONS_DIR_NAME);
+        for(int i = 0; i < 2 * NUMBER_OF_DEFINED_ITEMS + 2 * NUMBER_OF_MAP_ICONS; i ++){
+            string path = string(DATA_DIR_NAME) +
+                string(MAP_ICONS_DIR_NAME);
+            const int SELECTED_OFFSET = NUMBER_OF_DEFINED_ITEMS + NUMBER_OF_MAP_ICONS;
+            if( i >= SELECTED_OFFSET){
+                path += string(HILIGHTED_ICONS_DIR_NAME);
+            }
+            int index = i;
+
+            //selected
+            if(i >= SELECTED_OFFSET){
+                index -= SELECTED_OFFSET;
+            }
+            strToChar(mapIconFileNameInformations[index].jname, cstr);
+            path += string(cstr);
+            //strToChar(path, cstr);
+            HBITMAP bitmap = loadBitmapFromFile(path.c_str());
+            bitmapList.push_back(bitmap);
         }
-        int index = i;
 
-        //selected
-        if(i >= SELECTED_OFFSET){
-            index -= SELECTED_OFFSET;
-        }
-        strToChar(mapIconFileNameInformations[index].jname, cstr);
-        path += string(cstr);
-        //strToChar(path, cstr);
-        HBITMAP bitmap = loadBitmapFromFile(path.c_str());
-        bitmapList.push_back(bitmap);
     }
 
     //menu name to id
     menuIDMap[EM_DRAW] = ID_32795;
     menuIDMap[EM_VISUAL] = ID_32796;
     setEditMode(EM_DRAW);
+    return true;
+}
+
+CMapEditorSDIApp::CMapEditorSDIApp()
+{
+	// TODO: この位置に構築用コードを追加してください。
+	// ここに InitInstance 中の重要な初期化処理をすべて記述してください。
+
 
 }
 
@@ -277,6 +282,10 @@ BOOL CMapEditorSDIApp::InitInstance()
 	InitCommonControlsEx(&InitCtrls);
 
 	CWinApp::InitInstance();
+
+    if(!initialize()){
+        return FALSE;
+    }
 
 	// OLE ライブラリを初期化します。
 	if (!AfxOleInit())
@@ -328,6 +337,7 @@ BOOL CMapEditorSDIApp::InitInstance()
 	//  SDI アプリケーションでは、ProcessShellCommand の直後にこの呼び出しが発生しなければなりません。
 	// ドラッグ/ドロップ オープンを許可します。
 	m_pMainWnd->DragAcceptFiles();
+
 	return TRUE;
 }
 
@@ -562,11 +572,11 @@ platform_data *searchPlatformByPolygonIndex(int index)
 //load bitmap from file
 HBITMAP loadBitmapFromFile(const char *pathName)
 {
-    CBitmap *bitmap = new CBitmap;
+    /*CBitmap *bitmap = new CBitmap;
     if(!bitmap){
         AfxMessageBox(L"Memory over run");
         exit(1);
-    }
+    }*/
     HBITMAP handleBitmap = (HBITMAP)LoadImage(
         AfxGetInstanceHandle(), CString(pathName),
         IMAGE_BITMAP, 0, 0, LR_LOADFROMFILE);

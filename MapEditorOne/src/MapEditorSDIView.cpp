@@ -428,12 +428,14 @@ void CMapEditorSDIView::drawObjects(CDC *cdc)
                 //highlight!
                 index += NUMBER_OF_DEFINED_ITEMS + NUMBER_OF_MAP_ICONS;
             }
-            CBitmap* bitmap = CBitmap::FromHandle(theApp.bitmapList[index]);
+            HBITMAP hbmp = theApp.bitmapList[index];
+            //CBitmap* bitmap = CBitmap::FromHandle();
             BITMAP bmp;
-            CSize sz = bitmap->GetBitmap(&bmp);
+            GetObject(hbmp, sizeof(BITMAP), &bmp);
+            CSize sz;
             sz.cx = bmp.bmWidth;
             sz.cy = bmp.bmHeight;
-            memDC.SelectObject(bitmap);
+            memDC.SelectObject(hbmp);
             ::TransparentBlt(cdc->m_hDC, drawX - sz.cx / 2, drawY - sz.cy / 2,
                 sz.cx, sz.cy, memDC.m_hDC,
                 0, 0, sz.cx, sz.cy, RGB(221,221,221));

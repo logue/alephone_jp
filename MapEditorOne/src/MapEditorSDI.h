@@ -29,6 +29,9 @@
 
 //#include "AlephOne/placement.h"
 #include <map>
+#include <iostream>
+#include <fstream>
+#include <vector>
 using namespace std;
 
 #include "SDLToWin32/SDLToWin32.h"
@@ -292,6 +295,7 @@ public:
     //Editor setting
     MapEditorOneSetting setting;
 
+    bool initialize();
 private:
     //edit mode
     int editMode;
