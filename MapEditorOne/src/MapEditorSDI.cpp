@@ -202,7 +202,7 @@ bool CMapEditorSDIApp::initialize(){
     {
         char cstr[260];
         //load image file name list from file
-        bitmapList.resize(NUMBER_OF_DEFINED_ITEMS * 2 + NUMBER_OF_MAP_ICONS * 2);
+        //bitmapList.resize();
         const int NUMBER_OF_MAP_ICON_FILES = NUMBER_OF_DEFINED_ITEMS + NUMBER_OF_MAP_ICONS;
         Information mapIconFileNameInformations[NUMBER_OF_MAP_ICON_FILES];
 

@@ -482,6 +482,14 @@ void CMapEditorSDIView::OnLButtonUp(UINT nFlags, CPoint point)
     // TODO: ここにメッセージ ハンドラ コードを追加するか、既定の処理を呼び出します。
     theApp.isPressLButtonWithCtrl = false;
     bool okSelect = false;
+    if(theApp.selectGroupInformation.isSelectOneObject()){
+        //オブジェクト情報更新
+        theApp.objectPropertyDialog->setupDialog(theApp.selectGroupInformation.selObjects[0].index);
+    }else if(theApp.selectGroupInformation.isSelectOnePoint()){
+    }else if(theApp.selectGroupInformation.isSelectOneLine()){
+    }else if(theApp.selectGroupInformation.isSelectOnePolygon()){
+        theApp.polygonPropertyDialog->setupDialog(theApp.selectGroupInformation.polygons[0].index);
+    }
     if(theApp.isSelectingGroup){
         /*if(isNearbyPoints(point.x, point.y, 
             theApp.selectStartPoint.x, theApp.selectStartPoint.y, SELECT_GROUP_DISTANCE_THRESHOLD))
@@ -494,6 +502,8 @@ void CMapEditorSDIView::OnLButtonUp(UINT nFlags, CPoint point)
         okSelect = true;
     }
     if(okSelect){
+        //if selecting is only 1 object. setup property dialog
+
         theApp.selectGroupInformation.clear();
 
         int DIV = theApp.zoomDivision;
@@ -594,15 +604,6 @@ void CMapEditorSDIView::OnLButtonUp(UINT nFlags, CPoint point)
         }
         theApp.selectGroupInformation.setSelected(isSelected);
 
-        //if selecting is only 1 object. setup property dialog
-        if(theApp.selectGroupInformation.isSelectOneObject()){
-            //オブジェクト情報更新
-            theApp.objectPropertyDialog->setupDialog(theApp.selectGroupInformation.selObjects[0].index);
-        }else if(theApp.selectGroupInformation.isSelectOnePoint()){
-        }else if(theApp.selectGroupInformation.isSelectOneLine()){
-        }else if(theApp.selectGroupInformation.isSelectOnePolygon()){
-            theApp.polygonPropertyDialog->setupDialog(theApp.selectGroupInformation.polygons[0].index);
-        }
     }
 
     theApp.isSelectingGroup = false;
