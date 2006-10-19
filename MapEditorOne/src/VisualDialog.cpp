@@ -48,6 +48,7 @@ void CVisualDialog::OnPaint()
     // 描画メッセージで CDialog::OnPaint() を呼び出さないでください。
 
     if(testImage){
+        /*
         dc.SelectPalette( CPalette::FromHandle(hPalette), TRUE);
         dc.RealizePalette();
         SDL_LockSurface(testImage);
@@ -55,22 +56,33 @@ void CVisualDialog::OnPaint()
         for(int y = 0; y < testImage->h; y ++){
             for(int x = 0; x < testImage->w; x ++){
                 Uint32 pix = getpixel(testImage, x, y);
-                Uint8 r,g,b;
-                SDL_GetRGB(pix, testImage->format,
-                    &r,&g,&b);
-                dc.SetPixel(x,y, RGB(r,g,b));
-            }
+                dc.SetPixel(x,y, RGB(pallet[pix].r, pallet[pix].g, pallet[pix].b));
+            }//logger.printf("\n");
         }
         SDL_UnlockSurface(testImage);
-    }/*
-    if(m_SDLToWindows && testImage){
+        //AfxMessageBox(L"stop");
+        //exit(1);
+        */
         
         SDL_Surface* screen = m_SDLToWindows->getSurface();
         //drawing!
         SDL_FillRect(screen, NULL, SDL_MapRGB(screen->format, 0,0,0));
 
-        SDL_Rect r = {0,0,testImage->w, testImage->h};
-        SDL_BlitSurface(testImage, &r, screen, &r);
+        SDL_LockSurface(testImage);
+        SDL_LockSurface(screen);
+        //SDL_Rect r = {0,0,testImage->w, testImage->h};
+        //SDL_BlitSurface(testImage, &r, screen, &r);
+        for(int y = 0; y < testImage->h; y ++){
+            for(int x = 0; x < testImage->w; x ++){
+                Uint32 pix = getpixel(testImage, x, y);
+                putpixel(screen, x, y, SDL_MapRGB(screen->format,
+                    pallet[pix].r, pallet[pix].g, pallet[pix].b));
+                //dc.SetPixel(x,y, RGB(pallet[pix].r, pallet[pix].g, pallet[pix].b));
+            }//logger.printf("\n");
+        }
+       SDL_UnlockSurface(screen);
+        SDL_UnlockSurface(testImage);
+
         m_SDLToWindows->paint();
         
         //Invalidate(FALSE);
@@ -113,6 +125,8 @@ BOOL CVisualDialog::OnInitDialog()
         //SDL_FreeSurface(s);
     }else{
         testImage = NULL;
+        AfxMessageBox(L"couldn't load surface");
+        return FALSE;
     }
 
     int entries = 256;

@@ -773,7 +773,9 @@ int CMapEditorSDIView::OnCreate(LPCREATESTRUCT lpCreateStruct)
     FileSpecifier ShapesFile("Shapes");
     if(!ShapesFile.Exists()){
         MessageBox(L"no shapes file");
+        theApp.isLoadedShapesFile = false;
     }else{
+        theApp.isLoadedShapesFile = true;
         open_shapes_file(ShapesFile);
         for(int i = 0; i < NUMBER_OF_COLLECTIONS; i ++){
             mark_collection_for_loading(i);
@@ -831,10 +833,14 @@ void CMapEditorSDIView::OnFileNew()
 void CMapEditorSDIView::On32796()
 {
     // TODO: ここにコマンド ハンドラ コードを追加します。
-    setStatusBar(0, _T("start visual mode"));
-    CVisualDialog dlg(this);
+    if(theApp.isLoadedShapesFile){
+        setStatusBar(0, _T("start visual mode"));
+        CVisualDialog dlg(this);
 
-    if(dlg.DoModal() == IDOK){
+        if(dlg.DoModal() == IDOK){
+        }
+    }else{
+        AfxMessageBox(L"visual mode requires Shapes files of Marathon!!!");
     }
 }
 //object placement
@@ -878,7 +884,7 @@ BOOL CMapEditorSDIView::OnSetCursor(CWnd* pWnd, UINT nHitTest, UINT message)
     //return CView::OnSetCursor(pWnd, nHitTest, message);
 }
 
-
+// press event of Right button
 void CMapEditorSDIView::OnRButtonDown(UINT nFlags, CPoint point)
 {
     // TODO: ここにメッセージ ハンドラ コードを追加するか、既定の処理を呼び出します。

@@ -80,6 +80,8 @@ static char * MAP_ICONS_DIR_NAME = "Map Icons/";
 static char * HILIGHTED_ICONS_DIR_NAME = "Highlighted/";
 static char * MAP_ICONS_IMAGE_NAME_LIST_FILE_NAME = "MapIconImageList.txt";
 
+extern HPLLogger logger;
+
 //map icons
 enum
 {
@@ -295,7 +297,11 @@ public:
     //Editor setting
     MapEditorOneSetting setting;
 
+    //initialize all datas for application
     bool initialize();
+
+    //is shapes file loaded
+    bool isLoadedShapesFile;
 private:
     //edit mode
     int editMode;
@@ -377,3 +383,4 @@ int getPolygonIndexFromPointIndex(int pointIndex);
 platform_data *searchPlatformByPolygonIndex(int index);
 
 //CString GetModulePathFileName(CString pName);
+

@@ -141,12 +141,13 @@ bool CMapEditorSDIApp::initialize(){
         is.open(filename);
 
         if(!is.is_open()){
-            CString errMsg = CString("Couldn't open:");
+            CString errMsg = CString("Couldn't open color datas of polygon type:");
             errMsg += L"[" + CString(filename) + L"]";
             MessageBox(NULL, errMsg, L"Error", MB_OK);
             return false;
         }
         char cstr[260];
+        int count = 0;
         while(is.getline(cstr, sizeof(cstr))){
             string line = string(cstr);
             if(line.compare("") == 0){
@@ -157,7 +158,8 @@ bool CMapEditorSDIApp::initialize(){
             for(int i = 0; i < 3; i ++){
                 col[i] = atoi(sp[i].c_str());
             }
-            this->polygonTypeColor[i] = RGB(col[0], col[1], col[2]);
+            this->polygonTypeColor[count] = RGB(col[0], col[1], col[2]);
+            count ++;
         }
         is.close();
     }

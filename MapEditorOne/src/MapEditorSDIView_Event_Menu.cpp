@@ -281,14 +281,17 @@ void CMapEditorSDIView::OnHeightFloor()
 {
     changeMode(EM_FLOOR_HEIGHT);
 }
-
+//polygontype mode
 void CMapEditorSDIView::OnModePolygontype()
 {
     changeMode(EM_POLYGON_TYPE);
 
     //show polygon type dialog
     theApp.polygonTypeDialog->ShowWindow(TRUE);
-
+    //set selection as default
+    theApp.polygonTypeDialog->polygonTypeListCtrl.SetItemState(
+        0, LVIS_SELECTED | LVIS_FOCUSED,
+        LVIS_SELECTED | LVIS_FOCUSED);
     //hide other dialog
     theApp.objectPropertyDialog->ShowWindow(FALSE);
     theApp.polygonPropertyDialog->ShowWindow(FALSE);

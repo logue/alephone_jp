@@ -45,7 +45,7 @@ static void doLButtonDownDrawMode(UINT nFlags, CPoint &point)
             //clik without modify key
 
             //group selected
-            if(theApp.selectGroupInformation.isSelected()){
+            if(theApp.isSelectingGroup && theApp.selectGroupInformation.isSelected()){
 
                 //is point in objects/points/lines/polygons?
                 if(isPointInSelection(point.x, point.y,
@@ -126,8 +126,7 @@ static void doLButtonDownDrawMode(UINT nFlags, CPoint &point)
                     theApp.selectGroupInformation.clear();
                 }
 
-            }
-            if(!theApp.selectGroupInformation.isSelected()){
+            }else {
                 //shiftを押さずにクリック→選択
                 theApp.selectGroupInformation.clear();
 
@@ -240,12 +239,6 @@ static void doLButtonDownDrawMode(UINT nFlags, CPoint &point)
                             polydata.index = i;
                             polydata.num = polygon->vertex_count;
 
-                            //show polygon type dialog
-                            theApp.polygonTypeDialog->ShowWindow(TRUE);
-                            //set selection
-                            theApp.polygonTypeDialog->polygonTypeListCtrl.SetItemState(
-                                polygon->type, LVIS_SELECTED | LVIS_FOCUSED,
-                                LVIS_SELECTED | LVIS_FOCUSED);
                             
                             //show polygon property
                             theApp.polygonPropertyDialog->ShowWindow(TRUE);
@@ -371,6 +364,7 @@ void CMapEditorSDIView::OnLButtonDown(UINT nFlags, CPoint point)
         doLButtonDownDrawMode(nFlags, point);
         break;
     case EM_POLYGON_TYPE:
+
         break;
     case EM_FLOOR_HEIGHT:
         //change height
