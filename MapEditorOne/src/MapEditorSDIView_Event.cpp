@@ -467,15 +467,6 @@ void CMapEditorSDIView::OnMouseMove(UINT nFlags, CPoint point)
                     SavedObjectList[selData->index].location.y = y + selData->offset[1] * DIV;
                 }
                 
-                //if selecting is only 1 object. setup property dialog
-                if(theApp.selectGroupInformation.isSelectOneObject()){
-                    //オブジェクト情報更新
-                    theApp.objectPropertyDialog->setupDialog(theApp.selectGroupInformation.selObjects[0].index);
-                }else if(theApp.selectGroupInformation.isSelectOnePoint()){
-                }else if(theApp.selectGroupInformation.isSelectOneLine()){
-                }else if(theApp.selectGroupInformation.isSelectOnePolygon()){
-                    theApp.polygonPropertyDialog->setupDialog(theApp.selectGroupInformation.polygons[0].index);
-                }
             }
         }
     }
@@ -602,6 +593,16 @@ void CMapEditorSDIView::OnLButtonUp(UINT nFlags, CPoint point)
                 isSelected = true;
         }
         theApp.selectGroupInformation.setSelected(isSelected);
+
+        //if selecting is only 1 object. setup property dialog
+        if(theApp.selectGroupInformation.isSelectOneObject()){
+            //オブジェクト情報更新
+            theApp.objectPropertyDialog->setupDialog(theApp.selectGroupInformation.selObjects[0].index);
+        }else if(theApp.selectGroupInformation.isSelectOnePoint()){
+        }else if(theApp.selectGroupInformation.isSelectOneLine()){
+        }else if(theApp.selectGroupInformation.isSelectOnePolygon()){
+            theApp.polygonPropertyDialog->setupDialog(theApp.selectGroupInformation.polygons[0].index);
+        }
     }
 
     theApp.isSelectingGroup = false;

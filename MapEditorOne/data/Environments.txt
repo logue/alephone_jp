@@ -1,5 +1,5 @@
-水
-溶岩
-沼
-ジャイロ
-プフォール船
+Set #1 Water
+Set #2 Lava
+Set #3 Sewage
+Set #4 Jjaro
+Set #5 Pfhor

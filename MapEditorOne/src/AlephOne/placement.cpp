@@ -45,8 +45,8 @@ Oct 25, 200 (Mark Levin)
 /* This is done in a single array to facilitate the saving of the game state. */
 //HogePiyo Modified
 struct object_frequency_definition object_placement_info[2*MAXIMUM_OBJECT_TYPES];
-struct object_frequency_definition *monster_placement_info;
-struct object_frequency_definition *item_placement_info;
+struct object_frequency_definition *monster_placement_info = NULL;
+struct object_frequency_definition *item_placement_info = NULL;
 
 /* private functions */
 static void _recreate_objects(short object_type, short max_object_types, struct object_frequency_definition *placement_info, short *object_counts, short *random_counts);

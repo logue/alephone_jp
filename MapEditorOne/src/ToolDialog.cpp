@@ -23,10 +23,8 @@ CToolDialog::CToolDialog(CWnd* pParent /*=NULL*/)
 
     //イメージ名リスト読み込み
     Information imageNameInformations[NUMBER_OF_TOOL_BAR_ICON_FILES];
-    CString listPath = CString(DATA_DIR_NAME) +
-        CString(TOOL_BAR_ICONS_IMAGE_LIST_FILE_NAME);
-    char cstr[256];
-    strToChar(listPath, cstr);
+    char cstr[260];
+    sprintf(cstr, "%s%s", DATA_DIR_NAME, TOOL_BAR_ICONS_IMAGE_LIST_FILE_NAME);
     loadInformations(cstr, NUMBER_OF_TOOL_BAR_ICON_FILES,
         imageNameInformations);
     /*
@@ -54,28 +52,22 @@ CToolDialog::CToolDialog(CWnd* pParent /*=NULL*/)
     };
     */
     for(int i = 0; i < NUMBER_OF_TOOLS * 2; i ++){
-        //loadBitmap(assignment[i], &imageList, RGB(255,0,0));
         CString path = CString(DATA_DIR_NAME) + CString(TOOL_BAR_ICONS_DIR_NAMR);
         if(i >= NUMBER_OF_TOOLS){
             path += CString(SELECTED_ICONS_DIR_NAME);
         }
         path += imageNameInformations[i % NUMBER_OF_TOOLS].jname;
         strToChar(path, cstr);
-        CBitmap *bmp = loadBitmapFromFile(cstr);
+        HBITMAP bmp = loadBitmapFromFile(cstr);
         
-        //CBitmap* bmp = new CBitmap();
-        //bmp->LoadBitmap(assignment[i]);
         bitmaps.push_back(bmp);
     }
 }
 
 CToolDialog::~CToolDialog()
 {
-    //imageList.DeleteImageList();
-    vector<CBitmap*>::iterator it;
-    for(it = bitmaps.begin(); it != bitmaps.end(); it ++){
-        (*it)->DeleteObject();
-        delete (*it);
+    for(int i = 0; i < (int)bitmaps.size(); i ++){
+        DeleteObject(bitmaps[i]);
     }
     bitmaps.clear();
 }
@@ -153,7 +145,7 @@ void CToolDialog::OnPaint()
     //draw tools
     CDC memDC;
     memDC.CreateCompatibleDC(&dc);
-    CBitmap* old = memDC.SelectObject(bitmaps[0]);
+//    CBitmap* old = memDC.SelectObject(bitmaps[0]);
     for(int i = 0; i < NUMBER_OF_TOOLS; i ++){
         POINT pt;
 
@@ -165,7 +157,7 @@ void CToolDialog::OnPaint()
         if(theApp.selectingToolType == i){
             index += NUMBER_OF_TOOLS;
         }
-        CBitmap* bmp = bitmaps[index];
+        CBitmap* bmp = CBitmap::FromHandle(bitmaps[index]);
         BITMAP bmpInfo;
         bmp->GetBitmap(&bmpInfo);
         memDC.SelectObject(bmp);
@@ -173,7 +165,7 @@ void CToolDialog::OnPaint()
             0, 0, SRCCOPY);
 
     }
-    memDC.SelectObject(old);
+//    memDC.SelectObject(old);
     memDC.DeleteDC();
 }
 

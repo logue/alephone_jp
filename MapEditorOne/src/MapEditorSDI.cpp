@@ -76,6 +76,7 @@ CMapEditorSDIApp::CMapEditorSDIApp()
         AfxMessageBox(L"no setting file. I'll make default one");
         setting.setSettingToDefault();
     }
+    m_SDLToWindows = NULL;
 
     //ファイルからコンボ用文字列読み込み
     //大別
@@ -205,6 +206,33 @@ CMapEditorSDIApp::CMapEditorSDIApp()
         exit(1);
     }
 
+    bitmapList.resize(NUMBER_OF_DEFINED_ITEMS * 2 + NUMBER_OF_MAP_ICONS * 2);
+    const int NUMBER_OF_MAP_ICON_FILES = NUMBER_OF_DEFINED_ITEMS + NUMBER_OF_MAP_ICONS;
+    //load image file name list from file
+    Information mapIconFileNameInformations[NUMBER_OF_MAP_ICON_FILES];
+
+    sprintf(cstr, "%s%s", DATA_DIR_NAME, MAP_ICONS_IMAGE_NAME_LIST_FILE_NAME);
+    loadInformations(cstr, NUMBER_OF_MAP_ICON_FILES, mapIconFileNameInformations);
+
+    for(int i = 0; i < 2 * NUMBER_OF_DEFINED_ITEMS + 2 * NUMBER_OF_MAP_ICONS; i ++){
+        string path = string(DATA_DIR_NAME) +
+            string(MAP_ICONS_DIR_NAME);
+        const int SELECTED_OFFSET = NUMBER_OF_DEFINED_ITEMS + NUMBER_OF_MAP_ICONS;
+        if( i >= SELECTED_OFFSET){
+            path += string(HILIGHTED_ICONS_DIR_NAME);
+        }
+        int index = i;
+
+        //selected
+        if(i >= SELECTED_OFFSET){
+            index -= SELECTED_OFFSET;
+        }
+        strToChar(mapIconFileNameInformations[index].jname, cstr);
+        path += string(cstr);
+        //strToChar(path, cstr);
+        HBITMAP bitmap = loadBitmapFromFile(path.c_str());
+        bitmapList.push_back(bitmap);
+    }
 
     //menu name to id
     menuIDMap[EM_DRAW] = ID_32795;
@@ -218,13 +246,13 @@ CMapEditorSDIApp::~CMapEditorSDIApp()
     if(!setting.saveSetting()){
         AfxMessageBox(CString("fail to save setting:") + setting.getFilePath());
     }
-    if(m_SDLToWindows)delete m_SDLToWindows;
+    //if(m_SDLToWindows)delete m_SDLToWindows;
     shutdown_shape_handler();
     exit_screen();
-    mapIconImageList.DeleteImageList();
     for(int i = 0; i < (int)bitmapList.size(); i ++){
-        bitmapList[i]->DeleteObject();
+        DeleteObject(bitmapList[i]);
     }
+    bitmapList.clear();
     logger.close();
 }
 
@@ -370,13 +398,13 @@ void loadIcon(int id, CImageList* imageList){
     icon = LoadIcon(AfxGetInstanceHandle(), MAKEINTRESOURCE(id));
     imageList->Add(icon);
 }
-void loadBitmap(int id, CImageList* imageList, COLORREF key)
+/*void loadBitmap(int id, CImageList* imageList, COLORREF key)
 {
     CBitmap image;
     image.LoadBitmap(id);
     imageList->Add(&image, key);
     image.DeleteObject();
-}
+}*/
 //set object property to default
 void setObjectPropertyToDefault()
 {
@@ -441,6 +469,9 @@ void setCursor()
 object_frequency_definition *getIndexOfPlacement(int index)
 {
     object_frequency_definition *place;
+    if(!item_placement_info || !monster_placement_info){
+        return NULL;
+    }
     if( index < NUMBER_OF_DEFINED_ITEMS){
         place = &item_placement_info[index];
     }else{
@@ -459,8 +490,10 @@ void addInitialPlacement(int objectType, int index, int num)
         }else if(objectType == _saved_monster){
             place = getIndexOfPlacement(index + NUMBER_OF_DEFINED_ITEMS);
         }
-        //
-        place->initial_count += num;
+        if(place){
+            //
+            place->initial_count += num;
+        }
     }
 }
 void subInitialPlacement(int objectType, int index, int num)
@@ -527,18 +560,25 @@ platform_data *searchPlatformByPolygonIndex(int index)
 }
 
 //load bitmap from file
-CBitmap* loadBitmapFromFile(const char *pathName)
+HBITMAP loadBitmapFromFile(const char *pathName)
 {
     CBitmap *bitmap = new CBitmap;
+    if(!bitmap){
+        AfxMessageBox(L"Memory over run");
+        exit(1);
+    }
     HBITMAP handleBitmap = (HBITMAP)LoadImage(
         AfxGetInstanceHandle(), CString(pathName),
         IMAGE_BITMAP, 0, 0, LR_LOADFROMFILE);
     if(handleBitmap == NULL){
         AfxMessageBox(CString("Couldn't load [") + CString(pathName) + CString("]"));
         exit(1);
-    }
+    }/*
     memcpy(bitmap, CBitmap::FromHandle(handleBitmap), sizeof(CBitmap));
+    //DeleteObject(handleBitmap);
     return bitmap;
+    */
+    return handleBitmap;
 }
 
 /**

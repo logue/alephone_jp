@@ -17,7 +17,7 @@ public:
 
     //tool's icons
     CImageList imageList;
-    vector<CBitmap*> bitmaps;
+    vector<HBITMAP> bitmaps;
 
 // ダイアログ データ
 	enum { IDD = IDD_DIALOG_TOOL };

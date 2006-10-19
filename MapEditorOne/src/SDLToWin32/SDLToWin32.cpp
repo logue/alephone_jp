@@ -66,7 +66,8 @@ void SDLToWindows::createSurface(HWND hwnd, RECT size){
     Uint32 amask = 0xff000000;
 
 	//make an sdl surface
-	surface=SDL_CreateRGBSurface(SDL_SWSURFACE, size.right+size.left, size.top+size.bottom, 32, rmask, gmask, bmask, amask);
+	surface=SDL_CreateRGBSurface(SDL_SWSURFACE, size.right+size.left,
+        size.top+size.bottom, 32, rmask, gmask, bmask, amask);
 
 	if(surface==NULL) return;
 

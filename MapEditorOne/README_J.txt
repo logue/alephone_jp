@@ -10,3 +10,5 @@
 問題や要望はpfhorumsにてお願いします
 http://www.pfhorums.com/index.php?showtopic=860
 でなければ2chとかでもOKです。
+
+jp_patchディレクトリ以下をここに上書きすると一部日本語表記になります。

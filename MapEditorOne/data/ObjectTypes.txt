@@ -1,6 +1,6 @@
-モンスター
-オブジェ
-アイテム
-プレイヤー
-ゴール
-音源
+Monster
+Scenery
+Items
+Player
+Goal
+Sound

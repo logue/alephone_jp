@@ -69,6 +69,7 @@ CMapEditorSDIView::CMapEditorSDIView()
 CMapEditorSDIView::~CMapEditorSDIView()
 {
     //delete theApp.objectPropertyDialog;
+
 }
 
 BOOL CMapEditorSDIView::PreCreateWindow(CREATESTRUCT& cs)
@@ -427,7 +428,7 @@ void CMapEditorSDIView::drawObjects(CDC *cdc)
                 //highlight!
                 index += NUMBER_OF_DEFINED_ITEMS + NUMBER_OF_MAP_ICONS;
             }
-            CBitmap* bitmap = theApp.bitmapList[index];
+            CBitmap* bitmap = CBitmap::FromHandle(theApp.bitmapList[index]);
             BITMAP bmp;
             CSize sz = bitmap->GetBitmap(&bmp);
             sz.cx = bmp.bmWidth;
@@ -683,137 +684,20 @@ void CMapEditorSDIView::OnUpdateUIState(UINT /*nAction*/, UINT /*nUIElement*/)
     // TODO: ここにメッセージ ハンドラ コードを追加します。
 }
 
+
 void CMapEditorSDIView::OnInitialUpdate()
 {
     CView::OnInitialUpdate();
 
     // TODO : ここに特定なコードを追加するか、もしくは基本クラスを呼び出してください。
 
-    const int NUMBER_OF_MAP_ICON_FILES = NUMBER_OF_DEFINED_ITEMS + NUMBER_OF_MAP_ICONS;
-    char *MAP_ICONS_DIR_NAME = "Map Icons/";
-    char *HILIGHTED_ICONS_DIR_NAME = "Highlighted/";
-    char *MAP_ICONS_IMAGE_NAME_LIST_FILE_NAME = "MapIconImageList.txt";
     
     static bool isFirst = true;
 
     if(isFirst){
-        theApp.objectPropertyDialog = new CMonsterPropertyDialog;
-        theApp.objectPropertyDialog->Create(this);
-        //隠す
-        theApp.objectPropertyDialog->ShowWindow(FALSE);
-        //値をデフォルトに設定
-        setObjectPropertyToDefault();
-
-        //polygon type dialog
-        theApp.polygonTypeDialog = new CPolygonTypeDialog;
-        theApp.polygonTypeDialog->Create(this);
-        theApp.polygonTypeDialog->ShowWindow(FALSE);
-
-        //height dialog
-        theApp.heightDialog = new CHeightDialog;
-        theApp.heightDialog->Create(this);
-        
-        //tool
-        theApp.toolDialog = new CToolDialog;
-        theApp.toolDialog->Create(this);
-        theApp.toolDialog->ShowWindow(TRUE);
-
-        //polygon property
-        theApp.polygonPropertyDialog = new CPolygonPropertyDialog;
-        theApp.polygonPropertyDialog->Create(this);
-        theApp.polygonPropertyDialog->ShowWindow(FALSE);
 
         isFirst = false;
-        //
-        //ビットマップ読み込み
-        COLORREF key = RGB(221,221,221);
-        //theApp.mapIconImageList.Create(16, 16, ILC_MASK|ILC_COLOR32, 
-        //NUMBER_OF_DEFINED_ITEMS + NUMBER_OF_MAP_ICONS, 2);
 
-        //load image file name list from file
-        Information mapIconFileNameInformations[NUMBER_OF_MAP_ICON_FILES];
-        CString listPath = CString(DATA_DIR_NAME) +
-            CString(MAP_ICONS_IMAGE_NAME_LIST_FILE_NAME);
-        char cstr[_MAX_PATH];
-        strToChar(listPath, cstr);
-        loadInformations(cstr, NUMBER_OF_MAP_ICON_FILES, mapIconFileNameInformations);
-
-        /*int idAssignment[] ={
-            //items
-            //start by IDB_BITMAP21=AlienWeapon sorted by names
-            //look items.h for order 
-            IDB_BITMAP39,   //knife = fist = none 0
-            IDB_BITMAP39,   //magnum
-            IDB_BITMAP40,
-            IDB_BITMAP33,   //plasma
-            IDB_BITMAP32,
-            IDB_BITMAP24,   //rifle
-            IDB_BITMAP23,
-            IDB_BITMAP36,
-            IDB_BITMAP44,   //missile
-            IDB_BITMAP45,
-            IDB_BITMAP28,   //invisible 10
-
-            IDB_BITMAP37,   //invincible
-            IDB_BITMAP29,   //infravision
-            IDB_BITMAP21,   //alien
-            IDB_BITMAP21,   //alien ammo (none)
-            IDB_BITMAP31,   //frame
-            IDB_BITMAP30,   
-            IDB_BITMAP52,   //extravision
-            IDB_BITMAP34,   //oxygen
-            IDB_BITMAP43,   //energy
-            IDB_BITMAP20,                   //20
-            
-            IDB_BITMAP42,
-            IDB_BITMAP48,   //shotgun
-            IDB_BITMAP47,
-            IDB_BITMAP38,   //spht
-            IDB_BITMAP36,   //chip
-
-            IDB_BITMAP49,   //balls(unused except red one)
-            IDB_BITMAP49,   //red (used)
-            IDB_BITMAP49,
-            IDB_BITMAP49,
-            IDB_BITMAP49,                   //30
-            
-            IDB_BITMAP49,
-            IDB_BITMAP49,
-            IDB_BITMAP49,
-            
-            IDB_BITMAP50,   //smg
-            IDB_BITMAP53,
-
-            //other icons
-            IDB_BITMAP26,   //center x
-            IDB_BITMAP35,   //goal
-            IDB_BITMAP46,   //scenery
-            IDB_BITMAP51,   //sound
-
-            0   //terminater
-        };*/
-
-        for(int i = 0; i < 2 * NUMBER_OF_DEFINED_ITEMS + NUMBER_OF_MAP_ICONS; i ++){
-            //loadBitmap(idAssignment[i], &(theApp.mapIconImageList), key);
-            //CBitmap *bitmap = new CBitmap();
-            //bitmap->LoadBitmap(idAssignment[i]);
-            CString path = CString(DATA_DIR_NAME) +
-                CString(MAP_ICONS_DIR_NAME);
-            const int SELECTED_OFFSET = NUMBER_OF_DEFINED_ITEMS + NUMBER_OF_MAP_ICONS;
-            if( i >= SELECTED_OFFSET){
-                path += CString(HILIGHTED_ICONS_DIR_NAME);
-            }
-            int index = i;
-
-            //selected
-            if(i >= SELECTED_OFFSET){
-                index -= SELECTED_OFFSET;
-            }
-            path += mapIconFileNameInformations[index].jname;
-            strToChar(path, cstr);
-            CBitmap *bitmap = loadBitmapFromFile(cstr);
-            theApp.bitmapList.push_back(bitmap);
-        }
 
         On32795();
     }
@@ -863,16 +747,17 @@ int CMapEditorSDIView::OnCreate(LPCREATESTRUCT lpCreateStruct)
     GetClientRect(&cl_rect);
     theApp.m_SDLToWindows=new SDLToWindows(this->m_hWnd, cl_rect);
     screenSurface = theApp.m_SDLToWindows->getSurface();
+    
     /*
     struct view_data view;
     view.
     initialize_view_data(&view);
     initialize_screen
     */
-    /*    */
+     
     struct screen_mode_data scr;
     scr.acceleration = 0;
-    scr.bit_depth = bit_depth;
+    scr.bit_depth = screenSurface->format->BitsPerPixel;
     scr.draw_every_other_line = 0;
     scr.fullscreen = 0;
     scr.gamma_level = 0;
@@ -882,6 +767,7 @@ int CMapEditorSDIView::OnCreate(LPCREATESTRUCT lpCreateStruct)
     initialize_screen(&scr, false);
 
     initialize_shape_handler();
+
     FileSpecifier ShapesFile("Shapes");
     if(!ShapesFile.Exists()){
         MessageBox(L"no shapes file");
@@ -893,6 +779,33 @@ int CMapEditorSDIView::OnCreate(LPCREATESTRUCT lpCreateStruct)
         load_collections(false, false);
     }
 
+    theApp.objectPropertyDialog = new CMonsterPropertyDialog;
+    theApp.objectPropertyDialog->Create(this);
+    //隠す
+    theApp.objectPropertyDialog->ShowWindow(FALSE);
+    //値をデフォルトに設定
+    setObjectPropertyToDefault();
+
+    //polygon type dialog
+    theApp.polygonTypeDialog = new CPolygonTypeDialog;
+    theApp.polygonTypeDialog->Create(this);
+    theApp.polygonTypeDialog->ShowWindow(FALSE);
+
+    //height dialog
+    theApp.heightDialog = new CHeightDialog;
+    theApp.heightDialog->Create(this);
+
+    //tool
+    theApp.toolDialog = new CToolDialog;
+    theApp.toolDialog->Create(this);
+    theApp.toolDialog->ShowWindow(TRUE);
+
+    //polygon property
+    theApp.polygonPropertyDialog = new CPolygonPropertyDialog;
+    theApp.polygonPropertyDialog->Create(this);
+    theApp.polygonPropertyDialog->ShowWindow(FALSE);
+
+    //delete theApp.m_SDLToWindows;
     return 0;
 }
 // new file

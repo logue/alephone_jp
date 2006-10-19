@@ -73,6 +73,9 @@ const int LINE_DISTANCE_EPSILON = 5;
 
 static char *DATA_DIR_NAME = "./data/";
 static char *INI_FILE_NAME = "./setting.ini";
+static char * MAP_ICONS_DIR_NAME = "Map Icons/";
+static char * HILIGHTED_ICONS_DIR_NAME = "Highlighted/";
+static char * MAP_ICONS_IMAGE_NAME_LIST_FILE_NAME = "MapIconImageList.txt";
 
 //map icons
 enum
@@ -264,8 +267,9 @@ public:
 	SDLToWindows *m_SDLToWindows;
 
     //icons
-    CImageList mapIconImageList;
-    vector<CBitmap*> bitmapList;
+    //CImageList mapIconImageList;
+    //vector<CBitmap*> bitmapList;
+    vector<HBITMAP> bitmapList;
 
     //select tool
     int selectingToolType;
@@ -309,10 +313,10 @@ void loadInformations(const char* filename, int max,
 
 //load bitmap/icon from resources to ImageList
 void loadIcon(int id, CImageList* imageList);
-void loadBitmap(int id, CImageList* imageList, COLORREF key);
+//void loadBitmap(int id, CImageList* imageList, COLORREF key);
 
 //load bitmap/icon from file
-CBitmap* loadBitmapFromFile(const char *pathName);
+HBITMAP loadBitmapFromFile(const char *pathName);
 
 //set object property to default
 void setObjectPropertyToDefault();
@@ -368,4 +372,4 @@ int getPolygonIndexFromPointIndex(int pointIndex);
 */
 platform_data *searchPlatformByPolygonIndex(int index);
 
-CString GetModulePathFileName(CString pName);
+//CString GetModulePathFileName(CString pName);

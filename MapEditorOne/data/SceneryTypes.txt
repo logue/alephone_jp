@@ -1,61 +1,61 @@
-明るい埃
-暗い埃
-複数の骨
-骨
-肋骨
-頭蓋骨
-ぶら下げ照明1
-ぶら下げ照明2
-シリンダー小
-シリンダー大
-ブロック1
-ブロック2
-ブロック3
-ピストルクリップ
-照明小
-照明長
-サイレン
-岩
-血痕
-水
-ピストル
-ボブの●●
-水溜り
-水溜り大
-監視モニタ
-エイリアン用サプライ
-機械
-ファイターの杖
-切り株状の緑の照明
-長い緑の照明
-ごみくず
-アンテナ1
-アンテナ2
-エイリアン用サプライ
-骨
-骨大
-プフォールのかけら
-ボブのかけら
-ボブの血
-緑の照明
-エイリアン照明小
-エイリアン内張りの照明
-黄色い何か
-四角い灰色の何か
-プフォールの骸骨
-プフォールのマスク
-緑の物体
-ハンターのシールド
-骨
-エイリアンのヘドロ
-内張りの短い照明
-長い照明
-変なロッド
-プフォール船
-太陽
-大きなガラスのコンテナ
-骨子1
-骨子2
-ロウォン
-接地アンテナ
-内張りアンテナ
+Lava: light dirt
+Lava: dark dirt
+Lava: bones
+Lava: bone
+Lava: ribs
+Lava: skull
+Lava: hanging light 1
+Lava: hanging light 2
+Lava: small cylinder
+Lava: large cylinder
+Lava: block 1
+Lava: block 2
+Lava: block 3
+Water: pistol clip
+Water: short light
+Water: long light
+Water: siren
+Water: rocks
+Water: blood drops
+Water: water thing
+Water: gun
+Water: Bob remains
+Water: puddles
+Water: big puddles
+Water: security monitor
+Water: alien supply can
+Water: machine
+Water: fighter's staff
+Sewage: stubby green light
+Sewage: long green light
+Sewage: junk
+Sewage: big antenna 1
+Sewage: big antenna 2
+Sewage: alien supply can
+Sewage: bones
+Sewage: big bones
+Sewage: Pfhor pieces
+Sewage: Bob pieces
+Sewage: Bob blood
+Pfhor: green light
+Pfhor: small alien light
+Pfhor: alien ceiling rod light
+Pfhor: bulbous yellow alien object
+Pfhor: square gray organic object
+Pfhor: Pfhor skeleton
+Pfhor: Pfhor mask
+Pfhor: green stuff
+Pfhor: Hunter shield
+Pfhor: bones
+Pfhor: alien sludge
+Jjaro: short ceiling light
+Jjaro: long light
+Jjaro: weird rod
+Jjaro: Pfhor ship
+Jjaro: Sun
+Jjaro: large glass container
+Jjaro: nub 1
+Jjaro: nub 2
+Jjaro: Lh'owon
+Jjaro: floor whip antenna
+Jjaro: ceiling whip antenna 

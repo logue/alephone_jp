@@ -2203,7 +2203,9 @@ XML_ElementParser *Infravision_GetParser()
 }
 */
 
-SDL_Surface *get_shape_surface(int shape, int inCollection, byte** outPointerToPixelData, float inIllumination, bool inShrinkImage)
+SDL_Surface *get_shape_surface(int shape, int inCollection, byte** outPointerToPixelData,
+                               float inIllumination, bool inShrinkImage,
+                               SDL_Color *palette)
 {
 	// Get shape information
 	int collection_index = GET_COLLECTION(GET_DESCRIPTOR_COLLECTION(shape));
@@ -2239,27 +2241,27 @@ SDL_Surface *get_shape_surface(int shape, int inCollection, byte** outPointerToP
                     
                     // Extract color table - ZZZ change to use shading table rather than CLUT.  Hope it works.
 
-		    // ghs: I believe the second case in this if statement
-		    // is the way it should always be done; but somehow SDL
-		    // screws up when OPENGLBLIT is enabled (big surprise) and
-		    // this old behavior seems luckily to work around it
+		            // ghs: I believe the second case in this if statement
+		            // is the way it should always be done; but somehow SDL
+		            // screws up when OPENGLBLIT is enabled (big surprise) and
+		            // this old behavior seems luckily to work around it
 
-		    // well, ok, ideally the code that builds these tables
-		    // should either not use the current video format
-		    // (since in the future it may change) or should store
-		    // the pixel format it used somewhere so we're sure we've
-		    // got the right one
+		            // well, ok, ideally the code that builds these tables
+		            // should either not use the current video format
+		            // (since in the future it may change) or should store
+		            // the pixel format it used somewhere so we're sure we've
+		            // got the right one
                     if (screenSurface->flags & SDL_OPENGLBLIT){//SDL_GetVideoSurface()->flags & SDL_OPENGLBLIT) {
-		      for(int i = 0; i < 256; i++) {
-			colors[i].r = RED16(shading_tables[i]) << 3;
-			colors[i].g = GREEN16(shading_tables[i]) << 3;
-			colors[i].b = BLUE16(shading_tables[i]) << 3;
-		      }
-		    } else {
-		      SDL_PixelFormat *fmt = screenSurface->format;//SDL_GetVideoSurface()->format;
-		      for (int i = 0; i < 256; i++) {
-			SDL_GetRGB(shading_tables[i], fmt, &colors[i].r, &colors[i].g, &colors[i].b);
-		      }
+                        for(int i = 0; i < 256; i++) {
+			                colors[i].r = RED16(shading_tables[i]) << 3;
+			                colors[i].g = GREEN16(shading_tables[i]) << 3;
+			                colors[i].b = BLUE16(shading_tables[i]) << 3;
+                        }
+		            } else {
+                        SDL_PixelFormat *fmt = screenSurface->format;//SDL_GetVideoSurface()->format;
+		                for (int i = 0; i < 256; i++) {
+                			SDL_GetRGB(shading_tables[i], fmt, &colors[i].r, &colors[i].g, &colors[i].b);
+		                }
                     }
                 }
                 break;
@@ -2421,7 +2423,9 @@ SDL_Surface *get_shape_surface(int shape, int inCollection, byte** outPointerToP
                     SDL_SetColors(s, colors, 0, 256);
                 }
 	}
-
+    if(palette){
+        memcpy(palette, colors, sizeof(SDL_Color) * 256);
+    }
 	return s;
 }
 

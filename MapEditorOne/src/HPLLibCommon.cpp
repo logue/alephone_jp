@@ -498,3 +498,62 @@ vector<string> Split( string src, const char* key){
 	}
 	return vList;
 }
+
+/**
+    calculate degree between two connected lines
+*/
+double getDegreeBetweenTwoLines(int lineIndex0, int lineIndex1)
+{
+    endpoint_data *begin0, *end0;
+    endpoint_data *begin1, *end1;
+
+    begin0 = get_endpoint_data(get_line_data(lineIndex0)->endpoint_indexes[0]);
+    end0 = get_endpoint_data(get_line_data(lineIndex0)->endpoint_indexes[1]);
+    begin1 = get_endpoint_data(get_line_data(lineIndex1)->endpoint_indexes[0]);
+    end1 = get_endpoint_data(get_line_data(lineIndex1)->endpoint_indexes[1]);
+
+    //cos距離
+    
+    
+    return 0;
+}
+
+/**
+    check is polygon valid
+*/
+bool isPolygonValid(int polygonIndex)
+{
+    return false;
+}
+
+Uint32 getpixel(SDL_Surface *surface, int x, int y)
+{
+    int bpp = surface->format->BytesPerPixel;
+    return getpixel((Uint8*)surface->pixels, (int)surface->pitch, bpp, x, y);
+}
+
+Uint32 getpixel(Uint8* pixels, int pitch, int bpp, int x, int y)
+{
+    /* この p は取得したいピクセルを指すアドレス */
+    Uint8 *p = (Uint8 *)pixels + y * pitch + x * bpp;
+
+    switch(bpp) {
+    case 1:
+        return *p;
+
+    case 2:
+        return *(Uint16 *)p;
+
+    case 3:
+        if(SDL_BYTEORDER == SDL_BIG_ENDIAN)
+            return p[0] << 16 | p[1] << 8 | p[2];
+        else
+            return p[0] | p[1] << 8 | p[2] << 16;
+
+    case 4:
+        return *(Uint32 *)p;
+
+    default:
+        return 0;       /* 起こるはずがないが、ワーニングを回避 */
+    }
+}

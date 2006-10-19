@@ -8,6 +8,8 @@ void strToChar(CString& src, char* dest){
     LPBOOL ok = new BOOL[1];
 	lstrcpy(buf, src);
     wcharToChar(buf, dest);
+    delete ok;
+    delete buf;
 }
 
 /**

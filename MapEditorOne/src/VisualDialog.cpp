@@ -4,7 +4,9 @@
 #include "stdafx.h"
 #include "MapEditorSDI.h"
 #include "VisualDialog.h"
-
+static unsigned char** outPointerToPixelData;
+SDL_Color pallet[256];
+HPALETTE hPalette;
 
 // CVisualDialog ダイアログ
 
@@ -15,10 +17,13 @@ CVisualDialog::CVisualDialog(CWnd* pParent /*=NULL*/)
 {
     m_SDLToWindows = NULL;
     testImage = NULL;
+    outPointerToPixelData = (unsigned char**)malloc(sizeof(unsigned char*) * 1);
 }
 
 CVisualDialog::~CVisualDialog()
 {
+    DeleteObject(hPalette);
+    free(outPointerToPixelData);
     if(m_SDLToWindows)delete m_SDLToWindows;
     SDL_FreeSurface(testImage);
 }
@@ -42,7 +47,24 @@ void CVisualDialog::OnPaint()
     // TODO: ここにメッセージ ハンドラ コードを追加します。
     // 描画メッセージで CDialog::OnPaint() を呼び出さないでください。
 
-    if(m_SDLToWindows){
+    if(testImage){
+        dc.SelectPalette( CPalette::FromHandle(hPalette), TRUE);
+        dc.RealizePalette();
+        SDL_LockSurface(testImage);
+        int bpp = testImage->format->BytesPerPixel;
+        for(int y = 0; y < testImage->h; y ++){
+            for(int x = 0; x < testImage->w; x ++){
+                Uint32 pix = getpixel(testImage, x, y);
+                Uint8 r,g,b;
+                SDL_GetRGB(pix, testImage->format,
+                    &r,&g,&b);
+                dc.SetPixel(x,y, RGB(r,g,b));
+            }
+        }
+        SDL_UnlockSurface(testImage);
+    }/*
+    if(m_SDLToWindows && testImage){
+        
         SDL_Surface* screen = m_SDLToWindows->getSurface();
         //drawing!
         SDL_FillRect(screen, NULL, SDL_MapRGB(screen->format, 0,0,0));
@@ -50,6 +72,7 @@ void CVisualDialog::OnPaint()
         SDL_Rect r = {0,0,testImage->w, testImage->h};
         SDL_BlitSurface(testImage, &r, screen, &r);
         m_SDLToWindows->paint();
+        
         //Invalidate(FALSE);
     }
     /*CWnd *pictBox = GetDlgItem(IDC_PICTURE);
@@ -76,15 +99,41 @@ BOOL CVisualDialog::OnInitDialog()
     
     pictBox->GetWindowRect(&cl_rect);
     m_SDLToWindows=new SDLToWindows(pictBox->m_hWnd, cl_rect);
-
+    screenSurface = m_SDLToWindows->getSurface();
+    //screenSurface = SDL_SetVideoMode(640,480, 8, SDL_SWSURFACE);
     
-    int collection = BUILD_COLLECTION(12, 0);
-    shape_descriptor shape = BUILD_DESCRIPTOR(collection, 0);
-    unsigned char** outPointerToPixelData = (unsigned char**)malloc(sizeof(unsigned char*) * 1);
-    SDL_Surface *s = get_shape_surface(shape, NONE, outPointerToPixelData, 0);
-    testImage = s;//SDL_DisplayFormat(s);
-    //SDL_FreeSurface(s);
-    free(outPointerToPixelData);
+    int clut = 0;
+    int collection = BUILD_COLLECTION(11, clut);
+    shape_descriptor shape = BUILD_DESCRIPTOR(collection, 1);
+    SDL_Surface *s = get_shape_surface(shape, NONE, outPointerToPixelData,
+        0.9f, false, pallet);
+
+    if(s){
+        testImage = s;//SDL_DisplayFormat(s);
+        //SDL_FreeSurface(s);
+    }else{
+        testImage = NULL;
+    }
+
+    int entries = 256;
+	LOGPALETTE *lpPalette = (LOGPALETTE *)malloc(sizeof (LOGPALETTE) + (entries-1) * sizeof (PALETTEENTRY));
+	lpPalette->palVersion = 0x0300;
+	lpPalette->palNumEntries = entries;
+
+	for (int count = 0 ; count < entries ; count++) {
+		lpPalette->palPalEntry[count].peRed = pallet[count].r;
+		lpPalette->palPalEntry[count].peGreen = pallet[count].g;
+		lpPalette->palPalEntry[count].peBlue = pallet[count].b;
+		lpPalette->palPalEntry[count].peFlags = NULL;
+	}
+	/*
+	lpPalette->palPalEntry[entries - 1].peRed =
+	lpPalette->palPalEntry[entries - 1].peGreen =
+	lpPalette->palPalEntry[entries - 1].peBlue = 255;
+    */
+	hPalette = CreatePalette(lpPalette);
+	free(lpPalette);
+
     return TRUE;  // return TRUE unless you set the focus to a control
     // 例外 : OCX プロパティ ページは必ず FALSE を返します。
 }

@@ -69,7 +69,9 @@ static void initialize_pixmap_handler()
 // Note that default arguments are used to make this function
 // source-code compatible with existing usage.
 // Note also that inShrinkImage currently only applies to RLE shapes.
-SDL_Surface *get_shape_surface(int shape, int inCollection, byte** outPointerToPixelData, float inIllumination, bool inShrinkImage);
+SDL_Surface *get_shape_surface(int shape, int inCollection, byte** outPointerToPixelData,
+                               float inIllumination, bool inShrinkImage,
+                               SDL_Color *palette);
 
 
 /*

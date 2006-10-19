@@ -224,3 +224,16 @@ void quickSort(int *indexes, int max);
 	•¶Žš—ñ‚Ì•ªŠ„
 */
 vector<string> Split( string src, const char* key);
+
+/**
+    calculate degree between two connected lines
+*/
+double getDegreeBetweenTwoLines(int lineIndex0, int lineIndex1);
+
+/**
+    check is polygon valid
+*/
+bool isPolygonValid(int polygonIndex);
+
+Uint32 getpixel(SDL_Surface *surface, int x, int y);
+Uint32 getpixel(Uint8* pixels, int pitch, int bpp,  int x, int y);
