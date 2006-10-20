@@ -69,6 +69,9 @@ BEGIN_MESSAGE_MAP(CShapesEditorOneDlg, CDialog)
 	//}}AFX_MSG_MAP
     ON_BN_CLICKED(IDC_RADIO1, OnBnClickedRadio1)
     ON_BN_CLICKED(IDC_RADIO2, OnBnClickedRadio2)
+    ON_COMMAND(ID_FILE_CLOSE32773, &CShapesEditorOneDlg::OnFileClose32773)
+    ON_COMMAND(ID_FILE_OPEN32772, &CShapesEditorOneDlg::OnFileOpen32772)
+    ON_WM_CLOSE()
 END_MESSAGE_MAP()
 
 
@@ -178,11 +181,30 @@ bool CShapesEditorOneDlg::initialize()
     bitmapsDialog.Create(CBitmapsDialog::IDD, this);
     bitmapsDialog.MoveWindow(&panelRect);
 
-    sequencesDialog.Create(CSequencesDialog::IDD, this);
+    sequencesDialog.Create(MAKEINTRESOURCE(CSequencesDialog::IDD), this);
     sequencesDialog.MoveWindow(&panelRect);
 
     setupDialog();
 
+    //setup screen
+    CRect cl_rect;
+    GetClientRect(&cl_rect);
+    SDLToWindows *sdlToWin = new SDLToWindows(this->m_hWnd, cl_rect);
+    screenSurface = sdlToWin->getSurface();
+    
+    struct screen_mode_data scr;
+    scr.acceleration = 0;
+    scr.bit_depth = screenSurface->format->BitsPerPixel;
+    scr.draw_every_other_line = 0;
+    scr.fullscreen = 0;
+    scr.gamma_level = 0;
+    scr.high_resolution = 1;
+    scr.size = 2;
+
+    initialize_screen(&scr, false);
+
+    delete sdlToWin;
+    
     return true;
 }
 //setup show/hide dialog
@@ -217,4 +239,46 @@ void CShapesEditorOneDlg::OnBnClickedRadio2()
     showMode = eDialogShowSequences;
 
     setupDialog();
+}
+//OnExit
+void CShapesEditorOneDlg::OnFileClose32773()
+{
+    // TODO: ここにコマンド ハンドラ コードを追加します。
+    OnClose();
+    DestroyWindow();
+}
+//OnOpen
+void CShapesEditorOneDlg::OnFileOpen32772()
+{
+    // TODO: ここにコマンド ハンドラ コードを追加します。
+    //ファイル選択ダイアログ
+    close_shapes_file();
+	CFileDialog dlg(TRUE, L"*.*", L"", OFN_HIDEREADONLY | OFN_OVERWRITEPROMPT,
+	    L"MarathonMapFile (*.*)|*.*||", this);
+    if(dlg.DoModal() == IDOK){
+        //ファイル名
+        CString filename = dlg.GetPathName();
+        char cstr[_MAX_PATH];
+        strToChar(filename, cstr);
+
+        CRect cl_rect;
+        GetClientRect(&cl_rect);
+        SDLToWindows *sdlToWin = new SDLToWindows(this->m_hWnd, cl_rect);
+        screenSurface = sdlToWin->getSurface();
+        if(!openShapes(cstr)){
+            AfxMessageBox(CString("failed to open shapes file:") + 
+                dlg.GetFileName());
+        }else{
+            theApp.isShapesLoaded = true;
+        }
+        delete sdlToWin;
+    }
+}
+//OnClose
+void CShapesEditorOneDlg::OnClose()
+{
+    // TODO: ここにメッセージ ハンドラ コードを追加するか、既定の処理を呼び出します。
+    closeShapes();
+
+    CDialog::OnClose();
 }

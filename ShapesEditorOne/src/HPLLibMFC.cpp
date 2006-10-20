@@ -88,3 +88,27 @@ void setStatusBar(int index, CString str)
     status->SetPaneText(index, str);
 }
 
+
+//load informations
+void loadInformations(const char* filename, int max, 
+                             Information *informations)
+{
+    ifstream is;
+    is.open(filename);
+    if(!is.is_open()){
+        CString errMsg = CString("Couldn't open:");
+        errMsg += L"[" + CString(filename) + L"]";
+        MessageBox(NULL, errMsg, L"Error", MB_OK);
+        exit(-1);
+    }
+    char cstr[256];
+    int count = 0;
+    while(is.getline(cstr, sizeof(cstr)) && count < max){
+        if(strcmp(cstr, "") == 0){
+            continue;
+        }
+        informations[count].jname = CString(cstr);
+        count ++;
+    }
+    is.close();
+}

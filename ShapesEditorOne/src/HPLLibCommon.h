@@ -4,6 +4,8 @@
 #include <vector>
 #include "AlephOne/map.h"
 #include "AlephOne/wad.h"
+#include "AlephOne/shapes_sdl.h"
+#include "AlephOne/FileHandler.h"
 
 using namespace std;
 
@@ -98,6 +100,7 @@ private:
     bool isSelected_;
 
 };
+
 
 /////////////////////////////////////////////////
 // functions prototypes
@@ -243,3 +246,16 @@ bool isPolygonValid(int polygonIndex);
 Uint32 getpixel(SDL_Surface *surface, int x, int y);
 Uint32 getpixel(Uint8* pixels, int pitch, int bpp,  int x, int y);
 void putpixel(SDL_Surface *surface, int x, int y, Uint32 pixel);
+
+//initialize for loading shapes file
+//@return false by failure
+bool initForShapes();
+
+//finish shapes file
+void finishForShapes();
+
+//load shapes
+//@return false by failure
+bool openShapes(const char* filename);
+
+void closeShapes();

@@ -59,4 +59,10 @@ public:
     int sequencesSelect;
     afx_msg void OnBnClickedRadio1();
     afx_msg void OnBnClickedRadio2();
+public:
+    afx_msg void OnFileClose32773();
+public:
+    afx_msg void OnFileOpen32772();
+public:
+    afx_msg void OnClose();
 };

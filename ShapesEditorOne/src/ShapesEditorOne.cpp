@@ -17,6 +17,8 @@ BEGIN_MESSAGE_MAP(CShapesEditorOneApp, CWinApp)
 	ON_COMMAND(ID_HELP, &CWinApp::OnHelp)
 END_MESSAGE_MAP()
 
+static char* SHOW_TYPE_INFO_FILE_NAME = "data/ShowTypeInfo.txt";
+static char* COLLECTION_INFO_FILE_NAME = "data/Collections.txt";
 
 // CShapesEditorOneApp construction
 
@@ -50,6 +52,11 @@ BOOL CShapesEditorOneApp::InitInstance()
 
 	AfxEnableControlContainer();
 
+    loadInformations(SHOW_TYPE_INFO_FILE_NAME, NUMBER_OF_BITMAPS_DIALOG_SHOW_TYPES,
+        showTypeInformations);
+    loadInformations(COLLECTION_INFO_FILE_NAME, NUMBER_OF_COLLECTIONS,
+        collectionInformations);
+    isShapesLoaded = false;
 
 	// Standard initialization
 	// If you are not using these features and wish to reduce the size

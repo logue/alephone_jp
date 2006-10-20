@@ -3,7 +3,22 @@
 
 #include "stdafx.h"
 #include "HPLLibCommon.h"
+#include <fstream>
+using namespace std;
 
+////////////////////
+//structures
+//–¼Ì
+typedef struct Information_tag{
+    CString jname;
+}Information;
+//’l‚Â‚«–¼Ì
+typedef struct InformationBinded_tag{
+    CString jname;
+    int bind;
+}InformationBinded;
+
+//////////////////
 //CString->char
 void strToChar(CString& src, char* dest);
 
@@ -27,4 +42,8 @@ void setComboAndIntegerNum(int num, int max,
 void worldToWindow(int worldX, int worldY, POINT* point);
 
 void setStatusBar(int index, CString str);
+
+//load information
+void loadInformations(const char* filename, int max, 
+                             Information *informations);
 #endif

@@ -10,6 +10,8 @@
 enum{
     eBitmapDialogImages,
     eBitmapDialogCLUT,
+
+    NUMBER_OF_BITMAPS_DIALOG_SHOW_TYPES
 };
 
 class CBitmapsDialog : public CDialog
@@ -29,6 +31,10 @@ public:
 
     int showMode;
     void setupDialog();
+    
+    //selecting show type
+    //selecting collection
+    int collection;
 protected:
 	virtual void DoDataExchange(CDataExchange* pDX);    // DDX/DDV サポート
 
@@ -37,4 +43,8 @@ public:
     virtual BOOL OnInitDialog();
     CComboBox showTypeCmb;
     afx_msg void OnCbnSelchangeCombo1();
+public:
+    CComboBox collectionCmb;
+public:
+    afx_msg void OnCbnSelchangeCombo2();
 };

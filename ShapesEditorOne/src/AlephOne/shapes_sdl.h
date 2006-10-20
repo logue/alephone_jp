@@ -42,12 +42,15 @@ October 2001 (Woody Zenfell):
 
 #include "byte_swapping.h"
 #include "textures.h"
+#include "interface.h"
 
 void initialize_shape_handler();
 void open_shapes_file(FileSpecifier& File);
 void close_shapes_file(void);
 void shutdown_shape_handler(void);
 extern SDL_Surface *screenSurface;
+struct collection_header *get_collection_header(short collection_index);
+struct collection_definition *get_collection_definition(short collection_index);
 
 /*
  *  Initialize shapes handling

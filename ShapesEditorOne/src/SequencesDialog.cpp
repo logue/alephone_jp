@@ -29,3 +29,20 @@ END_MESSAGE_MAP()
 
 
 // CSequencesDialog メッセージ ハンドラ
+
+BOOL CSequencesDialog::Create(LPCTSTR lpszTemplateName, CWnd* pParentWnd)
+{
+    // TODO: ここに特定なコードを追加するか、もしくは基本クラスを呼び出してください。
+    parent = pParentWnd;
+    return CDialog::Create(lpszTemplateName, pParentWnd);
+}
+
+BOOL CSequencesDialog::OnInitDialog()
+{
+    CDialog::OnInitDialog();
+
+    // TODO:  ここに初期化を追加してください
+
+    return TRUE;  // return TRUE unless you set the focus to a control
+    // 例外 : OCX プロパティ ページは必ず FALSE を返します。
+}

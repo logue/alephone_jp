@@ -217,8 +217,6 @@ static byte *read_object_from_file(OpenedFile& OFile, long offset, long length);
 // Modified to return NULL for unloaded collections and out-of-range indices for collection contents.
 // This is to allow for more graceful degradation.
 
-static struct collection_header *get_collection_header(short collection_index);
-static struct collection_definition *get_collection_definition(short collection_index);
 static void *get_collection_shading_tables(short collection_index, short clut_index);
 static void *get_collection_tint_tables(short collection_index, short tint_index);
 static void *collection_offset(struct collection_definition *definition, long offset);
@@ -1894,7 +1892,7 @@ static void build_tinting_table32(
 /* ---------- collection accessors */
 // Some originally from shapes_macintosh.c
 
-static struct collection_header *get_collection_header(
+struct collection_header *get_collection_header(
 	short collection_index)
 {
 	// This one is intended to bomb because collection indices can only be from 1 to 31,
@@ -1912,7 +1910,7 @@ static struct collection_header *get_collection_header(
 	*/
 }
 
-static void *collection_offset(
+void *collection_offset(
 	struct collection_definition *definition,
 	long offset)
 {
@@ -1921,7 +1919,7 @@ static void *collection_offset(
 	return ((byte *)definition) + offset;
 }
 
-static struct collection_definition *get_collection_definition(
+struct collection_definition *get_collection_definition(
 	short collection_index)
 {
 	return get_collection_header(collection_index)->collection;

@@ -590,3 +590,41 @@ void putpixel(SDL_Surface *surface, int x, int y, Uint32 pixel)
         break;
     }
 }
+
+//initialize for loading shapes file
+//@return false by failure
+bool initForShapes()
+{
+    initialize_shape_handler();
+    return true;
+}
+
+//finish shapes file
+void finishForShapes()
+{
+    shutdown_shape_handler();
+}
+
+//load shapes
+//@return false by failure
+bool openShapes(const char* filename)
+{
+    FileSpecifier ShapesFile(filename);
+    if(!ShapesFile.Exists()){
+        return false;
+    }else{
+        open_shapes_file(ShapesFile);
+        int collectionNum = NUMBER_OF_COLLECTIONS;
+        for(int i = 0; i < collectionNum; i ++){
+            mark_collection_for_loading(i);
+        }
+        load_collections(false, false);
+    }
+
+    return true;
+}
+
+void closeShapes()
+{
+    close_shapes_file();
+}
