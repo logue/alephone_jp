@@ -10,6 +10,9 @@
 #include "resource.h"		// main symbols
 #include "HPLLogger.h"
 
+#include "BitmapsDialog.h"
+#include "SequencesDialog.h"
+
 // CShapesEditorOneApp:
 // See ShapesEditorOne.cpp for the implementation of this class
 //
@@ -26,6 +29,9 @@ public:
 // Implementation
 
 	DECLARE_MESSAGE_MAP()
+
+public:
+
 };
 
 extern CShapesEditorOneApp theApp;

@@ -50,6 +50,7 @@ BOOL CShapesEditorOneApp::InitInstance()
 
 	AfxEnableControlContainer();
 
+
 	// Standard initialization
 	// If you are not using these features and wish to reduce the size
 	// of your final executable, you should remove from the following
@@ -77,3 +78,5 @@ BOOL CShapesEditorOneApp::InitInstance()
 	//  application, rather than start the application's message pump.
 	return FALSE;
 }
+
+

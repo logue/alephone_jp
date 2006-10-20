@@ -4,6 +4,7 @@
 #include "stdafx.h"
 #include "ShapesEditorOne.h"
 #include "ShapesEditorOneDlg.h"
+#include ".\shapeseditoronedlg.h"
 
 #ifdef _DEBUG
 #define new DEBUG_NEW
@@ -48,13 +49,17 @@ END_MESSAGE_MAP()
 
 CShapesEditorOneDlg::CShapesEditorOneDlg(CWnd* pParent /*=NULL*/)
 	: CDialog(CShapesEditorOneDlg::IDD, pParent)
+    , bitmapSelect(0)
+    , sequencesSelect(0)
 {
 	m_hIcon = AfxGetApp()->LoadIcon(IDR_MAINFRAME);
 }
 
 void CShapesEditorOneDlg::DoDataExchange(CDataExchange* pDX)
 {
-	CDialog::DoDataExchange(pDX);
+    CDialog::DoDataExchange(pDX);
+    //DDX_Control(pDX, IDC_RADIO1, bitmapSelect);
+    //DDX_Control(pDX, IDC_RADIO2, sequencesSelect);
 }
 
 BEGIN_MESSAGE_MAP(CShapesEditorOneDlg, CDialog)
@@ -62,6 +67,8 @@ BEGIN_MESSAGE_MAP(CShapesEditorOneDlg, CDialog)
 	ON_WM_PAINT()
 	ON_WM_QUERYDRAGICON()
 	//}}AFX_MSG_MAP
+    ON_BN_CLICKED(IDC_RADIO1, OnBnClickedRadio1)
+    ON_BN_CLICKED(IDC_RADIO2, OnBnClickedRadio2)
 END_MESSAGE_MAP()
 
 
@@ -95,7 +102,12 @@ BOOL CShapesEditorOneDlg::OnInitDialog()
 	SetIcon(m_hIcon, FALSE);		// Set small icon
 
 	// TODO: Add extra initialization here
+    if(!initialize()){
+        AfxMessageBox(L"Fail to initialize");
+        return FALSE;
+    }
 
+    
 	return TRUE;  // return TRUE  unless you set the focus to a control
 }
 
@@ -148,3 +160,61 @@ HCURSOR CShapesEditorOneDlg::OnQueryDragIcon()
 	return static_cast<HCURSOR>(m_hIcon);
 }
 
+
+//init app
+bool CShapesEditorOneDlg::initialize()
+{
+    showMode  = eDialogShowBitmaps;
+
+    CRect panelRect, winRect;
+    this->GetWindowRect(&winRect);
+
+    panelRect.left = 100;
+    panelRect.top = 0;
+    panelRect.right = panelRect.left + winRect.Width() - 100;
+    panelRect.bottom = panelRect.top + winRect.Height() - 100;
+
+    //setup dialog
+    bitmapsDialog.Create(CBitmapsDialog::IDD, this);
+    bitmapsDialog.MoveWindow(&panelRect);
+
+    sequencesDialog.Create(CSequencesDialog::IDD, this);
+    sequencesDialog.MoveWindow(&panelRect);
+
+    setupDialog();
+
+    return true;
+}
+//setup show/hide dialog
+void CShapesEditorOneDlg::setupDialog()
+{
+    bitmapsDialog.ShowWindow(showMode == eDialogShowBitmaps ? TRUE:FALSE);
+    sequencesDialog.ShowWindow(showMode == eDialogShowSequences ? TRUE : FALSE);
+
+    //selection
+    bitmapSelect = showMode == eDialogShowBitmaps? TRUE: FALSE;
+    sequencesSelect = showMode == eDialogShowSequences? TRUE: FALSE;
+    
+    CButton* btn = (CButton*)GetDlgItem(IDC_RADIO1);
+    btn->SetCheck(bitmapSelect);
+    btn = (CButton*)GetDlgItem(IDC_RADIO2);
+    btn->SetCheck(sequencesSelect);
+    UpdateData();
+}
+
+//bitmap
+void CShapesEditorOneDlg::OnBnClickedRadio1()
+{
+    // TODO : ここにコントロール通知ハンドラ コードを追加します。
+    showMode = eDialogShowBitmaps;
+
+    setupDialog();
+}
+
+void CShapesEditorOneDlg::OnBnClickedRadio2()
+{
+    // TODO : ここにコントロール通知ハンドラ コードを追加します。
+    showMode = eDialogShowSequences;
+
+    setupDialog();
+}
