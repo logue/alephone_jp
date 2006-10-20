@@ -315,7 +315,7 @@ void CWeaponPage2::OnCbnSelchangeCombo15()
     }
     weapon_definitions[theApp.editWeaponTypeId].weapons_by_trigger[0].ammunition_type =
         sel;
-
+    setIntegerNum(sel, &triggers[0].weaponAmmurationTypeNum);
 }
 //firing time
 void CWeaponPage2::OnEnChangeEdit39()
@@ -469,6 +469,7 @@ void CWeaponPage2::OnCbnSelchangeCombo25()
     }
     weapon_definitions[theApp.editWeaponTypeId].weapons_by_trigger[1].ammunition_type =
         sel;
+    setIntegerNum(sel, &triggers[1].weaponAmmurationTypeNum);
 }
 //round per ticks
 void CWeaponPage2::OnEnChangeEdit53()
