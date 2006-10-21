@@ -6,12 +6,13 @@
 #include "BitmapImagesDialog.h"
 
 const int LENGTH_OF_TOP_MERGE = 40;
-const int LENGTH_OF_RIGHT_DELTA = 100;
+const int LENGTH_OF_RIGHT_DELTA = 50;
 const int PANEL_WIDTH = 100;
 const int PANEL_HEIGHT = 100;
 const int PANEL_COLUMN_SKIP = 1;
 const int PANEL_ROW_SKIP = 1;
 const int PANEL_SIZE_STEP = 5;
+int NUMBER_OF_MAX_ROWS = 30;
 
 // CBitmapImagesDialog ダイアログ
 
@@ -19,11 +20,14 @@ IMPLEMENT_DYNAMIC(CBitmapImagesDialog, CDialog)
 CBitmapImagesDialog::CBitmapImagesDialog(CWnd* pParent /*=NULL*/)
 	: CDialog(CBitmapImagesDialog::IDD, pParent)
     , clutNum(0)
+    , idNum(_T(""))
 {
 }
 
 CBitmapImagesDialog::~CBitmapImagesDialog()
 {
+    bufferBitmap.DeleteObject();
+    memDC.DeleteDC();
 }
 
 void CBitmapImagesDialog::DoDataExchange(CDataExchange* pDX)
@@ -32,6 +36,7 @@ void CBitmapImagesDialog::DoDataExchange(CDataExchange* pDX)
     DDX_Text(pDX, IDC_EDIT1, clutNum);
     DDX_Control(pDX, IDC_COMBO1, clutCmb);
     DDX_Control(pDX, IDC_SLIDER1, scrollSlider);
+    DDX_Text(pDX, IDC_EDIT2, idNum);
 }
 
 
@@ -39,6 +44,8 @@ BEGIN_MESSAGE_MAP(CBitmapImagesDialog, CDialog)
     ON_WM_PAINT()
     ON_NOTIFY(NM_CUSTOMDRAW, IDC_SLIDER1, &CBitmapImagesDialog::OnNMCustomdrawSlider1)
     ON_CBN_SELCHANGE(IDC_COMBO1, &CBitmapImagesDialog::OnCbnSelchangeCombo1)
+    ON_WM_LBUTTONDOWN()
+    ON_WM_LBUTTONDBLCLK()
 END_MESSAGE_MAP()
 
 
@@ -56,8 +63,23 @@ BOOL CBitmapImagesDialog::OnInitDialog()
     CDialog::OnInitDialog();
 
     // TODO:  ここに初期化を追加してください
-    zoom = 0;
+//    zoom = 0;
     offset = 0;
+    selectBitmapIndex = NONE;
+    memDC.CreateCompatibleDC(this->GetDC());
+    CRect imageRect;
+    getImageRect(&imageRect);
+
+    int width = PANEL_WIDTH + PANEL_SIZE_STEP;// * zoom;
+    int holizontalPanelNum = imageRect.Width() / 
+        (width + PANEL_COLUMN_SKIP);
+    int height = PANEL_HEIGHT + PANEL_SIZE_STEP;// * zoom;
+
+    int maxHeight = height * NUMBER_OF_MAX_ROWS;
+    scrollSlider.SetRange(0, maxHeight);
+    bufferBitmap.CreateCompatibleBitmap(this->GetDC(), 
+        imageRect.Width(), maxHeight);
+    memDC.SelectObject(bufferBitmap);
     return TRUE;  // return TRUE unless you set the focus to a control
     // 例外 : OCX プロパティ ページは必ず FALSE を返します。
 }
@@ -65,6 +87,7 @@ BOOL CBitmapImagesDialog::OnInitDialog()
 void CBitmapImagesDialog::setupDialog()
 {
     int collectionIndex = ((CBitmapsDialog*)parent)->collection;
+    selectBitmapIndex = NONE;
 
     if(theApp.isShapesLoaded){
         //store clut
@@ -77,28 +100,37 @@ void CBitmapImagesDialog::setupDialog()
             clutCmb.InsertString(i, CString(cstr));
         }
         clutCmb.SetCurSel(0);
+
+        //id
+        sprintf(cstr, "%d", selectBitmapIndex);
+        idNum.SetString(CString(cstr));
+
+        //draw images
+        draw(&memDC);
     }
     UpdateData();
     Invalidate(FALSE);
 }
 
-
-void CBitmapImagesDialog::OnPaint()
+void CBitmapImagesDialog::getImageRect(CRect* rect)
 {
-    CPaintDC dc(this); // device context for painting
-    // TODO: ここにメッセージ ハンドラ コードを追加します。
-    // 描画メッセージで CDialog::OnPaint() を呼び出さないでください。
-
     CRect panelRect;
     this->GetWindowRect(&panelRect);
 
-    CRect imageRect = panelRect;
-    dc.SelectObject(GetStockObject(LTGRAY_BRUSH));
-    imageRect.left = 0;
-    imageRect.top = LENGTH_OF_TOP_MERGE;
-    imageRect.right = imageRect.left + imageRect.Width() - LENGTH_OF_RIGHT_DELTA;
-    imageRect.bottom = imageRect.top + imageRect.Height() - LENGTH_OF_TOP_MERGE;
-    dc.Rectangle(&imageRect);
+    *rect = panelRect;
+    rect->left = 0;
+    rect->top = LENGTH_OF_TOP_MERGE;
+    rect->right = rect->left + rect->Width() - LENGTH_OF_RIGHT_DELTA;
+    rect->bottom = rect->top + rect->Height() - LENGTH_OF_TOP_MERGE;
+}
+
+void CBitmapImagesDialog::draw(CDC *cdc)
+{
+    CRect imageRect;
+    getImageRect(&imageRect);
+
+    cdc->SelectObject(GetStockObject(LTGRAY_BRUSH));
+    cdc->Rectangle(&imageRect);
 
     SDLToWindows *sdlToWin = new SDLToWindows(this->m_hWnd, imageRect);
     screenSurface = sdlToWin->getSurface();
@@ -112,19 +144,20 @@ void CBitmapImagesDialog::OnPaint()
         //get number of bitmaps
         int bitmapNum = header->collection->bitmap_count;
 
-        int width = PANEL_WIDTH + PANEL_SIZE_STEP * zoom;
-        int holizontalPanelNum = panelRect.Width() / 
+        int width = PANEL_WIDTH + PANEL_SIZE_STEP;// * zoom;
+        int holizontalPanelNum = imageRect.Width() / 
             (width + PANEL_COLUMN_SKIP);
-        int height = PANEL_HEIGHT + PANEL_SIZE_STEP * zoom;
+        int height = PANEL_HEIGHT + PANEL_SIZE_STEP;// * zoom;
 
         SDL_Color palette[256];
 
         for(int i = 0; i < bitmapNum; i ++){
             int left = (i % holizontalPanelNum) *
                 (width + PANEL_COLUMN_SKIP);
-            int top = LENGTH_OF_TOP_MERGE +
+            int top = //LENGTH_OF_TOP_MERGE +
                 (i / holizontalPanelNum) * 
                 (height + PANEL_ROW_SKIP);
+            top -= offset;
             CRect destRect(left, top, left + width, top + height);
 
             //get shape surface
@@ -137,15 +170,39 @@ void CBitmapImagesDialog::OnPaint()
             SDL_Surface *surface = get_shape_surface(shapes, excol, outp,
                 illumination, false, palette);
 
-            drawSurfaceByPalette(&dc, surface, palette, destRect);
+            drawSurfaceByPalette(&memDC, surface, palette, destRect);
 
             free(outp);
             SDL_FreeSurface(surface);
+
+            if(selectBitmapIndex == i){
+                //blit select rect
+                CPen pen;
+                pen.CreatePen(PS_SOLID, 2, RGB(255,0,0));
+                cdc->SelectObject(&pen);
+                cdc->SelectObject(GetStockObject(NULL_BRUSH));
+                cdc->Rectangle(destRect);
+                pen.DeleteObject();
+            }
         }
     }
     delete sdlToWin;
 }
 
+void CBitmapImagesDialog::OnPaint()
+{
+    CPaintDC dc(this); // device context for painting
+    // TODO: ここにメッセージ ハンドラ コードを追加します。
+    // 描画メッセージで CDialog::OnPaint() を呼び出さないでください。
+
+    CRect imageRect;
+    getImageRect(&imageRect);
+
+    dc.BitBlt(0,LENGTH_OF_TOP_MERGE ,imageRect.Width(), imageRect.Height(),
+        &memDC, 0, offset, SRCCOPY);
+}
+
+//change slider
 void CBitmapImagesDialog::OnNMCustomdrawSlider1(NMHDR *pNMHDR, LRESULT *pResult)
 {
     LPNMCUSTOMDRAW pNMCD = reinterpret_cast<LPNMCUSTOMDRAW>(pNMHDR);
@@ -163,6 +220,79 @@ void CBitmapImagesDialog::OnCbnSelchangeCombo1()
     // TODO: ここにコントロール通知ハンドラ コードを追加します。
     int sel = clutCmb.GetCurSel();
     clutNum = sel;
+    draw(&memDC);
     Invalidate(FALSE);
     UpdateData();
+}
+
+int CBitmapImagesDialog::getIndexPointIn(int px, int py)
+{
+    CRect imageRect;
+    getImageRect(&imageRect);
+
+    int collectionIndex = ((CBitmapsDialog*)parent)->collection;
+
+    int clut = clutCmb.GetCurSel();
+
+    struct collection_header* header = get_collection_header(collectionIndex);
+
+    //get number of bitmaps
+    int bitmapNum = header->collection->bitmap_count;
+
+    int width = PANEL_WIDTH + PANEL_SIZE_STEP;// * zoom;
+    int holizontalPanelNum = imageRect.Width() / 
+        (width + PANEL_COLUMN_SKIP);
+    int height = PANEL_HEIGHT + PANEL_SIZE_STEP;// * zoom;
+
+    for(int i = 0; i < bitmapNum; i ++){
+        int left = (i % holizontalPanelNum) *
+            (width + PANEL_COLUMN_SKIP);
+        int top = LENGTH_OF_TOP_MERGE +
+            (i / holizontalPanelNum) * 
+            (height + PANEL_ROW_SKIP);
+        top -= offset;
+        CRect destRect(left, top, left + width, top + height);
+
+        if(isPointInRect<int>(px, py , destRect.left, destRect.top,
+            destRect.right, destRect.bottom))
+        {
+            return i;
+        }
+    }
+    return NONE;
+}
+
+void CBitmapImagesDialog::OnLButtonDown(UINT nFlags, CPoint point)
+{
+    // TODO: ここにメッセージ ハンドラ コードを追加するか、既定の処理を呼び出します。
+    CRect imageRect;
+    getImageRect(&imageRect);
+    if(isPointInRect(point.x, point.y, imageRect.left, imageRect.top,
+        imageRect.right, imageRect.bottom))
+    {
+        selectBitmapIndex = getIndexPointIn(point.x, point.y);
+    }
+    draw(&memDC);
+    Invalidate();
+    UpdateData();
+    CDialog::OnLButtonDown(nFlags, point);
+}
+
+//double click 
+void CBitmapImagesDialog::OnLButtonDblClk(UINT nFlags, CPoint point)
+{
+    // TODO: ここにメッセージ ハンドラ コードを追加するか、既定の処理を呼び出します。
+    CRect imageRect;
+    getImageRect(&imageRect);
+    if(isPointInRect(point.x, point.y, imageRect.left, imageRect.top,
+        imageRect.right, imageRect.bottom))
+    {
+        selectBitmapIndex = getIndexPointIn(point.x, point.y);
+
+        //show image viewer
+    }
+    draw(&memDC);
+    Invalidate(FALSE);
+    UpdateData();
+    CDialog::OnLButtonDblClk(nFlags, point);
 }

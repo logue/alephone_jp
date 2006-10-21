@@ -22,10 +22,21 @@ public:
     void setupDialog();
 
     //zoom
-    int zoom;
+    //int zoom;
 
     //offset
     int offset;
+
+    int selectBitmapIndex;
+    
+    //get image list canvas's rect
+    void getImageRect(CRect* rect);
+
+    //search index mouse point is in
+    int getIndexPointIn(int px, int py);
+    CBitmap bufferBitmap;
+    CDC memDC;
+    void draw(CDC *cdc);
 protected:
 	virtual void DoDataExchange(CDataExchange* pDX);    // DDX/DDV サポート
 
@@ -46,4 +57,10 @@ public:
     afx_msg void OnNMCustomdrawSlider1(NMHDR *pNMHDR, LRESULT *pResult);
 public:
     afx_msg void OnCbnSelchangeCombo1();
+public:
+    afx_msg void OnLButtonDown(UINT nFlags, CPoint point);
+public:
+    CString idNum;
+public:
+    afx_msg void OnLButtonDblClk(UINT nFlags, CPoint point);
 };
