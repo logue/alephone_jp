@@ -42,7 +42,13 @@ BOOL CSequencesDialog::OnInitDialog()
     CDialog::OnInitDialog();
 
     // TODO:  ここに初期化を追加してください
-
+    setupDialog();
     return TRUE;  // return TRUE unless you set the focus to a control
     // 例外 : OCX プロパティ ページは必ず FALSE を返します。
+}
+
+void CSequencesDialog::setupDialog()
+{
+    UpdateData();
+
 }

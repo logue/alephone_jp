@@ -35,6 +35,7 @@ public:
     //selecting show type
     //selecting collection
     int collection;
+
 protected:
 	virtual void DoDataExchange(CDataExchange* pDX);    // DDX/DDV サポート
 

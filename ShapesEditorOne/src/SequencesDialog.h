@@ -17,6 +17,7 @@ public:
 
     SDLToWindows* sdlToWinScreen;
     CWnd *parent;
+    void setupDialog();
 protected:
 	virtual void DoDataExchange(CDataExchange* pDX);    // DDX/DDV サポート
 

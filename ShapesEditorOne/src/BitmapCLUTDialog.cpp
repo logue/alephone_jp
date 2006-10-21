@@ -5,6 +5,12 @@
 #include "ShapesEditorOne.h"
 #include "BitmapCLUTDialog.h"
 
+const int NUMBER_OF_ROW_PALETTE_ELEMENTS = 32;
+const int LENGTH_OF_PALETTE_ROW_SKIP = 20;
+const int LENGTH_OF_ELEMENT_COLUMN_SKIP = 1;
+const int LENGTH_OF_ELEMENT_ROW_SKIP = 1;
+const int ELEMENT_WIDTH = 10;
+const int ELEMENT_HEIGHT = 10;
 
 // CBitmapCLUTDialog ダイアログ
 
@@ -20,12 +26,14 @@ CBitmapCLUTDialog::~CBitmapCLUTDialog()
 
 void CBitmapCLUTDialog::DoDataExchange(CDataExchange* pDX)
 {
-	CDialog::DoDataExchange(pDX);
+    CDialog::DoDataExchange(pDX);
+    DDX_Control(pDX, IDC_SLIDER1, scrollSlider);
 }
 
 
 BEGIN_MESSAGE_MAP(CBitmapCLUTDialog, CDialog)
     ON_WM_PAINT()
+    ON_NOTIFY(NM_CUSTOMDRAW, IDC_SLIDER1, &CBitmapCLUTDialog::OnNMCustomdrawSlider1)
 END_MESSAGE_MAP()
 
 
@@ -58,13 +66,6 @@ void CBitmapCLUTDialog::OnPaint()
     CRect frameRect;
     this->GetWindowRect(&frameRect);
 
-    const int NUMBER_OF_ROW_PALETTE_ELEMENTS = 32;
-    const int LENGTH_OF_PALETTE_ROW_SKIP = 20;
-    const int LENGTH_OF_ELEMENT_COLUMN_SKIP = 1;
-    const int LENGTH_OF_ELEMENT_ROW_SKIP = 1;
-    const int ELEMENT_WIDTH = 10;
-    const int ELEMENT_HEIGHT = 10;
-
     frameRect.left = frameRect.top = 0;
     dc.SelectObject(GetStockObject(LTGRAY_BRUSH));
     dc.Rectangle(&frameRect);
@@ -94,6 +95,7 @@ void CBitmapCLUTDialog::OnPaint()
                 int top = merge +
                     (j / NUMBER_OF_ROW_PALETTE_ELEMENTS) * 
                     (ELEMENT_HEIGHT + LENGTH_OF_ELEMENT_ROW_SKIP);
+                top -= offset;
                 CRect rect;
                 rect.SetRect(left, top, left + ELEMENT_WIDTH, top + ELEMENT_HEIGHT);
 
@@ -114,6 +116,35 @@ void CBitmapCLUTDialog::OnPaint()
 
 void CBitmapCLUTDialog::setupDialog()
 {
-
+    scrollSlider.SetRangeMin(0);
+    
+    if(theApp.isShapesLoaded){
+        int collectionIndex = ((CBitmapsDialog*)parent)->collection;
+        struct collection_header* header = get_collection_header(collectionIndex);
+        int clutNum = header->collection->clut_count;
+        //max
+        int max = 0;
+        for(int i = 0; i < clutNum; i ++){
+            int numColors = 0;
+            struct rgb_color_value* palette = get_collection_colors(collectionIndex, i, numColors);
+            max += LENGTH_OF_PALETTE_ROW_SKIP +
+                        (numColors / NUMBER_OF_ROW_PALETTE_ELEMENTS + 1) *
+                        (ELEMENT_HEIGHT + LENGTH_OF_ELEMENT_ROW_SKIP);
+        }
+        scrollSlider.SetRangeMax(max);
+        scrollSlider.SetPos(0);
+    }
     Invalidate(FALSE);
+}
+
+void CBitmapCLUTDialog::OnNMCustomdrawSlider1(NMHDR *pNMHDR, LRESULT *pResult)
+{
+    LPNMCUSTOMDRAW pNMCD = reinterpret_cast<LPNMCUSTOMDRAW>(pNMHDR);
+    // TODO: ここにコントロール通知ハンドラ コードを追加します。
+    int oldPos = offset;
+    offset = scrollSlider.GetPos();
+    if(offset != oldPos){
+        Invalidate(FALSE);
+    }
+    *pResult = 0;
 }

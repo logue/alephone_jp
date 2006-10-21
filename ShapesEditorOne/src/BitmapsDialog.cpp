@@ -77,6 +77,7 @@ BOOL CBitmapsDialog::OnInitDialog()
     showTypeCmb.SetCurSel(0);
     collectionCmb.SetCurSel(0);
     collection = 0;
+    showMode = 0;
     setupDialog();
     return TRUE;  // return TRUE unless you set the focus to a control
     // 例外 : OCX プロパティ ページは必ず FALSE を返します。

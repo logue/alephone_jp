@@ -112,3 +112,40 @@ void loadInformations(const char* filename, int max,
     }
     is.close();
 }
+
+//draw surface to DC.
+//surface have "Marathon" palette indexes.
+void drawSurfaceByPalette(CDC* cdc, SDL_Surface* surface, SDL_Color* palette,
+                          CRect& destRect)
+{
+    CDC memDC;
+    memDC.CreateCompatibleDC(cdc);
+    
+    CBitmap bitmap;
+    SDL_LockSurface(surface);
+    
+
+    bitmap.CreateCompatibleBitmap(cdc, surface->w, surface->h);
+    memDC.SelectObject(bitmap);
+
+    for(int x = 0; x < surface->w; x ++){
+        for(int y = 0; y < surface->h; y ++){
+            Uint32 pixel = getpixel(surface, x, y);
+            memDC.SetPixel(x, y, RGB(palette[pixel].b, palette[pixel].g, palette[pixel].r));
+        }
+    }
+    SDL_UnlockSurface(surface);
+
+/*    cdc->BitBlt(destRect.left, destRect.top,
+        destRect.Width(), destRect.Height(),
+        &memDC, 0, 0, SRCCOPY);*/
+    cdc->StretchBlt(destRect.left, destRect.top,
+        destRect.Width(), destRect.Height(),
+        &memDC, 0, 0, surface->w, surface->h, SRCCOPY);
+    /*::StretchBlt(cdc->m_hDC, destRect.left, destRect.top,
+        destRect.Width(), destRect.Height(),
+        memDC.m_hDC, 0, 0, surface->w, surface->h, SRCCOPY);
+    */
+    bitmap.DeleteObject();
+    memDC.DeleteDC();
+}

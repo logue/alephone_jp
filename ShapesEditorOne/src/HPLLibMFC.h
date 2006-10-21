@@ -3,6 +3,7 @@
 
 #include "stdafx.h"
 #include "HPLLibCommon.h"
+#include "SDL.h"
 #include <fstream>
 using namespace std;
 
@@ -46,4 +47,9 @@ void setStatusBar(int index, CString str);
 //load information
 void loadInformations(const char* filename, int max, 
                              Information *informations);
+
+//draw surface to DC.
+//surface have "Marathon" palette indexes.
+void drawSurfaceByPalette(CDC* cdc, SDL_Surface* surface, SDL_Color* palette,
+                          CRect& destRect);
 #endif

@@ -1,6 +1,7 @@
 #pragma once
 
 #include "SDLToWin32/SDLToWin32.h"
+#include "afxcmn.h"
 
 // CBitmapCLUTDialog ダイアログ
 
@@ -18,6 +19,9 @@ public:
     SDLToWindows* sdlToWinScreen;
     CWnd *parent;
     void setupDialog();
+
+    //offset for draw
+    int offset;
 protected:
 	virtual void DoDataExchange(CDataExchange* pDX);    // DDX/DDV サポート
 
@@ -28,4 +32,8 @@ public:
     virtual BOOL OnInitDialog();
 public:
     afx_msg void OnPaint();
+public:
+    CSliderCtrl scrollSlider;
+public:
+    afx_msg void OnNMCustomdrawSlider1(NMHDR *pNMHDR, LRESULT *pResult);
 };

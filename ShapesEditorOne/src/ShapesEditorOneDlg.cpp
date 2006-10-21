@@ -172,7 +172,7 @@ bool CShapesEditorOneDlg::initialize()
     CRect panelRect, winRect;
     this->GetWindowRect(&winRect);
 
-    panelRect.left = 100;
+    panelRect.left = 80;
     panelRect.top = 0;
     panelRect.right = panelRect.left + winRect.Width() - 100;
     panelRect.bottom = panelRect.top + winRect.Height() - 100;
@@ -221,6 +221,10 @@ void CShapesEditorOneDlg::setupDialog()
     btn->SetCheck(bitmapSelect);
     btn = (CButton*)GetDlgItem(IDC_RADIO2);
     btn->SetCheck(sequencesSelect);
+
+    bitmapsDialog.setupDialog();
+    sequencesDialog.setupDialog();
+
     UpdateData();
 }
 
@@ -272,6 +276,8 @@ void CShapesEditorOneDlg::OnFileOpen32772()
             theApp.isShapesLoaded = true;
         }
         delete sdlToWin;
+
+        setupDialog();
     }
 }
 //OnClose
