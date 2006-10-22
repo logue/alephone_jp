@@ -106,6 +106,7 @@ void CHeightDialog::OnNMCustomdrawSlider2(NMHDR *pNMHDR, LRESULT *pResult)
     int pos = -maxSlider.GetPos();
     setIntegerNum(pos, &maxNum);
     theApp.viewHeightMax = pos;
+    parent->Invalidate(FALSE);
     *pResult = 0;
 }
 
@@ -117,6 +118,7 @@ void CHeightDialog::OnNMCustomdrawSlider1(NMHDR *pNMHDR, LRESULT *pResult)
     int pos = -minSlider.GetPos();
     setIntegerNum(pos, &minNum);
     theApp.viewHeightMin = pos;
+    parent->Invalidate(FALSE);
     *pResult = 0;
 }
 //maxnum
@@ -124,6 +126,7 @@ void CHeightDialog::OnEnChangeEdit1()
 {
     int num = getIntegerNum(&maxNum);
     maxSlider.SetPos(-num);
+    parent->Invalidate(FALSE);
     UpdateData();
 }
 //minnum
@@ -131,5 +134,6 @@ void CHeightDialog::OnEnChangeEdit6()
 {
     int num = getIntegerNum(&minNum);
     minSlider.SetPos(-num);
+    parent->Invalidate(FALSE);
     UpdateData();
 }

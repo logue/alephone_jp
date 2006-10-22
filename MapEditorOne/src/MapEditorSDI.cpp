@@ -561,11 +561,11 @@ int addObject(struct world_point2d &world_point, int polygonIndex)
     get platform_data by using polygon index
     only platform has polygon index. not polygon have
 */
-platform_data *searchPlatformByPolygonIndex(int index)
+int searchPlatformIndexByPolygonIndex(int index)
 {
     for(int i = 0; i < (int)PlatformList.size(); i ++){
         if(PlatformList[i].polygon_index == index){
-            return &PlatformList[i];
+            return i;
         }
     }
     return NULL;

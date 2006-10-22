@@ -1471,7 +1471,7 @@ bool process_map_wad(
 
 	/* Extract the annotations */
 	data= (uint8 *)extract_type_from_wad(wad, ANNOTATION_TAG, &data_length);
-    if(data){
+    if(data && data_length > 0){
 	    count = data_length/SIZEOF_map_annotation;
 	    assert(data_length == count*SIZEOF_map_annotation);
 	    load_annotations(data, count);

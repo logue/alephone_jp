@@ -380,7 +380,7 @@ int getPolygonIndexFromPointIndex(int pointIndex);
 
     return NULL in no exists
 */
-platform_data *searchPlatformByPolygonIndex(int index);
+int searchPlatformIndexByPolygonIndex(int index);
 
 //CString GetModulePathFileName(CString pName);
 
