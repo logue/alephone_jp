@@ -19,35 +19,35 @@ $C1
 #FINISHED
 #LOGON 131
 #PICT 132
-$C5-------------------------------------------
---1/1:begin_burst_historical_transmission--
--------------------------------------------
+$C5────────────────────────
+─　　　１／１：歴史＿バースト転送＿開始　　　─
+────────────────────────
 
-{period transfer}
-{entry begin}
+｛区分転送｝
+｛エントリ開始｝
 
 $C1
-File Summary:
+ファイルの要約：
 
-This historical transmission is intended to serve as an enclosure of supporting information to file #$biso-342107 $C5(caution: file referenced not found)$C1.  It documents the important resultant political and social events following directly after the Human/Pfhor war.
+この歴史資料は、ファイル＃ｉｓｏ－３４２１０７$C5（注意：参照したファイルは見つかりませんでした）$C1の情報を補完する目的で作られました。ここでの情報には、人類／プフォール戦争の後に起きた政治的に重要な結果および、社会的事件を文章化したものです。
 #PICT 132
-$C5{begin file contents 1/1}
+$C5｛ファイルの内容１／１開始｝
 
 
-$C1An interesting footnote to the UESC/Pfhor war was the long-term effect of the Chimera crashing on Pfhor Prime. In addition to it's human crew, the Chimera carried with it the assortment of fungi and molds that accompany humans everywhere they go.
+$C1　ＵＥＳＣ／プフォール戦争で興味深い脚注は、プフォール最前線に墜落したキメラによる長期的な影響でした。人間の乗組員に加えて、キメラよって運ばれてきた色々な菌類や鋳造物が、人間の行くところ何処へでも同行している点です。
 
-The slow spread of fungus growth in and around the wreckage of the Chimera recieved little attention in the first few centuries after the war. This changed when one strain of fungus formed a symbiosis with a lifeform native to Pfhor Prime.
+　戦争が終わってから数世紀の間、キメラの残骸の中や、その残骸周辺への菌類の成長と遅い拡散は、ずっと注目されていませんでした。しかし、菌類の１つの菌株がプフォール最前線に存在する固有の生命体との共生を形成しだすと、この状況は変わりました。
 #PICT 132
-$C1The result was a highly prolific fungus that rapidly spread across the planet and displaced much of the native life on Pfhor Prime. Other forms of fungi symbionts rapidly appeared, and soon the purple / beige hues of Pfhor Prime were being displaced by the green / brown hues of Earth.
+$C1　その結果、豊富な菌類が、惑星全体にわたって急速に広がり、プフォール最前線固有の生態系の多くを置き換えていきました。急速に菌類共生体の他の種が現れると、すぐにプフォール最前線の紫／ベージュの色調は、地球のような緑／茶色の色調によって、置き換えられていきました。
 
-Many of the native species were lost forever while others found new niches. The Pfhor suffered centuries of famine until the biosphere of Pfhor Prime reached a new equilibrium.
+　他のものが新しい生態的地位を得た一方で、在来種の多くは永久に失われました。プフォール最前線の生物圏が、新しい均衡状態に達するまでプフォールは、飢饉の世紀を迎えました。
 $C5
-{entry endsegment}
-{period transfer_getnextEvent&}
+｛エントリ終了｝
+｛区分転送＿完了｝
 
--------------------------------------------
----1/1:end_burst_historical_transmission---
--------------------------------------------
+────────────────────────
+─　　　１／１：歴史＿バースト転送＿終了　　　─
+────────────────────────
 #LOGOFF 131
 #END
 #ENDTERMINAL 0
@@ -56,43 +56,43 @@ $C5
 #UNFINISHED
 #LOGON 217
 #PICT 221
-#UNKNOWN SECTION TYPE 16 ID 4
+#TAG 4
 #LOGOFF 217
 #END
 #FINISHED
 #LOGON 419
 #PICT 420
-$C5-------------------------------------------
---1/1:begin_burst_historical_transmission--
--------------------------------------------
+$C5────────────────────────
+─　　　１／１：歴史＿バースト転送＿開始　　　─
+────────────────────────
 
-{period transfer}
-{entry begin}
-$C4
-
-$C1File Summary:
-
-This historical transmission is intended to serve as an enclosure of supporting information to file #$biso-342107 $C5(caution: file referenced not found)$C1.  It documents the important resultant political and social events following directly after the Human/Pfhor war.
-#PICT 420
-$C5{begin file contents 1/1}
+｛区分転送｝
+｛エントリ開始｝
 
 $C1
-The discovery of UESC weapon prototypes in Pfhor laboratories eventually led the UESC to re-investigate the DANGI sector of the Salinger, a little known research station.
+ファイルの要約：
 
-The Salinger was attacked by the Pfhor in the final days of the war, and the oddies discovered in the wake of this attack were considered to be of little importance and ignored.
-
-The re-investigation shed little light though. The main databanks of the DANGI sector were destroyed. The employees of DANGI were either found dead or missing.
+この歴史資料は、ファイル＃ｉｓｏ－３４２１０７$C5（注意：参照したファイルは見つかりませんでした）$C1の情報を補完する目的で作られました。ここでの情報には、人類／プフォール戦争の後に起きた政治的に重要な結果および、社会的事件を文章化したものです。
 #PICT 420
-$C1Fires had destroyed much of the sector, but some physical documents had escaped. They gave vague hints of a corporation that wanted to maximize it's profits by feeding both sides of the war, but nothing definite was found. A few cryptic memos were discovered that spoke of an "Achilles" project. But the nature of "Achilles"$C5 $C1could not be determined.
+$C5｛ファイルの内容１／１開始｝
 
-The DANGI sector was sealed off from the rest of the station to prevent tampering with undiscovered evidence. With time, the entire station was abandoned.$C5
+$C1
+　プフォールの研究所でＵＥＳＣの武器のプロトタイプが発見された事を受けて、サリンジャーの少し名高い研究所であるダンギセクターにＵＥＳＣの再調査のメスが入りました。
 
-{entry endsegment}
-{period transfer_end&}
+　サリンジャーは、戦争の最終日にプフォールによって攻撃を受けていたため、この攻撃で見つかった奇異なもののほとんどは、重要でなく無視されていました。
 
--------------------------------------------
----1/1:end_burst_historical_transmission---
--------------------------------------------
+　再調査しても、ほとんどが解明されないままでした。ダンギセクターの主要データーバンクは破壊されていたからです。ダンギの従業員は、見つかっても死んでいたか、行方不明になっていました。
+#PICT 420
+$C1　セクターの多くは、攻撃を受けたときに発生したと思われる火災によって破壊されていましたが、いくつかの物的な書類は、残っていました。それは、企業の実態の曖昧なヒントを与え、広義の意味で解釈すると、企業が両方の陣営に供給し利益を上げるというようなものでしたが、明確な証拠は何も見つからないままです。ただ、「アキレウス」プロジェクトについての話が書かれた不可解なメモが発見されました。しかし、「アキレウス」とは何なのかを決定づける事はできないかもしれません。
+
+　ダンギセクターは、未発見の証拠をみだりにいじられないようにするために、残りのステーションから封鎖されました。時が全てのステーションを放棄させるでしょう。
+$C5
+｛エントリ終了｝
+｛区分転送＿完了｝
+
+────────────────────────
+─　　　１／１：歴史＿バースト転送＿終了　　　─
+────────────────────────
 #LOGOFF 419
 #END
 #ENDTERMINAL 1
@@ -101,46 +101,46 @@ The DANGI sector was sealed off from the rest of the station to prevent tamperin
 #UNFINISHED
 #LOGON 217
 #PICT 221
-#UNKNOWN SECTION TYPE 16 ID 3
+#TAG 3
 #LOGOFF 217
 #END
 #FINISHED
 #LOGON 315
 #PICT 317
-$C5-------------------------------------------
---1/1:begin_burst_historical_transmission--
--------------------------------------------
+$C5────────────────────────
+─　　　１／１：歴史＿バースト転送＿開始　　　─
+────────────────────────
 
-{period transfer}
-{entry begin}
+｛区分転送｝
+｛エントリ開始｝
 
 $C1
-File Summary:
+ファイルの要約：
 
-This historical transmission is intended to serve as an enclosure of supporting information to file #$biso-342107 $C5(caution: file referenced not found)$C1.  It documents the important resultant political and social events following directly after the Human/Pfhor war.
-#PICT 317
-$C5{begin file contents 1/1}
+この歴史資料は、ファイル＃ｉｓｏ－３４２１０７$C5（注意：参照したファイルは見つかりませんでした）$C1の情報を補完する目的で作られました。ここでの情報には、人類／プフォール戦争の後に起きた政治的に重要な結果および、社会的事件を文章化したものです。
+#PICT 132
+$C5｛ファイルの内容１／１開始｝
 
 
-$C1The UESC victory on Pfhor Prime in 2862 may have been the most costly in human history, but it was also the most complete. The High Pfhor Council was defeated, and with it the foundation of Pfhor society.
+$C1　２８６２年のプフォール最前線でのＵＥＳＣの勝利は、人類の歴史の中で最も多大な犠牲を費やしたものだったかもしれませんが、それは最も完璧なものでもありました。プフォール高等評議会は、プフォール社会の基礎と共に破られました。
 
-The UESC was dismayed to learn that the networks and databanks throughout the former Pfhor Empire were completely empty. This was initially assumed to be a last-ditch form of "scorched earth" tactic from the Pfhor, but this was later ruled out.
+　ＵＥＳＣは、プフォール帝国の全体にわたるネットワークおよび、データーバンクが空っぽだったことを知ると、ひどく狼狽しました。これは、最初からプフォールが「焦土化」作戦の苦し紛れの形式だと仮定されていましたが、後に除外されました、
 
-The cause of the empty databanks remain a mystery.
+　データーバンクが空っぽであった原因は、未だにミステリーのままです。
 #PICT 317
 $C1
 
-In the years that followed the defeat of the Pfhor Empire, client races and slaves rose up in rebellion against their former masters, creating a power vacuum that many aspiring ex slaves and ex Pfhor military commanders tried to fill.  Over the next century, governments on the former Pfhor systems would rise and fall in a constant struggle for power.
+　月日は流れ、彼らに使役されていた種族と奴隷達は、その主に対して反乱を起こしました。これは、多くの向上心のある元奴隷達や、プフォール軍司令官が防ごうとした権力の空白期間をもたらすことになりました。今後数世紀にわたって、プフォールの社会は、内乱という権力闘争が続くでしょう。
 
 
 
 
-$C5{entry endsegment}
-{period transfer_end&}
+$C5｛エントリ終了｝
+｛区分転送＿完了｝
 
--------------------------------------------
----1/1:end_burst_historical_transmission---
--------------------------------------------
+────────────────────────
+─　　　１／１：歴史＿バースト転送＿終了　　　─
+────────────────────────
 #LOGOFF 315
 #END
 #ENDTERMINAL 2
