@@ -46,4 +46,8 @@ public:
     afx_msg void OnEnChangeEdit1();
 public:
     afx_msg void OnEnChangeEdit6();
+public:
+    afx_msg void OnBnClickedCheck1();
+public:
+    BOOL isRevealHiddenLines;
 };

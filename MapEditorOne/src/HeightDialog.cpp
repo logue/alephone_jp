@@ -13,6 +13,7 @@ IMPLEMENT_DYNAMIC(CHeightDialog, CDialog)
 
 CHeightDialog::CHeightDialog(CWnd* pParent /*=NULL*/)
 	: CDialog(CHeightDialog::IDD, pParent)
+    , isRevealHiddenLines(FALSE)
 {
 
 }
@@ -28,6 +29,7 @@ void CHeightDialog::DoDataExchange(CDataExchange* pDX)
     DDX_Control(pDX, IDC_SLIDER1, minSlider);
     DDX_Control(pDX, IDC_EDIT1, maxNum);
     DDX_Control(pDX, IDC_EDIT6, minNum);
+    DDX_Check(pDX, IDC_CHECK1, isRevealHiddenLines);
 }
 
 
@@ -37,6 +39,7 @@ BEGIN_MESSAGE_MAP(CHeightDialog, CDialog)
     ON_NOTIFY(NM_CUSTOMDRAW, IDC_SLIDER1, &CHeightDialog::OnNMCustomdrawSlider1)
     ON_EN_CHANGE(IDC_EDIT1, &CHeightDialog::OnEnChangeEdit1)
     ON_EN_CHANGE(IDC_EDIT6, &CHeightDialog::OnEnChangeEdit6)
+    ON_BN_CLICKED(IDC_CHECK1, &CHeightDialog::OnBnClickedCheck1)
 END_MESSAGE_MAP()
 
 
@@ -95,6 +98,7 @@ BOOL CHeightDialog::OnInitDialog()
     minSlider.SetRange(-max, max);
     minSlider.SetPos(max);
 
+
     return TRUE;  // return TRUE unless you set the focus to a control
     // 例外 : OCX プロパティ ページは必ず FALSE を返します。
 }
@@ -136,4 +140,11 @@ void CHeightDialog::OnEnChangeEdit6()
     minSlider.SetPos(-num);
     parent->Invalidate(FALSE);
     UpdateData();
+}
+
+//reveal hidden lines
+void CHeightDialog::OnBnClickedCheck1()
+{
+    // TODO: ここにコントロール通知ハンドラ コードを追加します。
+    theApp.isRevealHiddenLines = this->isRevealHiddenLines == TRUE?true:false;
 }

@@ -160,7 +160,9 @@ void CMapEditorSDIView::drawPolygons(CDC *cdc)
 
     int fillMode = WINDING;
     SetPolyFillMode(cdc->m_hDC, fillMode);
-    cdc->SelectObject(&pen);
+
+    //no lines
+    cdc->SelectObject(GetStockObject(NULL_PEN));
 
     POINT points[MAXIMUM_VERTICES_PER_POLYGON];
     //sort order from index to height
@@ -242,9 +244,10 @@ void CMapEditorSDIView::drawPolygons(CDC *cdc)
 
 void CMapEditorSDIView::drawLines(CDC *cdc)
 {
-    CPen pen, selectedPen;
+    CPen pen, selectedPen, hiddenLinePen;
     pen.CreatePen(PS_SOLID, 1, theApp.setting.getColorSetting()->lines);
     selectedPen.CreatePen(PS_SOLID, 2, RGB(255,0,0));
+    hiddenLinePen.CreatePen(PS_SOLID, 1, RGB(200,200,200));
 
     for(int i = 0; i < (int)LineList.size(); i ++){
         line_data* line = &LineList[i];
@@ -252,9 +255,13 @@ void CMapEditorSDIView::drawLines(CDC *cdc)
         endpoint_data* end = &EndpointList[line->endpoint_indexes[1]];
         int floor = line->highest_adjacent_floor;
         int ceil = line->lowest_adjacent_ceiling;
-        if( floor < theApp.viewHeightMin ||
-            ceil > theApp.viewHeightMax){
+
+        bool isHiddenLine = false;
+        if(floor < theApp.viewHeightMin || ceil > theApp.viewHeightMax){
+            isHiddenLine = true;
+            if(theApp.isRevealHiddenLines){
                 continue;
+            }
         }
 
         int beginPoint[2], endPoint[2];
@@ -263,29 +270,33 @@ void CMapEditorSDIView::drawLines(CDC *cdc)
 
         //ëIëíÜÇÕëæÇ¢ê‘ê¸Ç≈
         bool selected = false;
-        if(theApp.selectGroupInformation.isSelected()){
-            for(int k = 0; k < (int)theApp.selectGroupInformation.lines.size(); k ++){
-                if(theApp.selectGroupInformation.lines[k].index == i){
-                    selected = true;
-                    break;
+        if(isHiddenLine){
+            cdc->SelectObject(&hiddenLinePen);
+        }else{
+            if(theApp.selectGroupInformation.isSelected()){
+                for(int k = 0; k < (int)theApp.selectGroupInformation.lines.size(); k ++){
+                    if(theApp.selectGroupInformation.lines[k].index == i){
+                        selected = true;
+                        break;
+                    }
                 }
             }
-        }
-        if(selected){
-            cdc->SelectObject(&selectedPen);
+            if(selected){
+                cdc->SelectObject(&selectedPen);
 
-            if(theApp.selectGroupInformation.sideIndex != NONE){
-                //sideï\é¶
+                if(theApp.selectGroupInformation.sideIndex != NONE){
+                    //sideï\é¶
+                }
+            }else{
+                cdc->SelectObject(&pen);
             }
-        }else{
-            cdc->SelectObject(&pen);
         }
-
         cdc->MoveTo(beginPoint[0], beginPoint[1]);
         cdc->LineTo(endPoint[0], endPoint[1]);
     }
     pen.DeleteObject();
     selectedPen.DeleteObject();
+    hiddenLinePen.DeleteObject();
 }
 
 void CMapEditorSDIView::drawPoints(CDC *cdc)

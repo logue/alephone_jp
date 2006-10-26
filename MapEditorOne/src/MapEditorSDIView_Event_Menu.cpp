@@ -238,13 +238,13 @@ void CMapEditorSDIView::On32787()
 void CMapEditorSDIView::On32789()
 {
     // TODO: ここにコマンド ハンドラ コードを追加します。
-    theApp.heightDialog->ShowWindow(theApp.heightDialog->IsWindowVisible());
+    theApp.heightDialog->ShowWindow(!theApp.heightDialog->IsWindowVisible());
 }
 //show/hide polygon type dialog
 void CMapEditorSDIView::On32786()
 {
     // TODO: ここにコマンド ハンドラ コードを追加します。
-    theApp.polygonTypeDialog->ShowWindow(theApp.polygonTypeDialog->IsWindowVisible());
+    theApp.polygonTypeDialog->ShowWindow(!theApp.polygonTypeDialog->IsWindowVisible());
 }
 //edit terminals
 void CMapEditorSDIView::On32790()

@@ -97,6 +97,7 @@ void CPolygonPropertyDialog::setupDialog(int index_)
         MessageBox(CString(cstr));
         return;
     }
+    //polygon index
     index = index_;
     polygon_data *polygon = &PolygonList[index];
     memcpy(&store, polygon, sizeof(polygon_data));
@@ -170,10 +171,18 @@ void CPolygonPropertyDialog::setupDialogByStore()
 //show platform dialog
 void CPolygonPropertyDialog::OnBnClickedButton1()
 {
-    CPlatformDialog dlg((CWnd*)this, searchPlatformIndexByPolygonIndex(index));
-    if(dlg.DoModal() == IDOK){
-        //値をプラットフォームデータに反映
-        platform_data* platform = &PlatformList[searchPlatformIndexByPolygonIndex(index)];
-        //null?
+    int platformIndex = searchPlatformIndexByPolygonIndex(index);
+    if(platformIndex == NONE){
+        char cstr[10];
+        sprintf(cstr, "%d", index);
+        AfxMessageBox(CString("Cannot search platform of polygon=") + 
+            CString(cstr) );
+    }else{
+        CPlatformDialog dlg((CWnd*)this, platformIndex);
+        if(dlg.DoModal() == IDOK){
+            //値をプラットフォームデータに反映
+            platform_data* platform = &PlatformList[searchPlatformIndexByPolygonIndex(index)];
+            //null?
+        }
     }
 }

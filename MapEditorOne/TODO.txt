@@ -1,10 +1,54 @@
-TODO
--set selecting when launch level-select dialog
--change cursor
--strange streched texture
--cannot move over modified lines
--check invalid polygon and draw it with red 
--shift+click to add selection to group
+	TODO
+	*Dialogs
+	-Height for showing
+		Reveal hidden(done)
+		><and -> <>or(done)
+			->added point shold have -32767~32767
+	-tool
+		hand(done)
+		zoom(done)
+		annotation(text)
+		create prepared polygon ;-)
+			set button's image
+	-object property dialog
+		launch by...
+		directions=facing
+	-polygon property
+		type(uneditable)
+		floor light
+		ceiling light
+		media
+		media light
+		ambSnd
+		RndSnd
+	-preferences
+		custom color
+		settings
+	-platform dialog
+		type
+		speed cmb
+		delay cmb
+		tag
+		auto calc
+		height
+		door?
+		preset
+		copy from
+	-add!
+		point prop
+		lines prop
+		<->sides prop
+	*Drawing of Client area
+	-Show level's name editing now at dialog
+		draw anywhere else in client rect?
+	-(select mode)shift+click to add selection to group
+	-strange streched texture
+	-cannot move objects over modified lines(delete it!)
+	-check invalid polygon and draw it with red 
+	-change cursor
+	-terminal editing
+	-fix polygon editing problem
+	-add function of undo/redo
 
-Done
--Show level's name editing now at dialog
+	Done
+	-set selecting when launch level-select dialog

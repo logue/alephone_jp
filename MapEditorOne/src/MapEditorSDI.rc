@@ -101,6 +101,12 @@ IDR_MAINFRAME           BITMAP                  "res\\Toolbar.bmp"
 IDB_BITMAP_PATTERN_SELECTED_POLYGON BITMAP                  "res\\bmp00005.bmp"
 IDB_BITMAP_CIRCLE       BITMAP                  "res\\Marathon Toolbar\\direction circle.BMP"
 IDB_BITMAP_MARKER       BITMAP                  "res\\Marathon Toolbar\\direction marker.BMP"
+IDB_BITMAP_POLYGON3     BITMAP                  "res\\marathon toolbar\\bitmap1.bmp"
+IDB_BITMAP_POLYGON4     BITMAP                  "res\\marathon toolbar\\bitmap_p.bmp"
+IDB_BITMAP_POLYGON5     BITMAP                  "res\\marathon toolbar\\bmp00001.bmp"
+IDB_BITMAP_POLYGON6     BITMAP                  "res\\marathon toolbar\\bmp00002.bmp"
+IDB_BITMAP_POLYGON7     BITMAP                  "res\\marathon toolbar\\bmp00003.bmp"
+IDB_BITMAP_POLYGON8     BITMAP                  "res\\marathon toolbar\\bmp00004.bmp"
 
 /////////////////////////////////////////////////////////////////////////////
 //
@@ -625,6 +631,30 @@ BEGIN
     PUSHBUTTON      "Choose Color",IDC_BUTTON6,48,96,50,14
 END
 
+IDD_DIALOG_ANNOTATION DIALOGEX 0, 0, 196, 92
+STYLE DS_SETFONT | DS_MODALFRAME | DS_FIXEDSYS | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "Annotations"
+FONT 8, "MS Shell Dlg", 400, 0, 0x1
+BEGIN
+    DEFPUSHBUTTON   "OK",IDOK,78,71,50,14
+    PUSHBUTTON      "ƒLƒƒƒ“ƒZƒ‹",IDCANCEL,139,71,50,14
+    EDITTEXT        IDC_EDIT1,7,7,182,44,ES_MULTILINE | ES_AUTOHSCROLL
+    CONTROL         "Only dislay when platform shown",IDC_CHECK1,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,7,53,121,10
+END
+
+IDD_DIALOG_SELECT_POLYGON DIALOGEX 0, 0, 191, 39
+STYLE DS_SETFONT | DS_MODALFRAME | DS_FIXEDSYS | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "Select preset polygon"
+FONT 8, "MS Shell Dlg", 400, 0, 0x1
+BEGIN
+    PUSHBUTTON      "3",IDC_BUTTON1,7,7,27,25,BS_BITMAP
+    PUSHBUTTON      "4",IDC_BUTTON2,37,7,27,25,BS_BITMAP
+    PUSHBUTTON      "5",IDC_BUTTON3,67,7,27,25,BS_BITMAP
+    PUSHBUTTON      "6",IDC_BUTTON4,97,7,27,25,BS_BITMAP
+    PUSHBUTTON      "7",IDC_BUTTON5,127,7,27,25,BS_BITMAP
+    PUSHBUTTON      "8",IDC_BUTTON6,157,7,27,25,BS_BITMAP
+END
+
 
 /////////////////////////////////////////////////////////////////////////////
 //
@@ -823,6 +853,22 @@ BEGIN
         RIGHTMARGIN, 155
         TOPMARGIN, 7
         BOTTOMMARGIN, 128
+    END
+
+    IDD_DIALOG_ANNOTATION, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 189
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 85
+    END
+
+    IDD_DIALOG_SELECT_POLYGON, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 184
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 32
     END
 END
 #endif    // APSTUDIO_INVOKED

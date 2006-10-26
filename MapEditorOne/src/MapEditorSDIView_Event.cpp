@@ -34,7 +34,7 @@ static void checkSelectPoint(POINT& mousePoint,
     }
 }
 
-static void doLButtonDownDrawMode(UINT nFlags, CPoint &point)
+void CMapEditorSDIView::doLButtonDownDrawMode(UINT nFlags, CPoint &point)
 {
     int OFFSET_X_VIEW = theApp.offset.x;
     int OFFSET_Y_VIEW = theApp.offset.y;
@@ -283,7 +283,9 @@ static void doLButtonDownDrawMode(UINT nFlags, CPoint &point)
             }
         }
     }else if(theApp.selectingToolType == TI_FILL){
+        //TODO
     }else if(theApp.selectingToolType == TI_HAND){
+        //
     }else if( theApp.selectingToolType == TI_LINE){
         if(nFlags & MK_LBUTTON){
             theApp.selectGroupInformation.clear();
@@ -305,21 +307,27 @@ static void doLButtonDownDrawMode(UINT nFlags, CPoint &point)
             }
         }
     }else if(theApp.selectingToolType == TI_MAGNIFY){
+        //zoom in/out
+        if(nFlags & MK_CONTROL){
+            //with ctrl
+            //->zoom out
+            OnZoomOut();
+        }else{
+            //zoom in
+            OnZoomIn();
+        }
     }else if(theApp.selectingToolType == TI_SKULL){
-        for(int i = 0; i < (int)PolygonList.size(); i ++){
-            struct world_point2d world_point;
-            world_point.x = (world_distance)((point.x - OFFSET_X_VIEW) * DIV - OFFSET_X_WORLD);
-            world_point.y = (world_distance)((point.y - OFFSET_Y_VIEW) * DIV - OFFSET_Y_WORLD);
+        struct world_point2d world_point = getWorldPoint2DFromViewPoint(point.x, point.y);
 
-            if(point_in_polygon(i, &world_point)){
-                polygon_data *polygon = &PolygonList[i];
-                //invalid height -> skip
-                if(polygon->floor_height > theApp.viewHeightMax ||
-                    polygon->ceiling_height < theApp.viewHeightMin){
-                        continue;
-                }
+        int polygonIndex = getPolygonIdPointIn(world_point);
+        if(polygonIndex != NONE){
+            polygon_data *polygon = &PolygonList[polygonIndex];
+            //invalid height -> skip
+            if(polygon->floor_height > theApp.viewHeightMax ||
+                polygon->ceiling_height < theApp.viewHeightMin){
+            }else{
                 //add object on the polygon
-                int objectIndex = addObject(world_point, i);
+                int objectIndex = addObject(world_point, polygonIndex);
 
                 //‘I‘ðó‘Ô‚É‚·‚é
                 theApp.selectGroupInformation.clear();
@@ -334,8 +342,26 @@ static void doLButtonDownDrawMode(UINT nFlags, CPoint &point)
             }
         }
     }else if(theApp.selectingToolType == TI_TEXT){
-    }else if(theApp.selectingToolType == TI_POLYGON){
+        //add annotation
+        //show dialog
+        CAnnotationDialog dlg(this);
+        if(dlg.DoModal() == IDOK){
+            struct world_point2d world_point = getWorldPoint2DFromViewPoint(point.x, point.y);
 
+            int polygonIndex = getPolygonIdPointIn(world_point);
+
+            if(dlg.isOnlyDisplayWhenPolygonShown){
+            }else{
+                polygonIndex = NONE;
+            }
+            char cstr[MAXIMUM_ANNOTATION_TEXT_LENGTH];
+            strToChar(dlg.annotationText, cstr);
+            addAnnotationText(world_point, string(cstr));
+        }
+    }else if(theApp.selectingToolType == TI_POLYGON){
+        //show selection dialog
+
+        //add polygon preseted
     }
 }
 //¶ƒ{ƒ^ƒ“‰º‚°

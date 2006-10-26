@@ -48,6 +48,7 @@ public:
 
 public:
     void changeMode(int mode);
+    void doLButtonDownDrawMode(UINT nFlags, CPoint &point);
 protected:
 
 // 生成された、メッセージ割り当て関数

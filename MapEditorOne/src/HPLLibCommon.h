@@ -243,3 +243,8 @@ bool isPolygonValid(int polygonIndex);
 Uint32 getpixel(SDL_Surface *surface, int x, int y);
 Uint32 getpixel(Uint8* pixels, int pitch, int bpp,  int x, int y);
 void putpixel(SDL_Surface *surface, int x, int y, Uint32 pixel);
+void addAnnotationText(world_point2d& point, string text);
+
+//get polygon index which include the point
+//return NONE when not found
+int getPolygonIdPointIn(world_point2d& point);

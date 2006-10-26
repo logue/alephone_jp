@@ -1705,18 +1705,16 @@ bool process_map_wad(
 		assert(is_preprocessed_map&&map_index_count || !is_preprocessed_map&&!map_index_count);
 
 		data= (uint8 *)extract_type_from_wad(wad, PLATFORM_STATIC_DATA_TAG, &data_length);
-        if(data){
-		    count= data_length/SIZEOF_static_platform_data;
-		    assert(count*SIZEOF_static_platform_data==data_length);
+	    count= data_length/SIZEOF_static_platform_data;
+	    assert(count*SIZEOF_static_platform_data==data_length);
     		
-		    platform_structures= (uint8 *)extract_type_from_wad(wad, PLATFORM_STRUCTURE_TAG, &data_length);
-		    platform_structure_count= data_length/SIZEOF_platform_data;
-		    assert(platform_structure_count*SIZEOF_platform_data==data_length);
+	    platform_structures= (uint8 *)extract_type_from_wad(wad, PLATFORM_STRUCTURE_TAG, &data_length);
+	    platform_structure_count= data_length/SIZEOF_platform_data;
+	    assert(platform_structure_count*SIZEOF_platform_data==data_length);
     		
-		    complete_loading_level((short *) map_index_data, map_index_count,
-			    data, count, platform_structures,
-			    platform_structure_count, version);
-        }
+	    complete_loading_level((short *) map_index_data, map_index_count,
+		    data, count, platform_structures,
+		    platform_structure_count, version);
 	}
 	
 	/* ... and bail */

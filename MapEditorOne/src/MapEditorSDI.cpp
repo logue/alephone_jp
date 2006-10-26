@@ -190,6 +190,7 @@ bool CMapEditorSDIApp::initialize(){
     selectingToolType = TI_ARROW;
     viewHeightMin = - SHRT_MAX;
     viewHeightMax = -viewHeightMin;
+    isRevealHiddenLines = false;
 
     //no changes found(new)
     isChanged = false;
@@ -568,7 +569,7 @@ int searchPlatformIndexByPolygonIndex(int index)
             return i;
         }
     }
-    return NULL;
+    return NONE;
 }
 
 //load bitmap from file

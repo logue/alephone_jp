@@ -590,3 +590,26 @@ void putpixel(SDL_Surface *surface, int x, int y, Uint32 pixel)
         break;
     }
 }
+
+void addAnnotationText(world_point2d& point, string text)
+{
+    map_annotation annotationData;
+    annotationData.type = 0;
+    annotationData.location = point;
+    strcpy_s(annotationData.text, MAXIMUM_ANNOTATION_TEXT_LENGTH,
+        text.c_str());
+    MapAnnotationList.push_back(annotationData);
+}
+
+//get polygon index which include the point
+//return NONE when not found
+int getPolygonIdPointIn(world_point2d& point)
+{
+    for(int i = 0; i < (int)PolygonList.size(); i ++){
+
+        if(point_in_polygon(i, &point)){
+            return i;
+        }
+    }
+    return NONE;
+}

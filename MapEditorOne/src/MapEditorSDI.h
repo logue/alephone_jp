@@ -47,6 +47,8 @@ using namespace std;
 #include "SelectLevelDialog.h"
 #include "PolygonPropertyDialog.h"
 #include "EditorInforDialog.h"
+#include "AnnotationDialog.h"
+#include "SelectPolygonDialog.h"
 
 #include "MapEditorOneSetting.h"
 
@@ -282,6 +284,7 @@ public:
     //show / hide polygons, lines. points
     int viewHeightMax;
     int viewHeightMin;
+    bool isRevealHiddenLines;
 
     //save check
     //when true, warn to save
@@ -302,6 +305,10 @@ public:
 
     //is shapes file loaded
     bool isLoadedShapesFile;
+
+    //polygon to draw by preset
+    int numberOfPolygonPoints;
+
 private:
     //edit mode
     int editMode;

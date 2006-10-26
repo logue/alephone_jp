@@ -187,6 +187,11 @@ void CToolDialog::OnLButtonDown(UINT nFlags, CPoint point)
             if(i == TI_SKULL){
                 //show object property's dialog
                 theApp.objectPropertyDialog->ShowWindow(TRUE);
+            }else if(i == TI_POLYGON){
+                //show polygon dialog
+                CSelectPolygonDialog dlg(this);
+                dlg.DoModal();
+                theApp.numberOfPolygonPoints = dlg.pointsOfPolygon;
             }
             Invalidate(FALSE);
             setCursor();

@@ -61,6 +61,15 @@
 #define IDD_DIALOG_LINE_PROPERTY        233
 #define IDD_DIALOG_SIDE_PROPERTY        234
 #define IDD_DIALOG_COLOR_CUSTOMIZE      235
+#define IDD_DIALOG_ANNOTATION           236
+#define IDD_DIALOG_SELECT_POLYGON       237
+#define IDB_BITMAP1                     238
+#define IDB_BITMAP_POLYGON3             238
+#define IDB_BITMAP_POLYGON4             239
+#define IDB_BITMAP_POLYGON5             240
+#define IDB_BITMAP_POLYGON6             241
+#define IDB_BITMAP_POLYGON7             242
+#define IDB_BITMAP_POLYGON8             243
 #define IDC_LIST1                       1000
 #define IDC_LIST2                       1002
 #define IDC_COMBO1                      1003
@@ -148,7 +157,6 @@
 #define IDC_PICT_BACKGROUND             1057
 #define IDC_PICT_GRID_LINE              1058
 #define IDC_PICT_LINES                  1059
-#define IDC_PICT_LINES2                 1060
 #define IDC_PICT_POLYGONS               1060
 #define IDC_PICT_STRINGS                1061
 #define IDC_PICT_POINTS                 1062
@@ -190,9 +198,9 @@
 // 
 #ifdef APSTUDIO_INVOKED
 #ifndef APSTUDIO_READONLY_SYMBOLS
-#define _APS_NEXT_RESOURCE_VALUE        236
+#define _APS_NEXT_RESOURCE_VALUE        239
 #define _APS_NEXT_COMMAND_VALUE         32809
-#define _APS_NEXT_CONTROL_VALUE         1058
+#define _APS_NEXT_CONTROL_VALUE         1059
 #define _APS_NEXT_SYMED_VALUE           104
 #endif
 #endif
