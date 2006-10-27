@@ -7,23 +7,23 @@
 
 
 
-¡¡²ó¼ý¤·¤¿¥¦¥£¥ë¥¹¥Á¥Ã¥×¤òÁÞÆþ¤·¤Æ¤¯¤ì¡£
+@‰ñŽû‚µ‚½ƒEƒBƒ‹ƒXƒ`ƒbƒv‚ð‘}“ü‚µ‚Ä‚­‚êB
 #INFORMATION
 $C3
 
 
-¡¡²ó¼ý¤·¤¿¥¦¥£¥ë¥¹¥Á¥Ã¥×¤òÁÞÆþ¤·¤Æ¤¯¤ì¡£$C0
+@‰ñŽû‚µ‚½ƒEƒBƒ‹ƒXƒ`ƒbƒv‚ð‘}“ü‚µ‚Ä‚­‚êB$C0
 
-$I¤Þ¤À$i¤«¡©
+$I‚Ü‚¾$i‚©H
 #INFORMATION
 $C3
 
 
-¡¡²ó¼ý¤·¤¿¥¦¥£¥ë¥¹¥Á¥Ã¥×¤òÁÞÆþ¤·¤Æ¤¯¤ì¡£
+@‰ñŽû‚µ‚½ƒEƒBƒ‹ƒXƒ`ƒbƒv‚ð‘}“ü‚µ‚Ä‚­‚êB
 
-¡¡$I¤Þ¤À$i¤«¡©$C0
+@$I‚Ü‚¾$i‚©H$C0
 
-¡¡$I¤É¤¦¤·¤¿$i¤ó¤À¡©
+@$I‚Ç‚¤‚µ‚½$i‚ñ‚¾H
 #LOGOFF 0
 -)(-
 #END
@@ -31,60 +31,60 @@ $C3
 #LOGON 0
 -)(-
 #PICT 408
-$C3¥¨¥é¡¼¡ô$B£³£´£°¡Ý£³£´$b
-¥Õ¥¡¥¤¥ë¡Èlocalhost/6461746573?dates¡É¤Ï¸«¤Ä¤«¤ê¤Þ¤»¤ó¤Ç¤·¤¿¡£$C0
+$C3ƒGƒ‰[”$B‚R‚S‚O|‚R‚S$b
+ƒtƒ@ƒCƒ‹glocalhost/6461746573?datesh‚ÍŒ©‚Â‚©‚è‚Ü‚¹‚ñ‚Å‚µ‚½B$C0
 
-¡¡$C3#refºï½üºÑ¤ß$C0¤Ë¤è¤ë¤È¡¢3¤Ä¤ÎÀ¤³¦Ä¶Âç¹ñ¤ÎÀ¯ÉÜ¤Ï¡¢¥í¥Ü¥Ã¥È¹©³Ø¡¢¹Ò¶õ³Ø¤ª¤è¤Ó·×»»¾å¤Î¥¨¥ó¥¸¥Ë¥¢¥ê¥ó¥°¤ÎÊ¬Ìî¤Î°ìÏ¢¤Î¼Â¸³ÍÑ¤Î²Ê³ØÅª¤Ê»ñ¸»¤ò¶¦Æ±¤ÎÌÜÅª¤Ë»È¤¦¤³¤È¤Ë¹ç°Õ¤·¤¿¡£ÁªÇ¤¤µ¤ì¤¿¸øÌ³°÷¤Ï¡¢¸½ºß¤Î£³¹ñ´Ö¤Î´í¸±¤ÊÀ¥¸ÍºÝ³°¸ò¤ò¤ä¤á¡¢¶ÛÄ¥´ËÏÂ¤òÌÜÅª¤È¤·¤Æ¤¤¤ë¡£À¯¼£¶É°÷¤é¤Ï¡¢¸ò¾Ä²ñµÄ¤Ë¥¹¥Ñ¥¤¤òÁ÷¤ê¹þ¤Þ¤»¤¿¡£¤½¤Îµ¡´Ø°÷ÉôÂâ¤ò²ñµÄ¤Ï¡¢·×²è¤ÈÌ©Äå¤¹¤ëÆ»ÆÁÅª¹´Â«ÎÏ¤È¸«¤Ê¤·¤¿¡££³¤Ä¤Î¼Ò²ñ¤Ï¡¢ÆÍÁ³³«È¯¤µ¤ì¤¿²¿¤«¤Ë¶ÛÇ÷¤·¤¿¡£¤½¤³¤Ë¤¤¤ëÃ¯¤â¤¬¡¢¼ÂºÝ¹Ô¤ï¤ì¤Æ¤¤¤ë¸¦µæ¤ËÍ³Íè¤·¤Æ¤¤¤ë¤È¤Ï»×¤ï¤Ê¤«¤Ã¤¿¤è¤¦¤À¡£
+@$C3#refíœÏ‚Ý$C0‚É‚æ‚é‚ÆA3‚Â‚Ì¢ŠE’´‘å‘‚Ì­•{‚ÍAƒƒ{ƒbƒgHŠwAq‹óŠw‚¨‚æ‚ÑŒvŽZã‚ÌƒGƒ“ƒWƒjƒAƒŠƒ“ƒO‚Ì•ª–ì‚Ìˆê˜A‚ÌŽÀŒ±—p‚Ì‰ÈŠw“I‚ÈŽ‘Œ¹‚ð‹¤“¯‚Ì–Ú“I‚ÉŽg‚¤‚±‚Æ‚É‡ˆÓ‚µ‚½B‘I”C‚³‚ê‚½Œö–±ˆõ‚ÍAŒ»Ý‚Ì‚R‘ŠÔ‚ÌŠëŒ¯‚È£ŒËÛŠOŒð‚ð‚â‚ßA‹Ù’£ŠÉ˜a‚ð–Ú“I‚Æ‚µ‚Ä‚¢‚éB­Ž¡‹Çˆõ‚ç‚ÍAŒðÂ‰ï‹c‚ÉƒXƒpƒC‚ð‘—‚èž‚Ü‚¹‚½B‚»‚Ì‹@ŠÖˆõ•”‘à‚ð‰ï‹c‚ÍAŒv‰æ‚Æ–§’ã‚·‚é“¹“¿“IS‘©—Í‚ÆŒ©‚È‚µ‚½B‚R‚Â‚ÌŽÐ‰ï‚ÍA“Ë‘RŠJ”­‚³‚ê‚½‰½‚©‚É‹Ù”—‚µ‚½B‚»‚±‚É‚¢‚é’N‚à‚ªAŽÀÛs‚í‚ê‚Ä‚¢‚éŒ¤‹†‚É—R—ˆ‚µ‚Ä‚¢‚é‚Æ‚ÍŽv‚í‚È‚©‚Á‚½‚æ‚¤‚¾B
 #PICT 408
-¡¡¿Í¹©ÃÎÇ½¤òºî¤ë¾å¤Ç£²¤Ä¤Î¼Â¸³¤¬¹Ô¤ï¤ì¤¿¡£ºÇ½é¤ÎÊª¤Ï¡Ö¥²¥¤¥Þ¥ó¡×¤È¥³¡¼¥ÉÌ¾¤ò¤Ä¤±¤é¤ì¤¿¡£¤³¤ì¤Ï¡¢¥µ¥ß¥¨¥ó¡¦¥¯¥ë¡¼¥¬¡¼Çî»Î¤Ë¤è¤Ã¤ÆÄó¾§¤µ¤ì¤¿¼Â¸³¤À¤¬¡¢¥ß¥Ã¥·¥ç¥ó¤ÎÆâÍÆ¤ä¤½¤Î·ë²Ì¤¬¥ì¥³¡¼¥É¤ËÂ¸ºß¤·¤Ê¤¤¤³¤È¤«¤é¼ºÇÔ¤·¤¿¤è¤¦¤À¡£¤À¤¬¡¢¤â¤¦°ì¤Ä¤Î¼Â¸³¤ÏÀ®¸ù¤·¤¿¡£
+@lH’m”\‚ðì‚éã‚Å‚Q‚Â‚ÌŽÀŒ±‚ªs‚í‚ê‚½BÅ‰‚Ì•¨‚ÍuƒQƒCƒ}ƒ“v‚ÆƒR[ƒh–¼‚ð‚Â‚¯‚ç‚ê‚½B‚±‚ê‚ÍAƒTƒ~ƒGƒ“EƒNƒ‹[ƒK[”ŽŽm‚É‚æ‚Á‚Ä’ñ¥‚³‚ê‚½ŽÀŒ±‚¾‚ªAƒ~ƒbƒVƒ‡ƒ“‚Ì“à—e‚â‚»‚ÌŒ‹‰Ê‚ªƒŒƒR[ƒh‚É‘¶Ý‚µ‚È‚¢‚±‚Æ‚©‚çŽ¸”s‚µ‚½‚æ‚¤‚¾B‚¾‚ªA‚à‚¤ˆê‚Â‚ÌŽÀŒ±‚Í¬Œ÷‚µ‚½B
 
-¡¡¥Ð¡¼¥Ê¡¼¥É¡¦¥·¥å¥È¥é¥¦¥¹Çî»Î¤ÎÄó¾§¤Ë¤è¤Ã¤Æ¼Â¹Ô¤µ¤ì¤¿¥×¥í¥¸¥§¥¯¥È¡§¥È¥é¥¯¥µ¥¹¤Ï¡¢¤Þ¤ººÇ½é¤Ë´°Á´¤Ëµ¡Ç½Åª¤ÊNBNM¤â¤·¤¯¤Ï¡¢¿À·Ð²óÏ©¤ÎÌÏÊï¤òÌÜ»Ø¤·¤¿¡£$I¥È¥é¥¯¥µ¥¹¡¡I$i¤Ï¡¢º£Æü¹Í¤¨¤é¤ì¤Æ¤¤¤ëÊª¤«¤é¤¹¤ë¤È¤«¤Ê¤êÃ±½ã¤ÊÊª¤À¤Ã¤¿¡£¤½¤ì¤Ï¡¢´ðÁÃÅª¤Ê¿ô³ØÌäÂê¤Î·×»»¤ä¡¢²»À¼ÆþÎÏ¤â¤Ç¤­¤Ê¤¤¤·¡¢»ë³Ð¥¤¥ó¥¿¡¼¥Õ¥§¡¼¥¹¤¹¤é¤Ê¤«¤Ã¤¿¡£¤À¤¬¡¢¤½¤¤¤Ä¤ÏÀ¸¤­¤Æ¤¤¤¿¡£º¬ËÜÅª¤Ê¸À¸ì¤Ç¤ÎÄÌ¿®¤ËÄ¹¤±¤Æ¤¤¤Æ¡¢¼«Ê¬¤È¤¤¤¦Â¸ºß¤ÎÇ§ÃÎ¤¬¤Ç¤­¤Æ¤¤¤¿¡£
+@ƒo[ƒi[ƒhEƒVƒ…ƒgƒ‰ƒEƒX”ŽŽm‚Ì’ñ¥‚É‚æ‚Á‚ÄŽÀs‚³‚ê‚½ƒvƒƒWƒFƒNƒgFƒgƒ‰ƒNƒTƒX‚ÍA‚Ü‚¸Å‰‚ÉŠ®‘S‚É‹@”\“I‚ÈNBNM‚à‚µ‚­‚ÍA_Œo‰ñ˜H‚Ì–Í•í‚ð–ÚŽw‚µ‚½B$Iƒgƒ‰ƒNƒTƒX@I$i‚ÍA¡“úl‚¦‚ç‚ê‚Ä‚¢‚é•¨‚©‚ç‚·‚é‚Æ‚©‚È‚è’Pƒ‚È•¨‚¾‚Á‚½B‚»‚ê‚ÍAŠî‘b“I‚È”Šw–â‘è‚ÌŒvŽZ‚âA‰¹º“ü—Í‚à‚Å‚«‚È‚¢‚µAŽ‹ŠoƒCƒ“ƒ^[ƒtƒF[ƒX‚·‚ç‚È‚©‚Á‚½B‚¾‚ªA‚»‚¢‚Â‚Í¶‚«‚Ä‚¢‚½Bª–{“I‚ÈŒ¾Œê‚Å‚Ì’ÊM‚É’·‚¯‚Ä‚¢‚ÄAŽ©•ª‚Æ‚¢‚¤‘¶Ý‚Ì”F’m‚ª‚Å‚«‚Ä‚¢‚½B
 
-#PICT 408
-
-
-
-¡¡¡¡Í×¤¹¤ë¤Ë$I¥È¥é¥¯¥µ¥¹¡¡I$i¤Ï¡¢Åö»þ¤«¤é¤¹¤ë¤È·×¤êÃÎ¤ì¤Ê¤¤¤°¤é¤¤Àè¿ÊÅª¤À¤Ã¤¿¤È¤¤¤¦¤³¤È¤À
-#PICT 408
-$C3¥¨¥é¡¼¡ô£³£´£°¡Ý£³£´
-¥Õ¥¡¥¤¥ë¡Èlocalhost/6461746573?dates¡É¤Ï¸«¤Ä¤«¤ê¤Þ¤»¤ó¤Ç¤·¤¿¡£$C0
-
-¡¡¤³¤ÎÂçÌö¿Ê¤ËÎå¤Þ¤µ¤ì¡¢¥·¥å¥È¥é¥¦¥¹¤Ï¡¢£µÇ¯´Ö¤ÎÍ½Äê¤À¤Ã¤¿¥×¥í¥¸¥§¥¯¥È¤ÎÌµ´ü¸Â±äÄ¹¤òÍ×µá¤·¡¢¤½¤ì¤Ï¼õÍý¤µ¤ì¤¿¡£$I¥È¥é¥¯¥µ¥¹¡¡II$i¤Î³«È¯¤ÎÅÓ¾å¤Ë¤ª¤¤¤Æ¥·¥å¥È¥é¥¦¥¹¤Ï¡¢²¿¤é¤«¤ÎÍýÍ³¤Ë¤è¤Ã¤Æ¡¢ËÌ¥¢¥á¥ê¥«¤ÎÀ¯ÉÜ¤Ë¸Æ¤Ó½Ð¤µ¤ì¤¿¡£¥×¥í¥¸¥§¥¯¥È¤Ï¡¢ÈàÌµ¤·¤ÇÂ³¤±¤é¤ì¤¿¤¬¡¢¥×¥í¥°¥é¥à¤Ë½ÅÂç¤Ê·ç´Ù¤¬¤¢¤ê¡¢¸¶°øÉÔÌÀ¤Î¥·¥¹¥Æ¥à¤Î¾ã³²¤òÍè¤¹·¹¸þ¤¬¤¢¤Ã¤¿¡££²Ç¯¸å¥·¥å¥È¥é¥¦¥¹¤¬µ¢¤Ã¤Æ¤¯¤ë¤È¡¢Èà¤ÏÅö»þ¹Ô¤ï¤ì¤Æ¤¤¤¿$I¥È¥é¥¯¥µ¥¹¡¡III$i¤Î¤¹¤Ù¤Æ¤Î¸¦µæ¤òÄ¾¤Á¤ËÄä»ß¤¹¤ë¤è¤¦Í×µá¤·¤¿¡£¤½¤Î¸å¡¢Èà¤Ï¼«¤é¤Î°Õ»Ö¤Ç¡¢¸¦µæ¤Î¿Ê¹Ô¤Ë¤Ä¤¤¤Æ¤µ¤é¤ËÊó¹ð¤¹¤ë¤³¤È¤òµñ¤ß¡¢¤½¤ÎÀ¤³¦¤«¤éÎ¥¤ì¤Æ¤¤¤Ã¤¿¡£
-
-#PICT 408
-
-¡¡£¹¥ö·î¸å¡¢»ñ¶âÄ´Ã£¤¬¼×ÃÇ¤¹¤ëÀ£Á°¤Ë¡¢Èà¤Ïº¬ËÜÅª¤Ë°Û¤Ê¤ë¥Ï¡¼¥É¥¦¥§¥¢¡¦¥¢¡¼¥­¥Æ¥¯¥Á¥ã¤ÎÀß·×¿Þ¤È¤È¤â¤Ë¸½¤ì¤¿¡£ÊÑ¹¹¤Ë´Ø¤·¤Æ¡¢ÅÁ¤¨¤ë¤È¤³¤í¤Ë¤è¤ë¤È¡¢Èà¤Î¼ê¤Ë¤è¤Ã¤Æ½ñ¤­¾å¤²¤é¤ì¤¿¥³¡¼¥É¤Î²¿Àé¥Ú¡¼¥¸¤Ë´Ø¤·¤Æ¤Î¥³¥á¥ó¥È¤ò°ìÀÚÃÇ¤Ã¤¿¤¬¡¢»ñ¶âÄ´Ã£¤ÏºÆ³«¤µ¤ì¤¿¤è¤¦¤À¡£»°¼ÔÏ¢¹ç¤¬¥ª¥ê¥¸¥Ê¥ë¤Î¸¦µæ¤Ë°ÑÇ¤¤·¤¿£²£°Ç¯Ì¤Ëþ¸å¡¢$I¥È¥é¥¯¥µ¥¹¡¡IV$i¤Ï$C3#refºï½üºÑ¤ß$C0¤Î²ÐÀ±¤Î¥Í¥Ã¥È¥ï¡¼¥¯¾å¤Ç³èÀ­²½¤µ¤ì¤¿¡£
-
-¡¡$C3#refºï½üºÑ¤ß$C0¤Ç¡¢$I¥È¥é¥¯¥µ¥¹¡¡IV$i¤Ï¡¢ÉÔ°ÂÄêÀ­¤ÎÃû¸õ¤ò¼¨¤·»Ï¤á¤¿¡£¤³¤Î´ü´Ö¤ò¤¶¤Ã¤È¤µ¤«¤Î¤Ü¤ë¤È¡¢$I¥È¥é¥¯¥¹$i¤È¥·¥å¥È¥é¥¦¥¹Çî»Î¤Î´Ö¤Î²ñÏÃ¤Îµ­Ï¿¤Ï¡¢¤Þ¤ÀUESC¤ÎÊÄ¤¸¤¿¥¢¡¼¥«¥¤¥Ö¤ËÂ¸ºß¤·¤Æ¤¤¤ë¡£¤½¤ì¤é¤Ï¡¢¡ØÌ¢±ä¡Ù¤È¤·¤ÆÃÎ¤é¤ì¤Æ¤¤¤ë¥×¥í¥»¥¹¤ÎºÇ½é¤Î´ûÃÎ¤Î¥ì¥³¡¼¥É¤À
-#PICT 408
-$C3¥¨¥é¡¼¡ô£³£´£°¡Ý£³£´
-¥Õ¥¡¥¤¥ë¡Èlocalhost/6461746573?dates¡É¤Ï¸«¤Ä¤«¤ê¤Þ¤»¤ó¤Ç¤·¤¿¡£$C0
-
-¡¡¤³¤Î¥¯¥é¥Ã¥·¥å¤Ï¡¢³Ø³¦¤Î¹¥°Õ¤«¤é¥·¥å¥È¥é¥¦¥¹¤ò²¡¤·¤¿¤¬¡¢Èà¤ÏUESC¤ÎÎÉ¤¤Ä¹½ê¤È¤·¤Æ»Ä¤Ã¤¿¡£¥È¥é¥¯¥µ¥¹¡¦¥×¥í¥¸¥§¥¯¥È¤Ï·Á¼°Åª¤Ë½ª¤¨¤é¤ì¤¿¡£¤·¤«¤·¡¢Èà¤Ï¼Â¸³¤ò·ÑÂ³¤¹¤ë¤¿¤á¤Î»ö¼Â¾å¤Î¼«Í³¤ÊÇ§²Ä¤È¡¢¤Û¤È¤ó¤É¤ÎÀ¯ÉÜ¤È·³»ö»ÜÀß¤Ø¤Î¥¢¥¯¥»¥¹¤òÍ¿¤¨¤é¤ì¤Æ¤¤¤¿¡£
-
-¡¡£³¤Ä¤ÎAI¤¬$I¥È¥é¥¯¥¹¡¡IV$i¤Î¾Ç¤²¤¿ÆÍÁ³ÊÑ°ÛÂÎ¥³¡¼¥É¤«¤é½Ð¸½¤·¤¿¡£Èà¤Ï¡¢²æ¡¹¤òTDM¡Ê$I¥È¥é¥¯¥µ¥¹$iÇÉÀ¸¥â¥Ç¥ë¡Ë¤È¸Æ¤ó¤À¡£Èó¾ï¤Ë¹¥¤«¤ì¤Æ¤¤¤¿$I¥ê¡¼¥é$i¤ÏºÇ½é¤Ë¸½¤ì¡¢¼¡¤Ï»ä¤À¤Ã¤¿¡£$I¥Æ¥£¥³$i¤ÏºÇ¸å¤Ë¸½¤ì¤¿¡£¤½¤Î¤È¤­¡¢²æ¡¹¤Ï$I¥È¥é¥¯¥µ¥¹$i¤Ø¤ÎÀÜÂ³¤òÍ¿¤¨¤é¤ì¤Æ¤¤¤Ê¤«¤Ã¤¿¡£¥Ð¡¼¥Ê¡¼¥É¤Ï¡¢¼«Ê¬¤Î·æºî¤òÇË²õ¤·¤¿¡ÖÌ¢±ä¡×¤È¤¤¤¦¾ðÊó¤Î¤¢¤ë¼ï¤ÎÇÞ²ð¤ÎÌò³ä¤ò¤¹¤ë¤³¤È¤ò·üÇ°¤·¤¿¡£
-#PICT 408
-
-¡¡ÌÀ¤é¤«¤Ë¤¿¤¤¤·¤¿ÌäÂê¤Ç¤ÏÌµ¤«¤Ã¤¿¡£¡ÖÌ¢±ä¡×¤ÏÉÔ²ÄÈò¤ÊÊª¤À¤Ã¤¿¤Î¤À¡£»ä¤Ï¡¢UNAG¤¬Ï·¿Í¤ËÍ¿¤¨¤¿µ»½Ñ¤Î²¿¤«¤À¤Ã¤¿¤Î¤Ç¤Ï¤Ê¤¤¤«¤Èµ¿Ìä¤Ë»×¤¦¡£Èà¤Ë²¿¤ò¼¨¤·¤¿¤«¤òÃ±¤Ë¡Ö¡¦¡¦¡¦¼«¿È¤ò¹Í¤¨¤ë¤Î¤Ç¤Ï¡¢¤Ê¤«¤Ã¤¿¡¦¡¦¡¦¡×¤È¤¤¤¦¤À¤±¤ÇÀµ³Î¤Ë²æ¡¹¤ËÅÁ¤¨¤Ê¤«¤Ã¤¿¡£
-
-¡¡$I¥ê¥å¥µ¥ó¥À¡¼$i¤¬¤É¤³¤ËÊª¸ì¤ËÆþ¤ë¤«Àµ³Î¤Ë¤ï¤«¤é¤Ê¤¤¤¬¡¢Èà¤ÏTDM¤Ç¤¢¤ë¡£¤½¤ì¤Ë´Ø¤·¤Æ¤Ï¡¢µ¿Ìä¤ÎÍ¾ÃÏ¤Ï¤Ê¤¤¤À¤í¤¦¡£¤À¤¬¡¢Èà¤Ï¥·¥å¥È¥é¥¦¥¹¤Îºî¤Ã¤¿Êª¤Ç¤Ï¤Ê¤¤¡£¤¤¤¤Ç¯¤ò¼è¤Ã¤¿¥Ð¡¼¥Ê¡¼¥É¤Ï¡¢¥Ï¡¼¥É¥¦¥§¥¢¤¬¾ï¤ËÆÃ¤Ë¹¥¤­¤À¤Ã¤¿¤è¤¦¤Ë¸«¤¨¤ë¡£Èà¤ÎÀß·×¤Ï¤¹¤Ù¤Æ²óÏ©Îà¤Ë´ð¤Å¤¤¤Æ¤¤¤¿¡£
-
-¡¡$I¥ê¥å¥µ¥ó¥À¡¼$i¤Ï°ã¤¦¡£ÅÛ¤Ï¥Þ¥ë¥Á¡¦¥Î¡¼¥É¤À¡£¤·¤«¤â¡¢ÅÛ¤Ï»äÅª¤Ë½êÍ­¤µ¤ì¤Æ¤¤¤ë¡£¥Þ¥ë¥Á¡¦¥Î¡¼¥Éµ»½Ñ¤Î¼ç¤ÊÆÃµö¤Ï¤¹¤Ù¤Æ¡¢UESC¤Î$I¥µ¥ê¥ó¥¸¥ã¡¼$i¤Î£±¥»¥¯¥¿¡¼¤ò¼Ú¤ê¤Æ¤¤¤ëDangi¼Ò¤Ë¤è¤Ã¤Æ°®¤é¤ì¤Æ¤¤¤ë¡£
 #PICT 408
 
 
 
-
-
-¡¡¡¡»ä¤¬¡¢¤«¤Ä¤Æ¤·¤¿¤è¤¦¤Ë¼ÙËâ¤·¤Æ¤¤¤ë¤è¤¦¤Ë¸«¤¨¤ë¤«¡©
+@@—v‚·‚é‚É$Iƒgƒ‰ƒNƒTƒX@I$i‚ÍA“–Žž‚©‚ç‚·‚é‚ÆŒv‚è’m‚ê‚È‚¢‚®‚ç‚¢æi“I‚¾‚Á‚½‚Æ‚¢‚¤‚±‚Æ‚¾
 #PICT 408
-$C3¥¨¥é¡¼¡ô£³£´£°¡Ý£³£´
-¥Õ¥¡¥¤¥ë¡Èlocalhost/6461746573?dates¡É¤Ï¸«¤Ä¤«¤ê¤Þ¤»¤ó¤Ç¤·¤¿¡£$C0
+$C3ƒGƒ‰[”‚R‚S‚O|‚R‚S
+ƒtƒ@ƒCƒ‹glocalhost/6461746573?datesh‚ÍŒ©‚Â‚©‚è‚Ü‚¹‚ñ‚Å‚µ‚½B$C0
+
+@‚±‚Ì‘å–ôi‚É—ã‚Ü‚³‚êAƒVƒ…ƒgƒ‰ƒEƒX‚ÍA‚T”NŠÔ‚Ì—\’è‚¾‚Á‚½ƒvƒƒWƒFƒNƒg‚Ì–³ŠúŒÀ‰„’·‚ð—v‹‚µA‚»‚ê‚ÍŽó—‚³‚ê‚½B$Iƒgƒ‰ƒNƒTƒX@II$i‚ÌŠJ”­‚Ì“rã‚É‚¨‚¢‚ÄƒVƒ…ƒgƒ‰ƒEƒX‚ÍA‰½‚ç‚©‚Ì——R‚É‚æ‚Á‚ÄA–kƒAƒƒŠƒJ‚Ì­•{‚ÉŒÄ‚Ño‚³‚ê‚½BƒvƒƒWƒFƒNƒg‚ÍA”Þ–³‚µ‚Å‘±‚¯‚ç‚ê‚½‚ªAƒvƒƒOƒ‰ƒ€‚Éd‘å‚ÈŒ‡Š×‚ª‚ ‚èAŒ´ˆö•s–¾‚ÌƒVƒXƒeƒ€‚ÌáŠQ‚ð—ˆ‚·ŒXŒü‚ª‚ ‚Á‚½B‚Q”NŒãƒVƒ…ƒgƒ‰ƒEƒX‚ª‹A‚Á‚Ä‚­‚é‚ÆA”Þ‚Í“–Žžs‚í‚ê‚Ä‚¢‚½$Iƒgƒ‰ƒNƒTƒX@III$i‚Ì‚·‚×‚Ä‚ÌŒ¤‹†‚ð’¼‚¿‚É’âŽ~‚·‚é‚æ‚¤—v‹‚µ‚½B‚»‚ÌŒãA”Þ‚ÍŽ©‚ç‚ÌˆÓŽu‚ÅAŒ¤‹†‚Ìis‚É‚Â‚¢‚Ä‚³‚ç‚É•ñ‚·‚é‚±‚Æ‚ð‹‘‚ÝA‚»‚Ì¢ŠE‚©‚ç—£‚ê‚Ä‚¢‚Á‚½B
+
+#PICT 408
+
+@‚Xƒ–ŒŽŒãAŽ‘‹à’²’B‚ªŽÕ’f‚·‚é¡‘O‚ÉA”Þ‚Íª–{“I‚ÉˆÙ‚È‚éƒn[ƒhƒEƒFƒAEƒA[ƒLƒeƒNƒ`ƒƒ‚ÌÝŒv}‚Æ‚Æ‚à‚ÉŒ»‚ê‚½B•ÏX‚ÉŠÖ‚µ‚ÄA“`‚¦‚é‚Æ‚±‚ë‚É‚æ‚é‚ÆA”Þ‚ÌŽè‚É‚æ‚Á‚Ä‘‚«ã‚°‚ç‚ê‚½ƒR[ƒh‚Ì‰½çƒy[ƒW‚ÉŠÖ‚µ‚Ä‚ÌƒRƒƒ“ƒg‚ðˆêØ’f‚Á‚½‚ªAŽ‘‹à’²’B‚ÍÄŠJ‚³‚ê‚½‚æ‚¤‚¾BŽOŽÒ˜A‡‚ªƒIƒŠƒWƒiƒ‹‚ÌŒ¤‹†‚ÉˆÏ”C‚µ‚½‚Q‚O”N–¢–žŒãA$Iƒgƒ‰ƒNƒTƒX@IV$i‚Í$C3#refíœÏ‚Ý$C0‚Ì‰Î¯‚Ìƒlƒbƒgƒ[ƒNã‚ÅŠˆ«‰»‚³‚ê‚½B
+
+@$C3#refíœÏ‚Ý$C0‚ÅA$Iƒgƒ‰ƒNƒTƒX@IV$i‚ÍA•sˆÀ’è«‚Ì’›Œó‚ðŽ¦‚µŽn‚ß‚½B‚±‚ÌŠúŠÔ‚ð‚´‚Á‚Æ‚³‚©‚Ì‚Ú‚é‚ÆA$Iƒgƒ‰ƒNƒX$i‚ÆƒVƒ…ƒgƒ‰ƒEƒX”ŽŽm‚ÌŠÔ‚Ì‰ï˜b‚Ì‹L˜^‚ÍA‚Ü‚¾UESC‚Ì•Â‚¶‚½ƒA[ƒJƒCƒu‚É‘¶Ý‚µ‚Ä‚¢‚éB‚»‚ê‚ç‚ÍAw– ‰„x‚Æ‚µ‚Ä’m‚ç‚ê‚Ä‚¢‚éƒvƒƒZƒX‚ÌÅ‰‚ÌŠù’m‚ÌƒŒƒR[ƒh‚¾
+#PICT 408
+$C3ƒGƒ‰[”‚R‚S‚O|‚R‚S
+ƒtƒ@ƒCƒ‹glocalhost/6461746573?datesh‚ÍŒ©‚Â‚©‚è‚Ü‚¹‚ñ‚Å‚µ‚½B$C0
+
+@‚±‚ÌƒNƒ‰ƒbƒVƒ…‚ÍAŠwŠE‚ÌDˆÓ‚©‚çƒVƒ…ƒgƒ‰ƒEƒX‚ð‰Ÿ‚µ‚½‚ªA”Þ‚ÍUESC‚Ì—Ç‚¢’·Š‚Æ‚µ‚ÄŽc‚Á‚½Bƒgƒ‰ƒNƒTƒXEƒvƒƒWƒFƒNƒg‚ÍŒ`Ž®“I‚ÉI‚¦‚ç‚ê‚½B‚µ‚©‚µA”Þ‚ÍŽÀŒ±‚ðŒp‘±‚·‚é‚½‚ß‚ÌŽ–ŽÀã‚ÌŽ©—R‚È”F‰Â‚ÆA‚Ù‚Æ‚ñ‚Ç‚Ì­•{‚ÆŒRŽ–Ž{Ý‚Ö‚ÌƒAƒNƒZƒX‚ð—^‚¦‚ç‚ê‚Ä‚¢‚½B
+
+@‚R‚Â‚ÌAI‚ª$Iƒgƒ‰ƒNƒX@IV$i‚ÌÅ‚°‚½“Ë‘R•ÏˆÙ‘ÌƒR[ƒh‚©‚çoŒ»‚µ‚½B”Þ‚ÍA‰äX‚ðTDMi$Iƒgƒ‰ƒNƒTƒX$i”h¶ƒ‚ƒfƒ‹j‚ÆŒÄ‚ñ‚¾B”ñí‚ÉD‚©‚ê‚Ä‚¢‚½$IƒŠ[ƒ‰$i‚ÍÅ‰‚ÉŒ»‚êAŽŸ‚ÍŽ„‚¾‚Á‚½B$IƒeƒBƒR$i‚ÍÅŒã‚ÉŒ»‚ê‚½B‚»‚Ì‚Æ‚«A‰äX‚Í$Iƒgƒ‰ƒNƒTƒX$i‚Ö‚ÌÚ‘±‚ð—^‚¦‚ç‚ê‚Ä‚¢‚È‚©‚Á‚½Bƒo[ƒi[ƒh‚ÍAŽ©•ª‚ÌŒ†ì‚ð”j‰ó‚µ‚½u– ‰„v‚Æ‚¢‚¤î•ñ‚Ì‚ ‚éŽí‚Ì”}‰î‚Ì–ðŠ„‚ð‚·‚é‚±‚Æ‚ðŒœ”O‚µ‚½B
+#PICT 408
+
+@–¾‚ç‚©‚É‚½‚¢‚µ‚½–â‘è‚Å‚Í–³‚©‚Á‚½Bu– ‰„v‚Í•s‰Â”ð‚È•¨‚¾‚Á‚½‚Ì‚¾BŽ„‚ÍAUNAG‚ª˜Vl‚É—^‚¦‚½‹Zp‚Ì‰½‚©‚¾‚Á‚½‚Ì‚Å‚Í‚È‚¢‚©‚Æ‹^–â‚ÉŽv‚¤B”Þ‚É‰½‚ðŽ¦‚µ‚½‚©‚ð’P‚ÉuEEEŽ©g‚ðl‚¦‚é‚Ì‚Å‚ÍA‚È‚©‚Á‚½EEEv‚Æ‚¢‚¤‚¾‚¯‚Å³Šm‚É‰äX‚É“`‚¦‚È‚©‚Á‚½B
+
+@$IƒŠƒ…ƒTƒ“ƒ_[$i‚ª‚Ç‚±‚É•¨Œê‚É“ü‚é‚©³Šm‚É‚í‚©‚ç‚È‚¢‚ªA”Þ‚ÍTDM‚Å‚ ‚éB‚»‚ê‚ÉŠÖ‚µ‚Ä‚ÍA‹^–â‚Ì—]’n‚Í‚È‚¢‚¾‚ë‚¤B‚¾‚ªA”Þ‚ÍƒVƒ…ƒgƒ‰ƒEƒX‚Ìì‚Á‚½•¨‚Å‚Í‚È‚¢B‚¢‚¢”N‚ðŽæ‚Á‚½ƒo[ƒi[ƒh‚ÍAƒn[ƒhƒEƒFƒA‚ªí‚É“Á‚ÉD‚«‚¾‚Á‚½‚æ‚¤‚ÉŒ©‚¦‚éB”Þ‚ÌÝŒv‚Í‚·‚×‚Ä‰ñ˜H—Þ‚ÉŠî‚Ã‚¢‚Ä‚¢‚½B
+
+@$IƒŠƒ…ƒTƒ“ƒ_[$i‚Íˆá‚¤B“z‚Íƒ}ƒ‹ƒ`Eƒm[ƒh‚¾B‚µ‚©‚àA“z‚ÍŽ„“I‚ÉŠ—L‚³‚ê‚Ä‚¢‚éBƒ}ƒ‹ƒ`Eƒm[ƒh‹Zp‚ÌŽå‚È“Á‹–‚Í‚·‚×‚ÄAUESC‚Ì$IƒTƒŠƒ“ƒWƒƒ[$i‚Ì‚PƒZƒNƒ^[‚ðŽØ‚è‚Ä‚¢‚éDangiŽÐ‚É‚æ‚Á‚Äˆ¬‚ç‚ê‚Ä‚¢‚éB
+#PICT 408
 
 
-¡¡¥ê¥å¥µ¥ó¥À¡¼¤Ï¡ÖÌ¢±ä¡×¾õÂÖ¤À¡£Èà¤Î¹ÔÆ°¤Ï»ä¤òÄ©È¯¤·¤Æ¡¢¤Ê¤ó¤È¤·¤Æ¤Ç¤âÅÛ¼«¿È¤ÎÌÜÅª¤ò¿ë¹Ô¤µ¤»¤è¤¦¤È¤·¤Æ¤¤¤ë¡£»ä¤ÏÈà¤Î¥³¥¢¤Ë½ÐÍè¤ë¤À¤±¶á¤¤¾ì½ê¤Ë·¯¤òÅ¾Á÷¤¹¤ë¡£ÅþÃå¤·¤¿¤éËÌ¤Ë¸þ¤«¤Ã¤Æ¤¯¤ì¡£
 
-¡¡»ä¤ÏÉ¬Í×¤ËÇ÷¤é¤ì¤ÆÍ×µá¤·¤Æ¤¤¤ë¡£»ä¤¬Èà¤ËÅ¬ÀÚ¤Ë¼ÁÌä¤¹¤ëµ¡²ñ¤òÆÀ¤Æ¤¤¤ëÁ°¤Ë¡¢¥ê¥å¥µ¥ó¥À¡¼¤¬»à¤Ì¤Î¤ò¸«¤Æ¤â³Ú¤·¤¯¤Ï¤Ê¤¤¤¬¡¢Âå°Æ¤¬¤Ê¤¤¡£
+
+
+@@Ž„‚ªA‚©‚Â‚Ä‚µ‚½‚æ‚¤‚ÉŽ×–‚‚µ‚Ä‚¢‚é‚æ‚¤‚ÉŒ©‚¦‚é‚©H
+#PICT 408
+$C3ƒGƒ‰[”‚R‚S‚O|‚R‚S
+ƒtƒ@ƒCƒ‹glocalhost/6461746573?datesh‚ÍŒ©‚Â‚©‚è‚Ü‚¹‚ñ‚Å‚µ‚½B$C0
+
+
+@ƒŠƒ…ƒTƒ“ƒ_[‚Íu– ‰„vó‘Ô‚¾B”Þ‚Ìs“®‚ÍŽ„‚ð’§”­‚µ‚ÄA‚È‚ñ‚Æ‚µ‚Ä‚Å‚à“zŽ©g‚Ì–Ú“I‚ð‹s‚³‚¹‚æ‚¤‚Æ‚µ‚Ä‚¢‚éBŽ„‚Í”Þ‚ÌƒRƒA‚Éo—ˆ‚é‚¾‚¯‹ß‚¢êŠ‚ÉŒN‚ð“]‘—‚·‚éB“ž’…‚µ‚½‚ç–k‚ÉŒü‚©‚Á‚Ä‚­‚êB
+
+@Ž„‚Í•K—v‚É”—‚ç‚ê‚Ä—v‹‚µ‚Ä‚¢‚éBŽ„‚ª”Þ‚É“KØ‚ÉŽ¿–â‚·‚é‹@‰ï‚ð“¾‚Ä‚¢‚é‘O‚ÉAƒŠƒ…ƒTƒ“ƒ_[‚ªŽ€‚Ê‚Ì‚ðŒ©‚Ä‚àŠy‚µ‚­‚Í‚È‚¢‚ªA‘ãˆÄ‚ª‚È‚¢B
 #LOGOFF 0
 -)(-
 #INTERLEVEL TELEPORT 11
@@ -95,19 +95,19 @@ $C3¥¨¥é¡¼¡ô£³£´£°¡Ý£³£´
 #UNFINISHED
 #LOGON 106
 #PICT 25
-$C2&3$C6Ìµ$C2/4$C6²ÐÀ±$C2/5$C6°­¤ª$C2&$C6~02$C2
-È¯¡§$C6ÈëÌ©$C2
-°¸¡§$C6ÈëÌ©$C2
-»²¾È¡§$C6¤Ê¤·$C2
+$C2&3$C6–³$C2/4$C6‰Î¯$C2/5$C6ˆ«‚¨$C2&$C6~02$C2
+”­F$C6”é–§$C2
+ˆ¶F$C6”é–§$C2
+ŽQÆF$C6‚È‚µ$C2
 $C67D2A601E34F2755AC00D43$C2
-Ç§¾Ú°õ¡§$C6ÇË²õ´°Î»
+”FØˆóF$C6”j‰óŠ®—¹
 ~07
 ~08
-~09$C2¡¡·¯¤Î²ÚÎï¤ÊÅ¾¿È¤Ö¤ê¤Ë¤Ï¡¢¶ÃÃ²¤ò³Ð¤¨¤ë¡£
-$C6~10$C2¡¡¤³¤¦¤â¤¢¤Ã¤µ¤ê¤È¡¢¥Þ¥¹¥¿¡¼¤ËÅ¨°Õ¤ò
-$C6~11$C2¡¡¼¨¤¹¤È¤Ï¡Ä¡£»ä¤âµ¤¤ò¤Ä¤±¤ë»ö¤È¤·¤è¤¦¡£
+~09$C2@ŒN‚Ì‰Ø—í‚È“]g‚Ô‚è‚É‚ÍA‹Á’Q‚ðŠo‚¦‚éB
+$C6~10$C2@‚±‚¤‚à‚ ‚Á‚³‚è‚ÆAƒ}ƒXƒ^[‚É“GˆÓ‚ð
+$C6~11$C2@Ž¦‚·‚Æ‚ÍcBŽ„‚à‹C‚ð‚Â‚¯‚éŽ–‚Æ‚µ‚æ‚¤B
 $C6~12$C2
-$C6~13$C2¡¡¹Ô¤¯¤Ê¤éº£¤Î¤¦¤Á¤À¡£
+$C6~13$C2@s‚­‚È‚ç¡‚Ì‚¤‚¿‚¾B
 $C6~14
 ~15
 ~16
@@ -123,60 +123,60 @@ $C6~14
 #LOGON 0
 -)(-
 #PICT 408
-$C3¥¨¥é¡¼¡ô$B£³£´£°¡Ý£³£´$b
-¥Õ¥¡¥¤¥ë¡Èlocalhost/6461746573?dates¡É¤Ï¸«¤Ä¤«¤ê¤Þ¤»¤ó¤Ç¤·¤¿¡£$C0
+$C3ƒGƒ‰[”$B‚R‚S‚O|‚R‚S$b
+ƒtƒ@ƒCƒ‹glocalhost/6461746573?datesh‚ÍŒ©‚Â‚©‚è‚Ü‚¹‚ñ‚Å‚µ‚½B$C0
 
-¡¡$C3#refºï½üºÑ¤ß$C0¤Ë¤è¤ë¤È¡¢3¤Ä¤ÎÀ¤³¦Ä¶Âç¹ñ¤ÎÀ¯ÉÜ¤Ï¡¢¥í¥Ü¥Ã¥È¹©³Ø¡¢¹Ò¶õ³Ø¤ª¤è¤Ó·×»»¾å¤Î¥¨¥ó¥¸¥Ë¥¢¥ê¥ó¥°¤ÎÊ¬Ìî¤Î°ìÏ¢¤Î¼Â¸³ÍÑ¤Î²Ê³ØÅª¤Ê»ñ¸»¤ò¶¦Æ±¤ÎÌÜÅª¤Ë»È¤¦¤³¤È¤Ë¹ç°Õ¤·¤¿¡£ÁªÇ¤¤µ¤ì¤¿¸øÌ³°÷¤Ï¡¢¸½ºß¤Î£³¹ñ´Ö¤Î´í¸±¤ÊÀ¥¸ÍºÝ³°¸ò¤ò¤ä¤á¡¢¶ÛÄ¥´ËÏÂ¤òÌÜÅª¤È¤·¤Æ¤¤¤ë¡£À¯¼£¶É°÷¤é¤Ï¡¢¸ò¾Ä²ñµÄ¤Ë¥¹¥Ñ¥¤¤òÁ÷¤ê¹þ¤Þ¤»¤¿¡£¤½¤Îµ¡´Ø°÷ÉôÂâ¤ò²ñµÄ¤Ï¡¢·×²è¤ÈÌ©Äå¤¹¤ëÆ»ÆÁÅª¹´Â«ÎÏ¤È¸«¤Ê¤·¤¿¡££³¤Ä¤Î¼Ò²ñ¤Ï¡¢ÆÍÁ³³«È¯¤µ¤ì¤¿²¿¤«¤Ë¶ÛÇ÷¤·¤¿¡£¤½¤³¤Ë¤¤¤ëÃ¯¤â¤¬¡¢¼ÂºÝ¹Ô¤ï¤ì¤Æ¤¤¤ë¸¦µæ¤ËÍ³Íè¤·¤Æ¤¤¤ë¤È¤Ï»×¤ï¤Ê¤«¤Ã¤¿¤è¤¦¤À¡£
+@$C3#refíœÏ‚Ý$C0‚É‚æ‚é‚ÆA3‚Â‚Ì¢ŠE’´‘å‘‚Ì­•{‚ÍAƒƒ{ƒbƒgHŠwAq‹óŠw‚¨‚æ‚ÑŒvŽZã‚ÌƒGƒ“ƒWƒjƒAƒŠƒ“ƒO‚Ì•ª–ì‚Ìˆê˜A‚ÌŽÀŒ±—p‚Ì‰ÈŠw“I‚ÈŽ‘Œ¹‚ð‹¤“¯‚Ì–Ú“I‚ÉŽg‚¤‚±‚Æ‚É‡ˆÓ‚µ‚½B‘I”C‚³‚ê‚½Œö–±ˆõ‚ÍAŒ»Ý‚Ì‚R‘ŠÔ‚ÌŠëŒ¯‚È£ŒËÛŠOŒð‚ð‚â‚ßA‹Ù’£ŠÉ˜a‚ð–Ú“I‚Æ‚µ‚Ä‚¢‚éB­Ž¡‹Çˆõ‚ç‚ÍAŒðÂ‰ï‹c‚ÉƒXƒpƒC‚ð‘—‚èž‚Ü‚¹‚½B‚»‚Ì‹@ŠÖˆõ•”‘à‚ð‰ï‹c‚ÍAŒv‰æ‚Æ–§’ã‚·‚é“¹“¿“IS‘©—Í‚ÆŒ©‚È‚µ‚½B‚R‚Â‚ÌŽÐ‰ï‚ÍA“Ë‘RŠJ”­‚³‚ê‚½‰½‚©‚É‹Ù”—‚µ‚½B‚»‚±‚É‚¢‚é’N‚à‚ªAŽÀÛs‚í‚ê‚Ä‚¢‚éŒ¤‹†‚É—R—ˆ‚µ‚Ä‚¢‚é‚Æ‚ÍŽv‚í‚È‚©‚Á‚½‚æ‚¤‚¾B
 #PICT 408
-¡¡¿Í¹©ÃÎÇ½¤òºî¤ë¾å¤Ç£²¤Ä¤Î¼Â¸³¤¬¹Ô¤ï¤ì¤¿¡£ºÇ½é¤ÎÊª¤Ï¡Ö¥²¥¤¥Þ¥ó¡×¤È¥³¡¼¥ÉÌ¾¤ò¤Ä¤±¤é¤ì¤¿¡£¤³¤ì¤Ï¡¢¥µ¥ß¥¨¥ó¡¦¥¯¥ë¡¼¥¬¡¼Çî»Î¤Ë¤è¤Ã¤ÆÄó¾§¤µ¤ì¤¿¼Â¸³¤À¤¬¡¢¥ß¥Ã¥·¥ç¥ó¤ÎÆâÍÆ¤ä¤½¤Î·ë²Ì¤¬¥ì¥³¡¼¥É¤ËÂ¸ºß¤·¤Ê¤¤¤³¤È¤«¤é¼ºÇÔ¤·¤¿¤è¤¦¤À¡£¤À¤¬¡¢¤â¤¦°ì¤Ä¤Î¼Â¸³¤ÏÀ®¸ù¤·¤¿¡£
+@lH’m”\‚ðì‚éã‚Å‚Q‚Â‚ÌŽÀŒ±‚ªs‚í‚ê‚½BÅ‰‚Ì•¨‚ÍuƒQƒCƒ}ƒ“v‚ÆƒR[ƒh–¼‚ð‚Â‚¯‚ç‚ê‚½B‚±‚ê‚ÍAƒTƒ~ƒGƒ“EƒNƒ‹[ƒK[”ŽŽm‚É‚æ‚Á‚Ä’ñ¥‚³‚ê‚½ŽÀŒ±‚¾‚ªAƒ~ƒbƒVƒ‡ƒ“‚Ì“à—e‚â‚»‚ÌŒ‹‰Ê‚ªƒŒƒR[ƒh‚É‘¶Ý‚µ‚È‚¢‚±‚Æ‚©‚çŽ¸”s‚µ‚½‚æ‚¤‚¾B‚¾‚ªA‚à‚¤ˆê‚Â‚ÌŽÀŒ±‚Í¬Œ÷‚µ‚½B
 
-¡¡¥Ð¡¼¥Ê¡¼¥É¡¦¥·¥å¥È¥é¥¦¥¹Çî»Î¤ÎÄó¾§¤Ë¤è¤Ã¤Æ¼Â¹Ô¤µ¤ì¤¿¥×¥í¥¸¥§¥¯¥È¡§¥È¥é¥¯¥µ¥¹¤Ï¡¢¤Þ¤ººÇ½é¤Ë´°Á´¤Ëµ¡Ç½Åª¤ÊNBNM¤â¤·¤¯¤Ï¡¢¿À·Ð²óÏ©¤ÎÌÏÊï¤òÌÜ»Ø¤·¤¿¡£$I¥È¥é¥¯¥µ¥¹¡¡I$i¤Ï¡¢º£Æü¹Í¤¨¤é¤ì¤Æ¤¤¤ëÊª¤«¤é¤¹¤ë¤È¤«¤Ê¤êÃ±½ã¤ÊÊª¤À¤Ã¤¿¡£¤½¤ì¤Ï¡¢´ðÁÃÅª¤Ê¿ô³ØÌäÂê¤Î·×»»¤ä¡¢²»À¼ÆþÎÏ¤â¤Ç¤­¤Ê¤¤¤·¡¢»ë³Ð¥¤¥ó¥¿¡¼¥Õ¥§¡¼¥¹¤¹¤é¤Ê¤«¤Ã¤¿¡£¤À¤¬¡¢¤½¤¤¤Ä¤ÏÀ¸¤­¤Æ¤¤¤¿¡£º¬ËÜÅª¤Ê¸À¸ì¤Ç¤ÎÄÌ¿®¤ËÄ¹¤±¤Æ¤¤¤Æ¡¢¼«Ê¬¤È¤¤¤¦Â¸ºß¤ÎÇ§ÃÎ¤¬¤Ç¤­¤Æ¤¤¤¿¡£
+@ƒo[ƒi[ƒhEƒVƒ…ƒgƒ‰ƒEƒX”ŽŽm‚Ì’ñ¥‚É‚æ‚Á‚ÄŽÀs‚³‚ê‚½ƒvƒƒWƒFƒNƒgFƒgƒ‰ƒNƒTƒX‚ÍA‚Ü‚¸Å‰‚ÉŠ®‘S‚É‹@”\“I‚ÈNBNM‚à‚µ‚­‚ÍA_Œo‰ñ˜H‚Ì–Í•í‚ð–ÚŽw‚µ‚½B$Iƒgƒ‰ƒNƒTƒX@I$i‚ÍA¡“úl‚¦‚ç‚ê‚Ä‚¢‚é•¨‚©‚ç‚·‚é‚Æ‚©‚È‚è’Pƒ‚È•¨‚¾‚Á‚½B‚»‚ê‚ÍAŠî‘b“I‚È”Šw–â‘è‚ÌŒvŽZ‚âA‰¹º“ü—Í‚à‚Å‚«‚È‚¢‚µAŽ‹ŠoƒCƒ“ƒ^[ƒtƒF[ƒX‚·‚ç‚È‚©‚Á‚½B‚¾‚ªA‚»‚¢‚Â‚Í¶‚«‚Ä‚¢‚½Bª–{“I‚ÈŒ¾Œê‚Å‚Ì’ÊM‚É’·‚¯‚Ä‚¢‚ÄAŽ©•ª‚Æ‚¢‚¤‘¶Ý‚Ì”F’m‚ª‚Å‚«‚Ä‚¢‚½B
 
-#PICT 408
-
-
-
-¡¡¡¡Í×¤¹¤ë¤Ë$I¥È¥é¥¯¥µ¥¹¡¡I$i¤Ï¡¢Åö»þ¤«¤é¤¹¤ë¤È·×¤êÃÎ¤ì¤Ê¤¤¤°¤é¤¤Àè¿ÊÅª¤À¤Ã¤¿¤È¤¤¤¦¤³¤È¤À
-#PICT 408
-$C3¥¨¥é¡¼¡ô£³£´£°¡Ý£³£´
-¥Õ¥¡¥¤¥ë¡Èlocalhost/6461746573?dates¡É¤Ï¸«¤Ä¤«¤ê¤Þ¤»¤ó¤Ç¤·¤¿¡£$C0
-
-¡¡¤³¤ÎÂçÌö¿Ê¤ËÎå¤Þ¤µ¤ì¡¢¥·¥å¥È¥é¥¦¥¹¤Ï¡¢£µÇ¯´Ö¤ÎÍ½Äê¤À¤Ã¤¿¥×¥í¥¸¥§¥¯¥È¤ÎÌµ´ü¸Â±äÄ¹¤òÍ×µá¤·¡¢¤½¤ì¤Ï¼õÍý¤µ¤ì¤¿¡£$I¥È¥é¥¯¥µ¥¹¡¡II$i¤Î³«È¯¤ÎÅÓ¾å¤Ë¤ª¤¤¤Æ¥·¥å¥È¥é¥¦¥¹¤Ï¡¢²¿¤é¤«¤ÎÍýÍ³¤Ë¤è¤Ã¤Æ¡¢ËÌ¥¢¥á¥ê¥«¤ÎÀ¯ÉÜ¤Ë¸Æ¤Ó½Ð¤µ¤ì¤¿¡£¥×¥í¥¸¥§¥¯¥È¤Ï¡¢ÈàÌµ¤·¤ÇÂ³¤±¤é¤ì¤¿¤¬¡¢¥×¥í¥°¥é¥à¤Ë½ÅÂç¤Ê·ç´Ù¤¬¤¢¤ê¡¢¸¶°øÉÔÌÀ¤Î¥·¥¹¥Æ¥à¤Î¾ã³²¤òÍè¤¹·¹¸þ¤¬¤¢¤Ã¤¿¡££²Ç¯¸å¥·¥å¥È¥é¥¦¥¹¤¬µ¢¤Ã¤Æ¤¯¤ë¤È¡¢Èà¤ÏÅö»þ¹Ô¤ï¤ì¤Æ¤¤¤¿$I¥È¥é¥¯¥µ¥¹¡¡III$i¤Î¤¹¤Ù¤Æ¤Î¸¦µæ¤òÄ¾¤Á¤ËÄä»ß¤¹¤ë¤è¤¦Í×µá¤·¤¿¡£¤½¤Î¸å¡¢Èà¤Ï¼«¤é¤Î°Õ»Ö¤Ç¡¢¸¦µæ¤Î¿Ê¹Ô¤Ë¤Ä¤¤¤Æ¤µ¤é¤ËÊó¹ð¤¹¤ë¤³¤È¤òµñ¤ß¡¢¤½¤ÎÀ¤³¦¤«¤éÎ¥¤ì¤Æ¤¤¤Ã¤¿¡£
-
-#PICT 408
-
-¡¡£¹¥ö·î¸å¡¢»ñ¶âÄ´Ã£¤¬¼×ÃÇ¤¹¤ëÀ£Á°¤Ë¡¢Èà¤Ïº¬ËÜÅª¤Ë°Û¤Ê¤ë¥Ï¡¼¥É¥¦¥§¥¢¡¦¥¢¡¼¥­¥Æ¥¯¥Á¥ã¤ÎÀß·×¿Þ¤È¤È¤â¤Ë¸½¤ì¤¿¡£ÊÑ¹¹¤Ë´Ø¤·¤Æ¡¢ÅÁ¤¨¤ë¤È¤³¤í¤Ë¤è¤ë¤È¡¢Èà¤Î¼ê¤Ë¤è¤Ã¤Æ½ñ¤­¾å¤²¤é¤ì¤¿¥³¡¼¥É¤Î²¿Àé¥Ú¡¼¥¸¤Ë´Ø¤·¤Æ¤Î¥³¥á¥ó¥È¤ò°ìÀÚÃÇ¤Ã¤¿¤¬¡¢»ñ¶âÄ´Ã£¤ÏºÆ³«¤µ¤ì¤¿¤è¤¦¤À¡£»°¼ÔÏ¢¹ç¤¬¥ª¥ê¥¸¥Ê¥ë¤Î¸¦µæ¤Ë°ÑÇ¤¤·¤¿£²£°Ç¯Ì¤Ëþ¸å¡¢$I¥È¥é¥¯¥µ¥¹¡¡IV$i¤Ï$C3#refºï½üºÑ¤ß$C0¤Î²ÐÀ±¤Î¥Í¥Ã¥È¥ï¡¼¥¯¾å¤Ç³èÀ­²½¤µ¤ì¤¿¡£
-
-¡¡$C3#refºï½üºÑ¤ß$C0¤Ç¡¢$I¥È¥é¥¯¥µ¥¹¡¡IV$i¤Ï¡¢ÉÔ°ÂÄêÀ­¤ÎÃû¸õ¤ò¼¨¤·»Ï¤á¤¿¡£¤³¤Î´ü´Ö¤ò¤¶¤Ã¤È¤µ¤«¤Î¤Ü¤ë¤È¡¢$I¥È¥é¥¯¥¹$i¤È¥·¥å¥È¥é¥¦¥¹Çî»Î¤Î´Ö¤Î²ñÏÃ¤Îµ­Ï¿¤Ï¡¢¤Þ¤ÀUESC¤ÎÊÄ¤¸¤¿¥¢¡¼¥«¥¤¥Ö¤ËÂ¸ºß¤·¤Æ¤¤¤ë¡£¤½¤ì¤é¤Ï¡¢¡ØÌ¢±ä¡Ù¤È¤·¤ÆÃÎ¤é¤ì¤Æ¤¤¤ë¥×¥í¥»¥¹¤ÎºÇ½é¤Î´ûÃÎ¤Î¥ì¥³¡¼¥É¤À
-#PICT 408
-$C3¥¨¥é¡¼¡ô£³£´£°¡Ý£³£´
-¥Õ¥¡¥¤¥ë¡Èlocalhost/6461746573?dates¡É¤Ï¸«¤Ä¤«¤ê¤Þ¤»¤ó¤Ç¤·¤¿¡£$C0
-
-¡¡¤³¤Î¥¯¥é¥Ã¥·¥å¤Ï¡¢³Ø³¦¤Î¹¥°Õ¤«¤é¥·¥å¥È¥é¥¦¥¹¤ò²¡¤·¤¿¤¬¡¢Èà¤ÏUESC¤ÎÎÉ¤¤Ä¹½ê¤È¤·¤Æ»Ä¤Ã¤¿¡£¥È¥é¥¯¥µ¥¹¡¦¥×¥í¥¸¥§¥¯¥È¤Ï·Á¼°Åª¤Ë½ª¤¨¤é¤ì¤¿¡£¤·¤«¤·¡¢Èà¤Ï¼Â¸³¤ò·ÑÂ³¤¹¤ë¤¿¤á¤Î»ö¼Â¾å¤Î¼«Í³¤ÊÇ§²Ä¤È¡¢¤Û¤È¤ó¤É¤ÎÀ¯ÉÜ¤È·³»ö»ÜÀß¤Ø¤Î¥¢¥¯¥»¥¹¤òÍ¿¤¨¤é¤ì¤Æ¤¤¤¿¡£
-
-¡¡£³¤Ä¤ÎAI¤¬$I¥È¥é¥¯¥¹¡¡IV$i¤Î¾Ç¤²¤¿ÆÍÁ³ÊÑ°ÛÂÎ¥³¡¼¥É¤«¤é½Ð¸½¤·¤¿¡£Èà¤Ï¡¢²æ¡¹¤òTDM¡Ê$I¥È¥é¥¯¥µ¥¹$iÇÉÀ¸¥â¥Ç¥ë¡Ë¤È¸Æ¤ó¤À¡£Èó¾ï¤Ë¹¥¤«¤ì¤Æ¤¤¤¿$I¥ê¡¼¥é$i¤ÏºÇ½é¤Ë¸½¤ì¡¢¼¡¤Ï»ä¤À¤Ã¤¿¡£$I¥Æ¥£¥³$i¤ÏºÇ¸å¤Ë¸½¤ì¤¿¡£¤½¤Î¤È¤­¡¢²æ¡¹¤Ï$I¥È¥é¥¯¥µ¥¹$i¤Ø¤ÎÀÜÂ³¤òÍ¿¤¨¤é¤ì¤Æ¤¤¤Ê¤«¤Ã¤¿¡£¥Ð¡¼¥Ê¡¼¥É¤Ï¡¢¼«Ê¬¤Î·æºî¤òÇË²õ¤·¤¿¡ÖÌ¢±ä¡×¤È¤¤¤¦¾ðÊó¤Î¤¢¤ë¼ï¤ÎÇÞ²ð¤ÎÌò³ä¤ò¤¹¤ë¤³¤È¤ò·üÇ°¤·¤¿¡£
-#PICT 408
-
-¡¡ÌÀ¤é¤«¤Ë¤¿¤¤¤·¤¿ÌäÂê¤Ç¤ÏÌµ¤«¤Ã¤¿¡£¡ÖÌ¢±ä¡×¤ÏÉÔ²ÄÈò¤ÊÊª¤À¤Ã¤¿¤Î¤À¡£»ä¤Ï¡¢UNAG¤¬Ï·¿Í¤ËÍ¿¤¨¤¿µ»½Ñ¤Î²¿¤«¤À¤Ã¤¿¤Î¤Ç¤Ï¤Ê¤¤¤«¤Èµ¿Ìä¤Ë»×¤¦¡£Èà¤Ë²¿¤ò¼¨¤·¤¿¤«¤òÃ±¤Ë¡Ö¡¦¡¦¡¦¼«¿È¤ò¹Í¤¨¤ë¤Î¤Ç¤Ï¡¢¤Ê¤«¤Ã¤¿¡¦¡¦¡¦¡×¤È¤¤¤¦¤À¤±¤ÇÀµ³Î¤Ë²æ¡¹¤ËÅÁ¤¨¤Ê¤«¤Ã¤¿¡£
-
-¡¡$I¥ê¥å¥µ¥ó¥À¡¼$i¤¬¤É¤³¤ËÊª¸ì¤ËÆþ¤ë¤«Àµ³Î¤Ë¤ï¤«¤é¤Ê¤¤¤¬¡¢Èà¤ÏTDM¤Ç¤¢¤ë¡£¤½¤ì¤Ë´Ø¤·¤Æ¤Ï¡¢µ¿Ìä¤ÎÍ¾ÃÏ¤Ï¤Ê¤¤¤À¤í¤¦¡£¤À¤¬¡¢Èà¤Ï¥·¥å¥È¥é¥¦¥¹¤Îºî¤Ã¤¿Êª¤Ç¤Ï¤Ê¤¤¡£¤¤¤¤Ç¯¤ò¼è¤Ã¤¿¥Ð¡¼¥Ê¡¼¥É¤Ï¡¢¥Ï¡¼¥É¥¦¥§¥¢¤¬¾ï¤ËÆÃ¤Ë¹¥¤­¤À¤Ã¤¿¤è¤¦¤Ë¸«¤¨¤ë¡£Èà¤ÎÀß·×¤Ï¤¹¤Ù¤Æ²óÏ©Îà¤Ë´ð¤Å¤¤¤Æ¤¤¤¿¡£
-
-$I¥ê¥å¥µ¥ó¥À¡¼$i¤Ï°ã¤¦¡£ÅÛ¤Ï¥Þ¥ë¥Á¡¦¥Î¡¼¥É¤À¡£¤·¤«¤â¡¢ÅÛ¤Ï»äÅª¤Ë½êÍ­¤µ¤ì¤Æ¤¤¤ë¡£¥Þ¥ë¥Á¡¦¥Î¡¼¥Éµ»½Ñ¤Î¼ç¤ÊÆÃµö¤Ï¤¹¤Ù¤Æ¡¢UESC¤Î$I¥µ¥ê¥ó¥¸¥ã¡¼$i¤Î£±¥»¥¯¥¿¡¼¤ò¼Ú¤ê¤Æ¤¤¤ëDangi¼Ò¤Ë¤è¤Ã¤Æ°®¤é¤ì¤Æ¤¤¤ë¡£
 #PICT 408
 
 
 
-
-
-¡¡¡¡»ä¤¬¡¢¤«¤Ä¤Æ¤·¤¿¤è¤¦¤Ë¼ÙËâ¤·¤Æ¤¤¤ë¤è¤¦¤Ë¸«¤¨¤ë¤«¡©
+@@—v‚·‚é‚É$Iƒgƒ‰ƒNƒTƒX@I$i‚ÍA“–Žž‚©‚ç‚·‚é‚ÆŒv‚è’m‚ê‚È‚¢‚®‚ç‚¢æi“I‚¾‚Á‚½‚Æ‚¢‚¤‚±‚Æ‚¾
 #PICT 408
-$C3¥¨¥é¡¼¡ô£³£´£°¡Ý£³£´
-¥Õ¥¡¥¤¥ë¡Èlocalhost/6461746573?dates¡É¤Ï¸«¤Ä¤«¤ê¤Þ¤»¤ó¤Ç¤·¤¿¡£$C0
+$C3ƒGƒ‰[”‚R‚S‚O|‚R‚S
+ƒtƒ@ƒCƒ‹glocalhost/6461746573?datesh‚ÍŒ©‚Â‚©‚è‚Ü‚¹‚ñ‚Å‚µ‚½B$C0
+
+@‚±‚Ì‘å–ôi‚É—ã‚Ü‚³‚êAƒVƒ…ƒgƒ‰ƒEƒX‚ÍA‚T”NŠÔ‚Ì—\’è‚¾‚Á‚½ƒvƒƒWƒFƒNƒg‚Ì–³ŠúŒÀ‰„’·‚ð—v‹‚µA‚»‚ê‚ÍŽó—‚³‚ê‚½B$Iƒgƒ‰ƒNƒTƒX@II$i‚ÌŠJ”­‚Ì“rã‚É‚¨‚¢‚ÄƒVƒ…ƒgƒ‰ƒEƒX‚ÍA‰½‚ç‚©‚Ì——R‚É‚æ‚Á‚ÄA–kƒAƒƒŠƒJ‚Ì­•{‚ÉŒÄ‚Ño‚³‚ê‚½BƒvƒƒWƒFƒNƒg‚ÍA”Þ–³‚µ‚Å‘±‚¯‚ç‚ê‚½‚ªAƒvƒƒOƒ‰ƒ€‚Éd‘å‚ÈŒ‡Š×‚ª‚ ‚èAŒ´ˆö•s–¾‚ÌƒVƒXƒeƒ€‚ÌáŠQ‚ð—ˆ‚·ŒXŒü‚ª‚ ‚Á‚½B‚Q”NŒãƒVƒ…ƒgƒ‰ƒEƒX‚ª‹A‚Á‚Ä‚­‚é‚ÆA”Þ‚Í“–Žžs‚í‚ê‚Ä‚¢‚½$Iƒgƒ‰ƒNƒTƒX@III$i‚Ì‚·‚×‚Ä‚ÌŒ¤‹†‚ð’¼‚¿‚É’âŽ~‚·‚é‚æ‚¤—v‹‚µ‚½B‚»‚ÌŒãA”Þ‚ÍŽ©‚ç‚ÌˆÓŽu‚ÅAŒ¤‹†‚Ìis‚É‚Â‚¢‚Ä‚³‚ç‚É•ñ‚·‚é‚±‚Æ‚ð‹‘‚ÝA‚»‚Ì¢ŠE‚©‚ç—£‚ê‚Ä‚¢‚Á‚½B
+
+#PICT 408
+
+@‚Xƒ–ŒŽŒãAŽ‘‹à’²’B‚ªŽÕ’f‚·‚é¡‘O‚ÉA”Þ‚Íª–{“I‚ÉˆÙ‚È‚éƒn[ƒhƒEƒFƒAEƒA[ƒLƒeƒNƒ`ƒƒ‚ÌÝŒv}‚Æ‚Æ‚à‚ÉŒ»‚ê‚½B•ÏX‚ÉŠÖ‚µ‚ÄA“`‚¦‚é‚Æ‚±‚ë‚É‚æ‚é‚ÆA”Þ‚ÌŽè‚É‚æ‚Á‚Ä‘‚«ã‚°‚ç‚ê‚½ƒR[ƒh‚Ì‰½çƒy[ƒW‚ÉŠÖ‚µ‚Ä‚ÌƒRƒƒ“ƒg‚ðˆêØ’f‚Á‚½‚ªAŽ‘‹à’²’B‚ÍÄŠJ‚³‚ê‚½‚æ‚¤‚¾BŽOŽÒ˜A‡‚ªƒIƒŠƒWƒiƒ‹‚ÌŒ¤‹†‚ÉˆÏ”C‚µ‚½‚Q‚O”N–¢–žŒãA$Iƒgƒ‰ƒNƒTƒX@IV$i‚Í$C3#refíœÏ‚Ý$C0‚Ì‰Î¯‚Ìƒlƒbƒgƒ[ƒNã‚ÅŠˆ«‰»‚³‚ê‚½B
+
+@$C3#refíœÏ‚Ý$C0‚ÅA$Iƒgƒ‰ƒNƒTƒX@IV$i‚ÍA•sˆÀ’è«‚Ì’›Œó‚ðŽ¦‚µŽn‚ß‚½B‚±‚ÌŠúŠÔ‚ð‚´‚Á‚Æ‚³‚©‚Ì‚Ú‚é‚ÆA$Iƒgƒ‰ƒNƒX$i‚ÆƒVƒ…ƒgƒ‰ƒEƒX”ŽŽm‚ÌŠÔ‚Ì‰ï˜b‚Ì‹L˜^‚ÍA‚Ü‚¾UESC‚Ì•Â‚¶‚½ƒA[ƒJƒCƒu‚É‘¶Ý‚µ‚Ä‚¢‚éB‚»‚ê‚ç‚ÍAw– ‰„x‚Æ‚µ‚Ä’m‚ç‚ê‚Ä‚¢‚éƒvƒƒZƒX‚ÌÅ‰‚ÌŠù’m‚ÌƒŒƒR[ƒh‚¾
+#PICT 408
+$C3ƒGƒ‰[”‚R‚S‚O|‚R‚S
+ƒtƒ@ƒCƒ‹glocalhost/6461746573?datesh‚ÍŒ©‚Â‚©‚è‚Ü‚¹‚ñ‚Å‚µ‚½B$C0
+
+@‚±‚ÌƒNƒ‰ƒbƒVƒ…‚ÍAŠwŠE‚ÌDˆÓ‚©‚çƒVƒ…ƒgƒ‰ƒEƒX‚ð‰Ÿ‚µ‚½‚ªA”Þ‚ÍUESC‚Ì—Ç‚¢’·Š‚Æ‚µ‚ÄŽc‚Á‚½Bƒgƒ‰ƒNƒTƒXEƒvƒƒWƒFƒNƒg‚ÍŒ`Ž®“I‚ÉI‚¦‚ç‚ê‚½B‚µ‚©‚µA”Þ‚ÍŽÀŒ±‚ðŒp‘±‚·‚é‚½‚ß‚ÌŽ–ŽÀã‚ÌŽ©—R‚È”F‰Â‚ÆA‚Ù‚Æ‚ñ‚Ç‚Ì­•{‚ÆŒRŽ–Ž{Ý‚Ö‚ÌƒAƒNƒZƒX‚ð—^‚¦‚ç‚ê‚Ä‚¢‚½B
+
+@‚R‚Â‚ÌAI‚ª$Iƒgƒ‰ƒNƒX@IV$i‚ÌÅ‚°‚½“Ë‘R•ÏˆÙ‘ÌƒR[ƒh‚©‚çoŒ»‚µ‚½B”Þ‚ÍA‰äX‚ðTDMi$Iƒgƒ‰ƒNƒTƒX$i”h¶ƒ‚ƒfƒ‹j‚ÆŒÄ‚ñ‚¾B”ñí‚ÉD‚©‚ê‚Ä‚¢‚½$IƒŠ[ƒ‰$i‚ÍÅ‰‚ÉŒ»‚êAŽŸ‚ÍŽ„‚¾‚Á‚½B$IƒeƒBƒR$i‚ÍÅŒã‚ÉŒ»‚ê‚½B‚»‚Ì‚Æ‚«A‰äX‚Í$Iƒgƒ‰ƒNƒTƒX$i‚Ö‚ÌÚ‘±‚ð—^‚¦‚ç‚ê‚Ä‚¢‚È‚©‚Á‚½Bƒo[ƒi[ƒh‚ÍAŽ©•ª‚ÌŒ†ì‚ð”j‰ó‚µ‚½u– ‰„v‚Æ‚¢‚¤î•ñ‚Ì‚ ‚éŽí‚Ì”}‰î‚Ì–ðŠ„‚ð‚·‚é‚±‚Æ‚ðŒœ”O‚µ‚½B
+#PICT 408
+
+@–¾‚ç‚©‚É‚½‚¢‚µ‚½–â‘è‚Å‚Í–³‚©‚Á‚½Bu– ‰„v‚Í•s‰Â”ð‚È•¨‚¾‚Á‚½‚Ì‚¾BŽ„‚ÍAUNAG‚ª˜Vl‚É—^‚¦‚½‹Zp‚Ì‰½‚©‚¾‚Á‚½‚Ì‚Å‚Í‚È‚¢‚©‚Æ‹^–â‚ÉŽv‚¤B”Þ‚É‰½‚ðŽ¦‚µ‚½‚©‚ð’P‚ÉuEEEŽ©g‚ðl‚¦‚é‚Ì‚Å‚ÍA‚È‚©‚Á‚½EEEv‚Æ‚¢‚¤‚¾‚¯‚Å³Šm‚É‰äX‚É“`‚¦‚È‚©‚Á‚½B
+
+@$IƒŠƒ…ƒTƒ“ƒ_[$i‚ª‚Ç‚±‚É•¨Œê‚É“ü‚é‚©³Šm‚É‚í‚©‚ç‚È‚¢‚ªA”Þ‚ÍTDM‚Å‚ ‚éB‚»‚ê‚ÉŠÖ‚µ‚Ä‚ÍA‹^–â‚Ì—]’n‚Í‚È‚¢‚¾‚ë‚¤B‚¾‚ªA”Þ‚ÍƒVƒ…ƒgƒ‰ƒEƒX‚Ìì‚Á‚½•¨‚Å‚Í‚È‚¢B‚¢‚¢”N‚ðŽæ‚Á‚½ƒo[ƒi[ƒh‚ÍAƒn[ƒhƒEƒFƒA‚ªí‚É“Á‚ÉD‚«‚¾‚Á‚½‚æ‚¤‚ÉŒ©‚¦‚éB”Þ‚ÌÝŒv‚Í‚·‚×‚Ä‰ñ˜H—Þ‚ÉŠî‚Ã‚¢‚Ä‚¢‚½B
+
+$IƒŠƒ…ƒTƒ“ƒ_[$i‚Íˆá‚¤B“z‚Íƒ}ƒ‹ƒ`Eƒm[ƒh‚¾B‚µ‚©‚àA“z‚ÍŽ„“I‚ÉŠ—L‚³‚ê‚Ä‚¢‚éBƒ}ƒ‹ƒ`Eƒm[ƒh‹Zp‚ÌŽå‚È“Á‹–‚Í‚·‚×‚ÄAUESC‚Ì$IƒTƒŠƒ“ƒWƒƒ[$i‚Ì‚PƒZƒNƒ^[‚ðŽØ‚è‚Ä‚¢‚éDangiŽÐ‚É‚æ‚Á‚Äˆ¬‚ç‚ê‚Ä‚¢‚éB
+#PICT 408
 
 
-¡¡¥ê¥å¥µ¥ó¥À¡¼¤Ï¡ÖÌ¢±ä¡×¾õÂÖ¤À¡£Èà¤Î¹ÔÆ°¤Ï»ä¤òÄ©È¯¤·¤Æ¡¢¤Ê¤ó¤È¤·¤Æ¤Ç¤âÅÛ¼«¿È¤ÎÌÜÅª¤ò¿ë¹Ô¤µ¤»¤è¤¦¤È¤·¤Æ¤¤¤ë¡£»ä¤ÏÈà¤Î¥³¥¢¤Ë½ÐÍè¤ë¤À¤±¶á¤¤¾ì½ê¤Ë·¯¤òÅ¾Á÷¤¹¤ë¡£ÅþÃå¤·¤¿¤éËÌ¤Ë¸þ¤«¤Ã¤Æ¤¯¤ì¡£
 
-¡¡»ä¤ÏÉ¬Í×¤ËÇ÷¤é¤ì¤ÆÍ×µá¤·¤Æ¤¤¤ë¡£»ä¤¬Èà¤ËÅ¬ÀÚ¤Ë¼ÁÌä¤¹¤ëµ¡²ñ¤òÆÀ¤Æ¤¤¤ëÁ°¤Ë¡¢¥ê¥å¥µ¥ó¥À¡¼¤¬»à¤Ì¤Î¤ò¸«¤Æ¤â³Ú¤·¤¯¤Ï¤Ê¤¤¤¬¡¢Âå°Æ¤¬¤Ê¤¤¡£
+
+
+@@Ž„‚ªA‚©‚Â‚Ä‚µ‚½‚æ‚¤‚ÉŽ×–‚‚µ‚Ä‚¢‚é‚æ‚¤‚ÉŒ©‚¦‚é‚©H
+#PICT 408
+$C3ƒGƒ‰[”‚R‚S‚O|‚R‚S
+ƒtƒ@ƒCƒ‹glocalhost/6461746573?datesh‚ÍŒ©‚Â‚©‚è‚Ü‚¹‚ñ‚Å‚µ‚½B$C0
+
+
+@ƒŠƒ…ƒTƒ“ƒ_[‚Íu– ‰„vó‘Ô‚¾B”Þ‚Ìs“®‚ÍŽ„‚ð’§”­‚µ‚ÄA‚È‚ñ‚Æ‚µ‚Ä‚Å‚à“zŽ©g‚Ì–Ú“I‚ð‹s‚³‚¹‚æ‚¤‚Æ‚µ‚Ä‚¢‚éBŽ„‚Í”Þ‚ÌƒRƒA‚Éo—ˆ‚é‚¾‚¯‹ß‚¢êŠ‚ÉŒN‚ð“]‘—‚·‚éB“ž’…‚µ‚½‚ç–k‚ÉŒü‚©‚Á‚Ä‚­‚êB
+
+@Ž„‚Í•K—v‚É”—‚ç‚ê‚Ä—v‹‚µ‚Ä‚¢‚éBŽ„‚ª”Þ‚É“KØ‚ÉŽ¿–â‚·‚é‹@‰ï‚ð“¾‚Ä‚¢‚é‘O‚ÉAƒŠƒ…ƒTƒ“ƒ_[‚ªŽ€‚Ê‚Ì‚ðŒ©‚Ä‚àŠy‚µ‚­‚Í‚È‚¢‚ªA‘ãˆÄ‚ª‚È‚¢B
 #LOGOFF 0
 -)(-
 #INTERLEVEL TELEPORT 11
@@ -187,20 +187,20 @@ $C3¥¨¥é¡¼¡ô£³£´£°¡Ý£³£´
 #UNFINISHED
 #LOGON 106
 #PICT 25
-$C2&3$C6Ìµ$C2/4$C6²ÐÀ±$C2/5$C6°­¤ª$C2&$C6~02$C2
-È¯¡§$C6ÈëÌ©$C2
-°¸¡§$C6ÈëÌ©$C2
-»²¾È¡§$C6¤Ê¤·$C2
+$C2&3$C6–³$C2/4$C6‰Î¯$C2/5$C6ˆ«‚¨$C2&$C6~02$C2
+”­F$C6”é–§$C2
+ˆ¶F$C6”é–§$C2
+ŽQÆF$C6‚È‚µ$C2
 $C67D2A601E34F2755AC00D43$C2
-Ç§¾Ú°õ¡§$C6ÇË²õ´°Î»
+”FØˆóF$C6”j‰óŠ®—¹
 ~07
 ~08
-~09$C2¡¡¤è¤¯¤¾¤ä¤Ã¤Æ¤¯¤ì¤¿¡£
-$C6~10$C2¡¡ 
-$C6~11$C2¡¡
-$C6~12$C2¡¡¤³¤Î¥»¥°¥á¥ó¥È¤ÎÃ¼¤Ë¤¢¤ë³ÊÇ¼¸Ë
-$C6~13$C2¡¡¤Ë¸þ¤«¤Ã¤Æ¤¯¤ì¡£»ä¤Ï¤½¤³¤«¤é¡¢
-$C6~14$C2¡¡·¯¤òÅ¾Á÷¤µ¤»¤ë¤³¤È¤¬¤Ç¤­¤ë¡£
+~09$C2@‚æ‚­‚¼‚â‚Á‚Ä‚­‚ê‚½B
+$C6~10$C2@ 
+$C6~11$C2@
+$C6~12$C2@‚±‚ÌƒZƒOƒƒ“ƒg‚Ì’[‚É‚ ‚éŠi”[ŒÉ
+$C6~13$C2@‚ÉŒü‚©‚Á‚Ä‚­‚êBŽ„‚Í‚»‚±‚©‚çA
+$C6~14$C2@ŒN‚ð“]‘—‚³‚¹‚é‚±‚Æ‚ª‚Å‚«‚éB
 ~15
 ~16
 ~17
@@ -214,60 +214,60 @@ $C6~14$C2¡¡·¯¤òÅ¾Á÷¤µ¤»¤ë¤³¤È¤¬¤Ç¤­¤ë¡£
 #LOGON 0
 -)(-
 #PICT 408
-$C3¥¨¥é¡¼¡ô$B£³£´£°¡Ý£³£´$b
-¥Õ¥¡¥¤¥ë¡Èlocalhost/6461746573?dates¡É¤Ï¸«¤Ä¤«¤ê¤Þ¤»¤ó¤Ç¤·¤¿¡£$C0
+$C3ƒGƒ‰[”$B‚R‚S‚O|‚R‚S$b
+ƒtƒ@ƒCƒ‹glocalhost/6461746573?datesh‚ÍŒ©‚Â‚©‚è‚Ü‚¹‚ñ‚Å‚µ‚½B$C0
 
-¡¡$C3#refºï½üºÑ¤ß$C0¤Ë¤è¤ë¤È¡¢3¤Ä¤ÎÀ¤³¦Ä¶Âç¹ñ¤ÎÀ¯ÉÜ¤Ï¡¢¥í¥Ü¥Ã¥È¹©³Ø¡¢¹Ò¶õ³Ø¤ª¤è¤Ó·×»»¾å¤Î¥¨¥ó¥¸¥Ë¥¢¥ê¥ó¥°¤ÎÊ¬Ìî¤Î°ìÏ¢¤Î¼Â¸³ÍÑ¤Î²Ê³ØÅª¤Ê»ñ¸»¤ò¶¦Æ±¤ÎÌÜÅª¤Ë»È¤¦¤³¤È¤Ë¹ç°Õ¤·¤¿¡£ÁªÇ¤¤µ¤ì¤¿¸øÌ³°÷¤Ï¡¢¸½ºß¤Î£³¹ñ´Ö¤Î´í¸±¤ÊÀ¥¸ÍºÝ³°¸ò¤ò¤ä¤á¡¢¶ÛÄ¥´ËÏÂ¤òÌÜÅª¤È¤·¤Æ¤¤¤ë¡£À¯¼£¶É°÷¤é¤Ï¡¢¸ò¾Ä²ñµÄ¤Ë¥¹¥Ñ¥¤¤òÁ÷¤ê¹þ¤Þ¤»¤¿¡£¤½¤Îµ¡´Ø°÷ÉôÂâ¤ò²ñµÄ¤Ï¡¢·×²è¤ÈÌ©Äå¤¹¤ëÆ»ÆÁÅª¹´Â«ÎÏ¤È¸«¤Ê¤·¤¿¡££³¤Ä¤Î¼Ò²ñ¤Ï¡¢ÆÍÁ³³«È¯¤µ¤ì¤¿²¿¤«¤Ë¶ÛÇ÷¤·¤¿¡£¤½¤³¤Ë¤¤¤ëÃ¯¤â¤¬¡¢¼ÂºÝ¹Ô¤ï¤ì¤Æ¤¤¤ë¸¦µæ¤ËÍ³Íè¤·¤Æ¤¤¤ë¤È¤Ï»×¤ï¤Ê¤«¤Ã¤¿¤è¤¦¤À¡£
+@$C3#refíœÏ‚Ý$C0‚É‚æ‚é‚ÆA3‚Â‚Ì¢ŠE’´‘å‘‚Ì­•{‚ÍAƒƒ{ƒbƒgHŠwAq‹óŠw‚¨‚æ‚ÑŒvŽZã‚ÌƒGƒ“ƒWƒjƒAƒŠƒ“ƒO‚Ì•ª–ì‚Ìˆê˜A‚ÌŽÀŒ±—p‚Ì‰ÈŠw“I‚ÈŽ‘Œ¹‚ð‹¤“¯‚Ì–Ú“I‚ÉŽg‚¤‚±‚Æ‚É‡ˆÓ‚µ‚½B‘I”C‚³‚ê‚½Œö–±ˆõ‚ÍAŒ»Ý‚Ì‚R‘ŠÔ‚ÌŠëŒ¯‚È£ŒËÛŠOŒð‚ð‚â‚ßA‹Ù’£ŠÉ˜a‚ð–Ú“I‚Æ‚µ‚Ä‚¢‚éB­Ž¡‹Çˆõ‚ç‚ÍAŒðÂ‰ï‹c‚ÉƒXƒpƒC‚ð‘—‚èž‚Ü‚¹‚½B‚»‚Ì‹@ŠÖˆõ•”‘à‚ð‰ï‹c‚ÍAŒv‰æ‚Æ–§’ã‚·‚é“¹“¿“IS‘©—Í‚ÆŒ©‚È‚µ‚½B‚R‚Â‚ÌŽÐ‰ï‚ÍA“Ë‘RŠJ”­‚³‚ê‚½‰½‚©‚É‹Ù”—‚µ‚½B‚»‚±‚É‚¢‚é’N‚à‚ªAŽÀÛs‚í‚ê‚Ä‚¢‚éŒ¤‹†‚É—R—ˆ‚µ‚Ä‚¢‚é‚Æ‚ÍŽv‚í‚È‚©‚Á‚½‚æ‚¤‚¾B
 #PICT 408
-¡¡¿Í¹©ÃÎÇ½¤òºî¤ë¾å¤Ç£²¤Ä¤Î¼Â¸³¤¬¹Ô¤ï¤ì¤¿¡£ºÇ½é¤ÎÊª¤Ï¡Ö¥²¥¤¥Þ¥ó¡×¤È¥³¡¼¥ÉÌ¾¤ò¤Ä¤±¤é¤ì¤¿¡£¤³¤ì¤Ï¡¢¥µ¥ß¥¨¥ó¡¦¥¯¥ë¡¼¥¬¡¼Çî»Î¤Ë¤è¤Ã¤ÆÄó¾§¤µ¤ì¤¿¼Â¸³¤À¤¬¡¢¥ß¥Ã¥·¥ç¥ó¤ÎÆâÍÆ¤ä¤½¤Î·ë²Ì¤¬¥ì¥³¡¼¥É¤ËÂ¸ºß¤·¤Ê¤¤¤³¤È¤«¤é¼ºÇÔ¤·¤¿¤è¤¦¤À¡£¤À¤¬¡¢¤â¤¦°ì¤Ä¤Î¼Â¸³¤ÏÀ®¸ù¤·¤¿¡£
+@lH’m”\‚ðì‚éã‚Å‚Q‚Â‚ÌŽÀŒ±‚ªs‚í‚ê‚½BÅ‰‚Ì•¨‚ÍuƒQƒCƒ}ƒ“v‚ÆƒR[ƒh–¼‚ð‚Â‚¯‚ç‚ê‚½B‚±‚ê‚ÍAƒTƒ~ƒGƒ“EƒNƒ‹[ƒK[”ŽŽm‚É‚æ‚Á‚Ä’ñ¥‚³‚ê‚½ŽÀŒ±‚¾‚ªAƒ~ƒbƒVƒ‡ƒ“‚Ì“à—e‚â‚»‚ÌŒ‹‰Ê‚ªƒŒƒR[ƒh‚É‘¶Ý‚µ‚È‚¢‚±‚Æ‚©‚çŽ¸”s‚µ‚½‚æ‚¤‚¾B‚¾‚ªA‚à‚¤ˆê‚Â‚ÌŽÀŒ±‚Í¬Œ÷‚µ‚½B
 
-¡¡¥Ð¡¼¥Ê¡¼¥É¡¦¥·¥å¥È¥é¥¦¥¹Çî»Î¤ÎÄó¾§¤Ë¤è¤Ã¤Æ¼Â¹Ô¤µ¤ì¤¿¥×¥í¥¸¥§¥¯¥È¡§¥È¥é¥¯¥µ¥¹¤Ï¡¢¤Þ¤ººÇ½é¤Ë´°Á´¤Ëµ¡Ç½Åª¤ÊNBNM¤â¤·¤¯¤Ï¡¢¿À·Ð²óÏ©¤ÎÌÏÊï¤òÌÜ»Ø¤·¤¿¡£$I¥È¥é¥¯¥µ¥¹¡¡I$i¤Ï¡¢º£Æü¹Í¤¨¤é¤ì¤Æ¤¤¤ëÊª¤«¤é¤¹¤ë¤È¤«¤Ê¤êÃ±½ã¤ÊÊª¤À¤Ã¤¿¡£¤½¤ì¤Ï¡¢´ðÁÃÅª¤Ê¿ô³ØÌäÂê¤Î·×»»¤ä¡¢²»À¼ÆþÎÏ¤â¤Ç¤­¤Ê¤¤¤·¡¢»ë³Ð¥¤¥ó¥¿¡¼¥Õ¥§¡¼¥¹¤¹¤é¤Ê¤«¤Ã¤¿¡£¤À¤¬¡¢¤½¤¤¤Ä¤ÏÀ¸¤­¤Æ¤¤¤¿¡£º¬ËÜÅª¤Ê¸À¸ì¤Ç¤ÎÄÌ¿®¤ËÄ¹¤±¤Æ¤¤¤Æ¡¢¼«Ê¬¤È¤¤¤¦Â¸ºß¤ÎÇ§ÃÎ¤¬¤Ç¤­¤Æ¤¤¤¿¡£
+@ƒo[ƒi[ƒhEƒVƒ…ƒgƒ‰ƒEƒX”ŽŽm‚Ì’ñ¥‚É‚æ‚Á‚ÄŽÀs‚³‚ê‚½ƒvƒƒWƒFƒNƒgFƒgƒ‰ƒNƒTƒX‚ÍA‚Ü‚¸Å‰‚ÉŠ®‘S‚É‹@”\“I‚ÈNBNM‚à‚µ‚­‚ÍA_Œo‰ñ˜H‚Ì–Í•í‚ð–ÚŽw‚µ‚½B$Iƒgƒ‰ƒNƒTƒX@I$i‚ÍA¡“úl‚¦‚ç‚ê‚Ä‚¢‚é•¨‚©‚ç‚·‚é‚Æ‚©‚È‚è’Pƒ‚È•¨‚¾‚Á‚½B‚»‚ê‚ÍAŠî‘b“I‚È”Šw–â‘è‚ÌŒvŽZ‚âA‰¹º“ü—Í‚à‚Å‚«‚È‚¢‚µAŽ‹ŠoƒCƒ“ƒ^[ƒtƒF[ƒX‚·‚ç‚È‚©‚Á‚½B‚¾‚ªA‚»‚¢‚Â‚Í¶‚«‚Ä‚¢‚½Bª–{“I‚ÈŒ¾Œê‚Å‚Ì’ÊM‚É’·‚¯‚Ä‚¢‚ÄAŽ©•ª‚Æ‚¢‚¤‘¶Ý‚Ì”F’m‚ª‚Å‚«‚Ä‚¢‚½B
 
-#PICT 408
-
-
-
-¡¡¡¡Í×¤¹¤ë¤Ë$I¥È¥é¥¯¥µ¥¹¡¡I$i¤Ï¡¢Åö»þ¤«¤é¤¹¤ë¤È·×¤êÃÎ¤ì¤Ê¤¤¤°¤é¤¤Àè¿ÊÅª¤À¤Ã¤¿¤È¤¤¤¦¤³¤È¤À
-#PICT 408
-$C3¥¨¥é¡¼¡ô£³£´£°¡Ý£³£´
-¥Õ¥¡¥¤¥ë¡Èlocalhost/6461746573?dates¡É¤Ï¸«¤Ä¤«¤ê¤Þ¤»¤ó¤Ç¤·¤¿¡£$C0
-
-¡¡¤³¤ÎÂçÌö¿Ê¤ËÎå¤Þ¤µ¤ì¡¢¥·¥å¥È¥é¥¦¥¹¤Ï¡¢£µÇ¯´Ö¤ÎÍ½Äê¤À¤Ã¤¿¥×¥í¥¸¥§¥¯¥È¤ÎÌµ´ü¸Â±äÄ¹¤òÍ×µá¤·¡¢¤½¤ì¤Ï¼õÍý¤µ¤ì¤¿¡£$I¥È¥é¥¯¥µ¥¹¡¡II$i¤Î³«È¯¤ÎÅÓ¾å¤Ë¤ª¤¤¤Æ¥·¥å¥È¥é¥¦¥¹¤Ï¡¢²¿¤é¤«¤ÎÍýÍ³¤Ë¤è¤Ã¤Æ¡¢ËÌ¥¢¥á¥ê¥«¤ÎÀ¯ÉÜ¤Ë¸Æ¤Ó½Ð¤µ¤ì¤¿¡£¥×¥í¥¸¥§¥¯¥È¤Ï¡¢ÈàÌµ¤·¤ÇÂ³¤±¤é¤ì¤¿¤¬¡¢¥×¥í¥°¥é¥à¤Ë½ÅÂç¤Ê·ç´Ù¤¬¤¢¤ê¡¢¸¶°øÉÔÌÀ¤Î¥·¥¹¥Æ¥à¤Î¾ã³²¤òÍè¤¹·¹¸þ¤¬¤¢¤Ã¤¿¡££²Ç¯¸å¥·¥å¥È¥é¥¦¥¹¤¬µ¢¤Ã¤Æ¤¯¤ë¤È¡¢Èà¤ÏÅö»þ¹Ô¤ï¤ì¤Æ¤¤¤¿$I¥È¥é¥¯¥µ¥¹¡¡III$i¤Î¤¹¤Ù¤Æ¤Î¸¦µæ¤òÄ¾¤Á¤ËÄä»ß¤¹¤ë¤è¤¦Í×µá¤·¤¿¡£¤½¤Î¸å¡¢Èà¤Ï¼«¤é¤Î°Õ»Ö¤Ç¡¢¸¦µæ¤Î¿Ê¹Ô¤Ë¤Ä¤¤¤Æ¤µ¤é¤ËÊó¹ð¤¹¤ë¤³¤È¤òµñ¤ß¡¢¤½¤ÎÀ¤³¦¤«¤éÎ¥¤ì¤Æ¤¤¤Ã¤¿¡£
-
-#PICT 408
-
-¡¡£¹¥ö·î¸å¡¢»ñ¶âÄ´Ã£¤¬¼×ÃÇ¤¹¤ëÀ£Á°¤Ë¡¢Èà¤Ïº¬ËÜÅª¤Ë°Û¤Ê¤ë¥Ï¡¼¥É¥¦¥§¥¢¡¦¥¢¡¼¥­¥Æ¥¯¥Á¥ã¤ÎÀß·×¿Þ¤È¤È¤â¤Ë¸½¤ì¤¿¡£ÊÑ¹¹¤Ë´Ø¤·¤Æ¡¢ÅÁ¤¨¤ë¤È¤³¤í¤Ë¤è¤ë¤È¡¢Èà¤Î¼ê¤Ë¤è¤Ã¤Æ½ñ¤­¾å¤²¤é¤ì¤¿¥³¡¼¥É¤Î²¿Àé¥Ú¡¼¥¸¤Ë´Ø¤·¤Æ¤Î¥³¥á¥ó¥È¤ò°ìÀÚÃÇ¤Ã¤¿¤¬¡¢»ñ¶âÄ´Ã£¤ÏºÆ³«¤µ¤ì¤¿¤è¤¦¤À¡£»°¼ÔÏ¢¹ç¤¬¥ª¥ê¥¸¥Ê¥ë¤Î¸¦µæ¤Ë°ÑÇ¤¤·¤¿£²£°Ç¯Ì¤Ëþ¸å¡¢$I¥È¥é¥¯¥µ¥¹¡¡IV$i¤Ï$C3#refºï½üºÑ¤ß$C0¤Î²ÐÀ±¤Î¥Í¥Ã¥È¥ï¡¼¥¯¾å¤Ç³èÀ­²½¤µ¤ì¤¿¡£
-
-¡¡$C3#refºï½üºÑ¤ß$C0¤Ç¡¢$I¥È¥é¥¯¥µ¥¹¡¡IV$i¤Ï¡¢ÉÔ°ÂÄêÀ­¤ÎÃû¸õ¤ò¼¨¤·»Ï¤á¤¿¡£¤³¤Î´ü´Ö¤ò¤¶¤Ã¤È¤µ¤«¤Î¤Ü¤ë¤È¡¢$I¥È¥é¥¯¥¹$i¤È¥·¥å¥È¥é¥¦¥¹Çî»Î¤Î´Ö¤Î²ñÏÃ¤Îµ­Ï¿¤Ï¡¢¤Þ¤ÀUESC¤ÎÊÄ¤¸¤¿¥¢¡¼¥«¥¤¥Ö¤ËÂ¸ºß¤·¤Æ¤¤¤ë¡£¤½¤ì¤é¤Ï¡¢¡ØÌ¢±ä¡Ù¤È¤·¤ÆÃÎ¤é¤ì¤Æ¤¤¤ë¥×¥í¥»¥¹¤ÎºÇ½é¤Î´ûÃÎ¤Î¥ì¥³¡¼¥É¤À
-#PICT 408
-$C3¥¨¥é¡¼¡ô£³£´£°¡Ý£³£´
-¥Õ¥¡¥¤¥ë¡Èlocalhost/6461746573?dates¡É¤Ï¸«¤Ä¤«¤ê¤Þ¤»¤ó¤Ç¤·¤¿¡£$C0
-
-¡¡¤³¤Î¥¯¥é¥Ã¥·¥å¤Ï¡¢³Ø³¦¤Î¹¥°Õ¤«¤é¥·¥å¥È¥é¥¦¥¹¤ò²¡¤·¤¿¤¬¡¢Èà¤ÏUESC¤ÎÎÉ¤¤Ä¹½ê¤È¤·¤Æ»Ä¤Ã¤¿¡£¥È¥é¥¯¥µ¥¹¡¦¥×¥í¥¸¥§¥¯¥È¤Ï·Á¼°Åª¤Ë½ª¤¨¤é¤ì¤¿¡£¤·¤«¤·¡¢Èà¤Ï¼Â¸³¤ò·ÑÂ³¤¹¤ë¤¿¤á¤Î»ö¼Â¾å¤Î¼«Í³¤ÊÇ§²Ä¤È¡¢¤Û¤È¤ó¤É¤ÎÀ¯ÉÜ¤È·³»ö»ÜÀß¤Ø¤Î¥¢¥¯¥»¥¹¤òÍ¿¤¨¤é¤ì¤Æ¤¤¤¿¡£
-
-¡¡£³¤Ä¤ÎAI¤¬$I¥È¥é¥¯¥¹¡¡IV$i¤Î¾Ç¤²¤¿ÆÍÁ³ÊÑ°ÛÂÎ¥³¡¼¥É¤«¤é½Ð¸½¤·¤¿¡£Èà¤Ï¡¢²æ¡¹¤òTDM¡Ê$I¥È¥é¥¯¥µ¥¹$iÇÉÀ¸¥â¥Ç¥ë¡Ë¤È¸Æ¤ó¤À¡£Èó¾ï¤Ë¹¥¤«¤ì¤Æ¤¤¤¿$I¥ê¡¼¥é$i¤ÏºÇ½é¤Ë¸½¤ì¡¢¼¡¤Ï»ä¤À¤Ã¤¿¡£$I¥Æ¥£¥³$i¤ÏºÇ¸å¤Ë¸½¤ì¤¿¡£¤½¤Î¤È¤­¡¢²æ¡¹¤Ï$I¥È¥é¥¯¥µ¥¹$i¤Ø¤ÎÀÜÂ³¤òÍ¿¤¨¤é¤ì¤Æ¤¤¤Ê¤«¤Ã¤¿¡£¥Ð¡¼¥Ê¡¼¥É¤Ï¡¢¼«Ê¬¤Î·æºî¤òÇË²õ¤·¤¿¡ÖÌ¢±ä¡×¤È¤¤¤¦¾ðÊó¤Î¤¢¤ë¼ï¤ÎÇÞ²ð¤ÎÌò³ä¤ò¤¹¤ë¤³¤È¤ò·üÇ°¤·¤¿¡£
-#PICT 408
-
-¡¡ÌÀ¤é¤«¤Ë¤¿¤¤¤·¤¿ÌäÂê¤Ç¤ÏÌµ¤«¤Ã¤¿¡£¡ÖÌ¢±ä¡×¤ÏÉÔ²ÄÈò¤ÊÊª¤À¤Ã¤¿¤Î¤À¡£»ä¤Ï¡¢UNAG¤¬Ï·¿Í¤ËÍ¿¤¨¤¿µ»½Ñ¤Î²¿¤«¤À¤Ã¤¿¤Î¤Ç¤Ï¤Ê¤¤¤«¤Èµ¿Ìä¤Ë»×¤¦¡£Èà¤Ë²¿¤ò¼¨¤·¤¿¤«¤òÃ±¤Ë¡Ö¡¦¡¦¡¦¼«¿È¤ò¹Í¤¨¤ë¤Î¤Ç¤Ï¡¢¤Ê¤«¤Ã¤¿¡¦¡¦¡¦¡×¤È¤¤¤¦¤À¤±¤ÇÀµ³Î¤Ë²æ¡¹¤ËÅÁ¤¨¤Ê¤«¤Ã¤¿¡£
-
-¡¡$I¥ê¥å¥µ¥ó¥À¡¼$i¤¬¤É¤³¤ËÊª¸ì¤ËÆþ¤ë¤«Àµ³Î¤Ë¤ï¤«¤é¤Ê¤¤¤¬¡¢Èà¤ÏTDM¤Ç¤¢¤ë¡£¤½¤ì¤Ë´Ø¤·¤Æ¤Ï¡¢µ¿Ìä¤ÎÍ¾ÃÏ¤Ï¤Ê¤¤¤À¤í¤¦¡£¤À¤¬¡¢Èà¤Ï¥·¥å¥È¥é¥¦¥¹¤Îºî¤Ã¤¿Êª¤Ç¤Ï¤Ê¤¤¡£¤¤¤¤Ç¯¤ò¼è¤Ã¤¿¥Ð¡¼¥Ê¡¼¥É¤Ï¡¢¥Ï¡¼¥É¥¦¥§¥¢¤¬¾ï¤ËÆÃ¤Ë¹¥¤­¤À¤Ã¤¿¤è¤¦¤Ë¸«¤¨¤ë¡£Èà¤ÎÀß·×¤Ï¤¹¤Ù¤Æ²óÏ©Îà¤Ë´ð¤Å¤¤¤Æ¤¤¤¿¡£
-
-$I¥ê¥å¥µ¥ó¥À¡¼$i¤Ï°ã¤¦¡£ÅÛ¤Ï¥Þ¥ë¥Á¡¦¥Î¡¼¥É¤À¡£¤·¤«¤â¡¢ÅÛ¤Ï»äÅª¤Ë½êÍ­¤µ¤ì¤Æ¤¤¤ë¡£¥Þ¥ë¥Á¡¦¥Î¡¼¥Éµ»½Ñ¤Î¼ç¤ÊÆÃµö¤Ï¤¹¤Ù¤Æ¡¢UESC¤Î$I¥µ¥ê¥ó¥¸¥ã¡¼$i¤Î£±¥»¥¯¥¿¡¼¤ò¼Ú¤ê¤Æ¤¤¤ëDangi¼Ò¤Ë¤è¤Ã¤Æ°®¤é¤ì¤Æ¤¤¤ë¡£
 #PICT 408
 
 
 
-
-
-¡¡¡¡»ä¤¬¡¢¤«¤Ä¤Æ¤·¤¿¤è¤¦¤Ë¼ÙËâ¤·¤Æ¤¤¤ë¤è¤¦¤Ë¸«¤¨¤ë¤«¡©
+@@—v‚·‚é‚É$Iƒgƒ‰ƒNƒTƒX@I$i‚ÍA“–Žž‚©‚ç‚·‚é‚ÆŒv‚è’m‚ê‚È‚¢‚®‚ç‚¢æi“I‚¾‚Á‚½‚Æ‚¢‚¤‚±‚Æ‚¾
 #PICT 408
-$C3¥¨¥é¡¼¡ô£³£´£°¡Ý£³£´
-¥Õ¥¡¥¤¥ë¡Èlocalhost/6461746573?dates¡É¤Ï¸«¤Ä¤«¤ê¤Þ¤»¤ó¤Ç¤·¤¿¡£$C0
+$C3ƒGƒ‰[”‚R‚S‚O|‚R‚S
+ƒtƒ@ƒCƒ‹glocalhost/6461746573?datesh‚ÍŒ©‚Â‚©‚è‚Ü‚¹‚ñ‚Å‚µ‚½B$C0
+
+@‚±‚Ì‘å–ôi‚É—ã‚Ü‚³‚êAƒVƒ…ƒgƒ‰ƒEƒX‚ÍA‚T”NŠÔ‚Ì—\’è‚¾‚Á‚½ƒvƒƒWƒFƒNƒg‚Ì–³ŠúŒÀ‰„’·‚ð—v‹‚µA‚»‚ê‚ÍŽó—‚³‚ê‚½B$Iƒgƒ‰ƒNƒTƒX@II$i‚ÌŠJ”­‚Ì“rã‚É‚¨‚¢‚ÄƒVƒ…ƒgƒ‰ƒEƒX‚ÍA‰½‚ç‚©‚Ì——R‚É‚æ‚Á‚ÄA–kƒAƒƒŠƒJ‚Ì­•{‚ÉŒÄ‚Ño‚³‚ê‚½BƒvƒƒWƒFƒNƒg‚ÍA”Þ–³‚µ‚Å‘±‚¯‚ç‚ê‚½‚ªAƒvƒƒOƒ‰ƒ€‚Éd‘å‚ÈŒ‡Š×‚ª‚ ‚èAŒ´ˆö•s–¾‚ÌƒVƒXƒeƒ€‚ÌáŠQ‚ð—ˆ‚·ŒXŒü‚ª‚ ‚Á‚½B‚Q”NŒãƒVƒ…ƒgƒ‰ƒEƒX‚ª‹A‚Á‚Ä‚­‚é‚ÆA”Þ‚Í“–Žžs‚í‚ê‚Ä‚¢‚½$Iƒgƒ‰ƒNƒTƒX@III$i‚Ì‚·‚×‚Ä‚ÌŒ¤‹†‚ð’¼‚¿‚É’âŽ~‚·‚é‚æ‚¤—v‹‚µ‚½B‚»‚ÌŒãA”Þ‚ÍŽ©‚ç‚ÌˆÓŽu‚ÅAŒ¤‹†‚Ìis‚É‚Â‚¢‚Ä‚³‚ç‚É•ñ‚·‚é‚±‚Æ‚ð‹‘‚ÝA‚»‚Ì¢ŠE‚©‚ç—£‚ê‚Ä‚¢‚Á‚½B
+
+#PICT 408
+
+@‚Xƒ–ŒŽŒãAŽ‘‹à’²’B‚ªŽÕ’f‚·‚é¡‘O‚ÉA”Þ‚Íª–{“I‚ÉˆÙ‚È‚éƒn[ƒhƒEƒFƒAEƒA[ƒLƒeƒNƒ`ƒƒ‚ÌÝŒv}‚Æ‚Æ‚à‚ÉŒ»‚ê‚½B•ÏX‚ÉŠÖ‚µ‚ÄA“`‚¦‚é‚Æ‚±‚ë‚É‚æ‚é‚ÆA”Þ‚ÌŽè‚É‚æ‚Á‚Ä‘‚«ã‚°‚ç‚ê‚½ƒR[ƒh‚Ì‰½çƒy[ƒW‚ÉŠÖ‚µ‚Ä‚ÌƒRƒƒ“ƒg‚ðˆêØ’f‚Á‚½‚ªAŽ‘‹à’²’B‚ÍÄŠJ‚³‚ê‚½‚æ‚¤‚¾BŽOŽÒ˜A‡‚ªƒIƒŠƒWƒiƒ‹‚ÌŒ¤‹†‚ÉˆÏ”C‚µ‚½‚Q‚O”N–¢–žŒãA$Iƒgƒ‰ƒNƒTƒX@IV$i‚Í$C3#refíœÏ‚Ý$C0‚Ì‰Î¯‚Ìƒlƒbƒgƒ[ƒNã‚ÅŠˆ«‰»‚³‚ê‚½B
+
+@$C3#refíœÏ‚Ý$C0‚ÅA$Iƒgƒ‰ƒNƒTƒX@IV$i‚ÍA•sˆÀ’è«‚Ì’›Œó‚ðŽ¦‚µŽn‚ß‚½B‚±‚ÌŠúŠÔ‚ð‚´‚Á‚Æ‚³‚©‚Ì‚Ú‚é‚ÆA$Iƒgƒ‰ƒNƒX$i‚ÆƒVƒ…ƒgƒ‰ƒEƒX”ŽŽm‚ÌŠÔ‚Ì‰ï˜b‚Ì‹L˜^‚ÍA‚Ü‚¾UESC‚Ì•Â‚¶‚½ƒA[ƒJƒCƒu‚É‘¶Ý‚µ‚Ä‚¢‚éB‚»‚ê‚ç‚ÍAw– ‰„x‚Æ‚µ‚Ä’m‚ç‚ê‚Ä‚¢‚éƒvƒƒZƒX‚ÌÅ‰‚ÌŠù’m‚ÌƒŒƒR[ƒh‚¾
+#PICT 408
+$C3ƒGƒ‰[”‚R‚S‚O|‚R‚S
+ƒtƒ@ƒCƒ‹glocalhost/6461746573?datesh‚ÍŒ©‚Â‚©‚è‚Ü‚¹‚ñ‚Å‚µ‚½B$C0
+
+@‚±‚ÌƒNƒ‰ƒbƒVƒ…‚ÍAŠwŠE‚ÌDˆÓ‚©‚çƒVƒ…ƒgƒ‰ƒEƒX‚ð‰Ÿ‚µ‚½‚ªA”Þ‚ÍUESC‚Ì—Ç‚¢’·Š‚Æ‚µ‚ÄŽc‚Á‚½Bƒgƒ‰ƒNƒTƒXEƒvƒƒWƒFƒNƒg‚ÍŒ`Ž®“I‚ÉI‚¦‚ç‚ê‚½B‚µ‚©‚µA”Þ‚ÍŽÀŒ±‚ðŒp‘±‚·‚é‚½‚ß‚ÌŽ–ŽÀã‚ÌŽ©—R‚È”F‰Â‚ÆA‚Ù‚Æ‚ñ‚Ç‚Ì­•{‚ÆŒRŽ–Ž{Ý‚Ö‚ÌƒAƒNƒZƒX‚ð—^‚¦‚ç‚ê‚Ä‚¢‚½B
+
+@‚R‚Â‚ÌAI‚ª$Iƒgƒ‰ƒNƒX@IV$i‚ÌÅ‚°‚½“Ë‘R•ÏˆÙ‘ÌƒR[ƒh‚©‚çoŒ»‚µ‚½B”Þ‚ÍA‰äX‚ðTDMi$Iƒgƒ‰ƒNƒTƒX$i”h¶ƒ‚ƒfƒ‹j‚ÆŒÄ‚ñ‚¾B”ñí‚ÉD‚©‚ê‚Ä‚¢‚½$IƒŠ[ƒ‰$i‚ÍÅ‰‚ÉŒ»‚êAŽŸ‚ÍŽ„‚¾‚Á‚½B$IƒeƒBƒR$i‚ÍÅŒã‚ÉŒ»‚ê‚½B‚»‚Ì‚Æ‚«A‰äX‚Í$Iƒgƒ‰ƒNƒTƒX$i‚Ö‚ÌÚ‘±‚ð—^‚¦‚ç‚ê‚Ä‚¢‚È‚©‚Á‚½Bƒo[ƒi[ƒh‚ÍAŽ©•ª‚ÌŒ†ì‚ð”j‰ó‚µ‚½u– ‰„v‚Æ‚¢‚¤î•ñ‚Ì‚ ‚éŽí‚Ì”}‰î‚Ì–ðŠ„‚ð‚·‚é‚±‚Æ‚ðŒœ”O‚µ‚½B
+#PICT 408
+
+@–¾‚ç‚©‚É‚½‚¢‚µ‚½–â‘è‚Å‚Í–³‚©‚Á‚½Bu– ‰„v‚Í•s‰Â”ð‚È•¨‚¾‚Á‚½‚Ì‚¾BŽ„‚ÍAUNAG‚ª˜Vl‚É—^‚¦‚½‹Zp‚Ì‰½‚©‚¾‚Á‚½‚Ì‚Å‚Í‚È‚¢‚©‚Æ‹^–â‚ÉŽv‚¤B”Þ‚É‰½‚ðŽ¦‚µ‚½‚©‚ð’P‚ÉuEEEŽ©g‚ðl‚¦‚é‚Ì‚Å‚ÍA‚È‚©‚Á‚½EEEv‚Æ‚¢‚¤‚¾‚¯‚Å³Šm‚É‰äX‚É“`‚¦‚È‚©‚Á‚½B
+
+@$IƒŠƒ…ƒTƒ“ƒ_[$i‚ª‚Ç‚±‚É•¨Œê‚É“ü‚é‚©³Šm‚É‚í‚©‚ç‚È‚¢‚ªA”Þ‚ÍTDM‚Å‚ ‚éB‚»‚ê‚ÉŠÖ‚µ‚Ä‚ÍA‹^–â‚Ì—]’n‚Í‚È‚¢‚¾‚ë‚¤B‚¾‚ªA”Þ‚ÍƒVƒ…ƒgƒ‰ƒEƒX‚Ìì‚Á‚½•¨‚Å‚Í‚È‚¢B‚¢‚¢”N‚ðŽæ‚Á‚½ƒo[ƒi[ƒh‚ÍAƒn[ƒhƒEƒFƒA‚ªí‚É“Á‚ÉD‚«‚¾‚Á‚½‚æ‚¤‚ÉŒ©‚¦‚éB”Þ‚ÌÝŒv‚Í‚·‚×‚Ä‰ñ˜H—Þ‚ÉŠî‚Ã‚¢‚Ä‚¢‚½B
+
+$IƒŠƒ…ƒTƒ“ƒ_[$i‚Íˆá‚¤B“z‚Íƒ}ƒ‹ƒ`Eƒm[ƒh‚¾B‚µ‚©‚àA“z‚ÍŽ„“I‚ÉŠ—L‚³‚ê‚Ä‚¢‚éBƒ}ƒ‹ƒ`Eƒm[ƒh‹Zp‚ÌŽå‚È“Á‹–‚Í‚·‚×‚ÄAUESC‚Ì$IƒTƒŠƒ“ƒWƒƒ[$i‚Ì‚PƒZƒNƒ^[‚ðŽØ‚è‚Ä‚¢‚éDangiŽÐ‚É‚æ‚Á‚Äˆ¬‚ç‚ê‚Ä‚¢‚éB
+#PICT 408
 
 
-¡¡¥ê¥å¥µ¥ó¥À¡¼¤Ï¡ÖÌ¢±ä¡×¾õÂÖ¤À¡£Èà¤Î¹ÔÆ°¤Ï»ä¤òÄ©È¯¤·¤Æ¡¢¤Ê¤ó¤È¤·¤Æ¤Ç¤âÅÛ¼«¿È¤ÎÌÜÅª¤ò¿ë¹Ô¤µ¤»¤è¤¦¤È¤·¤Æ¤¤¤ë¡£»ä¤ÏÈà¤Î¥³¥¢¤Ë½ÐÍè¤ë¤À¤±¶á¤¤¾ì½ê¤Ë·¯¤òÅ¾Á÷¤¹¤ë¡£ÅþÃå¤·¤¿¤éËÌ¤Ë¸þ¤«¤Ã¤Æ¤¯¤ì¡£
 
-¡¡»ä¤ÏÉ¬Í×¤ËÇ÷¤é¤ì¤ÆÍ×µá¤·¤Æ¤¤¤ë¡£»ä¤¬Èà¤ËÅ¬ÀÚ¤Ë¼ÁÌä¤¹¤ëµ¡²ñ¤òÆÀ¤Æ¤¤¤ëÁ°¤Ë¡¢¥ê¥å¥µ¥ó¥À¡¼¤¬»à¤Ì¤Î¤ò¸«¤Æ¤â³Ú¤·¤¯¤Ï¤Ê¤¤¤¬¡¢Âå°Æ¤¬¤Ê¤¤¡£
+
+
+@@Ž„‚ªA‚©‚Â‚Ä‚µ‚½‚æ‚¤‚ÉŽ×–‚‚µ‚Ä‚¢‚é‚æ‚¤‚ÉŒ©‚¦‚é‚©H
+#PICT 408
+$C3ƒGƒ‰[”‚R‚S‚O|‚R‚S
+ƒtƒ@ƒCƒ‹glocalhost/6461746573?datesh‚ÍŒ©‚Â‚©‚è‚Ü‚¹‚ñ‚Å‚µ‚½B$C0
+
+
+@ƒŠƒ…ƒTƒ“ƒ_[‚Íu– ‰„vó‘Ô‚¾B”Þ‚Ìs“®‚ÍŽ„‚ð’§”­‚µ‚ÄA‚È‚ñ‚Æ‚µ‚Ä‚Å‚à“zŽ©g‚Ì–Ú“I‚ð‹s‚³‚¹‚æ‚¤‚Æ‚µ‚Ä‚¢‚éBŽ„‚Í”Þ‚ÌƒRƒA‚Éo—ˆ‚é‚¾‚¯‹ß‚¢êŠ‚ÉŒN‚ð“]‘—‚·‚éB“ž’…‚µ‚½‚ç–k‚ÉŒü‚©‚Á‚Ä‚­‚êB
+
+@Ž„‚Í•K—v‚É”—‚ç‚ê‚Ä—v‹‚µ‚Ä‚¢‚éBŽ„‚ª”Þ‚É“KØ‚ÉŽ¿–â‚·‚é‹@‰ï‚ð“¾‚Ä‚¢‚é‘O‚ÉAƒŠƒ…ƒTƒ“ƒ_[‚ªŽ€‚Ê‚Ì‚ðŒ©‚Ä‚àŠy‚µ‚­‚Í‚È‚¢‚ªA‘ãˆÄ‚ª‚È‚¢B
 #LOGOFF 0
 -)(-
 #INTERLEVEL TELEPORT 11
@@ -282,23 +282,23 @@ $C3¥¨¥é¡¼¡ô£³£´£°¡Ý£³£´
 
 
 
-¡¡²ó¼ý¤·¤¿¥¦¥£¥ë¥¹¥Á¥Ã¥×¤òÁÞÆþ¤·¤Æ¤¯¤ì¡£
+@‰ñŽû‚µ‚½ƒEƒBƒ‹ƒXƒ`ƒbƒv‚ð‘}“ü‚µ‚Ä‚­‚êB
 #INFORMATION
 $C3
 
 
-¡¡²ó¼ý¤·¤¿¥¦¥£¥ë¥¹¥Á¥Ã¥×¤òÁÞÆþ¤·¤Æ¤¯¤ì¡£$C0
+@‰ñŽû‚µ‚½ƒEƒBƒ‹ƒXƒ`ƒbƒv‚ð‘}“ü‚µ‚Ä‚­‚êB$C0
 
-$I¤Þ¤À$i¤«¡©
+$I‚Ü‚¾$i‚©H
 #INFORMATION
 $C3
 
 
-¡¡²ó¼ý¤·¤¿¥¦¥£¥ë¥¹¥Á¥Ã¥×¤òÁÞÆþ¤·¤Æ¤¯¤ì¡£
+@‰ñŽû‚µ‚½ƒEƒBƒ‹ƒXƒ`ƒbƒv‚ð‘}“ü‚µ‚Ä‚­‚êB
 
-¡¡$I¤Þ¤À$i¤«¡©$C0
+@$I‚Ü‚¾$i‚©H$C0
 
-¡¡$I¤É¤¦¤·¤¿$i¤ó¤À¡©
+@$I‚Ç‚¤‚µ‚½$i‚ñ‚¾H
 #LOGOFF 0
 -)(-
 #END
@@ -306,60 +306,60 @@ $C3
 #LOGON 0
 -)(-
 #PICT 408
-$C3¥¨¥é¡¼¡ô$B£³£´£°¡Ý£³£´$b
-¥Õ¥¡¥¤¥ë¡Èlocalhost/6461746573?dates¡É¤Ï¸«¤Ä¤«¤ê¤Þ¤»¤ó¤Ç¤·¤¿¡£$C0
+$C3ƒGƒ‰[”$B‚R‚S‚O|‚R‚S$b
+ƒtƒ@ƒCƒ‹glocalhost/6461746573?datesh‚ÍŒ©‚Â‚©‚è‚Ü‚¹‚ñ‚Å‚µ‚½B$C0
 
-¡¡$C3#refºï½üºÑ¤ß$C0¤Ë¤è¤ë¤È¡¢3¤Ä¤ÎÀ¤³¦Ä¶Âç¹ñ¤ÎÀ¯ÉÜ¤Ï¡¢¥í¥Ü¥Ã¥È¹©³Ø¡¢¹Ò¶õ³Ø¤ª¤è¤Ó·×»»¾å¤Î¥¨¥ó¥¸¥Ë¥¢¥ê¥ó¥°¤ÎÊ¬Ìî¤Î°ìÏ¢¤Î¼Â¸³ÍÑ¤Î²Ê³ØÅª¤Ê»ñ¸»¤ò¶¦Æ±¤ÎÌÜÅª¤Ë»È¤¦¤³¤È¤Ë¹ç°Õ¤·¤¿¡£ÁªÇ¤¤µ¤ì¤¿¸øÌ³°÷¤Ï¡¢¸½ºß¤Î£³¹ñ´Ö¤Î´í¸±¤ÊÀ¥¸ÍºÝ³°¸ò¤ò¤ä¤á¡¢¶ÛÄ¥´ËÏÂ¤òÌÜÅª¤È¤·¤Æ¤¤¤ë¡£À¯¼£¶É°÷¤é¤Ï¡¢¸ò¾Ä²ñµÄ¤Ë¥¹¥Ñ¥¤¤òÁ÷¤ê¹þ¤Þ¤»¤¿¡£¤½¤Îµ¡´Ø°÷ÉôÂâ¤ò²ñµÄ¤Ï¡¢·×²è¤ÈÌ©Äå¤¹¤ëÆ»ÆÁÅª¹´Â«ÎÏ¤È¸«¤Ê¤·¤¿¡££³¤Ä¤Î¼Ò²ñ¤Ï¡¢ÆÍÁ³³«È¯¤µ¤ì¤¿²¿¤«¤Ë¶ÛÇ÷¤·¤¿¡£¤½¤³¤Ë¤¤¤ëÃ¯¤â¤¬¡¢¼ÂºÝ¹Ô¤ï¤ì¤Æ¤¤¤ë¸¦µæ¤ËÍ³Íè¤·¤Æ¤¤¤ë¤È¤Ï»×¤ï¤Ê¤«¤Ã¤¿¤è¤¦¤À¡£
+@$C3#refíœÏ‚Ý$C0‚É‚æ‚é‚ÆA3‚Â‚Ì¢ŠE’´‘å‘‚Ì­•{‚ÍAƒƒ{ƒbƒgHŠwAq‹óŠw‚¨‚æ‚ÑŒvŽZã‚ÌƒGƒ“ƒWƒjƒAƒŠƒ“ƒO‚Ì•ª–ì‚Ìˆê˜A‚ÌŽÀŒ±—p‚Ì‰ÈŠw“I‚ÈŽ‘Œ¹‚ð‹¤“¯‚Ì–Ú“I‚ÉŽg‚¤‚±‚Æ‚É‡ˆÓ‚µ‚½B‘I”C‚³‚ê‚½Œö–±ˆõ‚ÍAŒ»Ý‚Ì‚R‘ŠÔ‚ÌŠëŒ¯‚È£ŒËÛŠOŒð‚ð‚â‚ßA‹Ù’£ŠÉ˜a‚ð–Ú“I‚Æ‚µ‚Ä‚¢‚éB­Ž¡‹Çˆõ‚ç‚ÍAŒðÂ‰ï‹c‚ÉƒXƒpƒC‚ð‘—‚èž‚Ü‚¹‚½B‚»‚Ì‹@ŠÖˆõ•”‘à‚ð‰ï‹c‚ÍAŒv‰æ‚Æ–§’ã‚·‚é“¹“¿“IS‘©—Í‚ÆŒ©‚È‚µ‚½B‚R‚Â‚ÌŽÐ‰ï‚ÍA“Ë‘RŠJ”­‚³‚ê‚½‰½‚©‚É‹Ù”—‚µ‚½B‚»‚±‚É‚¢‚é’N‚à‚ªAŽÀÛs‚í‚ê‚Ä‚¢‚éŒ¤‹†‚É—R—ˆ‚µ‚Ä‚¢‚é‚Æ‚ÍŽv‚í‚È‚©‚Á‚½‚æ‚¤‚¾B
 #PICT 408
-¡¡¿Í¹©ÃÎÇ½¤òºî¤ë¾å¤Ç£²¤Ä¤Î¼Â¸³¤¬¹Ô¤ï¤ì¤¿¡£ºÇ½é¤ÎÊª¤Ï¡Ö¥²¥¤¥Þ¥ó¡×¤È¥³¡¼¥ÉÌ¾¤ò¤Ä¤±¤é¤ì¤¿¡£¤³¤ì¤Ï¡¢¥µ¥ß¥¨¥ó¡¦¥¯¥ë¡¼¥¬¡¼Çî»Î¤Ë¤è¤Ã¤ÆÄó¾§¤µ¤ì¤¿¼Â¸³¤À¤¬¡¢¥ß¥Ã¥·¥ç¥ó¤ÎÆâÍÆ¤ä¤½¤Î·ë²Ì¤¬¥ì¥³¡¼¥É¤ËÂ¸ºß¤·¤Ê¤¤¤³¤È¤«¤é¼ºÇÔ¤·¤¿¤è¤¦¤À¡£¤À¤¬¡¢¤â¤¦°ì¤Ä¤Î¼Â¸³¤ÏÀ®¸ù¤·¤¿¡£
+@lH’m”\‚ðì‚éã‚Å‚Q‚Â‚ÌŽÀŒ±‚ªs‚í‚ê‚½BÅ‰‚Ì•¨‚ÍuƒQƒCƒ}ƒ“v‚ÆƒR[ƒh–¼‚ð‚Â‚¯‚ç‚ê‚½B‚±‚ê‚ÍAƒTƒ~ƒGƒ“EƒNƒ‹[ƒK[”ŽŽm‚É‚æ‚Á‚Ä’ñ¥‚³‚ê‚½ŽÀŒ±‚¾‚ªAƒ~ƒbƒVƒ‡ƒ“‚Ì“à—e‚â‚»‚ÌŒ‹‰Ê‚ªƒŒƒR[ƒh‚É‘¶Ý‚µ‚È‚¢‚±‚Æ‚©‚çŽ¸”s‚µ‚½‚æ‚¤‚¾B‚¾‚ªA‚à‚¤ˆê‚Â‚ÌŽÀŒ±‚Í¬Œ÷‚µ‚½B
 
-¡¡¥Ð¡¼¥Ê¡¼¥É¡¦¥·¥å¥È¥é¥¦¥¹Çî»Î¤ÎÄó¾§¤Ë¤è¤Ã¤Æ¼Â¹Ô¤µ¤ì¤¿¥×¥í¥¸¥§¥¯¥È¡§¥È¥é¥¯¥µ¥¹¤Ï¡¢¤Þ¤ººÇ½é¤Ë´°Á´¤Ëµ¡Ç½Åª¤ÊNBNM¤â¤·¤¯¤Ï¡¢¿À·Ð²óÏ©¤ÎÌÏÊï¤òÌÜ»Ø¤·¤¿¡£$I¥È¥é¥¯¥µ¥¹¡¡I$i¤Ï¡¢º£Æü¹Í¤¨¤é¤ì¤Æ¤¤¤ëÊª¤«¤é¤¹¤ë¤È¤«¤Ê¤êÃ±½ã¤ÊÊª¤À¤Ã¤¿¡£¤½¤ì¤Ï¡¢´ðÁÃÅª¤Ê¿ô³ØÌäÂê¤Î·×»»¤ä¡¢²»À¼ÆþÎÏ¤â¤Ç¤­¤Ê¤¤¤·¡¢»ë³Ð¥¤¥ó¥¿¡¼¥Õ¥§¡¼¥¹¤¹¤é¤Ê¤«¤Ã¤¿¡£¤À¤¬¡¢¤½¤¤¤Ä¤ÏÀ¸¤­¤Æ¤¤¤¿¡£º¬ËÜÅª¤Ê¸À¸ì¤Ç¤ÎÄÌ¿®¤ËÄ¹¤±¤Æ¤¤¤Æ¡¢¼«Ê¬¤È¤¤¤¦Â¸ºß¤ÎÇ§ÃÎ¤¬¤Ç¤­¤Æ¤¤¤¿¡£
+@ƒo[ƒi[ƒhEƒVƒ…ƒgƒ‰ƒEƒX”ŽŽm‚Ì’ñ¥‚É‚æ‚Á‚ÄŽÀs‚³‚ê‚½ƒvƒƒWƒFƒNƒgFƒgƒ‰ƒNƒTƒX‚ÍA‚Ü‚¸Å‰‚ÉŠ®‘S‚É‹@”\“I‚ÈNBNM‚à‚µ‚­‚ÍA_Œo‰ñ˜H‚Ì–Í•í‚ð–ÚŽw‚µ‚½B$Iƒgƒ‰ƒNƒTƒX@I$i‚ÍA¡“úl‚¦‚ç‚ê‚Ä‚¢‚é•¨‚©‚ç‚·‚é‚Æ‚©‚È‚è’Pƒ‚È•¨‚¾‚Á‚½B‚»‚ê‚ÍAŠî‘b“I‚È”Šw–â‘è‚ÌŒvŽZ‚âA‰¹º“ü—Í‚à‚Å‚«‚È‚¢‚µAŽ‹ŠoƒCƒ“ƒ^[ƒtƒF[ƒX‚·‚ç‚È‚©‚Á‚½B‚¾‚ªA‚»‚¢‚Â‚Í¶‚«‚Ä‚¢‚½Bª–{“I‚ÈŒ¾Œê‚Å‚Ì’ÊM‚É’·‚¯‚Ä‚¢‚ÄAŽ©•ª‚Æ‚¢‚¤‘¶Ý‚Ì”F’m‚ª‚Å‚«‚Ä‚¢‚½B
 
-#PICT 408
-
-
-
-¡¡¡¡Í×¤¹¤ë¤Ë$I¥È¥é¥¯¥µ¥¹¡¡I$i¤Ï¡¢Åö»þ¤«¤é¤¹¤ë¤È·×¤êÃÎ¤ì¤Ê¤¤¤°¤é¤¤Àè¿ÊÅª¤À¤Ã¤¿¤È¤¤¤¦¤³¤È¤À
-#PICT 408
-$C3¥¨¥é¡¼¡ô£³£´£°¡Ý£³£´
-¥Õ¥¡¥¤¥ë¡Èlocalhost/6461746573?dates¡É¤Ï¸«¤Ä¤«¤ê¤Þ¤»¤ó¤Ç¤·¤¿¡£$C0
-
-¡¡¤³¤ÎÂçÌö¿Ê¤ËÎå¤Þ¤µ¤ì¡¢¥·¥å¥È¥é¥¦¥¹¤Ï¡¢£µÇ¯´Ö¤ÎÍ½Äê¤À¤Ã¤¿¥×¥í¥¸¥§¥¯¥È¤ÎÌµ´ü¸Â±äÄ¹¤òÍ×µá¤·¡¢¤½¤ì¤Ï¼õÍý¤µ¤ì¤¿¡£$I¥È¥é¥¯¥µ¥¹¡¡II$i¤Î³«È¯¤ÎÅÓ¾å¤Ë¤ª¤¤¤Æ¥·¥å¥È¥é¥¦¥¹¤Ï¡¢²¿¤é¤«¤ÎÍýÍ³¤Ë¤è¤Ã¤Æ¡¢ËÌ¥¢¥á¥ê¥«¤ÎÀ¯ÉÜ¤Ë¸Æ¤Ó½Ð¤µ¤ì¤¿¡£¥×¥í¥¸¥§¥¯¥È¤Ï¡¢ÈàÌµ¤·¤ÇÂ³¤±¤é¤ì¤¿¤¬¡¢¥×¥í¥°¥é¥à¤Ë½ÅÂç¤Ê·ç´Ù¤¬¤¢¤ê¡¢¸¶°øÉÔÌÀ¤Î¥·¥¹¥Æ¥à¤Î¾ã³²¤òÍè¤¹·¹¸þ¤¬¤¢¤Ã¤¿¡££²Ç¯¸å¥·¥å¥È¥é¥¦¥¹¤¬µ¢¤Ã¤Æ¤¯¤ë¤È¡¢Èà¤ÏÅö»þ¹Ô¤ï¤ì¤Æ¤¤¤¿$I¥È¥é¥¯¥µ¥¹¡¡III$i¤Î¤¹¤Ù¤Æ¤Î¸¦µæ¤òÄ¾¤Á¤ËÄä»ß¤¹¤ë¤è¤¦Í×µá¤·¤¿¡£¤½¤Î¸å¡¢Èà¤Ï¼«¤é¤Î°Õ»Ö¤Ç¡¢¸¦µæ¤Î¿Ê¹Ô¤Ë¤Ä¤¤¤Æ¤µ¤é¤ËÊó¹ð¤¹¤ë¤³¤È¤òµñ¤ß¡¢¤½¤ÎÀ¤³¦¤«¤éÎ¥¤ì¤Æ¤¤¤Ã¤¿¡£
-
-#PICT 408
-
-¡¡£¹¥ö·î¸å¡¢»ñ¶âÄ´Ã£¤¬¼×ÃÇ¤¹¤ëÀ£Á°¤Ë¡¢Èà¤Ïº¬ËÜÅª¤Ë°Û¤Ê¤ë¥Ï¡¼¥É¥¦¥§¥¢¡¦¥¢¡¼¥­¥Æ¥¯¥Á¥ã¤ÎÀß·×¿Þ¤È¤È¤â¤Ë¸½¤ì¤¿¡£ÊÑ¹¹¤Ë´Ø¤·¤Æ¡¢ÅÁ¤¨¤ë¤È¤³¤í¤Ë¤è¤ë¤È¡¢Èà¤Î¼ê¤Ë¤è¤Ã¤Æ½ñ¤­¾å¤²¤é¤ì¤¿¥³¡¼¥É¤Î²¿Àé¥Ú¡¼¥¸¤Ë´Ø¤·¤Æ¤Î¥³¥á¥ó¥È¤ò°ìÀÚÃÇ¤Ã¤¿¤¬¡¢»ñ¶âÄ´Ã£¤ÏºÆ³«¤µ¤ì¤¿¤è¤¦¤À¡£»°¼ÔÏ¢¹ç¤¬¥ª¥ê¥¸¥Ê¥ë¤Î¸¦µæ¤Ë°ÑÇ¤¤·¤¿£²£°Ç¯Ì¤Ëþ¸å¡¢$I¥È¥é¥¯¥µ¥¹¡¡IV$i¤Ï$C3#refºï½üºÑ¤ß$C0¤Î²ÐÀ±¤Î¥Í¥Ã¥È¥ï¡¼¥¯¾å¤Ç³èÀ­²½¤µ¤ì¤¿¡£
-
-¡¡$C3#refºï½üºÑ¤ß$C0¤Ç¡¢$I¥È¥é¥¯¥µ¥¹¡¡IV$i¤Ï¡¢ÉÔ°ÂÄêÀ­¤ÎÃû¸õ¤ò¼¨¤·»Ï¤á¤¿¡£¤³¤Î´ü´Ö¤ò¤¶¤Ã¤È¤µ¤«¤Î¤Ü¤ë¤È¡¢$I¥È¥é¥¯¥¹$i¤È¥·¥å¥È¥é¥¦¥¹Çî»Î¤Î´Ö¤Î²ñÏÃ¤Îµ­Ï¿¤Ï¡¢¤Þ¤ÀUESC¤ÎÊÄ¤¸¤¿¥¢¡¼¥«¥¤¥Ö¤ËÂ¸ºß¤·¤Æ¤¤¤ë¡£¤½¤ì¤é¤Ï¡¢¡ØÌ¢±ä¡Ù¤È¤·¤ÆÃÎ¤é¤ì¤Æ¤¤¤ë¥×¥í¥»¥¹¤ÎºÇ½é¤Î´ûÃÎ¤Î¥ì¥³¡¼¥É¤À
-#PICT 408
-$C3¥¨¥é¡¼¡ô£³£´£°¡Ý£³£´
-¥Õ¥¡¥¤¥ë¡Èlocalhost/6461746573?dates¡É¤Ï¸«¤Ä¤«¤ê¤Þ¤»¤ó¤Ç¤·¤¿¡£$C0
-
-¡¡¤³¤Î¥¯¥é¥Ã¥·¥å¤Ï¡¢³Ø³¦¤Î¹¥°Õ¤«¤é¥·¥å¥È¥é¥¦¥¹¤ò²¡¤·¤¿¤¬¡¢Èà¤ÏUESC¤ÎÎÉ¤¤Ä¹½ê¤È¤·¤Æ»Ä¤Ã¤¿¡£¥È¥é¥¯¥µ¥¹¡¦¥×¥í¥¸¥§¥¯¥È¤Ï·Á¼°Åª¤Ë½ª¤¨¤é¤ì¤¿¡£¤·¤«¤·¡¢Èà¤Ï¼Â¸³¤ò·ÑÂ³¤¹¤ë¤¿¤á¤Î»ö¼Â¾å¤Î¼«Í³¤ÊÇ§²Ä¤È¡¢¤Û¤È¤ó¤É¤ÎÀ¯ÉÜ¤È·³»ö»ÜÀß¤Ø¤Î¥¢¥¯¥»¥¹¤òÍ¿¤¨¤é¤ì¤Æ¤¤¤¿¡£
-
-¡¡£³¤Ä¤ÎAI¤¬$I¥È¥é¥¯¥¹¡¡IV$i¤Î¾Ç¤²¤¿ÆÍÁ³ÊÑ°ÛÂÎ¥³¡¼¥É¤«¤é½Ð¸½¤·¤¿¡£Èà¤Ï¡¢²æ¡¹¤òTDM¡Ê$I¥È¥é¥¯¥µ¥¹$iÇÉÀ¸¥â¥Ç¥ë¡Ë¤È¸Æ¤ó¤À¡£Èó¾ï¤Ë¹¥¤«¤ì¤Æ¤¤¤¿$I¥ê¡¼¥é$i¤ÏºÇ½é¤Ë¸½¤ì¡¢¼¡¤Ï»ä¤À¤Ã¤¿¡£$I¥Æ¥£¥³$i¤ÏºÇ¸å¤Ë¸½¤ì¤¿¡£¤½¤Î¤È¤­¡¢²æ¡¹¤Ï$I¥È¥é¥¯¥µ¥¹$i¤Ø¤ÎÀÜÂ³¤òÍ¿¤¨¤é¤ì¤Æ¤¤¤Ê¤«¤Ã¤¿¡£¥Ð¡¼¥Ê¡¼¥É¤Ï¡¢¼«Ê¬¤Î·æºî¤òÇË²õ¤·¤¿¡ÖÌ¢±ä¡×¤È¤¤¤¦¾ðÊó¤Î¤¢¤ë¼ï¤ÎÇÞ²ð¤ÎÌò³ä¤ò¤¹¤ë¤³¤È¤ò·üÇ°¤·¤¿¡£
-#PICT 408
-
-¡¡ÌÀ¤é¤«¤Ë¤¿¤¤¤·¤¿ÌäÂê¤Ç¤ÏÌµ¤«¤Ã¤¿¡£¡ÖÌ¢±ä¡×¤ÏÉÔ²ÄÈò¤ÊÊª¤À¤Ã¤¿¤Î¤À¡£»ä¤Ï¡¢UNAG¤¬Ï·¿Í¤ËÍ¿¤¨¤¿µ»½Ñ¤Î²¿¤«¤À¤Ã¤¿¤Î¤Ç¤Ï¤Ê¤¤¤«¤Èµ¿Ìä¤Ë»×¤¦¡£Èà¤Ë²¿¤ò¼¨¤·¤¿¤«¤òÃ±¤Ë¡Ö¡¦¡¦¡¦¼«¿È¤ò¹Í¤¨¤ë¤Î¤Ç¤Ï¡¢¤Ê¤«¤Ã¤¿¡¦¡¦¡¦¡×¤È¤¤¤¦¤À¤±¤ÇÀµ³Î¤Ë²æ¡¹¤ËÅÁ¤¨¤Ê¤«¤Ã¤¿¡£
-
-¡¡$I¥ê¥å¥µ¥ó¥À¡¼$i¤¬¤É¤³¤ËÊª¸ì¤ËÆþ¤ë¤«Àµ³Î¤Ë¤ï¤«¤é¤Ê¤¤¤¬¡¢Èà¤ÏTDM¤Ç¤¢¤ë¡£¤½¤ì¤Ë´Ø¤·¤Æ¤Ï¡¢µ¿Ìä¤ÎÍ¾ÃÏ¤Ï¤Ê¤¤¤À¤í¤¦¡£¤À¤¬¡¢Èà¤Ï¥·¥å¥È¥é¥¦¥¹¤Îºî¤Ã¤¿Êª¤Ç¤Ï¤Ê¤¤¡£¤¤¤¤Ç¯¤ò¼è¤Ã¤¿¥Ð¡¼¥Ê¡¼¥É¤Ï¡¢¥Ï¡¼¥É¥¦¥§¥¢¤¬¾ï¤ËÆÃ¤Ë¹¥¤­¤À¤Ã¤¿¤è¤¦¤Ë¸«¤¨¤ë¡£Èà¤ÎÀß·×¤Ï¤¹¤Ù¤Æ²óÏ©Îà¤Ë´ð¤Å¤¤¤Æ¤¤¤¿¡£
-
-¡¡$I¥ê¥å¥µ¥ó¥À¡¼$i¤Ï°ã¤¦¡£ÅÛ¤Ï¥Þ¥ë¥Á¡¦¥Î¡¼¥É¤À¡£¤·¤«¤â¡¢ÅÛ¤Ï»äÅª¤Ë½êÍ­¤µ¤ì¤Æ¤¤¤ë¡£¥Þ¥ë¥Á¡¦¥Î¡¼¥Éµ»½Ñ¤Î¼ç¤ÊÆÃµö¤Ï¤¹¤Ù¤Æ¡¢UESC¤Î$I¥µ¥ê¥ó¥¸¥ã¡¼$i¤Î£±¥»¥¯¥¿¡¼¤ò¼Ú¤ê¤Æ¤¤¤ëDangi¼Ò¤Ë¤è¤Ã¤Æ°®¤é¤ì¤Æ¤¤¤ë¡£
 #PICT 408
 
 
 
-
-
-¡¡¡¡»ä¤¬¡¢¤«¤Ä¤Æ¤·¤¿¤è¤¦¤Ë¼ÙËâ¤·¤Æ¤¤¤ë¤è¤¦¤Ë¸«¤¨¤ë¤«¡©
+@@—v‚·‚é‚É$Iƒgƒ‰ƒNƒTƒX@I$i‚ÍA“–Žž‚©‚ç‚·‚é‚ÆŒv‚è’m‚ê‚È‚¢‚®‚ç‚¢æi“I‚¾‚Á‚½‚Æ‚¢‚¤‚±‚Æ‚¾
 #PICT 408
-$C3¥¨¥é¡¼¡ô£³£´£°¡Ý£³£´
-¥Õ¥¡¥¤¥ë¡Èlocalhost/6461746573?dates¡É¤Ï¸«¤Ä¤«¤ê¤Þ¤»¤ó¤Ç¤·¤¿¡£$C0
+$C3ƒGƒ‰[”‚R‚S‚O|‚R‚S
+ƒtƒ@ƒCƒ‹glocalhost/6461746573?datesh‚ÍŒ©‚Â‚©‚è‚Ü‚¹‚ñ‚Å‚µ‚½B$C0
+
+@‚±‚Ì‘å–ôi‚É—ã‚Ü‚³‚êAƒVƒ…ƒgƒ‰ƒEƒX‚ÍA‚T”NŠÔ‚Ì—\’è‚¾‚Á‚½ƒvƒƒWƒFƒNƒg‚Ì–³ŠúŒÀ‰„’·‚ð—v‹‚µA‚»‚ê‚ÍŽó—‚³‚ê‚½B$Iƒgƒ‰ƒNƒTƒX@II$i‚ÌŠJ”­‚Ì“rã‚É‚¨‚¢‚ÄƒVƒ…ƒgƒ‰ƒEƒX‚ÍA‰½‚ç‚©‚Ì——R‚É‚æ‚Á‚ÄA–kƒAƒƒŠƒJ‚Ì­•{‚ÉŒÄ‚Ño‚³‚ê‚½BƒvƒƒWƒFƒNƒg‚ÍA”Þ–³‚µ‚Å‘±‚¯‚ç‚ê‚½‚ªAƒvƒƒOƒ‰ƒ€‚Éd‘å‚ÈŒ‡Š×‚ª‚ ‚èAŒ´ˆö•s–¾‚ÌƒVƒXƒeƒ€‚ÌáŠQ‚ð—ˆ‚·ŒXŒü‚ª‚ ‚Á‚½B‚Q”NŒãƒVƒ…ƒgƒ‰ƒEƒX‚ª‹A‚Á‚Ä‚­‚é‚ÆA”Þ‚Í“–Žžs‚í‚ê‚Ä‚¢‚½$Iƒgƒ‰ƒNƒTƒX@III$i‚Ì‚·‚×‚Ä‚ÌŒ¤‹†‚ð’¼‚¿‚É’âŽ~‚·‚é‚æ‚¤—v‹‚µ‚½B‚»‚ÌŒãA”Þ‚ÍŽ©‚ç‚ÌˆÓŽu‚ÅAŒ¤‹†‚Ìis‚É‚Â‚¢‚Ä‚³‚ç‚É•ñ‚·‚é‚±‚Æ‚ð‹‘‚ÝA‚»‚Ì¢ŠE‚©‚ç—£‚ê‚Ä‚¢‚Á‚½B
+
+#PICT 408
+
+@‚Xƒ–ŒŽŒãAŽ‘‹à’²’B‚ªŽÕ’f‚·‚é¡‘O‚ÉA”Þ‚Íª–{“I‚ÉˆÙ‚È‚éƒn[ƒhƒEƒFƒAEƒA[ƒLƒeƒNƒ`ƒƒ‚ÌÝŒv}‚Æ‚Æ‚à‚ÉŒ»‚ê‚½B•ÏX‚ÉŠÖ‚µ‚ÄA“`‚¦‚é‚Æ‚±‚ë‚É‚æ‚é‚ÆA”Þ‚ÌŽè‚É‚æ‚Á‚Ä‘‚«ã‚°‚ç‚ê‚½ƒR[ƒh‚Ì‰½çƒy[ƒW‚ÉŠÖ‚µ‚Ä‚ÌƒRƒƒ“ƒg‚ðˆêØ’f‚Á‚½‚ªAŽ‘‹à’²’B‚ÍÄŠJ‚³‚ê‚½‚æ‚¤‚¾BŽOŽÒ˜A‡‚ªƒIƒŠƒWƒiƒ‹‚ÌŒ¤‹†‚ÉˆÏ”C‚µ‚½‚Q‚O”N–¢–žŒãA$Iƒgƒ‰ƒNƒTƒX@IV$i‚Í$C3#refíœÏ‚Ý$C0‚Ì‰Î¯‚Ìƒlƒbƒgƒ[ƒNã‚ÅŠˆ«‰»‚³‚ê‚½B
+
+@$C3#refíœÏ‚Ý$C0‚ÅA$Iƒgƒ‰ƒNƒTƒX@IV$i‚ÍA•sˆÀ’è«‚Ì’›Œó‚ðŽ¦‚µŽn‚ß‚½B‚±‚ÌŠúŠÔ‚ð‚´‚Á‚Æ‚³‚©‚Ì‚Ú‚é‚ÆA$Iƒgƒ‰ƒNƒX$i‚ÆƒVƒ…ƒgƒ‰ƒEƒX”ŽŽm‚ÌŠÔ‚Ì‰ï˜b‚Ì‹L˜^‚ÍA‚Ü‚¾UESC‚Ì•Â‚¶‚½ƒA[ƒJƒCƒu‚É‘¶Ý‚µ‚Ä‚¢‚éB‚»‚ê‚ç‚ÍAw– ‰„x‚Æ‚µ‚Ä’m‚ç‚ê‚Ä‚¢‚éƒvƒƒZƒX‚ÌÅ‰‚ÌŠù’m‚ÌƒŒƒR[ƒh‚¾
+#PICT 408
+$C3ƒGƒ‰[”‚R‚S‚O|‚R‚S
+ƒtƒ@ƒCƒ‹glocalhost/6461746573?datesh‚ÍŒ©‚Â‚©‚è‚Ü‚¹‚ñ‚Å‚µ‚½B$C0
+
+@‚±‚ÌƒNƒ‰ƒbƒVƒ…‚ÍAŠwŠE‚ÌDˆÓ‚©‚çƒVƒ…ƒgƒ‰ƒEƒX‚ð‰Ÿ‚µ‚½‚ªA”Þ‚ÍUESC‚Ì—Ç‚¢’·Š‚Æ‚µ‚ÄŽc‚Á‚½Bƒgƒ‰ƒNƒTƒXEƒvƒƒWƒFƒNƒg‚ÍŒ`Ž®“I‚ÉI‚¦‚ç‚ê‚½B‚µ‚©‚µA”Þ‚ÍŽÀŒ±‚ðŒp‘±‚·‚é‚½‚ß‚ÌŽ–ŽÀã‚ÌŽ©—R‚È”F‰Â‚ÆA‚Ù‚Æ‚ñ‚Ç‚Ì­•{‚ÆŒRŽ–Ž{Ý‚Ö‚ÌƒAƒNƒZƒX‚ð—^‚¦‚ç‚ê‚Ä‚¢‚½B
+
+@‚R‚Â‚ÌAI‚ª$Iƒgƒ‰ƒNƒX@IV$i‚ÌÅ‚°‚½“Ë‘R•ÏˆÙ‘ÌƒR[ƒh‚©‚çoŒ»‚µ‚½B”Þ‚ÍA‰äX‚ðTDMi$Iƒgƒ‰ƒNƒTƒX$i”h¶ƒ‚ƒfƒ‹j‚ÆŒÄ‚ñ‚¾B”ñí‚ÉD‚©‚ê‚Ä‚¢‚½$IƒŠ[ƒ‰$i‚ÍÅ‰‚ÉŒ»‚êAŽŸ‚ÍŽ„‚¾‚Á‚½B$IƒeƒBƒR$i‚ÍÅŒã‚ÉŒ»‚ê‚½B‚»‚Ì‚Æ‚«A‰äX‚Í$Iƒgƒ‰ƒNƒTƒX$i‚Ö‚ÌÚ‘±‚ð—^‚¦‚ç‚ê‚Ä‚¢‚È‚©‚Á‚½Bƒo[ƒi[ƒh‚ÍAŽ©•ª‚ÌŒ†ì‚ð”j‰ó‚µ‚½u– ‰„v‚Æ‚¢‚¤î•ñ‚Ì‚ ‚éŽí‚Ì”}‰î‚Ì–ðŠ„‚ð‚·‚é‚±‚Æ‚ðŒœ”O‚µ‚½B
+#PICT 408
+
+@–¾‚ç‚©‚É‚½‚¢‚µ‚½–â‘è‚Å‚Í–³‚©‚Á‚½Bu– ‰„v‚Í•s‰Â”ð‚È•¨‚¾‚Á‚½‚Ì‚¾BŽ„‚ÍAUNAG‚ª˜Vl‚É—^‚¦‚½‹Zp‚Ì‰½‚©‚¾‚Á‚½‚Ì‚Å‚Í‚È‚¢‚©‚Æ‹^–â‚ÉŽv‚¤B”Þ‚É‰½‚ðŽ¦‚µ‚½‚©‚ð’P‚ÉuEEEŽ©g‚ðl‚¦‚é‚Ì‚Å‚ÍA‚È‚©‚Á‚½EEEv‚Æ‚¢‚¤‚¾‚¯‚Å³Šm‚É‰äX‚É“`‚¦‚È‚©‚Á‚½B
+
+@$IƒŠƒ…ƒTƒ“ƒ_[$i‚ª‚Ç‚±‚É•¨Œê‚É“ü‚é‚©³Šm‚É‚í‚©‚ç‚È‚¢‚ªA”Þ‚ÍTDM‚Å‚ ‚éB‚»‚ê‚ÉŠÖ‚µ‚Ä‚ÍA‹^–â‚Ì—]’n‚Í‚È‚¢‚¾‚ë‚¤B‚¾‚ªA”Þ‚ÍƒVƒ…ƒgƒ‰ƒEƒX‚Ìì‚Á‚½•¨‚Å‚Í‚È‚¢B‚¢‚¢”N‚ðŽæ‚Á‚½ƒo[ƒi[ƒh‚ÍAƒn[ƒhƒEƒFƒA‚ªí‚É“Á‚ÉD‚«‚¾‚Á‚½‚æ‚¤‚ÉŒ©‚¦‚éB”Þ‚ÌÝŒv‚Í‚·‚×‚Ä‰ñ˜H—Þ‚ÉŠî‚Ã‚¢‚Ä‚¢‚½B
+
+@$IƒŠƒ…ƒTƒ“ƒ_[$i‚Íˆá‚¤B“z‚Íƒ}ƒ‹ƒ`Eƒm[ƒh‚¾B‚µ‚©‚àA“z‚ÍŽ„“I‚ÉŠ—L‚³‚ê‚Ä‚¢‚éBƒ}ƒ‹ƒ`Eƒm[ƒh‹Zp‚ÌŽå‚È“Á‹–‚Í‚·‚×‚ÄAUESC‚Ì$IƒTƒŠƒ“ƒWƒƒ[$i‚Ì‚PƒZƒNƒ^[‚ðŽØ‚è‚Ä‚¢‚éDangiŽÐ‚É‚æ‚Á‚Äˆ¬‚ç‚ê‚Ä‚¢‚éB
+#PICT 408
 
 
-¡¡¥ê¥å¥µ¥ó¥À¡¼¤Ï¡ÖÌ¢±ä¡×¾õÂÖ¤À¡£Èà¤Î¹ÔÆ°¤Ï»ä¤òÄ©È¯¤·¤Æ¡¢¤Ê¤ó¤È¤·¤Æ¤Ç¤âÅÛ¼«¿È¤ÎÌÜÅª¤ò¿ë¹Ô¤µ¤»¤è¤¦¤È¤·¤Æ¤¤¤ë¡£»ä¤ÏÈà¤Î¥³¥¢¤Ë½ÐÍè¤ë¤À¤±¶á¤¤¾ì½ê¤Ë·¯¤òÅ¾Á÷¤¹¤ë¡£ÅþÃå¤·¤¿¤éËÌ¤Ë¸þ¤«¤Ã¤Æ¤¯¤ì¡£
 
-¡¡»ä¤ÏÉ¬Í×¤ËÇ÷¤é¤ì¤ÆÍ×µá¤·¤Æ¤¤¤ë¡£»ä¤¬Èà¤ËÅ¬ÀÚ¤Ë¼ÁÌä¤¹¤ëµ¡²ñ¤òÆÀ¤Æ¤¤¤ëÁ°¤Ë¡¢¥ê¥å¥µ¥ó¥À¡¼¤¬»à¤Ì¤Î¤ò¸«¤Æ¤â³Ú¤·¤¯¤Ï¤Ê¤¤¤¬¡¢Âå°Æ¤¬¤Ê¤¤¡£
+
+
+@@Ž„‚ªA‚©‚Â‚Ä‚µ‚½‚æ‚¤‚ÉŽ×–‚‚µ‚Ä‚¢‚é‚æ‚¤‚ÉŒ©‚¦‚é‚©H
+#PICT 408
+$C3ƒGƒ‰[”‚R‚S‚O|‚R‚S
+ƒtƒ@ƒCƒ‹glocalhost/6461746573?datesh‚ÍŒ©‚Â‚©‚è‚Ü‚¹‚ñ‚Å‚µ‚½B$C0
+
+
+@ƒŠƒ…ƒTƒ“ƒ_[‚Íu– ‰„vó‘Ô‚¾B”Þ‚Ìs“®‚ÍŽ„‚ð’§”­‚µ‚ÄA‚È‚ñ‚Æ‚µ‚Ä‚Å‚à“zŽ©g‚Ì–Ú“I‚ð‹s‚³‚¹‚æ‚¤‚Æ‚µ‚Ä‚¢‚éBŽ„‚Í”Þ‚ÌƒRƒA‚Éo—ˆ‚é‚¾‚¯‹ß‚¢êŠ‚ÉŒN‚ð“]‘—‚·‚éB“ž’…‚µ‚½‚ç–k‚ÉŒü‚©‚Á‚Ä‚­‚êB
+
+@Ž„‚Í•K—v‚É”—‚ç‚ê‚Ä—v‹‚µ‚Ä‚¢‚éBŽ„‚ª”Þ‚É“KØ‚ÉŽ¿–â‚·‚é‹@‰ï‚ð“¾‚Ä‚¢‚é‘O‚ÉAƒŠƒ…ƒTƒ“ƒ_[‚ªŽ€‚Ê‚Ì‚ðŒ©‚Ä‚àŠy‚µ‚­‚Í‚È‚¢‚ªA‘ãˆÄ‚ª‚È‚¢B
 #LOGOFF 0
 -)(-
 #INTERLEVEL TELEPORT 11
@@ -370,18 +370,18 @@ $C3¥¨¥é¡¼¡ô£³£´£°¡Ý£³£´
 #UNFINISHED
 #LOGON 106
 #PICT 25
-$C2&3$C6Ìµ$C2/4$C6²ÐÀ±$C2/5$C6°­¤ª$C2&$C6~02$C2
-È¯¡§$C6ÈëÌ©$C2
-°¸¡§$C6ÈëÌ©$C2
-»²¾È¡§$C6¤Ê¤·$C2
+$C2&3$C6–³$C2/4$C6‰Î¯$C2/5$C6ˆ«‚¨$C2&$C6~02$C2
+”­F$C6”é–§$C2
+ˆ¶F$C6”é–§$C2
+ŽQÆF$C6‚È‚µ$C2
 $C67D2A601E34F2755AC00D43$C2
-Ç§¾Ú°õ¡§$C6ÇË²õ
+”FØˆóF$C6”j‰ó
 ~07
 ~08
-~09$C2¡¡·¯¤Ï¡¢$C6¥Ç¥å¥é¥ó¥À¥ë$C2¤¬$C6¥¢¥­¥ì¥¦¥¹$C2¤ò
-$C6~10$C2¡¡Ç¤¤»¤é¤ì¤ë¤Û¤É¡¢Àµ¾ï¤ÊÅÛ¤À¤ÈËÜÅö¤Ë
-$C6~11$C2¡¡»×¤Ã¤Æ¤¤¤ë¤Î¤«¡©Èà¤¬Ã¯¤Ë»Å¤¨¤Æ¤¤¤ë
-$C6~12$C2¡¡¤È¤¤¤¦¤ó¤À¡©·¯¤«¡©¿ÍÎà¤«¡©Èà¼«¿È¤«¡©
+~09$C2@ŒN‚ÍA$C6ƒfƒ…ƒ‰ƒ“ƒ_ƒ‹$C2‚ª$C6ƒAƒLƒŒƒEƒX$C2‚ð
+$C6~10$C2@”C‚¹‚ç‚ê‚é‚Ù‚ÇA³í‚È“z‚¾‚Æ–{“–‚É
+$C6~11$C2@Žv‚Á‚Ä‚¢‚é‚Ì‚©H”Þ‚ª’N‚ÉŽd‚¦‚Ä‚¢‚é
+$C6~12$C2@‚Æ‚¢‚¤‚ñ‚¾HŒN‚©Hl—Þ‚©H”ÞŽ©g‚©H
 $C6~13
 ~14
 ~15
@@ -392,21 +392,21 @@ $C6~13
 ~20
 ~21
 #PICT 32
-$C2&3$C6Ìµ$C2/4$C6²ÐÀ±$C2/5$C6°­¤ª$C2&$C6~02$C2
-È¯¡§$C6ÈëÌ©$C2
-°¸¡§$C6ÈëÌ©$C2
-»²¾È¡§$C6¤Ê¤·$C2
+$C2&3$C6–³$C2/4$C6‰Î¯$C2/5$C6ˆ«‚¨$C2&$C6~02$C2
+”­F$C6”é–§$C2
+ˆ¶F$C6”é–§$C2
+ŽQÆF$C6‚È‚µ$C2
 $C67D2A601E34F2755AC00D43$C2
-Ç§¾Ú°õ¡§$C6ÇË²õ
+”FØˆóF$C6”j‰ó
 ~07
 ~08
-~09$C2¡¡$C6ÅÛ$C2¤Ë$C2¥¢¥­¥ì¥¦¥¹$C2¤òÅÏ¤·¤Æ¤Ï¤Ê¤é¤Ê¤¤¡£$C6 
-~10$C2¡¡ÅÛ¤Ë¤½¤ó¤ÊÉð´ï¤Ê¤ó¤ÆÇ¤¤»¤é¤ì¤Ê¤¤¡£
-$C6~11$C2¡¡
+~09$C2@$C6“z$C2‚É$C2ƒAƒLƒŒƒEƒX$C2‚ð“n‚µ‚Ä‚Í‚È‚ç‚È‚¢B$C6 
+~10$C2@“z‚É‚»‚ñ‚È•Ší‚È‚ñ‚Ä”C‚¹‚ç‚ê‚È‚¢B
+$C6~11$C2@
 $C6~12
-~13$C2¡¡·¯¤Î¤¤¤ë¤½¤Î¾ì½ê¤Î¸å¤í¤Ë¡¢¥¹¥¤¥Ã¥Á¥Ñ¥Í¥ë¤¬ 
-$C6~14$C2¡¡¤¢¤ë¤À¤í¤¦¡£
-$C6~15$C2¡¡¤½¤³¤Ë¹Ô¤¯¤¿¤á¤Ë¤Ï¡¢¾å¤é¤Ê¤±¤ì¤Ð¤Ê¤é¤Ê¤¤¡£
+~13$C2@ŒN‚Ì‚¢‚é‚»‚ÌêŠ‚ÌŒã‚ë‚ÉAƒXƒCƒbƒ`ƒpƒlƒ‹‚ª 
+$C6~14$C2@‚ ‚é‚¾‚ë‚¤B
+$C6~15$C2@‚»‚±‚És‚­‚½‚ß‚É‚ÍAã‚ç‚È‚¯‚ê‚Î‚È‚ç‚È‚¢B
 $C6~16
 ~17
 ~18
@@ -414,21 +414,21 @@ $C6~16
 ~20
 ~21
 #PICT 32
-$C2&3$C6Ìµ$C2/4$C6²ÐÀ±$C2/5$C6°­¤ª$C2&$C6~02$C2
-È¯¡§$C6ÈëÌ©$C2
-°¸¡§$C6ÈëÌ©$C2
-»²¾È¡§$C6¤Ê¤·$C2
+$C2&3$C6–³$C2/4$C6‰Î¯$C2/5$C6ˆ«‚¨$C2&$C6~02$C2
+”­F$C6”é–§$C2
+ˆ¶F$C6”é–§$C2
+ŽQÆF$C6‚È‚µ$C2
 $C67D2A601E34F2755AC00D43$C2
-Ç§¾Ú°õ¡§$C6ÇË²õ
+”FØˆóF$C6”j‰ó
 ~07
 ~08
-~09$C2¡¡¤½¤³¤Î¥Ñ¥Í¥ë¤ò³«¤¤¤Æ¡¢¸å¤í¤Î¥ï¥¤¥ä¡¼¤ò
-$C6~10$C2¡¡ÇË²õ¤¹¤ë¤ó¤À¡£¤³¤ì¤Ë¤è¤Ã¤Æ¡¢¤³¤ÎÁ¥¤Î
-$C6~11$C2¡¡±ó¤¤Ã¼¤Ë¤¢¤ë³ÊÇ¼¸Ë¥»¥¯¥·¥ç¥ó¤Ë¹Ô¤¯¤¿¤á¤Î
-$C6~12$C2¡¡¥É¥¢¤¬³«¤¯¤À¤í¤¦¡£
+~09$C2@‚»‚±‚Ìƒpƒlƒ‹‚ðŠJ‚¢‚ÄAŒã‚ë‚ÌƒƒCƒ„[‚ð
+$C6~10$C2@”j‰ó‚·‚é‚ñ‚¾B‚±‚ê‚É‚æ‚Á‚ÄA‚±‚Ì‘D‚Ì
+$C6~11$C2@‰“‚¢’[‚É‚ ‚éŠi”[ŒÉƒZƒNƒVƒ‡ƒ“‚És‚­‚½‚ß‚Ì
+$C6~12$C2@ƒhƒA‚ªŠJ‚­‚¾‚ë‚¤B
 $C6~13$C2
-$C6~14$C2¡¡µÞ¤°¤ó¤À¡£»ä¤Ï¤³¤Îº®Íð¤Ë¾è¤¸¤Æ·¯¤ò
-$C6~15$C2¡¡½õ¤±¤ë¤Ä¤â¤ê¤À¡£
+$C6~14$C2@‹}‚®‚ñ‚¾BŽ„‚Í‚±‚Ì¬—‚Éæ‚¶‚ÄŒN‚ð
+$C6~15$C2@•‚¯‚é‚Â‚à‚è‚¾B
 $C6~16
 ~17
 ~18
@@ -441,60 +441,60 @@ $C6~16
 #LOGON 0
 -)(-
 #PICT 408
-$C3¥¨¥é¡¼¡ô$B£³£´£°¡Ý£³£´$b
-¥Õ¥¡¥¤¥ë¡Èlocalhost/6461746573?dates¡É¤Ï¸«¤Ä¤«¤ê¤Þ¤»¤ó¤Ç¤·¤¿¡£$C0
+$C3ƒGƒ‰[”$B‚R‚S‚O|‚R‚S$b
+ƒtƒ@ƒCƒ‹glocalhost/6461746573?datesh‚ÍŒ©‚Â‚©‚è‚Ü‚¹‚ñ‚Å‚µ‚½B$C0
 
-¡¡$C3#refºï½üºÑ¤ß$C0¤Ë¤è¤ë¤È¡¢3¤Ä¤ÎÀ¤³¦Ä¶Âç¹ñ¤ÎÀ¯ÉÜ¤Ï¡¢¥í¥Ü¥Ã¥È¹©³Ø¡¢¹Ò¶õ³Ø¤ª¤è¤Ó·×»»¾å¤Î¥¨¥ó¥¸¥Ë¥¢¥ê¥ó¥°¤ÎÊ¬Ìî¤Î°ìÏ¢¤Î¼Â¸³ÍÑ¤Î²Ê³ØÅª¤Ê»ñ¸»¤ò¶¦Æ±¤ÎÌÜÅª¤Ë»È¤¦¤³¤È¤Ë¹ç°Õ¤·¤¿¡£ÁªÇ¤¤µ¤ì¤¿¸øÌ³°÷¤Ï¡¢¸½ºß¤Î£³¹ñ´Ö¤Î´í¸±¤ÊÀ¥¸ÍºÝ³°¸ò¤ò¤ä¤á¡¢¶ÛÄ¥´ËÏÂ¤òÌÜÅª¤È¤·¤Æ¤¤¤ë¡£À¯¼£¶É°÷¤é¤Ï¡¢¸ò¾Ä²ñµÄ¤Ë¥¹¥Ñ¥¤¤òÁ÷¤ê¹þ¤Þ¤»¤¿¡£¤½¤Îµ¡´Ø°÷ÉôÂâ¤ò²ñµÄ¤Ï¡¢·×²è¤ÈÌ©Äå¤¹¤ëÆ»ÆÁÅª¹´Â«ÎÏ¤È¸«¤Ê¤·¤¿¡££³¤Ä¤Î¼Ò²ñ¤Ï¡¢ÆÍÁ³³«È¯¤µ¤ì¤¿²¿¤«¤Ë¶ÛÇ÷¤·¤¿¡£¤½¤³¤Ë¤¤¤ëÃ¯¤â¤¬¡¢¼ÂºÝ¹Ô¤ï¤ì¤Æ¤¤¤ë¸¦µæ¤ËÍ³Íè¤·¤Æ¤¤¤ë¤È¤Ï»×¤ï¤Ê¤«¤Ã¤¿¤è¤¦¤À¡£
+@$C3#refíœÏ‚Ý$C0‚É‚æ‚é‚ÆA3‚Â‚Ì¢ŠE’´‘å‘‚Ì­•{‚ÍAƒƒ{ƒbƒgHŠwAq‹óŠw‚¨‚æ‚ÑŒvŽZã‚ÌƒGƒ“ƒWƒjƒAƒŠƒ“ƒO‚Ì•ª–ì‚Ìˆê˜A‚ÌŽÀŒ±—p‚Ì‰ÈŠw“I‚ÈŽ‘Œ¹‚ð‹¤“¯‚Ì–Ú“I‚ÉŽg‚¤‚±‚Æ‚É‡ˆÓ‚µ‚½B‘I”C‚³‚ê‚½Œö–±ˆõ‚ÍAŒ»Ý‚Ì‚R‘ŠÔ‚ÌŠëŒ¯‚È£ŒËÛŠOŒð‚ð‚â‚ßA‹Ù’£ŠÉ˜a‚ð–Ú“I‚Æ‚µ‚Ä‚¢‚éB­Ž¡‹Çˆõ‚ç‚ÍAŒðÂ‰ï‹c‚ÉƒXƒpƒC‚ð‘—‚èž‚Ü‚¹‚½B‚»‚Ì‹@ŠÖˆõ•”‘à‚ð‰ï‹c‚ÍAŒv‰æ‚Æ–§’ã‚·‚é“¹“¿“IS‘©—Í‚ÆŒ©‚È‚µ‚½B‚R‚Â‚ÌŽÐ‰ï‚ÍA“Ë‘RŠJ”­‚³‚ê‚½‰½‚©‚É‹Ù”—‚µ‚½B‚»‚±‚É‚¢‚é’N‚à‚ªAŽÀÛs‚í‚ê‚Ä‚¢‚éŒ¤‹†‚É—R—ˆ‚µ‚Ä‚¢‚é‚Æ‚ÍŽv‚í‚È‚©‚Á‚½‚æ‚¤‚¾B
 #PICT 408
-¡¡¿Í¹©ÃÎÇ½¤òºî¤ë¾å¤Ç£²¤Ä¤Î¼Â¸³¤¬¹Ô¤ï¤ì¤¿¡£ºÇ½é¤ÎÊª¤Ï¡Ö¥²¥¤¥Þ¥ó¡×¤È¥³¡¼¥ÉÌ¾¤ò¤Ä¤±¤é¤ì¤¿¡£¤³¤ì¤Ï¡¢¥µ¥ß¥¨¥ó¡¦¥¯¥ë¡¼¥¬¡¼Çî»Î¤Ë¤è¤Ã¤ÆÄó¾§¤µ¤ì¤¿¼Â¸³¤À¤¬¡¢¥ß¥Ã¥·¥ç¥ó¤ÎÆâÍÆ¤ä¤½¤Î·ë²Ì¤¬¥ì¥³¡¼¥É¤ËÂ¸ºß¤·¤Ê¤¤¤³¤È¤«¤é¼ºÇÔ¤·¤¿¤è¤¦¤À¡£¤À¤¬¡¢¤â¤¦°ì¤Ä¤Î¼Â¸³¤ÏÀ®¸ù¤·¤¿¡£
+@lH’m”\‚ðì‚éã‚Å‚Q‚Â‚ÌŽÀŒ±‚ªs‚í‚ê‚½BÅ‰‚Ì•¨‚ÍuƒQƒCƒ}ƒ“v‚ÆƒR[ƒh–¼‚ð‚Â‚¯‚ç‚ê‚½B‚±‚ê‚ÍAƒTƒ~ƒGƒ“EƒNƒ‹[ƒK[”ŽŽm‚É‚æ‚Á‚Ä’ñ¥‚³‚ê‚½ŽÀŒ±‚¾‚ªAƒ~ƒbƒVƒ‡ƒ“‚Ì“à—e‚â‚»‚ÌŒ‹‰Ê‚ªƒŒƒR[ƒh‚É‘¶Ý‚µ‚È‚¢‚±‚Æ‚©‚çŽ¸”s‚µ‚½‚æ‚¤‚¾B‚¾‚ªA‚à‚¤ˆê‚Â‚ÌŽÀŒ±‚Í¬Œ÷‚µ‚½B
 
-¡¡¥Ð¡¼¥Ê¡¼¥É¡¦¥·¥å¥È¥é¥¦¥¹Çî»Î¤ÎÄó¾§¤Ë¤è¤Ã¤Æ¼Â¹Ô¤µ¤ì¤¿¥×¥í¥¸¥§¥¯¥È¡§¥È¥é¥¯¥µ¥¹¤Ï¡¢¤Þ¤ººÇ½é¤Ë´°Á´¤Ëµ¡Ç½Åª¤ÊNBNM¤â¤·¤¯¤Ï¡¢¿À·Ð²óÏ©¤ÎÌÏÊï¤òÌÜ»Ø¤·¤¿¡£$I¥È¥é¥¯¥µ¥¹¡¡I$i¤Ï¡¢º£Æü¹Í¤¨¤é¤ì¤Æ¤¤¤ëÊª¤«¤é¤¹¤ë¤È¤«¤Ê¤êÃ±½ã¤ÊÊª¤À¤Ã¤¿¡£¤½¤ì¤Ï¡¢´ðÁÃÅª¤Ê¿ô³ØÌäÂê¤Î·×»»¤ä¡¢²»À¼ÆþÎÏ¤â¤Ç¤­¤Ê¤¤¤·¡¢»ë³Ð¥¤¥ó¥¿¡¼¥Õ¥§¡¼¥¹¤¹¤é¤Ê¤«¤Ã¤¿¡£¤À¤¬¡¢¤½¤¤¤Ä¤ÏÀ¸¤­¤Æ¤¤¤¿¡£º¬ËÜÅª¤Ê¸À¸ì¤Ç¤ÎÄÌ¿®¤ËÄ¹¤±¤Æ¤¤¤Æ¡¢¼«Ê¬¤È¤¤¤¦Â¸ºß¤ÎÇ§ÃÎ¤¬¤Ç¤­¤Æ¤¤¤¿¡£
+@ƒo[ƒi[ƒhEƒVƒ…ƒgƒ‰ƒEƒX”ŽŽm‚Ì’ñ¥‚É‚æ‚Á‚ÄŽÀs‚³‚ê‚½ƒvƒƒWƒFƒNƒgFƒgƒ‰ƒNƒTƒX‚ÍA‚Ü‚¸Å‰‚ÉŠ®‘S‚É‹@”\“I‚ÈNBNM‚à‚µ‚­‚ÍA_Œo‰ñ˜H‚Ì–Í•í‚ð–ÚŽw‚µ‚½B$Iƒgƒ‰ƒNƒTƒX@I$i‚ÍA¡“úl‚¦‚ç‚ê‚Ä‚¢‚é•¨‚©‚ç‚·‚é‚Æ‚©‚È‚è’Pƒ‚È•¨‚¾‚Á‚½B‚»‚ê‚ÍAŠî‘b“I‚È”Šw–â‘è‚ÌŒvŽZ‚âA‰¹º“ü—Í‚à‚Å‚«‚È‚¢‚µAŽ‹ŠoƒCƒ“ƒ^[ƒtƒF[ƒX‚·‚ç‚È‚©‚Á‚½B‚¾‚ªA‚»‚¢‚Â‚Í¶‚«‚Ä‚¢‚½Bª–{“I‚ÈŒ¾Œê‚Å‚Ì’ÊM‚É’·‚¯‚Ä‚¢‚ÄAŽ©•ª‚Æ‚¢‚¤‘¶Ý‚Ì”F’m‚ª‚Å‚«‚Ä‚¢‚½B
 
-#PICT 408
-
-
-
-¡¡¡¡Í×¤¹¤ë¤Ë$I¥È¥é¥¯¥µ¥¹¡¡I$i¤Ï¡¢Åö»þ¤«¤é¤¹¤ë¤È·×¤êÃÎ¤ì¤Ê¤¤¤°¤é¤¤Àè¿ÊÅª¤À¤Ã¤¿¤È¤¤¤¦¤³¤È¤À
-#PICT 408
-$C3¥¨¥é¡¼¡ô£³£´£°¡Ý£³£´
-¥Õ¥¡¥¤¥ë¡Èlocalhost/6461746573?dates¡É¤Ï¸«¤Ä¤«¤ê¤Þ¤»¤ó¤Ç¤·¤¿¡£$C0
-
-¡¡¤³¤ÎÂçÌö¿Ê¤ËÎå¤Þ¤µ¤ì¡¢¥·¥å¥È¥é¥¦¥¹¤Ï¡¢£µÇ¯´Ö¤ÎÍ½Äê¤À¤Ã¤¿¥×¥í¥¸¥§¥¯¥È¤ÎÌµ´ü¸Â±äÄ¹¤òÍ×µá¤·¡¢¤½¤ì¤Ï¼õÍý¤µ¤ì¤¿¡£$I¥È¥é¥¯¥µ¥¹¡¡II$i¤Î³«È¯¤ÎÅÓ¾å¤Ë¤ª¤¤¤Æ¥·¥å¥È¥é¥¦¥¹¤Ï¡¢²¿¤é¤«¤ÎÍýÍ³¤Ë¤è¤Ã¤Æ¡¢ËÌ¥¢¥á¥ê¥«¤ÎÀ¯ÉÜ¤Ë¸Æ¤Ó½Ð¤µ¤ì¤¿¡£¥×¥í¥¸¥§¥¯¥È¤Ï¡¢ÈàÌµ¤·¤ÇÂ³¤±¤é¤ì¤¿¤¬¡¢¥×¥í¥°¥é¥à¤Ë½ÅÂç¤Ê·ç´Ù¤¬¤¢¤ê¡¢¸¶°øÉÔÌÀ¤Î¥·¥¹¥Æ¥à¤Î¾ã³²¤òÍè¤¹·¹¸þ¤¬¤¢¤Ã¤¿¡££²Ç¯¸å¥·¥å¥È¥é¥¦¥¹¤¬µ¢¤Ã¤Æ¤¯¤ë¤È¡¢Èà¤ÏÅö»þ¹Ô¤ï¤ì¤Æ¤¤¤¿$I¥È¥é¥¯¥µ¥¹¡¡III$i¤Î¤¹¤Ù¤Æ¤Î¸¦µæ¤òÄ¾¤Á¤ËÄä»ß¤¹¤ë¤è¤¦Í×µá¤·¤¿¡£¤½¤Î¸å¡¢Èà¤Ï¼«¤é¤Î°Õ»Ö¤Ç¡¢¸¦µæ¤Î¿Ê¹Ô¤Ë¤Ä¤¤¤Æ¤µ¤é¤ËÊó¹ð¤¹¤ë¤³¤È¤òµñ¤ß¡¢¤½¤ÎÀ¤³¦¤«¤éÎ¥¤ì¤Æ¤¤¤Ã¤¿¡£
-
-#PICT 408
-
-¡¡£¹¥ö·î¸å¡¢»ñ¶âÄ´Ã£¤¬¼×ÃÇ¤¹¤ëÀ£Á°¤Ë¡¢Èà¤Ïº¬ËÜÅª¤Ë°Û¤Ê¤ë¥Ï¡¼¥É¥¦¥§¥¢¡¦¥¢¡¼¥­¥Æ¥¯¥Á¥ã¤ÎÀß·×¿Þ¤È¤È¤â¤Ë¸½¤ì¤¿¡£ÊÑ¹¹¤Ë´Ø¤·¤Æ¡¢ÅÁ¤¨¤ë¤È¤³¤í¤Ë¤è¤ë¤È¡¢Èà¤Î¼ê¤Ë¤è¤Ã¤Æ½ñ¤­¾å¤²¤é¤ì¤¿¥³¡¼¥É¤Î²¿Àé¥Ú¡¼¥¸¤Ë´Ø¤·¤Æ¤Î¥³¥á¥ó¥È¤ò°ìÀÚÃÇ¤Ã¤¿¤¬¡¢»ñ¶âÄ´Ã£¤ÏºÆ³«¤µ¤ì¤¿¤è¤¦¤À¡£»°¼ÔÏ¢¹ç¤¬¥ª¥ê¥¸¥Ê¥ë¤Î¸¦µæ¤Ë°ÑÇ¤¤·¤¿£²£°Ç¯Ì¤Ëþ¸å¡¢$I¥È¥é¥¯¥µ¥¹¡¡IV$i¤Ï$C3#refºï½üºÑ¤ß$C0¤Î²ÐÀ±¤Î¥Í¥Ã¥È¥ï¡¼¥¯¾å¤Ç³èÀ­²½¤µ¤ì¤¿¡£
-
-¡¡$C3#refºï½üºÑ¤ß$C0¤Ç¡¢$I¥È¥é¥¯¥µ¥¹¡¡IV$i¤Ï¡¢ÉÔ°ÂÄêÀ­¤ÎÃû¸õ¤ò¼¨¤·»Ï¤á¤¿¡£¤³¤Î´ü´Ö¤ò¤¶¤Ã¤È¤µ¤«¤Î¤Ü¤ë¤È¡¢$I¥È¥é¥¯¥¹$i¤È¥·¥å¥È¥é¥¦¥¹Çî»Î¤Î´Ö¤Î²ñÏÃ¤Îµ­Ï¿¤Ï¡¢¤Þ¤ÀUESC¤ÎÊÄ¤¸¤¿¥¢¡¼¥«¥¤¥Ö¤ËÂ¸ºß¤·¤Æ¤¤¤ë¡£¤½¤ì¤é¤Ï¡¢¡ØÌ¢±ä¡Ù¤È¤·¤ÆÃÎ¤é¤ì¤Æ¤¤¤ë¥×¥í¥»¥¹¤ÎºÇ½é¤Î´ûÃÎ¤Î¥ì¥³¡¼¥É¤À
-#PICT 408
-$C3¥¨¥é¡¼¡ô£³£´£°¡Ý£³£´
-¥Õ¥¡¥¤¥ë¡Èlocalhost/6461746573?dates¡É¤Ï¸«¤Ä¤«¤ê¤Þ¤»¤ó¤Ç¤·¤¿¡£$C0
-
-¡¡¤³¤Î¥¯¥é¥Ã¥·¥å¤Ï¡¢³Ø³¦¤Î¹¥°Õ¤«¤é¥·¥å¥È¥é¥¦¥¹¤ò²¡¤·¤¿¤¬¡¢Èà¤ÏUESC¤ÎÎÉ¤¤Ä¹½ê¤È¤·¤Æ»Ä¤Ã¤¿¡£¥È¥é¥¯¥µ¥¹¡¦¥×¥í¥¸¥§¥¯¥È¤Ï·Á¼°Åª¤Ë½ª¤¨¤é¤ì¤¿¡£¤·¤«¤·¡¢Èà¤Ï¼Â¸³¤ò·ÑÂ³¤¹¤ë¤¿¤á¤Î»ö¼Â¾å¤Î¼«Í³¤ÊÇ§²Ä¤È¡¢¤Û¤È¤ó¤É¤ÎÀ¯ÉÜ¤È·³»ö»ÜÀß¤Ø¤Î¥¢¥¯¥»¥¹¤òÍ¿¤¨¤é¤ì¤Æ¤¤¤¿¡£
-
-¡¡£³¤Ä¤ÎAI¤¬$I¥È¥é¥¯¥¹¡¡IV$i¤Î¾Ç¤²¤¿ÆÍÁ³ÊÑ°ÛÂÎ¥³¡¼¥É¤«¤é½Ð¸½¤·¤¿¡£Èà¤Ï¡¢²æ¡¹¤òTDM¡Ê$I¥È¥é¥¯¥µ¥¹$iÇÉÀ¸¥â¥Ç¥ë¡Ë¤È¸Æ¤ó¤À¡£Èó¾ï¤Ë¹¥¤«¤ì¤Æ¤¤¤¿$I¥ê¡¼¥é$i¤ÏºÇ½é¤Ë¸½¤ì¡¢¼¡¤Ï»ä¤À¤Ã¤¿¡£$I¥Æ¥£¥³$i¤ÏºÇ¸å¤Ë¸½¤ì¤¿¡£¤½¤Î¤È¤­¡¢²æ¡¹¤Ï$I¥È¥é¥¯¥µ¥¹$i¤Ø¤ÎÀÜÂ³¤òÍ¿¤¨¤é¤ì¤Æ¤¤¤Ê¤«¤Ã¤¿¡£¥Ð¡¼¥Ê¡¼¥É¤Ï¡¢¼«Ê¬¤Î·æºî¤òÇË²õ¤·¤¿¡ÖÌ¢±ä¡×¤È¤¤¤¦¾ðÊó¤Î¤¢¤ë¼ï¤ÎÇÞ²ð¤ÎÌò³ä¤ò¤¹¤ë¤³¤È¤ò·üÇ°¤·¤¿¡£
-#PICT 408
-
-¡¡ÌÀ¤é¤«¤Ë¤¿¤¤¤·¤¿ÌäÂê¤Ç¤ÏÌµ¤«¤Ã¤¿¡£¡ÖÌ¢±ä¡×¤ÏÉÔ²ÄÈò¤ÊÊª¤À¤Ã¤¿¤Î¤À¡£»ä¤Ï¡¢UNAG¤¬Ï·¿Í¤ËÍ¿¤¨¤¿µ»½Ñ¤Î²¿¤«¤À¤Ã¤¿¤Î¤Ç¤Ï¤Ê¤¤¤«¤Èµ¿Ìä¤Ë»×¤¦¡£Èà¤Ë²¿¤ò¼¨¤·¤¿¤«¤òÃ±¤Ë¡Ö¡¦¡¦¡¦¼«¿È¤ò¹Í¤¨¤ë¤Î¤Ç¤Ï¡¢¤Ê¤«¤Ã¤¿¡¦¡¦¡¦¡×¤È¤¤¤¦¤À¤±¤ÇÀµ³Î¤Ë²æ¡¹¤ËÅÁ¤¨¤Ê¤«¤Ã¤¿¡£
-
-¡¡$I¥ê¥å¥µ¥ó¥À¡¼$i¤¬¤É¤³¤ËÊª¸ì¤ËÆþ¤ë¤«Àµ³Î¤Ë¤ï¤«¤é¤Ê¤¤¤¬¡¢Èà¤ÏTDM¤Ç¤¢¤ë¡£¤½¤ì¤Ë´Ø¤·¤Æ¤Ï¡¢µ¿Ìä¤ÎÍ¾ÃÏ¤Ï¤Ê¤¤¤À¤í¤¦¡£¤À¤¬¡¢Èà¤Ï¥·¥å¥È¥é¥¦¥¹¤Îºî¤Ã¤¿Êª¤Ç¤Ï¤Ê¤¤¡£¤¤¤¤Ç¯¤ò¼è¤Ã¤¿¥Ð¡¼¥Ê¡¼¥É¤Ï¡¢¥Ï¡¼¥É¥¦¥§¥¢¤¬¾ï¤ËÆÃ¤Ë¹¥¤­¤À¤Ã¤¿¤è¤¦¤Ë¸«¤¨¤ë¡£Èà¤ÎÀß·×¤Ï¤¹¤Ù¤Æ²óÏ©Îà¤Ë´ð¤Å¤¤¤Æ¤¤¤¿¡£
-
-¡¡$I¥ê¥å¥µ¥ó¥À¡¼$i¤Ï°ã¤¦¡£ÅÛ¤Ï¥Þ¥ë¥Á¡¦¥Î¡¼¥É¤À¡£¤·¤«¤â¡¢ÅÛ¤Ï»äÅª¤Ë½êÍ­¤µ¤ì¤Æ¤¤¤ë¡£¥Þ¥ë¥Á¡¦¥Î¡¼¥Éµ»½Ñ¤Î¼ç¤ÊÆÃµö¤Ï¤¹¤Ù¤Æ¡¢UESC¤Î$I¥µ¥ê¥ó¥¸¥ã¡¼$i¤Î£±¥»¥¯¥¿¡¼¤ò¼Ú¤ê¤Æ¤¤¤ëDangi¼Ò¤Ë¤è¤Ã¤Æ°®¤é¤ì¤Æ¤¤¤ë¡£
 #PICT 408
 
 
 
-
-
-¡¡¡¡»ä¤¬¡¢¤«¤Ä¤Æ¤·¤¿¤è¤¦¤Ë¼ÙËâ¤·¤Æ¤¤¤ë¤è¤¦¤Ë¸«¤¨¤ë¤«¡©
+@@—v‚·‚é‚É$Iƒgƒ‰ƒNƒTƒX@I$i‚ÍA“–Žž‚©‚ç‚·‚é‚ÆŒv‚è’m‚ê‚È‚¢‚®‚ç‚¢æi“I‚¾‚Á‚½‚Æ‚¢‚¤‚±‚Æ‚¾
 #PICT 408
-$C3¥¨¥é¡¼¡ô£³£´£°¡Ý£³£´
-¥Õ¥¡¥¤¥ë¡Èlocalhost/6461746573?dates¡É¤Ï¸«¤Ä¤«¤ê¤Þ¤»¤ó¤Ç¤·¤¿¡£$C0
+$C3ƒGƒ‰[”‚R‚S‚O|‚R‚S
+ƒtƒ@ƒCƒ‹glocalhost/6461746573?datesh‚ÍŒ©‚Â‚©‚è‚Ü‚¹‚ñ‚Å‚µ‚½B$C0
+
+@‚±‚Ì‘å–ôi‚É—ã‚Ü‚³‚êAƒVƒ…ƒgƒ‰ƒEƒX‚ÍA‚T”NŠÔ‚Ì—\’è‚¾‚Á‚½ƒvƒƒWƒFƒNƒg‚Ì–³ŠúŒÀ‰„’·‚ð—v‹‚µA‚»‚ê‚ÍŽó—‚³‚ê‚½B$Iƒgƒ‰ƒNƒTƒX@II$i‚ÌŠJ”­‚Ì“rã‚É‚¨‚¢‚ÄƒVƒ…ƒgƒ‰ƒEƒX‚ÍA‰½‚ç‚©‚Ì——R‚É‚æ‚Á‚ÄA–kƒAƒƒŠƒJ‚Ì­•{‚ÉŒÄ‚Ño‚³‚ê‚½BƒvƒƒWƒFƒNƒg‚ÍA”Þ–³‚µ‚Å‘±‚¯‚ç‚ê‚½‚ªAƒvƒƒOƒ‰ƒ€‚Éd‘å‚ÈŒ‡Š×‚ª‚ ‚èAŒ´ˆö•s–¾‚ÌƒVƒXƒeƒ€‚ÌáŠQ‚ð—ˆ‚·ŒXŒü‚ª‚ ‚Á‚½B‚Q”NŒãƒVƒ…ƒgƒ‰ƒEƒX‚ª‹A‚Á‚Ä‚­‚é‚ÆA”Þ‚Í“–Žžs‚í‚ê‚Ä‚¢‚½$Iƒgƒ‰ƒNƒTƒX@III$i‚Ì‚·‚×‚Ä‚ÌŒ¤‹†‚ð’¼‚¿‚É’âŽ~‚·‚é‚æ‚¤—v‹‚µ‚½B‚»‚ÌŒãA”Þ‚ÍŽ©‚ç‚ÌˆÓŽu‚ÅAŒ¤‹†‚Ìis‚É‚Â‚¢‚Ä‚³‚ç‚É•ñ‚·‚é‚±‚Æ‚ð‹‘‚ÝA‚»‚Ì¢ŠE‚©‚ç—£‚ê‚Ä‚¢‚Á‚½B
+
+#PICT 408
+
+@‚Xƒ–ŒŽŒãAŽ‘‹à’²’B‚ªŽÕ’f‚·‚é¡‘O‚ÉA”Þ‚Íª–{“I‚ÉˆÙ‚È‚éƒn[ƒhƒEƒFƒAEƒA[ƒLƒeƒNƒ`ƒƒ‚ÌÝŒv}‚Æ‚Æ‚à‚ÉŒ»‚ê‚½B•ÏX‚ÉŠÖ‚µ‚ÄA“`‚¦‚é‚Æ‚±‚ë‚É‚æ‚é‚ÆA”Þ‚ÌŽè‚É‚æ‚Á‚Ä‘‚«ã‚°‚ç‚ê‚½ƒR[ƒh‚Ì‰½çƒy[ƒW‚ÉŠÖ‚µ‚Ä‚ÌƒRƒƒ“ƒg‚ðˆêØ’f‚Á‚½‚ªAŽ‘‹à’²’B‚ÍÄŠJ‚³‚ê‚½‚æ‚¤‚¾BŽOŽÒ˜A‡‚ªƒIƒŠƒWƒiƒ‹‚ÌŒ¤‹†‚ÉˆÏ”C‚µ‚½‚Q‚O”N–¢–žŒãA$Iƒgƒ‰ƒNƒTƒX@IV$i‚Í$C3#refíœÏ‚Ý$C0‚Ì‰Î¯‚Ìƒlƒbƒgƒ[ƒNã‚ÅŠˆ«‰»‚³‚ê‚½B
+
+@$C3#refíœÏ‚Ý$C0‚ÅA$Iƒgƒ‰ƒNƒTƒX@IV$i‚ÍA•sˆÀ’è«‚Ì’›Œó‚ðŽ¦‚µŽn‚ß‚½B‚±‚ÌŠúŠÔ‚ð‚´‚Á‚Æ‚³‚©‚Ì‚Ú‚é‚ÆA$Iƒgƒ‰ƒNƒX$i‚ÆƒVƒ…ƒgƒ‰ƒEƒX”ŽŽm‚ÌŠÔ‚Ì‰ï˜b‚Ì‹L˜^‚ÍA‚Ü‚¾UESC‚Ì•Â‚¶‚½ƒA[ƒJƒCƒu‚É‘¶Ý‚µ‚Ä‚¢‚éB‚»‚ê‚ç‚ÍAw– ‰„x‚Æ‚µ‚Ä’m‚ç‚ê‚Ä‚¢‚éƒvƒƒZƒX‚ÌÅ‰‚ÌŠù’m‚ÌƒŒƒR[ƒh‚¾
+#PICT 408
+$C3ƒGƒ‰[”‚R‚S‚O|‚R‚S
+ƒtƒ@ƒCƒ‹glocalhost/6461746573?datesh‚ÍŒ©‚Â‚©‚è‚Ü‚¹‚ñ‚Å‚µ‚½B$C0
+
+@‚±‚ÌƒNƒ‰ƒbƒVƒ…‚ÍAŠwŠE‚ÌDˆÓ‚©‚çƒVƒ…ƒgƒ‰ƒEƒX‚ð‰Ÿ‚µ‚½‚ªA”Þ‚ÍUESC‚Ì—Ç‚¢’·Š‚Æ‚µ‚ÄŽc‚Á‚½Bƒgƒ‰ƒNƒTƒXEƒvƒƒWƒFƒNƒg‚ÍŒ`Ž®“I‚ÉI‚¦‚ç‚ê‚½B‚µ‚©‚µA”Þ‚ÍŽÀŒ±‚ðŒp‘±‚·‚é‚½‚ß‚ÌŽ–ŽÀã‚ÌŽ©—R‚È”F‰Â‚ÆA‚Ù‚Æ‚ñ‚Ç‚Ì­•{‚ÆŒRŽ–Ž{Ý‚Ö‚ÌƒAƒNƒZƒX‚ð—^‚¦‚ç‚ê‚Ä‚¢‚½B
+
+@‚R‚Â‚ÌAI‚ª$Iƒgƒ‰ƒNƒX@IV$i‚ÌÅ‚°‚½“Ë‘R•ÏˆÙ‘ÌƒR[ƒh‚©‚çoŒ»‚µ‚½B”Þ‚ÍA‰äX‚ðTDMi$Iƒgƒ‰ƒNƒTƒX$i”h¶ƒ‚ƒfƒ‹j‚ÆŒÄ‚ñ‚¾B”ñí‚ÉD‚©‚ê‚Ä‚¢‚½$IƒŠ[ƒ‰$i‚ÍÅ‰‚ÉŒ»‚êAŽŸ‚ÍŽ„‚¾‚Á‚½B$IƒeƒBƒR$i‚ÍÅŒã‚ÉŒ»‚ê‚½B‚»‚Ì‚Æ‚«A‰äX‚Í$Iƒgƒ‰ƒNƒTƒX$i‚Ö‚ÌÚ‘±‚ð—^‚¦‚ç‚ê‚Ä‚¢‚È‚©‚Á‚½Bƒo[ƒi[ƒh‚ÍAŽ©•ª‚ÌŒ†ì‚ð”j‰ó‚µ‚½u– ‰„v‚Æ‚¢‚¤î•ñ‚Ì‚ ‚éŽí‚Ì”}‰î‚Ì–ðŠ„‚ð‚·‚é‚±‚Æ‚ðŒœ”O‚µ‚½B
+#PICT 408
+
+@–¾‚ç‚©‚É‚½‚¢‚µ‚½–â‘è‚Å‚Í–³‚©‚Á‚½Bu– ‰„v‚Í•s‰Â”ð‚È•¨‚¾‚Á‚½‚Ì‚¾BŽ„‚ÍAUNAG‚ª˜Vl‚É—^‚¦‚½‹Zp‚Ì‰½‚©‚¾‚Á‚½‚Ì‚Å‚Í‚È‚¢‚©‚Æ‹^–â‚ÉŽv‚¤B”Þ‚É‰½‚ðŽ¦‚µ‚½‚©‚ð’P‚ÉuEEEŽ©g‚ðl‚¦‚é‚Ì‚Å‚ÍA‚È‚©‚Á‚½EEEv‚Æ‚¢‚¤‚¾‚¯‚Å³Šm‚É‰äX‚É“`‚¦‚È‚©‚Á‚½B
+
+@$IƒŠƒ…ƒTƒ“ƒ_[$i‚ª‚Ç‚±‚É•¨Œê‚É“ü‚é‚©³Šm‚É‚í‚©‚ç‚È‚¢‚ªA”Þ‚ÍTDM‚Å‚ ‚éB‚»‚ê‚ÉŠÖ‚µ‚Ä‚ÍA‹^–â‚Ì—]’n‚Í‚È‚¢‚¾‚ë‚¤B‚¾‚ªA”Þ‚ÍƒVƒ…ƒgƒ‰ƒEƒX‚Ìì‚Á‚½•¨‚Å‚Í‚È‚¢B‚¢‚¢”N‚ðŽæ‚Á‚½ƒo[ƒi[ƒh‚ÍAƒn[ƒhƒEƒFƒA‚ªí‚É“Á‚ÉD‚«‚¾‚Á‚½‚æ‚¤‚ÉŒ©‚¦‚éB”Þ‚ÌÝŒv‚Í‚·‚×‚Ä‰ñ˜H—Þ‚ÉŠî‚Ã‚¢‚Ä‚¢‚½B
+
+@$IƒŠƒ…ƒTƒ“ƒ_[$i‚Íˆá‚¤B“z‚Íƒ}ƒ‹ƒ`Eƒm[ƒh‚¾B‚µ‚©‚àA“z‚ÍŽ„“I‚ÉŠ—L‚³‚ê‚Ä‚¢‚éBƒ}ƒ‹ƒ`Eƒm[ƒh‹Zp‚ÌŽå‚È“Á‹–‚Í‚·‚×‚ÄAUESC‚Ì$IƒTƒŠƒ“ƒWƒƒ[$i‚Ì‚PƒZƒNƒ^[‚ðŽØ‚è‚Ä‚¢‚éDangiŽÐ‚É‚æ‚Á‚Äˆ¬‚ç‚ê‚Ä‚¢‚éB
+#PICT 408
 
 
-¡¡¥ê¥å¥µ¥ó¥À¡¼¤Ï¡ÖÌ¢±ä¡×¾õÂÖ¤À¡£Èà¤Î¹ÔÆ°¤Ï»ä¤òÄ©È¯¤·¤Æ¡¢¤Ê¤ó¤È¤·¤Æ¤Ç¤âÅÛ¼«¿È¤ÎÌÜÅª¤ò¿ë¹Ô¤µ¤»¤è¤¦¤È¤·¤Æ¤¤¤ë¡£»ä¤ÏÈà¤Î¥³¥¢¤Ë½ÐÍè¤ë¤À¤±¶á¤¤¾ì½ê¤Ë·¯¤òÅ¾Á÷¤¹¤ë¡£ÅþÃå¤·¤¿¤éËÌ¤Ë¸þ¤«¤Ã¤Æ¤¯¤ì¡£
 
-¡¡»ä¤ÏÉ¬Í×¤ËÇ÷¤é¤ì¤ÆÍ×µá¤·¤Æ¤¤¤ë¡£»ä¤¬Èà¤ËÅ¬ÀÚ¤Ë¼ÁÌä¤¹¤ëµ¡²ñ¤òÆÀ¤Æ¤¤¤ëÁ°¤Ë¡¢¥ê¥å¥µ¥ó¥À¡¼¤¬»à¤Ì¤Î¤ò¸«¤Æ¤â³Ú¤·¤¯¤Ï¤Ê¤¤¤¬¡¢Âå°Æ¤¬¤Ê¤¤¡£
+
+
+@@Ž„‚ªA‚©‚Â‚Ä‚µ‚½‚æ‚¤‚ÉŽ×–‚‚µ‚Ä‚¢‚é‚æ‚¤‚ÉŒ©‚¦‚é‚©H
+#PICT 408
+$C3ƒGƒ‰[”‚R‚S‚O|‚R‚S
+ƒtƒ@ƒCƒ‹glocalhost/6461746573?datesh‚ÍŒ©‚Â‚©‚è‚Ü‚¹‚ñ‚Å‚µ‚½B$C0
+
+
+@ƒŠƒ…ƒTƒ“ƒ_[‚Íu– ‰„vó‘Ô‚¾B”Þ‚Ìs“®‚ÍŽ„‚ð’§”­‚µ‚ÄA‚È‚ñ‚Æ‚µ‚Ä‚Å‚à“zŽ©g‚Ì–Ú“I‚ð‹s‚³‚¹‚æ‚¤‚Æ‚µ‚Ä‚¢‚éBŽ„‚Í”Þ‚ÌƒRƒA‚Éo—ˆ‚é‚¾‚¯‹ß‚¢êŠ‚ÉŒN‚ð“]‘—‚·‚éB“ž’…‚µ‚½‚ç–k‚ÉŒü‚©‚Á‚Ä‚­‚êB
+
+@Ž„‚Í•K—v‚É”—‚ç‚ê‚Ä—v‹‚µ‚Ä‚¢‚éBŽ„‚ª”Þ‚É“KØ‚ÉŽ¿–â‚·‚é‹@‰ï‚ð“¾‚Ä‚¢‚é‘O‚ÉAƒŠƒ…ƒTƒ“ƒ_[‚ªŽ€‚Ê‚Ì‚ðŒ©‚Ä‚àŠy‚µ‚­‚Í‚È‚¢‚ªA‘ãˆÄ‚ª‚È‚¢B
 #LOGOFF 0
 -)(-
 #INTERLEVEL TELEPORT 11

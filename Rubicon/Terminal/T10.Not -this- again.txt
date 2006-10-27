@@ -4,16 +4,16 @@
 #LOGON 20
 $C64%kjd#$bf$C0
 #PICT 22
-$C2Â¨½Ð·â²ÄÇ½¤Ê¥¹¥ê¡¼¥×Ãæ¤Î¥æ¥Ë¥Ã¥È
-È¯¡§$C6Âè£´¼ï²Ê³ØÈÃ¡¡¥¯¡¦¥³¡¼$C2
-°¸¡§$C6¼«Æ°°ÂÁ´ÊÝ¾ãÀ©ÅÙ
-¡¡¡¡¡¡¡¡´ÆÆÄ°Ñ°÷²ñ¡Ê¡õ¼«Æ°¥»¥¯¥¿¡¼¡á£á£³£±£ø¡Ë$C2
-»²¾È¡§$C6¥æ¥Ë¥Ã¥ÈºÆÊÔ$C2
-¥µ¥¤¥¯¥ë.023.7.0175.7.00014.343244333
-Ç§¾Ú°õ¡§$C6$I¥ê¥Ï¥Ó¥ê¥Æ¡¼¥·¥ç¥ó$i
+$C2‘¦oŒ‚‰Â”\‚ÈƒXƒŠ[ƒv’†‚Ìƒ†ƒjƒbƒg
+”­F$C6‘æ‚SŽí‰ÈŠw”Á@ƒNEƒR[$C2
+ˆ¶F$C6Ž©“®ˆÀ‘S•Ûá§“x
+@@@@ŠÄ“ÂˆÏˆõ‰ïi•Ž©“®ƒZƒNƒ^[‚‚R‚P‚˜j$C2
+ŽQÆF$C6ƒ†ƒjƒbƒgÄ•Ò$C2
+ƒTƒCƒNƒ‹.023.7.0175.7.00014.343244333
+”FØˆóF$C6$IƒŠƒnƒrƒŠƒe[ƒVƒ‡ƒ“$i
 
 $C2
-¡¡¥³¡¼¥ë¥É¥¹¥ê¡¼¥×X-03-b13f7¤Î´Æ»ë¤¹¤ë008-015¤ÎÌÀ³Î¤ÊÉÔÄ´¤Ï¡¢Á°½Ò¤ÎÎó¤òÀê¤á¤ë¥æ¥Ë¥Ã¥È¤Î¾õÂÖ¤Ë¹½À®¤µ¤ì¤Æ¤¤¤Ê¤¤¡Ê$C6¡©Ã¦¿å¤·¤¿$C2¡Ë¾õÂÖ¤Ë¤Ê¤ê¤Þ¤·¤¿¡£º£¸å¤Î¥æ¥Ë¥Ã¥ÈºÆ¹½À®¤Ï¡¢ÉÔÅ¬Åö¤È¹Í¤¨¤Þ¤·¤¿¡£»Îµ¤¤Ø¤Î¥Í¥¬¥Æ¥£¥Ö¤Ê±Æ¶Á¤Ë¤è¤ê¡¢Èï³²¤ò¼õ¤±¤¿¥æ¥Ë¥Ã¥È¤òÇË´þ¤¹¤ë¤¿¤á¤ÎÂ¨»þ¤Îµö²Ä¤òÍ×µá¤·¤Þ¤¹¡£¥æ¥Ë¥Ã¥È¤ÎÁ÷¤ê¼ê¤Ï¡¢¥³¡¼¥ë¥É¥¹¥ê¡¼¥×¤Î¥â¥Ç¥ë¡¦¥é¥¤¥óX-03¤ÎÀ¸»º¤¢¤ë¤¤¤Ï¼ê¤¬¤«¤ê¤ò»ß¤á¤ë¤¿¤á¤Ë¸Ä¿Í¤Î¶¨µÄ¡Ê$C6¡©Äó°Æ$C2¡Ë¤òÂ¥¤·¤Þ¤¹¡£
+@ƒR[ƒ‹ƒhƒXƒŠ[ƒvX-03-b13f7‚ÌŠÄŽ‹‚·‚é008-015‚Ì–¾Šm‚È•s’²‚ÍA‘Oq‚Ì—ñ‚ðè‚ß‚éƒ†ƒjƒbƒg‚Ìó‘Ô‚É\¬‚³‚ê‚Ä‚¢‚È‚¢i$C6H’E…‚µ‚½$C2jó‘Ô‚É‚È‚è‚Ü‚µ‚½B¡Œã‚Ìƒ†ƒjƒbƒgÄ\¬‚ÍA•s“K“–‚Æl‚¦‚Ü‚µ‚½BŽm‹C‚Ö‚ÌƒlƒKƒeƒBƒu‚È‰e‹¿‚É‚æ‚èA”íŠQ‚ðŽó‚¯‚½ƒ†ƒjƒbƒg‚ð”jŠü‚·‚é‚½‚ß‚Ì‘¦Žž‚Ì‹–‰Â‚ð—v‹‚µ‚Ü‚·Bƒ†ƒjƒbƒg‚Ì‘—‚èŽè‚ÍAƒR[ƒ‹ƒhƒXƒŠ[ƒv‚Ìƒ‚ƒfƒ‹Eƒ‰ƒCƒ“X-03‚Ì¶ŽY‚ ‚é‚¢‚ÍŽè‚ª‚©‚è‚ðŽ~‚ß‚é‚½‚ß‚ÉŒÂl‚Ì‹¦‹ci$C6H’ñˆÄ$C2j‚ð‘£‚µ‚Ü‚·B
 #LOGOFF 20
 $C2*4 $C6fghs $C2----
 #END
@@ -22,43 +22,43 @@ $C2*4 $C6fghs $C2----
 #TERMINAL 1
 #UNFINISHED
 #LOGON 20
-$C2GHF ¥¥¥¥ $C63#´ähg$C276
+$C2GHF ƒDƒD $C63#Šâhg$C276
 #PICT 21
-$C2Â¨½Ð·â²ÄÇ½¤Ê¥¹¥ê¡¼¥×Ãæ¤Î¥æ¥Ë¥Ã¥È
-È¯¡§$C6¼«Æ°°ÂÁ´ÊÝ¾ãÀ©ÅÙ
-¡¡¡¡¡¡¡¡´ÆÆÄ°Ñ°÷²ñ$C2
-°¸¡§$C6Âè»Í¼ï²Ê³Ø¹â´±¡¡¥¯¡¦¥³¡¼$C2
-»²¾È¡§$C6¥æ¥Ë¥Ã¥ÈºÆÊÔ$C2
-¥µ¥¤¥¯¥ë.023.7.0175.7.00014.343244334
-Ç§¾Ú°õ¡§$C6$I»Îµ¤$i
+$C2‘¦oŒ‚‰Â”\‚ÈƒXƒŠ[ƒv’†‚Ìƒ†ƒjƒbƒg
+”­F$C6Ž©“®ˆÀ‘S•Ûá§“x
+@@@@ŠÄ“ÂˆÏˆõ‰ï$C2
+ˆ¶F$C6‘æŽlŽí‰ÈŠw‚Š¯@ƒNEƒR[$C2
+ŽQÆF$C6ƒ†ƒjƒbƒgÄ•Ò$C2
+ƒTƒCƒNƒ‹.023.7.0175.7.00014.343244334
+”FØˆóF$C6$IŽm‹C$i
 
 $C2
-¡¡°Ñ°÷²ñ¤Ï¡¢¾èÁÈ°÷»Îµ¤¤Î¥á¥ó¥Æ¥Ê¥ó¥¹¡Ê$C6¡©°Ý»ý$C2¡Ë¤Ø¤Î¸¥¾å¤ò³ÎÇ§¤·¤Þ¤·¤¿¡£Å¬ÀÚ¤Ê»ñÎÁ´ÉÍý¤òÍÑ°Õ¤·¤Æ¡¢Í¿¤¨¤é¤ì¤¿ÉÔÅ¬Åö¤ÊÀÑ²Ù¤òÅê¤²¼Î¤Æ¤ëµö²Ä¤Ï¡¢¥¬¥¤¥É¥é¥¤¥ó¤Ë¤è¤Ã¤Æ³ÎÎ©¤·¤Æ¤¤¤ë¤È¼õ¤±¼è¤é¤ì¤Þ¤·¤¿¡£ÃíÌÜ¤µ¤ìÈÝÄê¤µ¤ì¤Æ¡¢½½Ê¬¤ËºÆÀß·×¤·¡¢¡Ê$C6¡©ÉÊ¼Á´Æºº$C2¡Ë»ÅÆþ²áÄø¤µ¤ì¤ë¾å¤Ç¡¢Åê´þ¤µ¤ì¤ë¥æ¥Ë¥Ã¥È¤Ï¡¢¤¹¤Ù¤Æ»à°ø¤ò³ÎÄê¤¹¤ë¤¿¤á¤Ë¸¡»à²òË¶¤µ¤ì¤ë¤È´üÂÔ¤Ç¤­¤Þ¤¹¡£
+@ˆÏˆõ‰ï‚ÍAæ‘gˆõŽm‹C‚Ìƒƒ“ƒeƒiƒ“ƒXi$C6HˆÛŽ$C2j‚Ö‚ÌŒ£ã‚ðŠm”F‚µ‚Ü‚µ‚½B“KØ‚ÈŽ‘—¿ŠÇ—‚ð—pˆÓ‚µ‚ÄA—^‚¦‚ç‚ê‚½•s“K“–‚ÈÏ‰×‚ð“Š‚°ŽÌ‚Ä‚é‹–‰Â‚ÍAƒKƒCƒhƒ‰ƒCƒ“‚É‚æ‚Á‚ÄŠm—§‚µ‚Ä‚¢‚é‚ÆŽó‚¯Žæ‚ç‚ê‚Ü‚µ‚½B’–Ú‚³‚ê”Û’è‚³‚ê‚ÄA\•ª‚ÉÄÝŒv‚µAi$C6H•iŽ¿ŠÄ¸$C2jŽd“ü‰ß’ö‚³‚ê‚éã‚ÅA“ŠŠü‚³‚ê‚éƒ†ƒjƒbƒg‚ÍA‚·‚×‚ÄŽ€ˆö‚ðŠm’è‚·‚é‚½‚ß‚ÉŒŸŽ€‰ð–U‚³‚ê‚é‚ÆŠú‘Ò‚Å‚«‚Ü‚·B
 #LOGOFF 20
-$C2cF$C65«íõ‘ŽÞ$C2 ¥¥¥¥ j
+$C2cF$C65†õ‘Þ$C2 ƒDƒD j
 #END
 #ENDTERMINAL 1
 ;
 #TERMINAL 2
 #UNFINISHED
 #LOGON 20
-$C6øùº·Ž¦675$C2 Ž¥ KJ
+$C6ì÷µ¦675$C2 ¥ KJ
 #PICT 22
-$C2µöÍÆÂ»³²¥ì¥Ù¥ë
-È¯¡§$C6Âè°ìµéÉôÂâ»Ø´ø´± 
-¡¡¡¡¡¡¡¡¥³¡¼¡¦¥Ê¥Õ¥¡¡¼¥ë¢ãK'hor Nf'arl¢ä
-$C2°¸¡§$C6¼«Æ°°ÂÁ´ÊÝ¾ãÀ©ÅÙ
-¡¡¡¡¡¡¡¡´ÆÆÄ°Ñ°÷²ñ$C2
-»²¾È¡§$C6µöÍÆÂ»³²¥ì¥Ù¥ë¡Ê¡¿¶èÊ¬¡Ë$C2
-¥µ¥¤¥¯¥ë.023.7.0175.7.00014.343244334
-Ç§¾Ú°õ¡§$IÇ¤°Õ$C6$i
+$C2‹–—e‘¹ŠQƒŒƒxƒ‹
+”­F$C6‘æˆê‹‰•”‘àŽwŠöŠ¯ 
+@@@@ƒR[Eƒiƒtƒ@[ƒ‹áK'hor Nf'arlâ
+$C2ˆ¶F$C6Ž©“®ˆÀ‘S•Ûá§“x
+@@@@ŠÄ“ÂˆÏˆõ‰ï$C2
+ŽQÆF$C6‹–—e‘¹ŠQƒŒƒxƒ‹i^‹æ•ªj$C2
+ƒTƒCƒNƒ‹.023.7.0175.7.00014.343244334
+”FØˆóF$I”CˆÓ$C6$i
 
-¡¡$C2Åë¾èÃæ¤Î»à½ý¼Ô¡¢ÌÜÉ¸¤Ç¤¢¤ëÌÜÅªÃÏÅÀ¤Îµ¡Æ°À­¤Î´ðÃÏ¡Ê$C6¡©Á¥$C2¡Ë¤Ï¡¢¼Â¹Ô¤Î²ÄÇ½À­¤¬¤Ê¤¤¥Ý¥¤¥ó¥È¤ËÃ£¤·¤Æ¤ª¤ê¡¢º£¡¢µðÂçÊ£¹ç´ë¶È¥æ¥Ë¥Ã¥È¡Ê$C6¡©½¸ÃÄ$C2¡Ë£³¤ª¤è¤Ó£´¤Ë¤è¤ë¡¢Ç¤°Õ¤Î¹çÍýÅª¤Ê¹¶·â¤Î²ÄÇ½À­¤ÏÇÓ½ü¤µ¤ì¤Þ¤¹¡£¤³¤ì¤Þ¤Ç¤Î¡¢»à½ý¼Ô¤ÎÃÇ¸Ç¤È¤·¤¿¸¶°ø¤Ï¡¢°ÊÁ°¤ËÆâÉô¶¦Æ±¤Î¥³¥Þ¥ó¥É¥æ¥Ë¥Ã¥È¤Î¥á¥â£É£Ä28.1973.81239.1.12¤Ëµ­ºÜ¤µ¤ì¤Æ¤¤¤ë¡¢Ì¤ÃÎ¤Î¼ü¿Í¤Î¾ò·ïÉÕ¤­¥æ¥Ë¥Ã¥È¤Ë¤¢¤ë¤È»×¤ï¤ì¤Þ¤¹¡£
+@$C2“‹æ’†‚ÌŽ€ŽÒA–Ú•W‚Å‚ ‚é–Ú“I’n“_‚Ì‹@“®«‚ÌŠî’ni$C6H‘D$C2j‚ÍAŽÀs‚Ì‰Â”\«‚ª‚È‚¢ƒ|ƒCƒ“ƒg‚É’B‚µ‚Ä‚¨‚èA¡A‹‘å•¡‡Šé‹Æƒ†ƒjƒbƒgi$C6HW’c$C2j‚R‚¨‚æ‚Ñ‚S‚É‚æ‚éA”CˆÓ‚Ì‡—“I‚ÈUŒ‚‚Ì‰Â”\«‚Í”rœ‚³‚ê‚Ü‚·B‚±‚ê‚Ü‚Å‚ÌAŽ€ŽÒ‚Ì’fŒÅ‚Æ‚µ‚½Œ´ˆö‚ÍAˆÈ‘O‚É“à•”‹¤“¯‚ÌƒRƒ}ƒ“ƒhƒ†ƒjƒbƒg‚Ìƒƒ‚‚h‚c28.1973.81239.1.12‚É‹LÚ‚³‚ê‚Ä‚¢‚éA–¢’m‚ÌŽúl‚ÌðŒ•t‚«ƒ†ƒjƒbƒg‚É‚ ‚é‚ÆŽv‚í‚ê‚Ü‚·B
 #PICT 22
 $C2
-¡¡¥Ê¥Õ¥¡¡¼¥ëÉôÂâÂè°ìµé»Ø´ø´±¤Ï¡¢¤³¤ì¤Ë¤è¤Ã¤Æ¥¿¡¼¥²¥Ã¥È¤È¤µ¤ì¤¿¼çÂê¤ËÂÐ¤¹¤ë¡¢¹¶·âÀ®¸ùÈæ¤Ë¤ª¤±¤ë²þÁ±¤Î´Ö¤Ë¼­É½¤òÄó½Ð¤·¤Þ¤¹¡£
+@ƒiƒtƒ@[ƒ‹•”‘à‘æˆê‹‰ŽwŠöŠ¯‚ÍA‚±‚ê‚É‚æ‚Á‚Äƒ^[ƒQƒbƒg‚Æ‚³‚ê‚½Žå‘è‚É‘Î‚·‚éAUŒ‚¬Œ÷”ä‚É‚¨‚¯‚é‰ü‘P‚ÌŠÔ‚ÉŽ«•\‚ð’ño‚µ‚Ü‚·B
 #LOGOFF 20
-$C2h$C6jf### Âùø÷$C2 -
+$C2h$C6jf### ‘÷ìõ$C2 -
 #END
 #ENDTERMINAL 2
 ;
@@ -67,9 +67,9 @@ $C2h$C6jf### Âùø÷$C2 -
 #LOGON 0
 $C3brink.feed
 #PICT 31
-¡¡$I¥Ö¡¼¥Þ¡¼$i¤ÎºÕ¤±¤¿Ï­²¼¤Ç¡¢·¯¤Ï¥¨¥¤¥ê¥¢¥óÁê¼ê¤Ë³Ú¾¡¤·¤Æ¤¤¤¿¤À¤í¡©·¯¤Î¼þ¤ê¤ÇÇúÈ¯¤¹¤ë¡¢¥×¥Õ¥©¡¼¥ë¤Î¥°¥ì¥Í¡¼¥ÉÃÆ¤Î²»¤ä¥Ï¥ó¥¿¡¼¤ÎÅÅ¸÷¤Î²»¤Ï¡¢²æ¡¹¤¬¤¤¤¯¤Ä¤â¤ÎÀï¾ì¤ò¤¯¤°¤êÈ´¤±¤Æ¤­¤¿»þ¤Î¡¢³Ú¤·¤¤»×¤¤½Ð¤ò×Ç×Ê¤È¤µ¤»¤ë¤À¤í¤¦¡£ÀµÄ¾¤À¤Ã¤¿¤¿¤á¤Ë¡¢»ä¤Ï¡¢Çº¤ó¤Ç¤¤¤ë·¯¤òÏ¢¤ì¤Æ¶ä²ÏÃæ¤òÍ·¤ÓÊâ¤­²ó¤Ã¤¿¤â¤ó¤À¤Ê¡£¤½¤³¤Ç»ä¤Ï¿§¡¹¤Ê¤³¤È¤ò³Ø¤Ó¡¢·¯¤È¿ÆÌ©¤Ê´Ø·¸¤Ë¤Ê¤Ã¤¿¡£¤Þ¤À¡¢°ì¤Ä¤À¤±¤¹¤Ù¤­¤³¤È¤¬¡¢·¯¤Î¼þ°Ï¤ÎÀ±³¦¿Þ¤òºî¤ë»ö¤À¤È»×¤¦¤ÈÂà¶þ¤Ë¤Ê¤ë¡£
+@$Iƒu[ƒ}[$i‚ÌÓ‚¯‚½˜L‰º‚ÅAŒN‚ÍƒGƒCƒŠƒAƒ“‘ŠŽè‚ÉŠyŸ‚µ‚Ä‚¢‚½‚¾‚ëHŒN‚ÌŽü‚è‚Å”š”­‚·‚éAƒvƒtƒH[ƒ‹‚ÌƒOƒŒƒl[ƒh’e‚Ì‰¹‚âƒnƒ“ƒ^[‚Ì“dŒõ‚Ì‰¹‚ÍA‰äX‚ª‚¢‚­‚Â‚à‚Ìíê‚ð‚­‚®‚è”²‚¯‚Ä‚«‚½Žž‚ÌAŠy‚µ‚¢Žv‚¢o‚ðœfœi‚Æ‚³‚¹‚é‚¾‚ë‚¤B³’¼‚¾‚Á‚½‚½‚ß‚ÉAŽ„‚ÍA”Y‚ñ‚Å‚¢‚éŒN‚ð˜A‚ê‚Ä‹â‰Í’†‚ð—V‚Ñ•à‚«‰ñ‚Á‚½‚à‚ñ‚¾‚ÈB‚»‚±‚ÅŽ„‚ÍFX‚È‚±‚Æ‚ðŠw‚ÑAŒN‚Æe–§‚ÈŠÖŒW‚É‚È‚Á‚½B‚Ü‚¾Aˆê‚Â‚¾‚¯‚·‚×‚«‚±‚Æ‚ªAŒN‚ÌŽüˆÍ‚Ì¯ŠE}‚ðì‚éŽ–‚¾‚ÆŽv‚¤‚Æ‘Þ‹ü‚É‚È‚éB
 
-¡¡¤³¤ì¤«¤é·¯¤ò$I¥í¥¸¥Ê¥ó¥Æ$i¤ËÅ¾Á÷¤¹¤ë¡£¼¡¤Î¥ß¥Ã¥·¥ç¥ó¤Ï¥¢¥Ã¥×¥ê¥ó¥¯¡¦¥Á¥Ã¥×¤Î²ó¼ý¤Èº¤Æñ¤Ê¿¿¶õ¤ØÆÍÆþ¤¹¤ë¤³¤È¤À¡£ÊÑ²½¤È¤Ï¿ÍÀ¸¤ÎÌôÌ£¡£·¯¤âÃÎ¤Ã¤Æ¤ë¤À¤í¡©
+@‚±‚ê‚©‚çŒN‚ð$IƒƒWƒiƒ“ƒe$i‚É“]‘—‚·‚éBŽŸ‚Ìƒ~ƒbƒVƒ‡ƒ“‚ÍƒAƒbƒvƒŠƒ“ƒNEƒ`ƒbƒv‚Ì‰ñŽû‚Æ¢“ï‚È^‹ó‚Ö“Ë“ü‚·‚é‚±‚Æ‚¾B•Ï‰»‚Æ‚Íl¶‚Ì–ò–¡BŒN‚à’m‚Á‚Ä‚é‚¾‚ëH
 #LOGOFF 0
 EOF brk $C3#$bs1001011010011$C0
 #INTERLEVEL TELEPORT 57
@@ -79,38 +79,38 @@ EOF brk $C3#$bs1001011010011$C0
 #TERMINAL 4
 #UNFINISHED
 #LOGON 400
-$C5Ž§HF¢¦\¢äŽ´ ¥¥Ž¥ H
+$C5§HF¤\â´ ƒD¥ H
 #INFORMATION
-$C5¤â¤·¡¢Ìµ°Õ¼±¤Î
-¿Í¤¬¤¤¤¿¤È¤¹¤ì¤Ð¡¢
+$C5‚à‚µA–³ˆÓŽ¯‚Ì
+l‚ª‚¢‚½‚Æ‚·‚ê‚ÎA
 
-²¿¤ò¿Í¤Ï°Å°Ç¤Ë
-¶²ÉÝ¤¹¤ë¤Î¤Ç¤¢¤í¤¦¤«
-²¿¤ò¿Í¤Ï¿¿Ãë¤Î±Æ¤Ë
-¶Ã¤«¤µ¤ì¤ë¤Î¤À¤í¤¦¤«
+‰½‚ðl‚ÍˆÃˆÅ‚É
+‹°•|‚·‚é‚Ì‚Å‚ ‚ë‚¤‚©
+‰½‚ðl‚Í^’‹‚Ì‰e‚É
+‹Á‚©‚³‚ê‚é‚Ì‚¾‚ë‚¤‚©
 
-¶²¤é¤¯¿Í¤Ï¡¢¤è¤¤¹Ô¤¤¤ò¤·¤Æ
-¶²¤é¤¯¿Í¤Ï¡¢¤½¤¦¤Ç¤Ï¤Ê¤¤
+‹°‚ç‚­l‚ÍA‚æ‚¢s‚¢‚ð‚µ‚Ä
+‹°‚ç‚­l‚ÍA‚»‚¤‚Å‚Í‚È‚¢
 
-¿Í¤Ï¡¢³Î¤«¤Ë´Ö°ã¤Ã¤Æ¤¤¤¿
+l‚ÍAŠm‚©‚ÉŠÔˆá‚Á‚Ä‚¢‚½
 #INFORMATION
-$C5¤·¤«¤·¿Í¤Ï
-´î¤ó¤Ç¤¤¤Æ¤â¡¢
-¤½¤¦¤Ç¤Ê¤¯¤È¤â¡¢
-Àä¤¨¤º¸Å¤¤µ­²±¤ò
-Ãµ¤·µá¤á¤Æ¤¤¤¯
+$C5‚µ‚©‚µl‚Í
+Šì‚ñ‚Å‚¢‚Ä‚àA
+‚»‚¤‚Å‚È‚­‚Æ‚àA
+â‚¦‚¸ŒÃ‚¢‹L‰¯‚ð
+’T‚µ‹‚ß‚Ä‚¢‚­
 
-¤½¤¦¤¹¤ë¤³¤È¤Ç¡¢¤¤¤º¤ì¾¯Ç¯»þÂå¤Ø
-²óµ¢¤Ç¤­¤ë¤Î¤Ç¤Ï¤Ê¤¤¤«¤È¤¤¤¦
-²¾½é¤á¤Î´õË¾¤Ëå×¤êÉÕ¤¯
-¤½¤ì¤Ï¶²¤é¤¯¡¢²¿½è¤Ë¤â
-Â¸ºß¤·¤Ê¤¤¤Î¤«¤â¤·¤ì¤Ê¤¤
+‚»‚¤‚·‚é‚±‚Æ‚ÅA‚¢‚¸‚ê­”NŽž‘ã‚Ö
+‰ñ‹A‚Å‚«‚é‚Ì‚Å‚Í‚È‚¢‚©‚Æ‚¢‚¤
+‰¼‰‚ß‚ÌŠó–]‚Éãv‚è•t‚­
+‚»‚ê‚Í‹°‚ç‚­A‰½ˆ‚É‚à
+‘¶Ý‚µ‚È‚¢‚Ì‚©‚à‚µ‚ê‚È‚¢
 
-¤Ê¤¼¤Ê¤é¤Ð¡¢½ã·é¤³¤½¤¬
-Ìµ¾å¤Î¹¬Ê¡¤Ç¤¢¤ë¤«¤é
+‚È‚º‚È‚ç‚ÎAƒŒ‰‚±‚»‚ª
+–³ã‚ÌK•Ÿ‚Å‚ ‚é‚©‚ç
 
-¤½¤·¤Æº£¡¢»ä¤ÏÍý²ò¤·¤¿
+‚»‚µ‚Ä¡AŽ„‚Í—‰ð‚µ‚½
 #LOGOFF 400
-$C5Žà%Ž¦{}h ----
+$C5à%¦{}h ----
 #END
 #ENDTERMINAL 4

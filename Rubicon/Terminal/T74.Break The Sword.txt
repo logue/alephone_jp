@@ -691,56 +691,56 @@ $C1plbbtbtbtbth
 #LOGON 500
 $C1mdk
 #PICT 505
-$C3
-$C7When we ($C4Jeff Schwartz$C7,$C4 Chris Wondra$C7,$C4 Tim Thomas $C7and $C4I$C7) made these levels, we made them so they would be challenging for us, so we wouldn't be able to stroll through the levels blindfolded.
 
-This turned out to be too tough for the betatesters.　Way too tough.　They completed the levels by cheating or by playing on kindergarden, swearing at the mapmakers every time they had their posteriour handed to them.
+$C7　これらのレベルを作成したとき、私たち（$C4Jeff Schwartz$C7，$C4Chris Wondra$C7，$C4Tim Thomas$C7そして$C4私$C7）は、レベルの順番通りに歩き回ることができないように、そして挑戦したくなるように作りました。
 
-So the monsters had to be pruned (meaning$C3 $C420-25%$C3 $C7of the monsters are gone in most levels). The result are levels that won't kill you before your feet hit the ground.$C0
+　この処置は、ベーターテスターにとってはあまりに難しすぎました。行程が難しすぎます。結局、チートしたり、幼稚園レベルで遊ぶことでやっと完遂しました。行き詰まるたびにマップ作成者に毒づくと、そのレベルは後ろの方に回されていきました。
+
+　このため、モンスターの数を減らさなければならなくなりました。（ほとんどのレベルの$C4２０～２５％$C3が無くなりました）その結果、あなたの足が地に着くまでにあなたを殺さないレベルができました。$C0
 #PICT 505
 $C3
 
-$C7But two of the levels were kept in their original lethal state as a reward to anyone clever enough to find this terminal. 
-$C4
-You are about to enter one of those levels.
-$C0
-$C7If you're not sure you're up to it, then press $C4[esc] $C7now and return to the kinder, more gentle levels.
+　$C7しかし、この中のレベルのうち２つは、このターミナルを見つけるほど利口な誰かへの報酬としてオリジナルの致死に値する難易度の状態にしてあります。$C4
+
+　これから、あなたは、それらのレベルのうちの１つに入るところです。
+
+　$C7無理だと思ったら、すぐに$C4「エスケープ」$C7キーを押して、より親切で穏和なレベルに戻ってください。
 #PICT 505
 $C3
 $C7
-But two of the levels were kept in their original lethal state as a reward to anyone clever enough to find this terminal. 
-$C4
-You are about to enter one of those levels.$C0
+　$C7しかし、この中のレベルのうち２つは、このターミナルを見つけるほど利口な誰かへの報酬としてオリジナルの致死に値する難易度の状態にしてあります。$C4
 
-$C7If you're not sure you're up to it, then press $C4[esc]$C7 now and return to the kinder, more gentle levels.
-$C4
-Are you sure you want to continue?　The next level is very difficult.$C0
+　これから、あなたは、それらのレベルのうちの１つに入るところです。
+
+　$C7無理だと思ったら、すぐに$C4「エスケープ」$C7キーを押して、より親切で穏和なレベルに戻ってください。
+
+　$C4続けますか？次のレベルは非常に困難ですよ。$C0
 #PICT 505
 $C3
 $C7
-But two of the levels were kept in their original lethal state as a reward to anyone clever enough to find this terminal. 
+　しかし、この中のレベルのうち２つは、このターミナルを見つけるほど利口な誰かへの報酬としてオリジナルの致死に値する難易度の状態にしてあります。
 $C4
-You are about to enter one of those levels.
+　これから、あなたは、それらのレベルのうちの１つに入るところです。
 $C7
-If you're not sure you're up to it, then press$C3 $C4[esc]$C3 $C7now and return to the kinder, more gentle levels.
+　無理だと思ったら、すぐに$C4「エスケープ」$C7キーを押して、より親切で穏和なレベルに戻ってください。
 
-Are you sure you want to continue?　The next level is very difficult.
+　続けますか？次のレベルは非常に困難ですよ。
 $C4
-It made some of the betatesters cry.$C0
+　何人ものベーターテスターを泣かせましたよ。$C0
 #PICT 505
 $C3
 $C7
-But two of the levels were kept in their original lethal state as a reward to anyone clever enough to find this terminal. 
+　しかし、この中のレベルのうち２つは、このターミナルを見つけるほど利口な誰かへの報酬としてオリジナルの致死に値する難易度の状態にしてあります。 
 $C4
-You are about to enter one of those levels.$C0
+　これから、あなたは、それらのレベルのうちの１つに入るところです。
 $C7
-If you're not sure you're up to it, then press$C3 $C4[esc]$C3 $C7now and return to the kinder, more gentle levels.
+　無理だと思ったら、すぐに$C4「エスケープ」$C7キーを押して、より親切で穏和なレベルに戻ってください。
 
-Are you sure you want to continue?　The next level is very difficult.
+　続けますか？次のレベルは非常に困難ですよ。
 
-It made some of the betatesters cry.$C4
+　何人ものベーターテスターを泣かせましたよ。$C4
 
-So be it.　Prepare to have your cherries blasted.
+　いいでしょう。チェリーを爆破する準備をしてください。
 #LOGOFF 500
 #INTERLEVEL TELEPORT 63
 #END
