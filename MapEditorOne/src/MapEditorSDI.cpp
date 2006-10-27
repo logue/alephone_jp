@@ -238,6 +238,10 @@ bool CMapEditorSDIApp::initialize(){
     menuIDMap[EM_DRAW] = ID_32795;
     menuIDMap[EM_VISUAL] = ID_32796;
     setEditMode(EM_DRAW);
+
+    isNowOnThePoint = false;
+
+
     return true;
 }
 
@@ -446,8 +450,10 @@ int searchSelectPolygon(int viewPX, int viewPY)
 world_point2d getWorldPoint2DFromViewPoint(int viewPX, int viewPY)
 {
     world_point2d point;
-    point.x = (world_distance)((viewPX - theApp.offset.x) * theApp.zoomDivision - OFFSET_X_WORLD);
-    point.y = (world_distance)((viewPY + theApp.offset.y) * theApp.zoomDivision - OFFSET_Y_WORLD);
+    point.x = (world_distance)((viewPX - theApp.offset.x) *
+        theApp.zoomDivision - OFFSET_X_WORLD);
+    point.y = (world_distance)((viewPY - theApp.offset.y) *
+        theApp.zoomDivision - OFFSET_Y_WORLD);
     return point;
 }
 void getViewPointFromWorldPoint2D(world_point2d& point, int *dest)
@@ -460,20 +466,26 @@ void getViewPointFromWorldPoint2D(world_point2d& point, int *dest)
 void setCursor()
 {
     //
-    LPWSTR cursors[] = {
-        IDC_HAND,
-        IDC_HAND,
-        IDC_HAND,
-        IDC_HAND,
-        IDC_HAND,
-        IDC_HAND,
-        IDC_HAND
+    int cursors[] = {
+        (IDC_CURSOR_ARROW),
+        (IDC_CURSOR_FILL),
+        (IDC_CURSOR_HAND),
+        (IDC_CURSOR_LINE),//line
+        (IDC_CURSOR_MAGNIFY),//magnify
+        (IDC_CURSOR_SKULL),//skull
+        (IDC_CURSOR_TEXT),//ibeam
+        (IDC_CURSOR_POLYGON)    //polygon
     };
+    int cursorId = cursors[theApp.selectingToolType];
+    if(theApp.selectingToolType == TI_LINE && theApp.isNowOnThePoint){
+        cursorId = IDC_CURSOR_POINT;
+    }
     //ƒJ[ƒ\ƒ‹•Ï‰»
-    HCURSOR cursor = LoadCursor(AfxGetInstanceHandle(), MAKEINTRESOURCE(IDC_CURSOR_FILL));
-        //cursors[theApp.selectingToolType]);
-    //SetCursor(cursor);
-    SetClassLong(AfxGetMainWnd()->m_hWnd, GCL_HCURSOR, NULL);
+    HCURSOR cursor = LoadCursor(AfxGetInstanceHandle(),
+        //MAKEINTRESOURCE(cursor[));
+        MAKEINTRESOURCE(cursorId));
+    SetCursor(cursor);
+    //SetClassLong(AfxGetMainWnd()->m_hWnd, GCL_HCURSOR, NULL);
     //SetCursor(cursor);
     ShowCursor(TRUE);
 }

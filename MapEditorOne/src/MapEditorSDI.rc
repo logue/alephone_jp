@@ -887,6 +887,14 @@ IDR_HTML_HEIGHTDIALOG   HTML                    "res\\HeightDialog.htm"
 //
 
 IDC_CURSOR_FILL         CURSOR                  "res\\cursor1.cur"
+IDC_CURSOR_SKULL        CURSOR                  "res\\cursor2.cur"
+IDC_CURSOR_HAND         CURSOR                  "res\\cur00001.cur"
+IDC_CURSOR_LINE         CURSOR                  "res\\cursor3.cur"
+IDC_CURSOR_TEXT         CURSOR                  "res\\cur00002.cur"
+IDC_CURSOR_MAGNIFY      CURSOR                  "res\\cur00003.cur"
+IDC_CURSOR_POLYGON      CURSOR                  "res\\cur00004.cur"
+IDC_CURSOR_ARROW        CURSOR                  "res\\cur00005.cur"
+IDC_CURSOR_POINT        CURSOR                  "res\\cur00006.cur"
 
 /////////////////////////////////////////////////////////////////////////////
 //

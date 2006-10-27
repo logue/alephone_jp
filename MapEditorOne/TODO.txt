@@ -8,8 +8,9 @@
 		hand(done)
 		zoom(done)
 		annotation(text)
+			->
 		create prepared polygon ;-)
-			set button's image
+			set button's image(done)
 	-object property dialog
 		launch by...
 		directions=facing

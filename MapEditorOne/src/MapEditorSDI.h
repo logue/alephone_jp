@@ -309,6 +309,9 @@ public:
     //polygon to draw by preset
     int numberOfPolygonPoints;
 
+    //is now on the point
+    bool isNowOnThePoint;
+
 private:
     //edit mode
     int editMode;

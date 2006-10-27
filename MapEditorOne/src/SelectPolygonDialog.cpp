@@ -86,33 +86,33 @@ void CSelectPolygonDialog::OnBnClickedButton1()
 {
     // TODO: ここにコントロール通知ハンドラ コードを追加します。
     pointsOfPolygon = 3;
-    DestroyWindow();
+    OnOK();
 }
 
 void CSelectPolygonDialog::OnBnClickedButton2()
 {
     // TODO: ここにコントロール通知ハンドラ コードを追加します。
     pointsOfPolygon = 4;
-    DestroyWindow();
+    OnOK();
 }
 void CSelectPolygonDialog::OnBnClickedButton3()
 {
     // TODO: ここにコントロール通知ハンドラ コードを追加します。
     pointsOfPolygon = 5;
-    DestroyWindow();
+    OnOK();
 }
 void CSelectPolygonDialog::OnBnClickedButton4()
 {
     pointsOfPolygon = 6;
-    DestroyWindow();
+    OnOK();
 }
 void CSelectPolygonDialog::OnBnClickedButton5()
 {
     pointsOfPolygon = 7;
-    DestroyWindow();
+    OnOK();
 }
 void CSelectPolygonDialog::OnBnClickedButton6()
 {
     pointsOfPolygon = 8;
-    DestroyWindow();
+    OnOK();
 }

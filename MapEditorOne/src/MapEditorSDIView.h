@@ -36,7 +36,8 @@ protected:
 	virtual void OnEndPrinting(CDC* pDC, CPrintInfo* pInfo);
     void addZoom(int step);
     void createDoubleBuffer();
-
+    void moveMapOffset(int newPx, int newPy);
+    void setStartPointForSelectGroup(int px, int py);
 // ŽÀ‘•
 public:
 	virtual ~CMapEditorSDIView();

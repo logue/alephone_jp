@@ -297,3 +297,69 @@ void CMapEditorSDIView::OnModePolygontype()
     theApp.polygonPropertyDialog->ShowWindow(FALSE);
     
 }
+
+// new file
+void CMapEditorSDIView::OnFileNew()
+{
+    // TODO: ここにコマンド ハンドラ コードを追加します。
+    //確認ダイアログ
+    //マップ情報ダイアログ表示
+    CLevelParameterDialog dlg(this, true);
+    if(dlg.DoModal() == IDOK){
+        //マップ情報削除
+        initialize_map_for_new_level();
+        //レベル一覧削除
+        theApp.LevelNameList.RemoveAll();
+        //
+        Invalidate(FALSE);
+        theApp.isChanged = false;
+    }
+}
+//visual mode dialog
+void CMapEditorSDIView::On32796()
+{
+    // TODO: ここにコマンド ハンドラ コードを追加します。
+    if(theApp.isLoadedShapesFile){
+        setStatusBar(0, _T("start visual mode"));
+        CVisualDialog dlg(this);
+
+        if(dlg.DoModal() == IDOK){
+        }
+    }else{
+        AfxMessageBox(L"visual mode requires Shapes files of Marathon!!!");
+    }
+}
+//object placement
+void CMapEditorSDIView::On32788()
+{
+    // TODO : ここにコマンド ハンドラ コードを追加します。
+    CObjectPlacementDialog dlg(this);
+    setStatusBar(0, L"object placement");
+    if(dlg.DoModal() == IDOK){
+        //内容を反映
+    }
+}
+//tool dialog
+void CMapEditorSDIView::OnMenu32797()
+{
+    // TODO: ここにコマンド ハンドラ コードを追加します。
+    theApp.toolDialog->ShowWindow(!theApp.toolDialog->IsWindowVisible());
+}
+
+//Preferences
+void CMapEditorSDIView::On32808()
+{
+    // TODO: ここにコマンド ハンドラ コードを追加します。
+    CEditorInforDialog dlg(AfxGetMainWnd());
+    if(dlg.DoModal() == IDOK){
+        //enable change
+        theApp.setting.setGridSizeIndex(dlg.gridIndex);
+
+        theApp.setting.setColorSetting(&dlg.colorSetting);
+
+        for(int i = 0; i < NUMBER_OF_EDITOR_FLAGS; i ++){
+            theApp.setting.flags[i] = dlg.flags[i];
+        }
+        Invalidate(FALSE);
+    }
+}

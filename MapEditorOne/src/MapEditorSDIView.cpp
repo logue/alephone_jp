@@ -794,6 +794,9 @@ int CMapEditorSDIView::OnCreate(LPCREATESTRUCT lpCreateStruct)
         load_collections(false, false);
     }
 
+    delete theApp.m_SDLToWindows;
+
+
     theApp.objectPropertyDialog = new CMonsterPropertyDialog;
     theApp.objectPropertyDialog->Create(this);
     //隠す
@@ -823,53 +826,6 @@ int CMapEditorSDIView::OnCreate(LPCREATESTRUCT lpCreateStruct)
     //delete theApp.m_SDLToWindows;
     return 0;
 }
-// new file
-void CMapEditorSDIView::OnFileNew()
-{
-    // TODO: ここにコマンド ハンドラ コードを追加します。
-    //確認ダイアログ
-    //マップ情報ダイアログ表示
-    CLevelParameterDialog dlg(this, true);
-    if(dlg.DoModal() == IDOK){
-        //マップ情報削除
-        initialize_map_for_new_level();
-        //レベル一覧削除
-        theApp.LevelNameList.RemoveAll();
-        //
-        Invalidate(FALSE);
-        theApp.isChanged = false;
-    }
-}
-//visual mode dialog
-void CMapEditorSDIView::On32796()
-{
-    // TODO: ここにコマンド ハンドラ コードを追加します。
-    if(theApp.isLoadedShapesFile){
-        setStatusBar(0, _T("start visual mode"));
-        CVisualDialog dlg(this);
-
-        if(dlg.DoModal() == IDOK){
-        }
-    }else{
-        AfxMessageBox(L"visual mode requires Shapes files of Marathon!!!");
-    }
-}
-//object placement
-void CMapEditorSDIView::On32788()
-{
-    // TODO : ここにコマンド ハンドラ コードを追加します。
-    CObjectPlacementDialog dlg(this);
-    setStatusBar(0, L"object placement");
-    if(dlg.DoModal() == IDOK){
-        //内容を反映
-    }
-}
-//tool dialog
-void CMapEditorSDIView::OnMenu32797()
-{
-    // TODO: ここにコマンド ハンドラ コードを追加します。
-    theApp.toolDialog->ShowWindow(!theApp.toolDialog->IsWindowVisible());
-}
 
 BOOL CMapEditorSDIView::OnSetCursor(CWnd* pWnd, UINT nHitTest, UINT message)
 {
@@ -895,66 +851,3 @@ BOOL CMapEditorSDIView::OnSetCursor(CWnd* pWnd, UINT nHitTest, UINT message)
     //return CView::OnSetCursor(pWnd, nHitTest, message);
 }
 
-// press event of Right button
-void CMapEditorSDIView::OnRButtonDown(UINT nFlags, CPoint point)
-{
-    // TODO: ここにメッセージ ハンドラ コードを追加するか、既定の処理を呼び出します。
-
-    theApp.nowMousePoint = point;
-    theApp.oldMousePoint = point;
-
-    int OFFSET_X_VIEW = theApp.offset.x;
-    int OFFSET_Y_VIEW = theApp.offset.y;
-    int DIV = theApp.zoomDivision;
-
-    if(theApp.selectingToolType != TI_LINE){
-        theApp.isFirstOfLineToAdd = true;
-        theApp.previousPointIndex = NONE;
-    }
-
-    if(theApp.selectingToolType == TI_ARROW){
-    }else if(theApp.selectingToolType == TI_FILL){
-    }else if(theApp.selectingToolType == TI_HAND){
-    }else if( theApp.selectingToolType == TI_LINE){
-        if(nFlags & MK_RBUTTON){
-            //stop adding points
-            theApp.isFirstOfLineToAdd = true;
-            theApp.previousPointIndex = NONE;
-        }
-    }else if(theApp.selectingToolType == TI_MAGNIFY){
-    }else if(theApp.selectingToolType == TI_SKULL){
-    }else if(theApp.selectingToolType == TI_TEXT){
-    }else if(theApp.selectingToolType == TI_POLYGON){
-
-    }
-    Invalidate(FALSE);
-    CView::OnRButtonDown(nFlags, point);
-    SetCapture();
-}
-
-void CMapEditorSDIView::OnRButtonUp(UINT nFlags, CPoint point)
-{
-    // TODO: ここにメッセージ ハンドラ コードを追加するか、既定の処理を呼び出します。
-
-    Invalidate(FALSE);
-    ReleaseCapture();
-    CView::OnRButtonUp(nFlags, point);
-}
-
-//Preferences
-void CMapEditorSDIView::On32808()
-{
-    // TODO: ここにコマンド ハンドラ コードを追加します。
-    CEditorInforDialog dlg(AfxGetMainWnd());
-    if(dlg.DoModal() == IDOK){
-        //enable change
-        theApp.setting.setGridSizeIndex(dlg.gridIndex);
-
-        theApp.setting.setColorSetting(&dlg.colorSetting);
-
-        for(int i = 0; i < NUMBER_OF_EDITOR_FLAGS; i ++){
-            theApp.setting.flags[i] = dlg.flags[i];
-        }
-        Invalidate(FALSE);
-    }
-}

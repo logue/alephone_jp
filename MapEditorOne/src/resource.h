@@ -63,13 +63,21 @@
 #define IDD_DIALOG_COLOR_CUSTOMIZE      235
 #define IDD_DIALOG_ANNOTATION           236
 #define IDD_DIALOG_SELECT_POLYGON       237
-#define IDB_BITMAP1                     238
 #define IDB_BITMAP_POLYGON3             238
 #define IDB_BITMAP_POLYGON4             239
+#define IDC_CURSOR_SKULL                239
 #define IDB_BITMAP_POLYGON5             240
+#define IDC_CURSOR_HAND                 240
 #define IDB_BITMAP_POLYGON6             241
+#define IDC_CURSOR_LINE                 241
 #define IDB_BITMAP_POLYGON7             242
+#define IDC_CURSOR_TEXT                 242
 #define IDB_BITMAP_POLYGON8             243
+#define IDC_CURSOR_MAGNIFY              243
+#define IDC_CURSOR_POLYGON              244
+#define IDC_CURSOR_ARROW                245
+#define IDC_CURSOR2                     246
+#define IDC_CURSOR_POINT                246
 #define IDC_LIST1                       1000
 #define IDC_LIST2                       1002
 #define IDC_COMBO1                      1003
@@ -198,7 +206,7 @@
 // 
 #ifdef APSTUDIO_INVOKED
 #ifndef APSTUDIO_READONLY_SYMBOLS
-#define _APS_NEXT_RESOURCE_VALUE        239
+#define _APS_NEXT_RESOURCE_VALUE        247
 #define _APS_NEXT_COMMAND_VALUE         32809
 #define _APS_NEXT_CONTROL_VALUE         1059
 #define _APS_NEXT_SYMED_VALUE           104
