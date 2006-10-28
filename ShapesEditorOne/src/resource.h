@@ -12,7 +12,6 @@
 #define IDD_DIALOG_BITMAP_CLUT          131
 #define IDD_DIALOG_BITMAP_IMAGES        132
 #define IDR_MENU1                       133
-#define IDD_DIALOG1                     134
 #define IDD_DIALOG_SHOW_IMAGE           134
 #define IDC_BUTTON1                     1000
 #define IDC_BUTTON2                     1001
@@ -26,6 +25,7 @@
 #define IDC_COMBO2                      1008
 #define IDC_SLIDER1                     1009
 #define IDC_EDIT2                       1010
+#define IDC_DUMMY_                      1011
 #define ID_FILE_NEW32771                32771
 #define ID_FILE_OPEN32772               32772
 #define ID_FILE_CLOSE32773              32773
@@ -37,7 +37,7 @@
 #ifndef APSTUDIO_READONLY_SYMBOLS
 #define _APS_NEXT_RESOURCE_VALUE        135
 #define _APS_NEXT_COMMAND_VALUE         32775
-#define _APS_NEXT_CONTROL_VALUE         1011
+#define _APS_NEXT_CONTROL_VALUE         1012
 #define _APS_NEXT_SYMED_VALUE           101
 #endif
 #endif

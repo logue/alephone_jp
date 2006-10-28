@@ -12,7 +12,7 @@ const int PANEL_HEIGHT = 100;
 const int PANEL_COLUMN_SKIP = 1;
 const int PANEL_ROW_SKIP = 1;
 const int PANEL_SIZE_STEP = 5;
-int NUMBER_OF_MAX_ROWS = 30;
+int NUMBER_OF_MAX_ROWS = 50;
 
 // CBitmapImagesDialog ダイアログ
 
@@ -26,8 +26,9 @@ CBitmapImagesDialog::CBitmapImagesDialog(CWnd* pParent /*=NULL*/)
 
 CBitmapImagesDialog::~CBitmapImagesDialog()
 {
+    freeBitmaps();
     bufferBitmap.DeleteObject();
-    memDC.DeleteDC();
+    bufferDC.DeleteDC();
 }
 
 void CBitmapImagesDialog::DoDataExchange(CDataExchange* pDX)
@@ -66,22 +67,29 @@ BOOL CBitmapImagesDialog::OnInitDialog()
 //    zoom = 0;
     offset = 0;
     selectBitmapIndex = NONE;
-    memDC.CreateCompatibleDC(this->GetDC());
+    bufferDC.CreateCompatibleDC(this->GetDC());
     CRect imageRect;
     getImageRect(&imageRect);
 
-    int width = PANEL_WIDTH + PANEL_SIZE_STEP;// * zoom;
-    int holizontalPanelNum = imageRect.Width() / 
-        (width + PANEL_COLUMN_SKIP);
-    int height = PANEL_HEIGHT + PANEL_SIZE_STEP;// * zoom;
+    CRect destRect;
+    getDestRect(&destRect, 0, imageRect);
 
-    int maxHeight = height * NUMBER_OF_MAX_ROWS;
+    int maxHeight = destRect.Height() * NUMBER_OF_MAX_ROWS;
     scrollSlider.SetRange(0, maxHeight);
     bufferBitmap.CreateCompatibleBitmap(this->GetDC(), 
-        imageRect.Width(), maxHeight);
-    memDC.SelectObject(bufferBitmap);
+        imageRect.Width(), imageRect.Height());
+    bufferDC.SelectObject(bufferBitmap);
     return TRUE;  // return TRUE unless you set the focus to a control
     // 例外 : OCX プロパティ ページは必ず FALSE を返します。
+}
+
+void CBitmapImagesDialog::freeBitmaps()
+{
+    for(int i = 0; i < (int)stockBitmapList.size(); i ++){
+        stockBitmapList[i]->DeleteObject();
+        delete stockBitmapList[i];
+    }
+    stockBitmapList.clear();
 }
 
 void CBitmapImagesDialog::setupDialog()
@@ -90,6 +98,8 @@ void CBitmapImagesDialog::setupDialog()
     selectBitmapIndex = NONE;
 
     if(theApp.isShapesLoaded){
+        scrollSlider.SetPos(0);
+
         //store clut
         struct collection_header* header = get_collection_header(collectionIndex);
         int clutNum = header->collection->clut_count;
@@ -106,7 +116,7 @@ void CBitmapImagesDialog::setupDialog()
         idNum.SetString(CString(cstr));
 
         //draw images
-        draw(&memDC);
+        draw(&bufferDC);
     }
     UpdateData();
     Invalidate(FALSE);
@@ -115,13 +125,32 @@ void CBitmapImagesDialog::setupDialog()
 void CBitmapImagesDialog::getImageRect(CRect* rect)
 {
     CRect panelRect;
-    this->GetWindowRect(&panelRect);
+    this->GetClientRect(&panelRect);
 
     *rect = panelRect;
     rect->left = 0;
     rect->top = LENGTH_OF_TOP_MERGE;
     rect->right = rect->left + rect->Width() - LENGTH_OF_RIGHT_DELTA;
     rect->bottom = rect->top + rect->Height() - LENGTH_OF_TOP_MERGE;
+}
+
+void CBitmapImagesDialog::getDestRect(CRect* rect, int index, CRect& imageRect)
+{
+    int width = PANEL_WIDTH + PANEL_SIZE_STEP;// * zoom;
+    int holizontalPanelNum = imageRect.Width() / 
+        (width + PANEL_COLUMN_SKIP) ;
+    int height = PANEL_HEIGHT + PANEL_SIZE_STEP;// * zoom;
+
+    int left = //imageRect.left + 
+        (index % holizontalPanelNum) *
+        (width + PANEL_COLUMN_SKIP);
+    int top = //LENGTH_OF_TOP_MERGE +
+        //imageRect.top + 
+        (index / holizontalPanelNum) * 
+        (height + PANEL_ROW_SKIP);
+    top -= this->offset;
+    rect->SetRect(left, top, left + width, top + height);
+    
 }
 
 void CBitmapImagesDialog::draw(CDC *cdc)
@@ -131,9 +160,15 @@ void CBitmapImagesDialog::draw(CDC *cdc)
 
     cdc->SelectObject(GetStockObject(LTGRAY_BRUSH));
     cdc->Rectangle(&imageRect);
+    
+    //CRect rect(0, 0, imageRect.Width(), imageRect.Height());
+    //bufferDC.SelectObject(GetStockObject(LTGRAY_BRUSH));
+    //bufferDC.Rectangle(rect);
 
     SDLToWindows *sdlToWin = new SDLToWindows(this->m_hWnd, imageRect);
     screenSurface = sdlToWin->getSurface();
+
+    freeBitmaps();
     if(theApp.isShapesLoaded){
         int collectionIndex = ((CBitmapsDialog*)parent)->collection;
 
@@ -144,14 +179,17 @@ void CBitmapImagesDialog::draw(CDC *cdc)
         //get number of bitmaps
         int bitmapNum = header->collection->bitmap_count;
 
+        /*
         int width = PANEL_WIDTH + PANEL_SIZE_STEP;// * zoom;
         int holizontalPanelNum = imageRect.Width() / 
-            (width + PANEL_COLUMN_SKIP);
+            (width + PANEL_COLUMN_SKIP) ;
         int height = PANEL_HEIGHT + PANEL_SIZE_STEP;// * zoom;
-
+*/
         SDL_Color palette[256];
 
         for(int i = 0; i < bitmapNum; i ++){
+
+            /*
             int left = (i % holizontalPanelNum) *
                 (width + PANEL_COLUMN_SKIP);
             int top = //LENGTH_OF_TOP_MERGE +
@@ -159,6 +197,9 @@ void CBitmapImagesDialog::draw(CDC *cdc)
                 (height + PANEL_ROW_SKIP);
             top -= offset;
             CRect destRect(left, top, left + width, top + height);
+            */
+            CRect destRect;
+            getDestRect(&destRect, i, imageRect);
 
             //get shape surface
             int collection = BUILD_COLLECTION(collectionIndex, clut);
@@ -170,20 +211,17 @@ void CBitmapImagesDialog::draw(CDC *cdc)
             SDL_Surface *surface = get_shape_surface(shapes, excol, outp,
                 illumination, false, palette);
 
-            drawSurfaceByPalette(&memDC, surface, palette, destRect);
+            CBitmap *bitmap = new CBitmap();
+            bitmap->CreateCompatibleBitmap(cdc, surface->w, surface->h);
+            
+            //copy to bitmap
+            copySurfaceToBitmap(cdc, bitmap, surface, palette);
 
             free(outp);
             SDL_FreeSurface(surface);
 
-            if(selectBitmapIndex == i){
-                //blit select rect
-                CPen pen;
-                pen.CreatePen(PS_SOLID, 2, RGB(255,0,0));
-                cdc->SelectObject(&pen);
-                cdc->SelectObject(GetStockObject(NULL_BRUSH));
-                cdc->Rectangle(destRect);
-                pen.DeleteObject();
-            }
+            //add to list
+            stockBitmapList.push_back(bitmap);
         }
     }
     delete sdlToWin;
@@ -198,8 +236,82 @@ void CBitmapImagesDialog::OnPaint()
     CRect imageRect;
     getImageRect(&imageRect);
 
+    CRect clRect;
+    GetClientRect(&clRect);
+
+    bufferDC.SelectObject(GetStockObject(NULL_PEN));
+    bufferDC.SelectObject(GetStockObject(LTGRAY_BRUSH));
+    bufferDC.Rectangle(clRect);
+
+    //draw panels
+    if(theApp.isShapesLoaded){
+        int collectionIndex = ((CBitmapsDialog*)parent)->collection;
+
+        int clut = clutCmb.GetCurSel();
+
+        struct collection_header* header = get_collection_header(collectionIndex);
+
+        //get number of bitmaps
+        int bitmapNum = header->collection->bitmap_count;
+
+        CDC memDC;
+        memDC.CreateCompatibleDC(&dc);
+
+        for(int i = 0; i < bitmapNum; i ++){
+            CRect destRect;
+            getDestRect(&destRect, i, imageRect);
+            /*if(isPointInRect<int>(destRect.left, destRect.top,
+                imageRect.left, imageRect.top, imageRect.right, imageRect.bottom) ||
+                isPointInRect<int>(destRect.right, destRect.bottom,
+                imageRect.left, imageRect.top, imageRect.right, imageRect.bottom))
+            {*/
+                CBitmap* bitmap = stockBitmapList[i];
+
+                memDC.SelectObject(bitmap);
+                //drawSurfaceByPalette(&memDC, surface, palette, destRect);
+                
+                //元サイズ
+                BITMAP bmpInfo;
+                bitmap->GetBitmap(&bmpInfo);
+
+                double perspective = (double)bmpInfo.bmWidth / bmpInfo.bmHeight;
+                if(bmpInfo.bmWidth > bmpInfo.bmHeight){
+                    destRect.bottom = (LONG)(destRect.top + destRect.Height() / perspective);
+                }else{
+                    destRect.right = (LONG)(destRect.left + destRect.Width() * perspective);
+                }
+
+                bufferDC.StretchBlt(destRect.left, destRect.top,
+                    destRect.Width(), destRect.Height(),
+                    &memDC, 0, 0, bmpInfo.bmWidth, bmpInfo.bmHeight, SRCCOPY);
+
+            //}
+
+        }
+        memDC.DeleteDC();
+    }
     dc.BitBlt(0,LENGTH_OF_TOP_MERGE ,imageRect.Width(), imageRect.Height(),
-        &memDC, 0, offset, SRCCOPY);
+        &bufferDC, 0, 0, SRCCOPY);
+
+    if(selectBitmapIndex != NONE){
+        CRect imageRect, destRect;
+        getImageRect(&imageRect);
+        getDestRect(&destRect, selectBitmapIndex, imageRect);
+        destRect.top += LENGTH_OF_TOP_MERGE;
+        destRect.bottom += LENGTH_OF_TOP_MERGE;
+        //blit select rect
+        CPen pen;
+        pen.CreatePen(PS_SOLID, 2, RGB(255,0,0));
+        dc.SelectObject(&pen);
+        dc.SelectObject(GetStockObject(NULL_BRUSH));
+        dc.Rectangle(destRect);
+        pen.DeleteObject();
+    }
+    dc.SelectObject(GetStockObject(NULL_PEN));
+    dc.SelectObject(GetStockObject(LTGRAY_BRUSH));
+    CRect bgRect = clRect;
+    bgRect.bottom = bgRect.top + LENGTH_OF_TOP_MERGE;
+    dc.Rectangle(bgRect);
 }
 
 //change slider
@@ -220,7 +332,7 @@ void CBitmapImagesDialog::OnCbnSelchangeCombo1()
     // TODO: ここにコントロール通知ハンドラ コードを追加します。
     int sel = clutCmb.GetCurSel();
     clutNum = sel;
-    draw(&memDC);
+    draw(&bufferDC);
     Invalidate(FALSE);
     UpdateData();
 }
@@ -239,19 +351,10 @@ int CBitmapImagesDialog::getIndexPointIn(int px, int py)
     //get number of bitmaps
     int bitmapNum = header->collection->bitmap_count;
 
-    int width = PANEL_WIDTH + PANEL_SIZE_STEP;// * zoom;
-    int holizontalPanelNum = imageRect.Width() / 
-        (width + PANEL_COLUMN_SKIP);
-    int height = PANEL_HEIGHT + PANEL_SIZE_STEP;// * zoom;
-
     for(int i = 0; i < bitmapNum; i ++){
-        int left = (i % holizontalPanelNum) *
-            (width + PANEL_COLUMN_SKIP);
-        int top = LENGTH_OF_TOP_MERGE +
-            (i / holizontalPanelNum) * 
-            (height + PANEL_ROW_SKIP);
-        top -= offset;
-        CRect destRect(left, top, left + width, top + height);
+        CRect destRect;
+        getDestRect(&destRect, i, imageRect);
+        destRect.OffsetRect(0, destRect.Height() / 2);
 
         if(isPointInRect<int>(px, py , destRect.left, destRect.top,
             destRect.right, destRect.bottom))
@@ -267,12 +370,11 @@ void CBitmapImagesDialog::OnLButtonDown(UINT nFlags, CPoint point)
     // TODO: ここにメッセージ ハンドラ コードを追加するか、既定の処理を呼び出します。
     CRect imageRect;
     getImageRect(&imageRect);
-    if(isPointInRect(point.x, point.y, imageRect.left, imageRect.top,
+    if(theApp.isShapesLoaded && isPointInRect(point.x, point.y, imageRect.left, imageRect.top,
         imageRect.right, imageRect.bottom))
     {
         selectBitmapIndex = getIndexPointIn(point.x, point.y);
     }
-    draw(&memDC);
     Invalidate();
     UpdateData();
     CDialog::OnLButtonDown(nFlags, point);
@@ -284,14 +386,23 @@ void CBitmapImagesDialog::OnLButtonDblClk(UINT nFlags, CPoint point)
     // TODO: ここにメッセージ ハンドラ コードを追加するか、既定の処理を呼び出します。
     CRect imageRect;
     getImageRect(&imageRect);
-    if(isPointInRect(point.x, point.y, imageRect.left, imageRect.top,
+    if(theApp.isShapesLoaded && isPointInRect(point.x, point.y, imageRect.left, imageRect.top,
         imageRect.right, imageRect.bottom))
     {
         selectBitmapIndex = getIndexPointIn(point.x, point.y);
+        if(selectBitmapIndex != NONE){
+            int collectionIndex = ((CBitmapsDialog*)parent)->collection;
 
-        //show image viewer
+            int clut = clutCmb.GetCurSel();
+
+            struct collection_header* header = get_collection_header(collectionIndex);
+
+            //show image viewer
+            CShowImageDialog dlg(this);
+            dlg.setupDialog(collectionIndex, selectBitmapIndex, clut);
+            dlg.DoModal();
+        }
     }
-    draw(&memDC);
     Invalidate(FALSE);
     UpdateData();
     CDialog::OnLButtonDblClk(nFlags, point);

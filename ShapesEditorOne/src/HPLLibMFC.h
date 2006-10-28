@@ -52,4 +52,5 @@ void loadInformations(const char* filename, int max,
 //surface have "Marathon" palette indexes.
 void drawSurfaceByPalette(CDC* cdc, SDL_Surface* surface, SDL_Color* palette,
                           CRect& destRect);
+void copySurfaceToBitmap(CDC* cdc, CBitmap* dest, SDL_Surface* surface, SDL_Color* palette);
 #endif

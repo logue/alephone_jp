@@ -121,31 +121,59 @@ void drawSurfaceByPalette(CDC* cdc, SDL_Surface* surface, SDL_Color* palette,
     CDC memDC;
     memDC.CreateCompatibleDC(cdc);
     
-    CBitmap bitmap;
-    SDL_LockSurface(surface);
-    
-
-    bitmap.CreateCompatibleBitmap(cdc, surface->w, surface->h);
-    memDC.SelectObject(bitmap);
-
-    for(int x = 0; x < surface->w; x ++){
-        for(int y = 0; y < surface->h; y ++){
-            Uint32 pixel = getpixel(surface, x, y);
-            memDC.SetPixel(x, y, RGB(palette[pixel].b, palette[pixel].g, palette[pixel].r));
+    if(surface){
+        CBitmap bitmap;
+        SDL_LockSurface(surface);
+        
+        double perspective = (double)surface->w / surface->h;
+        if(surface->w > surface->h){
+            destRect.bottom = (LONG)(destRect.top + destRect.Height() / perspective);
+        }else{
+            destRect.right = (LONG)(destRect.left + destRect.Width() * perspective);
         }
-    }
-    SDL_UnlockSurface(surface);
 
-/*    cdc->BitBlt(destRect.left, destRect.top,
-        destRect.Width(), destRect.Height(),
-        &memDC, 0, 0, SRCCOPY);*/
-    cdc->StretchBlt(destRect.left, destRect.top,
-        destRect.Width(), destRect.Height(),
-        &memDC, 0, 0, surface->w, surface->h, SRCCOPY);
-    /*::StretchBlt(cdc->m_hDC, destRect.left, destRect.top,
-        destRect.Width(), destRect.Height(),
-        memDC.m_hDC, 0, 0, surface->w, surface->h, SRCCOPY);
-    */
-    bitmap.DeleteObject();
+        bitmap.CreateCompatibleBitmap(cdc, surface->w, surface->h);
+        memDC.SelectObject(bitmap);
+
+        for(int x = 0; x < surface->w; x ++){
+            for(int y = 0; y < surface->h; y ++){
+                Uint32 pixel = getpixel(surface, x, y);
+                memDC.SetPixel(x, y, RGB(palette[pixel].b, palette[pixel].g, palette[pixel].r));
+            }
+        }
+        SDL_UnlockSurface(surface);
+
+        /*    cdc->BitBlt(destRect.left, destRect.top,
+            destRect.Width(), destRect.Height(),
+            &memDC, 0, 0, SRCCOPY);*/
+        cdc->StretchBlt(destRect.left, destRect.top,
+            destRect.Width(), destRect.Height(),
+            &memDC, 0, 0, surface->w, surface->h, SRCCOPY);
+        /*::StretchBlt(cdc->m_hDC, destRect.left, destRect.top,
+            destRect.Width(), destRect.Height(),
+            memDC.m_hDC, 0, 0, surface->w, surface->h, SRCCOPY);
+        */
+        bitmap.DeleteObject();
+    }
+        memDC.DeleteDC();
+}
+
+void copySurfaceToBitmap(CDC* cdc, CBitmap* dest, SDL_Surface* surface, SDL_Color* palette)
+{
+    CDC memDC;
+    memDC.CreateCompatibleDC(cdc);
+    CBitmap* old = memDC.SelectObject(dest);
+    if(surface){
+        SDL_LockSurface(surface);
+        
+        for(int x = 0; x < surface->w; x ++){
+            for(int y = 0; y < surface->h; y ++){
+                Uint32 pixel = getpixel(surface, x, y);
+                memDC.SetPixel(x, y, RGB(palette[pixel].b, palette[pixel].g, palette[pixel].r));
+            }
+        }
+        SDL_UnlockSurface(surface);
+    }
+    memDC.SelectObject(old);
     memDC.DeleteDC();
 }

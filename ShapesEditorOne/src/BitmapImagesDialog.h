@@ -34,9 +34,19 @@ public:
 
     //search index mouse point is in
     int getIndexPointIn(int px, int py);
+    vector<CBitmap*> stockBitmapList;
+
     CBitmap bufferBitmap;
-    CDC memDC;
+    CDC bufferDC;
     void draw(CDC *cdc);
+
+    //get dest image rect
+    void getDestRect(CRect* rect, int index, CRect& imageRect);
+
+    //int maxHeight;
+
+    //
+    void freeBitmaps();
 protected:
 	virtual void DoDataExchange(CDataExchange* pDX);    // DDX/DDV サポート
 

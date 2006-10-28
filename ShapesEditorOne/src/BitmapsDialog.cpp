@@ -97,4 +97,6 @@ void CBitmapsDialog::OnCbnSelchangeCombo2()
     // TODO: ここにコントロール通知ハンドラ コードを追加します。
     collection = collectionCmb.GetCurSel();
     setupDialog();
+    //フォーカスをshow typeへ。
+    GetDlgItem(IDC_DUMMY_)->SetFocus();
 }

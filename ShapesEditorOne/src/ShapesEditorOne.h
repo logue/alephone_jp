@@ -26,6 +26,7 @@
 #include "HPLLibMFC.h"
 #include "AlephOne/interface.h"
 
+#include "ShowImageDialog.h"
 // CShapesEditorOneApp:
 // See ShapesEditorOne.cpp for the implementation of this class
 //
