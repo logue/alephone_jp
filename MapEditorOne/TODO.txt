@@ -3,7 +3,7 @@
 	-Height for showing
 		Reveal hidden(done)
 		><and -> <>or(done)
-			->added point shold have -32767~32767
+			->added point should have -32767~32767
 	-tool
 		hand(done)
 		zoom(done)
