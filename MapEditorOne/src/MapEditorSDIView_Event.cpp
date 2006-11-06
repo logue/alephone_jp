@@ -232,45 +232,35 @@ void CMapEditorSDIView::doLButtonDownDrawMode(UINT nFlags, CPoint &point)
                 /////////////////
                 //polygons
                 if(!theApp.selectGroupInformation.isSelected()){
-                    for(int i = 0; i < (int)PolygonList.size(); i ++){
-                        struct world_point2d world_point;
-                        world_point.x = (world_distance)((point.x - OFFSET_X_VIEW) * DIV - OFFSET_X_WORLD);
-                        world_point.y = (world_distance)((point.y - OFFSET_Y_VIEW) * DIV - OFFSET_Y_WORLD);
+                    struct world_point2d world_point = getWorldPoint2DFromViewPoint(point.x, point.y);
+                    int polygonIndex = getPolygonIdPointIn(world_point);
+                    if(polygonIndex != NONE){
+                        polygon_data *polygon = &PolygonList[polygonIndex];
 
-                        if(point_in_polygon(i, &world_point)){
-                            polygon_data *polygon = &PolygonList[i];
+                        SelPolygon polydata;
+                        polydata.index = polygonIndex;
+                        polydata.num = polygon->vertex_count;
 
-                            SelPolygon polydata;
-                            polydata.index = i;
-                            polydata.num = polygon->vertex_count;
+                        
+                        //show polygon property
+                        theApp.polygonPropertyDialog->ShowWindow(TRUE);
+                        theApp.polygonPropertyDialog->setupDialog(polygonIndex);
 
-                            
-                            //show polygon property
-                            theApp.polygonPropertyDialog->ShowWindow(TRUE);
-                            theApp.polygonPropertyDialog->setupDialog(i);
-
-                            //set offset
-                            for(int j = 0; j < polygon->vertex_count; j ++){
-                                int drawX = (EndpointList[polygon->endpoint_indexes[j]].vertex.x + OFFSET_X_WORLD) / DIV
-                                    + OFFSET_X_VIEW;
-                                int drawY = (EndpointList[polygon->endpoint_indexes[j]].vertex.y + OFFSET_Y_WORLD) / DIV
-                                    + OFFSET_Y_VIEW;
-                                polydata.offsets[j][0] = drawX - point.x;
-                                polydata.offsets[j][1] = drawY - point.y;
-                            }
-
-                            theApp.selectGroupInformation.polygons.push_back(polydata);
-                            theApp.selectGroupInformation.setSelected(true);
+                        //set offset
+                        for(int j = 0; j < polygon->vertex_count; j ++){
+                            int drawPoint[2];
+                            getViewPointFromWorldPoint2D(EndpointList[polygon->endpoint_indexes[j]].vertex,
+                                drawPoint);
+                            int drawX = drawPoint[0];
+                            int drawY = drawPoint[1];
+                            polydata.offsets[j][0] = drawX - point.x;
+                            polydata.offsets[j][1] = drawY - point.y;
                         }
+
+                        theApp.selectGroupInformation.polygons.push_back(polydata);
+                        theApp.selectGroupInformation.setSelected(true);
                     }
                 }
-                
-                if(theApp.selectGroupInformation.isSelected()){
-                    //show polygon type
-                    //show polygon property
-                }else{
-                }
-
 
                 //////////////////////////////////
                 //ここからの処理はほかよりも後に書く
@@ -369,6 +359,30 @@ void CMapEditorSDIView::doLButtonDownDrawMode(UINT nFlags, CPoint &point)
         setStartPointForSelectGroup(point.x, point.y);
     }
 }
+
+void checkPolygonSelect(UINT nFlags, CPoint point)
+{
+    theApp.selectGroupInformation.clear();
+
+    struct world_point2d world_point = getWorldPoint2DFromViewPoint(point.x, point.y);
+    int polygonIndex = getPolygonIdPointIn(world_point);
+    if(polygonIndex != NONE){
+        polygon_data *polygon = &PolygonList[polygonIndex];
+
+        SelPolygon polydata;
+        polydata.index = polygonIndex;
+        polydata.num = polygon->vertex_count;
+
+        
+        //show polygon property
+        theApp.polygonPropertyDialog->ShowWindow(TRUE);
+        theApp.polygonPropertyDialog->setupDialog(polygonIndex);
+
+        theApp.selectGroupInformation.polygons.push_back(polydata);
+        theApp.selectGroupInformation.setSelected(true);
+    }
+}
+
 //左ボタン下げ
 void CMapEditorSDIView::OnLButtonDown(UINT nFlags, CPoint point)
 {
@@ -398,7 +412,7 @@ void CMapEditorSDIView::OnLButtonDown(UINT nFlags, CPoint point)
         }
         break;
     case EM_POLYGON_TYPE:
-
+        checkPolygonSelect(nFlags, point);
         break;
     case EM_FLOOR_HEIGHT:
         //change height
@@ -450,89 +464,92 @@ void CMapEditorSDIView::OnMouseMove(UINT nFlags, CPoint point)
         //Control+L=move map view
         moveMapOffset(point.x, point.y);
     }else{
-        if(theApp.selectingToolType == TI_ARROW){
-            if(!theApp.isPressLButtonWithCtrl && 
-                (nFlags & MK_LBUTTON) && /*!(nFlags & MK_CONTROL) && */
-                !(nFlags & MK_CONTROL))
-            {
-                //選択物の移動
-                //world position of mouse pointer
-                int x = (point.x - theApp.offset.x) * theApp.zoomDivision - OFFSET_X_WORLD;
-                int y = (point.y - theApp.offset.y) * theApp.zoomDivision - OFFSET_Y_WORLD;
-                if(theApp.selectGroupInformation.isSelected()){
-                    //グループを選択している
-                    //->グループを移動
-                    //points
-                    for(int i = 0; i < (int)theApp.selectGroupInformation.points.size(); i ++){
-                        struct SelPoint *selData = &theApp.selectGroupInformation.points[i];
-                        EndpointList[selData->index].vertex.x = x + selData->offset[0] * DIV;
-                        EndpointList[selData->index].vertex.y = y + selData->offset[1] * DIV;
-                    }
-                    //lines
-                    for(int i = 0; i < (int)theApp.selectGroupInformation.lines.size(); i ++){
-                        struct SelLine *selData = &theApp.selectGroupInformation.lines[i];
-                        EndpointList[LineList[selData->index].endpoint_indexes[0]].vertex.x =
-                            x + selData->offsets[0][0] * DIV;
-                        EndpointList[LineList[selData->index].endpoint_indexes[0]].vertex.y =
-                            y + selData->offsets[0][1] * DIV;
-                        EndpointList[LineList[selData->index].endpoint_indexes[1]].vertex.x =
-                            x + selData->offsets[1][0] * DIV;
-                        EndpointList[LineList[selData->index].endpoint_indexes[1]].vertex.y =
-                            y + selData->offsets[1][1] * DIV;
-                    }
-                    //polygons
-                    for(int i = 0; i < (int)theApp.selectGroupInformation.polygons.size(); i ++){
-                        struct SelPolygon *selData = &theApp.selectGroupInformation.polygons[i];
-                        for(int j = 0; j < selData->num; j ++){
-                            EndpointList[PolygonList[selData->index].endpoint_indexes[j]].vertex.x =
-                                x + selData->offsets[j][0] * DIV;
-                            EndpointList[PolygonList[selData->index].endpoint_indexes[j]].vertex.y =
-                                y + selData->offsets[j][1] * DIV;
+        if(theApp.getEditMode() == EM_DRAW){
+            if(theApp.selectingToolType == TI_ARROW){
+                if(!theApp.isPressLButtonWithCtrl && 
+                    (nFlags & MK_LBUTTON) && /*!(nFlags & MK_CONTROL) && */
+                    !(nFlags & MK_CONTROL))
+                {
+                    //選択物の移動
+                    //world position of mouse pointer
+                    int x = (point.x - theApp.offset.x) * theApp.zoomDivision - OFFSET_X_WORLD;
+                    int y = (point.y - theApp.offset.y) * theApp.zoomDivision - OFFSET_Y_WORLD;
+                    if(theApp.selectGroupInformation.isSelected()){
+                        //グループを選択している
+                        //->グループを移動
+                        //points
+                        for(int i = 0; i < (int)theApp.selectGroupInformation.points.size(); i ++){
+                            struct SelPoint *selData = &theApp.selectGroupInformation.points[i];
+                            EndpointList[selData->index].vertex.x = x + selData->offset[0] * DIV;
+                            EndpointList[selData->index].vertex.y = y + selData->offset[1] * DIV;
                         }
+                        //lines
+                        for(int i = 0; i < (int)theApp.selectGroupInformation.lines.size(); i ++){
+                            struct SelLine *selData = &theApp.selectGroupInformation.lines[i];
+                            EndpointList[LineList[selData->index].endpoint_indexes[0]].vertex.x =
+                                x + selData->offsets[0][0] * DIV;
+                            EndpointList[LineList[selData->index].endpoint_indexes[0]].vertex.y =
+                                y + selData->offsets[0][1] * DIV;
+                            EndpointList[LineList[selData->index].endpoint_indexes[1]].vertex.x =
+                                x + selData->offsets[1][0] * DIV;
+                            EndpointList[LineList[selData->index].endpoint_indexes[1]].vertex.y =
+                                y + selData->offsets[1][1] * DIV;
+                        }
+                        //polygons
+                        for(int i = 0; i < (int)theApp.selectGroupInformation.polygons.size(); i ++){
+                            struct SelPolygon *selData = &theApp.selectGroupInformation.polygons[i];
+                            for(int j = 0; j < selData->num; j ++){
+                                EndpointList[PolygonList[selData->index].endpoint_indexes[j]].vertex.x =
+                                    x + selData->offsets[j][0] * DIV;
+                                EndpointList[PolygonList[selData->index].endpoint_indexes[j]].vertex.y =
+                                    y + selData->offsets[j][1] * DIV;
+                            }
+                        }
+                        //objects
+                        for(int i = 0; i < (int)theApp.selectGroupInformation.selObjects.size(); i ++){
+                            struct SelObject *selData = &theApp.selectGroupInformation.selObjects[i];
+                            SavedObjectList[selData->index].location.x = x + selData->offset[0] * DIV;
+                            SavedObjectList[selData->index].location.y = y + selData->offset[1] * DIV;
+                        }
+                        
                     }
-                    //objects
-                    for(int i = 0; i < (int)theApp.selectGroupInformation.selObjects.size(); i ++){
-                        struct SelObject *selData = &theApp.selectGroupInformation.selObjects[i];
-                        SavedObjectList[selData->index].location.x = x + selData->offset[0] * DIV;
-                        SavedObjectList[selData->index].location.y = y + selData->offset[1] * DIV;
+                }
+            }else if(theApp.selectingToolType == TI_FILL){
+            }else if(theApp.selectingToolType == TI_HAND){
+                if(nFlags & MK_LBUTTON){
+                    moveMapOffset(point.x, point.y);
+                }
+            }else if(theApp.selectingToolType == TI_LINE){
+                //点を踏んでないか確認
+                int endpointIndex = NONE;
+                bool found = false;
+                world_point2d world_point = getWorldPoint2DFromViewPoint(point.x, point.y);
+                for(int i = 0; i < (int)EndpointList.size(); i ++){
+                    endpoint_data *point = &EndpointList[i];
+                    //check height
+                    if( point->highest_adjacent_floor_height > theApp.viewHeightMax ||
+                        point->lowest_adjacent_ceiling_height < theApp.viewHeightMin)
+                    {
+                        continue;
                     }
-                    
+                    if(isSelectPoint(world_point, point->vertex, POINT_DISTANCE_EPSILON * theApp.zoomDivision))
+                    {
+                        theApp.isNowOnThePoint = true;
+                        found = true;
+                        break;
+                    }
                 }
-            }
-        }else if(theApp.selectingToolType == TI_FILL){
-        }else if(theApp.selectingToolType == TI_HAND){
-            if(nFlags & MK_LBUTTON){
-                moveMapOffset(point.x, point.y);
-            }
-        }else if(theApp.selectingToolType == TI_LINE){
-            //点を踏んでないか確認
-            int endpointIndex = NONE;
-            bool found = false;
-            world_point2d world_point = getWorldPoint2DFromViewPoint(point.x, point.y);
-            for(int i = 0; i < (int)EndpointList.size(); i ++){
-                endpoint_data *point = &EndpointList[i];
-                //check height
-                if( point->highest_adjacent_floor_height > theApp.viewHeightMax ||
-                    point->lowest_adjacent_ceiling_height < theApp.viewHeightMin)
-                {
-                    continue;
+                if(!found){
+                    theApp.isNowOnThePoint = false;
                 }
-                if(isSelectPoint(world_point, point->vertex, POINT_DISTANCE_EPSILON * theApp.zoomDivision))
-                {
-                    theApp.isNowOnThePoint = true;
-                    found = true;
-                    break;
-                }
+            }else if(theApp.selectingToolType == TI_MAGNIFY){
+            }else if(theApp.selectingToolType == TI_POLYGON){
+            }else if(theApp.selectingToolType == TI_SKULL){
+            }else if(theApp.selectingToolType == TI_TEXT){
             }
-            if(!found){
-                theApp.isNowOnThePoint = false;
-            }
-        }else if(theApp.selectingToolType == TI_MAGNIFY){
-        }else if(theApp.selectingToolType == TI_POLYGON){
-        }else if(theApp.selectingToolType == TI_SKULL){
-        }else if(theApp.selectingToolType == TI_TEXT){
+        }else{
         }
-    }
+    }// if/not ctrled
     Invalidate(FALSE);
     theApp.oldMousePoint = point;
 

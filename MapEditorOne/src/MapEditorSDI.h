@@ -26,6 +26,7 @@
 #include "AlephOne/shell.h"
 #include "AlephOne/editor.h"
 #include "AlephOne/platforms.h"
+#include "AlephOne/lightsource.h"
 
 //#include "AlephOne/placement.h"
 #include <map>
@@ -242,6 +243,10 @@ public:
     //ポリゴンタイプ
     Information polygonTypeInformations[NUMBER_OF_POLYGON_TYPE];
 
+    //ambient sounds
+    Information ambientSoundTypeInformations[NUMBER_OF_AMBIENT_SOUND_DEFINITIONS];
+    //random sounds
+    Information randomSoundTypeInformations[NUMBER_OF_RANDOM_SOUND_DEFINITIONS];
 // 実装
 	afx_msg void OnAppAbout();
     /*BOOL isObjectPropertyDialogShow;

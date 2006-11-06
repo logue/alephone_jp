@@ -15,13 +15,18 @@
 		launch by...
 		directions=facing
 	-polygon property
-		type(uneditable)
-		floor light
-		ceiling light
+		type(uneditable)(done)
+			enlarge edit space
+			enenglish
+		floor light(stored)
+		ceiling light(stored)
 		media
-		media light
-		ambSnd
-		RndSnd
+		media light(stored)
+		ambSnd(stored)
+		RndSnd(stored)
+	-polygon types
+		enenglish
+		change selection when click other polygon
 	-preferences
 		custom color
 		settings

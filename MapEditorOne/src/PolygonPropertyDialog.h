@@ -24,6 +24,7 @@ public:
     void setupDialog(int index_);
     void setupDialogByStore();
     int index;
+    void setupLightSourceIndex(CComboBox* combo, int index, int max);
 protected:
 	virtual void DoDataExchange(CDataExchange* pDX);    // DDX/DDV サポート
 
@@ -80,4 +81,6 @@ public:
     CEdit ceilingOriginYNum;
 public:
     afx_msg void OnBnClickedButton1();
+public:
+    virtual BOOL OnInitDialog();
 };

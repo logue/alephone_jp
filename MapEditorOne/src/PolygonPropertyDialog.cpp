@@ -62,6 +62,7 @@ BOOL CPolygonPropertyDialog::Create(CWnd* par)
 {
     parent = par;
     BOOL ret = CDialog::Create(CPolygonPropertyDialog::IDD, parent);
+
     if(ret == TRUE){
         ShowWindow(SW_SHOW);
     }else{
@@ -104,18 +105,46 @@ void CPolygonPropertyDialog::setupDialog(int index_)
 
     setupDialogByStore();
 }
+
+void CPolygonPropertyDialog::setupLightSourceIndex(CComboBox* combo,
+                                                   int index, int max)
+{
+    //clear 
+    combo->ResetContent();
+    //store lights
+    {
+        char cstr[10];
+        for(int i = 0; i < (int)LightList.size(); i ++){
+            sprintf(cstr, "%d", i);
+            combo->InsertString(i, CString(cstr));
+        }
+    }
+    //set cur select
+    if(index == NONE){
+        index = max;
+    }
+    combo->SetCurSel(index);
+}
+
 void CPolygonPropertyDialog::setupDialogByStore()
 {
     //id
     setIntegerNum(index, &idNum);
 
     //type
+    //選択
+    typeCmb.SetCurSel(store.type);
 
     //per
     setIntegerNum(store.permutation, &permutationNum);
 
     //floor light
+    this->setupLightSourceIndex(&floorLightCmb, store.floor_lightsource_index,
+        (int)LightList.size());
+
     //ceiling light
+    this->setupLightSourceIndex(&ceilingLightCmb, store.ceiling_lightsource_index,
+        (int)LightList.size());
 
     //area
     setIntegerNum(store.area, &areaNum);
@@ -150,6 +179,9 @@ void CPolygonPropertyDialog::setupDialogByStore()
     setIntegerNum(store.ceiling_origin.y, &ceilingOriginYNum);
 
     //media
+    //media light
+    this->setupLightSourceIndex(&mediaLightCmb, store.media_lightsource_index,
+        (int)LightList.size());
 
     //snd src
     setIntegerNum(store.sound_source_indexes, &soundSourceIndexNum);
@@ -163,7 +195,11 @@ void CPolygonPropertyDialog::setupDialogByStore()
     GetDlgItem(IDC_BUTTON1)->EnableWindow(enabling);
 
     //ambient sound
+    setCombo(store.ambient_sound_image_index, NUMBER_OF_AMBIENT_SOUND_DEFINITIONS,
+        &ambientSoundIndexNum);
     //random sound
+    setCombo(store.random_sound_image_index, NUMBER_OF_RANDOM_SOUND_DEFINITIONS,
+        &randomSoundCmb);
 
     UpdateData();
 }
@@ -185,4 +221,30 @@ void CPolygonPropertyDialog::OnBnClickedButton1()
             //null?
         }
     }
+}
+
+BOOL CPolygonPropertyDialog::OnInitDialog()
+{
+    CDialog::OnInitDialog();
+
+    CString none = CString("* none *");
+    // TODO:  ここに初期化を追加してください
+    //store polygon type names
+    for(int i = 0; i < NUMBER_OF_POLYGON_TYPE; i ++){
+        typeCmb.InsertString(i, theApp.polygonTypeInformations[i].jname);
+    }
+
+    //store sound sources
+    for(int i = 0; i < NUMBER_OF_AMBIENT_SOUND_DEFINITIONS; i ++){
+        ambientSoundIndexNum.InsertString(i, theApp.ambientSoundTypeInformations[i].jname);
+    }
+    ambientSoundIndexNum.InsertString(NUMBER_OF_AMBIENT_SOUND_DEFINITIONS, none);
+
+    for(int i = 0; i < NUMBER_OF_RANDOM_SOUND_DEFINITIONS; i ++){
+        randomSoundCmb.InsertString(i, theApp.randomSoundTypeInformations[i].jname);
+    }
+    randomSoundCmb.InsertString(NUMBER_OF_RANDOM_SOUND_DEFINITIONS, none);
+
+    return TRUE;  // return TRUE unless you set the focus to a control
+    // 例外 : OCX プロパティ ページは必ず FALSE を返します。
 }

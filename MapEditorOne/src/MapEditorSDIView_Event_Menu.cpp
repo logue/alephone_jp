@@ -268,6 +268,11 @@ void CMapEditorSDIView::changeMode(int mode)
     //GetMenu()->CheckMenuItem(theApp.menuIDMap[oldMode], flags);
     flags = MF_BYCOMMAND | MF_CHECKED;
     //GetMenu()->CheckMenuItem(theApp.menuIDMap[nextMode], flags);
+
+    //change mode
+    if(mode != EM_DRAW){
+        theApp.selectGroupInformation.clear();
+    }
     Invalidate(FALSE);
 
 }

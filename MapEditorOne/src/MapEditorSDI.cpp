@@ -87,7 +87,7 @@ bool CMapEditorSDIApp::initialize(){
     //アイテム
     loadInformations("data/DefinedItems.txt", NUMBER_OF_DEFINED_ITEMS,
         itemTypeInformations);
-    //音
+    //sounds
     loadInformations("data/SoundSourceTypes.txt", NUMBER_OF_AMBIENT_SOUND_DEFINITIONS,
         soundSourceInformations);
     //起動
@@ -132,6 +132,14 @@ bool CMapEditorSDIApp::initialize(){
     missionTypeInformations[3].bind = _mission_retrieval;
     missionTypeInformations[4].bind = _mission_repair;
     missionTypeInformations[5].bind = _mission_rescue;
+    
+    //ambient sounds
+    //landscape
+    loadInformations("data/AmbientSoundTypes.txt", NUMBER_OF_AMBIENT_SOUND_DEFINITIONS,
+        ambientSoundTypeInformations);
+    //random sounds
+    loadInformations("data/RandomSoundTypes.txt", NUMBER_OF_RANDOM_SOUND_DEFINITIONS,
+        randomSoundTypeInformations);
 
     //色設定
     //ファイルから読み込み

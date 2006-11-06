@@ -75,6 +75,13 @@ void setComboAndIntegerNum(int num, int max,
     cmb->SetCurSel(num);
     setIntegerNum(num, edit);
 }
+void setCombo(int num, int max, CComboBox* cmb)
+{
+    if(num == -1){
+        num = max;
+    }
+    cmb->SetCurSel(num);
+}
 
 void worldToWindow(int worldX, int worldY, POINT* point)
 {

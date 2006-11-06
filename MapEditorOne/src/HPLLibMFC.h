@@ -22,6 +22,7 @@ void setIntegerNum(int num, CEdit* edit);
 int getIntegerNum(CEdit* edit);
 void setComboAndIntegerNum(int num, int max,
                            CEdit* edit, CComboBox* cmb);
+void setCombo(int num, int max, CComboBox* cmb);
 
 /**disable*/
 void worldToWindow(int worldX, int worldY, POINT* point);
