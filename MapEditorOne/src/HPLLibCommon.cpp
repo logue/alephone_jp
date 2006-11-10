@@ -596,7 +596,7 @@ void addAnnotationText(world_point2d& point, string text)
     map_annotation annotationData;
     annotationData.type = 0;
     annotationData.location = point;
-    strcpy_s(annotationData.text, MAXIMUM_ANNOTATION_TEXT_LENGTH,
+    strcpy(annotationData.text,// MAXIMUM_ANNOTATION_TEXT_LENGTH,
         text.c_str());
     MapAnnotationList.push_back(annotationData);
 }

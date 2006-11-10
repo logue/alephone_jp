@@ -273,6 +273,10 @@ void CMapEditorSDIView::changeMode(int mode)
     if(mode != EM_DRAW){
         theApp.selectGroupInformation.clear();
     }
+    if(mode != EM_FLOOR_TEXTURE && mode != EM_CEILING_TEXTURE){
+        //hide texture palette
+        theApp.textureDialog->ShowWindow(FALSE);
+    }
     Invalidate(FALSE);
 
 }
@@ -367,4 +371,12 @@ void CMapEditorSDIView::On32808()
         }
         Invalidate(FALSE);
     }
+}
+
+//texture mode
+void CMapEditorSDIView::OnTextureFloor()
+{
+    changeMode(EM_FLOOR_TEXTURE);
+    //show texture palette
+
 }

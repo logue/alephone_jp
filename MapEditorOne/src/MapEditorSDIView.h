@@ -113,6 +113,7 @@ public:
     afx_msg void OnModePolygontype();
 public:
     afx_msg void On32808();
+    afx_msg void OnTextureFloor();
 };
 
 #ifndef _DEBUG  // MapEditorSDIView.cpp のデバッグ バージョン

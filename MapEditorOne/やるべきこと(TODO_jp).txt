@@ -1,5 +1,5 @@
 	TODO
-	*Dialogs
+	*ダイアログやツールパレット関連
 	-Height for showing
 		Reveal hidden(done)
 		><and -> <>or(done)

@@ -78,6 +78,8 @@
 #define IDC_CURSOR_ARROW                245
 #define IDC_CURSOR2                     246
 #define IDC_CURSOR_POINT                246
+#define IDD_DIALOG5                     247
+#define IDD_DIALOG_TEXTURE              247
 #define IDC_LIST1                       1000
 #define IDC_LIST2                       1002
 #define IDC_COMBO1                      1003
@@ -206,7 +208,7 @@
 // 
 #ifdef APSTUDIO_INVOKED
 #ifndef APSTUDIO_READONLY_SYMBOLS
-#define _APS_NEXT_RESOURCE_VALUE        247
+#define _APS_NEXT_RESOURCE_VALUE        248
 #define _APS_NEXT_COMMAND_VALUE         32809
 #define _APS_NEXT_CONTROL_VALUE         1059
 #define _APS_NEXT_SYMED_VALUE           104

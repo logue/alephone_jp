@@ -274,6 +274,10 @@ CMapEditorSDIApp::~CMapEditorSDIApp()
     }
     bitmapList.clear();
     logger.close();
+    for(int i = 0; i < (int)textureBitmaps.size(); i ++){
+        DeleteObject(textureBitmaps[i]);
+    }
+    textureBitmaps.clear();
 }
 
 // 唯一の CMapEditorSDIApp オブジェクトです。

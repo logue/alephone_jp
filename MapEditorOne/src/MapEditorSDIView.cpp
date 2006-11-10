@@ -54,6 +54,7 @@ BEGIN_MESSAGE_MAP(CMapEditorSDIView, CView)
     ON_WM_RBUTTONUP()
     ON_COMMAND(ID_MODE_POLYGONTYPE, &CMapEditorSDIView::OnModePolygontype)
     ON_COMMAND(ID_32808, &CMapEditorSDIView::On32808)
+    ON_COMMAND(ID_TEXTURE_FLOOR, OnTextureFloor)
 END_MESSAGE_MAP()
 
 // CMapEditorSDIView コンストラクション/デストラクション
@@ -823,6 +824,14 @@ int CMapEditorSDIView::OnCreate(LPCREATESTRUCT lpCreateStruct)
     theApp.polygonPropertyDialog->Create(this);
     theApp.polygonPropertyDialog->ShowWindow(FALSE);
 
+    theApp.textureDialog = new CTextureDialog;
+    theApp.textureDialog->Create(this);
+    theApp.textureDialog->ShowWindow(FALSE);
+
+    //load texture
+    for(int i = 0; i < NUMBER_OF_SCENERY_DEFINITIONS; i ++){
+        for(int j = 0; j < NUMBER_OF_
+    }
     //delete theApp.m_SDLToWindows;
     return 0;
 }
@@ -850,4 +859,5 @@ BOOL CMapEditorSDIView::OnSetCursor(CWnd* pWnd, UINT nHitTest, UINT message)
     //}
     //return CView::OnSetCursor(pWnd, nHitTest, message);
 }
+
 

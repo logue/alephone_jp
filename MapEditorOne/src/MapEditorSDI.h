@@ -50,6 +50,7 @@ using namespace std;
 #include "EditorInforDialog.h"
 #include "AnnotationDialog.h"
 #include "SelectPolygonDialog.h"
+#include "TextureDialog.h"
 
 #include "MapEditorOneSetting.h"
 
@@ -211,6 +212,9 @@ public:
     //polygon property
     CPolygonPropertyDialog *polygonPropertyDialog;
 
+    //texture dialog (palette)
+    CTextureDialog *textureDialog;
+
     //ëÂï 
     Information objectTypeInformations[NUMBER_OF_MAP_OBJECT_TYPES];
     //ÉÇÉìÉXÉ^Å[ÇÃéÌóﬁ
@@ -316,6 +320,9 @@ public:
 
     //is now on the point
     bool isNowOnThePoint;
+
+    //texture bitmaps
+    vector<HBITMAP> textureBitmaps;
 
 private:
     //edit mode
