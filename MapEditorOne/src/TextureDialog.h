@@ -1,6 +1,7 @@
 #pragma once
 #include "afxwin.h"
 
+#include "TextureDialog.h"
 
 // CTextureDialog ダイアログ
 
@@ -16,6 +17,13 @@ public:
     BOOL Create(CWnd *par);
     virtual void PostNcDestroy();
     virtual BOOL DestroyWindow();
+    //
+    int collection;
+
+    //コレクションを設定して更新
+    void setupDialog(int col);
+
+    CTextureDialog *child;
 
 // ダイアログ データ
 	enum { IDD = IDD_DIALOG_TEXTURE };

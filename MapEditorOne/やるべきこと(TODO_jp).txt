@@ -1,9 +1,8 @@
 	TODO
 	*ダイアログやツールパレット関連
-	-Height for showing
-		Reveal hidden(done)
+	-高さウインドウ
 		><and -> <>or(done)
-			->added point should have -32767~32767
+			->追加する点の高さの範囲を -32767~32767に。
 	-tool
 		hand(done)
 		zoom(done)

@@ -90,6 +90,7 @@ void CMapEditorSDIView::drawBackground(CDC *cdc)
     brush.CreateSolidBrush(theApp.setting.getColorSetting()->background);
 
     //cdc->SelectObject(&blackSmallPen);
+    cdc->SelectObject(GetStockObject(NULL_PEN));
     cdc->SelectObject(brush);
     cdc->Rectangle(&winRect);
 
