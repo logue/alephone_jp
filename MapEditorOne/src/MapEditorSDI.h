@@ -18,6 +18,7 @@
 #include "AlephOne/weapons.h"
 #include "AlephOne/items.h"
 #include "AlephOne/monsters.h"
+#include "AlephOne/media.h"
 #include "AlephOne/scenery_definitions.h"
 #include "AlephOne/mysound.h"
 #include "AlephOne/computer_interface.h"
@@ -27,6 +28,8 @@
 #include "AlephOne/editor.h"
 #include "AlephOne/platforms.h"
 #include "AlephOne/lightsource.h"
+#include "AlephOne/shape_definitions.h"
+#include "AlephOne/collection_definition.h"
 
 //#include "AlephOne/placement.h"
 #include <map>
@@ -83,6 +86,7 @@ static char *INI_FILE_NAME = "./setting.ini";
 static char * MAP_ICONS_DIR_NAME = "Map Icons/";
 static char * HILIGHTED_ICONS_DIR_NAME = "Highlighted/";
 static char * MAP_ICONS_IMAGE_NAME_LIST_FILE_NAME = "MapIconImageList.txt";
+const int START_OF_TEXTURE = _collection_walls1;
 
 extern HPLLogger logger;
 
@@ -273,21 +277,19 @@ public:
     bool isSelectingGroup;
 
     //複数選択時の選択物リスト
+    //TODO add selection
     struct selectInformation selectGroupInformation;
 
     //selection group
-    //TODO use this
-    vector<struct selectInformation> selectGroupInformationList;
+    //vector<struct selectInformation> selectGroupInformationList;
 
     //SDL surface to win api device context
 	SDLToWindows *m_SDLToWindows;
 
-    //icons
-    //CImageList mapIconImageList;
-    //vector<CBitmap*> bitmapList;
+    //map icons
     vector<HBITMAP> bitmapList;
 
-    //select tool
+    //select tool type
     int selectingToolType;
 
     //show / hide polygons, lines. points
@@ -322,7 +324,7 @@ public:
     bool isNowOnThePoint;
 
     //texture bitmaps
-    vector<HBITMAP> textureBitmaps;
+    vector<vector<CBitmap*>> textureBitmaps;
 
 private:
     //edit mode

@@ -110,25 +110,38 @@ void CTextureDialog::OnPain()
     int tileNumY = (pictboxRect.Height() - TOP_MERGIN * 2) / (TILE_H + INTERVAL_Y);
     int type = 0;
 
-    int clut = clutCmb.GetCurSel()
-    struct collection_header* header = get_collection_header(collectionIndex);
+    int clut = 0;
+    struct collection_header* header = get_collection_header(collection);
     //get number of bitmaps
     int bitmapNum = header->collection->bitmap_count;
+    CDC memDC;
+    memDC.CreateCompatibleDC(pictDC);
 
     for(int x = 0 ; x < tileNumX && type < bitmapNum; x ++){
         for(int y = 0; y < tileNumY && type < bitmapNum; y ++){
             int tileX = LEFT_MERGIN + tileX * (TILE_W + INTERVALX);
             int tileY = TOP_MERGING + tileY * (TILE_H + INTERVAL_Y);
             CRect destRect = CRect(tileX, tileY, tileX + TILE_X, tileY + TILE_H);
+            CBitmap* bmp = theApp.textureBitmaps[collection][type];
+            BITMAP bmpInfo;
+            bmp->GetBitmap(&bmpInfo);
+
+            memDC.SelectObject(bmp);
             //縮小表示
-            
+            bufferDC.StretchBlt(destRect.left, destRect.top,
+                destRect.Width(), destRect.Height(),
+                &memDC, 0, 0, bmpInfo.bmWidth, bmpInfo.bmHeight, SRCCOPY);
             type ++;
         }
     }
+
+    memDC.DeleteDC();
 }
 
 //コレクションを設定して更新
 void CTextureDialog::setupDialog(int col)
 {
+    collection = col;
+    Invalidate(FALSE);
 }
 

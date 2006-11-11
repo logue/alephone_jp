@@ -217,7 +217,6 @@ static byte *read_object_from_file(OpenedFile& OFile, long offset, long length);
 // Modified to return NULL for unloaded collections and out-of-range indices for collection contents.
 // This is to allow for more graceful degradation.
 
-static struct collection_header *get_collection_header(short collection_index);
 static struct collection_definition *get_collection_definition(short collection_index);
 static void *get_collection_shading_tables(short collection_index, short clut_index);
 static void *get_collection_tint_tables(short collection_index, short tint_index);

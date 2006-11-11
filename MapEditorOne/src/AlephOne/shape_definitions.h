@@ -30,6 +30,7 @@ Aug 14, 2000 (Loren Petrich):
 */
 
 /* ---------- structures */
+#include "collection_definition.h"
 
 struct collection_header /* 32 bytes on disk */
 {

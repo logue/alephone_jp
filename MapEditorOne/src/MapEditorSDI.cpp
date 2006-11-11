@@ -275,7 +275,9 @@ CMapEditorSDIApp::~CMapEditorSDIApp()
     bitmapList.clear();
     logger.close();
     for(int i = 0; i < (int)textureBitmaps.size(); i ++){
-        DeleteObject(textureBitmaps[i]);
+        for(int j = 0; j < (int)textureBitmaps[0].size(); j ++){
+            textureBitmaps[i][j]->DeleteObject();
+        }
     }
     textureBitmaps.clear();
 }

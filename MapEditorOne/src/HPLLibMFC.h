@@ -28,4 +28,6 @@ void setCombo(int num, int max, CComboBox* cmb);
 void worldToWindow(int worldX, int worldY, POINT* point);
 
 void setStatusBar(int index, CString str);
+
+void copySurfaceToBitmap(CDC* cdc, CBitmap* dest, SDL_Surface* surface, SDL_Color* palette);
 #endif

@@ -95,3 +95,22 @@ void setStatusBar(int index, CString str)
     status->SetPaneText(index, str);
 }
 
+void copySurfaceToBitmap(CDC* cdc, CBitmap* dest, SDL_Surface* surface, SDL_Color* palette)
+{
+    CDC memDC;
+    memDC.CreateCompatibleDC(cdc);
+    CBitmap* old = memDC.SelectObject(dest);
+    if(surface){
+        SDL_LockSurface(surface);
+        
+        for(int x = 0; x < surface->w; x ++){
+            for(int y = 0; y < surface->h; y ++){
+                Uint32 pixel = getpixel(surface, x, y);
+                memDC.SetPixel(x, y, RGB(palette[pixel].b, palette[pixel].g, palette[pixel].r));
+            }
+        }
+        SDL_UnlockSurface(surface);
+    }
+    memDC.SelectObject(old);
+    memDC.DeleteDC();
+}

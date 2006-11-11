@@ -830,8 +830,39 @@ int CMapEditorSDIView::OnCreate(LPCREATESTRUCT lpCreateStruct)
     theApp.textureDialog->ShowWindow(FALSE);
 
     //load texture
-    for(int i = 0; i < NUMBER_OF_SCENERY_DEFINITIONS; i ++){
-        for(int j = 0; j < NUMBER_OF_
+    {
+        int clut = 0;
+        SDL_Color palette[256];
+
+        int excol = NONE;
+        float illumination = 1.0f;
+        byte **outp = (byte**)malloc(sizeof(byte*));
+        for(int i = 0; i < NUMBER_OF_MEDIA_TYPES; i ++){
+            int collection = START_OF_TEXTURE + i;
+            struct collection_header* header = get_collection_header(collection);
+            //get number of bitmaps
+            int bitmapNum = header->collection->bitmap_count;
+            
+            vector<CBitmap*> vec;
+            theApp.textureBitmaps.push_back(vec);
+
+            for(int j = 0; j < bitmapNum; j ++){
+                //load shapes
+                int col = BUILD_COLLECTION(collection, clut);
+                int shapes = BUILD_DESCRIPTOR(col, i);
+                SDL_Surface *surface = get_shape_surface(shapes, excol, outp,
+                    illumination, false, palette);
+                CBitmap *bitmap = new CBitmap();
+                bitmap->CreateCompatibleBitmap(GetDC());
+                int sizeW = surface->w, sizeH = surface->h;
+                //copy to bitmap
+                copySurfaceToBitmap(cdc, bitmap, surface, palette);
+                SDL_FreeSurface(surface);
+
+                theApp.textureBitmaps[i].push_back(bmp);
+            }
+        }
+        free(outp);
     }
     //delete theApp.m_SDLToWindows;
     return 0;
