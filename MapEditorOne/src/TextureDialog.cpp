@@ -14,12 +14,18 @@ const int INTERVAL_Y = 10;
 const int TILE_W = 30;
 const int TILE_H = 30;
 
+const int CHILD_LEFT = 10;
+const int CHILD_TOP = 30;
+const int CHILD_W_DELTA = 10;
+const int CHILD_H_DELTA = 10;
+
 // CTextureDialog ダイアログ
 
 IMPLEMENT_DYNAMIC(CTextureDialog, CDialog)
 CTextureDialog::CTextureDialog(CWnd* pParent /*=NULL*/)
 	: CDialog(CTextureDialog::IDD, pParent)
 {
+    child = NULL;
 }
 
 CTextureDialog::~CTextureDialog()
@@ -37,8 +43,18 @@ void CTextureDialog::DoDataExchange(CDataExchange* pDX)
 BEGIN_MESSAGE_MAP(CTextureDialog, CDialog)
     ON_WM_CLOSE()
     ON_WM_PAINT()
+    ON_WM_SHOWWINDOW()
+    ON_WM_SIZE()
 END_MESSAGE_MAP()
 
+void CTextureDialog::resizeChild()
+{
+    CRect parentRect;
+    GetClientRect(&parentRect);
+    child->MoveWindow(CHILD_LEFT, CHILD_TOP, 
+        parentRect.Width() - CHILD_LEFT - CHILD_W_DELTA,
+        parentRect.Height() - CHILD_TOP - CHILD_H_DELTA);
+}
 
 // CTextureDialog メッセージ ハンドラ
 
@@ -46,8 +62,12 @@ BOOL CTextureDialog::OnInitDialog()
 {
     CDialog::OnInitDialog();
 
+
     // TODO :  ここに初期化を追加してください
     child = new CTextureChildDialog(this);
+    child->Create(CTextureChildDialog::IDD, this);
+    resizeChild();
+    //child->ShowWindow(TRUE);
 
     return TRUE;  // return TRUE unless you set the focus to a control
     // 例外 : OCX プロパティ ページは必ず FALSE を返します。
@@ -92,12 +112,13 @@ BOOL CTextureDialog::DestroyWindow()
     return TRUE;//CDialog::DestroyWindow();
 }
 
-void CTextureDialog::OnPain()
+void CTextureDialog::OnPaint()
 {
     CPaintDC dc(this); // device context for painting
 
+    CDialog::OnPaint();
     //get picture box's rect
-    CRect pictboxRect;
+/*    CRect pictboxRect;
     CWnd *pictBox = GetDlgItem(IDC_PICTURE);
     pictBox->GetClientRect(&pictboxRect);
 
@@ -135,7 +156,7 @@ void CTextureDialog::OnPain()
         }
     }
 
-    memDC.DeleteDC();
+    memDC.DeleteDC();*/
 }
 
 //コレクションを設定して更新
@@ -145,3 +166,22 @@ void CTextureDialog::setupDialog(int col)
     Invalidate(FALSE);
 }
 
+
+void CTextureDialog::OnShowWindow(BOOL bShow, UINT nStatus)
+{
+    CDialog::OnShowWindow(bShow, nStatus);
+    
+    child->ShowWindow(bShow);
+    // TODO: ここにメッセージ ハンドラ コードを追加します。
+}
+
+void CTextureDialog::OnSize(UINT nType, int cx, int cy)
+{
+    CDialog::OnSize(nType, cx, cy);
+
+    //resize child dialog
+    if(child){
+        resizeChild();
+    }
+    // TODO: ここにメッセージ ハンドラ コードを追加します。
+}

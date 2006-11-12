@@ -1893,7 +1893,7 @@ static void build_tinting_table32(
 /* ---------- collection accessors */
 // Some originally from shapes_macintosh.c
 
-static struct collection_header *get_collection_header(
+struct collection_header *get_collection_header(
 	short collection_index)
 {
 	// This one is intended to bomb because collection indices can only be from 1 to 31,

@@ -378,5 +378,6 @@ void CMapEditorSDIView::OnTextureFloor()
 {
     changeMode(EM_FLOOR_TEXTURE);
     //show texture palette
-
+    theApp.textureDialog->setupDialog(0);
+    theApp.textureDialog->ShowWindow(TRUE);
 }

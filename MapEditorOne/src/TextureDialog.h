@@ -1,7 +1,7 @@
 #pragma once
 #include "afxwin.h"
 
-#include "TextureDialog.h"
+#include "TextureChildDialog.h"
 
 // CTextureDialog ダイアログ
 
@@ -23,7 +23,9 @@ public:
     //コレクションを設定して更新
     void setupDialog(int col);
 
-    CTextureDialog *child;
+    CTextureChildDialog *child;
+
+    void resizeChild();
 
 // ダイアログ データ
 	enum { IDD = IDD_DIALOG_TEXTURE };
@@ -38,4 +40,8 @@ public:
 public:
     afx_msg void OnClose();
     afx_msg void OnPaint();
+public:
+    afx_msg void OnShowWindow(BOOL bShow, UINT nStatus);
+public:
+    afx_msg void OnSize(UINT nType, int cx, int cy);
 };

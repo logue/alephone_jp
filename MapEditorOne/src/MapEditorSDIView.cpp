@@ -849,17 +849,17 @@ int CMapEditorSDIView::OnCreate(LPCREATESTRUCT lpCreateStruct)
             for(int j = 0; j < bitmapNum; j ++){
                 //load shapes
                 int col = BUILD_COLLECTION(collection, clut);
-                int shapes = BUILD_DESCRIPTOR(col, i);
+                int shapes = BUILD_DESCRIPTOR(col, j);
                 SDL_Surface *surface = get_shape_surface(shapes, excol, outp,
                     illumination, false, palette);
                 CBitmap *bitmap = new CBitmap();
-                bitmap->CreateCompatibleBitmap(GetDC());
+                bitmap->CreateCompatibleBitmap(GetDC(), surface->w, surface->h);
                 int sizeW = surface->w, sizeH = surface->h;
                 //copy to bitmap
-                copySurfaceToBitmap(cdc, bitmap, surface, palette);
+                copySurfaceToBitmap(GetDC(), bitmap, surface, palette);
                 SDL_FreeSurface(surface);
 
-                theApp.textureBitmaps[i].push_back(bmp);
+                theApp.textureBitmaps[i].push_back(bitmap);
             }
         }
         free(outp);

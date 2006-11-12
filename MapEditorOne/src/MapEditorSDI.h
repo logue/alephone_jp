@@ -54,6 +54,8 @@ using namespace std;
 #include "AnnotationDialog.h"
 #include "SelectPolygonDialog.h"
 #include "TextureDialog.h"
+#include "TextureDialog.h"
+#include "TextureChildDialog.h"
 
 #include "MapEditorOneSetting.h"
 
