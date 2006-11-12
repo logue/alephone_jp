@@ -830,7 +830,7 @@ int CMapEditorSDIView::OnCreate(LPCREATESTRUCT lpCreateStruct)
     theApp.textureDialog->ShowWindow(FALSE);
 
     //load texture
-    {
+    if(theApp.isLoadedShapesFile){
         int clut = 0;
         SDL_Color palette[256];
 

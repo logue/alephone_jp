@@ -63,38 +63,40 @@ void CTextureChildDialog::OnPaint()
     dc.SelectObject(GetStockObject(BLACK_PEN));
     dc.Rectangle(clRect);
 
-    int tileNumX = (clRect.Width() - LEFT_MERGIN * 2) / (TILE_W + INTERVAL_X);
-    int tileNumY = (clRect.Height() - TOP_MERGIN * 2) / (TILE_H + INTERVAL_Y);
-    int type = 0;
+    if(theApp.isLoadedShapesFile){
+        int tileNumX = (clRect.Width() - LEFT_MERGIN * 2) / (TILE_W + INTERVAL_X);
+        int tileNumY = (clRect.Height() - TOP_MERGIN * 2) / (TILE_H + INTERVAL_Y);
+        int type = 0;
 
-    int clut = 0;
-    int collection = ((CTextureDialog*)parent)->collection;
+        int clut = 0;
+        int collection = ((CTextureDialog*)parent)->collection;
 
-    struct collection_header* header = get_collection_header(collection);
-    //get number of bitmaps
-    int bitmapNum = header->collection->bitmap_count;
-    CDC memDC;
-    memDC.CreateCompatibleDC(&dc);
+        struct collection_header* header = get_collection_header(collection);
+        //get number of bitmaps
+        int bitmapNum = header->collection->bitmap_count;
+        CDC memDC;
+        memDC.CreateCompatibleDC(&dc);
 
-    for(int x = 0 ; x < tileNumX && type < bitmapNum; x ++){
-        for(int y = 0; y < tileNumY && type < bitmapNum; y ++){
-            int tileX = LEFT_MERGIN + x * (TILE_W + INTERVAL_X);
-            int tileY = TOP_MERGIN + y * (TILE_H + INTERVAL_Y);
-            CRect destRect = CRect(tileX, tileY, tileX + TILE_W, tileY + TILE_H);
-            CBitmap* bmp = theApp.textureBitmaps[collection][type];
-            BITMAP bmpInfo;
-            bmp->GetBitmap(&bmpInfo);
+        for(int x = 0 ; x < tileNumX && type < bitmapNum; x ++){
+            for(int y = 0; y < tileNumY && type < bitmapNum; y ++){
+                int tileX = LEFT_MERGIN + x * (TILE_W + INTERVAL_X);
+                int tileY = TOP_MERGIN + y * (TILE_H + INTERVAL_Y);
+                CRect destRect = CRect(tileX, tileY, tileX + TILE_W, tileY + TILE_H);
+                CBitmap* bmp = theApp.textureBitmaps[collection][type];
+                BITMAP bmpInfo;
+                bmp->GetBitmap(&bmpInfo);
 
-            memDC.SelectObject(bmp);
-            //èkè¨ï\é¶
-            dc.StretchBlt(destRect.left, destRect.top,
-                destRect.Width(), destRect.Height(),
-                &memDC, 0, 0, bmpInfo.bmWidth, bmpInfo.bmHeight, SRCCOPY);
-            type ++;
+                memDC.SelectObject(bmp);
+                //èkè¨ï\é¶
+                dc.StretchBlt(destRect.left, destRect.top,
+                    destRect.Width(), destRect.Height(),
+                    &memDC, 0, 0, bmpInfo.bmWidth, bmpInfo.bmHeight, SRCCOPY);
+                type ++;
+            }
         }
-    }
 
-    memDC.DeleteDC();
+        memDC.DeleteDC();
+    }
 }
 
 void CTextureChildDialog::OnSize(UINT nType, int cx, int cy)
