@@ -326,7 +326,7 @@ public:
     bool isNowOnThePoint;
 
     //texture bitmaps
-    vector<vector<CBitmap*>> textureBitmaps;
+    vector<vector<CBitmap*> > textureBitmaps;
 
 private:
     //edit mode
