@@ -14,6 +14,9 @@ const int PANEL_ROW_SKIP = 1;
 const int PANEL_SIZE_STEP = 5;
 int NUMBER_OF_MAX_ROWS = 50;
 
+bool isAlloced = false;
+bool isReady = false;
+
 // CBitmapImagesDialog ダイアログ
 
 IMPLEMENT_DYNAMIC(CBitmapImagesDialog, CDialog)
@@ -22,13 +25,14 @@ CBitmapImagesDialog::CBitmapImagesDialog(CWnd* pParent /*=NULL*/)
     , clutNum(0)
     , idNum(_T(""))
 {
+    isFirstOfSetup = true;
+
 }
 
 CBitmapImagesDialog::~CBitmapImagesDialog()
 {
     freeBitmaps();
-    bufferBitmap.DeleteObject();
-    bufferDC.DeleteDC();
+    freeBuffer();
 }
 
 void CBitmapImagesDialog::DoDataExchange(CDataExchange* pDX)
@@ -47,6 +51,7 @@ BEGIN_MESSAGE_MAP(CBitmapImagesDialog, CDialog)
     ON_CBN_SELCHANGE(IDC_COMBO1, &CBitmapImagesDialog::OnCbnSelchangeCombo1)
     ON_WM_LBUTTONDOWN()
     ON_WM_LBUTTONDBLCLK()
+    ON_WM_SIZE()
 END_MESSAGE_MAP()
 
 
@@ -59,6 +64,9 @@ BOOL CBitmapImagesDialog::Create(LPCTSTR lpszTemplateName, CWnd* pParentWnd)
     return CDialog::Create(lpszTemplateName, pParentWnd);
 }
 
+CBitmap* oldbitmap;
+
+
 BOOL CBitmapImagesDialog::OnInitDialog()
 {
     CDialog::OnInitDialog();
@@ -67,6 +75,12 @@ BOOL CBitmapImagesDialog::OnInitDialog()
 //    zoom = 0;
     offset = 0;
     selectBitmapIndex = NONE;
+    isReady = true;
+    return TRUE;  // return TRUE unless you set the focus to a control
+    // 例外 : OCX プロパティ ページは必ず FALSE を返します。
+}
+
+void CBitmapImagesDialog::allocBuffer(){
     bufferDC.CreateCompatibleDC(this->GetDC());
     CRect imageRect;
     getImageRect(&imageRect);
@@ -78,9 +92,20 @@ BOOL CBitmapImagesDialog::OnInitDialog()
     scrollSlider.SetRange(0, maxHeight);
     bufferBitmap.CreateCompatibleBitmap(this->GetDC(), 
         imageRect.Width(), imageRect.Height());
-    bufferDC.SelectObject(bufferBitmap);
-    return TRUE;  // return TRUE unless you set the focus to a control
-    // 例外 : OCX プロパティ ページは必ず FALSE を返します。
+    oldbitmap = bufferDC.SelectObject(&bufferBitmap);
+
+    isAlloced = true;
+
+}
+
+void CBitmapImagesDialog::freeBuffer(){
+    if(isAlloced){
+        bufferDC.SelectObject(oldbitmap);
+        bufferBitmap.DeleteObject();
+        bufferDC.DeleteDC();
+    }
+
+    isAlloced = false;
 }
 
 void CBitmapImagesDialog::freeBitmaps()
@@ -96,27 +121,30 @@ void CBitmapImagesDialog::setupDialog()
 {
     int collectionIndex = ((CBitmapsDialog*)parent)->collection;
     selectBitmapIndex = NONE;
-
     if(theApp.isShapesLoaded){
-        scrollSlider.SetPos(0);
+        if(isFirstOfSetup){
+            scrollSlider.SetPos(0);
 
-        //store clut
-        struct collection_header* header = get_collection_header(collectionIndex);
-        int clutNum = header->collection->clut_count;
-        clutCmb.ResetContent();
-        char cstr[10];
-        for(int i = 0; i < clutNum; i ++){
-            sprintf(cstr, "%d", i);
-            clutCmb.InsertString(i, CString(cstr));
+            //store clut
+            struct collection_header* header = get_collection_header(collectionIndex);
+            int clutNum = header->collection->clut_count;
+            clutCmb.ResetContent();
+            char cstr[10];
+            for(int i = 0; i < clutNum; i ++){
+                sprintf(cstr, "%d", i);
+                clutCmb.InsertString(i, CString(cstr));
+            }
+            clutCmb.SetCurSel(0);
+
+            //id
+            sprintf(cstr, "%d", selectBitmapIndex);
+            idNum.SetString(CString(cstr));
+
+            //draw images
+            draw(&bufferDC);
+            isFirstOfSetup = false;
+        }else{
         }
-        clutCmb.SetCurSel(0);
-
-        //id
-        sprintf(cstr, "%d", selectBitmapIndex);
-        idNum.SetString(CString(cstr));
-
-        //draw images
-        draw(&bufferDC);
     }
     UpdateData();
     Invalidate(FALSE);
@@ -406,4 +434,17 @@ void CBitmapImagesDialog::OnLButtonDblClk(UINT nFlags, CPoint point)
     Invalidate(FALSE);
     UpdateData();
     CDialog::OnLButtonDblClk(nFlags, point);
+}
+
+void CBitmapImagesDialog::OnSize(UINT nType, int cx, int cy)
+{
+    CDialog::OnSize(nType, cx, cy);
+
+    // TODO: ここにメッセージ ハンドラ コードを追加します。
+
+    if(isReady){
+        freeBuffer();
+
+        allocBuffer();
+    }
 }

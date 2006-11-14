@@ -170,12 +170,12 @@ bool CShapesEditorOneDlg::initialize()
     showMode  = eDialogShowBitmaps;
 
     CRect panelRect, winRect;
-    this->GetWindowRect(&winRect);
+    this->GetClientRect(&winRect);
 
     panelRect.left = 80;
     panelRect.top = 0;
     panelRect.right = panelRect.left + winRect.Width() - 100;
-    panelRect.bottom = panelRect.top + winRect.Height() - 100;
+    panelRect.bottom = panelRect.top + winRect.Height() - 10;
 
     //setup dialog
     bitmapsDialog.Create(CBitmapsDialog::IDD, this);
@@ -277,6 +277,7 @@ void CShapesEditorOneDlg::OnFileOpen32772()
         }
         delete sdlToWin;
 
+        bitmapsDialog.bitmapImagesDialog->isFirstOfSetup = true;
         setupDialog();
     }
 }

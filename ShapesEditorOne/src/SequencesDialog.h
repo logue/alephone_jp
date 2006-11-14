@@ -26,4 +26,6 @@ public:
     virtual BOOL Create(LPCTSTR lpszTemplateName, CWnd* pParentWnd = NULL);
 public:
     virtual BOOL OnInitDialog();
+public:
+    afx_msg void OnPaint();
 };

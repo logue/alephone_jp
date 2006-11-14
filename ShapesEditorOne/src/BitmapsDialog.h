@@ -26,8 +26,8 @@ public:
 	enum { IDD = IDD_DIALOG_BITMAPS };
 
 public:
-    CBitmapImagesDialog bitmapImagesDialog;
-    CBitmapCLUTDialog bitmapCLUTDialog;
+    CBitmapImagesDialog *bitmapImagesDialog;
+    CBitmapCLUTDialog *bitmapCLUTDialog;
 
     int showMode;
     void setupDialog();
@@ -35,6 +35,7 @@ public:
     //selecting show type
     //selecting collection
     int collection;
+    void resize();
 
 protected:
 	virtual void DoDataExchange(CDataExchange* pDX);    // DDX/DDV サポート
@@ -48,4 +49,6 @@ public:
     CComboBox collectionCmb;
 public:
     afx_msg void OnCbnSelchangeCombo2();
+public:
+    afx_msg void OnSize(UINT nType, int cx, int cy);
 };

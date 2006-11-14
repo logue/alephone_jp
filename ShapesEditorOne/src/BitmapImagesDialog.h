@@ -43,6 +43,10 @@ public:
     //get dest image rect
     void getDestRect(CRect* rect, int index, CRect& imageRect);
 
+    void allocBuffer();
+    void freeBuffer();
+
+    bool isFirstOfSetup;
     //int maxHeight;
 
     //
@@ -73,4 +77,6 @@ public:
     CString idNum;
 public:
     afx_msg void OnLButtonDblClk(UINT nFlags, CPoint point);
+public:
+    afx_msg void OnSize(UINT nType, int cx, int cy);
 };

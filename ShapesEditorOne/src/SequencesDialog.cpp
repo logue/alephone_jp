@@ -25,6 +25,7 @@ void CSequencesDialog::DoDataExchange(CDataExchange* pDX)
 
 
 BEGIN_MESSAGE_MAP(CSequencesDialog, CDialog)
+    ON_WM_PAINT()
 END_MESSAGE_MAP()
 
 
@@ -49,6 +50,17 @@ BOOL CSequencesDialog::OnInitDialog()
 
 void CSequencesDialog::setupDialog()
 {
+    
     UpdateData();
 
+}
+
+void CSequencesDialog::OnPaint()
+{
+    CPaintDC dc(this); // device context for painting
+    // TODO: ここにメッセージ ハンドラ コードを追加します。
+    // 描画メッセージで CDialog::OnPaint() を呼び出さないでください。
+    if(theApp.isShapesLoaded){
+        int collectionIndex = ((CBitmapsDialog*)parent)->collection;
+    }
 }
