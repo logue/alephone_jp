@@ -51,6 +51,8 @@ void shutdown_shape_handler(void);
 extern SDL_Surface *screenSurface;
 struct collection_header *get_collection_header(short collection_index);
 struct collection_definition *get_collection_definition(short collection_index);
+struct high_level_shape_definition *get_high_level_shape_definition(short collection_index, short high_level_shape_index);
+struct bitmap_definition *get_bitmap_definition(short collection_index, short bitmap_index);
 
 /*
  *  Initialize shapes handling

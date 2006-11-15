@@ -221,8 +221,6 @@ static void *get_collection_shading_tables(short collection_index, short clut_in
 static void *get_collection_tint_tables(short collection_index, short tint_index);
 static void *collection_offset(struct collection_definition *definition, long offset);
 static struct rgb_color_value *get_collection_colors(short collection_index, short clut_number);
-static struct high_level_shape_definition *get_high_level_shape_definition(short collection_index, short high_level_shape_index);
-static struct bitmap_definition *get_bitmap_definition(short collection_index, short bitmap_index);
 
 /* ---------- machine-specific code */
 
@@ -1949,7 +1947,7 @@ struct rgb_color_value *get_collection_colors(
 	return (struct rgb_color_value *) collection_offset(definition, definition->color_table_offset+clut_number*sizeof(struct rgb_color_value)*definition->color_count);
 }
 
-static struct high_level_shape_definition *get_high_level_shape_definition(
+struct high_level_shape_definition *get_high_level_shape_definition(
 	short collection_index,
 	short high_level_shape_index)
 {
@@ -1986,7 +1984,7 @@ struct low_level_shape_definition *get_low_level_shape_definition(
 	else return NULL;
 }
 
-static struct bitmap_definition *get_bitmap_definition(
+struct bitmap_definition *get_bitmap_definition(
 	short collection_index,
 	short bitmap_index)
 {

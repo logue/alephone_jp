@@ -19,6 +19,7 @@ END_MESSAGE_MAP()
 
 static char* SHOW_TYPE_INFO_FILE_NAME = "data/ShowTypeInfo.txt";
 static char* COLLECTION_INFO_FILE_NAME = "data/Collections.txt";
+static char* COLLECTION_TYPE_INFO_FILE_NAME = "data/CollectionTypes.txt";
 
 // CShapesEditorOneApp construction
 
@@ -56,7 +57,10 @@ BOOL CShapesEditorOneApp::InitInstance()
         showTypeInformations);
     loadInformations(COLLECTION_INFO_FILE_NAME, NUMBER_OF_COLLECTIONS,
         collectionInformations);
+    loadInformations(COLLECTION_TYPE_INFO_FILE_NAME, NUMBER_OF_COLLECTION_TYPES,
+        collectionTypeInformations);
     isShapesLoaded = false;
+    collection = 0;
 
 	// Standard initialization
 	// If you are not using these features and wish to reduce the size

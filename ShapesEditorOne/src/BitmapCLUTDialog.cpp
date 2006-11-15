@@ -70,7 +70,7 @@ void CBitmapCLUTDialog::OnPaint()
     dc.SelectObject(GetStockObject(LTGRAY_BRUSH));
     dc.Rectangle(&frameRect);
     if(theApp.isShapesLoaded){
-        int collectionIndex = ((CBitmapsDialog*)parent)->collection;
+        int collectionIndex = theApp.collection;
         struct collection_header* header = get_collection_header(collectionIndex);
         int clutNum = header->collection->clut_count;
         vector<int> colorCount;
@@ -119,7 +119,7 @@ void CBitmapCLUTDialog::setupDialog()
     scrollSlider.SetRangeMin(0);
     
     if(theApp.isShapesLoaded){
-        int collectionIndex = ((CBitmapsDialog*)parent)->collection;
+        int collectionIndex = theApp.collection;
         struct collection_header* header = get_collection_header(collectionIndex);
         int clutNum = header->collection->clut_count;
         //max

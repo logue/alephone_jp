@@ -34,6 +34,20 @@
 #define IDC_EDIT8                       1017
 #define IDC_EDIT9                       1018
 #define IDC_EDIT10                      1019
+#define IDC_EDIT11                      1020
+#define IDC_EDIT12                      1021
+#define IDC_EDIT13                      1022
+#define IDC_EDIT14                      1023
+#define IDC_COMBO3                      1024
+#define IDC_EDIT15                      1025
+#define IDC_EDIT16                      1026
+#define IDC_EDIT17                      1027
+#define IDC_EDIT18                      1028
+#define IDC_EDIT19                      1029
+#define IDC_EDIT20                      1030
+#define IDC_EDIT21                      1031
+#define IDC_EDIT22                      1032
+#define IDC_COMBO4                      1033
 #define ID_FILE_NEW32771                32771
 #define ID_FILE_OPEN32772               32772
 #define ID_FILE_CLOSE32773              32773
@@ -45,7 +59,7 @@
 #ifndef APSTUDIO_READONLY_SYMBOLS
 #define _APS_NEXT_RESOURCE_VALUE        135
 #define _APS_NEXT_COMMAND_VALUE         32775
-#define _APS_NEXT_CONTROL_VALUE         1013
+#define _APS_NEXT_CONTROL_VALUE         1034
 #define _APS_NEXT_SYMED_VALUE           101
 #endif
 #endif

@@ -31,6 +31,8 @@
 // See ShapesEditorOne.cpp for the implementation of this class
 //
 
+const int NUMBER_OF_COLLECTION_TYPES = _scenery_collection + 1;
+
 class CShapesEditorOneApp : public CWinApp
 {
 public:
@@ -40,6 +42,8 @@ public:
 	public:
 	virtual BOOL InitInstance();
 
+    int collection;
+
 // Implementation
 
 	DECLARE_MESSAGE_MAP()
@@ -47,6 +51,7 @@ public:
 public:
     Information showTypeInformations[NUMBER_OF_BITMAPS_DIALOG_SHOW_TYPES];
     Information collectionInformations[NUMBER_OF_COLLECTIONS];
+    Information collectionTypeInformations[NUMBER_OF_COLLECTION_TYPES];
     bool isShapesLoaded;
 };
 

@@ -119,7 +119,7 @@ void CBitmapImagesDialog::freeBitmaps()
 
 void CBitmapImagesDialog::setupDialog()
 {
-    int collectionIndex = ((CBitmapsDialog*)parent)->collection;
+    int collectionIndex = theApp.collection;
     selectBitmapIndex = NONE;
     if(theApp.isShapesLoaded){
         if(isFirstOfSetup){
@@ -198,7 +198,7 @@ void CBitmapImagesDialog::draw(CDC *cdc)
 
     freeBitmaps();
     if(theApp.isShapesLoaded){
-        int collectionIndex = ((CBitmapsDialog*)parent)->collection;
+        int collectionIndex = theApp.collection;
 
         int clut = clutCmb.GetCurSel();
 
@@ -273,7 +273,7 @@ void CBitmapImagesDialog::OnPaint()
 
     //draw panels
     if(theApp.isShapesLoaded){
-        int collectionIndex = ((CBitmapsDialog*)parent)->collection;
+        int collectionIndex = theApp.collection;
 
         int clut = clutCmb.GetCurSel();
 
@@ -370,7 +370,7 @@ int CBitmapImagesDialog::getIndexPointIn(int px, int py)
     CRect imageRect;
     getImageRect(&imageRect);
 
-    int collectionIndex = ((CBitmapsDialog*)parent)->collection;
+    int collectionIndex = theApp.collection;
 
     int clut = clutCmb.GetCurSel();
 
@@ -419,7 +419,7 @@ void CBitmapImagesDialog::OnLButtonDblClk(UINT nFlags, CPoint point)
     {
         selectBitmapIndex = getIndexPointIn(point.x, point.y);
         if(selectBitmapIndex != NONE){
-            int collectionIndex = ((CBitmapsDialog*)parent)->collection;
+            int collectionIndex = theApp.collection;
 
             int clut = clutCmb.GetCurSel();
 

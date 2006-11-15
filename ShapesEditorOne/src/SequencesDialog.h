@@ -1,6 +1,7 @@
 #pragma once
 
 #include "SDLToWin32/SDLToWin32.h"
+#include "afxwin.h"
 
 // CSequencesDialog ダイアログ
 
@@ -28,4 +29,38 @@ public:
     virtual BOOL OnInitDialog();
 public:
     afx_msg void OnPaint();
+public:
+    CComboBox collectionCmb;
+public:
+    CEdit versionNum;
+public:
+    CComboBox typeCmb;
+public:
+    CEdit flagNum;
+public:
+    CEdit colorCountNum;
+public:
+    CEdit CLUTCountNum;
+public:
+    CEdit colorTableOffsetNum;
+public:
+    CEdit highLevelShapeCountNum;
+public:
+    CEdit highLevelShapeOffsetTableOffsetNum;
+public:
+    CEdit lowLevelShapeCountNum;
+public:
+    CEdit lowLevelShapeOffsetTableOffsetNum;
+public:
+    CEdit bitmapCountNum;
+public:
+    CEdit bitmapOffsetTableOffset;
+public:
+    CEdit pixelsToWorldNum;
+public:
+    CEdit sizeNum;
+public:
+    CComboBox highLevelShapeIndexCmb;
+public:
+    afx_msg void OnCbnSelchangeCombo1();
 };

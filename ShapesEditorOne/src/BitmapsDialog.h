@@ -34,7 +34,6 @@ public:
     
     //selecting show type
     //selecting collection
-    int collection;
     void resize();
 
 protected:

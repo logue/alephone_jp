@@ -1,0 +1,5 @@
+unused
+wall
+object
+interface
+scenery

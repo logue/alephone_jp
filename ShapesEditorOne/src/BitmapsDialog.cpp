@@ -90,7 +90,6 @@ BOOL CBitmapsDialog::OnInitDialog()
     }
     showTypeCmb.SetCurSel(0);
     collectionCmb.SetCurSel(0);
-    collection = 0;
     showMode = 0;
     setupDialog();
     return TRUE;  // return TRUE unless you set the focus to a control
@@ -109,7 +108,7 @@ void CBitmapsDialog::OnCbnSelchangeCombo1()
 void CBitmapsDialog::OnCbnSelchangeCombo2()
 {
     // TODO: ここにコントロール通知ハンドラ コードを追加します。
-    collection = collectionCmb.GetCurSel();
+    theApp.collection = collectionCmb.GetCurSel();
     setupDialog();
     //フォーカスをshow typeへ。
     GetDlgItem(IDC_DUMMY_)->SetFocus();
