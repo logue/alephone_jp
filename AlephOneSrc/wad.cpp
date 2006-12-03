@@ -1161,7 +1161,7 @@ static bool read_indexed_wad_from_file_into_buffer(
 	/* Read the directory entry first */
 	if (read_indexed_directory_data(OFile, header, index, &entry))
 	{
-        logEntry(&entry, *length, index);
+//        logEntry(&entry, *length, index);
 		/* Some sanity checks */
 		assert(*length<=entry.length);
 		assert(buffer);
@@ -1231,7 +1231,7 @@ static struct wad_data *convert_wad_from_raw(
 	
 				for(index= 0; index<tag_count; ++index)
 				{
-                    logger.printf("WAD_FILE ver.:%d wad_entry_header.offset:%d\n", header->version, wad_entry_header.offset);
+//                    logger.printf("WAD_FILE ver.:%d wad_entry_header.offset:%d\n", header->version, wad_entry_header.offset);
 					assert(header->version<WADFILE_SUPPORTS_OVERLAYS || wad_entry_header.offset == 0);
 					wad->tag_data[index].tag = wad_entry_header.tag;
 					wad->tag_data[index].length = wad_entry_header.length;

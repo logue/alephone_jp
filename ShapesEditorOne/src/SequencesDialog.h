@@ -19,6 +19,7 @@ public:
     SDLToWindows* sdlToWinScreen;
     CWnd *parent;
     void setupDialog();
+    void setupHighLevelData();
 protected:
 	virtual void DoDataExchange(CDataExchange* pDX);    // DDX/DDV サポート
 
@@ -63,4 +64,28 @@ public:
     CComboBox highLevelShapeIndexCmb;
 public:
     afx_msg void OnCbnSelchangeCombo1();
+public:
+    afx_msg void OnCbnSelchangeCombo3();
+public:
+    CEdit highNumberOfViews;
+public:
+    CEdit highFramesPerView;
+public:
+    CEdit highTicksPerView;
+public:
+    CEdit highKeyFrame;
+public:
+    CEdit highTransferMode;
+public:
+    CEdit highPeriod;
+public:
+    CComboBox highFirstFrameSound;
+public:
+    CComboBox highKeyFrameSound;
+public:
+    CComboBox highLastFrameSound;
+public:
+    CEdit highPixelsToWorld;
+public:
+    CEdit highLoopFrames;
 };

@@ -37,12 +37,24 @@ void CSequencesDialog::DoDataExchange(CDataExchange* pDX)
     DDX_Control(pDX, IDC_EDIT13, pixelsToWorldNum);
     DDX_Control(pDX, IDC_EDIT14, sizeNum);
     DDX_Control(pDX, IDC_COMBO3, highLevelShapeIndexCmb);
+    DDX_Control(pDX, IDC_EDIT15, highNumberOfViews);
+    DDX_Control(pDX, IDC_EDIT16, highFramesPerView);
+    DDX_Control(pDX, IDC_EDIT17, highTicksPerView);
+    DDX_Control(pDX, IDC_EDIT18, highKeyFrame);
+    DDX_Control(pDX, IDC_EDIT19, highTransferMode);
+    DDX_Control(pDX, IDC_EDIT20, highPeriod);
+    DDX_Control(pDX, IDC_COMBO4, highFirstFrameSound);
+    DDX_Control(pDX, IDC_COMBO5, highKeyFrameSound);
+    DDX_Control(pDX, IDC_COMBO6, highLastFrameSound);
+    DDX_Control(pDX, IDC_EDIT21, highPixelsToWorld);
+    DDX_Control(pDX, IDC_EDIT22, highLoopFrames);
 }
 
 
 BEGIN_MESSAGE_MAP(CSequencesDialog, CDialog)
     ON_WM_PAINT()
     ON_CBN_SELCHANGE(IDC_COMBO1, &CSequencesDialog::OnCbnSelchangeCombo1)
+    ON_CBN_SELCHANGE(IDC_COMBO3, &CSequencesDialog::OnCbnSelchangeCombo3)
 END_MESSAGE_MAP()
 
 
@@ -120,10 +132,17 @@ void CSequencesDialog::setupDialog()
     //clear combo
     highLevelShapeIndexCmb.ResetContent();
     //store them
-    /*for(int i = 0; i < colDef->high_level_shape_count; i ++){
+    for(int i = 0; i < colDef->high_level_shape_count; i ++){
         high_level_shape_definition* highDef =
-            get_high_level_shape_definition(
-    }*/
+            get_high_level_shape_definition(theApp.collection, i);
+        char buf[256];
+        sprintf(buf, "%d:%s", i, highDef->name);
+        highLevelShapeIndexCmb.InsertString(i, CString(buf));
+    }
+    if(colDef->high_level_shape_count > 0){
+        highLevelShapeIndexCmb.SetCurSel(0);
+    }
+
     UpdateData();
 
 }
@@ -148,4 +167,32 @@ void CSequencesDialog::OnCbnSelchangeCombo1()
     if(theApp.isShapesLoaded){
         setupDialog();
     }
+}
+
+void CSequencesDialog::OnCbnSelchangeCombo3()
+{
+    // TODO: ここにコントロール通知ハンドラ コードを追加します。
+    if(theApp.isShapesLoaded){
+        setupHighLevelData();
+    }
+}
+
+void CSequencesDialog::setupHighLevelData()
+{
+    int collection = theApp.collection;
+    int highLevelIndex = highLevelShapeIndexCmb.GetCurSel();
+    high_level_shape_definition* highDef = get_high_level_shape_definition(collection, highLevelIndex);
+
+    setIntegerNum(highDef->number_of_views, &highNumberOfViews);
+    setIntegerNum(highDef->frames_per_view, &highFramesPerView);
+    setIntegerNum(highDef->ticks_per_frame, &highTicksPerView);
+    setIntegerNum(highDef->key_frame, &highKeyFrame);
+    setIntegerNum(highDef->transfer_mode, &highTransferMode);
+    setIntegerNum(highDef->transfer_mode_period, &highPeriod);
+    //sound
+
+    setIntegerNum(highDef->pixels_to_world, &highPixelsToWorld);
+    setIntegerNum(highDef->loop_frame, &highLoopFrames);
+
+    UpdateData();
 }

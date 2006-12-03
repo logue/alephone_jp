@@ -351,7 +351,7 @@ bool load_level_from_map(
                 //struct directory_entry entry;
                 //read_indexed_directory_data(MapFile, &header, index, &entry);
                 //log header informations
-                logHeader(&header, MapFileSpec.GetPath());
+//                logHeader(&header, MapFileSpec.GetPath());
 
 				if(index_to_load>=0 && index_to_load<header.wad_count)
 				{
@@ -540,7 +540,7 @@ bool save_level(const char* filename){
     set_indexed_directory_offset_and_length(&header, 
 		&entry, 0, offset, wad_length, 0);
     //header.entry_header_size = 0;
-    logEntry(&entry, header.entry_header_size, 0);
+//    logEntry(&entry, header.entry_header_size, 0);
     //when use this, then crash!
     //entry.index = 0;
     //entry.length = wad_length;
@@ -570,7 +570,7 @@ bool save_level(const char* filename){
 	header.directory_offset= offset;
     header.parent_checksum = 0;
     //header.entry_header_size = 16;
-    logHeader(&header, MapFileSpec.GetPath());
+//    logHeader(&header, MapFileSpec.GetPath());
 	write_wad_header( OFile, &header);
 	write_directorys( OFile, &header, &entry);
     //calculate_and_store_wadfile_checksum(OFile);
