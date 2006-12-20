@@ -248,3 +248,5 @@ void addAnnotationText(world_point2d& point, string text);
 //get polygon index which include the point
 //return NONE when not found
 int getPolygonIdPointIn(world_point2d& point);
+
+//bool isPolygonValid(world_point2d& point, 
