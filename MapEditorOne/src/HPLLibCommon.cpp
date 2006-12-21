@@ -1,4 +1,5 @@
 #include "HPLLibCommon.h"
+#include <float.h>
 
 static double getLength(double x, double y)
 {
@@ -612,4 +613,44 @@ int getPolygonIdPointIn(world_point2d& point)
         }
     }
     return NONE;
+}
+
+/**
+    search polygon include point stated.
+    @return points included in a new or existing valid polygon
+        if no points returned, no valid polygon can create or found
+*/
+vector<int> getValidPoligon(world_point2d& point, short maxHeight, short minHeight)
+{
+    //get nearest point
+
+}
+
+/**
+    get point nearest the one
+*/
+int getNearestPoint(world_point2d& pointFrom)
+{
+    double minLength = DBL_MAX;
+    int minIndex = 0;
+    int i = 0; i < (int)EndpointList.size(); i ++){
+        //get endpoint data...
+        endpoint_data* point = get_endpoint_data(i);
+
+        //get length
+        double length = getLength(point, pointFrom);
+        if(minLength > length){
+            minLength = length;
+            minIndex = i;
+        }
+    }
+    return minIndex;
+}
+
+/**
+*/
+double getLength(world_point2d& pointA, world_point& pointB)
+{
+    double length = getLength(pointA.x - pointB.x, pointA.y - pointB.y);
+    return length;
 }

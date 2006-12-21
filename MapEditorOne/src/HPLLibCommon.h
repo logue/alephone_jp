@@ -249,4 +249,16 @@ void addAnnotationText(world_point2d& point, string text);
 //return NONE when not found
 int getPolygonIdPointIn(world_point2d& point);
 
-//bool isPolygonValid(world_point2d& point, 
+/**
+    search polygon include point stated.
+    @return points included in a new or existing valid polygon
+        if no points returned, no valid polygon can create or found
+*/
+vector<int> getValidPoligon(world_point2d& point, short maxHeight, short minHeight);
+
+/**
+    get point nearest the one
+*/
+int getNearestPoint(world_point2d& pointFrom);
+
+double getLength(world_point2d& pointA, world_point& pointB);
