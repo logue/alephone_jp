@@ -622,8 +622,47 @@ int getPolygonIdPointIn(world_point2d& point)
 */
 vector<int> getValidPoligon(world_point2d& point, short maxHeight, short minHeight)
 {
+    vector<int> points;
     //get nearest point
+    int nearestPointIndex = getNearestPoint(point);
 
+    //ì_Ç™ë∂ç›ÇµÇ»Ç¢
+    if(nearestPointIndex < 0){
+        return points;
+    }
+}
+
+/**
+    get point nearby
+    (in the range)
+*/
+int getNearestPoint(world_point2d& pointFrom, short maxHeight, short minHeight)
+{
+    double minLength = DBL_MAX;
+    int minIndex = -1;
+    int i = 0; i < (int)EndpointList.size(); i ++){
+        //get endpoint data...
+        endpoint_data* point = get_endpoint_data(i);
+        if(isPointInHeight(point, maxHeight, minHeight)){
+            //get length
+            double length = getLength(point, pointFrom);
+            if(minLength > length){
+                minLength = length;
+                minIndex = i;
+            }
+        }
+    }
+    return minIndex;
+}
+bool isPointInHeight(endpoint_data* point, short maxHeight, short minHeight)
+{
+    if(point->highest_adjacent_floor_height >= minHeight &&
+        point->lowest_adjacent_ceiling_height <= maxHeight)
+    {
+        return true;
+    }
+    return false;
+            
 }
 
 /**
@@ -632,7 +671,7 @@ vector<int> getValidPoligon(world_point2d& point, short maxHeight, short minHeig
 int getNearestPoint(world_point2d& pointFrom)
 {
     double minLength = DBL_MAX;
-    int minIndex = 0;
+    int minIndex = -1;
     int i = 0; i < (int)EndpointList.size(); i ++){
         //get endpoint data...
         endpoint_data* point = get_endpoint_data(i);
