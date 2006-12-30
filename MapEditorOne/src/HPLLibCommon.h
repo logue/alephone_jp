@@ -261,7 +261,7 @@ vector<int> getValidPoligon(world_point2d& point, short maxHeight, short minHeig
 */
 int getNearestPoint(world_point2d& pointFrom);
 
-double getLength(world_point2d& pointA, world_point& pointB);
+double getLength(world_point2d& pointA, world_point2d& pointB);
 
 int getNearestPoint(world_point2d& pointFrom, short maxHeight, short minHeight);
 

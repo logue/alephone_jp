@@ -640,12 +640,12 @@ int getNearestPoint(world_point2d& pointFrom, short maxHeight, short minHeight)
 {
     double minLength = DBL_MAX;
     int minIndex = -1;
-    int i = 0; i < (int)EndpointList.size(); i ++){
+    for(int i = 0; i < (int)EndpointList.size(); i ++){
         //get endpoint data...
         endpoint_data* point = get_endpoint_data(i);
         if(isPointInHeight(point, maxHeight, minHeight)){
             //get length
-            double length = getLength(point, pointFrom);
+            double length = getLength(point->vertex, pointFrom->vertex);
             if(minLength > length){
                 minLength = length;
                 minIndex = i;
@@ -672,7 +672,7 @@ int getNearestPoint(world_point2d& pointFrom)
 {
     double minLength = DBL_MAX;
     int minIndex = -1;
-    int i = 0; i < (int)EndpointList.size(); i ++){
+    for(int i = 0; i < (int)EndpointList.size(); i ++){
         //get endpoint data...
         endpoint_data* point = get_endpoint_data(i);
 
@@ -688,7 +688,7 @@ int getNearestPoint(world_point2d& pointFrom)
 
 /**
 */
-double getLength(world_point2d& pointA, world_point& pointB)
+double getLength(world_point2d& pointA, world_point2d& pointB)
 {
     double length = getLength(pointA.x - pointB.x, pointA.y - pointB.y);
     return length;
