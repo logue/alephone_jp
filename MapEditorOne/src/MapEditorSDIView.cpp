@@ -168,12 +168,16 @@ void CMapEditorSDIView::drawPolygons(CDC *cdc)
 
     POINT points[MAXIMUM_VERTICES_PER_POLYGON];
     //sort order from index to height
-    int *indexes = new int[PolygonList.size()];
+    int polyMax = static_cast<int>(PolygonList.size());
+    int *indexes = new int[polyMax];
+    int* datas = new int[polyMax];
+    sortMap(indexes, polyMax, datas);
+    delete datas;
     //sort it by floor
     //sortOrderToHeight((int)PolygonList.size(), POLYGON_TAG, indexes, true);
 
     for(int i = 0; i < (int)PolygonList.size(); i ++){
-        int index = i;//indexes[i];
+        int index = indexes[i];
         struct polygon_data* polygon = &PolygonList[index];
         int flags = polygon->flags;
         int vertexCount = polygon->vertex_count;

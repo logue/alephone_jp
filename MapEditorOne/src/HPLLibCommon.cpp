@@ -623,6 +623,7 @@ int getPolygonIdPointIn(world_point2d& point)
 vector<int> getValidPoligon(world_point2d& point, short maxHeight, short minHeight)
 {
     vector<int> points;
+    /*
     //get nearest point
     int nearestPointIndex = getNearestPoint(point);
 
@@ -630,6 +631,53 @@ vector<int> getValidPoligon(world_point2d& point, short maxHeight, short minHeig
     if(nearestPointIndex < 0){
         return points;
     }
+    */
+    //sort point index
+    int pointMax = static_cast<int>(EndpointList.size());
+    int* indexes = new int[pointMax];
+    int* datas = new int[pointMax];
+    //・高さに問題がある点を省く
+    //・点がポリゴン内にある場合、そのポリゴンに対応する点は考慮しない
+    //　また、そのポリゴンより下にある点については考慮しない
+    int* invalidPoints = new int[pointMax];
+    int polygonMax = static_cast<int>(PolygonList.size());
+    int* includingPolygons = new int[polygonMax];
+    for(int i = 0; i < polygonMax; i ++){
+        if(point_in_polygon(i, &point);
+    }
+    //距離を求めてデータに入れる
+    for(int i = 0; i < pointMax; i ++){
+        endpoint_data* ep = get_endpoint_data(i);
+        datas[i] = static_cast<int>(getLength(ep->vertex, point);
+
+        bool invalid = false;
+        if(!isPointInHeight(ep, maxHeight, minHeight)){
+            invalid = true;
+        }
+        invalidHeightPoints[i] = invalid ? 1: 0;
+
+        //
+    }
+    sortMap(indexes, pointMax, datas);
+
+    delete datas;
+    //近い順に調べていく
+    for(int i = 0; i < pointMax; i ++){
+        endpoint_data* ep = get_endpoint_data(indexes[i]);
+        
+        //右回りに進み、角度が180度を超えていないか確かめていく。
+    }
+    delete invalidPoints;
+    delete includingPolygons;
+    delete indexes;
+    return points;
+}
+
+/**
+    check which is the polygon valid.
+*/
+bool isValidPolygon(int polygonIndex)
+{
 }
 
 /**
@@ -645,7 +693,7 @@ int getNearestPoint(world_point2d& pointFrom, short maxHeight, short minHeight)
         endpoint_data* point = get_endpoint_data(i);
         if(isPointInHeight(point, maxHeight, minHeight)){
             //get length
-            double length = getLength(point->vertex, pointFrom->vertex);
+            double length = getLength(point->vertex, pointFrom);
             if(minLength > length){
                 minLength = length;
                 minIndex = i;
@@ -677,7 +725,7 @@ int getNearestPoint(world_point2d& pointFrom)
         endpoint_data* point = get_endpoint_data(i);
 
         //get length
-        double length = getLength(point, pointFrom);
+        double length = getLength(point->vertex, pointFrom);
         if(minLength > length){
             minLength = length;
             minIndex = i;
@@ -692,4 +740,51 @@ double getLength(world_point2d& pointA, world_point2d& pointB)
 {
     double length = getLength(pointA.x - pointB.x, pointA.y - pointB.y);
     return length;
+}
+
+/**
+//1対1対応のマップをソートする。値側を比較する
+    @param indexes インデックス
+*/
+void sortMap(int *indexes, int max, int* datas)
+{
+    //datasをソート
+    int* temp = new int[max];
+    int* doneIndex = new int[max];
+    //コピー
+    memcpy(temp, datas, sizeof(int) * max);
+    memset(doneIndex, 0, sizeof(int) * max);
+
+    //quick sort
+    quickSort(temp, max);
+    
+    for(int i = 0; i < max; i ++){
+        int index = 0;
+        for(int k = 0; k < max; k ++){
+            if(doneIndex[k] == 0 && temp[i] == datas[k]){
+                //同率は同率で。
+                index = k;
+                break;
+            }
+        }
+        indexes[i] = index;
+        doneIndex[index] = 1;
+    }
+    delete doneIndex;
+    delete temp;
+}
+
+/**
+    get point list ordered by length from a point
+*/
+void getPointListLengthOrder(world_point2d& pointFrom, int* indexes)
+{
+    int max = static_cast<int>(EndpointList.size());
+    int* datas = new int[max];
+    //代入
+    for(int i = 0; i < max; i ++){
+        datas[i] = static_cast<int>(getLength(pointFrom, get_endpoint_data(i)->vertex));
+    }
+    //求める
+    sortMap(indexes, max, datas);
 }

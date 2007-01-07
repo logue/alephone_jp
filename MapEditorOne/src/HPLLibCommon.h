@@ -2,6 +2,8 @@
 
 #include <math.h>
 #include <vector>
+#include <map>
+
 #include "AlephOne/map.h"
 #include "AlephOne/wad.h"
 
@@ -220,6 +222,7 @@ void sortOrderToHeight(int max, int type, int *sortedOne, bool isFloor);
 
 void quickSort(int *indexes, int max);
 
+
 /**
 	ï∂éöóÒÇÃï™äÑ
 */
@@ -257,13 +260,27 @@ int getPolygonIdPointIn(world_point2d& point);
 vector<int> getValidPoligon(world_point2d& point, short maxHeight, short minHeight);
 
 /**
+    check which is the polygon valid.
+*/
+bool isValidPolygon(int polygonIndex);
+
+/**
     get point nearest the one
 */
 int getNearestPoint(world_point2d& pointFrom);
 
 double getLength(world_point2d& pointA, world_point2d& pointB);
 
+// get nearest point in the height range
 int getNearestPoint(world_point2d& pointFrom, short maxHeight, short minHeight);
 
+// is point in range
 bool isPointInHeight(endpoint_data* point, short maxHeight, short minHeight);
 
+//dataÇÉ\Å[ÉgÇ∑ÇÈ
+void sortMap(int *indexes, int max, int* datas);
+
+/**
+    get point list ordered by length from a point
+*/
+void getPointListLengthOrder(world_point2d& pointFrom, int* indexes);

@@ -39,6 +39,10 @@ void CMapEditorSDIView::setStartPointForSelectGroup(int px, int py){
     theApp.selectStartPoint.y = py;
     theApp.isSelectingGroup = true;
 }
+
+/**
+    左ボタンをドローモードで押す
+*/
 void CMapEditorSDIView::doLButtonDownDrawMode(UINT nFlags, CPoint &point)
 {
     int OFFSET_X_VIEW = theApp.offset.x;
@@ -277,8 +281,12 @@ void CMapEditorSDIView::doLButtonDownDrawMode(UINT nFlags, CPoint &point)
         }
     }else if(theApp.selectingToolType == TI_FILL){
         //TODO
+
+        //塗れるポリゴンっぽい線の集合を探す
+        int* lines = new int[8];
+        delete lines;
     }else if(theApp.selectingToolType == TI_HAND){
-        //
+        //全体を移動
     }else if( theApp.selectingToolType == TI_LINE){
         if(nFlags & MK_LBUTTON){
             theApp.selectGroupInformation.clear();
@@ -388,6 +396,7 @@ void CMapEditorSDIView::OnLButtonDown(UINT nFlags, CPoint point)
 {
     // TODO: ここにメッセージ ハンドラ コードを追加するか、既定の処理を呼び出します。
     if(nFlags & MK_CONTROL){
+        //コントロールボタンを押している
         theApp.isPressLButtonWithCtrl = true;
     }else{
         theApp.isPressLButtonWithCtrl = false;
@@ -399,13 +408,16 @@ void CMapEditorSDIView::OnLButtonDown(UINT nFlags, CPoint point)
     int OFFSET_Y_VIEW = theApp.offset.y;
     int DIV = theApp.zoomDivision;
 
-    if(theApp.selectingToolType != TI_LINE){
-        theApp.isFirstOfLineToAdd = true;
-        theApp.previousPointIndex = NONE;
-    }
 
     switch(theApp.getEditMode()){
     case EM_DRAW:
+        if(theApp.selectingToolType != TI_LINE){
+            theApp.isFirstOfLineToAdd = true;
+            theApp.previousPointIndex = NONE;
+        }
+        if(theApp.selectingToolType == TI_HAND){
+            theApp.isPressLButtonWithCtrl = true;
+        }
         if(nFlags & MK_CONTROL){
         }else{
             doLButtonDownDrawMode(nFlags, point);
@@ -460,7 +472,8 @@ void CMapEditorSDIView::OnMouseMove(UINT nFlags, CPoint point)
 
     const int DIV = theApp.zoomDivision;
 
-    if(nFlags & MK_LBUTTON && nFlags & MK_CONTROL && theApp.isPressLButtonWithCtrl){
+    if(nFlags & MK_LBUTTON && ((nFlags & MK_CONTROL && theApp.isPressLButtonWithCtrl) ||
+        (theApp.getEditMode() == EM_DRAW && theApp.selectingToolType == TI_HAND))){
         //Control+L=move map view
         moveMapOffset(point.x, point.y);
     }else{
