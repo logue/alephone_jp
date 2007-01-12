@@ -559,6 +559,9 @@ Uint32 getpixel(Uint8* pixels, int pitch, int bpp, int x, int y)
     }
 }
 
+/** 
+    サーフェイスに指定したピクセルを打ちます
+*/
 void putpixel(SDL_Surface *surface, int x, int y, Uint32 pixel)
 {
     int bpp = surface->format->BytesPerPixel;
@@ -592,6 +595,9 @@ void putpixel(SDL_Surface *surface, int x, int y, Uint32 pixel)
     }
 }
 
+/** 
+    add annotation text on map
+*/
 void addAnnotationText(world_point2d& point, string text)
 {
     map_annotation annotationData;
@@ -643,20 +649,23 @@ vector<int> getValidPoligon(world_point2d& point, short maxHeight, short minHeig
     int polygonMax = static_cast<int>(PolygonList.size());
     int* includingPolygons = new int[polygonMax];
     for(int i = 0; i < polygonMax; i ++){
-        if(point_in_polygon(i, &point);
+        if(point_in_polygon(i, &point)){
+        }
     }
     //距離を求めてデータに入れる
     for(int i = 0; i < pointMax; i ++){
         endpoint_data* ep = get_endpoint_data(i);
-        datas[i] = static_cast<int>(getLength(ep->vertex, point);
-
+        //高さが正しいかチェック
         bool invalid = false;
         if(!isPointInHeight(ep, maxHeight, minHeight)){
             invalid = true;
         }
-        invalidHeightPoints[i] = invalid ? 1: 0;
-
-        //
+        invalidPoints[i] = invalid ? 1: 0;
+        if(invalid){
+            datas[i] = FLT_MAX;
+            continue;
+        }
+        datas[i] = static_cast<int>(getLength(ep->vertex, point));
     }
     sortMap(indexes, pointMax, datas);
 
@@ -788,3 +797,74 @@ void getPointListLengthOrder(world_point2d& pointFrom, int* indexes)
     //求める
     sortMap(indexes, max, datas);
 }
+
+/**
+    指定した点と線で繋がっている点を探す
+*/
+vector<int> getLineSharedPoints(int fromPointIndex)
+{
+    vector<int> points;
+
+    for(int i = 0; i < static_cast<int>(LineList.size()); i ++){
+        line_data* ldata = get_line_data(i);
+        if(ldata->endpoint_indexes[0] == fromPointIndex){
+            points.push_back(ldata->endpoint_indexes[1]);
+        }else if(ldata->endpoint_indexes[1] == fromPointIndex){
+            points.push_back(ldata->endpoint_indexes[0]);
+        }else{
+            //含まれない
+        }
+    }
+    return points;
+}
+
+
+/**
+    <jp>指定した点を含む線を取得
+    <en>get lines include the point
+*/
+vector<int> getLineIncludePoint(int pointIndex)
+{
+    vector<int> lines;
+    for(int i = 0; i < static_cast<int>(LineList.size()); i ++){
+        line_data* ldata = get_line_data(i);
+        if(ldata->endpoint_indexes[0] == pointIndex ||
+            ldata->endpoint_indexes[1] == pointIndex)
+        {
+            lines.push_back(i);
+        }
+    }
+    return lines;
+}
+
+/**
+    3つの連続する点が成す線の角度が右回りで180度以内か
+    [0]始点
+    [1]経由点
+    [2]終点
+*/
+bool isThreeClockwisePointsInValidDegree(int pointIndexes[3])
+{
+    int lineIndex0 = getLineFromPoints(pointIndexes[0], pointIndexes[1]);
+}
+
+/** 
+    <jp>二つの点を持つ線情報を取得します。失敗時は負数
+    <en>
+    @return -1 when failed
+*/
+int getLineFromPoints(int point0, int point1)
+{
+    for(int i = 0; i < static_cast<int>(LineList.size()); i ++){
+        line_data* ldata = get_line_data(i);
+        if((ldata->endpoint_indexes[0] == point0 &&
+            ldata->endpoint_indexes[1] == point1) ||
+            (ldata->endpoint_indexes[0] == point1 &&
+            ldata->endpoint_indexes[1] == point0))
+        {
+            return i;
+        }
+    }
+    return -1;
+}
+

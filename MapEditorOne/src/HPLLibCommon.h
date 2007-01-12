@@ -284,3 +284,29 @@ void sortMap(int *indexes, int max, int* datas);
     get point list ordered by length from a point
 */
 void getPointListLengthOrder(world_point2d& pointFrom, int* indexes);
+
+/**
+    指定した点と線で繋がっている点を探す
+*/
+vector<int> getLineSharedPoints(int fromPointIndex);
+
+/**
+    <jp>指定した点を含む線を取得
+    <en>get lines include the point
+*/
+vector<int> getLineIncludePoint(int pointIndex);
+
+/**
+    3つの連続する点が成す線の角度が右回りで180度以内か
+    [0]始点
+    [1]経由点
+    [2]終点
+*/
+bool isThreeClockwisePointsInValidDegree(int pointIndexes[3]);
+
+/** 
+    <jp>二つの点を持つ線情報を取得します。失敗時は負数
+    <en>
+    @return -1 when failed
+*/
+int getLineFromPoints(int point0, int point1);
