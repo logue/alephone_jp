@@ -57,5 +57,9 @@
 	-add function of undo/redo
 	-draw polygons by textures
 	
+	Selecting
+	-copy/paste
+	-adding/deleting a select
+	
 	Done
 	-set selecting when launch level-select dialog

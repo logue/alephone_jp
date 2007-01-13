@@ -1,0 +1,40 @@
+pistol.bmp
+pistol.bmp
+pistol Ammo.bmp
+fusion pistol.bmp
+fusion battery.bmp
+assault.bmp
+assault ammo.bmp
+grenades.bmp
+rocket launcher.bmp
+rockets.bmp
+cloak.bmp
+invulnribility.bmp
+detection.bmp
+alien weapon.bmp
+alien weapon.bmp
+flamethrower.bmp
+flame canister.bmp
+wideview.bmp
+oxygen.bmp
+red health.bmp
+yellow health.bmp
+purple health.bmp
+shotgun.bmp
+shotgun ammo.bmp
+keycard.bmp
+chip.bmp
+skull.bmp
+skull.bmp
+skull.bmp
+skull.bmp
+skull.bmp
+skull.bmp
+skull.bmp
+skull.bmp
+smg.bmp
+smg ammo.bmp
+center X.bmp
+goal.bmp
+scenery.bmp
+sound.bmp

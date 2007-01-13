@@ -1,0 +1,1080 @@
+// Microsoft Visual C++ generated resource script.
+//
+#include "resource.h"
+
+#define APSTUDIO_READONLY_SYMBOLS
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 2 resource.
+//
+#include "afxres.h"
+
+/////////////////////////////////////////////////////////////////////////////
+#undef APSTUDIO_READONLY_SYMBOLS
+
+/////////////////////////////////////////////////////////////////////////////
+// 日本語 resources
+
+#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_JPN)
+#ifdef _WIN32
+LANGUAGE LANG_JAPANESE, SUBLANG_DEFAULT
+#pragma code_page(932)
+#endif //_WIN32
+
+#ifdef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// TEXTINCLUDE
+//
+
+1 TEXTINCLUDE 
+BEGIN
+    "resource.h\0"
+END
+
+2 TEXTINCLUDE 
+BEGIN
+    "#include ""afxres.h""\r\n"
+    "\0"
+END
+
+3 TEXTINCLUDE 
+BEGIN
+    "#define _AFX_NO_SPLITTER_RESOURCES\r\n"
+    "#define _AFX_NO_OLE_RESOURCES\r\n"
+    "#define _AFX_NO_TRACKER_RESOURCES\r\n"
+    "#define _AFX_NO_PROPERTY_RESOURCES\r\n"
+    "\r\n"
+    "#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_JPN)\r\n"
+    "LANGUAGE 17, 1\r\n"
+    "#pragma code_page(932)\r\n"
+    "#include ""res\\MapEditorSDI.rc2""  // Microsoft Visual C++ 以外で編集されたリソース\r\n"
+    "#include ""afxres.rc""         // 標準コンポーネント\r\n"
+    "#include ""afxprint.rc""       // 印刷/印刷プレビュー リソース\r\n"
+    "#endif\r\n"
+    "\0"
+END
+
+#endif    // APSTUDIO_INVOKED
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Icon
+//
+
+// Icon with lowest ID value placed first to ensure application icon
+// remains consistent on all systems.
+IDR_MAINFRAME           ICON                    "res\\MapEditorSDI.ico"
+IDR_MapEditorSDITYPE    ICON                    "res\\MapEditorSDIDoc.ico"
+IDI_ICON0_POLYGON_NORMAL ICON                    "res\\icon1.ico"
+IDI_ICON1_POLYGON_ITEM_IMPASSABLE ICON                    "res\\ico00001.ico"
+IDI_ICON2_POLYGON_MONTER_IMPASSIBLE ICON                    "res\\ico00002.ico"
+IDI_ICON3_POLYGON_HILL  ICON                    "res\\ico00003.ico"
+IDI_ICON4_POLYGON_BASE  ICON                    "res\\ico00004.ico"
+IDI_ICON5_POLYGON_PLATFORM ICON                    "res\\ico00005.ico"
+IDI_ICON6_POLYGON_ENLIGHT ICON                    "res\\ico00006.ico"
+IDI_ICON7_POLYGON_ENPLATFORM ICON                    "res\\ico00007.ico"
+IDI_ICON8_POLYGON_DISLIGHT ICON                    "res\\ico00008.ico"
+IDI_ICON9_POLYGON_DISPLATFORM ICON                    "res\\ico00009.ico"
+IDI_ICON10_POLYGON_TELEPORTER ICON                    "res\\ico00010.ico"
+IDI_ICON11_POLYGON_ZONE_BORDER ICON                    "res\\ico00011.ico"
+IDI_ICON12_POLYGON_GOAL ICON                    "res\\ico00012.ico"
+IDI_ICON13_POLYGON_VISIBLE_TRIGGER ICON                    "res\\ico00013.ico"
+IDI_ICON14_POLYGON_INVISIBLE_TRIGGER ICON                    "res\\ico00014.ico"
+IDI_ICON15_POLYGON_DUAL_TRIGGER ICON                    "res\\ico00015.ico"
+IDI_ICON16_POLYGON_ITEM_TRIGGER ICON                    "res\\ico00016.ico"
+IDI_ICON17_POLYGON_EXPLORE ICON                    "res\\ico00017.ico"
+IDI_ICON18_POLYGON_EXIT ICON                    "res\\ico00018.ico"
+IDI_ICON19_POLYGON_MINOR ICON                    "res\\ico00019.ico"
+IDI_ICON20_POLYGON_MAJOR ICON                    "res\\icon2.ico"
+IDI_ICON21_POLIGON_GLUE ICON                    "res\\ico00020.ico"
+IDI_ICON22_POLYGON_GLUE_TRIGGER ICON                    "res\\ico00021.ico"
+IDI_ICON23_POLYGON_SUPER_GLUE ICON                    "res\\ico00022.ico"
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Bitmap
+//
+
+IDR_MAINFRAME           BITMAP                  "res\\Toolbar.bmp"
+IDB_BITMAP_PATTERN_SELECTED_POLYGON BITMAP                  "res\\bmp00005.bmp"
+IDB_BITMAP_CIRCLE       BITMAP                  "res\\Marathon Toolbar\\direction circle.BMP"
+IDB_BITMAP_MARKER       BITMAP                  "res\\Marathon Toolbar\\direction marker.BMP"
+IDB_BITMAP_POLYGON3     BITMAP                  "res\\marathon toolbar\\bitmap1.bmp"
+IDB_BITMAP_POLYGON4     BITMAP                  "res\\marathon toolbar\\bitmap_p.bmp"
+IDB_BITMAP_POLYGON5     BITMAP                  "res\\marathon toolbar\\bmp00001.bmp"
+IDB_BITMAP_POLYGON6     BITMAP                  "res\\marathon toolbar\\bmp00002.bmp"
+IDB_BITMAP_POLYGON7     BITMAP                  "res\\marathon toolbar\\bmp00003.bmp"
+IDB_BITMAP_POLYGON8     BITMAP                  "res\\marathon toolbar\\bmp00004.bmp"
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Toolbar
+//
+
+IDR_MAINFRAME TOOLBAR  16, 15
+BEGIN
+    BUTTON      ID_FILE_NEW
+    BUTTON      ID_FILE_OPEN
+    BUTTON      ID_FILE_SAVE
+    SEPARATOR
+    BUTTON      ID_EDIT_CUT
+    BUTTON      ID_EDIT_COPY
+    BUTTON      ID_EDIT_PASTE
+    SEPARATOR
+    BUTTON      ID_FILE_PRINT
+    BUTTON      ID_APP_ABOUT
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Menu
+//
+
+IDR_MAINFRAME MENU 
+BEGIN
+    POPUP "File(&F)"
+    BEGIN
+        MENUITEM "New...\tCtrl+N(&N)",          ID_FILE_NEW
+        MENUITEM "Open...\tCtrl+O(&O)",         ID_FILE_OPEN
+        MENUITEM "Save...\tCtrl+S(&S)",         ID_FILE_SAVE
+        MENUITEM "Save As(&A)...",              ID_FILE_SAVE_AS
+        MENUITEM SEPARATOR
+        MENUITEM "印刷...\tCtrl+P(&P)",           ID_FILE_PRINT
+        MENUITEM "印刷プレビュー(&V)",                 ID_FILE_PRINT_PREVIEW
+        MENUITEM "プリンタの設定(&R)...",              ID_FILE_PRINT_SETUP
+        MENUITEM SEPARATOR
+        MENUITEM "Recently used",               ID_FILE_MRU_FILE1, GRAYED
+        MENUITEM SEPARATOR
+        MENUITEM "Exit(&X)",                    ID_APP_EXIT
+    END
+    POPUP "Edit(&E)"
+    BEGIN
+        MENUITEM "元に戻す\tCtrl+Z(&U)",            ID_EDIT_UNDO
+        MENUITEM SEPARATOR
+        MENUITEM "切り取り\tCtrl+X(&T)",            ID_EDIT_CUT
+        MENUITEM "コピー\tCtrl+C(&C)",             ID_EDIT_COPY
+        MENUITEM "貼り付け\tCtrl+V(&P)",            ID_EDIT_PASTE
+        MENUITEM SEPARATOR
+        MENUITEM "Preferences...",              ID_32808
+    END
+    POPUP "Show(&V)"
+    BEGIN
+        MENUITEM "Tool bar(Menu)(&T)",          ID_VIEW_TOOLBAR
+        MENUITEM "Status bar(&S)",              ID_VIEW_STATUS_BAR
+        MENUITEM "Zoom in\t+ or ^",             ID_ZOOM_IN
+        MENUITEM "Zoom out\t-",                 ID_ZOOM_OUT
+        MENUITEM "Default zoom",                ID_ITEM_ZOOM_DEFAULT
+        MENUITEM "Move to center",              ID_ITEM_CENTERING
+        MENUITEM SEPARATOR
+        MENUITEM "Object's property",           ID_32784
+        MENUITEM "Height",                      ID_32789
+        MENUITEM "Tool pallet",                 ID_Menu32797
+        MENUITEM SEPARATOR
+    END
+    POPUP "Mode"
+    BEGIN
+        MENUITEM "Draw Polygons",               ID_32795
+        MENUITEM "Visual Mode",                 ID_32796
+        MENUITEM "PolygonType",                 ID_MODE_POLYGONTYPE
+        MENUITEM SEPARATOR
+        POPUP "Height"
+        BEGIN
+            MENUITEM "Floor",                       ID_HEIGHT_FLOOR
+            MENUITEM "Ceiling",                     ID_HEIGHT_CEILING
+        END
+        POPUP "Media"
+        BEGIN
+            MENUITEM "Floor",                       ID_MEDIA_FLOOR
+            MENUITEM "Ceiling",                     ID_MEDIA_CEILING
+        END
+        POPUP "Light"
+        BEGIN
+            MENUITEM "Floor",                       ID_LIGHT_FLOOR
+            MENUITEM "Ceiling",                     ID_LIGHT_CEILING
+        END
+        POPUP "Texture"
+        BEGIN
+            MENUITEM "Floor",                       ID_TEXTURE_FLOOR
+            MENUITEM "Ceiling",                     ID_TEXTURE_CEILING
+        END
+    END
+    POPUP "Special"
+    BEGIN
+        MENUITEM "Jump Level...",               ID_32776
+        MENUITEM "Level's info...",             ID_32787
+        MENUITEM "Object's placement and frequency...", ID_32788
+        MENUITEM "Terminal viewer...",          ID_32790
+    END
+    POPUP "Help(&H)"
+    BEGIN
+        MENUITEM "About MapEditorOne(&A)...",   ID_APP_ABOUT
+    END
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Accelerator
+//
+
+IDR_MAINFRAME ACCELERATORS 
+BEGIN
+    "C",            ID_EDIT_COPY,           VIRTKEY, CONTROL, NOINVERT
+    VK_INSERT,      ID_EDIT_COPY,           VIRTKEY, CONTROL, NOINVERT
+    VK_DELETE,      ID_EDIT_CUT,            VIRTKEY, SHIFT, NOINVERT
+    "X",            ID_EDIT_CUT,            VIRTKEY, CONTROL, NOINVERT
+    "V",            ID_EDIT_PASTE,          VIRTKEY, CONTROL, NOINVERT
+    VK_INSERT,      ID_EDIT_PASTE,          VIRTKEY, SHIFT, NOINVERT
+    VK_BACK,        ID_EDIT_UNDO,           VIRTKEY, ALT, NOINVERT
+    "Z",            ID_EDIT_UNDO,           VIRTKEY, CONTROL, NOINVERT
+    "N",            ID_FILE_NEW,            VIRTKEY, CONTROL, NOINVERT
+    "O",            ID_FILE_OPEN,           VIRTKEY, CONTROL, NOINVERT
+    "P",            ID_FILE_PRINT,          VIRTKEY, CONTROL, NOINVERT
+    "S",            ID_FILE_SAVE,           VIRTKEY, CONTROL, NOINVERT
+    VK_F6,          ID_NEXT_PANE,           VIRTKEY, NOINVERT
+    VK_F6,          ID_PREV_PANE,           VIRTKEY, SHIFT, NOINVERT
+    VK_OEM_MINUS,   ID_ZOOM_OUT,            VIRTKEY, NOINVERT
+    VK_OEM_PLUS,    ID_ZOOM_IN,             VIRTKEY, NOINVERT
+    VK_OEM_7,       ID_ZOOM_IN,             VIRTKEY, NOINVERT
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Dialog
+//
+
+IDD_ABOUTBOX DIALOGEX 0, 0, 237, 80
+STYLE DS_SETFONT | DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "バージョン情報 MapEditorSDI"
+FONT 9, "MS UI Gothic", 0, 0, 0x1
+BEGIN
+    ICON            IDR_MAINFRAME,IDC_STATIC,11,17,18,21
+    LTEXT           "MapEditorSDI Version 1.0",IDC_STATIC,40,10,119,8,SS_NOPREFIX
+    LTEXT           "Copyright (C) 2006",IDC_STATIC,40,25,119,8
+    DEFPUSHBUTTON   "OK",IDOK,180,7,50,16,WS_GROUP
+    LTEXT           "Author HogePiyo",IDC_STATIC,36,42,119,8,SS_NOPREFIX
+END
+
+ID_DIALOG_SELECT_LEVEL DIALOGEX 0, 0, 250, 204
+STYLE DS_SETFONT | DS_MODALFRAME | DS_FIXEDSYS | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "Dialog"
+FONT 8, "MS Shell Dlg", 400, 0, 0x1
+BEGIN
+    DEFPUSHBUTTON   "OK",IDOK,138,180,50,14
+    PUSHBUTTON      "キャンセル",IDCANCEL,192,180,50,14
+    LTEXT           "変更先のレベルを選択してください",IDC_STATIC,7,7,107,8
+    LISTBOX         IDC_LIST1,6,24,234,150,LBS_NOINTEGRALHEIGHT | WS_VSCROLL | WS_TABSTOP
+END
+
+IDD_DIALOG_POLYGON_TYPE DIALOGEX 0, 0, 154, 210
+STYLE DS_SETFONT | DS_MODALFRAME | DS_FIXEDSYS | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "ポリゴンタイプ"
+FONT 8, "MS Shell Dlg", 400, 0, 0x1
+BEGIN
+    CONTROL         "",IDC_LIST2,"SysListView32",LVS_SMALLICON | LVS_SINGLESEL | LVS_SHOWSELALWAYS | LVS_ALIGNLEFT | WS_BORDER | WS_TABSTOP,6,6,144,198
+END
+
+IDD_DIALOG3 DIALOGEX 0, 0, 172, 241
+STYLE DS_SETFONT | DS_MODALFRAME | DS_SETFOREGROUND | DS_FIXEDSYS | WS_POPUP | WS_CAPTION | WS_SYSMENU
+EXSTYLE WS_EX_TOOLWINDOW
+FONT 8, "MS Shell Dlg", 400, 0, 0x1
+BEGIN
+    CONTROL         "",IDC_STATIC_ANGLE,"Static",SS_BLACKFRAME,54,120,78,60
+    COMBOBOX        IDC_COMBO1,42,186,48,30,CBS_DROPDOWN | CBS_SORT | WS_VSCROLL | WS_TABSTOP
+    LTEXT           "起動",IDC_STATIC,6,186,17,8
+    CONTROL         "隠れている",IDC_CHECK1,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,6,42,50,10
+    CONTROL         "天井にいる",IDC_CHECK2,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,6,54,51,10
+    CONTROL         "存在に気づかない",IDC_CHECK3,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,6,66,73,10
+    CONTROL         "音に気づかない",IDC_CHECK4,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,6,78,65,10
+    CONTROL         "空中にいる",IDC_CHECK5,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,6,90,51,10
+    CONTROL         "ネットワーク時のみ",IDC_CHECK6,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,6,102,73,10
+    LTEXT           "ポリゴンID",IDC_STATIC,84,42,32,8
+    EDITTEXT        IDC_EDIT_POLYGON_INDEX,84,54,40,14,ES_AUTOHSCROLL | ES_READONLY
+    LTEXT           "オブジェクトタイプ",IDC_STATIC,6,6,52,8
+    LTEXT           "種類",IDC_STATIC,6,24,17,8
+    EDITTEXT        IDC_EDIT_OBJECT_TYPE,60,6,18,14,ES_AUTOHSCROLL | ES_READONLY
+    LTEXT           "方向",IDC_STATIC,6,120,17,8
+    EDITTEXT        IDC_EDIT_TYPE,60,24,18,14,ES_AUTOHSCROLL | ES_READONLY
+    COMBOBOX        IDC_COMBO2,84,6,78,30,CBS_DROPDOWN | CBS_SORT | WS_VSCROLL | WS_TABSTOP
+    COMBOBOX        IDC_COMBO3,84,24,78,30,CBS_DROPDOWN | CBS_SORT | WS_VSCROLL | WS_TABSTOP
+    LTEXT           "座標",IDC_STATIC,6,204,17,8
+    EDITTEXT        IDC_EDIT3,42,202,48,14,ES_AUTOHSCROLL
+    LTEXT           "x",IDC_STATIC,30,204,8,8
+    EDITTEXT        IDC_EDIT4,107,201,48,14,ES_AUTOHSCROLL
+    LTEXT           "y",IDC_STATIC,96,204,8,8
+    EDITTEXT        IDC_EDIT5,42,222,48,14,ES_AUTOHSCROLL
+    LTEXT           "z",IDC_STATIC,30,222,8,8
+    EDITTEXT        IDC_EDIT1,6,132,40,14,ES_AUTOHSCROLL | ES_READONLY
+END
+
+IDD_DIALOG_HEIGHT DIALOGEX 0, 0, 142, 161
+STYLE DS_SETFONT | DS_MODALFRAME | DS_FIXEDSYS | WS_CAPTION | WS_SYSMENU
+CAPTION "Height for showing"
+FONT 8, "MS Shell Dlg", 400, 0, 0x1
+BEGIN
+    CONTROL         "",IDC_SLIDER1,"msctls_trackbar32",TBS_VERT | TBS_BOTH | TBS_NOTICKS | WS_TABSTOP,50,7,18,120
+    CONTROL         "Reveal hidden lines",IDC_CHECK1,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,6,144,77,10
+    LTEXT           "Floor",IDC_STATIC,54,132,17,8
+    CONTROL         "",IDC_SLIDER2,"msctls_trackbar32",TBS_VERT | TBS_BOTH | TBS_NOTICKS | WS_TABSTOP,71,7,18,120
+    LTEXT           "Ceiling",IDC_STATIC,72,132,22,8
+    EDITTEXT        IDC_EDIT1,90,60,42,14,ES_AUTOHSCROLL
+    EDITTEXT        IDC_EDIT6,6,60,42,14,ES_AUTOHSCROLL
+END
+
+IDD_DIALOG_OBJECT_PLACEMENT DIALOGEX 0, 0, 341, 262
+STYLE DS_SETFONT | DS_MODALFRAME | DS_FIXEDSYS | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "Dialog"
+FONT 8, "MS Shell Dlg", 400, 0, 0x1
+BEGIN
+    DEFPUSHBUTTON   "OK",IDOK,284,241,50,14
+    COMBOBOX        IDC_COMBO1,268,7,54,30,CBS_DROPDOWN | CBS_SORT | WS_VSCROLL | WS_TABSTOP
+    CONTROL         "",IDC_LIST1,"SysListView32",LVS_REPORT | LVS_SINGLESEL | LVS_SHOWSELALWAYS | LVS_ALIGNLEFT | LVS_NOSORTHEADER | WS_BORDER | WS_TABSTOP,7,95,327,143,WS_EX_DLGMODALFRAME | WS_EX_CLIENTEDGE
+    EDITTEXT        IDC_EDIT1,60,24,40,14,ES_AUTOHSCROLL
+    EDITTEXT        IDC_EDIT2,60,42,40,14,ES_AUTOHSCROLL
+    EDITTEXT        IDC_EDIT3,60,60,40,14,ES_AUTOHSCROLL
+    LTEXT           "minimum",IDC_STATIC,6,24,28,8
+    LTEXT           "maximum",IDC_STATIC,6,42,30,8
+    LTEXT           "random count",IDC_STATIC,6,60,48,8
+    EDITTEXT        IDC_EDIT4,60,78,40,14,ES_AUTOHSCROLL
+    LTEXT           "random chance",IDC_STATIC,6,78,50,8
+    CONTROL         "replace at random location",IDC_CHECK1,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,120,60,101,10
+    PUSHBUTTON      "Damn it! We cannot exterminate them!",IDC_BUTTON1,120,6,132,12
+    PUSHBUTTON      "Noooo! All monsters come infinity!",IDC_BUTTON2,120,24,132,12
+    PUSHBUTTON      "All monsters will be initial numbers",IDC_BUTTON3,120,42,132,12
+    EDITTEXT        IDC_EDIT5,60,6,40,14,ES_AUTOHSCROLL
+    LTEXT           "initial",IDC_STATIC,6,6,17,8
+END
+
+IDD_DIALOG_LEVEL_PARAMETER DIALOGEX 0, 0, 228, 215
+STYLE DS_SETFONT | DS_MODALFRAME | DS_FIXEDSYS | WS_POPUP | WS_CAPTION | WS_SYSMENU
+EXSTYLE WS_EX_TOPMOST | WS_EX_WINDOWEDGE
+CAPTION "Dialog"
+FONT 8, "MS Shell Dlg", 400, 0, 0x1
+BEGIN
+    DEFPUSHBUTTON   "OK",IDOK,66,180,50,14
+    PUSHBUTTON      "キャンセル",IDCANCEL,144,180,50,14
+    LTEXT           "レベル名",IDC_STATIC,6,6,28,8
+    EDITTEXT        IDC_EDIT1,42,6,162,14,ES_AUTOHSCROLL
+    LTEXT           "環境",IDC_STATIC,6,30,17,8
+    GROUPBOX        "環境タイプ",IDC_STATIC,132,30,66,60
+    COMBOBOX        IDC_COMBO1,30,30,78,30,CBS_DROPDOWN | CBS_SORT | WS_VSCROLL | WS_TABSTOP
+    LTEXT           "背景",IDC_STATIC,6,48,17,8
+    COMBOBOX        IDC_COMBO4,30,48,78,30,CBS_DROPDOWN | CBS_SORT | WS_VSCROLL | WS_TABSTOP
+    CONTROL         "真空",IDC_CHECK2,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,138,42,32,10
+    CONTROL         "反逆",IDC_CHECK3,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,138,54,32,10
+    CONTROL         "低重力",IDC_CHECK4,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,138,66,40,10
+    CONTROL         "磁気",IDC_CHECK5,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,138,78,32,10
+    GROUPBOX        "ゲームタイプ",IDC_STATIC,6,66,90,108
+    CONTROL         "一人用",IDC_CHECK6,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,12,78,40,10
+    CONTROL         "共同プレー",IDC_CHECK7,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,12,90,51,10
+    CONTROL         "CTF",IDC_CHECK8,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,12,102,29,10
+    CONTROL         "陣地取り",IDC_CHECK9,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,12,114,45,10
+    GROUPBOX        "ミッションタイプ",IDC_STATIC,132,96,66,72
+    CONTROL         "皆殺し",IDC_CHECK10,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,138,108,38,10
+    CONTROL         "探索",IDC_CHECK11,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,138,120,32,10
+    CONTROL         "獲得",IDC_CHECK12,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,138,132,32,10
+    CONTROL         "修理",IDC_CHECK13,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,138,144,32,10
+    CONTROL         "救助",IDC_CHECK14,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,138,156,32,10
+    CONTROL         "ボールの取り合い",IDC_CHECK15,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,12,126,71,10
+    CONTROL         "防衛",IDC_CHECK16,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,12,138,32,10
+    CONTROL         "ラグビー",IDC_CHECK17,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,12,150,39,10
+    CONTROL         "タッグ",IDC_CHECK18,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,12,162,32,10
+END
+
+IDD_DIALOG_TERMINAL DIALOGEX 0, 0, 411, 260
+STYLE DS_SETFONT | DS_MODALFRAME | DS_FIXEDSYS | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "Dialog"
+FONT 8, "MS Shell Dlg", 400, 0, 0x1
+BEGIN
+    DEFPUSHBUTTON   "OK",IDOK,303,239,50,14
+    PUSHBUTTON      "キャンセル",IDCANCEL,354,239,50,14
+    LISTBOX         IDC_LIST_TERMINALS,7,7,94,114,LBS_SORT | LBS_NOINTEGRALHEIGHT | WS_VSCROLL | WS_TABSTOP
+    LISTBOX         IDC_LIST_GROUPS,7,121,93,73,LBS_SORT | LBS_NOINTEGRALHEIGHT | WS_VSCROLL | WS_TABSTOP
+    CONTROL         "",IDC_PICTURE,"Static",SS_BLACKFRAME,112,7,292,112
+    EDITTEXT        IDC_EDIT1,113,120,291,115,ES_MULTILINE | ES_AUTOVSCROLL | ES_WANTRETURN
+    LISTBOX         IDC_LIST_INFORMATION,7,199,92,54,LBS_SORT | LBS_NOINTEGRALHEIGHT | WS_VSCROLL | WS_TABSTOP
+END
+
+IDD_DIALOG_VISUAL DIALOGEX 0, 0, 353, 255
+STYLE DS_SETFONT | DS_MODALFRAME | DS_FIXEDSYS | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "Dialog"
+FONT 8, "MS Shell Dlg", 400, 0, 0x1
+BEGIN
+    DEFPUSHBUTTON   "OK",IDOK,244,234,50,14
+    PUSHBUTTON      "キャンセル",IDCANCEL,296,234,50,14
+    CONTROL         "",IDC_PICTURE,"Static",SS_BLACKFRAME | SS_REALSIZEIMAGE,7,7,339,222
+END
+
+IDD_DIALOG_TOOL DIALOGEX 0, 0, 31, 60
+STYLE DS_SETFONT | DS_MODALFRAME | DS_FIXEDSYS | WS_POPUP | WS_CAPTION | WS_SYSMENU
+EXSTYLE WS_EX_TOOLWINDOW
+CAPTION "Tools"
+FONT 8, "MS Shell Dlg", 400, 0, 0x1
+BEGIN
+END
+
+IDD_DIALOG_POLYGON_PROPERTY DIALOGEX 0, 0, 196, 162
+STYLE DS_SETFONT | DS_MODALFRAME | DS_FIXEDSYS | WS_POPUP | WS_CAPTION | WS_SYSMENU
+EXSTYLE WS_EX_TOOLWINDOW
+CAPTION "Polygon Poperty"
+FONT 8, "MS Shell Dlg", 400, 0, 0x1
+BEGIN
+    LTEXT           "PolygonID",IDC_STATIC,6,6,34,8
+    EDITTEXT        IDC_EDIT1,48,6,42,12,ES_AUTOHSCROLL
+    LTEXT           "Type",IDC_STATIC,6,18,17,8
+    EDITTEXT        IDC_EDIT2,48,30,42,12,ES_AUTOHSCROLL | ES_READONLY
+    LTEXT           "Permutation",IDC_STATIC,6,30,40,8
+    LTEXT           "FloorLight",IDC_STATIC,6,42,32,8
+    COMBOBOX        IDC_COMBO1,48,18,42,30,CBS_DROPDOWN | CBS_SORT | WS_DISABLED | WS_VSCROLL | WS_TABSTOP
+    EDITTEXT        IDC_EDIT3,48,102,42,12,ES_AUTOHSCROLL | ES_READONLY
+    LTEXT           "CeilingLight",IDC_STATIC,6,54,37,8
+    LTEXT           "Area",IDC_STATIC,6,66,16,8
+    LTEXT           "FirstObject",IDC_STATIC,6,78,36,8
+    LTEXT           "FirstExZone",IDC_STATIC,6,90,39,8
+    EDITTEXT        IDC_EDIT4,48,90,42,12,ES_AUTOHSCROLL | ES_READONLY
+    EDITTEXT        IDC_EDIT5,48,66,42,12,ES_AUTOHSCROLL | ES_READONLY
+    EDITTEXT        IDC_EDIT6,48,78,42,12,ES_AUTOHSCROLL | ES_READONLY
+    COMBOBOX        IDC_COMBO4,48,42,42,30,CBS_DROPDOWN | CBS_SORT | WS_VSCROLL | WS_TABSTOP
+    COMBOBOX        IDC_COMBO5,48,54,42,30,CBS_DROPDOWN | CBS_SORT | WS_VSCROLL | WS_TABSTOP
+    LTEXT           "LineExZone",IDC_STATIC,6,102,38,8
+    LTEXT           "FloorTrans",IDC_STATIC,6,114,35,8
+    LTEXT           "CeilingTrans",IDC_STATIC,6,126,40,8
+    EDITTEXT        IDC_EDIT7,48,126,42,12,ES_AUTOHSCROLL | ES_READONLY
+    EDITTEXT        IDC_EDIT8,48,114,42,12,ES_AUTOHSCROLL | ES_READONLY
+    LTEXT           "1stNeighbour",IDC_STATIC,96,6,48,8
+    LTEXT           "NearCount",IDC_STATIC,96,18,36,8
+    LTEXT           "Center X",IDC_STATIC,96,30,29,8
+    LTEXT           "Y",IDC_STATIC,120,42,8,8
+    LTEXT           "FloorOrigin",IDC_STATIC,96,54,37,8
+    LTEXT           "CeilingOrigin",IDC_STATIC,96,66,40,8
+    LTEXT           "Media",IDC_STATIC,96,78,20,8
+    LTEXT           "MediaLight",IDC_STATIC,96,90,35,8
+    LTEXT           "SoundSrcIdx",IDC_STATIC,96,102,42,8
+    LTEXT           "AmbSnd",IDC_STATIC,96,114,27,8
+    LTEXT           "RndSnd",IDC_STATIC,96,126,26,8
+    COMBOBOX        IDC_COMBO6,144,126,48,30,CBS_DROPDOWN | CBS_SORT | WS_VSCROLL | WS_TABSTOP
+    COMBOBOX        IDC_COMBO7,144,114,48,30,CBS_DROPDOWN | CBS_SORT | WS_VSCROLL | WS_TABSTOP
+    COMBOBOX        IDC_COMBO8,144,90,48,30,CBS_DROPDOWN | CBS_SORT | WS_VSCROLL | WS_TABSTOP
+    COMBOBOX        IDC_COMBO9,144,78,48,30,CBS_DROPDOWN | CBS_SORT | WS_VSCROLL | WS_TABSTOP
+    EDITTEXT        IDC_EDIT9,144,6,48,12,ES_AUTOHSCROLL
+    EDITTEXT        IDC_EDIT10,144,18,48,12,ES_AUTOHSCROLL
+    EDITTEXT        IDC_EDIT11,144,30,48,12,ES_AUTOHSCROLL
+    EDITTEXT        IDC_EDIT12,144,42,48,12,ES_AUTOHSCROLL
+    EDITTEXT        IDC_EDIT13,144,54,18,12,ES_AUTOHSCROLL
+    EDITTEXT        IDC_EDIT14,144,66,18,12,ES_AUTOHSCROLL
+    EDITTEXT        IDC_EDIT15,144,102,48,12,ES_AUTOHSCROLL
+    EDITTEXT        IDC_EDIT16,174,54,18,12,ES_AUTOHSCROLL
+    LTEXT           "x",IDC_STATIC,162,54,8,8
+    EDITTEXT        IDC_EDIT17,174,66,18,12,ES_AUTOHSCROLL
+    LTEXT           "x",IDC_STATIC,162,66,8,8
+    PUSHBUTTON      "Setup Platform",IDC_BUTTON1,6,144,60,14
+END
+
+IDD_DIALOG_PLATFORM DIALOGEX 0, 0, 388, 233
+STYLE DS_SETFONT | DS_MODALFRAME | DS_FIXEDSYS | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "Platform setting"
+FONT 8, "MS Shell Dlg", 400, 0, 0x1
+BEGIN
+    DEFPUSHBUTTON   "OK",IDOK,276,204,50,14
+    PUSHBUTTON      "キャンセル",IDCANCEL,330,204,50,14
+    LTEXT           "Type",IDC_STATIC,6,6,17,8
+    COMBOBOX        IDC_COMBO1,36,6,66,30,CBS_DROPDOWN | CBS_SORT | WS_VSCROLL | WS_TABSTOP
+    LTEXT           "Speed",IDC_STATIC,6,24,21,8
+    EDITTEXT        IDC_EDIT1,36,24,40,14,ES_AUTOHSCROLL
+    COMBOBOX        IDC_COMBO2,78,24,48,30,CBS_DROPDOWN | CBS_SORT | WS_VSCROLL | WS_TABSTOP
+    LTEXT           "Delay",IDC_STATIC,6,36,19,8
+    EDITTEXT        IDC_EDIT2,36,36,40,14,ES_AUTOHSCROLL
+    COMBOBOX        IDC_COMBO3,78,36,48,30,CBS_DROPDOWN | CBS_SORT | WS_VSCROLL | WS_TABSTOP
+    CONTROL         "AutoCalc Min Height",IDC_CHECK1,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,138,6,80,10
+    LTEXT           "Min Height",IDC_STATIC,144,18,34,8
+    EDITTEXT        IDC_EDIT3,186,18,40,14,ES_AUTOHSCROLL
+    LTEXT           "Max Height",IDC_STATIC,144,42,37,8
+    CONTROL         "AutoCalc Max Height",IDC_CHECK2,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,138,30,83,10
+    EDITTEXT        IDC_EDIT4,186,42,40,14,ES_AUTOHSCROLL
+    CONTROL         "Door",IDC_CHECK3,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,234,6,31,10
+    COMBOBOX        IDC_COMBO7,288,24,78,30,CBS_DROPDOWN | CBS_SORT | WS_VSCROLL | WS_TABSTOP
+    LTEXT           "Default Preset",IDC_STATIC,234,24,47,8
+    GROUPBOX        "Initially",IDC_STATIC,6,60,54,36
+    CONTROL         "Active",IDC_CHECK5,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,12,72,36,10
+    CONTROL         "Opened",IDC_CHECK6,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,12,84,41,10
+    CONTROL         "Player",IDC_CHECK7,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,72,72,36,10
+    CONTROL         "Aliens",IDC_CHECK8,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,72,84,35,10
+    GROUPBOX        "Controlled by",IDC_STATIC,66,60,54,36
+    CONTROL         "Causes Damage",IDC_CHECK9,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,132,72,67,10
+    CONTROL         "Reverse",IDC_CHECK10,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,132,84,43,10
+    GROUPBOX        "When Bites",IDC_STATIC,126,60,78,36
+    CONTROL         "From Floor",IDC_RADIO1,"Button",BS_AUTORADIOBUTTON | WS_GROUP,240,49,50,10
+    CONTROL         "From Ceiling",IDC_RADIO2,"Button",BS_AUTORADIOBUTTON,240,60,55,10
+    CONTROL         "From Both",IDC_RADIO3,"Button",BS_AUTORADIOBUTTON,240,72,49,10
+    CONTROL         "Floor to Ceiling",IDC_CHECK15,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,240,84,63,10
+    GROUPBOX        "Open",IDC_STATIC,234,36,72,60
+    CONTROL         "Only Once",IDC_CHECK16,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,12,114,49,10
+    CONTROL         "Activates Polygon Lights",IDC_CHECK17,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,12,126,94,10
+    CONTROL         "Activates Adjacent Polygon",IDC_CHECK18,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,12,138,104,10
+    CONTROL         "Deactivates Adjacent Polygon",IDC_CHECK19,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,12,150,112,10
+    CONTROL         "Adjacent at Each Level",IDC_CHECK20,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,12,162,89,10
+    GROUPBOX        "Activates",IDC_STATIC,6,102,120,72
+    CONTROL         "Never",IDC_RADIO4,"Button",BS_AUTORADIOBUTTON | WS_GROUP,138,114,35,10
+    CONTROL         "At Each Level",IDC_RADIO5,"Button",BS_AUTORADIOBUTTON,138,126,59,10
+    CONTROL         "At Initial Level",IDC_RADIO6,"Button",BS_AUTORADIOBUTTON,138,138,61,10
+    CONTROL         "Deactivates Polygon Lights",IDC_CHECK21,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,138,150,102,10
+    CONTROL         "Deactivates Adjecent Platform",IDC_CHECK22,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,138,162,113,10
+    CONTROL         "Activates Adjecent Platform",IDC_CHECK23,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,138,174,105,10
+    GROUPBOX        "Deactivates",IDC_STATIC,132,102,126,84
+    CONTROL         "Can't Deactivate Externally",IDC_CHECK24,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,270,114,103,10
+    CONTROL         "Uses Native Polygon Heights",IDC_CHECK25,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,270,126,107,10
+    CONTROL         "Delay Before Activation",IDC_CHECK26,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,270,138,91,10
+    CONTROL         "Doesn't Activate Parent",IDC_CHECK27,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,270,150,92,10
+    CONTROL         "Contracts Slower",IDC_CHECK28,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,270,162,71,10
+    CONTROL         "Locked",IDC_CHECK29,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,270,174,38,10
+    CONTROL         "Secret",IDC_CHECK30,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,270,186,37,10
+    GROUPBOX        "Misc",IDC_STATIC,264,102,120,96
+    LTEXT           "Tag",IDC_STATIC,6,186,13,8
+    COMBOBOX        IDC_COMBO10,42,186,48,30,CBS_DROPDOWN | CBS_SORT | WS_VSCROLL | WS_TABSTOP
+    LTEXT           "Copy from",IDC_STATIC,324,54,34,8
+    COMBOBOX        IDC_COMBO11,318,66,48,30,CBS_DROPDOWN | CBS_SORT | WS_VSCROLL | WS_TABSTOP
+END
+
+IDD_DIALOG_EDITOR_INFO DIALOGEX 0, 0, 184, 167
+STYLE DS_SETFONT | DS_MODALFRAME | DS_FIXEDSYS | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "Dialog"
+FONT 8, "MS Shell Dlg", 400, 0, 0x1
+BEGIN
+    DEFPUSHBUTTON   "OK",IDOK,48,144,50,14
+    PUSHBUTTON      "Cancel",IDCANCEL,106,144,50,14
+    LTEXT           "grid size",IDC_STATIC,6,6,27,8
+    COMBOBOX        IDC_COMBO1,48,6,48,30,CBS_DROPDOWN | CBS_SORT | WS_VSCROLL | WS_TABSTOP
+    CONTROL         "Show grid",IDC_CHECK1,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,6,24,47,10
+    CONTROL         "Fit to grid",IDC_CHECK2,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,6,36,47,10
+    CONTROL         "Show Monsters",IDC_CHECK3,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,6,48,65,10
+    LTEXT           "Color set",IDC_STATIC,90,24,30,8
+    COMBOBOX        IDC_COMBO2,132,24,48,30,CBS_DROPDOWN | CBS_SORT | WS_VSCROLL | WS_TABSTOP
+    CONTROL         "Show Items",IDC_CHECK4,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,6,60,53,10
+    CONTROL         "Show Scenery",IDC_CHECK5,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,6,72,61,10
+    CONTROL         "Show Players",IDC_CHECK6,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,6,84,59,10
+    CONTROL         "Show Goals",IDC_CHECK7,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,6,96,53,10
+    CONTROL         "Show Sounds",IDC_CHECK8,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,6,108,59,10
+    CONTROL         "Show Annotations",IDC_CHECK9,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,6,120,74,10
+    CONTROL         "Visual mode-Crossfair",IDC_CHECK10,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,6,132,85,10
+    CONTROL         "Show Polygons",IDC_CHECK12,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,102,36,64,10
+    CONTROL         "Show Lines",IDC_CHECK13,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,102,48,51,10
+    PUSHBUTTON      "Set as Default",IDC_BUTTON1,108,126,60,14
+END
+
+IDD_DIALOG_HEIGHT_PALLET DIALOGEX 0, 0, 52, 137
+STYLE DS_SETFONT | DS_MODALFRAME | DS_FIXEDSYS | WS_POPUP | WS_CAPTION | WS_SYSMENU
+EXSTYLE WS_EX_PALETTEWINDOW
+CAPTION "Height"
+FONT 8, "MS Shell Dlg", 400, 0, 0x1
+BEGIN
+    CONTROL         "",IDC_SLIDER1,"msctls_trackbar32",TBS_VERT | TBS_BOTH | TBS_NOTICKS | WS_TABSTOP,24,6,20,114
+    CONTROL         "",IDC_STATIC,"Static",SS_BLACKFRAME,6,12,12,102
+    EDITTEXT        IDC_EDIT1,6,120,40,14,ES_AUTOHSCROLL
+END
+
+IDD_DIALOG_PROPERTIES DIALOGEX 0, 0, 135, 108
+STYLE DS_SETFONT | DS_MODALFRAME | DS_FIXEDSYS | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "Dialog"
+FONT 8, "MS Shell Dlg", 400, 0, 0x1
+BEGIN
+END
+
+IDD_DIALOG_POINT_PROPERTY DIALOGEX 0, 0, 109, 101
+STYLE DS_SETFONT | DS_MODALFRAME | DS_FIXEDSYS | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "Point property"
+FONT 8, "MS Shell Dlg", 400, 0, 0x1
+BEGIN
+END
+
+IDD_DIALOG_LINE_PROPERTY DIALOGEX 0, 0, 136, 94
+STYLE DS_SETFONT | DS_MODALFRAME | DS_FIXEDSYS | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "Line property"
+FONT 8, "MS Shell Dlg", 400, 0, 0x1
+BEGIN
+END
+
+IDD_DIALOG_SIDE_PROPERTY DIALOGEX 0, 0, 186, 95
+STYLE DS_SETFONT | DS_MODALFRAME | DS_FIXEDSYS | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "Side property"
+FONT 8, "MS Shell Dlg", 400, 0, 0x1
+BEGIN
+END
+
+IDD_DIALOG_COLOR_CUSTOMIZE DIALOGEX 0, 0, 162, 135
+STYLE DS_SETFONT | DS_MODALFRAME | DS_FIXEDSYS | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "Color Customize"
+FONT 8, "MS Shell Dlg", 400, 0, 0x1
+BEGIN
+    DEFPUSHBUTTON   "OK",IDOK,47,114,50,14
+    PUSHBUTTON      "キャンセル",IDCANCEL,105,114,50,14
+    LTEXT           "Background",IDC_STATIC,6,6,38,8
+    CONTROL         "",IDC_PICT_BACKGROUND,"Static",SS_BLACKFRAME,102,6,48,12
+    PUSHBUTTON      "Choose Color",IDC_BUTTON1,48,6,50,14
+    LTEXT           "Grid line",IDC_STATIC,6,24,26,8
+    CONTROL         "",IDC_PICT_GRID_LINE,"Static",SS_BLACKFRAME,102,24,48,12
+    PUSHBUTTON      "Choose Color",IDC_BUTTON2,48,24,50,14
+    LTEXT           "Lines",IDC_STATIC,6,42,17,8
+    CONTROL         "",IDC_PICT_LINES,"Static",SS_BLACKFRAME,102,42,48,12
+    PUSHBUTTON      "Choose Color",IDC_BUTTON3,48,42,50,14
+    LTEXT           "Polygons",IDC_STATIC,6,60,30,8
+    CONTROL         "",IDC_PICT_POLYGONS,"Static",SS_BLACKFRAME,102,60,48,12
+    PUSHBUTTON      "Choose Color",IDC_BUTTON4,48,60,50,14
+    LTEXT           "Strings",IDC_STATIC,6,78,23,8
+    CONTROL         "",IDC_PICT_STRINGS,"Static",SS_BLACKFRAME,102,78,48,12
+    PUSHBUTTON      "Choose Color",IDC_BUTTON5,48,78,50,14
+    LTEXT           "Points",IDC_STATIC,6,96,20,8
+    CONTROL         "",IDC_PICT_POINTS,"Static",SS_BLACKFRAME,102,96,48,12
+    PUSHBUTTON      "Choose Color",IDC_BUTTON6,48,96,50,14
+END
+
+IDD_DIALOG_ANNOTATION DIALOGEX 0, 0, 196, 92
+STYLE DS_SETFONT | DS_MODALFRAME | DS_FIXEDSYS | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "Annotations"
+FONT 8, "MS Shell Dlg", 400, 0, 0x1
+BEGIN
+    DEFPUSHBUTTON   "OK",IDOK,78,71,50,14
+    PUSHBUTTON      "キャンセル",IDCANCEL,139,71,50,14
+    EDITTEXT        IDC_EDIT1,7,7,182,44,ES_MULTILINE | ES_AUTOHSCROLL
+    CONTROL         "Only dislay when platform shown",IDC_CHECK1,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,7,53,121,10
+END
+
+IDD_DIALOG_SELECT_POLYGON DIALOGEX 0, 0, 191, 39
+STYLE DS_SETFONT | DS_MODALFRAME | DS_FIXEDSYS | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "Select preset polygon"
+FONT 8, "MS Shell Dlg", 400, 0, 0x1
+BEGIN
+    PUSHBUTTON      "3",IDC_BUTTON1,7,7,27,25,BS_BITMAP
+    PUSHBUTTON      "4",IDC_BUTTON2,37,7,27,25,BS_BITMAP
+    PUSHBUTTON      "5",IDC_BUTTON3,67,7,27,25,BS_BITMAP
+    PUSHBUTTON      "6",IDC_BUTTON4,97,7,27,25,BS_BITMAP
+    PUSHBUTTON      "7",IDC_BUTTON5,127,7,27,25,BS_BITMAP
+    PUSHBUTTON      "8",IDC_BUTTON6,157,7,27,25,BS_BITMAP
+END
+
+IDD_DIALOG_TEXTURE DIALOGEX 0, 0, 386, 106
+STYLE DS_SETFONT | DS_FIXEDSYS | WS_POPUP | WS_CAPTION | WS_SYSMENU | WS_THICKFRAME
+EXSTYLE WS_EX_PALETTEWINDOW
+CAPTION "Textures"
+FONT 8, "MS Shell Dlg", 400, 0, 0x1
+BEGIN
+    LTEXT           "Type",IDC_STATIC,6,6,17,8
+    COMBOBOX        IDC_COMBO1,30,6,48,38,CBS_DROPDOWN | CBS_SORT | WS_VSCROLL | WS_TABSTOP
+END
+
+IDD_DIALOG_TEXTURE_CHILD DIALOGEX 0, 0, 347, 83
+STYLE DS_SETFONT | DS_FIXEDSYS | WS_CHILD | WS_VSCROLL | WS_HSCROLL | WS_SYSMENU
+FONT 8, "MS Shell Dlg", 400, 0, 0x1
+BEGIN
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Version
+//
+
+VS_VERSION_INFO VERSIONINFO
+ FILEVERSION 1,0,0,1
+ PRODUCTVERSION 1,0,0,1
+ FILEFLAGSMASK 0x3fL
+#ifdef _DEBUG
+ FILEFLAGS 0x1L
+#else
+ FILEFLAGS 0x0L
+#endif
+ FILEOS 0x4L
+ FILETYPE 0x1L
+ FILESUBTYPE 0x0L
+BEGIN
+    BLOCK "StringFileInfo"
+    BEGIN
+        BLOCK "041103a4"
+        BEGIN
+            VALUE "CompanyName", "HogePiyo soft"
+            VALUE "FileDescription", "AlephOne MapEditor"
+            VALUE "FileVersion", "0.0.1"
+            VALUE "InternalName", "MapEditorSDI.exe"
+            VALUE "LegalCopyright", "HogePiyo.  All rights reserved."
+            VALUE "OriginalFilename", "MapEditorSDI.exe"
+            VALUE "ProductName", "MapEditorOne"
+            VALUE "ProductVersion", "0.0.1"
+        END
+    END
+    BLOCK "VarFileInfo"
+    BEGIN
+        VALUE "Translation", 0x411, 932
+    END
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// DESIGNINFO
+//
+
+#ifdef APSTUDIO_INVOKED
+GUIDELINES DESIGNINFO 
+BEGIN
+    IDD_ABOUTBOX, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 230
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 73
+    END
+
+    ID_DIALOG_SELECT_LEVEL, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 243
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 197
+    END
+
+    IDD_DIALOG_POLYGON_TYPE, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 147
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 203
+    END
+
+    IDD_DIALOG3, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 165
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 234
+    END
+
+    IDD_DIALOG_HEIGHT, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 135
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 154
+    END
+
+    IDD_DIALOG_OBJECT_PLACEMENT, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 334
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 255
+    END
+
+    IDD_DIALOG_LEVEL_PARAMETER, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 221
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 208
+    END
+
+    IDD_DIALOG_TERMINAL, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 404
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 253
+    END
+
+    IDD_DIALOG_VISUAL, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 346
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 248
+    END
+
+    IDD_DIALOG_TOOL, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 24
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 53
+    END
+
+    IDD_DIALOG_POLYGON_PROPERTY, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 189
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 155
+    END
+
+    IDD_DIALOG_PLATFORM, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 381
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 226
+    END
+
+    IDD_DIALOG_EDITOR_INFO, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 177
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 160
+    END
+
+    IDD_DIALOG_HEIGHT_PALLET, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 45
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 130
+    END
+
+    IDD_DIALOG_PROPERTIES, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 128
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 101
+    END
+
+    IDD_DIALOG_POINT_PROPERTY, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 102
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 94
+    END
+
+    IDD_DIALOG_LINE_PROPERTY, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 129
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 87
+    END
+
+    IDD_DIALOG_SIDE_PROPERTY, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 179
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 88
+    END
+
+    IDD_DIALOG_COLOR_CUSTOMIZE, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 155
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 128
+    END
+
+    IDD_DIALOG_ANNOTATION, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 189
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 85
+    END
+
+    IDD_DIALOG_SELECT_POLYGON, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 184
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 32
+    END
+
+    IDD_DIALOG_TEXTURE, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 379
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 99
+    END
+
+    IDD_DIALOG_TEXTURE_CHILD, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 330
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 66
+    END
+END
+#endif    // APSTUDIO_INVOKED
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// HTML
+//
+
+IDR_HTML_HEIGHTDIALOG   HTML                    "res\\HeightDialog.htm"
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Cursor
+//
+
+IDC_CURSOR_FILL         CURSOR                  "res\\cursor1.cur"
+IDC_CURSOR_SKULL        CURSOR                  "res\\cursor2.cur"
+IDC_CURSOR_HAND         CURSOR                  "res\\cur00001.cur"
+IDC_CURSOR_LINE         CURSOR                  "res\\cursor3.cur"
+IDC_CURSOR_TEXT         CURSOR                  "res\\cur00002.cur"
+IDC_CURSOR_MAGNIFY      CURSOR                  "res\\cur00003.cur"
+IDC_CURSOR_POLYGON      CURSOR                  "res\\cur00004.cur"
+IDC_CURSOR_ARROW        CURSOR                  "res\\cur00005.cur"
+IDC_CURSOR_POINT        CURSOR                  "res\\cur00006.cur"
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// String Table
+//
+
+STRINGTABLE 
+BEGIN
+    IDP_OLE_INIT_FAILED     "OLE の初期化に失敗しました。OLE ライブラリのバージョンが正しいことを確認してください。"
+END
+
+STRINGTABLE 
+BEGIN
+    IDR_MAINFRAME           "MapEditorSDI\n\nMapEditorSDI\nMapEditorSDI Files (*.mmp)\n.mmp\nMapEditorSDI.Document\nMapEditorSDI.Document"
+END
+
+STRINGTABLE 
+BEGIN
+    AFX_IDS_APP_TITLE       "MapEditorSDI"
+    AFX_IDS_IDLEMESSAGE     "レディ"
+END
+
+STRINGTABLE 
+BEGIN
+    ID_INDICATOR_EXT        "EXT"
+    ID_INDICATOR_CAPS       "CAP"
+    ID_INDICATOR_NUM        "NUM"
+    ID_INDICATOR_SCRL       "SCRL"
+    ID_INDICATOR_OVR        "上書き"
+    ID_INDICATOR_REC        "記録"
+END
+
+STRINGTABLE 
+BEGIN
+    ID_FILE_NEW             "新規にファイルを作成\n新規ファイル"
+    ID_FILE_OPEN            "既存のファイルを開く\n開く"
+    ID_FILE_CLOSE           "作業中のファイルを閉じる\n閉じる"
+    ID_FILE_SAVE            "作業中のファイルを上書きして保存\n保存"
+    ID_FILE_SAVE_AS         "作業中のファイルを新しい名前で保存\n名前をつけて保存"
+    ID_FILE_PAGE_SETUP      "印刷オプションの変更\nページ レイアウトの設定"
+    ID_FILE_PRINT_SETUP     "プリンタおよび印刷オプションの変更\n印刷設定"
+    ID_FILE_PRINT           "作業中のファイルを印刷\n印刷"
+    ID_FILE_PRINT_PREVIEW   "印刷イメージを表示\n印刷プレビュー"
+END
+
+STRINGTABLE 
+BEGIN
+    ID_APP_ABOUT            "プログラム情報、バージョン、著作権を表示します。\nバージョン情報"
+    ID_APP_EXIT             "アプリケーションを終了し、ファイルの保存を指示\\終了"
+END
+
+STRINGTABLE 
+BEGIN
+    ID_FILE_MRU_FILE1       "指定のファイルを開く"
+    ID_FILE_MRU_FILE2       "指定のファイルを開く"
+    ID_FILE_MRU_FILE3       "指定のファイルを開く"
+    ID_FILE_MRU_FILE4       "指定のファイルを開く"
+    ID_FILE_MRU_FILE5       "指定のファイルを開く"
+    ID_FILE_MRU_FILE6       "指定のファイルを開く"
+    ID_FILE_MRU_FILE7       "指定のファイルを開く"
+    ID_FILE_MRU_FILE8       "指定のファイルを開く"
+    ID_FILE_MRU_FILE9       "指定のファイルを開く"
+    ID_FILE_MRU_FILE10      "指定のファイルを開く"
+    ID_FILE_MRU_FILE11      "指定のファイルを開く"
+    ID_FILE_MRU_FILE12      "指定のファイルを開く"
+    ID_FILE_MRU_FILE13      "指定のファイルを開く"
+    ID_FILE_MRU_FILE14      "指定のファイルを開く"
+    ID_FILE_MRU_FILE15      "指定のファイルを開く"
+    ID_FILE_MRU_FILE16      "指定のファイルを開く"
+END
+
+STRINGTABLE 
+BEGIN
+    ID_NEXT_PANE            "次のウィンドウに切り替える\n次のペイン"
+    ID_PREV_PANE            "前のウィンドウに切り替える\n前のペイン"
+END
+
+STRINGTABLE 
+BEGIN
+    ID_WINDOW_SPLIT         "作業中のウィンドウを分割\n分割"
+END
+
+STRINGTABLE 
+BEGIN
+    ID_EDIT_CLEAR           "選択範囲を消去\n消去"
+    ID_EDIT_CLEAR_ALL       "すべて消去\nすべて消去"
+    ID_EDIT_COPY            "選択範囲をコピーしてクリップボードに保存\n保存"
+    ID_EDIT_CUT             "選択範囲を切り取ってクリップボードに保存\n切り取り"
+    ID_EDIT_FIND            "指定した文字列の検索\n検索"
+    ID_EDIT_PASTE           "クリップボードの内容を貼り付け\n貼り付け"
+    ID_EDIT_REPEAT          "直前に行った動作を繰り返す\n繰り返し"
+    ID_EDIT_REPLACE         "指定した文字列を他の文字列で置換\n置換"
+    ID_EDIT_SELECT_ALL      "ファイル内のすべてを選択\nすべて選択"
+    ID_EDIT_UNDO            "直前に行った動作を元に戻す\n元に戻す"
+    ID_EDIT_REDO            "取り消した操作をやり直す\nやり直す"
+END
+
+STRINGTABLE 
+BEGIN
+    ID_VIEW_TOOLBAR         "ツール バーの 表示/非表示\nツール バーの表示切り替え"
+    ID_VIEW_STATUS_BAR      "ステータス バーの 表示/非表示\nステータス バーの表示切り替え"
+END
+
+STRINGTABLE 
+BEGIN
+    AFX_IDS_SCSIZE          "ウィンドウのサイズを変更"
+    AFX_IDS_SCMOVE          "ウィンドウの位置を変更"
+    AFX_IDS_SCMINIMIZE      "ウィンドウを最小化する"
+    AFX_IDS_SCMAXIMIZE      "ウィンドウを最大化する"
+    AFX_IDS_SCNEXTWINDOW    "次のウィンドウに切り替える"
+    AFX_IDS_SCPREVWINDOW    "前のウィンドウに切り替える"
+    AFX_IDS_SCCLOSE         "作業中のウィンドウを閉じ、変更したファイルの保存を指示"
+END
+
+STRINGTABLE 
+BEGIN
+    AFX_IDS_SCRESTORE       "ウィンドウを通常のサイズに戻す"
+    AFX_IDS_SCTASKLIST      "タスク一覧をアクティブにする"
+END
+
+STRINGTABLE 
+BEGIN
+    AFX_IDS_PREVIEW_CLOSE   "印刷プレビュー モードの終わり\nプレビューのキャンセル"
+END
+
+#endif    // 日本語 resources
+/////////////////////////////////////////////////////////////////////////////
+
+
+
+#ifndef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 3 resource.
+//
+#define _AFX_NO_SPLITTER_RESOURCES
+#define _AFX_NO_OLE_RESOURCES
+#define _AFX_NO_TRACKER_RESOURCES
+#define _AFX_NO_PROPERTY_RESOURCES
+
+#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_JPN)
+LANGUAGE 17, 1
+#pragma code_page(932)
+#include "res\MapEditorSDI.rc2"  // Microsoft Visual C++ 以外で編集されたリソース
+#include "afxres.rc"         // 標準コンポーネント
+#include "afxprint.rc"       // 印刷/印刷プレビュー リソース
+#endif
+
+/////////////////////////////////////////////////////////////////////////////
+#endif    // not APSTUDIO_INVOKED
+

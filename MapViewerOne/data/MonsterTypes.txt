@@ -1,0 +1,47 @@
+Player
+Tick - Energy
+Tick - Oxygen
+Tick - Kamikaze
+S'pht - Minor
+S'pht - Major
+S'pht - Minor Invisible
+S'pht - Major Invisible
+Pfhor Fighter - Minor
+Pfhor Fighter - Major
+Pfhor Fighter - Minor Projectile
+Pfhor Fighter - Major Projectile
+Bob - Crew
+Bob - Science
+Bob - Security
+Bob - Bad
+Drone - Minor
+Drone - Major
+Drone - Big Minor
+Drone - Big Major
+Drone - Subverted
+Cyborg - Minor
+Cyborg - Major
+Cyborg - Minor Flame
+Cyborg - Major Flame
+Enforcer - Minor
+Enforcer - Major
+Hunter - Minor
+Hunter - Major
+Trooper - Minor
+Trooper - Major
+Mother of All Cyborgs
+Mother of All Hunters
+F'lickta - Sewage
+F'lickta - Water
+F'lickta - Lava
+S'pht'Kr - Minor
+S'pht'Kr - Major
+Juggernaut - Minor
+Juggernaut - Major
+Tiny Fighter
+Tiny Bob
+Tiny F'lickta
+VacBob - Crew
+VacBob - Science
+VacBob - Security
+VacBob - Bad 

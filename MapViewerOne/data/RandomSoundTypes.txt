@@ -1,0 +1,5 @@
+water drip
+surface explosion
+underground explosion
+owl
+creak
