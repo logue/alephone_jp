@@ -61,5 +61,7 @@
 	-copy/paste
 	-adding/deleting a select
 	
+	Fill polygon
+	
 	Done
 	-set selecting when launch level-select dialog

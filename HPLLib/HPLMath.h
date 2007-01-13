@@ -2,8 +2,16 @@
 #define _HPL_MATH_
 
 namespace hpl{
-namespace aleph{
 namespace math{
+    //exchange between a and b
+    template<class T>
+    void exchange(T *a, T *b)
+    {
+        T temp = *a;
+        *a = *b;
+        *b = temp;
+    }
+
     /**
         get sign of num
     */
@@ -18,10 +26,21 @@ namespace math{
             return 0;
         }
     }
+
+    /**
+        ラジアンと度の変換
+    */
+    double getDegreeFromRadian(double rad);
+    double getRadianFromDegree(double deg);
+
+    //////////////////////////////////////////////////////////////////////
+    ///////////////  Is Point In  ////////////////////////////////////////
+    /**
+        点が矩形内か調べる
+        <en>check point be in a rect
+    */
     template<class T>
-    bool isPointInRect(T px, T py, 
-                              T rx0, T ry0,
-                              T rx1, T ry1)
+    bool isPointInRect(T px, T py, T rx0, T ry0, T rx1, T ry1)
     {
         T left = (rx0<rx1?rx0:rx1);
         T right = (rx0<rx1?rx1:rx0);
@@ -34,8 +53,43 @@ namespace math{
         }
         return false;
     }
+    /**
+        線が矩形内かチェック
+    */
+    bool isLineInRect(int lx0, int ly0, int lx1, int ly1,
+                        int rx0, int ry0, int rx1, int ry1);
 
-};
+    /**
+        ポリゴンが矩形内かチェック
+    */
+    bool isPolygonInRect(int **points, int point_num,
+                        int rx0, int ry0, int rx1, int ry1);
+
+    /**
+        ベクトルから角度を求めます(右方向がX正方向。下方向がY正方向)
+        calcurate degree from vector
+        down to 90 degree. right to 0 degree.(right and bottom are plus)
+    */
+    double getDegreeFromVector(double dx, double dy);
+
+    //////////////////////////////////////////////////////////////////////
+    ///////////////  Length  /////////////////////////////////////////////
+    /**
+        <jp>点と線分の距離が閾値以下か調べる
+        <en>check distance between point and line is under threshold
+    */
+    bool isNearbyPointToLine(double px, double py, 
+                     double lx0, double ly0, double lx1, double ly1,
+                     double distance);
+
+    /**
+        点と点の距離が所定以内か判定
+        <en>check distance between points be under threshold
+    */
+    bool isNearbyPoints(double px0, double py0, 
+                     double px1, double py1, double distance);
+
+
 };
 };
 #endif

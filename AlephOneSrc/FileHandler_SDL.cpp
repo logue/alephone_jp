@@ -45,6 +45,7 @@
 #include <string.h>
 #include <ctype.h>
 
+//#undef _SDL_endian_h
 #include "SDL_endian.h"
 
 #define strcasecmp strcmp

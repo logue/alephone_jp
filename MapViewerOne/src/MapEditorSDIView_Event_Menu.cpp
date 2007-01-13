@@ -147,10 +147,16 @@ void CMapEditorSDIView::On32776()
 void CMapEditorSDIView::addZoom(int step)
 {
     int oldZoomDiv = theApp.zoomDivision;
+
+    //拡大率が上がったら拡大率の増減速度を落とす
     if( theApp.zoomDivision < 50){
-        step = sgn<int>(step);
+        step = hpl::math::sgn<int>(step);
     }
+
+    //拡大率増減
     theApp.zoomDivision += step;
+
+    //補正
     if(theApp.zoomDivision < ZOOM_DIVISION_MIN){
         theApp.zoomDivision = ZOOM_DIVISION_MIN;
     }else if(theApp.zoomDivision > ZOOM_DIVISION_MAX){
@@ -165,6 +171,8 @@ void CMapEditorSDIView::addZoom(int step)
     center.y = rect.Height() / 2;
     int newZoomDiv = theApp.zoomDivision;
 
+    //拡大時は画面の中心ではなく表示領域の中心を真ん中として拡大縮小を行う
+    //そのためズレを補正する必要がある
     int ax = center.x - oldOffset.x;
     theApp.offset.x = center.x - (ax * oldZoomDiv / newZoomDiv);
     int ay = center.y - oldOffset.y;

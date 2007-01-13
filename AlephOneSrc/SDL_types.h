@@ -22,7 +22,7 @@
 
 #ifdef SAVE_RCSID
 static char rcsid =
- "@(#) $Id: SDL_types.h,v 1.1 2006-12-01 09:11:40 hogepiyo Exp $";
+ "@(#) $Id: SDL_types.h,v 1.2 2007-01-13 16:26:38 hogepiyo Exp $";
 #endif
 
 /* General data types used by the SDL library */
@@ -31,9 +31,9 @@ static char rcsid =
 #define _SDL_types_h
 
 /* The number of elements in a table */
-#define SDL_TABLESIZE(table)	(sizeof(table)/sizeof(table[0]))
+//#define SDL_TABLESIZE(table)	(sizeof(table)/sizeof(table[0]))
 
-/* Basic data types */
+//* Basic data types *
 typedef enum {
 	SDL_FALSE = 0,
 	SDL_TRUE  = 1
@@ -60,7 +60,7 @@ typedef signed int	Sint32;
 #elif defined(__GNUC__) || defined(__MWERKS__) || defined(__SUNPRO_C) || defined(__DECC)
 #define SDL_HAS_64BIT_TYPE	long long
 #elif defined(_MSC_VER) /* VC++ */
-#define SDL_HAS_64BIT_TYPE	__int64
+//#define SDL_HAS_64BIT_TYPE	__int64
 #endif
 #endif /* !__STRICT_ANSI__ */
 

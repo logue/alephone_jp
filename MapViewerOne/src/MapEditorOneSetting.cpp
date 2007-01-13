@@ -44,11 +44,11 @@ bool MapEditorOneSetting::loadSetting()
             if(buf[0] == '#' || line.compare("") == 0){
                 continue;
             }
-            vector<string> splitted = Split(line, "=");
+            vector<string> splitted = hpl::string::Split(line, "=");
             if((int)splitted.size() < 2){
                 continue;
             }
-            vector<string> colors = Split(splitted[1], ",");
+            vector<string> colors = hpl::string::Split(splitted[1], ",");
 
             if(splitted[0].compare(GRID_SIZE_INDEX_TAG) == 0){
                 gridSizeIndex = atoi(splitted[1].c_str());

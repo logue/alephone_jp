@@ -3,6 +3,14 @@
 
 #include "HPLMapTool.h"
 
+#include "HPLMath.h"
+
 #include "HPLSelectData.h"
+
+#include "HPLStringModifier.h"
+
+#include "HPLQuickSort.h"
+
+#include "HPLSurfaceModifier.h"
 
 #endif

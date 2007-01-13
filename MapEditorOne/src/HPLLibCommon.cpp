@@ -13,7 +13,7 @@ static double getInnerProduct(double x0, double y0, double x1, double y1)
     return num;
 }
 
-
+/*
 double getPointDistanceFromLine(double px, double py, 
                          double lx0, double ly0, double lx1, double ly1)
 {
@@ -161,8 +161,7 @@ double degreeToRadian(double deg)
     double rad = deg * 2.0 * PI / 180.0;
     return rad;
 }
-
-/**線が矩形内かチェック**/
+//**線が矩形内かチェック**
 bool isLineInRect(int lx0, int ly0, int lx1, int ly1,
                     int rx0, int ry0,
                     int rx1, int ry1)
@@ -173,8 +172,9 @@ bool isLineInRect(int lx0, int ly0, int lx1, int ly1,
         return false;
     }
 }
+*/
 
-/**ポリゴンが矩形内かチェック*/
+/**ポリゴンが矩形内かチェック*
 bool isPolygonInRect(int **points, int point_num,
                     int rx0, int ry0,
                     int rx1, int ry1)
@@ -196,7 +196,7 @@ bool isPolygonInRect(int **points, int point_num,
     @param offsetWorldX offset of world
     @param div divergence of 2 * world per view
     @param distance check distance
-*/
+*
 bool isSelectPoint(int viewPX, int viewPY, 
                    int worldPX, int worldPY,
                    int offsetViewX, int offsetViewY,
@@ -229,7 +229,7 @@ bool isSelectPoint(world_point2d &point0, world_point2d &point1,
     @param offsetViewX offset of view
     @param offsetWorldX offset of world
     @param distance check distance
-*/
+*
 bool isSelectLine(int viewPX, int viewPY,
                    int worldPX0, int worldPY0,
                    int worldPX1, int worldPY1,
@@ -263,7 +263,7 @@ bool isSelectLine(world_point2d &point,
     @param pointDistance distance as nearby
     @param lineDistance distance as nearby
     @param selectInfo select group for check
-*/
+*
 bool isPointInSelection(int px, int py,
                         int offsetViewX, int offsetViewY,
                         int offsetWorldX, int offsetWorldY,
@@ -416,7 +416,7 @@ void exchange(T *a, T *b)
     -find two different nums from indexes' left
     -return bigger one
     -if all nums are equal, return -1
-*/
+*
 static int pivot(int *indexes, int start, int end)
 {
     int k = start + 1;
@@ -435,7 +435,7 @@ static int pivot(int *indexes, int start, int end)
     divide [more than axis] and [less than axis]
     -smaller is left, bigger is right
     -return offset of start of biggers
-*/
+*
 static int partition(int *indexes, int start, int end, int axis)
 {
     int left = start, right = end;
@@ -477,7 +477,7 @@ void quickSort(int *indexes, int max)
 
 /**
 	文字列の分割
-*/
+*
 vector<string> Split( string src, const char* key){
 	//結果用
 	vector<string> vList;
@@ -522,7 +522,7 @@ double getDegreeBetweenTwoLines(int lineIndex0, int lineIndex1)
     end1 = get_endpoint_data(get_line_data(lineIndex1)->endpoint_indexes[1]);
 
     //cos距離
-    
+    //clockwise_endpoint_in_line(
     
     return 0;
 }
@@ -535,6 +535,7 @@ bool isPolygonValid(int polygonIndex)
     return false;
 }
 
+/*
 Uint32 getpixel(SDL_Surface *surface, int x, int y)
 {
     int bpp = surface->format->BytesPerPixel;
@@ -543,7 +544,7 @@ Uint32 getpixel(SDL_Surface *surface, int x, int y)
 
 Uint32 getpixel(Uint8* pixels, int pitch, int bpp, int x, int y)
 {
-    /* この p は取得したいピクセルを指すアドレス */
+    //* この p は取得したいピクセルを指すアドレス *
     Uint8 *p = (Uint8 *)pixels + y * pitch + x * bpp;
 
     switch(bpp) {
@@ -563,17 +564,17 @@ Uint32 getpixel(Uint8* pixels, int pitch, int bpp, int x, int y)
         return *(Uint32 *)p;
 
     default:
-        return 0;       /* 起こるはずがないが、ワーニングを回避 */
+        return 0;       /* 起こるはずがないが、ワーニングを回避 *
     }
 }
 
 /** 
     サーフェイスに指定したピクセルを打ちます
-*/
+*
 void putpixel(SDL_Surface *surface, int x, int y, Uint32 pixel)
 {
     int bpp = surface->format->BytesPerPixel;
-    /* この p は取得したいピクセルを指すアドレス */
+    //* この p は取得したいピクセルを指すアドレス *
     Uint8 *p = (Uint8 *)surface->pixels + y * surface->pitch + x * bpp;
 
     switch(bpp) {
@@ -774,7 +775,7 @@ void sortMap(int *indexes, int max, int* datas)
     memset(doneIndex, 0, sizeof(int) * max);
 
     //quick sort
-    quickSort(temp, max);
+    hpl::math::qsort::quickSort(temp, max);
     
     for(int i = 0; i < max; i ++){
         int index = 0;

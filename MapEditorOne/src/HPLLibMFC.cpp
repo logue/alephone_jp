@@ -105,7 +105,7 @@ void copySurfaceToBitmap(CDC* cdc, CBitmap* dest, SDL_Surface* surface, SDL_Colo
         
         for(int x = 0; x < surface->w; x ++){
             for(int y = 0; y < surface->h; y ++){
-                Uint32 pixel = getpixel(surface, x, y);
+                Uint32 pixel = hpl::surface::getpixel(surface, x, y);
                 memDC.SetPixel(x, y, RGB(palette[pixel].b, palette[pixel].g, palette[pixel].r));
             }
         }

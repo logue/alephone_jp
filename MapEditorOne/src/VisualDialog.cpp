@@ -74,8 +74,8 @@ void CVisualDialog::OnPaint()
         //SDL_BlitSurface(testImage, &r, screen, &r);
         for(int y = 0; y < testImage->h; y ++){
             for(int x = 0; x < testImage->w; x ++){
-                Uint32 pix = getpixel(testImage, x, y);
-                putpixel(screen, x, y, SDL_MapRGB(screen->format,
+                Uint32 pix = hpl::surface::getpixel(testImage, x, y);
+                hpl::surface::putpixel(screen, x, y, SDL_MapRGB(screen->format,
                     pallet[pix].r, pallet[pix].g, pallet[pix].b));
                 //dc.SetPixel(x,y, RGB(pallet[pix].r, pallet[pix].g, pallet[pix].b));
             }//logger.printf("\n");

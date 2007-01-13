@@ -179,7 +179,7 @@ void CToolDialog::OnLButtonDown(UINT nFlags, CPoint point)
         rect.top = (i / 2) * TOOL_HEIGHT;
         rect.right = rect.left + TOOL_WIDTH;
         rect.bottom = rect.top + TOOL_HEIGHT;
-        if(isPointInRect<int>(point.x, point.y,
+        if(hpl::math::isPointInRect<int>(point.x, point.y,
             rect.left, rect.top, rect.right, rect.bottom))
         {
             //ÉcÅ[Éãïœâª

@@ -161,7 +161,7 @@ bool CMapEditorSDIApp::initialize(){
             if(line.compare("") == 0){
                 continue;
             }
-            vector<string> sp = Split(line, ",");
+            vector<string> sp = hpl::string::Split(line, ",");
             int col[3];
             for(int i = 0; i < 3; i ++){
                 col[i] = atoi(sp[i].c_str());
@@ -645,7 +645,8 @@ int addPoint(struct world_point2d &world_point)
         {
             continue;
         }
-        if(isSelectPoint(world_point, point->vertex, POINT_DISTANCE_EPSILON * theApp.zoomDivision))
+        if(hpl::aleph::map::isSelectPoint(world_point, point->vertex,
+            POINT_DISTANCE_EPSILON * theApp.zoomDivision))
         {
             //’Ç‰Á‚µ‚È‚¢
             isFound = true;
@@ -671,7 +672,7 @@ int addPoint(struct world_point2d &world_point)
         }
         endpoint_data *begin = &EndpointList[line->endpoint_indexes[0]];
         endpoint_data *end = &EndpointList[line->endpoint_indexes[1]];
-        if(isSelectLine(world_point, begin->vertex, end->vertex,
+        if(hpl::aleph::map::isSelectLine(world_point, begin->vertex, end->vertex,
             LINE_DISTANCE_EPSILON * theApp.zoomDivision))
         {
             isFound = true;

@@ -477,12 +477,12 @@ void CMapEditorSDIView::drawObjects(CDC *cdc)
 
             //三角形を描く
             POINT points[3];
-            points[0].x = (LONG)(drawX + 10 * cos(degreeToRadian(degree)));
-            points[0].y = (LONG)(drawY + 10 * sin(degreeToRadian(degree)));
-            points[1].x = (LONG)(drawX + 5 * cos(degreeToRadian(degree + 120)));
-            points[1].y = (LONG)(drawY + 5 * sin(degreeToRadian(degree + 120)));
-            points[2].x = (LONG)(drawX + 5 * cos(degreeToRadian(degree - 120)));
-            points[2].y = (LONG)(drawY + 5 * sin(degreeToRadian(degree - 120)));
+            points[0].x = (LONG)(drawX + 10 * cos(hpl::math::getRadianFromDegree(degree)));
+            points[0].y = (LONG)(drawY + 10 * sin(hpl::math::getRadianFromDegree(degree)));
+            points[1].x = (LONG)(drawX + 5 * cos(hpl::math::getRadianFromDegree(degree + 120)));
+            points[1].y = (LONG)(drawY + 5 * sin(hpl::math::getRadianFromDegree(degree + 120)));
+            points[2].x = (LONG)(drawX + 5 * cos(hpl::math::getRadianFromDegree(degree - 120)));
+            points[2].y = (LONG)(drawY + 5 * sin(hpl::math::getRadianFromDegree(degree - 120)));
 
             cdc->Polygon(points, 3);
         }
@@ -670,7 +670,7 @@ BOOL CMapEditorSDIView::OnMouseWheel(UINT nFlags, short zDelta, CPoint pt)
     
     // TODO: ここにメッセージ ハンドラ コードを追加するか、既定の処理を呼び出します。
     if(nFlags & MK_CONTROL){
-        addZoom( -1 * sgn<int>(zDelta) * ZOOM_DIVISION_STEP);
+        addZoom( -1 * hpl::math::sgn<int>(zDelta) * ZOOM_DIVISION_STEP);
         Invalidate(FALSE);
     }
     return CView::OnMouseWheel(nFlags, zDelta, pt);

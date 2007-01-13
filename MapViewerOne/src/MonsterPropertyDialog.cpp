@@ -253,8 +253,8 @@ void CMonsterPropertyDialog::OnPaint()
             directionMarkerImage.GetBitmap(&bmpInfo);
             int facing = store.facing;
             int degree = facing * 360 / 512 ;
-            int x = (int)(center.x + bmpInfo.bmWidth * cos(degreeToRadian(degree)));
-            int y = (int)(center.y + bmpInfo.bmHeight * sin(degreeToRadian(degree)));
+            int x = (int)(center.x + bmpInfo.bmWidth * cos(hpl::math::getRadianFromDegree(degree)));
+            int y = (int)(center.y + bmpInfo.bmHeight * sin(hpl::math::getRadianFromDegree(degree)));
             x -= bmpInfo.bmWidth / 2;
             y -= bmpInfo.bmHeight / 2;
             ::TransparentBlt(picDC->m_hDC,
@@ -336,7 +336,7 @@ void CMonsterPropertyDialog::clickFacing(int px, int py)
     CWnd *pictureBox = GetDlgItem(IDC_STATIC_ANGLE);
     CRect rect;
     pictureBox->GetClientRect(&rect);
-    if(!isPointInRect<LONG>((LONG)px, (LONG)py, rect.left, rect.top, rect.right, rect.bottom)){
+    if(!hpl::math::isPointInRect<LONG>((LONG)px, (LONG)py, rect.left, rect.top, rect.right, rect.bottom)){
         return;
     }
     //’†SÀ•W
@@ -345,8 +345,8 @@ void CMonsterPropertyDialog::clickFacing(int px, int py)
     //sub
     int dx = centerx + rect.left - px;
     int dy = centery + rect.top - py;
-    double rad = getDegreeFromVector(dx, dy);
-    int degree = (int)radianToDegree(rad);
+    double rad = hpl::math::getDegreeFromVector(dx, dy);
+    int degree = (int)hpl::math::getDegreeFromRadian(rad);
     //[0,360]->[0,512]
     int facing = degree / 360 * 512;
     store.facing = facing;

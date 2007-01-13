@@ -20,7 +20,7 @@ static void checkSelectPoint(POINT& mousePoint,
         int drawPoint[2];
         getViewPointFromWorldPoint2D(ep->vertex, drawPoint);
 
-        if(isSelectPoint(mousePoint.x, mousePoint.y, x, y,
+        if(hpl::aleph::map::isSelectPoint(mousePoint.x, mousePoint.y, x, y,
             offsetViewX, offsetViewY, offsetWorldX, offsetWorldY, div, distance))
         {
             int offset[2];
@@ -164,7 +164,7 @@ void CMapEditorSDIView::doLButtonDownDrawMode(UINT nFlags, CPoint &point)
                             z < theApp.viewHeightMin){
                                 continue;
                         }
-                        if(isSelectPoint(point.x, point.y,
+                        if(hpl::aleph::map::isSelectPoint(point.x, point.y,
                             x, y, OFFSET_X_VIEW, OFFSET_Y_VIEW,
                             OFFSET_X_WORLD, OFFSET_Y_WORLD, DIV, OBJECT_DISTANCE_EPSILON))
                         {
@@ -207,7 +207,7 @@ void CMapEditorSDIView::doLButtonDownDrawMode(UINT nFlags, CPoint &point)
                         line_data* line = &LineList[i];
                         endpoint_data* begin = &EndpointList[line->endpoint_indexes[0]];
                         endpoint_data* end = &EndpointList[line->endpoint_indexes[1]];
-                        if(isSelectLine(point.x, point.y, begin->vertex.x, begin->vertex.y,
+                        if(hpl::aleph::map::isSelectLine(point.x, point.y, begin->vertex.x, begin->vertex.y,
                             end->vertex.x, end->vertex.y, OFFSET_X_VIEW, OFFSET_Y_VIEW,
                             OFFSET_X_WORLD, OFFSET_Y_WORLD, DIV, LINE_DISTANCE_EPSILON))
                         {
@@ -555,7 +555,7 @@ void CMapEditorSDIView::OnMouseMove(UINT nFlags, CPoint point)
                     {
                         continue;
                     }
-                    if(isSelectPoint(world_point, point->vertex, POINT_DISTANCE_EPSILON * theApp.zoomDivision))
+                    if(hpl::aleph::map::isSelectPoint(world_point, point->vertex, POINT_DISTANCE_EPSILON * theApp.zoomDivision))
                     {
                         theApp.isNowOnThePoint = true;
                         found = true;
@@ -623,7 +623,7 @@ void CMapEditorSDIView::OnLButtonUp(UINT nFlags, CPoint point)
                 int drawX = (x + OFFSET_X_WORLD)/DIV + OFFSET_X_VIEW;
                 int drawY = (y + OFFSET_Y_WORLD)/DIV + OFFSET_Y_VIEW;
                 //チェック
-                if(isPointInRect<int>(drawX, drawY, point.x, point.y,
+                if(hpl::math::isPointInRect<int>(drawX, drawY, point.x, point.y,
                     theApp.selectStartPoint.x, theApp.selectStartPoint.y))
                 {
                     //追加
@@ -642,7 +642,7 @@ void CMapEditorSDIView::OnLButtonUp(UINT nFlags, CPoint point)
                 int y0 = (begin->vertex.y + OFFSET_Y_WORLD) / DIV + OFFSET_Y_VIEW;
                 int x1 = (end->vertex.x + OFFSET_X_WORLD) / DIV + OFFSET_X_VIEW;
                 int y1 = (end->vertex.y + OFFSET_Y_WORLD) / DIV + OFFSET_Y_VIEW;
-                if(isLineInRect(x0, y0, x1, y1, point.x, point.y,
+                if(hpl::math::isLineInRect(x0, y0, x1, y1, point.x, point.y,
                     theApp.selectStartPoint.x, theApp.selectStartPoint.y))
                 {
                     int index = i;
@@ -665,7 +665,7 @@ void CMapEditorSDIView::OnLButtonUp(UINT nFlags, CPoint point)
                     endpoint_data* ep = &EndpointList[polygon->endpoint_indexes[j]];
                     int drawX = (ep->vertex.x + OFFSET_X_WORLD) / DIV + OFFSET_X_VIEW;
                     int drawY = (ep->vertex.y + OFFSET_Y_WORLD) / DIV + OFFSET_Y_VIEW;
-                    if(!isPointInRect<int>(drawX, drawY, point.x, point.y,
+                    if(!hpl::math::isPointInRect<int>(drawX, drawY, point.x, point.y,
                         theApp.selectStartPoint.x, theApp.selectStartPoint.y))
                     {
                         inner = false;
@@ -692,7 +692,7 @@ void CMapEditorSDIView::OnLButtonUp(UINT nFlags, CPoint point)
                 int drawY = (y + OFFSET_Y_WORLD)/DIV + OFFSET_Y_VIEW;
 
                 //チェック
-                if(isPointInRect<int>(drawX, drawY, point.x, point.y,
+                if(hpl::math::isPointInRect<int>(drawX, drawY, point.x, point.y,
                     theApp.selectStartPoint.x, theApp.selectStartPoint.y))
                 {
                     //追加
