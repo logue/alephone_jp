@@ -3,9 +3,7 @@
 	-高さウインドウ
 		><and -> <>or(done)
 			->追加する点の高さの範囲を -32767~32767に。
-	-tool
-		hand(done)
-		zoom(done)
+	-ツール関係
 		annotation(text)
 			->change focus when click over client rect
 		create prepared polygon ;-)
@@ -64,3 +62,5 @@
 	
 	Done
 	-set selecting when launch level-select dialog
+	-ハンドツール（全体移動）実装
+	-拡大縮小ツール実装
