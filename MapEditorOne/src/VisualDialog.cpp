@@ -47,6 +47,7 @@ void CVisualDialog::OnPaint()
     // TODO: ここにメッセージ ハンドラ コードを追加します。
     // 描画メッセージで CDialog::OnPaint() を呼び出さないでください。
 
+    /*
     if(testImage){
         /*
         dc.SelectPalette( CPalette::FromHandle(hPalette), TRUE);
@@ -62,7 +63,7 @@ void CVisualDialog::OnPaint()
         SDL_UnlockSurface(testImage);
         //AfxMessageBox(L"stop");
         //exit(1);
-        */
+        *
         
         SDL_Surface* screen = m_SDLToWindows->getSurface();
         //drawing!
@@ -86,13 +87,19 @@ void CVisualDialog::OnPaint()
         m_SDLToWindows->paint();
         
         //Invalidate(FALSE);
-    }
-    /*CWnd *pictBox = GetDlgItem(IDC_PICTURE);
+    }*/
+
+    //copy surface to GDI
+    CWnd *pictBox = GetDlgItem(IDC_PICTURE);
     
     CRect pictRect;
     pictBox->GetClientRect(&pictRect);
     CDC *pictDC = pictBox->GetDC();
+    
+    render_screen(0);
 
+    m_SDLToWindows->paint();
+    /*
     CBrush blackBrush;
     blackBrush.CreateSolidBrush(RGB(0,0,0));
     CBrush *oldBrush = pictDC->SelectObject(&blackBrush);
@@ -114,6 +121,7 @@ BOOL CVisualDialog::OnInitDialog()
     screenSurface = m_SDLToWindows->getSurface();
     //screenSurface = SDL_SetVideoMode(640,480, 8, SDL_SWSURFACE);
     
+    /*
     int clut = 0;
     int collection = BUILD_COLLECTION(11, clut);
     shape_descriptor shape = BUILD_DESCRIPTOR(collection, 1);
@@ -140,14 +148,9 @@ BOOL CVisualDialog::OnInitDialog()
 		lpPalette->palPalEntry[count].peBlue = pallet[count].b;
 		lpPalette->palPalEntry[count].peFlags = NULL;
 	}
-	/*
-	lpPalette->palPalEntry[entries - 1].peRed =
-	lpPalette->palPalEntry[entries - 1].peGreen =
-	lpPalette->palPalEntry[entries - 1].peBlue = 255;
-    */
 	hPalette = CreatePalette(lpPalette);
 	free(lpPalette);
-
+    */
     return TRUE;  // return TRUE unless you set the focus to a control
     // 例外 : OCX プロパティ ページは必ず FALSE を返します。
 }

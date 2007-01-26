@@ -61,6 +61,8 @@ using namespace std;
 
 #include "MapEditorOneSetting.h"
 
+#include <HPLLib/HPLAlephLib.h>
+
 // CMapEditorSDIApp:
 // このクラスの実装については、MapEditorSDI.cpp を参照してください。
 //
@@ -165,6 +167,8 @@ typedef struct InformationBinded_tag{
     CString jname;
     int bind;
 }InformationBinded;
+
+//class HPLSelectData;
 
 /**
     MapEditorOneメインアプリケーション
