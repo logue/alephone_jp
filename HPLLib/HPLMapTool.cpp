@@ -1,6 +1,12 @@
 #include "HPLMapTool.h"
 #include "HPLMath.h"
 
+static double getLengthDouble(double x, double y)
+{
+    double length = (double)sqrt((double)(x * x + y * y));
+    return length;
+}
+
 ///////////////////////  Points  ////////////////////////////////////////////
 bool hpl::aleph::map::isSelectPoint(int viewPX, int viewPY, 
                    int worldPX, int worldPY,
@@ -53,6 +59,22 @@ bool hpl::aleph::map::isSelectLine(world_point2d &point,
     bool isSelect = hpl::math::isNearbyPointToLine(point.x, point.y,
         linePoint0.x, linePoint0.y, linePoint1.x, linePoint1.y, distance);
     return isSelect;
+}
+double hpl::aleph::map::getLineLength(int index)
+{
+    line_data* l = get_line_data(index);
+    endpoint_data* start = get_endpoint_data(l->endpoint_indexes[0]);
+    endpoint_data* end = get_endpoint_data(l->endpoint_indexes[1]);
+    double length = hpl::aleph::map::getLength(start->vertex, end->vertex);
+    return length;
+}
+
+/**
+*/
+double hpl::aleph::map::getLength(world_point2d& pointA, world_point2d& pointB)
+{
+    double length = getLengthDouble((double)pointA.x - pointB.x,(double) pointA.y - pointB.y);
+    return length;
 }
 
 ///////////////////////  Groups  ////////////////////////////////////////////

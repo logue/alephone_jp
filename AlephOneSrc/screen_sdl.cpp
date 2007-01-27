@@ -69,7 +69,7 @@
 #endif
 
 // Global variables
-static SDL_Surface *main_surface;	// Main (display) surface
+SDL_Surface *main_surface;	// Main (display) surface
 
 // Rendering buffer for the main view, the overhead map, and the terminals.
 // The HUD has a separate buffer.
@@ -298,7 +298,7 @@ static void change_screen_mode(int width, int height, int depth, bool nogl)
 		flags |= SDL_HWSURFACE | SDL_HWPALETTE;
 	}
 	
-	main_surface = SDL_SetVideoMode(width, height, depth, flags);
+	//main_surface = SDL_SetVideoMode(width, height, depth, flags);
 #ifdef HAVE_OPENGL
 #if SDL_VERSION_ATLEAST(1,2,6)
 	if (main_surface == NULL && !nogl && screen_mode.acceleration == _opengl_acceleration && Get_OGL_ConfigureData().Multisamples > 0) {
@@ -787,7 +787,7 @@ static void update_screen(SDL_Rect &source, SDL_Rect &destination, bool hi_rez)
 		  SDL_UnlockSurface(main_surface);
 		}
 	}
-	SDL_UpdateRects(main_surface, 1, &destination);
+	//SDL_UpdateRects(main_surface, 1, &destination);
 }
 
 
@@ -1100,6 +1100,6 @@ void clear_screen(void)
 #endif
 	{
 		SDL_FillRect(main_surface, NULL, SDL_MapRGB(main_surface->format, 0, 0, 0));
-		SDL_UpdateRect(main_surface, 0, 0, 0, 0);
+		//SDL_UpdateRect(main_surface, 0, 0, 0, 0);
 	}
 }

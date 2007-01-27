@@ -23,6 +23,7 @@
 	-polygon types
 		enenglish
 		change selection when click other polygon
+		‚‚³î•ñ‚Ì•\¦
 	-preferences
 		custom color
 		settings

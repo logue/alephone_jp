@@ -249,7 +249,8 @@ bool CMapEditorSDIApp::initialize(){
 
     isNowOnThePoint = false;
 
-
+    allocate_player_memory();
+    //int id = new_player(0, 0, 0);
     return true;
 }
 

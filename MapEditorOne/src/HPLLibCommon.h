@@ -4,93 +4,12 @@
 #include <vector>
 #include <map>
 
-#include "AlephOne/map.h"
-#include "AlephOne/wad.h"
+#include "map.h"
+#include "wad.h"
 
 #include "HPLLib/HPLAlephLib.h"
 
 using namespace std;
-
-/**線が矩形内かチェック**
-bool isLineInRect(int lx0, int ly0, int lx1, int ly1,
-                    int rx0, int ry0,
-                    int rx1, int ry1);
-
-/**ポリゴンが矩形内かチェック*
-bool isPolygonInRect(int **points, int point_num,
-                    int rx0, int ry0,
-                    int rx1, int ry1);
-
-/**
-    is view-point near world-point?
-    @param viewPX   point(mouse/view)
-    @param worldPX  point(world)
-    @param offsetViewX offset of view
-    @param offsetWorldX offset of world
-    @param distance check distance
-*
-bool isSelectPoint(int viewPX, int viewPY, 
-                   int worldPX, int worldPY,
-                   int offsetViewX, int offsetViewY,
-                   int offsetWorldX, int offsetWorldY,
-                   int div,
-                   int distance);
-bool isSelectPoint(world_point2d &point0, world_point2d &point1,
-                   int distance);
-/**
-    is view-point near world-line?
-    @param viewPX   point(mouse/view)
-    @param worldPX0 line's point(world)
-    @param offsetViewX offset of view
-    @param offsetWorldX offset of world
-    @param distance check distance
-*
-bool isSelectLine(int viewPX, int viewPY,
-                   int worldPX0, int worldPY0,
-                   int worldPX1, int worldPY1,
-                   int offsetViewX, int offsetViewY,
-                   int offsetWorldX, int offsetWorldY,
-                   int div,
-                   int distance);
-bool isSelectLine(world_point2d &point,
-                  world_point2d &linePoint0, world_point2d &linePoint1,
-                  int distance);
-/**
-    is point in select groups?
-    @param px point locatin(view)
-    @param offsetViewX offset(view)
-    @param offsetWorldX offset(world)
-    @param pointDistance distance as nearby point
-    @param lineDistance distance as nearby line
-    @param objectDistance distance as nearby object
-    @param selectInfo select group for check
-*
-bool isPointInSelection(int px, int py,
-    int offsetViewX, int offsetViewY,
-    int offsetWorldX, int offsetWorldY,
-    int pointDistance,
-    int lineDistance,
-    int objectDistance,
-    hpl::aleph::map::HPLSelectData* selectInfo,
-    int heightMax, int heightMin, int div);
-
-//calcurate degree from vector
-double getDegreeFromVector(double dx, double dy);
-
-/**
-    sort order from index to height
-    @param type LINE_TAG, ENDPOINT_TAG ...
-    @param 
-*
-void sortOrderToHeight(int max, int type, int *sortedOne, bool isFloor);
-
-void quickSort(int *indexes, int max);
-
-
-/**
-	文字列の分割
-*
-vector<string> Split( string src, const char* key);
 
 /**
     calculate degree between two connected lines
@@ -134,7 +53,6 @@ bool isValidPolygon(int polygonIndex);
 */
 int getNearestPoint(world_point2d& pointFrom);
 
-double getLength(world_point2d& pointA, world_point2d& pointB);
 
 // get nearest point in the height range
 int getNearestPoint(world_point2d& pointFrom, short maxHeight, short minHeight);

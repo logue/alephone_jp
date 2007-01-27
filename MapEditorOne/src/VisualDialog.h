@@ -1,6 +1,6 @@
 #pragma once
 
-#include "AlephOne/SDL.h"
+#include "SDL.h"
 #include "MapEditorSDI.h"
 
 // CVisualDialog ダイアログ

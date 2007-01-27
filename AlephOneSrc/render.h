@@ -199,7 +199,7 @@ void start_render_effect(struct view_data *view, short effect);
 void render_overhead_map(struct view_data *view);
 void render_computer_interface(struct view_data *view);
 
-//#include "scottish_textures.h"
+#include "scottish_textures.h"
 
 // LP: definitions moved up here because they are referred to
 // outside of render.c, where they are defined.

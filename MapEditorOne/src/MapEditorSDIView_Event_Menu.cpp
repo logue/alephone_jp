@@ -95,6 +95,15 @@ void CMapEditorSDIView::OnFileOpen()
         //
         theApp.isChanged = false;
         this->Invalidate(FALSE);
+
+        initialize_players();
+        int index = new_player(0,0,0);
+
+        set_local_player_index(index);
+        set_current_player_index(index);
+
+        allocate_render_memory();
+
     }
 }
 //save file

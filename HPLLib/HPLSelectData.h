@@ -5,8 +5,8 @@
 #ifndef _HPL_SELECT_DATA_
 #define _HPL_SELECT_DATA_
 
-#include "AlephOne/map.h"
-#include "AlephOne/wad.h"
+#include "map.h"
+#include "wad.h"
 #include <vector>
 
 namespace hpl{

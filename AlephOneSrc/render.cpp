@@ -280,7 +280,7 @@ vector<uint16> RenderFlagList;
 
 // LP additions: decomposition of the rendering code into various objects
 
-/*static RenderVisTreeClass RenderVisTree;			// Visibility-tree object
+static RenderVisTreeClass RenderVisTree;			// Visibility-tree object
 static RenderSortPolyClass RenderSortPoly;			// Polygon-sorting object
 static RenderPlaceObjsClass RenderPlaceObjs;		// Object-placement object
 static RenderRasterizerClass RenderRasterize;		// Clipping and rasterization class
@@ -293,11 +293,11 @@ static Rasterizer_OGL_Class Rasterizer_OGL;			// OpenGL rasterizer
 
 /* ---------- private prototypes */
 static void update_view_data(struct view_data *view);
+static void render_viewer_sprite_layer(view_data *view, RasterizerClass *RasPtr);
 /*
 static void update_render_effect(struct view_data *view);
 static void shake_view_origin(struct view_data *view, world_distance delta);
 
-static void render_viewer_sprite_layer(view_data *view, RasterizerClass *RasPtr);
 static void position_sprite_axis(short *x0, short *x1, short scale_width, short screen_width,
 	short positioning_mode, _fixed position, bool flip, world_distance world_left, world_distance world_right);
 
@@ -310,9 +310,28 @@ static void debug_x_line(world_distance x);
 #endif
 
 /* ---------- code */
-/*
 void allocate_render_memory(
 	void)
+{
+	assert(NUMBER_OF_RENDER_FLAGS<=16);
+    printf("NUMBER_OF_RENDER_FLAGS:%d\n", NUMBER_OF_RENDER_FLAGS);
+	RenderFlagList.resize(RENDER_FLAGS_BUFFER_SIZE);
+    for(int i = 0; i < RENDER_FLAGS_BUFFER_SIZE; i ++){
+        RenderFlagList.push_back(0);
+    }
+	// LP addition: check out pointer-arithmetic hack
+	assert(sizeof(void *) == sizeof(POINTER_DATA));
+	
+	// LP change: do max allocation
+	RenderVisTree.Resize(MAXIMUM_ENDPOINTS_PER_MAP,MAXIMUM_LINES_PER_MAP);
+	RenderSortPoly.Resize(MAXIMUM_POLYGONS_PER_MAP);
+	
+	// LP change: set up pointers
+	RenderSortPoly.RVPtr = &RenderVisTree;
+	RenderPlaceObjs.RVPtr = &RenderVisTree;
+	RenderPlaceObjs.RSPtr = &RenderSortPoly;
+	RenderRasterize.RSPtr = &RenderSortPoly;
+}
 
 /* just in case anyone was wondering, standard_screen_width will usually be the same as
 	screen_width.  the renderer assumes that the given field_of_view matches the standard
@@ -370,7 +389,9 @@ void render_view(
 	update_view_data(view);
 
 	/* clear the render flags */
-	objlist_clear(render_flags, RENDER_FLAGS_BUFFER_SIZE);
+    //if(RenderFlagList.size() > 0){
+    	objlist_clear(render_flags, RENDER_FLAGS_BUFFER_SIZE);
+    //}
 
 	//ResetOverheadMap();
 /*
@@ -392,13 +413,13 @@ void render_view(
 		
 		// LP: now from the visibility-tree class
 		/* build the render tree, regardless of map mode, so the automap updates while active */
-		/*RenderVisTree.view = view;
+		RenderVisTree.view = view;
 		RenderVisTree.build_render_tree();
 		
 		if (view->overhead_map_active)
 		{
 			//* if the overhead map is active, render it *
-			render_overhead_map(view);
+			//render_overhead_map(view);
 		}
 		else //* do something complicated and difficult to explain *
 		{			
@@ -435,20 +456,20 @@ void render_view(
 			RasPtr->Begin();
 			
 			// LP: now from the clipping/rasterizer class
-			/* render the object list, back to front, doing clipping on each surface before passing
-				it to the texture-mapping code *
+			//* render the object list, back to front, doing clipping on each surface before passing
+			//	it to the texture-mapping code *
 			RenderRasterize.view = view;
 			RenderRasterize.RasPtr = RasPtr;
 			RenderRasterize.render_tree();
 			
 			// LP: won't put this into a separate class
-			/* render the playerÕs weapons, etc. *	
+			//* render the playerÕs weapons, etc. *	
 			render_viewer_sprite_layer(view, RasPtr);
 			
 			// Finish rendering main view
 			RasPtr->End();
             
-		}*/
+		}
 	}
 }
 
@@ -576,10 +597,111 @@ void instantiate_polygon_transfer_mode(
 
 
 /* ---------- viewer sprite layer (i.e., weapons) */
-/*
 static void render_viewer_sprite_layer(view_data *view, RasterizerClass *RasPtr)
 {
+	rectangle_definition textured_rectangle;
+	weapon_display_information display_data;
+	shape_information_data *shape_information;
+//	short count;
 
+	// LP change: bug out if weapons-in-hand are not to be displayed
+	if (!view->show_weapons_in_hand) return;
+	
+	// Need to set this...
+	RasPtr->SetForeground();
+	
+	// No models here, and completely opaque
+	textured_rectangle.ModelPtr = NULL;
+	textured_rectangle.Opacity = 1;
+
+	/* get_weapon_display_information() returns true if there is a weapon to be drawn.  it
+	//	should initially be passed a count of zero.  it returns the weaponÕs texture and
+	//	enough information to draw it correctly. *
+	count= 0;
+	while (get_weapon_display_information(&count, &display_data))
+	{
+		//* fetch relevant shape data *
+		// LP: model-setup code is cribbed from 
+		// RenderPlaceObjsClass::build_render_object() in RenderPlaceObjs.cpp
+#ifdef HAVE_OPENGL
+		// Find which 3D model will take the place of this sprite, if any
+		short ModelSequence;
+		OGL_ModelData *ModelPtr =
+			OGL_GetModelData(GET_COLLECTION(display_data.collection),display_data.shape_index,ModelSequence);
+#endif
+		shape_information= extended_get_shape_information(display_data.collection, display_data.low_level_shape_index);
+		// Nonexistent frame: skip
+		if (!shape_information) continue;
+		// No need for a fake sprite rectangle, since models are foreground objects
+		
+		// LP change: for the convenience of the OpenGL renderer
+		textured_rectangle.ShapeDesc = BUILD_DESCRIPTOR(display_data.collection,0);
+		textured_rectangle.LowLevelShape = display_data.low_level_shape_index;
+#ifdef HAVE_OPENGL
+		textured_rectangle.ModelPtr = ModelPtr;
+		if (ModelPtr)
+		{
+			textured_rectangle.ModelSequence = ModelSequence;
+			textured_rectangle.ModelFrame = display_data.Frame;
+			textured_rectangle.NextModelFrame = display_data.NextFrame;
+			textured_rectangle.MixFrac = display_data.Ticks > 0 ?
+				float(display_data.Phase)/float(display_data.Ticks) : 0;
+			const world_point3d Zero = {0, 0, 0};
+			textured_rectangle.Position = Zero;
+			textured_rectangle.Azimuth = 0;
+			textured_rectangle.Scale = 1;
+			textured_rectangle.LightDepth = 0;
+			const GLfloat LightDirection[3] = {0, 1, 0};	// y is forward
+			objlist_copy(textured_rectangle.LightDirection,LightDirection,3);
+			RasPtr->SetForegroundView(display_data.flip_horizontal);
+		}
+#endif
+		
+		if (shape_information->flags&_X_MIRRORED_BIT) display_data.flip_horizontal= !display_data.flip_horizontal;
+		if (shape_information->flags&_Y_MIRRORED_BIT) display_data.flip_vertical= !display_data.flip_vertical;
+
+		//* calculate shape rectangle *
+		position_sprite_axis(&textured_rectangle.x0, &textured_rectangle.x1, view->screen_height, view->screen_width, display_data.horizontal_positioning_mode,
+			display_data.horizontal_position, display_data.flip_horizontal, shape_information->world_left, shape_information->world_right);
+		position_sprite_axis(&textured_rectangle.y0, &textured_rectangle.y1, view->screen_height, view->screen_height, display_data.vertical_positioning_mode,
+			display_data.vertical_position, display_data.flip_vertical, -shape_information->world_top, -shape_information->world_bottom);
+		
+		//* set rectangle bitmap and shading table /
+		extended_get_shape_bitmap_and_shading_table(display_data.collection, display_data.low_level_shape_index, &textured_rectangle.texture, &textured_rectangle.shading_tables, view->shading_mode);
+		if (!textured_rectangle.texture) continue;
+		
+		textured_rectangle.flags= 0;
+
+		//* initialize clipping window to full screen /
+		textured_rectangle.clip_left= 0;
+		textured_rectangle.clip_right= view->screen_width;
+		textured_rectangle.clip_top= 0;
+		textured_rectangle.clip_bottom= view->screen_height;
+
+		// copy mirror flags /
+		textured_rectangle.flip_horizontal= display_data.flip_horizontal;
+		textured_rectangle.flip_vertical= display_data.flip_vertical;
+		
+		//* lighting: depth of zero in the cameraÕs polygon index /
+		textured_rectangle.depth= 0;
+		textured_rectangle.ambient_shade= get_light_intensity(get_polygon_data(view->origin_polygon_index)->floor_lightsource_index);
+		textured_rectangle.ambient_shade= MAX(shape_information->minimum_light_intensity, textured_rectangle.ambient_shade);
+		if (view->shading_mode==_shading_infravision) textured_rectangle.flags|= _SHADELESS_BIT;
+
+		// Calculate the object's horizontal position
+		// for the convenience of doing teleport-in/teleport-out
+		textured_rectangle.xc = (textured_rectangle.x0 + textured_rectangle.x1) >> 1;
+		
+		//* make the weapon reflect the ownerÕs transfer mode /
+		instantiate_rectangle_transfer_mode(view, &textured_rectangle, display_data.transfer_mode, display_data.transfer_phase);
+		
+		//* and draw it /
+		// LP: added OpenGL support
+		RasPtr->texture_rectangle(textured_rectangle);
+	}
+    */
+}
+/*
 static void position_sprite_axis(
 	short *x0,
 	short *x1,

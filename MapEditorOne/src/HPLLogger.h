@@ -6,9 +6,9 @@
 #include <stdarg.h>
 #include <string.h>
 
-#include "AlephOne/map.h"
-#include "AlephOne/wad.h"
-#include "AlephOne/game_wad.h"
+#include "map.h"
+#include "wad.h"
+#include "game_wad.h"
 /**
     logger
 */

@@ -362,7 +362,8 @@ struct player_powerup_definition player_powerups = {
 
 static void set_player_shapes(short player_index, bool animate);
 static void revive_player(short player_index);
-/*static void recreate_player(short player_index);
+static void recreate_player(short player_index);
+/*
 static void kill_player(short player_index, short aggressor_player_index, short action);
 static void give_player_initial_items(short player_index);
 static void get_player_transfer_mode(short player_index, short *transfer_mode, short *transfer_period);
@@ -409,7 +410,7 @@ void allocate_player_memory(
 	//sRealActionQueues = new ActionQueues(MAXIMUM_NUMBER_OF_PLAYERS, ACTION_QUEUE_BUFFER_DIAMETER, false);
 }
 
-/* returns player index *
+/* returns player index */
 short new_player(
 	short team,
 	short color,
@@ -451,16 +452,16 @@ short new_player(
 	recreate_player(player_index);
 
 	// Mark the player's inventory as dirty *
-	mark_player_inventory_as_dirty(player_index, NONE);
-	initialize_player_weapons(player_index);
+	//mark_player_inventory_as_dirty(player_index, NONE);
+	//initialize_player_weapons(player_index);
 	
 	// give the player his initial items *
-	give_player_initial_items(player_index);
-	try_and_strip_player_items(player_index);
+	//give_player_initial_items(player_index);
+	//try_and_strip_player_items(player_index);
 	
 	return player_index;
 }
-*
+/*
 void walk_player_list(
 	void)*/
 
@@ -596,7 +597,78 @@ void set_current_player_index(
 /* We just teleported in as it were-> recreate all the players..  *
 void recreate_players_for_new_level(
 	void)
+{
 */
+static void recreate_player(
+	short player_index)
+{
+	short monster_index;
+	struct monster_data *monster;
+	struct player_data *player= get_player_data(player_index);
+	short placement_team;
+	struct object_location location;
+	bool  player_teleported_dead= false;
+	
+	/* Determine the location */
+	placement_team= 0;//calculate_player_team(player->team);
+	get_random_player_starting_location_and_facing(player_index, placement_team, &location);
+
+	/* create an object and a monster for this player */
+	monster_index= new_monster(&location, _monster_marine);
+	monster= get_monster_data(monster_index);
+
+	/* add our parasitic torso */
+	attach_parasitic_object(monster->object_index, 0, location.yaw);
+	
+	/* and initialize it */
+	if(PLAYER_IS_TOTALLY_DEAD(player) || PLAYER_IS_DEAD(player))
+	{
+		player_teleported_dead= true;
+	}
+
+	/* Clear the transient flags, leave the persistant flags, like Player has cheated */
+	player->flags &= (_player_is_teleporting_flag | _player_is_interlevel_teleporting_flag | PLAYER_PERSISTANT_FLAGS );
+	player->monster_index= monster_index;
+	player->object_index= monster->object_index;
+
+	/* initialize_player_physics_variables sets all of these */
+	player->facing= player->elevation= 0;
+	player->location.x= player->location.y= player->location.z= 0;
+	player->camera_location.x= player->camera_location.y= player->camera_location.z= 0;
+
+	/* We don't change... */
+	/* physics_model, suit_energy, suit_oxygen, current_weapon, desired_weapon */
+	/* None of the weapons array data... */
+	/* None of the items array data.. */
+	/* The inventory offset/dirty flags.. */
+	// ZZZ: netdead...
+	//mark_player_inventory_screen_as_dirty(player_index, _weapon);
+
+	/* Nuke the physics */
+	obj_clear(player->variables);
+
+	/* Reset the player weapon data and the physics variable.. (after updating player_count) */
+	//initialize_player_physics_variables(player_index);
+	//set_player_shapes(player_index, false);
+
+	player->control_panel_side_index = NONE; // not using a control panel.
+	//initialize_player_terminal_info(player_index);
+
+	//try_and_strip_player_items(player_index);
+
+	/*if(player_teleported_dead)
+	{
+		kill_player(player_index, NONE, _monster_is_dying_soft);
+	}*/
+	
+	// LP addition: handles the current player's chase cam;
+	// in screen.c, we find that it's the current player whose view gets rendered
+	//if (player_index == current_player_index) ChaseCam_Reset();
+	
+	// Done here so that players' missiles will always be guided
+	// if they are intended to be guided
+	//adjust_player_physics(get_monster_data(player->monster_index));
+}
 void team_damage_from_player_data(void)
 {
   for (short player_index = 0; player_index < dynamic_world->player_count; player_index++) {

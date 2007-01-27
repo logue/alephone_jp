@@ -99,6 +99,7 @@ void CVisualDialog::OnPaint()
     render_screen(0);
 
     m_SDLToWindows->paint();
+    Invalidate(FALSE);
     /*
     CBrush blackBrush;
     blackBrush.CreateSolidBrush(RGB(0,0,0));
@@ -119,6 +120,9 @@ BOOL CVisualDialog::OnInitDialog()
     pictBox->GetWindowRect(&cl_rect);
     m_SDLToWindows=new SDLToWindows(pictBox->m_hWnd, cl_rect);
     screenSurface = m_SDLToWindows->getSurface();
+    main_surface = m_SDLToWindows->getSurface();
+
+
     //screenSurface = SDL_SetVideoMode(640,480, 8, SDL_SWSURFACE);
     
     /*

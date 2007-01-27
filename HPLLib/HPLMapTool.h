@@ -5,8 +5,8 @@
 #include <vector>
 #include <map>
 
-#include "AlephOne/map.h"
-#include "AlephOne/wad.h"
+#include "map.h"
+#include "wad.h"
 
 //#include "HPLMath.h"
 #include "HPLSelectData.h"
@@ -56,6 +56,16 @@ namespace map{
     bool isSelectLine(world_point2d &point,
                       world_point2d &linePoint0, world_point2d &linePoint1,
                       int distance);
+
+    /**
+        線の長さを取得
+        @param index 線データのインデックス
+    */
+    double getLineLength(int index);
+    /*
+        線の長さを得る
+    */
+    double getLength(world_point2d& pointA, world_point2d& pointB);
 
     ///////////////////////////////////////////////////////////////////////
     ///////////  Groups  //////////////////////////////////////////////////

@@ -42,6 +42,8 @@ void set_to_default_physics_file(void);
 
 /* Proceses the entire physics file.. */
 void import_definition_structures(void);
+
+//HogePiyo added. export physics file
 void export_definition_structures(const char *filename);
 
 void *get_network_physics_buffer(long *physics_length);

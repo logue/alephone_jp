@@ -871,17 +871,152 @@ bool translate_map_object(
 }
 
 
-/*
+
 void get_object_shape_and_transfer_mode(
 	world_point3d *camera_location,
 	short object_index,
 	struct shape_and_transfer_mode *data)
-*/
-/*
+{
+	struct object_data *object= get_object_data(object_index);
+	register struct shape_animation_data *animation;
+	angle theta;
+	short view;
+	
+	animation= get_shape_animation_data(object->shape);
+	// Added bug-outs in case of incorrect data; turned asserts into these tests:
+	if (!animation)
+	{
+		data->collection_code = NONE; // Deliberate bad value
+		return;
+	}
+	else if (!(animation->frames_per_view>=1))
+	{
+		data->collection_code = NONE; // Deliberate bad value
+		return;
+	}
+	// assert(animation->frames_per_view>=1);
+	
+	/* get correct base shape */
+	// LP change: made long-distance friendly
+	theta= arctangent(int32(object->location.x) - int32(camera_location->x), int32(object->location.y) - int32(camera_location->y)) - object->facing;
+	switch (animation->number_of_views)
+	{
+		case _unanimated:
+		case _animated1:
+			view= 0;
+			break;
+		
+		case _animated3to4: /* front, quarter and side views only */
+		case _animated4:
+			switch (FACING4(theta))
+			{
+				case 0: view= 3; break; /* 90¡ (facing left) */
+				case 1: view= 0; break; /* 0¡ (facing forward) */
+				case 2: view= 1; break; /* -90¡ (facing right) */
+				case 3: view= 2; break; /* ±180¡ (facing away) */
+				default:
+					data->collection_code = NONE; // Deliberate bad value
+					return;
+			}
+			break;
+
+		case _animated3to5:
+		case _animated5:
+			theta+= HALF_CIRCLE;
+			switch (FACING5(theta))
+			{
+				case 0: view= 4; break;
+				case 1: view= 3; break;
+				case 2: view= 2; break;
+				case 3: view= 1; break;
+				case 4: view= 0; break;
+				default:
+					data->collection_code = NONE; // Deliberate bad value
+					return;
+			}
+			break;
+		
+		case _animated2to8:			
+		case _animated5to8:
+		case _animated8:
+			switch (FACING8(theta))
+			{
+				case 0: view= 3; break; /* 135¡ (facing left) */
+				case 1: view= 2; break; /* 90¡ (facing left) */
+				case 2: view= 1; break; /* 45¡ (facing left) */
+				case 3: view= 0; break; /* 0¡ (facing forward) */
+				case 4: view= 7; break; /* -45¡ (facing right) */
+				case 5: view= 6; break; /* -90¡ (facing right) */
+				case 6: view= 5; break; /* -135¡ (facing right) */
+				case 7: view= 4; break; /* ±180¡ (facing away) */
+				default:
+					data->collection_code = NONE; // Deliberate bad value
+					return;
+			}
+			break;
+		
+		default:
+			data->collection_code = NONE; // Deliberate bad value
+			return;
+	}
+
+	/* fill in the structure (transfer modes in the animation override transfer modes in the object */
+	data->collection_code= GET_DESCRIPTOR_COLLECTION(object->shape);
+	short Frame = GET_SEQUENCE_FRAME(object->sequence);
+	data->Frame = Frame;
+	
+	// Guess next frame
+	short NextFrame = Frame + 1;
+	if (NextFrame >= animation->frames_per_view)
+		NextFrame = animation->loop_frame;
+	data->NextFrame = NextFrame;
+	
+	// Work out the phase in the cycle; be sure to start a cycle with 0 and not 1
+	short Phase = GET_SEQUENCE_PHASE(object->sequence);
+	short Ticks = animation->ticks_per_frame;
+	if (Phase >= Ticks) Phase -= Ticks;
+	data->Phase = Phase;
+	data->Ticks = Ticks;
+	
+	// What bitmap, etc.
+	data->low_level_shape_index= animation->low_level_shape_indexes[view*animation->frames_per_view + Frame];
+	if (animation->transfer_mode==_xfer_normal && object->transfer_mode!=NONE)
+	{
+		data->transfer_mode= object->transfer_mode;
+		data->transfer_phase= object->transfer_period ? INTEGER_TO_FIXED(object->transfer_phase)/object->transfer_period : 0;
+
+//		if (object->transfer_mode==_xfer_fold_out) dprintf("#%d/#%d==%x", object->transfer_phase, object->transfer_period, data->transfer_phase);
+	}
+	else
+	{
+		data->transfer_mode= animation->transfer_mode;
+		data->transfer_phase= animation->transfer_mode!=_xfer_normal ? INTEGER_TO_FIXED(object->transfer_phase)/animation->transfer_mode_period : 0;
+	}
+}
+
 bool randomize_object_sequence(
 	short object_index,
 	shape_descriptor shape)
-*
+{
+	struct object_data *object= get_object_data(object_index);
+	register struct shape_animation_data *animation;
+	bool randomized= false;
+	
+	animation= get_shape_animation_data(shape);
+	if (!animation) return false;
+	
+	switch (animation->number_of_views)
+	{
+		case _unanimated:
+			object->shape= shape;
+			object->sequence= BUILD_SEQUENCE(global_random()%animation->frames_per_view, 0);
+			randomized= true;
+			break;
+	}
+	
+	return randomized;
+}
+/*
 void set_object_shape_and_transfer_mode(
 	short object_index,
 	shape_descriptor shape,

@@ -119,6 +119,7 @@ enum /* hardware acceleration codes */
 /* ---------- globals */
 
 extern struct color_table *world_color_table, *visible_color_table, *interface_color_table;
+extern SDL_Surface *main_surface;
 
 // Accessors for the screen's GDevice and GrafPort;
 // this abstraction is used for DrawSprocket support
