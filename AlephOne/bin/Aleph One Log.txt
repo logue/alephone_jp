@@ -1,0 +1,57 @@
+
+-------------------- Wed Jan 31 01:39:21 2007
+
+
+while opening resource file V:\cvs_\cvs_sf\marathon\AlephOne\bin\Map (v:\cvs_\cvs_sf\marathon\alephone\src\alephone-20061228\source_files\files\resource_manager.cpp:338)
+  file's resource header corrupt (v:\cvs_\cvs_sf\marathon\alephone\src\alephone-20061228\source_files\files\resource_manager.cpp:227)
+while opening resource file V:\cvs_\cvs_sf\marathon\AlephOne\bin\Map (v:\cvs_\cvs_sf\marathon\alephone\src\alephone-20061228\source_files\files\resource_manager.cpp:338)
+  file's resource header corrupt (v:\cvs_\cvs_sf\marathon\alephone\src\alephone-20061228\source_files\files\resource_manager.cpp:227)
+
+-------------------- Wed Jan 31 01:39:55 2007
+
+
+while opening resource file V:\cvs_\cvs_sf\marathon\AlephOne\bin\Map (v:\cvs_\cvs_sf\marathon\alephone\src\alephone-20061228\source_files\files\resource_manager.cpp:338)
+  file's resource header corrupt (v:\cvs_\cvs_sf\marathon\alephone\src\alephone-20061228\source_files\files\resource_manager.cpp:227)
+
+-------------------- Wed Jan 31 02:03:33 2007
+
+
+while opening resource file V:\cvs_\cvs_sf\marathon\AlephOne\bin\Map (v:\cvs_\cvs_sf\marathon\alephone\src\alephone-20061228\source_files\files\resource_manager.cpp:338)
+  file's resource header corrupt (v:\cvs_\cvs_sf\marathon\alephone\src\alephone-20061228\source_files\files\resource_manager.cpp:227)
+
+-------------------- Wed Jan 31 02:16:08 2007
+
+
+while opening resource file V:\cvs_\cvs_sf\marathon\AlephOne\bin\Map (v:\cvs_\cvs_sf\marathon\alephone\src\alephone-20061228\source_files\files\resource_manager.cpp:338)
+  file's resource header corrupt (v:\cvs_\cvs_sf\marathon\alephone\src\alephone-20061228\source_files\files\resource_manager.cpp:227)
+alert (ID=2): A system error occurred while attempting to read from your map or saved game file. (v:\cvs_\cvs_sf\marathon\alephone\src\alephone-20061228\source_files\cseries\csalerts_sdl.cpp:94)
+while opening resource file v:\cvs_\cvs_sf\marathon\AlephOne\bin\Map (v:\cvs_\cvs_sf\marathon\alephone\src\alephone-20061228\source_files\files\resource_manager.cpp:338)
+  file's resource header corrupt (v:\cvs_\cvs_sf\marathon\alephone\src\alephone-20061228\source_files\files\resource_manager.cpp:227)
+alert (ID=2): A system error occurred while attempting to read from your map or saved game file. (v:\cvs_\cvs_sf\marathon\alephone\src\alephone-20061228\source_files\cseries\csalerts_sdl.cpp:94)
+
+-------------------- Wed Jan 31 02:35:11 2007
+
+
+while opening resource file v:\cvs_\cvs_sf\marathon\AlephOne\bin\Map (v:\cvs_\cvs_sf\marathon\alephone\src\alephone-20061228\source_files\files\resource_manager.cpp:338)
+  file's resource header corrupt (v:\cvs_\cvs_sf\marathon\alephone\src\alephone-20061228\source_files\files\resource_manager.cpp:227)
+alert (ID=2): A system error occurred while attempting to read from your map or saved game file. (v:\cvs_\cvs_sf\marathon\alephone\src\alephone-20061228\source_files\cseries\csalerts_sdl.cpp:94)
+
+-------------------- Wed Jan 31 02:37:17 2007
+
+
+while opening resource file v:\cvs_\cvs_sf\marathon\AlephOne\bin\Map (v:\cvs_\cvs_sf\marathon\alephone\src\alephone-20061228\source_files\files\resource_manager.cpp:338)
+  file's resource header corrupt (v:\cvs_\cvs_sf\marathon\alephone\src\alephone-20061228\source_files\files\resource_manager.cpp:227)
+while opening resource file V:\cvs_\cvs_sf\marathon\AlephOne\bin\Map (v:\cvs_\cvs_sf\marathon\alephone\src\alephone-20061228\source_files\files\resource_manager.cpp:338)
+  file's resource header corrupt (v:\cvs_\cvs_sf\marathon\alephone\src\alephone-20061228\source_files\files\resource_manager.cpp:227)
+
+-------------------- Wed Jan 31 02:44:34 2007
+
+
+while opening resource file V:\cvs_\cvs_sf\marathon\AlephOne\bin\Map (v:\cvs_\cvs_sf\marathon\alephone\src\alephone-20061228\source_files\files\resource_manager.cpp:338)
+  file's resource header corrupt (v:\cvs_\cvs_sf\marathon\alephone\src\alephone-20061228\source_files\files\resource_manager.cpp:227)
+
+-------------------- Wed Jan 31 02:48:01 2007
+
+
+while opening resource file V:\cvs_\cvs_sf\marathon\AlephOne\bin\Map (v:\cvs_\cvs_sf\marathon\alephone\src\alephone-20061228\source_files\files\resource_manager.cpp:338)
+  file's resource header corrupt (v:\cvs_\cvs_sf\marathon\alephone\src\alephone-20061228\source_files\files\resource_manager.cpp:227)

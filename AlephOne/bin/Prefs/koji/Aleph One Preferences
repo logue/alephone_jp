@@ -1,0 +1,172 @@
+<!-- Preferences file for the Marathon Open Source "Aleph One" engine -->
+
+<mara_prefs>
+
+<graphics
+  scmode_size="2"
+  scmode_accel="1"
+  scmode_highres="true"
+  scmode_fullscreen="false"
+  scmode_fill_the_screen="false"
+  scmode_bitdepth="16"
+  scmode_gamma="2"
+  ogl_flags="3033"
+  experimental_rendering="false"
+  anisotropy_level="0.000000"
+  multisamples="0"
+  geforce_fix="false"
+  double_corpse_limit="false"
+>
+  <void>
+    <color red="0.000000" green="0.000000" blue="0.000000"/>
+  </void>
+  <landscapes>
+    <color index="0" red="1.000000" green="1.000000" blue="0.400000"/>
+    <color index="1" red="0.200000" green="0.600000" blue="1.000000"/>
+    <color index="2" red="0.094118" green="0.094118" blue="0.062745"/>
+    <color index="3" red="0.031373" green="0.031373" blue="0.062745"/>
+    <color index="4" red="0.400000" green="0.400000" blue="0.400000"/>
+    <color index="5" red="0.000000" green="0.000000" blue="0.000000"/>
+    <color index="6" red="0.000000" green="0.000000" blue="0.000000"/>
+    <color index="7" red="0.000000" green="0.000000" blue="0.000000"/>
+  </landscapes>
+  <texture index="0" near_filter="1" far_filter="5" resolution="0" color_format="0" max_size="0"/>
+  <texture index="1" near_filter="1" far_filter="1" resolution="0" color_format="0" max_size="0"/>
+  <texture index="2" near_filter="1" far_filter="5" resolution="0" color_format="0" max_size="0"/>
+  <texture index="3" near_filter="1" far_filter="1" resolution="0" color_format="0" max_size="0"/>
+</graphics>
+
+<player
+  name="koji"
+  color="0"
+  team="0"
+  last_time_ran="0"
+  difficulty="2"
+  bkgd_music="false"
+>
+  <chase_cam behind="1536" upward="0" rightward="0" flags="0"
+    damping="0.500000" spring="0.000000" opacity="1.000000"/>
+  <crosshairs
+    thickness="2" from_center="8" length="16"
+    shape="0" opacity="0.500000"
+  >
+    <color red="1.000000" green="1.000000" blue="1.000000"/>
+  </crosshairs>
+</player>
+
+<input
+  device="0"
+  modifiers="1"
+  sens_horizontal="65536"
+  sens_vertical="65536"
+  mouse_acceleration="true"
+>
+  <mouse_button index="0" action="left_trigger"/>
+  <mouse_button index="1" action="right_trigger"/>
+  <mouse_button index="2" action="none"/>
+  <mouse_button index="3" action="none"/>
+  <mouse_button index="4" action="none"/>
+  <sdl_key index="0" value="264"/>
+  <sdl_key index="1" value="261"/>
+  <sdl_key index="2" value="260"/>
+  <sdl_key index="3" value="262"/>
+  <sdl_key index="4" value="122"/>
+  <sdl_key index="5" value="120"/>
+  <sdl_key index="6" value="97"/>
+  <sdl_key index="7" value="115"/>
+  <sdl_key index="8" value="100"/>
+  <sdl_key index="9" value="99"/>
+  <sdl_key index="10" value="118"/>
+  <sdl_key index="11" value="263"/>
+  <sdl_key index="12" value="265"/>
+  <sdl_key index="13" value="32"/>
+  <sdl_key index="14" value="308"/>
+  <sdl_key index="15" value="304"/>
+  <sdl_key index="16" value="306"/>
+  <sdl_key index="17" value="310"/>
+  <sdl_key index="18" value="9"/>
+  <sdl_key index="19" value="109"/>
+  <sdl_key index="20" value="96"/>
+</input>
+
+<sound
+  channels="8"
+  volume="2"
+  music_volume="4"
+  flags="59"
+/>
+
+<network
+  microphone="true"
+  untimed="false"
+  type="3"
+  game_type="0"
+  difficulty="2"
+  game_options="5535"
+  time_limit="18000"
+  kill_limit="10"
+  entry_point="0"
+  autogather="false"
+  join_by_address="false"
+  join_address=""
+  local_game_port="4226"
+  game_protocol="star"
+  use_speex_netmic_encoder="true"
+  speex_encoder_quality="2"
+  speex_encoder_complexity="1"
+  use_netscript="false"
+  netscript_file=""
+  cheat_flags="7"
+  advertise_on_metaserver="false"
+  attempt_upnp="false"
+>
+  <star_protocol>
+    <hub
+    />
+    <!-- current hub defaults:
+      DO NOT EDIT THE FOLLOWING - they're FYI only.  Make settings in 'hub' tag above.
+      pregame_ticks_before_net_death="600"
+      ingame_ticks_before_net_death="90"
+      pregame_window_size="15"
+      ingame_window_size="150"
+      pregame_nth_element="2"
+      ingame_nth_element="75"
+      send_period="1"
+      recovery_send_period="15"
+      minimum_send_period="5"
+      use_bandwidth_reduction="true"
+    -->
+    <spoke
+      pregame_ticks_before_net_death="2700"
+      ingame_ticks_before_net_death="150"
+      recovery_send_period="15"
+      timing_window_size="90"
+      timing_nth_element="45"
+      adjust_timing="true"
+    />
+  </star_protocol>
+  <ring_protocol
+    accept_packets_from_anyone="false"
+    adapt_to_latency="true"
+    latency_hold_ticks="60"
+  />
+</network>
+
+<environment
+  map_file="V:\cvs_\cvs_sf\marathon\AlephOne\bin\Map"
+  physics_file="V:\cvs_\cvs_sf\marathon\AlephOne\bin\Standard.bin"
+  shapes_file="V:\cvs_\cvs_sf\marathon\AlephOne\bin\Shapes"
+  sounds_file="V:\cvs_\cvs_sf\marathon\AlephOne\bin\Sounds"
+  theme_dir="V:\cvs_\cvs_sf\marathon\AlephOne\bin\Themes\Default"
+  map_checksum="2819527857"
+  physics_checksum="525520953"
+  shapes_mod_date="1134793646"
+  sounds_mod_date="1134793648"
+  group_by_directory="true"
+  reduce_singletons="false"
+  non_bungie_warning="true"
+>
+</environment>
+
+</mara_prefs>
+
