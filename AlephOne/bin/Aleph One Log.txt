@@ -55,3 +55,17 @@ while opening resource file V:\cvs_\cvs_sf\marathon\AlephOne\bin\Map (v:\cvs_\cv
 
 while opening resource file V:\cvs_\cvs_sf\marathon\AlephOne\bin\Map (v:\cvs_\cvs_sf\marathon\alephone\src\alephone-20061228\source_files\files\resource_manager.cpp:338)
   file's resource header corrupt (v:\cvs_\cvs_sf\marathon\alephone\src\alephone-20061228\source_files\files\resource_manager.cpp:227)
+
+-------------------- Thu Feb 01 04:16:44 2007
+
+
+while opening resource file V:\cvs_\cvs_sf\marathon\AlephOne\bin\Map (v:\cvs_\cvs_sf\marathon\alephone\src\alephone-20061228\source_files\files\resource_manager.cpp:338)
+  file's resource header corrupt (v:\cvs_\cvs_sf\marathon\alephone\src\alephone-20061228\source_files\files\resource_manager.cpp:227)
+while opening resource file V:\cvs_\cvs_sf\marathon\AlephOne\bin\Map (v:\cvs_\cvs_sf\marathon\alephone\src\alephone-20061228\source_files\files\resource_manager.cpp:338)
+  file's resource header corrupt (v:\cvs_\cvs_sf\marathon\alephone\src\alephone-20061228\source_files\files\resource_manager.cpp:227)
+
+-------------------- Thu Feb 01 04:18:58 2007
+
+
+while opening resource file V:\cvs_\cvs_sf\marathon\AlephOne\bin\Map (v:\cvs_\cvs_sf\marathon\alephone\src\alephone-20061228\source_files\files\resource_manager.cpp:338)
+  file's resource header corrupt (v:\cvs_\cvs_sf\marathon\alephone\src\alephone-20061228\source_files\files\resource_manager.cpp:227)

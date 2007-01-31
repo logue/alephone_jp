@@ -4,7 +4,7 @@
 
 <graphics
   scmode_size="2"
-  scmode_accel="1"
+  scmode_accel="0"
   scmode_highres="true"
   scmode_fullscreen="false"
   scmode_fill_the_screen="false"
@@ -155,7 +155,7 @@
 <environment
   map_file="V:\cvs_\cvs_sf\marathon\AlephOne\bin\Map"
   physics_file="V:\cvs_\cvs_sf\marathon\AlephOne\bin\Standard.bin"
-  shapes_file="V:\cvs_\cvs_sf\marathon\AlephOne\bin\Shapes"
+  shapes_file="v:\cvs_\cvs_sf\marathon\AlephOne\bin\Shapes"
   sounds_file="V:\cvs_\cvs_sf\marathon\AlephOne\bin\Sounds"
   theme_dir="V:\cvs_\cvs_sf\marathon\AlephOne\bin\Themes\Default"
   map_checksum="2819527857"
