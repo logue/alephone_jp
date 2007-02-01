@@ -4,11 +4,11 @@
 
 <graphics
   scmode_size="2"
-  scmode_accel="0"
+  scmode_accel="1"
   scmode_highres="true"
   scmode_fullscreen="false"
   scmode_fill_the_screen="false"
-  scmode_bitdepth="16"
+  scmode_bitdepth="32"
   scmode_gamma="2"
   ogl_flags="3033"
   experimental_rendering="false"
