@@ -356,10 +356,12 @@ static void initialize_application(void)
 #else
 #define LIST_SEP ':'
 #endif
-	
-#ifndef __APPLE__ && __MACH__
-	if (arg_directory != "") 
+
+#ifndef __APPLE__
+#ifndef __MACH__
+    if (arg_directory != "") 
 		default_data_dir = arg_directory;
+#endif
 #endif
 
 	const char *data_env = getenv("ALEPHONE_DATA");
@@ -589,9 +591,9 @@ short get_level_number_from_user(void)
 	dialog d;
 	if (vidmasterStringSetID != -1 && TS_IsPresent(vidmasterStringSetID) && TS_CountStrings(vidmasterStringSetID) > 0) {
 		// if we there's a stringset present for it, load the message from there
-		int num_lines = TS_CountStrings(vidmasterStringSetID);
+		int num_lines = (int)TS_CountStrings(vidmasterStringSetID);
 
-		for (size_t i = 0; i < num_lines; i++) {
+		for (size_t i = 0; i < (size_t)num_lines; i++) {
 			bool message_font_title_color = true;
 			char *string = TS_GetCString(vidmasterStringSetID, i);
 			if (!strncmp(string, "[QUOTE]", 7)) {

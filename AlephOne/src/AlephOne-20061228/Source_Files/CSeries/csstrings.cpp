@@ -172,7 +172,7 @@ unsigned char *psprintf(
 	va_start(list,format);
 	vsprintf((char *)buffer+1,format,list);
 	va_end(list);
-	buffer[0] = strlen((char *)buffer+1);
+	buffer[0] = (unsigned char)strlen((char *)buffer+1);
 
 	return buffer;
 }
@@ -205,7 +205,7 @@ fdprintf(const char* format, ...) {
 
 void copy_string_to_pstring (const std::string &s, unsigned char* dst, int maxlen)
 {
-	dst[0] = s.copy (reinterpret_cast<char *>(dst+1), maxlen);
+	dst[0] = (unsigned char)s.copy (reinterpret_cast<char *>(dst+1), maxlen);
 }
 
 

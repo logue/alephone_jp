@@ -1018,7 +1018,7 @@ public:
 	virtual void set_labels (int stringset) { m_select->set_labels_stringset (stringset); }
 	virtual void set_labels (const std::vector<std::string>& labels) {}
 	
-	virtual int get_value () { return m_select->get_selection (); }
+	virtual int get_value () { return (int)m_select->get_selection (); }
 	virtual void set_value (int value) { m_select->set_selection (value); }
 	
 private:

@@ -593,8 +593,8 @@ struct wad_data *append_data_to_wad(
 
 	/* Setup the tag data. */
 	wad->tag_data[index].tag= type;
-	wad->tag_data[index].length= size;
-	wad->tag_data[index].offset= offset;
+	wad->tag_data[index].length= (long)size;
+	wad->tag_data[index].offset= (long)offset;
 
 	return wad;
 }

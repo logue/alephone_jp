@@ -283,7 +283,7 @@ bool set_light_status(
 			assert(light_index == static_cast<size_t>(static_cast<short>(light_index)));
 			activate_light_activated_trap(static_cast<int>(light_index)); // Hook for Pfhortran procedures
                         //MH: Lua script hook
-                        L_Call_Light_Activated(light_index);
+                        L_Call_Light_Activated((short)light_index);
 			assume_correct_switch_position(_panel_is_light_switch, static_cast<short>(light_index), new_status);
 			changed= true;
 		}

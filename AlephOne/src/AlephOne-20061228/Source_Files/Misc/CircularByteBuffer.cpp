@@ -39,7 +39,7 @@ CircularByteBuffer::splitIntoChunks(unsigned int inByteCount, unsigned int inSta
 {
 	// Copy, potentially, two separate chunks (one at end of buffer; one at beginning)
 	unsigned int theSpaceAtEndOfBuffer = inQueueSize - inStartingIndex;
-	unsigned int theFirstChunkSize = std::min(inByteCount, theSpaceAtEndOfBuffer);
+	unsigned int theFirstChunkSize = (unsigned int)std::min(inByteCount, theSpaceAtEndOfBuffer);
 	unsigned int theSecondChunkSize = inByteCount - theFirstChunkSize;
 
 	return std::pair<unsigned int, unsigned int>(theFirstChunkSize, theSecondChunkSize);

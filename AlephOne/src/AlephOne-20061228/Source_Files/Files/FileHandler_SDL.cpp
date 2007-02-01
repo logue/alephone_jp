@@ -377,11 +377,11 @@ bool FileSpecifier::Exists()
 		err = errno;
 	return err == 0;
 }
-#define S_IFMT  0160000 /* ファイルの型 */
-#define S_IFDIR 0040000 /* ディレクトリ */
-#define S_IFCHR 0020000 /* 文字スペシャル */
+//#define S_IFMT  0160000 /* ファイルの型 */
+//#define S_IFDIR 0040000 /* ディレクトリ */
+//#define S_IFCHR 0020000 /* 文字スペシャル */
 #define S_IFBLK 0060000 /* ブロックスペシャル */
-#define S_IFREG 0100000 /* 一般 */
+//#define S_IFREG 0100000 /* 一般 */
 
 #define S_ISDIR(file_Mode)  ((file_Mode&S_IFDIR) == S_IFDIR)
 
@@ -412,7 +412,7 @@ int strcasecmp(const char *s1, const char *s2)
     int i;
     if (strlen (s1) != strlen (s1))
 	return (1);
-    for (i = 0; i < strlen (s1); i++)
+    for (i = 0; i < (int)strlen (s1); i++)
 	if (toupper (s1[i]) != toupper (s2[i]))
 	    return (1);
     return (0);

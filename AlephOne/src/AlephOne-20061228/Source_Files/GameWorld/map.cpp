@@ -2433,7 +2433,7 @@ void _sound_add_ambient_sources_proc(
 		// do only if indexes were found
 		if (indexes)
 		{
-		while ((index= *indexes++)!=NONE && index < MAXIMUM_SAVED_OBJECTS)
+		while ((index= *indexes++)!=NONE && index < (short)MAXIMUM_SAVED_OBJECTS)
 		{
 			struct map_object *object= saved_objects + index; // gross, sorry
 			struct polygon_data *polygon= get_polygon_data(object->polygon_index);

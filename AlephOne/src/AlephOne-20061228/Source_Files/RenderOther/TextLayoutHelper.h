@@ -50,24 +50,26 @@ public:
     // Reserve a place for the rectangle given.  Returns the smallest bottom that will not overlap previous reservations. 
     int 	reserveSpaceFor(int inLeft, unsigned int inWidth, int inLowestBottom, unsigned int inHeight);
     
+
+struct //TextLayoutHelper::
+    Reservation {
+    int		mBottom;
+    int		mTop;
+};
+struct //TextLayoutHelper::
+    ReservationEnd {
+    int					mHorizontalCoordinate;
+    TextLayoutHelper::Reservation*	mReservation;
+    bool				mStartOfReservation;
+};
 protected:
-    struct ReservationEnd;
-    struct Reservation;
+//    struct ReservationEnd;
+//    struct Reservation;
     
     typedef vector<ReservationEnd>	CollectionOfReservationEnds;
     
     CollectionOfReservationEnds		mReservationEnds;
 };
 
-struct TextLayoutHelper::ReservationEnd {
-    int					mHorizontalCoordinate;
-    TextLayoutHelper::Reservation*	mReservation;
-    bool				mStartOfReservation;
-};
-
-struct TextLayoutHelper::Reservation {
-    int		mBottom;
-    int		mTop;
-};
 
 #endif//TEXTLAYOUTHELPER_H

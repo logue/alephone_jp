@@ -535,7 +535,7 @@ update_world()
 		// Observe, since we don't use a speed-limiter in predictive mode, that there cannot be flags
 		// stranded in the GameQueue.  Unfortunately this approach will mispredict if a script is
 		// controlling the local player.  We could be smarter about it if that eventually becomes an issue.
-		for ( ; sPredictedTicks < NetGetUnconfirmedActionFlagsCount(); sPredictedTicks++)
+		for ( ; sPredictedTicks < (size_t)NetGetUnconfirmedActionFlagsCount(); sPredictedTicks++)
 		{
 			// Real -> predictive transition, if necessary
 			enter_predictive_mode();
@@ -543,7 +543,7 @@ update_world()
 			// Enqueue stuff into thePredictiveQueues
 			for(short thePlayerIndex = 0; thePlayerIndex < dynamic_world->player_count; thePlayerIndex++)
 			{
-				uint32 theFlags = (thePlayerIndex == local_player_index) ? NetGetUnconfirmedActionFlag(sPredictedTicks) : sMostRecentFlagsForPlayer[thePlayerIndex];
+				uint32 theFlags = (uint32)(thePlayerIndex == local_player_index) ? NetGetUnconfirmedActionFlag(sPredictedTicks) : sMostRecentFlagsForPlayer[thePlayerIndex];
 				thePredictiveQueues.enqueueActionFlags(thePlayerIndex, &theFlags, 1);
 			}
 			

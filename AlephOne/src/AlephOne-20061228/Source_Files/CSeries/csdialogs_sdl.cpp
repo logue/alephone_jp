@@ -171,7 +171,7 @@ get_selection_control_value(DialogPtr dialog, short which_control)
     
     assert(theSelectionWidget != NULL);
     
-    return theSelectionWidget->get_selection() + 1;
+    return (short)theSelectionWidget->get_selection() + 1;
 }
 
 
@@ -186,7 +186,7 @@ get_boolean_control_value(DialogPtr dialog, short which_control)
     
     assert(theSelectionWidget != NULL);
     
-    return theSelectionWidget->get_selection();
+    return theSelectionWidget->get_selection() != 0;
 }
 
 
@@ -273,7 +273,7 @@ bool QQ_get_boolean_control_value (DialogPTR dlg, int item)
 	if (theWidget == NULL) {
 		return false;
 	} else {
-		return theWidget->get_selection();
+		return theWidget->get_selection() != 0;
 	}
 }
 
@@ -292,7 +292,7 @@ int QQ_get_selector_control_value (DialogPTR dlg, int item)
 	
 	w_select* theWidget = dynamic_cast<w_select*>(dlg->get_widget_by_id(item));
 	if (theWidget != NULL)
-		return theWidget->get_selection();
+		return (int)theWidget->get_selection();
 	
 	w_select_popup* theWidget2 = dynamic_cast<w_select_popup*>(dlg->get_widget_by_id(item));
 	if (theWidget2 != NULL)

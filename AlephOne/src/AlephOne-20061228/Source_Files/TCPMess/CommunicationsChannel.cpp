@@ -46,6 +46,8 @@ static int Our_TCP_Recv(TCPsocket, void *, int); // look below if you really wan
 #include <fcntl.h> // hacky non-cross-platform setting of nonblocking
 #endif
 #include <algorithm>
+#include <cmath>
+
 /*
 namespace std{
     template<class T>
@@ -658,7 +660,7 @@ void CommunicationsChannel::multipleFlushOutgoingMessages(
 
 		for (std::vector<CommunicationsChannel*>::iterator it = channels.begin(); it != channels.end(); it++)
 		{
-			if (!(*it)->mOutgoingMessages.empty() && SDL_GetTicks() - max((*it)->mTicksAtLastSend, theTicksAtStart) < inInactivityTimeout)
+            if (!(*it)->mOutgoingMessages.empty() && SDL_GetTicks() - max((*it)->mTicksAtLastSend, theTicksAtStart) < inInactivityTimeout)
 			{
 				someoneIsStillActive = true;
 			}
