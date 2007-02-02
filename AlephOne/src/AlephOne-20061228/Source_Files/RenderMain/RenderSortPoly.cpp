@@ -178,7 +178,7 @@ void RenderSortPolyClass::sort_render_tree()
 //			dprintf("removed polygon #%d (#%d aliases)", leaf->polygon_index, alias_count);
 			
 			size_t Length = SortedNodes.size();
-            if(Length > 0){
+//            if(Length > 0){
 			    POINTER_DATA OldSNPointer = POINTER_CAST(&SortedNodes.front());
     				
 			    // Add a dummy object and check if the pointer got changed
@@ -222,9 +222,9 @@ void RenderSortPolyClass::sort_render_tree()
 					    if (node->siblings) (node->siblings)->reference= node->reference;
 				    }
 			    }
-            }else{
-                break;
-            }
+//            }else{
+//                break;
+//            }
 			/* try to handle this nodeÕs siblings next (if there arenÕt any, then a ÔrandomÕ
 				node will be chosen) */
 			leaf= node->siblings;

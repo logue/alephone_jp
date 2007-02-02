@@ -1,4 +1,5 @@
 #pragma once
+#include "afxwin.h"
 
 
 // CPointPropertyDialog ダイアログ
@@ -18,4 +19,35 @@ protected:
 	virtual void DoDataExchange(CDataExchange* pDX);    // DDX/DDV サポート
 
 	DECLARE_MESSAGE_MAP()
+
+public:
+    /////////////////////
+    CWnd* parent;
+    BOOL Create(CWnd* par);
+    virtual void PostNcDestroy();
+    point_data store;
+    void setupDialog(int index_);
+    void setupDialogByStore();
+    int index;
+    ////////////////////////
+public:
+    bool flagSolid;
+public:
+    bool flagTransparent;
+public:
+    CButton flagElevation;
+public:
+    CEdit pointFloor;
+public:
+    CEdit pointHeight;
+public:
+    CEdit pointVertexX;
+public:
+    CEdit pointVertexY;
+public:
+    CEdit pointTransX;
+public:
+    CEdit pointTransY;
+public:
+    CEdit pointSupPolygonIndex;
 };

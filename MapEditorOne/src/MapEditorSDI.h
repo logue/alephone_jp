@@ -226,6 +226,8 @@ public:
     CToolDialog *toolDialog;
     //polygon property
     CPolygonPropertyDialog *polygonPropertyDialog;
+    //点プロパティ
+    CPointPropertyDialog *pointPropertyDialog;
 
     //texture dialog (palette)
     CTextureDialog *textureDialog;

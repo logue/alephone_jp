@@ -56,9 +56,11 @@ void CMapEditorSDIView::doLButtonDownDrawMode(UINT nFlags, CPoint &point)
             //→移動準備
             //->ready for move
 
+            //既に選択している状態
             //group selected
             if(theApp.isSelectingGroup && theApp.selectDatas.isSelected()){
 
+                //点をクリックしたかどうか
                 //is point in objects/points/lines/polygons?
                 if(isPointInSelection(point.x, point.y,
                     OFFSET_X_VIEW, OFFSET_Y_VIEW, OFFSET_X_WORLD, OFFSET_Y_WORLD,
@@ -146,10 +148,15 @@ void CMapEditorSDIView::doLButtonDownDrawMode(UINT nFlags, CPoint &point)
                 }
 
             }else {
-                //shiftを押さずにクリック→選択
-                theApp.selectDatas.clear();
+                //ctrlを押さずにクリック→選択
 
-                theApp.isSelectingGroup = false;
+                //シフトキーと一緒に押した？（選択の追加）
+                bool isWithShift = nFlags & MK_SHIFT;
+                if(!isWithShift){
+                    //シフトキーを押さずにクリックしたらいったん解放する
+                    theApp.selectDatas.clear();
+                    theApp.isSelectingGroup = false;
+                }
 
                 //objects
                 {
@@ -183,6 +190,7 @@ void CMapEditorSDIView::doLButtonDownDrawMode(UINT nFlags, CPoint &point)
                 }
                 if(theApp.selectDatas.isSelected()){
                     //object property
+                    //オブジェクトプロパティウインドウを表示する
                     theApp.objectPropertyDialog->ShowWindow(TRUE);
 
                 }else{
