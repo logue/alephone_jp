@@ -1,6 +1,7 @@
 #include "HPLLibCommon.h"
 #include <float.h>
 
+#include "HPLLib/HPLAlephLib.h"
 
 static double getInnerProduct(double x0, double y0, double x1, double y1)
 {
@@ -106,7 +107,7 @@ vector<int> getValidPoligon(world_point2d& point, short maxHeight, short minHeig
             datas[i] = INT_MAX;
             continue;
         }
-        datas[i] = static_cast<int>(hpl::aleph::map::getLength(ep->vertex, point));
+        datas[i] = static_cast<int>(hpl::aleph::map::getPointsDistance(ep->vertex, point));
     }
     sortMap(indexes, pointMax, datas);
 
@@ -144,7 +145,7 @@ int getNearestPoint(world_point2d& pointFrom, short maxHeight, short minHeight)
         endpoint_data* point = get_endpoint_data(i);
         if(isPointInHeight(point, maxHeight, minHeight)){
             //get length
-            double length = hpl::aleph::map::getLength(point->vertex, pointFrom);
+            double length = hpl::aleph::map::getPointsDistance(point->vertex, pointFrom);
             if(minLength > length){
                 minLength = length;
                 minIndex = i;
@@ -176,7 +177,7 @@ int getNearestPoint(world_point2d& pointFrom)
         endpoint_data* point = get_endpoint_data(i);
 
         //get length
-        double length = hpl::aleph::map::getLength(point->vertex, pointFrom);
+        double length = hpl::aleph::map::getPointsDistance(point->vertex, pointFrom);
         if(minLength > length){
             minLength = length;
             minIndex = i;
@@ -227,7 +228,7 @@ void getPointListLengthOrder(world_point2d& pointFrom, int* indexes)
     int* datas = new int[max];
     //ë„ì¸
     for(int i = 0; i < max; i ++){
-        datas[i] = static_cast<int>(hpl::aleph::map::getLength(pointFrom, get_endpoint_data(i)->vertex));
+        datas[i] = static_cast<int>(hpl::aleph::map::getPointsDistance(pointFrom, get_endpoint_data(i)->vertex));
     }
     //ãÅÇﬂÇÈ
     sortMap(indexes, max, datas);

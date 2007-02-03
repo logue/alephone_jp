@@ -1,6 +1,7 @@
 #pragma once
 #include "afxwin.h"
 
+#include "map.h"
 
 // CPointPropertyDialog ダイアログ
 
@@ -23,9 +24,10 @@ protected:
 public:
     /////////////////////
     CWnd* parent;
+    void OnClose();
     BOOL Create(CWnd* par);
     virtual void PostNcDestroy();
-    point_data store;
+    endpoint_data store;
     void setupDialog(int index_);
     void setupDialogByStore();
     int index;

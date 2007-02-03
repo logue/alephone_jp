@@ -42,7 +42,7 @@ END_MESSAGE_MAP()
 
 // CPointPropertyDialog メッセージ ハンドラ
 
-BOOL CPolygonPropertyDialog::Create(CWnd* par)
+BOOL CPointPropertyDialog::Create(CWnd* par)
 {
     parent = par;
     BOOL ret = CDialog::Create(CPointPropertyDialog::IDD, parent);
@@ -55,7 +55,7 @@ BOOL CPolygonPropertyDialog::Create(CWnd* par)
     return ret;
 }
 
-void CPolygonPropertyDialog::PostNcDestroy()
+void CPointPropertyDialog::PostNcDestroy()
 {
     // TODO: ここに特定なコードを追加するか、もしくは基本クラスを呼び出してください。
     if(parent != NULL){
@@ -65,7 +65,7 @@ void CPolygonPropertyDialog::PostNcDestroy()
     CDialog::PostNcDestroy();
 }
 
-void CPolygonPropertyDialog::OnClose()
+void CPointPropertyDialog::OnClose()
 {
     // TODO: ここにメッセージ ハンドラ コードを追加するか、既定の処理を呼び出します。
     if(parent != NULL){
@@ -74,9 +74,9 @@ void CPolygonPropertyDialog::OnClose()
         CDialog::OnClose();
     }
 }
-void CPolygonPropertyDialog::setupDialog(int index_)
+void CPointPropertyDialog::setupDialog(int index_)
 {
-    if(index_ < 0 || index_ >= (int)Endpoint.size()){
+    if(index_ < 0 || index_ >= (int)EndpointList.size()){
         char cstr[256];
         sprintf(cstr, "illigal polygon index:%d", index_);
         MessageBox(CString(cstr));
@@ -85,7 +85,11 @@ void CPolygonPropertyDialog::setupDialog(int index_)
     //point index
     index = index_;
     endpoint_data *p = get_endpoint_data(index);
-    memcpy(&store, polygon, sizeof(polygon_data));
+    memcpy(&store, p, sizeof(endpoint_data));
 
     setupDialogByStore();
+}
+
+void CPointPropertyDialog::setupDialogByStore()
+{
 }
