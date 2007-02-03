@@ -626,6 +626,7 @@ void update_players(ActionQueues* inActionQueuesToUse, bool inPredictive)
 		if (IsSwimming && (action_flags&_run_dont_walk)) action_flags&= ~_run_dont_walk, action_flags|= _swim;
 		
 		update_player_physics_variables(player_index, action_flags, inPredictive);
+    
 
 		if(!inPredictive)
 		{

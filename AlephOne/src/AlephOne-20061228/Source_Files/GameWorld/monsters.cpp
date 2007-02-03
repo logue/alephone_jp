@@ -442,6 +442,13 @@ void move_monsters(
 			
 			if (MONSTER_IS_ACTIVE(monster))
 			{
+                /*
+                player_data* player = get_player_data(0);
+                if(monster_index == player->monster_index){
+                    //update target
+                    change_monster_target(monster_index, find_closest_appropriate_target(monster_index, false));
+
+                }*/
 				if (!OBJECT_IS_INVISIBLE(object))
 				{
 					struct monster_definition *definition= get_monster_definition(monster->type);
