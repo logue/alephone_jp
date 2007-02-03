@@ -3,6 +3,8 @@ Microsoft Visual Studio Solution File, Format Version 9.00
 # Visual Studio 2005
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "AlephOne", "AlephOne\AlephOne.vcproj", "{D8F0A6B9-7625-4AA9-99EB-CB2FA4376850}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "AlephOneJP", "AlephOneJP\AlephOneJP.vcproj", "{4D0A22AC-8DDF-428B-B823-7F6791792665}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Win32 = Debug|Win32
@@ -13,6 +15,10 @@ Global
 		{D8F0A6B9-7625-4AA9-99EB-CB2FA4376850}.Debug|Win32.Build.0 = Debug|Win32
 		{D8F0A6B9-7625-4AA9-99EB-CB2FA4376850}.Release|Win32.ActiveCfg = Release|Win32
 		{D8F0A6B9-7625-4AA9-99EB-CB2FA4376850}.Release|Win32.Build.0 = Release|Win32
+		{4D0A22AC-8DDF-428B-B823-7F6791792665}.Debug|Win32.ActiveCfg = Debug|Win32
+		{4D0A22AC-8DDF-428B-B823-7F6791792665}.Debug|Win32.Build.0 = Debug|Win32
+		{4D0A22AC-8DDF-428B-B823-7F6791792665}.Release|Win32.ActiveCfg = Release|Win32
+		{4D0A22AC-8DDF-428B-B823-7F6791792665}.Release|Win32.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
