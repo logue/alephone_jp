@@ -67,7 +67,7 @@ void initialize_fonts(void)
 #define FONTE10 "5x10a.bdf"
 // 0001 1100 0000 0000
 uint16 sjis2jis(const char** datal) {
-	char*& data = *datal;
+	const char*& data = *datal;
 	char d1,d2;
 	uint8 c1,c2;
 	uint16 ret;
