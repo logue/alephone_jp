@@ -171,13 +171,13 @@ void CMapEditorSDIView::drawPolygons(CDC *cdc)
     int polyMax = static_cast<int>(PolygonList.size());
     int *indexes = new int[polyMax];
     int* datas = new int[polyMax];
-    sortMap(indexes, polyMax, datas);
+    //sortMap(indexes, polyMax, datas);
     delete datas;
     //sort it by floor
     //sortOrderToHeight((int)PolygonList.size(), POLYGON_TAG, indexes, true);
 
     for(int i = 0; i < (int)PolygonList.size(); i ++){
-        int index = indexes[i];
+        int index = i;//indexes[i];
         struct polygon_data* polygon = &PolygonList[index];
         int flags = polygon->flags;
         int vertexCount = polygon->vertex_count;
@@ -812,6 +812,11 @@ int CMapEditorSDIView::OnCreate(LPCREATESTRUCT lpCreateStruct)
     theApp.textureDialog = new CTextureDialog;
     theApp.textureDialog->Create(this);
     theApp.textureDialog->ShowWindow(FALSE);
+
+    //point property
+    theApp.pointPropertyDialog = new CPointPropertyDialog;
+    theApp.pointPropertyDialog->Create(this);
+    theApp.pointPropertyDialog->ShowWindow(FALSE);
 
     //load texture
     if(theApp.isLoadedShapesFile){

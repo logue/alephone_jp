@@ -18,4 +18,16 @@ protected:
 	virtual void DoDataExchange(CDataExchange* pDX);    // DDX/DDV サポート
 
 	DECLARE_MESSAGE_MAP()
+public:
+    /////////////////////
+    CWnd* parent;
+    void OnClose();
+    BOOL Create(CWnd* par);
+    virtual void PostNcDestroy();
+    side_data store;
+    void setupDialog(int index_);
+    void setupDialogByStore();
+    int index;
+    ////////////////////////
+
 };

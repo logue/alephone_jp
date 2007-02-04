@@ -96,12 +96,13 @@ void CMapEditorSDIView::OnFileOpen()
         theApp.isChanged = false;
         this->Invalidate(FALSE);
 
-        initialize_players();
+/*        initialize_players();
+        MARK_SLOT_AS_FREE(monsters);
         int index = new_player(0,0,0);
 
         set_local_player_index(index);
         set_current_player_index(index);
-
+*/
         allocate_render_memory();
 
     }
