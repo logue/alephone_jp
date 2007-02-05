@@ -325,7 +325,7 @@ BOOL CMapEditorSDIApp::InitInstance()
 	// 設定が格納されているレジストリ キーを変更します。
 	// TODO: 会社名または組織名などの適切な文字列に
 	// この文字列を変更してください。
-	SetRegistryKey(_T("MapEditorOne"));
+	SetRegistryKey(_T("MapViewerOne"));
 	LoadStdProfileSettings(4);  // 標準の INI ファイルのオプションをロードします (MRU を含む)
 	// アプリケーション用のドキュメント テンプレートを登録します。ドキュメント テンプレート
 	//  はドキュメント、フレーム ウィンドウとビューを結合するために機能します。

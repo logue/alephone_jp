@@ -495,8 +495,10 @@ void CMapEditorSDIView::OnMouseMove(UINT nFlags, CPoint point)
     const int DIV = theApp.zoomDivision;
 #ifdef MAP_VIEWER
     //ƒNƒŠƒbƒN‚µ‚Ä‚¢‚ê‚ÎˆÚ“®
-    if(nFlags & MK_LBUTTON &&(theApp.getEditMode() == EM_DRAW && theApp.selectingToolType == TI_HAND ||
-        theApp.getEditMode() == EM_DRAW && (theApp.selectingToolType == TI_ARROW)||
+    if(nFlags & MK_LBUTTON &&
+        (nFlags & MK_CONTROL && theApp.isPressLButtonWithCtrl ||
+        theApp.getEditMode() == EM_DRAW && theApp.selectingToolType == TI_HAND ||
+//        theApp.getEditMode() == EM_DRAW && (theApp.selectingToolType == TI_ARROW)||
         nFlags & MK_CONTROL)){
         moveMapOffset(point.x, point.y);
     }
