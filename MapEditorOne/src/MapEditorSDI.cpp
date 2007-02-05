@@ -214,7 +214,8 @@ bool CMapEditorSDIApp::initialize(){
         char cstr[260];
         //load image file name list from file
         //bitmapList.resize();
-        const int NUMBER_OF_MAP_ICON_FILES = NUMBER_OF_DEFINED_ITEMS + NUMBER_OF_MAP_ICONS;
+        const int NUMBER_OF_MAP_ICON_FILES = NUMBER_OF_DEFINED_ITEMS +
+            NUMBER_OF_MAP_ICONS;
         Information mapIconFileNameInformations[NUMBER_OF_MAP_ICON_FILES];
 
         sprintf(cstr, "%s%s", DATA_DIR_NAME, MAP_ICONS_IMAGE_NAME_LIST_FILE_NAME);
@@ -250,6 +251,7 @@ bool CMapEditorSDIApp::initialize(){
     isNowOnThePoint = false;
 
     allocate_player_memory();
+
     //int id = new_player(0, 0, 0);
     return true;
 }

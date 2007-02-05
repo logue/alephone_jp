@@ -347,11 +347,14 @@ void CMapEditorSDIView::On32796()
 {
     // TODO: ここにコマンド ハンドラ コードを追加します。
     if(theApp.isLoadedShapesFile){
+#ifdef MAP_VIEWER
+#else
         setStatusBar(0, _T("start visual mode"));
         CVisualDialog dlg(this);
 
         if(dlg.DoModal() == IDOK){
         }
+#endif
     }else{
         AfxMessageBox(L"visual mode requires Shapes files of Marathon!!!");
     }
@@ -395,7 +398,10 @@ void CMapEditorSDIView::On32808()
 void CMapEditorSDIView::OnTextureFloor()
 {
     changeMode(EM_FLOOR_TEXTURE);
+#ifdef MAP_VIEWER
+#else
     //show texture palette
     theApp.textureDialog->setupDialog(0);
     theApp.textureDialog->ShowWindow(TRUE);
+#endif
 }

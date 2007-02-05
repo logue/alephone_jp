@@ -34,7 +34,16 @@ void addAnnotationText(world_point2d& point, string text);
 
 //get polygon index which include the point
 //return NONE when not found
-int getPolygonIdPointIn(world_point2d& point);
+inline int getPolygonIdPointIn(world_point2d& point)
+{
+    for(int i = 0; i < (int)PolygonList.size(); i ++){
+
+        if(point_in_polygon(i, &point)){
+            return i;
+        }
+    }
+    return NONE;
+}
 
 /**
     search polygon include point stated.

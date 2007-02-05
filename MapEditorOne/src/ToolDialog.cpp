@@ -148,7 +148,11 @@ void CToolDialog::OnPaint()
 //    CBitmap* old = memDC.SelectObject(bitmaps[0]);
     for(int i = 0; i < NUMBER_OF_TOOLS; i ++){
         POINT pt;
-
+#ifdef MAP_VIEWER
+        if(i % 2 == 1 || i >= 6){
+            continue;
+        }
+#endif
         pt.x = (i % 2) * TOOL_WIDTH;
         pt.y = (i / 2) * TOOL_HEIGHT;
 

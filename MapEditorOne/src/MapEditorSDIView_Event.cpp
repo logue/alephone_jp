@@ -151,7 +151,7 @@ void CMapEditorSDIView::doLButtonDownDrawMode(UINT nFlags, CPoint &point)
                 //ctrlを押さずにクリック→選択
 
                 //シフトキーと一緒に押した？（選択の追加）
-                bool isWithShift = nFlags & MK_SHIFT;
+                bool isWithShift = (nFlags & MK_SHIFT) != 0;
                 if(!isWithShift){
                     //シフトキーを押さずにクリックしたらいったん解放する
                     theApp.selectDatas.clear();
@@ -300,6 +300,8 @@ void CMapEditorSDIView::doLButtonDownDrawMode(UINT nFlags, CPoint &point)
     }else if(theApp.selectingToolType == TI_HAND){
         //全体を移動
     }else if( theApp.selectingToolType == TI_LINE){
+#ifdef MAP_VIEWER
+#else
         if(nFlags & MK_LBUTTON){
             theApp.selectDatas.clear();
             world_point2d worldPoint = getWorldPoint2DFromViewPoint(point.x, point.y);
@@ -319,6 +321,7 @@ void CMapEditorSDIView::doLButtonDownDrawMode(UINT nFlags, CPoint &point)
                 theApp.previousPointIndex = settledPointIndex;
             }
         }
+#endif
     }else if(theApp.selectingToolType == TI_MAGNIFY){
         //zoom in/out
         if(nFlags & MK_CONTROL){
@@ -330,6 +333,8 @@ void CMapEditorSDIView::doLButtonDownDrawMode(UINT nFlags, CPoint &point)
             OnZoomIn();
         }
     }else if(theApp.selectingToolType == TI_SKULL){
+#ifdef MAP_VIEWER
+#else
         struct world_point2d world_point = getWorldPoint2DFromViewPoint(point.x, point.y);
 
         int polygonIndex = getPolygonIdPointIn(world_point);
@@ -353,7 +358,10 @@ void CMapEditorSDIView::doLButtonDownDrawMode(UINT nFlags, CPoint &point)
                 theApp.objectPropertyDialog->setupDialog(objectIndex);
             }
         }
+#endif
     }else if(theApp.selectingToolType == TI_TEXT){
+#ifdef MAP_VIEWER
+#else
         //add annotation
         //show dialog
         CAnnotationDialog dlg(this);
@@ -373,9 +381,13 @@ void CMapEditorSDIView::doLButtonDownDrawMode(UINT nFlags, CPoint &point)
         }
         //focus this window
         this->SetFocus();
+#endif
     }else if(theApp.selectingToolType == TI_POLYGON){
+#ifdef MAP_VIEWER
+#else
         //set start point
         setStartPointForSelectGroup(point.x, point.y);
+#endif
     }
 }
 
@@ -481,7 +493,14 @@ void CMapEditorSDIView::OnMouseMove(UINT nFlags, CPoint point)
     theApp.nowMousePoint = point;
 
     const int DIV = theApp.zoomDivision;
-
+#ifdef MAP_VIEWER
+    //クリックしていれば移動
+    if(nFlags & MK_LBUTTON &&(theApp.getEditMode() == EM_DRAW && theApp.selectingToolType == TI_HAND ||
+        theApp.getEditMode() == EM_DRAW && (theApp.selectingToolType == TI_ARROW)||
+        nFlags & MK_CONTROL)){
+        moveMapOffset(point.x, point.y);
+    }
+#else
     if(nFlags & MK_LBUTTON && ((nFlags & MK_CONTROL && theApp.isPressLButtonWithCtrl) ||
         (theApp.getEditMode() == EM_DRAW && theApp.selectingToolType == TI_HAND))){
         //Control+L=move map view
@@ -581,6 +600,7 @@ void CMapEditorSDIView::OnMouseMove(UINT nFlags, CPoint point)
         }else{
         }
     }// if/not ctrled
+#endif
     Invalidate(FALSE);
     theApp.oldMousePoint = point;
 
@@ -731,7 +751,6 @@ void CMapEditorSDIView::OnLButtonUp(UINT nFlags, CPoint point)
     }else if(theApp.selectingToolType == TI_SKULL){
     }else if(theApp.selectingToolType == TI_TEXT){
     }
-
     theApp.isSelectingGroup = false;
     Invalidate(FALSE);
     ReleaseCapture();
@@ -766,6 +785,8 @@ void CMapEditorSDIView::OnRButtonDown(UINT nFlags, CPoint point)
             theApp.previousPointIndex = NONE;
         }
     }else if(theApp.selectingToolType == TI_MAGNIFY){
+        //縮小
+        OnZoomOut();
     }else if(theApp.selectingToolType == TI_SKULL){
     }else if(theApp.selectingToolType == TI_TEXT){
     }else if(theApp.selectingToolType == TI_POLYGON){

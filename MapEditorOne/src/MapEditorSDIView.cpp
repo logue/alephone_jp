@@ -416,7 +416,7 @@ void CMapEditorSDIView::drawObjects(CDC *cdc)
         //check for selecting
         bool isSelected = false;
         if(theApp.selectDatas.isSelected() &&
-            theApp.selectDatas.containsObject(index)){
+            theApp.selectDatas.containsObject(i)){
                 isSelected = true;
         }
 
@@ -765,12 +765,14 @@ int CMapEditorSDIView::OnCreate(LPCREATESTRUCT lpCreateStruct)
     //SDL_Init(SDL_INIT_VIDEO);
     initialize_screen(&scr, false);
 
+    theApp.isLoadedShapesFile = false;
+#ifdef MAP_VIEWER
+#else
     initialize_shape_handler();
 
     FileSpecifier ShapesFile("Shapes");
     if(!ShapesFile.Exists()){
         MessageBox(L"no shapes file");
-        theApp.isLoadedShapesFile = false;
     }else{
         theApp.isLoadedShapesFile = true;
         open_shapes_file(ShapesFile);
@@ -779,7 +781,7 @@ int CMapEditorSDIView::OnCreate(LPCREATESTRUCT lpCreateStruct)
         }
         load_collections(false, false);
     }
-
+#endif
     delete theApp.m_SDLToWindows;
 
 
