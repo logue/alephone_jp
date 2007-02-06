@@ -65,16 +65,77 @@ double hpl::aleph::map::getLineLength(int index)
     line_data* l = get_line_data(index);
     endpoint_data* start = get_endpoint_data(l->endpoint_indexes[0]);
     endpoint_data* end = get_endpoint_data(l->endpoint_indexes[1]);
-    double length = hpl::aleph::map::getLength(start->vertex, end->vertex);
+    double length = hpl::aleph::map::getPointsDistance(start->vertex, end->vertex);
     return length;
 }
 
 /**
 */
-double hpl::aleph::map::getLength(world_point2d& pointA, world_point2d& pointB)
+double hpl::aleph::map::getPointsDistance(world_point2d& pointA, world_point2d& pointB)
 {
     double length = getLengthDouble((double)pointA.x - pointB.x,(double) pointA.y - pointB.y);
     return length;
+}
+
+/**
+    <jp>üî•ñ‚ğXV‚·‚é
+    <en>Fix line_data up
+    @param isDeleteOldSide descide which deletes or not g‚í‚ê‚Ä‚¢‚È‚¢•Çî•ñ‚ğíœ‚·‚é‚©
+*/
+void hpl::aleph::map::fixLine(int index, bool isDeleteOldSide)
+{
+    if(index < 0 || index >= (int)LineList.size()){
+        return;
+    }
+
+    line_data* line = get_line_data(index);
+
+    //left poly
+    int leftPolyIndex = line->counterclockwise_polygon_owner;
+    int rightPolyIndex = line->clockwise_polygon_owner;
+    //	theMapLevel.theSides.SetupSide(leftPoly, rightPoly, &theLine->leftSide, index, deleteOldSides);
+/*    hpl::aleph::map::setupSide(leftPolyIndex, rightPolyIndex,
+        line->left_side, index, isDeleteOldSide);
+    hpl::aleph::map::setupSide(rightPolyIndex, leftPolyIndex,
+        line->right_side, index, isDeleteOldSide);
+*/    if(leftPolyIndex != NONE){
+        polygon_data* leftPoly = get_polygon_data(leftPolyIndex);
+        if(rightPolyIndex != NONE){
+            polygon_data* rightPoly = get_polygon_data(rightPolyIndex);
+            if(line->highest_adjacent_floor < rightPoly->floor_height){
+                line->highest_adjacent_floor = rightPoly->floor_height;
+            }
+            if(line->lowest_adjacent_ceiling < rightPoly->ceiling_height){
+                line->lowest_adjacent_ceiling = rightPoly->ceiling_height;
+            }
+        }else{
+            line->highest_adjacent_floor = leftPoly->floor_height;
+            line->lowest_adjacent_ceiling = leftPoly->ceiling_height;
+        }
+    }else if(rightPolyIndex != NONE){
+        polygon_data* rightPoly = get_polygon_data(rightPolyIndex);
+        line->highest_adjacent_floor = rightPoly->floor_height;
+        line->lowest_adjacent_ceiling = rightPoly->ceiling_height;
+    }
+    if(leftPolyIndex == NONE && rightPolyIndex != NONE){
+        //reverse
+        int temp;
+        temp = line->endpoint_indexes[0];
+        line->endpoint_indexes[0] = line->endpoint_indexes[1];
+        line->endpoint_indexes[1] = temp;
+        hpl::math::exchange<int16>(&line->counterclockwise_polygon_side_index, &line->clockwise_polygon_side_index);
+        hpl::math::exchange<int16>(&line->counterclockwise_polygon_owner, &line->clockwise_polygon_owner);
+    }
+
+    double length = hpl::aleph::map::getLineLength(index);
+    line->length = static_cast<int>(length);
+}
+
+///////////////////////  Sides  ////////////////////////////////////////////
+void hpl::aleph::map::fixSide(int leftPolyIndex, int rightPolyIndex, int sideIndex,
+        int lineIndex, bool isDeleteOldSide)
+{
+
 }
 
 ///////////////////////  Groups  ////////////////////////////////////////////

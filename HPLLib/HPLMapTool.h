@@ -34,6 +34,21 @@ namespace map{
                        int distance);
     bool isSelectPoint(world_point2d &point0, world_point2d &point1,
                        int distance);
+    
+    /**
+        <jp>指定した点をグリッドに合わせ、その座標を得ます
+        <en>snap point to grid
+        @param srcPoint
+        @param destPoint snapped point          グリッドに合わされた点座標
+        @param gridInterval interval of grids   グリッド間隔
+    */
+    void getSnapedPointToGrid(world_point2d &srcPoint, world_point2d* destPoint,
+        int gridInterval);
+
+    /**
+        <jp>指定した点、および点を所有する線とポリゴンが正しいかどうか判定?
+    */
+//    bool isValidPoint(int index);
 
     ///////////////////////  Lines  ////////////////////////////////////////////
     /**
@@ -65,7 +80,20 @@ namespace map{
     /*
         線の長さを得る
     */
-    double getLength(world_point2d& pointA, world_point2d& pointB);
+    double getPointsDistance(world_point2d& pointA, world_point2d& pointB);
+
+    /**
+        <jp>線情報を更新する
+        <en>Fix line_data up
+        @param isDeleteOldSide descide which deletes or not 使われていない壁情報を削除するか
+    */
+    void fixLine(int index, bool isDeleteOldSide);
+
+    ////////////////////////////////////////////////////////////////////////
+    ///////////  Sides  ////////////////////////////////////////////////////
+
+    void fixSide(int leftPolyIndex, int rightPolyIndex, int sideIndex,
+        int lineIndex, bool isDeleteOldSide);
 
     ///////////////////////////////////////////////////////////////////////
     ///////////  Groups  //////////////////////////////////////////////////

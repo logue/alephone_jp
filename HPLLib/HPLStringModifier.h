@@ -11,6 +11,12 @@ namespace string{
     */
     std::vector<std::string> Split( std::string src, const char* key);
 
+    /*
+    */
+    std::string appendFrontString(std::string &src,
+                                           int power,
+                                           std::string& appender);
+
 };
 };
 

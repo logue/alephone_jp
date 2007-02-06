@@ -32,3 +32,29 @@ std::vector<std::string> hpl::string::Split( std::string src, const char* key){
 	}
 	return vList;
 }
+
+/*
+    文字列の先頭に指定数の文字を付加
+    @param src 対象
+    @param power 最大文字列長
+    @param appender 付加する文字列
+*/
+std::string hpl::string::appendFrontString(std::string &src,
+                                           int power,
+                                           std::string& appender)
+{
+    std::string result = src;
+    //すでにオーバーしている場合何もしせずコピーを返す
+    if((int)(src.size()) > power){
+        return result;
+    }
+    //文字列長がオーバーするまで
+    while((int)(result.size()) <= power){
+        result = appender + result;
+    }
+    //オーバーしたらカット
+    if((int)(result.size()) > power){
+        result = result.substr(result.size() - power);
+    }
+    return result;
+}
