@@ -42,7 +42,7 @@ using namespace std;
 #include "cseries.h"
 #include "shell.h"
 #include "game_wad.h"
-#include "music.h"
+//#include "music.h"
 #include "ColorParser.h"
 #include "XML_DataBlock.h"
 #include "XML_LevelScript.h"

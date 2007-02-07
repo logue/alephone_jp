@@ -1,4 +1,6 @@
 /* generated from ftp://ftp.unicode.org/Public/MAPPINGS/OBSOLETE/EASTASIA/JIS/JIS0208.TXT */
+#ifndef _JUTABLE_
+#define _JUTABLE_
 
 unsigned short j2u['~' - '!' + 1]['~' - '!' + 1] = {
     { /* 0x2121 - 0x217E */
@@ -2948,3 +2950,5 @@ unsigned short u2j[] = {
     0xFF59, 0x2379, 0xFF5A, 0x237A, 0xFF5B, 0x2150, 0xFF5C, 0x2143, 
     0xFF5D, 0x2151, 0xFFE3, 0x2131, 0xFFE5, 0x216F, 
 };
+
+#endif

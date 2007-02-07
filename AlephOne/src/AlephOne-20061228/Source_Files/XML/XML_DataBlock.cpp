@@ -35,7 +35,7 @@ April 15, 2003 (Woody Zenfell):
 #include <string.h>
 #include "cseries.h"
 #include "XML_DataBlock.h"
-#include "Logging.h"
+//#include "Logging.h"
 
 
 #ifdef mac

@@ -67,7 +67,8 @@ void initialize_fonts(void)
 #define FONTE10 "5x10a.bdf"
 // 0001 1100 0000 0000
 uint16 sjis2jis(const char** datal) {
-	const char*& data = *datal;
+	//HogePiyo modified: VC8 does not support pointer refference
+	const char*& data = (const char*)*datal;
 	char d1,d2;
 	uint8 c1,c2;
 	uint16 ret;
