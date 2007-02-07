@@ -308,7 +308,7 @@ int WINAPI WinMain(HINSTANCE hInstance ,
         MapIndexList.clear();
         MapIndexList.push_back(0);
         dynamic_world->map_index_count = 1;
-        dynamic_world->platform_count = PlatformList.size();
+//        dynamic_world->platform_count = PlatformList.size();
         if(!save_level(buf)){
             char cbuf[MAX_PATH+100];
             sprintf(cbuf, "save error with [%s]", buf);

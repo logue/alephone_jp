@@ -58,7 +58,8 @@ RenderSortPolyClass::RenderSortPolyClass():
 	RVPtr(NULL)
 {
     sorted_node_data dat = {0,0,0,0};
-    SortedNodes = std::vector<sorted_node_data>(MAXIMUM_SORTED_NODES, dat);//.reserve(MAXIMUM_SORTED_NODES);
+    SortedNodes.reserve(MAXIMUM_SORTED_NODES);
+    // = std::vector<sorted_node_data>(MAXIMUM_SORTED_NODES, dat);//
 	AccumulatedEndpointClips.reserve(MAXIMUM_CLIPS_PER_NODE);
 	AccumulatedLineClips.reserve(MAXIMUM_CLIPS_PER_NODE);
 }
@@ -180,7 +181,7 @@ void RenderSortPolyClass::sort_render_tree()
 			
 			size_t Length = SortedNodes.size();
             POINTER_DATA OldSNPointer = NULL;
-            if(Length > 0)
+//            if(Length > 0)
     			OldSNPointer = POINTER_CAST(&SortedNodes.front());
 				
 			// Add a dummy object and check if the pointer got changed
@@ -189,7 +190,8 @@ void RenderSortPolyClass::sort_render_tree()
 			SortedNodes.push_back(Dummy);
 			POINTER_DATA NewSNPointer = POINTER_CAST(&SortedNodes.front());
 				
-			if (Length == 0 || NewSNPointer != OldSNPointer)
+			if (//Length == 0 || 
+                NewSNPointer != OldSNPointer)
 			{
 				// Update what uses the sorted-node pointers
 				for (size_t k=0; k<Length; k++) {

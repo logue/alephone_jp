@@ -429,6 +429,7 @@ void initialize_map_for_new_level(
     SavedObjectList.clear();
     MapAnnotationList.clear();
 
+    PlatformList.clear();
 	/* map_polygons= NULL;
 	 map_sides= NULL;
 	 map_lines= NULL;

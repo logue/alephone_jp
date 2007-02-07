@@ -56,6 +56,7 @@ Nov 19, 2000 (Loren Petrich):
 #include "csmacros.h"
 #include "world.h"
 #include "dynamic_limits.h"
+
 //#include "XML_ElementParser.h"
 
 #include <vector>
@@ -1010,6 +1011,7 @@ extern vector<side_data> SideList;
 extern vector<polygon_data> PolygonList;
 #define map_polygons (&PolygonList[0])
 #define MAXIMUM_POLYGONS_PER_MAP (PolygonList.size())
+
 
 // extern struct polygon_data *map_polygons;
 // extern struct side_data *map_sides;

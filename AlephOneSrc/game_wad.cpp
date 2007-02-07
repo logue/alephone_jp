@@ -140,6 +140,7 @@ Feb 15, 2002 (Br'fin (Jeremy Parsons)):
 /* -------- local globals */
 FileSpecifier MapFileSpec;
 static bool file_is_set= false;
+static std::vector<static_platform_data> staticPlatforms;
 
 // LP addition: was a physics model loaded from the previous level loaded?
 static bool PhysicsModelLoadedEarlier = false;
@@ -409,10 +410,9 @@ static struct wad_data* export_level_wad_data()
         ANNOTATION_TAG, OBJECT_TAG,
         MAP_INFO_TAG, ITEM_PLACEMENT_STRUCTURE_TAG,
         TERMINAL_DATA_TAG, MEDIA_TAG, AMBIENT_SOUND_TAG,
-        RANDOM_SOUND_TAG, PLATFORM_STATIC_DATA_TAG,
+        RANDOM_SOUND_TAG, //PLATFORM_STATIC_DATA_TAG,
         PLATFORM_STRUCTURE_TAG,
         MAP_INDEXES_TAG,
-
     };
     for(int i = 0; i < sizeof(tags) / sizeof(int); i ++){
         data = tag_to_global_array_and_size(tags[i], &size);
@@ -423,10 +423,21 @@ static struct wad_data* export_level_wad_data()
         }
     }
 
+    size_t count = 0;
+
+    //platform
+    count = staticPlatforms.size();
+    if(count > 0){
+        size = SIZEOF_static_platform_data * count;
+        data = new Uint8[size];
+        pack_static_platform_data(data, &staticPlatforms[0], count);
+        append_data_to_wad(wad, PLATFORM_STATIC_DATA_TAG, data, size, 0);
+        delete data;
+    }
 
     //light
     //light's data is illigal
-    size_t count = LightList.size();
+    count = LightList.size();
     if(count > 0){
         size = SIZEOF_static_light_data * count;
         data = new Uint8[size];
@@ -1371,18 +1382,19 @@ bool process_map_wad(
 
 	/* zero everything so no slots are used */	
 	initialize_map_for_new_level();
+    staticPlatforms.clear();
 
 	/* Calculate the length (for reallocate map) */
 	allocate_map_structure_for_map(wad);
 
 	/* Extract points */
 	data= (uint8 *)extract_type_from_wad(wad, POINT_TAG, &data_length);
-    if(data){
+//    if(data){
 	    count= data_length/SIZEOF_world_point2d;
         assert(data_length == count*SIZEOF_world_point2d);
-    }else{
-        count = 0;
-    }
+//    }else{
+//        count = 0;
+//    }
 	
 	if(count)
 	{
@@ -1420,12 +1432,12 @@ bool process_map_wad(
 
 	/* Extract polygons */
 	data= (uint8 *)extract_type_from_wad(wad, POLYGON_TAG, &data_length);
-    assert(data);
-    if(data){
+//    assert(data);
+//   if(data){
 	    count = data_length/SIZEOF_polygon_data;
 	    assert(data_length == count*SIZEOF_polygon_data);
 	    load_polygons(data, count, version);
-    }
+//    }
 
 	/* Extract the lightsources */
 	if(restoring_game)
@@ -1443,7 +1455,7 @@ bool process_map_wad(
 	{
 		/* When you are restoring a game, the actual light structure is set. */
 		data= (uint8 *)extract_type_from_wad(wad, LIGHTSOURCE_TAG, &data_length);
-        if(data){
+//        if(data){
 		    if(version==MARATHON_ONE_DATA_VERSION) 
 		    {
 			    /* We have an old style light */
@@ -1455,7 +1467,7 @@ bool process_map_wad(
 			    assert(count*SIZEOF_static_light_data==data_length);
 			    load_lights(data, count, version);
 		    }
-        }
+//        }
 
 		//	HACK!!!!!!!!!!!!!!! vulcan doesnÕt NONE .first_object field after adding scenery
 		{
@@ -1471,33 +1483,33 @@ bool process_map_wad(
 
 	/* Extract the annotations */
 	data= (uint8 *)extract_type_from_wad(wad, ANNOTATION_TAG, &data_length);
-    if(data){
+//    if(data){
 	    count = data_length/SIZEOF_map_annotation;
 	    assert(data_length == count*SIZEOF_map_annotation);
 	    load_annotations(data, count);
-    }else{
-        MapAnnotationList.clear();
-    }
+//    }else{
+///        MapAnnotationList.clear();
+//    }
 
 	/* Extract the objects */
 	data= (uint8 *)extract_type_from_wad(wad, OBJECT_TAG, &data_length);
-    if(data){
+//    if(data){
 	    count = data_length/SIZEOF_map_object;
 	    assert(data_length == count*static_cast<size_t>(SIZEOF_map_object));
 	    load_objects(data, count);
-    }
+//    }
 	/* Extract the map info data */
 	data= (uint8 *)extract_type_from_wad(wad, MAP_INFO_TAG, &data_length);
-    if(data){
+//    if(data){
 	    // LP change: made this more Pfhorte-friendly
 	    assert(static_cast<size_t>(SIZEOF_static_data)==data_length 
 		    || static_cast<size_t>(SIZEOF_static_data-2)==data_length);
 	    load_map_info(data);
-    }
+//    }
 
 	/* Extract the game difficulty info.. */
 	data= (uint8 *)extract_type_from_wad(wad, ITEM_PLACEMENT_STRUCTURE_TAG, &data_length);
-    if(data){
+//    if(data){
 	    // In case of an absent placement chunk...
 	    if (data_length == 0)
 	    {
@@ -1509,13 +1521,13 @@ bool process_map_wad(
 	    load_placement_data(data + MAXIMUM_OBJECT_TYPES*SIZEOF_object_frequency_definition, data);
 	    if (data_length == 0)
 		    delete []data;
-    }
+//    }
 	
 	/* Extract the terminal data. */
 	data= (uint8 *)extract_type_from_wad(wad, TERMINAL_DATA_TAG, &data_length);
-    if(data){
+//    if(data){
     	load_terminal_data(data, data_length);
-    }
+//    }
 
 	/* Extract the media definitions */
 	if(restoring_game)
@@ -1530,29 +1542,29 @@ bool process_map_wad(
 	else
 	{
 		data= (uint8 *)extract_type_from_wad(wad, MEDIA_TAG, &data_length);
-        if(data){
+//        if(data){
 		    count= data_length/SIZEOF_media_data;
 		    assert(count*SIZEOF_media_data==data_length);
 		    load_media(data, count);
-        }
+//        }
 	}
 
 	/* Extract the ambient sound images */
 	data= (uint8 *)extract_type_from_wad(wad, AMBIENT_SOUND_TAG, &data_length);
-    if(data){
+//    if(data){
 	    count = data_length/SIZEOF_ambient_sound_image_data;
 	    assert(data_length == count*SIZEOF_ambient_sound_image_data);
 	    load_ambient_sound_images(data, count);
 	    load_ambient_sound_images(data, data_length/SIZEOF_ambient_sound_image_data);
-    }
+//    }
 
 	/* Extract the random sound images */
 	data= (uint8 *)extract_type_from_wad(wad, RANDOM_SOUND_TAG, &data_length);
-    if(data){
+//    if(data){
 	    count = data_length/SIZEOF_random_sound_image_data;
 	    assert(data_length == count*SIZEOF_random_sound_image_data);
 	    load_random_sound_images(data, count);
-    }
+//    }
 
 	// LP addition: load the physics-model chunks (all fixed-size)
 	bool PhysicsModelLoaded = false;
@@ -1705,7 +1717,7 @@ bool process_map_wad(
 		assert(is_preprocessed_map&&map_index_count || !is_preprocessed_map&&!map_index_count);
 
 		data= (uint8 *)extract_type_from_wad(wad, PLATFORM_STATIC_DATA_TAG, &data_length);
-        if(data){
+//        if(data){
 		    count= data_length/SIZEOF_static_platform_data;
 		    assert(count*SIZEOF_static_platform_data==data_length);
     		
@@ -1713,10 +1725,26 @@ bool process_map_wad(
 		    platform_structure_count= data_length/SIZEOF_platform_data;
 		    assert(platform_structure_count*SIZEOF_platform_data==data_length);
     		
+            //static_platform_data‚Ì•Û‘¶
+            {
+			    uint8 *_static_data= data;
+			    size_t platform_static_data_index;
+			    for(platform_static_data_index = 0; platform_static_data_index<count; ++platform_static_data_index)
+			    {
+				    static_platform_data TempPlatform;
+				    _static_data = unpack_static_platform_data(_static_data, &TempPlatform, 1);
+                    staticPlatforms.push_back(TempPlatform);
+				    /*if(TempPlatform.polygon_index==loop)
+				    {
+					    new_platform(&TempPlatform, loop);
+					    break;
+				    }*/
+			    }
+            }
 		    complete_loading_level((short *) map_index_data, map_index_count,
 			    data, count, platform_structures,
 			    platform_structure_count, version);
-        }
+  //      }
 	}
 	
 	/* ... and bail */
