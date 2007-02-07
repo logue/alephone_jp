@@ -17,7 +17,7 @@
 	<Configurations>
 		<Configuration
 			Name="Debug|Win32"
-			OutputDirectory="$(SolutionDir)..\..\..\bin\"
+			OutputDirectory="$(SolutionDir)\..\..\..\bin"
 			IntermediateDirectory="$(ConfigurationName)"
 			ConfigurationType="1"
 			CharacterSet="0"
@@ -41,7 +41,7 @@
 				Name="VCCLCompilerTool"
 				Optimization="0"
 				AdditionalIncludeDirectories="&quot;$(SolutionDir)\..\..\..\include\boost_1_33_1&quot;;&quot;$(SolutionDir)\..\..\..\src\AlephOne-20061228\Source_Files\TCPMess&quot;;&quot;$(SolutionDir)\..\..\..\src\AlephOne-20061228\Source_Files\Sound&quot;;&quot;$(SolutionDir)\..\..\..\src\AlephOne-20061228\Source_Files\CSeries&quot;;&quot;$(SolutionDir)\..\..\..\src\AlephOne-20061228\Source_Files\XML&quot;;&quot;$(SolutionDir)\..\..\..\src\AlephOne-20061228\Source_Files\RenderOther&quot;;&quot;$(SolutionDir)\..\..\..\src\AlephOne-20061228\Source_Files\RenderMain&quot;;&quot;$(SolutionDir)\..\..\..\src\AlephOne-20061228\Source_Files\Pfhortran&quot;;&quot;$(SolutionDir)\..\..\..\src\AlephOne-20061228\Source_Files\Network\Metaserver&quot;;&quot;$(SolutionDir)\..\..\..\src\AlephOne-20061228\Source_Files\Network&quot;;&quot;$(SolutionDir)\..\..\..\src\AlephOne-20061228\Source_Files\ModelView&quot;;&quot;$(SolutionDir)\..\..\..\src\AlephOne-20061228\Source_Files\Misc&quot;;&quot;$(SolutionDir)\..\..\..\src\AlephOne-20061228\Source_Files\Lua&quot;;&quot;$(SolutionDir)\..\..\..\src\AlephOne-20061228\Source_Files\LibNAT&quot;;&quot;$(SolutionDir)\..\..\..\src\AlephOne-20061228\Source_Files\Input&quot;;&quot;$(SolutionDir)\..\..\..\src\AlephOne-20061228\Source_Files\GameWorld&quot;;&quot;$(SolutionDir)\..\..\..\src\AlephOne-20061228\Source_Files\Files&quot;;&quot;$(SolutionDir)\..\..\..\src\AlephOne-20061228\Source_Files\Expat&quot;;&quot;$(SolutionDir)\..\..\..\src\AlephOne-20061228\Source_Files&quot;;&quot;$(SolutionDir)\..\..\..\include\SDL&quot;;&quot;$(SolutionDir)\..\..\..\include&quot;;&quot;$(SolutionDir)\..\..\..\src&quot;"
-				PreprocessorDefinitions="WIN32;_DEBUG;_WINDOWS;SDL;__WIN32__;__MVCPP__;HAVE_OPENGL"
+				PreprocessorDefinitions="WIN32;_DEBUG;_WINDOWS;SDL;__WIN32__;__MVCPP__;HAVE_OPENGL;_CRT_SECURE_NO_DEPRECATE"
 				MinimalRebuild="true"
 				BasicRuntimeChecks="3"
 				RuntimeLibrary="3"
@@ -321,14 +321,6 @@
 			<File
 				RelativePath="..\..\..\..\src\AlephOne-20061228\Source_Files\CSeries\snprintf.cpp"
 				>
-				<FileConfiguration
-					Name="Debug|Win32"
-					>
-					<Tool
-						Name="VCCLCompilerTool"
-						IgnoreStandardIncludePath="false"
-					/>
-				</FileConfiguration>
 			</File>
 			<File
 				RelativePath="..\..\..\..\src\AlephOne-20061228\Source_Files\CSeries\snprintf.h"
