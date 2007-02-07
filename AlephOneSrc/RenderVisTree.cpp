@@ -760,7 +760,7 @@ void RenderVisTreeClass::calculate_line_clipping_information(
 				else
 				{
 					data->top_vector.i= - p->x, data->top_vector.j= - z;
-					data->top_y= y;
+					data->top_y= (short)y;
 				}
 			}
 			
@@ -785,7 +785,7 @@ void RenderVisTreeClass::calculate_line_clipping_information(
 				else
 				{
 					data->bottom_vector.i= p->x,  data->bottom_vector.j= z;
-					data->bottom_y= y;
+					data->bottom_y= (short)y;
 				}
 			}
 	

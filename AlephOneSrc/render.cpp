@@ -316,7 +316,7 @@ void allocate_render_memory(
 	assert(NUMBER_OF_RENDER_FLAGS<=16);
     printf("NUMBER_OF_RENDER_FLAGS:%d\n", NUMBER_OF_RENDER_FLAGS);
 	RenderFlagList.resize(RENDER_FLAGS_BUFFER_SIZE);
-    for(int i = 0; i < RENDER_FLAGS_BUFFER_SIZE; i ++){
+    for(int i = 0; i < static_cast<int>(RENDER_FLAGS_BUFFER_SIZE); i ++){
         RenderFlagList.push_back(0);
     }
 	// LP addition: check out pointer-arithmetic hack
@@ -600,8 +600,8 @@ void instantiate_polygon_transfer_mode(
 static void render_viewer_sprite_layer(view_data *view, RasterizerClass *RasPtr)
 {
 	rectangle_definition textured_rectangle;
-	weapon_display_information display_data;
-	shape_information_data *shape_information;
+//	weapon_display_information display_data;
+//	shape_information_data *shape_information;
 //	short count;
 
 	// LP change: bug out if weapons-in-hand are not to be displayed

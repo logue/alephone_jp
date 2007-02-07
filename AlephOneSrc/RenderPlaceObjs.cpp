@@ -190,7 +190,7 @@ render_object_data *RenderPlaceObjsClass::build_render_object(
 			shape_and_transfer_mode data;
 			shape_information_data *shape_information;
 			shape_information_data scaled_shape_information; // if necessary
-			shape_information_data model_shape_information;	// also if necessary
+//			shape_information_data model_shape_information;	// also if necessary
 			
 			// Maximum distance of object parts (use position if a sprite)
 			int Farthest = transformed_origin.x;
@@ -203,7 +203,7 @@ render_object_data *RenderPlaceObjsClass::build_render_object(
 			
 			// For the convenience of the 3D-model renderer
 			int LightDepth = transformed_origin.x;
-			GLfloat LightDirection[3];
+//			GLfloat LightDirection[3];
 			
 			get_object_shape_and_transfer_mode(&view->origin, object_index, &data);
 			// Nonexistent shape: skip

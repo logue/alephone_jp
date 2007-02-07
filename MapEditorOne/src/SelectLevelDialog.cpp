@@ -64,7 +64,7 @@ BOOL CSelectLevelDialog::OnInitDialog()
         selectLevelListBox.AddString(CString(cstr) + CString(theApp.LevelNameList.GetAt(i)));
     }
     if(theApp.LevelNameList.GetSize() == 0){
-        selectLevelListBox.AddString(L"unknown");
+        selectLevelListBox.AddString(TEXT("unknown"));
     }
     //現在編集中のアイテムを選択
     int nowSelect = theApp.editLevelIndex;

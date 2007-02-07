@@ -95,7 +95,7 @@ BOOL CToolDialog::Create(CWnd* par)
     if(ret == TRUE){
         ShowWindow(SW_SHOW);
     }else{
-        MessageBox(L"Failed");
+        MessageBox(TEXT("Failed"));
     }
     return ret;
 }
