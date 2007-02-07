@@ -1,0 +1,969 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 42;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		00F5DBAA099157970051C449 /* MPEG.h in Headers */ = {isa = PBXBuildFile; fileRef = F8508D1703AD9BB801A8000A /* MPEG.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		00F5DBAB099157970051C449 /* MPEGerror.h in Headers */ = {isa = PBXBuildFile; fileRef = F8508D1A03AD9BB801A8000A /* MPEGerror.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		00F5DBAC099157970051C449 /* MPEGfilter.h in Headers */ = {isa = PBXBuildFile; fileRef = F8508D1B03AD9BB801A8000A /* MPEGfilter.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		00F5DBAD099157970051C449 /* smpeg.h in Headers */ = {isa = PBXBuildFile; fileRef = F8508D2103AD9BB801A8000A /* smpeg.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		00F5DBAE099157970051C449 /* MPEGaction.h in Headers */ = {isa = PBXBuildFile; fileRef = 00F5DABB099144240051C449 /* MPEGaction.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		00F5DBAF099157970051C449 /* MPEGaudio.h in Headers */ = {isa = PBXBuildFile; fileRef = 00F5DABC099144240051C449 /* MPEGaudio.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		00F5DBB0099157970051C449 /* MPEGlist.h in Headers */ = {isa = PBXBuildFile; fileRef = 00F5DABD099144250051C449 /* MPEGlist.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		00F5DBB1099157970051C449 /* MPEGring.h in Headers */ = {isa = PBXBuildFile; fileRef = 00F5DABE099144250051C449 /* MPEGring.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		00F5DBB2099157970051C449 /* MPEGstream.h in Headers */ = {isa = PBXBuildFile; fileRef = 00F5DABF099144250051C449 /* MPEGstream.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		00F5DBB3099157970051C449 /* MPEGsystem.h in Headers */ = {isa = PBXBuildFile; fileRef = 00F5DAC0099144250051C449 /* MPEGsystem.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		00F5DBB4099157970051C449 /* MPEGvideo.h in Headers */ = {isa = PBXBuildFile; fileRef = 00F5DAC1099144250051C449 /* MPEGvideo.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		00F5DBBD099157970051C449 /* bitwindow.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 00F5DAF60991569D0051C449 /* bitwindow.cpp */; };
+		00F5DBBE099157970051C449 /* filter.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 00F5DAF80991569D0051C449 /* filter.cpp */; };
+		00F5DBBF099157970051C449 /* filter_2.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 00F5DAF90991569D0051C449 /* filter_2.cpp */; };
+		00F5DBC0099157970051C449 /* hufftable.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 00F5DAFA0991569D0051C449 /* hufftable.cpp */; };
+		00F5DBC1099157970051C449 /* MPEGaudio.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 00F5DAFC0991569D0051C449 /* MPEGaudio.cpp */; };
+		00F5DBC2099157970051C449 /* mpeglayer1.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 00F5DAFD0991569D0051C449 /* mpeglayer1.cpp */; };
+		00F5DBC3099157970051C449 /* mpeglayer2.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 00F5DAFE0991569D0051C449 /* mpeglayer2.cpp */; };
+		00F5DBC4099157970051C449 /* mpeglayer3.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 00F5DAFF0991569D0051C449 /* mpeglayer3.cpp */; };
+		00F5DBC5099157970051C449 /* mpegtable.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 00F5DB000991569D0051C449 /* mpegtable.cpp */; };
+		00F5DBC6099157970051C449 /* mpegtoraw.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 00F5DB010991569D0051C449 /* mpegtoraw.cpp */; };
+		00F5DBC7099157970051C449 /* MPEG.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 00F5DB090991569D0051C449 /* MPEG.cpp */; };
+		00F5DBC8099157970051C449 /* MPEGfilter.c in Sources */ = {isa = PBXBuildFile; fileRef = 00F5DB0A0991569D0051C449 /* MPEGfilter.c */; };
+		00F5DBC9099157970051C449 /* MPEGlist.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 00F5DB0B0991569D0051C449 /* MPEGlist.cpp */; };
+		00F5DBCA099157970051C449 /* MPEGring.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 00F5DB0C0991569D0051C449 /* MPEGring.cpp */; };
+		00F5DBCB099157970051C449 /* MPEGstream.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 00F5DB0D0991569D0051C449 /* MPEGstream.cpp */; };
+		00F5DBCC099157970051C449 /* MPEGsystem.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 00F5DB0E0991569D0051C449 /* MPEGsystem.cpp */; };
+		00F5DBCD099157970051C449 /* smpeg.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 00F5DB0F0991569D0051C449 /* smpeg.cpp */; };
+		00F5DBCE099157970051C449 /* decoders.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 00F5DB130991569D0051C449 /* decoders.cpp */; };
+		00F5DBCF099157970051C449 /* floatdct.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 00F5DB160991569D0051C449 /* floatdct.cpp */; };
+		00F5DBD0099157970051C449 /* gdith.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 00F5DB170991569D0051C449 /* gdith.cpp */; };
+		00F5DBD1099157970051C449 /* jrevdct.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 00F5DB180991569D0051C449 /* jrevdct.cpp */; };
+		00F5DBD2099157970051C449 /* mmxflags_asm.S in Sources */ = {isa = PBXBuildFile; fileRef = 00F5DB1A0991569D0051C449 /* mmxflags_asm.S */; };
+		00F5DBD3099157970051C449 /* mmxidct_asm.S in Sources */ = {isa = PBXBuildFile; fileRef = 00F5DB1B0991569D0051C449 /* mmxidct_asm.S */; };
+		00F5DBD4099157970051C449 /* motionvec.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 00F5DB1C0991569D0051C449 /* motionvec.cpp */; };
+		00F5DBD5099157970051C449 /* MPEGvideo.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 00F5DB1D0991569D0051C449 /* MPEGvideo.cpp */; };
+		00F5DBD6099157970051C449 /* parseblock.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 00F5DB1E0991569D0051C449 /* parseblock.cpp */; };
+		00F5DBD7099157970051C449 /* readfile.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 00F5DB200991569D0051C449 /* readfile.cpp */; };
+		00F5DBD8099157970051C449 /* util.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 00F5DB220991569D0051C449 /* util.cpp */; };
+		00F5DBD9099157970051C449 /* vhar128.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 00F5DB240991569D0051C449 /* vhar128.cpp */; };
+		00F5DBDA099157970051C449 /* video.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 00F5DB260991569D0051C449 /* video.cpp */; };
+		00F5DBE6099157980051C449 /* MPEG.h in Headers */ = {isa = PBXBuildFile; fileRef = F8508D1703AD9BB801A8000A /* MPEG.h */; };
+		00F5DBE7099157980051C449 /* MPEGerror.h in Headers */ = {isa = PBXBuildFile; fileRef = F8508D1A03AD9BB801A8000A /* MPEGerror.h */; };
+		00F5DBE8099157980051C449 /* MPEGfilter.h in Headers */ = {isa = PBXBuildFile; fileRef = F8508D1B03AD9BB801A8000A /* MPEGfilter.h */; };
+		00F5DBE9099157980051C449 /* smpeg.h in Headers */ = {isa = PBXBuildFile; fileRef = F8508D2103AD9BB801A8000A /* smpeg.h */; };
+		00F5DBEA099157980051C449 /* MPEGaction.h in Headers */ = {isa = PBXBuildFile; fileRef = 00F5DABB099144240051C449 /* MPEGaction.h */; };
+		00F5DBEB099157980051C449 /* MPEGaudio.h in Headers */ = {isa = PBXBuildFile; fileRef = 00F5DABC099144240051C449 /* MPEGaudio.h */; };
+		00F5DBEC099157980051C449 /* MPEGlist.h in Headers */ = {isa = PBXBuildFile; fileRef = 00F5DABD099144250051C449 /* MPEGlist.h */; };
+		00F5DBED099157980051C449 /* MPEGring.h in Headers */ = {isa = PBXBuildFile; fileRef = 00F5DABE099144250051C449 /* MPEGring.h */; };
+		00F5DBEE099157980051C449 /* MPEGstream.h in Headers */ = {isa = PBXBuildFile; fileRef = 00F5DABF099144250051C449 /* MPEGstream.h */; };
+		00F5DBEF099157980051C449 /* MPEGsystem.h in Headers */ = {isa = PBXBuildFile; fileRef = 00F5DAC0099144250051C449 /* MPEGsystem.h */; };
+		00F5DBF0099157980051C449 /* MPEGvideo.h in Headers */ = {isa = PBXBuildFile; fileRef = 00F5DAC1099144250051C449 /* MPEGvideo.h */; };
+		00F5DBF1099157980051C449 /* decoders.h in Headers */ = {isa = PBXBuildFile; fileRef = 00F5DB140991569D0051C449 /* decoders.h */; };
+		00F5DBF2099157980051C449 /* dither.h in Headers */ = {isa = PBXBuildFile; fileRef = 00F5DB150991569D0051C449 /* dither.h */; };
+		00F5DBF3099157980051C449 /* proto.h in Headers */ = {isa = PBXBuildFile; fileRef = 00F5DB1F0991569D0051C449 /* proto.h */; };
+		00F5DBF4099157980051C449 /* util.h in Headers */ = {isa = PBXBuildFile; fileRef = 00F5DB230991569D0051C449 /* util.h */; };
+		00F5DBF5099157980051C449 /* vhar128.h in Headers */ = {isa = PBXBuildFile; fileRef = 00F5DB250991569D0051C449 /* vhar128.h */; };
+		00F5DBF6099157980051C449 /* video.h in Headers */ = {isa = PBXBuildFile; fileRef = 00F5DB270991569D0051C449 /* video.h */; };
+		00F5DBF8099157980051C449 /* bitwindow.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 00F5DAF60991569D0051C449 /* bitwindow.cpp */; };
+		00F5DBF9099157980051C449 /* filter.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 00F5DAF80991569D0051C449 /* filter.cpp */; };
+		00F5DBFA099157980051C449 /* filter_2.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 00F5DAF90991569D0051C449 /* filter_2.cpp */; };
+		00F5DBFB099157980051C449 /* hufftable.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 00F5DAFA0991569D0051C449 /* hufftable.cpp */; };
+		00F5DBFC099157980051C449 /* MPEGaudio.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 00F5DAFC0991569D0051C449 /* MPEGaudio.cpp */; };
+		00F5DBFD099157980051C449 /* mpeglayer1.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 00F5DAFD0991569D0051C449 /* mpeglayer1.cpp */; };
+		00F5DBFE099157980051C449 /* mpeglayer2.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 00F5DAFE0991569D0051C449 /* mpeglayer2.cpp */; };
+		00F5DBFF099157980051C449 /* mpeglayer3.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 00F5DAFF0991569D0051C449 /* mpeglayer3.cpp */; };
+		00F5DC00099157980051C449 /* mpegtable.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 00F5DB000991569D0051C449 /* mpegtable.cpp */; };
+		00F5DC01099157980051C449 /* mpegtoraw.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 00F5DB010991569D0051C449 /* mpegtoraw.cpp */; };
+		00F5DC02099157980051C449 /* MPEG.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 00F5DB090991569D0051C449 /* MPEG.cpp */; };
+		00F5DC03099157980051C449 /* MPEGfilter.c in Sources */ = {isa = PBXBuildFile; fileRef = 00F5DB0A0991569D0051C449 /* MPEGfilter.c */; };
+		00F5DC04099157980051C449 /* MPEGlist.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 00F5DB0B0991569D0051C449 /* MPEGlist.cpp */; };
+		00F5DC05099157980051C449 /* MPEGring.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 00F5DB0C0991569D0051C449 /* MPEGring.cpp */; };
+		00F5DC06099157980051C449 /* MPEGstream.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 00F5DB0D0991569D0051C449 /* MPEGstream.cpp */; };
+		00F5DC07099157980051C449 /* MPEGsystem.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 00F5DB0E0991569D0051C449 /* MPEGsystem.cpp */; };
+		00F5DC08099157980051C449 /* smpeg.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 00F5DB0F0991569D0051C449 /* smpeg.cpp */; };
+		00F5DC09099157980051C449 /* decoders.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 00F5DB130991569D0051C449 /* decoders.cpp */; };
+		00F5DC0A099157980051C449 /* floatdct.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 00F5DB160991569D0051C449 /* floatdct.cpp */; };
+		00F5DC0B099157980051C449 /* gdith.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 00F5DB170991569D0051C449 /* gdith.cpp */; };
+		00F5DC0C099157980051C449 /* jrevdct.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 00F5DB180991569D0051C449 /* jrevdct.cpp */; };
+		00F5DC0D099157980051C449 /* mmxflags_asm.S in Sources */ = {isa = PBXBuildFile; fileRef = 00F5DB1A0991569D0051C449 /* mmxflags_asm.S */; };
+		00F5DC0E099157980051C449 /* mmxidct_asm.S in Sources */ = {isa = PBXBuildFile; fileRef = 00F5DB1B0991569D0051C449 /* mmxidct_asm.S */; };
+		00F5DC0F099157980051C449 /* motionvec.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 00F5DB1C0991569D0051C449 /* motionvec.cpp */; };
+		00F5DC10099157980051C449 /* MPEGvideo.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 00F5DB1D0991569D0051C449 /* MPEGvideo.cpp */; };
+		00F5DC11099157980051C449 /* parseblock.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 00F5DB1E0991569D0051C449 /* parseblock.cpp */; };
+		00F5DC12099157980051C449 /* readfile.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 00F5DB200991569D0051C449 /* readfile.cpp */; };
+		00F5DC13099157980051C449 /* util.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 00F5DB220991569D0051C449 /* util.cpp */; };
+		00F5DC14099157980051C449 /* vhar128.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 00F5DB240991569D0051C449 /* vhar128.cpp */; };
+		00F5DC15099157980051C449 /* video.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 00F5DB260991569D0051C449 /* video.cpp */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		00F5DC27099157980051C449 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 0867D690FE84028FC02AAC07 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 00F5DBA8099157970051C449;
+			remoteInfo = "Framework (Upgraded)";
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		00F5DABB099144240051C449 /* MPEGaction.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; name = MPEGaction.h; path = ../MPEGaction.h; sourceTree = SOURCE_ROOT; };
+		00F5DABC099144240051C449 /* MPEGaudio.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; name = MPEGaudio.h; path = ../MPEGaudio.h; sourceTree = SOURCE_ROOT; };
+		00F5DABD099144250051C449 /* MPEGlist.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; name = MPEGlist.h; path = ../MPEGlist.h; sourceTree = SOURCE_ROOT; };
+		00F5DABE099144250051C449 /* MPEGring.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; name = MPEGring.h; path = ../MPEGring.h; sourceTree = SOURCE_ROOT; };
+		00F5DABF099144250051C449 /* MPEGstream.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; name = MPEGstream.h; path = ../MPEGstream.h; sourceTree = SOURCE_ROOT; };
+		00F5DAC0099144250051C449 /* MPEGsystem.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; name = MPEGsystem.h; path = ../MPEGsystem.h; sourceTree = SOURCE_ROOT; };
+		00F5DAC1099144250051C449 /* MPEGvideo.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; name = MPEGvideo.h; path = ../MPEGvideo.h; sourceTree = SOURCE_ROOT; };
+		00F5DAF60991569D0051C449 /* bitwindow.cpp */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.cpp.cpp; path = bitwindow.cpp; sourceTree = "<group>"; };
+		00F5DAF80991569D0051C449 /* filter.cpp */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.cpp.cpp; path = filter.cpp; sourceTree = "<group>"; };
+		00F5DAF90991569D0051C449 /* filter_2.cpp */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.cpp.cpp; path = filter_2.cpp; sourceTree = "<group>"; };
+		00F5DAFA0991569D0051C449 /* hufftable.cpp */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.cpp.cpp; path = hufftable.cpp; sourceTree = "<group>"; };
+		00F5DAFC0991569D0051C449 /* MPEGaudio.cpp */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.cpp.cpp; path = MPEGaudio.cpp; sourceTree = "<group>"; };
+		00F5DAFD0991569D0051C449 /* mpeglayer1.cpp */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.cpp.cpp; path = mpeglayer1.cpp; sourceTree = "<group>"; };
+		00F5DAFE0991569D0051C449 /* mpeglayer2.cpp */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.cpp.cpp; path = mpeglayer2.cpp; sourceTree = "<group>"; };
+		00F5DAFF0991569D0051C449 /* mpeglayer3.cpp */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.cpp.cpp; path = mpeglayer3.cpp; sourceTree = "<group>"; };
+		00F5DB000991569D0051C449 /* mpegtable.cpp */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.cpp.cpp; path = mpegtable.cpp; sourceTree = "<group>"; };
+		00F5DB010991569D0051C449 /* mpegtoraw.cpp */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.cpp.cpp; path = mpegtoraw.cpp; sourceTree = "<group>"; };
+		00F5DB090991569D0051C449 /* MPEG.cpp */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.cpp.cpp; name = MPEG.cpp; path = ../MPEG.cpp; sourceTree = SOURCE_ROOT; };
+		00F5DB0A0991569D0051C449 /* MPEGfilter.c */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.c; name = MPEGfilter.c; path = ../MPEGfilter.c; sourceTree = SOURCE_ROOT; };
+		00F5DB0B0991569D0051C449 /* MPEGlist.cpp */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.cpp.cpp; name = MPEGlist.cpp; path = ../MPEGlist.cpp; sourceTree = SOURCE_ROOT; };
+		00F5DB0C0991569D0051C449 /* MPEGring.cpp */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.cpp.cpp; name = MPEGring.cpp; path = ../MPEGring.cpp; sourceTree = SOURCE_ROOT; };
+		00F5DB0D0991569D0051C449 /* MPEGstream.cpp */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.cpp.cpp; name = MPEGstream.cpp; path = ../MPEGstream.cpp; sourceTree = SOURCE_ROOT; };
+		00F5DB0E0991569D0051C449 /* MPEGsystem.cpp */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.cpp.cpp; name = MPEGsystem.cpp; path = ../MPEGsystem.cpp; sourceTree = SOURCE_ROOT; };
+		00F5DB0F0991569D0051C449 /* smpeg.cpp */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.cpp.cpp; name = smpeg.cpp; path = ../smpeg.cpp; sourceTree = SOURCE_ROOT; };
+		00F5DB130991569D0051C449 /* decoders.cpp */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.cpp.cpp; path = decoders.cpp; sourceTree = "<group>"; };
+		00F5DB140991569D0051C449 /* decoders.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = decoders.h; sourceTree = "<group>"; };
+		00F5DB150991569D0051C449 /* dither.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = dither.h; sourceTree = "<group>"; };
+		00F5DB160991569D0051C449 /* floatdct.cpp */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.cpp.cpp; path = floatdct.cpp; sourceTree = "<group>"; };
+		00F5DB170991569D0051C449 /* gdith.cpp */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.cpp.cpp; path = gdith.cpp; sourceTree = "<group>"; };
+		00F5DB180991569D0051C449 /* jrevdct.cpp */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.cpp.cpp; path = jrevdct.cpp; sourceTree = "<group>"; };
+		00F5DB1A0991569D0051C449 /* mmxflags_asm.S */ = {isa = PBXFileReference; explicitFileType = sourcecode.asm; fileEncoding = 30; path = mmxflags_asm.S; sourceTree = "<group>"; };
+		00F5DB1B0991569D0051C449 /* mmxidct_asm.S */ = {isa = PBXFileReference; explicitFileType = sourcecode.asm; fileEncoding = 30; path = mmxidct_asm.S; sourceTree = "<group>"; };
+		00F5DB1C0991569D0051C449 /* motionvec.cpp */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.cpp.cpp; path = motionvec.cpp; sourceTree = "<group>"; };
+		00F5DB1D0991569D0051C449 /* MPEGvideo.cpp */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.cpp.cpp; path = MPEGvideo.cpp; sourceTree = "<group>"; };
+		00F5DB1E0991569D0051C449 /* parseblock.cpp */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.cpp.cpp; path = parseblock.cpp; sourceTree = "<group>"; };
+		00F5DB1F0991569D0051C449 /* proto.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = proto.h; sourceTree = "<group>"; };
+		00F5DB200991569D0051C449 /* readfile.cpp */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.cpp.cpp; path = readfile.cpp; sourceTree = "<group>"; };
+		00F5DB220991569D0051C449 /* util.cpp */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.cpp.cpp; path = util.cpp; sourceTree = "<group>"; };
+		00F5DB230991569D0051C449 /* util.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = util.h; sourceTree = "<group>"; };
+		00F5DB240991569D0051C449 /* vhar128.cpp */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.cpp.cpp; path = vhar128.cpp; sourceTree = "<group>"; };
+		00F5DB250991569D0051C449 /* vhar128.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = vhar128.h; sourceTree = "<group>"; };
+		00F5DB260991569D0051C449 /* video.cpp */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.cpp.cpp; path = video.cpp; sourceTree = "<group>"; };
+		00F5DB270991569D0051C449 /* video.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = video.h; sourceTree = "<group>"; };
+		00F5DBE2099157970051C449 /* Info-Framework__Upgraded_.plist */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = "Info-Framework__Upgraded_.plist"; sourceTree = "<group>"; };
+		00F5DBE3099157970051C449 /* smpeg.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = smpeg.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		00F5DC1C099157980051C449 /* libsmpeg.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libsmpeg.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		00F5DC25099157980051C449 /* Create DMG */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = "compiled.mach-o.executable"; path = "Create DMG"; sourceTree = BUILT_PRODUCTS_DIR; };
+		00F5DCE4099172D40051C449 /* ReadMe.txt */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = text; name = ReadMe.txt; path = "pkg-support/resources/ReadMe.txt"; sourceTree = "<group>"; };
+		089C1667FE841158C02AAC07 /* English */ = {isa = PBXFileReference; fileEncoding = 10; lastKnownFileType = text.plist.strings; name = English; path = English.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		F8508D1703AD9BB801A8000A /* MPEG.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = MPEG.h; path = ../MPEG.h; sourceTree = SOURCE_ROOT; };
+		F8508D1A03AD9BB801A8000A /* MPEGerror.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = MPEGerror.h; path = ../MPEGerror.h; sourceTree = SOURCE_ROOT; };
+		F8508D1B03AD9BB801A8000A /* MPEGfilter.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = MPEGfilter.h; path = ../MPEGfilter.h; sourceTree = SOURCE_ROOT; };
+		F8508D2103AD9BB801A8000A /* smpeg.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = smpeg.h; path = ../smpeg.h; sourceTree = SOURCE_ROOT; };
+		F8FDCD1303AEBE0E01A8000A /* devel-resources */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = folder; name = "devel-resources"; path = "pkg-support/devel-resources"; sourceTree = SOURCE_ROOT; };
+		F8FDCD1703AEBE0E01A8000A /* resources */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = folder; name = resources; path = "pkg-support/resources"; sourceTree = SOURCE_ROOT; };
+		F8FDCD1A03AEBE0E01A8000A /* smpeg-devel.info */ = {isa = PBXFileReference; lastKnownFileType = text; name = "smpeg-devel.info"; path = "pkg-support/smpeg-devel.info"; sourceTree = SOURCE_ROOT; };
+		F8FDCD1B03AEBE0E01A8000A /* smpeg.info */ = {isa = PBXFileReference; lastKnownFileType = text; name = smpeg.info; path = "pkg-support/smpeg.info"; sourceTree = SOURCE_ROOT; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		00F5DBDB099157970051C449 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		00F5DC16099157980051C449 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		00F5DAF30991569D0051C449 /* audio */ = {
+			isa = PBXGroup;
+			children = (
+				00F5DAF60991569D0051C449 /* bitwindow.cpp */,
+				00F5DAF80991569D0051C449 /* filter.cpp */,
+				00F5DAF90991569D0051C449 /* filter_2.cpp */,
+				00F5DAFA0991569D0051C449 /* hufftable.cpp */,
+				00F5DAFC0991569D0051C449 /* MPEGaudio.cpp */,
+				00F5DAFD0991569D0051C449 /* mpeglayer1.cpp */,
+				00F5DAFE0991569D0051C449 /* mpeglayer2.cpp */,
+				00F5DAFF0991569D0051C449 /* mpeglayer3.cpp */,
+				00F5DB000991569D0051C449 /* mpegtable.cpp */,
+				00F5DB010991569D0051C449 /* mpegtoraw.cpp */,
+			);
+			name = audio;
+			path = ../audio;
+			sourceTree = SOURCE_ROOT;
+		};
+		00F5DB100991569D0051C449 /* video */ = {
+			isa = PBXGroup;
+			children = (
+				00F5DB130991569D0051C449 /* decoders.cpp */,
+				00F5DB140991569D0051C449 /* decoders.h */,
+				00F5DB150991569D0051C449 /* dither.h */,
+				00F5DB160991569D0051C449 /* floatdct.cpp */,
+				00F5DB170991569D0051C449 /* gdith.cpp */,
+				00F5DB180991569D0051C449 /* jrevdct.cpp */,
+				00F5DB1A0991569D0051C449 /* mmxflags_asm.S */,
+				00F5DB1B0991569D0051C449 /* mmxidct_asm.S */,
+				00F5DB1C0991569D0051C449 /* motionvec.cpp */,
+				00F5DB1D0991569D0051C449 /* MPEGvideo.cpp */,
+				00F5DB1E0991569D0051C449 /* parseblock.cpp */,
+				00F5DB1F0991569D0051C449 /* proto.h */,
+				00F5DB200991569D0051C449 /* readfile.cpp */,
+				00F5DB220991569D0051C449 /* util.cpp */,
+				00F5DB230991569D0051C449 /* util.h */,
+				00F5DB240991569D0051C449 /* vhar128.cpp */,
+				00F5DB250991569D0051C449 /* vhar128.h */,
+				00F5DB260991569D0051C449 /* video.cpp */,
+				00F5DB270991569D0051C449 /* video.h */,
+			);
+			name = video;
+			path = ../video;
+			sourceTree = SOURCE_ROOT;
+		};
+		034768DFFF38A50411DB9C8B /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				00F5DBE3099157970051C449 /* smpeg.framework */,
+				00F5DC1C099157980051C449 /* libsmpeg.a */,
+				00F5DC25099157980051C449 /* Create DMG */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		0867D691FE84028FC02AAC07 /* smpeg */ = {
+			isa = PBXGroup;
+			children = (
+				089C1666FE841158C02AAC07 /* InfoPlist.strings */,
+				08FB77AEFE84172EC02AAC07 /* pkg-support */,
+				089C1665FE841158C02AAC07 /* Headers */,
+				0867D69AFE84028FC02AAC07 /* Library Source */,
+				034768DFFF38A50411DB9C8B /* Products */,
+				00F5DBE2099157970051C449 /* Info-Framework__Upgraded_.plist */,
+			);
+			comments = "Currently, the MMX optimizations are not compiled in due to compile errors I do not understand.\nAssuming this can fixed, to activate MMX optimizations, you must add the two flags to OTHER_CFLAGS_i386 in the framework and static library targets:\n\n-Di386 -DUSE_MMX\n\n";
+			name = smpeg;
+			sourceTree = "<group>";
+		};
+		0867D69AFE84028FC02AAC07 /* Library Source */ = {
+			isa = PBXGroup;
+			children = (
+				00F5DAF30991569D0051C449 /* audio */,
+				00F5DB090991569D0051C449 /* MPEG.cpp */,
+				00F5DB0A0991569D0051C449 /* MPEGfilter.c */,
+				00F5DB0B0991569D0051C449 /* MPEGlist.cpp */,
+				00F5DB0C0991569D0051C449 /* MPEGring.cpp */,
+				00F5DB0D0991569D0051C449 /* MPEGstream.cpp */,
+				00F5DB0E0991569D0051C449 /* MPEGsystem.cpp */,
+				00F5DB0F0991569D0051C449 /* smpeg.cpp */,
+				00F5DB100991569D0051C449 /* video */,
+			);
+			name = "Library Source";
+			sourceTree = "<group>";
+		};
+		089C1665FE841158C02AAC07 /* Headers */ = {
+			isa = PBXGroup;
+			children = (
+				00F5DABB099144240051C449 /* MPEGaction.h */,
+				00F5DABC099144240051C449 /* MPEGaudio.h */,
+				00F5DABD099144250051C449 /* MPEGlist.h */,
+				00F5DABE099144250051C449 /* MPEGring.h */,
+				00F5DABF099144250051C449 /* MPEGstream.h */,
+				00F5DAC0099144250051C449 /* MPEGsystem.h */,
+				00F5DAC1099144250051C449 /* MPEGvideo.h */,
+				F8508D1703AD9BB801A8000A /* MPEG.h */,
+				F8508D1A03AD9BB801A8000A /* MPEGerror.h */,
+				F8508D1B03AD9BB801A8000A /* MPEGfilter.h */,
+				F8508D2103AD9BB801A8000A /* smpeg.h */,
+			);
+			name = Headers;
+			sourceTree = "<group>";
+		};
+		08FB77AEFE84172EC02AAC07 /* pkg-support */ = {
+			isa = PBXGroup;
+			children = (
+				F8FDCD1303AEBE0E01A8000A /* devel-resources */,
+				F8FDCD1703AEBE0E01A8000A /* resources */,
+				00F5DCE4099172D40051C449 /* ReadMe.txt */,
+				F8FDCD1A03AEBE0E01A8000A /* smpeg-devel.info */,
+				F8FDCD1B03AEBE0E01A8000A /* smpeg.info */,
+			);
+			name = "pkg-support";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXHeadersBuildPhase section */
+		00F5DBA9099157970051C449 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				00F5DBAA099157970051C449 /* MPEG.h in Headers */,
+				00F5DBAB099157970051C449 /* MPEGerror.h in Headers */,
+				00F5DBAC099157970051C449 /* MPEGfilter.h in Headers */,
+				00F5DBAD099157970051C449 /* smpeg.h in Headers */,
+				00F5DBAE099157970051C449 /* MPEGaction.h in Headers */,
+				00F5DBAF099157970051C449 /* MPEGaudio.h in Headers */,
+				00F5DBB0099157970051C449 /* MPEGlist.h in Headers */,
+				00F5DBB1099157970051C449 /* MPEGring.h in Headers */,
+				00F5DBB2099157970051C449 /* MPEGstream.h in Headers */,
+				00F5DBB3099157970051C449 /* MPEGsystem.h in Headers */,
+				00F5DBB4099157970051C449 /* MPEGvideo.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		00F5DBE5099157980051C449 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				00F5DBE6099157980051C449 /* MPEG.h in Headers */,
+				00F5DBE7099157980051C449 /* MPEGerror.h in Headers */,
+				00F5DBE8099157980051C449 /* MPEGfilter.h in Headers */,
+				00F5DBE9099157980051C449 /* smpeg.h in Headers */,
+				00F5DBEA099157980051C449 /* MPEGaction.h in Headers */,
+				00F5DBEB099157980051C449 /* MPEGaudio.h in Headers */,
+				00F5DBEC099157980051C449 /* MPEGlist.h in Headers */,
+				00F5DBED099157980051C449 /* MPEGring.h in Headers */,
+				00F5DBEE099157980051C449 /* MPEGstream.h in Headers */,
+				00F5DBEF099157980051C449 /* MPEGsystem.h in Headers */,
+				00F5DBF0099157980051C449 /* MPEGvideo.h in Headers */,
+				00F5DBF1099157980051C449 /* decoders.h in Headers */,
+				00F5DBF2099157980051C449 /* dither.h in Headers */,
+				00F5DBF3099157980051C449 /* proto.h in Headers */,
+				00F5DBF4099157980051C449 /* util.h in Headers */,
+				00F5DBF5099157980051C449 /* vhar128.h in Headers */,
+				00F5DBF6099157980051C449 /* video.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXHeadersBuildPhase section */
+
+/* Begin PBXNativeTarget section */
+		00F5DBA8099157970051C449 /* Framework */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 00F5DBDE099157970051C449 /* Build configuration list for PBXNativeTarget "Framework" */;
+			buildPhases = (
+				00F5DBA9099157970051C449 /* Headers */,
+				00F5DBBB099157970051C449 /* Resources */,
+				00F5DBBC099157970051C449 /* Sources */,
+				00F5DBDB099157970051C449 /* Frameworks */,
+				00F5DBDC099157970051C449 /* Rez */,
+				00F5DBDD099157970051C449 /* ShellScript */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = Framework;
+			productInstallPath = "$(HOME)/Library/Frameworks";
+			productName = smpeg;
+			productReference = 00F5DBE3099157970051C449 /* smpeg.framework */;
+			productType = "com.apple.product-type.framework";
+		};
+		00F5DBE4099157980051C449 /* Static Library */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 00F5DC18099157980051C449 /* Build configuration list for PBXNativeTarget "Static Library" */;
+			buildPhases = (
+				00F5DBE5099157980051C449 /* Headers */,
+				00F5DBF7099157980051C449 /* Sources */,
+				00F5DC16099157980051C449 /* Frameworks */,
+				00F5DC17099157980051C449 /* Rez */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "Static Library";
+			productInstallPath = /usr/local/lib;
+			productName = "Static Library";
+			productReference = 00F5DC1C099157980051C449 /* libsmpeg.a */;
+			productType = "com.apple.product-type.library.static";
+		};
+		00F5DC1D099157980051C449 /* Create DMG */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 00F5DC21099157980051C449 /* Build configuration list for PBXNativeTarget "Create DMG" */;
+			buildPhases = (
+				00F5DC20099157980051C449 /* ShellScript */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				00F5DC28099157980051C449 /* PBXTargetDependency */,
+			);
+			name = "Create DMG";
+			productInstallPath = /usr/local/bin;
+			productName = "Standard Package";
+			productReference = 00F5DC25099157980051C449 /* Create DMG */;
+			productType = "com.apple.product-type.tool";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		0867D690FE84028FC02AAC07 /* Project object */ = {
+			isa = PBXProject;
+			buildConfigurationList = 00F5D8BE099142F40051C449 /* Build configuration list for PBXProject "smpeg" */;
+			hasScannedForEncodings = 0;
+			mainGroup = 0867D691FE84028FC02AAC07 /* smpeg */;
+			productRefGroup = 034768DFFF38A50411DB9C8B /* Products */;
+			projectDirPath = "";
+			targets = (
+				00F5DBA8099157970051C449 /* Framework */,
+				00F5DBE4099157980051C449 /* Static Library */,
+				00F5DC1D099157980051C449 /* Create DMG */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		00F5DBBB099157970051C449 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXRezBuildPhase section */
+		00F5DBDC099157970051C449 /* Rez */ = {
+			isa = PBXRezBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		00F5DC17099157980051C449 /* Rez */ = {
+			isa = PBXRezBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXRezBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		00F5DBDD099157970051C449 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 8;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 1;
+			shellPath = /bin/sh;
+			shellScript = "# make frameworks directory if it doesn't already exist\nmkdir -p ~/Library/Frameworks\n# delete the old framework\nrm -rf ~/Library/Frameworks/smpeg.framework\n# copy framework to its home\n/Developer/Tools/CpMac -r build/smepg.framework ~/Library/Frameworks/smpeg.framework\n# precompile header for speedier compiles\n/usr/bin/cc -I $HOME/Library/Frameworks/smpeg.framework/Headers -precomp ~/Library/Frameworks/smpeg.framework/Headers/smpeg.h -o ~/Library/Frameworks/smpeg.framework/Headers/smpeg.p \n";
+		};
+		00F5DC20099157980051C449 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# clean up the framework, remove headers, extra files\nmkdir -p build/dmg-tmp\n/Developer/Tools/CpMac -r $TARGET_BUILD_DIR/smpeg.framework build/dmg-tmp/\ncp pkg-support/resources/ReadMe.txt build/dmg-tmp\n\n# remove the .DS_Store files if any (we may want to provide one in the future for fancy .dmgs)\nrm -rf build/dmg-tmp/.DS_Store\n\n# create the dmg\nhdiutil create -ov -fs HFS+ -volname smpeg -srcfolder build/dmg-tmp build/smpeg.dmg\n\n# clean up\nrm -rf build/dmg-tmp\n\n# compress it???\n#(cd build; gnutar -zcvf smpeg.dmg.tar.gz smpeg.dmg)";
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		00F5DBBC099157970051C449 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				00F5DBBD099157970051C449 /* bitwindow.cpp in Sources */,
+				00F5DBBE099157970051C449 /* filter.cpp in Sources */,
+				00F5DBBF099157970051C449 /* filter_2.cpp in Sources */,
+				00F5DBC0099157970051C449 /* hufftable.cpp in Sources */,
+				00F5DBC1099157970051C449 /* MPEGaudio.cpp in Sources */,
+				00F5DBC2099157970051C449 /* mpeglayer1.cpp in Sources */,
+				00F5DBC3099157970051C449 /* mpeglayer2.cpp in Sources */,
+				00F5DBC4099157970051C449 /* mpeglayer3.cpp in Sources */,
+				00F5DBC5099157970051C449 /* mpegtable.cpp in Sources */,
+				00F5DBC6099157970051C449 /* mpegtoraw.cpp in Sources */,
+				00F5DBC7099157970051C449 /* MPEG.cpp in Sources */,
+				00F5DBC8099157970051C449 /* MPEGfilter.c in Sources */,
+				00F5DBC9099157970051C449 /* MPEGlist.cpp in Sources */,
+				00F5DBCA099157970051C449 /* MPEGring.cpp in Sources */,
+				00F5DBCB099157970051C449 /* MPEGstream.cpp in Sources */,
+				00F5DBCC099157970051C449 /* MPEGsystem.cpp in Sources */,
+				00F5DBCD099157970051C449 /* smpeg.cpp in Sources */,
+				00F5DBCE099157970051C449 /* decoders.cpp in Sources */,
+				00F5DBCF099157970051C449 /* floatdct.cpp in Sources */,
+				00F5DBD0099157970051C449 /* gdith.cpp in Sources */,
+				00F5DBD1099157970051C449 /* jrevdct.cpp in Sources */,
+				00F5DBD2099157970051C449 /* mmxflags_asm.S in Sources */,
+				00F5DBD3099157970051C449 /* mmxidct_asm.S in Sources */,
+				00F5DBD4099157970051C449 /* motionvec.cpp in Sources */,
+				00F5DBD5099157970051C449 /* MPEGvideo.cpp in Sources */,
+				00F5DBD6099157970051C449 /* parseblock.cpp in Sources */,
+				00F5DBD7099157970051C449 /* readfile.cpp in Sources */,
+				00F5DBD8099157970051C449 /* util.cpp in Sources */,
+				00F5DBD9099157970051C449 /* vhar128.cpp in Sources */,
+				00F5DBDA099157970051C449 /* video.cpp in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		00F5DBF7099157980051C449 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				00F5DBF8099157980051C449 /* bitwindow.cpp in Sources */,
+				00F5DBF9099157980051C449 /* filter.cpp in Sources */,
+				00F5DBFA099157980051C449 /* filter_2.cpp in Sources */,
+				00F5DBFB099157980051C449 /* hufftable.cpp in Sources */,
+				00F5DBFC099157980051C449 /* MPEGaudio.cpp in Sources */,
+				00F5DBFD099157980051C449 /* mpeglayer1.cpp in Sources */,
+				00F5DBFE099157980051C449 /* mpeglayer2.cpp in Sources */,
+				00F5DBFF099157980051C449 /* mpeglayer3.cpp in Sources */,
+				00F5DC00099157980051C449 /* mpegtable.cpp in Sources */,
+				00F5DC01099157980051C449 /* mpegtoraw.cpp in Sources */,
+				00F5DC02099157980051C449 /* MPEG.cpp in Sources */,
+				00F5DC03099157980051C449 /* MPEGfilter.c in Sources */,
+				00F5DC04099157980051C449 /* MPEGlist.cpp in Sources */,
+				00F5DC05099157980051C449 /* MPEGring.cpp in Sources */,
+				00F5DC06099157980051C449 /* MPEGstream.cpp in Sources */,
+				00F5DC07099157980051C449 /* MPEGsystem.cpp in Sources */,
+				00F5DC08099157980051C449 /* smpeg.cpp in Sources */,
+				00F5DC09099157980051C449 /* decoders.cpp in Sources */,
+				00F5DC0A099157980051C449 /* floatdct.cpp in Sources */,
+				00F5DC0B099157980051C449 /* gdith.cpp in Sources */,
+				00F5DC0C099157980051C449 /* jrevdct.cpp in Sources */,
+				00F5DC0D099157980051C449 /* mmxflags_asm.S in Sources */,
+				00F5DC0E099157980051C449 /* mmxidct_asm.S in Sources */,
+				00F5DC0F099157980051C449 /* motionvec.cpp in Sources */,
+				00F5DC10099157980051C449 /* MPEGvideo.cpp in Sources */,
+				00F5DC11099157980051C449 /* parseblock.cpp in Sources */,
+				00F5DC12099157980051C449 /* readfile.cpp in Sources */,
+				00F5DC13099157980051C449 /* util.cpp in Sources */,
+				00F5DC14099157980051C449 /* vhar128.cpp in Sources */,
+				00F5DC15099157980051C449 /* video.cpp in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		00F5DC28099157980051C449 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 00F5DBA8099157970051C449 /* Framework */;
+			targetProxy = 00F5DC27099157980051C449 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		089C1666FE841158C02AAC07 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				089C1667FE841158C02AAC07 /* English */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		00F5D8BF099142F40051C449 /* Development */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_USE_NASM_FOR_ASM_FILETYPE = YES;
+				GCC_VERSION_i386 = 4.0;
+				GCC_VERSION_ppc = 3.3;
+				MACOSX_DEPLOYMENT_TARGET_i386 = 10.4;
+				MACOSX_DEPLOYMENT_TARGET_ppc = 10.2;
+				OTHER_CFLAGS = "$(OTHER_CFLAGS_$(CURRENT_ARCH))";
+				SDKROOT = /Developer/SDKs/MacOSX10.4u.sdk;
+				SDKROOT_i386 = /Developer/SDKs/MacOSX10.4u.sdk;
+				SDKROOT_ppc = /Developer/SDKs/MacOSX10.4u.sdk;
+			};
+			name = Development;
+		};
+		00F5D8C0099142F40051C449 /* Deployment */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = (
+					ppc,
+					i386,
+				);
+				GCC_AUTO_VECTORIZATION = YES;
+				GCC_OPTIMIZATION_LEVEL = 3;
+				GCC_USE_NASM_FOR_ASM_FILETYPE = YES;
+				GCC_VERSION_i386 = 4.0;
+				GCC_VERSION_ppc = 3.3;
+				MACOSX_DEPLOYMENT_TARGET_i386 = 10.4;
+				MACOSX_DEPLOYMENT_TARGET_ppc = 10.2;
+				OTHER_CFLAGS = "$(OTHER_CFLAGS_$(CURRENT_ARCH))";
+				SDKROOT = /Developer/SDKs/MacOSX10.4u.sdk;
+				SDKROOT_i386 = /Developer/SDKs/MacOSX10.4u.sdk;
+				SDKROOT_ppc = /Developer/SDKs/MacOSX10.4u.sdk;
+			};
+			name = Deployment;
+		};
+		00F5D8C1099142F40051C449 /* Default */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_USE_NASM_FOR_ASM_FILETYPE = YES;
+				GCC_VERSION_i386 = 4.0;
+				GCC_VERSION_ppc = 3.3;
+				MACOSX_DEPLOYMENT_TARGET_i386 = 10.4;
+				MACOSX_DEPLOYMENT_TARGET_ppc = 10.2;
+				OTHER_CFLAGS = "$(OTHER_CFLAGS_$(CURRENT_ARCH))";
+				SDKROOT = /Developer/SDKs/MacOSX10.4u.sdk;
+				SDKROOT_i386 = /Developer/SDKs/MacOSX10.4u.sdk;
+				SDKROOT_ppc = /Developer/SDKs/MacOSX10.4u.sdk;
+			};
+			name = Default;
+		};
+		00F5DBDF099157970051C449 /* Development */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COPY_PHASE_STRIP = NO;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(HOME)/Library/Frameworks",
+					/Library/Frameworks,
+				);
+				FRAMEWORK_VERSION = A;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_ENABLE_FIX_AND_CONTINUE = YES;
+				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					NOCONTROLS,
+					NDEBUG,
+				);
+				HEADER_SEARCH_PATHS = (
+					"$(HOME)/Library/Frameworks/SDL.framework/Headers",
+					/Library/Frameworks/SDL.framework/Headers,
+				);
+				INFOPLIST_FILE = "Info-Framework__Upgraded_.plist";
+				INSTALL_PATH = "@executable_path/../Frameworks";
+				LIBRARY_SEARCH_PATHS = "";
+				OTHER_CFLAGS_i386 = "";
+				OTHER_CFLAGS_ppc = "";
+				OTHER_LDFLAGS = (
+					"-seg1addr",
+					0x30F00000,
+					"-framework",
+					SDL,
+				);
+				PRODUCT_NAME = smpeg;
+				SECTORDER_FLAGS = "";
+				WARNING_CFLAGS = (
+					"-Wmost",
+					"-Wno-four-char-constants",
+					"-Wno-unknown-pragmas",
+				);
+				WRAPPER_EXTENSION = framework;
+				ZERO_LINK = YES;
+			};
+			name = Development;
+		};
+		00F5DBE0099157970051C449 /* Deployment */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COPY_PHASE_STRIP = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(HOME)/Library/Frameworks",
+					/Library/Frameworks,
+				);
+				FRAMEWORK_VERSION = A;
+				GCC_ENABLE_FIX_AND_CONTINUE = NO;
+				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					NOCONTROLS,
+					NDEBUG,
+				);
+				HEADER_SEARCH_PATHS = (
+					"$(HOME)/Library/Frameworks/SDL.framework/Headers",
+					/Library/Frameworks/SDL.framework/Headers,
+				);
+				INFOPLIST_FILE = "Info-Framework__Upgraded_.plist";
+				INSTALL_PATH = "@executable_path/../Frameworks";
+				LIBRARY_SEARCH_PATHS = "";
+				OTHER_CFLAGS_i386 = "";
+				OTHER_CFLAGS_ppc = "";
+				OTHER_LDFLAGS = (
+					"-seg1addr",
+					0x30F00000,
+					"-framework",
+					SDL,
+				);
+				PRODUCT_NAME = smpeg;
+				SECTORDER_FLAGS = "";
+				WARNING_CFLAGS = (
+					"-Wmost",
+					"-Wno-four-char-constants",
+					"-Wno-unknown-pragmas",
+				);
+				WRAPPER_EXTENSION = framework;
+				ZERO_LINK = NO;
+			};
+			name = Deployment;
+		};
+		00F5DBE1099157970051C449 /* Default */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(HOME)/Library/Frameworks",
+					/Library/Frameworks,
+				);
+				FRAMEWORK_VERSION = A;
+				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					NOCONTROLS,
+					NDEBUG,
+				);
+				HEADER_SEARCH_PATHS = (
+					"$(HOME)/Library/Frameworks/SDL.framework/Headers",
+					/Library/Frameworks/SDL.framework/Headers,
+				);
+				INFOPLIST_FILE = "Info-Framework__Upgraded_.plist";
+				INSTALL_PATH = "@executable_path/../Frameworks";
+				LIBRARY_SEARCH_PATHS = "";
+				OTHER_CFLAGS_i386 = "";
+				OTHER_CFLAGS_ppc = "";
+				OTHER_LDFLAGS = (
+					"-seg1addr",
+					0x30F00000,
+					"-framework",
+					SDL,
+				);
+				PRODUCT_NAME = smpeg;
+				SECTORDER_FLAGS = "";
+				WARNING_CFLAGS = (
+					"-Wmost",
+					"-Wno-four-char-constants",
+					"-Wno-unknown-pragmas",
+				);
+				WRAPPER_EXTENSION = framework;
+			};
+			name = Default;
+		};
+		00F5DC19099157980051C449 /* Development */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COPY_PHASE_STRIP = NO;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(HOME)/Library/Frameworks",
+					/Library/Frameworks,
+				);
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_ENABLE_FIX_AND_CONTINUE = YES;
+				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
+				GCC_PREPROCESSOR_DEFINITIONS = NOCONTROLS;
+				HEADER_SEARCH_PATHS = (
+					"$(HOME)/Library/Frameworks/SDL.framework/Headers",
+					/Library/Frameworks/SDL.framework/Headers,
+				);
+				LIBRARY_STYLE = STATIC;
+				OTHER_CFLAGS_i386 = "";
+				OTHER_CFLAGS_ppc = "";
+				OTHER_LDFLAGS = (
+					"-framework",
+					SDL,
+				);
+				OTHER_LIBTOOL_FLAGS = "";
+				OTHER_REZFLAGS = "";
+				PRODUCT_NAME = smpeg;
+				REZ_EXECUTABLE = YES;
+				SECTORDER_FLAGS = "";
+				WARNING_CFLAGS = (
+					"-Wmost",
+					"-Wno-four-char-constants",
+					"-Wno-unknown-pragmas",
+				);
+				ZERO_LINK = YES;
+			};
+			name = Development;
+		};
+		00F5DC1A099157980051C449 /* Deployment */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COPY_PHASE_STRIP = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(HOME)/Library/Frameworks",
+					/Library/Frameworks,
+				);
+				GCC_ENABLE_FIX_AND_CONTINUE = NO;
+				GCC_PREPROCESSOR_DEFINITIONS = NOCONTROLS;
+				HEADER_SEARCH_PATHS = (
+					"$(HOME)/Library/Frameworks/SDL.framework/Headers",
+					/Library/Frameworks/SDL.framework/Headers,
+				);
+				LIBRARY_STYLE = STATIC;
+				OTHER_CFLAGS_i386 = "";
+				OTHER_CFLAGS_ppc = "";
+				OTHER_LDFLAGS = (
+					"-framework",
+					SDL,
+				);
+				OTHER_LIBTOOL_FLAGS = "";
+				OTHER_REZFLAGS = "";
+				PRODUCT_NAME = smpeg;
+				REZ_EXECUTABLE = YES;
+				SECTORDER_FLAGS = "";
+				WARNING_CFLAGS = (
+					"-Wmost",
+					"-Wno-four-char-constants",
+					"-Wno-unknown-pragmas",
+				);
+				ZERO_LINK = NO;
+			};
+			name = Deployment;
+		};
+		00F5DC1B099157980051C449 /* Default */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(HOME)/Library/Frameworks",
+					/Library/Frameworks,
+				);
+				GCC_PREPROCESSOR_DEFINITIONS = NOCONTROLS;
+				HEADER_SEARCH_PATHS = (
+					"$(HOME)/Library/Frameworks/SDL.framework/Headers",
+					/Library/Frameworks/SDL.framework/Headers,
+				);
+				LIBRARY_STYLE = STATIC;
+				OTHER_CFLAGS_i386 = "";
+				OTHER_CFLAGS_ppc = "";
+				OTHER_LDFLAGS = (
+					"-framework",
+					SDL,
+				);
+				OTHER_LIBTOOL_FLAGS = "";
+				OTHER_REZFLAGS = "";
+				PRODUCT_NAME = smpeg;
+				REZ_EXECUTABLE = YES;
+				SECTORDER_FLAGS = "";
+				WARNING_CFLAGS = (
+					"-Wmost",
+					"-Wno-four-char-constants",
+					"-Wno-unknown-pragmas",
+				);
+			};
+			name = Default;
+		};
+		00F5DC22099157980051C449 /* Development */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COPY_PHASE_STRIP = NO;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_ENABLE_FIX_AND_CONTINUE = YES;
+				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				OTHER_CFLAGS = "";
+				OTHER_LDFLAGS = "";
+				OTHER_REZFLAGS = "";
+				PRODUCT_NAME = "Create DMG";
+				REZ_EXECUTABLE = YES;
+				SECTORDER_FLAGS = "";
+				WARNING_CFLAGS = (
+					"-Wmost",
+					"-Wno-four-char-constants",
+					"-Wno-unknown-pragmas",
+				);
+				ZERO_LINK = YES;
+			};
+			name = Development;
+		};
+		00F5DC23099157980051C449 /* Deployment */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COPY_PHASE_STRIP = YES;
+				GCC_ENABLE_FIX_AND_CONTINUE = NO;
+				OTHER_CFLAGS = "";
+				OTHER_LDFLAGS = "";
+				OTHER_REZFLAGS = "";
+				PRODUCT_NAME = "Create DMG";
+				REZ_EXECUTABLE = YES;
+				SECTORDER_FLAGS = "";
+				WARNING_CFLAGS = (
+					"-Wmost",
+					"-Wno-four-char-constants",
+					"-Wno-unknown-pragmas",
+				);
+				ZERO_LINK = NO;
+			};
+			name = Deployment;
+		};
+		00F5DC24099157980051C449 /* Default */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				OTHER_CFLAGS = "";
+				OTHER_LDFLAGS = "";
+				OTHER_REZFLAGS = "";
+				PRODUCT_NAME = "Create DMG";
+				REZ_EXECUTABLE = YES;
+				SECTORDER_FLAGS = "";
+				WARNING_CFLAGS = (
+					"-Wmost",
+					"-Wno-four-char-constants",
+					"-Wno-unknown-pragmas",
+				);
+			};
+			name = Default;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		00F5D8BE099142F40051C449 /* Build configuration list for PBXProject "smpeg" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				00F5D8BF099142F40051C449 /* Development */,
+				00F5D8C0099142F40051C449 /* Deployment */,
+				00F5D8C1099142F40051C449 /* Default */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Default;
+		};
+		00F5DBDE099157970051C449 /* Build configuration list for PBXNativeTarget "Framework" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				00F5DBDF099157970051C449 /* Development */,
+				00F5DBE0099157970051C449 /* Deployment */,
+				00F5DBE1099157970051C449 /* Default */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Default;
+		};
+		00F5DC18099157980051C449 /* Build configuration list for PBXNativeTarget "Static Library" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				00F5DC19099157980051C449 /* Development */,
+				00F5DC1A099157980051C449 /* Deployment */,
+				00F5DC1B099157980051C449 /* Default */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Default;
+		};
+		00F5DC21099157980051C449 /* Build configuration list for PBXNativeTarget "Create DMG" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				00F5DC22099157980051C449 /* Development */,
+				00F5DC23099157980051C449 /* Deployment */,
+				00F5DC24099157980051C449 /* Default */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Default;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 0867D690FE84028FC02AAC07 /* Project object */;
+}
