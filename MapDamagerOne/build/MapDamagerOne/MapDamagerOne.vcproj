@@ -96,7 +96,7 @@
 		</Configuration>
 		<Configuration
 			Name="Release|Win32"
-			OutputDirectory="$(SolutionDir)$(ConfigurationName)"
+			OutputDirectory="$(ProjectDir)\..\..\"
 			IntermediateDirectory="$(ConfigurationName)"
 			ConfigurationType="1"
 			CharacterSet="1"
@@ -214,18 +214,6 @@
 				>
 			</File>
 			<File
-				RelativePath="..\..\..\AlephOneSrc\computer_interface.cpp"
-				>
-			</File>
-			<File
-				RelativePath="..\..\..\AlephOneSrc\computer_interface.h"
-				>
-			</File>
-			<File
-				RelativePath="..\..\..\AlephOneSrc\computer_interface_sdl.h"
-				>
-			</File>
-			<File
 				RelativePath="..\..\..\AlephOneSrc\crc.cpp"
 				>
 			</File>
@@ -239,22 +227,6 @@
 			</File>
 			<File
 				RelativePath="..\..\..\AlephOneSrc\dynamic_limits.h"
-				>
-			</File>
-			<File
-				RelativePath="..\..\..\AlephOneSrc\editor.h"
-				>
-			</File>
-			<File
-				RelativePath="..\..\..\AlephOneSrc\effect_definitions.h"
-				>
-			</File>
-			<File
-				RelativePath="..\..\..\AlephOneSrc\effects.cpp"
-				>
-			</File>
-			<File
-				RelativePath="..\..\..\AlephOneSrc\effects.h"
 				>
 			</File>
 			<File
@@ -279,14 +251,6 @@
 			</File>
 			<File
 				RelativePath="..\..\..\AlephOneSrc\find_files.h"
-				>
-			</File>
-			<File
-				RelativePath="..\..\..\AlephOneSrc\flood_map.cpp"
-				>
-			</File>
-			<File
-				RelativePath="..\..\..\AlephOneSrc\flood_map.h"
 				>
 			</File>
 			<File
@@ -350,18 +314,6 @@
 				>
 			</File>
 			<File
-				RelativePath="..\..\..\AlephOneSrc\item_definitions.h"
-				>
-			</File>
-			<File
-				RelativePath="..\..\..\AlephOneSrc\items.cpp"
-				>
-			</File>
-			<File
-				RelativePath="..\..\..\AlephOneSrc\items.h"
-				>
-			</File>
-			<File
 				RelativePath="..\..\..\AlephOneSrc\latin1tab.h"
 				>
 			</File>
@@ -375,42 +327,6 @@
 			</File>
 			<File
 				RelativePath="..\..\..\AlephOneSrc\low_level_textures.h"
-				>
-			</File>
-			<File
-				RelativePath="..\..\..\AlephOneSrc\map.cpp"
-				>
-			</File>
-			<File
-				RelativePath="..\..\..\AlephOneSrc\map.h"
-				>
-			</File>
-			<File
-				RelativePath="..\..\..\AlephOneSrc\map_constructors.cpp"
-				>
-			</File>
-			<File
-				RelativePath="..\..\..\AlephOneSrc\media.cpp"
-				>
-			</File>
-			<File
-				RelativePath="..\..\..\AlephOneSrc\media.h"
-				>
-			</File>
-			<File
-				RelativePath="..\..\..\AlephOneSrc\media_definitions.h"
-				>
-			</File>
-			<File
-				RelativePath="..\..\..\AlephOneSrc\monster_definitions.h"
-				>
-			</File>
-			<File
-				RelativePath="..\..\..\AlephOneSrc\monsters.cpp"
-				>
-			</File>
-			<File
-				RelativePath="..\..\..\AlephOneSrc\monsters.h"
 				>
 			</File>
 			<File
@@ -430,71 +346,11 @@
 				>
 			</File>
 			<File
-				RelativePath="..\..\..\AlephOneSrc\physics.cpp"
-				>
-			</File>
-			<File
-				RelativePath="..\..\..\AlephOneSrc\physics_models.h"
-				>
-			</File>
-			<File
-				RelativePath="..\..\..\AlephOneSrc\placement.cpp"
-				>
-			</File>
-			<File
-				RelativePath="..\..\..\AlephOneSrc\platform_definitions.h"
-				>
-			</File>
-			<File
-				RelativePath="..\..\..\AlephOneSrc\platforms.cpp"
-				>
-			</File>
-			<File
-				RelativePath="..\..\..\AlephOneSrc\platforms.h"
-				>
-			</File>
-			<File
-				RelativePath="..\..\..\AlephOneSrc\player.cpp"
-				>
-			</File>
-			<File
-				RelativePath="..\..\..\AlephOneSrc\player.h"
-				>
-			</File>
-			<File
-				RelativePath="..\..\..\AlephOneSrc\preprocess_map_sdl.cpp"
-				>
-			</File>
-			<File
-				RelativePath="..\..\..\AlephOneSrc\preprocess_map_shared.cpp"
-				>
-			</File>
-			<File
-				RelativePath="..\..\..\AlephOneSrc\projectile_definitions.h"
-				>
-			</File>
-			<File
-				RelativePath="..\..\..\AlephOneSrc\projectiles.cpp"
-				>
-			</File>
-			<File
-				RelativePath="..\..\..\AlephOneSrc\projectiles.h"
-				>
-			</File>
-			<File
 				RelativePath="..\..\..\AlephOneSrc\resource_manager.cpp"
 				>
 			</File>
 			<File
 				RelativePath="..\..\..\AlephOneSrc\resource_manager.h"
-				>
-			</File>
-			<File
-				RelativePath="..\..\..\AlephOneSrc\scenery.cpp"
-				>
-			</File>
-			<File
-				RelativePath="..\..\..\AlephOneSrc\scenery.h"
 				>
 			</File>
 			<File
@@ -607,26 +463,6 @@
 			</File>
 			<File
 				RelativePath="..\..\..\AlephOneSrc\wad_sdl.cpp"
-				>
-			</File>
-			<File
-				RelativePath="..\..\..\AlephOneSrc\weapon_definitions.h"
-				>
-			</File>
-			<File
-				RelativePath="..\..\..\AlephOneSrc\weapons.cpp"
-				>
-			</File>
-			<File
-				RelativePath="..\..\..\AlephOneSrc\weapons.h"
-				>
-			</File>
-			<File
-				RelativePath="..\..\..\AlephOneSrc\world.cpp"
-				>
-			</File>
-			<File
-				RelativePath="..\..\..\AlephOneSrc\world.h"
 				>
 			</File>
 			<File
@@ -909,6 +745,18 @@
 				Name="RenderMain"
 				>
 				<File
+					RelativePath="..\..\..\AlephOneSrc\computer_interface.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\AlephOneSrc\computer_interface.h"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\AlephOneSrc\computer_interface_sdl.h"
+					>
+				</File>
+				<File
 					RelativePath="..\..\..\AlephOneSrc\Rasterizer.h"
 					>
 				</File>
@@ -958,6 +806,162 @@
 				</File>
 				<File
 					RelativePath="..\..\..\AlephOneSrc\RenderVisTree.h"
+					>
+				</File>
+			</Filter>
+			<Filter
+				Name="GameWorld"
+				>
+				<File
+					RelativePath="..\..\..\AlephOneSrc\editor.h"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\AlephOneSrc\effect_definitions.h"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\AlephOneSrc\effects.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\AlephOneSrc\effects.h"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\AlephOneSrc\flood_map.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\AlephOneSrc\flood_map.h"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\AlephOneSrc\item_definitions.h"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\AlephOneSrc\items.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\AlephOneSrc\items.h"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\AlephOneSrc\map.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\AlephOneSrc\map.h"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\AlephOneSrc\map_constructors.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\AlephOneSrc\media.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\AlephOneSrc\media.h"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\AlephOneSrc\media_definitions.h"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\AlephOneSrc\monster_definitions.h"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\AlephOneSrc\monsters.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\AlephOneSrc\monsters.h"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\AlephOneSrc\physics.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\AlephOneSrc\physics_models.h"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\AlephOneSrc\placement.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\AlephOneSrc\platform_definitions.h"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\AlephOneSrc\platforms.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\AlephOneSrc\platforms.h"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\AlephOneSrc\player.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\AlephOneSrc\player.h"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\AlephOneSrc\preprocess_map_sdl.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\AlephOneSrc\preprocess_map_shared.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\AlephOneSrc\projectile_definitions.h"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\AlephOneSrc\projectiles.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\AlephOneSrc\projectiles.h"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\AlephOneSrc\scenery.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\AlephOneSrc\scenery.h"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\AlephOneSrc\weapon_definitions.h"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\AlephOneSrc\weapons.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\AlephOneSrc\weapons.h"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\AlephOneSrc\world.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\AlephOneSrc\world.h"
 					>
 				</File>
 			</Filter>

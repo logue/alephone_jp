@@ -305,15 +305,23 @@ int WINAPI WinMain(HINSTANCE hInstance ,
         sprintf(buf, "%sL%s%s.sceA", dir.c_str(),
             numstr.c_str(), names[i].c_str());
         //•Û‘¶
-        MapIndexList.clear();
+/*        MapIndexList.clear();
         MapIndexList.push_back(0);
-        dynamic_world->map_index_count = 1;
+        dynamic_world->map_index_count = 1;*/
 //        dynamic_world->platform_count = PlatformList.size();
         if(!save_level(buf)){
             char cbuf[MAX_PATH+100];
             sprintf(cbuf, "save error with [%s]", buf);
             charToWChar(cbuf, wbuf);
-            MessageBox(hwnd, wbuf, TEXT("save error"), MB_OK);
+            int id = MessageBox(hwnd, wbuf, TEXT("save error"), MB_OKCANCEL);
+            if(id == IDOK){
+                //skip
+            }else{
+                //quit
+                MessageBox(hwnd, TEXT("process banned by user selection"),
+                    TEXT("user assertion"), MB_OK);
+                break;
+            }
         }
     }
 

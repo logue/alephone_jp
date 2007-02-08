@@ -140,7 +140,9 @@ Feb 15, 2002 (Br'fin (Jeremy Parsons)):
 /* -------- local globals */
 FileSpecifier MapFileSpec;
 static bool file_is_set= false;
-static std::vector<static_platform_data> staticPlatforms;
+static vector<static_platform_data> staticPlatforms;
+static vector<side_data> oldSideList;
+static vector<static_light_data> staticLightList;
 
 // LP addition: was a physics model loaded from the previous level loaded?
 static bool PhysicsModelLoadedEarlier = false;
@@ -388,6 +390,18 @@ bool load_level_from_map(
 	return (!error_pending());
 }
 
+static void exportTag(int tag, struct wad_data* wad)
+{
+    size_t size;//offset, alloc_size;
+    Uint8 *data;
+    data = tag_to_global_array_and_size(tag, &size);
+//        if(data){
+    append_data_to_wad(wad, tag, data, size, 0);
+    //offset += alloc_size;
+    delete data;
+//        }
+}
+
 //HogePiyo added
 /**
     export level
@@ -395,6 +409,8 @@ bool load_level_from_map(
 */
 static struct wad_data* export_level_wad_data()
 {
+	recalculate_map_counts();
+
     //empty wad
     struct wad_data* wad = create_empty_wad();
 
@@ -404,52 +420,84 @@ static struct wad_data* export_level_wad_data()
 
     //offset = 0;
 
+    //sideÇÉRÉsÅ[Ç∑ÇÈ
+    /*
+    for(int i = 0; i < (int)SideList.size(); i ++){
+        memcpy(&SideList[i],&oldSideList[i], sizeof(side_data));
+    }*/
     //one of lines/side/polygons must be first of all !!!
     int tags[] ={
-        ENDPOINT_DATA_TAG, LINE_TAG, SIDE_TAG, POLYGON_TAG,
+        ENDPOINT_DATA_TAG, LINE_TAG, //SIDE_TAG,
+    };
+    int tags2[]={
+        POLYGON_TAG,
+        
+        //LIGHTSOURCE_TAG,
+        DYNAMIC_STRUCTURE_TAG,
         ANNOTATION_TAG, OBJECT_TAG,
         MAP_INFO_TAG, ITEM_PLACEMENT_STRUCTURE_TAG,
         TERMINAL_DATA_TAG, MEDIA_TAG, AMBIENT_SOUND_TAG,
-        RANDOM_SOUND_TAG, //PLATFORM_STATIC_DATA_TAG,
-        PLATFORM_STRUCTURE_TAG,
+        RANDOM_SOUND_TAG, PLATFORM_STRUCTURE_TAG,
         MAP_INDEXES_TAG,
     };
     for(int i = 0; i < sizeof(tags) / sizeof(int); i ++){
-        data = tag_to_global_array_and_size(tags[i], &size);
-        if(data){
-	        append_data_to_wad(wad, tags[i], data, size, 0);
-	        //offset += alloc_size;
-            delete data;
-        }
+        exportTag(tags[i], wad);
     }
-
-    size_t count = 0;
-
-    //platform
-    count = staticPlatforms.size();
-    if(count > 0){
-        size = SIZEOF_static_platform_data * count;
+    //side
+    size_t count = oldSideList.size();
+    //if(count > 0)
+    {
+        size = SIZEOF_side_data * count;
         data = new Uint8[size];
-        pack_static_platform_data(data, &staticPlatforms[0], count);
-        append_data_to_wad(wad, PLATFORM_STATIC_DATA_TAG, data, size, 0);
+        pack_side_data(data, &oldSideList[0], count);
+        
+        append_data_to_wad(wad, SIDE_TAG, data, size, 0);
         delete data;
     }
-
+    for(int i = 0; i < sizeof(tags2) / sizeof(int); i ++){
+        exportTag(tags2[i], wad);
+    }
     //light
     //light's data is illigal
+    
     count = LightList.size();
-    if(count > 0){
+    //if(count > 0)
+    {
         size = SIZEOF_static_light_data * count;
         data = new Uint8[size];
         struct static_light_data* slights = new struct static_light_data[count];
         for(size_t i = 0; i < count; i ++){
             memcpy(&slights[i], &LightList[i].static_data, SIZEOF_static_light_data);
         }
-        pack_static_light_data(data, slights, count);
+        pack_static_light_data(data, &staticLightList[0], count);
         delete slights;
         append_data_to_wad(wad, LIGHTSOURCE_TAG, data, size, 0);
         delete data;
+    }/*
+    for(int i = 0; i < sizeof(tags2) / sizeof(int); i ++){
+        exportTag(tags2[i], wad);
+    }*/
+
+    //platform
+    /*
+    count = staticPlatforms.size();
+    {
+        size = SIZEOF_static_platform_data * count;
+        data = new Uint8[size];
+        pack_static_platform_data(data, &staticPlatforms[0], count);
+        append_data_to_wad(wad, PLATFORM_STATIC_DATA_TAG, data, size, 0);
+        delete data;
     }
+//*/
+    //PLATFORM_STATIC_DATA_TAG,
+    //    PLATFORM_STRUCTURE_TAG,
+/*    {
+        int tag = PLATFORM_STRUCTURE_TAG;
+        data = tag_to_global_array_and_size(tag, &size);
+        append_data_to_wad(wad, tag, data, size, 0);
+        //offset += alloc_size;
+        delete data;
+    }*/
     //terminal
     /*count = map_terminal_text.size();
     if(count > 0){
@@ -533,7 +581,7 @@ bool save_level(const char* filename){
 
     struct directory_entry entry = {0,1,0};
 
-    static_world->physics_model = 0;
+    //static_world->physics_model = 0;
 
 
     wad = export_level_wad_data();
@@ -956,7 +1004,7 @@ void allocate_map_for_counts(
 	MapIndexList.clear();
 	MapIndexList.reserve(map_index_count);
 	dynamic_world->map_index_count= 0;
-	
+
 	// Stuff that needs the max number of polygons
 	//allocate_render_memory();
 	allocate_flood_map_memory();
@@ -1004,6 +1052,7 @@ void load_sides(
 
 	for(loop=0; loop<count; ++loop)
 	{
+        //oldSideList.push_back(map_sides[loop]);
 		if(version==MARATHON_ONE_DATA_VERSION)
 		{
 			map_sides[loop].transparent_texture.texture= UNONE;
@@ -1072,7 +1121,7 @@ void load_lights(
 	{
 	case MARATHON_ONE_DATA_VERSION: {
 		
-		// Unpack the old lights into a temporary array
+		// Unpack the old lights into a temporary arr
 		OldLights = new old_light_data[count];
 		unpack_old_light_data(_lights,OldLights,count);
 		
@@ -1092,6 +1141,9 @@ void load_lights(
 	case MARATHON_TWO_DATA_VERSION:
 	case MARATHON_INFINITY_DATA_VERSION:
 		// OK to modify the data pointer since it was passed by value
+        staticLightList.resize(count);
+        unpack_static_light_data(_lights, &staticLightList[0], count);
+
 		for(loop= 0; loop<count; ++loop)
 		{
 			static_light_data TempLight;
@@ -1383,10 +1435,12 @@ bool process_map_wad(
 	/* zero everything so no slots are used */	
 	initialize_map_for_new_level();
     staticPlatforms.clear();
+    oldSideList.clear();
+    staticLightList.clear();
 
 	/* Calculate the length (for reallocate map) */
 	allocate_map_structure_for_map(wad);
-
+    
 	/* Extract points */
 	data= (uint8 *)extract_type_from_wad(wad, POINT_TAG, &data_length);
 //    if(data){
@@ -1429,6 +1483,8 @@ bool process_map_wad(
     count = data_length/SIZEOF_side_data;
     assert(data_length == count*SIZEOF_side_data);
     load_sides(data, count, version);
+    oldSideList.resize(count);
+    unpack_side_data(data, &oldSideList[0],count);
 
 	/* Extract polygons */
 	data= (uint8 *)extract_type_from_wad(wad, POLYGON_TAG, &data_length);
@@ -1466,6 +1522,7 @@ bool process_map_wad(
 			    count= data_length/SIZEOF_static_light_data;
 			    assert(count*SIZEOF_static_light_data==data_length);
 			    load_lights(data, count, version);
+
 		    }
 //        }
 
@@ -1913,7 +1970,7 @@ static uint8 *tag_to_global_array_and_size(
 	size_t *size
 	)
 {
-	uint8 *array= NULL;
+	uint8 *arr= NULL;
 	size_t unit_size = 0;
 	size_t count = 0;
 	unsigned index;
@@ -2002,6 +2059,7 @@ static uint8 *tag_to_global_array_and_size(
 		case TERMINAL_DATA_TAG:
 			count= calculate_packed_terminal_data_length();
 			break;
+
 		case WEAPON_STATE_TAG:
 			count= dynamic_world->player_count;
 			break;
@@ -2032,111 +2090,111 @@ static uint8 *tag_to_global_array_and_size(
 	// indicate if there is nothing to be written
 	*size= count*unit_size;
 	if (*size > 0)
-		array = new byte[*size];
+		arr = new byte[*size];
 	else
 		return NULL;
 	
-	// An OK-to-alter version of that array pointer
-	uint8 *temp_array = array;
+	// An OK-to-alter version of that arr pointer
+	uint8 *temp_array = arr;
 	
 	switch (tag)
 	{
 		case ENDPOINT_DATA_TAG:
-			pack_endpoint_data(array,map_endpoints,count);
+			pack_endpoint_data(arr,map_endpoints,count);
 			break;
 		case LINE_TAG:
-			pack_line_data(array,map_lines,count);
+			pack_line_data(arr,map_lines,count);
 			break;
 		case SIDE_TAG:
-			pack_side_data(array,map_sides,count);
+			pack_side_data(arr,map_sides,count);
 			break;
 		case POLYGON_TAG:
-			pack_polygon_data(array,map_polygons,count);
+			pack_polygon_data(arr,map_polygons,count);
 			break;
 		case LIGHTSOURCE_TAG:
-			pack_light_data(array,lights,count);
+			pack_light_data(arr,lights,count);
 			break;
 		case ANNOTATION_TAG:
-			pack_map_annotation(array,map_annotations,count);
+			pack_map_annotation(arr,map_annotations,count);
 			break;
 		case OBJECT_TAG:
-			pack_map_object(array,saved_objects,count);
+			pack_map_object(arr,saved_objects,count);
 			break;
 		case MAP_INFO_TAG:
-			pack_static_data(array,static_world,count);
+			pack_static_data(arr,static_world,count);
 			break;
 		case PLAYER_STRUCTURE_TAG:
-			pack_player_data(array,players,count);
+			pack_player_data(arr,players,count);
 			break;
 		case DYNAMIC_STRUCTURE_TAG:
-			pack_dynamic_data(array,dynamic_world,count);
+			pack_dynamic_data(arr,dynamic_world,count);
 			break;
 		case OBJECT_STRUCTURE_TAG:
-			pack_object_data(array,objects,count);
+			pack_object_data(arr,objects,count);
 			break;
 		case MAP_INDEXES_TAG:
 			ListToStream(temp_array,map_indexes,count); // E-Z packing here...
 			break;
 		case AUTOMAP_LINES:
-			memcpy(array,automap_lines,*size);
+			memcpy(arr,automap_lines,*size);
 			break;
 		case AUTOMAP_POLYGONS:
-			memcpy(array,automap_polygons,*size);
+			memcpy(arr,automap_polygons,*size);
 			break;
 		case MONSTERS_STRUCTURE_TAG:
-			pack_monster_data(array,monsters,count);
+			pack_monster_data(arr,monsters,count);
 			break;
 		case EFFECTS_STRUCTURE_TAG:
-			pack_effect_data(array,effects,count);
+			pack_effect_data(arr,effects,count);
 			break;
 		case PROJECTILES_STRUCTURE_TAG:
-			pack_projectile_data(array,projectiles,count);
+			pack_projectile_data(arr,projectiles,count);
 			break;
 		case MEDIA_TAG:
-			pack_media_data(array,medias,count);
+			pack_media_data(arr,medias,count);
 			break;
 		case ITEM_PLACEMENT_STRUCTURE_TAG:
-			pack_object_frequency_definition(array,get_placement_info(),count);
+			pack_object_frequency_definition(arr,get_placement_info(),count);
 			break;
 		case PLATFORM_STRUCTURE_TAG:
-			pack_platform_data(array,platforms,count);
+			pack_platform_data(arr,platforms,count);
 			break;
 		case AMBIENT_SOUND_TAG:
-			pack_ambient_sound_image_data(array,ambient_sound_images,count);
+			pack_ambient_sound_image_data(arr,ambient_sound_images,count);
 			break;
 		case RANDOM_SOUND_TAG:
-			pack_random_sound_image_data(array,random_sound_images,count);
+			pack_random_sound_image_data(arr,random_sound_images,count);
 			break;
 		case TERMINAL_DATA_TAG:
-			pack_map_terminal_data(array,count);
+			pack_map_terminal_data(arr,count);
 			break;
 		case WEAPON_STATE_TAG:
-			pack_player_weapon_data(array,count);
+			pack_player_weapon_data(arr,count);
 			break;
 		case TERMINAL_STATE_TAG:
-			pack_player_terminal_data(array,count);
+			pack_player_terminal_data(arr,count);
 			break;
 		case MONSTER_PHYSICS_TAG:
-			pack_monster_definition(array,count);
+			pack_monster_definition(arr,count);
 			break;
 		case EFFECTS_PHYSICS_TAG:
-			pack_effect_definition(array,count);
+			pack_effect_definition(arr,count);
 			break;
 		case PROJECTILE_PHYSICS_TAG:
-			pack_projectile_definition(array,count);
+			pack_projectile_definition(arr,count);
 			break;
 		case PHYSICS_PHYSICS_TAG:
-			pack_physics_constants(array,count);
+			pack_physics_constants(arr,count);
 			break;
 		case WEAPONS_PHYSICS_TAG:
-			pack_weapon_definition(array,count);
+			pack_weapon_definition(arr,count);
 			break;
 		default:
 			assert(false);
 			break;
 	}
 	
-	return array;
+	return arr;
 }
 
 /* Build the wad, with all the crap */

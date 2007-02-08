@@ -1,4 +1,7 @@
 READ ME
+You might need runtime.
+http://www.microsoft.com/downloads/details.aspx?displaylang=ja&FamilyID=32bc1bee-a3f9-4c13-9c99-220b62a191ee
+
 <en>
 
 -----------------------------
@@ -33,7 +36,7 @@ Some functions does not work, yet.
 </en>
 
 <jp>
-Look this in Shif-JIS!
+Look this in Shift-JIS!
 
 -----------------------------
 ƒ\ƒtƒg–¼	:Map Viewer One
