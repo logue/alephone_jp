@@ -139,6 +139,7 @@
 			<Tool
 				Name="VCLinkerTool"
 				AdditionalDependencies="SDL.lib"
+				OutputFile="$(OutDir)\MapDemergerOne.exe"
 				LinkIncremental="1"
 				AdditionalLibraryDirectories="$(ProjectDir)\..\..\..\AlephOne\lib"
 				GenerateDebugInformation="true"

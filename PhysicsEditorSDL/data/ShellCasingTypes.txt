@@ -1,0 +1,5 @@
+_shell_casing_assault_rifle
+_shell_casing_pistol
+_shell_casing_pistol_left
+_shell_casing_pistol_right
+_shell_casing_smg

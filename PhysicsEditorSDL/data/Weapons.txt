@@ -1,0 +1,10 @@
+_weapon_fist
+_weapon_pistol
+_weapon_plasma_pistol
+_weapon_assault_rifle
+_weapon_missile_launcher
+_weapon_flamethrower
+_weapon_alien_shotgun
+_weapon_shotgun
+_weapon_ball
+_weapon_smg

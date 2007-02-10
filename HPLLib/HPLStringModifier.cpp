@@ -1,4 +1,5 @@
 #include "HPLStringModifier.h"
+#include <fstream>
 
 /////////////////////////////////////////////////////////////////////////////
 //////////////  Global Methods  /////////////////////////////////////////////
@@ -57,4 +58,23 @@ std::string hpl::string::appendFrontString(std::string &src,
         result = result.substr(result.size() - power);
     }
     return result;
+}
+
+std::vector<std::string> hpl::string::loadFromFile(const char* path)
+{
+    std::ifstream is(path);
+
+    std::vector<std::string> lines;
+
+    if(is.is_open()){
+        const int BUF_SIZE = 1024;
+        char buf[BUF_SIZE];
+        while(is.getline(buf, BUF_SIZE) != NULL){
+            lines.push_back(std::string(buf));
+        }
+        is.close();
+        return lines;
+    }else{
+        return lines;
+    }
 }

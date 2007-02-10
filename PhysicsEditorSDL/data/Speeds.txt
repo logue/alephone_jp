@@ -1,0 +1,11 @@
+_speed_slow
+_speed_medium
+_speed_almost_fast
+_speed_fast
+_speed_superfast1
+_speed_superfast2
+_speed_superfast3
+_speed_superfast4
+_speed_superfast5
+_speed_blinding
+_speed_insane

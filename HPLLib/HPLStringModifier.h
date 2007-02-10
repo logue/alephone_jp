@@ -17,6 +17,11 @@ namespace string{
                                            int power,
                                            std::string& appender);
 
+    /**
+        ƒtƒ@ƒCƒ‹‚©‚ç“Ç‚Ý‚±‚Ý
+        @return vector<string>
+    */
+    std::vector<std::string> loadFromFile(const char* path);
 };
 };
 
