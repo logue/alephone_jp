@@ -1,47 +1,47 @@
-_monster_marine
-_monster_tick_energy
-_monster_tick_oxygen
-_monster_tick_kamakazi
-_monster_compiler_minor
-_monster_compiler_major
-_monster_compiler_minor_invisible
-_monster_compiler_major_invisible
-_monster_fighter_minor
-_monster_fighter_major
-_monster_fighter_minor_projectile
-_monster_fighter_major_projectile
-_civilian_crew
-_civilian_science
-_civilian_security
-_civilian_assimilated
-_monster_hummer_minor // slow hummer
-_monster_hummer_major // fast hummer
-_monster_hummer_big_minor // big hummer
-_monster_hummer_big_major // angry hummer
-_monster_hummer_possessed // hummer from durandal
-_monster_cyborg_minor
-_monster_cyborg_major
-_monster_cyborg_flame_minor
-_monster_cyborg_flame_major
-_monster_enforcer_minor
-_monster_enforcer_major
-_monster_hunter_minor
-_monster_hunter_major
-_monster_trooper_minor
-_monster_trooper_major
-_monster_mother_of_all_cyborgs
-_monster_mother_of_all_hunters
-_monster_sewage_yeti
-_monster_water_yeti
-_monster_lava_yeti
-_monster_defender_minor
-_monster_defender_major
-_monster_juggernaut_minor
-_monster_juggernaut_major
-_monster_tiny_fighter
-_monster_tiny_bob
-_monster_tiny_yeti
-_civilian_fusion_crew
-_civilian_fusion_science
-_civilian_fusion_security
-_civilian_fusion_assimilated
+marine
+tick energy
+tick oxygen
+tick kamakazi
+compiler minor
+compiler major
+compiler minor invisible
+compiler major invisible
+fighter minor
+fighter major
+fighter minor projectile
+fighter major projectile
+crew
+science
+security
+assimilated
+hummer minor // slow hummer
+hummer major // fast hummer
+hummer big minor // big hummer
+hummer big major // angry hummer
+hummer possessed // hummer from durandal
+cyborg minor
+cyborg major
+cyborg flame minor
+cyborg flame major
+enforcer minor
+enforcer major
+hunter minor
+hunter major
+trooper minor
+trooper major
+mother of all cyborgs
+mother of all hunters
+sewage yeti
+water yeti
+lava yeti
+defender minor
+defender major
+juggernaut minor
+juggernaut major
+tiny fighter
+tiny bob
+tiny yeti
+fusion crew
+fusion science
+fusion security
+fusion assimilated

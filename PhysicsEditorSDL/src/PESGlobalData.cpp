@@ -6,11 +6,23 @@ hpl::pes::PESGlobalData::PESGlobalData()
     std::vector<std::string> lines;
     lines = hpl::string::loadFromFile(LIST_MONSTER_TYPES_PATH);
     listMonsterTypes = new hpl::pes::ListModelFromArray(lines);
+    lines = hpl::string::loadFromFile(LIST_COLLECTIONS_PATH);
+    listCollections = new hpl::pes::ListModelFromArray(lines);
+    lines = hpl::string::loadFromFile(LIST_EFFECT_TYPES_PATH);
+    listEffectTypes = new hpl::pes::ListModelFromArray(lines);
+    lines = hpl::string::loadFromFile(LIST_PROJECTILE_TYPES_PATH);
+    listProjectileTypes = new hpl::pes::ListModelFromArray(lines);
+    lines = hpl::string::loadFromFile(LIST_WEAPON_TYPES_PATH);
+    listWeaponTypes = new hpl::pes::ListModelFromArray(lines);
 
 }
 
 hpl::pes::PESGlobalData::~PESGlobalData()
 {
+    delete listCollections;
+    delete listEffectTypes;
+    delete listProjectileTypes;
+    delete listWeaponTypes;
     delete listMonsterTypes;
     delete pageMonster;
 }

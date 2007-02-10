@@ -1,8 +1,10 @@
 #ifndef _PES_GUICHAN_PACKAGE_
 #define _PES_GUICHAN_PACKAGE_
 
-#include "General.h"
+//#include "General.h"
 #include "ListModelFromArray.h"
+
+
 
 namespace hpl{
 namespace pes{

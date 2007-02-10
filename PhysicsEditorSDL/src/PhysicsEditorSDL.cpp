@@ -16,12 +16,6 @@ gcn::Button* btnPhysics;
 gcn::Button* btnWeapon;
 
 
-//list
-hpl::pes::ListModelFromArray* listCollections;
-hpl::pes::ListModelFromArray* listEffectTypes;
-hpl::pes::ListModelFromArray* listProjectileTypes;
-hpl::pes::ListModelFromArray* listWeaponTypes;
-
 //list-box
 gcn::ListBox* listBoxCollections;
 gcn::ListBox* listBoxEffectTypes;

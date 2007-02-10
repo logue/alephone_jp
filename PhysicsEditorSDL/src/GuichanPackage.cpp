@@ -1,5 +1,10 @@
 #include "GuichanPackage.h"
 
+const int WINDOW_SIZE_W = 640;
+const int WINDOW_SIZE_H = 480;
+const int SCREEN_BPP = 32;
+static char *IMAGE_FONT_PATH = "fixedfont.bmp";
+
 hpl::pes::GuichanPackage::GuichanPackage()
 {
 }

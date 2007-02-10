@@ -10,6 +10,12 @@ namespace pes{
     public:
         //monster types
         hpl::pes::ListModelFromArray* listMonsterTypes;
+        //collections
+        hpl::pes::ListModelFromArray* listCollections;
+        hpl::pes::ListModelFromArray* listEffectTypes;
+        hpl::pes::ListModelFromArray* listProjectileTypes;
+        hpl::pes::ListModelFromArray* listWeaponTypes;
+
         //page
         PageMonster* pageMonster;
     public:
