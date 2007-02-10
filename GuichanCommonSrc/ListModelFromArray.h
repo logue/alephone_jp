@@ -1,7 +1,9 @@
 #ifndef _PES_LIST_MODEL_FROM_ARRAY_
 #define _PES_LIST_MODEL_FROM_ARRAY_
 
-#include "General.h"
+#include <guichan.hpp>
+#include <guichan/sdl.hpp>
+#include "SDL.h"
 #include <vector>
 
 namespace hpl{

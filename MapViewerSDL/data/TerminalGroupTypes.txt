@@ -1,0 +1,17 @@
+logon
+unfinished
+success
+failure
+information
+end
+interlevel_teleport
+intralevel_teleport
+checkpoint
+sound
+movie
+track
+pict
+logoff
+camera
+static
+tag

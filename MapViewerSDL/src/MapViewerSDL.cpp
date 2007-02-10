@@ -11,6 +11,11 @@ void haltLocal()
 }
 void runLocal()
 {
+    gcn::Graphics* g = package->gui->getGraphics();
+    g->_beginDraw();
+    g->setColor(gcn::Color(255,0,0));
+    g->drawLine(0,0,100,100);
+    g->_endDraw();
 }
 void checkEventLocal(SDL_Event& ev)
 {

@@ -90,10 +90,10 @@ void hpl::pes::GuichanPackage::checkEvent()
 void hpl::pes::GuichanPackage::run()
 {
     while(this->running){
-        this->checkEvent();
-        runLocal();
         this->gui->logic();
         this->gui->draw();
+        runLocal();
+        this->checkEvent();
         SDL_Flip(this->screen);
     }
 }

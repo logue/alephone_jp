@@ -40,7 +40,7 @@
 			<Tool
 				Name="VCCLCompilerTool"
 				Optimization="0"
-				AdditionalIncludeDirectories="&quot;$(ProjectDir)\..\..\..\..\..\&quot;;&quot;$(ProjectDir)\..\..\..\..\..\AlephOneSrc&quot;"
+				AdditionalIncludeDirectories="&quot;$(ProjectDir)\..\..\..\..\..\GuichanCommonSrc&quot;;&quot;$(ProjectDir)\..\..\..\..\..\&quot;;&quot;$(ProjectDir)\..\..\..\..\..\AlephOneSrc&quot;"
 				PreprocessorDefinitions="WIN32;_DEBUG;_WINDOWS;SDL;__WIN32__"
 				MinimalRebuild="true"
 				BasicRuntimeChecks="3"
@@ -180,14 +180,6 @@
 			UniqueIdentifier="{4FC737F1-C7A5-4376-A066-2A32D752A2FF}"
 			>
 			<File
-				RelativePath="..\..\..\..\src\GuichanPackage.cpp"
-				>
-			</File>
-			<File
-				RelativePath="..\..\..\..\src\ListModelFromArray.cpp"
-				>
-			</File>
-			<File
 				RelativePath="..\..\..\..\src\PageMonster.cpp"
 				>
 			</File>
@@ -207,14 +199,6 @@
 			>
 			<File
 				RelativePath="..\..\..\..\src\General.h"
-				>
-			</File>
-			<File
-				RelativePath="..\..\..\..\src\GuichanPackage.h"
-				>
-			</File>
-			<File
-				RelativePath="..\..\..\..\src\ListModelFromArray.h"
 				>
 			</File>
 			<File
@@ -993,6 +977,26 @@
 			</File>
 			<File
 				RelativePath="..\..\..\..\..\HPLLib\HPLStringModifier.h"
+				>
+			</File>
+		</Filter>
+		<Filter
+			Name="GuichanCommonSrc"
+			>
+			<File
+				RelativePath="..\..\..\..\..\GuichanCommonSrc\GuichanPackage.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\..\..\GuichanCommonSrc\GuichanPackage.h"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\..\..\GuichanCommonSrc\ListModelFromArray.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\..\..\GuichanCommonSrc\ListModelFromArray.h"
 				>
 			</File>
 		</Filter>
