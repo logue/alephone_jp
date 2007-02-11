@@ -195,10 +195,10 @@ static void build_tinting_table32(struct rgb_color_value *colors, short color_co
 static void precalculate_bit_depth_constants(void);
 
 static bool collection_loaded(struct collection_header *header);
-static void unload_collection(struct collection_header *header);
+void unload_collection(struct collection_header *header);
 static void unlock_collection(struct collection_header *header);
 static void lock_collection(struct collection_header *header);
-static bool load_collection(short collection_index, bool strip);
+bool load_collection(short collection_index, bool strip);
 #ifdef mac
 static byte *unpack_collection(byte *collection, int32 length, bool strip);
 #endif
@@ -1215,8 +1215,10 @@ static void update_color_environment(
 				table and build the remapping table */
 			for (color_index=0;color_index<collection->color_count-NUMBER_OF_PRIVATE_COLORS;++color_index)
 			{
-				primary_colors[color_index].value= (uint8)remapping_table[primary_colors[color_index].value]= 
-					(pixel8)find_or_add_color(&primary_colors[color_index], colors, &color_count);
+				uint8 v = (pixel8)find_or_add_color(&primary_colors[color_index], colors, &color_count);
+				primary_colors[color_index].value= v;
+				remapping_table[primary_colors[color_index].value]= v;
+					
 			}
 			
 			/* then remap the collection and recalculate the base addresses of each bitmap */

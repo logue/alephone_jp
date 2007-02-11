@@ -614,7 +614,7 @@ void adjust_platform_endpoint_and_line_heights(
 static void play_platform_sound(
 	short platform_index,
 	short type)
-{
+{/*
 	struct platform_data *platform= get_platform_data(platform_index);
 	struct platform_definition *definition= get_platform_definition(platform->type);
 	if (!definition) return;
@@ -643,7 +643,7 @@ static void play_platform_sound(
 	}
 	
 	play_polygon_sound(platform->polygon_index, sound_code);
-	cause_ambient_sound_source_update();
+	cause_ambient_sound_source_update();*/
 }
 
 /* rules for using native polygon heights: a) if this is a floor platform, then take the polygon’s

@@ -36,7 +36,7 @@
 
 
 // From screen_sdl.cpp
-extern short interface_bit_depth;
+//extern short interface_bit_depth;
 
 // From screen_drawing_sdl.cpp
 static bool draw_clip_rect_active = true;

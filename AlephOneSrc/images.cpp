@@ -45,6 +45,7 @@ Jul 31, 2002 (Loren Petrich)
 
 #include "cseries.h"
 #include "FileHandler.h"
+#include "screen_shared.h"
 
 #include <stdlib.h>
 

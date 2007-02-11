@@ -630,7 +630,7 @@ uint8 *pack_projectile_definition(uint8 *Stream, size_t Count)
 	return pack_projectile_definition(Stream,projectile_definitions,Count);
 }
 
-static struct projectile_definition projectile_definitions[NUMBER_OF_PROJECTILE_TYPES]=
+struct projectile_definition projectile_definitions[NUMBER_OF_PROJECTILE_TYPES]=
 {
 	{	/* player’s rocket */
 		_collection_rocket, 0, /* collection number, shape number */

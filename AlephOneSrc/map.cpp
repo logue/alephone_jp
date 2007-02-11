@@ -2105,23 +2105,24 @@ bool line_has_variable_height(
 }
 
 /* ---------- sound code */
-/*
+
 void play_object_sound(
 	short object_index,
 	short sound_code)
 {
-	struct object_data *object= get_object_data(object_index);
+/*	struct object_data *object= get_object_data(object_index);
 	world_location3d *location= GET_OBJECT_OWNER(object)==_object_is_monster ?
 		(world_location3d *) &get_monster_data(object->permutation)->sound_location : 
 		(world_location3d *) &object->location;
 
 	_play_sound(sound_code, location, object_index, object->sound_pitch);
+  */
 }
 
 void play_polygon_sound(
 	short polygon_index,
 	short sound_code)
-{
+{/*
 	struct polygon_data *polygon= get_polygon_data(polygon_index);
 	world_location3d source;
 	
@@ -2129,34 +2130,36 @@ void play_polygon_sound(
 	source.point.z= polygon->floor_height;
 	source.polygon_index= polygon_index;
 	
-	play_sound(sound_code, &source, NONE);
+	play_sound(sound_code, &source, NONE);*/
 }
 
 void _play_side_sound(
 	short side_index,
 	short sound_code,
 	_fixed pitch)
-{
+{/*
 	struct side_data *side= get_side_data(side_index);
 	world_location3d source;
 
 	calculate_line_midpoint(side->line_index, &source.point);
 	source.polygon_index= side->polygon_index;
 
-	_play_sound(sound_code, &source, NONE, pitch);
+	_play_sound(sound_code, &source, NONE, pitch);*/
 }
 
 void play_world_sound(
 	short polygon_index,
 	world_point3d *origin,
 	short sound_code)
-{
+{/*
 	world_location3d source;
 	
 	source.point= *origin;
 	source.polygon_index= polygon_index;
-	play_sound(sound_code, &source, NONE);
+	play_sound(sound_code, &source, NONE);*/
 }
+
+  short get_game_state(void){return 0;}
 
 world_location3d *_sound_listener_proc(
 	void)
@@ -2171,8 +2174,9 @@ world_location3d *_sound_listener_proc(
 uint16 _sound_obstructed_proc(
 	world_location3d *source)
 {
+  uint16 flags= 0;
+/*
 	world_location3d *listener= _sound_listener_proc();
-	uint16 flags= 0;
 	
 	if (listener)
 	{
@@ -2232,15 +2236,16 @@ uint16 _sound_obstructed_proc(
 			}
 		}
 	}
-	
+	*/
 	return flags;
 }
-
+/*
 // for current player
 void _sound_add_ambient_sources_proc(
 	void *data,
 	add_ambient_sound_source_proc_ptr add_one_ambient_sound_source)
 {
+  
 	struct world_location3d *listener= _sound_listener_proc();
 	
 	if (listener)

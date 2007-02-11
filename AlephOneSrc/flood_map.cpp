@@ -45,6 +45,8 @@ on very small maps, choose_random_flood_node() may not terminate
 #include "map.h"
 #include "flood_map.h"
 
+//void delete_path(short path_index){}
+
 #include <string.h>
 #include <stdlib.h>
 #include <limits.h>

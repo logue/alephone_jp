@@ -1,5 +1,5 @@
 /////////////////////////////////////////////////////////////////////////
-// $Id: AStream.cpp,v 1.1 2006-12-01 09:11:40 hogepiyo Exp $
+// $Id: AStream.cpp,v 1.2 2007-02-11 11:53:31 hogepiyo Exp $
 /////////////////////////////////////////////////////////////////////////
 
 /*
@@ -324,7 +324,7 @@ AStream::failure::failure(const failure &f) {
 	}
 }
 
-AStream::failure::~failure() //throw()
+AStream::failure::~failure() throw()
 {
 	if (_M_name) {
 		free(_M_name);
@@ -332,7 +332,7 @@ AStream::failure::~failure() //throw()
 	}
 }
 
- const char*	AStream::failure::what() const //throw()
+ const char*	AStream::failure::what() const throw()
  {
 	 return _M_name;
  }

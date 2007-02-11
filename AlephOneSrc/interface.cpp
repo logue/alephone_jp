@@ -271,8 +271,8 @@ static struct color_table *animated_color_table= NULL;
 static struct color_table *current_picture_clut= NULL;
 
 /* -------------- externs */
-extern short interface_bit_depth;
-extern short bit_depth;
+short interface_bit_depth=NONE;
+//short bit_depth;
 
 /* ----------- prototypes/PREPROCESS_MAP_MAC.C */
 extern bool load_game_from_file(FileSpecifier& File);

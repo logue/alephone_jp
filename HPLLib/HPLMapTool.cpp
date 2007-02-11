@@ -34,6 +34,24 @@ bool hpl::aleph::map::isSelectPoint(world_point2d &point0, world_point2d &point1
     return isSelect;
 }
 
+//convert view <-> world point
+world_point2d hpl::aleph::map::getWorldPoint2DFromViewPoint(int viewPX, int viewPY,
+	int offsetXWorld, int offsetYWorld, int zoomDivision, int offsetx, int offsety)
+{
+    world_point2d point;
+    point.x = (world_distance)((viewPX - offsetx) *
+        zoomDivision - offsetXWorld);
+    point.y = (world_distance)((viewPY - offsety) *
+        zoomDivision - offsetYWorld);
+    return point;
+}
+void hpl::aleph::map::getViewPointFromWorldPoint2D(world_point2d& point, int *dest,
+	int offsetXWorld, int offsetYWorld, int zoomDivision, int offsetx, int offsety)
+{
+    dest[0] = (point.x + offsetXWorld)/zoomDivision + offsetx;
+    dest[1] = (point.y + offsetYWorld)/zoomDivision + offsety;
+}
+
 ///////////////////////  Lines  ////////////////////////////////////////////
 
 bool hpl::aleph::map::isSelectLine(int viewPX, int viewPY,

@@ -113,9 +113,9 @@ const ViewSizeData ViewSizes[NUMBER_OF_VIEW_SIZES] =
 /* ---------- globals */
 
 static struct color_table *uncorrected_color_table; /* the pristine color environment of the game (can be 16bit) */
-static struct color_table *world_color_table; /* the gamma-corrected color environment of the game (can be 16bit) */
-static struct color_table *interface_color_table; /* always 8bit, for mixed-mode (i.e., valkyrie) fades */
-static struct color_table *visible_color_table; /* the color environment the player sees (can be 16bit) */
+extern struct color_table *world_color_table; /* the gamma-corrected color environment of the game (can be 16bit) */
+extern struct color_table *interface_color_table; /* always 8bit, for mixed-mode (i.e., valkyrie) fades */
+extern struct color_table *visible_color_table; /* the color environment the player sees (can be 16bit) */
 
 static struct view_data *world_view; /* should be static */
 
@@ -145,7 +145,7 @@ static bool HUD_RenderRequest = false;
 static bool screen_initialized= false;
 
 extern short bit_depth;
-static short interface_bit_depth= NONE;
+extern short interface_bit_depth;
 
 // LP addition: this is defined in overhead_map.c
 // It indicates whether to render the overhead map in OpenGL
@@ -325,28 +325,8 @@ void SetScriptHUDSquare(int idx, int _color) {
 static void ResetFieldOfView();
 
 // LP addition: this resets the screen; useful when starting a game
-static void reset_screen()
-{
-	// Resetting cribbed from initialize_screen()
-/*	world_view->overhead_map_scale= DEFAULT_OVERHEAD_MAP_SCALE;
-	world_view->overhead_map_active= false;
-	world_view->terminal_mode_active= false;
-    */
-	world_view->horizontal_scale= 1, world_view->vertical_scale= 1;
-	
-	// LP change:
-	ResetFieldOfView();
+void reset_screen();
 
-	// ZZZ: reset screen_printf's
-	for(int i = 0; i < NumScreenMessages; i++)
-		Messages[i].TimeRemaining = 0;
-	/* SB: reset HUD elements */
-	for(int i = 0; i < MAXIMUM_NUMBER_OF_SCRIPT_HUD_ELEMENTS; i++) {
-		ScriptHUDElements[i].color = 1;
-		ScriptHUDElements[i].text[0] = 0;
-		ScriptHUDElements[i].isicon = false;
-	}
-}
 
 // LP change: resets field of view to whatever the player had had when reviving
 void ResetFieldOfView()

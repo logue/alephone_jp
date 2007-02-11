@@ -1,0 +1,50 @@
+##########################################
+# compiler flags                         #
+##########################################
+
+DEBUG = -DMSW -w -Wno-format -DWIN32 -D__WIN32__ -DSDL -O2 
+
+DBGRM = $(RM)
+
+##########################################
+# setting of includes                    #
+##########################################
+
+ALL_INCLUDES = -I. -I'$(WSDIR)/include' -I'../../../AlephOneSrc' -I'../../../' 
+
+##########################################
+# setting of libraries                   #
+##########################################
+
+ALL_LIBS = ../../../lib/AlephOneLib.a -L'../../../lib' -lSDL -lwswin -L'$(WSDIR)/lib' -lws -lwsc -mwindows -lwsb -lwsc -lwsc
+
+ALL_LIBS2 = ../../../lib/AlephOneLib.a -L'../../../lib' -lSDL -lwswin -L'$(WS_DEFAULT_DIR)/lib' -lws -lwsc -mwindows -lwsb -lwsc -lwsc
+
+##########################################
+# setting of window                      #
+##########################################
+
+WINOBJ = MapViewerWS.o \
+        MainWindow.o 
+
+OPOBJ = \
+        MainInitFunc.o \
+        MainResizeFunc.o \
+        MouseButtonDownFunc.o \
+        OnExpose.o \
+        DrawAreaMouseMoveFunc.o \
+        ToolPalletMouseButtonDownFunc.o \
+        FileNewEp.o \
+        FileExitEp.o \
+        FileOpenFunc.o 
+
+OBJS = $(WINOBJ) $(OPOBJ) V:/cvs_/cvs_sf/marathon/HPLLib/HPLMapTool.o V:/cvs_/cvs_sf/marathon/HPLLib/HPLMath.o V:/cvs_/cvs_sf/marathon/HPLLib/HPLQuickSort.o V:/cvs_/cvs_sf/marathon/HPLLib/HPLSelectData.o V:/cvs_/cvs_sf/marathon/HPLLib/HPLStringModifier.o V:/cvs_/cvs_sf/marathon/HPLLib/HPLSurfaceModifier.o   
+
+##########################################
+# setting of target binary               #
+##########################################
+
+TARGET = MapViewerWS
+
+CC=$(WSDIR)/../gcc/bin/gcc
+CXX=$(WSDIR)/../gcc/bin/g++

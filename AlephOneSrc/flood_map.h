@@ -47,7 +47,7 @@ short new_path(world_point2d *source_point, short source_polygon_index,
 	world_point2d *destination_point, short destination_polygon_index,
 	world_distance minimum_separation, cost_proc_ptr cost, void *data);
 bool move_along_path(short path_index, world_point2d *p);
-void delete_path(short path_index);
+//void delete_path(short path_index);
 
 /* ---------- prototypes/FLOOD_MAP.C */
 

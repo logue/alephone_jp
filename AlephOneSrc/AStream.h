@@ -1,5 +1,5 @@
 /////////////////////////////////////////////////////////////////////////
-// $Id: AStream.h,v 1.1 2006-12-01 09:11:40 hogepiyo Exp $
+// $Id: AStream.h,v 1.2 2007-02-11 11:53:31 hogepiyo Exp $
 /////////////////////////////////////////////////////////////////////////
 
 /*
@@ -45,9 +45,9 @@ namespace AStream
 		public:
 			failure(const std::string& __str) ;//throw();
 			failure(const failure &f);
-			~failure() ;//throw();
+			~failure() throw();
 			const char*
-			what() const ;//throw();
+			what() const throw();
 
 		private:
 			char * _M_name;

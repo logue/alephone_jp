@@ -956,103 +956,19 @@ static void monster_needs_path(
 	if (monster->action==_monster_is_moving && immediately) set_monster_action(monster_index, _monster_is_stationary);
 	SET_MONSTER_NEEDS_PATH_STATUS(monster, true);
 }
-*
+*/
 void set_monster_mode(
 	short monster_index,
 	short new_mode,
 	short target_index)
 {
+}
 /* this function decides what the given monster actually wants to do, and then generates a path
 	to get him there; if a monster who has lost lock calls this function, he will be forced to
 	wander randomly or follow a guard path. */
 static void generate_new_path_for_monster(
 	short monster_index)
-{
-	struct monster_data *monster= get_monster_data(monster_index);
-	struct object_data *object= get_object_data(monster->object_index);
-	struct monster_definition *definition= get_monster_definition(monster->type);
-	struct monster_pathfinding_data data;
-	short destination_polygon_index;
-	world_point2d *destination;
-	world_vector2d bias;
-
-	/* delete this monsterÕs old path, if one exists, and clear the need path flag */
-	if (monster->path!=NONE) delete_path(monster->path), monster->path= NONE;
-	SET_MONSTER_NEEDS_PATH_STATUS(monster, false);
-
-	switch (monster->mode)
-	{
-		case _monster_losing_lock:
-			/* our target is out of sight, but weÕre still zen-ing his position until we run out
-				of intelligence points */
-		case _monster_locked:
-		{
-			struct monster_data *target= get_monster_data(monster->target_index);
-			struct object_data *target_object= get_object_data(target->object_index);
-
-			if (definition->random_sound_mask && !(global_random()&definition->random_sound_mask)) play_object_sound(monster->object_index, definition->random_sound);
-
-			/* if we canÕt attack, run away, otherwise go for the target */
-			if (definition->flags&_monster_cannot_attack)
-			{
-				// LP changed: unnecessary to interrupt for this
-				// dprintf("%p", monster);
-				destination= (world_point2d *) &bias;
-				bias.i= object->location.x - target_object->location.x;
-				bias.j= object->location.y - target_object->location.y;
-				destination_polygon_index= NONE;
-			}
-			else
-			{
-				/* if we still have lock, just build a new path and keep charging */
-				destination= (world_point2d *) &target_object->location;
-				destination_polygon_index= MONSTER_IS_PLAYER(target) ?
-					get_polygon_index_supporting_player(monster->target_index) :
-					target_object->polygon;
-			}
-			break;
-		}
-		
-		case _monster_lost_lock:
-			/* if we lost lock during this path and we went as far as we could go, unlock */
-			set_monster_mode(monster_index, _monster_unlocked, NONE);
-//			dprintf("monster #%d lost lock and reached end of path;g;", monster_index);
-		case _monster_unlocked:
-			/* if weÕre unlocked and need a new path, follow our guard path if we have one and
-				run around randomly if we donÕt */
-			if ((destination_polygon_index= monster->goal_polygon_index)!=NONE)
-			{
-				destination= &get_polygon_data(destination_polygon_index)->center;
-			}
-			else
-			{	
-				destination= (world_point2d *) NULL;
-			}
-			break;
-		
-		default:
-			assert(false);
-			break;
-	}
-
-//	dprintf("#%d: generating new %spath for monster #%d;g;", dynamic_world->tick_count, destination?"":"random ", monster_index);
-
-	data.definition= definition;
-	data.monster= monster;
-	data.cross_zone_boundaries= destination_polygon_index==NONE ? false : true;
-
-	monster->path= new_path((world_point2d *)&object->location, object->polygon, destination,
-		destination_polygon_index, 3*definition->radius, monster_pathfinding_cost_function, &data);
-	if (monster->path==NONE)
-	{
-		if (monster->action!=_monster_is_being_hit || MONSTER_IS_DYING(monster)) set_monster_action(monster_index, _monster_is_stationary);
-		set_monster_mode(monster_index, _monster_unlocked, NONE);
-	}
-	else
-	{
-		advance_monster_path(monster_index);
-	}
-}
+{}
 
 
 /* somebody just did damage to us; see if we should start attacking them or not.  berserk
@@ -1067,29 +983,7 @@ static short get_monster_attitude(
 	short monster_index,
 	short target_index)
 {
-	struct monster_data *monster= get_monster_data(monster_index);
-	struct monster_definition *definition= get_monster_definition(monster->type);
-	struct monster_data *target= get_monster_data(target_index);
-	short target_type= target->type;
-	short attitude;
-
-	/* berserk monsters are hostile toward everything */
-	if (TYPE_IS_ENEMY(definition, target_type) || MONSTER_IS_BERSERK(monster) ||
-		(MONSTER_HAS_VALID_TARGET(monster) && monster->target_index==target_index) ||
-		((definition->_class&_class_human_civilian) && MONSTER_IS_PLAYER(target) && dynamic_world->civilians_killed_by_players>=CIVILIANS_KILLED_BY_PLAYER_THRESHHOLD))
-	{
-		attitude= _hostile;
-	}
-	else
-	{
-		attitude= (TYPE_IS_FRIEND(definition, target_type)) ? _friendly : _neutral;
-	}
-
-//	if ((definition->_class&_class_human_civilian) && MONSTER_IS_PLAYER(target))
-//	{
-//		dprintf("#%d vs. #%d ==> #%d", monster_index, target_index, attitude);
-//	}
-	
+	short attitude = 0;
 	return attitude;
 }
 
@@ -1111,89 +1005,7 @@ static bool clear_line_of_sight(
 	short viewer_index,
 	short target_index,
 	bool full_circle)
-{
-	struct monster_data *viewer= get_monster_data(viewer_index);
-	struct object_data *viewer_object= get_object_data(viewer->object_index);
-	struct monster_definition *viewer_definition= get_monster_definition(viewer->type);
-	struct monster_data *target= get_monster_data(target_index);
-	struct object_data *target_object= get_object_data(target->object_index);
-	bool target_visible= true;
-	
-	{
-		world_point3d *origin= &viewer_object->location;
-		world_point3d *destination= &target_object->location;
-		// LP change: made this long-distance friendly
-		int32 dx= int32(destination->x)-int32(origin->x);
-		int32 dy= int32(destination->y)-int32(origin->y);
-		world_distance dz= destination->z-origin->z;
-		int32 distance2d= GUESS_HYPOTENUSE(ABS(dx), ABS(dy));
-
-		/* if we canÕt see full circle, make sure the target is in our visual arc */
-		if (!full_circle)
-		{
-			angle theta= arctangent(dx, dy)-viewer_object->facing;
-			angle phi= arctangent(distance2d, ABS(dz));
-			
-			if (ABS(theta)>viewer_definition->half_visual_arc) target_visible= false;
-			if (phi>=viewer_definition->half_vertical_visual_arc&&phi<FULL_CIRCLE-viewer_definition->half_vertical_visual_arc) target_visible= false;
-		}
-
-		/* we canÕt see some transfer modes */
-		switch (target_object->transfer_mode)
-		{
-			case _xfer_invisibility:
-			case _xfer_subtle_invisibility:
-				if (distance2d>viewer_definition->dark_visual_range) target_visible= false;
-				break;
-		}
-		
-		/* make sure the target is within our visual_range (taking any of his active
-			effects, i.e. invisibility, into account) and that he isnÕt standing in a
-			dark polygon beyond our dark_visual_range. */
-		if (target_visible)
-		{
-			if (distance2d>viewer_definition->visual_range) // || (distance2d>viewer_definition->dark_visual_range&&get_object_light_intensity(target->object_index)<=LOW_LIGHT_INTENSITY))
-			{
-				target_visible= false;
-			}
-		}
-
-		/* make sure there are no non-transparent lines between the viewer and the target */
-		if (target_visible)
-		{
-			short polygon_index= viewer_object->polygon;
-			short line_index;
-			
-			do
-			{
-				line_index= find_line_crossed_leaving_polygon(polygon_index, (world_point2d *)origin, (world_point2d *)destination);
-				if (line_index!=NONE)
-				{
-					if (LINE_IS_TRANSPARENT(get_line_data(line_index)))
-					{
-						/* transparent line, find adjacent polygon */
-						polygon_index= find_adjacent_polygon(polygon_index, line_index);
-						// LP change: make no polygon act like a non-transparent line
-						if (polygon_index == NONE) target_visible= false;
-					}
-					else
-					{
-						/* non-transparent line, target not visible */
-						target_visible= false;
-					}
-				}
-				else
-				{
-					/* we got to the targetÕs (x,y) location, but weÕre in a different polygon;
-						heÕs invisible */
-					if (polygon_index!=target_object->polygon) target_visible= false;
-				}
-			}
-			while (target_visible&&line_index!=NONE);
-		}
-	}
-	
-	return target_visible;
+{return false;
 }
 
 /* lock the given monster onto the given target, playing a locking sound if the monster
@@ -1201,13 +1013,14 @@ static bool clear_line_of_sight(
 void change_monster_target(
 	short monster_index,
 	short target_index)
-
+*/
 static void handle_moving_or_stationary_monster(
-	short monster_index)
+  short monster_index){}
+  
 void set_monster_action(
 	short monster_index,
 	short action)
-{
+{}
 
 /* do whatever needs to be done when this monster dies and remove it from the monster list *
 static void kill_monster(
@@ -1227,68 +1040,26 @@ static bool translate_monster(
 static bool attempt_evasive_manouvers(
 	short monster_index)
 {
-	struct monster_data *monster= get_monster_data(monster_index);
-	struct object_data *object= get_object_data(monster->object_index);
-	world_point2d destination= *((world_point2d*)&object->location);
-	angle new_facing= NORMALIZE_ANGLE(object->facing + ((global_random()&1) ? QUARTER_CIRCLE : -QUARTER_CIRCLE));
-	world_distance original_floor_height= get_polygon_data(object->polygon)->floor_height;
-	short polygon_index= object->polygon;
-	bool successful= true;
-	
-	translate_point2d(&destination, EVASIVE_MANOUVER_DISTANCE, new_facing);
-	do
-	{
-		short line_index= find_line_crossed_leaving_polygon(polygon_index, (world_point2d *)&object->location, &destination);
-		
-		if (line_index==NONE)
-		{
-			polygon_index= NONE;
-		}
-		else
-		{
-			/* if we ran off the map, we failed */
-			if (LINE_IS_SOLID(get_line_data(line_index)) || (polygon_index= find_adjacent_polygon(polygon_index, line_index))==NONE)
-			{
-				polygon_index= NONE;
-				successful= false;
-			}
-			else
-			{
-				struct polygon_data *polygon= get_polygon_data(polygon_index);
-				if (polygon->floor_height!=original_floor_height || polygon->type==_polygon_is_monster_impassable)
-				{
-					polygon_index= NONE;
-					successful= false;
-				}
-			}
-		}
-	}
-	while (polygon_index!=NONE);
-	
-	if (successful)
-	{
-		object->facing= new_facing;
-		if (monster->path!=NONE) delete_path(monster->path), monster->path= NONE;
-		monster->path_segment_length= EVASIVE_MANOUVER_DISTANCE;
-	}
-	
-	return successful;
+	return false;
 }
-/*
+
 void advance_monster_path(
 	short monster_index)
-{
+{}
+  /*
 static bool try_monster_attack(
 	short monster_index)
 
 static void execute_monster_attack(
 	short monster_index)
 {
+  */
+
 long monster_pathfinding_cost_function(
 	short source_polygon_index,
 	short line_index,
 	short destination_polygon_index,
-	void *vdata)
+  void *vdata){return 0;}
 /* returns the type and index of any interesting terrain feature (platform or door) in front
 	of the given monster in his current direction; this lets us open doors and wait for
 	platforms.  relevant_polygon_index is the polygon_index we have to pass to platform_is_accessable *
@@ -1308,63 +1079,13 @@ static short position_monster_projectile(
 	world_point3d *_vector,
 	angle theta)
 {
-	struct monster_data *aggressor= get_monster_data(aggressor_index);
-	struct monster_data *target= get_monster_data(target_index);
-	struct object_data *aggressor_object= get_object_data(aggressor->object_index);
-	struct object_data *target_object= get_object_data(target->object_index);
-	world_distance radius, height;
-
-//	dprintf("positioning #%d to #%d", aggressor_index, target_index);
-
-	/* adjust origin */
-	*origin= aggressor_object->location;
-	origin->z+= attack->dz;
-	translate_point2d((world_point2d *)origin, attack->dy, NORMALIZE_ANGLE(theta+QUARTER_CIRCLE));
-	translate_point2d((world_point2d *)origin, attack->dx, theta);
-	
-	if (destination)
-	{
-		world_distance distance;
-		
-		/* adjust destination */
-		get_monster_dimensions(target_index, &radius, &height);
-		*destination= target_object->location;
-		destination->z+= (height>>1) + (height>>2); /* shoot 3/4ths up the target */
-		
-		/* calculate outbound vector */
-		_vector->x= destination->x-origin->x;
-		_vector->y= destination->y-origin->y;
-		_vector->z= destination->z-origin->z;
-		
-		distance= isqrt(_vector->x*_vector->x + _vector->y*_vector->y);
-		aggressor->elevation= distance ? (_vector->z*TRIG_MAGNITUDE)/distance : 0;
-	}
-	else
-	{
-		_vector->x= cosine_table[theta];
-		_vector->y= sine_table[theta];
-		_vector->z= aggressor->elevation;
-	}
-	
-	/* return polygon_index of the new origin point */
-	return find_new_object_polygon((world_point2d *)&aggressor_object->location,
-		(world_point2d *)origin, aggressor_object->polygon);
+  return 0;
 }
 
 short nearest_goal_polygon_index(
 	short polygon_index)
 {
-	polygon_index= flood_map(polygon_index, LONG_MAX, nearest_goal_cost_function, _breadth_first, (void *) NULL);
-	while (polygon_index!=NONE)
-	{
-		struct polygon_data *polygon= get_polygon_data(polygon_index);
-
-		if (polygon->type==_polygon_is_goal) break;
-
-		polygon_index= flood_map(NONE, LONG_MAX, nearest_goal_cost_function, _breadth_first, (void *) NULL);
-	}
-	
-	return polygon_index;
+  return 0;
 }
 
 static long nearest_goal_cost_function(
@@ -1373,25 +1094,14 @@ static long nearest_goal_cost_function(
 	short destination_polygon_index,
 	void *unused)
 {
-	struct polygon_data *destination_polygon= get_polygon_data(destination_polygon_index);
-//	struct polygon_data *source_polygon= get_polygon_data(source_polygon_index);
-//	struct line_data *line= get_line_data(line_index);
-	long cost= 1;
-	
-	(void) (unused);
-	(void) (source_polygon_index);
-	(void) (line_index);
-
-	if (destination_polygon->type==_polygon_is_zone_border) cost= -1;
-	
-	return cost;
+  return 0;
 }
 
 
 // LP: will set player view attributes when trying to shoot a guided projectile.
 void SetPlayerViewAttribs(int16 half_visual_arc, int16 half_vertical_visual_arc,
 	world_distance visual_range, world_distance dark_visual_range)
-{
+{/*
 	// Added a modified version of AlexJS's changes: change only if necessary
 	// Restoring AlexJLS's changes
 	monster_definition& PlayerAsMonster = monster_definitions[_monster_marine];
@@ -1402,7 +1112,7 @@ void SetPlayerViewAttribs(int16 half_visual_arc, int16 half_vertical_visual_arc,
 	if (visual_range > 0 || PlayerAsMonster.visual_range > 0)
 		PlayerAsMonster.visual_range = visual_range;
 	if (dark_visual_range > 0 || PlayerAsMonster.dark_visual_range > 0)
-		PlayerAsMonster.dark_visual_range = dark_visual_range;
+		PlayerAsMonster.dark_visual_range = dark_visual_range;*/
 }
 
 

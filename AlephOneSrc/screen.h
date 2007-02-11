@@ -163,7 +163,7 @@ void validate_world_window(void);
 void assert_world_color_table(struct color_table *world_color_table, struct color_table *interface_color_table);
 
 // LP change: added function for resetting the screen state when starting a game
-void reset_screen();
+//void reset_screen();
 
 // CP addition: added function to return the the game size
 screen_mode_data *get_screen_mode(void);//{	return &screen_mode;}

@@ -99,6 +99,7 @@ static bool option_nogamma = true;
 #include "screen_shared.h"
 
 short bit_depth = 32;
+struct color_table *world_color_table, *visible_color_table, *interface_color_table;
 
 // Prototypes
 void change_screen_mode(int width, int height, int depth, bool nogl);
@@ -270,7 +271,7 @@ void exit_screen(void)
  *  Change screen mode
  */
 
-static void change_screen_mode(int width, int height, int depth, bool nogl)
+void change_screen_mode(int width, int height, int depth, bool nogl)
 {
 	uint32 flags = (screen_mode.fullscreen ? SDL_FULLSCREEN : 0);
 #ifdef HAVE_OPENGL
@@ -1101,5 +1102,30 @@ void clear_screen(void)
 	{
 		SDL_FillRect(main_surface, NULL, SDL_MapRGB(main_surface->format, 0, 0, 0));
 		//SDL_UpdateRect(main_surface, 0, 0, 0, 0);
+	}
+}
+
+
+//reset screen
+void reset_screen()
+{
+	// Resetting cribbed from initialize_screen()
+/*	world_view->overhead_map_scale= DEFAULT_OVERHEAD_MAP_SCALE;
+	world_view->overhead_map_active= false;
+	world_view->terminal_mode_active= false;
+    */
+	world_view->horizontal_scale= 1, world_view->vertical_scale= 1;
+	
+	// LP change:
+	ResetFieldOfView();
+
+	// ZZZ: reset screen_printf's
+	for(int i = 0; i < NumScreenMessages; i++)
+		Messages[i].TimeRemaining = 0;
+	/* SB: reset HUD elements */
+	for(int i = 0; i < MAXIMUM_NUMBER_OF_SCRIPT_HUD_ELEMENTS; i++) {
+		ScriptHUDElements[i].color = 1;
+		ScriptHUDElements[i].text[0] = 0;
+		ScriptHUDElements[i].isicon = false;
 	}
 }

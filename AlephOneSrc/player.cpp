@@ -537,13 +537,13 @@ get_ticks_since_local_player_in_terminal() {
 void update_players(ActionQueues* inActionQueuesToUse, bool inPredictive)
 
 
-
+*/
 void damage_player(
 	short monster_index,
 	short aggressor_index,
 	short aggressor_type,
 	struct damage_definition *damage,
-	short projectile_index)*/
+short projectile_index){}
 short player_identifier_to_player_index(
 	short player_identifier)
 {
@@ -857,60 +857,6 @@ static void handle_player_in_vacuum(
 	short player_index,
 	uint32 action_flags)
 {
-	struct player_data *player= get_player_data(player_index);
-
-	if (player->suit_oxygen>0)	
-	{
-		short breathing_frequency;
-		
-		switch (player->suit_oxygen/TICKS_PER_MINUTE)
-		{
-			case 0: breathing_frequency= TICKS_PER_MINUTE/6;
-			case 1: breathing_frequency= TICKS_PER_MINUTE/5;
-			case 2: breathing_frequency= TICKS_PER_MINUTE/4;
-			case 3: breathing_frequency= TICKS_PER_MINUTE/3;
-			default: breathing_frequency= TICKS_PER_MINUTE/2;
-		}
-
-		if (!(player->suit_oxygen%breathing_frequency)) play_local_sound(Sound_Breathing());
-		if ((player->suit_oxygen+OXYGEN_WARNING_OFFSET)<OXYGEN_WARNING_LEVEL && !((player->suit_oxygen+OXYGEN_WARNING_OFFSET)%OXYGEN_WARNING_FREQUENCY)) play_local_sound(Sound_OxygenWarning());
-		
-		// LP change: modified to use global variable for change rate
-		assert(player_settings.OxygenChange <= 0);
-		player->suit_oxygen+= player_settings.OxygenChange;
-		switch (dynamic_world->game_information.difficulty_level)
-		{
-			case _total_carnage_level:
-				if (action_flags&_run_dont_walk) player->suit_oxygen+= player_settings.OxygenChange;
-			case _major_damage_level:
-				if (action_flags&(_left_trigger_state|_right_trigger_state)) player->suit_oxygen+= player_settings.OxygenChange;
-				break;
-		}
-		/*
-		player->suit_oxygen-= 1;
-		switch (dynamic_world->game_information.difficulty_level)
-		{
-			case _total_carnage_level:
-				if (action_flags&_run_dont_walk) player->suit_oxygen-= 1;
-			case _major_damage_level:
-				if (action_flags&(_left_trigger_state|_right_trigger_state)) player->suit_oxygen-= 1;
-				break;
-		}
-		*/
-		
-		if (player->suit_oxygen<=0)
-		{
-			struct damage_definition damage;
-			
-			damage.flags= 0;
-			damage.type= _damage_suffocation;
-			damage.base= player->suit_energy+1;
-			damage.random= 0;
-			damage.scale= FIXED_ONE;
-			
-			damage_player(player->monster_index, NONE, NONE, &damage, NONE);
-		}
-	}
 }
 
 // LP: assumes nonnegative change rate

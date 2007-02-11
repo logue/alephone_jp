@@ -1,0 +1,194 @@
+#OBJ       MainWindow
+ #TYPE       WSCmainWindow
+ #PARENT   NULL
+ #RES      titleString
+PhysicsEditorWS
+ #RES      x
+100
+ #RES      y
+100
+ #RES      width
+656
+ #RES      height
+463
+ #RES      vis
+1
+
+#OBJ       Maimenu_000
+ #TYPE       WSCmenuArea
+ #PARENT   MainWindow
+ #RES      x
+0
+ #RES      y
+0
+ #RES      width
+656
+ #RES      height
+23
+ #RES      vis
+1
+ #RES      anchorLeftFlag
+1
+ #RES      anchorRightFlag
+1
+
+#OBJ       Maipull_001
+ #TYPE       WSCpulldownMenu
+ #PARENT   Maimenu_000
+ #PROC  open1
+  #TRIG    -1
+  #PRO   open1.cpp
+
+ #PROC  close1
+  #TRIG    -1
+  #PRO   close1.cpp
+
+ #PROC  exit1
+  #TRIG    -1
+  #PRO   exit1.cpp
+
+ #RES      menuItems
+Open(O):open1:O,Close(C):close1:C,SP,Exit(X):exit1:X
+ #RES      shortcut
+F
+ #RES      labelString
+File(F)
+ #RES      vis
+1
+ #RES      width
+80
+ #RES      height
+21
+
+#OBJ       BtnMonster
+ #TYPE       WSCvbtn
+ #PARENT   MainWindow
+ #RES      labelString
+Monster
+ #RES      vis
+1
+ #RES      x
+5
+ #RES      y
+30
+ #RES      width
+85
+ #RES      height
+65
+
+#OBJ       BtnEffect
+ #TYPE       WSCvbtn
+ #PARENT   MainWindow
+ #RES      labelString
+Effect
+ #RES      vis
+1
+ #RES      x
+5
+ #RES      y
+95
+ #RES      width
+85
+ #RES      height
+65
+
+#OBJ       BtnProjectile
+ #TYPE       WSCvbtn
+ #PARENT   MainWindow
+ #RES      labelString
+Projectile
+ #RES      vis
+1
+ #RES      x
+5
+ #RES      y
+160
+ #RES      width
+85
+ #RES      height
+65
+
+#OBJ       BtnPhysics
+ #TYPE       WSCvbtn
+ #PARENT   MainWindow
+ #RES      labelString
+Physics
+ #RES      vis
+1
+ #RES      x
+5
+ #RES      y
+225
+ #RES      width
+85
+ #RES      height
+65
+
+#OBJ       BtnWeapon
+ #TYPE       WSCvbtn
+ #PARENT   MainWindow
+ #RES      labelString
+Weapon
+ #RES      vis
+1
+ #RES      x
+5
+ #RES      y
+290
+ #RES      width
+85
+ #RES      height
+65
+
+#OBJ       WndMonster
+ #TYPE       WSCwindow
+ #PARENT   MainWindow
+ #RES      titleString
+Monster
+ #RES      x
+272
+ #RES      y
+159
+ #RES      width
+560
+ #RES      height
+440
+ #RES      shadowThickness
+2
+ #RES      titleBar
+0
+ #RES      shadowType
+-1
+
+#OBJ       Maiinde_012
+ #TYPE       WSCindexForm
+ #PARENT   WndMonster
+ #RES      x
+110
+ #RES      y
+0
+ #RES      width
+445
+ #RES      height
+435
+ #RES      vis
+1
+
+#OBJ       ListMonsterType
+ #TYPE       WSClist
+ #PARENT   WndMonster
+ #RES      titleString
+
+ #RES      workHeight
+26
+ #RES      x
+5
+ #RES      y
+5
+ #RES      width
+105
+ #RES      height
+430
+ #RES      vis
+1
+
