@@ -1,0 +1,45 @@
+##########################################
+# compiler flags                         #
+##########################################
+
+DEBUG = -DMSW -Wall -Wno-format -O2 
+
+DBGRM = $(RM)
+
+##########################################
+# setting of includes                    #
+##########################################
+
+ALL_INCLUDES = -I. -I'$(WSDIR)/include' 
+
+##########################################
+# setting of libraries                   #
+##########################################
+
+ALL_LIBS =  -lwswin -L'$(WSDIR)/lib' -lws -lwsc -mwindows -lwsc
+
+ALL_LIBS2 =  -lwswin -L'$(WS_DEFAULT_DIR)/lib' -lws -lwsc -mwindows -lwsc
+
+##########################################
+# setting of window                      #
+##########################################
+
+WINOBJ = PhysicsEditorWS.o \
+        MainWindow.o 
+
+OPOBJ = \
+        MainInitFunc.o \
+        open1.o \
+        close1.o \
+        exit1.o 
+
+OBJS = $(WINOBJ) $(OPOBJ)  
+
+##########################################
+# setting of target binary               #
+##########################################
+
+TARGET = PhysicsEditorWS
+
+CC=$(WSDIR)/../gcc/bin/gcc
+CXX=$(WSDIR)/../gcc/bin/g++
