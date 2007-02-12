@@ -37,6 +37,10 @@ Main
   #TRIG    15
   #PRO   DrawAreaMouseMoveFunc.cpp
 
+ #PROC  DrawAreaMouseButtonRelease
+  #TRIG    14
+  #PRO   DrawAreaMouseButtonReleaseFunc.cpp
+
  #RES      vis
 1
  #RES      y

@@ -9,6 +9,8 @@ extern int selectLevel;
 extern int zoomDivision, offsetx, offsety;
 extern int nowMousePointX, nowMousePointY, oldMousePointX, oldMousePointY;
 
+extern bool isDownCtrl;
+
 const int NUMBER_OF_POLYGON_TYPE = 24;
 const int ZOOM_DIVISION_STEP = 5;
 const int ZOOM_DIVISION_MAX = 200;

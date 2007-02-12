@@ -33,12 +33,13 @@ OPOBJ = \
         MouseButtonDownFunc.o \
         OnExpose.o \
         DrawAreaMouseMoveFunc.o \
+        DrawAreaMouseButtonReleaseFunc.o \
         ToolPalletMouseButtonDownFunc.o \
         FileNewEp.o \
         FileExitEp.o \
         FileOpenFunc.o 
 
-OBJS = $(WINOBJ) $(OPOBJ) V:/cvs_/cvs_sf/marathon/HPLLib/HPLMapTool.o V:/cvs_/cvs_sf/marathon/HPLLib/HPLMath.o V:/cvs_/cvs_sf/marathon/HPLLib/HPLQuickSort.o V:/cvs_/cvs_sf/marathon/HPLLib/HPLSelectData.o V:/cvs_/cvs_sf/marathon/HPLLib/HPLStringModifier.o V:/cvs_/cvs_sf/marathon/HPLLib/HPLSurfaceModifier.o   
+OBJS = $(WINOBJ) $(OPOBJ) ../../../HPLLib/HPLMapTool.o ../../../HPLLib/HPLMath.o ../../../HPLLib/HPLQuickSort.o ../../../HPLLib/HPLSelectData.o ../../../HPLLib/HPLStringModifier.o ../../../HPLLib/HPLSurfaceModifier.o   
 
 ##########################################
 # setting of target binary               #

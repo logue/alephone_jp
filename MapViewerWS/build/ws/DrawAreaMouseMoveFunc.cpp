@@ -14,6 +14,7 @@ void moveMapOffset(int px, int py){
     offsety += deltaY;
 }
 
+
 //----------------------------------------------------------
 //Function for the event procedure
 //----------------------------------------------------------
@@ -34,8 +35,10 @@ void DrawAreaMouseMoveFunc(WSCbase* object){
 			oldMousePointX = nowMousePointX;
 			oldMousePointY = nowMousePointY;
 			object->redraw();
+		}else{
+			WSGIappKeyboard()->setKey(0);
 		}
+	}else{
 	}
-
 }
 static WSCfunctionRegister  op("DrawAreaMouseMoveFunc",(void*)DrawAreaMouseMoveFunc);

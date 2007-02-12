@@ -31,7 +31,7 @@ WSCmainWindow
 #COMPAT
 0
 #WS_FILES
-V:/cvs_/cvs_sf/marathon/HPLLib/HPLMapTool.cpp V:/cvs_/cvs_sf/marathon/HPLLib/HPLMath.cpp V:/cvs_/cvs_sf/marathon/HPLLib/HPLQuickSort.cpp V:/cvs_/cvs_sf/marathon/HPLLib/HPLSelectData.cpp V:/cvs_/cvs_sf/marathon/HPLLib/HPLStringModifier.cpp V:/cvs_/cvs_sf/marathon/HPLLib/HPLSurfaceModifier.cpp
+../../../HPLLib/HPLMapTool.cpp ../../../HPLLib/HPLMath.cpp ../../../HPLLib/HPLQuickSort.cpp ../../../HPLLib/HPLSelectData.cpp ../../../HPLLib/HPLStringModifier.cpp ../../../HPLLib/HPLSurfaceModifier.cpp
 #MPFC_COMPAT
 0
 #JAVA_PKG_NAME

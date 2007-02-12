@@ -31,6 +31,10 @@ void MouseButtonDownFunc(WSCbase* object){
 	//ˆê‚É‰Ÿ‚³‚ê‚Ä‚¢‚éƒL[
 	long key = WSGIappKeyboard()->getKey();
 	if(key == WSK_Control_L || key == WSK_Control_R){
+		
+	}else{
+		//“h‚è‚Â‚Ô‚µ
+		WSGIappKeyboard()->setKey(0);
 	}
 }
 static WSCfunctionRegister  op("MouseButtonDownFunc",(void*)MouseButtonDownFunc);

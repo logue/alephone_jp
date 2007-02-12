@@ -53,6 +53,8 @@ WSCbase* _create_win_MainWindow(){
     MainDrawArea->addProcedureV("MainDrawAreaExpose","OnExpose",OnExpose,9);
     extern void DrawAreaMouseMoveFunc(WSCbase*);
     MainDrawArea->addProcedureV("DrawAreaMouseMove","DrawAreaMouseMoveFunc",DrawAreaMouseMoveFunc,15);
+    extern void DrawAreaMouseButtonReleaseFunc(WSCbase*);
+    MainDrawArea->addProcedureV("DrawAreaMouseButtonRelease","DrawAreaMouseButtonReleaseFunc",DrawAreaMouseButtonReleaseFunc,14);
 
   ToolPallet = new  WSCwindow(MainWindow,"ToolPallet");
       ToolPallet->initialize();

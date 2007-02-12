@@ -9,6 +9,7 @@ std::vector<std::string> mapNameList;
 int selectLevel = 0;
 int zoomDivision, offsetx, offsety;
 int nowMousePointX, nowMousePointY, oldMousePointX, oldMousePointY;
+bool isDownCtrl;
 
 //----------------------------------------------------------
 //Function for the event procedure
@@ -30,5 +31,7 @@ void MainInitFunc(WSCbase* object){
 	nowMousePointY = 0;
 	oldMousePointX = 0;
 	oldMousePointY = 0;
+	
+	isDownCtrl = false;
 }
 static WSCfunctionRegister  op("MainInitFunc",(void*)MainInitFunc);

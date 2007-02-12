@@ -1,0 +1,94 @@
+#ID
+55707B20
+#STLINK
+0
+#CMODE
+0
+#OUTPUT
+AlephOneLib
+#STOUTPUT
+AlephOneLib
+#DBG_OUTPUT
+AlephOneLibd
+#DBG_STOUTPUT
+AlephOneLibd
+#DTHICKNESS
+2
+#GRIDX
+1
+#GRIDY
+1
+#DWIDTH
+100
+#DHEIGHT
+30
+#WS_DLL
+
+#WINC_NAME
+WSCmainWindow
+#OBJS
+
+#COMPAT
+0
+#WS_FILES
+C://0save/marathon/AlephOneSrc/world.cpp C://0save/marathon/AlephOneSrc/weapons.cpp C://0save/marathon/AlephOneSrc/wad_sdl.cpp C://0save/marathon/AlephOneSrc/wad.cpp C://0save/marathon/AlephOneSrc/textures.cpp C://0save/marathon/AlephOneSrc/shell_misc.cpp C://0save/marathon/AlephOneSrc/shapes.cpp C://0save/marathon/AlephOneSrc/screen_sdl.cpp C://0save/marathon/AlephOneSrc/scottish_textures.cpp C://0save/marathon/AlephOneSrc/scenery.cpp C://0save/marathon/AlephOneSrc/resource_manager.cpp C://0save/marathon/AlephOneSrc/render.cpp C://0save/marathon/AlephOneSrc/projectiles.cpp C://0save/marathon/AlephOneSrc/preprocess_map_shared.cpp C://0save/marathon/AlephOneSrc/preprocess_map_sdl.cpp C://0save/marathon/AlephOneSrc/player.cpp C://0save/marathon/AlephOneSrc/platforms.cpp C://0save/marathon/AlephOneSrc/placement.cpp C://0save/marathon/AlephOneSrc/physics.cpp C://0save/marathon/AlephOneSrc/monsters.cpp C://0save/marathon/AlephOneSrc/media.cpp C://0save/marathon/AlephOneSrc/map_constructors.cpp C://0save/marathon/AlephOneSrc/map.cpp C://0save/marathon/AlephOneSrc/lightsource.cpp C://0save/marathon/AlephOneSrc/items.cpp C://0save/marathon/AlephOneSrc/interface.cpp C://0save/marathon/AlephOneSrc/import_definitions.cpp C://0save/marathon/AlephOneSrc/images.cpp C://0save/marathon/AlephOneSrc/images.cpp C://0save/marathon/AlephOneSrc/hashtable.c C://0save/marathon/AlephOneSrc/game_wad.cpp C://0save/marathon/AlephOneSrc/game_errors.cpp C://0save/marathon/AlephOneSrc/flood_map.cpp C://0save/marathon/AlephOneSrc/fades.cpp C://0save/marathon/AlephOneSrc/effects.cpp C://0save/marathon/AlephOneSrc/dynamic_limits.cpp C://0save/marathon/AlephOneSrc/csstrings.cpp C://0save/marathon/AlephOneSrc/csmisc_sdl.cpp C://0save/marathon/AlephOneSrc/cscluts_sdl.cpp C://0save/marathon/AlephOneSrc/csalerts_sdl.cpp C://0save/marathon/AlephOneSrc/crc.cpp C://0save/marathon/AlephOneSrc/computer_interface.cpp C://0save/marathon/AlephOneSrc/byte_swapping.cpp C://0save/marathon/AlephOneSrc/XML_ElementParser.cpp C://0save/marathon/AlephOneSrc/ViewControl.cpp C://0save/marathon/AlephOneSrc/TextStrings.cpp C://0save/marathon/AlephOneSrc/ShapesParser.cpp C://0save/marathon/AlephOneSrc/RenderVisTree.cpp C://0save/marathon/AlephOneSrc/RenderSortPoly.cpp C://0save/marathon/AlephOneSrc/RenderRasterize.cpp C://0save/marathon/AlephOneSrc/RenderPlaceObjs.cpp C://0save/marathon/AlephOneSrc/Packing.cpp C://0save/marathon/AlephOneSrc/FileHandler_SDL.cpp C://0save/marathon/AlephOneSrc/DamageParser.cpp C://0save/marathon/AlephOneSrc/ColorParser.cpp C://0save/marathon/AlephOneSrc/AnimatedTextures.cpp C://0save/marathon/AlephOneSrc/AStream.cpp
+#MPFC_COMPAT
+0
+#JAVA_PKG_NAME
+
+#ENCODING
+SJIS
+#POLICY
+
+#LIB_CREATE
+1
+#LANG
+C++
+#MAKE
+$(WSDIR)/../gcc/bin/make
+#CC1
+$(WSDIR)/../gcc/bin/gcc
+#CC
+$(WSDIR)/../gcc/bin/g++
+#LD
+$(WSDIR)/../gcc/bin/g++
+#USER_INCLUDE
+-I. -I'$(WSDIR)/include' -I'../AlephOneSrc'
+#USER_FL
+-DMSW -w -Wno-format -DSDL -DWIN32 -D__WIN32__
+#USER_RT_INCLUDE
+
+#USER_RT_FL
+-O2 
+#USER_DBG_INCLUDE
+
+#USER_DBG_FL
+-g -ggdb
+#USER_LIB
+
+#USER_LD_FL
+
+#USER_RT_LIB
+-L'$(WSDIR)/lib' -lws -lwsc -mwindows
+#USER_DBG_LIB
+-L'$(WSDIR)/lib' -lws -lwsc
+#USER_RT_STLIB
+'$(WSDIR)/lib-st/libws.a' '$(WSDIR)/lib-st/libwsc.a' -L'$(WSDIR)/../others/lib' -ljpeg -lpng -lz -lmpr -limm32 -lwsock32 -mwindows
+#USER_DBG_STLIB
+'$(WSDIR)/lib-st/libws.a' '$(WSDIR)/lib-st/libwsc.a' -L'$(WSDIR)/../others/lib' -ljpeg -lpng -lz -lmpr -limm32 -lwsock32 -lgdi32 -lcomdlg32
+#FONT0
+13,0,0,0,400,0,0,0,128,3,2,1,1,ÇlÇr ÉSÉVÉbÉN
+#FONT1
+15,0,0,0,400,0,0,0,128,3,2,1,1,ÇlÇr ÉSÉVÉbÉN
+#FONT2
+17,0,0,0,400,0,0,0,128,3,2,1,1,ÇlÇr ÉSÉVÉbÉN
+#FONT3
+19,0,0,0,400,0,0,0,128,3,2,1,1,ÇlÇr ÉSÉVÉbÉN
+#FONT4
+22,0,0,0,400,0,0,0,128,3,2,1,1,ÇlÇr ÉSÉVÉbÉN
+#FONT5
+24,0,0,0,400,0,0,0,128,3,2,1,1,ÇlÇr ÉSÉVÉbÉN
+#FONT6
+26,0,0,0,400,0,0,0,128,3,2,1,1,ÇlÇr ÉSÉVÉbÉN
+#FONT7
+34,0,0,0,400,0,0,0,128,3,2,1,1,ÇlÇr ÉSÉVÉbÉN
