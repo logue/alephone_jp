@@ -53,9 +53,9 @@ $(WSDIR)/../gcc/bin/g++
 #LD
 $(WSDIR)/../gcc/bin/g++
 #USER_INCLUDE
--I. -I'$(WSDIR)/include'
+-I. -I'$(WSDIR)/include' -I'../../AlephOneSrc' -I'../../HPLLib'
 #USER_FL
--DMSW -Wall -Wno-format
+-DMSW -w -Wno-format -DSDL -DWIN32 -D__WIN32__
 #USER_RT_INCLUDE
 
 #USER_RT_FL
@@ -65,7 +65,7 @@ $(WSDIR)/../gcc/bin/g++
 #USER_DBG_FL
 -g -ggdb
 #USER_LIB
-
+-L'../../lib' ../../lib/AlephOneLib.a -lSDL
 #USER_LD_FL
 
 #USER_RT_LIB

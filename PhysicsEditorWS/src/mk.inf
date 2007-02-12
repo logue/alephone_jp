@@ -2,7 +2,7 @@
 # compiler flags                         #
 ##########################################
 
-DEBUG = -DMSW -Wall -Wno-format -O2 
+DEBUG = -DMSW -w -Wno-format -DSDL -DWIN32 -D__WIN32__ -O2 
 
 DBGRM = $(RM)
 
@@ -10,15 +10,15 @@ DBGRM = $(RM)
 # setting of includes                    #
 ##########################################
 
-ALL_INCLUDES = -I. -I'$(WSDIR)/include' 
+ALL_INCLUDES = -I. -I'$(WSDIR)/include' -I'../../AlephOneSrc' -I'../../HPLLib' 
 
 ##########################################
 # setting of libraries                   #
 ##########################################
 
-ALL_LIBS =  -lwswin -L'$(WSDIR)/lib' -lws -lwsc -mwindows -lwsc
+ALL_LIBS = -L'../../lib' ../../lib/AlephOneLib.a -lSDL -lwswin -L'$(WSDIR)/lib' -lws -lwsc -mwindows -lwsc
 
-ALL_LIBS2 =  -lwswin -L'$(WS_DEFAULT_DIR)/lib' -lws -lwsc -mwindows -lwsc
+ALL_LIBS2 = -L'../../lib' ../../lib/AlephOneLib.a -lSDL -lwswin -L'$(WS_DEFAULT_DIR)/lib' -lws -lwsc -mwindows -lwsc
 
 ##########################################
 # setting of window                      #
@@ -31,7 +31,12 @@ OPOBJ = \
         MainInitFunc.o \
         open1.o \
         close1.o \
-        exit1.o 
+        exit1.o \
+        FileNewFunc.o \
+        FileSaveFunc.o \
+        BtnMonsterPressFunc.o \
+        WndMonsterClosedFunc.o \
+        MonsterTabsInitFunc.o 
 
 OBJS = $(WINOBJ) $(OPOBJ)  
 
