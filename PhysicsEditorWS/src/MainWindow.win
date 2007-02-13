@@ -5,6 +5,14 @@
   #TRIG    0
   #PRO   MainInitFunc.cpp
 
+ #PROC  MainWindowExit
+  #TRIG    32
+  #PRO   MainWindowExitFunc.cpp
+
+ #PROC  MainWindowClose
+  #TRIG    56
+  #PRO   MainWindowCloseFunc.cpp
+
  #RES      titleString
 PhysicsEditorWS
  #RES      x
@@ -218,26 +226,6 @@ Collection
  #RES      height
 25
 
-#OBJ       CollectionsCombo
- #TYPE       WSCoption
- #PARENT   Maiinde_012
- #RES      userValue
-1
- #RES      value
-1
- #RES      labelString
-item1
- #RES      vis
-1
- #RES      x
-95
- #RES      y
-30
- #RES      width
-80
- #RES      height
-25
-
 #OBJ       Maivlab_018
  #TYPE       WSCvlabel
  #PARENT   Maiinde_012
@@ -253,26 +241,6 @@ Pallet
 55
  #RES      width
 90
- #RES      height
-25
-
-#OBJ       ClassCombo
- #TYPE       WSCoption
- #PARENT   Maiinde_012
- #RES      userValue
-1
- #RES      value
-3
- #RES      labelString
-item3
- #RES      vis
-1
- #RES      x
-95
- #RES      y
-105
- #RES      width
-80
  #RES      height
 25
 
@@ -325,26 +293,6 @@ Class
 105
  #RES      width
 90
- #RES      height
-25
-
-#OBJ       CarryItemCombo
- #TYPE       WSCoption
- #PARENT   Maiinde_012
- #RES      userValue
-1
- #RES      value
-1
- #RES      labelString
-item1
- #RES      vis
-1
- #RES      x
-95
- #RES      y
-280
- #RES      width
-80
  #RES      height
 25
 
@@ -958,26 +906,6 @@ ClearSnd
  #RES      height
 25
 
-#OBJ       Maiopti_009
- #TYPE       WSCoption
- #PARENT   Maiinde_012
- #RES      userValue
-1
- #RES      value
-1
- #RES      labelString
-item1
- #RES      vis
-1
- #RES      x
-450
- #RES      y
-55
- #RES      width
-80
- #RES      height
-25
-
 #OBJ       Maivlab_010
  #TYPE       WSCvlabel
  #PARENT   Maiinde_012
@@ -1055,146 +983,6 @@ RandomSnd
 350
  #RES      y
 230
- #RES      height
-25
-
-#OBJ       Maiopti_017
- #TYPE       WSCoption
- #PARENT   Maiinde_012
- #RES      userValue
-1
- #RES      value
-1
- #RES      labelString
-item1
- #RES      vis
-1
- #RES      x
-450
- #RES      y
-80
- #RES      width
-80
- #RES      height
-25
-
-#OBJ       Maiopti_018
- #TYPE       WSCoption
- #PARENT   Maiinde_012
- #RES      userValue
-1
- #RES      value
-1
- #RES      labelString
-item1
- #RES      vis
-1
- #RES      x
-450
- #RES      y
-105
- #RES      width
-80
- #RES      height
-25
-
-#OBJ       Maiopti_020
- #TYPE       WSCoption
- #PARENT   Maiinde_012
- #RES      userValue
-1
- #RES      value
-1
- #RES      labelString
-item1
- #RES      vis
-1
- #RES      x
-450
- #RES      y
-130
- #RES      width
-80
- #RES      height
-25
-
-#OBJ       Maiopti_021
- #TYPE       WSCoption
- #PARENT   Maiinde_012
- #RES      userValue
-1
- #RES      value
-1
- #RES      labelString
-item1
- #RES      vis
-1
- #RES      x
-450
- #RES      y
-155
- #RES      width
-80
- #RES      height
-25
-
-#OBJ       Maiopti_022
- #TYPE       WSCoption
- #PARENT   Maiinde_012
- #RES      userValue
-1
- #RES      value
-1
- #RES      labelString
-item1
- #RES      vis
-1
- #RES      x
-450
- #RES      y
-180
- #RES      width
-80
- #RES      height
-25
-
-#OBJ       Maiopti_023
- #TYPE       WSCoption
- #PARENT   Maiinde_012
- #RES      userValue
-1
- #RES      value
-1
- #RES      labelString
-item1
- #RES      vis
-1
- #RES      x
-450
- #RES      y
-205
- #RES      width
-80
- #RES      height
-25
-
-#OBJ       Maiopti_025
- #TYPE       WSCoption
- #PARENT   Maiinde_012
- #RES      userValue
-1
- #RES      value
-1
- #RES      labelString
-item1
- #RES      vis
-1
- #RES      x
-450
- #RES      y
-230
- #RES      width
-80
  #RES      height
 25
 
@@ -1450,48 +1238,6 @@ Gravity
  #RES      height
 25
 
-#OBJ       SpeedCombo
- #TYPE       WSCoption
- #PARENT   Maiinde_012
- #RES      userValue
-1
- #RES      value
-1
- #RES      labelString
-item1
- #RES      vis
-1
- #RES      x
-175
- #RES      y
-380
- #RES      width
-80
- #RES      height
-25
-
-#OBJ       IntelligenceCombo
- #TYPE       WSCoption
- #PARENT   Maiinde_012
- #RES      userValue
-1
- #RES      menuItems
-Low:1:IntelligenceLow,Average:2:IntelligenceAverage,High:3:IntelligenceHigh
- #RES      value
-1
- #RES      labelString
-Low
- #RES      vis
-1
- #RES      x
-95
- #RES      y
-355
- #RES      width
-80
- #RES      height
-25
-
 #OBJ       ListImmunities
  #TYPE       WSClist
  #PARENT   Maiinde_012
@@ -1708,9 +1454,239 @@ Set as Default
  #RES      width
 115
 
+#OBJ       SpeedCombo
+ #TYPE       WSCoption
+ #PARENT   Maiinde_012
+ #RES      userValue
+1
+ #RES      value
+1
+ #RES      labelString
+item1
+ #RES      vis
+1
+ #RES      x
+175
+ #RES      y
+380
+ #RES      width
+80
+ #RES      height
+25
+
+#OBJ       IntelligenceCombo
+ #TYPE       WSCoption
+ #PARENT   Maiinde_012
+ #PROC  IntelligenceValueCh
+  #TRIG    3
+  #PRO   IntelligenceValueChFunc.cpp
+
+ #RES      userValue
+1
+ #RES      menuItems
+Low:1:ep1_name,Average:2:ep2_name,High:3:ep3_name
+ #RES      value
+1
+ #RES      labelString
+Low
+ #RES      vis
+1
+ #RES      x
+95
+ #RES      y
+355
+ #RES      width
+80
+ #RES      height
+25
+
+#OBJ       Maivbtn_021
+ #TYPE       WSCvbtn
+ #PARENT   Maiinde_012
+ #RES      userValue
+1
+ #RES      vis
+1
+ #RES      x
+95
+ #RES      y
+30
+ #RES      width
+80
+ #RES      height
+25
+
+#OBJ       Maivbtn_022
+ #TYPE       WSCvbtn
+ #PARENT   Maiinde_012
+ #RES      userValue
+1
+ #RES      vis
+1
+ #RES      x
+95
+ #RES      y
+280
+ #RES      width
+80
+ #RES      height
+25
+
+#OBJ       Maivbtn_023
+ #TYPE       WSCvbtn
+ #PARENT   Maiinde_012
+ #RES      userValue
+1
+ #RES      vis
+1
+ #RES      x
+450
+ #RES      y
+55
+ #RES      width
+80
+ #RES      height
+25
+
+#OBJ       Maivbtn_024
+ #TYPE       WSCvbtn
+ #PARENT   Maiinde_012
+ #RES      userValue
+1
+ #RES      vis
+1
+ #RES      x
+450
+ #RES      y
+80
+ #RES      width
+80
+ #RES      height
+25
+
+#OBJ       Maivbtn_025
+ #TYPE       WSCvbtn
+ #PARENT   Maiinde_012
+ #RES      userValue
+1
+ #RES      vis
+1
+ #RES      x
+450
+ #RES      y
+105
+ #RES      width
+80
+ #RES      height
+25
+
+#OBJ       Maivbtn_026
+ #TYPE       WSCvbtn
+ #PARENT   Maiinde_012
+ #RES      userValue
+1
+ #RES      vis
+1
+ #RES      x
+450
+ #RES      y
+130
+ #RES      width
+80
+ #RES      height
+25
+
+#OBJ       Maivbtn_027
+ #TYPE       WSCvbtn
+ #PARENT   Maiinde_012
+ #RES      userValue
+1
+ #RES      vis
+1
+ #RES      x
+450
+ #RES      y
+155
+ #RES      width
+80
+ #RES      height
+25
+
+#OBJ       Maivbtn_028
+ #TYPE       WSCvbtn
+ #PARENT   Maiinde_012
+ #RES      userValue
+1
+ #RES      vis
+1
+ #RES      x
+450
+ #RES      y
+180
+ #RES      width
+80
+ #RES      height
+25
+
+#OBJ       Maivbtn_029
+ #TYPE       WSCvbtn
+ #PARENT   Maiinde_012
+ #RES      userValue
+1
+ #RES      vis
+1
+ #RES      x
+450
+ #RES      y
+205
+ #RES      width
+80
+ #RES      height
+25
+
+#OBJ       Maivbtn_030
+ #TYPE       WSCvbtn
+ #PARENT   Maiinde_012
+ #RES      userValue
+1
+ #RES      vis
+1
+ #RES      x
+450
+ #RES      y
+230
+ #RES      width
+80
+ #RES      height
+25
+
+#OBJ       Maiopti_031
+ #TYPE       WSCoption
+ #PARENT   Maiinde_012
+ #RES      userValue
+1
+ #RES      value
+1
+ #RES      labelString
+item1
+ #RES      vis
+1
+ #RES      x
+95
+ #RES      y
+105
+ #RES      width
+80
+ #RES      height
+25
+
 #OBJ       ListMonsterType
  #TYPE       WSClist
  #PARENT   WndMonster
+ #PROC  ListMonsterTypeItemSel
+  #TRIG    35
+  #PRO   ListMonsterTypeItemSelFunc.cpp
+
  #RES      titleString
 
  #RES      dataSource
@@ -1733,4 +1709,126 @@ data/MonsterTypes.txt
 450
  #RES      vis
 1
+
+#OBJ       WndEffect
+ #TYPE       WSCwindow
+ #PARENT   MainWindow
+ #RES      titleString
+Effect
+ #RES      x
+78
+ #RES      y
+246
+ #RES      width
+680
+ #RES      height
+460
+ #RES      shadowThickness
+2
+
+#OBJ       WndProjectile
+ #TYPE       WSCwindow
+ #PARENT   MainWindow
+ #RES      titleString
+Projectile
+ #RES      x
+78
+ #RES      y
+65
+ #RES      width
+675
+ #RES      height
+459
+ #RES      shadowThickness
+2
+
+#OBJ       WndPhysics
+ #TYPE       WSCwindow
+ #PARENT   MainWindow
+ #RES      titleString
+Physics
+ #RES      x
+64
+ #RES      y
+85
+ #RES      width
+674
+ #RES      height
+457
+ #RES      shadowThickness
+2
+
+#OBJ       WndWeapon
+ #TYPE       WSCwindow
+ #PARENT   MainWindow
+ #RES      titleString
+Weapon
+ #RES      x
+51
+ #RES      y
+46
+ #RES      width
+669
+ #RES      height
+455
+ #RES      shadowThickness
+2
+
+#OBJ       WndSelect
+ #TYPE       WSCwindow
+ #PARENT   MainWindow
+ #RES      titleString
+Select
+ #RES      x
+95
+ #RES      y
+272
+ #RES      width
+255
+ #RES      height
+470
+ #RES      shadowThickness
+2
+
+#OBJ       Mailist_016
+ #TYPE       WSClist
+ #PARENT   WndSelect
+ #RES      titleString
+title6
+ #RES      workHeight
+26
+ #RES      x
+5
+ #RES      y
+5
+ #RES      width
+135
+ #RES      height
+460
+ #RES      vis
+1
+
+#OBJ       Maivbtn_017
+ #TYPE       WSCvbtn
+ #PARENT   WndSelect
+ #RES      labelString
+OK
+ #RES      vis
+1
+ #RES      x
+145
+ #RES      y
+390
+
+#OBJ       Maivbtn_018
+ #TYPE       WSCvbtn
+ #PARENT   WndSelect
+ #RES      labelString
+Cancel
+ #RES      vis
+1
+ #RES      x
+145
+ #RES      y
+425
 

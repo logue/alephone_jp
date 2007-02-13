@@ -23,6 +23,28 @@ struct projectile_definition projectile_default_definitions[NUMBER_OF_PROJECTILE
 struct physics_constants physics_default_models[NUMBER_OF_PHYSICS_MODELS];
 struct weapon_definition weapon_default_definitions[MAXIMUM_NUMBER_OF_WEAPONS];
 
+std::vector<std::string> stockCollections;
+std::vector<std::string> stockSpeeds;
+std::vector<std::string> stockMonsterClasses;
+std::vector<std::string> stockItemTypes;
+
+int valueSpeed[NUMBER_OF_SPEED_INFORMATIONS];
+int valueMonsterClasses[NUMBER_OF_CLASS_INFORMATIONS];
+
+std::string getOptionItemListFromFile(std::vector<std::string>& stocks)
+{
+	std::string itemList;
+	itemList += stocks[0] + ":1:DummyEp";
+	char buf[10];
+	for(int i = 1; i < stocks.size(); i ++){
+		itemList += ",";
+		sprintf(buf, "%d", i + 1);
+		itemList += stocks[i] + ":";
+		itemList += std::string(buf) + ":DummyEp";
+	}
+	return itemList;
+}
+
 void setDefinitionsToDefault()
 {
     //モンスター情報
@@ -97,7 +119,10 @@ void setupDialog(WSCbase* object)
 		//vertvisualarc
 		setInteger(indextab->getChildInstance("VertVisualArc"), monster_definitions[type].half_vertical_visual_arc);
 		//interlligence
+		indextab->getChildInstance("IntelligenceCombo")->setProperty(WSNvalue, monster_definitions[type].intelligence + 1);
 		//speed
+		setInteger(indextab->getChildInstance("SpeedEdit"), monster_definitions[type].half_vertical_visual_arc);
+		//indextab->getChildInstance("SpeedCombo")->setProperty(WSNvalue, );
 		//gravity
 		setInteger(indextab->getChildInstance("Gravity"), monster_definitions[type].gravity);
 	}
@@ -121,6 +146,22 @@ void MainInitFunc(WSCbase* object){
     memcpy(weapon_default_definitions, weapon_definitions,
         sizeof(struct weapon_definition) * MAXIMUM_NUMBER_OF_WEAPONS);
 
+	//load
+	stockCollections = hpl::string::loadFromFile("data/Collections.txt");
+	stockSpeeds = hpl::string::loadFromFile("data/Speeds.txt");
+	
+	//index setup
+	// speed
+	valueSpeed[0] = 0;
+	
+	//setup window's combo
+	//std::string itemList = getOptionItemListFromFile(stockCollections);
+	//object->getChildInstance("WndMonster")->
+	//getChildInstance("Maiinde_012")->getChildInstance("CollectionCombo")->setProperty(WSNmenuItems, itemList.c_str());
+	/*long ret = object->getChildInstance("WndSelect")->popup();
+	if(ret == WS_DIALOG_OK){
+	}else{
+	}*/
 	//子ウインドウの表示
 	char* class_name = "WSCwindow"; //ラベルクラス
 	char* obj_name   = "WndMonster";     //newvlab_001 という名称

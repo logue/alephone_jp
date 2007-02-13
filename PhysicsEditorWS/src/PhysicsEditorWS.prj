@@ -31,7 +31,7 @@ WSCmainWindow
 #COMPAT
 0
 #WS_FILES
-
+V:/cvs_/cvs_sf/marathon/HPLLib/HPLStringModifier.cpp
 #MPFC_COMPAT
 0
 #JAVA_PKG_NAME
@@ -53,7 +53,7 @@ $(WSDIR)/../gcc/bin/g++
 #LD
 $(WSDIR)/../gcc/bin/g++
 #USER_INCLUDE
--I. -I'$(WSDIR)/include' -I'../../AlephOneSrc' -I'../../HPLLib'
+-I. -I'$(WSDIR)/include' -I'../../AlephOneSrc' -I'../../'
 #USER_FL
 -DMSW -w -Wno-format -DSDL -DWIN32 -D__WIN32__
 #USER_RT_INCLUDE

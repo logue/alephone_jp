@@ -13,9 +13,9 @@
 #include <WSCwindow.h>
 #include <WSCindexForm.h>
 #include <WSCvlabel.h>
-#include <WSCoption.h>
 #include <WSCvifield.h>
 #include <WSClist.h>
+#include <WSCoption.h>
 
 //--- OBJECT instance variable ---//
 WSCmainWindow* MainWindow = NULL;
@@ -29,13 +29,10 @@ WSCvbtn* BtnWeapon = NULL;
 WSCwindow* WndMonster = NULL;
 WSCindexForm* Maiinde_012 = NULL;
 WSCvlabel* Maivlab_014 = NULL;
-WSCoption* CollectionsCombo = NULL;
 WSCvlabel* Maivlab_018 = NULL;
-WSCoption* ClassCombo = NULL;
 WSCvifield* PalletEdit = NULL;
 WSCvlabel* Maivlab_021 = NULL;
 WSCvlabel* Maivlab_023 = NULL;
-WSCoption* CarryItemCombo = NULL;
 WSCvifield* VitalityEdit = NULL;
 WSCvlabel* Maivlab_026 = NULL;
 WSCvlabel* Maivlab_027 = NULL;
@@ -72,19 +69,11 @@ WSCvlabel* Maivlab_005 = NULL;
 WSCvlabel* Maivlab_006 = NULL;
 WSCvlabel* Maivlab_007 = NULL;
 WSCvlabel* Maivlab_008 = NULL;
-WSCoption* Maiopti_009 = NULL;
 WSCvlabel* Maivlab_010 = NULL;
 WSCvlabel* Maivlab_011 = NULL;
 WSCvlabel* Maivlab_012 = NULL;
 WSCvlabel* Maivlab_013 = NULL;
 WSCvlabel* Maivlab_015 = NULL;
-WSCoption* Maiopti_017 = NULL;
-WSCoption* Maiopti_018 = NULL;
-WSCoption* Maiopti_020 = NULL;
-WSCoption* Maiopti_021 = NULL;
-WSCoption* Maiopti_022 = NULL;
-WSCoption* Maiopti_023 = NULL;
-WSCoption* Maiopti_025 = NULL;
 WSCvifield* Maivifi_026 = NULL;
 WSCvifield* Maivifi_027 = NULL;
 WSCvlabel* Maivlab_028 = NULL;
@@ -100,8 +89,6 @@ WSCvifield* HalfVisualArcEdit = NULL;
 WSCvifield* VertVisualArc = NULL;
 WSCvifield* SpeedEdit = NULL;
 WSCvifield* GravityEdit = NULL;
-WSCoption* SpeedCombo = NULL;
-WSCoption* IntelligenceCombo = NULL;
 WSClist* ListImmunities = NULL;
 WSCvlabel* Maivlab_003 = NULL;
 WSClist* Mailist_004 = NULL;
@@ -112,7 +99,28 @@ WSCvlabel* Maivlab_017 = NULL;
 WSClist* Mailist_018 = NULL;
 WSClist* Mailist_019 = NULL;
 WSCvbtn* Maivbtn_020 = NULL;
+WSCoption* SpeedCombo = NULL;
+WSCoption* IntelligenceCombo = NULL;
+WSCvbtn* Maivbtn_021 = NULL;
+WSCvbtn* Maivbtn_022 = NULL;
+WSCvbtn* Maivbtn_023 = NULL;
+WSCvbtn* Maivbtn_024 = NULL;
+WSCvbtn* Maivbtn_025 = NULL;
+WSCvbtn* Maivbtn_026 = NULL;
+WSCvbtn* Maivbtn_027 = NULL;
+WSCvbtn* Maivbtn_028 = NULL;
+WSCvbtn* Maivbtn_029 = NULL;
+WSCvbtn* Maivbtn_030 = NULL;
+WSCoption* Maiopti_031 = NULL;
 WSClist* ListMonsterType = NULL;
+WSCwindow* WndEffect = NULL;
+WSCwindow* WndProjectile = NULL;
+WSCwindow* WndPhysics = NULL;
+WSCwindow* WndWeapon = NULL;
+WSCwindow* WndSelect = NULL;
+WSClist* Mailist_016 = NULL;
+WSCvbtn* Maivbtn_017 = NULL;
+WSCvbtn* Maivbtn_018 = NULL;
 
 //--- OBJECT src ---//
 
@@ -130,6 +138,10 @@ WSCbase* _create_win_MainWindow(){
   MainWindow->setPropertyV(WSNvis,(WSCbool)1);
     extern void MainInitFunc(WSCbase*);
     MainWindow->addProcedureV("MainInit","MainInitFunc",MainInitFunc,0);
+    extern void MainWindowExitFunc(WSCbase*);
+    MainWindow->addProcedureV("MainWindowExit","MainWindowExitFunc",MainWindowExitFunc,32);
+    extern void MainWindowCloseFunc(WSCbase*);
+    MainWindow->addProcedureV("MainWindowClose","MainWindowCloseFunc",MainWindowCloseFunc,56);
 
   Maimenu_000 = new  WSCmenuArea(MainWindow,"Maimenu_000");
       Maimenu_000->initialize();
@@ -251,18 +263,6 @@ WSCbase* _create_win_MainWindow(){
   Maivlab_014->setPropertyV(WSNwidth,(unsigned short)90);
   Maivlab_014->setPropertyV(WSNheight,(unsigned short)25);
 
-  CollectionsCombo = new  WSCoption(Maiinde_012,"CollectionsCombo");
-      CollectionsCombo->initialize();
-  CollectionsCombo->setPropertyV(WSNuserValue,(long)1);
-  CollectionsCombo->setPropertyV(WSNvalue,(long)1);
-  CollectionsCombo->setPropertyV(WSNlabelString,"item1");
-  CollectionsCombo->setPropertyV(WSNname,"CollectionsCombo");
-  CollectionsCombo->setPropertyV(WSNvis,(WSCbool)1);
-  CollectionsCombo->setPropertyV(WSNx,(short)95);
-  CollectionsCombo->setPropertyV(WSNy,(short)30);
-  CollectionsCombo->setPropertyV(WSNwidth,(unsigned short)80);
-  CollectionsCombo->setPropertyV(WSNheight,(unsigned short)25);
-
   Maivlab_018 = new  WSCvlabel(Maiinde_012,"Maivlab_018");
       Maivlab_018->initialize();
   Maivlab_018->setPropertyV(WSNuserValue,(long)1);
@@ -273,18 +273,6 @@ WSCbase* _create_win_MainWindow(){
   Maivlab_018->setPropertyV(WSNy,(short)55);
   Maivlab_018->setPropertyV(WSNwidth,(unsigned short)90);
   Maivlab_018->setPropertyV(WSNheight,(unsigned short)25);
-
-  ClassCombo = new  WSCoption(Maiinde_012,"ClassCombo");
-      ClassCombo->initialize();
-  ClassCombo->setPropertyV(WSNuserValue,(long)1);
-  ClassCombo->setPropertyV(WSNvalue,(long)3);
-  ClassCombo->setPropertyV(WSNlabelString,"item3");
-  ClassCombo->setPropertyV(WSNname,"ClassCombo");
-  ClassCombo->setPropertyV(WSNvis,(WSCbool)1);
-  ClassCombo->setPropertyV(WSNx,(short)95);
-  ClassCombo->setPropertyV(WSNy,(short)105);
-  ClassCombo->setPropertyV(WSNwidth,(unsigned short)80);
-  ClassCombo->setPropertyV(WSNheight,(unsigned short)25);
 
   PalletEdit = new  WSCvifield(Maiinde_012,"PalletEdit");
       PalletEdit->initialize();
@@ -317,18 +305,6 @@ WSCbase* _create_win_MainWindow(){
   Maivlab_023->setPropertyV(WSNy,(short)105);
   Maivlab_023->setPropertyV(WSNwidth,(unsigned short)90);
   Maivlab_023->setPropertyV(WSNheight,(unsigned short)25);
-
-  CarryItemCombo = new  WSCoption(Maiinde_012,"CarryItemCombo");
-      CarryItemCombo->initialize();
-  CarryItemCombo->setPropertyV(WSNuserValue,(long)1);
-  CarryItemCombo->setPropertyV(WSNvalue,(long)1);
-  CarryItemCombo->setPropertyV(WSNlabelString,"item1");
-  CarryItemCombo->setPropertyV(WSNname,"CarryItemCombo");
-  CarryItemCombo->setPropertyV(WSNvis,(WSCbool)1);
-  CarryItemCombo->setPropertyV(WSNx,(short)95);
-  CarryItemCombo->setPropertyV(WSNy,(short)280);
-  CarryItemCombo->setPropertyV(WSNwidth,(unsigned short)80);
-  CarryItemCombo->setPropertyV(WSNheight,(unsigned short)25);
 
   VitalityEdit = new  WSCvifield(Maiinde_012,"VitalityEdit");
       VitalityEdit->initialize();
@@ -707,18 +683,6 @@ WSCbase* _create_win_MainWindow(){
   Maivlab_008->setPropertyV(WSNy,(short)105);
   Maivlab_008->setPropertyV(WSNheight,(unsigned short)25);
 
-  Maiopti_009 = new  WSCoption(Maiinde_012,"Maiopti_009");
-      Maiopti_009->initialize();
-  Maiopti_009->setPropertyV(WSNuserValue,(long)1);
-  Maiopti_009->setPropertyV(WSNvalue,(long)1);
-  Maiopti_009->setPropertyV(WSNlabelString,"item1");
-  Maiopti_009->setPropertyV(WSNname,"Maiopti_009");
-  Maiopti_009->setPropertyV(WSNvis,(WSCbool)1);
-  Maiopti_009->setPropertyV(WSNx,(short)450);
-  Maiopti_009->setPropertyV(WSNy,(short)55);
-  Maiopti_009->setPropertyV(WSNwidth,(unsigned short)80);
-  Maiopti_009->setPropertyV(WSNheight,(unsigned short)25);
-
   Maivlab_010 = new  WSCvlabel(Maiinde_012,"Maivlab_010");
       Maivlab_010->initialize();
   Maivlab_010->setPropertyV(WSNuserValue,(long)1);
@@ -768,90 +732,6 @@ WSCbase* _create_win_MainWindow(){
   Maivlab_015->setPropertyV(WSNx,(short)350);
   Maivlab_015->setPropertyV(WSNy,(short)230);
   Maivlab_015->setPropertyV(WSNheight,(unsigned short)25);
-
-  Maiopti_017 = new  WSCoption(Maiinde_012,"Maiopti_017");
-      Maiopti_017->initialize();
-  Maiopti_017->setPropertyV(WSNuserValue,(long)1);
-  Maiopti_017->setPropertyV(WSNvalue,(long)1);
-  Maiopti_017->setPropertyV(WSNlabelString,"item1");
-  Maiopti_017->setPropertyV(WSNname,"Maiopti_017");
-  Maiopti_017->setPropertyV(WSNvis,(WSCbool)1);
-  Maiopti_017->setPropertyV(WSNx,(short)450);
-  Maiopti_017->setPropertyV(WSNy,(short)80);
-  Maiopti_017->setPropertyV(WSNwidth,(unsigned short)80);
-  Maiopti_017->setPropertyV(WSNheight,(unsigned short)25);
-
-  Maiopti_018 = new  WSCoption(Maiinde_012,"Maiopti_018");
-      Maiopti_018->initialize();
-  Maiopti_018->setPropertyV(WSNuserValue,(long)1);
-  Maiopti_018->setPropertyV(WSNvalue,(long)1);
-  Maiopti_018->setPropertyV(WSNlabelString,"item1");
-  Maiopti_018->setPropertyV(WSNname,"Maiopti_018");
-  Maiopti_018->setPropertyV(WSNvis,(WSCbool)1);
-  Maiopti_018->setPropertyV(WSNx,(short)450);
-  Maiopti_018->setPropertyV(WSNy,(short)105);
-  Maiopti_018->setPropertyV(WSNwidth,(unsigned short)80);
-  Maiopti_018->setPropertyV(WSNheight,(unsigned short)25);
-
-  Maiopti_020 = new  WSCoption(Maiinde_012,"Maiopti_020");
-      Maiopti_020->initialize();
-  Maiopti_020->setPropertyV(WSNuserValue,(long)1);
-  Maiopti_020->setPropertyV(WSNvalue,(long)1);
-  Maiopti_020->setPropertyV(WSNlabelString,"item1");
-  Maiopti_020->setPropertyV(WSNname,"Maiopti_020");
-  Maiopti_020->setPropertyV(WSNvis,(WSCbool)1);
-  Maiopti_020->setPropertyV(WSNx,(short)450);
-  Maiopti_020->setPropertyV(WSNy,(short)130);
-  Maiopti_020->setPropertyV(WSNwidth,(unsigned short)80);
-  Maiopti_020->setPropertyV(WSNheight,(unsigned short)25);
-
-  Maiopti_021 = new  WSCoption(Maiinde_012,"Maiopti_021");
-      Maiopti_021->initialize();
-  Maiopti_021->setPropertyV(WSNuserValue,(long)1);
-  Maiopti_021->setPropertyV(WSNvalue,(long)1);
-  Maiopti_021->setPropertyV(WSNlabelString,"item1");
-  Maiopti_021->setPropertyV(WSNname,"Maiopti_021");
-  Maiopti_021->setPropertyV(WSNvis,(WSCbool)1);
-  Maiopti_021->setPropertyV(WSNx,(short)450);
-  Maiopti_021->setPropertyV(WSNy,(short)155);
-  Maiopti_021->setPropertyV(WSNwidth,(unsigned short)80);
-  Maiopti_021->setPropertyV(WSNheight,(unsigned short)25);
-
-  Maiopti_022 = new  WSCoption(Maiinde_012,"Maiopti_022");
-      Maiopti_022->initialize();
-  Maiopti_022->setPropertyV(WSNuserValue,(long)1);
-  Maiopti_022->setPropertyV(WSNvalue,(long)1);
-  Maiopti_022->setPropertyV(WSNlabelString,"item1");
-  Maiopti_022->setPropertyV(WSNname,"Maiopti_022");
-  Maiopti_022->setPropertyV(WSNvis,(WSCbool)1);
-  Maiopti_022->setPropertyV(WSNx,(short)450);
-  Maiopti_022->setPropertyV(WSNy,(short)180);
-  Maiopti_022->setPropertyV(WSNwidth,(unsigned short)80);
-  Maiopti_022->setPropertyV(WSNheight,(unsigned short)25);
-
-  Maiopti_023 = new  WSCoption(Maiinde_012,"Maiopti_023");
-      Maiopti_023->initialize();
-  Maiopti_023->setPropertyV(WSNuserValue,(long)1);
-  Maiopti_023->setPropertyV(WSNvalue,(long)1);
-  Maiopti_023->setPropertyV(WSNlabelString,"item1");
-  Maiopti_023->setPropertyV(WSNname,"Maiopti_023");
-  Maiopti_023->setPropertyV(WSNvis,(WSCbool)1);
-  Maiopti_023->setPropertyV(WSNx,(short)450);
-  Maiopti_023->setPropertyV(WSNy,(short)205);
-  Maiopti_023->setPropertyV(WSNwidth,(unsigned short)80);
-  Maiopti_023->setPropertyV(WSNheight,(unsigned short)25);
-
-  Maiopti_025 = new  WSCoption(Maiinde_012,"Maiopti_025");
-      Maiopti_025->initialize();
-  Maiopti_025->setPropertyV(WSNuserValue,(long)1);
-  Maiopti_025->setPropertyV(WSNvalue,(long)1);
-  Maiopti_025->setPropertyV(WSNlabelString,"item1");
-  Maiopti_025->setPropertyV(WSNname,"Maiopti_025");
-  Maiopti_025->setPropertyV(WSNvis,(WSCbool)1);
-  Maiopti_025->setPropertyV(WSNx,(short)450);
-  Maiopti_025->setPropertyV(WSNy,(short)230);
-  Maiopti_025->setPropertyV(WSNwidth,(unsigned short)80);
-  Maiopti_025->setPropertyV(WSNheight,(unsigned short)25);
 
   Maivifi_026 = new  WSCvifield(Maiinde_012,"Maivifi_026");
       Maivifi_026->initialize();
@@ -1009,31 +889,6 @@ WSCbase* _create_win_MainWindow(){
   GravityEdit->setPropertyV(WSNwidth,(unsigned short)80);
   GravityEdit->setPropertyV(WSNheight,(unsigned short)25);
 
-  SpeedCombo = new  WSCoption(Maiinde_012,"SpeedCombo");
-      SpeedCombo->initialize();
-  SpeedCombo->setPropertyV(WSNuserValue,(long)1);
-  SpeedCombo->setPropertyV(WSNvalue,(long)1);
-  SpeedCombo->setPropertyV(WSNlabelString,"item1");
-  SpeedCombo->setPropertyV(WSNname,"SpeedCombo");
-  SpeedCombo->setPropertyV(WSNvis,(WSCbool)1);
-  SpeedCombo->setPropertyV(WSNx,(short)175);
-  SpeedCombo->setPropertyV(WSNy,(short)380);
-  SpeedCombo->setPropertyV(WSNwidth,(unsigned short)80);
-  SpeedCombo->setPropertyV(WSNheight,(unsigned short)25);
-
-  IntelligenceCombo = new  WSCoption(Maiinde_012,"IntelligenceCombo");
-      IntelligenceCombo->initialize();
-  IntelligenceCombo->setPropertyV(WSNuserValue,(long)1);
-  IntelligenceCombo->setPropertyV(WSNmenuItems,"Low:1:IntelligenceLow,Average:2:IntelligenceAverage,High:3:IntelligenceHigh");
-  IntelligenceCombo->setPropertyV(WSNvalue,(long)1);
-  IntelligenceCombo->setPropertyV(WSNlabelString,"Low");
-  IntelligenceCombo->setPropertyV(WSNname,"IntelligenceCombo");
-  IntelligenceCombo->setPropertyV(WSNvis,(WSCbool)1);
-  IntelligenceCombo->setPropertyV(WSNx,(short)95);
-  IntelligenceCombo->setPropertyV(WSNy,(short)355);
-  IntelligenceCombo->setPropertyV(WSNwidth,(unsigned short)80);
-  IntelligenceCombo->setPropertyV(WSNheight,(unsigned short)25);
-
   ListImmunities = new  WSClist(Maiinde_012,"ListImmunities");
       ListImmunities->initialize();
   ListImmunities->setPropertyV(WSNuserValue,(long)2);
@@ -1162,6 +1017,145 @@ WSCbase* _create_win_MainWindow(){
   Maivbtn_020->setPropertyV(WSNy,(short)425);
   Maivbtn_020->setPropertyV(WSNwidth,(unsigned short)115);
 
+  SpeedCombo = new  WSCoption(Maiinde_012,"SpeedCombo");
+      SpeedCombo->initialize();
+  SpeedCombo->setPropertyV(WSNuserValue,(long)1);
+  SpeedCombo->setPropertyV(WSNvalue,(long)1);
+  SpeedCombo->setPropertyV(WSNlabelString,"item1");
+  SpeedCombo->setPropertyV(WSNname,"SpeedCombo");
+  SpeedCombo->setPropertyV(WSNvis,(WSCbool)1);
+  SpeedCombo->setPropertyV(WSNx,(short)175);
+  SpeedCombo->setPropertyV(WSNy,(short)380);
+  SpeedCombo->setPropertyV(WSNwidth,(unsigned short)80);
+  SpeedCombo->setPropertyV(WSNheight,(unsigned short)25);
+
+  IntelligenceCombo = new  WSCoption(Maiinde_012,"IntelligenceCombo");
+      IntelligenceCombo->initialize();
+  IntelligenceCombo->setPropertyV(WSNuserValue,(long)1);
+  IntelligenceCombo->setPropertyV(WSNmenuItems,"Low:1:ep1_name,Average:2:ep2_name,High:3:ep3_name");
+  IntelligenceCombo->setPropertyV(WSNvalue,(long)1);
+  IntelligenceCombo->setPropertyV(WSNlabelString,"Low");
+  IntelligenceCombo->setPropertyV(WSNname,"IntelligenceCombo");
+  IntelligenceCombo->setPropertyV(WSNvis,(WSCbool)1);
+  IntelligenceCombo->setPropertyV(WSNx,(short)95);
+  IntelligenceCombo->setPropertyV(WSNy,(short)355);
+  IntelligenceCombo->setPropertyV(WSNwidth,(unsigned short)80);
+  IntelligenceCombo->setPropertyV(WSNheight,(unsigned short)25);
+    extern void IntelligenceValueChFunc(WSCbase*);
+    IntelligenceCombo->addProcedureV("IntelligenceValueCh","IntelligenceValueChFunc",IntelligenceValueChFunc,3);
+
+  Maivbtn_021 = new  WSCvbtn(Maiinde_012,"Maivbtn_021");
+      Maivbtn_021->initialize();
+  Maivbtn_021->setPropertyV(WSNuserValue,(long)1);
+  Maivbtn_021->setPropertyV(WSNname,"Maivbtn_021");
+  Maivbtn_021->setPropertyV(WSNvis,(WSCbool)1);
+  Maivbtn_021->setPropertyV(WSNx,(short)95);
+  Maivbtn_021->setPropertyV(WSNy,(short)30);
+  Maivbtn_021->setPropertyV(WSNwidth,(unsigned short)80);
+  Maivbtn_021->setPropertyV(WSNheight,(unsigned short)25);
+
+  Maivbtn_022 = new  WSCvbtn(Maiinde_012,"Maivbtn_022");
+      Maivbtn_022->initialize();
+  Maivbtn_022->setPropertyV(WSNuserValue,(long)1);
+  Maivbtn_022->setPropertyV(WSNname,"Maivbtn_022");
+  Maivbtn_022->setPropertyV(WSNvis,(WSCbool)1);
+  Maivbtn_022->setPropertyV(WSNx,(short)95);
+  Maivbtn_022->setPropertyV(WSNy,(short)280);
+  Maivbtn_022->setPropertyV(WSNwidth,(unsigned short)80);
+  Maivbtn_022->setPropertyV(WSNheight,(unsigned short)25);
+
+  Maivbtn_023 = new  WSCvbtn(Maiinde_012,"Maivbtn_023");
+      Maivbtn_023->initialize();
+  Maivbtn_023->setPropertyV(WSNuserValue,(long)1);
+  Maivbtn_023->setPropertyV(WSNname,"Maivbtn_023");
+  Maivbtn_023->setPropertyV(WSNvis,(WSCbool)1);
+  Maivbtn_023->setPropertyV(WSNx,(short)450);
+  Maivbtn_023->setPropertyV(WSNy,(short)55);
+  Maivbtn_023->setPropertyV(WSNwidth,(unsigned short)80);
+  Maivbtn_023->setPropertyV(WSNheight,(unsigned short)25);
+
+  Maivbtn_024 = new  WSCvbtn(Maiinde_012,"Maivbtn_024");
+      Maivbtn_024->initialize();
+  Maivbtn_024->setPropertyV(WSNuserValue,(long)1);
+  Maivbtn_024->setPropertyV(WSNname,"Maivbtn_024");
+  Maivbtn_024->setPropertyV(WSNvis,(WSCbool)1);
+  Maivbtn_024->setPropertyV(WSNx,(short)450);
+  Maivbtn_024->setPropertyV(WSNy,(short)80);
+  Maivbtn_024->setPropertyV(WSNwidth,(unsigned short)80);
+  Maivbtn_024->setPropertyV(WSNheight,(unsigned short)25);
+
+  Maivbtn_025 = new  WSCvbtn(Maiinde_012,"Maivbtn_025");
+      Maivbtn_025->initialize();
+  Maivbtn_025->setPropertyV(WSNuserValue,(long)1);
+  Maivbtn_025->setPropertyV(WSNname,"Maivbtn_025");
+  Maivbtn_025->setPropertyV(WSNvis,(WSCbool)1);
+  Maivbtn_025->setPropertyV(WSNx,(short)450);
+  Maivbtn_025->setPropertyV(WSNy,(short)105);
+  Maivbtn_025->setPropertyV(WSNwidth,(unsigned short)80);
+  Maivbtn_025->setPropertyV(WSNheight,(unsigned short)25);
+
+  Maivbtn_026 = new  WSCvbtn(Maiinde_012,"Maivbtn_026");
+      Maivbtn_026->initialize();
+  Maivbtn_026->setPropertyV(WSNuserValue,(long)1);
+  Maivbtn_026->setPropertyV(WSNname,"Maivbtn_026");
+  Maivbtn_026->setPropertyV(WSNvis,(WSCbool)1);
+  Maivbtn_026->setPropertyV(WSNx,(short)450);
+  Maivbtn_026->setPropertyV(WSNy,(short)130);
+  Maivbtn_026->setPropertyV(WSNwidth,(unsigned short)80);
+  Maivbtn_026->setPropertyV(WSNheight,(unsigned short)25);
+
+  Maivbtn_027 = new  WSCvbtn(Maiinde_012,"Maivbtn_027");
+      Maivbtn_027->initialize();
+  Maivbtn_027->setPropertyV(WSNuserValue,(long)1);
+  Maivbtn_027->setPropertyV(WSNname,"Maivbtn_027");
+  Maivbtn_027->setPropertyV(WSNvis,(WSCbool)1);
+  Maivbtn_027->setPropertyV(WSNx,(short)450);
+  Maivbtn_027->setPropertyV(WSNy,(short)155);
+  Maivbtn_027->setPropertyV(WSNwidth,(unsigned short)80);
+  Maivbtn_027->setPropertyV(WSNheight,(unsigned short)25);
+
+  Maivbtn_028 = new  WSCvbtn(Maiinde_012,"Maivbtn_028");
+      Maivbtn_028->initialize();
+  Maivbtn_028->setPropertyV(WSNuserValue,(long)1);
+  Maivbtn_028->setPropertyV(WSNname,"Maivbtn_028");
+  Maivbtn_028->setPropertyV(WSNvis,(WSCbool)1);
+  Maivbtn_028->setPropertyV(WSNx,(short)450);
+  Maivbtn_028->setPropertyV(WSNy,(short)180);
+  Maivbtn_028->setPropertyV(WSNwidth,(unsigned short)80);
+  Maivbtn_028->setPropertyV(WSNheight,(unsigned short)25);
+
+  Maivbtn_029 = new  WSCvbtn(Maiinde_012,"Maivbtn_029");
+      Maivbtn_029->initialize();
+  Maivbtn_029->setPropertyV(WSNuserValue,(long)1);
+  Maivbtn_029->setPropertyV(WSNname,"Maivbtn_029");
+  Maivbtn_029->setPropertyV(WSNvis,(WSCbool)1);
+  Maivbtn_029->setPropertyV(WSNx,(short)450);
+  Maivbtn_029->setPropertyV(WSNy,(short)205);
+  Maivbtn_029->setPropertyV(WSNwidth,(unsigned short)80);
+  Maivbtn_029->setPropertyV(WSNheight,(unsigned short)25);
+
+  Maivbtn_030 = new  WSCvbtn(Maiinde_012,"Maivbtn_030");
+      Maivbtn_030->initialize();
+  Maivbtn_030->setPropertyV(WSNuserValue,(long)1);
+  Maivbtn_030->setPropertyV(WSNname,"Maivbtn_030");
+  Maivbtn_030->setPropertyV(WSNvis,(WSCbool)1);
+  Maivbtn_030->setPropertyV(WSNx,(short)450);
+  Maivbtn_030->setPropertyV(WSNy,(short)230);
+  Maivbtn_030->setPropertyV(WSNwidth,(unsigned short)80);
+  Maivbtn_030->setPropertyV(WSNheight,(unsigned short)25);
+
+  Maiopti_031 = new  WSCoption(Maiinde_012,"Maiopti_031");
+      Maiopti_031->initialize();
+  Maiopti_031->setPropertyV(WSNuserValue,(long)1);
+  Maiopti_031->setPropertyV(WSNvalue,(long)1);
+  Maiopti_031->setPropertyV(WSNlabelString,"item1");
+  Maiopti_031->setPropertyV(WSNname,"Maiopti_031");
+  Maiopti_031->setPropertyV(WSNvis,(WSCbool)1);
+  Maiopti_031->setPropertyV(WSNx,(short)95);
+  Maiopti_031->setPropertyV(WSNy,(short)105);
+  Maiopti_031->setPropertyV(WSNwidth,(unsigned short)80);
+  Maiopti_031->setPropertyV(WSNheight,(unsigned short)25);
+
   ListMonsterType = new  WSClist(WndMonster,"ListMonsterType");
       ListMonsterType->initialize();
   ListMonsterType->setPropertyV(WSNtitleString,"");
@@ -1176,6 +1170,85 @@ WSCbase* _create_win_MainWindow(){
   ListMonsterType->setPropertyV(WSNwidth,(unsigned short)105);
   ListMonsterType->setPropertyV(WSNheight,(unsigned short)450);
   ListMonsterType->setPropertyV(WSNvis,(WSCbool)1);
+    extern void ListMonsterTypeItemSelFunc(WSCbase*);
+    ListMonsterType->addProcedureV("ListMonsterTypeItemSel","ListMonsterTypeItemSelFunc",ListMonsterTypeItemSelFunc,35);
+
+  WndEffect = new  WSCwindow(MainWindow,"WndEffect");
+      WndEffect->initialize();
+  WndEffect->setPropertyV(WSNname,"WndEffect");
+  WndEffect->setPropertyV(WSNtitleString,"Effect");
+  WndEffect->setPropertyV(WSNx,(short)78);
+  WndEffect->setPropertyV(WSNy,(short)246);
+  WndEffect->setPropertyV(WSNwidth,(unsigned short)680);
+  WndEffect->setPropertyV(WSNheight,(unsigned short)460);
+  WndEffect->setPropertyV(WSNshadowThickness,(unsigned char)2);
+
+  WndProjectile = new  WSCwindow(MainWindow,"WndProjectile");
+      WndProjectile->initialize();
+  WndProjectile->setPropertyV(WSNname,"WndProjectile");
+  WndProjectile->setPropertyV(WSNtitleString,"Projectile");
+  WndProjectile->setPropertyV(WSNx,(short)78);
+  WndProjectile->setPropertyV(WSNy,(short)65);
+  WndProjectile->setPropertyV(WSNwidth,(unsigned short)675);
+  WndProjectile->setPropertyV(WSNheight,(unsigned short)459);
+  WndProjectile->setPropertyV(WSNshadowThickness,(unsigned char)2);
+
+  WndPhysics = new  WSCwindow(MainWindow,"WndPhysics");
+      WndPhysics->initialize();
+  WndPhysics->setPropertyV(WSNname,"WndPhysics");
+  WndPhysics->setPropertyV(WSNtitleString,"Physics");
+  WndPhysics->setPropertyV(WSNx,(short)64);
+  WndPhysics->setPropertyV(WSNy,(short)85);
+  WndPhysics->setPropertyV(WSNwidth,(unsigned short)674);
+  WndPhysics->setPropertyV(WSNheight,(unsigned short)457);
+  WndPhysics->setPropertyV(WSNshadowThickness,(unsigned char)2);
+
+  WndWeapon = new  WSCwindow(MainWindow,"WndWeapon");
+      WndWeapon->initialize();
+  WndWeapon->setPropertyV(WSNname,"WndWeapon");
+  WndWeapon->setPropertyV(WSNtitleString,"Weapon");
+  WndWeapon->setPropertyV(WSNx,(short)51);
+  WndWeapon->setPropertyV(WSNy,(short)46);
+  WndWeapon->setPropertyV(WSNwidth,(unsigned short)669);
+  WndWeapon->setPropertyV(WSNheight,(unsigned short)455);
+  WndWeapon->setPropertyV(WSNshadowThickness,(unsigned char)2);
+
+  WndSelect = new  WSCwindow(MainWindow,"WndSelect");
+      WndSelect->initialize();
+  WndSelect->setPropertyV(WSNname,"WndSelect");
+  WndSelect->setPropertyV(WSNtitleString,"Select");
+  WndSelect->setPropertyV(WSNx,(short)95);
+  WndSelect->setPropertyV(WSNy,(short)272);
+  WndSelect->setPropertyV(WSNwidth,(unsigned short)255);
+  WndSelect->setPropertyV(WSNheight,(unsigned short)470);
+  WndSelect->setPropertyV(WSNshadowThickness,(unsigned char)2);
+
+  Mailist_016 = new  WSClist(WndSelect,"Mailist_016");
+      Mailist_016->initialize();
+  Mailist_016->setPropertyV(WSNtitleString,"title6");
+  Mailist_016->setPropertyV(WSNworkHeight,(unsigned short)26);
+  Mailist_016->setPropertyV(WSNname,"Mailist_016");
+  Mailist_016->setPropertyV(WSNx,(short)5);
+  Mailist_016->setPropertyV(WSNy,(short)5);
+  Mailist_016->setPropertyV(WSNwidth,(unsigned short)135);
+  Mailist_016->setPropertyV(WSNheight,(unsigned short)460);
+  Mailist_016->setPropertyV(WSNvis,(WSCbool)1);
+
+  Maivbtn_017 = new  WSCvbtn(WndSelect,"Maivbtn_017");
+      Maivbtn_017->initialize();
+  Maivbtn_017->setPropertyV(WSNlabelString,"OK");
+  Maivbtn_017->setPropertyV(WSNname,"Maivbtn_017");
+  Maivbtn_017->setPropertyV(WSNvis,(WSCbool)1);
+  Maivbtn_017->setPropertyV(WSNx,(short)145);
+  Maivbtn_017->setPropertyV(WSNy,(short)390);
+
+  Maivbtn_018 = new  WSCvbtn(WndSelect,"Maivbtn_018");
+      Maivbtn_018->initialize();
+  Maivbtn_018->setPropertyV(WSNlabelString,"Cancel");
+  Maivbtn_018->setPropertyV(WSNname,"Maivbtn_018");
+  Maivbtn_018->setPropertyV(WSNvis,(WSCbool)1);
+  Maivbtn_018->setPropertyV(WSNx,(short)145);
+  Maivbtn_018->setPropertyV(WSNy,(short)425);
 
    MainWindow->setVisible(True);
    return MainWindow;

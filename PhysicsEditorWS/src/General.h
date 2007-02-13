@@ -16,6 +16,8 @@
 #include "weapon_definitions.h"
 #include <WSCbase.h>
 
+#include <HPLLib/HPLAlephLib.h>
+
 namespace Windows{
 	enum{
 		None,
@@ -58,6 +60,16 @@ extern struct effect_definition effect_default_definitions[NUMBER_OF_EFFECT_TYPE
 extern struct projectile_definition projectile_default_definitions[NUMBER_OF_PROJECTILE_TYPES];
 extern struct physics_constants physics_default_models[NUMBER_OF_PHYSICS_MODELS];
 extern struct weapon_definition weapon_default_definitions[MAXIMUM_NUMBER_OF_WEAPONS];
+
+//stock names
+extern std::vector<std::string> stockCollections;
+extern std::vector<std::string> stockSpeeds;
+extern std::vector<std::string> stockMonsterClasses;
+extern std::vector<std::string> stockItemTypes;
+
+//index-value
+extern int valueSpeed[NUMBER_OF_SPEED_INFORMATIONS];
+extern int valueMonsterClasses[NUMBER_OF_CLASS_INFORMATIONS];
 
 void setDefinitionsToDefault();
 void setupDialog(WSCbase* object);

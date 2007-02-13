@@ -10,7 +10,7 @@ DBGRM = $(RM)
 # setting of includes                    #
 ##########################################
 
-ALL_INCLUDES = -I. -I'$(WSDIR)/include' -I'../../AlephOneSrc' -I'../../HPLLib' 
+ALL_INCLUDES = -I. -I'$(WSDIR)/include' -I'../../AlephOneSrc' -I'../../' 
 
 ##########################################
 # setting of libraries                   #
@@ -29,6 +29,8 @@ WINOBJ = PhysicsEditorWS.o \
 
 OPOBJ = \
         MainInitFunc.o \
+        MainWindowExitFunc.o \
+        MainWindowCloseFunc.o \
         open1.o \
         close1.o \
         exit1.o \
@@ -36,9 +38,11 @@ OPOBJ = \
         FileSaveFunc.o \
         BtnMonsterPressFunc.o \
         WndMonsterClosedFunc.o \
-        MonsterTabsInitFunc.o 
+        MonsterTabsInitFunc.o \
+        IntelligenceValueChFunc.o \
+        ListMonsterTypeItemSelFunc.o 
 
-OBJS = $(WINOBJ) $(OPOBJ)  
+OBJS = $(WINOBJ) $(OPOBJ) V:/cvs_/cvs_sf/marathon/HPLLib/HPLStringModifier.o   
 
 ##########################################
 # setting of target binary               #

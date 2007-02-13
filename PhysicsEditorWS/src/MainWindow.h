@@ -15,9 +15,9 @@
 #include <WSCwindow.h>
 #include <WSCindexForm.h>
 #include <WSCvlabel.h>
-#include <WSCoption.h>
 #include <WSCvifield.h>
 #include <WSClist.h>
+#include <WSCoption.h>
 
 //--- OBJECT instance variable ---//
 extern WSCmainWindow* MainWindow;
@@ -31,13 +31,10 @@ extern WSCvbtn* BtnWeapon;
 extern WSCwindow* WndMonster;
 extern WSCindexForm* Maiinde_012;
 extern WSCvlabel* Maivlab_014;
-extern WSCoption* CollectionsCombo;
 extern WSCvlabel* Maivlab_018;
-extern WSCoption* ClassCombo;
 extern WSCvifield* PalletEdit;
 extern WSCvlabel* Maivlab_021;
 extern WSCvlabel* Maivlab_023;
-extern WSCoption* CarryItemCombo;
 extern WSCvifield* VitalityEdit;
 extern WSCvlabel* Maivlab_026;
 extern WSCvlabel* Maivlab_027;
@@ -74,19 +71,11 @@ extern WSCvlabel* Maivlab_005;
 extern WSCvlabel* Maivlab_006;
 extern WSCvlabel* Maivlab_007;
 extern WSCvlabel* Maivlab_008;
-extern WSCoption* Maiopti_009;
 extern WSCvlabel* Maivlab_010;
 extern WSCvlabel* Maivlab_011;
 extern WSCvlabel* Maivlab_012;
 extern WSCvlabel* Maivlab_013;
 extern WSCvlabel* Maivlab_015;
-extern WSCoption* Maiopti_017;
-extern WSCoption* Maiopti_018;
-extern WSCoption* Maiopti_020;
-extern WSCoption* Maiopti_021;
-extern WSCoption* Maiopti_022;
-extern WSCoption* Maiopti_023;
-extern WSCoption* Maiopti_025;
 extern WSCvifield* Maivifi_026;
 extern WSCvifield* Maivifi_027;
 extern WSCvlabel* Maivlab_028;
@@ -102,8 +91,6 @@ extern WSCvifield* HalfVisualArcEdit;
 extern WSCvifield* VertVisualArc;
 extern WSCvifield* SpeedEdit;
 extern WSCvifield* GravityEdit;
-extern WSCoption* SpeedCombo;
-extern WSCoption* IntelligenceCombo;
 extern WSClist* ListImmunities;
 extern WSCvlabel* Maivlab_003;
 extern WSClist* Mailist_004;
@@ -114,6 +101,27 @@ extern WSCvlabel* Maivlab_017;
 extern WSClist* Mailist_018;
 extern WSClist* Mailist_019;
 extern WSCvbtn* Maivbtn_020;
+extern WSCoption* SpeedCombo;
+extern WSCoption* IntelligenceCombo;
+extern WSCvbtn* Maivbtn_021;
+extern WSCvbtn* Maivbtn_022;
+extern WSCvbtn* Maivbtn_023;
+extern WSCvbtn* Maivbtn_024;
+extern WSCvbtn* Maivbtn_025;
+extern WSCvbtn* Maivbtn_026;
+extern WSCvbtn* Maivbtn_027;
+extern WSCvbtn* Maivbtn_028;
+extern WSCvbtn* Maivbtn_029;
+extern WSCvbtn* Maivbtn_030;
+extern WSCoption* Maiopti_031;
 extern WSClist* ListMonsterType;
+extern WSCwindow* WndEffect;
+extern WSCwindow* WndProjectile;
+extern WSCwindow* WndPhysics;
+extern WSCwindow* WndWeapon;
+extern WSCwindow* WndSelect;
+extern WSClist* Mailist_016;
+extern WSCvbtn* Maivbtn_017;
+extern WSCvbtn* Maivbtn_018;
 
 #endif /* _MainWindow_H */
