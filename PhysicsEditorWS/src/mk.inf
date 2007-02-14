@@ -42,7 +42,7 @@ OPOBJ = \
         IntelligenceValueChFunc.o \
         ListMonsterTypeItemSelFunc.o 
 
-OBJS = $(WINOBJ) $(OPOBJ) V:/cvs_/cvs_sf/marathon/HPLLib/HPLStringModifier.o   
+OBJS = $(WINOBJ) $(OPOBJ) ../../HPLLib/HPLStringModifier.o   
 
 ##########################################
 # setting of target binary               #

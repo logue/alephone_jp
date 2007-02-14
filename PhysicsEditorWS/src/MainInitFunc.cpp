@@ -150,15 +150,22 @@ void setupDialog(WSCbase* object)
 		//vertvisualarc
 		setInteger(indextab->getChildInstance("VertVisualArc"), monster_definitions[type].half_vertical_visual_arc);
 		//interlligence
-		indextab->getChildInstance("IntelligenceCombo")->setProperty(WSNvalue,
-			monster_definitions[type].intelligence + 1);
+		WSCoption* opt = (WSCoption*)indextab->getChildInstance("IntelligenceCombo");
+		long num = monster_definitions[type].intelligence;
+//		opt->onValueChange(num);
+//		opt->setProperty(WSNvalue, num);
+		char* intelligences[10]={"Low", "Average", "High"};
+		indextab->getChildInstance("IntelligenceCombo")->setProperty(WSNvalue, num);//WSNlabelString
+//		indextab->getChildInstance("IntelligenceCombo")->setProperty(WSNlabelString, intelligences[num-1]);//WSNlabelString
+		
+		//opt->update();
 		//setSelectedValue((WSCoption*)indextab->getChildInstance("IntelligenceCombo"),
 		//	monster_definitions[type].intelligence);
 		//speed
 		setInteger(indextab->getChildInstance("SpeedEdit"), monster_definitions[type].half_vertical_visual_arc);
 		//indextab->getChildInstance("SpeedCombo")->setProperty(WSNvalue, );
 		//gravity
-		setInteger(indextab->getChildInstance("Gravity"), monster_definitions[type].gravity);
+		setInteger(indextab->getChildInstance("GravityEdit"), monster_definitions[type].gravity);
 	}
 	object->update();
 }

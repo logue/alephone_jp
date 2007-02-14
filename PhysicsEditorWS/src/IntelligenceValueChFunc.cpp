@@ -15,6 +15,6 @@ void IntelligenceValueChFunc(WSCbase* object){
 	long index = ((WSCoption*)object)->getValue();
 	//getSelectedValue(((WSCoption*)object));//->getValue();
 	//change value
-	monster_definitions[selectedMonsterType].intelligence = index - 1;
+	//monster_definitions[selectedMonsterType].intelligence = index - 1;
 }
 static WSCfunctionRegister  op("IntelligenceValueChFunc",(void*)IntelligenceValueChFunc);

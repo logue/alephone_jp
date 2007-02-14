@@ -1033,8 +1033,8 @@ WSCbase* _create_win_MainWindow(){
       IntelligenceCombo->initialize();
   IntelligenceCombo->setPropertyV(WSNuserValue,(long)1);
   IntelligenceCombo->setPropertyV(WSNmenuItems,"Low:1:ep1_name,Average:2:ep2_name,High:3:ep3_name");
-  IntelligenceCombo->setPropertyV(WSNvalue,(long)1);
-  IntelligenceCombo->setPropertyV(WSNlabelString,"Low");
+  IntelligenceCombo->setPropertyV(WSNvalue,(long)3);
+  IntelligenceCombo->setPropertyV(WSNlabelString,"High");
   IntelligenceCombo->setPropertyV(WSNname,"IntelligenceCombo");
   IntelligenceCombo->setPropertyV(WSNvis,(WSCbool)1);
   IntelligenceCombo->setPropertyV(WSNx,(short)95);

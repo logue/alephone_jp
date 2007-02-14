@@ -31,7 +31,7 @@ WSCmainWindow
 #COMPAT
 0
 #WS_FILES
-V:/cvs_/cvs_sf/marathon/HPLLib/HPLStringModifier.cpp
+../../HPLLib/HPLStringModifier.cpp
 #MPFC_COMPAT
 0
 #JAVA_PKG_NAME
