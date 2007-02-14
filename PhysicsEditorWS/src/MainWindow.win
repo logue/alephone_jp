@@ -1500,7 +1500,7 @@ Low
  #RES      height
 25
 
-#OBJ       Maivbtn_021
+#OBJ       CollectionBtn
  #TYPE       WSCvbtn
  #PARENT   Maiinde_012
  #RES      userValue
@@ -1660,7 +1660,7 @@ Low
  #RES      height
 25
 
-#OBJ       Maiopti_031
+#OBJ       ClassCombo
  #TYPE       WSCoption
  #PARENT   Maiinde_012
  #RES      userValue

@@ -15,6 +15,7 @@
 #include "projectile_definitions.h"
 #include "weapon_definitions.h"
 #include <WSCbase.h>
+#include <WSCoption.h>
 
 #include <HPLLib/HPLAlephLib.h>
 
@@ -73,6 +74,7 @@ extern int valueMonsterClasses[NUMBER_OF_CLASS_INFORMATIONS];
 
 void setDefinitionsToDefault();
 void setupDialog(WSCbase* object);
+//int getSelectedValue(WSCoption *opt);
 
 WSCbase* getObject(const char* class_name, const char* obj_name);
 

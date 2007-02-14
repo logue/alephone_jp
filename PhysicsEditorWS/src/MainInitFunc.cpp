@@ -31,7 +31,7 @@ std::vector<std::string> stockItemTypes;
 int valueSpeed[NUMBER_OF_SPEED_INFORMATIONS];
 int valueMonsterClasses[NUMBER_OF_CLASS_INFORMATIONS];
 
-std::string getOptionItemListFromFile(std::vector<std::string>& stocks)
+std::string getOptionItemListFromVectorString(std::vector<std::string>& stocks)
 {
 	std::string itemList;
 	itemList += stocks[0] + ":1:DummyEp";
@@ -78,7 +78,32 @@ void setInteger(WSCbase* obj, int num)
 	//vitality
 	obj->setProperty(WSNlabelString, (long)num);
 }
+/*
+int getSelectedValue(WSCoption *opt)
+{
+	WSCbool* status = opt->getSelectStatus();
+	int max = opt->getItems();
+	for(int i = 0; i < max; i ++){
+		if(status[i]){
+			return i;
+		}
+	}
+	return 0;
+}
 
+void setSelectedValue(WSCoption *opt, int index)
+{
+	WSCbool* status = opt->getSelectStatus();
+	int max = opt->getItems();
+	for(int i = 0; i < max; i ++){
+		bool st = false;
+		if(i == index){
+			st = true;
+		}
+		status[i] = st;
+	}
+}
+*/
 void setupDialog(WSCbase* object)
 {
 	if(windowType == Windows::Monster){
@@ -96,11 +121,17 @@ void setupDialog(WSCbase* object)
 		//clut
 		WSCvifield* clutField = (WSCvifield*)indextab->getChildInstance("PalletEdit");
 		clutField->setProperty(WSNlabelString, (long)clut);
-		//clutField->update();
+		//collection
+		indextab->getChildInstance("CollectionBtn")->setProperty(WSNlabelString,
+			stockCollections[col].c_str());
 		
 		//vitality
 		setInteger(indextab->getChildInstance("VitalityEdit"), monster_definitions[type].vitality);
 		//class
+		indextab->getChildInstance("ClassCombo")->setProperty(WSNvalue,
+			(monster_definitions[type]._class));
+		//setSelectedValue((WSCoption*)indextab->getChildInstance("ClassCombo"),
+		//	(monster_definitions[type]._class));
 		//radius
 		setInteger(indextab->getChildInstance("RadiusEdit"), monster_definitions[type].radius);
 		//height
@@ -119,7 +150,10 @@ void setupDialog(WSCbase* object)
 		//vertvisualarc
 		setInteger(indextab->getChildInstance("VertVisualArc"), monster_definitions[type].half_vertical_visual_arc);
 		//interlligence
-		indextab->getChildInstance("IntelligenceCombo")->setProperty(WSNvalue, monster_definitions[type].intelligence + 1);
+		indextab->getChildInstance("IntelligenceCombo")->setProperty(WSNvalue,
+			monster_definitions[type].intelligence + 1);
+		//setSelectedValue((WSCoption*)indextab->getChildInstance("IntelligenceCombo"),
+		//	monster_definitions[type].intelligence);
 		//speed
 		setInteger(indextab->getChildInstance("SpeedEdit"), monster_definitions[type].half_vertical_visual_arc);
 		//indextab->getChildInstance("SpeedCombo")->setProperty(WSNvalue, );
@@ -149,19 +183,25 @@ void MainInitFunc(WSCbase* object){
 	//load
 	stockCollections = hpl::string::loadFromFile("data/Collections.txt");
 	stockSpeeds = hpl::string::loadFromFile("data/Speeds.txt");
+	stockMonsterClasses = hpl::string::loadFromFile("data/MonsterClasses.txt");
+	stockItemTypes = hpl::string::loadFromFile("data/DefinedItems.txt");
 	
 	//index setup
 	// speed
 	valueSpeed[0] = 0;
 	
 	//setup window's combo
-	//std::string itemList = getOptionItemListFromFile(stockCollections);
 	//object->getChildInstance("WndMonster")->
 	//getChildInstance("Maiinde_012")->getChildInstance("CollectionCombo")->setProperty(WSNmenuItems, itemList.c_str());
 	/*long ret = object->getChildInstance("WndSelect")->popup();
 	if(ret == WS_DIALOG_OK){
 	}else{
 	}*/
+	std::string itemList = getOptionItemListFromVectorString(stockMonsterClasses);
+	object->getChildInstance("WndMonster")->
+		getChildInstance("Maiinde_012")->getChildInstance("ClassCombo")->
+		setProperty(WSNmenuItems, itemList.c_str());
+	
 	//子ウインドウの表示
 	char* class_name = "WSCwindow"; //ラベルクラス
 	char* obj_name   = "WndMonster";     //newvlab_001 という名称
