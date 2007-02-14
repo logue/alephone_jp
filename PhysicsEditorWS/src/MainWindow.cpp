@@ -54,17 +54,17 @@ WSCvlabel* Maivlab_042 = NULL;
 WSCvlabel* Maivlab_043 = NULL;
 WSCvlabel* Maivlab_044 = NULL;
 WSCvlabel* Maivlab_045 = NULL;
-WSCvifield* Maivifi_000 = NULL;
+WSCvifield* SeqStationaly = NULL;
 WSCvlabel* Maivlab_001 = NULL;
 WSCvlabel* Maivlab_002 = NULL;
-WSCvifield* Maivifi_003 = NULL;
-WSCvifield* Maivifi_004 = NULL;
-WSCvifield* Maivifi_005 = NULL;
-WSCvifield* Maivifi_006 = NULL;
-WSCvifield* Maivifi_007 = NULL;
-WSCvifield* Maivifi_008 = NULL;
-WSCvifield* Maivifi_009 = NULL;
-WSCvifield* Maivifi_010 = NULL;
+WSCvifield* SeqMoving = NULL;
+WSCvifield* SeqHitting = NULL;
+WSCvifield* SeqSoftDying = NULL;
+WSCvifield* SeqSoftDead = NULL;
+WSCvifield* SeqHardDying = NULL;
+WSCvifield* SeqHardDead = NULL;
+WSCvifield* SeqTeleportIn = NULL;
+WSCvifield* SeqTeleportOut = NULL;
 WSCvlabel* Maivlab_005 = NULL;
 WSCvlabel* Maivlab_006 = NULL;
 WSCvlabel* Maivlab_007 = NULL;
@@ -102,7 +102,7 @@ WSCvbtn* Maivbtn_020 = NULL;
 WSCoption* SpeedCombo = NULL;
 WSCoption* IntelligenceCombo = NULL;
 WSCvbtn* CollectionBtn = NULL;
-WSCvbtn* Maivbtn_022 = NULL;
+WSCvbtn* CarryItemBtn = NULL;
 WSCvbtn* Maivbtn_023 = NULL;
 WSCvbtn* Maivbtn_024 = NULL;
 WSCvbtn* Maivbtn_025 = NULL;
@@ -112,6 +112,9 @@ WSCvbtn* Maivbtn_028 = NULL;
 WSCvbtn* Maivbtn_029 = NULL;
 WSCvbtn* Maivbtn_030 = NULL;
 WSCoption* ClassCombo = NULL;
+WSCvbtn* Maivbtn_000 = NULL;
+WSCvbtn* Maivbtn_001 = NULL;
+WSCvbtn* Maivbtn_002 = NULL;
 WSClist* ListMonsterType = NULL;
 WSCwindow* WndEffect = NULL;
 WSCwindow* WndProjectile = NULL;
@@ -233,7 +236,7 @@ WSCbase* _create_win_MainWindow(){
   WndMonster->setPropertyV(WSNx,(short)272);
   WndMonster->setPropertyV(WSNy,(short)159);
   WndMonster->setPropertyV(WSNwidth,(unsigned short)678);
-  WndMonster->setPropertyV(WSNheight,(unsigned short)463);
+  WndMonster->setPropertyV(WSNheight,(unsigned short)464);
   WndMonster->setPropertyV(WSNshadowThickness,(unsigned char)2);
   WndMonster->setPropertyV(WSNtitleBar,(char)2);
   WndMonster->setPropertyV(WSNshadowType,(char)-1);
@@ -459,7 +462,7 @@ WSCbase* _create_win_MainWindow(){
   Maivlab_039->setPropertyV(WSNlabelString,"Stationaly");
   Maivlab_039->setPropertyV(WSNname,"Maivlab_039");
   Maivlab_039->setPropertyV(WSNvis,(WSCbool)1);
-  Maivlab_039->setPropertyV(WSNx,(short)180);
+  Maivlab_039->setPropertyV(WSNx,(short)205);
   Maivlab_039->setPropertyV(WSNy,(short)30);
   Maivlab_039->setPropertyV(WSNwidth,(unsigned short)90);
   Maivlab_039->setPropertyV(WSNheight,(unsigned short)25);
@@ -470,7 +473,7 @@ WSCbase* _create_win_MainWindow(){
   Maivlab_040->setPropertyV(WSNlabelString,"Moving");
   Maivlab_040->setPropertyV(WSNname,"Maivlab_040");
   Maivlab_040->setPropertyV(WSNvis,(WSCbool)1);
-  Maivlab_040->setPropertyV(WSNx,(short)180);
+  Maivlab_040->setPropertyV(WSNx,(short)205);
   Maivlab_040->setPropertyV(WSNy,(short)55);
   Maivlab_040->setPropertyV(WSNwidth,(unsigned short)90);
   Maivlab_040->setPropertyV(WSNheight,(unsigned short)25);
@@ -481,7 +484,7 @@ WSCbase* _create_win_MainWindow(){
   Maivlab_041->setPropertyV(WSNlabelString,"Hitting");
   Maivlab_041->setPropertyV(WSNname,"Maivlab_041");
   Maivlab_041->setPropertyV(WSNvis,(WSCbool)1);
-  Maivlab_041->setPropertyV(WSNx,(short)180);
+  Maivlab_041->setPropertyV(WSNx,(short)205);
   Maivlab_041->setPropertyV(WSNy,(short)80);
   Maivlab_041->setPropertyV(WSNwidth,(unsigned short)90);
   Maivlab_041->setPropertyV(WSNheight,(unsigned short)25);
@@ -492,7 +495,7 @@ WSCbase* _create_win_MainWindow(){
   Maivlab_042->setPropertyV(WSNlabelString,"Soft Dying");
   Maivlab_042->setPropertyV(WSNname,"Maivlab_042");
   Maivlab_042->setPropertyV(WSNvis,(WSCbool)1);
-  Maivlab_042->setPropertyV(WSNx,(short)180);
+  Maivlab_042->setPropertyV(WSNx,(short)205);
   Maivlab_042->setPropertyV(WSNy,(short)105);
   Maivlab_042->setPropertyV(WSNwidth,(unsigned short)90);
   Maivlab_042->setPropertyV(WSNheight,(unsigned short)25);
@@ -503,7 +506,7 @@ WSCbase* _create_win_MainWindow(){
   Maivlab_043->setPropertyV(WSNlabelString,"Soft Dead");
   Maivlab_043->setPropertyV(WSNname,"Maivlab_043");
   Maivlab_043->setPropertyV(WSNvis,(WSCbool)1);
-  Maivlab_043->setPropertyV(WSNx,(short)180);
+  Maivlab_043->setPropertyV(WSNx,(short)205);
   Maivlab_043->setPropertyV(WSNy,(short)130);
   Maivlab_043->setPropertyV(WSNwidth,(unsigned short)90);
   Maivlab_043->setPropertyV(WSNheight,(unsigned short)25);
@@ -514,7 +517,7 @@ WSCbase* _create_win_MainWindow(){
   Maivlab_044->setPropertyV(WSNlabelString,"Hard Dying");
   Maivlab_044->setPropertyV(WSNname,"Maivlab_044");
   Maivlab_044->setPropertyV(WSNvis,(WSCbool)1);
-  Maivlab_044->setPropertyV(WSNx,(short)180);
+  Maivlab_044->setPropertyV(WSNx,(short)205);
   Maivlab_044->setPropertyV(WSNy,(short)155);
   Maivlab_044->setPropertyV(WSNwidth,(unsigned short)90);
   Maivlab_044->setPropertyV(WSNheight,(unsigned short)25);
@@ -525,20 +528,20 @@ WSCbase* _create_win_MainWindow(){
   Maivlab_045->setPropertyV(WSNlabelString,"Hard Dead");
   Maivlab_045->setPropertyV(WSNname,"Maivlab_045");
   Maivlab_045->setPropertyV(WSNvis,(WSCbool)1);
-  Maivlab_045->setPropertyV(WSNx,(short)180);
+  Maivlab_045->setPropertyV(WSNx,(short)205);
   Maivlab_045->setPropertyV(WSNy,(short)180);
   Maivlab_045->setPropertyV(WSNwidth,(unsigned short)90);
   Maivlab_045->setPropertyV(WSNheight,(unsigned short)25);
 
-  Maivifi_000 = new  WSCvifield(Maiinde_012,"Maivifi_000");
-      Maivifi_000->initialize();
-  Maivifi_000->setPropertyV(WSNuserValue,(long)1);
-  Maivifi_000->setPropertyV(WSNname,"Maivifi_000");
-  Maivifi_000->setPropertyV(WSNvis,(WSCbool)1);
-  Maivifi_000->setPropertyV(WSNx,(short)270);
-  Maivifi_000->setPropertyV(WSNy,(short)30);
-  Maivifi_000->setPropertyV(WSNwidth,(unsigned short)80);
-  Maivifi_000->setPropertyV(WSNheight,(unsigned short)25);
+  SeqStationaly = new  WSCvifield(Maiinde_012,"SeqStationaly");
+      SeqStationaly->initialize();
+  SeqStationaly->setPropertyV(WSNuserValue,(long)1);
+  SeqStationaly->setPropertyV(WSNname,"SeqStationaly");
+  SeqStationaly->setPropertyV(WSNvis,(WSCbool)1);
+  SeqStationaly->setPropertyV(WSNx,(short)295);
+  SeqStationaly->setPropertyV(WSNy,(short)30);
+  SeqStationaly->setPropertyV(WSNwidth,(unsigned short)55);
+  SeqStationaly->setPropertyV(WSNheight,(unsigned short)25);
 
   Maivlab_001 = new  WSCvlabel(Maiinde_012,"Maivlab_001");
       Maivlab_001->initialize();
@@ -546,7 +549,7 @@ WSCbase* _create_win_MainWindow(){
   Maivlab_001->setPropertyV(WSNlabelString,"Teleport In");
   Maivlab_001->setPropertyV(WSNname,"Maivlab_001");
   Maivlab_001->setPropertyV(WSNvis,(WSCbool)1);
-  Maivlab_001->setPropertyV(WSNx,(short)180);
+  Maivlab_001->setPropertyV(WSNx,(short)205);
   Maivlab_001->setPropertyV(WSNy,(short)205);
   Maivlab_001->setPropertyV(WSNwidth,(unsigned short)90);
   Maivlab_001->setPropertyV(WSNheight,(unsigned short)25);
@@ -557,90 +560,90 @@ WSCbase* _create_win_MainWindow(){
   Maivlab_002->setPropertyV(WSNlabelString,"Teleport Out");
   Maivlab_002->setPropertyV(WSNname,"Maivlab_002");
   Maivlab_002->setPropertyV(WSNvis,(WSCbool)1);
-  Maivlab_002->setPropertyV(WSNx,(short)180);
+  Maivlab_002->setPropertyV(WSNx,(short)205);
   Maivlab_002->setPropertyV(WSNy,(short)230);
   Maivlab_002->setPropertyV(WSNwidth,(unsigned short)90);
   Maivlab_002->setPropertyV(WSNheight,(unsigned short)25);
 
-  Maivifi_003 = new  WSCvifield(Maiinde_012,"Maivifi_003");
-      Maivifi_003->initialize();
-  Maivifi_003->setPropertyV(WSNuserValue,(long)1);
-  Maivifi_003->setPropertyV(WSNname,"Maivifi_003");
-  Maivifi_003->setPropertyV(WSNvis,(WSCbool)1);
-  Maivifi_003->setPropertyV(WSNx,(short)270);
-  Maivifi_003->setPropertyV(WSNy,(short)55);
-  Maivifi_003->setPropertyV(WSNwidth,(unsigned short)80);
-  Maivifi_003->setPropertyV(WSNheight,(unsigned short)25);
+  SeqMoving = new  WSCvifield(Maiinde_012,"SeqMoving");
+      SeqMoving->initialize();
+  SeqMoving->setPropertyV(WSNuserValue,(long)1);
+  SeqMoving->setPropertyV(WSNname,"SeqMoving");
+  SeqMoving->setPropertyV(WSNvis,(WSCbool)1);
+  SeqMoving->setPropertyV(WSNx,(short)295);
+  SeqMoving->setPropertyV(WSNy,(short)55);
+  SeqMoving->setPropertyV(WSNwidth,(unsigned short)55);
+  SeqMoving->setPropertyV(WSNheight,(unsigned short)25);
 
-  Maivifi_004 = new  WSCvifield(Maiinde_012,"Maivifi_004");
-      Maivifi_004->initialize();
-  Maivifi_004->setPropertyV(WSNuserValue,(long)1);
-  Maivifi_004->setPropertyV(WSNname,"Maivifi_004");
-  Maivifi_004->setPropertyV(WSNvis,(WSCbool)1);
-  Maivifi_004->setPropertyV(WSNx,(short)270);
-  Maivifi_004->setPropertyV(WSNy,(short)80);
-  Maivifi_004->setPropertyV(WSNwidth,(unsigned short)80);
-  Maivifi_004->setPropertyV(WSNheight,(unsigned short)25);
+  SeqHitting = new  WSCvifield(Maiinde_012,"SeqHitting");
+      SeqHitting->initialize();
+  SeqHitting->setPropertyV(WSNuserValue,(long)1);
+  SeqHitting->setPropertyV(WSNname,"SeqHitting");
+  SeqHitting->setPropertyV(WSNvis,(WSCbool)1);
+  SeqHitting->setPropertyV(WSNx,(short)295);
+  SeqHitting->setPropertyV(WSNy,(short)80);
+  SeqHitting->setPropertyV(WSNwidth,(unsigned short)55);
+  SeqHitting->setPropertyV(WSNheight,(unsigned short)25);
 
-  Maivifi_005 = new  WSCvifield(Maiinde_012,"Maivifi_005");
-      Maivifi_005->initialize();
-  Maivifi_005->setPropertyV(WSNuserValue,(long)1);
-  Maivifi_005->setPropertyV(WSNname,"Maivifi_005");
-  Maivifi_005->setPropertyV(WSNvis,(WSCbool)1);
-  Maivifi_005->setPropertyV(WSNx,(short)270);
-  Maivifi_005->setPropertyV(WSNy,(short)105);
-  Maivifi_005->setPropertyV(WSNwidth,(unsigned short)80);
-  Maivifi_005->setPropertyV(WSNheight,(unsigned short)25);
+  SeqSoftDying = new  WSCvifield(Maiinde_012,"SeqSoftDying");
+      SeqSoftDying->initialize();
+  SeqSoftDying->setPropertyV(WSNuserValue,(long)1);
+  SeqSoftDying->setPropertyV(WSNname,"SeqSoftDying");
+  SeqSoftDying->setPropertyV(WSNvis,(WSCbool)1);
+  SeqSoftDying->setPropertyV(WSNx,(short)295);
+  SeqSoftDying->setPropertyV(WSNy,(short)105);
+  SeqSoftDying->setPropertyV(WSNwidth,(unsigned short)55);
+  SeqSoftDying->setPropertyV(WSNheight,(unsigned short)25);
 
-  Maivifi_006 = new  WSCvifield(Maiinde_012,"Maivifi_006");
-      Maivifi_006->initialize();
-  Maivifi_006->setPropertyV(WSNuserValue,(long)1);
-  Maivifi_006->setPropertyV(WSNname,"Maivifi_006");
-  Maivifi_006->setPropertyV(WSNvis,(WSCbool)1);
-  Maivifi_006->setPropertyV(WSNx,(short)270);
-  Maivifi_006->setPropertyV(WSNy,(short)130);
-  Maivifi_006->setPropertyV(WSNwidth,(unsigned short)80);
-  Maivifi_006->setPropertyV(WSNheight,(unsigned short)25);
+  SeqSoftDead = new  WSCvifield(Maiinde_012,"SeqSoftDead");
+      SeqSoftDead->initialize();
+  SeqSoftDead->setPropertyV(WSNuserValue,(long)1);
+  SeqSoftDead->setPropertyV(WSNname,"SeqSoftDead");
+  SeqSoftDead->setPropertyV(WSNvis,(WSCbool)1);
+  SeqSoftDead->setPropertyV(WSNx,(short)295);
+  SeqSoftDead->setPropertyV(WSNy,(short)130);
+  SeqSoftDead->setPropertyV(WSNwidth,(unsigned short)55);
+  SeqSoftDead->setPropertyV(WSNheight,(unsigned short)25);
 
-  Maivifi_007 = new  WSCvifield(Maiinde_012,"Maivifi_007");
-      Maivifi_007->initialize();
-  Maivifi_007->setPropertyV(WSNuserValue,(long)1);
-  Maivifi_007->setPropertyV(WSNname,"Maivifi_007");
-  Maivifi_007->setPropertyV(WSNvis,(WSCbool)1);
-  Maivifi_007->setPropertyV(WSNx,(short)270);
-  Maivifi_007->setPropertyV(WSNy,(short)155);
-  Maivifi_007->setPropertyV(WSNwidth,(unsigned short)80);
-  Maivifi_007->setPropertyV(WSNheight,(unsigned short)25);
+  SeqHardDying = new  WSCvifield(Maiinde_012,"SeqHardDying");
+      SeqHardDying->initialize();
+  SeqHardDying->setPropertyV(WSNuserValue,(long)1);
+  SeqHardDying->setPropertyV(WSNname,"SeqHardDying");
+  SeqHardDying->setPropertyV(WSNvis,(WSCbool)1);
+  SeqHardDying->setPropertyV(WSNx,(short)295);
+  SeqHardDying->setPropertyV(WSNy,(short)155);
+  SeqHardDying->setPropertyV(WSNwidth,(unsigned short)55);
+  SeqHardDying->setPropertyV(WSNheight,(unsigned short)25);
 
-  Maivifi_008 = new  WSCvifield(Maiinde_012,"Maivifi_008");
-      Maivifi_008->initialize();
-  Maivifi_008->setPropertyV(WSNuserValue,(long)1);
-  Maivifi_008->setPropertyV(WSNname,"Maivifi_008");
-  Maivifi_008->setPropertyV(WSNvis,(WSCbool)1);
-  Maivifi_008->setPropertyV(WSNx,(short)270);
-  Maivifi_008->setPropertyV(WSNy,(short)180);
-  Maivifi_008->setPropertyV(WSNwidth,(unsigned short)80);
-  Maivifi_008->setPropertyV(WSNheight,(unsigned short)25);
+  SeqHardDead = new  WSCvifield(Maiinde_012,"SeqHardDead");
+      SeqHardDead->initialize();
+  SeqHardDead->setPropertyV(WSNuserValue,(long)1);
+  SeqHardDead->setPropertyV(WSNname,"SeqHardDead");
+  SeqHardDead->setPropertyV(WSNvis,(WSCbool)1);
+  SeqHardDead->setPropertyV(WSNx,(short)295);
+  SeqHardDead->setPropertyV(WSNy,(short)180);
+  SeqHardDead->setPropertyV(WSNwidth,(unsigned short)55);
+  SeqHardDead->setPropertyV(WSNheight,(unsigned short)25);
 
-  Maivifi_009 = new  WSCvifield(Maiinde_012,"Maivifi_009");
-      Maivifi_009->initialize();
-  Maivifi_009->setPropertyV(WSNuserValue,(long)1);
-  Maivifi_009->setPropertyV(WSNname,"Maivifi_009");
-  Maivifi_009->setPropertyV(WSNvis,(WSCbool)1);
-  Maivifi_009->setPropertyV(WSNx,(short)270);
-  Maivifi_009->setPropertyV(WSNy,(short)205);
-  Maivifi_009->setPropertyV(WSNwidth,(unsigned short)80);
-  Maivifi_009->setPropertyV(WSNheight,(unsigned short)25);
+  SeqTeleportIn = new  WSCvifield(Maiinde_012,"SeqTeleportIn");
+      SeqTeleportIn->initialize();
+  SeqTeleportIn->setPropertyV(WSNuserValue,(long)1);
+  SeqTeleportIn->setPropertyV(WSNname,"SeqTeleportIn");
+  SeqTeleportIn->setPropertyV(WSNvis,(WSCbool)1);
+  SeqTeleportIn->setPropertyV(WSNx,(short)295);
+  SeqTeleportIn->setPropertyV(WSNy,(short)205);
+  SeqTeleportIn->setPropertyV(WSNwidth,(unsigned short)55);
+  SeqTeleportIn->setPropertyV(WSNheight,(unsigned short)25);
 
-  Maivifi_010 = new  WSCvifield(Maiinde_012,"Maivifi_010");
-      Maivifi_010->initialize();
-  Maivifi_010->setPropertyV(WSNuserValue,(long)1);
-  Maivifi_010->setPropertyV(WSNname,"Maivifi_010");
-  Maivifi_010->setPropertyV(WSNvis,(WSCbool)1);
-  Maivifi_010->setPropertyV(WSNx,(short)270);
-  Maivifi_010->setPropertyV(WSNy,(short)230);
-  Maivifi_010->setPropertyV(WSNwidth,(unsigned short)80);
-  Maivifi_010->setPropertyV(WSNheight,(unsigned short)25);
+  SeqTeleportOut = new  WSCvifield(Maiinde_012,"SeqTeleportOut");
+      SeqTeleportOut->initialize();
+  SeqTeleportOut->setPropertyV(WSNuserValue,(long)1);
+  SeqTeleportOut->setPropertyV(WSNname,"SeqTeleportOut");
+  SeqTeleportOut->setPropertyV(WSNvis,(WSCbool)1);
+  SeqTeleportOut->setPropertyV(WSNx,(short)295);
+  SeqTeleportOut->setPropertyV(WSNy,(short)230);
+  SeqTeleportOut->setPropertyV(WSNwidth,(unsigned short)55);
+  SeqTeleportOut->setPropertyV(WSNheight,(unsigned short)25);
 
   Maivlab_005 = new  WSCvlabel(Maiinde_012,"Maivlab_005");
       Maivlab_005->initialize();
@@ -766,33 +769,33 @@ WSCbase* _create_win_MainWindow(){
   Maivlab_029 = new  WSCvlabel(Maiinde_012,"Maivlab_029");
       Maivlab_029->initialize();
   Maivlab_029->setPropertyV(WSNuserValue,(long)1);
-  Maivlab_029->setPropertyV(WSNlabelString,"Teleport Out");
+  Maivlab_029->setPropertyV(WSNlabelString,"ImpactEffect");
   Maivlab_029->setPropertyV(WSNname,"Maivlab_029");
   Maivlab_029->setPropertyV(WSNvis,(WSCbool)1);
-  Maivlab_029->setPropertyV(WSNx,(short)180);
-  Maivlab_029->setPropertyV(WSNy,(short)255);
+  Maivlab_029->setPropertyV(WSNx,(short)350);
+  Maivlab_029->setPropertyV(WSNy,(short)280);
   Maivlab_029->setPropertyV(WSNwidth,(unsigned short)90);
   Maivlab_029->setPropertyV(WSNheight,(unsigned short)25);
 
   Maivlab_035 = new  WSCvlabel(Maiinde_012,"Maivlab_035");
       Maivlab_035->initialize();
   Maivlab_035->setPropertyV(WSNuserValue,(long)1);
-  Maivlab_035->setPropertyV(WSNlabelString,"Teleport Out");
+  Maivlab_035->setPropertyV(WSNlabelString,"MeleeEffect");
   Maivlab_035->setPropertyV(WSNname,"Maivlab_035");
   Maivlab_035->setPropertyV(WSNvis,(WSCbool)1);
-  Maivlab_035->setPropertyV(WSNx,(short)180);
-  Maivlab_035->setPropertyV(WSNy,(short)280);
+  Maivlab_035->setPropertyV(WSNx,(short)350);
+  Maivlab_035->setPropertyV(WSNy,(short)305);
   Maivlab_035->setPropertyV(WSNwidth,(unsigned short)90);
   Maivlab_035->setPropertyV(WSNheight,(unsigned short)25);
 
   Maivlab_036 = new  WSCvlabel(Maiinde_012,"Maivlab_036");
       Maivlab_036->initialize();
   Maivlab_036->setPropertyV(WSNuserValue,(long)1);
-  Maivlab_036->setPropertyV(WSNlabelString,"Teleport Out");
+  Maivlab_036->setPropertyV(WSNlabelString,"ContrailEffect");
   Maivlab_036->setPropertyV(WSNname,"Maivlab_036");
   Maivlab_036->setPropertyV(WSNvis,(WSCbool)1);
-  Maivlab_036->setPropertyV(WSNx,(short)180);
-  Maivlab_036->setPropertyV(WSNy,(short)305);
+  Maivlab_036->setPropertyV(WSNx,(short)350);
+  Maivlab_036->setPropertyV(WSNy,(short)330);
   Maivlab_036->setPropertyV(WSNwidth,(unsigned short)90);
   Maivlab_036->setPropertyV(WSNheight,(unsigned short)25);
 
@@ -1026,15 +1029,14 @@ WSCbase* _create_win_MainWindow(){
   SpeedCombo->setPropertyV(WSNvis,(WSCbool)1);
   SpeedCombo->setPropertyV(WSNx,(short)175);
   SpeedCombo->setPropertyV(WSNy,(short)380);
-  SpeedCombo->setPropertyV(WSNwidth,(unsigned short)80);
   SpeedCombo->setPropertyV(WSNheight,(unsigned short)25);
 
   IntelligenceCombo = new  WSCoption(Maiinde_012,"IntelligenceCombo");
       IntelligenceCombo->initialize();
   IntelligenceCombo->setPropertyV(WSNuserValue,(long)1);
   IntelligenceCombo->setPropertyV(WSNmenuItems,"Low:1:ep1_name,Average:2:ep2_name,High:3:ep3_name");
-  IntelligenceCombo->setPropertyV(WSNvalue,(long)3);
-  IntelligenceCombo->setPropertyV(WSNlabelString,"High");
+  IntelligenceCombo->setPropertyV(WSNvalue,(long)1);
+  IntelligenceCombo->setPropertyV(WSNlabelString,"Low");
   IntelligenceCombo->setPropertyV(WSNname,"IntelligenceCombo");
   IntelligenceCombo->setPropertyV(WSNvis,(WSCbool)1);
   IntelligenceCombo->setPropertyV(WSNx,(short)95);
@@ -1054,15 +1056,15 @@ WSCbase* _create_win_MainWindow(){
   CollectionBtn->setPropertyV(WSNwidth,(unsigned short)80);
   CollectionBtn->setPropertyV(WSNheight,(unsigned short)25);
 
-  Maivbtn_022 = new  WSCvbtn(Maiinde_012,"Maivbtn_022");
-      Maivbtn_022->initialize();
-  Maivbtn_022->setPropertyV(WSNuserValue,(long)1);
-  Maivbtn_022->setPropertyV(WSNname,"Maivbtn_022");
-  Maivbtn_022->setPropertyV(WSNvis,(WSCbool)1);
-  Maivbtn_022->setPropertyV(WSNx,(short)95);
-  Maivbtn_022->setPropertyV(WSNy,(short)280);
-  Maivbtn_022->setPropertyV(WSNwidth,(unsigned short)80);
-  Maivbtn_022->setPropertyV(WSNheight,(unsigned short)25);
+  CarryItemBtn = new  WSCvbtn(Maiinde_012,"CarryItemBtn");
+      CarryItemBtn->initialize();
+  CarryItemBtn->setPropertyV(WSNuserValue,(long)1);
+  CarryItemBtn->setPropertyV(WSNname,"CarryItemBtn");
+  CarryItemBtn->setPropertyV(WSNvis,(WSCbool)1);
+  CarryItemBtn->setPropertyV(WSNx,(short)95);
+  CarryItemBtn->setPropertyV(WSNy,(short)280);
+  CarryItemBtn->setPropertyV(WSNwidth,(unsigned short)110);
+  CarryItemBtn->setPropertyV(WSNheight,(unsigned short)25);
 
   Maivbtn_023 = new  WSCvbtn(Maiinde_012,"Maivbtn_023");
       Maivbtn_023->initialize();
@@ -1071,7 +1073,7 @@ WSCbase* _create_win_MainWindow(){
   Maivbtn_023->setPropertyV(WSNvis,(WSCbool)1);
   Maivbtn_023->setPropertyV(WSNx,(short)450);
   Maivbtn_023->setPropertyV(WSNy,(short)55);
-  Maivbtn_023->setPropertyV(WSNwidth,(unsigned short)80);
+  Maivbtn_023->setPropertyV(WSNwidth,(unsigned short)95);
   Maivbtn_023->setPropertyV(WSNheight,(unsigned short)25);
 
   Maivbtn_024 = new  WSCvbtn(Maiinde_012,"Maivbtn_024");
@@ -1081,7 +1083,7 @@ WSCbase* _create_win_MainWindow(){
   Maivbtn_024->setPropertyV(WSNvis,(WSCbool)1);
   Maivbtn_024->setPropertyV(WSNx,(short)450);
   Maivbtn_024->setPropertyV(WSNy,(short)80);
-  Maivbtn_024->setPropertyV(WSNwidth,(unsigned short)80);
+  Maivbtn_024->setPropertyV(WSNwidth,(unsigned short)95);
   Maivbtn_024->setPropertyV(WSNheight,(unsigned short)25);
 
   Maivbtn_025 = new  WSCvbtn(Maiinde_012,"Maivbtn_025");
@@ -1091,7 +1093,7 @@ WSCbase* _create_win_MainWindow(){
   Maivbtn_025->setPropertyV(WSNvis,(WSCbool)1);
   Maivbtn_025->setPropertyV(WSNx,(short)450);
   Maivbtn_025->setPropertyV(WSNy,(short)105);
-  Maivbtn_025->setPropertyV(WSNwidth,(unsigned short)80);
+  Maivbtn_025->setPropertyV(WSNwidth,(unsigned short)95);
   Maivbtn_025->setPropertyV(WSNheight,(unsigned short)25);
 
   Maivbtn_026 = new  WSCvbtn(Maiinde_012,"Maivbtn_026");
@@ -1101,7 +1103,7 @@ WSCbase* _create_win_MainWindow(){
   Maivbtn_026->setPropertyV(WSNvis,(WSCbool)1);
   Maivbtn_026->setPropertyV(WSNx,(short)450);
   Maivbtn_026->setPropertyV(WSNy,(short)130);
-  Maivbtn_026->setPropertyV(WSNwidth,(unsigned short)80);
+  Maivbtn_026->setPropertyV(WSNwidth,(unsigned short)95);
   Maivbtn_026->setPropertyV(WSNheight,(unsigned short)25);
 
   Maivbtn_027 = new  WSCvbtn(Maiinde_012,"Maivbtn_027");
@@ -1111,7 +1113,7 @@ WSCbase* _create_win_MainWindow(){
   Maivbtn_027->setPropertyV(WSNvis,(WSCbool)1);
   Maivbtn_027->setPropertyV(WSNx,(short)450);
   Maivbtn_027->setPropertyV(WSNy,(short)155);
-  Maivbtn_027->setPropertyV(WSNwidth,(unsigned short)80);
+  Maivbtn_027->setPropertyV(WSNwidth,(unsigned short)95);
   Maivbtn_027->setPropertyV(WSNheight,(unsigned short)25);
 
   Maivbtn_028 = new  WSCvbtn(Maiinde_012,"Maivbtn_028");
@@ -1121,7 +1123,7 @@ WSCbase* _create_win_MainWindow(){
   Maivbtn_028->setPropertyV(WSNvis,(WSCbool)1);
   Maivbtn_028->setPropertyV(WSNx,(short)450);
   Maivbtn_028->setPropertyV(WSNy,(short)180);
-  Maivbtn_028->setPropertyV(WSNwidth,(unsigned short)80);
+  Maivbtn_028->setPropertyV(WSNwidth,(unsigned short)95);
   Maivbtn_028->setPropertyV(WSNheight,(unsigned short)25);
 
   Maivbtn_029 = new  WSCvbtn(Maiinde_012,"Maivbtn_029");
@@ -1131,7 +1133,7 @@ WSCbase* _create_win_MainWindow(){
   Maivbtn_029->setPropertyV(WSNvis,(WSCbool)1);
   Maivbtn_029->setPropertyV(WSNx,(short)450);
   Maivbtn_029->setPropertyV(WSNy,(short)205);
-  Maivbtn_029->setPropertyV(WSNwidth,(unsigned short)80);
+  Maivbtn_029->setPropertyV(WSNwidth,(unsigned short)95);
   Maivbtn_029->setPropertyV(WSNheight,(unsigned short)25);
 
   Maivbtn_030 = new  WSCvbtn(Maiinde_012,"Maivbtn_030");
@@ -1141,7 +1143,7 @@ WSCbase* _create_win_MainWindow(){
   Maivbtn_030->setPropertyV(WSNvis,(WSCbool)1);
   Maivbtn_030->setPropertyV(WSNx,(short)450);
   Maivbtn_030->setPropertyV(WSNy,(short)230);
-  Maivbtn_030->setPropertyV(WSNwidth,(unsigned short)80);
+  Maivbtn_030->setPropertyV(WSNwidth,(unsigned short)95);
   Maivbtn_030->setPropertyV(WSNheight,(unsigned short)25);
 
   ClassCombo = new  WSCoption(Maiinde_012,"ClassCombo");
@@ -1153,8 +1155,38 @@ WSCbase* _create_win_MainWindow(){
   ClassCombo->setPropertyV(WSNvis,(WSCbool)1);
   ClassCombo->setPropertyV(WSNx,(short)95);
   ClassCombo->setPropertyV(WSNy,(short)105);
-  ClassCombo->setPropertyV(WSNwidth,(unsigned short)80);
+  ClassCombo->setPropertyV(WSNwidth,(unsigned short)110);
   ClassCombo->setPropertyV(WSNheight,(unsigned short)25);
+
+  Maivbtn_000 = new  WSCvbtn(Maiinde_012,"Maivbtn_000");
+      Maivbtn_000->initialize();
+  Maivbtn_000->setPropertyV(WSNuserValue,(long)1);
+  Maivbtn_000->setPropertyV(WSNname,"Maivbtn_000");
+  Maivbtn_000->setPropertyV(WSNvis,(WSCbool)1);
+  Maivbtn_000->setPropertyV(WSNx,(short)440);
+  Maivbtn_000->setPropertyV(WSNy,(short)280);
+  Maivbtn_000->setPropertyV(WSNwidth,(unsigned short)90);
+  Maivbtn_000->setPropertyV(WSNheight,(unsigned short)25);
+
+  Maivbtn_001 = new  WSCvbtn(Maiinde_012,"Maivbtn_001");
+      Maivbtn_001->initialize();
+  Maivbtn_001->setPropertyV(WSNuserValue,(long)1);
+  Maivbtn_001->setPropertyV(WSNname,"Maivbtn_001");
+  Maivbtn_001->setPropertyV(WSNvis,(WSCbool)1);
+  Maivbtn_001->setPropertyV(WSNx,(short)440);
+  Maivbtn_001->setPropertyV(WSNy,(short)305);
+  Maivbtn_001->setPropertyV(WSNwidth,(unsigned short)90);
+  Maivbtn_001->setPropertyV(WSNheight,(unsigned short)25);
+
+  Maivbtn_002 = new  WSCvbtn(Maiinde_012,"Maivbtn_002");
+      Maivbtn_002->initialize();
+  Maivbtn_002->setPropertyV(WSNuserValue,(long)1);
+  Maivbtn_002->setPropertyV(WSNname,"Maivbtn_002");
+  Maivbtn_002->setPropertyV(WSNvis,(WSCbool)1);
+  Maivbtn_002->setPropertyV(WSNx,(short)440);
+  Maivbtn_002->setPropertyV(WSNy,(short)330);
+  Maivbtn_002->setPropertyV(WSNwidth,(unsigned short)90);
+  Maivbtn_002->setPropertyV(WSNheight,(unsigned short)25);
 
   ListMonsterType = new  WSClist(WndMonster,"ListMonsterType");
       ListMonsterType->initialize();

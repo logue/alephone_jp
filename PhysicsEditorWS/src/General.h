@@ -64,13 +64,28 @@ extern struct weapon_definition weapon_default_definitions[MAXIMUM_NUMBER_OF_WEA
 
 //stock names
 extern std::vector<std::string> stockCollections;
-extern std::vector<std::string> stockSpeeds;
 extern std::vector<std::string> stockMonsterClasses;
+extern std::vector<std::string> stockSpeeds;
 extern std::vector<std::string> stockItemTypes;
+extern std::vector<std::string> stockEffects;
+extern std::vector<std::string> stockProjectiles;
+extern std::vector<std::string> stockSounds;
+extern std::vector<std::string> stockDamages;
+extern std::vector<std::string> stockMonsterActivates;
+extern std::vector<std::string> stockMonsterDoorRetryMasks;
+extern std::vector<std::string> stockWeaponClasses;
+extern std::vector<std::string> stockShellCasingTypes;
+extern std::vector<std::string> stockPhysicsTypes;
 
 //index-value
 extern int valueSpeed[NUMBER_OF_SPEED_INFORMATIONS];
 extern int valueMonsterClasses[NUMBER_OF_CLASS_INFORMATIONS];
+extern int valueIntelligences[NUMBER_OF_MONSTER_INTELLIGENCE_INFORMATIONS];
+extern int valueMonsterDoorRetryMask[NUMBER_OF_MONSTER_DOOR_RETRY_MASK_INFORMATIONS];
+extern int valueMonsterFlags[NUMBER_OF_MONSTER_FLAG_INFORMATIONS];
+extern int valueEffectFlags[NUMBER_OF_EFFECT_FLAG_INFORMATIONS];
+extern int valueWeaponFlags[NUMBER_OF_WEAPON_FLAG_INFORMATIONS];
+extern int valueProjectileFlags[NUMBER_OF_PROJECTILE_FLAG_INFORMATIONS];
 
 void setDefinitionsToDefault();
 void setupDialog(WSCbase* object);

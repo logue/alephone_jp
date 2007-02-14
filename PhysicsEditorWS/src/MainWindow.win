@@ -180,7 +180,7 @@ Monster
  #RES      width
 678
  #RES      height
-463
+464
  #RES      shadowThickness
 2
  #RES      titleBar
@@ -544,7 +544,7 @@ Stationaly
  #RES      vis
 1
  #RES      x
-180
+205
  #RES      y
 30
  #RES      width
@@ -562,7 +562,7 @@ Moving
  #RES      vis
 1
  #RES      x
-180
+205
  #RES      y
 55
  #RES      width
@@ -580,7 +580,7 @@ Hitting
  #RES      vis
 1
  #RES      x
-180
+205
  #RES      y
 80
  #RES      width
@@ -598,7 +598,7 @@ Soft Dying
  #RES      vis
 1
  #RES      x
-180
+205
  #RES      y
 105
  #RES      width
@@ -616,7 +616,7 @@ Soft Dead
  #RES      vis
 1
  #RES      x
-180
+205
  #RES      y
 130
  #RES      width
@@ -634,7 +634,7 @@ Hard Dying
  #RES      vis
 1
  #RES      x
-180
+205
  #RES      y
 155
  #RES      width
@@ -652,7 +652,7 @@ Hard Dead
  #RES      vis
 1
  #RES      x
-180
+205
  #RES      y
 180
  #RES      width
@@ -660,7 +660,7 @@ Hard Dead
  #RES      height
 25
 
-#OBJ       Maivifi_000
+#OBJ       SeqStationaly
  #TYPE       WSCvifield
  #PARENT   Maiinde_012
  #RES      userValue
@@ -668,11 +668,11 @@ Hard Dead
  #RES      vis
 1
  #RES      x
-270
+295
  #RES      y
 30
  #RES      width
-80
+55
  #RES      height
 25
 
@@ -686,7 +686,7 @@ Teleport In
  #RES      vis
 1
  #RES      x
-180
+205
  #RES      y
 205
  #RES      width
@@ -704,7 +704,7 @@ Teleport Out
  #RES      vis
 1
  #RES      x
-180
+205
  #RES      y
 230
  #RES      width
@@ -712,7 +712,7 @@ Teleport Out
  #RES      height
 25
 
-#OBJ       Maivifi_003
+#OBJ       SeqMoving
  #TYPE       WSCvifield
  #PARENT   Maiinde_012
  #RES      userValue
@@ -720,15 +720,15 @@ Teleport Out
  #RES      vis
 1
  #RES      x
-270
+295
  #RES      y
 55
  #RES      width
-80
+55
  #RES      height
 25
 
-#OBJ       Maivifi_004
+#OBJ       SeqHitting
  #TYPE       WSCvifield
  #PARENT   Maiinde_012
  #RES      userValue
@@ -736,15 +736,15 @@ Teleport Out
  #RES      vis
 1
  #RES      x
-270
+295
  #RES      y
 80
  #RES      width
-80
+55
  #RES      height
 25
 
-#OBJ       Maivifi_005
+#OBJ       SeqSoftDying
  #TYPE       WSCvifield
  #PARENT   Maiinde_012
  #RES      userValue
@@ -752,15 +752,15 @@ Teleport Out
  #RES      vis
 1
  #RES      x
-270
+295
  #RES      y
 105
  #RES      width
-80
+55
  #RES      height
 25
 
-#OBJ       Maivifi_006
+#OBJ       SeqSoftDead
  #TYPE       WSCvifield
  #PARENT   Maiinde_012
  #RES      userValue
@@ -768,15 +768,15 @@ Teleport Out
  #RES      vis
 1
  #RES      x
-270
+295
  #RES      y
 130
  #RES      width
-80
+55
  #RES      height
 25
 
-#OBJ       Maivifi_007
+#OBJ       SeqHardDying
  #TYPE       WSCvifield
  #PARENT   Maiinde_012
  #RES      userValue
@@ -784,15 +784,15 @@ Teleport Out
  #RES      vis
 1
  #RES      x
-270
+295
  #RES      y
 155
  #RES      width
-80
+55
  #RES      height
 25
 
-#OBJ       Maivifi_008
+#OBJ       SeqHardDead
  #TYPE       WSCvifield
  #PARENT   Maiinde_012
  #RES      userValue
@@ -800,15 +800,15 @@ Teleport Out
  #RES      vis
 1
  #RES      x
-270
+295
  #RES      y
 180
  #RES      width
-80
+55
  #RES      height
 25
 
-#OBJ       Maivifi_009
+#OBJ       SeqTeleportIn
  #TYPE       WSCvifield
  #PARENT   Maiinde_012
  #RES      userValue
@@ -816,15 +816,15 @@ Teleport Out
  #RES      vis
 1
  #RES      x
-270
+295
  #RES      y
 205
  #RES      width
-80
+55
  #RES      height
 25
 
-#OBJ       Maivifi_010
+#OBJ       SeqTeleportOut
  #TYPE       WSCvifield
  #PARENT   Maiinde_012
  #RES      userValue
@@ -832,11 +832,11 @@ Teleport Out
  #RES      vis
 1
  #RES      x
-270
+295
  #RES      y
 230
  #RES      width
-80
+55
  #RES      height
 25
 
@@ -1040,13 +1040,13 @@ RandomSndMask
  #RES      userValue
 1
  #RES      labelString
-Teleport Out
+ImpactEffect
  #RES      vis
 1
  #RES      x
-180
+350
  #RES      y
-255
+280
  #RES      width
 90
  #RES      height
@@ -1058,13 +1058,13 @@ Teleport Out
  #RES      userValue
 1
  #RES      labelString
-Teleport Out
+MeleeEffect
  #RES      vis
 1
  #RES      x
-180
+350
  #RES      y
-280
+305
  #RES      width
 90
  #RES      height
@@ -1076,13 +1076,13 @@ Teleport Out
  #RES      userValue
 1
  #RES      labelString
-Teleport Out
+ContrailEffect
  #RES      vis
 1
  #RES      x
-180
+350
  #RES      y
-305
+330
  #RES      width
 90
  #RES      height
@@ -1469,8 +1469,6 @@ item1
 175
  #RES      y
 380
- #RES      width
-80
  #RES      height
 25
 
@@ -1486,9 +1484,9 @@ item1
  #RES      menuItems
 Low:1:ep1_name,Average:2:ep2_name,High:3:ep3_name
  #RES      value
-3
+1
  #RES      labelString
-High
+Low
  #RES      vis
 1
  #RES      x
@@ -1516,7 +1514,7 @@ High
  #RES      height
 25
 
-#OBJ       Maivbtn_022
+#OBJ       CarryItemBtn
  #TYPE       WSCvbtn
  #PARENT   Maiinde_012
  #RES      userValue
@@ -1528,7 +1526,7 @@ High
  #RES      y
 280
  #RES      width
-80
+110
  #RES      height
 25
 
@@ -1544,7 +1542,7 @@ High
  #RES      y
 55
  #RES      width
-80
+95
  #RES      height
 25
 
@@ -1560,7 +1558,7 @@ High
  #RES      y
 80
  #RES      width
-80
+95
  #RES      height
 25
 
@@ -1576,7 +1574,7 @@ High
  #RES      y
 105
  #RES      width
-80
+95
  #RES      height
 25
 
@@ -1592,7 +1590,7 @@ High
  #RES      y
 130
  #RES      width
-80
+95
  #RES      height
 25
 
@@ -1608,7 +1606,7 @@ High
  #RES      y
 155
  #RES      width
-80
+95
  #RES      height
 25
 
@@ -1624,7 +1622,7 @@ High
  #RES      y
 180
  #RES      width
-80
+95
  #RES      height
 25
 
@@ -1640,7 +1638,7 @@ High
  #RES      y
 205
  #RES      width
-80
+95
  #RES      height
 25
 
@@ -1656,7 +1654,7 @@ High
  #RES      y
 230
  #RES      width
-80
+95
  #RES      height
 25
 
@@ -1676,7 +1674,55 @@ item1
  #RES      y
 105
  #RES      width
-80
+110
+ #RES      height
+25
+
+#OBJ       Maivbtn_000
+ #TYPE       WSCvbtn
+ #PARENT   Maiinde_012
+ #RES      userValue
+1
+ #RES      vis
+1
+ #RES      x
+440
+ #RES      y
+280
+ #RES      width
+90
+ #RES      height
+25
+
+#OBJ       Maivbtn_001
+ #TYPE       WSCvbtn
+ #PARENT   Maiinde_012
+ #RES      userValue
+1
+ #RES      vis
+1
+ #RES      x
+440
+ #RES      y
+305
+ #RES      width
+90
+ #RES      height
+25
+
+#OBJ       Maivbtn_002
+ #TYPE       WSCvbtn
+ #PARENT   Maiinde_012
+ #RES      userValue
+1
+ #RES      vis
+1
+ #RES      x
+440
+ #RES      y
+330
+ #RES      width
+90
  #RES      height
 25
 
