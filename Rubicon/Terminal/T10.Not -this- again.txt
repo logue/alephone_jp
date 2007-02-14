@@ -22,7 +22,7 @@ $C2*4 $C6fghs $C2----
 #TERMINAL 1
 #UNFINISHED
 #LOGON 20
-$C2GHF ƒDƒD $C63#Šâhg$C276
+$C2GHF ƒDƒD $C63#hg$C276
 #PICT 21
 $C2‘¦oŒ‚‰Â”\‚ÈƒXƒŠ[ƒv’†‚Ìƒ†ƒjƒbƒg
 ”­F$C6Ž©“®ˆÀ‘S•Ûá§“x
@@ -35,14 +35,14 @@ $C2‘¦oŒ‚‰Â”\‚ÈƒXƒŠ[ƒv’†‚Ìƒ†ƒjƒbƒg
 $C2
 @ˆÏˆõ‰ï‚ÍAæ‘gˆõŽm‹C‚Ìƒƒ“ƒeƒiƒ“ƒXi$C6HˆÛŽ$C2j‚Ö‚ÌŒ£ã‚ðŠm”F‚µ‚Ü‚µ‚½B“KØ‚ÈŽ‘—¿ŠÇ—‚ð—pˆÓ‚µ‚ÄA—^‚¦‚ç‚ê‚½•s“K“–‚ÈÏ‰×‚ð“Š‚°ŽÌ‚Ä‚é‹–‰Â‚ÍAƒKƒCƒhƒ‰ƒCƒ“‚É‚æ‚Á‚ÄŠm—§‚µ‚Ä‚¢‚é‚ÆŽó‚¯Žæ‚ç‚ê‚Ü‚µ‚½B’–Ú‚³‚ê”Û’è‚³‚ê‚ÄA\•ª‚ÉÄÝŒv‚µAi$C6H•iŽ¿ŠÄ¸$C2jŽd“ü‰ß’ö‚³‚ê‚éã‚ÅA“ŠŠü‚³‚ê‚éƒ†ƒjƒbƒg‚ÍA‚·‚×‚ÄŽ€ˆö‚ðŠm’è‚·‚é‚½‚ß‚ÉŒŸŽ€‰ð–U‚³‚ê‚é‚ÆŠú‘Ò‚Å‚«‚Ü‚·B
 #LOGOFF 20
-$C2cF$C65†õ‘Þ$C2 ƒDƒD j
+
 #END
 #ENDTERMINAL 1
 ;
 #TERMINAL 2
 #UNFINISHED
 #LOGON 20
-$C6ì÷µ¦675$C2 ¥ KJ
+$C6Eµ¦675$C2 ¥ KJ
 #PICT 22
 $C2‹–—e‘¹ŠQƒŒƒxƒ‹
 ”­F$C6‘æˆê‹‰•”‘àŽwŠöŠ¯ 
@@ -58,7 +58,7 @@ $C2ˆ¶F$C6Ž©“®ˆÀ‘S•Ûá§“x
 $C2
 @ƒiƒtƒ@[ƒ‹•”‘à‘æˆê‹‰ŽwŠöŠ¯‚ÍA‚±‚ê‚É‚æ‚Á‚Äƒ^[ƒQƒbƒg‚Æ‚³‚ê‚½Žå‘è‚É‘Î‚·‚éAUŒ‚¬Œ÷”ä‚É‚¨‚¯‚é‰ü‘P‚ÌŠÔ‚ÉŽ«•\‚ð’ño‚µ‚Ü‚·B
 #LOGOFF 20
-$C2h$C6jf### ‘÷ìõ$C2 -
+$C2h$C6jf### ‘÷E$C2 -
 #END
 #ENDTERMINAL 2
 ;
@@ -111,6 +111,6 @@ $C5‚µ‚©‚µl‚Í
 
 ‚»‚µ‚Ä¡AŽ„‚Í—‰ð‚µ‚½
 #LOGOFF 400
-$C5à%¦{}h ----
+$C5E%¦{}h ----
 #END
 #ENDTERMINAL 4
