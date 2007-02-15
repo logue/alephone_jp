@@ -103,6 +103,10 @@ Monster
 #OBJ       BtnEffect
  #TYPE       WSCvbtn
  #PARENT   MainWindow
+ #PROC  BtnEffectDown
+  #TRIG    13
+  #PRO   BtnEffectDownFunc.cpp
+
  #RES      labelString
 Effect
  #RES      vis
@@ -119,6 +123,10 @@ Effect
 #OBJ       BtnProjectile
  #TYPE       WSCvbtn
  #PARENT   MainWindow
+ #PROC  BtnProjectileDown
+  #TRIG    13
+  #PRO   BtnProjectileDownFunc.cpp
+
  #RES      labelString
 Projectile
  #RES      vis
@@ -135,6 +143,10 @@ Projectile
 #OBJ       BtnPhysics
  #TYPE       WSCvbtn
  #PARENT   MainWindow
+ #PROC  BtnPhysicsDown
+  #TRIG    13
+  #PRO   BtnPhysicsDownFunc.cpp
+
  #RES      labelString
 Physics
  #RES      vis
@@ -151,6 +163,10 @@ Physics
 #OBJ       BtnWeapon
  #TYPE       WSCvbtn
  #PARENT   MainWindow
+ #PROC  BtnWeaponDown
+  #TRIG    13
+  #PRO   BtnWeaponDownFunc.cpp
+
  #RES      labelString
 Weapon
  #RES      vis
@@ -780,7 +796,7 @@ Teleport Out
  #RES      height
 25
 
-#OBJ       Maivifi_068
+#OBJ       SeqSoftDead
  #TYPE       WSCvifield
  #PARENT   Maiinde_012
  #RES      userValue
@@ -796,7 +812,7 @@ Teleport Out
  #RES      height
 25
 
-#OBJ       Maivifi_069
+#OBJ       SeqHardDying
  #TYPE       WSCvifield
  #PARENT   Maiinde_012
  #RES      userValue
@@ -812,7 +828,7 @@ Teleport Out
  #RES      height
 25
 
-#OBJ       Maivifi_070
+#OBJ       SeqHardDead
  #TYPE       WSCvifield
  #PARENT   Maiinde_012
  #RES      userValue
@@ -828,7 +844,7 @@ Teleport Out
  #RES      height
 25
 
-#OBJ       Maivifi_071
+#OBJ       SeqTeleportIn
  #TYPE       WSCvifield
  #PARENT   Maiinde_012
  #RES      userValue
@@ -844,7 +860,7 @@ Teleport Out
  #RES      height
 25
 
-#OBJ       Maivifi_072
+#OBJ       SeqTeleportOut
  #TYPE       WSCvifield
  #PARENT   Maiinde_012
  #RES      userValue
@@ -885,6 +901,8 @@ SoundPitch
 1
  #RES      labelString
 ActivationSnd
+ #RES      font
+0
  #RES      vis
 1
  #RES      x
@@ -1006,7 +1024,7 @@ RandomSnd
  #RES      height
 25
 
-#OBJ       Maivifi_082
+#OBJ       SoundPitchEdit
  #TYPE       WSCvifield
  #PARENT   Maiinde_012
  #RES      userValue
@@ -1022,7 +1040,7 @@ RandomSnd
  #RES      height
 25
 
-#OBJ       Maivifi_083
+#OBJ       RandomSndMaskEdit
  #TYPE       WSCvifield
  #PARENT   Maiinde_012
  #RES      userValue
@@ -1064,7 +1082,7 @@ ImpactEffect
  #RES      vis
 1
  #RES      x
-350
+345
  #RES      y
 280
  #RES      width
@@ -1082,7 +1100,7 @@ MeleeEffect
  #RES      vis
 1
  #RES      x
-350
+345
  #RES      y
 305
  #RES      width
@@ -1100,11 +1118,11 @@ ContrailEffect
  #RES      vis
 1
  #RES      x
-350
+345
  #RES      y
 330
  #RES      width
-90
+110
  #RES      height
 25
 
@@ -1194,7 +1212,7 @@ Gravity
  #RES      height
 25
 
-#OBJ       Maivifi_093
+#OBJ       HalfVisualArcEdit
  #TYPE       WSCvifield
  #PARENT   Maiinde_012
  #RES      userValue
@@ -1210,7 +1228,7 @@ Gravity
  #RES      height
 25
 
-#OBJ       Maivifi_094
+#OBJ       VertVisualArcEdit
  #TYPE       WSCvifield
  #PARENT   Maiinde_012
  #RES      userValue
@@ -1226,7 +1244,7 @@ Gravity
  #RES      height
 25
 
-#OBJ       Maivifi_095
+#OBJ       SpeedEdit
  #TYPE       WSCvifield
  #PARENT   Maiinde_012
  #RES      userValue
@@ -1242,7 +1260,7 @@ Gravity
  #RES      height
 25
 
-#OBJ       Maivifi_096
+#OBJ       GravityEdit
  #TYPE       WSCvifield
  #PARENT   Maiinde_012
  #RES      userValue
@@ -1474,7 +1492,7 @@ Set as Default
  #RES      width
 115
 
-#OBJ       Maiopti_107
+#OBJ       SpeedCombo
  #TYPE       WSCoption
  #PARENT   Maiinde_012
  #RES      userValue
@@ -1483,6 +1501,8 @@ Set as Default
 1
  #RES      labelString
 item1
+ #RES      font
+0
  #RES      vis
 1
  #RES      x
@@ -1492,7 +1512,7 @@ item1
  #RES      height
 25
 
-#OBJ       Maiopti_108
+#OBJ       IntelligenceCombo
  #TYPE       WSCoption
  #PARENT   Maiinde_012
  #PROC  IntelligenceValueCh
@@ -1507,6 +1527,8 @@ Low:1:ep1_name,Average:2:ep2_name,High:3:ep3_name
 1
  #RES      labelString
 Low
+ #RES      font
+0
  #RES      vis
 1
  #RES      x
@@ -1518,7 +1540,7 @@ Low
  #RES      height
 25
 
-#OBJ       Maivbtn_109
+#OBJ       CollectionBtn
  #TYPE       WSCvbtn
  #PARENT   Maiinde_012
  #PROC  CollectionBtn
@@ -1527,6 +1549,8 @@ Low
 
  #RES      userValue
 1
+ #RES      font
+0
  #RES      vis
 1
  #RES      x
@@ -1538,11 +1562,17 @@ Low
  #RES      height
 25
 
-#OBJ       Maivbtn_110
+#OBJ       CarryItemBtn
  #TYPE       WSCvbtn
  #PARENT   Maiinde_012
+ #PROC  CaarryItemBtn
+  #TRIG    13
+  #PRO   CaarryItemBtnFunc.cpp
+
  #RES      userValue
 1
+ #RES      font
+0
  #RES      vis
 1
  #RES      x
@@ -1554,11 +1584,13 @@ Low
  #RES      height
 25
 
-#OBJ       Maivbtn_111
+#OBJ       ActivationSndBtn
  #TYPE       WSCvbtn
  #PARENT   Maiinde_012
  #RES      userValue
 1
+ #RES      font
+0
  #RES      vis
 1
  #RES      x
@@ -1570,11 +1602,13 @@ Low
  #RES      height
 25
 
-#OBJ       Maivbtn_112
+#OBJ       FriendActSndBtn
  #TYPE       WSCvbtn
  #PARENT   Maiinde_012
  #RES      userValue
 1
+ #RES      font
+0
  #RES      vis
 1
  #RES      x
@@ -1586,11 +1620,13 @@ Low
  #RES      height
 25
 
-#OBJ       Maivbtn_113
+#OBJ       ClearSndBtn
  #TYPE       WSCvbtn
  #PARENT   Maiinde_012
  #RES      userValue
 1
+ #RES      font
+0
  #RES      vis
 1
  #RES      x
@@ -1602,11 +1638,13 @@ Low
  #RES      height
 25
 
-#OBJ       Maivbtn_114
+#OBJ       KillSndBtn
  #TYPE       WSCvbtn
  #PARENT   Maiinde_012
  #RES      userValue
 1
+ #RES      font
+0
  #RES      vis
 1
  #RES      x
@@ -1618,11 +1656,13 @@ Low
  #RES      height
 25
 
-#OBJ       Maivbtn_115
+#OBJ       ApologySndBtn
  #TYPE       WSCvbtn
  #PARENT   Maiinde_012
  #RES      userValue
 1
+ #RES      font
+0
  #RES      vis
 1
  #RES      x
@@ -1634,11 +1674,13 @@ Low
  #RES      height
 25
 
-#OBJ       Maivbtn_116
+#OBJ       FriendFireSndBtn
  #TYPE       WSCvbtn
  #PARENT   Maiinde_012
  #RES      userValue
 1
+ #RES      font
+0
  #RES      vis
 1
  #RES      x
@@ -1650,11 +1692,13 @@ Low
  #RES      height
 25
 
-#OBJ       Maivbtn_117
+#OBJ       FlamingSndBtn
  #TYPE       WSCvbtn
  #PARENT   Maiinde_012
  #RES      userValue
 1
+ #RES      font
+0
  #RES      vis
 1
  #RES      x
@@ -1666,11 +1710,13 @@ Low
  #RES      height
 25
 
-#OBJ       Maivbtn_118
+#OBJ       RandomSndBtn
  #TYPE       WSCvbtn
  #PARENT   Maiinde_012
  #RES      userValue
 1
+ #RES      font
+0
  #RES      vis
 1
  #RES      x
@@ -1682,7 +1728,7 @@ Low
  #RES      height
 25
 
-#OBJ       Maiopti_119
+#OBJ       ClassCombo
  #TYPE       WSCoption
  #PARENT   Maiinde_012
  #RES      userValue
@@ -1691,6 +1737,8 @@ Low
 1
  #RES      labelString
 item1
+ #RES      font
+0
  #RES      vis
 1
  #RES      x
@@ -1702,51 +1750,57 @@ item1
  #RES      height
 25
 
-#OBJ       Maivbtn_120
+#OBJ       ImpactEffectBtn
  #TYPE       WSCvbtn
  #PARENT   Maiinde_012
  #RES      userValue
 1
+ #RES      font
+0
  #RES      vis
 1
  #RES      x
-440
+450
  #RES      y
 280
  #RES      width
-90
+110
  #RES      height
 25
 
-#OBJ       Maivbtn_121
+#OBJ       MeleeEffectBtn
  #TYPE       WSCvbtn
  #PARENT   Maiinde_012
  #RES      userValue
 1
+ #RES      font
+0
  #RES      vis
 1
  #RES      x
-440
+450
  #RES      y
 305
  #RES      width
-90
+110
  #RES      height
 25
 
-#OBJ       Maivbtn_122
+#OBJ       ContrailEffectBtn
  #TYPE       WSCvbtn
  #PARENT   Maiinde_012
  #RES      userValue
 1
+ #RES      font
+0
  #RES      vis
 1
  #RES      x
-440
+450
  #RES      y
 330
  #RES      width
-90
+110
  #RES      height
 25
 
@@ -1762,7 +1816,7 @@ SelectIt!
  #RES      width
 290
  #RES      height
-496
+503
 
 #OBJ       ListSelect
  #TYPE       WSClist
@@ -1770,7 +1824,7 @@ SelectIt!
  #RES      titleString
 title4
  #RES      workHeight
-26
+10
  #RES      hbarVisible
 1
  #RES      x
@@ -1783,4 +1837,64 @@ title4
 465
  #RES      vis
 1
+
+#OBJ       FrmEffect
+ #TYPE       WSCform
+ #PARENT   MainWindow
+ #RES      x
+95
+ #RES      y
+25
+ #RES      width
+690
+ #RES      height
+470
+
+#OBJ       Maiinde_001
+ #TYPE       WSCindexForm
+ #PARENT   FrmEffect
+ #RES      y
+5
+ #RES      width
+585
+ #RES      height
+460
+ #RES      vis
+1
+
+#OBJ       FrmProjectile
+ #TYPE       WSCform
+ #PARENT   MainWindow
+ #RES      x
+95
+ #RES      y
+25
+ #RES      width
+690
+ #RES      height
+470
+
+#OBJ       FrmPhysics
+ #TYPE       WSCform
+ #PARENT   MainWindow
+ #RES      x
+95
+ #RES      y
+25
+ #RES      width
+690
+ #RES      height
+470
+
+#OBJ       FrmWeapon
+ #TYPE       WSCform
+ #PARENT   MainWindow
+ #RES      x
+95
+ #RES      y
+25
+ #RES      width
+690
+ #RES      height
+470
 

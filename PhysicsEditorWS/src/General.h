@@ -94,5 +94,5 @@ void setupDialog(WSCbase* object);
 //int getSelectedValue(WSCoption *opt);
 
 WSCbase* getObject(const char* class_name, const char* obj_name);
-
+WSCbase* getChild(WSCbase* parent, const char* obj_name);
 #endif

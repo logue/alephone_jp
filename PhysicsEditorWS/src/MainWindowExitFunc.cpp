@@ -6,5 +6,6 @@
 //----------------------------------------------------------
 void MainWindowExitFunc(WSCbase* object){
   //do something...
+	exit(0);
 }
 static WSCfunctionRegister  op("MainWindowExitFunc",(void*)MainWindowExitFunc);

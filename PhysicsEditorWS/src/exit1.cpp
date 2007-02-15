@@ -7,6 +7,7 @@
 void exit1(WSCbase* object){
   //do something...
 	//•Û‘¶Šm”F
-	
+	exit(0);
+
 }
 static WSCfunctionRegister  op("exit1",(void*)exit1);

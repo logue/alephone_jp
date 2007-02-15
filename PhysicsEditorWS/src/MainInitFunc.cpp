@@ -7,8 +7,11 @@
 #include <WSCindexForm.h>
 #include <WSCvifield.h>
 #include <WSCmessageDialog.h>
+#include <WSClist.h>
 
 #include "General.h"
+
+#include <stdarg.h>
 
 int windowType = Windows::Monster;
 int selectedMonsterType;
@@ -134,6 +137,22 @@ int valueProjectileFlags[NUMBER_OF_PROJECTILE_FLAG_INFORMATIONS]={
     _penetrates_media_boundary
 };
 
+void messageBox(const char* format, ...)
+{
+    char message[1024];
+
+    va_list maker;
+    va_start(maker, format);
+    vsprintf(message, format, maker);
+
+	WSCmessageDialog* msg = WSGIappMessageDialog(); //(G)
+	msg->setProperty(WSNwidth,500);									//(H)
+	msg->setProperty(WSNheight,120);								//(I)
+	msg->setProperty(WSNdefaultPosition,True);			//(J)
+	msg->setProperty(WSNlabelString, message);
+	msg->popup();
+}
+
 std::string getOptionItemListFromVectorString(std::vector<std::string>& stocks)
 {
 	std::string itemList;
@@ -161,26 +180,35 @@ void setDefinitionsToDefault()
 WSCbase* getObject(const char* class_name, const char* obj_name)
 {
 	WSCbase* obj = WSGIappObjectList()->getInstance((char*)class_name,(char*)obj_name);
+	if(obj == NULL){
+		messageBox("ClassName[%s], ObjectName[%s] the Instance not found",
+			class_name, obj_name);
+		exit(1);
+	}
 	return obj;
+}
+
+WSCbase* getChild(WSCbase* parent, const char* obj_name)
+{
+	WSCbase* child = parent->getChildInstance((char*)obj_name);
+	if(child == NULL){
+		messageBox("ObjectName[%s] the Child Instance not found",
+			obj_name);
+		exit(1);
+	}
+	return child;
 }
 
 void setInteger(WSCbase* obj, int num)
 {
-	//アプリケーションに1つあらかじめ用意されている
-	//メッセージダイアログのインスタンスを取得する。
-	WSCmessageDialog* msg = WSGIappMessageDialog(); //(G)
-	msg->setProperty(WSNwidth,500);									//(H)
-	msg->setProperty(WSNheight,120);								//(I)
-	msg->setProperty(WSNdefaultPosition,True);			//(J)
-
 	if(obj == NULL){
-		msg->setProperty(WSNlabelString,WSCstring("NULL OBJECT! @ setInteger"));
-		msg->popup();
+		messageBox("NULL OBJECT! @ setInteger");
 		exit(1);
 	}
 	//vitality
 	obj->setProperty(WSNlabelString, (long)num);
 }
+
 /*
 int getSelectedValue(WSCoption *opt)
 {
@@ -225,7 +253,7 @@ void setupDialog(WSCbase* object)
 {
 	if(windowType == Windows::Monster){
 		//window
-		WSCwindow* wnd = (WSCwindow*)getObject("WSCwindow", "WndMonster");
+		WSCwindow* wnd = (WSCwindow*)getObject("WSCform", "FrmMonster");
 		int type = selectedMonsterType;
 		if(type >= 0 && type < NUMBER_OF_MONSTER_TYPES){
 			//設定
@@ -234,42 +262,42 @@ void setupDialog(WSCbase* object)
 			int16 clut = GET_COLLECTION_CLUT(collection);
 			
 			//index
-			WSCindexForm* indextab = (WSCindexForm*)wnd->getChildInstance("Maiinde_012");
+			WSCindexForm* indextab = (WSCindexForm*)getChild(wnd, "Maiinde_012");
 			//clut
-			WSCvifield* clutField = (WSCvifield*)indextab->getChildInstance("PalletEdit");
+			WSCvifield* clutField = (WSCvifield*)getChild(indextab, "PalletEdit");
 			clutField->setProperty(WSNlabelString, (long)clut);
 			//collection
-			indextab->getChildInstance("CollectionBtn")->setProperty(WSNlabelString,
+			getChild(indextab, "CollectionBtn")->setProperty(WSNlabelString,
 				stockCollections[col].c_str());
 			
 			//vitality
 			char buf[256];
-			setInteger(indextab->getChildInstance("VitalityEdit"), monster_definitions[type].vitality);
+			setInteger(getChild(indextab, "VitalityEdit"), monster_definitions[type].vitality);
 			//class
 			int classIndex = getIndexFromValueArray(valueMonsterClasses, NUMBER_OF_CLASS_INFORMATIONS,
 				monster_definitions[type]._class);
-			if(classIndex > 0){
-				WSCbase* opt = indextab->getChildInstance("ClassCombo");
+			if(classIndex >= 0){
+				WSCbase* opt = getChild(indextab, "ClassCombo");
 				opt->setProperty(WSNvalue, (classIndex));
 				opt->setProperty(WSNlabelString, stockMonsterClasses[classIndex].c_str());
 			}else{
 				sprintf(buf, "class combo failure:%d", monster_definitions[type]._class);
 				MessageBox(NULL, buf, "", MB_OK);
 			}
-			//setSelectedValue((WSCoption*)indextab->getChildInstance("ClassCombo"),
+			//setSelectedValue((WSCoption*)getChild(indextab, "ClassCombo"),
 			//	(monster_definitions[type]._class));
 			//radius
-			setInteger(indextab->getChildInstance("RadiusEdit"), monster_definitions[type].radius);
+			setInteger(getChild(indextab, "RadiusEdit"), monster_definitions[type].radius);
 			//height
-			setInteger(indextab->getChildInstance("HeightEdit"), monster_definitions[type].height);
+			setInteger(getChild(indextab, "HeightEdit"), monster_definitions[type].height);
 			//hover
-			setInteger(indextab->getChildInstance("HoverEdit"), monster_definitions[type].preferred_hover_height);
+			setInteger(getChild(indextab, "HoverEdit"), monster_definitions[type].preferred_hover_height);
 			//minledge
-			setInteger(indextab->getChildInstance("MinLedgeEdit"), monster_definitions[type].minimum_ledge_delta);
+			setInteger(getChild(indextab, "MinLedgeEdit"), monster_definitions[type].minimum_ledge_delta);
 			//maxledge
-			setInteger(indextab->getChildInstance("MaxLedgeEdit"), monster_definitions[type].maximum_ledge_delta);
+			setInteger(getChild(indextab, "MaxLedgeEdit"), monster_definitions[type].maximum_ledge_delta);
 			//extvelscale
-			setInteger(indextab->getChildInstance("ExtVelScaleEdit"), monster_definitions[type].external_velocity_scale);
+			setInteger(getChild(indextab, "ExtVelScaleEdit"), monster_definitions[type].external_velocity_scale);
 			
 		//	sprintf(buf, "carry item:%d", monster_definitions[type].carrying_item_type);
 		//	MessageBox(NULL, buf, "", MB_OK);
@@ -278,14 +306,14 @@ void setupDialog(WSCbase* object)
 			if(carryIndex < 0){
 				carryIndex = stockItemTypes.size() -1;
 			}
-			indextab->getChildInstance("CarryItemBtn")->setProperty(WSNlabelString,
+			getChild(indextab, "CarryItemBtn")->setProperty(WSNlabelString,
 				stockItemTypes[carryIndex].c_str());
 			//halfvisualarc
-			setInteger(indextab->getChildInstance("HalfVisualArc"), monster_definitions[type].half_visual_arc);
+			setInteger(getChild(indextab, "HalfVisualArcEdit"), monster_definitions[type].half_visual_arc);
 			//vertvisualarc
-			setInteger(indextab->getChildInstance("VertVisualArc"), monster_definitions[type].half_vertical_visual_arc);
+			setInteger(getChild(indextab, "VertVisualArcEdit"), monster_definitions[type].half_vertical_visual_arc);
 			//interlligence
-			WSCoption* opt = (WSCoption*)indextab->getChildInstance("IntelligenceCombo");
+			WSCoption* opt = (WSCoption*)getChild(indextab, "IntelligenceCombo");
 			long intelli = monster_definitions[type].intelligence;
 	//		opt->onValueChange(num);
 	//		opt->setProperty(WSNvalue, num);
@@ -293,44 +321,108 @@ void setupDialog(WSCbase* object)
 			int intelliIndex = getIndexFromValueArray(valueIntelligences, NUMBER_OF_MONSTER_INTELLIGENCE_INFORMATIONS,
 				intelli);
 			if(intelliIndex > 0){
-				indextab->getChildInstance("IntelligenceCombo")->setProperty(WSNvalue, intelliIndex);//WSNlabelString
-				indextab->getChildInstance("IntelligenceCombo")->setProperty(WSNlabelString,
+				getChild(indextab, "IntelligenceCombo")->setProperty(WSNvalue, intelliIndex);//WSNlabelString
+				getChild(indextab, "IntelligenceCombo")->setProperty(WSNlabelString,
 					intelligences[intelliIndex]);//WSNlabelString
 			}else{
 			}
 			
 			//opt->update();
-			//setSelectedValue((WSCoption*)indextab->getChildInstance("IntelligenceCombo"),
+			//setSelectedValue((WSCoption*)getChild(indextab, "IntelligenceCombo"),
 			//	monster_definitions[type].intelligence);
 			//speed
-			setInteger(indextab->getChildInstance("SpeedEdit"), monster_definitions[type].half_vertical_visual_arc);
-			//indextab->getChildInstance("SpeedCombo")->setProperty(WSNvalue, );
+			setInteger(getChild(indextab, "SpeedEdit"), monster_definitions[type].half_vertical_visual_arc);
+			//getChild(indextab, "SpeedCombo")->setProperty(WSNvalue, );
 			//gravity
-			setInteger(indextab->getChildInstance("GravityEdit"), monster_definitions[type].gravity);
+			setInteger(getChild(indextab, "GravityEdit"), monster_definitions[type].gravity);
 			
 			////////////
 			//sequences
-			setInteger(indextab->getChildInstance("SeqStationaly"),
+			setInteger(getChild(indextab, "SeqStationaly"),
 				monster_definitions[type].stationary_shape);
-			setInteger(indextab->getChildInstance("SeqMoving"),
+			setInteger(getChild(indextab, "SeqMoving"),
 				monster_definitions[type].moving_shape);
-			setInteger(indextab->getChildInstance("SeqSoftDying"),
+			setInteger(getChild(indextab, "SeqSoftDying"),
 				monster_definitions[type].soft_dying_shape);
-			setInteger(indextab->getChildInstance("SeqSoftDead"),
+			setInteger(getChild(indextab, "SeqSoftDead"),
 				monster_definitions[type].soft_dead_shapes);
-			setInteger(indextab->getChildInstance("SeqHardDying"),
+			setInteger(getChild(indextab, "SeqHardDying"),
 				monster_definitions[type].hard_dying_shape);
-			setInteger(indextab->getChildInstance("SeqHardDead"),
+			setInteger(getChild(indextab, "SeqHardDead"),
 				monster_definitions[type].hard_dead_shapes);
-			setInteger(indextab->getChildInstance("SeqHitting"),
+			setInteger(getChild(indextab, "SeqHitting"),
 				monster_definitions[type].hit_shapes);
-			setInteger(indextab->getChildInstance("SeqTeleportIn"),
+			setInteger(getChild(indextab, "SeqTeleportIn"),
 				monster_definitions[type].teleport_in_shape);
-			setInteger(indextab->getChildInstance("SeqTeleportOut"),
+			setInteger(getChild(indextab, "SeqTeleportOut"),
 				monster_definitions[type].teleport_out_shape);
+			
+			//sounds
+			setInteger(getChild(indextab, "SoundPitchEdit"),
+				monster_definitions[type].sound_pitch);
+			setInteger(getChild(indextab, "RandomSndMaskEdit"),
+				monster_definitions[type].random_sound_mask);
+			int index = monster_definitions[type].activation_sound;
+			if(index < 0 || index == UNONE){index = stockSounds.size() - 1;}
+			getChild(indextab, "ActivationSndBtn")->setProperty(WSNlabelString,
+				stockSounds[index].c_str());
+			index = monster_definitions[type].friendly_activation_sound;
+			if(index < 0 || index == UNONE){index = stockSounds.size() - 1;}
+			getChild(indextab, "FriendActSndBtn")->setProperty(WSNlabelString,
+				stockSounds[index].c_str());
+			index = monster_definitions[type].clear_sound;
+			if(index < 0 || index == UNONE){index = stockSounds.size() - 1;}
+			getChild(indextab, "ClearSndBtn")->setProperty(WSNlabelString,
+				stockSounds[index].c_str());
+			index = monster_definitions[type].kill_sound;
+			if(index < 0 || index == UNONE){index = stockSounds.size() - 1;}
+			getChild(indextab, "KillSndBtn")->setProperty(WSNlabelString,
+				stockSounds[index].c_str());
+			index = monster_definitions[type].apology_sound;
+			if(index < 0 || index == UNONE){index = stockSounds.size() - 1;}
+			getChild(indextab, "ApologySndBtn")->setProperty(WSNlabelString,
+				stockSounds[index].c_str());
+			index = monster_definitions[type].friendly_fire_sound;
+			if(index < 0 || index == UNONE){index = stockSounds.size() - 1;}
+			getChild(indextab, "FriendFireSndBtn")->setProperty(WSNlabelString,
+				stockSounds[index].c_str());
+			index = monster_definitions[type].flaming_sound;
+			if(index < 0 || index == UNONE){index = stockSounds.size() - 1;}
+			getChild(indextab, "FlamingSndBtn")->setProperty(WSNlabelString,
+				stockSounds[index].c_str());
+			index = monster_definitions[type].random_sound;
+			if(index < 0 || index == UNONE){index = stockSounds.size() - 1;}
+			getChild(indextab, "RandomSndBtn")->setProperty(WSNlabelString,
+				stockSounds[index].c_str());
+			
+			index = monster_definitions[type].impact_effect;
+			if(index < 0 || index == UNONE){index = stockEffects.size() - 1;}
+			getChild(indextab, "ImpactEffectBtn")->setProperty(WSNlabelString,
+				stockEffects[index].c_str());
+			index = monster_definitions[type].melee_impact_effect;
+			if(index < 0 || index == UNONE){index = stockEffects.size() - 1;}
+			getChild(indextab, "MeleeEffectBtn")->setProperty(WSNlabelString,
+				stockEffects[index].c_str());
+			index = monster_definitions[type].contrail_effect;
+			if(index < 0 || index == UNONE){index = stockEffects.size() - 1;}
+			getChild(indextab, "ContrailEffectBtn")->setProperty(WSNlabelString,
+				stockEffects[index].c_str());
+
 		}
 	}
 	object->update();
+}
+
+//空文字を消します。
+std::vector<std::string> killSpaceOfList(std::vector<std::string>& lst)
+{
+	std::vector<std::string> dest;
+	for(int i = 0; i < lst.size(); i ++){
+		if(lst[i].compare("") != 0){
+			dest.push_back(lst[i]);
+		}
+	}
+	return dest;
 }
 
 //----------------------------------------------------------
@@ -351,23 +443,38 @@ void MainInitFunc(WSCbase* object){
         sizeof(struct weapon_definition) * MAXIMUM_NUMBER_OF_WEAPONS);
 
 	//load
-	stockCollections = hpl::string::loadFromFile("data/Collections.txt");
-	stockMonsterClasses = hpl::string::loadFromFile("data/MonsterClasses.txt");
-	stockSpeeds = hpl::string::loadFromFile("data/Speeds.txt");
-	stockSpeeds.push_back("*other*");
-	stockItemTypes = hpl::string::loadFromFile("data/DefinedItems.txt");
-	stockItemTypes.push_back("*none*");
-	stockEffects = hpl::string::loadFromFile("data/Effects.txt");
-	stockEffects.push_back("*none*");
-	stockProjectiles = hpl::string::loadFromFile("data/Projectiles.txt");
-	stockSounds = hpl::string::loadFromFile("data/Sounds.txt");
-	stockSounds.push_back("*none*");
-	stockDamages = hpl::string::loadFromFile("data/Damages.txt");
-	stockMonsterActivates = hpl::string::loadFromFile("data/MonsterActivates.txt");
-	stockMonsterDoorRetryMasks = hpl::string::loadFromFile("data/MonsterDoorRetryMasks.txt");
-	stockWeaponClasses = hpl::string::loadFromFile("data/WeaponClasses.txt");
-	stockShellCasingTypes = hpl::string::loadFromFile("data/ShellCasingTypes.txt");
-	stockPhysicsTypes = hpl::string::loadFromFile("data/PhysicsTypes.txt");
+	{
+		std::vector<std::string> lst = hpl::string::loadFromFile("data/Collections.txt");
+		stockCollections = killSpaceOfList(lst);
+		lst = hpl::string::loadFromFile("data/MonsterClasses.txt");
+		stockMonsterClasses = killSpaceOfList(lst);
+		lst = hpl::string::loadFromFile("data/Speeds.txt");
+		stockSpeeds = killSpaceOfList(lst);
+		stockSpeeds.push_back("*other*");
+		lst = hpl::string::loadFromFile("data/DefinedItems.txt");
+		stockItemTypes = killSpaceOfList(lst);
+		stockItemTypes.push_back("*none*");
+		lst = hpl::string::loadFromFile("data/Effects.txt");
+		stockEffects = killSpaceOfList(lst);
+		stockEffects.push_back("*none*");
+		lst = hpl::string::loadFromFile("data/Projectiles.txt");
+		stockProjectiles = killSpaceOfList(lst);
+		lst = hpl::string::loadFromFile("data/Sounds.txt");
+		stockSounds = killSpaceOfList(lst);
+		stockSounds.push_back("*none*");
+		lst = hpl::string::loadFromFile("data/Damages.txt");
+		stockDamages = killSpaceOfList(lst);
+		lst = hpl::string::loadFromFile("data/MonsterActivates.txt");
+		stockMonsterActivates = killSpaceOfList(lst);
+		lst = hpl::string::loadFromFile("data/MonsterDoorRetryMasks.txt");
+		stockMonsterDoorRetryMasks = killSpaceOfList(lst);
+		lst = hpl::string::loadFromFile("data/WeaponClasses.txt");
+		stockWeaponClasses = killSpaceOfList(lst);
+		lst = hpl::string::loadFromFile("data/ShellCasingTypes.txt");
+		stockShellCasingTypes = killSpaceOfList(lst);
+		lst = hpl::string::loadFromFile("data/PhysicsTypes.txt");
+		stockPhysicsTypes = killSpaceOfList(lst);
+	}
 	
 
 	//setup window's combo
@@ -378,8 +485,7 @@ void MainInitFunc(WSCbase* object){
 	}else{
 	}*/
 	std::string itemList = getOptionItemListFromVectorString(stockMonsterClasses);
-	object->getChildInstance("FrmMonster")->
-		getChildInstance("Maiinde_012")->getChildInstance("ClassCombo")->
+	getChild(getChild(getChild(object, "FrmMonster"), "Maiinde_012"), "ClassCombo")->
 		setProperty(WSNmenuItems, itemList.c_str());
 	
 	//フレームの表示
@@ -387,6 +493,9 @@ void MainInitFunc(WSCbase* object){
 	obj->setVisible(true);
 	selectedMonsterType = selectedEffectType = selectedProjectileType = 0;
 	selectedPhysicsType = selectedWeaponType = 0;
+	//リストを選択
+	WSClist* lst = (WSClist*)getObject("WSClist", "ListMonsterTypes");
+	lst->setSelectPos(selectedMonsterType);
 	windowType = Windows::Monster;
 	
 	setDefinitionsToDefault();

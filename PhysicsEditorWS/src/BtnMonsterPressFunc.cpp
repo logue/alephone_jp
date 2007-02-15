@@ -10,30 +10,13 @@
 //----------------------------------------------------------
 void BtnMonsterPressFunc(WSCbase* object){
   //do something...
-	//他のダイアログを閉じる
-	{
-		WSCwindow* obj = (WSCwindow*)getObject("WSCwindow", "WndEffect");
-		obj->setVisible(false);
-	}
-	{
-		WSCwindow* obj = (WSCwindow*)getObject("WSCwindow", "WndProjectile");
-		obj->setVisible(false);
-	}
-	{
-		WSCwindow* obj = (WSCwindow*)getObject("WSCwindow", "WndPhysics");
-		obj->setVisible(false);
-	}
-	{
-		WSCwindow* obj = (WSCwindow*)getObject("WSCwindow", "WndWeapon");
-		obj->setVisible(false);
-	}
-	//モンスターダイアログの表示
-	{
-		WSCwindow* obj = (WSCwindow*)getObject("WSCwindow", "WndMonster");
-		obj->setVisible(true);
-		windowType = Windows::Monster;
-		//モンスターウインドウ更新
-		setupDialog(obj);
-	}
+	getObject("WSCform", "FrmEffect")->setVisible(false);
+	getObject("WSCform", "FrmProjectile")->setVisible(false);
+	getObject("WSCform", "FrmPhysics")->setVisible(false);
+	getObject("WSCform", "FrmWeapon")->setVisible(false);
+	WSCbase* obj = getObject("WSCform", "FrmMonster");
+	obj->setVisible(true);
+	windowType = Windows::Monster;
+	setupDialog(obj);
 }
 static WSCfunctionRegister  op("BtnMonsterPressFunc",(void*)BtnMonsterPressFunc);
