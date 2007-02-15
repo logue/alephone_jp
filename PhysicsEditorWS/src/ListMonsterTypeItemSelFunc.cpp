@@ -18,7 +18,7 @@ void ListMonsterTypeItemSelFunc(WSCbase* object){
 	//set type
 	selectedMonsterType = index;
 	//update monster window
-	WSCbase* wndMonster = getObject("WSCwindow", "WndMonster");
+	WSCbase* wndMonster = getObject("WSCform", "FrmMonster");
 	setupDialog(wndMonster);
 
 }

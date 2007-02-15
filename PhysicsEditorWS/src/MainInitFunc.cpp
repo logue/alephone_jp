@@ -16,6 +16,7 @@ int selectedEffectType;
 int selectedProjectileType;
 int selectedPhysicsType;
 int selectedWeaponType;
+int selectIndex;
 
 struct monster_definition monster_default_definitions[NUMBER_OF_MONSTER_TYPES];
 struct effect_definition effect_default_definitions[NUMBER_OF_EFFECT_TYPES];
@@ -377,14 +378,12 @@ void MainInitFunc(WSCbase* object){
 	}else{
 	}*/
 	std::string itemList = getOptionItemListFromVectorString(stockMonsterClasses);
-	object->getChildInstance("WndMonster")->
+	object->getChildInstance("FrmMonster")->
 		getChildInstance("Maiinde_012")->getChildInstance("ClassCombo")->
 		setProperty(WSNmenuItems, itemList.c_str());
 	
-	//子ウインドウの表示
-	char* class_name = "WSCwindow"; //ラベルクラス
-	char* obj_name   = "WndMonster";     //newvlab_001 という名称
-	WSCwindow* obj = (WSCwindow*)WSGIappObjectList()->getInstance(class_name,obj_name);
+	//フレームの表示
+	WSCwindow* obj = (WSCwindow*)getObject("WSCform", "FrmMonster");
 	obj->setVisible(true);
 	selectedMonsterType = selectedEffectType = selectedProjectileType = 0;
 	selectedPhysicsType = selectedWeaponType = 0;

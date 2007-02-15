@@ -56,6 +56,8 @@ extern int selectedProjectileType;
 extern int selectedPhysicsType;
 extern int selectedWeaponType;
 
+extern int selectIndex;
+
 extern struct monster_definition monster_default_definitions[NUMBER_OF_MONSTER_TYPES];
 extern struct effect_definition effect_default_definitions[NUMBER_OF_EFFECT_TYPES];
 extern struct projectile_definition projectile_default_definitions[NUMBER_OF_PROJECTILE_TYPES];

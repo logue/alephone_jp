@@ -37,10 +37,10 @@ OPOBJ = \
         FileNewFunc.o \
         FileSaveFunc.o \
         BtnMonsterPressFunc.o \
-        WndMonsterClosedFunc.o \
+        ListMonsterTypeItemSelFunc.o \
         MonsterTabsInitFunc.o \
         IntelligenceValueChFunc.o \
-        ListMonsterTypeItemSelFunc.o 
+        CollectionBtnFunc.o 
 
 OBJS = $(WINOBJ) $(OPOBJ) ../../HPLLib/HPLStringModifier.o   
 

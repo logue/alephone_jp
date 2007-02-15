@@ -164,64 +164,6 @@ Weapon
  #RES      height
 65
 
-#OBJ       WndSelect
- #TYPE       WSCwindow
- #PARENT   MainWindow
- #RES      titleString
-Select
- #RES      x
-95
- #RES      y
-272
- #RES      width
-255
- #RES      height
-470
- #RES      shadowThickness
-2
-
-#OBJ       Mailist_016
- #TYPE       WSClist
- #PARENT   WndSelect
- #RES      titleString
-title6
- #RES      workHeight
-26
- #RES      x
-5
- #RES      y
-5
- #RES      width
-135
- #RES      height
-460
- #RES      vis
-1
-
-#OBJ       Maivbtn_017
- #TYPE       WSCvbtn
- #PARENT   WndSelect
- #RES      labelString
-OK
- #RES      vis
-1
- #RES      x
-145
- #RES      y
-390
-
-#OBJ       Maivbtn_018
- #TYPE       WSCvbtn
- #PARENT   WndSelect
- #RES      labelString
-Cancel
- #RES      vis
-1
- #RES      x
-145
- #RES      y
-425
-
 #OBJ       FrmMonster
  #TYPE       WSCform
  #PARENT   MainWindow
@@ -252,7 +194,7 @@ data/MonsterTypes.txt
  #RES      workWidth
 300
  #RES      workHeight
-430
+940
  #RES      hbarVisible
 1
  #RES      x
@@ -266,7 +208,7 @@ data/MonsterTypes.txt
  #RES      vis
 1
 
-#OBJ       Maiinde_002
+#OBJ       Maiinde_012
  #TYPE       WSCindexForm
  #PARENT   FrmMonster
  #PROC  MonsterTabsInit
@@ -288,7 +230,7 @@ Appearance,Flags1,Attack
 
 #OBJ       Maivlab_004
  #TYPE       WSCvlabel
- #PARENT   Maiinde_002
+ #PARENT   Maiinde_012
  #RES      userValue
 1
  #RES      labelString
@@ -306,7 +248,7 @@ Collection
 
 #OBJ       Maivlab_019
  #TYPE       WSCvlabel
- #PARENT   Maiinde_002
+ #PARENT   Maiinde_012
  #RES      userValue
 1
  #RES      labelString
@@ -324,7 +266,7 @@ Pallet
 
 #OBJ       PalletEdit
  #TYPE       WSCvifield
- #PARENT   Maiinde_002
+ #PARENT   Maiinde_012
  #RES      userValue
 1
  #RES      vis
@@ -340,7 +282,7 @@ Pallet
 
 #OBJ       Maivlab_022
  #TYPE       WSCvlabel
- #PARENT   Maiinde_002
+ #PARENT   Maiinde_012
  #RES      userValue
 1
  #RES      labelString
@@ -358,7 +300,7 @@ Vitality
 
 #OBJ       Maivlab_024
  #TYPE       WSCvlabel
- #PARENT   Maiinde_002
+ #PARENT   Maiinde_012
  #RES      userValue
 1
  #RES      labelString
@@ -376,7 +318,7 @@ Class
 
 #OBJ       VitalityEdit
  #TYPE       WSCvifield
- #PARENT   Maiinde_002
+ #PARENT   Maiinde_012
  #RES      userValue
 1
  #RES      vis
@@ -392,7 +334,7 @@ Class
 
 #OBJ       Maivlab_037
  #TYPE       WSCvlabel
- #PARENT   Maiinde_002
+ #PARENT   Maiinde_012
  #RES      userValue
 1
  #RES      labelString
@@ -410,7 +352,7 @@ Radius
 
 #OBJ       Maivlab_038
  #TYPE       WSCvlabel
- #PARENT   Maiinde_002
+ #PARENT   Maiinde_012
  #RES      userValue
 1
  #RES      labelString
@@ -428,7 +370,7 @@ Height
 
 #OBJ       RadiusEdit
  #TYPE       WSCvifield
- #PARENT   Maiinde_002
+ #PARENT   Maiinde_012
  #RES      userValue
 1
  #RES      vis
@@ -444,7 +386,7 @@ Height
 
 #OBJ       HeightEdit
  #TYPE       WSCvifield
- #PARENT   Maiinde_002
+ #PARENT   Maiinde_012
  #RES      userValue
 1
  #RES      vis
@@ -460,7 +402,7 @@ Height
 
 #OBJ       Maivlab_046
  #TYPE       WSCvlabel
- #PARENT   Maiinde_002
+ #PARENT   Maiinde_012
  #RES      userValue
 1
  #RES      labelString
@@ -478,7 +420,7 @@ Hover
 
 #OBJ       Maivlab_047
  #TYPE       WSCvlabel
- #PARENT   Maiinde_002
+ #PARENT   Maiinde_012
  #RES      userValue
 1
  #RES      labelString
@@ -496,7 +438,7 @@ Min Ledge
 
 #OBJ       Maivlab_048
  #TYPE       WSCvlabel
- #PARENT   Maiinde_002
+ #PARENT   Maiinde_012
  #RES      userValue
 1
  #RES      labelString
@@ -514,7 +456,7 @@ Max Ledge
 
 #OBJ       Maivlab_049
  #TYPE       WSCvlabel
- #PARENT   Maiinde_002
+ #PARENT   Maiinde_012
  #RES      userValue
 1
  #RES      labelString
@@ -532,7 +474,7 @@ ExtVelScale
 
 #OBJ       Maivlab_050
  #TYPE       WSCvlabel
- #PARENT   Maiinde_002
+ #PARENT   Maiinde_012
  #RES      userValue
 1
  #RES      labelString
@@ -550,7 +492,7 @@ CarryItem
 
 #OBJ       HoverEdit
  #TYPE       WSCvifield
- #PARENT   Maiinde_002
+ #PARENT   Maiinde_012
  #RES      userValue
 1
  #RES      vis
@@ -566,7 +508,7 @@ CarryItem
 
 #OBJ       MinLedgeEdit
  #TYPE       WSCvifield
- #PARENT   Maiinde_002
+ #PARENT   Maiinde_012
  #RES      userValue
 1
  #RES      vis
@@ -582,7 +524,7 @@ CarryItem
 
 #OBJ       MaxLedgeEdit
  #TYPE       WSCvifield
- #PARENT   Maiinde_002
+ #PARENT   Maiinde_012
  #RES      userValue
 1
  #RES      vis
@@ -598,7 +540,7 @@ CarryItem
 
 #OBJ       ExtVelScaleEdit
  #TYPE       WSCvifield
- #PARENT   Maiinde_002
+ #PARENT   Maiinde_012
  #RES      userValue
 1
  #RES      vis
@@ -614,7 +556,7 @@ CarryItem
 
 #OBJ       Maivlab_055
  #TYPE       WSCvlabel
- #PARENT   Maiinde_002
+ #PARENT   Maiinde_012
  #RES      userValue
 1
  #RES      labelString
@@ -632,7 +574,7 @@ Stationaly
 
 #OBJ       Maivlab_056
  #TYPE       WSCvlabel
- #PARENT   Maiinde_002
+ #PARENT   Maiinde_012
  #RES      userValue
 1
  #RES      labelString
@@ -650,7 +592,7 @@ Moving
 
 #OBJ       Maivlab_057
  #TYPE       WSCvlabel
- #PARENT   Maiinde_002
+ #PARENT   Maiinde_012
  #RES      userValue
 1
  #RES      labelString
@@ -668,7 +610,7 @@ Hitting
 
 #OBJ       Maivlab_058
  #TYPE       WSCvlabel
- #PARENT   Maiinde_002
+ #PARENT   Maiinde_012
  #RES      userValue
 1
  #RES      labelString
@@ -686,7 +628,7 @@ Soft Dying
 
 #OBJ       Maivlab_059
  #TYPE       WSCvlabel
- #PARENT   Maiinde_002
+ #PARENT   Maiinde_012
  #RES      userValue
 1
  #RES      labelString
@@ -704,7 +646,7 @@ Soft Dead
 
 #OBJ       Maivlab_060
  #TYPE       WSCvlabel
- #PARENT   Maiinde_002
+ #PARENT   Maiinde_012
  #RES      userValue
 1
  #RES      labelString
@@ -722,7 +664,7 @@ Hard Dying
 
 #OBJ       Maivlab_061
  #TYPE       WSCvlabel
- #PARENT   Maiinde_002
+ #PARENT   Maiinde_012
  #RES      userValue
 1
  #RES      labelString
@@ -740,7 +682,7 @@ Hard Dead
 
 #OBJ       SeqStationaly
  #TYPE       WSCvifield
- #PARENT   Maiinde_002
+ #PARENT   Maiinde_012
  #RES      userValue
 1
  #RES      vis
@@ -756,7 +698,7 @@ Hard Dead
 
 #OBJ       Maivlab_063
  #TYPE       WSCvlabel
- #PARENT   Maiinde_002
+ #PARENT   Maiinde_012
  #RES      userValue
 1
  #RES      labelString
@@ -774,7 +716,7 @@ Teleport In
 
 #OBJ       Maivlab_064
  #TYPE       WSCvlabel
- #PARENT   Maiinde_002
+ #PARENT   Maiinde_012
  #RES      userValue
 1
  #RES      labelString
@@ -792,7 +734,7 @@ Teleport Out
 
 #OBJ       SeqMoving
  #TYPE       WSCvifield
- #PARENT   Maiinde_002
+ #PARENT   Maiinde_012
  #RES      userValue
 1
  #RES      vis
@@ -808,7 +750,7 @@ Teleport Out
 
 #OBJ       SeqHitting
  #TYPE       WSCvifield
- #PARENT   Maiinde_002
+ #PARENT   Maiinde_012
  #RES      userValue
 1
  #RES      vis
@@ -824,7 +766,7 @@ Teleport Out
 
 #OBJ       SeqSoftDying
  #TYPE       WSCvifield
- #PARENT   Maiinde_002
+ #PARENT   Maiinde_012
  #RES      userValue
 1
  #RES      vis
@@ -840,7 +782,7 @@ Teleport Out
 
 #OBJ       Maivifi_068
  #TYPE       WSCvifield
- #PARENT   Maiinde_002
+ #PARENT   Maiinde_012
  #RES      userValue
 1
  #RES      vis
@@ -856,7 +798,7 @@ Teleport Out
 
 #OBJ       Maivifi_069
  #TYPE       WSCvifield
- #PARENT   Maiinde_002
+ #PARENT   Maiinde_012
  #RES      userValue
 1
  #RES      vis
@@ -872,7 +814,7 @@ Teleport Out
 
 #OBJ       Maivifi_070
  #TYPE       WSCvifield
- #PARENT   Maiinde_002
+ #PARENT   Maiinde_012
  #RES      userValue
 1
  #RES      vis
@@ -888,7 +830,7 @@ Teleport Out
 
 #OBJ       Maivifi_071
  #TYPE       WSCvifield
- #PARENT   Maiinde_002
+ #PARENT   Maiinde_012
  #RES      userValue
 1
  #RES      vis
@@ -904,7 +846,7 @@ Teleport Out
 
 #OBJ       Maivifi_072
  #TYPE       WSCvifield
- #PARENT   Maiinde_002
+ #PARENT   Maiinde_012
  #RES      userValue
 1
  #RES      vis
@@ -920,7 +862,7 @@ Teleport Out
 
 #OBJ       Maivlab_073
  #TYPE       WSCvlabel
- #PARENT   Maiinde_002
+ #PARENT   Maiinde_012
  #RES      userValue
 1
  #RES      labelString
@@ -938,7 +880,7 @@ SoundPitch
 
 #OBJ       Maivlab_074
  #TYPE       WSCvlabel
- #PARENT   Maiinde_002
+ #PARENT   Maiinde_012
  #RES      userValue
 1
  #RES      labelString
@@ -954,7 +896,7 @@ ActivationSnd
 
 #OBJ       Maivlab_075
  #TYPE       WSCvlabel
- #PARENT   Maiinde_002
+ #PARENT   Maiinde_012
  #RES      userValue
 1
  #RES      labelString
@@ -970,7 +912,7 @@ FriendActSnd
 
 #OBJ       Maivlab_076
  #TYPE       WSCvlabel
- #PARENT   Maiinde_002
+ #PARENT   Maiinde_012
  #RES      userValue
 1
  #RES      labelString
@@ -986,7 +928,7 @@ ClearSnd
 
 #OBJ       Maivlab_077
  #TYPE       WSCvlabel
- #PARENT   Maiinde_002
+ #PARENT   Maiinde_012
  #RES      userValue
 1
  #RES      labelString
@@ -1002,7 +944,7 @@ KillSnd
 
 #OBJ       Maivlab_078
  #TYPE       WSCvlabel
- #PARENT   Maiinde_002
+ #PARENT   Maiinde_012
  #RES      userValue
 1
  #RES      labelString
@@ -1018,7 +960,7 @@ ApologySnd
 
 #OBJ       Maivlab_079
  #TYPE       WSCvlabel
- #PARENT   Maiinde_002
+ #PARENT   Maiinde_012
  #RES      userValue
 1
  #RES      labelString
@@ -1034,7 +976,7 @@ FriendFireSnd
 
 #OBJ       Maivlab_080
  #TYPE       WSCvlabel
- #PARENT   Maiinde_002
+ #PARENT   Maiinde_012
  #RES      userValue
 1
  #RES      labelString
@@ -1050,7 +992,7 @@ FlamingSnd
 
 #OBJ       Maivlab_081
  #TYPE       WSCvlabel
- #PARENT   Maiinde_002
+ #PARENT   Maiinde_012
  #RES      userValue
 1
  #RES      labelString
@@ -1066,7 +1008,7 @@ RandomSnd
 
 #OBJ       Maivifi_082
  #TYPE       WSCvifield
- #PARENT   Maiinde_002
+ #PARENT   Maiinde_012
  #RES      userValue
 1
  #RES      vis
@@ -1082,7 +1024,7 @@ RandomSnd
 
 #OBJ       Maivifi_083
  #TYPE       WSCvifield
- #PARENT   Maiinde_002
+ #PARENT   Maiinde_012
  #RES      userValue
 1
  #RES      vis
@@ -1098,7 +1040,7 @@ RandomSnd
 
 #OBJ       Maivlab_084
  #TYPE       WSCvlabel
- #PARENT   Maiinde_002
+ #PARENT   Maiinde_012
  #RES      userValue
 1
  #RES      labelString
@@ -1114,7 +1056,7 @@ RandomSndMask
 
 #OBJ       Maivlab_085
  #TYPE       WSCvlabel
- #PARENT   Maiinde_002
+ #PARENT   Maiinde_012
  #RES      userValue
 1
  #RES      labelString
@@ -1132,7 +1074,7 @@ ImpactEffect
 
 #OBJ       Maivlab_086
  #TYPE       WSCvlabel
- #PARENT   Maiinde_002
+ #PARENT   Maiinde_012
  #RES      userValue
 1
  #RES      labelString
@@ -1150,7 +1092,7 @@ MeleeEffect
 
 #OBJ       Maivlab_087
  #TYPE       WSCvlabel
- #PARENT   Maiinde_002
+ #PARENT   Maiinde_012
  #RES      userValue
 1
  #RES      labelString
@@ -1168,7 +1110,7 @@ ContrailEffect
 
 #OBJ       Maivlab_088
  #TYPE       WSCvlabel
- #PARENT   Maiinde_002
+ #PARENT   Maiinde_012
  #RES      userValue
 1
  #RES      labelString
@@ -1184,7 +1126,7 @@ HalfVisualArc
 
 #OBJ       Maivlab_089
  #TYPE       WSCvlabel
- #PARENT   Maiinde_002
+ #PARENT   Maiinde_012
  #RES      userValue
 1
  #RES      labelString
@@ -1200,7 +1142,7 @@ VertVisualArc
 
 #OBJ       Maivlab_090
  #TYPE       WSCvlabel
- #PARENT   Maiinde_002
+ #PARENT   Maiinde_012
  #RES      userValue
 1
  #RES      labelString
@@ -1218,7 +1160,7 @@ Intelligence
 
 #OBJ       Maivlab_091
  #TYPE       WSCvlabel
- #PARENT   Maiinde_002
+ #PARENT   Maiinde_012
  #RES      userValue
 1
  #RES      labelString
@@ -1236,7 +1178,7 @@ Speed
 
 #OBJ       Maivlab_092
  #TYPE       WSCvlabel
- #PARENT   Maiinde_002
+ #PARENT   Maiinde_012
  #RES      userValue
 1
  #RES      labelString
@@ -1254,7 +1196,7 @@ Gravity
 
 #OBJ       Maivifi_093
  #TYPE       WSCvifield
- #PARENT   Maiinde_002
+ #PARENT   Maiinde_012
  #RES      userValue
 1
  #RES      vis
@@ -1270,7 +1212,7 @@ Gravity
 
 #OBJ       Maivifi_094
  #TYPE       WSCvifield
- #PARENT   Maiinde_002
+ #PARENT   Maiinde_012
  #RES      userValue
 1
  #RES      vis
@@ -1286,7 +1228,7 @@ Gravity
 
 #OBJ       Maivifi_095
  #TYPE       WSCvifield
- #PARENT   Maiinde_002
+ #PARENT   Maiinde_012
  #RES      userValue
 1
  #RES      vis
@@ -1302,7 +1244,7 @@ Gravity
 
 #OBJ       Maivifi_096
  #TYPE       WSCvifield
- #PARENT   Maiinde_002
+ #PARENT   Maiinde_012
  #RES      userValue
 1
  #RES      vis
@@ -1318,7 +1260,7 @@ Gravity
 
 #OBJ       Mailist_097
  #TYPE       WSClist
- #PARENT   Maiinde_002
+ #PARENT   Maiinde_012
  #RES      userValue
 2
  #RES      multiSelect
@@ -1346,7 +1288,7 @@ data/WSImmunitiesWeaknesses.txt
 
 #OBJ       Maivlab_098
  #TYPE       WSCvlabel
- #PARENT   Maiinde_002
+ #PARENT   Maiinde_012
  #RES      userValue
 2
  #RES      labelString
@@ -1360,7 +1302,7 @@ Immunities
 
 #OBJ       Mailist_099
  #TYPE       WSClist
- #PARENT   Maiinde_002
+ #PARENT   Maiinde_012
  #RES      userValue
 2
  #RES      multiSelect
@@ -1388,7 +1330,7 @@ data/WSImmunitiesWeaknesses.txt
 
 #OBJ       Maivlab_100
  #TYPE       WSCvlabel
- #PARENT   Maiinde_002
+ #PARENT   Maiinde_012
  #RES      userValue
 2
  #RES      labelString
@@ -1404,7 +1346,7 @@ Weaknesses
 
 #OBJ       Mailist_101
  #TYPE       WSClist
- #PARENT   Maiinde_002
+ #PARENT   Maiinde_012
  #RES      userValue
 2
  #RES      multiSelect
@@ -1432,7 +1374,7 @@ data/WSEnemiesFriends.txt
 
 #OBJ       Maivlab_102
  #TYPE       WSCvlabel
- #PARENT   Maiinde_002
+ #PARENT   Maiinde_012
  #RES      userValue
 2
  #RES      labelString
@@ -1448,7 +1390,7 @@ Enemies
 
 #OBJ       Maivlab_103
  #TYPE       WSCvlabel
- #PARENT   Maiinde_002
+ #PARENT   Maiinde_012
  #RES      userValue
 2
  #RES      labelString
@@ -1464,7 +1406,7 @@ Friends
 
 #OBJ       Mailist_104
  #TYPE       WSClist
- #PARENT   Maiinde_002
+ #PARENT   Maiinde_012
  #RES      userValue
 2
  #RES      multiSelect
@@ -1492,7 +1434,7 @@ data/WSEnemiesFriends.txt
 
 #OBJ       Mailist_105
  #TYPE       WSClist
- #PARENT   Maiinde_002
+ #PARENT   Maiinde_012
  #RES      userValue
 2
  #RES      multiSelect
@@ -1520,7 +1462,7 @@ data/WSFlags.txt
 
 #OBJ       Maivbtn_106
  #TYPE       WSCvbtn
- #PARENT   Maiinde_002
+ #PARENT   Maiinde_012
  #RES      userValue
 2
  #RES      labelString
@@ -1534,7 +1476,7 @@ Set as Default
 
 #OBJ       Maiopti_107
  #TYPE       WSCoption
- #PARENT   Maiinde_002
+ #PARENT   Maiinde_012
  #RES      userValue
 1
  #RES      value
@@ -1552,7 +1494,7 @@ item1
 
 #OBJ       Maiopti_108
  #TYPE       WSCoption
- #PARENT   Maiinde_002
+ #PARENT   Maiinde_012
  #PROC  IntelligenceValueCh
   #TRIG    3
   #PRO   IntelligenceValueChFunc.cpp
@@ -1578,7 +1520,11 @@ Low
 
 #OBJ       Maivbtn_109
  #TYPE       WSCvbtn
- #PARENT   Maiinde_002
+ #PARENT   Maiinde_012
+ #PROC  CollectionBtn
+  #TRIG    13
+  #PRO   CollectionBtnFunc.cpp
+
  #RES      userValue
 1
  #RES      vis
@@ -1594,7 +1540,7 @@ Low
 
 #OBJ       Maivbtn_110
  #TYPE       WSCvbtn
- #PARENT   Maiinde_002
+ #PARENT   Maiinde_012
  #RES      userValue
 1
  #RES      vis
@@ -1610,7 +1556,7 @@ Low
 
 #OBJ       Maivbtn_111
  #TYPE       WSCvbtn
- #PARENT   Maiinde_002
+ #PARENT   Maiinde_012
  #RES      userValue
 1
  #RES      vis
@@ -1626,7 +1572,7 @@ Low
 
 #OBJ       Maivbtn_112
  #TYPE       WSCvbtn
- #PARENT   Maiinde_002
+ #PARENT   Maiinde_012
  #RES      userValue
 1
  #RES      vis
@@ -1642,7 +1588,7 @@ Low
 
 #OBJ       Maivbtn_113
  #TYPE       WSCvbtn
- #PARENT   Maiinde_002
+ #PARENT   Maiinde_012
  #RES      userValue
 1
  #RES      vis
@@ -1658,7 +1604,7 @@ Low
 
 #OBJ       Maivbtn_114
  #TYPE       WSCvbtn
- #PARENT   Maiinde_002
+ #PARENT   Maiinde_012
  #RES      userValue
 1
  #RES      vis
@@ -1674,7 +1620,7 @@ Low
 
 #OBJ       Maivbtn_115
  #TYPE       WSCvbtn
- #PARENT   Maiinde_002
+ #PARENT   Maiinde_012
  #RES      userValue
 1
  #RES      vis
@@ -1690,7 +1636,7 @@ Low
 
 #OBJ       Maivbtn_116
  #TYPE       WSCvbtn
- #PARENT   Maiinde_002
+ #PARENT   Maiinde_012
  #RES      userValue
 1
  #RES      vis
@@ -1706,7 +1652,7 @@ Low
 
 #OBJ       Maivbtn_117
  #TYPE       WSCvbtn
- #PARENT   Maiinde_002
+ #PARENT   Maiinde_012
  #RES      userValue
 1
  #RES      vis
@@ -1722,7 +1668,7 @@ Low
 
 #OBJ       Maivbtn_118
  #TYPE       WSCvbtn
- #PARENT   Maiinde_002
+ #PARENT   Maiinde_012
  #RES      userValue
 1
  #RES      vis
@@ -1738,7 +1684,7 @@ Low
 
 #OBJ       Maiopti_119
  #TYPE       WSCoption
- #PARENT   Maiinde_002
+ #PARENT   Maiinde_012
  #RES      userValue
 1
  #RES      value
@@ -1758,7 +1704,7 @@ item1
 
 #OBJ       Maivbtn_120
  #TYPE       WSCvbtn
- #PARENT   Maiinde_002
+ #PARENT   Maiinde_012
  #RES      userValue
 1
  #RES      vis
@@ -1774,7 +1720,7 @@ item1
 
 #OBJ       Maivbtn_121
  #TYPE       WSCvbtn
- #PARENT   Maiinde_002
+ #PARENT   Maiinde_012
  #RES      userValue
 1
  #RES      vis
@@ -1790,7 +1736,7 @@ item1
 
 #OBJ       Maivbtn_122
  #TYPE       WSCvbtn
- #PARENT   Maiinde_002
+ #PARENT   Maiinde_012
  #RES      userValue
 1
  #RES      vis
@@ -1803,4 +1749,38 @@ item1
 90
  #RES      height
 25
+
+#OBJ       WndSelect
+ #TYPE       WSCdialog
+ #PARENT   MainWindow
+ #RES      titleString
+SelectIt!
+ #RES      x
+47
+ #RES      y
+374
+ #RES      width
+290
+ #RES      height
+496
+
+#OBJ       ListSelect
+ #TYPE       WSClist
+ #PARENT   WndSelect
+ #RES      titleString
+title4
+ #RES      workHeight
+26
+ #RES      hbarVisible
+1
+ #RES      x
+0
+ #RES      y
+0
+ #RES      width
+285
+ #RES      height
+465
+ #RES      vis
+1
 
