@@ -210,7 +210,7 @@ data/MonsterTypes.txt
  #RES      workWidth
 300
  #RES      workHeight
-940
+10
  #RES      hbarVisible
 1
  #RES      x

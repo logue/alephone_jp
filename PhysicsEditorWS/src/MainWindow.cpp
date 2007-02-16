@@ -252,7 +252,7 @@ WSCbase* _create_win_MainWindow(){
   ListMonsterTypes->setPropertyV(WSNdataSource,(unsigned char)2);
   ListMonsterTypes->setPropertyV(WSNdataSourceName,"data/MonsterTypes.txt");
   ListMonsterTypes->setPropertyV(WSNworkWidth,(unsigned short)300);
-  ListMonsterTypes->setPropertyV(WSNworkHeight,(unsigned short)940);
+  ListMonsterTypes->setPropertyV(WSNworkHeight,(unsigned short)10);
   ListMonsterTypes->setPropertyV(WSNhbarVisible,(WSCbool)1);
   ListMonsterTypes->setPropertyV(WSNname,"ListMonsterTypes");
   ListMonsterTypes->setPropertyV(WSNx,(short)10);
