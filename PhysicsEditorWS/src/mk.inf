@@ -16,9 +16,9 @@ ALL_INCLUDES = -I. -I'$(WSDIR)/include' -I'../../AlephOneSrc' -I'../../'
 # setting of libraries                   #
 ##########################################
 
-ALL_LIBS = -L'../../lib' ../../lib/AlephOneLib.a -lSDL -lwswin -L'$(WSDIR)/lib' -lws -lwsc -mwindows -lwsc
+ALL_LIBS = -L'../../lib' ../../lib/AlephOneLib.a -lSDL -lwswin -L'$(WSDIR)/lib' -lws -lwsc -mwindows -lwsc -lwsb -lwsc
 
-ALL_LIBS2 = -L'../../lib' ../../lib/AlephOneLib.a -lSDL -lwswin -L'$(WS_DEFAULT_DIR)/lib' -lws -lwsc -mwindows -lwsc
+ALL_LIBS2 = -L'../../lib' ../../lib/AlephOneLib.a -lSDL -lwswin -L'$(WS_DEFAULT_DIR)/lib' -lws -lwsc -mwindows -lwsc -lwsb -lwsc
 
 ##########################################
 # setting of window                      #
@@ -45,7 +45,19 @@ OPOBJ = \
         MonsterTabsInitFunc.o \
         IntelligenceValueChFunc.o \
         CollectionBtnFunc.o \
-        CaarryItemBtnFunc.o 
+        CaarryItemBtnFunc.o \
+        ShapnelTypeBtnDownFunc.o \
+        BtnMeleePresetDownFunc.o \
+        BtnPresetThisAllEnemyOnDownFunc.o \
+        BtnAllUncheckDownFunc.o \
+        BtnRangedPresetDownFunc.o \
+        WndSelectActivateFunc.o \
+        ListSelectSelectFunc.o \
+        ListEffectDownFunc.o \
+        BtnEffectCollectionDownFunc.o \
+        BtnEffectDelaySoundDownFunc.o \
+        ListProjectileDownFunc.o \
+        PhysicsTypeOptChFunc.o 
 
 OBJS = $(WINOBJ) $(OPOBJ) ../../HPLLib/HPLStringModifier.o   
 

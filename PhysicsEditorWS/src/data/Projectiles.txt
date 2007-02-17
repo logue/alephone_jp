@@ -1,39 +1,39 @@
-_projectile_rocket
-_projectile_grenade
-_projectile_pistol_bullet
-_projectile_rifle_bullet
-_projectile_shotgun_bullet
-_projectile_staff
-_projectile_staff_bolt
-_projectile_flamethrower_burst
-_projectile_compiler_bolt_minor
-_projectile_compiler_bolt_major
-_projectile_alien_weapon
-_projectile_fusion_bolt_minor
-_projectile_fusion_bolt_major
-_projectile_hunter
-_projectile_fist
-_projectile_armageddon_sphere
-_projectile_armageddon_electricity
-_projectile_juggernaut_rocket
-_projectile_trooper_bullet
-_projectile_trooper_grenade
-_projectile_minor_defender
-_projectile_major_defender
-_projectile_juggernaut_missile
-_projectile_minor_energy_drain
-_projectile_major_energy_drain
-_projectile_oxygen_drain
-_projectile_minor_hummer
-_projectile_major_hummer
-_projectile_durandal_hummer
-_projectile_minor_cyborg_ball
-_projectile_major_cyborg_ball
-_projectile_ball
-_projectile_minor_fusion_dispersal
-_projectile_major_fusion_dispersal
-_projectile_overloaded_fusion_dispersal
-_projectile_yeti
-_projectile_sewage_yeti
-_projectile_lava_yeti
-_projectile_smg_bullet
+rocket
+grenade
+pistol bullet
+rifle bullet
+shotgun bullet
+staff
+staff bolt
+flamethrower burst
+compiler bolt minor
+compiler bolt major
+alien weapon
+fusion bolt minor
+fusion bolt major
+hunter
+fist
+armageddon sphere
+armageddon electricity
+juggernaut rocket
+trooper bullet
+trooper grenade
+minor defender
+major defender
+juggernaut missile
+minor energy drain
+major energy drain
+oxygen drain
+minor hummer
+major hummer
+durandal hummer
+minor cyborg ball
+major cyborg ball
+ball
+minor fusion dispersal
+major fusion dispersal
+overloaded fusion dispersal
+yeti
+sewage yeti
+lava yeti
+smg bullet

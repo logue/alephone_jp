@@ -3,14 +3,14 @@
 #include <WSCbase.h>
 
 #include "General.h"
-#include <WSCwindow.h>
-#include <WSClist.h>
 
 //----------------------------------------------------------
 //Function for the event procedure
 //----------------------------------------------------------
-void BtnMonsterPressFunc(WSCbase* object){
+void ListProjectileDownFunc(WSCbase* object){
   //do something...
-	changeForm(Windows::Monster);
+	//get selected index
+	selectedProjectileType = ((WSClist*)object)->getSelectedPos();
+	setupDialog();
 }
-static WSCfunctionRegister  op("BtnMonsterPressFunc",(void*)BtnMonsterPressFunc);
+static WSCfunctionRegister  op("ListProjectileDownFunc",(void*)ListProjectileDownFunc);

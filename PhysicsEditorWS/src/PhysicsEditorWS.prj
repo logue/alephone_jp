@@ -77,9 +77,9 @@ $(WSDIR)/../gcc/bin/g++
 #USER_DBG_STLIB
 '$(WSDIR)/lib-st/libws.a' '$(WSDIR)/lib-st/libwsc.a' -L'$(WSDIR)/../others/lib' -ljpeg -lpng -lz -lmpr -limm32 -lwsock32 -lgdi32 -lcomdlg32
 #FONT0
-16,0,0,0,400,0,0,0,128,3,2,1,49,ÇlÇr ÉSÉVÉbÉN
+12,0,0,0,400,0,0,0,0,1,2,1,34,MS Sans Serif
 #FONT1
-15,0,0,0,400,0,0,0,128,3,2,1,1,ÇlÇr ÉSÉVÉbÉN
+10,0,0,0,400,0,0,0,0,1,2,1,34,MS Sans Serif
 #FONT2
 17,0,0,0,400,0,0,0,128,3,2,1,1,ÇlÇr ÉSÉVÉbÉN
 #FONT3

@@ -2,15 +2,15 @@
 #include <WSCfunctionList.h>
 #include <WSCbase.h>
 
-#include "General.h"
-#include <WSCwindow.h>
 #include <WSClist.h>
+
+#include "General.h"
 
 //----------------------------------------------------------
 //Function for the event procedure
 //----------------------------------------------------------
-void BtnMonsterPressFunc(WSCbase* object){
+void ListSelectSelectFunc(WSCbase* object){
   //do something...
-	changeForm(Windows::Monster);
+	selectIndex = ((WSClist*)object)->getSelectedPos();
 }
-static WSCfunctionRegister  op("BtnMonsterPressFunc",(void*)BtnMonsterPressFunc);
+static WSCfunctionRegister  op("ListSelectSelectFunc",(void*)ListSelectSelectFunc);

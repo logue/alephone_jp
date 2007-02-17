@@ -2,13 +2,6 @@
 #include <WSCfunctionList.h>
 #include <WSCbase.h>
 
-#include <WSCbaseList.h>
-#include <WSCwindow.h>
-#include <WSCindexForm.h>
-#include <WSCvifield.h>
-#include <WSCmessageDialog.h>
-#include <WSClist.h>
-
 #include "General.h"
 
 #include <stdarg.h>
@@ -40,8 +33,10 @@ std::vector<std::string> stockMonsterDoorRetryMasks;
 std::vector<std::string> stockWeaponClasses;
 std::vector<std::string> stockShellCasingTypes;
 std::vector<std::string> stockPhysicsTypes;
+std::vector<std::string> stockMonsterFlags;
+std::vector<std::string> stockProjectileFlags;
 
-
+//モンスター区分
 int valueMonsterClasses[NUMBER_OF_CLASS_INFORMATIONS]={
     _class_player, _class_human_civilian, _class_madd, _class_possessed_hummer,
     _class_defender,
@@ -49,6 +44,7 @@ int valueMonsterClasses[NUMBER_OF_CLASS_INFORMATIONS]={
     _class_compiler, _class_cyborg, _class_assimilated_civilian,
     _class_hummer, _class_tick, _class_yeti
 };
+//速度の規定値
 int valueSpeed[NUMBER_OF_SPEED_INFORMATIONS]={
     _speed_slow, _speed_medium, _speed_almost_fast, _speed_fast,
     _speed_superfast1, _speed_superfast2, _speed_superfast3, 
@@ -58,10 +54,12 @@ int valueSpeed[NUMBER_OF_SPEED_INFORMATIONS]={
 int valueIntelligences[NUMBER_OF_MONSTER_INTELLIGENCE_INFORMATIONS]={
     _intelligence_low, _intelligence_average, _intelligence_high
 };
+//ドアマスク
 int valueMonsterDoorRetryMask[NUMBER_OF_MONSTER_DOOR_RETRY_MASK_INFORMATIONS]={
     _slow_door_retry_mask, _normal_door_retry_mask,
     _fast_door_retry_mask, _vidmaster_door_retry_mask
 };
+//モンスターフラグ
 int valueMonsterFlags[NUMBER_OF_MONSTER_FLAG_INFORMATIONS]={
 	_monster_is_omniscent,
     _monster_flys,
@@ -92,6 +90,7 @@ int valueMonsterFlags[NUMBER_OF_MONSTER_FLAG_INFORMATIONS]={
     _monster_can_teleport_under_media,
     _monster_chooses_weapons_randomly
 };
+//エフェクトフラグ
 int valueEffectFlags[NUMBER_OF_EFFECT_FLAG_INFORMATIONS]={
 	_end_when_animation_loops,
     _end_when_transfer_animation_loops,
@@ -249,11 +248,11 @@ int getIndexFromValueArray(int *arr, int max, int target)
 	return -1;
 }
 
-void setupDialog(WSCbase* object)
+void setupDialog()//WSCbase* object)
 {
 	if(windowType == Windows::Monster){
-		//window
-		WSCwindow* wnd = (WSCwindow*)getObject("WSCform", "FrmMonster");
+		//form
+		WSCform* wnd = (WSCform*)getObject("WSCform", "FrmMonster");
 		int type = selectedMonsterType;
 		if(type >= 0 && type < NUMBER_OF_MONSTER_TYPES){
 			//設定
@@ -357,6 +356,31 @@ void setupDialog(WSCbase* object)
 			setInteger(getChild(indextab, "SeqTeleportOut"),
 				monster_definitions[type].teleport_out_shape);
 			
+			//shapnel damage!
+			setInteger(getChild(indextab, "ShapnelRadiusEdit"),
+				monster_definitions[type].shrapnel_radius);
+			setInteger(getChild(indextab, "ShapnelBaseEdit"),
+				monster_definitions[type].shrapnel_damage.base);
+			setInteger(getChild(indextab, "ShapnelRndEdit"),
+				monster_definitions[type].shrapnel_damage.random);
+			setInteger(getChild(indextab, "ShapnelScaleEdit"),
+				monster_definitions[type].shrapnel_damage.scale);
+			//shrapnel
+			int shrapnelDamageTypeIndex = monster_definitions[type].shrapnel_damage.type;
+			if(shrapnelDamageTypeIndex < 0 || shrapnelDamageTypeIndex >= stockDamages.size()){
+				getChild(indextab, "ShapnelTypeBtn")->setProperty(WSNlabelString,
+					"");
+			}else{
+				getChild(indextab, "ShapnelTypeBtn")->setProperty(WSNlabelString,
+					stockDamages[shrapnelDamageTypeIndex].c_str());//WSNlabelString
+			}
+			//check box
+			WSCbool status = False;
+			if(monster_definitions[type].shrapnel_damage.flags & _alien_damage){
+				status = True;
+			}
+			((WSCvradio*)getChild(indextab, "ShapnelAlienCheck"))->setStatus(status);
+			
 			//sounds
 			setInteger(getChild(indextab, "SoundPitchEdit"),
 				monster_definitions[type].sound_pitch);
@@ -408,9 +432,233 @@ void setupDialog(WSCbase* object)
 			getChild(indextab, "ContrailEffectBtn")->setProperty(WSNlabelString,
 				stockEffects[index].c_str());
 
+			/////////////////////////////////////////
+			//tab index 2(flags)
+			//immunities
+			WSCcheckGroup* lstImmunities = (WSCcheckGroup*)getObject("WSCcheckGroup", "ListImmunities");
+			WSCcheckGroup* lstWeaknesses = (WSCcheckGroup*)getObject("WSCcheckGroup", "ListWeakness");
+			int immunities = monster_definitions[type].immunities;
+			int weaknesses = monster_definitions[type].weaknesses;
+			for(int i = 0; i < NUMBER_OF_DAMAGE_TYPES; i ++){
+				WSCvradio* immunity = (WSCvradio*)lstImmunities->getItem(i);
+				WSCvradio* weakness = (WSCvradio*)lstWeaknesses->getItem(i);
+				if(immunity == NULL || weakness == NULL){
+					messageBox("NULL id[%d], immunity[%x], weakness[%x]", i, immunity, weakness);
+					exit(1);
+				}
+				if(immunities & FLAG(i)){
+					immunity->setStatus(True);
+				}else{
+					//lstFlags
+					immunity->setStatus(False);
+				}
+				if(weaknesses & FLAG(i)){
+					weakness->setStatus(True);
+				}else{
+					weakness->setStatus(False);
+				}
+			}
+			
+			//enemies & friends
+			WSCcheckGroup* lstEnemies = (WSCcheckGroup*)getObject("WSCcheckGroup", "ListEnemies");
+			WSCcheckGroup* lstFriends = (WSCcheckGroup*)getObject("WSCcheckGroup", "ListFriends");
+			int enemies = monster_definitions[type].enemies;
+			int friends = monster_definitions[type].friends;
+			for(int i = 0; i < NUMBER_OF_CLASS_INFORMATIONS; i ++){
+				WSCvtoggle* enemy = (WSCvtoggle*)lstEnemies->getItem(i);
+				WSCvtoggle* _friend = (WSCvtoggle*)lstFriends->getItem(i);
+				if(enemies & FLAG(i)){
+					enemy->setStatus(True);
+				}else{
+					//lstFlags
+					enemy->setStatus(False);
+				}
+				if(friends & FLAG(i)){
+					_friend->setStatus(True);
+				}else{
+					_friend->setStatus(False);
+				}
+			}
+			WSCcheckGroup* lstFlags = (WSCcheckGroup*)getObject("WSCcheckGroup", "ListFlags");
+			int nflags = monster_definitions[type].flags;
+			for(int i = 0; i < NUMBER_OF_MONSTER_FLAG_INFORMATIONS; i ++){
+				WSCvtoggle* flags = (WSCvtoggle*)lstFlags->getItem(i);
+				if(nflags & FLAG(i)){
+					flags->setStatus(True);
+				}else{
+					//lstFlags
+					flags->setStatus(False);
+				}
+			}
+			
+			///////////////////////////////////////
+			// Attacks!
+			setInteger(getChild(indextab, "FrequencyEdit"),
+				monster_definitions[type].attack_frequency);
+			//melee
+			index = monster_definitions[type].melee_attack.type;
+			if(index < 0 || index == UNONE){index = stockProjectiles.size() - 1;}
+			getChild(indextab, "BtnMeleeType")->setProperty(WSNlabelString,
+				stockProjectiles[index].c_str());
+			setInteger(getChild(indextab, "MeleeRepetitionsEdit"),
+				monster_definitions[type].melee_attack.repetitions);
+			setInteger(getChild(indextab, "MeleeErrorEdit"),
+				monster_definitions[type].melee_attack.error);
+			setInteger(getChild(indextab, "MeleeRangeEdit"),
+				monster_definitions[type].melee_attack.range);
+			setInteger(getChild(indextab, "MeleeSequenceEdit"),
+				monster_definitions[type].melee_attack.attack_shape);
+			setInteger(getChild(indextab, "MeleedxEdit"),
+				monster_definitions[type].melee_attack.dx);
+			setInteger(getChild(indextab, "MeleedyEdit"),
+				monster_definitions[type].melee_attack.dy);
+			setInteger(getChild(indextab, "MeleedzEdit"),
+				monster_definitions[type].melee_attack.dz);
+			//ranged
+			index = monster_definitions[type].ranged_attack.type;
+			if(index < 0 || index == UNONE){index = stockProjectiles.size() - 1;}
+			getChild(indextab, "BtnRangedType")->setProperty(WSNlabelString,
+				stockProjectiles[index].c_str());
+			setInteger(getChild(indextab, "RangedRepetitionsEdit"),
+				monster_definitions[type].ranged_attack.repetitions);
+			setInteger(getChild(indextab, "RangedErrorEdit"),
+				monster_definitions[type].ranged_attack.error);
+			setInteger(getChild(indextab, "RangedRangeEdit"),
+				monster_definitions[type].ranged_attack.range);
+			setInteger(getChild(indextab, "RangedSequenceEdit"),
+				monster_definitions[type].ranged_attack.attack_shape);
+			setInteger(getChild(indextab, "RangeddxEdit"),
+				monster_definitions[type].ranged_attack.dx);
+			setInteger(getChild(indextab, "RangeddyEdit"),
+				monster_definitions[type].ranged_attack.dy);
+			setInteger(getChild(indextab, "RangeddzEdit"),
+				monster_definitions[type].ranged_attack.dz);
+		}
+	}else if(windowType == Windows::Effect){
+		//form
+		WSCform* wnd = (WSCform*)getObject("WSCform", "FrmEffect");
+		int type = selectedEffectType;
+		if(type >= 0 && type < NUMBER_OF_EFFECT_TYPES){
+			int16 collection = effect_definitions[type].collection;
+			int16 col = GET_COLLECTION(collection);
+			int16 clut = GET_COLLECTION_CLUT(collection);
+			//collection(btn)
+			getChild(wnd, "BtnEffectCollection")->setProperty(WSNlabelString,
+				stockCollections[col].c_str());
+			//clut
+			setInteger(getChild(wnd, "EffectPalletEdit"),
+				clut);
+			
+			//sequence
+			setInteger(getChild(wnd, "EffectSequenceEdit"),
+				effect_definitions[type].shape);
+			//sound pitch
+			setInteger(getChild(wnd, "EffectSoundPitchEdit"),
+				effect_definitions[type].sound_pitch);
+			//delay
+			setInteger(getChild(wnd, "EffectDelayEdit"),
+				effect_definitions[type].delay);
+			//delay sound(btn)
+			int index = effect_definitions[type].delay_sound;
+			if(index < 0){index = stockSounds.size() - 1;}
+			getChild(wnd, "BtnEffectDelaySound")->setProperty(WSNlabelString,
+				stockSounds[index].c_str());
+			
+			//check group
+			WSCcheckGroup* flags = (WSCcheckGroup*)getChild(wnd, "EffectFlagsCheckGroup");
+			int nflag = effect_definitions[type].flags;
+			for(int i = 0; i < NUMBER_OF_EFFECT_FLAG_INFORMATIONS; i ++){
+				WSCvtoggle* toggle = (WSCvtoggle*)flags->getItem(i);
+				if(nflag & valueEffectFlags[i]){
+					//ON
+					toggle->setStatus(True);
+				}else{
+					//OFF
+					toggle->setStatus(False);
+				}
+			}
+		}
+	}else if(windowType == Windows::Projectile){
+		WSCform* wnd = (WSCform*)getObject("WSCform", "FrmProjectile");
+		int type = selectedProjectileType;
+		if(type >= 0 && type < NUMBER_OF_PROJECTILE_TYPES){
+			int16 collection = projectile_definitions[type].collection;
+			int16 col = GET_COLLECTION(collection);
+			int16 clut = GET_COLLECTION_CLUT(collection);
+			//collection(btn)
+			getChild(wnd, "ProjCollectionBtn")->setProperty(WSNlabelString,
+				stockCollections[col].c_str());
+			//clut
+			setInteger(getChild(wnd, "ProjPalletEdit"),
+				clut);
+			//sequence
+			setInteger(getChild(wnd, "ProjSequenceEdit"),
+				projectile_definitions[type].shape);
+			//detonation effect(btn)
+			int index = projectile_definitions[type].detonation_effect;
+			if(index < 0){index = stockEffects.size() - 1;}
+			getChild(wnd, "ProjDetonationEfBtn")->setProperty(WSNlabelString,
+				stockEffects[index].c_str());
+			//detonation media effect(btn)
+			index = projectile_definitions[type].media_detonation_effect;
+			if(index < 0){index = stockEffects.size() - 1;}
+			getChild(wnd, "ProjDetMediaEfBtn")->setProperty(WSNlabelString,
+				stockEffects[index].c_str());
+			//contrail effect(btn)
+			index = projectile_definitions[type].contrail_effect;
+			if(index < 0){index = stockEffects.size() - 1;}
+			getChild(wnd, "ProjContrailEfBtn")->setProperty(WSNlabelString,
+				stockEffects[index].c_str());
+			//Ticks between Contrail
+			setInteger(getChild(wnd, "ProjTicksBetContrailEdit"),
+				projectile_definitions[type].ticks_between_contrails);
+			//max contrail
+			setInteger(getChild(wnd, "ProjMaxContrailEdit"),
+				projectile_definitions[type].maximum_contrails);
+			//media promo
+			setInteger(getChild(wnd, "ProjMediaPromoEdit"),
+				projectile_definitions[type].media_projectile_promotion);
+			//radius
+			setInteger(getChild(wnd, "ProjRadiusEdit"),
+				projectile_definitions[type].radius);
+			//area of effect
+			setInteger(getChild(wnd, "ProjAreaOfEfEdit"),
+				projectile_definitions[type].area_of_effect);
+			
+			//damages
+			//type(btn)
+			index = projectile_definitions[type].damage.type;
+			if(index < 0){index = stockDamages.size() - 1;}
+			getChild(wnd, "ProjDamageTypeBtn")->setProperty(WSNlabelString,
+				stockDamages[index].c_str());
+			//base
+			setInteger(getChild(wnd, "ProjDamageBaseEdit"),
+				projectile_definitions[type].damage.base);
+			//random
+			setInteger(getChild(wnd, "ProjDamageRandomEdit"),
+				projectile_definitions[type].damage.random);
+			//scale
+			setInteger(getChild(wnd, "ProjDamageScaleEdit"),
+				projectile_definitions[type].damage.scale);
+			//alian(chk box)
+			WSCbool status = False;
+			if(projectile_definitions[type].damage.flags & _alien_damage){
+				status = True;
+			}
+			((WSCvradio*)getChild(wnd, "ProjDamageFlags"))->setStatus(status);
+		}
+	}else if(windowType == Windows::Physics){
+		WSCform* wnd = (WSCform*)getObject("WSCform", "FrmPhysics");
+		int type = selectedPhysicsType;
+		if(type >= 0 && type < NUMBER_OF_PHYSICS_MODELS){
+		}
+	}else if(windowType == Windows::Weapon){
+		WSCform* wnd = (WSCform*)getObject("WSCform", "FrmWeapon");
+		int type = selectedEffectType;
+		if(type >= 0 && type < MAXIMUM_NUMBER_OF_WEAPONS){
 		}
 	}
-	object->update();
+	getObject("WSCmainWindow", "MainWindow")->update();
 }
 
 //空文字を消します。
@@ -423,6 +671,43 @@ std::vector<std::string> killSpaceOfList(std::vector<std::string>& lst)
 		}
 	}
 	return dest;
+}
+
+//カンマでつなぎます
+std::string getCommaItemList(std::vector<std::string>& lst)
+{
+	std::string str;
+	if(lst.size() > 0){
+		str += lst[0];
+	}
+	for(int i = 1; i < lst.size(); i ++){
+		str += ",";
+		str += lst[i];
+	}
+	return str;
+}
+
+void changeForm(int wtype)
+{
+	bool visible;
+	windowType = wtype;
+	visible = wtype == Windows::Monster;
+	getObject("WSCform", "FrmMonster")->setVisible(visible);
+	getObject("WSCvbtn", "BtnMonster")->setProperty(WSNreverseFlag, visible);
+	visible = wtype == Windows::Effect;
+	getObject("WSCform", "FrmEffect")->setVisible(visible);
+	getObject("WSCvbtn", "BtnEffect")->setProperty(WSNreverseFlag, visible);
+	visible = wtype == Windows::Projectile;
+	getObject("WSCform", "FrmProjectile")->setVisible(visible);
+	getObject("WSCvbtn", "BtnProjectile")->setProperty(WSNreverseFlag, visible);
+	visible = wtype == Windows::Physics;
+	getObject("WSCform", "FrmPhysics")->setVisible(visible);
+	getObject("WSCvbtn", "BtnPhysics")->setProperty(WSNreverseFlag, visible);
+	visible = wtype == Windows::Weapon;
+	getObject("WSCform", "FrmWeapon")->setVisible(visible);
+	getObject("WSCvbtn", "BtnWeapon")->setProperty(WSNreverseFlag, visible);
+	
+	setupDialog();
 }
 
 //----------------------------------------------------------
@@ -459,11 +744,13 @@ void MainInitFunc(WSCbase* object){
 		stockEffects.push_back("*none*");
 		lst = hpl::string::loadFromFile("data/Projectiles.txt");
 		stockProjectiles = killSpaceOfList(lst);
+		stockProjectiles.push_back("*none*");
 		lst = hpl::string::loadFromFile("data/Sounds.txt");
 		stockSounds = killSpaceOfList(lst);
 		stockSounds.push_back("*none*");
 		lst = hpl::string::loadFromFile("data/Damages.txt");
 		stockDamages = killSpaceOfList(lst);
+		stockDamages.push_back("*none*");
 		lst = hpl::string::loadFromFile("data/MonsterActivates.txt");
 		stockMonsterActivates = killSpaceOfList(lst);
 		lst = hpl::string::loadFromFile("data/MonsterDoorRetryMasks.txt");
@@ -474,6 +761,10 @@ void MainInitFunc(WSCbase* object){
 		stockShellCasingTypes = killSpaceOfList(lst);
 		lst = hpl::string::loadFromFile("data/PhysicsTypes.txt");
 		stockPhysicsTypes = killSpaceOfList(lst);
+		lst = hpl::string::loadFromFile("data/MonsterFlags.txt");
+		stockMonsterFlags = killSpaceOfList(lst);
+		lst = hpl::string::loadFromFile("data/WSProjectileFlags.txt");
+		stockProjectileFlags = killSpaceOfList(lst);
 	}
 	
 
@@ -484,22 +775,43 @@ void MainInitFunc(WSCbase* object){
 	if(ret == WS_DIALOG_OK){
 	}else{
 	}*/
+	//モンスターのクラスに補充
 	std::string itemList = getOptionItemListFromVectorString(stockMonsterClasses);
 	getChild(getChild(getChild(object, "FrmMonster"), "Maiinde_012"), "ClassCombo")->
 		setProperty(WSNmenuItems, itemList.c_str());
-	
+	//モンスターの耐性リストを設定
+	// ダメージ名称をカンマでつなげる
+	itemList = getCommaItemList(stockDamages);
+	getObject("WSCcheckGroup", "ListImmunities")->setProperty(WSNmenuItems,
+		itemList.c_str());
+	getObject("WSCcheckGroup", "ListWeakness")->setProperty(WSNmenuItems,
+		itemList.c_str());
+	itemList = getCommaItemList(stockMonsterClasses);
+	getObject("WSCcheckGroup", "ListEnemies")->setProperty(WSNmenuItems,
+		itemList.c_str());
+	getObject("WSCcheckGroup", "ListFriends")->setProperty(WSNmenuItems,
+		itemList.c_str());
+	itemList = getCommaItemList(stockMonsterFlags);
+	getObject("WSCcheckGroup", "ListFlags")->setProperty(WSNmenuItems,
+		itemList.c_str());
+	//proj flags
+	itemList = getCommaItemList(stockProjectileFlags);
+	getObject("WSCcheckGroup", "ListProjFlags")->setProperty(WSNmenuItems,
+		itemList.c_str());
+	/////////////////////
+	//表示
 	//フレームの表示
 	WSCwindow* obj = (WSCwindow*)getObject("WSCform", "FrmMonster");
 	obj->setVisible(true);
 	selectedMonsterType = selectedEffectType = selectedProjectileType = 0;
 	selectedPhysicsType = selectedWeaponType = 0;
-	//リストを選択
+	//モンスター種類リストで選択変更
 	WSClist* lst = (WSClist*)getObject("WSClist", "ListMonsterTypes");
 	lst->setSelectPos(selectedMonsterType);
 	windowType = Windows::Monster;
-	
+
 	setDefinitionsToDefault();
 	//更新
-	setupDialog(object);
+	setupDialog();
 }
 static WSCfunctionRegister  op("MainInitFunc",(void*)MainInitFunc);

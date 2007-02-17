@@ -2,15 +2,14 @@
 #include <WSCfunctionList.h>
 #include <WSCbase.h>
 
+
 #include "General.h"
-#include <WSCwindow.h>
-#include <WSClist.h>
 
 //----------------------------------------------------------
 //Function for the event procedure
 //----------------------------------------------------------
-void BtnMonsterPressFunc(WSCbase* object){
+void BtnEffectDownFunc(WSCbase* object){
   //do something...
-	changeForm(Windows::Monster);
+	changeForm(Windows::Effect);
 }
-static WSCfunctionRegister  op("BtnMonsterPressFunc",(void*)BtnMonsterPressFunc);
+static WSCfunctionRegister  op("BtnEffectDownFunc",(void*)BtnEffectDownFunc);

@@ -16,6 +16,16 @@
 #include "weapon_definitions.h"
 #include <WSCbase.h>
 #include <WSCoption.h>
+#include <WSCbaseList.h>
+#include <WSCwindow.h>
+#include <WSCindexForm.h>
+#include <WSCvifield.h>
+#include <WSCmessageDialog.h>
+#include <WSClist.h>
+#include <WSCvradio.h>
+#include <WSCcheckGroup.h>
+#include <WSCvtoggle.h>
+
 
 #include <HPLLib/HPLAlephLib.h>
 
@@ -78,6 +88,8 @@ extern std::vector<std::string> stockMonsterDoorRetryMasks;
 extern std::vector<std::string> stockWeaponClasses;
 extern std::vector<std::string> stockShellCasingTypes;
 extern std::vector<std::string> stockPhysicsTypes;
+extern std::vector<std::string> stockMonsterFlags;
+extern std::vector<std::string> stockProjectileFlags;
 
 //index-value
 extern int valueSpeed[NUMBER_OF_SPEED_INFORMATIONS];
@@ -90,9 +102,12 @@ extern int valueWeaponFlags[NUMBER_OF_WEAPON_FLAG_INFORMATIONS];
 extern int valueProjectileFlags[NUMBER_OF_PROJECTILE_FLAG_INFORMATIONS];
 
 void setDefinitionsToDefault();
-void setupDialog(WSCbase* object);
+void setupDialog();
 //int getSelectedValue(WSCoption *opt);
 
 WSCbase* getObject(const char* class_name, const char* obj_name);
 WSCbase* getChild(WSCbase* parent, const char* obj_name);
+void messageBox(const char* format, ...);
+void changeForm(int wtype);
+
 #endif

@@ -20,13 +20,13 @@ PhysicsEditorWS
  #RES      y
 100
  #RES      width
-786
+787
  #RES      height
-497
+502
  #RES      vis
 1
 
-#OBJ       Maimenu_000
+#OBJ       MainMenu
  #TYPE       WSCmenuArea
  #PARENT   MainWindow
  #RES      x
@@ -34,7 +34,7 @@ PhysicsEditorWS
  #RES      y
 0
  #RES      width
-786
+787
  #RES      height
 23
  #RES      vis
@@ -46,7 +46,7 @@ PhysicsEditorWS
 
 #OBJ       Maipull_001
  #TYPE       WSCpulldownMenu
- #PARENT   Maimenu_000
+ #PARENT   MainMenu
  #PROC  open1
   #TRIG    -1
   #PRO   open1.cpp
@@ -191,8 +191,6 @@ Weapon
 690
  #RES      height
 470
- #RES      vis
-1
 
 #OBJ       ListMonsterTypes
  #TYPE       WSClist
@@ -201,6 +199,8 @@ Weapon
   #TRIG    35
   #PRO   ListMonsterTypeItemSelFunc.cpp
 
+ #RES      itemHeight
+10
  #RES      titleString
 
  #RES      dataSource
@@ -210,7 +210,7 @@ data/MonsterTypes.txt
  #RES      workWidth
 300
  #RES      workHeight
-10
+470
  #RES      hbarVisible
 1
  #RES      x
@@ -233,6 +233,8 @@ data/MonsterTypes.txt
 
  #RES      menuItems
 Appearance,Flags1,Attack
+ #RES      value
+1
  #RES      x
 120
  #RES      y
@@ -251,8 +253,6 @@ Appearance,Flags1,Attack
 1
  #RES      labelString
 Collection
- #RES      vis
-1
  #RES      x
 5
  #RES      y
@@ -269,8 +269,6 @@ Collection
 1
  #RES      labelString
 Pallet
- #RES      vis
-1
  #RES      x
 5
  #RES      y
@@ -284,8 +282,6 @@ Pallet
  #TYPE       WSCvifield
  #PARENT   Maiinde_012
  #RES      userValue
-1
- #RES      vis
 1
  #RES      x
 95
@@ -303,8 +299,6 @@ Pallet
 1
  #RES      labelString
 Vitality
- #RES      vis
-1
  #RES      x
 5
  #RES      y
@@ -321,8 +315,6 @@ Vitality
 1
  #RES      labelString
 Class
- #RES      vis
-1
  #RES      x
 5
  #RES      y
@@ -336,8 +328,6 @@ Class
  #TYPE       WSCvifield
  #PARENT   Maiinde_012
  #RES      userValue
-1
- #RES      vis
 1
  #RES      x
 95
@@ -355,8 +345,6 @@ Class
 1
  #RES      labelString
 Radius
- #RES      vis
-1
  #RES      x
 5
  #RES      y
@@ -373,8 +361,6 @@ Radius
 1
  #RES      labelString
 Height
- #RES      vis
-1
  #RES      x
 5
  #RES      y
@@ -389,8 +375,6 @@ Height
  #PARENT   Maiinde_012
  #RES      userValue
 1
- #RES      vis
-1
  #RES      x
 95
  #RES      y
@@ -404,8 +388,6 @@ Height
  #TYPE       WSCvifield
  #PARENT   Maiinde_012
  #RES      userValue
-1
- #RES      vis
 1
  #RES      x
 95
@@ -423,8 +405,6 @@ Height
 1
  #RES      labelString
 Hover
- #RES      vis
-1
  #RES      x
 5
  #RES      y
@@ -441,8 +421,6 @@ Hover
 1
  #RES      labelString
 Min Ledge
- #RES      vis
-1
  #RES      x
 5
  #RES      y
@@ -459,8 +437,6 @@ Min Ledge
 1
  #RES      labelString
 Max Ledge
- #RES      vis
-1
  #RES      x
 5
  #RES      y
@@ -477,8 +453,6 @@ Max Ledge
 1
  #RES      labelString
 ExtVelScale
- #RES      vis
-1
  #RES      x
 5
  #RES      y
@@ -495,8 +469,6 @@ ExtVelScale
 1
  #RES      labelString
 CarryItem
- #RES      vis
-1
  #RES      x
 5
  #RES      y
@@ -510,8 +482,6 @@ CarryItem
  #TYPE       WSCvifield
  #PARENT   Maiinde_012
  #RES      userValue
-1
- #RES      vis
 1
  #RES      x
 95
@@ -527,8 +497,6 @@ CarryItem
  #PARENT   Maiinde_012
  #RES      userValue
 1
- #RES      vis
-1
  #RES      x
 95
  #RES      y
@@ -543,8 +511,6 @@ CarryItem
  #PARENT   Maiinde_012
  #RES      userValue
 1
- #RES      vis
-1
  #RES      x
 95
  #RES      y
@@ -558,8 +524,6 @@ CarryItem
  #TYPE       WSCvifield
  #PARENT   Maiinde_012
  #RES      userValue
-1
- #RES      vis
 1
  #RES      x
 95
@@ -577,8 +541,6 @@ CarryItem
 1
  #RES      labelString
 Stationaly
- #RES      vis
-1
  #RES      x
 205
  #RES      y
@@ -595,8 +557,6 @@ Stationaly
 1
  #RES      labelString
 Moving
- #RES      vis
-1
  #RES      x
 205
  #RES      y
@@ -613,8 +573,6 @@ Moving
 1
  #RES      labelString
 Hitting
- #RES      vis
-1
  #RES      x
 205
  #RES      y
@@ -631,8 +589,6 @@ Hitting
 1
  #RES      labelString
 Soft Dying
- #RES      vis
-1
  #RES      x
 205
  #RES      y
@@ -649,8 +605,6 @@ Soft Dying
 1
  #RES      labelString
 Soft Dead
- #RES      vis
-1
  #RES      x
 205
  #RES      y
@@ -667,8 +621,6 @@ Soft Dead
 1
  #RES      labelString
 Hard Dying
- #RES      vis
-1
  #RES      x
 205
  #RES      y
@@ -685,8 +637,6 @@ Hard Dying
 1
  #RES      labelString
 Hard Dead
- #RES      vis
-1
  #RES      x
 205
  #RES      y
@@ -700,8 +650,6 @@ Hard Dead
  #TYPE       WSCvifield
  #PARENT   Maiinde_012
  #RES      userValue
-1
- #RES      vis
 1
  #RES      x
 295
@@ -719,8 +667,6 @@ Hard Dead
 1
  #RES      labelString
 Teleport In
- #RES      vis
-1
  #RES      x
 205
  #RES      y
@@ -737,8 +683,6 @@ Teleport In
 1
  #RES      labelString
 Teleport Out
- #RES      vis
-1
  #RES      x
 205
  #RES      y
@@ -752,8 +696,6 @@ Teleport Out
  #TYPE       WSCvifield
  #PARENT   Maiinde_012
  #RES      userValue
-1
- #RES      vis
 1
  #RES      x
 295
@@ -769,8 +711,6 @@ Teleport Out
  #PARENT   Maiinde_012
  #RES      userValue
 1
- #RES      vis
-1
  #RES      x
 295
  #RES      y
@@ -784,8 +724,6 @@ Teleport Out
  #TYPE       WSCvifield
  #PARENT   Maiinde_012
  #RES      userValue
-1
- #RES      vis
 1
  #RES      x
 295
@@ -801,8 +739,6 @@ Teleport Out
  #PARENT   Maiinde_012
  #RES      userValue
 1
- #RES      vis
-1
  #RES      x
 295
  #RES      y
@@ -816,8 +752,6 @@ Teleport Out
  #TYPE       WSCvifield
  #PARENT   Maiinde_012
  #RES      userValue
-1
- #RES      vis
 1
  #RES      x
 295
@@ -833,8 +767,6 @@ Teleport Out
  #PARENT   Maiinde_012
  #RES      userValue
 1
- #RES      vis
-1
  #RES      x
 295
  #RES      y
@@ -849,8 +781,6 @@ Teleport Out
  #PARENT   Maiinde_012
  #RES      userValue
 1
- #RES      vis
-1
  #RES      x
 295
  #RES      y
@@ -864,8 +794,6 @@ Teleport Out
  #TYPE       WSCvifield
  #PARENT   Maiinde_012
  #RES      userValue
-1
- #RES      vis
 1
  #RES      x
 295
@@ -883,8 +811,6 @@ Teleport Out
 1
  #RES      labelString
 SoundPitch
- #RES      vis
-1
  #RES      x
 350
  #RES      y
@@ -903,8 +829,6 @@ SoundPitch
 ActivationSnd
  #RES      font
 0
- #RES      vis
-1
  #RES      x
 350
  #RES      y
@@ -919,8 +843,6 @@ ActivationSnd
 1
  #RES      labelString
 FriendActSnd
- #RES      vis
-1
  #RES      x
 350
  #RES      y
@@ -935,8 +857,6 @@ FriendActSnd
 1
  #RES      labelString
 ClearSnd
- #RES      vis
-1
  #RES      x
 350
  #RES      y
@@ -951,8 +871,6 @@ ClearSnd
 1
  #RES      labelString
 KillSnd
- #RES      vis
-1
  #RES      x
 350
  #RES      y
@@ -967,8 +885,6 @@ KillSnd
 1
  #RES      labelString
 ApologySnd
- #RES      vis
-1
  #RES      x
 350
  #RES      y
@@ -983,8 +899,6 @@ ApologySnd
 1
  #RES      labelString
 FriendFireSnd
- #RES      vis
-1
  #RES      x
 350
  #RES      y
@@ -999,8 +913,6 @@ FriendFireSnd
 1
  #RES      labelString
 FlamingSnd
- #RES      vis
-1
  #RES      x
 350
  #RES      y
@@ -1015,8 +927,6 @@ FlamingSnd
 1
  #RES      labelString
 RandomSnd
- #RES      vis
-1
  #RES      x
 350
  #RES      y
@@ -1028,8 +938,6 @@ RandomSnd
  #TYPE       WSCvifield
  #PARENT   Maiinde_012
  #RES      userValue
-1
- #RES      vis
 1
  #RES      x
 440
@@ -1044,8 +952,6 @@ RandomSnd
  #TYPE       WSCvifield
  #PARENT   Maiinde_012
  #RES      userValue
-1
- #RES      vis
 1
  #RES      x
 450
@@ -1063,8 +969,6 @@ RandomSnd
 1
  #RES      labelString
 RandomSndMask
- #RES      vis
-1
  #RES      x
 350
  #RES      y
@@ -1079,8 +983,6 @@ RandomSndMask
 1
  #RES      labelString
 ImpactEffect
- #RES      vis
-1
  #RES      x
 345
  #RES      y
@@ -1097,8 +999,6 @@ ImpactEffect
 1
  #RES      labelString
 MeleeEffect
- #RES      vis
-1
  #RES      x
 345
  #RES      y
@@ -1115,8 +1015,6 @@ MeleeEffect
 1
  #RES      labelString
 ContrailEffect
- #RES      vis
-1
  #RES      x
 345
  #RES      y
@@ -1133,8 +1031,6 @@ ContrailEffect
 1
  #RES      labelString
 HalfVisualArc
- #RES      vis
-1
  #RES      x
 5
  #RES      y
@@ -1149,8 +1045,6 @@ HalfVisualArc
 1
  #RES      labelString
 VertVisualArc
- #RES      vis
-1
  #RES      x
 5
  #RES      y
@@ -1165,8 +1059,6 @@ VertVisualArc
 1
  #RES      labelString
 Intelligence
- #RES      vis
-1
  #RES      x
 5
  #RES      y
@@ -1183,8 +1075,6 @@ Intelligence
 1
  #RES      labelString
 Speed
- #RES      vis
-1
  #RES      x
 5
  #RES      y
@@ -1201,8 +1091,6 @@ Speed
 1
  #RES      labelString
 Gravity
- #RES      vis
-1
  #RES      x
 5
  #RES      y
@@ -1216,8 +1104,6 @@ Gravity
  #TYPE       WSCvifield
  #PARENT   Maiinde_012
  #RES      userValue
-1
- #RES      vis
 1
  #RES      x
 105
@@ -1233,8 +1119,6 @@ Gravity
  #PARENT   Maiinde_012
  #RES      userValue
 1
- #RES      vis
-1
  #RES      x
 105
  #RES      y
@@ -1248,8 +1132,6 @@ Gravity
  #TYPE       WSCvifield
  #PARENT   Maiinde_012
  #RES      userValue
-1
- #RES      vis
 1
  #RES      x
 95
@@ -1265,8 +1147,6 @@ Gravity
  #PARENT   Maiinde_012
  #RES      userValue
 1
- #RES      vis
-1
  #RES      x
 95
  #RES      y
@@ -1275,208 +1155,6 @@ Gravity
 80
  #RES      height
 25
-
-#OBJ       Mailist_097
- #TYPE       WSClist
- #PARENT   Maiinde_012
- #RES      userValue
-2
- #RES      multiSelect
-1
- #RES      titleString
-Immunities
- #RES      dataSource
-2
- #RES      dataSourceName
-data/WSImmunitiesWeaknesses.txt
- #RES      workWidth
-200
- #RES      workHeight
-385
- #RES      hbarVisible
-1
- #RES      x
-0
- #RES      y
-50
- #RES      width
-115
- #RES      height
-405
-
-#OBJ       Maivlab_098
- #TYPE       WSCvlabel
- #PARENT   Maiinde_012
- #RES      userValue
-2
- #RES      labelString
-Immunities
- #RES      y
-25
- #RES      width
-95
- #RES      height
-25
-
-#OBJ       Mailist_099
- #TYPE       WSClist
- #PARENT   Maiinde_012
- #RES      userValue
-2
- #RES      multiSelect
-1
- #RES      titleString
-Immunities
- #RES      dataSource
-2
- #RES      dataSourceName
-data/WSImmunitiesWeaknesses.txt
- #RES      workWidth
-200
- #RES      workHeight
-385
- #RES      hbarVisible
-1
- #RES      x
-115
- #RES      y
-50
- #RES      width
-110
- #RES      height
-405
-
-#OBJ       Maivlab_100
- #TYPE       WSCvlabel
- #PARENT   Maiinde_012
- #RES      userValue
-2
- #RES      labelString
-Weaknesses
- #RES      x
-115
- #RES      y
-25
- #RES      width
-95
- #RES      height
-25
-
-#OBJ       Mailist_101
- #TYPE       WSClist
- #PARENT   Maiinde_012
- #RES      userValue
-2
- #RES      multiSelect
-1
- #RES      titleString
-Immunities
- #RES      dataSource
-2
- #RES      dataSourceName
-data/WSEnemiesFriends.txt
- #RES      workWidth
-200
- #RES      workHeight
-385
- #RES      hbarVisible
-1
- #RES      x
-235
- #RES      y
-50
- #RES      width
-80
- #RES      height
-405
-
-#OBJ       Maivlab_102
- #TYPE       WSCvlabel
- #PARENT   Maiinde_012
- #RES      userValue
-2
- #RES      labelString
-Enemies
- #RES      x
-235
- #RES      y
-25
- #RES      width
-80
- #RES      height
-25
-
-#OBJ       Maivlab_103
- #TYPE       WSCvlabel
- #PARENT   Maiinde_012
- #RES      userValue
-2
- #RES      labelString
-Friends
- #RES      x
-315
- #RES      y
-25
- #RES      width
-80
- #RES      height
-25
-
-#OBJ       Mailist_104
- #TYPE       WSClist
- #PARENT   Maiinde_012
- #RES      userValue
-2
- #RES      multiSelect
-1
- #RES      titleString
-Immunities
- #RES      dataSource
-2
- #RES      dataSourceName
-data/WSEnemiesFriends.txt
- #RES      workWidth
-200
- #RES      workHeight
-385
- #RES      hbarVisible
-1
- #RES      x
-315
- #RES      y
-50
- #RES      width
-80
- #RES      height
-405
-
-#OBJ       Mailist_105
- #TYPE       WSClist
- #PARENT   Maiinde_012
- #RES      userValue
-2
- #RES      multiSelect
-1
- #RES      titleString
-Immunities
- #RES      dataSource
-2
- #RES      dataSourceName
-data/WSFlags.txt
- #RES      workWidth
-200
- #RES      workHeight
-345
- #RES      hbarVisible
-1
- #RES      x
-400
- #RES      y
-50
- #RES      width
-155
- #RES      height
-365
 
 #OBJ       Maivbtn_106
  #TYPE       WSCvbtn
@@ -1485,12 +1163,16 @@ data/WSFlags.txt
 2
  #RES      labelString
 Set as Default
+ #RES      vis
+1
  #RES      x
-430
+270
  #RES      y
-425
+430
  #RES      width
 115
+ #RES      height
+25
 
 #OBJ       SpeedCombo
  #TYPE       WSCoption
@@ -1503,8 +1185,6 @@ Set as Default
 item1
  #RES      font
 0
- #RES      vis
-1
  #RES      x
 175
  #RES      y
@@ -1529,8 +1209,6 @@ Low:1:ep1_name,Average:2:ep2_name,High:3:ep3_name
 Low
  #RES      font
 0
- #RES      vis
-1
  #RES      x
 95
  #RES      y
@@ -1551,8 +1229,6 @@ Low
 1
  #RES      font
 0
- #RES      vis
-1
  #RES      x
 95
  #RES      y
@@ -1573,8 +1249,6 @@ Low
 1
  #RES      font
 0
- #RES      vis
-1
  #RES      x
 95
  #RES      y
@@ -1591,8 +1265,6 @@ Low
 1
  #RES      font
 0
- #RES      vis
-1
  #RES      x
 450
  #RES      y
@@ -1609,8 +1281,6 @@ Low
 1
  #RES      font
 0
- #RES      vis
-1
  #RES      x
 450
  #RES      y
@@ -1627,8 +1297,6 @@ Low
 1
  #RES      font
 0
- #RES      vis
-1
  #RES      x
 450
  #RES      y
@@ -1645,8 +1313,6 @@ Low
 1
  #RES      font
 0
- #RES      vis
-1
  #RES      x
 450
  #RES      y
@@ -1663,8 +1329,6 @@ Low
 1
  #RES      font
 0
- #RES      vis
-1
  #RES      x
 450
  #RES      y
@@ -1681,8 +1345,6 @@ Low
 1
  #RES      font
 0
- #RES      vis
-1
  #RES      x
 450
  #RES      y
@@ -1699,8 +1361,6 @@ Low
 1
  #RES      font
 0
- #RES      vis
-1
  #RES      x
 450
  #RES      y
@@ -1717,8 +1377,6 @@ Low
 1
  #RES      font
 0
- #RES      vis
-1
  #RES      x
 450
  #RES      y
@@ -1739,8 +1397,6 @@ Low
 item1
  #RES      font
 0
- #RES      vis
-1
  #RES      x
 95
  #RES      y
@@ -1757,8 +1413,6 @@ item1
 1
  #RES      font
 0
- #RES      vis
-1
  #RES      x
 450
  #RES      y
@@ -1775,8 +1429,6 @@ item1
 1
  #RES      font
 0
- #RES      vis
-1
  #RES      x
 450
  #RES      y
@@ -1793,8 +1445,6 @@ item1
 1
  #RES      font
 0
- #RES      vis
-1
  #RES      x
 450
  #RES      y
@@ -1804,9 +1454,1007 @@ item1
  #RES      height
 25
 
+#OBJ       BtnDefaultMonster01
+ #TYPE       WSCvbtn
+ #PARENT   Maiinde_012
+ #RES      userValue
+1
+ #RES      labelString
+SetAsDefault
+ #RES      x
+460
+ #RES      y
+420
+
+#OBJ       ListImmunities
+ #TYPE       WSCcheckGroup
+ #PARENT   Maiinde_012
+ #RES      userValue
+2
+ #RES      value
+4
+ #RES      titleString
+Immunities
+ #RES      menuItemHeight
+12
+ #RES      font
+0
+ #RES      indicatorSize
+10
+ #RES      x
+5
+ #RES      y
+25
+ #RES      width
+105
+ #RES      height
+430
+ #RES      vis
+1
+
+#OBJ       ListWeakness
+ #TYPE       WSCcheckGroup
+ #PARENT   Maiinde_012
+ #RES      userValue
+2
+ #RES      titleString
+Weakness
+ #RES      menuItemHeight
+12
+ #RES      font
+0
+ #RES      indicatorSize
+10
+ #RES      x
+110
+ #RES      y
+25
+ #RES      width
+105
+ #RES      height
+430
+ #RES      vis
+1
+
+#OBJ       ListEnemies
+ #TYPE       WSCcheckGroup
+ #PARENT   Maiinde_012
+ #RES      userValue
+2
+ #RES      value
+1
+ #RES      titleString
+Enemies
+ #RES      menuItemHeight
+12
+ #RES      font
+0
+ #RES      indicatorSize
+10
+ #RES      x
+220
+ #RES      y
+25
+ #RES      width
+105
+ #RES      height
+340
+ #RES      vis
+1
+
+#OBJ       ListFriends
+ #TYPE       WSCcheckGroup
+ #PARENT   Maiinde_012
+ #RES      userValue
+2
+ #RES      value
+1
+ #RES      titleString
+Friends
+ #RES      menuItemHeight
+12
+ #RES      font
+0
+ #RES      indicatorSize
+10
+ #RES      x
+325
+ #RES      y
+25
+ #RES      width
+110
+ #RES      height
+340
+ #RES      vis
+1
+
+#OBJ       ListFlags
+ #TYPE       WSCcheckGroup
+ #PARENT   Maiinde_012
+ #RES      userValue
+2
+ #RES      value
+1
+ #RES      titleString
+Flags
+ #RES      menuItemHeight
+11
+ #RES      font
+0
+ #RES      indicatorSize
+10
+ #RES      x
+435
+ #RES      y
+25
+ #RES      width
+105
+ #RES      height
+430
+ #RES      vis
+1
+
+#OBJ       Maivlab_009
+ #TYPE       WSCvlabel
+ #PARENT   Maiinde_012
+ #RES      userValue
+1
+ #RES      labelString
+ShrapnelR
+ #RES      x
+205
+ #RES      y
+255
+ #RES      width
+90
+ #RES      height
+25
+
+#OBJ       ShapnelRadiusEdit
+ #TYPE       WSCvifield
+ #PARENT   Maiinde_012
+ #RES      userValue
+1
+ #RES      x
+295
+ #RES      y
+255
+ #RES      width
+55
+ #RES      height
+25
+
+#OBJ       Maivlab_012
+ #TYPE       WSCvlabel
+ #PARENT   Maiinde_012
+ #RES      userValue
+1
+ #RES      labelString
+ShrapnelType
+ #RES      x
+205
+ #RES      y
+355
+ #RES      width
+90
+ #RES      height
+25
+
+#OBJ       Maivlab_013
+ #TYPE       WSCvlabel
+ #PARENT   Maiinde_012
+ #RES      userValue
+1
+ #RES      labelString
+ShrapnelScale
+ #RES      x
+205
+ #RES      y
+330
+ #RES      width
+90
+ #RES      height
+25
+
+#OBJ       Maivlab_014
+ #TYPE       WSCvlabel
+ #PARENT   Maiinde_012
+ #RES      userValue
+1
+ #RES      labelString
+ShrapnelBase
+ #RES      x
+205
+ #RES      y
+280
+ #RES      width
+90
+ #RES      height
+25
+
+#OBJ       Maaaa
+ #TYPE       WSCvlabel
+ #PARENT   Maiinde_012
+ #RES      userValue
+1
+ #RES      labelString
+ShrapnelRnd
+ #RES      x
+205
+ #RES      y
+305
+ #RES      width
+90
+ #RES      height
+25
+
+#OBJ       ShapnelRndEdit
+ #TYPE       WSCvifield
+ #PARENT   Maiinde_012
+ #RES      userValue
+1
+ #RES      x
+295
+ #RES      y
+305
+ #RES      width
+55
+ #RES      height
+25
+
+#OBJ       ShapnelScaleEdit
+ #TYPE       WSCvifield
+ #PARENT   Maiinde_012
+ #RES      userValue
+1
+ #RES      x
+295
+ #RES      y
+330
+ #RES      width
+55
+ #RES      height
+25
+
+#OBJ       ShapnelBaseEdit
+ #TYPE       WSCvifield
+ #PARENT   Maiinde_012
+ #RES      userValue
+1
+ #RES      x
+295
+ #RES      y
+280
+ #RES      width
+55
+ #RES      height
+25
+
+#OBJ       ShapnelTypeBtn
+ #TYPE       WSCvbtn
+ #PARENT   Maiinde_012
+ #PROC  ShapnelTypeBtnDown
+  #TRIG    13
+  #PRO   ShapnelTypeBtnDownFunc.cpp
+
+ #RES      userValue
+1
+ #RES      font
+0
+ #RES      x
+295
+ #RES      y
+355
+ #RES      width
+110
+ #RES      height
+25
+
+#OBJ       ShapnelAlienCheck
+ #TYPE       WSCvradio
+ #PARENT   Maiinde_012
+ #RES      userValue
+1
+ #RES      labelString
+Shrapnel is Alien
+ #RES      x
+295
+ #RES      y
+380
+ #RES      width
+155
+ #RES      height
+20
+
+#OBJ       Maivlab_023
+ #TYPE       WSCvlabel
+ #PARENT   Maiinde_012
+ #RES      userValue
+3
+ #RES      labelString
+Frequency
+ #RES      x
+5
+ #RES      y
+30
+ #RES      width
+95
+ #RES      height
+25
+
+#OBJ       FrequencyEdit
+ #TYPE       WSCvifield
+ #PARENT   Maiinde_012
+ #RES      userValue
+3
+ #RES      x
+100
+ #RES      y
+30
+ #RES      width
+80
+ #RES      height
+25
+
+#OBJ       Maitfor_025
+ #TYPE       WSCtform
+ #PARENT   Maiinde_012
+ #RES      userValue
+3
+ #RES      titleString
+Melee
+ #RES      x
+5
+ #RES      y
+60
+ #RES      width
+245
+ #RES      height
+255
+
+#OBJ       MeleedzEdit
+ #TYPE       WSCvifield
+ #PARENT   Maitfor_025
+ #RES      userValue
+3
+ #RES      vis
+1
+ #RES      x
+105
+ #RES      y
+190
+ #RES      width
+80
+ #RES      height
+25
+
+#OBJ       Maivlab_026
+ #TYPE       WSCvlabel
+ #PARENT   Maitfor_025
+ #RES      userValue
+3
+ #RES      labelString
+Type
+ #RES      vis
+1
+ #RES      x
+10
+ #RES      y
+15
+ #RES      width
+95
+ #RES      height
+25
+
+#OBJ       BtnMeleeType
+ #TYPE       WSCvbtn
+ #PARENT   Maitfor_025
+ #RES      vis
+1
+ #RES      x
+105
+ #RES      y
+15
+ #RES      width
+130
+ #RES      height
+25
+
+#OBJ       Maivlab_028
+ #TYPE       WSCvlabel
+ #PARENT   Maitfor_025
+ #RES      userValue
+3
+ #RES      labelString
+Repetitions
+ #RES      vis
+1
+ #RES      x
+10
+ #RES      y
+40
+ #RES      width
+95
+ #RES      height
+25
+
+#OBJ       Maivlab_029
+ #TYPE       WSCvlabel
+ #PARENT   Maitfor_025
+ #RES      userValue
+3
+ #RES      labelString
+Error
+ #RES      vis
+1
+ #RES      x
+10
+ #RES      y
+65
+ #RES      width
+95
+ #RES      height
+25
+
+#OBJ       Maivlab_030
+ #TYPE       WSCvlabel
+ #PARENT   Maitfor_025
+ #RES      userValue
+3
+ #RES      labelString
+Range
+ #RES      vis
+1
+ #RES      x
+10
+ #RES      y
+90
+ #RES      width
+95
+ #RES      height
+25
+
+#OBJ       Maivlab_031
+ #TYPE       WSCvlabel
+ #PARENT   Maitfor_025
+ #RES      userValue
+3
+ #RES      labelString
+Sequence
+ #RES      vis
+1
+ #RES      x
+10
+ #RES      y
+115
+ #RES      width
+95
+ #RES      height
+25
+
+#OBJ       Maivlab_032
+ #TYPE       WSCvlabel
+ #PARENT   Maitfor_025
+ #RES      userValue
+3
+ #RES      labelString
+dx
+ #RES      vis
+1
+ #RES      x
+10
+ #RES      y
+140
+ #RES      width
+95
+ #RES      height
+25
+
+#OBJ       MeleeRepetitionsEdit
+ #TYPE       WSCvifield
+ #PARENT   Maitfor_025
+ #RES      userValue
+3
+ #RES      vis
+1
+ #RES      x
+105
+ #RES      y
+40
+ #RES      width
+80
+ #RES      height
+25
+
+#OBJ       MeleeErrorEdit
+ #TYPE       WSCvifield
+ #PARENT   Maitfor_025
+ #RES      userValue
+3
+ #RES      vis
+1
+ #RES      x
+105
+ #RES      y
+65
+ #RES      width
+80
+ #RES      height
+25
+
+#OBJ       MeleeRangeEdit
+ #TYPE       WSCvifield
+ #PARENT   Maitfor_025
+ #RES      userValue
+3
+ #RES      vis
+1
+ #RES      x
+105
+ #RES      y
+90
+ #RES      width
+80
+ #RES      height
+25
+
+#OBJ       MeleeSequenceEdit
+ #TYPE       WSCvifield
+ #PARENT   Maitfor_025
+ #RES      userValue
+3
+ #RES      vis
+1
+ #RES      x
+105
+ #RES      y
+115
+ #RES      width
+80
+ #RES      height
+25
+
+#OBJ       MeleedxEdit
+ #TYPE       WSCvifield
+ #PARENT   Maitfor_025
+ #RES      userValue
+3
+ #RES      vis
+1
+ #RES      x
+105
+ #RES      y
+140
+ #RES      width
+80
+ #RES      height
+25
+
+#OBJ       MeleedyEdit
+ #TYPE       WSCvifield
+ #PARENT   Maitfor_025
+ #RES      userValue
+3
+ #RES      vis
+1
+ #RES      x
+105
+ #RES      y
+165
+ #RES      width
+80
+ #RES      height
+25
+
+#OBJ       Maivlab_040
+ #TYPE       WSCvlabel
+ #PARENT   Maitfor_025
+ #RES      userValue
+3
+ #RES      labelString
+dy
+ #RES      vis
+1
+ #RES      x
+10
+ #RES      y
+165
+ #RES      width
+95
+ #RES      height
+25
+
+#OBJ       Maivlab_041
+ #TYPE       WSCvlabel
+ #PARENT   Maitfor_025
+ #RES      userValue
+3
+ #RES      labelString
+dz
+ #RES      vis
+1
+ #RES      x
+10
+ #RES      y
+190
+ #RES      width
+95
+ #RES      height
+25
+
+#OBJ       BtnMeleePreset
+ #TYPE       WSCvbtn
+ #PARENT   Maitfor_025
+ #PROC  BtnMeleePresetDown
+  #TRIG    13
+  #PRO   BtnMeleePresetDownFunc.cpp
+
+ #RES      labelString
+Preset From Other Monster
+ #RES      vis
+1
+ #RES      x
+10
+ #RES      y
+220
+ #RES      width
+225
+
+#OBJ       BtnPresetThisAllEnemyOn
+ #TYPE       WSCvbtn
+ #PARENT   Maiinde_012
+ #PROC  BtnPresetThisAllEnemyOnDown
+  #TRIG    13
+  #PRO   BtnPresetThisAllEnemyOnDownFunc.cpp
+
+ #RES      userValue
+2
+ #RES      labelString
+Set All Enemy Check For This
+ #RES      vis
+1
+ #RES      x
+225
+ #RES      y
+370
+ #RES      width
+205
+ #RES      height
+25
+
+#OBJ       BtnAllUncheck
+ #TYPE       WSCvbtn
+ #PARENT   Maiinde_012
+ #PROC  BtnAllUncheckDown
+  #TRIG    13
+  #PRO   BtnAllUncheckDownFunc.cpp
+
+ #RES      userValue
+2
+ #RES      labelString
+Set All Enemy Unchk For This
+ #RES      vis
+1
+ #RES      x
+225
+ #RES      y
+395
+ #RES      width
+205
+ #RES      height
+25
+
+#OBJ       Maitfor_055
+ #TYPE       WSCtform
+ #PARENT   Maiinde_012
+ #RES      userValue
+3
+ #RES      titleString
+Ranged
+ #RES      x
+260
+ #RES      y
+60
+ #RES      width
+245
+ #RES      height
+255
+
+#OBJ       RangeddzEdit
+ #TYPE       WSCvifield
+ #PARENT   Maitfor_055
+ #RES      userValue
+3
+ #RES      vis
+1
+ #RES      x
+105
+ #RES      y
+190
+ #RES      width
+80
+ #RES      height
+25
+
+#OBJ       Maivlab_062
+ #TYPE       WSCvlabel
+ #PARENT   Maitfor_055
+ #RES      userValue
+3
+ #RES      labelString
+Type
+ #RES      vis
+1
+ #RES      x
+10
+ #RES      y
+15
+ #RES      width
+95
+ #RES      height
+25
+
+#OBJ       BtnRangedType
+ #TYPE       WSCvbtn
+ #PARENT   Maitfor_055
+ #RES      vis
+1
+ #RES      x
+105
+ #RES      y
+15
+ #RES      width
+130
+ #RES      height
+25
+
+#OBJ       Maivlab_065
+ #TYPE       WSCvlabel
+ #PARENT   Maitfor_055
+ #RES      userValue
+3
+ #RES      labelString
+Repetitions
+ #RES      vis
+1
+ #RES      x
+10
+ #RES      y
+40
+ #RES      width
+95
+ #RES      height
+25
+
+#OBJ       Maivlab_066
+ #TYPE       WSCvlabel
+ #PARENT   Maitfor_055
+ #RES      userValue
+3
+ #RES      labelString
+Error
+ #RES      vis
+1
+ #RES      x
+10
+ #RES      y
+65
+ #RES      width
+95
+ #RES      height
+25
+
+#OBJ       Maivlab_067
+ #TYPE       WSCvlabel
+ #PARENT   Maitfor_055
+ #RES      userValue
+3
+ #RES      labelString
+Range
+ #RES      vis
+1
+ #RES      x
+10
+ #RES      y
+90
+ #RES      width
+95
+ #RES      height
+25
+
+#OBJ       Maivlab_068
+ #TYPE       WSCvlabel
+ #PARENT   Maitfor_055
+ #RES      userValue
+3
+ #RES      labelString
+Sequence
+ #RES      vis
+1
+ #RES      x
+10
+ #RES      y
+115
+ #RES      width
+95
+ #RES      height
+25
+
+#OBJ       Maivlab_069
+ #TYPE       WSCvlabel
+ #PARENT   Maitfor_055
+ #RES      userValue
+3
+ #RES      labelString
+dx
+ #RES      vis
+1
+ #RES      x
+10
+ #RES      y
+140
+ #RES      width
+95
+ #RES      height
+25
+
+#OBJ       RangedRepetitionsEdit
+ #TYPE       WSCvifield
+ #PARENT   Maitfor_055
+ #RES      userValue
+3
+ #RES      vis
+1
+ #RES      x
+105
+ #RES      y
+40
+ #RES      width
+80
+ #RES      height
+25
+
+#OBJ       RangedErrorEdit
+ #TYPE       WSCvifield
+ #PARENT   Maitfor_055
+ #RES      userValue
+3
+ #RES      vis
+1
+ #RES      x
+105
+ #RES      y
+65
+ #RES      width
+80
+ #RES      height
+25
+
+#OBJ       RangedRangeEdit
+ #TYPE       WSCvifield
+ #PARENT   Maitfor_055
+ #RES      userValue
+3
+ #RES      vis
+1
+ #RES      x
+105
+ #RES      y
+90
+ #RES      width
+80
+ #RES      height
+25
+
+#OBJ       RangedSequenceEdit
+ #TYPE       WSCvifield
+ #PARENT   Maitfor_055
+ #RES      userValue
+3
+ #RES      vis
+1
+ #RES      x
+105
+ #RES      y
+115
+ #RES      width
+80
+ #RES      height
+25
+
+#OBJ       RangeddxEdit
+ #TYPE       WSCvifield
+ #PARENT   Maitfor_055
+ #RES      userValue
+3
+ #RES      vis
+1
+ #RES      x
+105
+ #RES      y
+140
+ #RES      width
+80
+ #RES      height
+25
+
+#OBJ       RangeddyEdit
+ #TYPE       WSCvifield
+ #PARENT   Maitfor_055
+ #RES      userValue
+3
+ #RES      vis
+1
+ #RES      x
+105
+ #RES      y
+165
+ #RES      width
+80
+ #RES      height
+25
+
+#OBJ       Maivlab_082
+ #TYPE       WSCvlabel
+ #PARENT   Maitfor_055
+ #RES      userValue
+3
+ #RES      labelString
+dy
+ #RES      vis
+1
+ #RES      x
+10
+ #RES      y
+165
+ #RES      width
+95
+ #RES      height
+25
+
+#OBJ       Maivlab_083
+ #TYPE       WSCvlabel
+ #PARENT   Maitfor_055
+ #RES      userValue
+3
+ #RES      labelString
+dz
+ #RES      vis
+1
+ #RES      x
+10
+ #RES      y
+190
+ #RES      width
+95
+ #RES      height
+25
+
+#OBJ       BtnRangedPreset
+ #TYPE       WSCvbtn
+ #PARENT   Maitfor_055
+ #PROC  BtnRangedPresetDown
+  #TRIG    13
+  #PRO   BtnRangedPresetDownFunc.cpp
+
+ #RES      labelString
+Preset From Other Monster
+ #RES      vis
+1
+ #RES      x
+10
+ #RES      y
+220
+ #RES      width
+225
+
 #OBJ       WndSelect
  #TYPE       WSCdialog
  #PARENT   MainWindow
+ #PROC  WndSelectActivate
+  #TRIG    2
+  #PRO   WndSelectActivateFunc.cpp
+
  #RES      titleString
 SelectIt!
  #RES      x
@@ -1816,11 +2464,15 @@ SelectIt!
  #RES      width
 290
  #RES      height
-503
+425
 
 #OBJ       ListSelect
  #TYPE       WSClist
  #PARENT   WndSelect
+ #PROC  ListSelectSelect
+  #TRIG    35
+  #PRO   ListSelectSelectFunc.cpp
+
  #RES      titleString
 title4
  #RES      workHeight
@@ -1850,17 +2502,243 @@ title4
  #RES      height
 470
 
-#OBJ       Maiinde_001
- #TYPE       WSCindexForm
+#OBJ       ListEffect
+ #TYPE       WSClist
  #PARENT   FrmEffect
+ #PROC  ListEffectDown
+  #TRIG    35
+  #PRO   ListEffectDownFunc.cpp
+
+ #RES      itemHeight
+11
+ #RES      titleString
+title3
+ #RES      dataSource
+2
+ #RES      dataSourceName
+data/Effects.txt
+ #RES      workWidth
+200
+ #RES      workHeight
+803
+ #RES      hbarVisible
+1
+ #RES      x
+5
  #RES      y
 5
  #RES      width
-585
+145
  #RES      height
 460
  #RES      vis
 1
+
+#OBJ       BtnEffectCollection
+ #TYPE       WSCvbtn
+ #PARENT   FrmEffect
+ #PROC  BtnEffectCollectionDown
+  #TRIG    13
+  #PRO   BtnEffectCollectionDownFunc.cpp
+
+ #RES      vis
+1
+ #RES      x
+245
+ #RES      y
+10
+ #RES      width
+165
+ #RES      height
+25
+
+#OBJ       Maivlab_093
+ #TYPE       WSCvlabel
+ #PARENT   FrmEffect
+ #RES      labelString
+Collection
+ #RES      vis
+1
+ #RES      x
+150
+ #RES      y
+10
+ #RES      width
+95
+ #RES      height
+25
+
+#OBJ       Maivlab_094
+ #TYPE       WSCvlabel
+ #PARENT   FrmEffect
+ #RES      labelString
+Sequence
+ #RES      vis
+1
+ #RES      x
+150
+ #RES      y
+35
+ #RES      width
+95
+ #RES      height
+25
+
+#OBJ       Maivlab_095
+ #TYPE       WSCvlabel
+ #PARENT   FrmEffect
+ #RES      labelString
+Sound Pitch
+ #RES      vis
+1
+ #RES      x
+150
+ #RES      y
+60
+ #RES      width
+95
+ #RES      height
+25
+
+#OBJ       EffectFlagsCheckGroup
+ #TYPE       WSCcheckGroup
+ #PARENT   FrmEffect
+ #RES      menuItems
+End When Animation Loops,End When Transfer Animation Loops,Sound Only, Make Twin Visible,Media Effect
+ #RES      titleString
+Flags
+ #RES      x
+150
+ #RES      y
+145
+ #RES      width
+235
+ #RES      height
+165
+ #RES      vis
+1
+
+#OBJ       Maivlab_097
+ #TYPE       WSCvlabel
+ #PARENT   FrmEffect
+ #RES      labelString
+Delay
+ #RES      vis
+1
+ #RES      x
+150
+ #RES      y
+85
+ #RES      width
+95
+ #RES      height
+25
+
+#OBJ       Maivlab_099
+ #TYPE       WSCvlabel
+ #PARENT   FrmEffect
+ #RES      labelString
+Delay Sound
+ #RES      vis
+1
+ #RES      x
+150
+ #RES      y
+110
+ #RES      width
+95
+ #RES      height
+25
+
+#OBJ       BtnEffectDelaySound
+ #TYPE       WSCvbtn
+ #PARENT   FrmEffect
+ #PROC  BtnEffectDelaySoundDown
+  #TRIG    13
+  #PRO   BtnEffectDelaySoundDownFunc.cpp
+
+ #RES      vis
+1
+ #RES      x
+245
+ #RES      y
+110
+ #RES      width
+165
+ #RES      height
+25
+
+#OBJ       EffectSoundPitchEdit
+ #TYPE       WSCvifield
+ #PARENT   FrmEffect
+ #RES      vis
+1
+ #RES      x
+245
+ #RES      y
+60
+ #RES      width
+95
+ #RES      height
+25
+
+#OBJ       EffectDelayEdit
+ #TYPE       WSCvifield
+ #PARENT   FrmEffect
+ #RES      vis
+1
+ #RES      x
+245
+ #RES      y
+85
+ #RES      width
+95
+ #RES      height
+25
+
+#OBJ       EffectSequenceEdit
+ #TYPE       WSCvifield
+ #PARENT   FrmEffect
+ #RES      vis
+1
+ #RES      x
+245
+ #RES      y
+35
+ #RES      width
+95
+ #RES      height
+25
+
+#OBJ       Maivlab_104
+ #TYPE       WSCvlabel
+ #PARENT   FrmEffect
+ #RES      labelString
+Pallet
+ #RES      vis
+1
+ #RES      x
+420
+ #RES      y
+10
+ #RES      width
+95
+ #RES      height
+25
+
+#OBJ       EffectPalletEdit
+ #TYPE       WSCvifield
+ #PARENT   FrmEffect
+ #RES      vis
+1
+ #RES      x
+515
+ #RES      y
+10
+ #RES      width
+95
+ #RES      height
+25
 
 #OBJ       FrmProjectile
  #TYPE       WSCform
@@ -1874,6 +2752,720 @@ title4
  #RES      height
 470
 
+#OBJ       ListProjectile
+ #TYPE       WSClist
+ #PARENT   FrmProjectile
+ #PROC  ListProjectileDown
+  #TRIG    35
+  #PRO   ListProjectileDownFunc.cpp
+
+ #RES      itemHeight
+11
+ #RES      titleString
+title6
+ #RES      dataSource
+2
+ #RES      dataSourceName
+data/Projectiles.txt
+ #RES      workWidth
+200
+ #RES      workHeight
+456
+ #RES      x
+5
+ #RES      y
+5
+ #RES      width
+95
+ #RES      height
+460
+ #RES      vis
+1
+
+#OBJ       Maivlab_109
+ #TYPE       WSCvlabel
+ #PARENT   FrmProjectile
+ #RES      labelString
+Collection
+ #RES      vis
+1
+ #RES      x
+105
+ #RES      y
+10
+ #RES      width
+95
+ #RES      height
+20
+
+#OBJ       ProjPalletEdit
+ #TYPE       WSCvifield
+ #PARENT   FrmProjectile
+ #RES      vis
+1
+ #RES      x
+200
+ #RES      y
+30
+ #RES      width
+110
+ #RES      height
+20
+
+#OBJ       ProjCollectionBtn
+ #TYPE       WSCvbtn
+ #PARENT   FrmProjectile
+ #RES      vis
+1
+ #RES      x
+200
+ #RES      y
+10
+ #RES      width
+110
+ #RES      height
+20
+
+#OBJ       Maivlab_112
+ #TYPE       WSCvlabel
+ #PARENT   FrmProjectile
+ #RES      labelString
+Pallet
+ #RES      vis
+1
+ #RES      x
+105
+ #RES      y
+30
+ #RES      width
+95
+ #RES      height
+20
+
+#OBJ       Maivlab_113
+ #TYPE       WSCvlabel
+ #PARENT   FrmProjectile
+ #RES      labelString
+ContrailEf
+ #RES      vis
+1
+ #RES      x
+105
+ #RES      y
+110
+ #RES      width
+95
+ #RES      height
+20
+
+#OBJ       Maivlab_114
+ #TYPE       WSCvlabel
+ #PARENT   FrmProjectile
+ #RES      labelString
+DetonationEf
+ #RES      vis
+1
+ #RES      x
+105
+ #RES      y
+70
+ #RES      width
+95
+ #RES      height
+20
+
+#OBJ       Maivlab_115
+ #TYPE       WSCvlabel
+ #PARENT   FrmProjectile
+ #RES      labelString
+Det(media)Ef
+ #RES      vis
+1
+ #RES      x
+105
+ #RES      y
+90
+ #RES      width
+95
+ #RES      height
+20
+
+#OBJ       ProjContrailEfBtn
+ #TYPE       WSCvbtn
+ #PARENT   FrmProjectile
+ #RES      vis
+1
+ #RES      x
+200
+ #RES      y
+110
+ #RES      width
+110
+ #RES      height
+20
+
+#OBJ       ProjDetonationEfBtn
+ #TYPE       WSCvbtn
+ #PARENT   FrmProjectile
+ #RES      vis
+1
+ #RES      x
+200
+ #RES      y
+70
+ #RES      width
+110
+ #RES      height
+20
+
+#OBJ       ProjDetMediaEfBtn
+ #TYPE       WSCvbtn
+ #PARENT   FrmProjectile
+ #RES      vis
+1
+ #RES      x
+200
+ #RES      y
+90
+ #RES      width
+110
+ #RES      height
+20
+
+#OBJ       Maivlab_119
+ #TYPE       WSCvlabel
+ #PARENT   FrmProjectile
+ #RES      labelString
+AreaOfEf
+ #RES      vis
+1
+ #RES      x
+105
+ #RES      y
+210
+ #RES      width
+95
+ #RES      height
+20
+
+#OBJ       Maivlab_120
+ #TYPE       WSCvlabel
+ #PARENT   FrmProjectile
+ #RES      labelString
+TicksBetContrail
+ #RES      vis
+1
+ #RES      x
+105
+ #RES      y
+130
+ #RES      width
+95
+ #RES      height
+20
+
+#OBJ       Maivlab_121
+ #TYPE       WSCvlabel
+ #PARENT   FrmProjectile
+ #RES      labelString
+MaxContrail
+ #RES      vis
+1
+ #RES      x
+105
+ #RES      y
+150
+ #RES      width
+95
+ #RES      height
+20
+
+#OBJ       Maivlab_122
+ #TYPE       WSCvlabel
+ #PARENT   FrmProjectile
+ #RES      labelString
+MediaPromo
+ #RES      vis
+1
+ #RES      x
+105
+ #RES      y
+170
+ #RES      width
+95
+ #RES      height
+20
+
+#OBJ       Maivlab_123
+ #TYPE       WSCvlabel
+ #PARENT   FrmProjectile
+ #RES      labelString
+Radius
+ #RES      vis
+1
+ #RES      x
+105
+ #RES      y
+190
+ #RES      width
+95
+ #RES      height
+20
+
+#OBJ       ProjAreaOfEfEdit
+ #TYPE       WSCvifield
+ #PARENT   FrmProjectile
+ #RES      vis
+1
+ #RES      x
+200
+ #RES      y
+210
+ #RES      width
+110
+ #RES      height
+20
+
+#OBJ       ProjTicksBetContrailEdit
+ #TYPE       WSCvifield
+ #PARENT   FrmProjectile
+ #RES      vis
+1
+ #RES      x
+200
+ #RES      y
+130
+ #RES      width
+110
+ #RES      height
+20
+
+#OBJ       ProjMaxContrailEdit
+ #TYPE       WSCvifield
+ #PARENT   FrmProjectile
+ #RES      vis
+1
+ #RES      x
+200
+ #RES      y
+150
+ #RES      width
+110
+ #RES      height
+20
+
+#OBJ       ProjMediaPromoEdit
+ #TYPE       WSCvifield
+ #PARENT   FrmProjectile
+ #RES      vis
+1
+ #RES      x
+200
+ #RES      y
+170
+ #RES      width
+110
+ #RES      height
+20
+
+#OBJ       ProjRadiusEdit
+ #TYPE       WSCvifield
+ #PARENT   FrmProjectile
+ #RES      vis
+1
+ #RES      x
+200
+ #RES      y
+190
+ #RES      width
+110
+ #RES      height
+20
+
+#OBJ       Maitfor_129
+ #TYPE       WSCtform
+ #PARENT   FrmProjectile
+ #RES      titleString
+Damage
+ #RES      x
+105
+ #RES      y
+235
+ #RES      width
+210
+ #RES      height
+135
+ #RES      vis
+1
+
+#OBJ       Maivlab_130
+ #TYPE       WSCvlabel
+ #PARENT   Maitfor_129
+ #RES      labelString
+Type
+ #RES      vis
+1
+ #RES      x
+15
+ #RES      y
+20
+ #RES      width
+80
+ #RES      height
+20
+
+#OBJ       ProjDamageTypeBtn
+ #TYPE       WSCvbtn
+ #PARENT   Maitfor_129
+ #RES      vis
+1
+ #RES      x
+95
+ #RES      y
+20
+ #RES      width
+110
+ #RES      height
+20
+
+#OBJ       Maivlab_132
+ #TYPE       WSCvlabel
+ #PARENT   Maitfor_129
+ #RES      labelString
+Base
+ #RES      vis
+1
+ #RES      x
+15
+ #RES      y
+40
+ #RES      width
+80
+ #RES      height
+20
+
+#OBJ       Maivlab_133
+ #TYPE       WSCvlabel
+ #PARENT   Maitfor_129
+ #RES      labelString
+Random
+ #RES      vis
+1
+ #RES      x
+15
+ #RES      y
+60
+ #RES      width
+80
+ #RES      height
+20
+
+#OBJ       Maivlab_134
+ #TYPE       WSCvlabel
+ #PARENT   Maitfor_129
+ #RES      labelString
+Scale
+ #RES      vis
+1
+ #RES      x
+15
+ #RES      y
+80
+ #RES      width
+80
+ #RES      height
+20
+
+#OBJ       ProjDamageFlags
+ #TYPE       WSCvradio
+ #PARENT   Maitfor_129
+ #RES      labelString
+Alien
+ #RES      vis
+1
+ #RES      x
+15
+ #RES      y
+105
+ #RES      width
+80
+ #RES      height
+20
+
+#OBJ       ProjDamageBaseEdit
+ #TYPE       WSCvifield
+ #PARENT   Maitfor_129
+ #RES      vis
+1
+ #RES      x
+95
+ #RES      y
+40
+ #RES      width
+110
+ #RES      height
+20
+
+#OBJ       ProjDamageRandomEdit
+ #TYPE       WSCvifield
+ #PARENT   Maitfor_129
+ #RES      vis
+1
+ #RES      x
+95
+ #RES      y
+60
+ #RES      width
+110
+ #RES      height
+20
+
+#OBJ       ProjDamageScaleEdit
+ #TYPE       WSCvifield
+ #PARENT   Maitfor_129
+ #RES      vis
+1
+ #RES      x
+95
+ #RES      y
+80
+ #RES      width
+110
+ #RES      height
+20
+
+#OBJ       ListProjFlags
+ #TYPE       WSCcheckGroup
+ #PARENT   FrmProjectile
+ #RES      titleString
+Flags
+ #RES      menuItemHeight
+11
+ #RES      indicatorSize
+11
+ #RES      x
+315
+ #RES      y
+5
+ #RES      width
+140
+ #RES      height
+460
+ #RES      vis
+1
+
+#OBJ       Maivlab_137
+ #TYPE       WSCvlabel
+ #PARENT   FrmProjectile
+ #RES      labelString
+Speed
+ #RES      vis
+1
+ #RES      x
+475
+ #RES      y
+10
+ #RES      width
+95
+ #RES      height
+20
+
+#OBJ       Maivlab_138
+ #TYPE       WSCvlabel
+ #PARENT   FrmProjectile
+ #RES      labelString
+MaxRange
+ #RES      vis
+1
+ #RES      x
+475
+ #RES      y
+30
+ #RES      width
+95
+ #RES      height
+20
+
+#OBJ       Maivlab_139
+ #TYPE       WSCvlabel
+ #PARENT   FrmProjectile
+ #RES      labelString
+SoundPitch
+ #RES      vis
+1
+ #RES      x
+475
+ #RES      y
+50
+ #RES      width
+95
+ #RES      height
+20
+
+#OBJ       Maivlab_140
+ #TYPE       WSCvlabel
+ #PARENT   FrmProjectile
+ #RES      labelString
+FlyBySound
+ #RES      vis
+1
+ #RES      x
+475
+ #RES      y
+70
+ #RES      width
+95
+ #RES      height
+20
+
+#OBJ       Maivlab_141
+ #TYPE       WSCvlabel
+ #PARENT   FrmProjectile
+ #RES      labelString
+ReboundSnd
+ #RES      vis
+1
+ #RES      x
+475
+ #RES      y
+90
+ #RES      width
+95
+ #RES      height
+20
+
+#OBJ       ProjFlyBySoundBtn
+ #TYPE       WSCvbtn
+ #PARENT   FrmProjectile
+ #RES      vis
+1
+ #RES      x
+570
+ #RES      y
+70
+ #RES      width
+110
+ #RES      height
+20
+
+#OBJ       ProjReboundSndBtn
+ #TYPE       WSCvbtn
+ #PARENT   FrmProjectile
+ #RES      vis
+1
+ #RES      x
+570
+ #RES      y
+90
+ #RES      width
+110
+ #RES      height
+20
+
+#OBJ       ProjSpeedEdit
+ #TYPE       WSCvifield
+ #PARENT   FrmProjectile
+ #RES      vis
+1
+ #RES      x
+570
+ #RES      y
+10
+ #RES      width
+110
+ #RES      height
+20
+
+#OBJ       ProjMaxRangeEdit
+ #TYPE       WSCvifield
+ #PARENT   FrmProjectile
+ #RES      vis
+1
+ #RES      x
+570
+ #RES      y
+30
+ #RES      width
+110
+ #RES      height
+20
+
+#OBJ       ProjSoundPitchEdit
+ #TYPE       WSCvifield
+ #PARENT   FrmProjectile
+ #RES      vis
+1
+ #RES      x
+570
+ #RES      y
+50
+ #RES      width
+110
+ #RES      height
+20
+
+#OBJ       Maivlab_147
+ #TYPE       WSCvlabel
+ #PARENT   FrmProjectile
+ #RES      labelString
+Sequence
+ #RES      vis
+1
+ #RES      x
+105
+ #RES      y
+50
+ #RES      width
+95
+ #RES      height
+20
+
+#OBJ       ProjSequenceEdit
+ #TYPE       WSCvifield
+ #PARENT   FrmProjectile
+ #RES      vis
+1
+ #RES      x
+200
+ #RES      y
+50
+ #RES      width
+110
+ #RES      height
+20
+
+#OBJ       ProjPresetOtherProj
+ #TYPE       WSCvbtn
+ #PARENT   FrmProjectile
+ #RES      labelString
+Set As Preset Other Proj
+ #RES      vis
+1
+ #RES      x
+465
+ #RES      y
+345
+ #RES      width
+180
+ #RES      height
+20
+
+#OBJ       Maivbtn_153
+ #TYPE       WSCvbtn
+ #PARENT   FrmProjectile
+ #RES      labelString
+Set As Hand Granade
+ #RES      vis
+1
+ #RES      x
+465
+ #RES      y
+365
+ #RES      width
+180
+ #RES      height
+20
+
 #OBJ       FrmPhysics
  #TYPE       WSCform
  #PARENT   MainWindow
@@ -1885,6 +3477,796 @@ title4
 690
  #RES      height
 470
+ #RES      vis
+1
+
+#OBJ       PhysicsTypeOpt
+ #TYPE       WSCoption
+ #PARENT   FrmPhysics
+ #PROC  PhysicsTypeOptCh
+  #TRIG    3
+  #PRO   PhysicsTypeOptChFunc.cpp
+
+ #RES      menuItems
+Walking:1:ep1_name,Running:2:ep2_name
+ #RES      value
+1
+ #RES      labelString
+Walking
+ #RES      vis
+1
+ #RES      x
+110
+ #RES      y
+10
+ #RES      width
+110
+ #RES      height
+20
+
+#OBJ       Maivlab_158
+ #TYPE       WSCvlabel
+ #PARENT   FrmPhysics
+ #RES      labelString
+Type
+ #RES      vis
+1
+ #RES      x
+10
+ #RES      y
+10
+ #RES      height
+20
+
+#OBJ       PhyMaxForwardEdit
+ #TYPE       WSCvifield
+ #PARENT   FrmPhysics
+ #RES      vis
+1
+ #RES      x
+180
+ #RES      y
+40
+ #RES      width
+110
+ #RES      height
+20
+
+#OBJ       Maivlab_160
+ #TYPE       WSCvlabel
+ #PARENT   FrmPhysics
+ #RES      labelString
+Max Forward Velocity
+ #RES      vis
+1
+ #RES      x
+10
+ #RES      y
+40
+ #RES      width
+170
+ #RES      height
+20
+
+#OBJ       Maivlab_161
+ #TYPE       WSCvlabel
+ #PARENT   FrmPhysics
+ #RES      labelString
+Max Backward Velocity
+ #RES      vis
+1
+ #RES      x
+10
+ #RES      y
+60
+ #RES      width
+170
+ #RES      height
+20
+
+#OBJ       Maivlab_162
+ #TYPE       WSCvlabel
+ #PARENT   FrmPhysics
+ #RES      labelString
+Max Perpendicular Velocity
+ #RES      vis
+1
+ #RES      x
+10
+ #RES      y
+80
+ #RES      width
+170
+ #RES      height
+20
+
+#OBJ       labne
+ #TYPE       WSCvlabel
+ #PARENT   FrmPhysics
+ #RES      labelString
+Acceleration
+ #RES      vis
+1
+ #RES      x
+10
+ #RES      y
+100
+ #RES      width
+170
+ #RES      height
+20
+
+#OBJ       Maivlab_164
+ #TYPE       WSCvlabel
+ #PARENT   FrmPhysics
+ #RES      labelString
+Deceleration
+ #RES      vis
+1
+ #RES      x
+10
+ #RES      y
+120
+ #RES      width
+170
+ #RES      height
+20
+
+#OBJ       Maivlab_165
+ #TYPE       WSCvlabel
+ #PARENT   FrmPhysics
+ #RES      labelString
+Airborne Deceleration
+ #RES      vis
+1
+ #RES      x
+10
+ #RES      y
+140
+ #RES      width
+170
+ #RES      height
+20
+
+#OBJ       Maivlab_166
+ #TYPE       WSCvlabel
+ #PARENT   FrmPhysics
+ #RES      labelString
+Gravity Accel
+ #RES      vis
+1
+ #RES      x
+10
+ #RES      y
+160
+ #RES      width
+170
+ #RES      height
+20
+
+#OBJ       Maivlab_167
+ #TYPE       WSCvlabel
+ #PARENT   FrmPhysics
+ #RES      labelString
+Climb Accel
+ #RES      vis
+1
+ #RES      x
+10
+ #RES      y
+180
+ #RES      width
+170
+ #RES      height
+20
+
+#OBJ       Maivlab_168
+ #TYPE       WSCvlabel
+ #PARENT   FrmPhysics
+ #RES      labelString
+Terminal Accel
+ #RES      vis
+1
+ #RES      x
+10
+ #RES      y
+200
+ #RES      width
+170
+ #RES      height
+20
+
+#OBJ       Maivlab_169
+ #TYPE       WSCvlabel
+ #PARENT   FrmPhysics
+ #RES      labelString
+External Deceleration
+ #RES      vis
+1
+ #RES      x
+10
+ #RES      y
+220
+ #RES      width
+170
+ #RES      height
+20
+
+#OBJ       Maivlab_170
+ #TYPE       WSCvlabel
+ #PARENT   FrmPhysics
+ #RES      labelString
+Angular Accel
+ #RES      vis
+1
+ #RES      x
+10
+ #RES      y
+240
+ #RES      width
+170
+ #RES      height
+20
+
+#OBJ       Maivlab_171
+ #TYPE       WSCvlabel
+ #PARENT   FrmPhysics
+ #RES      labelString
+Angular Deceleration
+ #RES      vis
+1
+ #RES      x
+10
+ #RES      y
+260
+ #RES      width
+170
+ #RES      height
+20
+
+#OBJ       Maivlab_172
+ #TYPE       WSCvlabel
+ #PARENT   FrmPhysics
+ #RES      labelString
+Max Angular Velocity
+ #RES      vis
+1
+ #RES      x
+10
+ #RES      y
+280
+ #RES      width
+170
+ #RES      height
+20
+
+#OBJ       PhyMaxBackwardEdit
+ #TYPE       WSCvifield
+ #PARENT   FrmPhysics
+ #RES      vis
+1
+ #RES      x
+180
+ #RES      y
+60
+ #RES      width
+110
+ #RES      height
+20
+
+#OBJ       PhyMaxPerpendEdit
+ #TYPE       WSCvifield
+ #PARENT   FrmPhysics
+ #RES      vis
+1
+ #RES      x
+180
+ #RES      y
+80
+ #RES      width
+110
+ #RES      height
+20
+
+#OBJ       PhyAccelEdit
+ #TYPE       WSCvifield
+ #PARENT   FrmPhysics
+ #RES      vis
+1
+ #RES      x
+180
+ #RES      y
+100
+ #RES      width
+110
+ #RES      height
+20
+
+#OBJ       PhyDecelEdit
+ #TYPE       WSCvifield
+ #PARENT   FrmPhysics
+ #RES      vis
+1
+ #RES      x
+180
+ #RES      y
+120
+ #RES      width
+110
+ #RES      height
+20
+
+#OBJ       PhyAirDecelEdit
+ #TYPE       WSCvifield
+ #PARENT   FrmPhysics
+ #RES      vis
+1
+ #RES      x
+180
+ #RES      y
+140
+ #RES      width
+110
+ #RES      height
+20
+
+#OBJ       PhyGravityAccelEdit
+ #TYPE       WSCvifield
+ #PARENT   FrmPhysics
+ #RES      vis
+1
+ #RES      x
+180
+ #RES      y
+160
+ #RES      width
+110
+ #RES      height
+20
+
+#OBJ       PhyClimbAccelEdit
+ #TYPE       WSCvifield
+ #PARENT   FrmPhysics
+ #RES      vis
+1
+ #RES      x
+180
+ #RES      y
+180
+ #RES      width
+110
+ #RES      height
+20
+
+#OBJ       PhyTerminalAccelEdit
+ #TYPE       WSCvifield
+ #PARENT   FrmPhysics
+ #RES      vis
+1
+ #RES      x
+180
+ #RES      y
+200
+ #RES      width
+110
+ #RES      height
+20
+
+#OBJ       PhyExtDecEdit
+ #TYPE       WSCvifield
+ #PARENT   FrmPhysics
+ #RES      vis
+1
+ #RES      x
+180
+ #RES      y
+220
+ #RES      width
+110
+ #RES      height
+20
+
+#OBJ       PhyAngularAccelEdit
+ #TYPE       WSCvifield
+ #PARENT   FrmPhysics
+ #RES      vis
+1
+ #RES      x
+180
+ #RES      y
+240
+ #RES      width
+110
+ #RES      height
+20
+
+#OBJ       PhyAngularDecelEdit
+ #TYPE       WSCvifield
+ #PARENT   FrmPhysics
+ #RES      vis
+1
+ #RES      x
+180
+ #RES      y
+260
+ #RES      width
+110
+ #RES      height
+20
+
+#OBJ       PhyMaxAngularVelEdit
+ #TYPE       WSCvifield
+ #PARENT   FrmPhysics
+ #RES      vis
+1
+ #RES      x
+180
+ #RES      y
+280
+ #RES      width
+110
+ #RES      height
+20
+
+#OBJ       Maivlab_185
+ #TYPE       WSCvlabel
+ #PARENT   FrmPhysics
+ #RES      labelString
+Angular Recentering Velocity
+ #RES      vis
+1
+ #RES      x
+10
+ #RES      y
+300
+ #RES      width
+170
+ #RES      height
+20
+
+#OBJ       Maivlab_186
+ #TYPE       WSCvlabel
+ #PARENT   FrmPhysics
+ #RES      labelString
+Fast Angular Velocity
+ #RES      vis
+1
+ #RES      x
+10
+ #RES      y
+320
+ #RES      width
+170
+ #RES      height
+20
+
+#OBJ       Maivlab_187
+ #TYPE       WSCvlabel
+ #PARENT   FrmPhysics
+ #RES      labelString
+Max Elevation
+ #RES      vis
+1
+ #RES      x
+10
+ #RES      y
+340
+ #RES      width
+170
+ #RES      height
+20
+
+#OBJ       Maivlab_188
+ #TYPE       WSCvlabel
+ #PARENT   FrmPhysics
+ #RES      labelString
+External Angular Decel
+ #RES      vis
+1
+ #RES      x
+10
+ #RES      y
+360
+ #RES      width
+170
+ #RES      height
+20
+
+#OBJ       PhyAngularRecenterEdit
+ #TYPE       WSCvifield
+ #PARENT   FrmPhysics
+ #RES      vis
+1
+ #RES      x
+180
+ #RES      y
+300
+ #RES      width
+110
+ #RES      height
+20
+
+#OBJ       PhyFastAngularVelEdit
+ #TYPE       WSCvifield
+ #PARENT   FrmPhysics
+ #RES      vis
+1
+ #RES      x
+180
+ #RES      y
+320
+ #RES      width
+110
+ #RES      height
+20
+
+#OBJ       PhyMaxElevationEdit
+ #TYPE       WSCvifield
+ #PARENT   FrmPhysics
+ #RES      vis
+1
+ #RES      x
+180
+ #RES      y
+340
+ #RES      width
+110
+ #RES      height
+20
+
+#OBJ       PhyExtAngularDecelEdit
+ #TYPE       WSCvifield
+ #PARENT   FrmPhysics
+ #RES      vis
+1
+ #RES      x
+180
+ #RES      y
+360
+ #RES      width
+110
+ #RES      height
+20
+
+#OBJ       Maivlab_193
+ #TYPE       WSCvlabel
+ #PARENT   FrmPhysics
+ #RES      labelString
+Step Delta
+ #RES      vis
+1
+ #RES      x
+10
+ #RES      y
+380
+ #RES      width
+170
+ #RES      height
+20
+
+#OBJ       Maivlab_194
+ #TYPE       WSCvlabel
+ #PARENT   FrmPhysics
+ #RES      labelString
+Step Amplitude
+ #RES      vis
+1
+ #RES      x
+10
+ #RES      y
+400
+ #RES      width
+170
+ #RES      height
+20
+
+#OBJ       Maivlab_195
+ #TYPE       WSCvlabel
+ #PARENT   FrmPhysics
+ #RES      labelString
+Radius
+ #RES      vis
+1
+ #RES      x
+295
+ #RES      y
+40
+ #RES      width
+170
+ #RES      height
+20
+
+#OBJ       Maivlab_196
+ #TYPE       WSCvlabel
+ #PARENT   FrmPhysics
+ #RES      labelString
+Height
+ #RES      vis
+1
+ #RES      x
+295
+ #RES      y
+60
+ #RES      width
+170
+ #RES      height
+20
+
+#OBJ       Maivlab_197
+ #TYPE       WSCvlabel
+ #PARENT   FrmPhysics
+ #RES      labelString
+Dead Height
+ #RES      vis
+1
+ #RES      x
+295
+ #RES      y
+80
+ #RES      width
+170
+ #RES      height
+20
+
+#OBJ       Maivlab_198
+ #TYPE       WSCvlabel
+ #PARENT   FrmPhysics
+ #RES      labelString
+Camera Height
+ #RES      vis
+1
+ #RES      x
+295
+ #RES      y
+100
+ #RES      width
+170
+ #RES      height
+20
+
+#OBJ       Maivlab_199
+ #TYPE       WSCvlabel
+ #PARENT   FrmPhysics
+ #RES      labelString
+Splash Height
+ #RES      vis
+1
+ #RES      x
+295
+ #RES      y
+120
+ #RES      width
+170
+ #RES      height
+20
+
+#OBJ       PhyHalfCameraSepEdit
+ #TYPE       WSCvlabel
+ #PARENT   FrmPhysics
+ #RES      labelString
+EHalf Camera Separation
+ #RES      vis
+1
+ #RES      x
+295
+ #RES      y
+140
+ #RES      width
+170
+ #RES      height
+20
+
+#OBJ       PhyStepDeltaEdit
+ #TYPE       WSCvifield
+ #PARENT   FrmPhysics
+ #RES      vis
+1
+ #RES      x
+180
+ #RES      y
+380
+ #RES      width
+110
+ #RES      height
+20
+
+#OBJ       PhyStepAmpEdit
+ #TYPE       WSCvifield
+ #PARENT   FrmPhysics
+ #RES      vis
+1
+ #RES      x
+180
+ #RES      y
+400
+ #RES      width
+110
+ #RES      height
+20
+
+#OBJ       PhyRadiusEdit
+ #TYPE       WSCvifield
+ #PARENT   FrmPhysics
+ #RES      vis
+1
+ #RES      x
+465
+ #RES      y
+40
+ #RES      width
+110
+ #RES      height
+20
+
+#OBJ       PhyHeightEdit
+ #TYPE       WSCvifield
+ #PARENT   FrmPhysics
+ #RES      vis
+1
+ #RES      x
+465
+ #RES      y
+60
+ #RES      width
+110
+ #RES      height
+20
+
+#OBJ       PhyDeadHeightEdit
+ #TYPE       WSCvifield
+ #PARENT   FrmPhysics
+ #RES      vis
+1
+ #RES      x
+465
+ #RES      y
+80
+ #RES      width
+110
+ #RES      height
+20
+
+#OBJ       PhyCameraHeightEdit
+ #TYPE       WSCvifield
+ #PARENT   FrmPhysics
+ #RES      vis
+1
+ #RES      x
+465
+ #RES      y
+100
+ #RES      width
+110
+ #RES      height
+20
+
+#OBJ       PhySplashHeightEdit
+ #TYPE       WSCvifield
+ #PARENT   FrmPhysics
+ #RES      vis
+1
+ #RES      x
+465
+ #RES      y
+120
+ #RES      width
+110
+ #RES      height
+20
+
+#OBJ       Maivifi_208
+ #TYPE       WSCvifield
+ #PARENT   FrmPhysics
+ #RES      vis
+1
+ #RES      x
+465
+ #RES      y
+140
+ #RES      width
+110
+ #RES      height
+20
 
 #OBJ       FrmWeapon
  #TYPE       WSCform
