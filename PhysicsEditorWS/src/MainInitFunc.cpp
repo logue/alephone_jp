@@ -35,6 +35,7 @@ std::vector<std::string> stockShellCasingTypes;
 std::vector<std::string> stockPhysicsTypes;
 std::vector<std::string> stockMonsterFlags;
 std::vector<std::string> stockProjectileFlags;
+std::vector<std::string> stockWeaponFlags;
 
 //モンスター区分
 int valueMonsterClasses[NUMBER_OF_CLASS_INFORMATIONS]={
@@ -248,6 +249,83 @@ int getIndexFromValueArray(int *arr, int max, int target)
 	return -1;
 }
 
+long getInteger(WSCbase* obj)
+{
+	if(obj == NULL){
+		messageBox("NULL (getInteger())");
+	}
+	long num = obj->getProperty(WSNlabelString);
+	return num;
+}
+
+void setupTrigger(int triggerIndex, const char* addon, WSCbase* parent)
+{
+	int type = selectedWeaponType;
+	int index = 0;
+	std::string wstr = std::string("W") + addon;
+	setInteger(getChild(parent, (wstr + "RoundPerMagEdit").c_str()),
+		weapon_definitions[type].weapons_by_trigger[triggerIndex].rounds_per_magazine);
+	//ammo item(btn)
+	index = weapon_definitions[type].weapons_by_trigger[triggerIndex].ammunition_type;
+	if(index < 0 || index == UNONE){index = stockItemTypes.size() - 1;}
+	getChild(parent, (wstr + "AmmoItemBtn").c_str())->setProperty(WSNlabelString,
+		stockItemTypes[index].c_str());
+	setInteger(getChild(parent, (wstr + "TicksPerRoundEdit").c_str()),
+		weapon_definitions[type].weapons_by_trigger[triggerIndex].ticks_per_round);
+	setInteger(getChild(parent, (wstr + "RecovTicksEdit").c_str()),
+		weapon_definitions[type].weapons_by_trigger[triggerIndex].recovery_ticks);
+	setInteger(getChild(parent, (wstr + "ChargingTicksEdit").c_str()),
+		weapon_definitions[type].weapons_by_trigger[triggerIndex].charging_ticks);
+	setInteger(getChild(parent, (wstr + "RecoilMagnitudeEdit").c_str()),
+		weapon_definitions[type].weapons_by_trigger[triggerIndex].recoil_magnitude);
+	//sounds(btn)
+	index = weapon_definitions[type].weapons_by_trigger[triggerIndex].firing_sound;
+	if(index < 0 || index == UNONE){index = stockSounds.size() - 1;}
+	getChild(parent, (wstr + "FiringSndBtn").c_str())->setProperty(WSNlabelString,
+		stockSounds[index].c_str());
+	index = weapon_definitions[type].weapons_by_trigger[triggerIndex].click_sound;
+	if(index < 0 || index == UNONE){index = stockSounds.size() - 1;}
+	getChild(parent, (wstr + "ClickSndBtn").c_str())->setProperty(WSNlabelString,
+		stockSounds[index].c_str());
+	index = weapon_definitions[type].weapons_by_trigger[triggerIndex].charging_sound;
+	if(index < 0 || index == UNONE){index = stockSounds.size() - 1;}
+	getChild(parent, (wstr + "ChargingSndBtn").c_str())->setProperty(WSNlabelString,
+		stockSounds[index].c_str());
+	index = weapon_definitions[type].weapons_by_trigger[triggerIndex].shell_casing_sound;
+	if(index < 0 || index == UNONE){index = stockSounds.size() - 1;}
+	getChild(parent, (wstr + "ShellCasingSndBtn").c_str())->setProperty(WSNlabelString,
+		stockSounds[index].c_str());
+	index = weapon_definitions[type].weapons_by_trigger[triggerIndex].reloading_sound;
+	if(index < 0 || index == UNONE){index = stockSounds.size() - 1;}
+	getChild(parent, (wstr + "ReloadSndBtn").c_str())->setProperty(WSNlabelString,
+		stockSounds[index].c_str());
+	index = weapon_definitions[type].weapons_by_trigger[triggerIndex].charged_sound;
+	if(index < 0 || index == UNONE){index = stockSounds.size() - 1;}
+	getChild(parent, (wstr + "ChargedSndBtn").c_str())->setProperty(WSNlabelString,
+		stockSounds[index].c_str());
+	
+	//projectile(btn)
+	index = weapon_definitions[type].weapons_by_trigger[triggerIndex].projectile_type;
+	if(index < 0 || index == UNONE){index = stockProjectiles.size() - 1;}
+	if(index == _projectile_ball_dropped){index = stockProjectiles.size() -2;}
+	getChild(parent, (wstr + "ProjectileBtn").c_str())->setProperty(WSNlabelString,
+		stockProjectiles[index].c_str());
+	setInteger(getChild(parent, (wstr + "ErrorEdit").c_str()),
+		weapon_definitions[type].weapons_by_trigger[triggerIndex].theta_error);
+	setInteger(getChild(parent, (wstr + "dxEdit").c_str()),
+		weapon_definitions[type].weapons_by_trigger[triggerIndex].dx);
+	setInteger(getChild(parent, (wstr + "dzEdit").c_str()),
+		weapon_definitions[type].weapons_by_trigger[triggerIndex].dz);
+	//shell casing (option)
+	index = weapon_definitions[type].weapons_by_trigger[triggerIndex].shell_casing_type;
+	if(index < 0 || index == UNONE){index = stockShellCasingTypes.size() - 1;}
+	getChild(parent, (wstr + "ShellCasingOption").c_str())->setProperty(WSNlabelString,
+		stockShellCasingTypes[index].c_str());
+	
+	setInteger(getChild(parent, (wstr + "BurstCountEdit").c_str()),
+		weapon_definitions[type].weapons_by_trigger[triggerIndex].burst_count);
+}
+
 void setupDialog()//WSCbase* object)
 {
 	if(windowType == Windows::Monster){
@@ -277,7 +355,7 @@ void setupDialog()//WSCbase* object)
 				monster_definitions[type]._class);
 			if(classIndex >= 0){
 				WSCbase* opt = getChild(indextab, "ClassCombo");
-				opt->setProperty(WSNvalue, (classIndex));
+				opt->setProperty(WSNvalue, (classIndex+1));
 				opt->setProperty(WSNlabelString, stockMonsterClasses[classIndex].c_str());
 			}else{
 				sprintf(buf, "class combo failure:%d", monster_definitions[type]._class);
@@ -314,13 +392,13 @@ void setupDialog()//WSCbase* object)
 			//interlligence
 			WSCoption* opt = (WSCoption*)getChild(indextab, "IntelligenceCombo");
 			long intelli = monster_definitions[type].intelligence;
-	//		opt->onValueChange(num);
-	//		opt->setProperty(WSNvalue, num);
 			char* intelligences[10]={"Low", "Average", "High"};
 			int intelliIndex = getIndexFromValueArray(valueIntelligences, NUMBER_OF_MONSTER_INTELLIGENCE_INFORMATIONS,
 				intelli);
-			if(intelliIndex > 0){
-				getChild(indextab, "IntelligenceCombo")->setProperty(WSNvalue, intelliIndex);//WSNlabelString
+			if(intelliIndex >= 0){
+		//		opt->onValueChange(intelliIndex);
+				getChild(indextab, "IntelligenceCombo")->setProperty(WSNvalue, 
+					intelliIndex+1);//WSNlabelString
 				getChild(indextab, "IntelligenceCombo")->setProperty(WSNlabelString,
 					intelligences[intelliIndex]);//WSNlabelString
 			}else{
@@ -330,7 +408,15 @@ void setupDialog()//WSCbase* object)
 			//setSelectedValue((WSCoption*)getChild(indextab, "IntelligenceCombo"),
 			//	monster_definitions[type].intelligence);
 			//speed
-			setInteger(getChild(indextab, "SpeedEdit"), monster_definitions[type].half_vertical_visual_arc);
+			int speed = monster_definitions[type].speed;
+			setInteger(getChild(indextab, "SpeedEdit"), speed);
+			int speedIndex = getIndexFromValueArray(valueSpeed, NUMBER_OF_SPEED_INFORMATIONS,
+				speed);
+			if(speedIndex >= 0){
+				//
+				getChild(indextab, "SpeedEdit")->setProperty(WSNlabelString,
+					stockSpeeds[speedIndex].c_str());
+			}
 			//getChild(indextab, "SpeedCombo")->setProperty(WSNvalue, );
 			//gravity
 			setInteger(getChild(indextab, "GravityEdit"), monster_definitions[type].gravity);
@@ -646,16 +732,169 @@ void setupDialog()//WSCbase* object)
 				status = True;
 			}
 			((WSCvradio*)getChild(wnd, "ProjDamageFlags"))->setStatus(status);
+			
+			//
+			WSCcheckGroup* flags = (WSCcheckGroup*)getChild(wnd, "ListProjFlags");
+			int nflags = projectile_definitions[type].flags;
+			for(int i = 0; i < NUMBER_OF_PROJECTILE_FLAG_INFORMATIONS; i ++){
+				WSCvtoggle* toggle = (WSCvtoggle*)flags->getItem(i);
+				WSCbool status = False;
+				if(nflags & valueProjectileFlags[i]){
+					status = True;
+				}
+				toggle->setStatus(status);
+			}
+			setInteger(getChild(wnd, "ProjSpeedEdit"),
+				projectile_definitions[type].speed);
+			setInteger(getChild(wnd, "ProjMaxRangeEdit"),
+				projectile_definitions[type].maximum_range);
+			setInteger(getChild(wnd, "ProjSoundPitchEdit"),
+				projectile_definitions[type].sound_pitch);
+			//sounds(btn)
+			index = projectile_definitions[type].flyby_sound;
+			if(index < 0){index = stockSounds.size() - 1;}
+			getChild(wnd, "ProjFlyBySoundBtn")->setProperty(WSNlabelString,
+				stockSounds[index].c_str());
+			index = projectile_definitions[type].rebound_sound;
+			if(index < 0){index = stockSounds.size() - 1;}
+			getChild(wnd, "ProjReboundSndBtn")->setProperty(WSNlabelString,
+				stockSounds[index].c_str());
 		}
 	}else if(windowType == Windows::Physics){
 		WSCform* wnd = (WSCform*)getObject("WSCform", "FrmPhysics");
 		int type = selectedPhysicsType;
 		if(type >= 0 && type < NUMBER_OF_PHYSICS_MODELS){
+			setInteger(getChild(wnd, "PhyMaxForwardEdit"),
+				physics_models[type].maximum_forward_velocity);
+			setInteger(getChild(wnd, "PhyMaxBackwardEdit"),
+				physics_models[type].maximum_backward_velocity);
+			setInteger(getChild(wnd, "PhyMaxPerpendEdit"),
+				physics_models[type].maximum_perpendicular_velocity);
+			setInteger(getChild(wnd, "PhyAccelEdit"),
+				physics_models[type].acceleration);
+			setInteger(getChild(wnd, "PhyDecelEdit"),
+				physics_models[type].deceleration);
+			setInteger(getChild(wnd, "PhyAirDecelEdit"),
+				physics_models[type].airborne_deceleration);
+			setInteger(getChild(wnd, "PhyGravityAccelEdit"),
+				physics_models[type].gravitational_acceleration);
+			setInteger(getChild(wnd, "PhyClimbAccelEdit"),
+				physics_models[type].climbing_acceleration);
+			setInteger(getChild(wnd, "PhyTerminalAccelEdit"),
+				physics_models[type].terminal_velocity);
+			setInteger(getChild(wnd, "PhyExtDecEdit"),
+				physics_models[type].external_deceleration);
+
+			setInteger(getChild(wnd, "PhyAngularAccelEdit"),
+				physics_models[type].angular_acceleration);
+			setInteger(getChild(wnd, "PhyAngularDecelEdit"),
+				physics_models[type].angular_deceleration);
+			setInteger(getChild(wnd, "PhyMaxAngularVelEdit"),
+				physics_models[type].maximum_angular_velocity);
+			setInteger(getChild(wnd, "PhyAngularRecenterEdit"),
+				physics_models[type].fast_angular_velocity);
+			setInteger(getChild(wnd, "PhyFastAngularVelEdit"),
+				physics_models[type].fast_angular_maximum);
+			setInteger(getChild(wnd, "PhyMaxElevationEdit"),
+				physics_models[type].maximum_elevation);
+			setInteger(getChild(wnd, "PhyExtAngularDecelEdit"),
+				physics_models[type].external_angular_deceleration);
+			setInteger(getChild(wnd, "PhyStepDeltaEdit"),
+				physics_models[type].step_delta);
+			setInteger(getChild(wnd, "PhyStepAmpEdit"),
+				physics_models[type].step_amplitude);
+			setInteger(getChild(wnd, "PhyRadiusEdit"),
+				physics_models[type].radius);
+
+			setInteger(getChild(wnd, "PhyHeightEdit"),
+				physics_models[type].height);
+			setInteger(getChild(wnd, "PhyDeadHeightEdit"),
+				physics_models[type].dead_height);
+			setInteger(getChild(wnd, "PhyCameraHeightEdit"),
+				physics_models[type].camera_height);
+			setInteger(getChild(wnd, "PhySplashHeightEdit"),
+				physics_models[type].splash_height);
+			setInteger(getChild(wnd, "PhyHalfCamSepEdit"),
+				physics_models[type].half_camera_separation);
 		}
 	}else if(windowType == Windows::Weapon){
 		WSCform* wnd = (WSCform*)getObject("WSCform", "FrmWeapon");
-		int type = selectedEffectType;
+		int type = selectedWeaponType;
 		if(type >= 0 && type < MAXIMUM_NUMBER_OF_WEAPONS){
+			//collection (btn)
+			int16 collection = weapon_definitions[type].collection;
+			int16 col = GET_COLLECTION(collection);
+			int16 clut = GET_COLLECTION_CLUT(collection);
+			//collection(btn)
+			getChild(wnd, "WCollectionBtn")->setProperty(WSNlabelString,
+				stockCollections[col].c_str());
+			//clut
+			setInteger(getChild(wnd, "WPalletEdit"),
+				col);
+			setInteger(getChild(wnd, "WIdleSeqEdit"),
+				weapon_definitions[type].idle_shape);
+			setInteger(getChild(wnd, "WFiringSeqEdit"),
+				weapon_definitions[type].firing_shape);
+			setInteger(getChild(wnd, "WReloadSeqEdit"),
+				weapon_definitions[type].reloading_shape);
+			setInteger(getChild(wnd, "WChargingSeqEdit"),
+				weapon_definitions[type].charging_shape);
+			setInteger(getChild(wnd, "WChargedSeqEdit"),
+				weapon_definitions[type].charged_shape);
+			//item(btn)
+			int index = weapon_definitions[type].item_type;
+			if(index < 0 || index == UNONE){index = stockItemTypes.size() - 1;}
+			getChild(wnd, "WItemBtn")->setProperty(WSNlabelString,
+				stockItemTypes[index].c_str());
+			//class(option)
+			getChild(wnd, "WClassOption")->setProperty(WSNlabelString,
+				stockWeaponClasses[weapon_definitions[type].weapon_class].c_str());
+
+			setInteger(getChild(wnd, "WLightIntensityEdit"),
+				weapon_definitions[type].firing_light_intensity);
+			setInteger(getChild(wnd, "WIntensityDecayEdit"),
+				weapon_definitions[type].firing_intensity_decay_ticks);
+			setInteger(getChild(wnd, "WIdleWidthEdit"),
+				weapon_definitions[type].idle_width);
+			setInteger(getChild(wnd, "WIdleHeightEdit"),
+				weapon_definitions[type].idle_height);
+			setInteger(getChild(wnd, "WFiringHeightEdit"),
+				weapon_definitions[type].kick_height);
+			setInteger(getChild(wnd, "WReloadingHeighEdit"),
+				weapon_definitions[type].reload_height);
+			setInteger(getChild(wnd, "WHorAmpEdit"),
+				weapon_definitions[type].horizontal_amplitude);
+			setInteger(getChild(wnd, "WUserAmpEdit"),
+				weapon_definitions[type].bob_amplitude);
+			setInteger(getChild(wnd, "WReadyEdit"),
+				weapon_definitions[type].ready_ticks);
+			setInteger(getChild(wnd, "WAwaitReloadEdit"),
+				weapon_definitions[type].await_reload_ticks);
+			setInteger(getChild(wnd, "WLoadingEdit"),
+				weapon_definitions[type].loading_ticks);
+			setInteger(getChild(wnd, "WLoadedEdit"),
+				weapon_definitions[type].finish_loading_ticks);
+
+			//flags
+			WSCcheckGroup* flags = (WSCcheckGroup*)getObject("WSCcheckGroup", "WFlagsCheckGroup");
+			int nflags = weapon_definitions[type].flags;
+			for(int i = 0; i < NUMBER_OF_WEAPON_FLAG_INFORMATIONS; i ++){
+				WSCvtoggle* toggle = (WSCvtoggle*)flags->getItem(i);
+				if(nflags & valueWeaponFlags[i]){
+					//ON
+					toggle->setStatus(True);
+				}else{
+					//OFF
+					toggle->setStatus(False);
+				}
+			}
+			
+			///////////////////////
+			//triggers
+			WSCbase* primary = getChild(wnd, "WPrimaryGroup");
+			setupTrigger(0, "", primary);
+			WSCbase* secondary = getChild(wnd, "WSecondaryGroup");
+			setupTrigger(1, "S", secondary);
 		}
 	}
 	getObject("WSCmainWindow", "MainWindow")->update();
@@ -744,6 +983,7 @@ void MainInitFunc(WSCbase* object){
 		stockEffects.push_back("*none*");
 		lst = hpl::string::loadFromFile("data/Projectiles.txt");
 		stockProjectiles = killSpaceOfList(lst);
+		stockProjectiles.push_back("*ball drop*");
 		stockProjectiles.push_back("*none*");
 		lst = hpl::string::loadFromFile("data/Sounds.txt");
 		stockSounds = killSpaceOfList(lst);
@@ -759,12 +999,15 @@ void MainInitFunc(WSCbase* object){
 		stockWeaponClasses = killSpaceOfList(lst);
 		lst = hpl::string::loadFromFile("data/ShellCasingTypes.txt");
 		stockShellCasingTypes = killSpaceOfList(lst);
+		stockShellCasingTypes.push_back("*none*");
 		lst = hpl::string::loadFromFile("data/PhysicsTypes.txt");
 		stockPhysicsTypes = killSpaceOfList(lst);
 		lst = hpl::string::loadFromFile("data/MonsterFlags.txt");
 		stockMonsterFlags = killSpaceOfList(lst);
 		lst = hpl::string::loadFromFile("data/WSProjectileFlags.txt");
 		stockProjectileFlags = killSpaceOfList(lst);
+		lst = hpl::string::loadFromFile("data/WSWeaponFlags.txt");
+		stockWeaponFlags = killSpaceOfList(lst);
 	}
 	
 
@@ -779,6 +1022,13 @@ void MainInitFunc(WSCbase* object){
 	std::string itemList = getOptionItemListFromVectorString(stockMonsterClasses);
 	getChild(getChild(getChild(object, "FrmMonster"), "Maiinde_012"), "ClassCombo")->
 		setProperty(WSNmenuItems, itemList.c_str());
+	itemList = getOptionItemListFromVectorString(stockShellCasingTypes);
+	getObject("WSCoption", "WShellCasingOption")->setProperty(WSNmenuItems,
+		itemList.c_str());
+	itemList = getOptionItemListFromVectorString(stockSpeeds);
+	getObject("WSCoption", "SpeedCombo")->setProperty(WSNmenuItems,
+		itemList.c_str());
+	
 	//モンスターの耐性リストを設定
 	// ダメージ名称をカンマでつなげる
 	itemList = getCommaItemList(stockDamages);
@@ -798,6 +1048,11 @@ void MainInitFunc(WSCbase* object){
 	itemList = getCommaItemList(stockProjectileFlags);
 	getObject("WSCcheckGroup", "ListProjFlags")->setProperty(WSNmenuItems,
 		itemList.c_str());
+	//weapon flags
+	itemList = getCommaItemList(stockWeaponFlags);
+	getObject("WSCcheckGroup", "WFlagsCheckGroup")->setProperty(WSNmenuItems,
+		itemList.c_str());
+
 	/////////////////////
 	//表示
 	//フレームの表示

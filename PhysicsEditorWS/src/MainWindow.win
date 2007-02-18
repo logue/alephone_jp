@@ -20,9 +20,9 @@ PhysicsEditorWS
  #RES      y
 100
  #RES      width
-787
+630
  #RES      height
-502
+423
  #RES      vis
 1
 
@@ -34,7 +34,7 @@ PhysicsEditorWS
  #RES      y
 0
  #RES      width
-787
+630
  #RES      height
 23
  #RES      vis
@@ -191,6 +191,8 @@ Weapon
 690
  #RES      height
 470
+ #RES      vis
+1
 
 #OBJ       ListMonsterTypes
  #TYPE       WSClist
@@ -281,6 +283,10 @@ Pallet
 #OBJ       PalletEdit
  #TYPE       WSCvifield
  #PARENT   Maiinde_012
+ #PROC  PalletEditValuCh
+  #TRIG    3
+  #PRO   PalletEditValuChFunc.cpp
+
  #RES      userValue
 1
  #RES      x
@@ -327,6 +333,10 @@ Class
 #OBJ       VitalityEdit
  #TYPE       WSCvifield
  #PARENT   Maiinde_012
+ #PROC  VitalityEditValueCh
+  #TRIG    3
+  #PRO   VitalityEditValueChFunc.cpp
+
  #RES      userValue
 1
  #RES      x
@@ -373,6 +383,10 @@ Height
 #OBJ       RadiusEdit
  #TYPE       WSCvifield
  #PARENT   Maiinde_012
+ #PROC  RadiusEditValueCh
+  #TRIG    3
+  #PRO   RadiusEditValueChFunc.cpp
+
  #RES      userValue
 1
  #RES      x
@@ -387,6 +401,10 @@ Height
 #OBJ       HeightEdit
  #TYPE       WSCvifield
  #PARENT   Maiinde_012
+ #PROC  HeightEditValueCh
+  #TRIG    3
+  #PRO   HeightEditValueChFunc.cpp
+
  #RES      userValue
 1
  #RES      x
@@ -481,6 +499,10 @@ CarryItem
 #OBJ       HoverEdit
  #TYPE       WSCvifield
  #PARENT   Maiinde_012
+ #PROC  HoverEditValueCh
+  #TRIG    3
+  #PRO   HoverEditValueChFunc.cpp
+
  #RES      userValue
 1
  #RES      x
@@ -495,6 +517,10 @@ CarryItem
 #OBJ       MinLedgeEdit
  #TYPE       WSCvifield
  #PARENT   Maiinde_012
+ #PROC  MinLedgeEditValueCh
+  #TRIG    3
+  #PRO   MinLedgeEditValueChFunc.cpp
+
  #RES      userValue
 1
  #RES      x
@@ -509,6 +535,10 @@ CarryItem
 #OBJ       MaxLedgeEdit
  #TYPE       WSCvifield
  #PARENT   Maiinde_012
+ #PROC  MaxLedgeEditValueCh
+  #TRIG    3
+  #PRO   MaxLedgeEditValueChFunc.cpp
+
  #RES      userValue
 1
  #RES      x
@@ -523,6 +553,10 @@ CarryItem
 #OBJ       ExtVelScaleEdit
  #TYPE       WSCvifield
  #PARENT   Maiinde_012
+ #PROC  ExtVelScaleEditValueCh
+  #TRIG    3
+  #PRO   ExtVelScaleEditValueChFunc.cpp
+
  #RES      userValue
 1
  #RES      x
@@ -1103,6 +1137,10 @@ Gravity
 #OBJ       HalfVisualArcEdit
  #TYPE       WSCvifield
  #PARENT   Maiinde_012
+ #PROC  HalfVisualArcEditValueCh
+  #TRIG    3
+  #PRO   HalfVisualArcEditValueChFunc.cpp
+
  #RES      userValue
 1
  #RES      x
@@ -1117,6 +1155,10 @@ Gravity
 #OBJ       VertVisualArcEdit
  #TYPE       WSCvifield
  #PARENT   Maiinde_012
+ #PROC  VertVisualArcEditValueCh
+  #TRIG    3
+  #PRO   VertVisualArcEditValueChFunc.cpp
+
  #RES      userValue
 1
  #RES      x
@@ -1131,6 +1173,10 @@ Gravity
 #OBJ       SpeedEdit
  #TYPE       WSCvifield
  #PARENT   Maiinde_012
+ #PROC  SpeedEditValueCh
+  #TRIG    3
+  #PRO   SpeedEditValueChFunc.cpp
+
  #RES      userValue
 1
  #RES      x
@@ -1145,6 +1191,10 @@ Gravity
 #OBJ       GravityEdit
  #TYPE       WSCvifield
  #PARENT   Maiinde_012
+ #PROC  GravityEditValueCh
+  #TRIG    3
+  #PRO   GravityEditValueChFunc.cpp
+
  #RES      userValue
 1
  #RES      x
@@ -1177,6 +1227,10 @@ Set as Default
 #OBJ       SpeedCombo
  #TYPE       WSCoption
  #PARENT   Maiinde_012
+ #PROC  SpeedComboValueCh
+  #TRIG    3
+  #PRO   SpeedComboValueChFunc.cpp
+
  #RES      userValue
 1
  #RES      value
@@ -1389,6 +1443,10 @@ Low
 #OBJ       ClassCombo
  #TYPE       WSCoption
  #PARENT   Maiinde_012
+ #PROC  ClassComboValueCh
+  #TRIG    3
+  #PRO   ClassComboValueChFunc.cpp
+
  #RES      userValue
 1
  #RES      value
@@ -2520,7 +2578,7 @@ data/Effects.txt
  #RES      workWidth
 200
  #RES      workHeight
-803
+10
  #RES      hbarVisible
 1
  #RES      x
@@ -3477,8 +3535,6 @@ Set As Hand Granade
 690
  #RES      height
 470
- #RES      vis
-1
 
 #OBJ       PhysicsTypeOpt
  #TYPE       WSCoption
@@ -3490,9 +3546,9 @@ Set As Hand Granade
  #RES      menuItems
 Walking:1:ep1_name,Running:2:ep2_name
  #RES      value
-1
+2
  #RES      labelString
-Walking
+Running
  #RES      vis
 1
  #RES      x
@@ -4144,7 +4200,7 @@ Splash Height
  #TYPE       WSCvlabel
  #PARENT   FrmPhysics
  #RES      labelString
-EHalf Camera Separation
+Half Camera Separation
  #RES      vis
 1
  #RES      x
@@ -4254,7 +4310,7 @@ EHalf Camera Separation
  #RES      height
 20
 
-#OBJ       Maivifi_208
+#OBJ       PhyHalfCamSepEdit
  #TYPE       WSCvifield
  #PARENT   FrmPhysics
  #RES      vis
@@ -4279,4 +4335,1860 @@ EHalf Camera Separation
 690
  #RES      height
 470
+
+#OBJ       Mailist_000
+ #TYPE       WSClist
+ #PARENT   FrmWeapon
+ #PROC  ListWeaponsDown
+  #TRIG    35
+  #PRO   ListWeaponsDownFunc.cpp
+
+ #RES      itemHeight
+11
+ #RES      titleString
+title1
+ #RES      dataSource
+2
+ #RES      dataSourceName
+data/Weapons.txt
+ #RES      workHeight
+456
+ #RES      x
+5
+ #RES      y
+5
+ #RES      width
+105
+ #RES      height
+460
+ #RES      vis
+1
+
+#OBJ       Maiinde_001
+ #TYPE       WSCindexForm
+ #PARENT   FrmWeapon
+ #RES      menuItems
+Apeearance,Triggers
+ #RES      x
+110
+ #RES      y
+5
+ #RES      width
+575
+ #RES      height
+460
+ #RES      vis
+1
+
+#OBJ       Maivlab_002
+ #TYPE       WSCvlabel
+ #PARENT   Maiinde_001
+ #RES      userValue
+1
+ #RES      labelString
+Collection
+ #RES      vis
+1
+ #RES      x
+5
+ #RES      y
+30
+ #RES      height
+20
+
+#OBJ       WCollectionBtn
+ #TYPE       WSCvbtn
+ #PARENT   Maiinde_001
+ #RES      userValue
+1
+ #RES      vis
+1
+ #RES      x
+145
+ #RES      y
+30
+ #RES      width
+110
+ #RES      height
+20
+
+#OBJ       Maivlab_005
+ #TYPE       WSCvlabel
+ #PARENT   Maiinde_001
+ #RES      userValue
+1
+ #RES      labelString
+Pallet
+ #RES      vis
+1
+ #RES      x
+5
+ #RES      y
+50
+ #RES      height
+20
+
+#OBJ       WPalletEdit
+ #TYPE       WSCvifield
+ #PARENT   Maiinde_001
+ #RES      userValue
+1
+ #RES      vis
+1
+ #RES      x
+145
+ #RES      y
+50
+ #RES      height
+20
+
+#OBJ       Maivlab_007
+ #TYPE       WSCvlabel
+ #PARENT   Maiinde_001
+ #RES      userValue
+1
+ #RES      labelString
+Idle Sequence
+ #RES      vis
+1
+ #RES      x
+5
+ #RES      y
+70
+ #RES      width
+140
+ #RES      height
+20
+
+#OBJ       Maivlab_008
+ #TYPE       WSCvlabel
+ #PARENT   Maiinde_001
+ #RES      userValue
+1
+ #RES      labelString
+Firing Sequence
+ #RES      vis
+1
+ #RES      x
+5
+ #RES      y
+90
+ #RES      width
+140
+ #RES      height
+20
+
+#OBJ       Maivlab_010
+ #TYPE       WSCvlabel
+ #PARENT   Maiinde_001
+ #RES      userValue
+1
+ #RES      labelString
+Reload Sequence
+ #RES      vis
+1
+ #RES      x
+5
+ #RES      y
+110
+ #RES      width
+140
+ #RES      height
+20
+
+#OBJ       Maivlab_011
+ #TYPE       WSCvlabel
+ #PARENT   Maiinde_001
+ #RES      userValue
+1
+ #RES      labelString
+Charging Sequence
+ #RES      vis
+1
+ #RES      x
+5
+ #RES      y
+130
+ #RES      width
+140
+ #RES      height
+20
+
+#OBJ       Maivlab_015
+ #TYPE       WSCvlabel
+ #PARENT   Maiinde_001
+ #RES      userValue
+1
+ #RES      labelString
+Charged Sequence
+ #RES      vis
+1
+ #RES      x
+5
+ #RES      y
+150
+ #RES      width
+140
+ #RES      height
+20
+
+#OBJ       WIdleSeqEdit
+ #TYPE       WSCvifield
+ #PARENT   Maiinde_001
+ #RES      userValue
+1
+ #RES      vis
+1
+ #RES      x
+145
+ #RES      y
+70
+ #RES      height
+20
+
+#OBJ       WFiringSeqEdit
+ #TYPE       WSCvifield
+ #PARENT   Maiinde_001
+ #RES      userValue
+1
+ #RES      vis
+1
+ #RES      x
+145
+ #RES      y
+90
+ #RES      height
+20
+
+#OBJ       WReloadSeqEdit
+ #TYPE       WSCvifield
+ #PARENT   Maiinde_001
+ #RES      userValue
+1
+ #RES      vis
+1
+ #RES      x
+145
+ #RES      y
+110
+ #RES      height
+20
+
+#OBJ       WChargingSeqEdit
+ #TYPE       WSCvifield
+ #PARENT   Maiinde_001
+ #RES      userValue
+1
+ #RES      vis
+1
+ #RES      x
+145
+ #RES      y
+130
+ #RES      height
+20
+
+#OBJ       WChargedSeqEdit
+ #TYPE       WSCvifield
+ #PARENT   Maiinde_001
+ #RES      userValue
+1
+ #RES      vis
+1
+ #RES      x
+145
+ #RES      y
+150
+ #RES      height
+20
+
+#OBJ       Maivlab_021
+ #TYPE       WSCvlabel
+ #PARENT   Maiinde_001
+ #RES      userValue
+1
+ #RES      labelString
+Item
+ #RES      vis
+1
+ #RES      x
+5
+ #RES      y
+170
+ #RES      height
+20
+
+#OBJ       WItemBtn
+ #TYPE       WSCvbtn
+ #PARENT   Maiinde_001
+ #RES      userValue
+1
+ #RES      vis
+1
+ #RES      x
+105
+ #RES      y
+170
+ #RES      width
+110
+ #RES      height
+20
+
+#OBJ       Maivlab_025
+ #TYPE       WSCvlabel
+ #PARENT   Maiinde_001
+ #RES      userValue
+1
+ #RES      labelString
+Class
+ #RES      vis
+1
+ #RES      x
+5
+ #RES      y
+190
+ #RES      height
+20
+
+#OBJ       WClassOption
+ #TYPE       WSCoption
+ #PARENT   Maiinde_001
+ #RES      userValue
+1
+ #RES      vis
+1
+ #RES      x
+105
+ #RES      y
+190
+ #RES      width
+110
+ #RES      height
+20
+
+#OBJ       WFlagsCheckGroup
+ #TYPE       WSCcheckGroup
+ #PARENT   Maiinde_001
+ #RES      userValue
+1
+ #RES      titleString
+Flags
+ #RES      menuItemHeight
+11
+ #RES      indicatorSize
+11
+ #RES      x
+260
+ #RES      y
+30
+ #RES      width
+285
+ #RES      height
+410
+ #RES      vis
+1
+
+#OBJ       Maivlab_033
+ #TYPE       WSCvlabel
+ #PARENT   Maiinde_001
+ #RES      userValue
+1
+ #RES      labelString
+Light Intensity
+ #RES      vis
+1
+ #RES      x
+5
+ #RES      y
+210
+ #RES      width
+140
+ #RES      height
+20
+
+#OBJ       Maivlab_034
+ #TYPE       WSCvlabel
+ #PARENT   Maiinde_001
+ #RES      userValue
+1
+ #RES      labelString
+Intensity Decay
+ #RES      vis
+1
+ #RES      x
+5
+ #RES      y
+230
+ #RES      width
+140
+ #RES      height
+20
+
+#OBJ       Maivlab_035
+ #TYPE       WSCvlabel
+ #PARENT   Maiinde_001
+ #RES      userValue
+1
+ #RES      labelString
+Idle Width
+ #RES      vis
+1
+ #RES      x
+5
+ #RES      y
+250
+ #RES      width
+140
+ #RES      height
+20
+
+#OBJ       Maivlab_036
+ #TYPE       WSCvlabel
+ #PARENT   Maiinde_001
+ #RES      userValue
+1
+ #RES      labelString
+Idle Height
+ #RES      vis
+1
+ #RES      x
+5
+ #RES      y
+270
+ #RES      width
+140
+ #RES      height
+20
+
+#OBJ       Maivlab_039
+ #TYPE       WSCvlabel
+ #PARENT   Maiinde_001
+ #RES      userValue
+1
+ #RES      labelString
+Firing Height
+ #RES      vis
+1
+ #RES      x
+5
+ #RES      y
+290
+ #RES      width
+140
+ #RES      height
+20
+
+#OBJ       Maivlab_042
+ #TYPE       WSCvlabel
+ #PARENT   Maiinde_001
+ #RES      userValue
+1
+ #RES      labelString
+Reloading Height
+ #RES      vis
+1
+ #RES      x
+5
+ #RES      y
+310
+ #RES      width
+140
+ #RES      height
+20
+
+#OBJ       Maivlab_043
+ #TYPE       WSCvlabel
+ #PARENT   Maiinde_001
+ #RES      userValue
+1
+ #RES      labelString
+Horizontal Amplitude
+ #RES      vis
+1
+ #RES      x
+5
+ #RES      y
+330
+ #RES      width
+140
+ #RES      height
+20
+
+#OBJ       Maivlab_044
+ #TYPE       WSCvlabel
+ #PARENT   Maiinde_001
+ #RES      userValue
+1
+ #RES      labelString
+User Amplitude
+ #RES      vis
+1
+ #RES      x
+5
+ #RES      y
+350
+ #RES      width
+140
+ #RES      height
+20
+
+#OBJ       Maivlab_045
+ #TYPE       WSCvlabel
+ #PARENT   Maiinde_001
+ #RES      userValue
+1
+ #RES      labelString
+Ready Ticks
+ #RES      vis
+1
+ #RES      x
+5
+ #RES      y
+370
+ #RES      width
+140
+ #RES      height
+20
+
+#OBJ       Maivlab_051
+ #TYPE       WSCvlabel
+ #PARENT   Maiinde_001
+ #RES      userValue
+1
+ #RES      labelString
+Await Reload Ticks
+ #RES      vis
+1
+ #RES      x
+5
+ #RES      y
+390
+ #RES      width
+140
+ #RES      height
+20
+
+#OBJ       WLightIntensityEdit
+ #TYPE       WSCvifield
+ #PARENT   Maiinde_001
+ #RES      userValue
+1
+ #RES      vis
+1
+ #RES      x
+145
+ #RES      y
+210
+ #RES      height
+20
+
+#OBJ       WIntensityDecayEdit
+ #TYPE       WSCvifield
+ #PARENT   Maiinde_001
+ #RES      userValue
+1
+ #RES      vis
+1
+ #RES      x
+145
+ #RES      y
+230
+ #RES      height
+20
+
+#OBJ       WIdleWidthEdit
+ #TYPE       WSCvifield
+ #PARENT   Maiinde_001
+ #RES      userValue
+1
+ #RES      vis
+1
+ #RES      x
+145
+ #RES      y
+250
+ #RES      height
+20
+
+#OBJ       WIdleHeightEdit
+ #TYPE       WSCvifield
+ #PARENT   Maiinde_001
+ #RES      userValue
+1
+ #RES      vis
+1
+ #RES      x
+145
+ #RES      y
+270
+ #RES      height
+20
+
+#OBJ       WFiringHeightEdit
+ #TYPE       WSCvifield
+ #PARENT   Maiinde_001
+ #RES      userValue
+1
+ #RES      vis
+1
+ #RES      x
+145
+ #RES      y
+290
+ #RES      height
+20
+
+#OBJ       WReloadingHeighEdit
+ #TYPE       WSCvifield
+ #PARENT   Maiinde_001
+ #RES      userValue
+1
+ #RES      vis
+1
+ #RES      x
+145
+ #RES      y
+310
+ #RES      height
+20
+
+#OBJ       WHorAmpEdit
+ #TYPE       WSCvifield
+ #PARENT   Maiinde_001
+ #RES      userValue
+1
+ #RES      vis
+1
+ #RES      x
+145
+ #RES      y
+330
+ #RES      height
+20
+
+#OBJ       WUserAmpEdit
+ #TYPE       WSCvifield
+ #PARENT   Maiinde_001
+ #RES      userValue
+1
+ #RES      vis
+1
+ #RES      x
+145
+ #RES      y
+350
+ #RES      height
+20
+
+#OBJ       WReadyEdit
+ #TYPE       WSCvifield
+ #PARENT   Maiinde_001
+ #RES      userValue
+1
+ #RES      vis
+1
+ #RES      x
+145
+ #RES      y
+370
+ #RES      height
+20
+
+#OBJ       WAwaitReloadEdit
+ #TYPE       WSCvifield
+ #PARENT   Maiinde_001
+ #RES      userValue
+1
+ #RES      vis
+1
+ #RES      x
+145
+ #RES      y
+390
+ #RES      height
+20
+
+#OBJ       Maivlab_070
+ #TYPE       WSCvlabel
+ #PARENT   Maiinde_001
+ #RES      userValue
+1
+ #RES      labelString
+Loading Ticks
+ #RES      vis
+1
+ #RES      x
+5
+ #RES      y
+410
+ #RES      width
+140
+ #RES      height
+20
+
+#OBJ       Maivlab_071
+ #TYPE       WSCvlabel
+ #PARENT   Maiinde_001
+ #RES      userValue
+1
+ #RES      labelString
+Loaded Ticks
+ #RES      vis
+1
+ #RES      x
+5
+ #RES      y
+430
+ #RES      width
+140
+ #RES      height
+20
+
+#OBJ       WLoadingEdit
+ #TYPE       WSCvifield
+ #PARENT   Maiinde_001
+ #RES      userValue
+1
+ #RES      vis
+1
+ #RES      x
+145
+ #RES      y
+410
+ #RES      height
+20
+
+#OBJ       WLoadedEdit
+ #TYPE       WSCvifield
+ #PARENT   Maiinde_001
+ #RES      userValue
+1
+ #RES      vis
+1
+ #RES      x
+145
+ #RES      y
+430
+ #RES      height
+20
+
+#OBJ       WPrimaryGroup
+ #TYPE       WSCtform
+ #PARENT   Maiinde_001
+ #RES      userValue
+2
+ #RES      titleString
+Primary
+ #RES      x
+5
+ #RES      y
+25
+ #RES      width
+280
+ #RES      height
+420
+
+#OBJ       Maivlab_096
+ #TYPE       WSCvlabel
+ #PARENT   WPrimaryGroup
+ #RES      labelString
+Round Per Magazine
+ #RES      vis
+1
+ #RES      x
+15
+ #RES      y
+20
+ #RES      width
+155
+ #RES      height
+20
+
+#OBJ       WRoundPerMagEdit
+ #TYPE       WSCvifield
+ #PARENT   WPrimaryGroup
+ #RES      vis
+1
+ #RES      x
+170
+ #RES      y
+20
+ #RES      width
+90
+ #RES      height
+20
+
+#OBJ       Maivlab_098
+ #TYPE       WSCvlabel
+ #PARENT   WPrimaryGroup
+ #RES      labelString
+Ammo Item
+ #RES      vis
+1
+ #RES      x
+15
+ #RES      y
+40
+ #RES      width
+105
+ #RES      height
+20
+
+#OBJ       Maivlab_100
+ #TYPE       WSCvlabel
+ #PARENT   WPrimaryGroup
+ #RES      labelString
+Ticks Per Round
+ #RES      vis
+1
+ #RES      x
+15
+ #RES      y
+60
+ #RES      width
+155
+ #RES      height
+20
+
+#OBJ       Maivlab_101
+ #TYPE       WSCvlabel
+ #PARENT   WPrimaryGroup
+ #RES      labelString
+Recovery Ticks
+ #RES      vis
+1
+ #RES      x
+15
+ #RES      y
+80
+ #RES      width
+155
+ #RES      height
+20
+
+#OBJ       Maivlab_102
+ #TYPE       WSCvlabel
+ #PARENT   WPrimaryGroup
+ #RES      labelString
+Firing Snd
+ #RES      vis
+1
+ #RES      x
+15
+ #RES      y
+140
+ #RES      width
+105
+ #RES      height
+20
+
+#OBJ       Maivlab_103
+ #TYPE       WSCvlabel
+ #PARENT   WPrimaryGroup
+ #RES      labelString
+Click Snd
+ #RES      vis
+1
+ #RES      x
+15
+ #RES      y
+160
+ #RES      width
+105
+ #RES      height
+20
+
+#OBJ       Maivlab_105
+ #TYPE       WSCvlabel
+ #PARENT   WPrimaryGroup
+ #RES      labelString
+Shell Casing Snd
+ #RES      vis
+1
+ #RES      x
+15
+ #RES      y
+200
+ #RES      width
+105
+ #RES      height
+20
+
+#OBJ       Maivlab_106
+ #TYPE       WSCvlabel
+ #PARENT   WPrimaryGroup
+ #RES      labelString
+Charging Snd
+ #RES      vis
+1
+ #RES      x
+15
+ #RES      y
+180
+ #RES      width
+105
+ #RES      height
+20
+
+#OBJ       Maivlab_107
+ #TYPE       WSCvlabel
+ #PARENT   WPrimaryGroup
+ #RES      labelString
+Reload Snd
+ #RES      vis
+1
+ #RES      x
+15
+ #RES      y
+220
+ #RES      width
+105
+ #RES      height
+20
+
+#OBJ       Maivlab_108
+ #TYPE       WSCvlabel
+ #PARENT   WPrimaryGroup
+ #RES      labelString
+Projectile
+ #RES      vis
+1
+ #RES      x
+15
+ #RES      y
+260
+ #RES      width
+105
+ #RES      height
+20
+
+#OBJ       Maivlab_110
+ #TYPE       WSCvlabel
+ #PARENT   WPrimaryGroup
+ #RES      labelString
+Charged Snd
+ #RES      vis
+1
+ #RES      x
+15
+ #RES      y
+240
+ #RES      width
+105
+ #RES      height
+20
+
+#OBJ       Maivlab_111
+ #TYPE       WSCvlabel
+ #PARENT   WPrimaryGroup
+ #RES      labelString
+Error
+ #RES      vis
+1
+ #RES      x
+15
+ #RES      y
+280
+ #RES      width
+155
+ #RES      height
+20
+
+#OBJ       Maivlab_116
+ #TYPE       WSCvlabel
+ #PARENT   WPrimaryGroup
+ #RES      labelString
+dx
+ #RES      vis
+1
+ #RES      x
+15
+ #RES      y
+300
+ #RES      width
+155
+ #RES      height
+20
+
+#OBJ       Maivlab_117
+ #TYPE       WSCvlabel
+ #PARENT   WPrimaryGroup
+ #RES      labelString
+dz
+ #RES      vis
+1
+ #RES      x
+15
+ #RES      y
+320
+ #RES      width
+155
+ #RES      height
+20
+
+#OBJ       Maivlab_118
+ #TYPE       WSCvlabel
+ #PARENT   WPrimaryGroup
+ #RES      labelString
+Burst Count
+ #RES      vis
+1
+ #RES      x
+15
+ #RES      y
+360
+ #RES      width
+155
+ #RES      height
+20
+
+#OBJ       Maivlab_124
+ #TYPE       WSCvlabel
+ #PARENT   WPrimaryGroup
+ #RES      labelString
+Shell Casing
+ #RES      vis
+1
+ #RES      x
+15
+ #RES      y
+340
+ #RES      width
+105
+ #RES      height
+20
+
+#OBJ       WTicksPerRoundEdit
+ #TYPE       WSCvifield
+ #PARENT   WPrimaryGroup
+ #RES      vis
+1
+ #RES      x
+170
+ #RES      y
+60
+ #RES      width
+90
+ #RES      height
+20
+
+#OBJ       WRecovTicksEdit
+ #TYPE       WSCvifield
+ #PARENT   WPrimaryGroup
+ #RES      vis
+1
+ #RES      x
+170
+ #RES      y
+80
+ #RES      width
+90
+ #RES      height
+20
+
+#OBJ       WErrorEdit
+ #TYPE       WSCvifield
+ #PARENT   WPrimaryGroup
+ #RES      vis
+1
+ #RES      x
+170
+ #RES      y
+280
+ #RES      width
+90
+ #RES      height
+20
+
+#OBJ       WdxEdit
+ #TYPE       WSCvifield
+ #PARENT   WPrimaryGroup
+ #RES      vis
+1
+ #RES      x
+170
+ #RES      y
+300
+ #RES      width
+90
+ #RES      height
+20
+
+#OBJ       WdzEdit
+ #TYPE       WSCvifield
+ #PARENT   WPrimaryGroup
+ #RES      vis
+1
+ #RES      x
+170
+ #RES      y
+320
+ #RES      width
+90
+ #RES      height
+20
+
+#OBJ       WBurstCountEdit
+ #TYPE       WSCvifield
+ #PARENT   WPrimaryGroup
+ #RES      vis
+1
+ #RES      x
+170
+ #RES      y
+360
+ #RES      width
+90
+ #RES      height
+20
+
+#OBJ       WAmmoItemBtn
+ #TYPE       WSCvbtn
+ #PARENT   WPrimaryGroup
+ #RES      vis
+1
+ #RES      x
+120
+ #RES      y
+40
+ #RES      width
+140
+ #RES      height
+20
+
+#OBJ       WFiringSndBtn
+ #TYPE       WSCvbtn
+ #PARENT   WPrimaryGroup
+ #RES      vis
+1
+ #RES      x
+120
+ #RES      y
+140
+ #RES      width
+140
+ #RES      height
+20
+
+#OBJ       WClickSndBtn
+ #TYPE       WSCvbtn
+ #PARENT   WPrimaryGroup
+ #RES      vis
+1
+ #RES      x
+120
+ #RES      y
+160
+ #RES      width
+140
+ #RES      height
+20
+
+#OBJ       WChargingSndBtn
+ #TYPE       WSCvbtn
+ #PARENT   WPrimaryGroup
+ #RES      vis
+1
+ #RES      x
+120
+ #RES      y
+180
+ #RES      width
+140
+ #RES      height
+20
+
+#OBJ       WShellCasingSndBtn
+ #TYPE       WSCvbtn
+ #PARENT   WPrimaryGroup
+ #RES      vis
+1
+ #RES      x
+120
+ #RES      y
+200
+ #RES      width
+140
+ #RES      height
+20
+
+#OBJ       WReloadSndBtn
+ #TYPE       WSCvbtn
+ #PARENT   WPrimaryGroup
+ #RES      vis
+1
+ #RES      x
+120
+ #RES      y
+220
+ #RES      width
+140
+ #RES      height
+20
+
+#OBJ       WChargedSndBtn
+ #TYPE       WSCvbtn
+ #PARENT   WPrimaryGroup
+ #RES      vis
+1
+ #RES      x
+120
+ #RES      y
+240
+ #RES      width
+140
+ #RES      height
+20
+
+#OBJ       WProjectileBtn
+ #TYPE       WSCvbtn
+ #PARENT   WPrimaryGroup
+ #RES      vis
+1
+ #RES      x
+120
+ #RES      y
+260
+ #RES      width
+140
+ #RES      height
+20
+
+#OBJ       WShellCasingOption
+ #TYPE       WSCoption
+ #PARENT   WPrimaryGroup
+ #RES      value
+1
+ #RES      labelString
+item1
+ #RES      vis
+1
+ #RES      x
+120
+ #RES      y
+340
+ #RES      width
+140
+ #RES      height
+20
+
+#OBJ       Maivlab_142
+ #TYPE       WSCvlabel
+ #PARENT   WPrimaryGroup
+ #RES      labelString
+Charging Ticks
+ #RES      vis
+1
+ #RES      x
+15
+ #RES      y
+100
+ #RES      width
+155
+ #RES      height
+20
+
+#OBJ       Maivlab_143
+ #TYPE       WSCvlabel
+ #PARENT   WPrimaryGroup
+ #RES      labelString
+Recoil Magnitude
+ #RES      vis
+1
+ #RES      x
+15
+ #RES      y
+120
+ #RES      width
+155
+ #RES      height
+20
+
+#OBJ       WChargingTicksEdit
+ #TYPE       WSCvifield
+ #PARENT   WPrimaryGroup
+ #RES      vis
+1
+ #RES      x
+170
+ #RES      y
+100
+ #RES      width
+90
+ #RES      height
+20
+
+#OBJ       WRecoilMagnitudeEdit
+ #TYPE       WSCvifield
+ #PARENT   WPrimaryGroup
+ #RES      vis
+1
+ #RES      x
+170
+ #RES      y
+120
+ #RES      width
+90
+ #RES      height
+20
+
+#OBJ       WSecondaryGroup
+ #TYPE       WSCtform
+ #PARENT   Maiinde_001
+ #RES      userValue
+2
+ #RES      titleString
+Secondary
+ #RES      x
+290
+ #RES      y
+25
+ #RES      width
+280
+ #RES      height
+420
+
+#OBJ       Maivlab_148
+ #TYPE       WSCvlabel
+ #PARENT   WSecondaryGroup
+ #RES      labelString
+Round Per Magazine
+ #RES      vis
+1
+ #RES      x
+15
+ #RES      y
+20
+ #RES      width
+155
+ #RES      height
+20
+
+#OBJ       WSRoundPerMagEdit
+ #TYPE       WSCvifield
+ #PARENT   WSecondaryGroup
+ #RES      vis
+1
+ #RES      x
+170
+ #RES      y
+20
+ #RES      width
+90
+ #RES      height
+20
+
+#OBJ       Maivlab_150
+ #TYPE       WSCvlabel
+ #PARENT   WSecondaryGroup
+ #RES      labelString
+Ammo Item
+ #RES      vis
+1
+ #RES      x
+15
+ #RES      y
+40
+ #RES      width
+105
+ #RES      height
+20
+
+#OBJ       Maivlab_151
+ #TYPE       WSCvlabel
+ #PARENT   WSecondaryGroup
+ #RES      labelString
+Ticks Per Round
+ #RES      vis
+1
+ #RES      x
+15
+ #RES      y
+60
+ #RES      width
+155
+ #RES      height
+20
+
+#OBJ       Maivlab_152
+ #TYPE       WSCvlabel
+ #PARENT   WSecondaryGroup
+ #RES      labelString
+Recovery Ticks
+ #RES      vis
+1
+ #RES      x
+15
+ #RES      y
+80
+ #RES      width
+155
+ #RES      height
+20
+
+#OBJ       Maivlab_153
+ #TYPE       WSCvlabel
+ #PARENT   WSecondaryGroup
+ #RES      labelString
+Firing Snd
+ #RES      vis
+1
+ #RES      x
+15
+ #RES      y
+140
+ #RES      width
+105
+ #RES      height
+20
+
+#OBJ       Maivlab_154
+ #TYPE       WSCvlabel
+ #PARENT   WSecondaryGroup
+ #RES      labelString
+Click Snd
+ #RES      vis
+1
+ #RES      x
+15
+ #RES      y
+160
+ #RES      width
+105
+ #RES      height
+20
+
+#OBJ       Maivlab_155
+ #TYPE       WSCvlabel
+ #PARENT   WSecondaryGroup
+ #RES      labelString
+Shell Casing Snd
+ #RES      vis
+1
+ #RES      x
+15
+ #RES      y
+200
+ #RES      width
+105
+ #RES      height
+20
+
+#OBJ       Maivlab_156
+ #TYPE       WSCvlabel
+ #PARENT   WSecondaryGroup
+ #RES      labelString
+Charging Snd
+ #RES      vis
+1
+ #RES      x
+15
+ #RES      y
+180
+ #RES      width
+105
+ #RES      height
+20
+
+#OBJ       Maivlab_157
+ #TYPE       WSCvlabel
+ #PARENT   WSecondaryGroup
+ #RES      labelString
+Reload Snd
+ #RES      vis
+1
+ #RES      x
+15
+ #RES      y
+220
+ #RES      width
+105
+ #RES      height
+20
+
+#OBJ       Maivlab_159
+ #TYPE       WSCvlabel
+ #PARENT   WSecondaryGroup
+ #RES      labelString
+Projectile
+ #RES      vis
+1
+ #RES      x
+15
+ #RES      y
+260
+ #RES      width
+105
+ #RES      height
+20
+
+#OBJ       Maivlab_163
+ #TYPE       WSCvlabel
+ #PARENT   WSecondaryGroup
+ #RES      labelString
+Charged Snd
+ #RES      vis
+1
+ #RES      x
+15
+ #RES      y
+240
+ #RES      width
+105
+ #RES      height
+20
+
+#OBJ       Maivlab_173
+ #TYPE       WSCvlabel
+ #PARENT   WSecondaryGroup
+ #RES      labelString
+Error
+ #RES      vis
+1
+ #RES      x
+15
+ #RES      y
+280
+ #RES      width
+155
+ #RES      height
+20
+
+#OBJ       Maivlab_174
+ #TYPE       WSCvlabel
+ #PARENT   WSecondaryGroup
+ #RES      labelString
+dx
+ #RES      vis
+1
+ #RES      x
+15
+ #RES      y
+300
+ #RES      width
+155
+ #RES      height
+20
+
+#OBJ       Maivlab_175
+ #TYPE       WSCvlabel
+ #PARENT   WSecondaryGroup
+ #RES      labelString
+dz
+ #RES      vis
+1
+ #RES      x
+15
+ #RES      y
+320
+ #RES      width
+155
+ #RES      height
+20
+
+#OBJ       Maivlab_176
+ #TYPE       WSCvlabel
+ #PARENT   WSecondaryGroup
+ #RES      labelString
+Burst Count
+ #RES      vis
+1
+ #RES      x
+15
+ #RES      y
+360
+ #RES      width
+155
+ #RES      height
+20
+
+#OBJ       Maivlab_177
+ #TYPE       WSCvlabel
+ #PARENT   WSecondaryGroup
+ #RES      labelString
+Shell Casing
+ #RES      vis
+1
+ #RES      x
+15
+ #RES      y
+340
+ #RES      width
+105
+ #RES      height
+20
+
+#OBJ       WSTicksPerRoundEdit
+ #TYPE       WSCvifield
+ #PARENT   WSecondaryGroup
+ #RES      vis
+1
+ #RES      x
+170
+ #RES      y
+60
+ #RES      width
+90
+ #RES      height
+20
+
+#OBJ       WSRecovTicksEdit
+ #TYPE       WSCvifield
+ #PARENT   WSecondaryGroup
+ #RES      vis
+1
+ #RES      x
+170
+ #RES      y
+80
+ #RES      width
+90
+ #RES      height
+20
+
+#OBJ       WSErrorEdit
+ #TYPE       WSCvifield
+ #PARENT   WSecondaryGroup
+ #RES      vis
+1
+ #RES      x
+170
+ #RES      y
+280
+ #RES      width
+90
+ #RES      height
+20
+
+#OBJ       WSdxEdit
+ #TYPE       WSCvifield
+ #PARENT   WSecondaryGroup
+ #RES      vis
+1
+ #RES      x
+170
+ #RES      y
+300
+ #RES      width
+90
+ #RES      height
+20
+
+#OBJ       WSdzEdit
+ #TYPE       WSCvifield
+ #PARENT   WSecondaryGroup
+ #RES      vis
+1
+ #RES      x
+170
+ #RES      y
+320
+ #RES      width
+90
+ #RES      height
+20
+
+#OBJ       WSBurstCountEdit
+ #TYPE       WSCvifield
+ #PARENT   WSecondaryGroup
+ #RES      vis
+1
+ #RES      x
+170
+ #RES      y
+360
+ #RES      width
+90
+ #RES      height
+20
+
+#OBJ       WSAmmoItemBtn
+ #TYPE       WSCvbtn
+ #PARENT   WSecondaryGroup
+ #RES      vis
+1
+ #RES      x
+120
+ #RES      y
+40
+ #RES      width
+140
+ #RES      height
+20
+
+#OBJ       WSFiringSndBtn
+ #TYPE       WSCvbtn
+ #PARENT   WSecondaryGroup
+ #RES      vis
+1
+ #RES      x
+120
+ #RES      y
+140
+ #RES      width
+140
+ #RES      height
+20
+
+#OBJ       WSClickSndBtn
+ #TYPE       WSCvbtn
+ #PARENT   WSecondaryGroup
+ #RES      vis
+1
+ #RES      x
+120
+ #RES      y
+160
+ #RES      width
+140
+ #RES      height
+20
+
+#OBJ       WSChargingSndBtn
+ #TYPE       WSCvbtn
+ #PARENT   WSecondaryGroup
+ #RES      vis
+1
+ #RES      x
+120
+ #RES      y
+180
+ #RES      width
+140
+ #RES      height
+20
+
+#OBJ       WSShellCasingSndBtn
+ #TYPE       WSCvbtn
+ #PARENT   WSecondaryGroup
+ #RES      vis
+1
+ #RES      x
+120
+ #RES      y
+200
+ #RES      width
+140
+ #RES      height
+20
+
+#OBJ       WSReloadSndBtn
+ #TYPE       WSCvbtn
+ #PARENT   WSecondaryGroup
+ #RES      vis
+1
+ #RES      x
+120
+ #RES      y
+220
+ #RES      width
+140
+ #RES      height
+20
+
+#OBJ       WSChargedSndBtn
+ #TYPE       WSCvbtn
+ #PARENT   WSecondaryGroup
+ #RES      vis
+1
+ #RES      x
+120
+ #RES      y
+240
+ #RES      width
+140
+ #RES      height
+20
+
+#OBJ       WSProjectileBtn
+ #TYPE       WSCvbtn
+ #PARENT   WSecondaryGroup
+ #RES      vis
+1
+ #RES      x
+120
+ #RES      y
+260
+ #RES      width
+140
+ #RES      height
+20
+
+#OBJ       WSShellCasingOption
+ #TYPE       WSCoption
+ #PARENT   WSecondaryGroup
+ #RES      value
+1
+ #RES      labelString
+item1
+ #RES      vis
+1
+ #RES      x
+120
+ #RES      y
+340
+ #RES      width
+140
+ #RES      height
+20
+
+#OBJ       Maivlab_200
+ #TYPE       WSCvlabel
+ #PARENT   WSecondaryGroup
+ #RES      labelString
+Charging Ticks
+ #RES      vis
+1
+ #RES      x
+15
+ #RES      y
+100
+ #RES      width
+155
+ #RES      height
+20
+
+#OBJ       Maivlab_201
+ #TYPE       WSCvlabel
+ #PARENT   WSecondaryGroup
+ #RES      labelString
+Recoil Magnitude
+ #RES      vis
+1
+ #RES      x
+15
+ #RES      y
+120
+ #RES      width
+155
+ #RES      height
+20
+
+#OBJ       WSChargingTicksEdit
+ #TYPE       WSCvifield
+ #PARENT   WSecondaryGroup
+ #RES      vis
+1
+ #RES      x
+170
+ #RES      y
+100
+ #RES      width
+90
+ #RES      height
+20
+
+#OBJ       WSRecoilMagnitudeEdit
+ #TYPE       WSCvifield
+ #PARENT   WSecondaryGroup
+ #RES      vis
+1
+ #RES      x
+170
+ #RES      y
+120
+ #RES      width
+90
+ #RES      height
+20
 

@@ -38,5 +38,6 @@ void CollectionBtnFunc(WSCbase* object){
 		}
 	}else{
 	}
+	setupDialog();
 }
 static WSCfunctionRegister  op("CollectionBtnFunc",(void*)CollectionBtnFunc);

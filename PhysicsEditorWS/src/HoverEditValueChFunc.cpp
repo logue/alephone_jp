@@ -7,11 +7,9 @@
 //----------------------------------------------------------
 //Function for the event procedure
 //----------------------------------------------------------
-void PhysicsTypeOptChFunc(WSCbase* object){
+void HoverEditValueChFunc(WSCbase* object){
   //do something...
-	int index = ((WSCoption*)object)->getValue();
-	selectedPhysicsType = index-1;
-//	messageBox("index=%d", index);
-	setupDialog();
+	int type = selectedMonsterType;
+	monster_definitions[type].preferred_hover_height = getInteger(object);
 }
-static WSCfunctionRegister  op("PhysicsTypeOptChFunc",(void*)PhysicsTypeOptChFunc);
+static WSCfunctionRegister  op("HoverEditValueChFunc",(void*)HoverEditValueChFunc);

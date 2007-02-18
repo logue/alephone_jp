@@ -43,9 +43,23 @@ OPOBJ = \
         BtnWeaponDownFunc.o \
         ListMonsterTypeItemSelFunc.o \
         MonsterTabsInitFunc.o \
+        PalletEditValuChFunc.o \
+        VitalityEditValueChFunc.o \
+        RadiusEditValueChFunc.o \
+        HeightEditValueChFunc.o \
+        HoverEditValueChFunc.o \
+        MinLedgeEditValueChFunc.o \
+        MaxLedgeEditValueChFunc.o \
+        ExtVelScaleEditValueChFunc.o \
+        HalfVisualArcEditValueChFunc.o \
+        VertVisualArcEditValueChFunc.o \
+        SpeedEditValueChFunc.o \
+        GravityEditValueChFunc.o \
+        SpeedComboValueChFunc.o \
         IntelligenceValueChFunc.o \
         CollectionBtnFunc.o \
         CaarryItemBtnFunc.o \
+        ClassComboValueChFunc.o \
         ShapnelTypeBtnDownFunc.o \
         BtnMeleePresetDownFunc.o \
         BtnPresetThisAllEnemyOnDownFunc.o \
@@ -57,7 +71,8 @@ OPOBJ = \
         BtnEffectCollectionDownFunc.o \
         BtnEffectDelaySoundDownFunc.o \
         ListProjectileDownFunc.o \
-        PhysicsTypeOptChFunc.o 
+        PhysicsTypeOptChFunc.o \
+        ListWeaponsDownFunc.o 
 
 OBJS = $(WINOBJ) $(OPOBJ) ../../HPLLib/HPLStringModifier.o   
 

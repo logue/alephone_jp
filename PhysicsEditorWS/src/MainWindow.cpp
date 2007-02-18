@@ -284,8 +284,127 @@ WSCvifield* PhyHeightEdit = NULL;
 WSCvifield* PhyDeadHeightEdit = NULL;
 WSCvifield* PhyCameraHeightEdit = NULL;
 WSCvifield* PhySplashHeightEdit = NULL;
-WSCvifield* Maivifi_208 = NULL;
+WSCvifield* PhyHalfCamSepEdit = NULL;
 WSCform* FrmWeapon = NULL;
+WSClist* Mailist_000 = NULL;
+WSCindexForm* Maiinde_001 = NULL;
+WSCvlabel* Maivlab_002 = NULL;
+WSCvbtn* WCollectionBtn = NULL;
+WSCvlabel* Maivlab_005 = NULL;
+WSCvifield* WPalletEdit = NULL;
+WSCvlabel* Maivlab_007 = NULL;
+WSCvlabel* Maivlab_008 = NULL;
+WSCvlabel* Maivlab_010 = NULL;
+WSCvlabel* Maivlab_011 = NULL;
+WSCvlabel* Maivlab_015 = NULL;
+WSCvifield* WIdleSeqEdit = NULL;
+WSCvifield* WFiringSeqEdit = NULL;
+WSCvifield* WReloadSeqEdit = NULL;
+WSCvifield* WChargingSeqEdit = NULL;
+WSCvifield* WChargedSeqEdit = NULL;
+WSCvlabel* Maivlab_021 = NULL;
+WSCvbtn* WItemBtn = NULL;
+WSCvlabel* Maivlab_025 = NULL;
+WSCoption* WClassOption = NULL;
+WSCcheckGroup* WFlagsCheckGroup = NULL;
+WSCvlabel* Maivlab_033 = NULL;
+WSCvlabel* Maivlab_034 = NULL;
+WSCvlabel* Maivlab_035 = NULL;
+WSCvlabel* Maivlab_036 = NULL;
+WSCvlabel* Maivlab_039 = NULL;
+WSCvlabel* Maivlab_042 = NULL;
+WSCvlabel* Maivlab_043 = NULL;
+WSCvlabel* Maivlab_044 = NULL;
+WSCvlabel* Maivlab_045 = NULL;
+WSCvlabel* Maivlab_051 = NULL;
+WSCvifield* WLightIntensityEdit = NULL;
+WSCvifield* WIntensityDecayEdit = NULL;
+WSCvifield* WIdleWidthEdit = NULL;
+WSCvifield* WIdleHeightEdit = NULL;
+WSCvifield* WFiringHeightEdit = NULL;
+WSCvifield* WReloadingHeighEdit = NULL;
+WSCvifield* WHorAmpEdit = NULL;
+WSCvifield* WUserAmpEdit = NULL;
+WSCvifield* WReadyEdit = NULL;
+WSCvifield* WAwaitReloadEdit = NULL;
+WSCvlabel* Maivlab_070 = NULL;
+WSCvlabel* Maivlab_071 = NULL;
+WSCvifield* WLoadingEdit = NULL;
+WSCvifield* WLoadedEdit = NULL;
+WSCtform* WPrimaryGroup = NULL;
+WSCvlabel* Maivlab_096 = NULL;
+WSCvifield* WRoundPerMagEdit = NULL;
+WSCvlabel* Maivlab_098 = NULL;
+WSCvlabel* Maivlab_100 = NULL;
+WSCvlabel* Maivlab_101 = NULL;
+WSCvlabel* Maivlab_102 = NULL;
+WSCvlabel* Maivlab_103 = NULL;
+WSCvlabel* Maivlab_105 = NULL;
+WSCvlabel* Maivlab_106 = NULL;
+WSCvlabel* Maivlab_107 = NULL;
+WSCvlabel* Maivlab_108 = NULL;
+WSCvlabel* Maivlab_110 = NULL;
+WSCvlabel* Maivlab_111 = NULL;
+WSCvlabel* Maivlab_116 = NULL;
+WSCvlabel* Maivlab_117 = NULL;
+WSCvlabel* Maivlab_118 = NULL;
+WSCvlabel* Maivlab_124 = NULL;
+WSCvifield* WTicksPerRoundEdit = NULL;
+WSCvifield* WRecovTicksEdit = NULL;
+WSCvifield* WErrorEdit = NULL;
+WSCvifield* WdxEdit = NULL;
+WSCvifield* WdzEdit = NULL;
+WSCvifield* WBurstCountEdit = NULL;
+WSCvbtn* WAmmoItemBtn = NULL;
+WSCvbtn* WFiringSndBtn = NULL;
+WSCvbtn* WClickSndBtn = NULL;
+WSCvbtn* WChargingSndBtn = NULL;
+WSCvbtn* WShellCasingSndBtn = NULL;
+WSCvbtn* WReloadSndBtn = NULL;
+WSCvbtn* WChargedSndBtn = NULL;
+WSCvbtn* WProjectileBtn = NULL;
+WSCoption* WShellCasingOption = NULL;
+WSCvlabel* Maivlab_142 = NULL;
+WSCvlabel* Maivlab_143 = NULL;
+WSCvifield* WChargingTicksEdit = NULL;
+WSCvifield* WRecoilMagnitudeEdit = NULL;
+WSCtform* WSecondaryGroup = NULL;
+WSCvlabel* Maivlab_148 = NULL;
+WSCvifield* WSRoundPerMagEdit = NULL;
+WSCvlabel* Maivlab_150 = NULL;
+WSCvlabel* Maivlab_151 = NULL;
+WSCvlabel* Maivlab_152 = NULL;
+WSCvlabel* Maivlab_153 = NULL;
+WSCvlabel* Maivlab_154 = NULL;
+WSCvlabel* Maivlab_155 = NULL;
+WSCvlabel* Maivlab_156 = NULL;
+WSCvlabel* Maivlab_157 = NULL;
+WSCvlabel* Maivlab_159 = NULL;
+WSCvlabel* Maivlab_163 = NULL;
+WSCvlabel* Maivlab_173 = NULL;
+WSCvlabel* Maivlab_174 = NULL;
+WSCvlabel* Maivlab_175 = NULL;
+WSCvlabel* Maivlab_176 = NULL;
+WSCvlabel* Maivlab_177 = NULL;
+WSCvifield* WSTicksPerRoundEdit = NULL;
+WSCvifield* WSRecovTicksEdit = NULL;
+WSCvifield* WSErrorEdit = NULL;
+WSCvifield* WSdxEdit = NULL;
+WSCvifield* WSdzEdit = NULL;
+WSCvifield* WSBurstCountEdit = NULL;
+WSCvbtn* WSAmmoItemBtn = NULL;
+WSCvbtn* WSFiringSndBtn = NULL;
+WSCvbtn* WSClickSndBtn = NULL;
+WSCvbtn* WSChargingSndBtn = NULL;
+WSCvbtn* WSShellCasingSndBtn = NULL;
+WSCvbtn* WSReloadSndBtn = NULL;
+WSCvbtn* WSChargedSndBtn = NULL;
+WSCvbtn* WSProjectileBtn = NULL;
+WSCoption* WSShellCasingOption = NULL;
+WSCvlabel* Maivlab_200 = NULL;
+WSCvlabel* Maivlab_201 = NULL;
+WSCvifield* WSChargingTicksEdit = NULL;
+WSCvifield* WSRecoilMagnitudeEdit = NULL;
 
 //--- OBJECT src ---//
 
@@ -406,6 +525,7 @@ WSCbase* _create_win_MainWindow(){
   FrmMonster->setPropertyV(WSNy,(short)25);
   FrmMonster->setPropertyV(WSNwidth,(unsigned short)690);
   FrmMonster->setPropertyV(WSNheight,(unsigned short)470);
+  FrmMonster->setPropertyV(WSNvis,(WSCbool)1);
 
   ListMonsterTypes = new  WSClist(FrmMonster,"ListMonsterTypes");
       ListMonsterTypes->initialize();
@@ -466,6 +586,8 @@ WSCbase* _create_win_MainWindow(){
   PalletEdit->setPropertyV(WSNy,(short)55);
   PalletEdit->setPropertyV(WSNwidth,(unsigned short)80);
   PalletEdit->setPropertyV(WSNheight,(unsigned short)25);
+    extern void PalletEditValuChFunc(WSCbase*);
+    PalletEdit->addProcedureV("PalletEditValuCh","PalletEditValuChFunc",PalletEditValuChFunc,3);
 
   Maivlab_022 = new  WSCvlabel(Maiinde_012,"Maivlab_022");
       Maivlab_022->initialize();
@@ -495,6 +617,8 @@ WSCbase* _create_win_MainWindow(){
   VitalityEdit->setPropertyV(WSNy,(short)80);
   VitalityEdit->setPropertyV(WSNwidth,(unsigned short)80);
   VitalityEdit->setPropertyV(WSNheight,(unsigned short)25);
+    extern void VitalityEditValueChFunc(WSCbase*);
+    VitalityEdit->addProcedureV("VitalityEditValueCh","VitalityEditValueChFunc",VitalityEditValueChFunc,3);
 
   Maivlab_037 = new  WSCvlabel(Maiinde_012,"Maivlab_037");
       Maivlab_037->initialize();
@@ -524,6 +648,8 @@ WSCbase* _create_win_MainWindow(){
   RadiusEdit->setPropertyV(WSNy,(short)130);
   RadiusEdit->setPropertyV(WSNwidth,(unsigned short)80);
   RadiusEdit->setPropertyV(WSNheight,(unsigned short)25);
+    extern void RadiusEditValueChFunc(WSCbase*);
+    RadiusEdit->addProcedureV("RadiusEditValueCh","RadiusEditValueChFunc",RadiusEditValueChFunc,3);
 
   HeightEdit = new  WSCvifield(Maiinde_012,"HeightEdit");
       HeightEdit->initialize();
@@ -533,6 +659,8 @@ WSCbase* _create_win_MainWindow(){
   HeightEdit->setPropertyV(WSNy,(short)155);
   HeightEdit->setPropertyV(WSNwidth,(unsigned short)80);
   HeightEdit->setPropertyV(WSNheight,(unsigned short)25);
+    extern void HeightEditValueChFunc(WSCbase*);
+    HeightEdit->addProcedureV("HeightEditValueCh","HeightEditValueChFunc",HeightEditValueChFunc,3);
 
   Maivlab_046 = new  WSCvlabel(Maiinde_012,"Maivlab_046");
       Maivlab_046->initialize();
@@ -592,6 +720,8 @@ WSCbase* _create_win_MainWindow(){
   HoverEdit->setPropertyV(WSNy,(short)180);
   HoverEdit->setPropertyV(WSNwidth,(unsigned short)80);
   HoverEdit->setPropertyV(WSNheight,(unsigned short)25);
+    extern void HoverEditValueChFunc(WSCbase*);
+    HoverEdit->addProcedureV("HoverEditValueCh","HoverEditValueChFunc",HoverEditValueChFunc,3);
 
   MinLedgeEdit = new  WSCvifield(Maiinde_012,"MinLedgeEdit");
       MinLedgeEdit->initialize();
@@ -601,6 +731,8 @@ WSCbase* _create_win_MainWindow(){
   MinLedgeEdit->setPropertyV(WSNy,(short)205);
   MinLedgeEdit->setPropertyV(WSNwidth,(unsigned short)80);
   MinLedgeEdit->setPropertyV(WSNheight,(unsigned short)25);
+    extern void MinLedgeEditValueChFunc(WSCbase*);
+    MinLedgeEdit->addProcedureV("MinLedgeEditValueCh","MinLedgeEditValueChFunc",MinLedgeEditValueChFunc,3);
 
   MaxLedgeEdit = new  WSCvifield(Maiinde_012,"MaxLedgeEdit");
       MaxLedgeEdit->initialize();
@@ -610,6 +742,8 @@ WSCbase* _create_win_MainWindow(){
   MaxLedgeEdit->setPropertyV(WSNy,(short)230);
   MaxLedgeEdit->setPropertyV(WSNwidth,(unsigned short)80);
   MaxLedgeEdit->setPropertyV(WSNheight,(unsigned short)25);
+    extern void MaxLedgeEditValueChFunc(WSCbase*);
+    MaxLedgeEdit->addProcedureV("MaxLedgeEditValueCh","MaxLedgeEditValueChFunc",MaxLedgeEditValueChFunc,3);
 
   ExtVelScaleEdit = new  WSCvifield(Maiinde_012,"ExtVelScaleEdit");
       ExtVelScaleEdit->initialize();
@@ -619,6 +753,8 @@ WSCbase* _create_win_MainWindow(){
   ExtVelScaleEdit->setPropertyV(WSNy,(short)255);
   ExtVelScaleEdit->setPropertyV(WSNwidth,(unsigned short)80);
   ExtVelScaleEdit->setPropertyV(WSNheight,(unsigned short)25);
+    extern void ExtVelScaleEditValueChFunc(WSCbase*);
+    ExtVelScaleEdit->addProcedureV("ExtVelScaleEditValueCh","ExtVelScaleEditValueChFunc",ExtVelScaleEditValueChFunc,3);
 
   Maivlab_055 = new  WSCvlabel(Maiinde_012,"Maivlab_055");
       Maivlab_055->initialize();
@@ -987,6 +1123,8 @@ WSCbase* _create_win_MainWindow(){
   HalfVisualArcEdit->setPropertyV(WSNy,(short)305);
   HalfVisualArcEdit->setPropertyV(WSNwidth,(unsigned short)70);
   HalfVisualArcEdit->setPropertyV(WSNheight,(unsigned short)25);
+    extern void HalfVisualArcEditValueChFunc(WSCbase*);
+    HalfVisualArcEdit->addProcedureV("HalfVisualArcEditValueCh","HalfVisualArcEditValueChFunc",HalfVisualArcEditValueChFunc,3);
 
   VertVisualArcEdit = new  WSCvifield(Maiinde_012,"VertVisualArcEdit");
       VertVisualArcEdit->initialize();
@@ -996,6 +1134,8 @@ WSCbase* _create_win_MainWindow(){
   VertVisualArcEdit->setPropertyV(WSNy,(short)330);
   VertVisualArcEdit->setPropertyV(WSNwidth,(unsigned short)70);
   VertVisualArcEdit->setPropertyV(WSNheight,(unsigned short)25);
+    extern void VertVisualArcEditValueChFunc(WSCbase*);
+    VertVisualArcEdit->addProcedureV("VertVisualArcEditValueCh","VertVisualArcEditValueChFunc",VertVisualArcEditValueChFunc,3);
 
   SpeedEdit = new  WSCvifield(Maiinde_012,"SpeedEdit");
       SpeedEdit->initialize();
@@ -1005,6 +1145,8 @@ WSCbase* _create_win_MainWindow(){
   SpeedEdit->setPropertyV(WSNy,(short)380);
   SpeedEdit->setPropertyV(WSNwidth,(unsigned short)80);
   SpeedEdit->setPropertyV(WSNheight,(unsigned short)25);
+    extern void SpeedEditValueChFunc(WSCbase*);
+    SpeedEdit->addProcedureV("SpeedEditValueCh","SpeedEditValueChFunc",SpeedEditValueChFunc,3);
 
   GravityEdit = new  WSCvifield(Maiinde_012,"GravityEdit");
       GravityEdit->initialize();
@@ -1014,6 +1156,8 @@ WSCbase* _create_win_MainWindow(){
   GravityEdit->setPropertyV(WSNy,(short)405);
   GravityEdit->setPropertyV(WSNwidth,(unsigned short)80);
   GravityEdit->setPropertyV(WSNheight,(unsigned short)25);
+    extern void GravityEditValueChFunc(WSCbase*);
+    GravityEdit->addProcedureV("GravityEditValueCh","GravityEditValueChFunc",GravityEditValueChFunc,3);
 
   Maivbtn_106 = new  WSCvbtn(Maiinde_012,"Maivbtn_106");
       Maivbtn_106->initialize();
@@ -1036,6 +1180,8 @@ WSCbase* _create_win_MainWindow(){
   SpeedCombo->setPropertyV(WSNx,(short)175);
   SpeedCombo->setPropertyV(WSNy,(short)380);
   SpeedCombo->setPropertyV(WSNheight,(unsigned short)25);
+    extern void SpeedComboValueChFunc(WSCbase*);
+    SpeedCombo->addProcedureV("SpeedComboValueCh","SpeedComboValueChFunc",SpeedComboValueChFunc,3);
 
   IntelligenceCombo = new  WSCoption(Maiinde_012,"IntelligenceCombo");
       IntelligenceCombo->initialize();
@@ -1167,6 +1313,8 @@ WSCbase* _create_win_MainWindow(){
   ClassCombo->setPropertyV(WSNy,(short)105);
   ClassCombo->setPropertyV(WSNwidth,(unsigned short)110);
   ClassCombo->setPropertyV(WSNheight,(unsigned short)25);
+    extern void ClassComboValueChFunc(WSCbase*);
+    ClassCombo->addProcedureV("ClassComboValueCh","ClassComboValueChFunc",ClassComboValueChFunc,3);
 
   ImpactEffectBtn = new  WSCvbtn(Maiinde_012,"ImpactEffectBtn");
       ImpactEffectBtn->initialize();
@@ -1849,7 +1997,7 @@ WSCbase* _create_win_MainWindow(){
   ListEffect->setPropertyV(WSNdataSource,(unsigned char)2);
   ListEffect->setPropertyV(WSNdataSourceName,"data/Effects.txt");
   ListEffect->setPropertyV(WSNworkWidth,(unsigned short)200);
-  ListEffect->setPropertyV(WSNworkHeight,(unsigned short)803);
+  ListEffect->setPropertyV(WSNworkHeight,(unsigned short)10);
   ListEffect->setPropertyV(WSNhbarVisible,(WSCbool)1);
   ListEffect->setPropertyV(WSNname,"ListEffect");
   ListEffect->setPropertyV(WSNx,(short)5);
@@ -2453,13 +2601,12 @@ WSCbase* _create_win_MainWindow(){
   FrmPhysics->setPropertyV(WSNy,(short)25);
   FrmPhysics->setPropertyV(WSNwidth,(unsigned short)690);
   FrmPhysics->setPropertyV(WSNheight,(unsigned short)470);
-  FrmPhysics->setPropertyV(WSNvis,(WSCbool)1);
 
   PhysicsTypeOpt = new  WSCoption(FrmPhysics,"PhysicsTypeOpt");
       PhysicsTypeOpt->initialize();
   PhysicsTypeOpt->setPropertyV(WSNmenuItems,"Walking:1:ep1_name,Running:2:ep2_name");
-  PhysicsTypeOpt->setPropertyV(WSNvalue,(long)1);
-  PhysicsTypeOpt->setPropertyV(WSNlabelString,"Walking");
+  PhysicsTypeOpt->setPropertyV(WSNvalue,(long)2);
+  PhysicsTypeOpt->setPropertyV(WSNlabelString,"Running");
   PhysicsTypeOpt->setPropertyV(WSNname,"PhysicsTypeOpt");
   PhysicsTypeOpt->setPropertyV(WSNvis,(WSCbool)1);
   PhysicsTypeOpt->setPropertyV(WSNx,(short)110);
@@ -2873,7 +3020,7 @@ WSCbase* _create_win_MainWindow(){
 
   PhyHalfCameraSepEdit = new  WSCvlabel(FrmPhysics,"PhyHalfCameraSepEdit");
       PhyHalfCameraSepEdit->initialize();
-  PhyHalfCameraSepEdit->setPropertyV(WSNlabelString,"EHalf Camera Separation");
+  PhyHalfCameraSepEdit->setPropertyV(WSNlabelString,"Half Camera Separation");
   PhyHalfCameraSepEdit->setPropertyV(WSNname,"PhyHalfCameraSepEdit");
   PhyHalfCameraSepEdit->setPropertyV(WSNvis,(WSCbool)1);
   PhyHalfCameraSepEdit->setPropertyV(WSNx,(short)295);
@@ -2944,14 +3091,14 @@ WSCbase* _create_win_MainWindow(){
   PhySplashHeightEdit->setPropertyV(WSNwidth,(unsigned short)110);
   PhySplashHeightEdit->setPropertyV(WSNheight,(unsigned short)20);
 
-  Maivifi_208 = new  WSCvifield(FrmPhysics,"Maivifi_208");
-      Maivifi_208->initialize();
-  Maivifi_208->setPropertyV(WSNname,"Maivifi_208");
-  Maivifi_208->setPropertyV(WSNvis,(WSCbool)1);
-  Maivifi_208->setPropertyV(WSNx,(short)465);
-  Maivifi_208->setPropertyV(WSNy,(short)140);
-  Maivifi_208->setPropertyV(WSNwidth,(unsigned short)110);
-  Maivifi_208->setPropertyV(WSNheight,(unsigned short)20);
+  PhyHalfCamSepEdit = new  WSCvifield(FrmPhysics,"PhyHalfCamSepEdit");
+      PhyHalfCamSepEdit->initialize();
+  PhyHalfCamSepEdit->setPropertyV(WSNname,"PhyHalfCamSepEdit");
+  PhyHalfCamSepEdit->setPropertyV(WSNvis,(WSCbool)1);
+  PhyHalfCamSepEdit->setPropertyV(WSNx,(short)465);
+  PhyHalfCamSepEdit->setPropertyV(WSNy,(short)140);
+  PhyHalfCamSepEdit->setPropertyV(WSNwidth,(unsigned short)110);
+  PhyHalfCamSepEdit->setPropertyV(WSNheight,(unsigned short)20);
 
   FrmWeapon = new  WSCform(MainWindow,"FrmWeapon");
       FrmWeapon->initialize();
@@ -2960,6 +3107,1172 @@ WSCbase* _create_win_MainWindow(){
   FrmWeapon->setPropertyV(WSNy,(short)25);
   FrmWeapon->setPropertyV(WSNwidth,(unsigned short)690);
   FrmWeapon->setPropertyV(WSNheight,(unsigned short)470);
+
+  Mailist_000 = new  WSClist(FrmWeapon,"Mailist_000");
+      Mailist_000->initialize();
+  Mailist_000->setPropertyV(WSNitemHeight,(unsigned char)11);
+  Mailist_000->setPropertyV(WSNtitleString,"title1");
+  Mailist_000->setPropertyV(WSNdataSource,(unsigned char)2);
+  Mailist_000->setPropertyV(WSNdataSourceName,"data/Weapons.txt");
+  Mailist_000->setPropertyV(WSNworkHeight,(unsigned short)456);
+  Mailist_000->setPropertyV(WSNname,"Mailist_000");
+  Mailist_000->setPropertyV(WSNx,(short)5);
+  Mailist_000->setPropertyV(WSNy,(short)5);
+  Mailist_000->setPropertyV(WSNwidth,(unsigned short)105);
+  Mailist_000->setPropertyV(WSNheight,(unsigned short)460);
+  Mailist_000->setPropertyV(WSNvis,(WSCbool)1);
+    extern void ListWeaponsDownFunc(WSCbase*);
+    Mailist_000->addProcedureV("ListWeaponsDown","ListWeaponsDownFunc",ListWeaponsDownFunc,35);
+
+  Maiinde_001 = new  WSCindexForm(FrmWeapon,"Maiinde_001");
+      Maiinde_001->initialize();
+  Maiinde_001->setPropertyV(WSNmenuItems,"Apeearance,Triggers");
+  Maiinde_001->setPropertyV(WSNname,"Maiinde_001");
+  Maiinde_001->setPropertyV(WSNx,(short)110);
+  Maiinde_001->setPropertyV(WSNy,(short)5);
+  Maiinde_001->setPropertyV(WSNwidth,(unsigned short)575);
+  Maiinde_001->setPropertyV(WSNheight,(unsigned short)460);
+  Maiinde_001->setPropertyV(WSNvis,(WSCbool)1);
+
+  Maivlab_002 = new  WSCvlabel(Maiinde_001,"Maivlab_002");
+      Maivlab_002->initialize();
+  Maivlab_002->setPropertyV(WSNuserValue,(long)1);
+  Maivlab_002->setPropertyV(WSNlabelString,"Collection");
+  Maivlab_002->setPropertyV(WSNname,"Maivlab_002");
+  Maivlab_002->setPropertyV(WSNvis,(WSCbool)1);
+  Maivlab_002->setPropertyV(WSNx,(short)5);
+  Maivlab_002->setPropertyV(WSNy,(short)30);
+  Maivlab_002->setPropertyV(WSNheight,(unsigned short)20);
+
+  WCollectionBtn = new  WSCvbtn(Maiinde_001,"WCollectionBtn");
+      WCollectionBtn->initialize();
+  WCollectionBtn->setPropertyV(WSNuserValue,(long)1);
+  WCollectionBtn->setPropertyV(WSNname,"WCollectionBtn");
+  WCollectionBtn->setPropertyV(WSNvis,(WSCbool)1);
+  WCollectionBtn->setPropertyV(WSNx,(short)145);
+  WCollectionBtn->setPropertyV(WSNy,(short)30);
+  WCollectionBtn->setPropertyV(WSNwidth,(unsigned short)110);
+  WCollectionBtn->setPropertyV(WSNheight,(unsigned short)20);
+
+  Maivlab_005 = new  WSCvlabel(Maiinde_001,"Maivlab_005");
+      Maivlab_005->initialize();
+  Maivlab_005->setPropertyV(WSNuserValue,(long)1);
+  Maivlab_005->setPropertyV(WSNlabelString,"Pallet");
+  Maivlab_005->setPropertyV(WSNname,"Maivlab_005");
+  Maivlab_005->setPropertyV(WSNvis,(WSCbool)1);
+  Maivlab_005->setPropertyV(WSNx,(short)5);
+  Maivlab_005->setPropertyV(WSNy,(short)50);
+  Maivlab_005->setPropertyV(WSNheight,(unsigned short)20);
+
+  WPalletEdit = new  WSCvifield(Maiinde_001,"WPalletEdit");
+      WPalletEdit->initialize();
+  WPalletEdit->setPropertyV(WSNuserValue,(long)1);
+  WPalletEdit->setPropertyV(WSNname,"WPalletEdit");
+  WPalletEdit->setPropertyV(WSNvis,(WSCbool)1);
+  WPalletEdit->setPropertyV(WSNx,(short)145);
+  WPalletEdit->setPropertyV(WSNy,(short)50);
+  WPalletEdit->setPropertyV(WSNheight,(unsigned short)20);
+
+  Maivlab_007 = new  WSCvlabel(Maiinde_001,"Maivlab_007");
+      Maivlab_007->initialize();
+  Maivlab_007->setPropertyV(WSNuserValue,(long)1);
+  Maivlab_007->setPropertyV(WSNlabelString,"Idle Sequence");
+  Maivlab_007->setPropertyV(WSNname,"Maivlab_007");
+  Maivlab_007->setPropertyV(WSNvis,(WSCbool)1);
+  Maivlab_007->setPropertyV(WSNx,(short)5);
+  Maivlab_007->setPropertyV(WSNy,(short)70);
+  Maivlab_007->setPropertyV(WSNwidth,(unsigned short)140);
+  Maivlab_007->setPropertyV(WSNheight,(unsigned short)20);
+
+  Maivlab_008 = new  WSCvlabel(Maiinde_001,"Maivlab_008");
+      Maivlab_008->initialize();
+  Maivlab_008->setPropertyV(WSNuserValue,(long)1);
+  Maivlab_008->setPropertyV(WSNlabelString,"Firing Sequence");
+  Maivlab_008->setPropertyV(WSNname,"Maivlab_008");
+  Maivlab_008->setPropertyV(WSNvis,(WSCbool)1);
+  Maivlab_008->setPropertyV(WSNx,(short)5);
+  Maivlab_008->setPropertyV(WSNy,(short)90);
+  Maivlab_008->setPropertyV(WSNwidth,(unsigned short)140);
+  Maivlab_008->setPropertyV(WSNheight,(unsigned short)20);
+
+  Maivlab_010 = new  WSCvlabel(Maiinde_001,"Maivlab_010");
+      Maivlab_010->initialize();
+  Maivlab_010->setPropertyV(WSNuserValue,(long)1);
+  Maivlab_010->setPropertyV(WSNlabelString,"Reload Sequence");
+  Maivlab_010->setPropertyV(WSNname,"Maivlab_010");
+  Maivlab_010->setPropertyV(WSNvis,(WSCbool)1);
+  Maivlab_010->setPropertyV(WSNx,(short)5);
+  Maivlab_010->setPropertyV(WSNy,(short)110);
+  Maivlab_010->setPropertyV(WSNwidth,(unsigned short)140);
+  Maivlab_010->setPropertyV(WSNheight,(unsigned short)20);
+
+  Maivlab_011 = new  WSCvlabel(Maiinde_001,"Maivlab_011");
+      Maivlab_011->initialize();
+  Maivlab_011->setPropertyV(WSNuserValue,(long)1);
+  Maivlab_011->setPropertyV(WSNlabelString,"Charging Sequence");
+  Maivlab_011->setPropertyV(WSNname,"Maivlab_011");
+  Maivlab_011->setPropertyV(WSNvis,(WSCbool)1);
+  Maivlab_011->setPropertyV(WSNx,(short)5);
+  Maivlab_011->setPropertyV(WSNy,(short)130);
+  Maivlab_011->setPropertyV(WSNwidth,(unsigned short)140);
+  Maivlab_011->setPropertyV(WSNheight,(unsigned short)20);
+
+  Maivlab_015 = new  WSCvlabel(Maiinde_001,"Maivlab_015");
+      Maivlab_015->initialize();
+  Maivlab_015->setPropertyV(WSNuserValue,(long)1);
+  Maivlab_015->setPropertyV(WSNlabelString,"Charged Sequence");
+  Maivlab_015->setPropertyV(WSNname,"Maivlab_015");
+  Maivlab_015->setPropertyV(WSNvis,(WSCbool)1);
+  Maivlab_015->setPropertyV(WSNx,(short)5);
+  Maivlab_015->setPropertyV(WSNy,(short)150);
+  Maivlab_015->setPropertyV(WSNwidth,(unsigned short)140);
+  Maivlab_015->setPropertyV(WSNheight,(unsigned short)20);
+
+  WIdleSeqEdit = new  WSCvifield(Maiinde_001,"WIdleSeqEdit");
+      WIdleSeqEdit->initialize();
+  WIdleSeqEdit->setPropertyV(WSNuserValue,(long)1);
+  WIdleSeqEdit->setPropertyV(WSNname,"WIdleSeqEdit");
+  WIdleSeqEdit->setPropertyV(WSNvis,(WSCbool)1);
+  WIdleSeqEdit->setPropertyV(WSNx,(short)145);
+  WIdleSeqEdit->setPropertyV(WSNy,(short)70);
+  WIdleSeqEdit->setPropertyV(WSNheight,(unsigned short)20);
+
+  WFiringSeqEdit = new  WSCvifield(Maiinde_001,"WFiringSeqEdit");
+      WFiringSeqEdit->initialize();
+  WFiringSeqEdit->setPropertyV(WSNuserValue,(long)1);
+  WFiringSeqEdit->setPropertyV(WSNname,"WFiringSeqEdit");
+  WFiringSeqEdit->setPropertyV(WSNvis,(WSCbool)1);
+  WFiringSeqEdit->setPropertyV(WSNx,(short)145);
+  WFiringSeqEdit->setPropertyV(WSNy,(short)90);
+  WFiringSeqEdit->setPropertyV(WSNheight,(unsigned short)20);
+
+  WReloadSeqEdit = new  WSCvifield(Maiinde_001,"WReloadSeqEdit");
+      WReloadSeqEdit->initialize();
+  WReloadSeqEdit->setPropertyV(WSNuserValue,(long)1);
+  WReloadSeqEdit->setPropertyV(WSNname,"WReloadSeqEdit");
+  WReloadSeqEdit->setPropertyV(WSNvis,(WSCbool)1);
+  WReloadSeqEdit->setPropertyV(WSNx,(short)145);
+  WReloadSeqEdit->setPropertyV(WSNy,(short)110);
+  WReloadSeqEdit->setPropertyV(WSNheight,(unsigned short)20);
+
+  WChargingSeqEdit = new  WSCvifield(Maiinde_001,"WChargingSeqEdit");
+      WChargingSeqEdit->initialize();
+  WChargingSeqEdit->setPropertyV(WSNuserValue,(long)1);
+  WChargingSeqEdit->setPropertyV(WSNname,"WChargingSeqEdit");
+  WChargingSeqEdit->setPropertyV(WSNvis,(WSCbool)1);
+  WChargingSeqEdit->setPropertyV(WSNx,(short)145);
+  WChargingSeqEdit->setPropertyV(WSNy,(short)130);
+  WChargingSeqEdit->setPropertyV(WSNheight,(unsigned short)20);
+
+  WChargedSeqEdit = new  WSCvifield(Maiinde_001,"WChargedSeqEdit");
+      WChargedSeqEdit->initialize();
+  WChargedSeqEdit->setPropertyV(WSNuserValue,(long)1);
+  WChargedSeqEdit->setPropertyV(WSNname,"WChargedSeqEdit");
+  WChargedSeqEdit->setPropertyV(WSNvis,(WSCbool)1);
+  WChargedSeqEdit->setPropertyV(WSNx,(short)145);
+  WChargedSeqEdit->setPropertyV(WSNy,(short)150);
+  WChargedSeqEdit->setPropertyV(WSNheight,(unsigned short)20);
+
+  Maivlab_021 = new  WSCvlabel(Maiinde_001,"Maivlab_021");
+      Maivlab_021->initialize();
+  Maivlab_021->setPropertyV(WSNuserValue,(long)1);
+  Maivlab_021->setPropertyV(WSNlabelString,"Item");
+  Maivlab_021->setPropertyV(WSNname,"Maivlab_021");
+  Maivlab_021->setPropertyV(WSNvis,(WSCbool)1);
+  Maivlab_021->setPropertyV(WSNx,(short)5);
+  Maivlab_021->setPropertyV(WSNy,(short)170);
+  Maivlab_021->setPropertyV(WSNheight,(unsigned short)20);
+
+  WItemBtn = new  WSCvbtn(Maiinde_001,"WItemBtn");
+      WItemBtn->initialize();
+  WItemBtn->setPropertyV(WSNuserValue,(long)1);
+  WItemBtn->setPropertyV(WSNname,"WItemBtn");
+  WItemBtn->setPropertyV(WSNvis,(WSCbool)1);
+  WItemBtn->setPropertyV(WSNx,(short)105);
+  WItemBtn->setPropertyV(WSNy,(short)170);
+  WItemBtn->setPropertyV(WSNwidth,(unsigned short)110);
+  WItemBtn->setPropertyV(WSNheight,(unsigned short)20);
+
+  Maivlab_025 = new  WSCvlabel(Maiinde_001,"Maivlab_025");
+      Maivlab_025->initialize();
+  Maivlab_025->setPropertyV(WSNuserValue,(long)1);
+  Maivlab_025->setPropertyV(WSNlabelString,"Class");
+  Maivlab_025->setPropertyV(WSNname,"Maivlab_025");
+  Maivlab_025->setPropertyV(WSNvis,(WSCbool)1);
+  Maivlab_025->setPropertyV(WSNx,(short)5);
+  Maivlab_025->setPropertyV(WSNy,(short)190);
+  Maivlab_025->setPropertyV(WSNheight,(unsigned short)20);
+
+  WClassOption = new  WSCoption(Maiinde_001,"WClassOption");
+      WClassOption->initialize();
+  WClassOption->setPropertyV(WSNuserValue,(long)1);
+  WClassOption->setPropertyV(WSNname,"WClassOption");
+  WClassOption->setPropertyV(WSNvis,(WSCbool)1);
+  WClassOption->setPropertyV(WSNx,(short)105);
+  WClassOption->setPropertyV(WSNy,(short)190);
+  WClassOption->setPropertyV(WSNwidth,(unsigned short)110);
+  WClassOption->setPropertyV(WSNheight,(unsigned short)20);
+
+  WFlagsCheckGroup = new  WSCcheckGroup(Maiinde_001,"WFlagsCheckGroup");
+      WFlagsCheckGroup->initialize();
+  WFlagsCheckGroup->setPropertyV(WSNuserValue,(long)1);
+  WFlagsCheckGroup->setPropertyV(WSNtitleString,"Flags");
+  WFlagsCheckGroup->setPropertyV(WSNmenuItemHeight,(unsigned short)11);
+  WFlagsCheckGroup->setPropertyV(WSNindicatorSize,(unsigned char)11);
+  WFlagsCheckGroup->setPropertyV(WSNname,"WFlagsCheckGroup");
+  WFlagsCheckGroup->setPropertyV(WSNx,(short)260);
+  WFlagsCheckGroup->setPropertyV(WSNy,(short)30);
+  WFlagsCheckGroup->setPropertyV(WSNwidth,(unsigned short)285);
+  WFlagsCheckGroup->setPropertyV(WSNheight,(unsigned short)410);
+  WFlagsCheckGroup->setPropertyV(WSNvis,(WSCbool)1);
+
+  Maivlab_033 = new  WSCvlabel(Maiinde_001,"Maivlab_033");
+      Maivlab_033->initialize();
+  Maivlab_033->setPropertyV(WSNuserValue,(long)1);
+  Maivlab_033->setPropertyV(WSNlabelString,"Light Intensity");
+  Maivlab_033->setPropertyV(WSNname,"Maivlab_033");
+  Maivlab_033->setPropertyV(WSNvis,(WSCbool)1);
+  Maivlab_033->setPropertyV(WSNx,(short)5);
+  Maivlab_033->setPropertyV(WSNy,(short)210);
+  Maivlab_033->setPropertyV(WSNwidth,(unsigned short)140);
+  Maivlab_033->setPropertyV(WSNheight,(unsigned short)20);
+
+  Maivlab_034 = new  WSCvlabel(Maiinde_001,"Maivlab_034");
+      Maivlab_034->initialize();
+  Maivlab_034->setPropertyV(WSNuserValue,(long)1);
+  Maivlab_034->setPropertyV(WSNlabelString,"Intensity Decay");
+  Maivlab_034->setPropertyV(WSNname,"Maivlab_034");
+  Maivlab_034->setPropertyV(WSNvis,(WSCbool)1);
+  Maivlab_034->setPropertyV(WSNx,(short)5);
+  Maivlab_034->setPropertyV(WSNy,(short)230);
+  Maivlab_034->setPropertyV(WSNwidth,(unsigned short)140);
+  Maivlab_034->setPropertyV(WSNheight,(unsigned short)20);
+
+  Maivlab_035 = new  WSCvlabel(Maiinde_001,"Maivlab_035");
+      Maivlab_035->initialize();
+  Maivlab_035->setPropertyV(WSNuserValue,(long)1);
+  Maivlab_035->setPropertyV(WSNlabelString,"Idle Width");
+  Maivlab_035->setPropertyV(WSNname,"Maivlab_035");
+  Maivlab_035->setPropertyV(WSNvis,(WSCbool)1);
+  Maivlab_035->setPropertyV(WSNx,(short)5);
+  Maivlab_035->setPropertyV(WSNy,(short)250);
+  Maivlab_035->setPropertyV(WSNwidth,(unsigned short)140);
+  Maivlab_035->setPropertyV(WSNheight,(unsigned short)20);
+
+  Maivlab_036 = new  WSCvlabel(Maiinde_001,"Maivlab_036");
+      Maivlab_036->initialize();
+  Maivlab_036->setPropertyV(WSNuserValue,(long)1);
+  Maivlab_036->setPropertyV(WSNlabelString,"Idle Height");
+  Maivlab_036->setPropertyV(WSNname,"Maivlab_036");
+  Maivlab_036->setPropertyV(WSNvis,(WSCbool)1);
+  Maivlab_036->setPropertyV(WSNx,(short)5);
+  Maivlab_036->setPropertyV(WSNy,(short)270);
+  Maivlab_036->setPropertyV(WSNwidth,(unsigned short)140);
+  Maivlab_036->setPropertyV(WSNheight,(unsigned short)20);
+
+  Maivlab_039 = new  WSCvlabel(Maiinde_001,"Maivlab_039");
+      Maivlab_039->initialize();
+  Maivlab_039->setPropertyV(WSNuserValue,(long)1);
+  Maivlab_039->setPropertyV(WSNlabelString,"Firing Height");
+  Maivlab_039->setPropertyV(WSNname,"Maivlab_039");
+  Maivlab_039->setPropertyV(WSNvis,(WSCbool)1);
+  Maivlab_039->setPropertyV(WSNx,(short)5);
+  Maivlab_039->setPropertyV(WSNy,(short)290);
+  Maivlab_039->setPropertyV(WSNwidth,(unsigned short)140);
+  Maivlab_039->setPropertyV(WSNheight,(unsigned short)20);
+
+  Maivlab_042 = new  WSCvlabel(Maiinde_001,"Maivlab_042");
+      Maivlab_042->initialize();
+  Maivlab_042->setPropertyV(WSNuserValue,(long)1);
+  Maivlab_042->setPropertyV(WSNlabelString,"Reloading Height");
+  Maivlab_042->setPropertyV(WSNname,"Maivlab_042");
+  Maivlab_042->setPropertyV(WSNvis,(WSCbool)1);
+  Maivlab_042->setPropertyV(WSNx,(short)5);
+  Maivlab_042->setPropertyV(WSNy,(short)310);
+  Maivlab_042->setPropertyV(WSNwidth,(unsigned short)140);
+  Maivlab_042->setPropertyV(WSNheight,(unsigned short)20);
+
+  Maivlab_043 = new  WSCvlabel(Maiinde_001,"Maivlab_043");
+      Maivlab_043->initialize();
+  Maivlab_043->setPropertyV(WSNuserValue,(long)1);
+  Maivlab_043->setPropertyV(WSNlabelString,"Horizontal Amplitude");
+  Maivlab_043->setPropertyV(WSNname,"Maivlab_043");
+  Maivlab_043->setPropertyV(WSNvis,(WSCbool)1);
+  Maivlab_043->setPropertyV(WSNx,(short)5);
+  Maivlab_043->setPropertyV(WSNy,(short)330);
+  Maivlab_043->setPropertyV(WSNwidth,(unsigned short)140);
+  Maivlab_043->setPropertyV(WSNheight,(unsigned short)20);
+
+  Maivlab_044 = new  WSCvlabel(Maiinde_001,"Maivlab_044");
+      Maivlab_044->initialize();
+  Maivlab_044->setPropertyV(WSNuserValue,(long)1);
+  Maivlab_044->setPropertyV(WSNlabelString,"User Amplitude");
+  Maivlab_044->setPropertyV(WSNname,"Maivlab_044");
+  Maivlab_044->setPropertyV(WSNvis,(WSCbool)1);
+  Maivlab_044->setPropertyV(WSNx,(short)5);
+  Maivlab_044->setPropertyV(WSNy,(short)350);
+  Maivlab_044->setPropertyV(WSNwidth,(unsigned short)140);
+  Maivlab_044->setPropertyV(WSNheight,(unsigned short)20);
+
+  Maivlab_045 = new  WSCvlabel(Maiinde_001,"Maivlab_045");
+      Maivlab_045->initialize();
+  Maivlab_045->setPropertyV(WSNuserValue,(long)1);
+  Maivlab_045->setPropertyV(WSNlabelString,"Ready Ticks");
+  Maivlab_045->setPropertyV(WSNname,"Maivlab_045");
+  Maivlab_045->setPropertyV(WSNvis,(WSCbool)1);
+  Maivlab_045->setPropertyV(WSNx,(short)5);
+  Maivlab_045->setPropertyV(WSNy,(short)370);
+  Maivlab_045->setPropertyV(WSNwidth,(unsigned short)140);
+  Maivlab_045->setPropertyV(WSNheight,(unsigned short)20);
+
+  Maivlab_051 = new  WSCvlabel(Maiinde_001,"Maivlab_051");
+      Maivlab_051->initialize();
+  Maivlab_051->setPropertyV(WSNuserValue,(long)1);
+  Maivlab_051->setPropertyV(WSNlabelString,"Await Reload Ticks");
+  Maivlab_051->setPropertyV(WSNname,"Maivlab_051");
+  Maivlab_051->setPropertyV(WSNvis,(WSCbool)1);
+  Maivlab_051->setPropertyV(WSNx,(short)5);
+  Maivlab_051->setPropertyV(WSNy,(short)390);
+  Maivlab_051->setPropertyV(WSNwidth,(unsigned short)140);
+  Maivlab_051->setPropertyV(WSNheight,(unsigned short)20);
+
+  WLightIntensityEdit = new  WSCvifield(Maiinde_001,"WLightIntensityEdit");
+      WLightIntensityEdit->initialize();
+  WLightIntensityEdit->setPropertyV(WSNuserValue,(long)1);
+  WLightIntensityEdit->setPropertyV(WSNname,"WLightIntensityEdit");
+  WLightIntensityEdit->setPropertyV(WSNvis,(WSCbool)1);
+  WLightIntensityEdit->setPropertyV(WSNx,(short)145);
+  WLightIntensityEdit->setPropertyV(WSNy,(short)210);
+  WLightIntensityEdit->setPropertyV(WSNheight,(unsigned short)20);
+
+  WIntensityDecayEdit = new  WSCvifield(Maiinde_001,"WIntensityDecayEdit");
+      WIntensityDecayEdit->initialize();
+  WIntensityDecayEdit->setPropertyV(WSNuserValue,(long)1);
+  WIntensityDecayEdit->setPropertyV(WSNname,"WIntensityDecayEdit");
+  WIntensityDecayEdit->setPropertyV(WSNvis,(WSCbool)1);
+  WIntensityDecayEdit->setPropertyV(WSNx,(short)145);
+  WIntensityDecayEdit->setPropertyV(WSNy,(short)230);
+  WIntensityDecayEdit->setPropertyV(WSNheight,(unsigned short)20);
+
+  WIdleWidthEdit = new  WSCvifield(Maiinde_001,"WIdleWidthEdit");
+      WIdleWidthEdit->initialize();
+  WIdleWidthEdit->setPropertyV(WSNuserValue,(long)1);
+  WIdleWidthEdit->setPropertyV(WSNname,"WIdleWidthEdit");
+  WIdleWidthEdit->setPropertyV(WSNvis,(WSCbool)1);
+  WIdleWidthEdit->setPropertyV(WSNx,(short)145);
+  WIdleWidthEdit->setPropertyV(WSNy,(short)250);
+  WIdleWidthEdit->setPropertyV(WSNheight,(unsigned short)20);
+
+  WIdleHeightEdit = new  WSCvifield(Maiinde_001,"WIdleHeightEdit");
+      WIdleHeightEdit->initialize();
+  WIdleHeightEdit->setPropertyV(WSNuserValue,(long)1);
+  WIdleHeightEdit->setPropertyV(WSNname,"WIdleHeightEdit");
+  WIdleHeightEdit->setPropertyV(WSNvis,(WSCbool)1);
+  WIdleHeightEdit->setPropertyV(WSNx,(short)145);
+  WIdleHeightEdit->setPropertyV(WSNy,(short)270);
+  WIdleHeightEdit->setPropertyV(WSNheight,(unsigned short)20);
+
+  WFiringHeightEdit = new  WSCvifield(Maiinde_001,"WFiringHeightEdit");
+      WFiringHeightEdit->initialize();
+  WFiringHeightEdit->setPropertyV(WSNuserValue,(long)1);
+  WFiringHeightEdit->setPropertyV(WSNname,"WFiringHeightEdit");
+  WFiringHeightEdit->setPropertyV(WSNvis,(WSCbool)1);
+  WFiringHeightEdit->setPropertyV(WSNx,(short)145);
+  WFiringHeightEdit->setPropertyV(WSNy,(short)290);
+  WFiringHeightEdit->setPropertyV(WSNheight,(unsigned short)20);
+
+  WReloadingHeighEdit = new  WSCvifield(Maiinde_001,"WReloadingHeighEdit");
+      WReloadingHeighEdit->initialize();
+  WReloadingHeighEdit->setPropertyV(WSNuserValue,(long)1);
+  WReloadingHeighEdit->setPropertyV(WSNname,"WReloadingHeighEdit");
+  WReloadingHeighEdit->setPropertyV(WSNvis,(WSCbool)1);
+  WReloadingHeighEdit->setPropertyV(WSNx,(short)145);
+  WReloadingHeighEdit->setPropertyV(WSNy,(short)310);
+  WReloadingHeighEdit->setPropertyV(WSNheight,(unsigned short)20);
+
+  WHorAmpEdit = new  WSCvifield(Maiinde_001,"WHorAmpEdit");
+      WHorAmpEdit->initialize();
+  WHorAmpEdit->setPropertyV(WSNuserValue,(long)1);
+  WHorAmpEdit->setPropertyV(WSNname,"WHorAmpEdit");
+  WHorAmpEdit->setPropertyV(WSNvis,(WSCbool)1);
+  WHorAmpEdit->setPropertyV(WSNx,(short)145);
+  WHorAmpEdit->setPropertyV(WSNy,(short)330);
+  WHorAmpEdit->setPropertyV(WSNheight,(unsigned short)20);
+
+  WUserAmpEdit = new  WSCvifield(Maiinde_001,"WUserAmpEdit");
+      WUserAmpEdit->initialize();
+  WUserAmpEdit->setPropertyV(WSNuserValue,(long)1);
+  WUserAmpEdit->setPropertyV(WSNname,"WUserAmpEdit");
+  WUserAmpEdit->setPropertyV(WSNvis,(WSCbool)1);
+  WUserAmpEdit->setPropertyV(WSNx,(short)145);
+  WUserAmpEdit->setPropertyV(WSNy,(short)350);
+  WUserAmpEdit->setPropertyV(WSNheight,(unsigned short)20);
+
+  WReadyEdit = new  WSCvifield(Maiinde_001,"WReadyEdit");
+      WReadyEdit->initialize();
+  WReadyEdit->setPropertyV(WSNuserValue,(long)1);
+  WReadyEdit->setPropertyV(WSNname,"WReadyEdit");
+  WReadyEdit->setPropertyV(WSNvis,(WSCbool)1);
+  WReadyEdit->setPropertyV(WSNx,(short)145);
+  WReadyEdit->setPropertyV(WSNy,(short)370);
+  WReadyEdit->setPropertyV(WSNheight,(unsigned short)20);
+
+  WAwaitReloadEdit = new  WSCvifield(Maiinde_001,"WAwaitReloadEdit");
+      WAwaitReloadEdit->initialize();
+  WAwaitReloadEdit->setPropertyV(WSNuserValue,(long)1);
+  WAwaitReloadEdit->setPropertyV(WSNname,"WAwaitReloadEdit");
+  WAwaitReloadEdit->setPropertyV(WSNvis,(WSCbool)1);
+  WAwaitReloadEdit->setPropertyV(WSNx,(short)145);
+  WAwaitReloadEdit->setPropertyV(WSNy,(short)390);
+  WAwaitReloadEdit->setPropertyV(WSNheight,(unsigned short)20);
+
+  Maivlab_070 = new  WSCvlabel(Maiinde_001,"Maivlab_070");
+      Maivlab_070->initialize();
+  Maivlab_070->setPropertyV(WSNuserValue,(long)1);
+  Maivlab_070->setPropertyV(WSNlabelString,"Loading Ticks");
+  Maivlab_070->setPropertyV(WSNname,"Maivlab_070");
+  Maivlab_070->setPropertyV(WSNvis,(WSCbool)1);
+  Maivlab_070->setPropertyV(WSNx,(short)5);
+  Maivlab_070->setPropertyV(WSNy,(short)410);
+  Maivlab_070->setPropertyV(WSNwidth,(unsigned short)140);
+  Maivlab_070->setPropertyV(WSNheight,(unsigned short)20);
+
+  Maivlab_071 = new  WSCvlabel(Maiinde_001,"Maivlab_071");
+      Maivlab_071->initialize();
+  Maivlab_071->setPropertyV(WSNuserValue,(long)1);
+  Maivlab_071->setPropertyV(WSNlabelString,"Loaded Ticks");
+  Maivlab_071->setPropertyV(WSNname,"Maivlab_071");
+  Maivlab_071->setPropertyV(WSNvis,(WSCbool)1);
+  Maivlab_071->setPropertyV(WSNx,(short)5);
+  Maivlab_071->setPropertyV(WSNy,(short)430);
+  Maivlab_071->setPropertyV(WSNwidth,(unsigned short)140);
+  Maivlab_071->setPropertyV(WSNheight,(unsigned short)20);
+
+  WLoadingEdit = new  WSCvifield(Maiinde_001,"WLoadingEdit");
+      WLoadingEdit->initialize();
+  WLoadingEdit->setPropertyV(WSNuserValue,(long)1);
+  WLoadingEdit->setPropertyV(WSNname,"WLoadingEdit");
+  WLoadingEdit->setPropertyV(WSNvis,(WSCbool)1);
+  WLoadingEdit->setPropertyV(WSNx,(short)145);
+  WLoadingEdit->setPropertyV(WSNy,(short)410);
+  WLoadingEdit->setPropertyV(WSNheight,(unsigned short)20);
+
+  WLoadedEdit = new  WSCvifield(Maiinde_001,"WLoadedEdit");
+      WLoadedEdit->initialize();
+  WLoadedEdit->setPropertyV(WSNuserValue,(long)1);
+  WLoadedEdit->setPropertyV(WSNname,"WLoadedEdit");
+  WLoadedEdit->setPropertyV(WSNvis,(WSCbool)1);
+  WLoadedEdit->setPropertyV(WSNx,(short)145);
+  WLoadedEdit->setPropertyV(WSNy,(short)430);
+  WLoadedEdit->setPropertyV(WSNheight,(unsigned short)20);
+
+  WPrimaryGroup = new  WSCtform(Maiinde_001,"WPrimaryGroup");
+      WPrimaryGroup->initialize();
+  WPrimaryGroup->setPropertyV(WSNuserValue,(long)2);
+  WPrimaryGroup->setPropertyV(WSNtitleString,"Primary");
+  WPrimaryGroup->setPropertyV(WSNname,"WPrimaryGroup");
+  WPrimaryGroup->setPropertyV(WSNx,(short)5);
+  WPrimaryGroup->setPropertyV(WSNy,(short)25);
+  WPrimaryGroup->setPropertyV(WSNwidth,(unsigned short)280);
+  WPrimaryGroup->setPropertyV(WSNheight,(unsigned short)420);
+
+  Maivlab_096 = new  WSCvlabel(WPrimaryGroup,"Maivlab_096");
+      Maivlab_096->initialize();
+  Maivlab_096->setPropertyV(WSNlabelString,"Round Per Magazine");
+  Maivlab_096->setPropertyV(WSNname,"Maivlab_096");
+  Maivlab_096->setPropertyV(WSNvis,(WSCbool)1);
+  Maivlab_096->setPropertyV(WSNx,(short)15);
+  Maivlab_096->setPropertyV(WSNy,(short)20);
+  Maivlab_096->setPropertyV(WSNwidth,(unsigned short)155);
+  Maivlab_096->setPropertyV(WSNheight,(unsigned short)20);
+
+  WRoundPerMagEdit = new  WSCvifield(WPrimaryGroup,"WRoundPerMagEdit");
+      WRoundPerMagEdit->initialize();
+  WRoundPerMagEdit->setPropertyV(WSNname,"WRoundPerMagEdit");
+  WRoundPerMagEdit->setPropertyV(WSNvis,(WSCbool)1);
+  WRoundPerMagEdit->setPropertyV(WSNx,(short)170);
+  WRoundPerMagEdit->setPropertyV(WSNy,(short)20);
+  WRoundPerMagEdit->setPropertyV(WSNwidth,(unsigned short)90);
+  WRoundPerMagEdit->setPropertyV(WSNheight,(unsigned short)20);
+
+  Maivlab_098 = new  WSCvlabel(WPrimaryGroup,"Maivlab_098");
+      Maivlab_098->initialize();
+  Maivlab_098->setPropertyV(WSNlabelString,"Ammo Item");
+  Maivlab_098->setPropertyV(WSNname,"Maivlab_098");
+  Maivlab_098->setPropertyV(WSNvis,(WSCbool)1);
+  Maivlab_098->setPropertyV(WSNx,(short)15);
+  Maivlab_098->setPropertyV(WSNy,(short)40);
+  Maivlab_098->setPropertyV(WSNwidth,(unsigned short)105);
+  Maivlab_098->setPropertyV(WSNheight,(unsigned short)20);
+
+  Maivlab_100 = new  WSCvlabel(WPrimaryGroup,"Maivlab_100");
+      Maivlab_100->initialize();
+  Maivlab_100->setPropertyV(WSNlabelString,"Ticks Per Round");
+  Maivlab_100->setPropertyV(WSNname,"Maivlab_100");
+  Maivlab_100->setPropertyV(WSNvis,(WSCbool)1);
+  Maivlab_100->setPropertyV(WSNx,(short)15);
+  Maivlab_100->setPropertyV(WSNy,(short)60);
+  Maivlab_100->setPropertyV(WSNwidth,(unsigned short)155);
+  Maivlab_100->setPropertyV(WSNheight,(unsigned short)20);
+
+  Maivlab_101 = new  WSCvlabel(WPrimaryGroup,"Maivlab_101");
+      Maivlab_101->initialize();
+  Maivlab_101->setPropertyV(WSNlabelString,"Recovery Ticks");
+  Maivlab_101->setPropertyV(WSNname,"Maivlab_101");
+  Maivlab_101->setPropertyV(WSNvis,(WSCbool)1);
+  Maivlab_101->setPropertyV(WSNx,(short)15);
+  Maivlab_101->setPropertyV(WSNy,(short)80);
+  Maivlab_101->setPropertyV(WSNwidth,(unsigned short)155);
+  Maivlab_101->setPropertyV(WSNheight,(unsigned short)20);
+
+  Maivlab_102 = new  WSCvlabel(WPrimaryGroup,"Maivlab_102");
+      Maivlab_102->initialize();
+  Maivlab_102->setPropertyV(WSNlabelString,"Firing Snd");
+  Maivlab_102->setPropertyV(WSNname,"Maivlab_102");
+  Maivlab_102->setPropertyV(WSNvis,(WSCbool)1);
+  Maivlab_102->setPropertyV(WSNx,(short)15);
+  Maivlab_102->setPropertyV(WSNy,(short)140);
+  Maivlab_102->setPropertyV(WSNwidth,(unsigned short)105);
+  Maivlab_102->setPropertyV(WSNheight,(unsigned short)20);
+
+  Maivlab_103 = new  WSCvlabel(WPrimaryGroup,"Maivlab_103");
+      Maivlab_103->initialize();
+  Maivlab_103->setPropertyV(WSNlabelString,"Click Snd");
+  Maivlab_103->setPropertyV(WSNname,"Maivlab_103");
+  Maivlab_103->setPropertyV(WSNvis,(WSCbool)1);
+  Maivlab_103->setPropertyV(WSNx,(short)15);
+  Maivlab_103->setPropertyV(WSNy,(short)160);
+  Maivlab_103->setPropertyV(WSNwidth,(unsigned short)105);
+  Maivlab_103->setPropertyV(WSNheight,(unsigned short)20);
+
+  Maivlab_105 = new  WSCvlabel(WPrimaryGroup,"Maivlab_105");
+      Maivlab_105->initialize();
+  Maivlab_105->setPropertyV(WSNlabelString,"Shell Casing Snd");
+  Maivlab_105->setPropertyV(WSNname,"Maivlab_105");
+  Maivlab_105->setPropertyV(WSNvis,(WSCbool)1);
+  Maivlab_105->setPropertyV(WSNx,(short)15);
+  Maivlab_105->setPropertyV(WSNy,(short)200);
+  Maivlab_105->setPropertyV(WSNwidth,(unsigned short)105);
+  Maivlab_105->setPropertyV(WSNheight,(unsigned short)20);
+
+  Maivlab_106 = new  WSCvlabel(WPrimaryGroup,"Maivlab_106");
+      Maivlab_106->initialize();
+  Maivlab_106->setPropertyV(WSNlabelString,"Charging Snd");
+  Maivlab_106->setPropertyV(WSNname,"Maivlab_106");
+  Maivlab_106->setPropertyV(WSNvis,(WSCbool)1);
+  Maivlab_106->setPropertyV(WSNx,(short)15);
+  Maivlab_106->setPropertyV(WSNy,(short)180);
+  Maivlab_106->setPropertyV(WSNwidth,(unsigned short)105);
+  Maivlab_106->setPropertyV(WSNheight,(unsigned short)20);
+
+  Maivlab_107 = new  WSCvlabel(WPrimaryGroup,"Maivlab_107");
+      Maivlab_107->initialize();
+  Maivlab_107->setPropertyV(WSNlabelString,"Reload Snd");
+  Maivlab_107->setPropertyV(WSNname,"Maivlab_107");
+  Maivlab_107->setPropertyV(WSNvis,(WSCbool)1);
+  Maivlab_107->setPropertyV(WSNx,(short)15);
+  Maivlab_107->setPropertyV(WSNy,(short)220);
+  Maivlab_107->setPropertyV(WSNwidth,(unsigned short)105);
+  Maivlab_107->setPropertyV(WSNheight,(unsigned short)20);
+
+  Maivlab_108 = new  WSCvlabel(WPrimaryGroup,"Maivlab_108");
+      Maivlab_108->initialize();
+  Maivlab_108->setPropertyV(WSNlabelString,"Projectile");
+  Maivlab_108->setPropertyV(WSNname,"Maivlab_108");
+  Maivlab_108->setPropertyV(WSNvis,(WSCbool)1);
+  Maivlab_108->setPropertyV(WSNx,(short)15);
+  Maivlab_108->setPropertyV(WSNy,(short)260);
+  Maivlab_108->setPropertyV(WSNwidth,(unsigned short)105);
+  Maivlab_108->setPropertyV(WSNheight,(unsigned short)20);
+
+  Maivlab_110 = new  WSCvlabel(WPrimaryGroup,"Maivlab_110");
+      Maivlab_110->initialize();
+  Maivlab_110->setPropertyV(WSNlabelString,"Charged Snd");
+  Maivlab_110->setPropertyV(WSNname,"Maivlab_110");
+  Maivlab_110->setPropertyV(WSNvis,(WSCbool)1);
+  Maivlab_110->setPropertyV(WSNx,(short)15);
+  Maivlab_110->setPropertyV(WSNy,(short)240);
+  Maivlab_110->setPropertyV(WSNwidth,(unsigned short)105);
+  Maivlab_110->setPropertyV(WSNheight,(unsigned short)20);
+
+  Maivlab_111 = new  WSCvlabel(WPrimaryGroup,"Maivlab_111");
+      Maivlab_111->initialize();
+  Maivlab_111->setPropertyV(WSNlabelString,"Error");
+  Maivlab_111->setPropertyV(WSNname,"Maivlab_111");
+  Maivlab_111->setPropertyV(WSNvis,(WSCbool)1);
+  Maivlab_111->setPropertyV(WSNx,(short)15);
+  Maivlab_111->setPropertyV(WSNy,(short)280);
+  Maivlab_111->setPropertyV(WSNwidth,(unsigned short)155);
+  Maivlab_111->setPropertyV(WSNheight,(unsigned short)20);
+
+  Maivlab_116 = new  WSCvlabel(WPrimaryGroup,"Maivlab_116");
+      Maivlab_116->initialize();
+  Maivlab_116->setPropertyV(WSNlabelString,"dx");
+  Maivlab_116->setPropertyV(WSNname,"Maivlab_116");
+  Maivlab_116->setPropertyV(WSNvis,(WSCbool)1);
+  Maivlab_116->setPropertyV(WSNx,(short)15);
+  Maivlab_116->setPropertyV(WSNy,(short)300);
+  Maivlab_116->setPropertyV(WSNwidth,(unsigned short)155);
+  Maivlab_116->setPropertyV(WSNheight,(unsigned short)20);
+
+  Maivlab_117 = new  WSCvlabel(WPrimaryGroup,"Maivlab_117");
+      Maivlab_117->initialize();
+  Maivlab_117->setPropertyV(WSNlabelString,"dz");
+  Maivlab_117->setPropertyV(WSNname,"Maivlab_117");
+  Maivlab_117->setPropertyV(WSNvis,(WSCbool)1);
+  Maivlab_117->setPropertyV(WSNx,(short)15);
+  Maivlab_117->setPropertyV(WSNy,(short)320);
+  Maivlab_117->setPropertyV(WSNwidth,(unsigned short)155);
+  Maivlab_117->setPropertyV(WSNheight,(unsigned short)20);
+
+  Maivlab_118 = new  WSCvlabel(WPrimaryGroup,"Maivlab_118");
+      Maivlab_118->initialize();
+  Maivlab_118->setPropertyV(WSNlabelString,"Burst Count");
+  Maivlab_118->setPropertyV(WSNname,"Maivlab_118");
+  Maivlab_118->setPropertyV(WSNvis,(WSCbool)1);
+  Maivlab_118->setPropertyV(WSNx,(short)15);
+  Maivlab_118->setPropertyV(WSNy,(short)360);
+  Maivlab_118->setPropertyV(WSNwidth,(unsigned short)155);
+  Maivlab_118->setPropertyV(WSNheight,(unsigned short)20);
+
+  Maivlab_124 = new  WSCvlabel(WPrimaryGroup,"Maivlab_124");
+      Maivlab_124->initialize();
+  Maivlab_124->setPropertyV(WSNlabelString,"Shell Casing");
+  Maivlab_124->setPropertyV(WSNname,"Maivlab_124");
+  Maivlab_124->setPropertyV(WSNvis,(WSCbool)1);
+  Maivlab_124->setPropertyV(WSNx,(short)15);
+  Maivlab_124->setPropertyV(WSNy,(short)340);
+  Maivlab_124->setPropertyV(WSNwidth,(unsigned short)105);
+  Maivlab_124->setPropertyV(WSNheight,(unsigned short)20);
+
+  WTicksPerRoundEdit = new  WSCvifield(WPrimaryGroup,"WTicksPerRoundEdit");
+      WTicksPerRoundEdit->initialize();
+  WTicksPerRoundEdit->setPropertyV(WSNname,"WTicksPerRoundEdit");
+  WTicksPerRoundEdit->setPropertyV(WSNvis,(WSCbool)1);
+  WTicksPerRoundEdit->setPropertyV(WSNx,(short)170);
+  WTicksPerRoundEdit->setPropertyV(WSNy,(short)60);
+  WTicksPerRoundEdit->setPropertyV(WSNwidth,(unsigned short)90);
+  WTicksPerRoundEdit->setPropertyV(WSNheight,(unsigned short)20);
+
+  WRecovTicksEdit = new  WSCvifield(WPrimaryGroup,"WRecovTicksEdit");
+      WRecovTicksEdit->initialize();
+  WRecovTicksEdit->setPropertyV(WSNname,"WRecovTicksEdit");
+  WRecovTicksEdit->setPropertyV(WSNvis,(WSCbool)1);
+  WRecovTicksEdit->setPropertyV(WSNx,(short)170);
+  WRecovTicksEdit->setPropertyV(WSNy,(short)80);
+  WRecovTicksEdit->setPropertyV(WSNwidth,(unsigned short)90);
+  WRecovTicksEdit->setPropertyV(WSNheight,(unsigned short)20);
+
+  WErrorEdit = new  WSCvifield(WPrimaryGroup,"WErrorEdit");
+      WErrorEdit->initialize();
+  WErrorEdit->setPropertyV(WSNname,"WErrorEdit");
+  WErrorEdit->setPropertyV(WSNvis,(WSCbool)1);
+  WErrorEdit->setPropertyV(WSNx,(short)170);
+  WErrorEdit->setPropertyV(WSNy,(short)280);
+  WErrorEdit->setPropertyV(WSNwidth,(unsigned short)90);
+  WErrorEdit->setPropertyV(WSNheight,(unsigned short)20);
+
+  WdxEdit = new  WSCvifield(WPrimaryGroup,"WdxEdit");
+      WdxEdit->initialize();
+  WdxEdit->setPropertyV(WSNname,"WdxEdit");
+  WdxEdit->setPropertyV(WSNvis,(WSCbool)1);
+  WdxEdit->setPropertyV(WSNx,(short)170);
+  WdxEdit->setPropertyV(WSNy,(short)300);
+  WdxEdit->setPropertyV(WSNwidth,(unsigned short)90);
+  WdxEdit->setPropertyV(WSNheight,(unsigned short)20);
+
+  WdzEdit = new  WSCvifield(WPrimaryGroup,"WdzEdit");
+      WdzEdit->initialize();
+  WdzEdit->setPropertyV(WSNname,"WdzEdit");
+  WdzEdit->setPropertyV(WSNvis,(WSCbool)1);
+  WdzEdit->setPropertyV(WSNx,(short)170);
+  WdzEdit->setPropertyV(WSNy,(short)320);
+  WdzEdit->setPropertyV(WSNwidth,(unsigned short)90);
+  WdzEdit->setPropertyV(WSNheight,(unsigned short)20);
+
+  WBurstCountEdit = new  WSCvifield(WPrimaryGroup,"WBurstCountEdit");
+      WBurstCountEdit->initialize();
+  WBurstCountEdit->setPropertyV(WSNname,"WBurstCountEdit");
+  WBurstCountEdit->setPropertyV(WSNvis,(WSCbool)1);
+  WBurstCountEdit->setPropertyV(WSNx,(short)170);
+  WBurstCountEdit->setPropertyV(WSNy,(short)360);
+  WBurstCountEdit->setPropertyV(WSNwidth,(unsigned short)90);
+  WBurstCountEdit->setPropertyV(WSNheight,(unsigned short)20);
+
+  WAmmoItemBtn = new  WSCvbtn(WPrimaryGroup,"WAmmoItemBtn");
+      WAmmoItemBtn->initialize();
+  WAmmoItemBtn->setPropertyV(WSNname,"WAmmoItemBtn");
+  WAmmoItemBtn->setPropertyV(WSNvis,(WSCbool)1);
+  WAmmoItemBtn->setPropertyV(WSNx,(short)120);
+  WAmmoItemBtn->setPropertyV(WSNy,(short)40);
+  WAmmoItemBtn->setPropertyV(WSNwidth,(unsigned short)140);
+  WAmmoItemBtn->setPropertyV(WSNheight,(unsigned short)20);
+
+  WFiringSndBtn = new  WSCvbtn(WPrimaryGroup,"WFiringSndBtn");
+      WFiringSndBtn->initialize();
+  WFiringSndBtn->setPropertyV(WSNname,"WFiringSndBtn");
+  WFiringSndBtn->setPropertyV(WSNvis,(WSCbool)1);
+  WFiringSndBtn->setPropertyV(WSNx,(short)120);
+  WFiringSndBtn->setPropertyV(WSNy,(short)140);
+  WFiringSndBtn->setPropertyV(WSNwidth,(unsigned short)140);
+  WFiringSndBtn->setPropertyV(WSNheight,(unsigned short)20);
+
+  WClickSndBtn = new  WSCvbtn(WPrimaryGroup,"WClickSndBtn");
+      WClickSndBtn->initialize();
+  WClickSndBtn->setPropertyV(WSNname,"WClickSndBtn");
+  WClickSndBtn->setPropertyV(WSNvis,(WSCbool)1);
+  WClickSndBtn->setPropertyV(WSNx,(short)120);
+  WClickSndBtn->setPropertyV(WSNy,(short)160);
+  WClickSndBtn->setPropertyV(WSNwidth,(unsigned short)140);
+  WClickSndBtn->setPropertyV(WSNheight,(unsigned short)20);
+
+  WChargingSndBtn = new  WSCvbtn(WPrimaryGroup,"WChargingSndBtn");
+      WChargingSndBtn->initialize();
+  WChargingSndBtn->setPropertyV(WSNname,"WChargingSndBtn");
+  WChargingSndBtn->setPropertyV(WSNvis,(WSCbool)1);
+  WChargingSndBtn->setPropertyV(WSNx,(short)120);
+  WChargingSndBtn->setPropertyV(WSNy,(short)180);
+  WChargingSndBtn->setPropertyV(WSNwidth,(unsigned short)140);
+  WChargingSndBtn->setPropertyV(WSNheight,(unsigned short)20);
+
+  WShellCasingSndBtn = new  WSCvbtn(WPrimaryGroup,"WShellCasingSndBtn");
+      WShellCasingSndBtn->initialize();
+  WShellCasingSndBtn->setPropertyV(WSNname,"WShellCasingSndBtn");
+  WShellCasingSndBtn->setPropertyV(WSNvis,(WSCbool)1);
+  WShellCasingSndBtn->setPropertyV(WSNx,(short)120);
+  WShellCasingSndBtn->setPropertyV(WSNy,(short)200);
+  WShellCasingSndBtn->setPropertyV(WSNwidth,(unsigned short)140);
+  WShellCasingSndBtn->setPropertyV(WSNheight,(unsigned short)20);
+
+  WReloadSndBtn = new  WSCvbtn(WPrimaryGroup,"WReloadSndBtn");
+      WReloadSndBtn->initialize();
+  WReloadSndBtn->setPropertyV(WSNname,"WReloadSndBtn");
+  WReloadSndBtn->setPropertyV(WSNvis,(WSCbool)1);
+  WReloadSndBtn->setPropertyV(WSNx,(short)120);
+  WReloadSndBtn->setPropertyV(WSNy,(short)220);
+  WReloadSndBtn->setPropertyV(WSNwidth,(unsigned short)140);
+  WReloadSndBtn->setPropertyV(WSNheight,(unsigned short)20);
+
+  WChargedSndBtn = new  WSCvbtn(WPrimaryGroup,"WChargedSndBtn");
+      WChargedSndBtn->initialize();
+  WChargedSndBtn->setPropertyV(WSNname,"WChargedSndBtn");
+  WChargedSndBtn->setPropertyV(WSNvis,(WSCbool)1);
+  WChargedSndBtn->setPropertyV(WSNx,(short)120);
+  WChargedSndBtn->setPropertyV(WSNy,(short)240);
+  WChargedSndBtn->setPropertyV(WSNwidth,(unsigned short)140);
+  WChargedSndBtn->setPropertyV(WSNheight,(unsigned short)20);
+
+  WProjectileBtn = new  WSCvbtn(WPrimaryGroup,"WProjectileBtn");
+      WProjectileBtn->initialize();
+  WProjectileBtn->setPropertyV(WSNname,"WProjectileBtn");
+  WProjectileBtn->setPropertyV(WSNvis,(WSCbool)1);
+  WProjectileBtn->setPropertyV(WSNx,(short)120);
+  WProjectileBtn->setPropertyV(WSNy,(short)260);
+  WProjectileBtn->setPropertyV(WSNwidth,(unsigned short)140);
+  WProjectileBtn->setPropertyV(WSNheight,(unsigned short)20);
+
+  WShellCasingOption = new  WSCoption(WPrimaryGroup,"WShellCasingOption");
+      WShellCasingOption->initialize();
+  WShellCasingOption->setPropertyV(WSNvalue,(long)1);
+  WShellCasingOption->setPropertyV(WSNlabelString,"item1");
+  WShellCasingOption->setPropertyV(WSNname,"WShellCasingOption");
+  WShellCasingOption->setPropertyV(WSNvis,(WSCbool)1);
+  WShellCasingOption->setPropertyV(WSNx,(short)120);
+  WShellCasingOption->setPropertyV(WSNy,(short)340);
+  WShellCasingOption->setPropertyV(WSNwidth,(unsigned short)140);
+  WShellCasingOption->setPropertyV(WSNheight,(unsigned short)20);
+
+  Maivlab_142 = new  WSCvlabel(WPrimaryGroup,"Maivlab_142");
+      Maivlab_142->initialize();
+  Maivlab_142->setPropertyV(WSNlabelString,"Charging Ticks");
+  Maivlab_142->setPropertyV(WSNname,"Maivlab_142");
+  Maivlab_142->setPropertyV(WSNvis,(WSCbool)1);
+  Maivlab_142->setPropertyV(WSNx,(short)15);
+  Maivlab_142->setPropertyV(WSNy,(short)100);
+  Maivlab_142->setPropertyV(WSNwidth,(unsigned short)155);
+  Maivlab_142->setPropertyV(WSNheight,(unsigned short)20);
+
+  Maivlab_143 = new  WSCvlabel(WPrimaryGroup,"Maivlab_143");
+      Maivlab_143->initialize();
+  Maivlab_143->setPropertyV(WSNlabelString,"Recoil Magnitude");
+  Maivlab_143->setPropertyV(WSNname,"Maivlab_143");
+  Maivlab_143->setPropertyV(WSNvis,(WSCbool)1);
+  Maivlab_143->setPropertyV(WSNx,(short)15);
+  Maivlab_143->setPropertyV(WSNy,(short)120);
+  Maivlab_143->setPropertyV(WSNwidth,(unsigned short)155);
+  Maivlab_143->setPropertyV(WSNheight,(unsigned short)20);
+
+  WChargingTicksEdit = new  WSCvifield(WPrimaryGroup,"WChargingTicksEdit");
+      WChargingTicksEdit->initialize();
+  WChargingTicksEdit->setPropertyV(WSNname,"WChargingTicksEdit");
+  WChargingTicksEdit->setPropertyV(WSNvis,(WSCbool)1);
+  WChargingTicksEdit->setPropertyV(WSNx,(short)170);
+  WChargingTicksEdit->setPropertyV(WSNy,(short)100);
+  WChargingTicksEdit->setPropertyV(WSNwidth,(unsigned short)90);
+  WChargingTicksEdit->setPropertyV(WSNheight,(unsigned short)20);
+
+  WRecoilMagnitudeEdit = new  WSCvifield(WPrimaryGroup,"WRecoilMagnitudeEdit");
+      WRecoilMagnitudeEdit->initialize();
+  WRecoilMagnitudeEdit->setPropertyV(WSNname,"WRecoilMagnitudeEdit");
+  WRecoilMagnitudeEdit->setPropertyV(WSNvis,(WSCbool)1);
+  WRecoilMagnitudeEdit->setPropertyV(WSNx,(short)170);
+  WRecoilMagnitudeEdit->setPropertyV(WSNy,(short)120);
+  WRecoilMagnitudeEdit->setPropertyV(WSNwidth,(unsigned short)90);
+  WRecoilMagnitudeEdit->setPropertyV(WSNheight,(unsigned short)20);
+
+  WSecondaryGroup = new  WSCtform(Maiinde_001,"WSecondaryGroup");
+      WSecondaryGroup->initialize();
+  WSecondaryGroup->setPropertyV(WSNuserValue,(long)2);
+  WSecondaryGroup->setPropertyV(WSNtitleString,"Secondary");
+  WSecondaryGroup->setPropertyV(WSNname,"WSecondaryGroup");
+  WSecondaryGroup->setPropertyV(WSNx,(short)290);
+  WSecondaryGroup->setPropertyV(WSNy,(short)25);
+  WSecondaryGroup->setPropertyV(WSNwidth,(unsigned short)280);
+  WSecondaryGroup->setPropertyV(WSNheight,(unsigned short)420);
+
+  Maivlab_148 = new  WSCvlabel(WSecondaryGroup,"Maivlab_148");
+      Maivlab_148->initialize();
+  Maivlab_148->setPropertyV(WSNlabelString,"Round Per Magazine");
+  Maivlab_148->setPropertyV(WSNname,"Maivlab_148");
+  Maivlab_148->setPropertyV(WSNvis,(WSCbool)1);
+  Maivlab_148->setPropertyV(WSNx,(short)15);
+  Maivlab_148->setPropertyV(WSNy,(short)20);
+  Maivlab_148->setPropertyV(WSNwidth,(unsigned short)155);
+  Maivlab_148->setPropertyV(WSNheight,(unsigned short)20);
+
+  WSRoundPerMagEdit = new  WSCvifield(WSecondaryGroup,"WSRoundPerMagEdit");
+      WSRoundPerMagEdit->initialize();
+  WSRoundPerMagEdit->setPropertyV(WSNname,"WSRoundPerMagEdit");
+  WSRoundPerMagEdit->setPropertyV(WSNvis,(WSCbool)1);
+  WSRoundPerMagEdit->setPropertyV(WSNx,(short)170);
+  WSRoundPerMagEdit->setPropertyV(WSNy,(short)20);
+  WSRoundPerMagEdit->setPropertyV(WSNwidth,(unsigned short)90);
+  WSRoundPerMagEdit->setPropertyV(WSNheight,(unsigned short)20);
+
+  Maivlab_150 = new  WSCvlabel(WSecondaryGroup,"Maivlab_150");
+      Maivlab_150->initialize();
+  Maivlab_150->setPropertyV(WSNlabelString,"Ammo Item");
+  Maivlab_150->setPropertyV(WSNname,"Maivlab_150");
+  Maivlab_150->setPropertyV(WSNvis,(WSCbool)1);
+  Maivlab_150->setPropertyV(WSNx,(short)15);
+  Maivlab_150->setPropertyV(WSNy,(short)40);
+  Maivlab_150->setPropertyV(WSNwidth,(unsigned short)105);
+  Maivlab_150->setPropertyV(WSNheight,(unsigned short)20);
+
+  Maivlab_151 = new  WSCvlabel(WSecondaryGroup,"Maivlab_151");
+      Maivlab_151->initialize();
+  Maivlab_151->setPropertyV(WSNlabelString,"Ticks Per Round");
+  Maivlab_151->setPropertyV(WSNname,"Maivlab_151");
+  Maivlab_151->setPropertyV(WSNvis,(WSCbool)1);
+  Maivlab_151->setPropertyV(WSNx,(short)15);
+  Maivlab_151->setPropertyV(WSNy,(short)60);
+  Maivlab_151->setPropertyV(WSNwidth,(unsigned short)155);
+  Maivlab_151->setPropertyV(WSNheight,(unsigned short)20);
+
+  Maivlab_152 = new  WSCvlabel(WSecondaryGroup,"Maivlab_152");
+      Maivlab_152->initialize();
+  Maivlab_152->setPropertyV(WSNlabelString,"Recovery Ticks");
+  Maivlab_152->setPropertyV(WSNname,"Maivlab_152");
+  Maivlab_152->setPropertyV(WSNvis,(WSCbool)1);
+  Maivlab_152->setPropertyV(WSNx,(short)15);
+  Maivlab_152->setPropertyV(WSNy,(short)80);
+  Maivlab_152->setPropertyV(WSNwidth,(unsigned short)155);
+  Maivlab_152->setPropertyV(WSNheight,(unsigned short)20);
+
+  Maivlab_153 = new  WSCvlabel(WSecondaryGroup,"Maivlab_153");
+      Maivlab_153->initialize();
+  Maivlab_153->setPropertyV(WSNlabelString,"Firing Snd");
+  Maivlab_153->setPropertyV(WSNname,"Maivlab_153");
+  Maivlab_153->setPropertyV(WSNvis,(WSCbool)1);
+  Maivlab_153->setPropertyV(WSNx,(short)15);
+  Maivlab_153->setPropertyV(WSNy,(short)140);
+  Maivlab_153->setPropertyV(WSNwidth,(unsigned short)105);
+  Maivlab_153->setPropertyV(WSNheight,(unsigned short)20);
+
+  Maivlab_154 = new  WSCvlabel(WSecondaryGroup,"Maivlab_154");
+      Maivlab_154->initialize();
+  Maivlab_154->setPropertyV(WSNlabelString,"Click Snd");
+  Maivlab_154->setPropertyV(WSNname,"Maivlab_154");
+  Maivlab_154->setPropertyV(WSNvis,(WSCbool)1);
+  Maivlab_154->setPropertyV(WSNx,(short)15);
+  Maivlab_154->setPropertyV(WSNy,(short)160);
+  Maivlab_154->setPropertyV(WSNwidth,(unsigned short)105);
+  Maivlab_154->setPropertyV(WSNheight,(unsigned short)20);
+
+  Maivlab_155 = new  WSCvlabel(WSecondaryGroup,"Maivlab_155");
+      Maivlab_155->initialize();
+  Maivlab_155->setPropertyV(WSNlabelString,"Shell Casing Snd");
+  Maivlab_155->setPropertyV(WSNname,"Maivlab_155");
+  Maivlab_155->setPropertyV(WSNvis,(WSCbool)1);
+  Maivlab_155->setPropertyV(WSNx,(short)15);
+  Maivlab_155->setPropertyV(WSNy,(short)200);
+  Maivlab_155->setPropertyV(WSNwidth,(unsigned short)105);
+  Maivlab_155->setPropertyV(WSNheight,(unsigned short)20);
+
+  Maivlab_156 = new  WSCvlabel(WSecondaryGroup,"Maivlab_156");
+      Maivlab_156->initialize();
+  Maivlab_156->setPropertyV(WSNlabelString,"Charging Snd");
+  Maivlab_156->setPropertyV(WSNname,"Maivlab_156");
+  Maivlab_156->setPropertyV(WSNvis,(WSCbool)1);
+  Maivlab_156->setPropertyV(WSNx,(short)15);
+  Maivlab_156->setPropertyV(WSNy,(short)180);
+  Maivlab_156->setPropertyV(WSNwidth,(unsigned short)105);
+  Maivlab_156->setPropertyV(WSNheight,(unsigned short)20);
+
+  Maivlab_157 = new  WSCvlabel(WSecondaryGroup,"Maivlab_157");
+      Maivlab_157->initialize();
+  Maivlab_157->setPropertyV(WSNlabelString,"Reload Snd");
+  Maivlab_157->setPropertyV(WSNname,"Maivlab_157");
+  Maivlab_157->setPropertyV(WSNvis,(WSCbool)1);
+  Maivlab_157->setPropertyV(WSNx,(short)15);
+  Maivlab_157->setPropertyV(WSNy,(short)220);
+  Maivlab_157->setPropertyV(WSNwidth,(unsigned short)105);
+  Maivlab_157->setPropertyV(WSNheight,(unsigned short)20);
+
+  Maivlab_159 = new  WSCvlabel(WSecondaryGroup,"Maivlab_159");
+      Maivlab_159->initialize();
+  Maivlab_159->setPropertyV(WSNlabelString,"Projectile");
+  Maivlab_159->setPropertyV(WSNname,"Maivlab_159");
+  Maivlab_159->setPropertyV(WSNvis,(WSCbool)1);
+  Maivlab_159->setPropertyV(WSNx,(short)15);
+  Maivlab_159->setPropertyV(WSNy,(short)260);
+  Maivlab_159->setPropertyV(WSNwidth,(unsigned short)105);
+  Maivlab_159->setPropertyV(WSNheight,(unsigned short)20);
+
+  Maivlab_163 = new  WSCvlabel(WSecondaryGroup,"Maivlab_163");
+      Maivlab_163->initialize();
+  Maivlab_163->setPropertyV(WSNlabelString,"Charged Snd");
+  Maivlab_163->setPropertyV(WSNname,"Maivlab_163");
+  Maivlab_163->setPropertyV(WSNvis,(WSCbool)1);
+  Maivlab_163->setPropertyV(WSNx,(short)15);
+  Maivlab_163->setPropertyV(WSNy,(short)240);
+  Maivlab_163->setPropertyV(WSNwidth,(unsigned short)105);
+  Maivlab_163->setPropertyV(WSNheight,(unsigned short)20);
+
+  Maivlab_173 = new  WSCvlabel(WSecondaryGroup,"Maivlab_173");
+      Maivlab_173->initialize();
+  Maivlab_173->setPropertyV(WSNlabelString,"Error");
+  Maivlab_173->setPropertyV(WSNname,"Maivlab_173");
+  Maivlab_173->setPropertyV(WSNvis,(WSCbool)1);
+  Maivlab_173->setPropertyV(WSNx,(short)15);
+  Maivlab_173->setPropertyV(WSNy,(short)280);
+  Maivlab_173->setPropertyV(WSNwidth,(unsigned short)155);
+  Maivlab_173->setPropertyV(WSNheight,(unsigned short)20);
+
+  Maivlab_174 = new  WSCvlabel(WSecondaryGroup,"Maivlab_174");
+      Maivlab_174->initialize();
+  Maivlab_174->setPropertyV(WSNlabelString,"dx");
+  Maivlab_174->setPropertyV(WSNname,"Maivlab_174");
+  Maivlab_174->setPropertyV(WSNvis,(WSCbool)1);
+  Maivlab_174->setPropertyV(WSNx,(short)15);
+  Maivlab_174->setPropertyV(WSNy,(short)300);
+  Maivlab_174->setPropertyV(WSNwidth,(unsigned short)155);
+  Maivlab_174->setPropertyV(WSNheight,(unsigned short)20);
+
+  Maivlab_175 = new  WSCvlabel(WSecondaryGroup,"Maivlab_175");
+      Maivlab_175->initialize();
+  Maivlab_175->setPropertyV(WSNlabelString,"dz");
+  Maivlab_175->setPropertyV(WSNname,"Maivlab_175");
+  Maivlab_175->setPropertyV(WSNvis,(WSCbool)1);
+  Maivlab_175->setPropertyV(WSNx,(short)15);
+  Maivlab_175->setPropertyV(WSNy,(short)320);
+  Maivlab_175->setPropertyV(WSNwidth,(unsigned short)155);
+  Maivlab_175->setPropertyV(WSNheight,(unsigned short)20);
+
+  Maivlab_176 = new  WSCvlabel(WSecondaryGroup,"Maivlab_176");
+      Maivlab_176->initialize();
+  Maivlab_176->setPropertyV(WSNlabelString,"Burst Count");
+  Maivlab_176->setPropertyV(WSNname,"Maivlab_176");
+  Maivlab_176->setPropertyV(WSNvis,(WSCbool)1);
+  Maivlab_176->setPropertyV(WSNx,(short)15);
+  Maivlab_176->setPropertyV(WSNy,(short)360);
+  Maivlab_176->setPropertyV(WSNwidth,(unsigned short)155);
+  Maivlab_176->setPropertyV(WSNheight,(unsigned short)20);
+
+  Maivlab_177 = new  WSCvlabel(WSecondaryGroup,"Maivlab_177");
+      Maivlab_177->initialize();
+  Maivlab_177->setPropertyV(WSNlabelString,"Shell Casing");
+  Maivlab_177->setPropertyV(WSNname,"Maivlab_177");
+  Maivlab_177->setPropertyV(WSNvis,(WSCbool)1);
+  Maivlab_177->setPropertyV(WSNx,(short)15);
+  Maivlab_177->setPropertyV(WSNy,(short)340);
+  Maivlab_177->setPropertyV(WSNwidth,(unsigned short)105);
+  Maivlab_177->setPropertyV(WSNheight,(unsigned short)20);
+
+  WSTicksPerRoundEdit = new  WSCvifield(WSecondaryGroup,"WSTicksPerRoundEdit");
+      WSTicksPerRoundEdit->initialize();
+  WSTicksPerRoundEdit->setPropertyV(WSNname,"WSTicksPerRoundEdit");
+  WSTicksPerRoundEdit->setPropertyV(WSNvis,(WSCbool)1);
+  WSTicksPerRoundEdit->setPropertyV(WSNx,(short)170);
+  WSTicksPerRoundEdit->setPropertyV(WSNy,(short)60);
+  WSTicksPerRoundEdit->setPropertyV(WSNwidth,(unsigned short)90);
+  WSTicksPerRoundEdit->setPropertyV(WSNheight,(unsigned short)20);
+
+  WSRecovTicksEdit = new  WSCvifield(WSecondaryGroup,"WSRecovTicksEdit");
+      WSRecovTicksEdit->initialize();
+  WSRecovTicksEdit->setPropertyV(WSNname,"WSRecovTicksEdit");
+  WSRecovTicksEdit->setPropertyV(WSNvis,(WSCbool)1);
+  WSRecovTicksEdit->setPropertyV(WSNx,(short)170);
+  WSRecovTicksEdit->setPropertyV(WSNy,(short)80);
+  WSRecovTicksEdit->setPropertyV(WSNwidth,(unsigned short)90);
+  WSRecovTicksEdit->setPropertyV(WSNheight,(unsigned short)20);
+
+  WSErrorEdit = new  WSCvifield(WSecondaryGroup,"WSErrorEdit");
+      WSErrorEdit->initialize();
+  WSErrorEdit->setPropertyV(WSNname,"WSErrorEdit");
+  WSErrorEdit->setPropertyV(WSNvis,(WSCbool)1);
+  WSErrorEdit->setPropertyV(WSNx,(short)170);
+  WSErrorEdit->setPropertyV(WSNy,(short)280);
+  WSErrorEdit->setPropertyV(WSNwidth,(unsigned short)90);
+  WSErrorEdit->setPropertyV(WSNheight,(unsigned short)20);
+
+  WSdxEdit = new  WSCvifield(WSecondaryGroup,"WSdxEdit");
+      WSdxEdit->initialize();
+  WSdxEdit->setPropertyV(WSNname,"WSdxEdit");
+  WSdxEdit->setPropertyV(WSNvis,(WSCbool)1);
+  WSdxEdit->setPropertyV(WSNx,(short)170);
+  WSdxEdit->setPropertyV(WSNy,(short)300);
+  WSdxEdit->setPropertyV(WSNwidth,(unsigned short)90);
+  WSdxEdit->setPropertyV(WSNheight,(unsigned short)20);
+
+  WSdzEdit = new  WSCvifield(WSecondaryGroup,"WSdzEdit");
+      WSdzEdit->initialize();
+  WSdzEdit->setPropertyV(WSNname,"WSdzEdit");
+  WSdzEdit->setPropertyV(WSNvis,(WSCbool)1);
+  WSdzEdit->setPropertyV(WSNx,(short)170);
+  WSdzEdit->setPropertyV(WSNy,(short)320);
+  WSdzEdit->setPropertyV(WSNwidth,(unsigned short)90);
+  WSdzEdit->setPropertyV(WSNheight,(unsigned short)20);
+
+  WSBurstCountEdit = new  WSCvifield(WSecondaryGroup,"WSBurstCountEdit");
+      WSBurstCountEdit->initialize();
+  WSBurstCountEdit->setPropertyV(WSNname,"WSBurstCountEdit");
+  WSBurstCountEdit->setPropertyV(WSNvis,(WSCbool)1);
+  WSBurstCountEdit->setPropertyV(WSNx,(short)170);
+  WSBurstCountEdit->setPropertyV(WSNy,(short)360);
+  WSBurstCountEdit->setPropertyV(WSNwidth,(unsigned short)90);
+  WSBurstCountEdit->setPropertyV(WSNheight,(unsigned short)20);
+
+  WSAmmoItemBtn = new  WSCvbtn(WSecondaryGroup,"WSAmmoItemBtn");
+      WSAmmoItemBtn->initialize();
+  WSAmmoItemBtn->setPropertyV(WSNname,"WSAmmoItemBtn");
+  WSAmmoItemBtn->setPropertyV(WSNvis,(WSCbool)1);
+  WSAmmoItemBtn->setPropertyV(WSNx,(short)120);
+  WSAmmoItemBtn->setPropertyV(WSNy,(short)40);
+  WSAmmoItemBtn->setPropertyV(WSNwidth,(unsigned short)140);
+  WSAmmoItemBtn->setPropertyV(WSNheight,(unsigned short)20);
+
+  WSFiringSndBtn = new  WSCvbtn(WSecondaryGroup,"WSFiringSndBtn");
+      WSFiringSndBtn->initialize();
+  WSFiringSndBtn->setPropertyV(WSNname,"WSFiringSndBtn");
+  WSFiringSndBtn->setPropertyV(WSNvis,(WSCbool)1);
+  WSFiringSndBtn->setPropertyV(WSNx,(short)120);
+  WSFiringSndBtn->setPropertyV(WSNy,(short)140);
+  WSFiringSndBtn->setPropertyV(WSNwidth,(unsigned short)140);
+  WSFiringSndBtn->setPropertyV(WSNheight,(unsigned short)20);
+
+  WSClickSndBtn = new  WSCvbtn(WSecondaryGroup,"WSClickSndBtn");
+      WSClickSndBtn->initialize();
+  WSClickSndBtn->setPropertyV(WSNname,"WSClickSndBtn");
+  WSClickSndBtn->setPropertyV(WSNvis,(WSCbool)1);
+  WSClickSndBtn->setPropertyV(WSNx,(short)120);
+  WSClickSndBtn->setPropertyV(WSNy,(short)160);
+  WSClickSndBtn->setPropertyV(WSNwidth,(unsigned short)140);
+  WSClickSndBtn->setPropertyV(WSNheight,(unsigned short)20);
+
+  WSChargingSndBtn = new  WSCvbtn(WSecondaryGroup,"WSChargingSndBtn");
+      WSChargingSndBtn->initialize();
+  WSChargingSndBtn->setPropertyV(WSNname,"WSChargingSndBtn");
+  WSChargingSndBtn->setPropertyV(WSNvis,(WSCbool)1);
+  WSChargingSndBtn->setPropertyV(WSNx,(short)120);
+  WSChargingSndBtn->setPropertyV(WSNy,(short)180);
+  WSChargingSndBtn->setPropertyV(WSNwidth,(unsigned short)140);
+  WSChargingSndBtn->setPropertyV(WSNheight,(unsigned short)20);
+
+  WSShellCasingSndBtn = new  WSCvbtn(WSecondaryGroup,"WSShellCasingSndBtn");
+      WSShellCasingSndBtn->initialize();
+  WSShellCasingSndBtn->setPropertyV(WSNname,"WSShellCasingSndBtn");
+  WSShellCasingSndBtn->setPropertyV(WSNvis,(WSCbool)1);
+  WSShellCasingSndBtn->setPropertyV(WSNx,(short)120);
+  WSShellCasingSndBtn->setPropertyV(WSNy,(short)200);
+  WSShellCasingSndBtn->setPropertyV(WSNwidth,(unsigned short)140);
+  WSShellCasingSndBtn->setPropertyV(WSNheight,(unsigned short)20);
+
+  WSReloadSndBtn = new  WSCvbtn(WSecondaryGroup,"WSReloadSndBtn");
+      WSReloadSndBtn->initialize();
+  WSReloadSndBtn->setPropertyV(WSNname,"WSReloadSndBtn");
+  WSReloadSndBtn->setPropertyV(WSNvis,(WSCbool)1);
+  WSReloadSndBtn->setPropertyV(WSNx,(short)120);
+  WSReloadSndBtn->setPropertyV(WSNy,(short)220);
+  WSReloadSndBtn->setPropertyV(WSNwidth,(unsigned short)140);
+  WSReloadSndBtn->setPropertyV(WSNheight,(unsigned short)20);
+
+  WSChargedSndBtn = new  WSCvbtn(WSecondaryGroup,"WSChargedSndBtn");
+      WSChargedSndBtn->initialize();
+  WSChargedSndBtn->setPropertyV(WSNname,"WSChargedSndBtn");
+  WSChargedSndBtn->setPropertyV(WSNvis,(WSCbool)1);
+  WSChargedSndBtn->setPropertyV(WSNx,(short)120);
+  WSChargedSndBtn->setPropertyV(WSNy,(short)240);
+  WSChargedSndBtn->setPropertyV(WSNwidth,(unsigned short)140);
+  WSChargedSndBtn->setPropertyV(WSNheight,(unsigned short)20);
+
+  WSProjectileBtn = new  WSCvbtn(WSecondaryGroup,"WSProjectileBtn");
+      WSProjectileBtn->initialize();
+  WSProjectileBtn->setPropertyV(WSNname,"WSProjectileBtn");
+  WSProjectileBtn->setPropertyV(WSNvis,(WSCbool)1);
+  WSProjectileBtn->setPropertyV(WSNx,(short)120);
+  WSProjectileBtn->setPropertyV(WSNy,(short)260);
+  WSProjectileBtn->setPropertyV(WSNwidth,(unsigned short)140);
+  WSProjectileBtn->setPropertyV(WSNheight,(unsigned short)20);
+
+  WSShellCasingOption = new  WSCoption(WSecondaryGroup,"WSShellCasingOption");
+      WSShellCasingOption->initialize();
+  WSShellCasingOption->setPropertyV(WSNvalue,(long)1);
+  WSShellCasingOption->setPropertyV(WSNlabelString,"item1");
+  WSShellCasingOption->setPropertyV(WSNname,"WSShellCasingOption");
+  WSShellCasingOption->setPropertyV(WSNvis,(WSCbool)1);
+  WSShellCasingOption->setPropertyV(WSNx,(short)120);
+  WSShellCasingOption->setPropertyV(WSNy,(short)340);
+  WSShellCasingOption->setPropertyV(WSNwidth,(unsigned short)140);
+  WSShellCasingOption->setPropertyV(WSNheight,(unsigned short)20);
+
+  Maivlab_200 = new  WSCvlabel(WSecondaryGroup,"Maivlab_200");
+      Maivlab_200->initialize();
+  Maivlab_200->setPropertyV(WSNlabelString,"Charging Ticks");
+  Maivlab_200->setPropertyV(WSNname,"Maivlab_200");
+  Maivlab_200->setPropertyV(WSNvis,(WSCbool)1);
+  Maivlab_200->setPropertyV(WSNx,(short)15);
+  Maivlab_200->setPropertyV(WSNy,(short)100);
+  Maivlab_200->setPropertyV(WSNwidth,(unsigned short)155);
+  Maivlab_200->setPropertyV(WSNheight,(unsigned short)20);
+
+  Maivlab_201 = new  WSCvlabel(WSecondaryGroup,"Maivlab_201");
+      Maivlab_201->initialize();
+  Maivlab_201->setPropertyV(WSNlabelString,"Recoil Magnitude");
+  Maivlab_201->setPropertyV(WSNname,"Maivlab_201");
+  Maivlab_201->setPropertyV(WSNvis,(WSCbool)1);
+  Maivlab_201->setPropertyV(WSNx,(short)15);
+  Maivlab_201->setPropertyV(WSNy,(short)120);
+  Maivlab_201->setPropertyV(WSNwidth,(unsigned short)155);
+  Maivlab_201->setPropertyV(WSNheight,(unsigned short)20);
+
+  WSChargingTicksEdit = new  WSCvifield(WSecondaryGroup,"WSChargingTicksEdit");
+      WSChargingTicksEdit->initialize();
+  WSChargingTicksEdit->setPropertyV(WSNname,"WSChargingTicksEdit");
+  WSChargingTicksEdit->setPropertyV(WSNvis,(WSCbool)1);
+  WSChargingTicksEdit->setPropertyV(WSNx,(short)170);
+  WSChargingTicksEdit->setPropertyV(WSNy,(short)100);
+  WSChargingTicksEdit->setPropertyV(WSNwidth,(unsigned short)90);
+  WSChargingTicksEdit->setPropertyV(WSNheight,(unsigned short)20);
+
+  WSRecoilMagnitudeEdit = new  WSCvifield(WSecondaryGroup,"WSRecoilMagnitudeEdit");
+      WSRecoilMagnitudeEdit->initialize();
+  WSRecoilMagnitudeEdit->setPropertyV(WSNname,"WSRecoilMagnitudeEdit");
+  WSRecoilMagnitudeEdit->setPropertyV(WSNvis,(WSCbool)1);
+  WSRecoilMagnitudeEdit->setPropertyV(WSNx,(short)170);
+  WSRecoilMagnitudeEdit->setPropertyV(WSNy,(short)120);
+  WSRecoilMagnitudeEdit->setPropertyV(WSNwidth,(unsigned short)90);
+  WSRecoilMagnitudeEdit->setPropertyV(WSNheight,(unsigned short)20);
 
    MainWindow->setVisible(True);
    return MainWindow;

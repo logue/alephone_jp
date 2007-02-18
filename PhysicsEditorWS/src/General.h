@@ -25,7 +25,7 @@
 #include <WSCvradio.h>
 #include <WSCcheckGroup.h>
 #include <WSCvtoggle.h>
-
+#include <WSCdialog.h>
 
 #include <HPLLib/HPLAlephLib.h>
 
@@ -90,6 +90,7 @@ extern std::vector<std::string> stockShellCasingTypes;
 extern std::vector<std::string> stockPhysicsTypes;
 extern std::vector<std::string> stockMonsterFlags;
 extern std::vector<std::string> stockProjectileFlags;
+extern std::vector<std::string> stockWeaponFlags;
 
 //index-value
 extern int valueSpeed[NUMBER_OF_SPEED_INFORMATIONS];
@@ -103,6 +104,8 @@ extern int valueProjectileFlags[NUMBER_OF_PROJECTILE_FLAG_INFORMATIONS];
 
 void setDefinitionsToDefault();
 void setupDialog();
+long getInteger(WSCbase* obj);
+
 //int getSelectedValue(WSCoption *opt);
 
 WSCbase* getObject(const char* class_name, const char* obj_name);

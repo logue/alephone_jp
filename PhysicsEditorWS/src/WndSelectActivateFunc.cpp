@@ -21,8 +21,7 @@ void WndSelectActivateFunc(WSCbase* object){
 		object->setVisible(False);
 		return;
 	}else{
-		//‘I‘ð€–Ú‚ð”Ô†‚ÉÝ’è?
-		//
+		object->setVisible(False);
 	}
 }
 static WSCfunctionRegister  op("WndSelectActivateFunc",(void*)WndSelectActivateFunc);

@@ -1,17 +1,13 @@
 #include <WScom.h>
 #include <WSCfunctionList.h>
 #include <WSCbase.h>
-
 #include "General.h"
-
 //----------------------------------------------------------
 //Function for the event procedure
 //----------------------------------------------------------
-void PhysicsTypeOptChFunc(WSCbase* object){
+void HeightEditValueChFunc(WSCbase* object){
   //do something...
-	int index = ((WSCoption*)object)->getValue();
-	selectedPhysicsType = index-1;
-//	messageBox("index=%d", index);
-	setupDialog();
+	int type = selectedMonsterType;
+	monster_definitions[type].height = getInteger(object);
 }
-static WSCfunctionRegister  op("PhysicsTypeOptChFunc",(void*)PhysicsTypeOptChFunc);
+static WSCfunctionRegister  op("HeightEditValueChFunc",(void*)HeightEditValueChFunc);
