@@ -417,8 +417,8 @@ WSCbase* _create_win_MainWindow(){
   MainWindow->setPropertyV(WSNtitleString,"PhysicsEditorWS");
   MainWindow->setPropertyV(WSNx,(short)100);
   MainWindow->setPropertyV(WSNy,(short)100);
-  MainWindow->setPropertyV(WSNwidth,(unsigned short)787);
-  MainWindow->setPropertyV(WSNheight,(unsigned short)502);
+  MainWindow->setPropertyV(WSNwidth,(unsigned short)788);
+  MainWindow->setPropertyV(WSNheight,(unsigned short)498);
   MainWindow->setPropertyV(WSNvis,(WSCbool)1);
     extern void MainInitFunc(WSCbase*);
     MainWindow->addProcedureV("MainInit","MainInitFunc",MainInitFunc,0);
@@ -432,7 +432,7 @@ WSCbase* _create_win_MainWindow(){
   MainMenu->setPropertyV(WSNname,"MainMenu");
   MainMenu->setPropertyV(WSNx,(short)0);
   MainMenu->setPropertyV(WSNy,(short)0);
-  MainMenu->setPropertyV(WSNwidth,(unsigned short)787);
+  MainMenu->setPropertyV(WSNwidth,(unsigned short)788);
   MainMenu->setPropertyV(WSNheight,(unsigned short)23);
   MainMenu->setPropertyV(WSNvis,(WSCbool)1);
   MainMenu->setPropertyV(WSNanchorLeftFlag,(WSCbool)1);
@@ -834,6 +834,8 @@ WSCbase* _create_win_MainWindow(){
   SeqStationaly->setPropertyV(WSNy,(short)30);
   SeqStationaly->setPropertyV(WSNwidth,(unsigned short)55);
   SeqStationaly->setPropertyV(WSNheight,(unsigned short)25);
+    extern void SeqStationalyValueChFunc(WSCbase*);
+    SeqStationaly->addProcedureV("SeqStationalyValueCh","SeqStationalyValueChFunc",SeqStationalyValueChFunc,3);
 
   Maivlab_063 = new  WSCvlabel(Maiinde_012,"Maivlab_063");
       Maivlab_063->initialize();
@@ -863,6 +865,8 @@ WSCbase* _create_win_MainWindow(){
   SeqMoving->setPropertyV(WSNy,(short)55);
   SeqMoving->setPropertyV(WSNwidth,(unsigned short)55);
   SeqMoving->setPropertyV(WSNheight,(unsigned short)25);
+    extern void SeqMovingValueChFunc(WSCbase*);
+    SeqMoving->addProcedureV("SeqMovingValueCh","SeqMovingValueChFunc",SeqMovingValueChFunc,3);
 
   SeqHitting = new  WSCvifield(Maiinde_012,"SeqHitting");
       SeqHitting->initialize();
@@ -872,6 +876,8 @@ WSCbase* _create_win_MainWindow(){
   SeqHitting->setPropertyV(WSNy,(short)80);
   SeqHitting->setPropertyV(WSNwidth,(unsigned short)55);
   SeqHitting->setPropertyV(WSNheight,(unsigned short)25);
+    extern void SeqHittingVChFunc(WSCbase*);
+    SeqHitting->addProcedureV("SeqHittingVCh","SeqHittingVChFunc",SeqHittingVChFunc,3);
 
   SeqSoftDying = new  WSCvifield(Maiinde_012,"SeqSoftDying");
       SeqSoftDying->initialize();
@@ -881,6 +887,8 @@ WSCbase* _create_win_MainWindow(){
   SeqSoftDying->setPropertyV(WSNy,(short)105);
   SeqSoftDying->setPropertyV(WSNwidth,(unsigned short)55);
   SeqSoftDying->setPropertyV(WSNheight,(unsigned short)25);
+    extern void SeqSoftDyingVChFunc(WSCbase*);
+    SeqSoftDying->addProcedureV("SeqSoftDyingVCh","SeqSoftDyingVChFunc",SeqSoftDyingVChFunc,3);
 
   SeqSoftDead = new  WSCvifield(Maiinde_012,"SeqSoftDead");
       SeqSoftDead->initialize();
@@ -890,6 +898,8 @@ WSCbase* _create_win_MainWindow(){
   SeqSoftDead->setPropertyV(WSNy,(short)130);
   SeqSoftDead->setPropertyV(WSNwidth,(unsigned short)55);
   SeqSoftDead->setPropertyV(WSNheight,(unsigned short)25);
+    extern void SeqSoftDeadVChFunc(WSCbase*);
+    SeqSoftDead->addProcedureV("SeqSoftDeadVCh","SeqSoftDeadVChFunc",SeqSoftDeadVChFunc,3);
 
   SeqHardDying = new  WSCvifield(Maiinde_012,"SeqHardDying");
       SeqHardDying->initialize();
@@ -899,6 +909,8 @@ WSCbase* _create_win_MainWindow(){
   SeqHardDying->setPropertyV(WSNy,(short)155);
   SeqHardDying->setPropertyV(WSNwidth,(unsigned short)55);
   SeqHardDying->setPropertyV(WSNheight,(unsigned short)25);
+    extern void SeqHardDyingVChFunc(WSCbase*);
+    SeqHardDying->addProcedureV("SeqHardDyingVCh","SeqHardDyingVChFunc",SeqHardDyingVChFunc,3);
 
   SeqHardDead = new  WSCvifield(Maiinde_012,"SeqHardDead");
       SeqHardDead->initialize();
@@ -908,6 +920,8 @@ WSCbase* _create_win_MainWindow(){
   SeqHardDead->setPropertyV(WSNy,(short)180);
   SeqHardDead->setPropertyV(WSNwidth,(unsigned short)55);
   SeqHardDead->setPropertyV(WSNheight,(unsigned short)25);
+    extern void SeqHardDeadVChFunc(WSCbase*);
+    SeqHardDead->addProcedureV("SeqHardDeadVCh","SeqHardDeadVChFunc",SeqHardDeadVChFunc,3);
 
   SeqTeleportIn = new  WSCvifield(Maiinde_012,"SeqTeleportIn");
       SeqTeleportIn->initialize();
@@ -917,6 +931,8 @@ WSCbase* _create_win_MainWindow(){
   SeqTeleportIn->setPropertyV(WSNy,(short)205);
   SeqTeleportIn->setPropertyV(WSNwidth,(unsigned short)55);
   SeqTeleportIn->setPropertyV(WSNheight,(unsigned short)25);
+    extern void SeqTeleportInVChFunc(WSCbase*);
+    SeqTeleportIn->addProcedureV("SeqTeleportInVCh","SeqTeleportInVChFunc",SeqTeleportInVChFunc,3);
 
   SeqTeleportOut = new  WSCvifield(Maiinde_012,"SeqTeleportOut");
       SeqTeleportOut->initialize();
@@ -926,6 +942,8 @@ WSCbase* _create_win_MainWindow(){
   SeqTeleportOut->setPropertyV(WSNy,(short)230);
   SeqTeleportOut->setPropertyV(WSNwidth,(unsigned short)55);
   SeqTeleportOut->setPropertyV(WSNheight,(unsigned short)25);
+    extern void SeqTeleportOutVChFunc(WSCbase*);
+    SeqTeleportOut->addProcedureV("SeqTeleportOutVCh","SeqTeleportOutVChFunc",SeqTeleportOutVChFunc,3);
 
   Maivlab_073 = new  WSCvlabel(Maiinde_012,"Maivlab_073");
       Maivlab_073->initialize();
@@ -1446,6 +1464,8 @@ WSCbase* _create_win_MainWindow(){
   ShapnelRadiusEdit->setPropertyV(WSNy,(short)255);
   ShapnelRadiusEdit->setPropertyV(WSNwidth,(unsigned short)55);
   ShapnelRadiusEdit->setPropertyV(WSNheight,(unsigned short)25);
+    extern void ShapnelRadiusEditVChFunc(WSCbase*);
+    ShapnelRadiusEdit->addProcedureV("ShapnelRadiusEditVCh","ShapnelRadiusEditVChFunc",ShapnelRadiusEditVChFunc,3);
 
   Maivlab_012 = new  WSCvlabel(Maiinde_012,"Maivlab_012");
       Maivlab_012->initialize();
@@ -1495,6 +1515,8 @@ WSCbase* _create_win_MainWindow(){
   ShapnelRndEdit->setPropertyV(WSNy,(short)305);
   ShapnelRndEdit->setPropertyV(WSNwidth,(unsigned short)55);
   ShapnelRndEdit->setPropertyV(WSNheight,(unsigned short)25);
+    extern void ShapnelRndEditVChFunc(WSCbase*);
+    ShapnelRndEdit->addProcedureV("ShapnelRndEditVCh","ShapnelRndEditVChFunc",ShapnelRndEditVChFunc,3);
 
   ShapnelScaleEdit = new  WSCvifield(Maiinde_012,"ShapnelScaleEdit");
       ShapnelScaleEdit->initialize();
@@ -1504,6 +1526,8 @@ WSCbase* _create_win_MainWindow(){
   ShapnelScaleEdit->setPropertyV(WSNy,(short)330);
   ShapnelScaleEdit->setPropertyV(WSNwidth,(unsigned short)55);
   ShapnelScaleEdit->setPropertyV(WSNheight,(unsigned short)25);
+    extern void ShapnelScaleEditVChFunc(WSCbase*);
+    ShapnelScaleEdit->addProcedureV("ShapnelScaleEditVCh","ShapnelScaleEditVChFunc",ShapnelScaleEditVChFunc,3);
 
   ShapnelBaseEdit = new  WSCvifield(Maiinde_012,"ShapnelBaseEdit");
       ShapnelBaseEdit->initialize();
@@ -1513,6 +1537,8 @@ WSCbase* _create_win_MainWindow(){
   ShapnelBaseEdit->setPropertyV(WSNy,(short)280);
   ShapnelBaseEdit->setPropertyV(WSNwidth,(unsigned short)55);
   ShapnelBaseEdit->setPropertyV(WSNheight,(unsigned short)25);
+    extern void ShapnelBaseEditVChFunc(WSCbase*);
+    ShapnelBaseEdit->addProcedureV("ShapnelBaseEditVCh","ShapnelBaseEditVChFunc",ShapnelBaseEditVChFunc,3);
 
   ShapnelTypeBtn = new  WSCvbtn(Maiinde_012,"ShapnelTypeBtn");
       ShapnelTypeBtn->initialize();
@@ -2152,7 +2178,7 @@ WSCbase* _create_win_MainWindow(){
   ListProjectile->setPropertyV(WSNdataSource,(unsigned char)2);
   ListProjectile->setPropertyV(WSNdataSourceName,"data/Projectiles.txt");
   ListProjectile->setPropertyV(WSNworkWidth,(unsigned short)200);
-  ListProjectile->setPropertyV(WSNworkHeight,(unsigned short)456);
+  ListProjectile->setPropertyV(WSNworkHeight,(unsigned short)26);
   ListProjectile->setPropertyV(WSNname,"ListProjectile");
   ListProjectile->setPropertyV(WSNx,(short)5);
   ListProjectile->setPropertyV(WSNy,(short)5);
@@ -3114,7 +3140,7 @@ WSCbase* _create_win_MainWindow(){
   Mailist_000->setPropertyV(WSNtitleString,"title1");
   Mailist_000->setPropertyV(WSNdataSource,(unsigned char)2);
   Mailist_000->setPropertyV(WSNdataSourceName,"data/Weapons.txt");
-  Mailist_000->setPropertyV(WSNworkHeight,(unsigned short)456);
+  Mailist_000->setPropertyV(WSNworkHeight,(unsigned short)26);
   Mailist_000->setPropertyV(WSNname,"Mailist_000");
   Mailist_000->setPropertyV(WSNx,(short)5);
   Mailist_000->setPropertyV(WSNy,(short)5);

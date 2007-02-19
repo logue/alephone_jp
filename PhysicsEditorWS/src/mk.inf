@@ -51,6 +51,15 @@ OPOBJ = \
         MinLedgeEditValueChFunc.o \
         MaxLedgeEditValueChFunc.o \
         ExtVelScaleEditValueChFunc.o \
+        SeqStationalyValueChFunc.o \
+        SeqMovingValueChFunc.o \
+        SeqHittingVChFunc.o \
+        SeqSoftDyingVChFunc.o \
+        SeqSoftDeadVChFunc.o \
+        SeqHardDyingVChFunc.o \
+        SeqHardDeadVChFunc.o \
+        SeqTeleportInVChFunc.o \
+        SeqTeleportOutVChFunc.o \
         HalfVisualArcEditValueChFunc.o \
         VertVisualArcEditValueChFunc.o \
         SpeedEditValueChFunc.o \
@@ -60,6 +69,10 @@ OPOBJ = \
         CollectionBtnFunc.o \
         CaarryItemBtnFunc.o \
         ClassComboValueChFunc.o \
+        ShapnelRadiusEditVChFunc.o \
+        ShapnelRndEditVChFunc.o \
+        ShapnelScaleEditVChFunc.o \
+        ShapnelBaseEditVChFunc.o \
         ShapnelTypeBtnDownFunc.o \
         BtnMeleePresetDownFunc.o \
         BtnPresetThisAllEnemyOnDownFunc.o \

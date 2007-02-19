@@ -20,9 +20,9 @@ PhysicsEditorWS
  #RES      y
 100
  #RES      width
-630
+788
  #RES      height
-423
+498
  #RES      vis
 1
 
@@ -34,7 +34,7 @@ PhysicsEditorWS
  #RES      y
 0
  #RES      width
-630
+788
  #RES      height
 23
  #RES      vis
@@ -235,8 +235,6 @@ data/MonsterTypes.txt
 
  #RES      menuItems
 Appearance,Flags1,Attack
- #RES      value
-1
  #RES      x
 120
  #RES      y
@@ -255,6 +253,8 @@ Appearance,Flags1,Attack
 1
  #RES      labelString
 Collection
+ #RES      vis
+1
  #RES      x
 5
  #RES      y
@@ -271,6 +271,8 @@ Collection
 1
  #RES      labelString
 Pallet
+ #RES      vis
+1
  #RES      x
 5
  #RES      y
@@ -289,6 +291,8 @@ Pallet
 
  #RES      userValue
 1
+ #RES      vis
+1
  #RES      x
 95
  #RES      y
@@ -305,6 +309,8 @@ Pallet
 1
  #RES      labelString
 Vitality
+ #RES      vis
+1
  #RES      x
 5
  #RES      y
@@ -321,6 +327,8 @@ Vitality
 1
  #RES      labelString
 Class
+ #RES      vis
+1
  #RES      x
 5
  #RES      y
@@ -339,6 +347,8 @@ Class
 
  #RES      userValue
 1
+ #RES      vis
+1
  #RES      x
 95
  #RES      y
@@ -355,6 +365,8 @@ Class
 1
  #RES      labelString
 Radius
+ #RES      vis
+1
  #RES      x
 5
  #RES      y
@@ -371,6 +383,8 @@ Radius
 1
  #RES      labelString
 Height
+ #RES      vis
+1
  #RES      x
 5
  #RES      y
@@ -388,6 +402,8 @@ Height
   #PRO   RadiusEditValueChFunc.cpp
 
  #RES      userValue
+1
+ #RES      vis
 1
  #RES      x
 95
@@ -407,6 +423,8 @@ Height
 
  #RES      userValue
 1
+ #RES      vis
+1
  #RES      x
 95
  #RES      y
@@ -423,6 +441,8 @@ Height
 1
  #RES      labelString
 Hover
+ #RES      vis
+1
  #RES      x
 5
  #RES      y
@@ -439,6 +459,8 @@ Hover
 1
  #RES      labelString
 Min Ledge
+ #RES      vis
+1
  #RES      x
 5
  #RES      y
@@ -455,6 +477,8 @@ Min Ledge
 1
  #RES      labelString
 Max Ledge
+ #RES      vis
+1
  #RES      x
 5
  #RES      y
@@ -471,6 +495,8 @@ Max Ledge
 1
  #RES      labelString
 ExtVelScale
+ #RES      vis
+1
  #RES      x
 5
  #RES      y
@@ -487,6 +513,8 @@ ExtVelScale
 1
  #RES      labelString
 CarryItem
+ #RES      vis
+1
  #RES      x
 5
  #RES      y
@@ -504,6 +532,8 @@ CarryItem
   #PRO   HoverEditValueChFunc.cpp
 
  #RES      userValue
+1
+ #RES      vis
 1
  #RES      x
 95
@@ -523,6 +553,8 @@ CarryItem
 
  #RES      userValue
 1
+ #RES      vis
+1
  #RES      x
 95
  #RES      y
@@ -540,6 +572,8 @@ CarryItem
   #PRO   MaxLedgeEditValueChFunc.cpp
 
  #RES      userValue
+1
+ #RES      vis
 1
  #RES      x
 95
@@ -559,6 +593,8 @@ CarryItem
 
  #RES      userValue
 1
+ #RES      vis
+1
  #RES      x
 95
  #RES      y
@@ -575,6 +611,8 @@ CarryItem
 1
  #RES      labelString
 Stationaly
+ #RES      vis
+1
  #RES      x
 205
  #RES      y
@@ -591,6 +629,8 @@ Stationaly
 1
  #RES      labelString
 Moving
+ #RES      vis
+1
  #RES      x
 205
  #RES      y
@@ -607,6 +647,8 @@ Moving
 1
  #RES      labelString
 Hitting
+ #RES      vis
+1
  #RES      x
 205
  #RES      y
@@ -623,6 +665,8 @@ Hitting
 1
  #RES      labelString
 Soft Dying
+ #RES      vis
+1
  #RES      x
 205
  #RES      y
@@ -639,6 +683,8 @@ Soft Dying
 1
  #RES      labelString
 Soft Dead
+ #RES      vis
+1
  #RES      x
 205
  #RES      y
@@ -655,6 +701,8 @@ Soft Dead
 1
  #RES      labelString
 Hard Dying
+ #RES      vis
+1
  #RES      x
 205
  #RES      y
@@ -671,6 +719,8 @@ Hard Dying
 1
  #RES      labelString
 Hard Dead
+ #RES      vis
+1
  #RES      x
 205
  #RES      y
@@ -683,7 +733,13 @@ Hard Dead
 #OBJ       SeqStationaly
  #TYPE       WSCvifield
  #PARENT   Maiinde_012
+ #PROC  SeqStationalyValueCh
+  #TRIG    3
+  #PRO   SeqStationalyValueChFunc.cpp
+
  #RES      userValue
+1
+ #RES      vis
 1
  #RES      x
 295
@@ -701,6 +757,8 @@ Hard Dead
 1
  #RES      labelString
 Teleport In
+ #RES      vis
+1
  #RES      x
 205
  #RES      y
@@ -717,6 +775,8 @@ Teleport In
 1
  #RES      labelString
 Teleport Out
+ #RES      vis
+1
  #RES      x
 205
  #RES      y
@@ -729,7 +789,13 @@ Teleport Out
 #OBJ       SeqMoving
  #TYPE       WSCvifield
  #PARENT   Maiinde_012
+ #PROC  SeqMovingValueCh
+  #TRIG    3
+  #PRO   SeqMovingValueChFunc.cpp
+
  #RES      userValue
+1
+ #RES      vis
 1
  #RES      x
 295
@@ -743,7 +809,13 @@ Teleport Out
 #OBJ       SeqHitting
  #TYPE       WSCvifield
  #PARENT   Maiinde_012
+ #PROC  SeqHittingVCh
+  #TRIG    3
+  #PRO   SeqHittingVChFunc.cpp
+
  #RES      userValue
+1
+ #RES      vis
 1
  #RES      x
 295
@@ -757,7 +829,13 @@ Teleport Out
 #OBJ       SeqSoftDying
  #TYPE       WSCvifield
  #PARENT   Maiinde_012
+ #PROC  SeqSoftDyingVCh
+  #TRIG    3
+  #PRO   SeqSoftDyingVChFunc.cpp
+
  #RES      userValue
+1
+ #RES      vis
 1
  #RES      x
 295
@@ -771,7 +849,13 @@ Teleport Out
 #OBJ       SeqSoftDead
  #TYPE       WSCvifield
  #PARENT   Maiinde_012
+ #PROC  SeqSoftDeadVCh
+  #TRIG    3
+  #PRO   SeqSoftDeadVChFunc.cpp
+
  #RES      userValue
+1
+ #RES      vis
 1
  #RES      x
 295
@@ -785,7 +869,13 @@ Teleport Out
 #OBJ       SeqHardDying
  #TYPE       WSCvifield
  #PARENT   Maiinde_012
+ #PROC  SeqHardDyingVCh
+  #TRIG    3
+  #PRO   SeqHardDyingVChFunc.cpp
+
  #RES      userValue
+1
+ #RES      vis
 1
  #RES      x
 295
@@ -799,7 +889,13 @@ Teleport Out
 #OBJ       SeqHardDead
  #TYPE       WSCvifield
  #PARENT   Maiinde_012
+ #PROC  SeqHardDeadVCh
+  #TRIG    3
+  #PRO   SeqHardDeadVChFunc.cpp
+
  #RES      userValue
+1
+ #RES      vis
 1
  #RES      x
 295
@@ -813,7 +909,13 @@ Teleport Out
 #OBJ       SeqTeleportIn
  #TYPE       WSCvifield
  #PARENT   Maiinde_012
+ #PROC  SeqTeleportInVCh
+  #TRIG    3
+  #PRO   SeqTeleportInVChFunc.cpp
+
  #RES      userValue
+1
+ #RES      vis
 1
  #RES      x
 295
@@ -827,7 +929,13 @@ Teleport Out
 #OBJ       SeqTeleportOut
  #TYPE       WSCvifield
  #PARENT   Maiinde_012
+ #PROC  SeqTeleportOutVCh
+  #TRIG    3
+  #PRO   SeqTeleportOutVChFunc.cpp
+
  #RES      userValue
+1
+ #RES      vis
 1
  #RES      x
 295
@@ -845,6 +953,8 @@ Teleport Out
 1
  #RES      labelString
 SoundPitch
+ #RES      vis
+1
  #RES      x
 350
  #RES      y
@@ -863,6 +973,8 @@ SoundPitch
 ActivationSnd
  #RES      font
 0
+ #RES      vis
+1
  #RES      x
 350
  #RES      y
@@ -877,6 +989,8 @@ ActivationSnd
 1
  #RES      labelString
 FriendActSnd
+ #RES      vis
+1
  #RES      x
 350
  #RES      y
@@ -891,6 +1005,8 @@ FriendActSnd
 1
  #RES      labelString
 ClearSnd
+ #RES      vis
+1
  #RES      x
 350
  #RES      y
@@ -905,6 +1021,8 @@ ClearSnd
 1
  #RES      labelString
 KillSnd
+ #RES      vis
+1
  #RES      x
 350
  #RES      y
@@ -919,6 +1037,8 @@ KillSnd
 1
  #RES      labelString
 ApologySnd
+ #RES      vis
+1
  #RES      x
 350
  #RES      y
@@ -933,6 +1053,8 @@ ApologySnd
 1
  #RES      labelString
 FriendFireSnd
+ #RES      vis
+1
  #RES      x
 350
  #RES      y
@@ -947,6 +1069,8 @@ FriendFireSnd
 1
  #RES      labelString
 FlamingSnd
+ #RES      vis
+1
  #RES      x
 350
  #RES      y
@@ -961,6 +1085,8 @@ FlamingSnd
 1
  #RES      labelString
 RandomSnd
+ #RES      vis
+1
  #RES      x
 350
  #RES      y
@@ -972,6 +1098,8 @@ RandomSnd
  #TYPE       WSCvifield
  #PARENT   Maiinde_012
  #RES      userValue
+1
+ #RES      vis
 1
  #RES      x
 440
@@ -986,6 +1114,8 @@ RandomSnd
  #TYPE       WSCvifield
  #PARENT   Maiinde_012
  #RES      userValue
+1
+ #RES      vis
 1
  #RES      x
 450
@@ -1003,6 +1133,8 @@ RandomSnd
 1
  #RES      labelString
 RandomSndMask
+ #RES      vis
+1
  #RES      x
 350
  #RES      y
@@ -1017,6 +1149,8 @@ RandomSndMask
 1
  #RES      labelString
 ImpactEffect
+ #RES      vis
+1
  #RES      x
 345
  #RES      y
@@ -1033,6 +1167,8 @@ ImpactEffect
 1
  #RES      labelString
 MeleeEffect
+ #RES      vis
+1
  #RES      x
 345
  #RES      y
@@ -1049,6 +1185,8 @@ MeleeEffect
 1
  #RES      labelString
 ContrailEffect
+ #RES      vis
+1
  #RES      x
 345
  #RES      y
@@ -1065,6 +1203,8 @@ ContrailEffect
 1
  #RES      labelString
 HalfVisualArc
+ #RES      vis
+1
  #RES      x
 5
  #RES      y
@@ -1079,6 +1219,8 @@ HalfVisualArc
 1
  #RES      labelString
 VertVisualArc
+ #RES      vis
+1
  #RES      x
 5
  #RES      y
@@ -1093,6 +1235,8 @@ VertVisualArc
 1
  #RES      labelString
 Intelligence
+ #RES      vis
+1
  #RES      x
 5
  #RES      y
@@ -1109,6 +1253,8 @@ Intelligence
 1
  #RES      labelString
 Speed
+ #RES      vis
+1
  #RES      x
 5
  #RES      y
@@ -1125,6 +1271,8 @@ Speed
 1
  #RES      labelString
 Gravity
+ #RES      vis
+1
  #RES      x
 5
  #RES      y
@@ -1142,6 +1290,8 @@ Gravity
   #PRO   HalfVisualArcEditValueChFunc.cpp
 
  #RES      userValue
+1
+ #RES      vis
 1
  #RES      x
 105
@@ -1161,6 +1311,8 @@ Gravity
 
  #RES      userValue
 1
+ #RES      vis
+1
  #RES      x
 105
  #RES      y
@@ -1178,6 +1330,8 @@ Gravity
   #PRO   SpeedEditValueChFunc.cpp
 
  #RES      userValue
+1
+ #RES      vis
 1
  #RES      x
 95
@@ -1197,6 +1351,8 @@ Gravity
 
  #RES      userValue
 1
+ #RES      vis
+1
  #RES      x
 95
  #RES      y
@@ -1213,8 +1369,6 @@ Gravity
 2
  #RES      labelString
 Set as Default
- #RES      vis
-1
  #RES      x
 270
  #RES      y
@@ -1239,6 +1393,8 @@ Set as Default
 item1
  #RES      font
 0
+ #RES      vis
+1
  #RES      x
 175
  #RES      y
@@ -1263,6 +1419,8 @@ Low:1:ep1_name,Average:2:ep2_name,High:3:ep3_name
 Low
  #RES      font
 0
+ #RES      vis
+1
  #RES      x
 95
  #RES      y
@@ -1283,6 +1441,8 @@ Low
 1
  #RES      font
 0
+ #RES      vis
+1
  #RES      x
 95
  #RES      y
@@ -1303,6 +1463,8 @@ Low
 1
  #RES      font
 0
+ #RES      vis
+1
  #RES      x
 95
  #RES      y
@@ -1319,6 +1481,8 @@ Low
 1
  #RES      font
 0
+ #RES      vis
+1
  #RES      x
 450
  #RES      y
@@ -1335,6 +1499,8 @@ Low
 1
  #RES      font
 0
+ #RES      vis
+1
  #RES      x
 450
  #RES      y
@@ -1351,6 +1517,8 @@ Low
 1
  #RES      font
 0
+ #RES      vis
+1
  #RES      x
 450
  #RES      y
@@ -1367,6 +1535,8 @@ Low
 1
  #RES      font
 0
+ #RES      vis
+1
  #RES      x
 450
  #RES      y
@@ -1383,6 +1553,8 @@ Low
 1
  #RES      font
 0
+ #RES      vis
+1
  #RES      x
 450
  #RES      y
@@ -1399,6 +1571,8 @@ Low
 1
  #RES      font
 0
+ #RES      vis
+1
  #RES      x
 450
  #RES      y
@@ -1415,6 +1589,8 @@ Low
 1
  #RES      font
 0
+ #RES      vis
+1
  #RES      x
 450
  #RES      y
@@ -1431,6 +1607,8 @@ Low
 1
  #RES      font
 0
+ #RES      vis
+1
  #RES      x
 450
  #RES      y
@@ -1455,6 +1633,8 @@ Low
 item1
  #RES      font
 0
+ #RES      vis
+1
  #RES      x
 95
  #RES      y
@@ -1471,6 +1651,8 @@ item1
 1
  #RES      font
 0
+ #RES      vis
+1
  #RES      x
 450
  #RES      y
@@ -1487,6 +1669,8 @@ item1
 1
  #RES      font
 0
+ #RES      vis
+1
  #RES      x
 450
  #RES      y
@@ -1503,6 +1687,8 @@ item1
 1
  #RES      font
 0
+ #RES      vis
+1
  #RES      x
 450
  #RES      y
@@ -1519,6 +1705,8 @@ item1
 1
  #RES      labelString
 SetAsDefault
+ #RES      vis
+1
  #RES      x
 460
  #RES      y
@@ -1547,8 +1735,6 @@ Immunities
 105
  #RES      height
 430
- #RES      vis
-1
 
 #OBJ       ListWeakness
  #TYPE       WSCcheckGroup
@@ -1571,8 +1757,6 @@ Weakness
 105
  #RES      height
 430
- #RES      vis
-1
 
 #OBJ       ListEnemies
  #TYPE       WSCcheckGroup
@@ -1597,8 +1781,6 @@ Enemies
 105
  #RES      height
 340
- #RES      vis
-1
 
 #OBJ       ListFriends
  #TYPE       WSCcheckGroup
@@ -1623,8 +1805,6 @@ Friends
 110
  #RES      height
 340
- #RES      vis
-1
 
 #OBJ       ListFlags
  #TYPE       WSCcheckGroup
@@ -1649,8 +1829,6 @@ Flags
 105
  #RES      height
 430
- #RES      vis
-1
 
 #OBJ       Maivlab_009
  #TYPE       WSCvlabel
@@ -1659,6 +1837,8 @@ Flags
 1
  #RES      labelString
 ShrapnelR
+ #RES      vis
+1
  #RES      x
 205
  #RES      y
@@ -1671,7 +1851,13 @@ ShrapnelR
 #OBJ       ShapnelRadiusEdit
  #TYPE       WSCvifield
  #PARENT   Maiinde_012
+ #PROC  ShapnelRadiusEditVCh
+  #TRIG    3
+  #PRO   ShapnelRadiusEditVChFunc.cpp
+
  #RES      userValue
+1
+ #RES      vis
 1
  #RES      x
 295
@@ -1689,6 +1875,8 @@ ShrapnelR
 1
  #RES      labelString
 ShrapnelType
+ #RES      vis
+1
  #RES      x
 205
  #RES      y
@@ -1705,6 +1893,8 @@ ShrapnelType
 1
  #RES      labelString
 ShrapnelScale
+ #RES      vis
+1
  #RES      x
 205
  #RES      y
@@ -1721,6 +1911,8 @@ ShrapnelScale
 1
  #RES      labelString
 ShrapnelBase
+ #RES      vis
+1
  #RES      x
 205
  #RES      y
@@ -1737,6 +1929,8 @@ ShrapnelBase
 1
  #RES      labelString
 ShrapnelRnd
+ #RES      vis
+1
  #RES      x
 205
  #RES      y
@@ -1749,7 +1943,13 @@ ShrapnelRnd
 #OBJ       ShapnelRndEdit
  #TYPE       WSCvifield
  #PARENT   Maiinde_012
+ #PROC  ShapnelRndEditVCh
+  #TRIG    3
+  #PRO   ShapnelRndEditVChFunc.cpp
+
  #RES      userValue
+1
+ #RES      vis
 1
  #RES      x
 295
@@ -1763,7 +1963,13 @@ ShrapnelRnd
 #OBJ       ShapnelScaleEdit
  #TYPE       WSCvifield
  #PARENT   Maiinde_012
+ #PROC  ShapnelScaleEditVCh
+  #TRIG    3
+  #PRO   ShapnelScaleEditVChFunc.cpp
+
  #RES      userValue
+1
+ #RES      vis
 1
  #RES      x
 295
@@ -1777,7 +1983,13 @@ ShrapnelRnd
 #OBJ       ShapnelBaseEdit
  #TYPE       WSCvifield
  #PARENT   Maiinde_012
+ #PROC  ShapnelBaseEditVCh
+  #TRIG    3
+  #PRO   ShapnelBaseEditVChFunc.cpp
+
  #RES      userValue
+1
+ #RES      vis
 1
  #RES      x
 295
@@ -1799,6 +2011,8 @@ ShrapnelRnd
 1
  #RES      font
 0
+ #RES      vis
+1
  #RES      x
 295
  #RES      y
@@ -1815,6 +2029,8 @@ ShrapnelRnd
 1
  #RES      labelString
 Shrapnel is Alien
+ #RES      vis
+1
  #RES      x
 295
  #RES      y
@@ -2169,8 +2385,6 @@ Preset From Other Monster
 2
  #RES      labelString
 Set All Enemy Check For This
- #RES      vis
-1
  #RES      x
 225
  #RES      y
@@ -2191,8 +2405,6 @@ Set All Enemy Check For This
 2
  #RES      labelString
 Set All Enemy Unchk For This
- #RES      vis
-1
  #RES      x
 225
  #RES      y
@@ -2828,7 +3040,7 @@ data/Projectiles.txt
  #RES      workWidth
 200
  #RES      workHeight
-456
+26
  #RES      x
 5
  #RES      y
@@ -4352,7 +4564,7 @@ title1
  #RES      dataSourceName
 data/Weapons.txt
  #RES      workHeight
-456
+26
  #RES      x
 5
  #RES      y

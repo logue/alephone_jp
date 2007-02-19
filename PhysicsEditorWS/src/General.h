@@ -112,5 +112,6 @@ WSCbase* getObject(const char* class_name, const char* obj_name);
 WSCbase* getChild(WSCbase* parent, const char* obj_name);
 void messageBox(const char* format, ...);
 void changeForm(int wtype);
+void setValueByName(WSCbase* object);
 
 #endif

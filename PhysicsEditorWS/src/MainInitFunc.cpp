@@ -326,6 +326,50 @@ void setupTrigger(int triggerIndex, const char* addon, WSCbase* parent)
 		weapon_definitions[type].weapons_by_trigger[triggerIndex].burst_count);
 }
 
+/*インスタンス名で判定して値取得＆設定*/
+void setValueByName(WSCbase* object)
+{
+	long value = getInteger(object);
+	
+	int type = 0;
+	if(windowType == Windows::Monster){
+		type = selectedMonsterType;
+	}
+	//monster-appearance
+	if(strcmp(object->getProperty(WSNname), "SeqStationaly") == 0){
+		monster_definitions[type].stationary_shape = value;
+	}else if(strcmp(object->getProperty(WSNname), "SeqMoving") == 0){
+		monster_definitions[type].moving_shape = value;
+	}else if(strcmp(object->getProperty(WSNname), "SeqHitting") == 0){
+		monster_definitions[type].hit_shapes = value;
+	}else if(strcmp(object->getProperty(WSNname), "SeqSoftDying") == 0){
+		monster_definitions[type].soft_dying_shape = value;
+	}else if(strcmp(object->getProperty(WSNname), "SeqSoftDead") == 0){
+		monster_definitions[type].soft_dead_shapes = value;
+	}else if(strcmp(object->getProperty(WSNname), "SeqHardDying") == 0){
+		monster_definitions[type].hard_dying_shape = value;
+	}else if(strcmp(object->getProperty(WSNname), "SeqHardDead") == 0){
+		monster_definitions[type].hard_dead_shapes = value;
+	}else if(strcmp(object->getProperty(WSNname), "SeqTeleportIn") == 0){
+		monster_definitions[type].teleport_in_shape = value;
+	}else if(strcmp(object->getProperty(WSNname), "SeqTeleportOut") == 0){
+		monster_definitions[type].teleport_out_shape = value;
+	}else if(strcmp(object->getProperty(WSNname), "ShapnelRadiusEdit") == 0){
+		monster_definitions[type].shrapnel_radius = value;
+	}else if(strcmp(object->getProperty(WSNname), "ShapnelBaseEdit") == 0){
+		monster_definitions[type].shrapnel_damage.base = value;
+	}else if(strcmp(object->getProperty(WSNname), "ShapnelRndEdit") == 0){
+		monster_definitions[type].shrapnel_damage.random = value;
+	}else if(strcmp(object->getProperty(WSNname), "ShapnelScaleEdit") == 0){
+		monster_definitions[type].shrapnel_damage.scale = value;
+	}else if(strcmp(object->getProperty(WSNname), "SeqHitting") == 0){
+		monster_definitions[type].hit_shapes = value;
+	}else{
+		//
+		messageBox("Unknown item");
+	}
+}
+
 void setupDialog()//WSCbase* object)
 {
 	if(windowType == Windows::Monster){
@@ -410,14 +454,18 @@ void setupDialog()//WSCbase* object)
 			//speed
 			int speed = monster_definitions[type].speed;
 			setInteger(getChild(indextab, "SpeedEdit"), speed);
+			
 			int speedIndex = getIndexFromValueArray(valueSpeed, NUMBER_OF_SPEED_INFORMATIONS,
 				speed);
 			if(speedIndex >= 0){
 				//
-				getChild(indextab, "SpeedEdit")->setProperty(WSNlabelString,
-					stockSpeeds[speedIndex].c_str());
+			}else{
+				speedIndex = stockSpeeds.size() - 1;
 			}
+			getChild(indextab, "SpeedCombo")->setProperty(WSNlabelString,
+				stockSpeeds[speedIndex].c_str());
 			//getChild(indextab, "SpeedCombo")->setProperty(WSNvalue, );
+			
 			//gravity
 			setInteger(getChild(indextab, "GravityEdit"), monster_definitions[type].gravity);
 			
