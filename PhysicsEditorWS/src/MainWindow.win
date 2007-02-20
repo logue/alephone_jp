@@ -212,7 +212,7 @@ data/MonsterTypes.txt
  #RES      workWidth
 300
  #RES      workHeight
-470
+430
  #RES      hbarVisible
 1
  #RES      x
@@ -1097,6 +1097,10 @@ RandomSnd
 #OBJ       SoundPitchEdit
  #TYPE       WSCvifield
  #PARENT   Maiinde_012
+ #PROC  SoundPitchEditVCh
+  #TRIG    3
+  #PRO   SoundPitchEditVChFunc.cpp
+
  #RES      userValue
 1
  #RES      vis
@@ -1113,6 +1117,10 @@ RandomSnd
 #OBJ       RandomSndMaskEdit
  #TYPE       WSCvifield
  #PARENT   Maiinde_012
+ #PROC  RandomSndMaskEditVCh
+  #TRIG    3
+  #PRO   RandomSndMaskEditVChFunc.cpp
+
  #RES      userValue
 1
  #RES      vis
@@ -1477,6 +1485,10 @@ Low
 #OBJ       ActivationSndBtn
  #TYPE       WSCvbtn
  #PARENT   Maiinde_012
+ #PROC  ActivationSndBtnDown
+  #TRIG    13
+  #PRO   ActivationSndBtnDownFunc.cpp
+
  #RES      userValue
 1
  #RES      font
@@ -1495,6 +1507,10 @@ Low
 #OBJ       FriendActSndBtn
  #TYPE       WSCvbtn
  #PARENT   Maiinde_012
+ #PROC  FriendActSndBtnDown
+  #TRIG    13
+  #PRO   FriendActSndBtnDownFunc.cpp
+
  #RES      userValue
 1
  #RES      font
@@ -1513,6 +1529,10 @@ Low
 #OBJ       ClearSndBtn
  #TYPE       WSCvbtn
  #PARENT   Maiinde_012
+ #PROC  ClearSndBtnDown
+  #TRIG    13
+  #PRO   ClearSndBtnDownFunc.cpp
+
  #RES      userValue
 1
  #RES      font
@@ -1531,6 +1551,10 @@ Low
 #OBJ       KillSndBtn
  #TYPE       WSCvbtn
  #PARENT   Maiinde_012
+ #PROC  KillSndBtnDown
+  #TRIG    13
+  #PRO   KillSndBtnDownFunc.cpp
+
  #RES      userValue
 1
  #RES      font
@@ -1549,6 +1573,10 @@ Low
 #OBJ       ApologySndBtn
  #TYPE       WSCvbtn
  #PARENT   Maiinde_012
+ #PROC  ApologySndBtnDown
+  #TRIG    13
+  #PRO   ApologySndBtnDownFunc.cpp
+
  #RES      userValue
 1
  #RES      font
@@ -1567,6 +1595,10 @@ Low
 #OBJ       FriendFireSndBtn
  #TYPE       WSCvbtn
  #PARENT   Maiinde_012
+ #PROC  FriendFireSndBtnDown
+  #TRIG    13
+  #PRO   FriendFireSndBtnDownFunc.cpp
+
  #RES      userValue
 1
  #RES      font
@@ -1585,6 +1617,10 @@ Low
 #OBJ       FlamingSndBtn
  #TYPE       WSCvbtn
  #PARENT   Maiinde_012
+ #PROC  FlamingSndBtnDown
+  #TRIG    13
+  #PRO   FlamingSndBtnDownFunc.cpp
+
  #RES      userValue
 1
  #RES      font
@@ -1603,6 +1639,10 @@ Low
 #OBJ       RandomSndBtn
  #TYPE       WSCvbtn
  #PARENT   Maiinde_012
+ #PROC  RandomSndBtnDown
+  #TRIG    13
+  #PRO   RandomSndBtnDownFunc.cpp
+
  #RES      userValue
 1
  #RES      font
@@ -1647,6 +1687,10 @@ item1
 #OBJ       ImpactEffectBtn
  #TYPE       WSCvbtn
  #PARENT   Maiinde_012
+ #PROC  ImpactEffectBtnDown
+  #TRIG    13
+  #PRO   ImpactEffectBtnDownFunc.cpp
+
  #RES      userValue
 1
  #RES      font
@@ -1665,6 +1709,10 @@ item1
 #OBJ       MeleeEffectBtn
  #TYPE       WSCvbtn
  #PARENT   Maiinde_012
+ #PROC  MeleeEffectBtnDown
+  #TRIG    13
+  #PRO   MeleeEffectBtnDownFunc.cpp
+
  #RES      userValue
 1
  #RES      font
@@ -1683,6 +1731,10 @@ item1
 #OBJ       ContrailEffectBtn
  #TYPE       WSCvbtn
  #PARENT   Maiinde_012
+ #PROC  ContrailEffectBtnDown
+  #TRIG    13
+  #PRO   ContrailEffectBtnDownFunc.cpp
+
  #RES      userValue
 1
  #RES      font
@@ -1701,6 +1753,10 @@ item1
 #OBJ       BtnDefaultMonster01
  #TYPE       WSCvbtn
  #PARENT   Maiinde_012
+ #PROC  BtnDefaultMonster01Down
+  #TRIG    13
+  #PRO   BtnDefaultMonster01DownFunc.cpp
+
  #RES      userValue
 1
  #RES      labelString
@@ -2025,6 +2081,10 @@ ShrapnelRnd
 #OBJ       ShapnelAlienCheck
  #TYPE       WSCvradio
  #PARENT   Maiinde_012
+ #PROC  ShapnelAlienCheckVCh
+  #TRIG    3
+  #PRO   ShapnelAlienCheckVChFunc.cpp
+
  #RES      userValue
 1
  #RES      labelString
@@ -2790,7 +2850,7 @@ data/Effects.txt
  #RES      workWidth
 200
  #RES      workHeight
-10
+440
  #RES      hbarVisible
 1
  #RES      x
@@ -3040,7 +3100,7 @@ data/Projectiles.txt
  #RES      workWidth
 200
  #RES      workHeight
-26
+456
  #RES      x
 5
  #RES      y
@@ -3449,6 +3509,8 @@ Scale
 #OBJ       ProjDamageFlags
  #TYPE       WSCvradio
  #PARENT   Maitfor_129
+ #RES      status
+1
  #RES      labelString
 Alien
  #RES      vis
@@ -4564,7 +4626,7 @@ title1
  #RES      dataSourceName
 data/Weapons.txt
  #RES      workHeight
-26
+456
  #RES      x
 5
  #RES      y

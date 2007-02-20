@@ -364,10 +364,51 @@ void setValueByName(WSCbase* object)
 		monster_definitions[type].shrapnel_damage.scale = value;
 	}else if(strcmp(object->getProperty(WSNname), "SeqHitting") == 0){
 		monster_definitions[type].hit_shapes = value;
+		
+		////////////////////////
+		//appearance-3
+	}else if(strcmp(object->getProperty(WSNname), "SoundPitchEdit") == 0){
+		monster_definitions[type].sound_pitch = value;
+	}else if(strcmp(object->getProperty(WSNname), "RandomSndMaskEdit") == 0){
+		monster_definitions[type].random_sound_mask = value;
 	}else{
 		//
 		messageBox("Unknown item");
 	}
+}
+
+/**
+	@param isMaxNONE もし最大値を選択した場合、それはNONEにあたる
+*/
+void selectFromDialog(int* value, WSCbase* object,
+std::vector<std::string>& stock,
+bool isMaxNONE)
+{
+	//選択ダイアログを表示
+	WSCbase* dlg = getObject("WSCdialog", "WndSelect");
+	//リストに候補を代入
+	//コレクションリスト
+	WSClist* lst = (WSClist*)getChild(dlg, "ListSelect");
+	lst->delAll();
+	//
+	for(int i = 0; i < (int)stock.size(); i ++){
+		lst->addItem((char*)stock[i].c_str());
+	}
+	int type = selectedType;
+	lst->setSelectPos(col);
+	long ret = ((WSCdialog*)dlg)->popup();
+	if(ret == WS_DIALOG_OK){
+		//値を取得
+		int index = selectIndex;
+		if(isMaxNONE && index != -1){
+			if(index == stock.size() - 1){
+				index = -1;
+			}
+			*value = index;
+		}
+	}else{
+	}
+	setupDialog();
 }
 
 void setupDialog()//WSCbase* object)
