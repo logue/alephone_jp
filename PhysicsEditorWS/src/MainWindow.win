@@ -2850,7 +2850,7 @@ data/Effects.txt
  #RES      workWidth
 200
  #RES      workHeight
-440
+10
  #RES      hbarVisible
 1
  #RES      x
@@ -3100,7 +3100,7 @@ data/Projectiles.txt
  #RES      workWidth
 200
  #RES      workHeight
-456
+26
  #RES      x
 5
  #RES      y
@@ -4626,7 +4626,7 @@ title1
  #RES      dataSourceName
 data/Weapons.txt
  #RES      workHeight
-456
+26
  #RES      x
 5
  #RES      y

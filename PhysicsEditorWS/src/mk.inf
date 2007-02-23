@@ -60,6 +60,8 @@ OPOBJ = \
         SeqHardDeadVChFunc.o \
         SeqTeleportInVChFunc.o \
         SeqTeleportOutVChFunc.o \
+        SoundPitchEditVChFunc.o \
+        RandomSndMaskEditVChFunc.o \
         HalfVisualArcEditValueChFunc.o \
         VertVisualArcEditValueChFunc.o \
         SpeedEditValueChFunc.o \
@@ -68,12 +70,25 @@ OPOBJ = \
         IntelligenceValueChFunc.o \
         CollectionBtnFunc.o \
         CaarryItemBtnFunc.o \
+        ActivationSndBtnDownFunc.o \
+        FriendActSndBtnDownFunc.o \
+        ClearSndBtnDownFunc.o \
+        KillSndBtnDownFunc.o \
+        ApologySndBtnDownFunc.o \
+        FriendFireSndBtnDownFunc.o \
+        FlamingSndBtnDownFunc.o \
+        RandomSndBtnDownFunc.o \
         ClassComboValueChFunc.o \
+        ImpactEffectBtnDownFunc.o \
+        MeleeEffectBtnDownFunc.o \
+        ContrailEffectBtnDownFunc.o \
+        BtnDefaultMonster01DownFunc.o \
         ShapnelRadiusEditVChFunc.o \
         ShapnelRndEditVChFunc.o \
         ShapnelScaleEditVChFunc.o \
         ShapnelBaseEditVChFunc.o \
         ShapnelTypeBtnDownFunc.o \
+        ShapnelAlienCheckVChFunc.o \
         BtnMeleePresetDownFunc.o \
         BtnPresetThisAllEnemyOnDownFunc.o \
         BtnAllUncheckDownFunc.o \

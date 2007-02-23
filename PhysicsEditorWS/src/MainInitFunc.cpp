@@ -394,8 +394,7 @@ bool isMaxNONE)
 	for(int i = 0; i < (int)stock.size(); i ++){
 		lst->addItem((char*)stock[i].c_str());
 	}
-	int type = selectedType;
-	lst->setSelectPos(col);
+	lst->setSelectPos(*value);
 	long ret = ((WSCdialog*)dlg)->popup();
 	if(ret == WS_DIALOG_OK){
 		//’l‚ðŽæ“¾
