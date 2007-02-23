@@ -14,6 +14,7 @@ void ShapnelAlienCheckVChFunc(WSCbase* object){
 		flag |= _alien_damage;
 	}else{
 	}
+	int type = selectedMonsterType;
 	monster_definitions[type].shrapnel_damage.flags = flag;
 }
 static WSCfunctionRegister  op("ShapnelAlienCheckVChFunc",(void*)ShapnelAlienCheckVChFunc);

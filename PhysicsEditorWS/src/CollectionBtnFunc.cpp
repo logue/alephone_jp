@@ -11,33 +11,16 @@
 //Function for the event procedure
 //----------------------------------------------------------
 void CollectionBtnFunc(WSCbase* object){
-  //do something...
-	//選択ダイアログを表示
-	WSCbase* dlg = getObject("WSCdialog", "WndSelect");
-	//リストに候補を代入
-	//コレクションリスト
-	WSClist* lst = (WSClist*)getChild(dlg, "ListSelect");
-	lst->delAll();
-	//
-	for(int i = 0; i < (int)stockCollections.size(); i ++){
-		lst->addItem((char*)stockCollections[i].c_str());
-	}
 	int type = selectedMonsterType;
+	bool isMax = false;
 	int16 collection = monster_definitions[type].collection;
 	int16 col = GET_COLLECTION(collection);
 	int16 clut = GET_COLLECTION_CLUT(collection);
-	lst->setSelectPos(col);
-	long ret = ((WSCdialog*)dlg)->popup();
-	if(ret == WS_DIALOG_OK){
-		//値を取得
-		int index = selectIndex;
-		if(index != -1){
-			col = index;
-			collection = BUILD_COLLECTION(col, clut);
-			monster_definitions[type].collection = collection;
-		}
-	}else{
-	}
+	int ncol = (int)col;
+	selectFromDialog(&ncol, object, stockCollections, isMax);
+	col = (int16)ncol;
+	collection = BUILD_COLLECTION(col, clut);
+	monster_definitions[type].collection = collection;
 	setupDialog();
 }
 static WSCfunctionRegister  op("CollectionBtnFunc",(void*)CollectionBtnFunc);

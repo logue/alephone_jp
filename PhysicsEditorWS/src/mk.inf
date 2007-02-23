@@ -83,16 +83,39 @@ OPOBJ = \
         MeleeEffectBtnDownFunc.o \
         ContrailEffectBtnDownFunc.o \
         BtnDefaultMonster01DownFunc.o \
+        ListImmunitiesVChFunc.o \
+        ListWeaknessVChFunc.o \
+        ListEnemiesVChFunc.o \
+        ListFriendsVChFunc.o \
+        ListFlagsVCh.o \
         ShapnelRadiusEditVChFunc.o \
         ShapnelRndEditVChFunc.o \
         ShapnelScaleEditVChFunc.o \
         ShapnelBaseEditVChFunc.o \
         ShapnelTypeBtnDownFunc.o \
         ShapnelAlienCheckVChFunc.o \
+        FrequencyEditVChFunc.o \
+        MeleedzVChFunc.o \
+        BtnMeleeTypeDownFunc.o \
+        MeleeRepeVChFunc.o \
+        MeleeErVChFunc.o \
+        MeleeRangeVChFunc.o \
+        MeleeSeqVChFunc.o \
+        MeleedxVChFunc.o \
+        MeleedyVChFunc.o \
         BtnMeleePresetDownFunc.o \
         BtnPresetThisAllEnemyOnDownFunc.o \
         BtnAllUncheckDownFunc.o \
+        RangeddzVChFunc.o \
+        BtnRangedTypeDownFunc.o \
+        RangedRepVChFunc.o \
+        RangedErrorVChFunc.o \
+        RangedRangeVChFunc.o \
+        RangedSeqVChFunc.o \
+        RangeddxVChFunc.o \
+        RangeddyVChFunc.o \
         BtnRangedPresetDownFunc.o \
+        BtnSelPresetSeqDownFunc.o \
         WndSelectActivateFunc.o \
         ListSelectSelectFunc.o \
         ListEffectDownFunc.o \

@@ -14,6 +14,7 @@
 #include "effect_definitions.h"
 #include "projectile_definitions.h"
 #include "weapon_definitions.h"
+#include "extensions.h"
 #include <WSCbase.h>
 #include <WSCoption.h>
 #include <WSCbaseList.h>
@@ -26,6 +27,7 @@
 #include <WSCcheckGroup.h>
 #include <WSCvtoggle.h>
 #include <WSCdialog.h>
+#include <WSCfileSelect.h>
 
 #include <HPLLib/HPLAlephLib.h>
 
@@ -77,6 +79,7 @@ extern struct weapon_definition weapon_default_definitions[MAXIMUM_NUMBER_OF_WEA
 //stock names
 extern std::vector<std::string> stockCollections;
 extern std::vector<std::string> stockMonsterClasses;
+extern std::vector<std::string> stockMonsterTypes;
 extern std::vector<std::string> stockSpeeds;
 extern std::vector<std::string> stockItemTypes;
 extern std::vector<std::string> stockEffects;
@@ -113,8 +116,9 @@ WSCbase* getChild(WSCbase* parent, const char* obj_name);
 void messageBox(const char* format, ...);
 void changeForm(int wtype);
 void setValueByName(WSCbase* object);
-void selectFromDialog(int selectedType, int* value, WSCbase* object,
+void selectFromDialog(int* value, WSCbase* object,
 	std::vector<std::string>& stock,
 	bool isMaxNONE);
+void importPhysicsFile(const char *filename);
 
 #endif

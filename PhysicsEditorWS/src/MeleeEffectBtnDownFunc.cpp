@@ -8,7 +8,10 @@
 void MeleeEffectBtnDownFunc(WSCbase* object){
 	int type = selectedMonsterType;
 	bool isMaxNONE = true;//*none*—L‚è
-	selectFromDialog(&monster_definitions[type].melee_effect,
+	int index = monster_definitions[type].melee_impact_effect;
+	selectFromDialog((int*)&index,
 		object, stockEffects, isMaxNONE);
+	monster_definitions[type].melee_impact_effect = index;
+	setupDialog();
 }
 static WSCfunctionRegister  op("MeleeEffectBtnDownFunc",(void*)MeleeEffectBtnDownFunc);

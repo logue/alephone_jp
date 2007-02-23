@@ -53,7 +53,7 @@ void open1(WSCbase* object){
 		char* path = str.getString();
 		importPhysicsFile(path);
 		//XV
-		
+		setupDialog();
 	}
 
 }

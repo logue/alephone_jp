@@ -170,6 +170,7 @@ extern WSCvifield* RangeddyEdit;
 extern WSCvlabel* Maivlab_082;
 extern WSCvlabel* Maivlab_083;
 extern WSCvbtn* BtnRangedPreset;
+extern WSCvbtn* Maivbtn_000;
 extern WSCdialog* WndSelect;
 extern WSClist* ListSelect;
 extern WSCform* FrmEffect;

@@ -10,7 +10,10 @@ void ActivationSndBtnDownFunc(WSCbase* object){
 	//ëIëÇµÇƒílê›íË
 	int type = selectedMonsterType;
 	bool isMaxNONE = true;//*none*óLÇË
-	selectFromDialog(&monster_definitions[type].activation_sound,
+	int index = monster_definitions[type].activation_sound;
+	selectFromDialog(&index,
 		object, stockSounds, isMaxNONE);
+	monster_definitions[type].activation_sound = index;
+	setupDialog();
 }
 static WSCfunctionRegister  op("ActivationSndBtnDownFunc",(void*)ActivationSndBtnDownFunc);

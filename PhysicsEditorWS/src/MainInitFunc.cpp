@@ -22,6 +22,7 @@ struct weapon_definition weapon_default_definitions[MAXIMUM_NUMBER_OF_WEAPONS];
 
 std::vector<std::string> stockCollections;
 std::vector<std::string> stockMonsterClasses;
+std::vector<std::string> stockMonsterTypes;
 std::vector<std::string> stockSpeeds;
 std::vector<std::string> stockItemTypes;
 std::vector<std::string> stockEffects;
@@ -371,6 +372,43 @@ void setValueByName(WSCbase* object)
 		monster_definitions[type].sound_pitch = value;
 	}else if(strcmp(object->getProperty(WSNname), "RandomSndMaskEdit") == 0){
 		monster_definitions[type].random_sound_mask = value;
+		
+		
+		
+		//////////////////////
+		//monster - attack
+	}else if(strcmp(object->getProperty(WSNname), "FrequencyEdit") == 0){
+		monster_definitions[type].attack_frequency = value;
+		
+	}else if(strcmp(object->getProperty(WSNname), "MeleeRepetitionsEdit") == 0){
+		monster_definitions[type].melee_attack.repetitions = value;
+	}else if(strcmp(object->getProperty(WSNname), "MeleeErrorEdit") == 0){
+		monster_definitions[type].melee_attack.error = value;
+	}else if(strcmp(object->getProperty(WSNname), "MeleeRangeEdit") == 0){
+		monster_definitions[type].melee_attack.range = value;
+	}else if(strcmp(object->getProperty(WSNname), "MeleeSequenceEdit") == 0){
+		monster_definitions[type].melee_attack.attack_shape = value;
+	}else if(strcmp(object->getProperty(WSNname), "MeleedxEdit") == 0){
+		monster_definitions[type].melee_attack.dx = value;
+	}else if(strcmp(object->getProperty(WSNname), "MeleedyEdit") == 0){
+		monster_definitions[type].melee_attack.dy = value;
+	}else if(strcmp(object->getProperty(WSNname), "MeleedzEdit") == 0){
+		monster_definitions[type].melee_attack.dz = value;
+
+	}else if(strcmp(object->getProperty(WSNname), "RangedRepetitionsEdit") == 0){
+		monster_definitions[type].ranged_attack.repetitions = value;
+	}else if(strcmp(object->getProperty(WSNname), "RangedErrorEdit") == 0){
+		monster_definitions[type].ranged_attack.error = value;
+	}else if(strcmp(object->getProperty(WSNname), "RangedRangeEdit") == 0){
+		monster_definitions[type].ranged_attack.range = value;
+	}else if(strcmp(object->getProperty(WSNname), "RangedSequenceEdit") == 0){
+		monster_definitions[type].ranged_attack.attack_shape = value;
+	}else if(strcmp(object->getProperty(WSNname), "RangeddxEdit") == 0){
+		monster_definitions[type].ranged_attack.dx = value;
+	}else if(strcmp(object->getProperty(WSNname), "RangeddyEdit") == 0){
+		monster_definitions[type].ranged_attack.dy = value;
+	}else if(strcmp(object->getProperty(WSNname), "RangeddzEdit") == 0){
+		monster_definitions[type].ranged_attack.dz = value;
 	}else{
 		//
 		messageBox("Unknown item");
@@ -384,6 +422,7 @@ void selectFromDialog(int* value, WSCbase* object,
 std::vector<std::string>& stock,
 bool isMaxNONE)
 {
+	int index = *value;
 	//選択ダイアログを表示
 	WSCbase* dlg = getObject("WSCdialog", "WndSelect");
 	//リストに候補を代入
@@ -394,20 +433,23 @@ bool isMaxNONE)
 	for(int i = 0; i < (int)stock.size(); i ++){
 		lst->addItem((char*)stock[i].c_str());
 	}
-	lst->setSelectPos(*value);
+	if(isMaxNONE && index < 0){
+		index = stock.size() - 1;
+	}
+	lst->setSelectPos(index);
 	long ret = ((WSCdialog*)dlg)->popup();
 	if(ret == WS_DIALOG_OK){
 		//値を取得
-		int index = selectIndex;
+		index = selectIndex;
 		if(isMaxNONE && index != -1){
 			if(index == stock.size() - 1){
 				index = -1;
 			}
-			*value = index;
 		}
+		*value = index;
 	}else{
 	}
-	setupDialog();
+	//setupDialog();
 }
 
 void setupDialog()//WSCbase* object)
@@ -541,13 +583,12 @@ void setupDialog()//WSCbase* object)
 				monster_definitions[type].shrapnel_damage.scale);
 			//shrapnel
 			int shrapnelDamageTypeIndex = monster_definitions[type].shrapnel_damage.type;
-			if(shrapnelDamageTypeIndex < 0 || shrapnelDamageTypeIndex >= stockDamages.size()){
-				getChild(indextab, "ShapnelTypeBtn")->setProperty(WSNlabelString,
-					"");
-			}else{
-				getChild(indextab, "ShapnelTypeBtn")->setProperty(WSNlabelString,
-					stockDamages[shrapnelDamageTypeIndex].c_str());//WSNlabelString
+			if(shrapnelDamageTypeIndex < 0 || shrapnelDamageTypeIndex == UNONE){
+				shrapnelDamageTypeIndex = stockDamages.size() - 1;
 			}
+			getChild(indextab, "ShapnelTypeBtn")->setProperty(WSNlabelString,
+				stockDamages[shrapnelDamageTypeIndex].c_str());//WSNlabelString
+
 			//check box
 			WSCbool status = False;
 			if(monster_definitions[type].shrapnel_damage.flags & _alien_damage){
@@ -608,7 +649,7 @@ void setupDialog()//WSCbase* object)
 
 			/////////////////////////////////////////
 			//tab index 2(flags)
-			//immunities
+			//immunities/weaknesses
 			WSCcheckGroup* lstImmunities = (WSCcheckGroup*)getObject("WSCcheckGroup", "ListImmunities");
 			WSCcheckGroup* lstWeaknesses = (WSCcheckGroup*)getObject("WSCcheckGroup", "ListWeakness");
 			int immunities = monster_definitions[type].immunities;
@@ -1054,6 +1095,9 @@ void MainInitFunc(WSCbase* object){
     memcpy(weapon_default_definitions, weapon_definitions,
         sizeof(struct weapon_definition) * MAXIMUM_NUMBER_OF_WEAPONS);
 
+	//初期データのロード
+	importPhysicsFile("Standard.bin");
+
 	//load
 	{
 		std::vector<std::string> lst = hpl::string::loadFromFile("data/Collections.txt");
@@ -1096,6 +1140,8 @@ void MainInitFunc(WSCbase* object){
 		stockProjectileFlags = killSpaceOfList(lst);
 		lst = hpl::string::loadFromFile("data/WSWeaponFlags.txt");
 		stockWeaponFlags = killSpaceOfList(lst);
+		lst = hpl::string::loadFromFile("data/MonsterTypes.txt");
+		stockMonsterTypes = killSpaceOfList(lst);
 	}
 	
 
@@ -1151,10 +1197,10 @@ void MainInitFunc(WSCbase* object){
 	//モンスター種類リストで選択変更
 	WSClist* lst = (WSClist*)getObject("WSClist", "ListMonsterTypes");
 	lst->setSelectPos(selectedMonsterType);
-	windowType = Windows::Monster;
 
 	setDefinitionsToDefault();
 	//更新
-	setupDialog();
+	changeForm(windowType = Windows::Monster);
+	//setupDialog();
 }
 static WSCfunctionRegister  op("MainInitFunc",(void*)MainInitFunc);

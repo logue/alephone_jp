@@ -168,6 +168,7 @@ WSCvifield* RangeddyEdit = NULL;
 WSCvlabel* Maivlab_082 = NULL;
 WSCvlabel* Maivlab_083 = NULL;
 WSCvbtn* BtnRangedPreset = NULL;
+WSCvbtn* Maivbtn_000 = NULL;
 WSCdialog* WndSelect = NULL;
 WSClist* ListSelect = NULL;
 WSCform* FrmEffect = NULL;
@@ -548,6 +549,7 @@ WSCbase* _create_win_MainWindow(){
   Maiinde_012 = new  WSCindexForm(FrmMonster,"Maiinde_012");
       Maiinde_012->initialize();
   Maiinde_012->setPropertyV(WSNmenuItems,"Appearance,Flags1,Attack");
+  Maiinde_012->setPropertyV(WSNvalue,(unsigned char)1);
   Maiinde_012->setPropertyV(WSNname,"Maiinde_012");
   Maiinde_012->setPropertyV(WSNx,(short)120);
   Maiinde_012->setPropertyV(WSNy,(short)10);
@@ -562,7 +564,6 @@ WSCbase* _create_win_MainWindow(){
   Maivlab_004->setPropertyV(WSNuserValue,(long)1);
   Maivlab_004->setPropertyV(WSNlabelString,"Collection");
   Maivlab_004->setPropertyV(WSNname,"Maivlab_004");
-  Maivlab_004->setPropertyV(WSNvis,(WSCbool)1);
   Maivlab_004->setPropertyV(WSNx,(short)5);
   Maivlab_004->setPropertyV(WSNy,(short)30);
   Maivlab_004->setPropertyV(WSNwidth,(unsigned short)90);
@@ -573,7 +574,6 @@ WSCbase* _create_win_MainWindow(){
   Maivlab_019->setPropertyV(WSNuserValue,(long)1);
   Maivlab_019->setPropertyV(WSNlabelString,"Pallet");
   Maivlab_019->setPropertyV(WSNname,"Maivlab_019");
-  Maivlab_019->setPropertyV(WSNvis,(WSCbool)1);
   Maivlab_019->setPropertyV(WSNx,(short)5);
   Maivlab_019->setPropertyV(WSNy,(short)55);
   Maivlab_019->setPropertyV(WSNwidth,(unsigned short)90);
@@ -583,7 +583,6 @@ WSCbase* _create_win_MainWindow(){
       PalletEdit->initialize();
   PalletEdit->setPropertyV(WSNuserValue,(long)1);
   PalletEdit->setPropertyV(WSNname,"PalletEdit");
-  PalletEdit->setPropertyV(WSNvis,(WSCbool)1);
   PalletEdit->setPropertyV(WSNx,(short)95);
   PalletEdit->setPropertyV(WSNy,(short)55);
   PalletEdit->setPropertyV(WSNwidth,(unsigned short)80);
@@ -596,7 +595,6 @@ WSCbase* _create_win_MainWindow(){
   Maivlab_022->setPropertyV(WSNuserValue,(long)1);
   Maivlab_022->setPropertyV(WSNlabelString,"Vitality");
   Maivlab_022->setPropertyV(WSNname,"Maivlab_022");
-  Maivlab_022->setPropertyV(WSNvis,(WSCbool)1);
   Maivlab_022->setPropertyV(WSNx,(short)5);
   Maivlab_022->setPropertyV(WSNy,(short)80);
   Maivlab_022->setPropertyV(WSNwidth,(unsigned short)90);
@@ -607,7 +605,6 @@ WSCbase* _create_win_MainWindow(){
   Maivlab_024->setPropertyV(WSNuserValue,(long)1);
   Maivlab_024->setPropertyV(WSNlabelString,"Class");
   Maivlab_024->setPropertyV(WSNname,"Maivlab_024");
-  Maivlab_024->setPropertyV(WSNvis,(WSCbool)1);
   Maivlab_024->setPropertyV(WSNx,(short)5);
   Maivlab_024->setPropertyV(WSNy,(short)105);
   Maivlab_024->setPropertyV(WSNwidth,(unsigned short)90);
@@ -617,7 +614,6 @@ WSCbase* _create_win_MainWindow(){
       VitalityEdit->initialize();
   VitalityEdit->setPropertyV(WSNuserValue,(long)1);
   VitalityEdit->setPropertyV(WSNname,"VitalityEdit");
-  VitalityEdit->setPropertyV(WSNvis,(WSCbool)1);
   VitalityEdit->setPropertyV(WSNx,(short)95);
   VitalityEdit->setPropertyV(WSNy,(short)80);
   VitalityEdit->setPropertyV(WSNwidth,(unsigned short)80);
@@ -630,7 +626,6 @@ WSCbase* _create_win_MainWindow(){
   Maivlab_037->setPropertyV(WSNuserValue,(long)1);
   Maivlab_037->setPropertyV(WSNlabelString,"Radius");
   Maivlab_037->setPropertyV(WSNname,"Maivlab_037");
-  Maivlab_037->setPropertyV(WSNvis,(WSCbool)1);
   Maivlab_037->setPropertyV(WSNx,(short)5);
   Maivlab_037->setPropertyV(WSNy,(short)130);
   Maivlab_037->setPropertyV(WSNwidth,(unsigned short)90);
@@ -641,7 +636,6 @@ WSCbase* _create_win_MainWindow(){
   Maivlab_038->setPropertyV(WSNuserValue,(long)1);
   Maivlab_038->setPropertyV(WSNlabelString,"Height");
   Maivlab_038->setPropertyV(WSNname,"Maivlab_038");
-  Maivlab_038->setPropertyV(WSNvis,(WSCbool)1);
   Maivlab_038->setPropertyV(WSNx,(short)5);
   Maivlab_038->setPropertyV(WSNy,(short)155);
   Maivlab_038->setPropertyV(WSNwidth,(unsigned short)90);
@@ -651,7 +645,6 @@ WSCbase* _create_win_MainWindow(){
       RadiusEdit->initialize();
   RadiusEdit->setPropertyV(WSNuserValue,(long)1);
   RadiusEdit->setPropertyV(WSNname,"RadiusEdit");
-  RadiusEdit->setPropertyV(WSNvis,(WSCbool)1);
   RadiusEdit->setPropertyV(WSNx,(short)95);
   RadiusEdit->setPropertyV(WSNy,(short)130);
   RadiusEdit->setPropertyV(WSNwidth,(unsigned short)80);
@@ -663,7 +656,6 @@ WSCbase* _create_win_MainWindow(){
       HeightEdit->initialize();
   HeightEdit->setPropertyV(WSNuserValue,(long)1);
   HeightEdit->setPropertyV(WSNname,"HeightEdit");
-  HeightEdit->setPropertyV(WSNvis,(WSCbool)1);
   HeightEdit->setPropertyV(WSNx,(short)95);
   HeightEdit->setPropertyV(WSNy,(short)155);
   HeightEdit->setPropertyV(WSNwidth,(unsigned short)80);
@@ -676,7 +668,6 @@ WSCbase* _create_win_MainWindow(){
   Maivlab_046->setPropertyV(WSNuserValue,(long)1);
   Maivlab_046->setPropertyV(WSNlabelString,"Hover");
   Maivlab_046->setPropertyV(WSNname,"Maivlab_046");
-  Maivlab_046->setPropertyV(WSNvis,(WSCbool)1);
   Maivlab_046->setPropertyV(WSNx,(short)5);
   Maivlab_046->setPropertyV(WSNy,(short)180);
   Maivlab_046->setPropertyV(WSNwidth,(unsigned short)90);
@@ -687,7 +678,6 @@ WSCbase* _create_win_MainWindow(){
   Maivlab_047->setPropertyV(WSNuserValue,(long)1);
   Maivlab_047->setPropertyV(WSNlabelString,"Min Ledge");
   Maivlab_047->setPropertyV(WSNname,"Maivlab_047");
-  Maivlab_047->setPropertyV(WSNvis,(WSCbool)1);
   Maivlab_047->setPropertyV(WSNx,(short)5);
   Maivlab_047->setPropertyV(WSNy,(short)205);
   Maivlab_047->setPropertyV(WSNwidth,(unsigned short)90);
@@ -698,7 +688,6 @@ WSCbase* _create_win_MainWindow(){
   Maivlab_048->setPropertyV(WSNuserValue,(long)1);
   Maivlab_048->setPropertyV(WSNlabelString,"Max Ledge");
   Maivlab_048->setPropertyV(WSNname,"Maivlab_048");
-  Maivlab_048->setPropertyV(WSNvis,(WSCbool)1);
   Maivlab_048->setPropertyV(WSNx,(short)5);
   Maivlab_048->setPropertyV(WSNy,(short)230);
   Maivlab_048->setPropertyV(WSNwidth,(unsigned short)90);
@@ -709,7 +698,6 @@ WSCbase* _create_win_MainWindow(){
   Maivlab_049->setPropertyV(WSNuserValue,(long)1);
   Maivlab_049->setPropertyV(WSNlabelString,"ExtVelScale");
   Maivlab_049->setPropertyV(WSNname,"Maivlab_049");
-  Maivlab_049->setPropertyV(WSNvis,(WSCbool)1);
   Maivlab_049->setPropertyV(WSNx,(short)5);
   Maivlab_049->setPropertyV(WSNy,(short)255);
   Maivlab_049->setPropertyV(WSNwidth,(unsigned short)90);
@@ -720,7 +708,6 @@ WSCbase* _create_win_MainWindow(){
   Maivlab_050->setPropertyV(WSNuserValue,(long)1);
   Maivlab_050->setPropertyV(WSNlabelString,"CarryItem");
   Maivlab_050->setPropertyV(WSNname,"Maivlab_050");
-  Maivlab_050->setPropertyV(WSNvis,(WSCbool)1);
   Maivlab_050->setPropertyV(WSNx,(short)5);
   Maivlab_050->setPropertyV(WSNy,(short)280);
   Maivlab_050->setPropertyV(WSNwidth,(unsigned short)90);
@@ -730,7 +717,6 @@ WSCbase* _create_win_MainWindow(){
       HoverEdit->initialize();
   HoverEdit->setPropertyV(WSNuserValue,(long)1);
   HoverEdit->setPropertyV(WSNname,"HoverEdit");
-  HoverEdit->setPropertyV(WSNvis,(WSCbool)1);
   HoverEdit->setPropertyV(WSNx,(short)95);
   HoverEdit->setPropertyV(WSNy,(short)180);
   HoverEdit->setPropertyV(WSNwidth,(unsigned short)80);
@@ -742,7 +728,6 @@ WSCbase* _create_win_MainWindow(){
       MinLedgeEdit->initialize();
   MinLedgeEdit->setPropertyV(WSNuserValue,(long)1);
   MinLedgeEdit->setPropertyV(WSNname,"MinLedgeEdit");
-  MinLedgeEdit->setPropertyV(WSNvis,(WSCbool)1);
   MinLedgeEdit->setPropertyV(WSNx,(short)95);
   MinLedgeEdit->setPropertyV(WSNy,(short)205);
   MinLedgeEdit->setPropertyV(WSNwidth,(unsigned short)80);
@@ -754,7 +739,6 @@ WSCbase* _create_win_MainWindow(){
       MaxLedgeEdit->initialize();
   MaxLedgeEdit->setPropertyV(WSNuserValue,(long)1);
   MaxLedgeEdit->setPropertyV(WSNname,"MaxLedgeEdit");
-  MaxLedgeEdit->setPropertyV(WSNvis,(WSCbool)1);
   MaxLedgeEdit->setPropertyV(WSNx,(short)95);
   MaxLedgeEdit->setPropertyV(WSNy,(short)230);
   MaxLedgeEdit->setPropertyV(WSNwidth,(unsigned short)80);
@@ -766,7 +750,6 @@ WSCbase* _create_win_MainWindow(){
       ExtVelScaleEdit->initialize();
   ExtVelScaleEdit->setPropertyV(WSNuserValue,(long)1);
   ExtVelScaleEdit->setPropertyV(WSNname,"ExtVelScaleEdit");
-  ExtVelScaleEdit->setPropertyV(WSNvis,(WSCbool)1);
   ExtVelScaleEdit->setPropertyV(WSNx,(short)95);
   ExtVelScaleEdit->setPropertyV(WSNy,(short)255);
   ExtVelScaleEdit->setPropertyV(WSNwidth,(unsigned short)80);
@@ -779,7 +762,6 @@ WSCbase* _create_win_MainWindow(){
   Maivlab_055->setPropertyV(WSNuserValue,(long)1);
   Maivlab_055->setPropertyV(WSNlabelString,"Stationaly");
   Maivlab_055->setPropertyV(WSNname,"Maivlab_055");
-  Maivlab_055->setPropertyV(WSNvis,(WSCbool)1);
   Maivlab_055->setPropertyV(WSNx,(short)205);
   Maivlab_055->setPropertyV(WSNy,(short)30);
   Maivlab_055->setPropertyV(WSNwidth,(unsigned short)90);
@@ -790,7 +772,6 @@ WSCbase* _create_win_MainWindow(){
   Maivlab_056->setPropertyV(WSNuserValue,(long)1);
   Maivlab_056->setPropertyV(WSNlabelString,"Moving");
   Maivlab_056->setPropertyV(WSNname,"Maivlab_056");
-  Maivlab_056->setPropertyV(WSNvis,(WSCbool)1);
   Maivlab_056->setPropertyV(WSNx,(short)205);
   Maivlab_056->setPropertyV(WSNy,(short)55);
   Maivlab_056->setPropertyV(WSNwidth,(unsigned short)90);
@@ -801,7 +782,6 @@ WSCbase* _create_win_MainWindow(){
   Maivlab_057->setPropertyV(WSNuserValue,(long)1);
   Maivlab_057->setPropertyV(WSNlabelString,"Hitting");
   Maivlab_057->setPropertyV(WSNname,"Maivlab_057");
-  Maivlab_057->setPropertyV(WSNvis,(WSCbool)1);
   Maivlab_057->setPropertyV(WSNx,(short)205);
   Maivlab_057->setPropertyV(WSNy,(short)80);
   Maivlab_057->setPropertyV(WSNwidth,(unsigned short)90);
@@ -812,7 +792,6 @@ WSCbase* _create_win_MainWindow(){
   Maivlab_058->setPropertyV(WSNuserValue,(long)1);
   Maivlab_058->setPropertyV(WSNlabelString,"Soft Dying");
   Maivlab_058->setPropertyV(WSNname,"Maivlab_058");
-  Maivlab_058->setPropertyV(WSNvis,(WSCbool)1);
   Maivlab_058->setPropertyV(WSNx,(short)205);
   Maivlab_058->setPropertyV(WSNy,(short)105);
   Maivlab_058->setPropertyV(WSNwidth,(unsigned short)90);
@@ -823,7 +802,6 @@ WSCbase* _create_win_MainWindow(){
   Maivlab_059->setPropertyV(WSNuserValue,(long)1);
   Maivlab_059->setPropertyV(WSNlabelString,"Soft Dead");
   Maivlab_059->setPropertyV(WSNname,"Maivlab_059");
-  Maivlab_059->setPropertyV(WSNvis,(WSCbool)1);
   Maivlab_059->setPropertyV(WSNx,(short)205);
   Maivlab_059->setPropertyV(WSNy,(short)130);
   Maivlab_059->setPropertyV(WSNwidth,(unsigned short)90);
@@ -834,7 +812,6 @@ WSCbase* _create_win_MainWindow(){
   Maivlab_060->setPropertyV(WSNuserValue,(long)1);
   Maivlab_060->setPropertyV(WSNlabelString,"Hard Dying");
   Maivlab_060->setPropertyV(WSNname,"Maivlab_060");
-  Maivlab_060->setPropertyV(WSNvis,(WSCbool)1);
   Maivlab_060->setPropertyV(WSNx,(short)205);
   Maivlab_060->setPropertyV(WSNy,(short)155);
   Maivlab_060->setPropertyV(WSNwidth,(unsigned short)90);
@@ -845,7 +822,6 @@ WSCbase* _create_win_MainWindow(){
   Maivlab_061->setPropertyV(WSNuserValue,(long)1);
   Maivlab_061->setPropertyV(WSNlabelString,"Hard Dead");
   Maivlab_061->setPropertyV(WSNname,"Maivlab_061");
-  Maivlab_061->setPropertyV(WSNvis,(WSCbool)1);
   Maivlab_061->setPropertyV(WSNx,(short)205);
   Maivlab_061->setPropertyV(WSNy,(short)180);
   Maivlab_061->setPropertyV(WSNwidth,(unsigned short)90);
@@ -855,7 +831,6 @@ WSCbase* _create_win_MainWindow(){
       SeqStationaly->initialize();
   SeqStationaly->setPropertyV(WSNuserValue,(long)1);
   SeqStationaly->setPropertyV(WSNname,"SeqStationaly");
-  SeqStationaly->setPropertyV(WSNvis,(WSCbool)1);
   SeqStationaly->setPropertyV(WSNx,(short)295);
   SeqStationaly->setPropertyV(WSNy,(short)30);
   SeqStationaly->setPropertyV(WSNwidth,(unsigned short)55);
@@ -868,7 +843,6 @@ WSCbase* _create_win_MainWindow(){
   Maivlab_063->setPropertyV(WSNuserValue,(long)1);
   Maivlab_063->setPropertyV(WSNlabelString,"Teleport In");
   Maivlab_063->setPropertyV(WSNname,"Maivlab_063");
-  Maivlab_063->setPropertyV(WSNvis,(WSCbool)1);
   Maivlab_063->setPropertyV(WSNx,(short)205);
   Maivlab_063->setPropertyV(WSNy,(short)205);
   Maivlab_063->setPropertyV(WSNwidth,(unsigned short)90);
@@ -879,7 +853,6 @@ WSCbase* _create_win_MainWindow(){
   Maivlab_064->setPropertyV(WSNuserValue,(long)1);
   Maivlab_064->setPropertyV(WSNlabelString,"Teleport Out");
   Maivlab_064->setPropertyV(WSNname,"Maivlab_064");
-  Maivlab_064->setPropertyV(WSNvis,(WSCbool)1);
   Maivlab_064->setPropertyV(WSNx,(short)205);
   Maivlab_064->setPropertyV(WSNy,(short)230);
   Maivlab_064->setPropertyV(WSNwidth,(unsigned short)90);
@@ -889,7 +862,6 @@ WSCbase* _create_win_MainWindow(){
       SeqMoving->initialize();
   SeqMoving->setPropertyV(WSNuserValue,(long)1);
   SeqMoving->setPropertyV(WSNname,"SeqMoving");
-  SeqMoving->setPropertyV(WSNvis,(WSCbool)1);
   SeqMoving->setPropertyV(WSNx,(short)295);
   SeqMoving->setPropertyV(WSNy,(short)55);
   SeqMoving->setPropertyV(WSNwidth,(unsigned short)55);
@@ -901,7 +873,6 @@ WSCbase* _create_win_MainWindow(){
       SeqHitting->initialize();
   SeqHitting->setPropertyV(WSNuserValue,(long)1);
   SeqHitting->setPropertyV(WSNname,"SeqHitting");
-  SeqHitting->setPropertyV(WSNvis,(WSCbool)1);
   SeqHitting->setPropertyV(WSNx,(short)295);
   SeqHitting->setPropertyV(WSNy,(short)80);
   SeqHitting->setPropertyV(WSNwidth,(unsigned short)55);
@@ -913,7 +884,6 @@ WSCbase* _create_win_MainWindow(){
       SeqSoftDying->initialize();
   SeqSoftDying->setPropertyV(WSNuserValue,(long)1);
   SeqSoftDying->setPropertyV(WSNname,"SeqSoftDying");
-  SeqSoftDying->setPropertyV(WSNvis,(WSCbool)1);
   SeqSoftDying->setPropertyV(WSNx,(short)295);
   SeqSoftDying->setPropertyV(WSNy,(short)105);
   SeqSoftDying->setPropertyV(WSNwidth,(unsigned short)55);
@@ -925,7 +895,6 @@ WSCbase* _create_win_MainWindow(){
       SeqSoftDead->initialize();
   SeqSoftDead->setPropertyV(WSNuserValue,(long)1);
   SeqSoftDead->setPropertyV(WSNname,"SeqSoftDead");
-  SeqSoftDead->setPropertyV(WSNvis,(WSCbool)1);
   SeqSoftDead->setPropertyV(WSNx,(short)295);
   SeqSoftDead->setPropertyV(WSNy,(short)130);
   SeqSoftDead->setPropertyV(WSNwidth,(unsigned short)55);
@@ -937,7 +906,6 @@ WSCbase* _create_win_MainWindow(){
       SeqHardDying->initialize();
   SeqHardDying->setPropertyV(WSNuserValue,(long)1);
   SeqHardDying->setPropertyV(WSNname,"SeqHardDying");
-  SeqHardDying->setPropertyV(WSNvis,(WSCbool)1);
   SeqHardDying->setPropertyV(WSNx,(short)295);
   SeqHardDying->setPropertyV(WSNy,(short)155);
   SeqHardDying->setPropertyV(WSNwidth,(unsigned short)55);
@@ -949,7 +917,6 @@ WSCbase* _create_win_MainWindow(){
       SeqHardDead->initialize();
   SeqHardDead->setPropertyV(WSNuserValue,(long)1);
   SeqHardDead->setPropertyV(WSNname,"SeqHardDead");
-  SeqHardDead->setPropertyV(WSNvis,(WSCbool)1);
   SeqHardDead->setPropertyV(WSNx,(short)295);
   SeqHardDead->setPropertyV(WSNy,(short)180);
   SeqHardDead->setPropertyV(WSNwidth,(unsigned short)55);
@@ -961,7 +928,6 @@ WSCbase* _create_win_MainWindow(){
       SeqTeleportIn->initialize();
   SeqTeleportIn->setPropertyV(WSNuserValue,(long)1);
   SeqTeleportIn->setPropertyV(WSNname,"SeqTeleportIn");
-  SeqTeleportIn->setPropertyV(WSNvis,(WSCbool)1);
   SeqTeleportIn->setPropertyV(WSNx,(short)295);
   SeqTeleportIn->setPropertyV(WSNy,(short)205);
   SeqTeleportIn->setPropertyV(WSNwidth,(unsigned short)55);
@@ -973,7 +939,6 @@ WSCbase* _create_win_MainWindow(){
       SeqTeleportOut->initialize();
   SeqTeleportOut->setPropertyV(WSNuserValue,(long)1);
   SeqTeleportOut->setPropertyV(WSNname,"SeqTeleportOut");
-  SeqTeleportOut->setPropertyV(WSNvis,(WSCbool)1);
   SeqTeleportOut->setPropertyV(WSNx,(short)295);
   SeqTeleportOut->setPropertyV(WSNy,(short)230);
   SeqTeleportOut->setPropertyV(WSNwidth,(unsigned short)55);
@@ -986,7 +951,6 @@ WSCbase* _create_win_MainWindow(){
   Maivlab_073->setPropertyV(WSNuserValue,(long)1);
   Maivlab_073->setPropertyV(WSNlabelString,"SoundPitch");
   Maivlab_073->setPropertyV(WSNname,"Maivlab_073");
-  Maivlab_073->setPropertyV(WSNvis,(WSCbool)1);
   Maivlab_073->setPropertyV(WSNx,(short)350);
   Maivlab_073->setPropertyV(WSNy,(short)30);
   Maivlab_073->setPropertyV(WSNwidth,(unsigned short)90);
@@ -998,7 +962,6 @@ WSCbase* _create_win_MainWindow(){
   Maivlab_074->setPropertyV(WSNlabelString,"ActivationSnd");
   Maivlab_074->setPropertyV(WSNfont,(unsigned char)0);
   Maivlab_074->setPropertyV(WSNname,"Maivlab_074");
-  Maivlab_074->setPropertyV(WSNvis,(WSCbool)1);
   Maivlab_074->setPropertyV(WSNx,(short)350);
   Maivlab_074->setPropertyV(WSNy,(short)55);
   Maivlab_074->setPropertyV(WSNheight,(unsigned short)25);
@@ -1008,7 +971,6 @@ WSCbase* _create_win_MainWindow(){
   Maivlab_075->setPropertyV(WSNuserValue,(long)1);
   Maivlab_075->setPropertyV(WSNlabelString,"FriendActSnd");
   Maivlab_075->setPropertyV(WSNname,"Maivlab_075");
-  Maivlab_075->setPropertyV(WSNvis,(WSCbool)1);
   Maivlab_075->setPropertyV(WSNx,(short)350);
   Maivlab_075->setPropertyV(WSNy,(short)80);
   Maivlab_075->setPropertyV(WSNheight,(unsigned short)25);
@@ -1018,7 +980,6 @@ WSCbase* _create_win_MainWindow(){
   Maivlab_076->setPropertyV(WSNuserValue,(long)1);
   Maivlab_076->setPropertyV(WSNlabelString,"ClearSnd");
   Maivlab_076->setPropertyV(WSNname,"Maivlab_076");
-  Maivlab_076->setPropertyV(WSNvis,(WSCbool)1);
   Maivlab_076->setPropertyV(WSNx,(short)350);
   Maivlab_076->setPropertyV(WSNy,(short)105);
   Maivlab_076->setPropertyV(WSNheight,(unsigned short)25);
@@ -1028,7 +989,6 @@ WSCbase* _create_win_MainWindow(){
   Maivlab_077->setPropertyV(WSNuserValue,(long)1);
   Maivlab_077->setPropertyV(WSNlabelString,"KillSnd");
   Maivlab_077->setPropertyV(WSNname,"Maivlab_077");
-  Maivlab_077->setPropertyV(WSNvis,(WSCbool)1);
   Maivlab_077->setPropertyV(WSNx,(short)350);
   Maivlab_077->setPropertyV(WSNy,(short)130);
   Maivlab_077->setPropertyV(WSNheight,(unsigned short)25);
@@ -1038,7 +998,6 @@ WSCbase* _create_win_MainWindow(){
   Maivlab_078->setPropertyV(WSNuserValue,(long)1);
   Maivlab_078->setPropertyV(WSNlabelString,"ApologySnd");
   Maivlab_078->setPropertyV(WSNname,"Maivlab_078");
-  Maivlab_078->setPropertyV(WSNvis,(WSCbool)1);
   Maivlab_078->setPropertyV(WSNx,(short)350);
   Maivlab_078->setPropertyV(WSNy,(short)155);
   Maivlab_078->setPropertyV(WSNheight,(unsigned short)25);
@@ -1048,7 +1007,6 @@ WSCbase* _create_win_MainWindow(){
   Maivlab_079->setPropertyV(WSNuserValue,(long)1);
   Maivlab_079->setPropertyV(WSNlabelString,"FriendFireSnd");
   Maivlab_079->setPropertyV(WSNname,"Maivlab_079");
-  Maivlab_079->setPropertyV(WSNvis,(WSCbool)1);
   Maivlab_079->setPropertyV(WSNx,(short)350);
   Maivlab_079->setPropertyV(WSNy,(short)180);
   Maivlab_079->setPropertyV(WSNheight,(unsigned short)25);
@@ -1058,7 +1016,6 @@ WSCbase* _create_win_MainWindow(){
   Maivlab_080->setPropertyV(WSNuserValue,(long)1);
   Maivlab_080->setPropertyV(WSNlabelString,"FlamingSnd");
   Maivlab_080->setPropertyV(WSNname,"Maivlab_080");
-  Maivlab_080->setPropertyV(WSNvis,(WSCbool)1);
   Maivlab_080->setPropertyV(WSNx,(short)350);
   Maivlab_080->setPropertyV(WSNy,(short)205);
   Maivlab_080->setPropertyV(WSNheight,(unsigned short)25);
@@ -1068,7 +1025,6 @@ WSCbase* _create_win_MainWindow(){
   Maivlab_081->setPropertyV(WSNuserValue,(long)1);
   Maivlab_081->setPropertyV(WSNlabelString,"RandomSnd");
   Maivlab_081->setPropertyV(WSNname,"Maivlab_081");
-  Maivlab_081->setPropertyV(WSNvis,(WSCbool)1);
   Maivlab_081->setPropertyV(WSNx,(short)350);
   Maivlab_081->setPropertyV(WSNy,(short)230);
   Maivlab_081->setPropertyV(WSNheight,(unsigned short)25);
@@ -1077,7 +1033,6 @@ WSCbase* _create_win_MainWindow(){
       SoundPitchEdit->initialize();
   SoundPitchEdit->setPropertyV(WSNuserValue,(long)1);
   SoundPitchEdit->setPropertyV(WSNname,"SoundPitchEdit");
-  SoundPitchEdit->setPropertyV(WSNvis,(WSCbool)1);
   SoundPitchEdit->setPropertyV(WSNx,(short)440);
   SoundPitchEdit->setPropertyV(WSNy,(short)30);
   SoundPitchEdit->setPropertyV(WSNwidth,(unsigned short)80);
@@ -1089,7 +1044,6 @@ WSCbase* _create_win_MainWindow(){
       RandomSndMaskEdit->initialize();
   RandomSndMaskEdit->setPropertyV(WSNuserValue,(long)1);
   RandomSndMaskEdit->setPropertyV(WSNname,"RandomSndMaskEdit");
-  RandomSndMaskEdit->setPropertyV(WSNvis,(WSCbool)1);
   RandomSndMaskEdit->setPropertyV(WSNx,(short)450);
   RandomSndMaskEdit->setPropertyV(WSNy,(short)255);
   RandomSndMaskEdit->setPropertyV(WSNwidth,(unsigned short)80);
@@ -1102,7 +1056,6 @@ WSCbase* _create_win_MainWindow(){
   Maivlab_084->setPropertyV(WSNuserValue,(long)1);
   Maivlab_084->setPropertyV(WSNlabelString,"RandomSndMask");
   Maivlab_084->setPropertyV(WSNname,"Maivlab_084");
-  Maivlab_084->setPropertyV(WSNvis,(WSCbool)1);
   Maivlab_084->setPropertyV(WSNx,(short)350);
   Maivlab_084->setPropertyV(WSNy,(short)255);
   Maivlab_084->setPropertyV(WSNheight,(unsigned short)25);
@@ -1112,7 +1065,6 @@ WSCbase* _create_win_MainWindow(){
   Maivlab_085->setPropertyV(WSNuserValue,(long)1);
   Maivlab_085->setPropertyV(WSNlabelString,"ImpactEffect");
   Maivlab_085->setPropertyV(WSNname,"Maivlab_085");
-  Maivlab_085->setPropertyV(WSNvis,(WSCbool)1);
   Maivlab_085->setPropertyV(WSNx,(short)345);
   Maivlab_085->setPropertyV(WSNy,(short)280);
   Maivlab_085->setPropertyV(WSNwidth,(unsigned short)90);
@@ -1123,7 +1075,6 @@ WSCbase* _create_win_MainWindow(){
   Maivlab_086->setPropertyV(WSNuserValue,(long)1);
   Maivlab_086->setPropertyV(WSNlabelString,"MeleeEffect");
   Maivlab_086->setPropertyV(WSNname,"Maivlab_086");
-  Maivlab_086->setPropertyV(WSNvis,(WSCbool)1);
   Maivlab_086->setPropertyV(WSNx,(short)345);
   Maivlab_086->setPropertyV(WSNy,(short)305);
   Maivlab_086->setPropertyV(WSNwidth,(unsigned short)90);
@@ -1134,7 +1085,6 @@ WSCbase* _create_win_MainWindow(){
   Maivlab_087->setPropertyV(WSNuserValue,(long)1);
   Maivlab_087->setPropertyV(WSNlabelString,"ContrailEffect");
   Maivlab_087->setPropertyV(WSNname,"Maivlab_087");
-  Maivlab_087->setPropertyV(WSNvis,(WSCbool)1);
   Maivlab_087->setPropertyV(WSNx,(short)345);
   Maivlab_087->setPropertyV(WSNy,(short)330);
   Maivlab_087->setPropertyV(WSNwidth,(unsigned short)110);
@@ -1145,7 +1095,6 @@ WSCbase* _create_win_MainWindow(){
   Maivlab_088->setPropertyV(WSNuserValue,(long)1);
   Maivlab_088->setPropertyV(WSNlabelString,"HalfVisualArc");
   Maivlab_088->setPropertyV(WSNname,"Maivlab_088");
-  Maivlab_088->setPropertyV(WSNvis,(WSCbool)1);
   Maivlab_088->setPropertyV(WSNx,(short)5);
   Maivlab_088->setPropertyV(WSNy,(short)305);
   Maivlab_088->setPropertyV(WSNheight,(unsigned short)25);
@@ -1155,7 +1104,6 @@ WSCbase* _create_win_MainWindow(){
   Maivlab_089->setPropertyV(WSNuserValue,(long)1);
   Maivlab_089->setPropertyV(WSNlabelString,"VertVisualArc");
   Maivlab_089->setPropertyV(WSNname,"Maivlab_089");
-  Maivlab_089->setPropertyV(WSNvis,(WSCbool)1);
   Maivlab_089->setPropertyV(WSNx,(short)5);
   Maivlab_089->setPropertyV(WSNy,(short)330);
   Maivlab_089->setPropertyV(WSNheight,(unsigned short)25);
@@ -1165,7 +1113,6 @@ WSCbase* _create_win_MainWindow(){
   Maivlab_090->setPropertyV(WSNuserValue,(long)1);
   Maivlab_090->setPropertyV(WSNlabelString,"Intelligence");
   Maivlab_090->setPropertyV(WSNname,"Maivlab_090");
-  Maivlab_090->setPropertyV(WSNvis,(WSCbool)1);
   Maivlab_090->setPropertyV(WSNx,(short)5);
   Maivlab_090->setPropertyV(WSNy,(short)355);
   Maivlab_090->setPropertyV(WSNwidth,(unsigned short)90);
@@ -1176,7 +1123,6 @@ WSCbase* _create_win_MainWindow(){
   Maivlab_091->setPropertyV(WSNuserValue,(long)1);
   Maivlab_091->setPropertyV(WSNlabelString,"Speed");
   Maivlab_091->setPropertyV(WSNname,"Maivlab_091");
-  Maivlab_091->setPropertyV(WSNvis,(WSCbool)1);
   Maivlab_091->setPropertyV(WSNx,(short)5);
   Maivlab_091->setPropertyV(WSNy,(short)380);
   Maivlab_091->setPropertyV(WSNwidth,(unsigned short)90);
@@ -1187,7 +1133,6 @@ WSCbase* _create_win_MainWindow(){
   Maivlab_092->setPropertyV(WSNuserValue,(long)1);
   Maivlab_092->setPropertyV(WSNlabelString,"Gravity");
   Maivlab_092->setPropertyV(WSNname,"Maivlab_092");
-  Maivlab_092->setPropertyV(WSNvis,(WSCbool)1);
   Maivlab_092->setPropertyV(WSNx,(short)5);
   Maivlab_092->setPropertyV(WSNy,(short)405);
   Maivlab_092->setPropertyV(WSNwidth,(unsigned short)90);
@@ -1197,7 +1142,6 @@ WSCbase* _create_win_MainWindow(){
       HalfVisualArcEdit->initialize();
   HalfVisualArcEdit->setPropertyV(WSNuserValue,(long)1);
   HalfVisualArcEdit->setPropertyV(WSNname,"HalfVisualArcEdit");
-  HalfVisualArcEdit->setPropertyV(WSNvis,(WSCbool)1);
   HalfVisualArcEdit->setPropertyV(WSNx,(short)105);
   HalfVisualArcEdit->setPropertyV(WSNy,(short)305);
   HalfVisualArcEdit->setPropertyV(WSNwidth,(unsigned short)70);
@@ -1209,7 +1153,6 @@ WSCbase* _create_win_MainWindow(){
       VertVisualArcEdit->initialize();
   VertVisualArcEdit->setPropertyV(WSNuserValue,(long)1);
   VertVisualArcEdit->setPropertyV(WSNname,"VertVisualArcEdit");
-  VertVisualArcEdit->setPropertyV(WSNvis,(WSCbool)1);
   VertVisualArcEdit->setPropertyV(WSNx,(short)105);
   VertVisualArcEdit->setPropertyV(WSNy,(short)330);
   VertVisualArcEdit->setPropertyV(WSNwidth,(unsigned short)70);
@@ -1221,7 +1164,6 @@ WSCbase* _create_win_MainWindow(){
       SpeedEdit->initialize();
   SpeedEdit->setPropertyV(WSNuserValue,(long)1);
   SpeedEdit->setPropertyV(WSNname,"SpeedEdit");
-  SpeedEdit->setPropertyV(WSNvis,(WSCbool)1);
   SpeedEdit->setPropertyV(WSNx,(short)95);
   SpeedEdit->setPropertyV(WSNy,(short)380);
   SpeedEdit->setPropertyV(WSNwidth,(unsigned short)80);
@@ -1233,7 +1175,6 @@ WSCbase* _create_win_MainWindow(){
       GravityEdit->initialize();
   GravityEdit->setPropertyV(WSNuserValue,(long)1);
   GravityEdit->setPropertyV(WSNname,"GravityEdit");
-  GravityEdit->setPropertyV(WSNvis,(WSCbool)1);
   GravityEdit->setPropertyV(WSNx,(short)95);
   GravityEdit->setPropertyV(WSNy,(short)405);
   GravityEdit->setPropertyV(WSNwidth,(unsigned short)80);
@@ -1246,6 +1187,7 @@ WSCbase* _create_win_MainWindow(){
   Maivbtn_106->setPropertyV(WSNuserValue,(long)2);
   Maivbtn_106->setPropertyV(WSNlabelString,"Set as Default");
   Maivbtn_106->setPropertyV(WSNname,"Maivbtn_106");
+  Maivbtn_106->setPropertyV(WSNvis,(WSCbool)1);
   Maivbtn_106->setPropertyV(WSNx,(short)270);
   Maivbtn_106->setPropertyV(WSNy,(short)430);
   Maivbtn_106->setPropertyV(WSNwidth,(unsigned short)115);
@@ -1258,7 +1200,6 @@ WSCbase* _create_win_MainWindow(){
   SpeedCombo->setPropertyV(WSNlabelString,"item1");
   SpeedCombo->setPropertyV(WSNfont,(unsigned char)0);
   SpeedCombo->setPropertyV(WSNname,"SpeedCombo");
-  SpeedCombo->setPropertyV(WSNvis,(WSCbool)1);
   SpeedCombo->setPropertyV(WSNx,(short)175);
   SpeedCombo->setPropertyV(WSNy,(short)380);
   SpeedCombo->setPropertyV(WSNheight,(unsigned short)25);
@@ -1273,7 +1214,6 @@ WSCbase* _create_win_MainWindow(){
   IntelligenceCombo->setPropertyV(WSNlabelString,"Low");
   IntelligenceCombo->setPropertyV(WSNfont,(unsigned char)0);
   IntelligenceCombo->setPropertyV(WSNname,"IntelligenceCombo");
-  IntelligenceCombo->setPropertyV(WSNvis,(WSCbool)1);
   IntelligenceCombo->setPropertyV(WSNx,(short)95);
   IntelligenceCombo->setPropertyV(WSNy,(short)355);
   IntelligenceCombo->setPropertyV(WSNwidth,(unsigned short)80);
@@ -1286,7 +1226,6 @@ WSCbase* _create_win_MainWindow(){
   CollectionBtn->setPropertyV(WSNuserValue,(long)1);
   CollectionBtn->setPropertyV(WSNfont,(unsigned char)0);
   CollectionBtn->setPropertyV(WSNname,"CollectionBtn");
-  CollectionBtn->setPropertyV(WSNvis,(WSCbool)1);
   CollectionBtn->setPropertyV(WSNx,(short)95);
   CollectionBtn->setPropertyV(WSNy,(short)30);
   CollectionBtn->setPropertyV(WSNwidth,(unsigned short)80);
@@ -1299,7 +1238,6 @@ WSCbase* _create_win_MainWindow(){
   CarryItemBtn->setPropertyV(WSNuserValue,(long)1);
   CarryItemBtn->setPropertyV(WSNfont,(unsigned char)0);
   CarryItemBtn->setPropertyV(WSNname,"CarryItemBtn");
-  CarryItemBtn->setPropertyV(WSNvis,(WSCbool)1);
   CarryItemBtn->setPropertyV(WSNx,(short)95);
   CarryItemBtn->setPropertyV(WSNy,(short)280);
   CarryItemBtn->setPropertyV(WSNwidth,(unsigned short)110);
@@ -1312,7 +1250,6 @@ WSCbase* _create_win_MainWindow(){
   ActivationSndBtn->setPropertyV(WSNuserValue,(long)1);
   ActivationSndBtn->setPropertyV(WSNfont,(unsigned char)0);
   ActivationSndBtn->setPropertyV(WSNname,"ActivationSndBtn");
-  ActivationSndBtn->setPropertyV(WSNvis,(WSCbool)1);
   ActivationSndBtn->setPropertyV(WSNx,(short)450);
   ActivationSndBtn->setPropertyV(WSNy,(short)55);
   ActivationSndBtn->setPropertyV(WSNwidth,(unsigned short)95);
@@ -1325,7 +1262,6 @@ WSCbase* _create_win_MainWindow(){
   FriendActSndBtn->setPropertyV(WSNuserValue,(long)1);
   FriendActSndBtn->setPropertyV(WSNfont,(unsigned char)0);
   FriendActSndBtn->setPropertyV(WSNname,"FriendActSndBtn");
-  FriendActSndBtn->setPropertyV(WSNvis,(WSCbool)1);
   FriendActSndBtn->setPropertyV(WSNx,(short)450);
   FriendActSndBtn->setPropertyV(WSNy,(short)80);
   FriendActSndBtn->setPropertyV(WSNwidth,(unsigned short)95);
@@ -1338,7 +1274,6 @@ WSCbase* _create_win_MainWindow(){
   ClearSndBtn->setPropertyV(WSNuserValue,(long)1);
   ClearSndBtn->setPropertyV(WSNfont,(unsigned char)0);
   ClearSndBtn->setPropertyV(WSNname,"ClearSndBtn");
-  ClearSndBtn->setPropertyV(WSNvis,(WSCbool)1);
   ClearSndBtn->setPropertyV(WSNx,(short)450);
   ClearSndBtn->setPropertyV(WSNy,(short)105);
   ClearSndBtn->setPropertyV(WSNwidth,(unsigned short)95);
@@ -1351,7 +1286,6 @@ WSCbase* _create_win_MainWindow(){
   KillSndBtn->setPropertyV(WSNuserValue,(long)1);
   KillSndBtn->setPropertyV(WSNfont,(unsigned char)0);
   KillSndBtn->setPropertyV(WSNname,"KillSndBtn");
-  KillSndBtn->setPropertyV(WSNvis,(WSCbool)1);
   KillSndBtn->setPropertyV(WSNx,(short)450);
   KillSndBtn->setPropertyV(WSNy,(short)130);
   KillSndBtn->setPropertyV(WSNwidth,(unsigned short)95);
@@ -1364,7 +1298,6 @@ WSCbase* _create_win_MainWindow(){
   ApologySndBtn->setPropertyV(WSNuserValue,(long)1);
   ApologySndBtn->setPropertyV(WSNfont,(unsigned char)0);
   ApologySndBtn->setPropertyV(WSNname,"ApologySndBtn");
-  ApologySndBtn->setPropertyV(WSNvis,(WSCbool)1);
   ApologySndBtn->setPropertyV(WSNx,(short)450);
   ApologySndBtn->setPropertyV(WSNy,(short)155);
   ApologySndBtn->setPropertyV(WSNwidth,(unsigned short)95);
@@ -1377,7 +1310,6 @@ WSCbase* _create_win_MainWindow(){
   FriendFireSndBtn->setPropertyV(WSNuserValue,(long)1);
   FriendFireSndBtn->setPropertyV(WSNfont,(unsigned char)0);
   FriendFireSndBtn->setPropertyV(WSNname,"FriendFireSndBtn");
-  FriendFireSndBtn->setPropertyV(WSNvis,(WSCbool)1);
   FriendFireSndBtn->setPropertyV(WSNx,(short)450);
   FriendFireSndBtn->setPropertyV(WSNy,(short)180);
   FriendFireSndBtn->setPropertyV(WSNwidth,(unsigned short)95);
@@ -1390,7 +1322,6 @@ WSCbase* _create_win_MainWindow(){
   FlamingSndBtn->setPropertyV(WSNuserValue,(long)1);
   FlamingSndBtn->setPropertyV(WSNfont,(unsigned char)0);
   FlamingSndBtn->setPropertyV(WSNname,"FlamingSndBtn");
-  FlamingSndBtn->setPropertyV(WSNvis,(WSCbool)1);
   FlamingSndBtn->setPropertyV(WSNx,(short)450);
   FlamingSndBtn->setPropertyV(WSNy,(short)205);
   FlamingSndBtn->setPropertyV(WSNwidth,(unsigned short)95);
@@ -1403,7 +1334,6 @@ WSCbase* _create_win_MainWindow(){
   RandomSndBtn->setPropertyV(WSNuserValue,(long)1);
   RandomSndBtn->setPropertyV(WSNfont,(unsigned char)0);
   RandomSndBtn->setPropertyV(WSNname,"RandomSndBtn");
-  RandomSndBtn->setPropertyV(WSNvis,(WSCbool)1);
   RandomSndBtn->setPropertyV(WSNx,(short)450);
   RandomSndBtn->setPropertyV(WSNy,(short)230);
   RandomSndBtn->setPropertyV(WSNwidth,(unsigned short)95);
@@ -1418,7 +1348,6 @@ WSCbase* _create_win_MainWindow(){
   ClassCombo->setPropertyV(WSNlabelString,"item1");
   ClassCombo->setPropertyV(WSNfont,(unsigned char)0);
   ClassCombo->setPropertyV(WSNname,"ClassCombo");
-  ClassCombo->setPropertyV(WSNvis,(WSCbool)1);
   ClassCombo->setPropertyV(WSNx,(short)95);
   ClassCombo->setPropertyV(WSNy,(short)105);
   ClassCombo->setPropertyV(WSNwidth,(unsigned short)110);
@@ -1431,7 +1360,6 @@ WSCbase* _create_win_MainWindow(){
   ImpactEffectBtn->setPropertyV(WSNuserValue,(long)1);
   ImpactEffectBtn->setPropertyV(WSNfont,(unsigned char)0);
   ImpactEffectBtn->setPropertyV(WSNname,"ImpactEffectBtn");
-  ImpactEffectBtn->setPropertyV(WSNvis,(WSCbool)1);
   ImpactEffectBtn->setPropertyV(WSNx,(short)450);
   ImpactEffectBtn->setPropertyV(WSNy,(short)280);
   ImpactEffectBtn->setPropertyV(WSNwidth,(unsigned short)110);
@@ -1444,7 +1372,6 @@ WSCbase* _create_win_MainWindow(){
   MeleeEffectBtn->setPropertyV(WSNuserValue,(long)1);
   MeleeEffectBtn->setPropertyV(WSNfont,(unsigned char)0);
   MeleeEffectBtn->setPropertyV(WSNname,"MeleeEffectBtn");
-  MeleeEffectBtn->setPropertyV(WSNvis,(WSCbool)1);
   MeleeEffectBtn->setPropertyV(WSNx,(short)450);
   MeleeEffectBtn->setPropertyV(WSNy,(short)305);
   MeleeEffectBtn->setPropertyV(WSNwidth,(unsigned short)110);
@@ -1457,7 +1384,6 @@ WSCbase* _create_win_MainWindow(){
   ContrailEffectBtn->setPropertyV(WSNuserValue,(long)1);
   ContrailEffectBtn->setPropertyV(WSNfont,(unsigned char)0);
   ContrailEffectBtn->setPropertyV(WSNname,"ContrailEffectBtn");
-  ContrailEffectBtn->setPropertyV(WSNvis,(WSCbool)1);
   ContrailEffectBtn->setPropertyV(WSNx,(short)450);
   ContrailEffectBtn->setPropertyV(WSNy,(short)330);
   ContrailEffectBtn->setPropertyV(WSNwidth,(unsigned short)110);
@@ -1468,11 +1394,12 @@ WSCbase* _create_win_MainWindow(){
   BtnDefaultMonster01 = new  WSCvbtn(Maiinde_012,"BtnDefaultMonster01");
       BtnDefaultMonster01->initialize();
   BtnDefaultMonster01->setPropertyV(WSNuserValue,(long)1);
-  BtnDefaultMonster01->setPropertyV(WSNlabelString,"SetAsDefault");
+  BtnDefaultMonster01->setPropertyV(WSNlabelString,"Reset All");
   BtnDefaultMonster01->setPropertyV(WSNname,"BtnDefaultMonster01");
-  BtnDefaultMonster01->setPropertyV(WSNvis,(WSCbool)1);
-  BtnDefaultMonster01->setPropertyV(WSNx,(short)460);
-  BtnDefaultMonster01->setPropertyV(WSNy,(short)420);
+  BtnDefaultMonster01->setPropertyV(WSNx,(short)430);
+  BtnDefaultMonster01->setPropertyV(WSNy,(short)430);
+  BtnDefaultMonster01->setPropertyV(WSNwidth,(unsigned short)130);
+  BtnDefaultMonster01->setPropertyV(WSNheight,(unsigned short)20);
     extern void BtnDefaultMonster01DownFunc(WSCbase*);
     BtnDefaultMonster01->addProcedureV("BtnDefaultMonster01Down","BtnDefaultMonster01DownFunc",BtnDefaultMonster01DownFunc,13);
 
@@ -1489,6 +1416,9 @@ WSCbase* _create_win_MainWindow(){
   ListImmunities->setPropertyV(WSNy,(short)25);
   ListImmunities->setPropertyV(WSNwidth,(unsigned short)105);
   ListImmunities->setPropertyV(WSNheight,(unsigned short)430);
+  ListImmunities->setPropertyV(WSNvis,(WSCbool)1);
+    extern void ListImmunitiesVChFunc(WSCbase*);
+    ListImmunities->addProcedureV("ListImmunitiesVCh","ListImmunitiesVChFunc",ListImmunitiesVChFunc,3);
 
   ListWeakness = new  WSCcheckGroup(Maiinde_012,"ListWeakness");
       ListWeakness->initialize();
@@ -1502,6 +1432,9 @@ WSCbase* _create_win_MainWindow(){
   ListWeakness->setPropertyV(WSNy,(short)25);
   ListWeakness->setPropertyV(WSNwidth,(unsigned short)105);
   ListWeakness->setPropertyV(WSNheight,(unsigned short)430);
+  ListWeakness->setPropertyV(WSNvis,(WSCbool)1);
+    extern void ListWeaknessVChFunc(WSCbase*);
+    ListWeakness->addProcedureV("ListWeaknessVCh","ListWeaknessVChFunc",ListWeaknessVChFunc,3);
 
   ListEnemies = new  WSCcheckGroup(Maiinde_012,"ListEnemies");
       ListEnemies->initialize();
@@ -1516,6 +1449,9 @@ WSCbase* _create_win_MainWindow(){
   ListEnemies->setPropertyV(WSNy,(short)25);
   ListEnemies->setPropertyV(WSNwidth,(unsigned short)105);
   ListEnemies->setPropertyV(WSNheight,(unsigned short)340);
+  ListEnemies->setPropertyV(WSNvis,(WSCbool)1);
+    extern void ListEnemiesVChFunc(WSCbase*);
+    ListEnemies->addProcedureV("ListEnemiesVCh","ListEnemiesVChFunc",ListEnemiesVChFunc,3);
 
   ListFriends = new  WSCcheckGroup(Maiinde_012,"ListFriends");
       ListFriends->initialize();
@@ -1530,6 +1466,9 @@ WSCbase* _create_win_MainWindow(){
   ListFriends->setPropertyV(WSNy,(short)25);
   ListFriends->setPropertyV(WSNwidth,(unsigned short)110);
   ListFriends->setPropertyV(WSNheight,(unsigned short)340);
+  ListFriends->setPropertyV(WSNvis,(WSCbool)1);
+    extern void ListFriendsVChFunc(WSCbase*);
+    ListFriends->addProcedureV("ListFriendsVCh","ListFriendsVChFunc",ListFriendsVChFunc,3);
 
   ListFlags = new  WSCcheckGroup(Maiinde_012,"ListFlags");
       ListFlags->initialize();
@@ -1544,13 +1483,15 @@ WSCbase* _create_win_MainWindow(){
   ListFlags->setPropertyV(WSNy,(short)25);
   ListFlags->setPropertyV(WSNwidth,(unsigned short)105);
   ListFlags->setPropertyV(WSNheight,(unsigned short)430);
+  ListFlags->setPropertyV(WSNvis,(WSCbool)1);
+    extern void ListFlagsVCh(WSCbase*);
+    ListFlags->addProcedureV("ListFlagsVCh","ListFlagsVCh",ListFlagsVCh,3);
 
   Maivlab_009 = new  WSCvlabel(Maiinde_012,"Maivlab_009");
       Maivlab_009->initialize();
   Maivlab_009->setPropertyV(WSNuserValue,(long)1);
   Maivlab_009->setPropertyV(WSNlabelString,"ShrapnelR");
   Maivlab_009->setPropertyV(WSNname,"Maivlab_009");
-  Maivlab_009->setPropertyV(WSNvis,(WSCbool)1);
   Maivlab_009->setPropertyV(WSNx,(short)205);
   Maivlab_009->setPropertyV(WSNy,(short)255);
   Maivlab_009->setPropertyV(WSNwidth,(unsigned short)90);
@@ -1560,7 +1501,6 @@ WSCbase* _create_win_MainWindow(){
       ShapnelRadiusEdit->initialize();
   ShapnelRadiusEdit->setPropertyV(WSNuserValue,(long)1);
   ShapnelRadiusEdit->setPropertyV(WSNname,"ShapnelRadiusEdit");
-  ShapnelRadiusEdit->setPropertyV(WSNvis,(WSCbool)1);
   ShapnelRadiusEdit->setPropertyV(WSNx,(short)295);
   ShapnelRadiusEdit->setPropertyV(WSNy,(short)255);
   ShapnelRadiusEdit->setPropertyV(WSNwidth,(unsigned short)55);
@@ -1573,7 +1513,6 @@ WSCbase* _create_win_MainWindow(){
   Maivlab_012->setPropertyV(WSNuserValue,(long)1);
   Maivlab_012->setPropertyV(WSNlabelString,"ShrapnelType");
   Maivlab_012->setPropertyV(WSNname,"Maivlab_012");
-  Maivlab_012->setPropertyV(WSNvis,(WSCbool)1);
   Maivlab_012->setPropertyV(WSNx,(short)205);
   Maivlab_012->setPropertyV(WSNy,(short)355);
   Maivlab_012->setPropertyV(WSNwidth,(unsigned short)90);
@@ -1584,7 +1523,6 @@ WSCbase* _create_win_MainWindow(){
   Maivlab_013->setPropertyV(WSNuserValue,(long)1);
   Maivlab_013->setPropertyV(WSNlabelString,"ShrapnelScale");
   Maivlab_013->setPropertyV(WSNname,"Maivlab_013");
-  Maivlab_013->setPropertyV(WSNvis,(WSCbool)1);
   Maivlab_013->setPropertyV(WSNx,(short)205);
   Maivlab_013->setPropertyV(WSNy,(short)330);
   Maivlab_013->setPropertyV(WSNwidth,(unsigned short)90);
@@ -1595,7 +1533,6 @@ WSCbase* _create_win_MainWindow(){
   Maivlab_014->setPropertyV(WSNuserValue,(long)1);
   Maivlab_014->setPropertyV(WSNlabelString,"ShrapnelBase");
   Maivlab_014->setPropertyV(WSNname,"Maivlab_014");
-  Maivlab_014->setPropertyV(WSNvis,(WSCbool)1);
   Maivlab_014->setPropertyV(WSNx,(short)205);
   Maivlab_014->setPropertyV(WSNy,(short)280);
   Maivlab_014->setPropertyV(WSNwidth,(unsigned short)90);
@@ -1606,7 +1543,6 @@ WSCbase* _create_win_MainWindow(){
   Maaaa->setPropertyV(WSNuserValue,(long)1);
   Maaaa->setPropertyV(WSNlabelString,"ShrapnelRnd");
   Maaaa->setPropertyV(WSNname,"Maaaa");
-  Maaaa->setPropertyV(WSNvis,(WSCbool)1);
   Maaaa->setPropertyV(WSNx,(short)205);
   Maaaa->setPropertyV(WSNy,(short)305);
   Maaaa->setPropertyV(WSNwidth,(unsigned short)90);
@@ -1616,7 +1552,6 @@ WSCbase* _create_win_MainWindow(){
       ShapnelRndEdit->initialize();
   ShapnelRndEdit->setPropertyV(WSNuserValue,(long)1);
   ShapnelRndEdit->setPropertyV(WSNname,"ShapnelRndEdit");
-  ShapnelRndEdit->setPropertyV(WSNvis,(WSCbool)1);
   ShapnelRndEdit->setPropertyV(WSNx,(short)295);
   ShapnelRndEdit->setPropertyV(WSNy,(short)305);
   ShapnelRndEdit->setPropertyV(WSNwidth,(unsigned short)55);
@@ -1628,7 +1563,6 @@ WSCbase* _create_win_MainWindow(){
       ShapnelScaleEdit->initialize();
   ShapnelScaleEdit->setPropertyV(WSNuserValue,(long)1);
   ShapnelScaleEdit->setPropertyV(WSNname,"ShapnelScaleEdit");
-  ShapnelScaleEdit->setPropertyV(WSNvis,(WSCbool)1);
   ShapnelScaleEdit->setPropertyV(WSNx,(short)295);
   ShapnelScaleEdit->setPropertyV(WSNy,(short)330);
   ShapnelScaleEdit->setPropertyV(WSNwidth,(unsigned short)55);
@@ -1640,7 +1574,6 @@ WSCbase* _create_win_MainWindow(){
       ShapnelBaseEdit->initialize();
   ShapnelBaseEdit->setPropertyV(WSNuserValue,(long)1);
   ShapnelBaseEdit->setPropertyV(WSNname,"ShapnelBaseEdit");
-  ShapnelBaseEdit->setPropertyV(WSNvis,(WSCbool)1);
   ShapnelBaseEdit->setPropertyV(WSNx,(short)295);
   ShapnelBaseEdit->setPropertyV(WSNy,(short)280);
   ShapnelBaseEdit->setPropertyV(WSNwidth,(unsigned short)55);
@@ -1653,7 +1586,6 @@ WSCbase* _create_win_MainWindow(){
   ShapnelTypeBtn->setPropertyV(WSNuserValue,(long)1);
   ShapnelTypeBtn->setPropertyV(WSNfont,(unsigned char)0);
   ShapnelTypeBtn->setPropertyV(WSNname,"ShapnelTypeBtn");
-  ShapnelTypeBtn->setPropertyV(WSNvis,(WSCbool)1);
   ShapnelTypeBtn->setPropertyV(WSNx,(short)295);
   ShapnelTypeBtn->setPropertyV(WSNy,(short)355);
   ShapnelTypeBtn->setPropertyV(WSNwidth,(unsigned short)110);
@@ -1666,7 +1598,6 @@ WSCbase* _create_win_MainWindow(){
   ShapnelAlienCheck->setPropertyV(WSNuserValue,(long)1);
   ShapnelAlienCheck->setPropertyV(WSNlabelString,"Shrapnel is Alien");
   ShapnelAlienCheck->setPropertyV(WSNname,"ShapnelAlienCheck");
-  ShapnelAlienCheck->setPropertyV(WSNvis,(WSCbool)1);
   ShapnelAlienCheck->setPropertyV(WSNx,(short)295);
   ShapnelAlienCheck->setPropertyV(WSNy,(short)380);
   ShapnelAlienCheck->setPropertyV(WSNwidth,(unsigned short)155);
@@ -1692,6 +1623,8 @@ WSCbase* _create_win_MainWindow(){
   FrequencyEdit->setPropertyV(WSNy,(short)30);
   FrequencyEdit->setPropertyV(WSNwidth,(unsigned short)80);
   FrequencyEdit->setPropertyV(WSNheight,(unsigned short)25);
+    extern void FrequencyEditVChFunc(WSCbase*);
+    FrequencyEdit->addProcedureV("FrequencyEditVCh","FrequencyEditVChFunc",FrequencyEditVChFunc,3);
 
   Maitfor_025 = new  WSCtform(Maiinde_012,"Maitfor_025");
       Maitfor_025->initialize();
@@ -1712,6 +1645,8 @@ WSCbase* _create_win_MainWindow(){
   MeleedzEdit->setPropertyV(WSNy,(short)190);
   MeleedzEdit->setPropertyV(WSNwidth,(unsigned short)80);
   MeleedzEdit->setPropertyV(WSNheight,(unsigned short)25);
+    extern void MeleedzVChFunc(WSCbase*);
+    MeleedzEdit->addProcedureV("MeleedzVCh","MeleedzVChFunc",MeleedzVChFunc,3);
 
   Maivlab_026 = new  WSCvlabel(Maitfor_025,"Maivlab_026");
       Maivlab_026->initialize();
@@ -1732,6 +1667,8 @@ WSCbase* _create_win_MainWindow(){
   BtnMeleeType->setPropertyV(WSNy,(short)15);
   BtnMeleeType->setPropertyV(WSNwidth,(unsigned short)130);
   BtnMeleeType->setPropertyV(WSNheight,(unsigned short)25);
+    extern void BtnMeleeTypeDownFunc(WSCbase*);
+    BtnMeleeType->addProcedureV("BtnMeleeTypeDown","BtnMeleeTypeDownFunc",BtnMeleeTypeDownFunc,13);
 
   Maivlab_028 = new  WSCvlabel(Maitfor_025,"Maivlab_028");
       Maivlab_028->initialize();
@@ -1797,6 +1734,8 @@ WSCbase* _create_win_MainWindow(){
   MeleeRepetitionsEdit->setPropertyV(WSNy,(short)40);
   MeleeRepetitionsEdit->setPropertyV(WSNwidth,(unsigned short)80);
   MeleeRepetitionsEdit->setPropertyV(WSNheight,(unsigned short)25);
+    extern void MeleeRepeVChFunc(WSCbase*);
+    MeleeRepetitionsEdit->addProcedureV("MeleeRepeVCh","MeleeRepeVChFunc",MeleeRepeVChFunc,3);
 
   MeleeErrorEdit = new  WSCvifield(Maitfor_025,"MeleeErrorEdit");
       MeleeErrorEdit->initialize();
@@ -1807,6 +1746,8 @@ WSCbase* _create_win_MainWindow(){
   MeleeErrorEdit->setPropertyV(WSNy,(short)65);
   MeleeErrorEdit->setPropertyV(WSNwidth,(unsigned short)80);
   MeleeErrorEdit->setPropertyV(WSNheight,(unsigned short)25);
+    extern void MeleeErVChFunc(WSCbase*);
+    MeleeErrorEdit->addProcedureV("MeleeErVCh","MeleeErVChFunc",MeleeErVChFunc,3);
 
   MeleeRangeEdit = new  WSCvifield(Maitfor_025,"MeleeRangeEdit");
       MeleeRangeEdit->initialize();
@@ -1817,6 +1758,8 @@ WSCbase* _create_win_MainWindow(){
   MeleeRangeEdit->setPropertyV(WSNy,(short)90);
   MeleeRangeEdit->setPropertyV(WSNwidth,(unsigned short)80);
   MeleeRangeEdit->setPropertyV(WSNheight,(unsigned short)25);
+    extern void MeleeRangeVChFunc(WSCbase*);
+    MeleeRangeEdit->addProcedureV("MeleeRangeVCh","MeleeRangeVChFunc",MeleeRangeVChFunc,3);
 
   MeleeSequenceEdit = new  WSCvifield(Maitfor_025,"MeleeSequenceEdit");
       MeleeSequenceEdit->initialize();
@@ -1827,6 +1770,8 @@ WSCbase* _create_win_MainWindow(){
   MeleeSequenceEdit->setPropertyV(WSNy,(short)115);
   MeleeSequenceEdit->setPropertyV(WSNwidth,(unsigned short)80);
   MeleeSequenceEdit->setPropertyV(WSNheight,(unsigned short)25);
+    extern void MeleeSeqVChFunc(WSCbase*);
+    MeleeSequenceEdit->addProcedureV("MeleeSeqVCh","MeleeSeqVChFunc",MeleeSeqVChFunc,3);
 
   MeleedxEdit = new  WSCvifield(Maitfor_025,"MeleedxEdit");
       MeleedxEdit->initialize();
@@ -1837,6 +1782,8 @@ WSCbase* _create_win_MainWindow(){
   MeleedxEdit->setPropertyV(WSNy,(short)140);
   MeleedxEdit->setPropertyV(WSNwidth,(unsigned short)80);
   MeleedxEdit->setPropertyV(WSNheight,(unsigned short)25);
+    extern void MeleedxVChFunc(WSCbase*);
+    MeleedxEdit->addProcedureV("MeleedxVCh","MeleedxVChFunc",MeleedxVChFunc,3);
 
   MeleedyEdit = new  WSCvifield(Maitfor_025,"MeleedyEdit");
       MeleedyEdit->initialize();
@@ -1847,6 +1794,8 @@ WSCbase* _create_win_MainWindow(){
   MeleedyEdit->setPropertyV(WSNy,(short)165);
   MeleedyEdit->setPropertyV(WSNwidth,(unsigned short)80);
   MeleedyEdit->setPropertyV(WSNheight,(unsigned short)25);
+    extern void MeleedyVChFunc(WSCbase*);
+    MeleedyEdit->addProcedureV("MeleedyVCh","MeleedyVChFunc",MeleedyVChFunc,3);
 
   Maivlab_040 = new  WSCvlabel(Maitfor_025,"Maivlab_040");
       Maivlab_040->initialize();
@@ -1886,6 +1835,7 @@ WSCbase* _create_win_MainWindow(){
   BtnPresetThisAllEnemyOn->setPropertyV(WSNuserValue,(long)2);
   BtnPresetThisAllEnemyOn->setPropertyV(WSNlabelString,"Set All Enemy Check For This");
   BtnPresetThisAllEnemyOn->setPropertyV(WSNname,"BtnPresetThisAllEnemyOn");
+  BtnPresetThisAllEnemyOn->setPropertyV(WSNvis,(WSCbool)1);
   BtnPresetThisAllEnemyOn->setPropertyV(WSNx,(short)225);
   BtnPresetThisAllEnemyOn->setPropertyV(WSNy,(short)370);
   BtnPresetThisAllEnemyOn->setPropertyV(WSNwidth,(unsigned short)205);
@@ -1898,6 +1848,7 @@ WSCbase* _create_win_MainWindow(){
   BtnAllUncheck->setPropertyV(WSNuserValue,(long)2);
   BtnAllUncheck->setPropertyV(WSNlabelString,"Set All Enemy Unchk For This");
   BtnAllUncheck->setPropertyV(WSNname,"BtnAllUncheck");
+  BtnAllUncheck->setPropertyV(WSNvis,(WSCbool)1);
   BtnAllUncheck->setPropertyV(WSNx,(short)225);
   BtnAllUncheck->setPropertyV(WSNy,(short)395);
   BtnAllUncheck->setPropertyV(WSNwidth,(unsigned short)205);
@@ -1924,6 +1875,8 @@ WSCbase* _create_win_MainWindow(){
   RangeddzEdit->setPropertyV(WSNy,(short)190);
   RangeddzEdit->setPropertyV(WSNwidth,(unsigned short)80);
   RangeddzEdit->setPropertyV(WSNheight,(unsigned short)25);
+    extern void RangeddzVChFunc(WSCbase*);
+    RangeddzEdit->addProcedureV("RangeddzVCh","RangeddzVChFunc",RangeddzVChFunc,3);
 
   Maivlab_062 = new  WSCvlabel(Maitfor_055,"Maivlab_062");
       Maivlab_062->initialize();
@@ -1944,6 +1897,8 @@ WSCbase* _create_win_MainWindow(){
   BtnRangedType->setPropertyV(WSNy,(short)15);
   BtnRangedType->setPropertyV(WSNwidth,(unsigned short)130);
   BtnRangedType->setPropertyV(WSNheight,(unsigned short)25);
+    extern void BtnRangedTypeDownFunc(WSCbase*);
+    BtnRangedType->addProcedureV("BtnRangedTypeDown","BtnRangedTypeDownFunc",BtnRangedTypeDownFunc,13);
 
   Maivlab_065 = new  WSCvlabel(Maitfor_055,"Maivlab_065");
       Maivlab_065->initialize();
@@ -2009,6 +1964,8 @@ WSCbase* _create_win_MainWindow(){
   RangedRepetitionsEdit->setPropertyV(WSNy,(short)40);
   RangedRepetitionsEdit->setPropertyV(WSNwidth,(unsigned short)80);
   RangedRepetitionsEdit->setPropertyV(WSNheight,(unsigned short)25);
+    extern void RangedRepVChFunc(WSCbase*);
+    RangedRepetitionsEdit->addProcedureV("RangedRepVCh","RangedRepVChFunc",RangedRepVChFunc,3);
 
   RangedErrorEdit = new  WSCvifield(Maitfor_055,"RangedErrorEdit");
       RangedErrorEdit->initialize();
@@ -2019,6 +1976,8 @@ WSCbase* _create_win_MainWindow(){
   RangedErrorEdit->setPropertyV(WSNy,(short)65);
   RangedErrorEdit->setPropertyV(WSNwidth,(unsigned short)80);
   RangedErrorEdit->setPropertyV(WSNheight,(unsigned short)25);
+    extern void RangedErrorVChFunc(WSCbase*);
+    RangedErrorEdit->addProcedureV("RangedErrorVCh","RangedErrorVChFunc",RangedErrorVChFunc,3);
 
   RangedRangeEdit = new  WSCvifield(Maitfor_055,"RangedRangeEdit");
       RangedRangeEdit->initialize();
@@ -2029,6 +1988,8 @@ WSCbase* _create_win_MainWindow(){
   RangedRangeEdit->setPropertyV(WSNy,(short)90);
   RangedRangeEdit->setPropertyV(WSNwidth,(unsigned short)80);
   RangedRangeEdit->setPropertyV(WSNheight,(unsigned short)25);
+    extern void RangedRangeVChFunc(WSCbase*);
+    RangedRangeEdit->addProcedureV("RangedRangeVCh","RangedRangeVChFunc",RangedRangeVChFunc,3);
 
   RangedSequenceEdit = new  WSCvifield(Maitfor_055,"RangedSequenceEdit");
       RangedSequenceEdit->initialize();
@@ -2039,6 +2000,8 @@ WSCbase* _create_win_MainWindow(){
   RangedSequenceEdit->setPropertyV(WSNy,(short)115);
   RangedSequenceEdit->setPropertyV(WSNwidth,(unsigned short)80);
   RangedSequenceEdit->setPropertyV(WSNheight,(unsigned short)25);
+    extern void RangedSeqVChFunc(WSCbase*);
+    RangedSequenceEdit->addProcedureV("RangedSeqVCh","RangedSeqVChFunc",RangedSeqVChFunc,3);
 
   RangeddxEdit = new  WSCvifield(Maitfor_055,"RangeddxEdit");
       RangeddxEdit->initialize();
@@ -2049,6 +2012,8 @@ WSCbase* _create_win_MainWindow(){
   RangeddxEdit->setPropertyV(WSNy,(short)140);
   RangeddxEdit->setPropertyV(WSNwidth,(unsigned short)80);
   RangeddxEdit->setPropertyV(WSNheight,(unsigned short)25);
+    extern void RangeddxVChFunc(WSCbase*);
+    RangeddxEdit->addProcedureV("RangeddxVCh","RangeddxVChFunc",RangeddxVChFunc,3);
 
   RangeddyEdit = new  WSCvifield(Maitfor_055,"RangeddyEdit");
       RangeddyEdit->initialize();
@@ -2059,6 +2024,8 @@ WSCbase* _create_win_MainWindow(){
   RangeddyEdit->setPropertyV(WSNy,(short)165);
   RangeddyEdit->setPropertyV(WSNwidth,(unsigned short)80);
   RangeddyEdit->setPropertyV(WSNheight,(unsigned short)25);
+    extern void RangeddyVChFunc(WSCbase*);
+    RangeddyEdit->addProcedureV("RangeddyVCh","RangeddyVChFunc",RangeddyVChFunc,3);
 
   Maivlab_082 = new  WSCvlabel(Maitfor_055,"Maivlab_082");
       Maivlab_082->initialize();
@@ -2093,14 +2060,27 @@ WSCbase* _create_win_MainWindow(){
     extern void BtnRangedPresetDownFunc(WSCbase*);
     BtnRangedPreset->addProcedureV("BtnRangedPresetDown","BtnRangedPresetDownFunc",BtnRangedPresetDownFunc,13);
 
+  Maivbtn_000 = new  WSCvbtn(Maiinde_012,"Maivbtn_000");
+      Maivbtn_000->initialize();
+  Maivbtn_000->setPropertyV(WSNuserValue,(long)1);
+  Maivbtn_000->setPropertyV(WSNlabelString,"Select preset monster sequences");
+  Maivbtn_000->setPropertyV(WSNname,"Maivbtn_000");
+  Maivbtn_000->setPropertyV(WSNx,(short)205);
+  Maivbtn_000->setPropertyV(WSNy,(short)405);
+  Maivbtn_000->setPropertyV(WSNwidth,(unsigned short)245);
+  Maivbtn_000->setPropertyV(WSNheight,(unsigned short)25);
+    extern void BtnSelPresetSeqDownFunc(WSCbase*);
+    Maivbtn_000->addProcedureV("BtnSelPresetSeqDown","BtnSelPresetSeqDownFunc",BtnSelPresetSeqDownFunc,13);
+
   WndSelect = new  WSCdialog(MainWindow,"WndSelect");
       WndSelect->initialize();
+  WndSelect->setPropertyV(WSNdefaultPosition,(WSCbool)1);
   WndSelect->setPropertyV(WSNname,"WndSelect");
   WndSelect->setPropertyV(WSNtitleString,"SelectIt!");
   WndSelect->setPropertyV(WSNx,(short)47);
   WndSelect->setPropertyV(WSNy,(short)374);
-  WndSelect->setPropertyV(WSNwidth,(unsigned short)290);
-  WndSelect->setPropertyV(WSNheight,(unsigned short)425);
+  WndSelect->setPropertyV(WSNwidth,(unsigned short)283);
+  WndSelect->setPropertyV(WSNheight,(unsigned short)482);
     extern void WndSelectActivateFunc(WSCbase*);
     WndSelect->addProcedureV("WndSelectActivate","WndSelectActivateFunc",WndSelectActivateFunc,2);
 
@@ -2113,7 +2093,7 @@ WSCbase* _create_win_MainWindow(){
   ListSelect->setPropertyV(WSNx,(short)0);
   ListSelect->setPropertyV(WSNy,(short)0);
   ListSelect->setPropertyV(WSNwidth,(unsigned short)285);
-  ListSelect->setPropertyV(WSNheight,(unsigned short)465);
+  ListSelect->setPropertyV(WSNheight,(unsigned short)440);
   ListSelect->setPropertyV(WSNvis,(WSCbool)1);
     extern void ListSelectSelectFunc(WSCbase*);
     ListSelect->addProcedureV("ListSelectSelect","ListSelectSelectFunc",ListSelectSelectFunc,35);

@@ -8,7 +8,10 @@
 void ContrailEffectBtnDownFunc(WSCbase* object){
 	int type = selectedMonsterType;
 	bool isMaxNONE = true;//*none*—L‚è
-	selectFromDialog(&monster_definitions[type].contrail_effect,
+	int index = monster_definitions[type].contrail_effect;
+	selectFromDialog((int*)&index,
 		object, stockEffects, isMaxNONE);
+	monster_definitions[type].contrail_effect = index;
+	setupDialog();
 }
 static WSCfunctionRegister  op("ContrailEffectBtnDownFunc",(void*)ContrailEffectBtnDownFunc);

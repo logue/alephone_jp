@@ -10,7 +10,10 @@ void ImpactEffectBtnDownFunc(WSCbase* object){
 	//ëIëÇµÇƒílê›íË
 	int type = selectedMonsterType;
 	bool isMaxNONE = true;//*none*óLÇË
-	selectFromDialog(&monster_definitions[type].impact_effect,
+	int index = monster_definitions[type].impact_effect;
+	selectFromDialog((int*)&index,
 		object, stockEffects, isMaxNONE);
+	monster_definitions[type].impact_effect = index;
+	setupDialog();
 }
 static WSCfunctionRegister  op("ImpactEffectBtnDownFunc",(void*)ImpactEffectBtnDownFunc);
