@@ -232,7 +232,7 @@ WSCvifield* ProjSoundPitchEdit = NULL;
 WSCvlabel* Maivlab_147 = NULL;
 WSCvifield* ProjSequenceEdit = NULL;
 WSCvbtn* ProjPresetOtherProj = NULL;
-WSCvbtn* Maivbtn_153 = NULL;
+WSCvbtn* ProjPresetHandGrenade = NULL;
 WSCform* FrmPhysics = NULL;
 WSCoption* PhysicsTypeOpt = NULL;
 WSCvlabel* Maivlab_158 = NULL;
@@ -286,6 +286,8 @@ WSCvifield* PhyDeadHeightEdit = NULL;
 WSCvifield* PhyCameraHeightEdit = NULL;
 WSCvifield* PhySplashHeightEdit = NULL;
 WSCvifield* PhyHalfCamSepEdit = NULL;
+WSCvlabel* Maivlab_000 = NULL;
+WSCvifield* PhyFastAngularMax = NULL;
 WSCform* FrmWeapon = NULL;
 WSClist* Mailist_000 = NULL;
 WSCindexForm* Maiinde_001 = NULL;
@@ -418,8 +420,8 @@ WSCbase* _create_win_MainWindow(){
   MainWindow->setPropertyV(WSNtitleString,"PhysicsEditorWS");
   MainWindow->setPropertyV(WSNx,(short)100);
   MainWindow->setPropertyV(WSNy,(short)100);
-  MainWindow->setPropertyV(WSNwidth,(unsigned short)788);
-  MainWindow->setPropertyV(WSNheight,(unsigned short)498);
+  MainWindow->setPropertyV(WSNwidth,(unsigned short)787);
+  MainWindow->setPropertyV(WSNheight,(unsigned short)499);
   MainWindow->setPropertyV(WSNvis,(WSCbool)1);
     extern void MainInitFunc(WSCbase*);
     MainWindow->addProcedureV("MainInit","MainInitFunc",MainInitFunc,0);
@@ -433,7 +435,7 @@ WSCbase* _create_win_MainWindow(){
   MainMenu->setPropertyV(WSNname,"MainMenu");
   MainMenu->setPropertyV(WSNx,(short)0);
   MainMenu->setPropertyV(WSNy,(short)0);
-  MainMenu->setPropertyV(WSNwidth,(unsigned short)788);
+  MainMenu->setPropertyV(WSNwidth,(unsigned short)787);
   MainMenu->setPropertyV(WSNheight,(unsigned short)23);
   MainMenu->setPropertyV(WSNvis,(WSCbool)1);
   MainMenu->setPropertyV(WSNanchorLeftFlag,(WSCbool)1);
@@ -535,7 +537,7 @@ WSCbase* _create_win_MainWindow(){
   ListMonsterTypes->setPropertyV(WSNdataSource,(unsigned char)2);
   ListMonsterTypes->setPropertyV(WSNdataSourceName,"data/MonsterTypes.txt");
   ListMonsterTypes->setPropertyV(WSNworkWidth,(unsigned short)300);
-  ListMonsterTypes->setPropertyV(WSNworkHeight,(unsigned short)430);
+  ListMonsterTypes->setPropertyV(WSNworkHeight,(unsigned short)470);
   ListMonsterTypes->setPropertyV(WSNhbarVisible,(WSCbool)1);
   ListMonsterTypes->setPropertyV(WSNname,"ListMonsterTypes");
   ListMonsterTypes->setPropertyV(WSNx,(short)10);
@@ -2079,7 +2081,7 @@ WSCbase* _create_win_MainWindow(){
   WndSelect->setPropertyV(WSNtitleString,"SelectIt!");
   WndSelect->setPropertyV(WSNx,(short)47);
   WndSelect->setPropertyV(WSNy,(short)374);
-  WndSelect->setPropertyV(WSNwidth,(unsigned short)283);
+  WndSelect->setPropertyV(WSNwidth,(unsigned short)277);
   WndSelect->setPropertyV(WSNheight,(unsigned short)482);
     extern void WndSelectActivateFunc(WSCbase*);
     WndSelect->addProcedureV("WndSelectActivate","WndSelectActivateFunc",WndSelectActivateFunc,2);
@@ -2105,6 +2107,7 @@ WSCbase* _create_win_MainWindow(){
   FrmEffect->setPropertyV(WSNy,(short)25);
   FrmEffect->setPropertyV(WSNwidth,(unsigned short)690);
   FrmEffect->setPropertyV(WSNheight,(unsigned short)470);
+  FrmEffect->setPropertyV(WSNvis,(WSCbool)1);
 
   ListEffect = new  WSClist(FrmEffect,"ListEffect");
       ListEffect->initialize();
@@ -2113,7 +2116,7 @@ WSCbase* _create_win_MainWindow(){
   ListEffect->setPropertyV(WSNdataSource,(unsigned char)2);
   ListEffect->setPropertyV(WSNdataSourceName,"data/Effects.txt");
   ListEffect->setPropertyV(WSNworkWidth,(unsigned short)200);
-  ListEffect->setPropertyV(WSNworkHeight,(unsigned short)10);
+  ListEffect->setPropertyV(WSNworkHeight,(unsigned short)803);
   ListEffect->setPropertyV(WSNhbarVisible,(WSCbool)1);
   ListEffect->setPropertyV(WSNname,"ListEffect");
   ListEffect->setPropertyV(WSNx,(short)5);
@@ -2175,6 +2178,8 @@ WSCbase* _create_win_MainWindow(){
   EffectFlagsCheckGroup->setPropertyV(WSNwidth,(unsigned short)235);
   EffectFlagsCheckGroup->setPropertyV(WSNheight,(unsigned short)165);
   EffectFlagsCheckGroup->setPropertyV(WSNvis,(WSCbool)1);
+    extern void EfFlagsVChF(WSCbase*);
+    EffectFlagsCheckGroup->addProcedureV("EfFlagsVCh","EfFlagsVChF",EfFlagsVChF,3);
 
   Maivlab_097 = new  WSCvlabel(FrmEffect,"Maivlab_097");
       Maivlab_097->initialize();
@@ -2215,6 +2220,8 @@ WSCbase* _create_win_MainWindow(){
   EffectSoundPitchEdit->setPropertyV(WSNy,(short)60);
   EffectSoundPitchEdit->setPropertyV(WSNwidth,(unsigned short)95);
   EffectSoundPitchEdit->setPropertyV(WSNheight,(unsigned short)25);
+    extern void EfSndPitchVChF(WSCbase*);
+    EffectSoundPitchEdit->addProcedureV("EfSndPitchVCh","EfSndPitchVChF",EfSndPitchVChF,3);
 
   EffectDelayEdit = new  WSCvifield(FrmEffect,"EffectDelayEdit");
       EffectDelayEdit->initialize();
@@ -2224,6 +2231,8 @@ WSCbase* _create_win_MainWindow(){
   EffectDelayEdit->setPropertyV(WSNy,(short)85);
   EffectDelayEdit->setPropertyV(WSNwidth,(unsigned short)95);
   EffectDelayEdit->setPropertyV(WSNheight,(unsigned short)25);
+    extern void EfDelayVChF(WSCbase*);
+    EffectDelayEdit->addProcedureV("EfDelayVCh","EfDelayVChF",EfDelayVChF,3);
 
   EffectSequenceEdit = new  WSCvifield(FrmEffect,"EffectSequenceEdit");
       EffectSequenceEdit->initialize();
@@ -2233,6 +2242,8 @@ WSCbase* _create_win_MainWindow(){
   EffectSequenceEdit->setPropertyV(WSNy,(short)35);
   EffectSequenceEdit->setPropertyV(WSNwidth,(unsigned short)95);
   EffectSequenceEdit->setPropertyV(WSNheight,(unsigned short)25);
+    extern void EfSeqVChF(WSCbase*);
+    EffectSequenceEdit->addProcedureV("EfSeqVCh","EfSeqVChF",EfSeqVChF,3);
 
   Maivlab_104 = new  WSCvlabel(FrmEffect,"Maivlab_104");
       Maivlab_104->initialize();
@@ -2252,6 +2263,8 @@ WSCbase* _create_win_MainWindow(){
   EffectPalletEdit->setPropertyV(WSNy,(short)10);
   EffectPalletEdit->setPropertyV(WSNwidth,(unsigned short)95);
   EffectPalletEdit->setPropertyV(WSNheight,(unsigned short)25);
+    extern void EfPalVChF(WSCbase*);
+    EffectPalletEdit->addProcedureV("EfPalVCh","EfPalVChF",EfPalVChF,3);
 
   FrmProjectile = new  WSCform(MainWindow,"FrmProjectile");
       FrmProjectile->initialize();
@@ -2260,6 +2273,7 @@ WSCbase* _create_win_MainWindow(){
   FrmProjectile->setPropertyV(WSNy,(short)25);
   FrmProjectile->setPropertyV(WSNwidth,(unsigned short)690);
   FrmProjectile->setPropertyV(WSNheight,(unsigned short)470);
+  FrmProjectile->setPropertyV(WSNvis,(WSCbool)1);
 
   ListProjectile = new  WSClist(FrmProjectile,"ListProjectile");
       ListProjectile->initialize();
@@ -2268,7 +2282,7 @@ WSCbase* _create_win_MainWindow(){
   ListProjectile->setPropertyV(WSNdataSource,(unsigned char)2);
   ListProjectile->setPropertyV(WSNdataSourceName,"data/Projectiles.txt");
   ListProjectile->setPropertyV(WSNworkWidth,(unsigned short)200);
-  ListProjectile->setPropertyV(WSNworkHeight,(unsigned short)26);
+  ListProjectile->setPropertyV(WSNworkHeight,(unsigned short)456);
   ListProjectile->setPropertyV(WSNname,"ListProjectile");
   ListProjectile->setPropertyV(WSNx,(short)5);
   ListProjectile->setPropertyV(WSNy,(short)5);
@@ -2296,6 +2310,8 @@ WSCbase* _create_win_MainWindow(){
   ProjPalletEdit->setPropertyV(WSNy,(short)30);
   ProjPalletEdit->setPropertyV(WSNwidth,(unsigned short)110);
   ProjPalletEdit->setPropertyV(WSNheight,(unsigned short)20);
+    extern void ProjPalVChF(WSCbase*);
+    ProjPalletEdit->addProcedureV("ProjPalVCh","ProjPalVChF",ProjPalVChF,3);
 
   ProjCollectionBtn = new  WSCvbtn(FrmProjectile,"ProjCollectionBtn");
       ProjCollectionBtn->initialize();
@@ -2305,6 +2321,8 @@ WSCbase* _create_win_MainWindow(){
   ProjCollectionBtn->setPropertyV(WSNy,(short)10);
   ProjCollectionBtn->setPropertyV(WSNwidth,(unsigned short)110);
   ProjCollectionBtn->setPropertyV(WSNheight,(unsigned short)20);
+    extern void ProjColBtnDownFunc(WSCbase*);
+    ProjCollectionBtn->addProcedureV("ProjColBtnDown","ProjColBtnDownFunc",ProjColBtnDownFunc,13);
 
   Maivlab_112 = new  WSCvlabel(FrmProjectile,"Maivlab_112");
       Maivlab_112->initialize();
@@ -2354,6 +2372,8 @@ WSCbase* _create_win_MainWindow(){
   ProjContrailEfBtn->setPropertyV(WSNy,(short)110);
   ProjContrailEfBtn->setPropertyV(WSNwidth,(unsigned short)110);
   ProjContrailEfBtn->setPropertyV(WSNheight,(unsigned short)20);
+    extern void ProjContrailEfDownF(WSCbase*);
+    ProjContrailEfBtn->addProcedureV("ProjContrailEfDown","ProjContrailEfDownF",ProjContrailEfDownF,13);
 
   ProjDetonationEfBtn = new  WSCvbtn(FrmProjectile,"ProjDetonationEfBtn");
       ProjDetonationEfBtn->initialize();
@@ -2363,6 +2383,8 @@ WSCbase* _create_win_MainWindow(){
   ProjDetonationEfBtn->setPropertyV(WSNy,(short)70);
   ProjDetonationEfBtn->setPropertyV(WSNwidth,(unsigned short)110);
   ProjDetonationEfBtn->setPropertyV(WSNheight,(unsigned short)20);
+    extern void ProjDetEfDownF(WSCbase*);
+    ProjDetonationEfBtn->addProcedureV("ProjDetEfDown","ProjDetEfDownF",ProjDetEfDownF,13);
 
   ProjDetMediaEfBtn = new  WSCvbtn(FrmProjectile,"ProjDetMediaEfBtn");
       ProjDetMediaEfBtn->initialize();
@@ -2372,6 +2394,8 @@ WSCbase* _create_win_MainWindow(){
   ProjDetMediaEfBtn->setPropertyV(WSNy,(short)90);
   ProjDetMediaEfBtn->setPropertyV(WSNwidth,(unsigned short)110);
   ProjDetMediaEfBtn->setPropertyV(WSNheight,(unsigned short)20);
+    extern void ProjDetMediaEfDownF(WSCbase*);
+    ProjDetMediaEfBtn->addProcedureV("ProjDetMediaEfDown","ProjDetMediaEfDownF",ProjDetMediaEfDownF,13);
 
   Maivlab_119 = new  WSCvlabel(FrmProjectile,"Maivlab_119");
       Maivlab_119->initialize();
@@ -2431,6 +2455,8 @@ WSCbase* _create_win_MainWindow(){
   ProjAreaOfEfEdit->setPropertyV(WSNy,(short)210);
   ProjAreaOfEfEdit->setPropertyV(WSNwidth,(unsigned short)110);
   ProjAreaOfEfEdit->setPropertyV(WSNheight,(unsigned short)20);
+    extern void ProjAreaOfEfVChF(WSCbase*);
+    ProjAreaOfEfEdit->addProcedureV("ProjAreaOfEfVCh","ProjAreaOfEfVChF",ProjAreaOfEfVChF,3);
 
   ProjTicksBetContrailEdit = new  WSCvifield(FrmProjectile,"ProjTicksBetContrailEdit");
       ProjTicksBetContrailEdit->initialize();
@@ -2440,6 +2466,8 @@ WSCbase* _create_win_MainWindow(){
   ProjTicksBetContrailEdit->setPropertyV(WSNy,(short)130);
   ProjTicksBetContrailEdit->setPropertyV(WSNwidth,(unsigned short)110);
   ProjTicksBetContrailEdit->setPropertyV(WSNheight,(unsigned short)20);
+    extern void ProjTicksBetContrailDownF(WSCbase*);
+    ProjTicksBetContrailEdit->addProcedureV("ProjTicksBetContrailDown","ProjTicksBetContrailDownF",ProjTicksBetContrailDownF,3);
 
   ProjMaxContrailEdit = new  WSCvifield(FrmProjectile,"ProjMaxContrailEdit");
       ProjMaxContrailEdit->initialize();
@@ -2449,6 +2477,8 @@ WSCbase* _create_win_MainWindow(){
   ProjMaxContrailEdit->setPropertyV(WSNy,(short)150);
   ProjMaxContrailEdit->setPropertyV(WSNwidth,(unsigned short)110);
   ProjMaxContrailEdit->setPropertyV(WSNheight,(unsigned short)20);
+    extern void ProjMaxContrailVChF(WSCbase*);
+    ProjMaxContrailEdit->addProcedureV("ProjMaxContrailVCh","ProjMaxContrailVChF",ProjMaxContrailVChF,3);
 
   ProjMediaPromoEdit = new  WSCvifield(FrmProjectile,"ProjMediaPromoEdit");
       ProjMediaPromoEdit->initialize();
@@ -2458,6 +2488,8 @@ WSCbase* _create_win_MainWindow(){
   ProjMediaPromoEdit->setPropertyV(WSNy,(short)170);
   ProjMediaPromoEdit->setPropertyV(WSNwidth,(unsigned short)110);
   ProjMediaPromoEdit->setPropertyV(WSNheight,(unsigned short)20);
+    extern void ProjMediaPromoVChF(WSCbase*);
+    ProjMediaPromoEdit->addProcedureV("ProjMediaPromoVCh","ProjMediaPromoVChF",ProjMediaPromoVChF,3);
 
   ProjRadiusEdit = new  WSCvifield(FrmProjectile,"ProjRadiusEdit");
       ProjRadiusEdit->initialize();
@@ -2467,6 +2499,8 @@ WSCbase* _create_win_MainWindow(){
   ProjRadiusEdit->setPropertyV(WSNy,(short)190);
   ProjRadiusEdit->setPropertyV(WSNwidth,(unsigned short)110);
   ProjRadiusEdit->setPropertyV(WSNheight,(unsigned short)20);
+    extern void ProjRadiusVChF(WSCbase*);
+    ProjRadiusEdit->addProcedureV("ProjRadiusVCh","ProjRadiusVChF",ProjRadiusVChF,3);
 
   Maitfor_129 = new  WSCtform(FrmProjectile,"Maitfor_129");
       Maitfor_129->initialize();
@@ -2496,6 +2530,8 @@ WSCbase* _create_win_MainWindow(){
   ProjDamageTypeBtn->setPropertyV(WSNy,(short)20);
   ProjDamageTypeBtn->setPropertyV(WSNwidth,(unsigned short)110);
   ProjDamageTypeBtn->setPropertyV(WSNheight,(unsigned short)20);
+    extern void ProjDamageTypeDownF(WSCbase*);
+    ProjDamageTypeBtn->addProcedureV("ProjDamageTypeDown","ProjDamageTypeDownF",ProjDamageTypeDownF,13);
 
   Maivlab_132 = new  WSCvlabel(Maitfor_129,"Maivlab_132");
       Maivlab_132->initialize();
@@ -2529,7 +2565,6 @@ WSCbase* _create_win_MainWindow(){
 
   ProjDamageFlags = new  WSCvradio(Maitfor_129,"ProjDamageFlags");
       ProjDamageFlags->initialize();
-  ProjDamageFlags->setPropertyV(WSNstatus,(WSCbool)1);
   ProjDamageFlags->setPropertyV(WSNlabelString,"Alien");
   ProjDamageFlags->setPropertyV(WSNname,"ProjDamageFlags");
   ProjDamageFlags->setPropertyV(WSNvis,(WSCbool)1);
@@ -2537,6 +2572,8 @@ WSCbase* _create_win_MainWindow(){
   ProjDamageFlags->setPropertyV(WSNy,(short)105);
   ProjDamageFlags->setPropertyV(WSNwidth,(unsigned short)80);
   ProjDamageFlags->setPropertyV(WSNheight,(unsigned short)20);
+    extern void ProjDamageFlagsVChF(WSCbase*);
+    ProjDamageFlags->addProcedureV("ProjDamageFlagsVCh","ProjDamageFlagsVChF",ProjDamageFlagsVChF,3);
 
   ProjDamageBaseEdit = new  WSCvifield(Maitfor_129,"ProjDamageBaseEdit");
       ProjDamageBaseEdit->initialize();
@@ -2546,6 +2583,8 @@ WSCbase* _create_win_MainWindow(){
   ProjDamageBaseEdit->setPropertyV(WSNy,(short)40);
   ProjDamageBaseEdit->setPropertyV(WSNwidth,(unsigned short)110);
   ProjDamageBaseEdit->setPropertyV(WSNheight,(unsigned short)20);
+    extern void ProjDamageBaseVChF(WSCbase*);
+    ProjDamageBaseEdit->addProcedureV("ProjDamageBaseVCh","ProjDamageBaseVChF",ProjDamageBaseVChF,3);
 
   ProjDamageRandomEdit = new  WSCvifield(Maitfor_129,"ProjDamageRandomEdit");
       ProjDamageRandomEdit->initialize();
@@ -2555,6 +2594,8 @@ WSCbase* _create_win_MainWindow(){
   ProjDamageRandomEdit->setPropertyV(WSNy,(short)60);
   ProjDamageRandomEdit->setPropertyV(WSNwidth,(unsigned short)110);
   ProjDamageRandomEdit->setPropertyV(WSNheight,(unsigned short)20);
+    extern void ProjDamageRndVChF(WSCbase*);
+    ProjDamageRandomEdit->addProcedureV("ProjDamageRndVCh","ProjDamageRndVChF",ProjDamageRndVChF,3);
 
   ProjDamageScaleEdit = new  WSCvifield(Maitfor_129,"ProjDamageScaleEdit");
       ProjDamageScaleEdit->initialize();
@@ -2564,6 +2605,8 @@ WSCbase* _create_win_MainWindow(){
   ProjDamageScaleEdit->setPropertyV(WSNy,(short)80);
   ProjDamageScaleEdit->setPropertyV(WSNwidth,(unsigned short)110);
   ProjDamageScaleEdit->setPropertyV(WSNheight,(unsigned short)20);
+    extern void ProjDamageScaleVChF(WSCbase*);
+    ProjDamageScaleEdit->addProcedureV("ProjDamageScaleVCh","ProjDamageScaleVChF",ProjDamageScaleVChF,3);
 
   ListProjFlags = new  WSCcheckGroup(FrmProjectile,"ListProjFlags");
       ListProjFlags->initialize();
@@ -2576,6 +2619,8 @@ WSCbase* _create_win_MainWindow(){
   ListProjFlags->setPropertyV(WSNwidth,(unsigned short)140);
   ListProjFlags->setPropertyV(WSNheight,(unsigned short)460);
   ListProjFlags->setPropertyV(WSNvis,(WSCbool)1);
+    extern void ListProjFlagsVChF(WSCbase*);
+    ListProjFlags->addProcedureV("ListProjFlagsVCh","ListProjFlagsVChF",ListProjFlagsVChF,3);
 
   Maivlab_137 = new  WSCvlabel(FrmProjectile,"Maivlab_137");
       Maivlab_137->initialize();
@@ -2635,6 +2680,8 @@ WSCbase* _create_win_MainWindow(){
   ProjFlyBySoundBtn->setPropertyV(WSNy,(short)70);
   ProjFlyBySoundBtn->setPropertyV(WSNwidth,(unsigned short)110);
   ProjFlyBySoundBtn->setPropertyV(WSNheight,(unsigned short)20);
+    extern void ProjFlyBySndDownF(WSCbase*);
+    ProjFlyBySoundBtn->addProcedureV("ProjFlyBySndDown","ProjFlyBySndDownF",ProjFlyBySndDownF,13);
 
   ProjReboundSndBtn = new  WSCvbtn(FrmProjectile,"ProjReboundSndBtn");
       ProjReboundSndBtn->initialize();
@@ -2644,6 +2691,8 @@ WSCbase* _create_win_MainWindow(){
   ProjReboundSndBtn->setPropertyV(WSNy,(short)90);
   ProjReboundSndBtn->setPropertyV(WSNwidth,(unsigned short)110);
   ProjReboundSndBtn->setPropertyV(WSNheight,(unsigned short)20);
+    extern void ProjReboundSndDownF(WSCbase*);
+    ProjReboundSndBtn->addProcedureV("ProjReboundSndDown","ProjReboundSndDownF",ProjReboundSndDownF,13);
 
   ProjSpeedEdit = new  WSCvifield(FrmProjectile,"ProjSpeedEdit");
       ProjSpeedEdit->initialize();
@@ -2653,6 +2702,8 @@ WSCbase* _create_win_MainWindow(){
   ProjSpeedEdit->setPropertyV(WSNy,(short)10);
   ProjSpeedEdit->setPropertyV(WSNwidth,(unsigned short)110);
   ProjSpeedEdit->setPropertyV(WSNheight,(unsigned short)20);
+    extern void ProjSpeedVChF(WSCbase*);
+    ProjSpeedEdit->addProcedureV("ProjSpeedVCh","ProjSpeedVChF",ProjSpeedVChF,3);
 
   ProjMaxRangeEdit = new  WSCvifield(FrmProjectile,"ProjMaxRangeEdit");
       ProjMaxRangeEdit->initialize();
@@ -2662,6 +2713,8 @@ WSCbase* _create_win_MainWindow(){
   ProjMaxRangeEdit->setPropertyV(WSNy,(short)30);
   ProjMaxRangeEdit->setPropertyV(WSNwidth,(unsigned short)110);
   ProjMaxRangeEdit->setPropertyV(WSNheight,(unsigned short)20);
+    extern void ProjMaxRangeVChF(WSCbase*);
+    ProjMaxRangeEdit->addProcedureV("ProjMaxRangeVCh","ProjMaxRangeVChF",ProjMaxRangeVChF,3);
 
   ProjSoundPitchEdit = new  WSCvifield(FrmProjectile,"ProjSoundPitchEdit");
       ProjSoundPitchEdit->initialize();
@@ -2671,6 +2724,8 @@ WSCbase* _create_win_MainWindow(){
   ProjSoundPitchEdit->setPropertyV(WSNy,(short)50);
   ProjSoundPitchEdit->setPropertyV(WSNwidth,(unsigned short)110);
   ProjSoundPitchEdit->setPropertyV(WSNheight,(unsigned short)20);
+    extern void ProjSndPitchVChF(WSCbase*);
+    ProjSoundPitchEdit->addProcedureV("ProjSndPitchVCh","ProjSndPitchVChF",ProjSndPitchVChF,3);
 
   Maivlab_147 = new  WSCvlabel(FrmProjectile,"Maivlab_147");
       Maivlab_147->initialize();
@@ -2690,6 +2745,8 @@ WSCbase* _create_win_MainWindow(){
   ProjSequenceEdit->setPropertyV(WSNy,(short)50);
   ProjSequenceEdit->setPropertyV(WSNwidth,(unsigned short)110);
   ProjSequenceEdit->setPropertyV(WSNheight,(unsigned short)20);
+    extern void ProjSeqVChF(WSCbase*);
+    ProjSequenceEdit->addProcedureV("ProjSeqVCh","ProjSeqVChF",ProjSeqVChF,-1);
 
   ProjPresetOtherProj = new  WSCvbtn(FrmProjectile,"ProjPresetOtherProj");
       ProjPresetOtherProj->initialize();
@@ -2700,16 +2757,20 @@ WSCbase* _create_win_MainWindow(){
   ProjPresetOtherProj->setPropertyV(WSNy,(short)345);
   ProjPresetOtherProj->setPropertyV(WSNwidth,(unsigned short)180);
   ProjPresetOtherProj->setPropertyV(WSNheight,(unsigned short)20);
+    extern void ProjPresetOtherProjDownF(WSCbase*);
+    ProjPresetOtherProj->addProcedureV("ProjPresetOtherProjDown","ProjPresetOtherProjDownF",ProjPresetOtherProjDownF,13);
 
-  Maivbtn_153 = new  WSCvbtn(FrmProjectile,"Maivbtn_153");
-      Maivbtn_153->initialize();
-  Maivbtn_153->setPropertyV(WSNlabelString,"Set As Hand Granade");
-  Maivbtn_153->setPropertyV(WSNname,"Maivbtn_153");
-  Maivbtn_153->setPropertyV(WSNvis,(WSCbool)1);
-  Maivbtn_153->setPropertyV(WSNx,(short)465);
-  Maivbtn_153->setPropertyV(WSNy,(short)365);
-  Maivbtn_153->setPropertyV(WSNwidth,(unsigned short)180);
-  Maivbtn_153->setPropertyV(WSNheight,(unsigned short)20);
+  ProjPresetHandGrenade = new  WSCvbtn(FrmProjectile,"ProjPresetHandGrenade");
+      ProjPresetHandGrenade->initialize();
+  ProjPresetHandGrenade->setPropertyV(WSNlabelString,"Set As Hand Grenade");
+  ProjPresetHandGrenade->setPropertyV(WSNname,"ProjPresetHandGrenade");
+  ProjPresetHandGrenade->setPropertyV(WSNvis,(WSCbool)1);
+  ProjPresetHandGrenade->setPropertyV(WSNx,(short)465);
+  ProjPresetHandGrenade->setPropertyV(WSNy,(short)365);
+  ProjPresetHandGrenade->setPropertyV(WSNwidth,(unsigned short)180);
+  ProjPresetHandGrenade->setPropertyV(WSNheight,(unsigned short)20);
+    extern void ProjPresetHandGrenadeDownF(WSCbase*);
+    ProjPresetHandGrenade->addProcedureV("ProjPresetHandGrenadeDown","ProjPresetHandGrenadeDownF",ProjPresetHandGrenadeDownF,13);
 
   FrmPhysics = new  WSCform(MainWindow,"FrmPhysics");
       FrmPhysics->initialize();
@@ -2718,12 +2779,13 @@ WSCbase* _create_win_MainWindow(){
   FrmPhysics->setPropertyV(WSNy,(short)25);
   FrmPhysics->setPropertyV(WSNwidth,(unsigned short)690);
   FrmPhysics->setPropertyV(WSNheight,(unsigned short)470);
+  FrmPhysics->setPropertyV(WSNvis,(WSCbool)1);
 
   PhysicsTypeOpt = new  WSCoption(FrmPhysics,"PhysicsTypeOpt");
       PhysicsTypeOpt->initialize();
   PhysicsTypeOpt->setPropertyV(WSNmenuItems,"Walking:1:ep1_name,Running:2:ep2_name");
-  PhysicsTypeOpt->setPropertyV(WSNvalue,(long)2);
-  PhysicsTypeOpt->setPropertyV(WSNlabelString,"Running");
+  PhysicsTypeOpt->setPropertyV(WSNvalue,(long)1);
+  PhysicsTypeOpt->setPropertyV(WSNlabelString,"Walking");
   PhysicsTypeOpt->setPropertyV(WSNname,"PhysicsTypeOpt");
   PhysicsTypeOpt->setPropertyV(WSNvis,(WSCbool)1);
   PhysicsTypeOpt->setPropertyV(WSNx,(short)110);
@@ -2750,6 +2812,8 @@ WSCbase* _create_win_MainWindow(){
   PhyMaxForwardEdit->setPropertyV(WSNy,(short)40);
   PhyMaxForwardEdit->setPropertyV(WSNwidth,(unsigned short)110);
   PhyMaxForwardEdit->setPropertyV(WSNheight,(unsigned short)20);
+    extern void PhyMaxForwardVChF(WSCbase*);
+    PhyMaxForwardEdit->addProcedureV("PhyMaxForwardVCh","PhyMaxForwardVChF",PhyMaxForwardVChF,3);
 
   Maivlab_160 = new  WSCvlabel(FrmPhysics,"Maivlab_160");
       Maivlab_160->initialize();
@@ -2807,7 +2871,7 @@ WSCbase* _create_win_MainWindow(){
   Maivlab_165->setPropertyV(WSNname,"Maivlab_165");
   Maivlab_165->setPropertyV(WSNvis,(WSCbool)1);
   Maivlab_165->setPropertyV(WSNx,(short)10);
-  Maivlab_165->setPropertyV(WSNy,(short)140);
+  Maivlab_165->setPropertyV(WSNy,(short)145);
   Maivlab_165->setPropertyV(WSNwidth,(unsigned short)170);
   Maivlab_165->setPropertyV(WSNheight,(unsigned short)20);
 
@@ -2817,7 +2881,7 @@ WSCbase* _create_win_MainWindow(){
   Maivlab_166->setPropertyV(WSNname,"Maivlab_166");
   Maivlab_166->setPropertyV(WSNvis,(WSCbool)1);
   Maivlab_166->setPropertyV(WSNx,(short)10);
-  Maivlab_166->setPropertyV(WSNy,(short)160);
+  Maivlab_166->setPropertyV(WSNy,(short)165);
   Maivlab_166->setPropertyV(WSNwidth,(unsigned short)170);
   Maivlab_166->setPropertyV(WSNheight,(unsigned short)20);
 
@@ -2827,7 +2891,7 @@ WSCbase* _create_win_MainWindow(){
   Maivlab_167->setPropertyV(WSNname,"Maivlab_167");
   Maivlab_167->setPropertyV(WSNvis,(WSCbool)1);
   Maivlab_167->setPropertyV(WSNx,(short)10);
-  Maivlab_167->setPropertyV(WSNy,(short)180);
+  Maivlab_167->setPropertyV(WSNy,(short)185);
   Maivlab_167->setPropertyV(WSNwidth,(unsigned short)170);
   Maivlab_167->setPropertyV(WSNheight,(unsigned short)20);
 
@@ -2837,7 +2901,7 @@ WSCbase* _create_win_MainWindow(){
   Maivlab_168->setPropertyV(WSNname,"Maivlab_168");
   Maivlab_168->setPropertyV(WSNvis,(WSCbool)1);
   Maivlab_168->setPropertyV(WSNx,(short)10);
-  Maivlab_168->setPropertyV(WSNy,(short)200);
+  Maivlab_168->setPropertyV(WSNy,(short)205);
   Maivlab_168->setPropertyV(WSNwidth,(unsigned short)170);
   Maivlab_168->setPropertyV(WSNheight,(unsigned short)20);
 
@@ -2847,7 +2911,7 @@ WSCbase* _create_win_MainWindow(){
   Maivlab_169->setPropertyV(WSNname,"Maivlab_169");
   Maivlab_169->setPropertyV(WSNvis,(WSCbool)1);
   Maivlab_169->setPropertyV(WSNx,(short)10);
-  Maivlab_169->setPropertyV(WSNy,(short)220);
+  Maivlab_169->setPropertyV(WSNy,(short)225);
   Maivlab_169->setPropertyV(WSNwidth,(unsigned short)170);
   Maivlab_169->setPropertyV(WSNheight,(unsigned short)20);
 
@@ -2857,7 +2921,7 @@ WSCbase* _create_win_MainWindow(){
   Maivlab_170->setPropertyV(WSNname,"Maivlab_170");
   Maivlab_170->setPropertyV(WSNvis,(WSCbool)1);
   Maivlab_170->setPropertyV(WSNx,(short)10);
-  Maivlab_170->setPropertyV(WSNy,(short)240);
+  Maivlab_170->setPropertyV(WSNy,(short)250);
   Maivlab_170->setPropertyV(WSNwidth,(unsigned short)170);
   Maivlab_170->setPropertyV(WSNheight,(unsigned short)20);
 
@@ -2867,7 +2931,7 @@ WSCbase* _create_win_MainWindow(){
   Maivlab_171->setPropertyV(WSNname,"Maivlab_171");
   Maivlab_171->setPropertyV(WSNvis,(WSCbool)1);
   Maivlab_171->setPropertyV(WSNx,(short)10);
-  Maivlab_171->setPropertyV(WSNy,(short)260);
+  Maivlab_171->setPropertyV(WSNy,(short)270);
   Maivlab_171->setPropertyV(WSNwidth,(unsigned short)170);
   Maivlab_171->setPropertyV(WSNheight,(unsigned short)20);
 
@@ -2877,7 +2941,7 @@ WSCbase* _create_win_MainWindow(){
   Maivlab_172->setPropertyV(WSNname,"Maivlab_172");
   Maivlab_172->setPropertyV(WSNvis,(WSCbool)1);
   Maivlab_172->setPropertyV(WSNx,(short)10);
-  Maivlab_172->setPropertyV(WSNy,(short)280);
+  Maivlab_172->setPropertyV(WSNy,(short)290);
   Maivlab_172->setPropertyV(WSNwidth,(unsigned short)170);
   Maivlab_172->setPropertyV(WSNheight,(unsigned short)20);
 
@@ -2889,6 +2953,8 @@ WSCbase* _create_win_MainWindow(){
   PhyMaxBackwardEdit->setPropertyV(WSNy,(short)60);
   PhyMaxBackwardEdit->setPropertyV(WSNwidth,(unsigned short)110);
   PhyMaxBackwardEdit->setPropertyV(WSNheight,(unsigned short)20);
+    extern void PhyMaxBackwardVChF(WSCbase*);
+    PhyMaxBackwardEdit->addProcedureV("PhyMaxBackwardVCh","PhyMaxBackwardVChF",PhyMaxBackwardVChF,3);
 
   PhyMaxPerpendEdit = new  WSCvifield(FrmPhysics,"PhyMaxPerpendEdit");
       PhyMaxPerpendEdit->initialize();
@@ -2898,6 +2964,8 @@ WSCbase* _create_win_MainWindow(){
   PhyMaxPerpendEdit->setPropertyV(WSNy,(short)80);
   PhyMaxPerpendEdit->setPropertyV(WSNwidth,(unsigned short)110);
   PhyMaxPerpendEdit->setPropertyV(WSNheight,(unsigned short)20);
+    extern void PhyMaxPerpendVChF(WSCbase*);
+    PhyMaxPerpendEdit->addProcedureV("PhyMaxPerpendVCh","PhyMaxPerpendVChF",PhyMaxPerpendVChF,3);
 
   PhyAccelEdit = new  WSCvifield(FrmPhysics,"PhyAccelEdit");
       PhyAccelEdit->initialize();
@@ -2907,6 +2975,8 @@ WSCbase* _create_win_MainWindow(){
   PhyAccelEdit->setPropertyV(WSNy,(short)100);
   PhyAccelEdit->setPropertyV(WSNwidth,(unsigned short)110);
   PhyAccelEdit->setPropertyV(WSNheight,(unsigned short)20);
+    extern void PhyAccelVChF(WSCbase*);
+    PhyAccelEdit->addProcedureV("PhyAccelVCh","PhyAccelVChF",PhyAccelVChF,3);
 
   PhyDecelEdit = new  WSCvifield(FrmPhysics,"PhyDecelEdit");
       PhyDecelEdit->initialize();
@@ -2916,13 +2986,15 @@ WSCbase* _create_win_MainWindow(){
   PhyDecelEdit->setPropertyV(WSNy,(short)120);
   PhyDecelEdit->setPropertyV(WSNwidth,(unsigned short)110);
   PhyDecelEdit->setPropertyV(WSNheight,(unsigned short)20);
+    extern void PhyDecelVChF(WSCbase*);
+    PhyDecelEdit->addProcedureV("PhyDecelVCh","PhyDecelVChF",PhyDecelVChF,3);
 
   PhyAirDecelEdit = new  WSCvifield(FrmPhysics,"PhyAirDecelEdit");
       PhyAirDecelEdit->initialize();
   PhyAirDecelEdit->setPropertyV(WSNname,"PhyAirDecelEdit");
   PhyAirDecelEdit->setPropertyV(WSNvis,(WSCbool)1);
   PhyAirDecelEdit->setPropertyV(WSNx,(short)180);
-  PhyAirDecelEdit->setPropertyV(WSNy,(short)140);
+  PhyAirDecelEdit->setPropertyV(WSNy,(short)145);
   PhyAirDecelEdit->setPropertyV(WSNwidth,(unsigned short)110);
   PhyAirDecelEdit->setPropertyV(WSNheight,(unsigned short)20);
 
@@ -2931,63 +3003,77 @@ WSCbase* _create_win_MainWindow(){
   PhyGravityAccelEdit->setPropertyV(WSNname,"PhyGravityAccelEdit");
   PhyGravityAccelEdit->setPropertyV(WSNvis,(WSCbool)1);
   PhyGravityAccelEdit->setPropertyV(WSNx,(short)180);
-  PhyGravityAccelEdit->setPropertyV(WSNy,(short)160);
+  PhyGravityAccelEdit->setPropertyV(WSNy,(short)165);
   PhyGravityAccelEdit->setPropertyV(WSNwidth,(unsigned short)110);
   PhyGravityAccelEdit->setPropertyV(WSNheight,(unsigned short)20);
+    extern void PhyGravAccelVChF(WSCbase*);
+    PhyGravityAccelEdit->addProcedureV("PhyGravAccelVCh","PhyGravAccelVChF",PhyGravAccelVChF,3);
 
   PhyClimbAccelEdit = new  WSCvifield(FrmPhysics,"PhyClimbAccelEdit");
       PhyClimbAccelEdit->initialize();
   PhyClimbAccelEdit->setPropertyV(WSNname,"PhyClimbAccelEdit");
   PhyClimbAccelEdit->setPropertyV(WSNvis,(WSCbool)1);
   PhyClimbAccelEdit->setPropertyV(WSNx,(short)180);
-  PhyClimbAccelEdit->setPropertyV(WSNy,(short)180);
+  PhyClimbAccelEdit->setPropertyV(WSNy,(short)185);
   PhyClimbAccelEdit->setPropertyV(WSNwidth,(unsigned short)110);
   PhyClimbAccelEdit->setPropertyV(WSNheight,(unsigned short)20);
+    extern void PhyClimbAccelVChF(WSCbase*);
+    PhyClimbAccelEdit->addProcedureV("PhyClimbAccelVCh","PhyClimbAccelVChF",PhyClimbAccelVChF,3);
 
   PhyTerminalAccelEdit = new  WSCvifield(FrmPhysics,"PhyTerminalAccelEdit");
       PhyTerminalAccelEdit->initialize();
   PhyTerminalAccelEdit->setPropertyV(WSNname,"PhyTerminalAccelEdit");
   PhyTerminalAccelEdit->setPropertyV(WSNvis,(WSCbool)1);
   PhyTerminalAccelEdit->setPropertyV(WSNx,(short)180);
-  PhyTerminalAccelEdit->setPropertyV(WSNy,(short)200);
+  PhyTerminalAccelEdit->setPropertyV(WSNy,(short)205);
   PhyTerminalAccelEdit->setPropertyV(WSNwidth,(unsigned short)110);
   PhyTerminalAccelEdit->setPropertyV(WSNheight,(unsigned short)20);
+    extern void PhyTerminalAccelVChF(WSCbase*);
+    PhyTerminalAccelEdit->addProcedureV("PhyTerminalAccelVCh","PhyTerminalAccelVChF",PhyTerminalAccelVChF,3);
 
   PhyExtDecEdit = new  WSCvifield(FrmPhysics,"PhyExtDecEdit");
       PhyExtDecEdit->initialize();
   PhyExtDecEdit->setPropertyV(WSNname,"PhyExtDecEdit");
   PhyExtDecEdit->setPropertyV(WSNvis,(WSCbool)1);
   PhyExtDecEdit->setPropertyV(WSNx,(short)180);
-  PhyExtDecEdit->setPropertyV(WSNy,(short)220);
+  PhyExtDecEdit->setPropertyV(WSNy,(short)225);
   PhyExtDecEdit->setPropertyV(WSNwidth,(unsigned short)110);
   PhyExtDecEdit->setPropertyV(WSNheight,(unsigned short)20);
+    extern void PhyExtDecVChF(WSCbase*);
+    PhyExtDecEdit->addProcedureV("PhyExtDecVCh","PhyExtDecVChF",PhyExtDecVChF,3);
 
   PhyAngularAccelEdit = new  WSCvifield(FrmPhysics,"PhyAngularAccelEdit");
       PhyAngularAccelEdit->initialize();
   PhyAngularAccelEdit->setPropertyV(WSNname,"PhyAngularAccelEdit");
   PhyAngularAccelEdit->setPropertyV(WSNvis,(WSCbool)1);
   PhyAngularAccelEdit->setPropertyV(WSNx,(short)180);
-  PhyAngularAccelEdit->setPropertyV(WSNy,(short)240);
+  PhyAngularAccelEdit->setPropertyV(WSNy,(short)250);
   PhyAngularAccelEdit->setPropertyV(WSNwidth,(unsigned short)110);
   PhyAngularAccelEdit->setPropertyV(WSNheight,(unsigned short)20);
+    extern void PhyAngularAccelVChF(WSCbase*);
+    PhyAngularAccelEdit->addProcedureV("PhyAngularAccelVCh","PhyAngularAccelVChF",PhyAngularAccelVChF,3);
 
   PhyAngularDecelEdit = new  WSCvifield(FrmPhysics,"PhyAngularDecelEdit");
       PhyAngularDecelEdit->initialize();
   PhyAngularDecelEdit->setPropertyV(WSNname,"PhyAngularDecelEdit");
   PhyAngularDecelEdit->setPropertyV(WSNvis,(WSCbool)1);
   PhyAngularDecelEdit->setPropertyV(WSNx,(short)180);
-  PhyAngularDecelEdit->setPropertyV(WSNy,(short)260);
+  PhyAngularDecelEdit->setPropertyV(WSNy,(short)270);
   PhyAngularDecelEdit->setPropertyV(WSNwidth,(unsigned short)110);
   PhyAngularDecelEdit->setPropertyV(WSNheight,(unsigned short)20);
+    extern void PhyAngularDecelVChF(WSCbase*);
+    PhyAngularDecelEdit->addProcedureV("PhyAngularDecelVCh","PhyAngularDecelVChF",PhyAngularDecelVChF,3);
 
   PhyMaxAngularVelEdit = new  WSCvifield(FrmPhysics,"PhyMaxAngularVelEdit");
       PhyMaxAngularVelEdit->initialize();
   PhyMaxAngularVelEdit->setPropertyV(WSNname,"PhyMaxAngularVelEdit");
   PhyMaxAngularVelEdit->setPropertyV(WSNvis,(WSCbool)1);
   PhyMaxAngularVelEdit->setPropertyV(WSNx,(short)180);
-  PhyMaxAngularVelEdit->setPropertyV(WSNy,(short)280);
+  PhyMaxAngularVelEdit->setPropertyV(WSNy,(short)290);
   PhyMaxAngularVelEdit->setPropertyV(WSNwidth,(unsigned short)110);
   PhyMaxAngularVelEdit->setPropertyV(WSNheight,(unsigned short)20);
+    extern void PhyMaxAngularVelVChF(WSCbase*);
+    PhyMaxAngularVelEdit->addProcedureV("PhyMaxAngularVelVCh","PhyMaxAngularVelVChF",PhyMaxAngularVelVChF,-1);
 
   Maivlab_185 = new  WSCvlabel(FrmPhysics,"Maivlab_185");
       Maivlab_185->initialize();
@@ -2995,7 +3081,7 @@ WSCbase* _create_win_MainWindow(){
   Maivlab_185->setPropertyV(WSNname,"Maivlab_185");
   Maivlab_185->setPropertyV(WSNvis,(WSCbool)1);
   Maivlab_185->setPropertyV(WSNx,(short)10);
-  Maivlab_185->setPropertyV(WSNy,(short)300);
+  Maivlab_185->setPropertyV(WSNy,(short)310);
   Maivlab_185->setPropertyV(WSNwidth,(unsigned short)170);
   Maivlab_185->setPropertyV(WSNheight,(unsigned short)20);
 
@@ -3005,7 +3091,7 @@ WSCbase* _create_win_MainWindow(){
   Maivlab_186->setPropertyV(WSNname,"Maivlab_186");
   Maivlab_186->setPropertyV(WSNvis,(WSCbool)1);
   Maivlab_186->setPropertyV(WSNx,(short)10);
-  Maivlab_186->setPropertyV(WSNy,(short)320);
+  Maivlab_186->setPropertyV(WSNy,(short)330);
   Maivlab_186->setPropertyV(WSNwidth,(unsigned short)170);
   Maivlab_186->setPropertyV(WSNheight,(unsigned short)20);
 
@@ -3015,7 +3101,7 @@ WSCbase* _create_win_MainWindow(){
   Maivlab_187->setPropertyV(WSNname,"Maivlab_187");
   Maivlab_187->setPropertyV(WSNvis,(WSCbool)1);
   Maivlab_187->setPropertyV(WSNx,(short)10);
-  Maivlab_187->setPropertyV(WSNy,(short)340);
+  Maivlab_187->setPropertyV(WSNy,(short)375);
   Maivlab_187->setPropertyV(WSNwidth,(unsigned short)170);
   Maivlab_187->setPropertyV(WSNheight,(unsigned short)20);
 
@@ -3025,7 +3111,7 @@ WSCbase* _create_win_MainWindow(){
   Maivlab_188->setPropertyV(WSNname,"Maivlab_188");
   Maivlab_188->setPropertyV(WSNvis,(WSCbool)1);
   Maivlab_188->setPropertyV(WSNx,(short)10);
-  Maivlab_188->setPropertyV(WSNy,(short)360);
+  Maivlab_188->setPropertyV(WSNy,(short)395);
   Maivlab_188->setPropertyV(WSNwidth,(unsigned short)170);
   Maivlab_188->setPropertyV(WSNheight,(unsigned short)20);
 
@@ -3034,36 +3120,44 @@ WSCbase* _create_win_MainWindow(){
   PhyAngularRecenterEdit->setPropertyV(WSNname,"PhyAngularRecenterEdit");
   PhyAngularRecenterEdit->setPropertyV(WSNvis,(WSCbool)1);
   PhyAngularRecenterEdit->setPropertyV(WSNx,(short)180);
-  PhyAngularRecenterEdit->setPropertyV(WSNy,(short)300);
+  PhyAngularRecenterEdit->setPropertyV(WSNy,(short)310);
   PhyAngularRecenterEdit->setPropertyV(WSNwidth,(unsigned short)110);
   PhyAngularRecenterEdit->setPropertyV(WSNheight,(unsigned short)20);
+    extern void PhyAngularRecenterVChF(WSCbase*);
+    PhyAngularRecenterEdit->addProcedureV("PhyAngularRecenterVCh","PhyAngularRecenterVChF",PhyAngularRecenterVChF,3);
 
   PhyFastAngularVelEdit = new  WSCvifield(FrmPhysics,"PhyFastAngularVelEdit");
       PhyFastAngularVelEdit->initialize();
   PhyFastAngularVelEdit->setPropertyV(WSNname,"PhyFastAngularVelEdit");
   PhyFastAngularVelEdit->setPropertyV(WSNvis,(WSCbool)1);
   PhyFastAngularVelEdit->setPropertyV(WSNx,(short)180);
-  PhyFastAngularVelEdit->setPropertyV(WSNy,(short)320);
+  PhyFastAngularVelEdit->setPropertyV(WSNy,(short)330);
   PhyFastAngularVelEdit->setPropertyV(WSNwidth,(unsigned short)110);
   PhyFastAngularVelEdit->setPropertyV(WSNheight,(unsigned short)20);
+    extern void PhyFastAngularVelVChF(WSCbase*);
+    PhyFastAngularVelEdit->addProcedureV("PhyFastAngularVelVCh","PhyFastAngularVelVChF",PhyFastAngularVelVChF,3);
 
   PhyMaxElevationEdit = new  WSCvifield(FrmPhysics,"PhyMaxElevationEdit");
       PhyMaxElevationEdit->initialize();
   PhyMaxElevationEdit->setPropertyV(WSNname,"PhyMaxElevationEdit");
   PhyMaxElevationEdit->setPropertyV(WSNvis,(WSCbool)1);
   PhyMaxElevationEdit->setPropertyV(WSNx,(short)180);
-  PhyMaxElevationEdit->setPropertyV(WSNy,(short)340);
+  PhyMaxElevationEdit->setPropertyV(WSNy,(short)375);
   PhyMaxElevationEdit->setPropertyV(WSNwidth,(unsigned short)110);
   PhyMaxElevationEdit->setPropertyV(WSNheight,(unsigned short)20);
+    extern void PhyMaxElevationVChF(WSCbase*);
+    PhyMaxElevationEdit->addProcedureV("PhyMaxElevationVCh","PhyMaxElevationVChF",PhyMaxElevationVChF,3);
 
   PhyExtAngularDecelEdit = new  WSCvifield(FrmPhysics,"PhyExtAngularDecelEdit");
       PhyExtAngularDecelEdit->initialize();
   PhyExtAngularDecelEdit->setPropertyV(WSNname,"PhyExtAngularDecelEdit");
   PhyExtAngularDecelEdit->setPropertyV(WSNvis,(WSCbool)1);
   PhyExtAngularDecelEdit->setPropertyV(WSNx,(short)180);
-  PhyExtAngularDecelEdit->setPropertyV(WSNy,(short)360);
+  PhyExtAngularDecelEdit->setPropertyV(WSNy,(short)395);
   PhyExtAngularDecelEdit->setPropertyV(WSNwidth,(unsigned short)110);
   PhyExtAngularDecelEdit->setPropertyV(WSNheight,(unsigned short)20);
+    extern void PhyExtAngularDecelVChF(WSCbase*);
+    PhyExtAngularDecelEdit->addProcedureV("PhyExtAngularDecelVCh","PhyExtAngularDecelVChF",PhyExtAngularDecelVChF,3);
 
   Maivlab_193 = new  WSCvlabel(FrmPhysics,"Maivlab_193");
       Maivlab_193->initialize();
@@ -3071,7 +3165,7 @@ WSCbase* _create_win_MainWindow(){
   Maivlab_193->setPropertyV(WSNname,"Maivlab_193");
   Maivlab_193->setPropertyV(WSNvis,(WSCbool)1);
   Maivlab_193->setPropertyV(WSNx,(short)10);
-  Maivlab_193->setPropertyV(WSNy,(short)380);
+  Maivlab_193->setPropertyV(WSNy,(short)415);
   Maivlab_193->setPropertyV(WSNwidth,(unsigned short)170);
   Maivlab_193->setPropertyV(WSNheight,(unsigned short)20);
 
@@ -3081,7 +3175,7 @@ WSCbase* _create_win_MainWindow(){
   Maivlab_194->setPropertyV(WSNname,"Maivlab_194");
   Maivlab_194->setPropertyV(WSNvis,(WSCbool)1);
   Maivlab_194->setPropertyV(WSNx,(short)10);
-  Maivlab_194->setPropertyV(WSNy,(short)400);
+  Maivlab_194->setPropertyV(WSNy,(short)435);
   Maivlab_194->setPropertyV(WSNwidth,(unsigned short)170);
   Maivlab_194->setPropertyV(WSNheight,(unsigned short)20);
 
@@ -3150,18 +3244,22 @@ WSCbase* _create_win_MainWindow(){
   PhyStepDeltaEdit->setPropertyV(WSNname,"PhyStepDeltaEdit");
   PhyStepDeltaEdit->setPropertyV(WSNvis,(WSCbool)1);
   PhyStepDeltaEdit->setPropertyV(WSNx,(short)180);
-  PhyStepDeltaEdit->setPropertyV(WSNy,(short)380);
+  PhyStepDeltaEdit->setPropertyV(WSNy,(short)415);
   PhyStepDeltaEdit->setPropertyV(WSNwidth,(unsigned short)110);
   PhyStepDeltaEdit->setPropertyV(WSNheight,(unsigned short)20);
+    extern void PhyStepDeltaVChF(WSCbase*);
+    PhyStepDeltaEdit->addProcedureV("PhyStepDeltaVCh","PhyStepDeltaVChF",PhyStepDeltaVChF,3);
 
   PhyStepAmpEdit = new  WSCvifield(FrmPhysics,"PhyStepAmpEdit");
       PhyStepAmpEdit->initialize();
   PhyStepAmpEdit->setPropertyV(WSNname,"PhyStepAmpEdit");
   PhyStepAmpEdit->setPropertyV(WSNvis,(WSCbool)1);
   PhyStepAmpEdit->setPropertyV(WSNx,(short)180);
-  PhyStepAmpEdit->setPropertyV(WSNy,(short)400);
+  PhyStepAmpEdit->setPropertyV(WSNy,(short)435);
   PhyStepAmpEdit->setPropertyV(WSNwidth,(unsigned short)110);
   PhyStepAmpEdit->setPropertyV(WSNheight,(unsigned short)20);
+    extern void PhyStepAmpVChF(WSCbase*);
+    PhyStepAmpEdit->addProcedureV("PhyStepAmpVCh","PhyStepAmpVChF",PhyStepAmpVChF,3);
 
   PhyRadiusEdit = new  WSCvifield(FrmPhysics,"PhyRadiusEdit");
       PhyRadiusEdit->initialize();
@@ -3171,6 +3269,8 @@ WSCbase* _create_win_MainWindow(){
   PhyRadiusEdit->setPropertyV(WSNy,(short)40);
   PhyRadiusEdit->setPropertyV(WSNwidth,(unsigned short)110);
   PhyRadiusEdit->setPropertyV(WSNheight,(unsigned short)20);
+    extern void PhyRadiusVChF(WSCbase*);
+    PhyRadiusEdit->addProcedureV("PhyRadiusVCh","PhyRadiusVChF",PhyRadiusVChF,3);
 
   PhyHeightEdit = new  WSCvifield(FrmPhysics,"PhyHeightEdit");
       PhyHeightEdit->initialize();
@@ -3180,6 +3280,8 @@ WSCbase* _create_win_MainWindow(){
   PhyHeightEdit->setPropertyV(WSNy,(short)60);
   PhyHeightEdit->setPropertyV(WSNwidth,(unsigned short)110);
   PhyHeightEdit->setPropertyV(WSNheight,(unsigned short)20);
+    extern void PhyHeightVChF(WSCbase*);
+    PhyHeightEdit->addProcedureV("PhyHeightVCh","PhyHeightVChF",PhyHeightVChF,3);
 
   PhyDeadHeightEdit = new  WSCvifield(FrmPhysics,"PhyDeadHeightEdit");
       PhyDeadHeightEdit->initialize();
@@ -3189,6 +3291,8 @@ WSCbase* _create_win_MainWindow(){
   PhyDeadHeightEdit->setPropertyV(WSNy,(short)80);
   PhyDeadHeightEdit->setPropertyV(WSNwidth,(unsigned short)110);
   PhyDeadHeightEdit->setPropertyV(WSNheight,(unsigned short)20);
+    extern void PhyDeadHeightVChF(WSCbase*);
+    PhyDeadHeightEdit->addProcedureV("PhyDeadHeightVCh","PhyDeadHeightVChF",PhyDeadHeightVChF,3);
 
   PhyCameraHeightEdit = new  WSCvifield(FrmPhysics,"PhyCameraHeightEdit");
       PhyCameraHeightEdit->initialize();
@@ -3198,6 +3302,8 @@ WSCbase* _create_win_MainWindow(){
   PhyCameraHeightEdit->setPropertyV(WSNy,(short)100);
   PhyCameraHeightEdit->setPropertyV(WSNwidth,(unsigned short)110);
   PhyCameraHeightEdit->setPropertyV(WSNheight,(unsigned short)20);
+    extern void PhyCameraHeightVChF(WSCbase*);
+    PhyCameraHeightEdit->addProcedureV("PhyCameraHeightVCh","PhyCameraHeightVChF",PhyCameraHeightVChF,3);
 
   PhySplashHeightEdit = new  WSCvifield(FrmPhysics,"PhySplashHeightEdit");
       PhySplashHeightEdit->initialize();
@@ -3207,6 +3313,8 @@ WSCbase* _create_win_MainWindow(){
   PhySplashHeightEdit->setPropertyV(WSNy,(short)120);
   PhySplashHeightEdit->setPropertyV(WSNwidth,(unsigned short)110);
   PhySplashHeightEdit->setPropertyV(WSNheight,(unsigned short)20);
+    extern void PhySplashHeightVChF(WSCbase*);
+    PhySplashHeightEdit->addProcedureV("PhySplashHeightVCh","PhySplashHeightVChF",PhySplashHeightVChF,3);
 
   PhyHalfCamSepEdit = new  WSCvifield(FrmPhysics,"PhyHalfCamSepEdit");
       PhyHalfCamSepEdit->initialize();
@@ -3216,6 +3324,29 @@ WSCbase* _create_win_MainWindow(){
   PhyHalfCamSepEdit->setPropertyV(WSNy,(short)140);
   PhyHalfCamSepEdit->setPropertyV(WSNwidth,(unsigned short)110);
   PhyHalfCamSepEdit->setPropertyV(WSNheight,(unsigned short)20);
+    extern void PhyHalfCamSepVChF(WSCbase*);
+    PhyHalfCamSepEdit->addProcedureV("PhyHalfCamSepVCh","PhyHalfCamSepVChF",PhyHalfCamSepVChF,3);
+
+  Maivlab_000 = new  WSCvlabel(FrmPhysics,"Maivlab_000");
+      Maivlab_000->initialize();
+  Maivlab_000->setPropertyV(WSNlabelString,"Fast Angular Maximum");
+  Maivlab_000->setPropertyV(WSNname,"Maivlab_000");
+  Maivlab_000->setPropertyV(WSNvis,(WSCbool)1);
+  Maivlab_000->setPropertyV(WSNx,(short)10);
+  Maivlab_000->setPropertyV(WSNy,(short)355);
+  Maivlab_000->setPropertyV(WSNwidth,(unsigned short)170);
+  Maivlab_000->setPropertyV(WSNheight,(unsigned short)20);
+
+  PhyFastAngularMax = new  WSCvifield(FrmPhysics,"PhyFastAngularMax");
+      PhyFastAngularMax->initialize();
+  PhyFastAngularMax->setPropertyV(WSNname,"PhyFastAngularMax");
+  PhyFastAngularMax->setPropertyV(WSNvis,(WSCbool)1);
+  PhyFastAngularMax->setPropertyV(WSNx,(short)180);
+  PhyFastAngularMax->setPropertyV(WSNy,(short)355);
+  PhyFastAngularMax->setPropertyV(WSNwidth,(unsigned short)110);
+  PhyFastAngularMax->setPropertyV(WSNheight,(unsigned short)20);
+    extern void PhyMaxElevationVChF(WSCbase*);
+    PhyFastAngularMax->addProcedureV("PhyMaxElevationVCh","PhyMaxElevationVChF",PhyMaxElevationVChF,3);
 
   FrmWeapon = new  WSCform(MainWindow,"FrmWeapon");
       FrmWeapon->initialize();
@@ -3224,6 +3355,7 @@ WSCbase* _create_win_MainWindow(){
   FrmWeapon->setPropertyV(WSNy,(short)25);
   FrmWeapon->setPropertyV(WSNwidth,(unsigned short)690);
   FrmWeapon->setPropertyV(WSNheight,(unsigned short)470);
+  FrmWeapon->setPropertyV(WSNvis,(WSCbool)1);
 
   Mailist_000 = new  WSClist(FrmWeapon,"Mailist_000");
       Mailist_000->initialize();
@@ -3231,7 +3363,7 @@ WSCbase* _create_win_MainWindow(){
   Mailist_000->setPropertyV(WSNtitleString,"title1");
   Mailist_000->setPropertyV(WSNdataSource,(unsigned char)2);
   Mailist_000->setPropertyV(WSNdataSourceName,"data/Weapons.txt");
-  Mailist_000->setPropertyV(WSNworkHeight,(unsigned short)26);
+  Mailist_000->setPropertyV(WSNworkHeight,(unsigned short)456);
   Mailist_000->setPropertyV(WSNname,"Mailist_000");
   Mailist_000->setPropertyV(WSNx,(short)5);
   Mailist_000->setPropertyV(WSNy,(short)5);
@@ -3270,6 +3402,8 @@ WSCbase* _create_win_MainWindow(){
   WCollectionBtn->setPropertyV(WSNy,(short)30);
   WCollectionBtn->setPropertyV(WSNwidth,(unsigned short)110);
   WCollectionBtn->setPropertyV(WSNheight,(unsigned short)20);
+    extern void WColBtnDownF(WSCbase*);
+    WCollectionBtn->addProcedureV("WColBtnDown","WColBtnDownF",WColBtnDownF,13);
 
   Maivlab_005 = new  WSCvlabel(Maiinde_001,"Maivlab_005");
       Maivlab_005->initialize();
@@ -3289,6 +3423,8 @@ WSCbase* _create_win_MainWindow(){
   WPalletEdit->setPropertyV(WSNx,(short)145);
   WPalletEdit->setPropertyV(WSNy,(short)50);
   WPalletEdit->setPropertyV(WSNheight,(unsigned short)20);
+    extern void WPalVChF(WSCbase*);
+    WPalletEdit->addProcedureV("WPalVCh","WPalVChF",WPalVChF,3);
 
   Maivlab_007 = new  WSCvlabel(Maiinde_001,"Maivlab_007");
       Maivlab_007->initialize();
@@ -3353,6 +3489,8 @@ WSCbase* _create_win_MainWindow(){
   WIdleSeqEdit->setPropertyV(WSNx,(short)145);
   WIdleSeqEdit->setPropertyV(WSNy,(short)70);
   WIdleSeqEdit->setPropertyV(WSNheight,(unsigned short)20);
+    extern void WIdleSeqVChF(WSCbase*);
+    WIdleSeqEdit->addProcedureV("WIdleSeqVCh","WIdleSeqVChF",WIdleSeqVChF,3);
 
   WFiringSeqEdit = new  WSCvifield(Maiinde_001,"WFiringSeqEdit");
       WFiringSeqEdit->initialize();
@@ -3362,6 +3500,8 @@ WSCbase* _create_win_MainWindow(){
   WFiringSeqEdit->setPropertyV(WSNx,(short)145);
   WFiringSeqEdit->setPropertyV(WSNy,(short)90);
   WFiringSeqEdit->setPropertyV(WSNheight,(unsigned short)20);
+    extern void WFiringSeqVChF(WSCbase*);
+    WFiringSeqEdit->addProcedureV("WFiringSeqVCh","WFiringSeqVChF",WFiringSeqVChF,3);
 
   WReloadSeqEdit = new  WSCvifield(Maiinde_001,"WReloadSeqEdit");
       WReloadSeqEdit->initialize();
@@ -3371,6 +3511,8 @@ WSCbase* _create_win_MainWindow(){
   WReloadSeqEdit->setPropertyV(WSNx,(short)145);
   WReloadSeqEdit->setPropertyV(WSNy,(short)110);
   WReloadSeqEdit->setPropertyV(WSNheight,(unsigned short)20);
+    extern void WReloadSeqVChF(WSCbase*);
+    WReloadSeqEdit->addProcedureV("WReloadSeqVCh","WReloadSeqVChF",WReloadSeqVChF,3);
 
   WChargingSeqEdit = new  WSCvifield(Maiinde_001,"WChargingSeqEdit");
       WChargingSeqEdit->initialize();
@@ -3380,6 +3522,8 @@ WSCbase* _create_win_MainWindow(){
   WChargingSeqEdit->setPropertyV(WSNx,(short)145);
   WChargingSeqEdit->setPropertyV(WSNy,(short)130);
   WChargingSeqEdit->setPropertyV(WSNheight,(unsigned short)20);
+    extern void WChargingSeqVChF(WSCbase*);
+    WChargingSeqEdit->addProcedureV("WChargingSeqVCh","WChargingSeqVChF",WChargingSeqVChF,3);
 
   WChargedSeqEdit = new  WSCvifield(Maiinde_001,"WChargedSeqEdit");
       WChargedSeqEdit->initialize();
@@ -3389,6 +3533,8 @@ WSCbase* _create_win_MainWindow(){
   WChargedSeqEdit->setPropertyV(WSNx,(short)145);
   WChargedSeqEdit->setPropertyV(WSNy,(short)150);
   WChargedSeqEdit->setPropertyV(WSNheight,(unsigned short)20);
+    extern void WChargedSeqVChF(WSCbase*);
+    WChargedSeqEdit->addProcedureV("WChargedSeqVCh","WChargedSeqVChF",WChargedSeqVChF,3);
 
   Maivlab_021 = new  WSCvlabel(Maiinde_001,"Maivlab_021");
       Maivlab_021->initialize();
@@ -3409,6 +3555,8 @@ WSCbase* _create_win_MainWindow(){
   WItemBtn->setPropertyV(WSNy,(short)170);
   WItemBtn->setPropertyV(WSNwidth,(unsigned short)110);
   WItemBtn->setPropertyV(WSNheight,(unsigned short)20);
+    extern void WItemDownF(WSCbase*);
+    WItemBtn->addProcedureV("WItemDown","WItemDownF",WItemDownF,13);
 
   Maivlab_025 = new  WSCvlabel(Maiinde_001,"Maivlab_025");
       Maivlab_025->initialize();
@@ -3423,12 +3571,16 @@ WSCbase* _create_win_MainWindow(){
   WClassOption = new  WSCoption(Maiinde_001,"WClassOption");
       WClassOption->initialize();
   WClassOption->setPropertyV(WSNuserValue,(long)1);
+  WClassOption->setPropertyV(WSNvalue,(long)1);
+  WClassOption->setPropertyV(WSNlabelString,"item1");
   WClassOption->setPropertyV(WSNname,"WClassOption");
   WClassOption->setPropertyV(WSNvis,(WSCbool)1);
   WClassOption->setPropertyV(WSNx,(short)105);
   WClassOption->setPropertyV(WSNy,(short)190);
   WClassOption->setPropertyV(WSNwidth,(unsigned short)110);
   WClassOption->setPropertyV(WSNheight,(unsigned short)20);
+    extern void WClassVChF(WSCbase*);
+    WClassOption->addProcedureV("WClassVCh","WClassVChF",WClassVChF,3);
 
   WFlagsCheckGroup = new  WSCcheckGroup(Maiinde_001,"WFlagsCheckGroup");
       WFlagsCheckGroup->initialize();
@@ -3442,6 +3594,8 @@ WSCbase* _create_win_MainWindow(){
   WFlagsCheckGroup->setPropertyV(WSNwidth,(unsigned short)285);
   WFlagsCheckGroup->setPropertyV(WSNheight,(unsigned short)410);
   WFlagsCheckGroup->setPropertyV(WSNvis,(WSCbool)1);
+    extern void WFlagsVChF(WSCbase*);
+    WFlagsCheckGroup->addProcedureV("WFlagsVCh","WFlagsVChF",WFlagsVChF,3);
 
   Maivlab_033 = new  WSCvlabel(Maiinde_001,"Maivlab_033");
       Maivlab_033->initialize();
@@ -3561,6 +3715,8 @@ WSCbase* _create_win_MainWindow(){
   WLightIntensityEdit->setPropertyV(WSNx,(short)145);
   WLightIntensityEdit->setPropertyV(WSNy,(short)210);
   WLightIntensityEdit->setPropertyV(WSNheight,(unsigned short)20);
+    extern void WLightIntVChF(WSCbase*);
+    WLightIntensityEdit->addProcedureV("WLightIntVCh","WLightIntVChF",WLightIntVChF,3);
 
   WIntensityDecayEdit = new  WSCvifield(Maiinde_001,"WIntensityDecayEdit");
       WIntensityDecayEdit->initialize();
@@ -3570,6 +3726,8 @@ WSCbase* _create_win_MainWindow(){
   WIntensityDecayEdit->setPropertyV(WSNx,(short)145);
   WIntensityDecayEdit->setPropertyV(WSNy,(short)230);
   WIntensityDecayEdit->setPropertyV(WSNheight,(unsigned short)20);
+    extern void WIntDecayVChF(WSCbase*);
+    WIntensityDecayEdit->addProcedureV("WIntDecayVCh","WIntDecayVChF",WIntDecayVChF,3);
 
   WIdleWidthEdit = new  WSCvifield(Maiinde_001,"WIdleWidthEdit");
       WIdleWidthEdit->initialize();
@@ -3579,6 +3737,8 @@ WSCbase* _create_win_MainWindow(){
   WIdleWidthEdit->setPropertyV(WSNx,(short)145);
   WIdleWidthEdit->setPropertyV(WSNy,(short)250);
   WIdleWidthEdit->setPropertyV(WSNheight,(unsigned short)20);
+    extern void WIdleWidthVChF(WSCbase*);
+    WIdleWidthEdit->addProcedureV("WIdleWidthVCh","WIdleWidthVChF",WIdleWidthVChF,3);
 
   WIdleHeightEdit = new  WSCvifield(Maiinde_001,"WIdleHeightEdit");
       WIdleHeightEdit->initialize();
@@ -3588,6 +3748,8 @@ WSCbase* _create_win_MainWindow(){
   WIdleHeightEdit->setPropertyV(WSNx,(short)145);
   WIdleHeightEdit->setPropertyV(WSNy,(short)270);
   WIdleHeightEdit->setPropertyV(WSNheight,(unsigned short)20);
+    extern void WIdleHeightVChF(WSCbase*);
+    WIdleHeightEdit->addProcedureV("WIdleHeightVCh","WIdleHeightVChF",WIdleHeightVChF,3);
 
   WFiringHeightEdit = new  WSCvifield(Maiinde_001,"WFiringHeightEdit");
       WFiringHeightEdit->initialize();
@@ -3597,6 +3759,8 @@ WSCbase* _create_win_MainWindow(){
   WFiringHeightEdit->setPropertyV(WSNx,(short)145);
   WFiringHeightEdit->setPropertyV(WSNy,(short)290);
   WFiringHeightEdit->setPropertyV(WSNheight,(unsigned short)20);
+    extern void WFiringHeightVChF(WSCbase*);
+    WFiringHeightEdit->addProcedureV("WFiringHeightVCh","WFiringHeightVChF",WFiringHeightVChF,3);
 
   WReloadingHeighEdit = new  WSCvifield(Maiinde_001,"WReloadingHeighEdit");
       WReloadingHeighEdit->initialize();
@@ -3606,6 +3770,8 @@ WSCbase* _create_win_MainWindow(){
   WReloadingHeighEdit->setPropertyV(WSNx,(short)145);
   WReloadingHeighEdit->setPropertyV(WSNy,(short)310);
   WReloadingHeighEdit->setPropertyV(WSNheight,(unsigned short)20);
+    extern void WReloadingHeightVChF(WSCbase*);
+    WReloadingHeighEdit->addProcedureV("WReloadingHeightVCh","WReloadingHeightVChF",WReloadingHeightVChF,3);
 
   WHorAmpEdit = new  WSCvifield(Maiinde_001,"WHorAmpEdit");
       WHorAmpEdit->initialize();
@@ -3615,6 +3781,8 @@ WSCbase* _create_win_MainWindow(){
   WHorAmpEdit->setPropertyV(WSNx,(short)145);
   WHorAmpEdit->setPropertyV(WSNy,(short)330);
   WHorAmpEdit->setPropertyV(WSNheight,(unsigned short)20);
+    extern void WHorAmpVChF(WSCbase*);
+    WHorAmpEdit->addProcedureV("WHorAmpVCh","WHorAmpVChF",WHorAmpVChF,3);
 
   WUserAmpEdit = new  WSCvifield(Maiinde_001,"WUserAmpEdit");
       WUserAmpEdit->initialize();
@@ -3624,6 +3792,8 @@ WSCbase* _create_win_MainWindow(){
   WUserAmpEdit->setPropertyV(WSNx,(short)145);
   WUserAmpEdit->setPropertyV(WSNy,(short)350);
   WUserAmpEdit->setPropertyV(WSNheight,(unsigned short)20);
+    extern void WUserAmpVChF(WSCbase*);
+    WUserAmpEdit->addProcedureV("WUserAmpVCh","WUserAmpVChF",WUserAmpVChF,3);
 
   WReadyEdit = new  WSCvifield(Maiinde_001,"WReadyEdit");
       WReadyEdit->initialize();
@@ -3633,6 +3803,8 @@ WSCbase* _create_win_MainWindow(){
   WReadyEdit->setPropertyV(WSNx,(short)145);
   WReadyEdit->setPropertyV(WSNy,(short)370);
   WReadyEdit->setPropertyV(WSNheight,(unsigned short)20);
+    extern void WReadyVChF(WSCbase*);
+    WReadyEdit->addProcedureV("WReadyVCh","WReadyVChF",WReadyVChF,3);
 
   WAwaitReloadEdit = new  WSCvifield(Maiinde_001,"WAwaitReloadEdit");
       WAwaitReloadEdit->initialize();
@@ -3642,6 +3814,8 @@ WSCbase* _create_win_MainWindow(){
   WAwaitReloadEdit->setPropertyV(WSNx,(short)145);
   WAwaitReloadEdit->setPropertyV(WSNy,(short)390);
   WAwaitReloadEdit->setPropertyV(WSNheight,(unsigned short)20);
+    extern void WAwaitReloadVChF(WSCbase*);
+    WAwaitReloadEdit->addProcedureV("WAwaitReloadVCh","WAwaitReloadVChF",WAwaitReloadVChF,3);
 
   Maivlab_070 = new  WSCvlabel(Maiinde_001,"Maivlab_070");
       Maivlab_070->initialize();
@@ -3673,6 +3847,8 @@ WSCbase* _create_win_MainWindow(){
   WLoadingEdit->setPropertyV(WSNx,(short)145);
   WLoadingEdit->setPropertyV(WSNy,(short)410);
   WLoadingEdit->setPropertyV(WSNheight,(unsigned short)20);
+    extern void WLoadingVChF(WSCbase*);
+    WLoadingEdit->addProcedureV("WLoadingVCh","WLoadingVChF",WLoadingVChF,3);
 
   WLoadedEdit = new  WSCvifield(Maiinde_001,"WLoadedEdit");
       WLoadedEdit->initialize();
@@ -3682,6 +3858,8 @@ WSCbase* _create_win_MainWindow(){
   WLoadedEdit->setPropertyV(WSNx,(short)145);
   WLoadedEdit->setPropertyV(WSNy,(short)430);
   WLoadedEdit->setPropertyV(WSNheight,(unsigned short)20);
+    extern void WLoadedVChF(WSCbase*);
+    WLoadedEdit->addProcedureV("WLoadedVCh","WLoadedVChF",WLoadedVChF,3);
 
   WPrimaryGroup = new  WSCtform(Maiinde_001,"WPrimaryGroup");
       WPrimaryGroup->initialize();
@@ -3711,6 +3889,8 @@ WSCbase* _create_win_MainWindow(){
   WRoundPerMagEdit->setPropertyV(WSNy,(short)20);
   WRoundPerMagEdit->setPropertyV(WSNwidth,(unsigned short)90);
   WRoundPerMagEdit->setPropertyV(WSNheight,(unsigned short)20);
+    extern void WRoundPerMagVChF(WSCbase*);
+    WRoundPerMagEdit->addProcedureV("WRoundPerMagVCh","WRoundPerMagVChF",WRoundPerMagVChF,3);
 
   Maivlab_098 = new  WSCvlabel(WPrimaryGroup,"Maivlab_098");
       Maivlab_098->initialize();
@@ -3870,6 +4050,8 @@ WSCbase* _create_win_MainWindow(){
   WTicksPerRoundEdit->setPropertyV(WSNy,(short)60);
   WTicksPerRoundEdit->setPropertyV(WSNwidth,(unsigned short)90);
   WTicksPerRoundEdit->setPropertyV(WSNheight,(unsigned short)20);
+    extern void WTicksPerRoundVChF(WSCbase*);
+    WTicksPerRoundEdit->addProcedureV("WTicksPerRoundVCh","WTicksPerRoundVChF",WTicksPerRoundVChF,3);
 
   WRecovTicksEdit = new  WSCvifield(WPrimaryGroup,"WRecovTicksEdit");
       WRecovTicksEdit->initialize();
@@ -3879,6 +4061,8 @@ WSCbase* _create_win_MainWindow(){
   WRecovTicksEdit->setPropertyV(WSNy,(short)80);
   WRecovTicksEdit->setPropertyV(WSNwidth,(unsigned short)90);
   WRecovTicksEdit->setPropertyV(WSNheight,(unsigned short)20);
+    extern void WRecovTicksVChF(WSCbase*);
+    WRecovTicksEdit->addProcedureV("WRecovTicksVCh","WRecovTicksVChF",WRecovTicksVChF,3);
 
   WErrorEdit = new  WSCvifield(WPrimaryGroup,"WErrorEdit");
       WErrorEdit->initialize();
@@ -3888,6 +4072,8 @@ WSCbase* _create_win_MainWindow(){
   WErrorEdit->setPropertyV(WSNy,(short)280);
   WErrorEdit->setPropertyV(WSNwidth,(unsigned short)90);
   WErrorEdit->setPropertyV(WSNheight,(unsigned short)20);
+    extern void WErrorVChF(WSCbase*);
+    WErrorEdit->addProcedureV("WErrorVCh","WErrorVChF",WErrorVChF,3);
 
   WdxEdit = new  WSCvifield(WPrimaryGroup,"WdxEdit");
       WdxEdit->initialize();
@@ -3897,6 +4083,8 @@ WSCbase* _create_win_MainWindow(){
   WdxEdit->setPropertyV(WSNy,(short)300);
   WdxEdit->setPropertyV(WSNwidth,(unsigned short)90);
   WdxEdit->setPropertyV(WSNheight,(unsigned short)20);
+    extern void WdxVChF(WSCbase*);
+    WdxEdit->addProcedureV("WdxVCh","WdxVChF",WdxVChF,3);
 
   WdzEdit = new  WSCvifield(WPrimaryGroup,"WdzEdit");
       WdzEdit->initialize();
@@ -3906,6 +4094,8 @@ WSCbase* _create_win_MainWindow(){
   WdzEdit->setPropertyV(WSNy,(short)320);
   WdzEdit->setPropertyV(WSNwidth,(unsigned short)90);
   WdzEdit->setPropertyV(WSNheight,(unsigned short)20);
+    extern void WdzVChF(WSCbase*);
+    WdzEdit->addProcedureV("WdzVCh","WdzVChF",WdzVChF,3);
 
   WBurstCountEdit = new  WSCvifield(WPrimaryGroup,"WBurstCountEdit");
       WBurstCountEdit->initialize();
@@ -3915,6 +4105,8 @@ WSCbase* _create_win_MainWindow(){
   WBurstCountEdit->setPropertyV(WSNy,(short)360);
   WBurstCountEdit->setPropertyV(WSNwidth,(unsigned short)90);
   WBurstCountEdit->setPropertyV(WSNheight,(unsigned short)20);
+    extern void WBurstCountVChF(WSCbase*);
+    WBurstCountEdit->addProcedureV("WBurstCountVCh","WBurstCountVChF",WBurstCountVChF,3);
 
   WAmmoItemBtn = new  WSCvbtn(WPrimaryGroup,"WAmmoItemBtn");
       WAmmoItemBtn->initialize();
@@ -3924,6 +4116,8 @@ WSCbase* _create_win_MainWindow(){
   WAmmoItemBtn->setPropertyV(WSNy,(short)40);
   WAmmoItemBtn->setPropertyV(WSNwidth,(unsigned short)140);
   WAmmoItemBtn->setPropertyV(WSNheight,(unsigned short)20);
+    extern void WAmmoItemDownF(WSCbase*);
+    WAmmoItemBtn->addProcedureV("WAmmoItemDown","WAmmoItemDownF",WAmmoItemDownF,13);
 
   WFiringSndBtn = new  WSCvbtn(WPrimaryGroup,"WFiringSndBtn");
       WFiringSndBtn->initialize();
@@ -3933,6 +4127,8 @@ WSCbase* _create_win_MainWindow(){
   WFiringSndBtn->setPropertyV(WSNy,(short)140);
   WFiringSndBtn->setPropertyV(WSNwidth,(unsigned short)140);
   WFiringSndBtn->setPropertyV(WSNheight,(unsigned short)20);
+    extern void WFiringSndDownF(WSCbase*);
+    WFiringSndBtn->addProcedureV("WFiringSndDown","WFiringSndDownF",WFiringSndDownF,13);
 
   WClickSndBtn = new  WSCvbtn(WPrimaryGroup,"WClickSndBtn");
       WClickSndBtn->initialize();
@@ -3942,6 +4138,8 @@ WSCbase* _create_win_MainWindow(){
   WClickSndBtn->setPropertyV(WSNy,(short)160);
   WClickSndBtn->setPropertyV(WSNwidth,(unsigned short)140);
   WClickSndBtn->setPropertyV(WSNheight,(unsigned short)20);
+    extern void WClickSndDownF(WSCbase*);
+    WClickSndBtn->addProcedureV("WClickSndDown","WClickSndDownF",WClickSndDownF,13);
 
   WChargingSndBtn = new  WSCvbtn(WPrimaryGroup,"WChargingSndBtn");
       WChargingSndBtn->initialize();
@@ -3951,6 +4149,8 @@ WSCbase* _create_win_MainWindow(){
   WChargingSndBtn->setPropertyV(WSNy,(short)180);
   WChargingSndBtn->setPropertyV(WSNwidth,(unsigned short)140);
   WChargingSndBtn->setPropertyV(WSNheight,(unsigned short)20);
+    extern void WChargingSndVChF(WSCbase*);
+    WChargingSndBtn->addProcedureV("WChargingSndDown","WChargingSndVChF",WChargingSndVChF,13);
 
   WShellCasingSndBtn = new  WSCvbtn(WPrimaryGroup,"WShellCasingSndBtn");
       WShellCasingSndBtn->initialize();
@@ -3960,6 +4160,8 @@ WSCbase* _create_win_MainWindow(){
   WShellCasingSndBtn->setPropertyV(WSNy,(short)200);
   WShellCasingSndBtn->setPropertyV(WSNwidth,(unsigned short)140);
   WShellCasingSndBtn->setPropertyV(WSNheight,(unsigned short)20);
+    extern void WShellCasingSndDownF(WSCbase*);
+    WShellCasingSndBtn->addProcedureV("WShellCasingSndDown","WShellCasingSndDownF",WShellCasingSndDownF,13);
 
   WReloadSndBtn = new  WSCvbtn(WPrimaryGroup,"WReloadSndBtn");
       WReloadSndBtn->initialize();
@@ -3969,6 +4171,8 @@ WSCbase* _create_win_MainWindow(){
   WReloadSndBtn->setPropertyV(WSNy,(short)220);
   WReloadSndBtn->setPropertyV(WSNwidth,(unsigned short)140);
   WReloadSndBtn->setPropertyV(WSNheight,(unsigned short)20);
+    extern void WReloadSndDownF(WSCbase*);
+    WReloadSndBtn->addProcedureV("WReloadSndDown","WReloadSndDownF",WReloadSndDownF,13);
 
   WChargedSndBtn = new  WSCvbtn(WPrimaryGroup,"WChargedSndBtn");
       WChargedSndBtn->initialize();
@@ -3978,6 +4182,8 @@ WSCbase* _create_win_MainWindow(){
   WChargedSndBtn->setPropertyV(WSNy,(short)240);
   WChargedSndBtn->setPropertyV(WSNwidth,(unsigned short)140);
   WChargedSndBtn->setPropertyV(WSNheight,(unsigned short)20);
+    extern void WChargedSndDownF(WSCbase*);
+    WChargedSndBtn->addProcedureV("WChargedSndDown","WChargedSndDownF",WChargedSndDownF,13);
 
   WProjectileBtn = new  WSCvbtn(WPrimaryGroup,"WProjectileBtn");
       WProjectileBtn->initialize();
@@ -3987,6 +4193,8 @@ WSCbase* _create_win_MainWindow(){
   WProjectileBtn->setPropertyV(WSNy,(short)260);
   WProjectileBtn->setPropertyV(WSNwidth,(unsigned short)140);
   WProjectileBtn->setPropertyV(WSNheight,(unsigned short)20);
+    extern void WProjectileDownF(WSCbase*);
+    WProjectileBtn->addProcedureV("WProjectileDown","WProjectileDownF",WProjectileDownF,13);
 
   WShellCasingOption = new  WSCoption(WPrimaryGroup,"WShellCasingOption");
       WShellCasingOption->initialize();
@@ -3998,6 +4206,8 @@ WSCbase* _create_win_MainWindow(){
   WShellCasingOption->setPropertyV(WSNy,(short)340);
   WShellCasingOption->setPropertyV(WSNwidth,(unsigned short)140);
   WShellCasingOption->setPropertyV(WSNheight,(unsigned short)20);
+    extern void WShellCasingVChF(WSCbase*);
+    WShellCasingOption->addProcedureV("WShellCasingVCh","WShellCasingVChF",WShellCasingVChF,3);
 
   Maivlab_142 = new  WSCvlabel(WPrimaryGroup,"Maivlab_142");
       Maivlab_142->initialize();
@@ -4027,6 +4237,8 @@ WSCbase* _create_win_MainWindow(){
   WChargingTicksEdit->setPropertyV(WSNy,(short)100);
   WChargingTicksEdit->setPropertyV(WSNwidth,(unsigned short)90);
   WChargingTicksEdit->setPropertyV(WSNheight,(unsigned short)20);
+    extern void WChargingTicksVChF(WSCbase*);
+    WChargingTicksEdit->addProcedureV("WChargingTicksVCh","WChargingTicksVChF",WChargingTicksVChF,3);
 
   WRecoilMagnitudeEdit = new  WSCvifield(WPrimaryGroup,"WRecoilMagnitudeEdit");
       WRecoilMagnitudeEdit->initialize();
@@ -4036,6 +4248,8 @@ WSCbase* _create_win_MainWindow(){
   WRecoilMagnitudeEdit->setPropertyV(WSNy,(short)120);
   WRecoilMagnitudeEdit->setPropertyV(WSNwidth,(unsigned short)90);
   WRecoilMagnitudeEdit->setPropertyV(WSNheight,(unsigned short)20);
+    extern void WRecoilMagnitudeVChF(WSCbase*);
+    WRecoilMagnitudeEdit->addProcedureV("WRecoilMagnitudeVCh","WRecoilMagnitudeVChF",WRecoilMagnitudeVChF,3);
 
   WSecondaryGroup = new  WSCtform(Maiinde_001,"WSecondaryGroup");
       WSecondaryGroup->initialize();
@@ -4065,6 +4279,8 @@ WSCbase* _create_win_MainWindow(){
   WSRoundPerMagEdit->setPropertyV(WSNy,(short)20);
   WSRoundPerMagEdit->setPropertyV(WSNwidth,(unsigned short)90);
   WSRoundPerMagEdit->setPropertyV(WSNheight,(unsigned short)20);
+    extern void WSRoundPerMagVChF(WSCbase*);
+    WSRoundPerMagEdit->addProcedureV("WSRoundPerMagVCh","WSRoundPerMagVChF",WSRoundPerMagVChF,3);
 
   Maivlab_150 = new  WSCvlabel(WSecondaryGroup,"Maivlab_150");
       Maivlab_150->initialize();
@@ -4224,6 +4440,8 @@ WSCbase* _create_win_MainWindow(){
   WSTicksPerRoundEdit->setPropertyV(WSNy,(short)60);
   WSTicksPerRoundEdit->setPropertyV(WSNwidth,(unsigned short)90);
   WSTicksPerRoundEdit->setPropertyV(WSNheight,(unsigned short)20);
+    extern void WSTickPerRoundVChF(WSCbase*);
+    WSTicksPerRoundEdit->addProcedureV("WSTickPerRoundVCh","WSTickPerRoundVChF",WSTickPerRoundVChF,3);
 
   WSRecovTicksEdit = new  WSCvifield(WSecondaryGroup,"WSRecovTicksEdit");
       WSRecovTicksEdit->initialize();
@@ -4233,6 +4451,8 @@ WSCbase* _create_win_MainWindow(){
   WSRecovTicksEdit->setPropertyV(WSNy,(short)80);
   WSRecovTicksEdit->setPropertyV(WSNwidth,(unsigned short)90);
   WSRecovTicksEdit->setPropertyV(WSNheight,(unsigned short)20);
+    extern void WSRecovTickVChF(WSCbase*);
+    WSRecovTicksEdit->addProcedureV("WSRecovTickVCh","WSRecovTickVChF",WSRecovTickVChF,3);
 
   WSErrorEdit = new  WSCvifield(WSecondaryGroup,"WSErrorEdit");
       WSErrorEdit->initialize();
@@ -4242,6 +4462,8 @@ WSCbase* _create_win_MainWindow(){
   WSErrorEdit->setPropertyV(WSNy,(short)280);
   WSErrorEdit->setPropertyV(WSNwidth,(unsigned short)90);
   WSErrorEdit->setPropertyV(WSNheight,(unsigned short)20);
+    extern void WSErrorVChF(WSCbase*);
+    WSErrorEdit->addProcedureV("WSErrorVCh","WSErrorVChF",WSErrorVChF,3);
 
   WSdxEdit = new  WSCvifield(WSecondaryGroup,"WSdxEdit");
       WSdxEdit->initialize();
@@ -4251,6 +4473,8 @@ WSCbase* _create_win_MainWindow(){
   WSdxEdit->setPropertyV(WSNy,(short)300);
   WSdxEdit->setPropertyV(WSNwidth,(unsigned short)90);
   WSdxEdit->setPropertyV(WSNheight,(unsigned short)20);
+    extern void WSdxVChF(WSCbase*);
+    WSdxEdit->addProcedureV("WSdxVCh","WSdxVChF",WSdxVChF,3);
 
   WSdzEdit = new  WSCvifield(WSecondaryGroup,"WSdzEdit");
       WSdzEdit->initialize();
@@ -4260,6 +4484,8 @@ WSCbase* _create_win_MainWindow(){
   WSdzEdit->setPropertyV(WSNy,(short)320);
   WSdzEdit->setPropertyV(WSNwidth,(unsigned short)90);
   WSdzEdit->setPropertyV(WSNheight,(unsigned short)20);
+    extern void WSdzVChF(WSCbase*);
+    WSdzEdit->addProcedureV("WSdzVCh","WSdzVChF",WSdzVChF,3);
 
   WSBurstCountEdit = new  WSCvifield(WSecondaryGroup,"WSBurstCountEdit");
       WSBurstCountEdit->initialize();
@@ -4269,6 +4495,8 @@ WSCbase* _create_win_MainWindow(){
   WSBurstCountEdit->setPropertyV(WSNy,(short)360);
   WSBurstCountEdit->setPropertyV(WSNwidth,(unsigned short)90);
   WSBurstCountEdit->setPropertyV(WSNheight,(unsigned short)20);
+    extern void WSBurstCountVChF(WSCbase*);
+    WSBurstCountEdit->addProcedureV("WSBurstCountVCh","WSBurstCountVChF",WSBurstCountVChF,3);
 
   WSAmmoItemBtn = new  WSCvbtn(WSecondaryGroup,"WSAmmoItemBtn");
       WSAmmoItemBtn->initialize();
@@ -4278,6 +4506,8 @@ WSCbase* _create_win_MainWindow(){
   WSAmmoItemBtn->setPropertyV(WSNy,(short)40);
   WSAmmoItemBtn->setPropertyV(WSNwidth,(unsigned short)140);
   WSAmmoItemBtn->setPropertyV(WSNheight,(unsigned short)20);
+    extern void WSAmmoItemDownF(WSCbase*);
+    WSAmmoItemBtn->addProcedureV("WSAmmoItemDown","WSAmmoItemDownF",WSAmmoItemDownF,13);
 
   WSFiringSndBtn = new  WSCvbtn(WSecondaryGroup,"WSFiringSndBtn");
       WSFiringSndBtn->initialize();
@@ -4287,6 +4517,8 @@ WSCbase* _create_win_MainWindow(){
   WSFiringSndBtn->setPropertyV(WSNy,(short)140);
   WSFiringSndBtn->setPropertyV(WSNwidth,(unsigned short)140);
   WSFiringSndBtn->setPropertyV(WSNheight,(unsigned short)20);
+    extern void WSFiringSndDownF(WSCbase*);
+    WSFiringSndBtn->addProcedureV("WSFiringSndDown","WSFiringSndDownF",WSFiringSndDownF,13);
 
   WSClickSndBtn = new  WSCvbtn(WSecondaryGroup,"WSClickSndBtn");
       WSClickSndBtn->initialize();
@@ -4296,6 +4528,8 @@ WSCbase* _create_win_MainWindow(){
   WSClickSndBtn->setPropertyV(WSNy,(short)160);
   WSClickSndBtn->setPropertyV(WSNwidth,(unsigned short)140);
   WSClickSndBtn->setPropertyV(WSNheight,(unsigned short)20);
+    extern void WSClickSndDownF(WSCbase*);
+    WSClickSndBtn->addProcedureV("WSClickSndDown","WSClickSndDownF",WSClickSndDownF,13);
 
   WSChargingSndBtn = new  WSCvbtn(WSecondaryGroup,"WSChargingSndBtn");
       WSChargingSndBtn->initialize();
@@ -4305,6 +4539,8 @@ WSCbase* _create_win_MainWindow(){
   WSChargingSndBtn->setPropertyV(WSNy,(short)180);
   WSChargingSndBtn->setPropertyV(WSNwidth,(unsigned short)140);
   WSChargingSndBtn->setPropertyV(WSNheight,(unsigned short)20);
+    extern void WSChargingSndDownF(WSCbase*);
+    WSChargingSndBtn->addProcedureV("WSChargingSndDown","WSChargingSndDownF",WSChargingSndDownF,13);
 
   WSShellCasingSndBtn = new  WSCvbtn(WSecondaryGroup,"WSShellCasingSndBtn");
       WSShellCasingSndBtn->initialize();
@@ -4314,6 +4550,8 @@ WSCbase* _create_win_MainWindow(){
   WSShellCasingSndBtn->setPropertyV(WSNy,(short)200);
   WSShellCasingSndBtn->setPropertyV(WSNwidth,(unsigned short)140);
   WSShellCasingSndBtn->setPropertyV(WSNheight,(unsigned short)20);
+    extern void WSShellCasingSndDownF(WSCbase*);
+    WSShellCasingSndBtn->addProcedureV("WSShellCasingSndDown","WSShellCasingSndDownF",WSShellCasingSndDownF,13);
 
   WSReloadSndBtn = new  WSCvbtn(WSecondaryGroup,"WSReloadSndBtn");
       WSReloadSndBtn->initialize();
@@ -4323,6 +4561,8 @@ WSCbase* _create_win_MainWindow(){
   WSReloadSndBtn->setPropertyV(WSNy,(short)220);
   WSReloadSndBtn->setPropertyV(WSNwidth,(unsigned short)140);
   WSReloadSndBtn->setPropertyV(WSNheight,(unsigned short)20);
+    extern void WSReloadSndDownF(WSCbase*);
+    WSReloadSndBtn->addProcedureV("WSReloadSndDown","WSReloadSndDownF",WSReloadSndDownF,13);
 
   WSChargedSndBtn = new  WSCvbtn(WSecondaryGroup,"WSChargedSndBtn");
       WSChargedSndBtn->initialize();
@@ -4332,6 +4572,8 @@ WSCbase* _create_win_MainWindow(){
   WSChargedSndBtn->setPropertyV(WSNy,(short)240);
   WSChargedSndBtn->setPropertyV(WSNwidth,(unsigned short)140);
   WSChargedSndBtn->setPropertyV(WSNheight,(unsigned short)20);
+    extern void WSChargedSndDownF(WSCbase*);
+    WSChargedSndBtn->addProcedureV("WSChargedSndDown","WSChargedSndDownF",WSChargedSndDownF,13);
 
   WSProjectileBtn = new  WSCvbtn(WSecondaryGroup,"WSProjectileBtn");
       WSProjectileBtn->initialize();
@@ -4341,6 +4583,8 @@ WSCbase* _create_win_MainWindow(){
   WSProjectileBtn->setPropertyV(WSNy,(short)260);
   WSProjectileBtn->setPropertyV(WSNwidth,(unsigned short)140);
   WSProjectileBtn->setPropertyV(WSNheight,(unsigned short)20);
+    extern void WSProjectileDownF(WSCbase*);
+    WSProjectileBtn->addProcedureV("WSProjectileDown","WSProjectileDownF",WSProjectileDownF,13);
 
   WSShellCasingOption = new  WSCoption(WSecondaryGroup,"WSShellCasingOption");
       WSShellCasingOption->initialize();
@@ -4352,6 +4596,8 @@ WSCbase* _create_win_MainWindow(){
   WSShellCasingOption->setPropertyV(WSNy,(short)340);
   WSShellCasingOption->setPropertyV(WSNwidth,(unsigned short)140);
   WSShellCasingOption->setPropertyV(WSNheight,(unsigned short)20);
+    extern void WSShellCasingVChF(WSCbase*);
+    WSShellCasingOption->addProcedureV("WSShellCasingVCh","WSShellCasingVChF",WSShellCasingVChF,3);
 
   Maivlab_200 = new  WSCvlabel(WSecondaryGroup,"Maivlab_200");
       Maivlab_200->initialize();
@@ -4381,6 +4627,8 @@ WSCbase* _create_win_MainWindow(){
   WSChargingTicksEdit->setPropertyV(WSNy,(short)100);
   WSChargingTicksEdit->setPropertyV(WSNwidth,(unsigned short)90);
   WSChargingTicksEdit->setPropertyV(WSNheight,(unsigned short)20);
+    extern void WSChargingTickVChF(WSCbase*);
+    WSChargingTicksEdit->addProcedureV("WSChargingTickVCh","WSChargingTickVChF",WSChargingTickVChF,3);
 
   WSRecoilMagnitudeEdit = new  WSCvifield(WSecondaryGroup,"WSRecoilMagnitudeEdit");
       WSRecoilMagnitudeEdit->initialize();
@@ -4390,6 +4638,8 @@ WSCbase* _create_win_MainWindow(){
   WSRecoilMagnitudeEdit->setPropertyV(WSNy,(short)120);
   WSRecoilMagnitudeEdit->setPropertyV(WSNwidth,(unsigned short)90);
   WSRecoilMagnitudeEdit->setPropertyV(WSNheight,(unsigned short)20);
+    extern void WSRecoilMagnitudeVChF(WSCbase*);
+    WSRecoilMagnitudeEdit->addProcedureV("WSRecoilMagnitudeVCh","WSRecoilMagnitudeVChF",WSRecoilMagnitudeVChF,3);
 
    MainWindow->setVisible(True);
    return MainWindow;

@@ -9,9 +9,11 @@
 void CaarryItemBtnFunc(WSCbase* object){
 	int type = selectedMonsterType;
 	int index = monster_definitions[type].carrying_item_type;
-	monster_definitions[type].carrying_item_type = index;
 	bool isMax = true;
-	selectFromDialog(&index, object, stockItemTypes, isMax);
-	setupDialog();
+	long ret = selectFromDialog(&index, object, stockItemTypes, isMax);
+	if(ret == WS_DIALOG_OK){
+		monster_definitions[type].carrying_item_type = index;
+		setupDialog();
+	}
 }
 static WSCfunctionRegister  op("CaarryItemBtnFunc",(void*)CaarryItemBtnFunc);

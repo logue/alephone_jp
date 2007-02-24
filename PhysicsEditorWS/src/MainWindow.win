@@ -20,9 +20,9 @@ PhysicsEditorWS
  #RES      y
 100
  #RES      width
-788
+787
  #RES      height
-498
+499
  #RES      vis
 1
 
@@ -34,7 +34,7 @@ PhysicsEditorWS
  #RES      y
 0
  #RES      width
-788
+787
  #RES      height
 23
  #RES      vis
@@ -212,7 +212,7 @@ data/MonsterTypes.txt
  #RES      workWidth
 300
  #RES      workHeight
-430
+470
  #RES      hbarVisible
 1
  #RES      x
@@ -2746,7 +2746,7 @@ SelectIt!
  #RES      y
 374
  #RES      width
-283
+277
  #RES      height
 482
 
@@ -2785,6 +2785,8 @@ title4
 690
  #RES      height
 470
+ #RES      vis
+1
 
 #OBJ       ListEffect
  #TYPE       WSClist
@@ -2804,7 +2806,7 @@ data/Effects.txt
  #RES      workWidth
 200
  #RES      workHeight
-10
+803
  #RES      hbarVisible
 1
  #RES      x
@@ -2887,6 +2889,10 @@ Sound Pitch
 #OBJ       EffectFlagsCheckGroup
  #TYPE       WSCcheckGroup
  #PARENT   FrmEffect
+ #PROC  EfFlagsVCh
+  #TRIG    3
+  #PRO   EfFlagsVChF.cpp
+
  #RES      menuItems
 End When Animation Loops,End When Transfer Animation Loops,Sound Only, Make Twin Visible,Media Effect
  #RES      titleString
@@ -2955,6 +2961,10 @@ Delay Sound
 #OBJ       EffectSoundPitchEdit
  #TYPE       WSCvifield
  #PARENT   FrmEffect
+ #PROC  EfSndPitchVCh
+  #TRIG    3
+  #PRO   EfSndPitchVChF.cpp
+
  #RES      vis
 1
  #RES      x
@@ -2969,6 +2979,10 @@ Delay Sound
 #OBJ       EffectDelayEdit
  #TYPE       WSCvifield
  #PARENT   FrmEffect
+ #PROC  EfDelayVCh
+  #TRIG    3
+  #PRO   EfDelayVChF.cpp
+
  #RES      vis
 1
  #RES      x
@@ -2983,6 +2997,10 @@ Delay Sound
 #OBJ       EffectSequenceEdit
  #TYPE       WSCvifield
  #PARENT   FrmEffect
+ #PROC  EfSeqVCh
+  #TRIG    3
+  #PRO   EfSeqVChF.cpp
+
  #RES      vis
 1
  #RES      x
@@ -3013,6 +3031,10 @@ Pallet
 #OBJ       EffectPalletEdit
  #TYPE       WSCvifield
  #PARENT   FrmEffect
+ #PROC  EfPalVCh
+  #TRIG    3
+  #PRO   EfPalVChF.cpp
+
  #RES      vis
 1
  #RES      x
@@ -3035,6 +3057,8 @@ Pallet
 690
  #RES      height
 470
+ #RES      vis
+1
 
 #OBJ       ListProjectile
  #TYPE       WSClist
@@ -3054,7 +3078,7 @@ data/Projectiles.txt
  #RES      workWidth
 200
  #RES      workHeight
-26
+456
  #RES      x
 5
  #RES      y
@@ -3085,6 +3109,10 @@ Collection
 #OBJ       ProjPalletEdit
  #TYPE       WSCvifield
  #PARENT   FrmProjectile
+ #PROC  ProjPalVCh
+  #TRIG    3
+  #PRO   ProjPalVChF.cpp
+
  #RES      vis
 1
  #RES      x
@@ -3099,6 +3127,10 @@ Collection
 #OBJ       ProjCollectionBtn
  #TYPE       WSCvbtn
  #PARENT   FrmProjectile
+ #PROC  ProjColBtnDown
+  #TRIG    13
+  #PRO   ProjColBtnDownFunc.cpp
+
  #RES      vis
 1
  #RES      x
@@ -3177,6 +3209,10 @@ Det(media)Ef
 #OBJ       ProjContrailEfBtn
  #TYPE       WSCvbtn
  #PARENT   FrmProjectile
+ #PROC  ProjContrailEfDown
+  #TRIG    13
+  #PRO   ProjContrailEfDownF.cpp
+
  #RES      vis
 1
  #RES      x
@@ -3191,6 +3227,10 @@ Det(media)Ef
 #OBJ       ProjDetonationEfBtn
  #TYPE       WSCvbtn
  #PARENT   FrmProjectile
+ #PROC  ProjDetEfDown
+  #TRIG    13
+  #PRO   ProjDetEfDownF.cpp
+
  #RES      vis
 1
  #RES      x
@@ -3205,6 +3245,10 @@ Det(media)Ef
 #OBJ       ProjDetMediaEfBtn
  #TYPE       WSCvbtn
  #PARENT   FrmProjectile
+ #PROC  ProjDetMediaEfDown
+  #TRIG    13
+  #PRO   ProjDetMediaEfDownF.cpp
+
  #RES      vis
 1
  #RES      x
@@ -3299,6 +3343,10 @@ Radius
 #OBJ       ProjAreaOfEfEdit
  #TYPE       WSCvifield
  #PARENT   FrmProjectile
+ #PROC  ProjAreaOfEfVCh
+  #TRIG    3
+  #PRO   ProjAreaOfEfVChF.cpp
+
  #RES      vis
 1
  #RES      x
@@ -3313,6 +3361,10 @@ Radius
 #OBJ       ProjTicksBetContrailEdit
  #TYPE       WSCvifield
  #PARENT   FrmProjectile
+ #PROC  ProjTicksBetContrailDown
+  #TRIG    3
+  #PRO   ProjTicksBetContrailDownF.cpp
+
  #RES      vis
 1
  #RES      x
@@ -3327,6 +3379,10 @@ Radius
 #OBJ       ProjMaxContrailEdit
  #TYPE       WSCvifield
  #PARENT   FrmProjectile
+ #PROC  ProjMaxContrailVCh
+  #TRIG    3
+  #PRO   ProjMaxContrailVChF.cpp
+
  #RES      vis
 1
  #RES      x
@@ -3341,6 +3397,10 @@ Radius
 #OBJ       ProjMediaPromoEdit
  #TYPE       WSCvifield
  #PARENT   FrmProjectile
+ #PROC  ProjMediaPromoVCh
+  #TRIG    3
+  #PRO   ProjMediaPromoVChF.cpp
+
  #RES      vis
 1
  #RES      x
@@ -3355,6 +3415,10 @@ Radius
 #OBJ       ProjRadiusEdit
  #TYPE       WSCvifield
  #PARENT   FrmProjectile
+ #PROC  ProjRadiusVCh
+  #TRIG    3
+  #PRO   ProjRadiusVChF.cpp
+
  #RES      vis
 1
  #RES      x
@@ -3401,6 +3465,10 @@ Type
 #OBJ       ProjDamageTypeBtn
  #TYPE       WSCvbtn
  #PARENT   Maitfor_129
+ #PROC  ProjDamageTypeDown
+  #TRIG    13
+  #PRO   ProjDamageTypeDownF.cpp
+
  #RES      vis
 1
  #RES      x
@@ -3463,8 +3531,10 @@ Scale
 #OBJ       ProjDamageFlags
  #TYPE       WSCvradio
  #PARENT   Maitfor_129
- #RES      status
-1
+ #PROC  ProjDamageFlagsVCh
+  #TRIG    3
+  #PRO   ProjDamageFlagsVChF.cpp
+
  #RES      labelString
 Alien
  #RES      vis
@@ -3481,6 +3551,10 @@ Alien
 #OBJ       ProjDamageBaseEdit
  #TYPE       WSCvifield
  #PARENT   Maitfor_129
+ #PROC  ProjDamageBaseVCh
+  #TRIG    3
+  #PRO   ProjDamageBaseVChF.cpp
+
  #RES      vis
 1
  #RES      x
@@ -3495,6 +3569,10 @@ Alien
 #OBJ       ProjDamageRandomEdit
  #TYPE       WSCvifield
  #PARENT   Maitfor_129
+ #PROC  ProjDamageRndVCh
+  #TRIG    3
+  #PRO   ProjDamageRndVChF.cpp
+
  #RES      vis
 1
  #RES      x
@@ -3509,6 +3587,10 @@ Alien
 #OBJ       ProjDamageScaleEdit
  #TYPE       WSCvifield
  #PARENT   Maitfor_129
+ #PROC  ProjDamageScaleVCh
+  #TRIG    3
+  #PRO   ProjDamageScaleVChF.cpp
+
  #RES      vis
 1
  #RES      x
@@ -3523,6 +3605,10 @@ Alien
 #OBJ       ListProjFlags
  #TYPE       WSCcheckGroup
  #PARENT   FrmProjectile
+ #PROC  ListProjFlagsVCh
+  #TRIG    3
+  #PRO   ListProjFlagsVChF.cpp
+
  #RES      titleString
 Flags
  #RES      menuItemHeight
@@ -3623,6 +3709,10 @@ ReboundSnd
 #OBJ       ProjFlyBySoundBtn
  #TYPE       WSCvbtn
  #PARENT   FrmProjectile
+ #PROC  ProjFlyBySndDown
+  #TRIG    13
+  #PRO   ProjFlyBySndDownF.cpp
+
  #RES      vis
 1
  #RES      x
@@ -3637,6 +3727,10 @@ ReboundSnd
 #OBJ       ProjReboundSndBtn
  #TYPE       WSCvbtn
  #PARENT   FrmProjectile
+ #PROC  ProjReboundSndDown
+  #TRIG    13
+  #PRO   ProjReboundSndDownF.cpp
+
  #RES      vis
 1
  #RES      x
@@ -3651,6 +3745,10 @@ ReboundSnd
 #OBJ       ProjSpeedEdit
  #TYPE       WSCvifield
  #PARENT   FrmProjectile
+ #PROC  ProjSpeedVCh
+  #TRIG    3
+  #PRO   ProjSpeedVChF.cpp
+
  #RES      vis
 1
  #RES      x
@@ -3665,6 +3763,10 @@ ReboundSnd
 #OBJ       ProjMaxRangeEdit
  #TYPE       WSCvifield
  #PARENT   FrmProjectile
+ #PROC  ProjMaxRangeVCh
+  #TRIG    3
+  #PRO   ProjMaxRangeVChF.cpp
+
  #RES      vis
 1
  #RES      x
@@ -3679,6 +3781,10 @@ ReboundSnd
 #OBJ       ProjSoundPitchEdit
  #TYPE       WSCvifield
  #PARENT   FrmProjectile
+ #PROC  ProjSndPitchVCh
+  #TRIG    3
+  #PRO   ProjSndPitchVChF.cpp
+
  #RES      vis
 1
  #RES      x
@@ -3709,6 +3815,10 @@ Sequence
 #OBJ       ProjSequenceEdit
  #TYPE       WSCvifield
  #PARENT   FrmProjectile
+ #PROC  ProjSeqVCh
+  #TRIG    -1
+  #PRO   ProjSeqVChF.cpp
+
  #RES      vis
 1
  #RES      x
@@ -3723,6 +3833,10 @@ Sequence
 #OBJ       ProjPresetOtherProj
  #TYPE       WSCvbtn
  #PARENT   FrmProjectile
+ #PROC  ProjPresetOtherProjDown
+  #TRIG    13
+  #PRO   ProjPresetOtherProjDownF.cpp
+
  #RES      labelString
 Set As Preset Other Proj
  #RES      vis
@@ -3736,11 +3850,15 @@ Set As Preset Other Proj
  #RES      height
 20
 
-#OBJ       Maivbtn_153
+#OBJ       ProjPresetHandGrenade
  #TYPE       WSCvbtn
  #PARENT   FrmProjectile
+ #PROC  ProjPresetHandGrenadeDown
+  #TRIG    13
+  #PRO   ProjPresetHandGrenadeDownF.cpp
+
  #RES      labelString
-Set As Hand Granade
+Set As Hand Grenade
  #RES      vis
 1
  #RES      x
@@ -3763,6 +3881,8 @@ Set As Hand Granade
 690
  #RES      height
 470
+ #RES      vis
+1
 
 #OBJ       PhysicsTypeOpt
  #TYPE       WSCoption
@@ -3774,9 +3894,9 @@ Set As Hand Granade
  #RES      menuItems
 Walking:1:ep1_name,Running:2:ep2_name
  #RES      value
-2
+1
  #RES      labelString
-Running
+Walking
  #RES      vis
 1
  #RES      x
@@ -3805,6 +3925,10 @@ Type
 #OBJ       PhyMaxForwardEdit
  #TYPE       WSCvifield
  #PARENT   FrmPhysics
+ #PROC  PhyMaxForwardVCh
+  #TRIG    3
+  #PRO   PhyMaxForwardVChF.cpp
+
  #RES      vis
 1
  #RES      x
@@ -3906,7 +4030,7 @@ Airborne Deceleration
  #RES      x
 10
  #RES      y
-140
+145
  #RES      width
 170
  #RES      height
@@ -3922,7 +4046,7 @@ Gravity Accel
  #RES      x
 10
  #RES      y
-160
+165
  #RES      width
 170
  #RES      height
@@ -3938,7 +4062,7 @@ Climb Accel
  #RES      x
 10
  #RES      y
-180
+185
  #RES      width
 170
  #RES      height
@@ -3954,7 +4078,7 @@ Terminal Accel
  #RES      x
 10
  #RES      y
-200
+205
  #RES      width
 170
  #RES      height
@@ -3970,7 +4094,7 @@ External Deceleration
  #RES      x
 10
  #RES      y
-220
+225
  #RES      width
 170
  #RES      height
@@ -3986,7 +4110,7 @@ Angular Accel
  #RES      x
 10
  #RES      y
-240
+250
  #RES      width
 170
  #RES      height
@@ -4002,7 +4126,7 @@ Angular Deceleration
  #RES      x
 10
  #RES      y
-260
+270
  #RES      width
 170
  #RES      height
@@ -4018,7 +4142,7 @@ Max Angular Velocity
  #RES      x
 10
  #RES      y
-280
+290
  #RES      width
 170
  #RES      height
@@ -4027,6 +4151,10 @@ Max Angular Velocity
 #OBJ       PhyMaxBackwardEdit
  #TYPE       WSCvifield
  #PARENT   FrmPhysics
+ #PROC  PhyMaxBackwardVCh
+  #TRIG    3
+  #PRO   PhyMaxBackwardVChF.cpp
+
  #RES      vis
 1
  #RES      x
@@ -4041,6 +4169,10 @@ Max Angular Velocity
 #OBJ       PhyMaxPerpendEdit
  #TYPE       WSCvifield
  #PARENT   FrmPhysics
+ #PROC  PhyMaxPerpendVCh
+  #TRIG    3
+  #PRO   PhyMaxPerpendVChF.cpp
+
  #RES      vis
 1
  #RES      x
@@ -4055,6 +4187,10 @@ Max Angular Velocity
 #OBJ       PhyAccelEdit
  #TYPE       WSCvifield
  #PARENT   FrmPhysics
+ #PROC  PhyAccelVCh
+  #TRIG    3
+  #PRO   PhyAccelVChF.cpp
+
  #RES      vis
 1
  #RES      x
@@ -4069,6 +4205,10 @@ Max Angular Velocity
 #OBJ       PhyDecelEdit
  #TYPE       WSCvifield
  #PARENT   FrmPhysics
+ #PROC  PhyDecelVCh
+  #TRIG    3
+  #PRO   PhyDecelVChF.cpp
+
  #RES      vis
 1
  #RES      x
@@ -4088,7 +4228,7 @@ Max Angular Velocity
  #RES      x
 180
  #RES      y
-140
+145
  #RES      width
 110
  #RES      height
@@ -4097,12 +4237,16 @@ Max Angular Velocity
 #OBJ       PhyGravityAccelEdit
  #TYPE       WSCvifield
  #PARENT   FrmPhysics
+ #PROC  PhyGravAccelVCh
+  #TRIG    3
+  #PRO   PhyGravAccelVChF.cpp
+
  #RES      vis
 1
  #RES      x
 180
  #RES      y
-160
+165
  #RES      width
 110
  #RES      height
@@ -4111,12 +4255,16 @@ Max Angular Velocity
 #OBJ       PhyClimbAccelEdit
  #TYPE       WSCvifield
  #PARENT   FrmPhysics
+ #PROC  PhyClimbAccelVCh
+  #TRIG    3
+  #PRO   PhyClimbAccelVChF.cpp
+
  #RES      vis
 1
  #RES      x
 180
  #RES      y
-180
+185
  #RES      width
 110
  #RES      height
@@ -4125,12 +4273,16 @@ Max Angular Velocity
 #OBJ       PhyTerminalAccelEdit
  #TYPE       WSCvifield
  #PARENT   FrmPhysics
+ #PROC  PhyTerminalAccelVCh
+  #TRIG    3
+  #PRO   PhyTerminalAccelVChF.cpp
+
  #RES      vis
 1
  #RES      x
 180
  #RES      y
-200
+205
  #RES      width
 110
  #RES      height
@@ -4139,12 +4291,16 @@ Max Angular Velocity
 #OBJ       PhyExtDecEdit
  #TYPE       WSCvifield
  #PARENT   FrmPhysics
+ #PROC  PhyExtDecVCh
+  #TRIG    3
+  #PRO   PhyExtDecVChF.cpp
+
  #RES      vis
 1
  #RES      x
 180
  #RES      y
-220
+225
  #RES      width
 110
  #RES      height
@@ -4153,12 +4309,16 @@ Max Angular Velocity
 #OBJ       PhyAngularAccelEdit
  #TYPE       WSCvifield
  #PARENT   FrmPhysics
+ #PROC  PhyAngularAccelVCh
+  #TRIG    3
+  #PRO   PhyAngularAccelVChF.cpp
+
  #RES      vis
 1
  #RES      x
 180
  #RES      y
-240
+250
  #RES      width
 110
  #RES      height
@@ -4167,12 +4327,16 @@ Max Angular Velocity
 #OBJ       PhyAngularDecelEdit
  #TYPE       WSCvifield
  #PARENT   FrmPhysics
+ #PROC  PhyAngularDecelVCh
+  #TRIG    3
+  #PRO   PhyAngularDecelVChF.cpp
+
  #RES      vis
 1
  #RES      x
 180
  #RES      y
-260
+270
  #RES      width
 110
  #RES      height
@@ -4181,12 +4345,16 @@ Max Angular Velocity
 #OBJ       PhyMaxAngularVelEdit
  #TYPE       WSCvifield
  #PARENT   FrmPhysics
+ #PROC  PhyMaxAngularVelVCh
+  #TRIG    -1
+  #PRO   PhyMaxAngularVelVChF.cpp
+
  #RES      vis
 1
  #RES      x
 180
  #RES      y
-280
+290
  #RES      width
 110
  #RES      height
@@ -4202,7 +4370,7 @@ Angular Recentering Velocity
  #RES      x
 10
  #RES      y
-300
+310
  #RES      width
 170
  #RES      height
@@ -4218,7 +4386,7 @@ Fast Angular Velocity
  #RES      x
 10
  #RES      y
-320
+330
  #RES      width
 170
  #RES      height
@@ -4234,7 +4402,7 @@ Max Elevation
  #RES      x
 10
  #RES      y
-340
+375
  #RES      width
 170
  #RES      height
@@ -4250,7 +4418,7 @@ External Angular Decel
  #RES      x
 10
  #RES      y
-360
+395
  #RES      width
 170
  #RES      height
@@ -4259,12 +4427,16 @@ External Angular Decel
 #OBJ       PhyAngularRecenterEdit
  #TYPE       WSCvifield
  #PARENT   FrmPhysics
+ #PROC  PhyAngularRecenterVCh
+  #TRIG    3
+  #PRO   PhyAngularRecenterVChF.cpp
+
  #RES      vis
 1
  #RES      x
 180
  #RES      y
-300
+310
  #RES      width
 110
  #RES      height
@@ -4273,12 +4445,16 @@ External Angular Decel
 #OBJ       PhyFastAngularVelEdit
  #TYPE       WSCvifield
  #PARENT   FrmPhysics
+ #PROC  PhyFastAngularVelVCh
+  #TRIG    3
+  #PRO   PhyFastAngularVelVChF.cpp
+
  #RES      vis
 1
  #RES      x
 180
  #RES      y
-320
+330
  #RES      width
 110
  #RES      height
@@ -4287,12 +4463,16 @@ External Angular Decel
 #OBJ       PhyMaxElevationEdit
  #TYPE       WSCvifield
  #PARENT   FrmPhysics
+ #PROC  PhyMaxElevationVCh
+  #TRIG    3
+  #PRO   PhyMaxElevationVChF.cpp
+
  #RES      vis
 1
  #RES      x
 180
  #RES      y
-340
+375
  #RES      width
 110
  #RES      height
@@ -4301,12 +4481,16 @@ External Angular Decel
 #OBJ       PhyExtAngularDecelEdit
  #TYPE       WSCvifield
  #PARENT   FrmPhysics
+ #PROC  PhyExtAngularDecelVCh
+  #TRIG    3
+  #PRO   PhyExtAngularDecelVChF.cpp
+
  #RES      vis
 1
  #RES      x
 180
  #RES      y
-360
+395
  #RES      width
 110
  #RES      height
@@ -4322,7 +4506,7 @@ Step Delta
  #RES      x
 10
  #RES      y
-380
+415
  #RES      width
 170
  #RES      height
@@ -4338,7 +4522,7 @@ Step Amplitude
  #RES      x
 10
  #RES      y
-400
+435
  #RES      width
 170
  #RES      height
@@ -4443,12 +4627,16 @@ Half Camera Separation
 #OBJ       PhyStepDeltaEdit
  #TYPE       WSCvifield
  #PARENT   FrmPhysics
+ #PROC  PhyStepDeltaVCh
+  #TRIG    3
+  #PRO   PhyStepDeltaVChF.cpp
+
  #RES      vis
 1
  #RES      x
 180
  #RES      y
-380
+415
  #RES      width
 110
  #RES      height
@@ -4457,12 +4645,16 @@ Half Camera Separation
 #OBJ       PhyStepAmpEdit
  #TYPE       WSCvifield
  #PARENT   FrmPhysics
+ #PROC  PhyStepAmpVCh
+  #TRIG    3
+  #PRO   PhyStepAmpVChF.cpp
+
  #RES      vis
 1
  #RES      x
 180
  #RES      y
-400
+435
  #RES      width
 110
  #RES      height
@@ -4471,6 +4663,10 @@ Half Camera Separation
 #OBJ       PhyRadiusEdit
  #TYPE       WSCvifield
  #PARENT   FrmPhysics
+ #PROC  PhyRadiusVCh
+  #TRIG    3
+  #PRO   PhyRadiusVChF.cpp
+
  #RES      vis
 1
  #RES      x
@@ -4485,6 +4681,10 @@ Half Camera Separation
 #OBJ       PhyHeightEdit
  #TYPE       WSCvifield
  #PARENT   FrmPhysics
+ #PROC  PhyHeightVCh
+  #TRIG    3
+  #PRO   PhyHeightVChF.cpp
+
  #RES      vis
 1
  #RES      x
@@ -4499,6 +4699,10 @@ Half Camera Separation
 #OBJ       PhyDeadHeightEdit
  #TYPE       WSCvifield
  #PARENT   FrmPhysics
+ #PROC  PhyDeadHeightVCh
+  #TRIG    3
+  #PRO   PhyDeadHeightVChF.cpp
+
  #RES      vis
 1
  #RES      x
@@ -4513,6 +4717,10 @@ Half Camera Separation
 #OBJ       PhyCameraHeightEdit
  #TYPE       WSCvifield
  #PARENT   FrmPhysics
+ #PROC  PhyCameraHeightVCh
+  #TRIG    3
+  #PRO   PhyCameraHeightVChF.cpp
+
  #RES      vis
 1
  #RES      x
@@ -4527,6 +4735,10 @@ Half Camera Separation
 #OBJ       PhySplashHeightEdit
  #TYPE       WSCvifield
  #PARENT   FrmPhysics
+ #PROC  PhySplashHeightVCh
+  #TRIG    3
+  #PRO   PhySplashHeightVChF.cpp
+
  #RES      vis
 1
  #RES      x
@@ -4541,12 +4753,50 @@ Half Camera Separation
 #OBJ       PhyHalfCamSepEdit
  #TYPE       WSCvifield
  #PARENT   FrmPhysics
+ #PROC  PhyHalfCamSepVCh
+  #TRIG    3
+  #PRO   PhyHalfCamSepVChF.cpp
+
  #RES      vis
 1
  #RES      x
 465
  #RES      y
 140
+ #RES      width
+110
+ #RES      height
+20
+
+#OBJ       Maivlab_000
+ #TYPE       WSCvlabel
+ #PARENT   FrmPhysics
+ #RES      labelString
+Fast Angular Maximum
+ #RES      vis
+1
+ #RES      x
+10
+ #RES      y
+355
+ #RES      width
+170
+ #RES      height
+20
+
+#OBJ       PhyFastAngularMax
+ #TYPE       WSCvifield
+ #PARENT   FrmPhysics
+ #PROC  PhyMaxElevationVCh
+  #TRIG    3
+  #PRO   PhyMaxElevationVChF.cpp
+
+ #RES      vis
+1
+ #RES      x
+180
+ #RES      y
+355
  #RES      width
 110
  #RES      height
@@ -4563,6 +4813,8 @@ Half Camera Separation
 690
  #RES      height
 470
+ #RES      vis
+1
 
 #OBJ       Mailist_000
  #TYPE       WSClist
@@ -4580,7 +4832,7 @@ title1
  #RES      dataSourceName
 data/Weapons.txt
  #RES      workHeight
-26
+456
  #RES      x
 5
  #RES      y
@@ -4627,6 +4879,10 @@ Collection
 #OBJ       WCollectionBtn
  #TYPE       WSCvbtn
  #PARENT   Maiinde_001
+ #PROC  WColBtnDown
+  #TRIG    13
+  #PRO   WColBtnDownF.cpp
+
  #RES      userValue
 1
  #RES      vis
@@ -4659,6 +4915,10 @@ Pallet
 #OBJ       WPalletEdit
  #TYPE       WSCvifield
  #PARENT   Maiinde_001
+ #PROC  WPalVCh
+  #TRIG    3
+  #PRO   WPalVChF.cpp
+
  #RES      userValue
 1
  #RES      vis
@@ -4763,6 +5023,10 @@ Charged Sequence
 #OBJ       WIdleSeqEdit
  #TYPE       WSCvifield
  #PARENT   Maiinde_001
+ #PROC  WIdleSeqVCh
+  #TRIG    3
+  #PRO   WIdleSeqVChF.cpp
+
  #RES      userValue
 1
  #RES      vis
@@ -4777,6 +5041,10 @@ Charged Sequence
 #OBJ       WFiringSeqEdit
  #TYPE       WSCvifield
  #PARENT   Maiinde_001
+ #PROC  WFiringSeqVCh
+  #TRIG    3
+  #PRO   WFiringSeqVChF.cpp
+
  #RES      userValue
 1
  #RES      vis
@@ -4791,6 +5059,10 @@ Charged Sequence
 #OBJ       WReloadSeqEdit
  #TYPE       WSCvifield
  #PARENT   Maiinde_001
+ #PROC  WReloadSeqVCh
+  #TRIG    3
+  #PRO   WReloadSeqVChF.cpp
+
  #RES      userValue
 1
  #RES      vis
@@ -4805,6 +5077,10 @@ Charged Sequence
 #OBJ       WChargingSeqEdit
  #TYPE       WSCvifield
  #PARENT   Maiinde_001
+ #PROC  WChargingSeqVCh
+  #TRIG    3
+  #PRO   WChargingSeqVChF.cpp
+
  #RES      userValue
 1
  #RES      vis
@@ -4819,6 +5095,10 @@ Charged Sequence
 #OBJ       WChargedSeqEdit
  #TYPE       WSCvifield
  #PARENT   Maiinde_001
+ #PROC  WChargedSeqVCh
+  #TRIG    3
+  #PRO   WChargedSeqVChF.cpp
+
  #RES      userValue
 1
  #RES      vis
@@ -4849,6 +5129,10 @@ Item
 #OBJ       WItemBtn
  #TYPE       WSCvbtn
  #PARENT   Maiinde_001
+ #PROC  WItemDown
+  #TRIG    13
+  #PRO   WItemDownF.cpp
+
  #RES      userValue
 1
  #RES      vis
@@ -4881,8 +5165,16 @@ Class
 #OBJ       WClassOption
  #TYPE       WSCoption
  #PARENT   Maiinde_001
+ #PROC  WClassVCh
+  #TRIG    3
+  #PRO   WClassVChF.cpp
+
  #RES      userValue
 1
+ #RES      value
+1
+ #RES      labelString
+item1
  #RES      vis
 1
  #RES      x
@@ -4897,6 +5189,10 @@ Class
 #OBJ       WFlagsCheckGroup
  #TYPE       WSCcheckGroup
  #PARENT   Maiinde_001
+ #PROC  WFlagsVCh
+  #TRIG    3
+  #PRO   WFlagsVChF.cpp
+
  #RES      userValue
 1
  #RES      titleString
@@ -5099,6 +5395,10 @@ Await Reload Ticks
 #OBJ       WLightIntensityEdit
  #TYPE       WSCvifield
  #PARENT   Maiinde_001
+ #PROC  WLightIntVCh
+  #TRIG    3
+  #PRO   WLightIntVChF.cpp
+
  #RES      userValue
 1
  #RES      vis
@@ -5113,6 +5413,10 @@ Await Reload Ticks
 #OBJ       WIntensityDecayEdit
  #TYPE       WSCvifield
  #PARENT   Maiinde_001
+ #PROC  WIntDecayVCh
+  #TRIG    3
+  #PRO   WIntDecayVChF.cpp
+
  #RES      userValue
 1
  #RES      vis
@@ -5127,6 +5431,10 @@ Await Reload Ticks
 #OBJ       WIdleWidthEdit
  #TYPE       WSCvifield
  #PARENT   Maiinde_001
+ #PROC  WIdleWidthVCh
+  #TRIG    3
+  #PRO   WIdleWidthVChF.cpp
+
  #RES      userValue
 1
  #RES      vis
@@ -5141,6 +5449,10 @@ Await Reload Ticks
 #OBJ       WIdleHeightEdit
  #TYPE       WSCvifield
  #PARENT   Maiinde_001
+ #PROC  WIdleHeightVCh
+  #TRIG    3
+  #PRO   WIdleHeightVChF.cpp
+
  #RES      userValue
 1
  #RES      vis
@@ -5155,6 +5467,10 @@ Await Reload Ticks
 #OBJ       WFiringHeightEdit
  #TYPE       WSCvifield
  #PARENT   Maiinde_001
+ #PROC  WFiringHeightVCh
+  #TRIG    3
+  #PRO   WFiringHeightVChF.cpp
+
  #RES      userValue
 1
  #RES      vis
@@ -5169,6 +5485,10 @@ Await Reload Ticks
 #OBJ       WReloadingHeighEdit
  #TYPE       WSCvifield
  #PARENT   Maiinde_001
+ #PROC  WReloadingHeightVCh
+  #TRIG    3
+  #PRO   WReloadingHeightVChF.cpp
+
  #RES      userValue
 1
  #RES      vis
@@ -5183,6 +5503,10 @@ Await Reload Ticks
 #OBJ       WHorAmpEdit
  #TYPE       WSCvifield
  #PARENT   Maiinde_001
+ #PROC  WHorAmpVCh
+  #TRIG    3
+  #PRO   WHorAmpVChF.cpp
+
  #RES      userValue
 1
  #RES      vis
@@ -5197,6 +5521,10 @@ Await Reload Ticks
 #OBJ       WUserAmpEdit
  #TYPE       WSCvifield
  #PARENT   Maiinde_001
+ #PROC  WUserAmpVCh
+  #TRIG    3
+  #PRO   WUserAmpVChF.cpp
+
  #RES      userValue
 1
  #RES      vis
@@ -5211,6 +5539,10 @@ Await Reload Ticks
 #OBJ       WReadyEdit
  #TYPE       WSCvifield
  #PARENT   Maiinde_001
+ #PROC  WReadyVCh
+  #TRIG    3
+  #PRO   WReadyVChF.cpp
+
  #RES      userValue
 1
  #RES      vis
@@ -5225,6 +5557,10 @@ Await Reload Ticks
 #OBJ       WAwaitReloadEdit
  #TYPE       WSCvifield
  #PARENT   Maiinde_001
+ #PROC  WAwaitReloadVCh
+  #TRIG    3
+  #PRO   WAwaitReloadVChF.cpp
+
  #RES      userValue
 1
  #RES      vis
@@ -5275,6 +5611,10 @@ Loaded Ticks
 #OBJ       WLoadingEdit
  #TYPE       WSCvifield
  #PARENT   Maiinde_001
+ #PROC  WLoadingVCh
+  #TRIG    3
+  #PRO   WLoadingVChF.cpp
+
  #RES      userValue
 1
  #RES      vis
@@ -5289,6 +5629,10 @@ Loaded Ticks
 #OBJ       WLoadedEdit
  #TYPE       WSCvifield
  #PARENT   Maiinde_001
+ #PROC  WLoadedVCh
+  #TRIG    3
+  #PRO   WLoadedVChF.cpp
+
  #RES      userValue
 1
  #RES      vis
@@ -5335,6 +5679,10 @@ Round Per Magazine
 #OBJ       WRoundPerMagEdit
  #TYPE       WSCvifield
  #PARENT   WPrimaryGroup
+ #PROC  WRoundPerMagVCh
+  #TRIG    3
+  #PRO   WRoundPerMagVChF.cpp
+
  #RES      vis
 1
  #RES      x
@@ -5589,6 +5937,10 @@ Shell Casing
 #OBJ       WTicksPerRoundEdit
  #TYPE       WSCvifield
  #PARENT   WPrimaryGroup
+ #PROC  WTicksPerRoundVCh
+  #TRIG    3
+  #PRO   WTicksPerRoundVChF.cpp
+
  #RES      vis
 1
  #RES      x
@@ -5603,6 +5955,10 @@ Shell Casing
 #OBJ       WRecovTicksEdit
  #TYPE       WSCvifield
  #PARENT   WPrimaryGroup
+ #PROC  WRecovTicksVCh
+  #TRIG    3
+  #PRO   WRecovTicksVChF.cpp
+
  #RES      vis
 1
  #RES      x
@@ -5617,6 +5973,10 @@ Shell Casing
 #OBJ       WErrorEdit
  #TYPE       WSCvifield
  #PARENT   WPrimaryGroup
+ #PROC  WErrorVCh
+  #TRIG    3
+  #PRO   WErrorVChF.cpp
+
  #RES      vis
 1
  #RES      x
@@ -5631,6 +5991,10 @@ Shell Casing
 #OBJ       WdxEdit
  #TYPE       WSCvifield
  #PARENT   WPrimaryGroup
+ #PROC  WdxVCh
+  #TRIG    3
+  #PRO   WdxVChF.cpp
+
  #RES      vis
 1
  #RES      x
@@ -5645,6 +6009,10 @@ Shell Casing
 #OBJ       WdzEdit
  #TYPE       WSCvifield
  #PARENT   WPrimaryGroup
+ #PROC  WdzVCh
+  #TRIG    3
+  #PRO   WdzVChF.cpp
+
  #RES      vis
 1
  #RES      x
@@ -5659,6 +6027,10 @@ Shell Casing
 #OBJ       WBurstCountEdit
  #TYPE       WSCvifield
  #PARENT   WPrimaryGroup
+ #PROC  WBurstCountVCh
+  #TRIG    3
+  #PRO   WBurstCountVChF.cpp
+
  #RES      vis
 1
  #RES      x
@@ -5673,6 +6045,10 @@ Shell Casing
 #OBJ       WAmmoItemBtn
  #TYPE       WSCvbtn
  #PARENT   WPrimaryGroup
+ #PROC  WAmmoItemDown
+  #TRIG    13
+  #PRO   WAmmoItemDownF.cpp
+
  #RES      vis
 1
  #RES      x
@@ -5687,6 +6063,10 @@ Shell Casing
 #OBJ       WFiringSndBtn
  #TYPE       WSCvbtn
  #PARENT   WPrimaryGroup
+ #PROC  WFiringSndDown
+  #TRIG    13
+  #PRO   WFiringSndDownF.cpp
+
  #RES      vis
 1
  #RES      x
@@ -5701,6 +6081,10 @@ Shell Casing
 #OBJ       WClickSndBtn
  #TYPE       WSCvbtn
  #PARENT   WPrimaryGroup
+ #PROC  WClickSndDown
+  #TRIG    13
+  #PRO   WClickSndDownF.cpp
+
  #RES      vis
 1
  #RES      x
@@ -5715,6 +6099,10 @@ Shell Casing
 #OBJ       WChargingSndBtn
  #TYPE       WSCvbtn
  #PARENT   WPrimaryGroup
+ #PROC  WChargingSndDown
+  #TRIG    13
+  #PRO   WChargingSndVChF.cpp
+
  #RES      vis
 1
  #RES      x
@@ -5729,6 +6117,10 @@ Shell Casing
 #OBJ       WShellCasingSndBtn
  #TYPE       WSCvbtn
  #PARENT   WPrimaryGroup
+ #PROC  WShellCasingSndDown
+  #TRIG    13
+  #PRO   WShellCasingSndDownF.cpp
+
  #RES      vis
 1
  #RES      x
@@ -5743,6 +6135,10 @@ Shell Casing
 #OBJ       WReloadSndBtn
  #TYPE       WSCvbtn
  #PARENT   WPrimaryGroup
+ #PROC  WReloadSndDown
+  #TRIG    13
+  #PRO   WReloadSndDownF.cpp
+
  #RES      vis
 1
  #RES      x
@@ -5757,6 +6153,10 @@ Shell Casing
 #OBJ       WChargedSndBtn
  #TYPE       WSCvbtn
  #PARENT   WPrimaryGroup
+ #PROC  WChargedSndDown
+  #TRIG    13
+  #PRO   WChargedSndDownF.cpp
+
  #RES      vis
 1
  #RES      x
@@ -5771,6 +6171,10 @@ Shell Casing
 #OBJ       WProjectileBtn
  #TYPE       WSCvbtn
  #PARENT   WPrimaryGroup
+ #PROC  WProjectileDown
+  #TRIG    13
+  #PRO   WProjectileDownF.cpp
+
  #RES      vis
 1
  #RES      x
@@ -5785,6 +6189,10 @@ Shell Casing
 #OBJ       WShellCasingOption
  #TYPE       WSCoption
  #PARENT   WPrimaryGroup
+ #PROC  WShellCasingVCh
+  #TRIG    3
+  #PRO   WShellCasingVChF.cpp
+
  #RES      value
 1
  #RES      labelString
@@ -5835,6 +6243,10 @@ Recoil Magnitude
 #OBJ       WChargingTicksEdit
  #TYPE       WSCvifield
  #PARENT   WPrimaryGroup
+ #PROC  WChargingTicksVCh
+  #TRIG    3
+  #PRO   WChargingTicksVChF.cpp
+
  #RES      vis
 1
  #RES      x
@@ -5849,6 +6261,10 @@ Recoil Magnitude
 #OBJ       WRecoilMagnitudeEdit
  #TYPE       WSCvifield
  #PARENT   WPrimaryGroup
+ #PROC  WRecoilMagnitudeVCh
+  #TRIG    3
+  #PRO   WRecoilMagnitudeVChF.cpp
+
  #RES      vis
 1
  #RES      x
@@ -5895,6 +6311,10 @@ Round Per Magazine
 #OBJ       WSRoundPerMagEdit
  #TYPE       WSCvifield
  #PARENT   WSecondaryGroup
+ #PROC  WSRoundPerMagVCh
+  #TRIG    3
+  #PRO   WSRoundPerMagVChF.cpp
+
  #RES      vis
 1
  #RES      x
@@ -6149,6 +6569,10 @@ Shell Casing
 #OBJ       WSTicksPerRoundEdit
  #TYPE       WSCvifield
  #PARENT   WSecondaryGroup
+ #PROC  WSTickPerRoundVCh
+  #TRIG    3
+  #PRO   WSTickPerRoundVChF.cpp
+
  #RES      vis
 1
  #RES      x
@@ -6163,6 +6587,10 @@ Shell Casing
 #OBJ       WSRecovTicksEdit
  #TYPE       WSCvifield
  #PARENT   WSecondaryGroup
+ #PROC  WSRecovTickVCh
+  #TRIG    3
+  #PRO   WSRecovTickVChF.cpp
+
  #RES      vis
 1
  #RES      x
@@ -6177,6 +6605,10 @@ Shell Casing
 #OBJ       WSErrorEdit
  #TYPE       WSCvifield
  #PARENT   WSecondaryGroup
+ #PROC  WSErrorVCh
+  #TRIG    3
+  #PRO   WSErrorVChF.cpp
+
  #RES      vis
 1
  #RES      x
@@ -6191,6 +6623,10 @@ Shell Casing
 #OBJ       WSdxEdit
  #TYPE       WSCvifield
  #PARENT   WSecondaryGroup
+ #PROC  WSdxVCh
+  #TRIG    3
+  #PRO   WSdxVChF.cpp
+
  #RES      vis
 1
  #RES      x
@@ -6205,6 +6641,10 @@ Shell Casing
 #OBJ       WSdzEdit
  #TYPE       WSCvifield
  #PARENT   WSecondaryGroup
+ #PROC  WSdzVCh
+  #TRIG    3
+  #PRO   WSdzVChF.cpp
+
  #RES      vis
 1
  #RES      x
@@ -6219,6 +6659,10 @@ Shell Casing
 #OBJ       WSBurstCountEdit
  #TYPE       WSCvifield
  #PARENT   WSecondaryGroup
+ #PROC  WSBurstCountVCh
+  #TRIG    3
+  #PRO   WSBurstCountVChF.cpp
+
  #RES      vis
 1
  #RES      x
@@ -6233,6 +6677,10 @@ Shell Casing
 #OBJ       WSAmmoItemBtn
  #TYPE       WSCvbtn
  #PARENT   WSecondaryGroup
+ #PROC  WSAmmoItemDown
+  #TRIG    13
+  #PRO   WSAmmoItemDownF.cpp
+
  #RES      vis
 1
  #RES      x
@@ -6247,6 +6695,10 @@ Shell Casing
 #OBJ       WSFiringSndBtn
  #TYPE       WSCvbtn
  #PARENT   WSecondaryGroup
+ #PROC  WSFiringSndDown
+  #TRIG    13
+  #PRO   WSFiringSndDownF.cpp
+
  #RES      vis
 1
  #RES      x
@@ -6261,6 +6713,10 @@ Shell Casing
 #OBJ       WSClickSndBtn
  #TYPE       WSCvbtn
  #PARENT   WSecondaryGroup
+ #PROC  WSClickSndDown
+  #TRIG    13
+  #PRO   WSClickSndDownF.cpp
+
  #RES      vis
 1
  #RES      x
@@ -6275,6 +6731,10 @@ Shell Casing
 #OBJ       WSChargingSndBtn
  #TYPE       WSCvbtn
  #PARENT   WSecondaryGroup
+ #PROC  WSChargingSndDown
+  #TRIG    13
+  #PRO   WSChargingSndDownF.cpp
+
  #RES      vis
 1
  #RES      x
@@ -6289,6 +6749,10 @@ Shell Casing
 #OBJ       WSShellCasingSndBtn
  #TYPE       WSCvbtn
  #PARENT   WSecondaryGroup
+ #PROC  WSShellCasingSndDown
+  #TRIG    13
+  #PRO   WSShellCasingSndDownF.cpp
+
  #RES      vis
 1
  #RES      x
@@ -6303,6 +6767,10 @@ Shell Casing
 #OBJ       WSReloadSndBtn
  #TYPE       WSCvbtn
  #PARENT   WSecondaryGroup
+ #PROC  WSReloadSndDown
+  #TRIG    13
+  #PRO   WSReloadSndDownF.cpp
+
  #RES      vis
 1
  #RES      x
@@ -6317,6 +6785,10 @@ Shell Casing
 #OBJ       WSChargedSndBtn
  #TYPE       WSCvbtn
  #PARENT   WSecondaryGroup
+ #PROC  WSChargedSndDown
+  #TRIG    13
+  #PRO   WSChargedSndDownF.cpp
+
  #RES      vis
 1
  #RES      x
@@ -6331,6 +6803,10 @@ Shell Casing
 #OBJ       WSProjectileBtn
  #TYPE       WSCvbtn
  #PARENT   WSecondaryGroup
+ #PROC  WSProjectileDown
+  #TRIG    13
+  #PRO   WSProjectileDownF.cpp
+
  #RES      vis
 1
  #RES      x
@@ -6345,6 +6821,10 @@ Shell Casing
 #OBJ       WSShellCasingOption
  #TYPE       WSCoption
  #PARENT   WSecondaryGroup
+ #PROC  WSShellCasingVCh
+  #TRIG    3
+  #PRO   WSShellCasingVChF.cpp
+
  #RES      value
 1
  #RES      labelString
@@ -6395,6 +6875,10 @@ Recoil Magnitude
 #OBJ       WSChargingTicksEdit
  #TYPE       WSCvifield
  #PARENT   WSecondaryGroup
+ #PROC  WSChargingTickVCh
+  #TRIG    3
+  #PRO   WSChargingTickVChF.cpp
+
  #RES      vis
 1
  #RES      x
@@ -6409,6 +6893,10 @@ Recoil Magnitude
 #OBJ       WSRecoilMagnitudeEdit
  #TYPE       WSCvifield
  #PARENT   WSecondaryGroup
+ #PROC  WSRecoilMagnitudeVCh
+  #TRIG    3
+  #PRO   WSRecoilMagnitudeVChF.cpp
+
  #RES      vis
 1
  #RES      x

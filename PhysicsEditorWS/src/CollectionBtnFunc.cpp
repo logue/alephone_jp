@@ -17,10 +17,12 @@ void CollectionBtnFunc(WSCbase* object){
 	int16 col = GET_COLLECTION(collection);
 	int16 clut = GET_COLLECTION_CLUT(collection);
 	int ncol = (int)col;
-	selectFromDialog(&ncol, object, stockCollections, isMax);
-	col = (int16)ncol;
-	collection = BUILD_COLLECTION(col, clut);
-	monster_definitions[type].collection = collection;
-	setupDialog();
+	long ret = selectFromDialog(&ncol, object, stockCollections, isMax);
+	if(ret == WS_DIALOG_OK){
+		col = (int16)ncol;
+		collection = BUILD_COLLECTION(col, clut);
+		monster_definitions[type].collection = collection;
+		setupDialog();
+	}
 }
 static WSCfunctionRegister  op("CollectionBtnFunc",(void*)CollectionBtnFunc);

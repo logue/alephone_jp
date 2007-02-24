@@ -116,7 +116,7 @@ WSCbase* getChild(WSCbase* parent, const char* obj_name);
 void messageBox(const char* format, ...);
 void changeForm(int wtype);
 void setValueByName(WSCbase* object);
-void selectFromDialog(int* value, WSCbase* object,
+long selectFromDialog(int* value, WSCbase* object,
 	std::vector<std::string>& stock,
 	bool isMaxNONE);
 void importPhysicsFile(const char *filename);

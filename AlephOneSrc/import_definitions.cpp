@@ -197,8 +197,9 @@ void export_definition_structures(const char *filename)
 		free_wad(wad);
     }else{
 //		MessageBox(NULL, L"データを作成できませんでした", L"エラー", MB_OK | MB_ICONEXCLAMATION);
+    	//return false;
     }
-
+	//return true;
 }
 
 void *get_network_physics_buffer(

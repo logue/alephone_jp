@@ -9,7 +9,7 @@
 //----------------------------------------------------------
 void ListImmunitiesVChFunc(WSCbase* object){
 	int type = selectedMonsterType;
-	int immunities = 0;
+	int flags = 0;
 	for(int i = 0; i < NUMBER_OF_DAMAGE_TYPES; i ++){
 		WSCvradio* item = (WSCvradio*)((WSCcheckGroup*)object)->getItem(i);
 		if(item == NULL){
@@ -18,10 +18,10 @@ void ListImmunitiesVChFunc(WSCbase* object){
 		}
 		WSCbool status = item->getStatus();
 		if(status == True){
-			immunities |= FLAG(i);
+			flags |= valueEffectFlags[i];
 		}else{
 		}
 	}
-	monster_definitions[type].immunities = immunities;
+	monster_definitions[type].immunities = flags;
 }
 static WSCfunctionRegister  op("ListImmunitiesVChFunc",(void*)ListImmunitiesVChFunc);

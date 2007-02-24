@@ -10,9 +10,11 @@ void ClearSndBtnDownFunc(WSCbase* object){
 	int type = selectedMonsterType;
 	bool isMaxNONE = true;//*none*—L‚è
 	int index = monster_definitions[type].clear_sound;
-	selectFromDialog((int*)&index,
+	long ret = selectFromDialog((int*)&index,
 		object, stockSounds, isMaxNONE);
-	monster_definitions[type].clear_sound = index;
-	setupDialog();
+	if(ret == WS_DIALOG_OK){
+		monster_definitions[type].clear_sound = index;
+		setupDialog();
+	}
 }
 static WSCfunctionRegister  op("ClearSndBtnDownFunc",(void*)ClearSndBtnDownFunc);

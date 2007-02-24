@@ -100,6 +100,7 @@ int valueEffectFlags[NUMBER_OF_EFFECT_FLAG_INFORMATIONS]={
     _make_twin_visible,
     _media_effect
 };
+//武器フラグ
 int valueWeaponFlags[NUMBER_OF_WEAPON_FLAG_INFORMATIONS]={
 	_weapon_is_automatic,
     _weapon_disappears_after_use,
@@ -113,6 +114,7 @@ int valueWeaponFlags[NUMBER_OF_WEAPON_FLAG_INFORMATIONS]={
     _weapon_triggers_share_ammo,
     _weapon_secondary_has_angular_flipping
 };
+//プロじぇくてぃるフラグ
 int valueProjectileFlags[NUMBER_OF_PROJECTILE_FLAG_INFORMATIONS]={
 	 _guided,
     _stop_when_animation_loops,
@@ -327,6 +329,40 @@ void setupTrigger(int triggerIndex, const char* addon, WSCbase* parent)
 		weapon_definitions[type].weapons_by_trigger[triggerIndex].burst_count);
 }
 
+/*
+	@wtype 0:primary, 1:secondary
+	@return ヒットするものがある場合真
+*/
+bool checkTrigger(int triggerIndex, const char* addon,
+	//WSCbase* groupObject, 
+	WSCbase* target, 
+	int value, int type)
+{
+	std::string wstr = std::string("W") + addon ;
+	if(strcmp(target->getProperty(WSNname), (wstr + "RoundPerMagEdit").c_str()) == 0){
+		weapon_definitions[type].weapons_by_trigger[triggerIndex].rounds_per_magazine = value;
+	}else if(strcmp(target->getProperty(WSNname), (wstr + "TicksPerRoundEdit").c_str()) == 0){
+		weapon_definitions[type].weapons_by_trigger[triggerIndex].ticks_per_round = value;
+	}else if(strcmp(target->getProperty(WSNname), (wstr + "RecovTicksEdit").c_str()) == 0){
+		weapon_definitions[type].weapons_by_trigger[triggerIndex].recovery_ticks = value;
+	}else if(strcmp(target->getProperty(WSNname), (wstr + "ChargingTicksEdit").c_str()) == 0){
+		weapon_definitions[type].weapons_by_trigger[triggerIndex].charging_ticks = value;
+	}else if(strcmp(target->getProperty(WSNname), (wstr + "RecoilMagnitudeEdit").c_str()) == 0){
+		weapon_definitions[type].weapons_by_trigger[triggerIndex].recoil_magnitude = value;
+	}else if(strcmp(target->getProperty(WSNname), (wstr + "ErrorEdit").c_str()) == 0){
+		weapon_definitions[type].weapons_by_trigger[triggerIndex].theta_error = value;
+	}else if(strcmp(target->getProperty(WSNname), (wstr + "dxEdit").c_str()) == 0){
+		weapon_definitions[type].weapons_by_trigger[triggerIndex].dx = value;
+	}else if(strcmp(target->getProperty(WSNname), (wstr + "dzEdit").c_str()) == 0){
+		weapon_definitions[type].weapons_by_trigger[triggerIndex].dz = value;
+	}else if(strcmp(target->getProperty(WSNname), (wstr + "BurstCountEdit").c_str()) == 0){
+		weapon_definitions[type].weapons_by_trigger[triggerIndex].burst_count = value;
+	}else {
+		return false;
+	}
+	return true;
+}
+
 /*インスタンス名で判定して値取得＆設定*/
 void setValueByName(WSCbase* object)
 {
@@ -335,6 +371,14 @@ void setValueByName(WSCbase* object)
 	int type = 0;
 	if(windowType == Windows::Monster){
 		type = selectedMonsterType;
+	}else if(windowType == Windows::Effect){
+		type = selectedEffectType;
+	}else if(windowType == Windows::Projectile){
+		type = selectedProjectileType;
+	}else if(windowType == Windows::Physics){
+		type = selectedPhysicsType;
+	}else if(windowType == Windows::Weapon){
+		type = selectedWeaponType;
 	}
 	//monster-appearance
 	if(strcmp(object->getProperty(WSNname), "SeqStationaly") == 0){
@@ -409,6 +453,173 @@ void setValueByName(WSCbase* object)
 		monster_definitions[type].ranged_attack.dy = value;
 	}else if(strcmp(object->getProperty(WSNname), "RangeddzEdit") == 0){
 		monster_definitions[type].ranged_attack.dz = value;
+		
+		////////////////////////////
+		//effect
+	}else if(strcmp(object->getProperty(WSNname), "EffectPalletEdit") == 0){
+		int16 collection = effect_definitions[type].collection;
+		int16 col = GET_COLLECTION(collection);
+		int16 clut = GET_COLLECTION_CLUT(collection);
+		clut = value;
+		effect_definitions[type].collection = BUILD_COLLECTION(col, clut);
+	}else if(strcmp(object->getProperty(WSNname), "EffectSequenceEdit") == 0){
+		effect_definitions[type].shape = value;
+	}else if(strcmp(object->getProperty(WSNname), "EffectSoundPitchEdit") == 0){
+		effect_definitions[type].sound_pitch = value;
+	}else if(strcmp(object->getProperty(WSNname), "EffectDelayEdit") == 0){
+		effect_definitions[type].delay = value;
+		
+		
+		////////////////////////////
+		//projectiles
+	}else if(strcmp(object->getProperty(WSNname), "ProjPalletEdit") == 0){
+		int16 collection = projectile_definitions[type].collection;
+		int16 col = GET_COLLECTION(collection);
+		int16 clut = GET_COLLECTION_CLUT(collection);
+		clut = value;
+		projectile_definitions[type].collection = BUILD_COLLECTION(col, clut);
+	}else if(strcmp(object->getProperty(WSNname), "ProjSequenceEdit") == 0){
+		projectile_definitions[type].shape = value;
+		
+	}else if(strcmp(object->getProperty(WSNname), "ProjTicksBetContrailEdit") == 0){
+		projectile_definitions[type].ticks_between_contrails = value;
+	}else if(strcmp(object->getProperty(WSNname), "ProjMaxContrailEdit") == 0){
+		projectile_definitions[type].maximum_contrails = value;
+	}else if(strcmp(object->getProperty(WSNname), "ProjMediaPromoEdit") == 0){
+		projectile_definitions[type].media_projectile_promotion = value;
+	}else if(strcmp(object->getProperty(WSNname), "ProjRadiusEdit") == 0){
+		projectile_definitions[type].radius = value;
+	}else if(strcmp(object->getProperty(WSNname), "ProjAreaOfEfEdit") == 0){
+		projectile_definitions[type].area_of_effect = value;
+
+		//damage
+	}else if(strcmp(object->getProperty(WSNname), "ProjDamageBaseEdit") == 0){
+		projectile_definitions[type].damage.base = value;
+	}else if(strcmp(object->getProperty(WSNname), "ProjDamageRandomEdit") == 0){
+		projectile_definitions[type].damage.random = value;
+	}else if(strcmp(object->getProperty(WSNname), "ProjDamageScaleEdit") == 0){
+		projectile_definitions[type].damage.scale = value;
+		
+	}else if(strcmp(object->getProperty(WSNname), "ProjSpeedEdit") == 0){
+		projectile_definitions[type].speed = value;
+	}else if(strcmp(object->getProperty(WSNname), "ProjMaxRangeEdit") == 0){
+		projectile_definitions[type].maximum_range = value;
+	}else if(strcmp(object->getProperty(WSNname), "ProjSoundPitchEdit") == 0){
+		projectile_definitions[type].sound_pitch = value;
+		
+		//////////////////////////
+		//physics
+	}else if(strcmp(object->getProperty(WSNname), "PhyMaxForwardEdit") == 0){
+		physics_models[type].maximum_forward_velocity = value;
+	}else if(strcmp(object->getProperty(WSNname), "PhyMaxBackwardEdit") == 0){
+		physics_models[type].maximum_backward_velocity = value;
+	}else if(strcmp(object->getProperty(WSNname), "PhyMaxPerpendEdit") == 0){
+		physics_models[type].maximum_perpendicular_velocity = value;
+	}else if(strcmp(object->getProperty(WSNname), "PhyAccelEdit") == 0){
+		physics_models[type].acceleration = value;
+	}else if(strcmp(object->getProperty(WSNname), "PhyDecelEdit") == 0){
+		physics_models[type].deceleration = value;
+		
+	}else if(strcmp(object->getProperty(WSNname), "PhyAirDecelEdit") == 0){
+		physics_models[type].airborne_deceleration = value;
+	}else if(strcmp(object->getProperty(WSNname), "PhyGravityAccelEdit") == 0){
+		physics_models[type].gravitational_acceleration = value;
+	}else if(strcmp(object->getProperty(WSNname), "PhyClimbAccelEdit") == 0){
+		physics_models[type].climbing_acceleration = value;
+	}else if(strcmp(object->getProperty(WSNname), "PhyTerminalAccelEdit") == 0){
+		physics_models[type].terminal_velocity = value;
+	}else if(strcmp(object->getProperty(WSNname), "PhyExtDecEdit") == 0){
+		physics_models[type].external_deceleration = value;
+
+	}else if(strcmp(object->getProperty(WSNname), "PhyAngularAccelEdit") == 0){
+		physics_models[type].angular_acceleration = value;
+	}else if(strcmp(object->getProperty(WSNname), "PhyAngularDecelEdit") == 0){
+		physics_models[type].angular_deceleration = value;
+	}else if(strcmp(object->getProperty(WSNname), "PhyMaxAngularVelEdit") == 0){
+		physics_models[type].maximum_angular_velocity = value;
+	}else if(strcmp(object->getProperty(WSNname), "PhyAngularRecenterEdit") == 0){
+		physics_models[type].fast_angular_velocity = value;
+	}else if(strcmp(object->getProperty(WSNname), "PhyFastAngularVelEdit") == 0){
+		physics_models[type].fast_angular_velocity = value;
+
+	}else if(strcmp(object->getProperty(WSNname), "PhyFastAngularMax") == 0){
+		physics_models[type].fast_angular_maximum = value;
+	}else if(strcmp(object->getProperty(WSNname), "PhyMaxElevationEdit") == 0){
+		physics_models[type].maximum_elevation = value;
+	}else if(strcmp(object->getProperty(WSNname), "PhyExtAngularDecelEdit") == 0){
+		physics_models[type].external_angular_deceleration = value;
+	}else if(strcmp(object->getProperty(WSNname), "PhyStepDeltaEdit") == 0){
+		physics_models[type].step_delta = value;
+	}else if(strcmp(object->getProperty(WSNname), "PhyStepAmpEdit") == 0){
+		physics_models[type].step_amplitude = value;
+		
+	}else if(strcmp(object->getProperty(WSNname), "PhyRadiusEdit") == 0){
+		physics_models[type].radius = value;
+	}else if(strcmp(object->getProperty(WSNname), "PhyHeightEdit") == 0){
+		physics_models[type].height = value;
+	}else if(strcmp(object->getProperty(WSNname), "PhyDeadHeightEdit") == 0){
+		physics_models[type].dead_height = value;
+	}else if(strcmp(object->getProperty(WSNname), "PhyCameraHeightEdit") == 0){
+		physics_models[type].camera_height = value;
+	}else if(strcmp(object->getProperty(WSNname), "PhySplashHeightEdit") == 0){
+		physics_models[type].splash_height = value;
+	}else if(strcmp(object->getProperty(WSNname), "PhyHalfCamSepEdit") == 0){
+		physics_models[type].half_camera_separation = value;
+		
+		///////////////////////////
+		//weapons
+	}else if(strcmp(object->getProperty(WSNname), "WPalletEdit") == 0){
+		int16 collection = weapon_definitions[type].collection;
+		int16 col = GET_COLLECTION(collection);
+		int16 clut = value;
+		weapon_definitions[type].collection = BUILD_COLLECTION(col, clut);
+	}else if(strcmp(object->getProperty(WSNname), "WIdleSeqEdit") == 0){
+		weapon_definitions[type].idle_shape = value;
+	}else if(strcmp(object->getProperty(WSNname), "WFiringSeqEdit") == 0){
+		weapon_definitions[type].firing_shape = value;
+	}else if(strcmp(object->getProperty(WSNname), "WReloadSeqEdit") == 0){
+		weapon_definitions[type].reloading_shape = value;
+	}else if(strcmp(object->getProperty(WSNname), "WChargingSeqEdit") == 0){
+		weapon_definitions[type].charging_shape = value;
+	}else if(strcmp(object->getProperty(WSNname), "WChargedSeqEdit") == 0){
+		weapon_definitions[type].charged_shape = value;
+
+		//weapon - 2
+	}else if(strcmp(object->getProperty(WSNname), "WLightIntensityEdit") == 0){
+		weapon_definitions[type].firing_light_intensity = value;
+	}else if(strcmp(object->getProperty(WSNname), "WIntensityDecayEdit") == 0){
+		weapon_definitions[type].firing_intensity_decay_ticks = value;
+	}else if(strcmp(object->getProperty(WSNname), "WIdleWidthEdit") == 0){
+		weapon_definitions[type].idle_width = value;
+	}else if(strcmp(object->getProperty(WSNname), "WIdleHeightEdit") == 0){
+		weapon_definitions[type].idle_height = value;
+	}else if(strcmp(object->getProperty(WSNname), "WFiringHeightEdit") == 0){
+		weapon_definitions[type].kick_height = value;
+
+	}else if(strcmp(object->getProperty(WSNname), "WReloadingHeighEdit") == 0){
+		weapon_definitions[type].reload_height = value;
+	}else if(strcmp(object->getProperty(WSNname), "WHorAmpEdit") == 0){
+		weapon_definitions[type].horizontal_amplitude = value;
+	}else if(strcmp(object->getProperty(WSNname), "WUserAmpEdit") == 0){
+		weapon_definitions[type].bob_amplitude = value;
+	}else if(strcmp(object->getProperty(WSNname), "WReadyEdit") == 0){
+		weapon_definitions[type].ready_ticks = value;
+	}else if(strcmp(object->getProperty(WSNname), "WAwaitReloadEdit") == 0){
+		weapon_definitions[type].await_reload_ticks = value;
+
+	}else if(strcmp(object->getProperty(WSNname), "WLoadingEdit") == 0){
+		weapon_definitions[type].loading_ticks = value;
+	}else if(strcmp(object->getProperty(WSNname), "WLoadedEdit") == 0){
+		weapon_definitions[type].finish_loading_ticks = value;
+		
+		//weapon - triggers
+	}else if(checkTrigger(0, "",
+		object,
+		value, type)){
+	}else if(checkTrigger(1, "S",
+		object,
+		value, type)){
+		
 	}else{
 		//
 		messageBox("Unknown item");
@@ -418,7 +629,7 @@ void setValueByName(WSCbase* object)
 /**
 	@param isMaxNONE もし最大値を選択した場合、それはNONEにあたる
 */
-void selectFromDialog(int* value, WSCbase* object,
+long selectFromDialog(int* value, WSCbase* object,
 std::vector<std::string>& stock,
 bool isMaxNONE)
 {
@@ -449,7 +660,8 @@ bool isMaxNONE)
 		*value = index;
 	}else{
 	}
-	//setupDialog();
+	//setupDialog();r
+	return ret;
 }
 
 void setupDialog()//WSCbase* object)
@@ -905,6 +1117,7 @@ void setupDialog()//WSCbase* object)
 				physics_models[type].deceleration);
 			setInteger(getChild(wnd, "PhyAirDecelEdit"),
 				physics_models[type].airborne_deceleration);
+			
 			setInteger(getChild(wnd, "PhyGravityAccelEdit"),
 				physics_models[type].gravitational_acceleration);
 			setInteger(getChild(wnd, "PhyClimbAccelEdit"),
@@ -921,8 +1134,11 @@ void setupDialog()//WSCbase* object)
 			setInteger(getChild(wnd, "PhyMaxAngularVelEdit"),
 				physics_models[type].maximum_angular_velocity);
 			setInteger(getChild(wnd, "PhyAngularRecenterEdit"),
-				physics_models[type].fast_angular_velocity);
+				physics_models[type].angular_recentering_velocity);
 			setInteger(getChild(wnd, "PhyFastAngularVelEdit"),
+				physics_models[type].fast_angular_velocity);
+			
+			setInteger(getChild(wnd, "PhyFastAngularMax"),
 				physics_models[type].fast_angular_maximum);
 			setInteger(getChild(wnd, "PhyMaxElevationEdit"),
 				physics_models[type].maximum_elevation);
@@ -932,9 +1148,9 @@ void setupDialog()//WSCbase* object)
 				physics_models[type].step_delta);
 			setInteger(getChild(wnd, "PhyStepAmpEdit"),
 				physics_models[type].step_amplitude);
+			
 			setInteger(getChild(wnd, "PhyRadiusEdit"),
 				physics_models[type].radius);
-
 			setInteger(getChild(wnd, "PhyHeightEdit"),
 				physics_models[type].height);
 			setInteger(getChild(wnd, "PhyDeadHeightEdit"),
@@ -1009,6 +1225,10 @@ void setupDialog()//WSCbase* object)
 			int nflags = weapon_definitions[type].flags;
 			for(int i = 0; i < NUMBER_OF_WEAPON_FLAG_INFORMATIONS; i ++){
 				WSCvtoggle* toggle = (WSCvtoggle*)flags->getItem(i);
+				if(toggle == NULL){
+					messageBox("weapon flag check box's instance is null");
+					exit(1);
+				}
 				if(nflags & valueWeaponFlags[i]){
 					//ON
 					toggle->setStatus(True);
@@ -1062,19 +1282,33 @@ void changeForm(int wtype)
 	visible = wtype == Windows::Monster;
 	getObject("WSCform", "FrmMonster")->setVisible(visible);
 	getObject("WSCvbtn", "BtnMonster")->setProperty(WSNreverseFlag, visible);
+	//selectedを選択状態にする
+	WSClist* lst = (WSClist*)getObject("WSClist", "ListMonsterTypes");
+	int type = selectedMonsterType;
+	if(visible && lst->getSelectedPos() != type)lst->setSelectPos(type);
 	visible = wtype == Windows::Effect;
 	getObject("WSCform", "FrmEffect")->setVisible(visible);
 	getObject("WSCvbtn", "BtnEffect")->setProperty(WSNreverseFlag, visible);
+	lst = (WSClist*)getObject("WSClist", "ListEffect");
+	type = selectedEffectType;
+	if(visible && lst->getSelectedPos() != type)lst->setSelectPos(type);
 	visible = wtype == Windows::Projectile;
 	getObject("WSCform", "FrmProjectile")->setVisible(visible);
 	getObject("WSCvbtn", "BtnProjectile")->setProperty(WSNreverseFlag, visible);
+	lst = (WSClist*)getObject("WSClist", "ListProjectile");
+	type = selectedProjectileType;
+	if(visible && lst->getSelectedPos() != type)lst->setSelectPos(type);
 	visible = wtype == Windows::Physics;
 	getObject("WSCform", "FrmPhysics")->setVisible(visible);
 	getObject("WSCvbtn", "BtnPhysics")->setProperty(WSNreverseFlag, visible);
+	//option
+	//((WSClist*)getObject("WSClist", "Mailist_000"))->setSelectPos(selectedWeaponType);
 	visible = wtype == Windows::Weapon;
 	getObject("WSCform", "FrmWeapon")->setVisible(visible);
 	getObject("WSCvbtn", "BtnWeapon")->setProperty(WSNreverseFlag, visible);
-	
+	lst = (WSClist*)getObject("WSClist", "Mailist_000");
+	type = selectedWeaponType;
+	if(visible && lst->getSelectedPos() != type)lst->setSelectPos(type);
 	setupDialog();
 }
 
@@ -1157,10 +1391,17 @@ void MainInitFunc(WSCbase* object){
 	getChild(getChild(getChild(object, "FrmMonster"), "Maiinde_012"), "ClassCombo")->
 		setProperty(WSNmenuItems, itemList.c_str());
 	itemList = getOptionItemListFromVectorString(stockShellCasingTypes);
+	//shell casing
 	getObject("WSCoption", "WShellCasingOption")->setProperty(WSNmenuItems,
+		itemList.c_str());
+	getObject("WSCoption", "WSShellCasingOption")->setProperty(WSNmenuItems,
 		itemList.c_str());
 	itemList = getOptionItemListFromVectorString(stockSpeeds);
 	getObject("WSCoption", "SpeedCombo")->setProperty(WSNmenuItems,
+		itemList.c_str());
+	//weapon classes
+	itemList = getOptionItemListFromVectorString(stockWeaponClasses);
+	getObject("WSCoption", "WClassOption")->setProperty(WSNmenuItems,
 		itemList.c_str());
 	
 	//モンスターの耐性リストを設定
@@ -1186,7 +1427,6 @@ void MainInitFunc(WSCbase* object){
 	itemList = getCommaItemList(stockWeaponFlags);
 	getObject("WSCcheckGroup", "WFlagsCheckGroup")->setProperty(WSNmenuItems,
 		itemList.c_str());
-
 	/////////////////////
 	//表示
 	//フレームの表示
@@ -1196,7 +1436,7 @@ void MainInitFunc(WSCbase* object){
 	selectedPhysicsType = selectedWeaponType = 0;
 	//モンスター種類リストで選択変更
 	WSClist* lst = (WSClist*)getObject("WSClist", "ListMonsterTypes");
-	lst->setSelectPos(selectedMonsterType);
+	//lst->setSelectPos(selectedMonsterType);
 
 	setDefinitionsToDefault();
 	//更新
