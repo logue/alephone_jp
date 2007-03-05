@@ -175,6 +175,7 @@ void FontSpecifier::DrawGryphGLJ(const char* txt) {
 	// Non-MacOS-specific: allocate the texture buffer
  	// Its format is LA 88, where L is the luminosity and A is the alpha channel
  	// The font value will go into A.
+	delete [] OGL_Texture;
 	OGL_Texture = new uint8[2*GetTxtrSize()];
 	
 	// Copy the SDL surface into the OpenGL texture
