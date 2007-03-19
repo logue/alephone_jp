@@ -461,9 +461,13 @@ static inline unsigned char s2u(char i) { return i>0 ? i : 256+i; }
 
 // Draw text at given position in frame buffer, return width
 template <class T>
-inline static int draw_text(const uint8 *text, size_t length, int x, int y, T *p, int pitch, int clip_left, int clip_top, int clip_right, int clip_bottom, uint32 pixel, const sdl_font_info *font, uint16 style)
+inline static int draw_text(const uint8 *text2, size_t length, int x, int y, T *p, int pitch, int clip_left, int clip_top, int clip_right, int clip_bottom, uint32 pixel, const sdl_font_info *font, uint16 style)
 {
+	uint8* texts = (uint8*)malloc(length+2), *text = texts;
 	bool oblique = ((style & styleItalic) != 0);
+	strncpy((char*)text,(const char*)text2,length);
+	text[length] = 0;
+	text[length+1] = 0;
 	int total_width = 0;
 	uint16 c;
 	int lc = 0;
@@ -502,6 +506,7 @@ inline static int draw_text(const uint8 *text, size_t length, int x, int y, T *p
 		total_width += width;
 		x += width;
 	}
+	free(texts);
 	return total_width;
 }
 
