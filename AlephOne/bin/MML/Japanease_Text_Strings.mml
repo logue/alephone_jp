@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="Shift_JIS" ?>
 <!--
 Japanese Text_strings
-By Logue  (2007/03/16)
+By Logue  (2007/03/20)
 -->
 <marathon>
 <!-- STR# Resource: "Errors" -->
@@ -92,9 +92,9 @@ By Logue  (2007/03/16)
 <string index="7">ゲームの参加中にエラーが発生しました(アプリケーションのバージョンが違うかもしれません)。もう一度試してみてください。</string>
 <string index="8">ネットワークエラーのためマラソンは続行できません。</string>
 <string index="9">マラソンのバージョンが異なるためそのプレーヤーはゲームに参加できませんでした。</string>
-<string index="10">The player you just added is using an older version of Aleph One that does not support some advanced features required by the game you're trying to gather.  You will not be allowed to start the game.</string>
-<string index="11">The player you just attempted to add is using a version of Aleph One that does not support some advanced features required by the game you're trying to gather.</string>
-<string index="12">Aleph One was unable to locate the Map file this level came from.  Some terminals may not display properly, and saving this game on this computer is not recommended.</string>
+<string index="10">このプレイヤーは、現在募集をかけているゲームのいくつかの拡張機能が使用できない古いバージョンのAlephOneを使用しているようです。このため、ゲームを開始することができません。</string>
+<string index="11">現在募集をかけているゲームに、拡張機能に対応していないAlephOneを使っているプレイヤーが参加しようとしました。</string>
+<string index="12">Aleph Oneは、このレベルのマップファイルを見つけることができませんでした。いくつかのターミナルが正常に表示されないかもしれません。また、このコンピューター上でゲームを保存することは推奨できません。</string>
 </stringset>
 <!-- STR# Resource: "Key Codes To Names" -->
 <stringset index="133">
@@ -258,12 +258,12 @@ By Logue  (2007/03/16)
 <string index="1">.44 マグナム・メガ級 A1</string>
 <string index="2">ゼウス級核融合ピストル</string>
 <string index="3">MA-75B 機関銃/グレネード砲</string>
-<string index="4">SPNKR-X18 SSM     発射機</string>
+<string index="4">SPNKR-X18型ミサイルランチャー</string>
 <string index="5">TOZT-7 火炎放射機</string>
 <string index="6">武器類不明 システムエラー 0xfded</string>
 <string index="7">WSTE-M 戦闘用ショットガン</string>
 <string index="8">(somehow related to time of applicability)</string>
-<string index="9">KKV-7 10MM       小型軽機関銃</string>
+<string index="9">KKV-7 10MMフルチエット小型軽機関銃</string>
 </stringset>
 <!-- STR# Resource: "file search path" -->
 <stringset index="138">
@@ -288,6 +288,7 @@ By Logue  (2007/03/16)
 <string index="6">時間  It  </string>
 <string index="7">ゴール</string>
 <string index="8">陣地にいた時間</string>
+<string index="9">陣地にいた時間</string>
 </stringset>
 <!-- STR# Resource: "Net Game Setup" -->
 <stringset index="141">
@@ -297,6 +298,8 @@ By Logue  (2007/03/16)
 <string index="3">旗</string>
 <string index="4">点数制限</string>
 <string index="5">点数</string>
+<string index="6">陣地にいた時間</string>
+<string index="7">分</string>
 </stringset>
 <!-- STR# Resource: "New Join Dialog Messages" -->
 <stringset index="142">
@@ -325,14 +328,14 @@ By Logue  (2007/03/16)
 <string index="0">ちびっ子</string>
 <string index="1">簡単</string>
 <string index="2">普通</string>
-<string index="3">破者</string>
-<string index="4">勇者</string>
+<string index="3">難しい</string>
+<string index="4">虐殺</string>
 </stringset>
 
 <!-- ZZZ: Names of game types, used by SDL version (for menu) -->
 <stringset index="146">
 <string index="0">バトルロワイヤル</string>
-<string index="1">連係プレイ</string>
+<string index="1">チームプレイ</string>
 <string index="2">旗取り</string>
 <string index="3">陣地取り</string>
 <string index="4">鬼ごっこ</string>
@@ -351,14 +354,14 @@ By Logue  (2007/03/16)
 <!-- ZZZ: Names of alternate end-conditions (replace "Score Limit" above), used by SDL version -->
 <!-- ZZZ: hmm, I think I have stopped needing these (now use 141 like Mac)... leaving them in anyway just in case. -->
 <stringset index="148">
-<string index="0">Kill Limit</string>
-<string index="1">Kill Limit</string>
-<string index="2">Flag-Capture Limit</string>
-<string index="3">Kill Limit</string>
-<string index="4">Kill Limit</string>
+<string index="0">殺傷上限数</string>
+<string index="1">殺傷上限数</string>
+<string index="2">フラグ収集上限数</string>
+<string index="3">殺傷上限数</string>
+<string index="4">殺傷上限数</string>
 <string index="5">Time in Enemy Bases</string>
-<string index="6">Score Limit</string>
-<string index="7">Kill Limit</string>
+<string index="6">スコア上限</string>
+<string index="7">殺傷上限数</string>
 </stringset>
 <!-- ZZZ: custom labels for "Restore saved-game as..." selector -->
 <stringset index="149">
@@ -436,6 +439,13 @@ By Logue  (2007/03/16)
 <string index="9"> - 味方による殺傷 %d人を含む</string>
 <string index="10">成績</string>
 <string index="11">チームの成績</string>
+<!-- ZZZ: added for team vs. team carnage in postgame report -->
+<string index="12">%sのチーム</string>
+<!-- ZZZ: added for legend/key in SDL postgame report -->
+<string index="13">殺傷</string>
+<string index="14">死亡</string>
+<string index="15">自滅</string>
+<string index="16">事故</string>
 </stringset>
 <!-- STR# Resource: "OpenGL-Option Color-Picker Prompts" -->
 <stringset index="200">
