@@ -3242,7 +3242,7 @@ int poolGrow(STRING_POOL *pool)
 }
 
 /*
- * $Id: xmlparse.c,v 1.1 2007-01-21 05:01:18 ookawa_mi Exp $
+ * $Id: xmlparse.c,v 1.2 2007-03-20 00:36:53 ookawa_mi Exp $
  * expatの日本語文字コード対応。
  * encodingにSHIFT_JISとEUC-JPを指定されたXMLの処理を可能にする。
  * またUTF-8からSHIFT_JIS・EUC-JPへの変換ルーチンも提供する。
@@ -3538,6 +3538,9 @@ static void setAsciiMap(int map[]) {
 		map[i] = i;
 }
 
+#ifdef __WIN32__
+#include "strcasecmp.h"
+#endif
 /**
 * 日本語文字コードを処理するためのハンドラ
  * @param encodingHandlerData このハンドラのためのユーザ定義データ(未使用)
@@ -3572,6 +3575,9 @@ int XML_JapaneseEncodingHandler(void *encodingHandlerData, const XML_Char *name,
 /*
  * Changes:
  * $Log: not supported by cvs2svn $
+ * Revision 1.1  2007/01/21 05:01:18  ookawa_mi
+ * *** empty log message ***
+ *
  * Revision 1.3  2003/11/27 05:45:17  sugoroku
  * CVSキーワードにファイル名があるのでコメントからはファイル名を削除
  *

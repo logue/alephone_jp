@@ -470,11 +470,8 @@ inline static int draw_text(const uint8 *text2, size_t length, int x, int y, T *
 	text[length+1] = 0;
 	int total_width = 0;
 	uint16 c;
-	int lc = 0;
-	while (++lc, length-- ) {
+	while (length-- ) {
 		int width;
-		static uint8 t = 0;
-		static bool crypted;
 		if(IsTwoByte(*text)) {
 			if(length) {
 				length--;
