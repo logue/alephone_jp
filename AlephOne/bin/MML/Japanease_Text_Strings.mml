@@ -46,16 +46,16 @@ By Logue  (2007/03/20)
 <string index="1">Shapes.16</string>
 <string index="2">Sounds</string>
 <string index="3">Sounds.16</string>
-<string index="4">Aleph One 初期設定</string>
+<!-- <string index="4">Aleph One 初期設定</string> -->
 <string index="5">Map</string>
-<string index="6">新規ゲーム</string>
+<!-- <string index="6">新規ゲーム</string> -->
 <string index="7">Marathon</string>
-<string index="8">Aleph One 映画</string>
+<!-- <string index="8">Aleph One 映画</string> -->
 <string index="9">Physics Model</string>
 <string index="10">Music</string>
 <string index="11">Images</string>
 <string index="12">Movie</string>
-<string index="13">デフォルト</string>
+<!-- <string index="13">デフォルト</string> -->
 </stringset>
 <!-- STR# Resource: "Top-Level Interface Items" -->
 <stringset index="130">
@@ -63,7 +63,7 @@ By Logue  (2007/03/20)
 <string index="1">既存のゲームを開く</string>
 <string index="2"></string>
 <string index="3">最後のゲームを再生</string>
-<string index="4">映画を開くG</string>
+<string index="4">映画を開く</string>
 <string index="5">映画の保存</string>
 <string index="6"></string>
 <string index="7">ネットゲーム集合</string>
@@ -78,7 +78,7 @@ By Logue  (2007/03/20)
 <string index="0">ゲーム保存:</string>
 <string index="1">映画の保存:</string>
 <string index="2">映画の選択:</string>
-<string index="3">&lt;I デフォルト</string>
+<string index="3">デフォルト</string>
 </stringset>
 <!-- STR# Resource: "Network Errors" -->
 <stringset index="132">
