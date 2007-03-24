@@ -150,7 +150,19 @@ int FontSpecifier::TextWidth(const char *text)
 // (this is to avoid texture and display-list memory leaks and other such things)
 void FontSpecifier::OGL_Reset(bool IsStarting)
 {
-
+	// Don't delete these if there is no valid texture;
+	// that indicates that there are no valid texture and display-list ID's.
+	if (!IsStarting && !OGL_Texture)
+	{
+		glDeleteTextures(1,&TxtrID);
+	}
+	
+	// Invalidates whatever texture had been present
+	if (OGL_Texture)
+	{
+		delete[]OGL_Texture;
+		OGL_Texture = NULL;
+	}
 }
 
 void FontSpecifier::DrawGryphGLJ(const char* txt) {
