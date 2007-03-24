@@ -16,8 +16,9 @@ Soft描画/OpenGLでの日本語表示
 Shift-JIS/(EUC-JP?/UTF-8?)でのMML
 
 バグ：
-一部文字が切れる（修正済み）
 たまにごみが表示される（プレイに支障はない？）
+最初の起動でファイルの読み込みに失敗する(prefで変更すればOK)
+一部の音楽が再生されない？（条件不明、AIFFは可）
 
 Special Thanks
 SDL_Kanji
