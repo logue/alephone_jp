@@ -152,7 +152,7 @@ void FontSpecifier::OGL_Reset(bool IsStarting)
 {
 	// Don't delete these if there is no valid texture;
 	// that indicates that there are no valid texture and display-list ID's.
-	if (!IsStarting && !OGL_Texture)
+	if (!OGL_Texture)
 	{
 		glDeleteTextures(1,&TxtrID);
 	}
