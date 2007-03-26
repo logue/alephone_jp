@@ -152,7 +152,7 @@ void FontSpecifier::OGL_Reset(bool IsStarting)
 {
 	// Don't delete these if there is no valid texture;
 	// that indicates that there are no valid texture and display-list ID's.
-	if (!OGL_Texture)
+	if (!IsStarting && !OGL_Texture)
 	{
 		glDeleteTextures(1,&TxtrID);
 	}
@@ -162,7 +162,9 @@ void FontSpecifier::OGL_Reset(bool IsStarting)
 	{
 		delete[]OGL_Texture;
 		OGL_Texture = NULL;
+		
 	}
+	glGenTextures(1,&TxtrID);
 }
 
 void FontSpecifier::DrawGryphGLJ(const char* txt) {
@@ -211,8 +213,7 @@ void FontSpecifier::DrawGryphGLJ(const char* txt) {
 	
 	// OpenGL stuff starts here 	
  	// Load texture
-	glDeleteTextures(1,&TxtrID);
- 	glGenTextures(1,&TxtrID);
+
  	glBindTexture(GL_TEXTURE_2D,TxtrID);
  	
  	glTexEnvi(GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_MODULATE);
