@@ -4,47 +4,48 @@
 #LOGON 500
 #PICT 505
 $C7
-The initial release of Rubicon was accompanied by "Rubicon Aleph Light" - which was basically Rubicon accompanied by an early version of AO - and a promise to release a "full" Rubicon AO at some later point.
+Rubiconの最初のリリースには"Rubicon Aleph Light"が同封していた。それは基本的にAOの初期のバージョンと、「完全な」Ribicon AOを将来のいつかにリリースするという約束を同封したRubiconであった。 
 
-But work on "Rubicon　AO" - or "Rubicon X" as it is called now - soon faltered and was reduced to the occasional handful of texture upgrades or level tweak. RX was more or less dead at one point, and all work had stopped.
+しかし、"Rubicon AO"、もしくは今は"Rubicon X"と呼ぶものの作業はすぐにつまずき、時々の一握りのテクスチャのアップグレードとレベルの修正に縮小された。RXはその時点では多かれ少なかれ死んでいて、全ての作業は止まった。 
 
-It would have remained that way if $C4Steve Levinson$C7 hadn't brought it back to life with his "A change in strategy" email.
+もし$C4Steve Levinson$C7が「戦略の変更」メールで息を吹き返させてくれなかったならば、ずっとそのままだったであろう。 
 #PICT 505
 $C7
-But Real Life kept interfering with the other contributors and pretty soon my part was pretty much limited to waiting for them to cough up the occasional texture. In the spring of 2005 they bowed out. They just did not have the time to work on RX, and I was the only one left.
+しかし現実の生活はほかの貢献者を干渉し、ほどなくして私の役割は時々のテクスチャーの受け渡しを待つことに制限されてしまった。2005年の春には彼らはやめた。彼らは単にRXで作業をする時間がなかったのだ、そして私一人が残された。 
 
-This should have been the end of RX, but recognizing that this was a solo project actually increased the development rate; I no longer had to wait for anybody else's input and could work at my own pace.
+これはRXの終わりになるはずだったのだが、これが一人のプロジェクトであることに気づき、実際は開発速度は上がった。私はもはや他の誰かの入力を待つ必要はなく、自分のペースで作業ができたのだ。 
 
-Hope you've enjoyed the new and improved Rubicon.
+あなたが新しい向上したRubiconで楽しんでくれることを希望します。 
 #LOGOFF 500
 #END
 #FINISHED
 #LOGON 500
 #PICT 505
 $C7
-The initial release of Rubicon was accompanied by "Rubicon Aleph Light" - which was basically Rubicon accompanied by an early version of AO - and a promise to release a "full" Rubicon AO at some later point.
+Rubiconの最初のリリースには"Rubicon Aleph Light"が同封していた。それは基本的にAOの初期のバージョンと、「完全な」Ribicon AOを将来のいつかにリリースするという約束を同封したRubiconであった。 
 
-But work on "Rubicon　AO" - or "Rubicon X" as it is called now - soon faltered and was reduced to the occasional handful of texture upgrades or level tweak. RX was more or less dead at one point, and all work had stopped.
+しかし、"Rubicon AO"、もしくは今は"Rubicon X"と呼ぶものの作業はすぐにつまずき、時々の一握りのテクスチャのアップグレードとレベルの修正に縮小された。RXはその時点では多かれ少なかれ死んでいて、全ての作業は止まった。 
 
-It would have remained that way if $C4Steve Levinson$C7 hadn't brought it back to life with his "A change in strategy" email.
+もし$C4Steve Levinson$C7が「戦略の変更」メールで息を吹き返させてくれなかったならば、ずっとそのままだったであろう。 
 #PICT 505
 $C7
-But Real Life kept interfering with the other contributors and pretty soon my part was pretty much limited to waiting for them to cough up the occasional texture. In the spring of 2005 they bowed out. They just did not have the time to work on RX, and I was the only one left.
+しかし現実の生活はほかの貢献者を干渉し、ほどなくして私の役割は時々のテクスチャーの受け渡しを待つことに制限されてしまった。2005年の春には彼らはやめた。彼らは単にRXで作業をする時間がなかったのだ、そして私一人が残された。 
 
-This should have been the end of RX, but recognizing that this was a solo project actually increased the development rate; I no longer had to wait for anybody else's input and could work at my own pace.
+これはRXの終わりになるはずだったのだが、これが一人のプロジェクトであることに気づき、実際は開発速度は上がった。私はもはや他の誰かの入力を待つ必要はなく、自分のペースで作業ができたのだ。 
 
-Hope you've enjoyed the new and improved Rubicon.
-#PICT 505
-$C7
-
-
-One more thing...
+あなたが新しい向上したRubiconで楽しんでくれることを希望します。 
 #PICT 505
 $C7
 
-When the various line of sight limits were removed in Aleph One, I just $Ihad$i to make a map that explored the new possibilities. The resulting level was rather mediocre and I've since made other and better "long view levels", but I decided to include it in case somebody was interested.
 
-That's where you're heading now. If you don't want to see this "because I could" level, hit ESC. Otherwise...
+もう一つ... 
+#PICT 505
+$C7
+
+Aleph Oneで視野制限のいくつかの線が取り除かれたとき、私はちょうど新しい可能性を調査するマップを作らなければならなかった。 その結果のレベルはどちらかといえば月並みで、私はそれ以来ほかのもっといい「長い視野のレベル」を作ったけれども、 誰かが興味を持ったときのためにそのレベルを含めることに決めた。 
+
+あなたが今行こうとしているのがそれである。もしこの「だってできるんだもん」レベルを見たくなければ、ESCを押してください。さもなければ... 
+
 #LOGOFF 500
 #INTERLEVEL TELEPORT 50
 #END
