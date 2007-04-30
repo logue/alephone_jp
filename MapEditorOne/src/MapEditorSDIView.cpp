@@ -141,6 +141,9 @@ void CMapEditorSDIView::drawGrid(CDC *cdc)
 	midiumPen.DeleteObject();
 }
 
+/**
+    ポリゴン生成
+*/
 void CMapEditorSDIView::drawPolygons(CDC *cdc)
 {
 	CBrush nullBrush, netBrush;
@@ -197,6 +200,9 @@ void CMapEditorSDIView::drawPolygons(CDC *cdc)
 			points[j].x = viewPoint[0];
 			points[j].y = viewPoint[1];
 		}
+        //ポリゴンの整合性を確かめる
+        bool validity = isValidPolygon(index);
+
 		CBrush brush;
 		int type = 0;
 		switch(theApp.getEditMode()){
@@ -294,6 +300,10 @@ void CMapEditorSDIView::drawLines(CDC *cdc)
 	hiddenLinePen.DeleteObject();
 }
 
+/**
+    点の表示
+    @param cdc デバイスコンテキスト
+*/
 void CMapEditorSDIView::drawPoints(CDC *cdc)
 {
 	CPen pen, selectedPen;
@@ -524,6 +534,12 @@ void CMapEditorSDIView::drawStrings(CDC *cdc)
 	cdc->SetTextColor(RGB(0,0,0));
 }
 
+//////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////
+/**
+    描画全体
+*/
 void CMapEditorSDIView::OnDraw(CDC* pDC)
 {
 	CMapEditorSDIDoc* pDoc = GetDocument();
@@ -663,6 +679,12 @@ CMapEditorSDIDoc* CMapEditorSDIView::GetDocument() const // デバッグ以外のバージ
 // CMapEditorSDIView メッセージ ハンドラ
 
 //ホイール
+/**
+    ホイールイベント
+    @param nFlags 同時になにをやっているか(キーなど)
+    @param zDelta ズーム変化量の幅
+    @param pt ホイールを回したときのマウスポイント
+*/
 BOOL CMapEditorSDIView::OnMouseWheel(UINT nFlags, short zDelta, CPoint pt)
 {
 	static short oldZDelta = zDelta;

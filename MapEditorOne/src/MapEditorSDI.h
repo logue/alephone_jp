@@ -304,9 +304,11 @@ public:
     vector<HBITMAP> bitmapList;
 
     //select tool type
+    //選択ツールタイプ
     int selectingToolType;
 
     //show / hide polygons, lines. points
+    //表示している高さの範囲。選択にも反映される
     int viewHeightMax;
     int viewHeightMin;
     bool isRevealHiddenLines;

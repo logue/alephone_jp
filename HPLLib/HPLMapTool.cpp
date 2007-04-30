@@ -233,3 +233,45 @@ bool hpl::aleph::map::isPointInSelection(int px, int py,
     //no selection
     return false;
 }
+
+//線の回り方が時計回りか、反時計回りか
+typename PolygonRotation{
+    enum RotationType{
+        Clockwise,
+        Counterclockwise,
+
+        MAX_POLYGON_ROTATION_TYPES
+    };
+};
+
+/**
+    ポリゴンが存在として正しいかどうかを判定します
+    @param index index of polygon which is checked 検査対象のポリゴンインデックス
+*/
+bool hpl::aleph::map::isValidPolygon(int index)
+{
+    //TODO
+    //ポリゴン情報を取得します
+    polygon_data *polygon = get_polygon_data(index);
+
+    //ポリゴン情報が無い
+    if(polygon == null){
+        return false;
+    }
+
+    //ポリゴンに所属する線を取得します
+    int vertexCount = polygon->vertex_count;
+    int startPointIndex = polygon->endpoint_indexes[0];
+    int pointA, pointB, pointC;
+    
+    //時計回りか、反時計回りか
+    PolygonRotation::RotationType polygonRotationType = PolygonRotation::Clockwise;
+
+    //点iと点i+1を含む線をAB, 点i+1と点i+2を含む線をBCとする。
+    //最初の線[点0,点1]と線[点1,点2]の角度から、時計回りか、反時計回りかを判定する
+    pointA = startPointIndex;
+    pointB = polygon->endpoint_indexes[1];
+    pointC = polygon->endpoint_indexes[2];
+    
+    return false;
+}

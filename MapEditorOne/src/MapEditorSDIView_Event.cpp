@@ -6,7 +6,16 @@
 #include ".\mapeditorsdiview.h"
 #include "SelectLevelDialog.h"
 
-
+/**
+    マウス座標が点に近いかどうかを調べて選択情報に設定
+    @param mousePoint view座標系のマウスポイント座標
+    @param offsetViewX view座標系のズレ補正
+    @param offsetViewY view座標系のズレ補正
+    @param offsetWorldX world座標系のズレ補正
+    @param offsetWorldY world座標系のズレ補正
+    @param div ズーム
+    @param distance 距離の閾値。これ以下なら選択
+*/
 static void checkSelectPoint(POINT& mousePoint,
                              int offsetViewX, int offsetViewY,
                              int offsetWorldX, int offsetWorldY,
@@ -32,6 +41,9 @@ static void checkSelectPoint(POINT& mousePoint,
     }
 }
 
+/**
+    選択開始位置を記憶
+*/
 void CMapEditorSDIView::setStartPointForSelectGroup(int px, int py){
     theApp.selectStartPoint.x = px;
     theApp.selectStartPoint.y = py;
@@ -46,8 +58,10 @@ void CMapEditorSDIView::doLButtonDownDrawMode(UINT nFlags, CPoint &point)
     int OFFSET_X_VIEW = theApp.offset.x;
     int OFFSET_Y_VIEW = theApp.offset.y;
     int DIV = theApp.zoomDivision;
+
     if(theApp.selectingToolType == TI_ARROW){
         //selecting tool = TI_ARROW
+        //矢印ツール時
 
         if(/*!(nFlags & MK_SHIFT) && */!(nFlags & MK_CONTROL)){
             //コントロールキーを押さずに
@@ -299,7 +313,11 @@ void CMapEditorSDIView::doLButtonDownDrawMode(UINT nFlags, CPoint &point)
         delete lines;
     }else if(theApp.selectingToolType == TI_HAND){
         //全体を移動
+        //D&Dの部分で実装済み
+
     }else if( theApp.selectingToolType == TI_LINE){
+        //線引きツール
+
 #ifdef MAP_VIEWER
 #else
         if(nFlags & MK_LBUTTON){
@@ -322,6 +340,7 @@ void CMapEditorSDIView::doLButtonDownDrawMode(UINT nFlags, CPoint &point)
             }
         }
 #endif
+
     }else if(theApp.selectingToolType == TI_MAGNIFY){
         //zoom in/out
         if(nFlags & MK_CONTROL){
@@ -332,7 +351,9 @@ void CMapEditorSDIView::doLButtonDownDrawMode(UINT nFlags, CPoint &point)
             //zoom in
             OnZoomIn();
         }
+
     }else if(theApp.selectingToolType == TI_SKULL){
+        //オブジェクト配置ツール時
 #ifdef MAP_VIEWER
 #else
         struct world_point2d world_point = getWorldPoint2DFromViewPoint(point.x, point.y);
@@ -359,7 +380,9 @@ void CMapEditorSDIView::doLButtonDownDrawMode(UINT nFlags, CPoint &point)
             }
         }
 #endif
+
     }else if(theApp.selectingToolType == TI_TEXT){
+        //テキスト入力ツール
 #ifdef MAP_VIEWER
 #else
         //add annotation
@@ -383,6 +406,7 @@ void CMapEditorSDIView::doLButtonDownDrawMode(UINT nFlags, CPoint &point)
         this->SetFocus();
 #endif
     }else if(theApp.selectingToolType == TI_POLYGON){
+        //規定ポリゴン作成ツール
 #ifdef MAP_VIEWER
 #else
         //set start point
@@ -391,11 +415,16 @@ void CMapEditorSDIView::doLButtonDownDrawMode(UINT nFlags, CPoint &point)
     }
 }
 
+/**
+    ポリゴンを選択したかどうか判断します
+*/
 void checkPolygonSelect(UINT nFlags, CPoint point)
 {
     theApp.selectDatas.clear();
 
     struct world_point2d world_point = getWorldPoint2DFromViewPoint(point.x, point.y);
+
+    //ポリゴンの中にマウスポインタが入っているか
     int polygonIndex = getPolygonIdPointIn(world_point);
     if(polygonIndex != NONE){
         polygon_data *polygon = &PolygonList[polygonIndex];
@@ -616,6 +645,8 @@ void CMapEditorSDIView::OnLButtonUp(UINT nFlags, CPoint point)
     theApp.isPressLButtonWithCtrl = false;
 
     if(theApp.selectingToolType == TI_ARROW){
+        //矢印ツール
+
         bool okSelect = false;
         if(theApp.selectDatas.isSelectOneObject()){
             //オブジェクト情報更新
@@ -623,6 +654,7 @@ void CMapEditorSDIView::OnLButtonUp(UINT nFlags, CPoint point)
         }else if(theApp.selectDatas.isSelectOnePoint()){
         }else if(theApp.selectDatas.isSelectOneLine()){
         }else if(theApp.selectDatas.isSelectOnePolygon()){
+            //ポリゴン情報更新
             theApp.polygonPropertyDialog->setupDialog(theApp.selectDatas.getSelPolygons()->at(0).index);
         }
         if(theApp.isSelectingGroup){

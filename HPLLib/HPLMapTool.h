@@ -122,6 +122,23 @@ namespace map{
 							hpl::aleph::map::HPLSelectData* selectInfo,
 							int heightMax, int heightMin, int div);
 
+    ///////////////////////////////////////////////////////////////////////////////
+    ////// Polygon ////////////////////////////////////////////////////////////////
+
+    /**
+        ポリゴンが存在として正しいかどうかを判定します
+        @param index index of polygon which is checked 検査対象のポリゴンインデックス
+    */
+    bool isValidPolygon(int index);
+
+    /**
+        ポリゴンをセットアップします
+        具体的には、
+        ・点の順番、線の順番を時計回りに整えます
+        ・Sideデータ等を設定します
+        ・
+    */
+    //void setupPolygon(int index);
 };
 };
 };
