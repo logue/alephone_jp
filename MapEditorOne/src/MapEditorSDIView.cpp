@@ -248,6 +248,9 @@ void CMapEditorSDIView::drawPolygons(CDC *cdc)
 	nullBrush.DeleteObject();
 }
 
+/**
+    ü‚ğ•`‰æ‚µ‚Ü‚·
+*/
 void CMapEditorSDIView::drawLines(CDC *cdc)
 {
 	CPen pen, selectedPen, hiddenLinePen;

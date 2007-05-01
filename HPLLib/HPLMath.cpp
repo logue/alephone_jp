@@ -73,6 +73,7 @@ double getPointDistanceFromLine(double px, double py,
         return fabs(startToPointDeltaY);
     }
 
+    //垂線の距離を得るために角度を計算します
     double costheta = (double)getInnerProduct(lineDeltaX, lineDeltaY, startToPointDeltaX, startToPointDeltaY) /
         (linevectorDistance * pointvectorDistance);
 
@@ -253,3 +254,80 @@ bool hpl::math::isNearbyPoints(double px0, double py0,
     }
 }
 
+//////////////////////////////////////////////////////////////////////
+///////////////  Angle   /////////////////////////////////////////////
+/**
+    二つの線が織り成す角度を求めます。スクリーン座標系より、
+    時計回りが正方向となる
+    @param pax,y,pbx,y 線分ABの座標
+    @param pcx,y,pdx,y 線分CDの座標
+*/
+double hpl::math::getTwoLinesRadian(double pax, double pay, double pbx, double pby,
+                         double pcx, double pcy, double pdx, double pdy)
+{
+    //cosの定義により角度を求めます
+    //A->B >>> [AB]
+    double deltaABX = pbx - pax;
+    double deltaABY = pby - pay;
+    //|AB|
+    double lengthAB = getLength(deltaABX, deltaABY);
+    //∠BAX
+    double radABX = getRadianFromVector(deltaABX, deltaABY);
+
+    //[CD]
+    double deltaCDX = pdx - pcx;
+    double deltaCDY = pdy - pcy;
+    //|CD|
+    double lengthCD = getLength(deltaCDX, deltaCDY);
+    //∠DCX
+    double radCDX = getRadianFromVector(deltaCDX, deltaCDY);
+
+    //ABとCDの成す角
+    double radABCD = radCDX - radABX;
+
+    return radABCD;
+}
+double hpl::math::getTwoLinesRadian(double pax, double pay, double pbx, double pby,
+    double pcx, double pcy, double pdx, double pdy)
+{
+    double rad = hpl::math::getTwoLinesRadian(pax, pay, pbx, pby, pcx, pcy, pdx, pdy);
+    double deg = hpl::math::getDegreeFromRadian(rad);
+    return deg;
+}
+
+/**
+    ベクトルの角度を求めます(0 deg = (1,0))
+*/
+double hpl::math::getDegreeFromVector(double x, double y){
+    double rad = hpl::math::getRadianFromVector(x,y);
+    double deg = hpl::math::getDegreeFromRadian(rad);
+    return rad;
+}
+
+double hpl::math::getRadianFromVector(double x, double y){
+    //atanで求める
+    //垂直
+    if(x == 0){
+        if(y > 0){
+            //90度
+            return PI / 2.f;
+        }else if(y < 0){
+            //270度
+            return PI * 1.5f;
+        }else{  //y == 0
+            return 0;
+        }
+    }
+
+    float div = y / x;
+    if( x > 0){
+        float rad = atan(div);
+        if( rad < 0){
+            rad += 2 * PI;
+        }
+        return rad;
+    }else{
+        float rad = atan(div) + PI;
+        return rad;
+    }
+}

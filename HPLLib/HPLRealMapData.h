@@ -1,0 +1,36 @@
+/*
+    実データの控えです。
+    UNDO用です
+
+*/
+#ifndef _HPL_REAL_MAP_DATA_
+#define _HPL_REAL_MAP_DATA_
+
+#include <map>
+
+namespace hpl{
+namespace aleph{
+namespace map{
+    class HPLRealMapData{
+    private:
+        //名前がかぶりまくるので扱いに注意。
+        //<en> names of field are all duplicated to 
+        // ones in AlephOne's original codes.
+        //点データ<index, data_structure>
+        std::map<int, endpoint_data> points;
+        //オブジェクトデータ
+        std::map<int, map_object> objects;
+        //線データ
+        std::map<int, line_data> lines;
+        //サイドデータ
+        std::map<int, side_date> sides;
+        //ポリゴンデータ
+        std::map<int, polygon_data> polygons;
+    public:
+        HPLRealMapData();
+        ~HPLRealMapData();
+    };
+};
+};
+};
+#endif

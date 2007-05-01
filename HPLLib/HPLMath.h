@@ -90,7 +90,23 @@ namespace math{
     bool isNearbyPoints(double px0, double py0, 
                      double px1, double py1, double distance);
 
-
+    //////////////////////////////////////////////////////////////////////
+    ///////////////  Angle   /////////////////////////////////////////////
+    /**
+        二つの線が織り成す角度を求めます。スクリーン座標系より、
+        時計回りが正方向となる
+        @param pax,y,pbx,y 線分ABの座標
+        @param pcx,y,pdx,y 線分CDの座標
+    */
+    double getTwoLinesRadian(double pax, double pay, double pbx, double pby,
+        double pcx, double pcy, double pdx, double pdy);
+    double getTwoLinesDegree(double pax, double pay, double pbx, double pby,
+        double pcx, double pcy, double pdx, double pdy);
+    /**
+        ベクトルの角度を求めます(0 deg = (1,0))
+    */
+    double getDegreeFromVector(double x, double y);
+    double getRadianFromVector(double x, double y);
 };
 };
 #endif

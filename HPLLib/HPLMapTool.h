@@ -132,6 +132,14 @@ namespace map{
     bool isValidPolygon(int index);
 
     /**
+        二つの線が織り成す角度を求めます
+        @param pIndexA1,2 線分A1-A2の点インデックス
+        @param pIndexB1,2 線分B1-B2の点インデックス
+    */
+    double getTwoLinesDegree(int pIndexA1, int pIndexA2, int pIndexB1, int pIndexB2);
+    double getTwoLinesRadian(int pIndexA1, int pIndexA2, int pIndexB1, int pIndexB2);
+
+    /**
         ポリゴンをセットアップします
         具体的には、
         ・点の順番、線の順番を時計回りに整えます

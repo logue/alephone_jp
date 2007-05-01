@@ -295,7 +295,187 @@
 			UniqueIdentifier="{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}"
 			>
 			<File
+				RelativePath="..\..\..\..\..\src\res\Marathon Toolbar\bitmap1.bmp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\..\..\src\res\Marathon Toolbar\bitmap_p.bmp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\..\..\src\res\Marathon Toolbar\bmp00001.bmp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\..\..\src\res\Marathon Toolbar\bmp00002.bmp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\..\..\src\res\Marathon Toolbar\bmp00003.bmp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\..\..\src\res\Marathon Toolbar\bmp00004.bmp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\..\..\src\res\bmp00005.bmp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\..\..\src\res\cur00001.cur"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\..\..\src\res\cur00002.cur"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\..\..\src\res\cur00003.cur"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\..\..\src\res\cur00004.cur"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\..\..\src\res\cur00005.cur"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\..\..\src\res\cur00006.cur"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\..\..\src\res\cursor1.cur"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\..\..\src\res\cursor2.cur"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\..\..\src\res\cursor3.cur"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\..\..\src\res\Marathon Toolbar\direction circle.BMP"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\..\..\src\res\Marathon Toolbar\direction marker.BMP"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\..\..\src\res\ico00001.ico"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\..\..\src\res\ico00002.ico"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\..\..\src\res\ico00003.ico"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\..\..\src\res\ico00004.ico"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\..\..\src\res\ico00005.ico"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\..\..\src\res\ico00006.ico"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\..\..\src\res\ico00007.ico"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\..\..\src\res\ico00008.ico"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\..\..\src\res\ico00009.ico"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\..\..\src\res\ico00010.ico"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\..\..\src\res\ico00011.ico"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\..\..\src\res\ico00012.ico"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\..\..\src\res\ico00013.ico"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\..\..\src\res\ico00014.ico"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\..\..\src\res\ico00015.ico"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\..\..\src\res\ico00016.ico"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\..\..\src\res\ico00017.ico"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\..\..\src\res\ico00018.ico"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\..\..\src\res\ico00019.ico"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\..\..\src\res\ico00020.ico"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\..\..\src\res\ico00021.ico"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\..\..\src\res\ico00022.ico"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\..\..\src\res\icon1.ico"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\..\..\src\res\icon2.ico"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\..\..\src\res\MapEditorSDI.ico"
+				>
+			</File>
+			<File
 				RelativePath="..\..\..\..\..\src\MapEditorSDI.rc"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\..\..\src\res\MapEditorSDIDoc.ico"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\..\..\src\res\Toolbar.bmp"
 				>
 			</File>
 		</Filter>
@@ -1251,6 +1431,10 @@
 				>
 			</File>
 			<File
+				RelativePath="..\..\..\..\..\..\HPLLib\HPLDoneHistory.h"
+				>
+			</File>
+			<File
 				RelativePath="..\..\..\..\..\..\HPLLib\HPLMapTool.cpp"
 				>
 			</File>
@@ -1272,6 +1456,10 @@
 			</File>
 			<File
 				RelativePath="..\..\..\..\..\..\HPLLib\HPLQuickSort.h"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\..\..\..\HPLLib\HPLRealMapData.h"
 				>
 			</File>
 			<File
@@ -1299,6 +1487,11 @@
 				>
 			</File>
 		</Filter>
+		<File
+			RelativePath="..\..\..\..\..\src\res\HeightDialog.htm"
+			DeploymentContent="true"
+			>
+		</File>
 	</Files>
 	<Globals>
 	</Globals>

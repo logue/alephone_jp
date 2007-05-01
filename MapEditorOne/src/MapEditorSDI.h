@@ -294,6 +294,9 @@ public:
     //struct selectInformation selectGroupInformation;
     hpl::aleph::map::HPLSelectData selectDatas;
 
+    //•ÏX“_‚Ì—š—ğ
+    list<hpl::aleph::map::HPLSelectData> doneHistory;
+
     //selection group
     //vector<struct selectInformation> selectGroupInformationList;
 

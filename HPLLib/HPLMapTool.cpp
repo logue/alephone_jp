@@ -271,5 +271,33 @@ bool hpl::aleph::map::isValidPolygon(int index)
     pointB = polygon->endpoint_indexes[1];
     pointC = polygon->endpoint_indexes[2];
     
+    //二つの線AB,BCが織り成す角度を求める
+    double firstDegree = hpl::aleph::map::getTwoLinesDegree(pointA, pointB, pointB, pointC);
     return false;
+}
+
+/**
+    二つの線が織り成す角度を求めます
+    @param pIndexA1,2 線分A1-A2の点インデックス
+    @param pIndexB1,2 線分B1-B2の点インデックス
+*/
+double hpl::aleph::map::getTwoLinesDegree(int pIndexA1, int pIndexA2, int pIndexB1, int pIndexB2)
+{
+    //degreeにします
+    double rad = hpl::aleph::map::getTwoLinesRadian(pIndexA1, pIndexA2, pIndexB1, pIndexB2);
+    double deg = hpl::math::getDegreeFromRadian(rad);
+    return deg;
+}
+double hpl::aleph::map::getTwoLinesRadian(int pIndexA1, int pIndexA2, int pIndexB1, int pIndexB2)
+{
+    //radianで求めます
+    endpoint_data *a1 = get_endpoint_data(pIndexA1);
+    endpoint_data *a2 = get_endpoint_data(pIndexA2);
+    endpoint_data *b1 = get_endpoint_data(pIndexB1);
+    endpoint_data *b2 = get_endpoint_data(pIndexB2);
+    double rad = hpl::math::getTwoLinesRadian(a1->vertex.x, a1->vertex.y,
+        a2->vertex.x, a2->vertex.y,
+        b1->vertex.x, b1->vertex.y,
+        b2->vertex.x, b2->vertex.y);
+    return rad;
 }

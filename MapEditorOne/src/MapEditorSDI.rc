@@ -152,11 +152,11 @@ BEGIN
     END
     POPUP "Edit(&E)"
     BEGIN
-        MENUITEM "元に戻す\tCtrl+Z(&U)",            ID_EDIT_UNDO
+        MENUITEM "Undo!\tCtrl+Z(&U)",           ID_EDIT_UNDO
         MENUITEM SEPARATOR
-        MENUITEM "切り取り\tCtrl+X(&T)",            ID_EDIT_CUT
-        MENUITEM "コピー\tCtrl+C(&C)",             ID_EDIT_COPY
-        MENUITEM "貼り付け\tCtrl+V(&P)",            ID_EDIT_PASTE
+        MENUITEM "Cut\tCtrl+X(&T)",             ID_EDIT_CUT
+        MENUITEM "Copy\tCtrl+C(&C)",            ID_EDIT_COPY
+        MENUITEM "Paste\tCtrl+V(&P)",           ID_EDIT_PASTE
         MENUITEM SEPARATOR
         MENUITEM "Preferences...",              ID_32808
     END
