@@ -107,6 +107,12 @@ namespace math{
     */
     double getDegreeFromVector(double x, double y);
     double getRadianFromVector(double x, double y);
+
+    /**
+        Šp“x‚ð[0,360)‚É’¼‚µ‚Ü‚·
+    */
+    double optimizeDegree(double deg);
+    double optimizeRadian(double rad);
 };
 };
 #endif

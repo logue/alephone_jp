@@ -8,6 +8,10 @@
 
 #include <map>
 
+#include "map.h"
+
+#include "HPLSelectData.h"
+
 namespace hpl{
 namespace aleph{
 namespace map{
@@ -17,19 +21,34 @@ namespace map{
         //<en> names of field are all duplicated to 
         // ones in AlephOne's original codes.
         //点データ<index, data_structure>
-        std::map<int, endpoint_data> points;
+        std::map<int, endpoint_data> realPoints;
         //オブジェクトデータ
-        std::map<int, map_object> objects;
+        std::map<int, map_object> realObjects;
         //線データ
-        std::map<int, line_data> lines;
+        std::map<int, line_data> realLines;
         //サイドデータ
-        std::map<int, side_date> sides;
+        std::map<int, side_data> realSides;
         //ポリゴンデータ
-        std::map<int, polygon_data> polygons;
+        std::map<int, polygon_data> realPolygons;
     public:
         HPLRealMapData();
         ~HPLRealMapData();
+
+    public:
+        //コピー対象のマップデータ(選択部分)
+        void set(hpl::aleph::map::HPLSelectData* copyTargetData);
+        std::map<int, map_object> getObjects();
+        std::map<int, endpoint_data> getPoints();
+        std::map<int, line_data> getLines();
+        std::map<int, polygon_data> getPolygons();
+        std::map<int, side_data> getSides();
+    private:
+        //所持するデータを消します
+        void removeAll();
+
     };
+
+
 };
 };
 };

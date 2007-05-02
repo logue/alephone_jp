@@ -38,6 +38,7 @@ namespace map{
         std::vector<struct SelLine> sellines;
         std::vector<struct SelPolygon> selpolygons;
         std::vector<struct SelObject> selobjects;
+        std::vector<struct SelSide> selsides;
         struct SelSide side;
         bool _isSelected;
     public:
@@ -49,12 +50,14 @@ namespace map{
         std::vector<struct SelLine>* getSelLines();
         std::vector<struct SelPolygon>* getSelPolygons();
         std::vector<struct SelObject>* getSelObjects();
+        std::vector<struct SelSide>* getSelSides();
         struct SelSide* getSelSide();
 
         bool containsPoint(int index);
         bool containsLine(int index);
         bool containsPolygon(int index);
         bool containsObject(int index);
+        bool containsSide(int index);
         bool isSelectSide(int index);
 
         bool isSelected();

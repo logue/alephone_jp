@@ -65,6 +65,7 @@ using namespace std;
 #include "MapEditorOneSetting.h"
 
 #include <HPLLib/HPLAlephLib.h>
+#include <HPLLib/HPLDoneHistory.h>
 
 // CMapEditorSDIApp:
 // このクラスの実装については、MapEditorSDI.cpp を参照してください。
@@ -294,8 +295,12 @@ public:
     //struct selectInformation selectGroupInformation;
     hpl::aleph::map::HPLSelectData selectDatas;
 
+    //コピーアンドペースト用のデータリスト
+    //ペースト時にこれらを元に新規作成します
+    hpl::aleph::map::HPLRealMapData storedMapData;
+
     //変更点の履歴
-    list<hpl::aleph::map::HPLSelectData> doneHistory;
+    hpl::aleph::map::HPLDoneHistory history;
 
     //selection group
     //vector<struct selectInformation> selectGroupInformationList;

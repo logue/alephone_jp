@@ -331,3 +331,22 @@ double hpl::math::getRadianFromVector(double x, double y){
         return rad;
     }
 }
+
+/**
+    Šp“x‚ð[0,360)‚É’¼‚µ‚Ü‚·
+*/
+double hpl::math::optimizeDegree(double deg)
+{
+    const double MAX_DEGREE = 360;
+    const double MIN_DEGREE = 0;
+    deg += (deg < MIN_DEGREE ? 1: 0) * MAX_DEGREE * (abs((int)(deg / 360)) + 1) +
+        (deg > MAX_DEGREE ? -1: 0) * MAX_DEGREE * (int)(deg / MAX_DEGREE);
+    return deg;
+}
+double hpl::math::optimizeRadian(double rad)
+{
+    double deg = hpl::math::getDegreeFromRadian(rad);
+    double optDeg = hpl::math::optimizeDegree(deg);
+    double optRad = hpl::math::getRadianFromDegree(optDeg);
+    return optRad;
+}

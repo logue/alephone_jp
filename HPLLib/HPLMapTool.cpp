@@ -273,6 +273,10 @@ bool hpl::aleph::map::isValidPolygon(int index)
     
     //“ñ‚Â‚ÌüAB,BC‚ªD‚è¬‚·Šp“x‚ğ‹‚ß‚é
     double firstDegree = hpl::aleph::map::getTwoLinesDegree(pointA, pointB, pointB, pointC);
+    //optimize degree to [0,360)
+    double optFirstDeg = hpl::math::optimizeDegree(deg);
+    //if degree is in [180,360),
+    
     return false;
 }
 

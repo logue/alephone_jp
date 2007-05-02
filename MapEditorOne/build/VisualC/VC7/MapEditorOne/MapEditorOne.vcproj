@@ -780,13 +780,13 @@
 				RelativePath="..\..\..\..\..\HPLLib\HPLAlephLib.h">
 			</File>
 			<File
+				RelativePath="..\..\..\..\..\HPLLib\HPLDoneHistory.h">
+			</File>
+			<File
 				RelativePath="..\..\..\..\..\HPLLib\HPLMapTool.cpp">
 			</File>
 			<File
 				RelativePath="..\..\..\..\..\HPLLib\HPLMapTool.h">
-			</File>
-			<File
-				RelativePath="..\..\..\..\..\HPLLib\HPLMapTool.o">
 			</File>
 			<File
 				RelativePath="..\..\..\..\..\HPLLib\HPLMath.cpp">
@@ -795,25 +795,22 @@
 				RelativePath="..\..\..\..\..\HPLLib\HPLMath.h">
 			</File>
 			<File
-				RelativePath="..\..\..\..\..\HPLLib\HPLMath.o">
-			</File>
-			<File
 				RelativePath="..\..\..\..\..\HPLLib\HPLQuickSort.cpp">
 			</File>
 			<File
 				RelativePath="..\..\..\..\..\HPLLib\HPLQuickSort.h">
 			</File>
 			<File
-				RelativePath="..\..\..\..\..\HPLLib\HPLQuickSort.o">
+				RelativePath="..\..\..\..\..\HPLLib\HPLRealMapData.cpp">
+			</File>
+			<File
+				RelativePath="..\..\..\..\..\HPLLib\HPLRealMapData.h">
 			</File>
 			<File
 				RelativePath="..\..\..\..\..\HPLLib\HPLSelectData.cpp">
 			</File>
 			<File
 				RelativePath="..\..\..\..\..\HPLLib\HPLSelectData.h">
-			</File>
-			<File
-				RelativePath="..\..\..\..\..\HPLLib\HPLSelectData.o">
 			</File>
 			<File
 				RelativePath="..\..\..\..\..\HPLLib\HPLStringModifier.cpp">
@@ -826,9 +823,6 @@
 			</File>
 			<File
 				RelativePath="..\..\..\..\..\HPLLib\HPLSurfaceModifier.h">
-			</File>
-			<File
-				RelativePath="..\..\..\..\..\HPLLib\HPLSurfaceModifier.o">
 			</File>
 		</Filter>
 		<Filter
