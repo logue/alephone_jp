@@ -114,6 +114,10 @@ public:
 public:
     afx_msg void On32808();
     afx_msg void OnTextureFloor();
+public:
+    afx_msg void OnEditCopy();
+public:
+    afx_msg void OnEditPaste();
 };
 
 #ifndef _DEBUG  // MapEditorSDIView.cpp のデバッグ バージョン

@@ -190,7 +190,7 @@ bool hpl::aleph::map::isPointInSelection(int px, int py,
     std::vector<struct hpl::aleph::map::SelPoint>* selpoints = 
         selectInfo->getSelPoints();
     for(int i = 0; i < (int)selpoints->size(); i ++){
-        endpoint_data* ep = &EndpointList[selobjects->at(i).index];
+        endpoint_data* ep = &EndpointList[selpoints->at(i).index];
         int x = ep->vertex.x;
         int y = ep->vertex.y;
         int drawX = (x + offsetWorldX)/div + offsetViewX;
@@ -207,7 +207,7 @@ bool hpl::aleph::map::isPointInSelection(int px, int py,
     std::vector<struct hpl::aleph::map::SelLine>* sellines = 
         selectInfo->getSelLines();
     for(int i = 0; i < (int)sellines->size(); i ++){
-        line_data* line = &LineList[selobjects->at(i).index];
+        line_data* line = &LineList[sellines->at(i).index];
         endpoint_data* begin = &EndpointList[line->endpoint_indexes[0]];
         endpoint_data* end = &EndpointList[line->endpoint_indexes[1]];
         if(hpl::aleph::map::isSelectLine(px, py, begin->vertex.x, begin->vertex.y,
@@ -274,10 +274,10 @@ bool hpl::aleph::map::isValidPolygon(int index)
     //“ñ‚Â‚ÌüAB,BC‚ªD‚è¬‚·Šp“x‚ğ‹‚ß‚é
     double firstDegree = hpl::aleph::map::getTwoLinesDegree(pointA, pointB, pointB, pointC);
     //optimize degree to [0,360)
-    double optFirstDeg = hpl::math::optimizeDegree(deg);
+    double optFirstDeg = hpl::math::optimizeDegree(firstDegree);
     //if degree is in [180,360),
     
-    return false;
+    return true;
 }
 
 /**

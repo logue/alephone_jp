@@ -287,7 +287,7 @@ double hpl::math::getTwoLinesRadian(double pax, double pay, double pbx, double p
 
     return radABCD;
 }
-double hpl::math::getTwoLinesRadian(double pax, double pay, double pbx, double pby,
+double hpl::math::getTwoLinesDegree(double pax, double pay, double pbx, double pby,
     double pcx, double pcy, double pdx, double pdy)
 {
     double rad = hpl::math::getTwoLinesRadian(pax, pay, pbx, pby, pcx, pcy, pdx, pdy);
@@ -297,15 +297,18 @@ double hpl::math::getTwoLinesRadian(double pax, double pay, double pbx, double p
 
 /**
     ベクトルの角度を求めます(0 deg = (1,0))
-*/
+*
 double hpl::math::getDegreeFromVector(double x, double y){
     double rad = hpl::math::getRadianFromVector(x,y);
     double deg = hpl::math::getDegreeFromRadian(rad);
     return rad;
 }
-
+*/
 double hpl::math::getRadianFromVector(double x, double y){
-    //atanで求める
+    double deg = hpl::math::getDegreeFromVector(x, y);
+    double rad = hpl::math::getRadianFromDegree(deg);
+    return rad;
+/*    //atanで求める
     //垂直
     if(x == 0){
         if(y > 0){
@@ -330,6 +333,7 @@ double hpl::math::getRadianFromVector(double x, double y){
         float rad = atan(div) + PI;
         return rad;
     }
+    */
 }
 
 /**

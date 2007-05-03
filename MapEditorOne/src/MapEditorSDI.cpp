@@ -805,3 +805,8 @@ CString GetModulePathFileName(CString pName)
 	CString str(path);
 	return str;
 }
+
+void addPolygon(polygon_data* data)
+{
+    PolygonList.push_back(*data);
+}

@@ -37,12 +37,18 @@ namespace map{
     public:
         //コピー対象のマップデータ(選択部分)
         void set(hpl::aleph::map::HPLSelectData* copyTargetData);
-        std::map<int, map_object> getObjects();
-        std::map<int, endpoint_data> getPoints();
-        std::map<int, line_data> getLines();
-        std::map<int, polygon_data> getPolygons();
-        std::map<int, side_data> getSides();
+        std::map<int, map_object>* getObjects();
+        std::map<int, endpoint_data>* getPoints();
+        std::map<int, line_data>* getLines();
+        std::map<int, polygon_data>* getPolygons();
+        std::map<int, side_data>* getSides();
+
     private:
+        void addObject(int index);
+        void addPoint(int index);
+        void addLine(int index);
+        void addSide(int index);
+        void addPolygon(int index);
         //所持するデータを消します
         void removeAll();
 

@@ -72,7 +72,8 @@ void CMapEditorSDIView::doLButtonDownDrawMode(UINT nFlags, CPoint &point)
 
             //既に選択している状態
             //group selected
-            if(theApp.isSelectingGroup && theApp.selectDatas.isSelected()){
+            if(//theApp.isSelectingGroup && 
+                theApp.selectDatas.isSelected()){
 
                 //点をクリックしたかどうか
                 //is point in objects/points/lines/polygons?
@@ -163,7 +164,7 @@ void CMapEditorSDIView::doLButtonDownDrawMode(UINT nFlags, CPoint &point)
 
             }else {
                 //ctrlを押さずにクリック→選択
-
+                //グループ選択ではない
                 //シフトキーと一緒に押した？（選択の追加）
                 bool isWithShift = (nFlags & MK_SHIFT) != 0;
                 if(!isWithShift){

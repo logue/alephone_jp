@@ -298,6 +298,8 @@ public:
     //コピーアンドペースト用のデータリスト
     //ペースト時にこれらを元に新規作成します
     hpl::aleph::map::HPLRealMapData storedMapData;
+    //その場に展開すると重なるので、どれだけずらすか(world座標)
+    int storedDataPointDelta[2];
 
     //変更点の履歴
     hpl::aleph::map::HPLDoneHistory history;
@@ -412,6 +414,8 @@ int addObject(struct world_point2d &world_point, int polygonIndex);
 int addPoint(struct world_point2d &world_point);
 
 int addLine(int beginPointIndex, int endPointIndex);
+
+void addPolygon(polygon_data* data);
 
 /**
     get line index from point of edge.

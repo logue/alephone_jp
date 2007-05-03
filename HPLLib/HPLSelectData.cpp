@@ -233,7 +233,9 @@ void hpl::aleph::map::HPLSelectData::addSelObject(int index, int offset[2])
 }
 void hpl::aleph::map::HPLSelectData::addSelSide(int index)
 {
-    struct 
+/*    struct hpl::aleph::map::SelSide sp;
+    sp.index = index;
+    selsides.push_back(sp);*/
     this->side.index = index;
     this->setSelected(true);
 }

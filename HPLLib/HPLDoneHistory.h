@@ -9,7 +9,7 @@
 #ifndef _HPL_DONE_HISTORY_
 #define _HPL_DONE_HISTORY_
 
-#include <list>
+#include <vector>
 #include "HPLSelectData.h"
 #include "HPLRealMapData.h"
 
@@ -23,17 +23,31 @@ namespace map{
             Modify,
         };
     };
-
+    
     class HPLDoneHistory{
     private:
         //触ったデータ情報
-        list<HPLSelectData> dataList;
+        std::vector<HPLSelectData> dataList;
 
         //触った実データの控え
-        list<HPLRealMapData> realList;
+        std::vector<HPLRealMapData> realList;
     public:
         HPLDoneHistory();
         ~HPLDoneHistory();
+
+    public:
+        /**
+            情報を追加します
+        */
+        void push_back(HPLSelectData selectData);
+
+        /**
+            最後からindex番目の要素を取り出します。
+            最大記憶量を超えていたらNULLが入り、falseが返ります
+        */
+        bool getLastIndexOf(int index,
+            HPLSelectData* selectData, HPLRealMapData* realData);
+    private:
     };
 };
 };

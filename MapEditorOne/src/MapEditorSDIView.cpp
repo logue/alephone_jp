@@ -55,6 +55,8 @@ BEGIN_MESSAGE_MAP(CMapEditorSDIView, CView)
 	ON_COMMAND(ID_MODE_POLYGONTYPE, &CMapEditorSDIView::OnModePolygontype)
 	ON_COMMAND(ID_32808, &CMapEditorSDIView::On32808)
 	ON_COMMAND(ID_TEXTURE_FLOOR, OnTextureFloor)
+    ON_COMMAND(ID_EDIT_COPY, &CMapEditorSDIView::OnEditCopy)
+    ON_COMMAND(ID_EDIT_PASTE, &CMapEditorSDIView::OnEditPaste)
 END_MESSAGE_MAP()
 
 // CMapEditorSDIView コンストラクション/デストラクション
@@ -909,3 +911,154 @@ BOOL CMapEditorSDIView::OnSetCursor(CWnd* pWnd, UINT nHitTest, UINT message)
 }
 
 
+
+//view座標
+const int DELTA = 10;
+void CMapEditorSDIView::OnEditCopy()
+{
+
+    //選択範囲を保持する
+    theApp.storedMapData.set(&theApp.selectDatas);
+    theApp.storedDataPointDelta[0] = DELTA;
+    theApp.storedDataPointDelta[1] = DELTA;
+}
+
+
+void CMapEditorSDIView::OnEditPaste()
+{
+    //点→線→壁→ポリゴン→オブジェクトの順で作成
+    //コピー元のIDで線、点の関係性を求め、新しいIDで作成する
+
+    std::map<int, endpoint_data>* cpoints = theApp.storedMapData.getPoints();
+    std::map<int, line_data>* clines = theApp.storedMapData.getLines();
+    std::map<int, side_data>* csides = theApp.storedMapData.getSides();
+    std::map<int, polygon_data>* cpolygons = theApp.storedMapData.getPolygons();
+    std::map<int, map_object>* cobjects = theApp.storedMapData.getObjects();
+    //新しく作ったポリゴンのIDと、コピー元のIDの対応[元,新]
+    std::map<int, int> pointIndexTable;
+    std::map<int, int> lineIndexTable;
+    std::map<int, int> sideIndexTable;
+    std::map<int, int> polygonIndexTable;
+    std::map<int, int> objectIndexTable;
+    
+    theApp.selectDatas.clear();
+
+    for(std::map<int, endpoint_data>::iterator it = cpoints->begin();
+        it != cpoints->end(); it ++){
+        //コピー元のID
+        int cid = it->first;
+        endpoint_data cep = it->second;
+        //
+        endpoint_data ep;
+        memcpy(&ep, &cep, sizeof(endpoint_data));
+
+        //位置修正
+        ep.vertex.x += theApp.storedDataPointDelta[0] * theApp.zoomDivision;
+        ep.vertex.y += theApp.storedDataPointDelta[1] * theApp.zoomDivision;
+
+        //他は触らず。
+        EndpointList.push_back(ep);
+        int newIndex = (int)EndpointList.size() - 1;
+        pointIndexTable[cid] = newIndex;
+        int offset[] = {0,0};
+        theApp.selectDatas.addSelPoint(newIndex, offset);
+    }
+    //線
+    for(std::map<int, line_data>::iterator it = clines->begin();
+        it != clines->end(); it ++){
+        //コピー元のID
+        int cid = it->first;
+        line_data cep = it->second;
+        //
+        line_data ep;
+        memcpy(&ep, &cep, sizeof(line_data));
+
+        for(int i = 0; i < 2; i ++){
+            ep.endpoint_indexes[i] = pointIndexTable[ep.endpoint_indexes[i]];
+        }
+        //polygon番号が古いままなので、setupPolygon()で修正すること
+
+        LineList.push_back(ep);
+        int newIndex = (int)LineList.size() - 1;
+        lineIndexTable[cid] = newIndex;
+        int offset[][2] = {{0,0},{0,0}};
+        theApp.selectDatas.addSelLine(newIndex, offset);
+    }
+    //壁
+    for(std::map<int, side_data>::iterator it = csides->begin();
+        it != csides->end(); it ++){
+        //コピー元のID
+        int cid = it->first;
+        side_data cep = it->second;
+        //
+        side_data ep;
+        memcpy(&ep, &cep, sizeof(side_data));
+
+        //乗ってる線の番号
+        ep.line_index = lineIndexTable[cep.line_index];
+
+        SideList.push_back(ep);
+        int newIndex = (int)SideList.size() - 1;
+        sideIndexTable[cid] = newIndex;
+        theApp.selectDatas.addSelSide(newIndex);
+    }
+    //ポリゴン
+    for(std::map<int, polygon_data>::iterator it = cpolygons->begin();
+        it != cpolygons->end(); it ++){
+        //コピー元のID
+        int cid = it->first;
+        polygon_data cep = it->second;
+        //
+        polygon_data ep;
+        memcpy(&ep, &cep, sizeof(polygon_data));
+
+        //
+        ep.center.x += theApp.storedDataPointDelta[0] * theApp.zoomDivision;
+        ep.center.y += theApp.storedDataPointDelta[1] * theApp.zoomDivision;
+        for(int i = 0; i < ep.vertex_count; i ++){
+            ep.endpoint_indexes[i] = pointIndexTable[cep.endpoint_indexes[i]];
+        }
+        for(int i = 0; i < ep.vertex_count - 1; i ++){
+            ep.line_indexes[i] = lineIndexTable[cep.line_indexes[i]];
+        }
+        ep.first_object = NONE;
+
+        //TODO 他の項目はよくわからん
+
+        PolygonList.push_back(ep);
+        int newIndex = (int)PolygonList.size() - 1;
+        polygonIndexTable[cid] = newIndex;
+        int offset[8][2];
+        for(int i = 0; i < 8; i ++){
+            offset[i][0] = 0;
+            offset[i][1] = 0;
+        }
+        theApp.selectDatas.addSelPolygon(newIndex, offset, ep.vertex_count);
+    }
+    //オブジェクト
+    for(std::map<int, map_object>::iterator it = cobjects->begin();
+        it != cobjects->end(); it ++){
+        //コピー元のID
+        int cid = it->first;
+        map_object cep = it->second;
+        //
+        map_object ep;
+        memcpy(&ep, &cep, sizeof(map_object));
+
+        //
+        ep.location.x += theApp.storedDataPointDelta[0] * theApp.zoomDivision;
+        ep.location.y += theApp.storedDataPointDelta[1] * theApp.zoomDivision;
+
+        SavedObjectList.push_back(ep);
+        int newIndex = (int)SavedObjectList.size() - 1;
+        objectIndexTable[cid] = newIndex;
+        int offset[2] = {0,0};
+        theApp.selectDatas.addSelObject(newIndex, offset);
+    }
+
+    theApp.selectDatas.setSelected(true);
+
+    theApp.storedDataPointDelta[0] += DELTA;
+    theApp.storedDataPointDelta[1] += DELTA;
+
+}
