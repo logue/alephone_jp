@@ -12,27 +12,27 @@
 			長方形の交点）
 			（あるいは、一旦正n角形を作って、上下の端を短辺に合わせ、
 			それ以外を横へ引き伸ばすことで決定する方法でもよい）
-	-object property dialog
-		launch by...
-		directions=facing
-	-polygon property
-		type(uneditable)(done)
-			enlarge edit space
-			enenglish
+	-オブジェクトダイアログ
+		選択時に表示（済）
+		向きがバグっとる
+	-ポリゴンダイアログ
+		種類(編集不可能にする)(done)
+			編集部分を大きくする
+			英語化
 		floor light(stored)
 		ceiling light(stored)
 		media
 		media light(stored)
 		ambSnd(stored)
 		RndSnd(stored)
-	-polygon types
+	-ポリゴンタイプ
 		enenglish
 		change selection when click other polygon
 		高さ情報の表示
-	-preferences
+	-設定
 		custom color
 		settings
-	-platform dialog
+	-プラットフォームダイアログ
 		type
 		speed cmb
 		delay cmb
@@ -70,11 +70,12 @@
 	-塗りつぶせるポリゴンを探す
 		-近い点から見ていく
 		-点から伸びる線のうち、先がマウスクリックに近いもの順に確認する
-		-
 	
 	回転ツール考えようぜ！（それかマウス＋Altとかでもいいけど）
 	反転とかもね
 	
+	-範囲選択でポリゴンが追加されていないんじゃないか？
+	isPolygonInRect(int[2][8], rx, ry, rw, rh)を作るべし
 	
 	・階段ツール
 	・自動ポリゴン塗りつぶしツール（8以上や、逆鋭角があるポリゴンでも塗りつぶせるように
@@ -98,3 +99,7 @@
 	-set selecting when launch level-select dialog
 	-ハンドツール（全体移動）実装
 	-拡大縮小ツール実装
+
+	-ビジュアルモード
+	ダッシュモードとかジャンプもつけてくれ
+	

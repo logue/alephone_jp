@@ -172,7 +172,16 @@ bool CMapEditorSDIApp::initialize(){
         is.close();
     }
 
+    //“à•”ê—pÝ’è‚³‚ñ
+    char* tagNameFilePath = "data/InnerSettingTagList.ini";
+    char* innerDataFilePath = "data/InnerSetting.ini";
+    //Ý’è“Ç‚Ýž‚Ý
+    mapeditorone::MapEditorOneInnerSetting innerSetting = 
+        mapeditorone::MapEditorOneInnerSetting(tagNameFilePath, innerDataFilePath);
+
+
     //Zoom
+    //innerSetting.getInt(mapeditorone::TagType::ZOOM_DIVISION_DEFAULT);
     zoomDivision = ZOOM_DIVISION_DEFAULT;
 
     isPressLButtonWithCtrl = false;
@@ -425,6 +434,18 @@ void CMapEditorSDIApp::setEditMode(int mode)
 int CMapEditorSDIApp::getEditMode()
 {
     return this->editMode;
+}
+
+int CMapEditorSDIApp::getZoomDivision()
+{
+    return this->zoomDivision;
+}
+void CMapEditorSDIApp::zoomIn()
+{
+
+}
+void CMapEditorSDIApp::zoomOut()
+{
 }
 
 void loadIcon(int id, CImageList* imageList){

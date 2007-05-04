@@ -63,9 +63,9 @@ using namespace std;
 #include "SidePropertyDialog.h"
 
 #include "MapEditorOneSetting.h"
+#include "MapEditorOneInnerSetting.h"
 
 #include <HPLLib/HPLAlephLib.h>
-#include <HPLLib/HPLDoneHistory.h>
 
 // CMapEditorSDIApp:
 // このクラスの実装については、MapEditorSDI.cpp を参照してください。
@@ -187,35 +187,48 @@ public:
 public:
 	virtual BOOL InitInstance();
 public:
-    //レベルの名称
+    ///////////////////////
+    //レベル関連
+
+    /**レベルの名称*/
     CStringArray LevelNameList;
     
-    //選択中の倍率
+    //選択中のレベルインデックス
+    int editLevelIndex;
+
+
+    ///////////////////////////
+    //グリッド・表示関係
+
+public:
+    /**拡大縮小・スクロール管理マネージャー*/
+    hpl::aleph::view::HPLViewGridManager* viewGrid;
+
+    /**選択中の倍率*/
     int zoomDivision;
 
-    //グリッド表示用間隔(世界距離に対応し、拡大縮小で大きさ変化)
+    /**グリッド表示用間隔(世界距離に対応し、拡大縮小で大きさ変化)*/
     int gridIntervals[NUMBER_OF_GLID];
-    //int nowGridInterval;
 
     //位置オフセット
     POINT offset;
 
+    /**現在のマウス座標*/
     POINT nowMousePoint;
+
+    /**一つ前のマウス座標*/
     POINT oldMousePoint;
 
-    //選択したものの種類
-//    int selectType;
-    //選択したもののインデックス
-//    int selectIndex;
-
-    //グリッド
-    //ボタン押してる？
-    bool isPressLButtonWithCtrl;
-
-    //選択中のレベルインデックス
-    int editLevelIndex;
     //ポリゴンタイプの色
     COLORREF polygonTypeColor[NUMBER_OF_POLYGON_TYPE];
+
+    //ダブルバッファリング
+    CDC doubleBufferDC;
+    CBitmap doubleBuffserBitmap;
+
+
+    ///////////////////////
+    //ツール・プロパティダイアログ
 
     //モードレスモンスタープロパティダイアログ
     CMonsterPropertyDialog *objectPropertyDialog;
@@ -232,6 +245,9 @@ public:
 
     //texture dialog (palette)
     CTextureDialog *textureDialog;
+
+    ///////////////////////////
+    //名称などのストック
 
     //大別
     Information objectTypeInformations[NUMBER_OF_MAP_OBJECT_TYPES];
@@ -269,25 +285,21 @@ public:
     Information ambientSoundTypeInformations[NUMBER_OF_AMBIENT_SOUND_DEFINITIONS];
     //random sounds
     Information randomSoundTypeInformations[NUMBER_OF_RANDOM_SOUND_DEFINITIONS];
-// 実装
-	afx_msg void OnAppAbout();
-    /*BOOL isObjectPropertyDialogShow;
-    BOOL isHeightDialogShow;
-    BOOL isPolygonTypeDialogShow;
-    BOOL isToolDialogShow;
-    BOOL isPolygonPropertyDialogShow;
-*/
-    //ダブルバッファリング
-    CDC doubleBufferDC;
-    CBitmap doubleBuffserBitmap;
 
-    //ポリゴンや線を持ったときのマウス座標からのオフセット
-    //相対座標
-//    POINT polygonPoints[8];
-//    int polygonPointNum;
+    // 実装
+	afx_msg void OnAppAbout();
+
+
+    /////////////////////
+    //イベント管理
+
+    //ボタン押してる？
+    bool isPressLButtonWithCtrl;
 
     //選択範囲始点
     POINT selectStartPoint;
+
+    //グループ選択中か？
     bool isSelectingGroup;
 
     //複数選択時の選択物リスト
