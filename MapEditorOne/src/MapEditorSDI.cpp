@@ -436,17 +436,6 @@ int CMapEditorSDIApp::getEditMode()
     return this->editMode;
 }
 
-int CMapEditorSDIApp::getZoomDivision()
-{
-    return this->zoomDivision;
-}
-void CMapEditorSDIApp::zoomIn()
-{
-
-}
-void CMapEditorSDIApp::zoomOut()
-{
-}
 
 void loadIcon(int id, CImageList* imageList){
     HICON icon;

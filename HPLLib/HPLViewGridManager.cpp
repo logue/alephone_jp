@@ -25,7 +25,7 @@ int hpl::aleph::view::HPLViewGridManager::getZoomDivision()
 */
 void hpl::aleph::view::HPLViewGridManager::zoomIn(int viewW, int viewH)
 {
-    this->addZoom(this->zoomProperties.zoomDivisionStep);
+    this->addZoom(this->zoomProperties.zoomDivisionStep, viewW, viewH);
 }
 
 /**
@@ -33,7 +33,7 @@ void hpl::aleph::view::HPLViewGridManager::zoomIn(int viewW, int viewH)
 */
 void hpl::aleph::view::HPLViewGridManager::zoomOut(int viewW, int viewH)
 {
-    this->addZoom(this->zoomProperties.zoomDivisionStep);
+    this->addZoom(this->zoomProperties.zoomDivisionStep, viewW, viewH);
 }
 
 /**

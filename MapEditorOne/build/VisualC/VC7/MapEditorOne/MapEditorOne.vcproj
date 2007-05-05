@@ -144,6 +144,9 @@
 				RelativePath="..\..\..\..\src\MainFrm.cpp">
 			</File>
 			<File
+				RelativePath="..\..\..\..\src\MapEditorOneInnerSetting.cpp">
+			</File>
+			<File
 				RelativePath="..\..\..\..\src\MapEditorOneSetting.cpp">
 			</File>
 			<File
@@ -180,6 +183,9 @@
 			</File>
 			<File
 				RelativePath="..\..\..\..\src\MainFrm.h">
+			</File>
+			<File
+				RelativePath="..\..\..\..\src\MapEditorOneInnerSetting.h">
 			</File>
 			<File
 				RelativePath="..\..\..\..\src\MapEditorOneSetting.h">
@@ -261,6 +267,12 @@
 			</File>
 			<File
 				RelativePath="..\..\..\..\..\HPLLib\HPLSurfaceModifier.h">
+			</File>
+			<File
+				RelativePath="..\..\..\..\..\HPLLib\HPLViewGridManager.cpp">
+			</File>
+			<File
+				RelativePath="..\..\..\..\..\HPLLib\HPLViewGridManager.h">
 			</File>
 		</Filter>
 		<Filter

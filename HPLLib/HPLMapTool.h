@@ -124,8 +124,7 @@ namespace map{
         <jp>壁情報をセットアップします
         <en>
     */
-	void fixSide(int leftPolyIndex, int rightPolyIndex, int sideIndex,
-		int lineIndex, bool isDeleteOldSide);
+	void fixSide(int sideIndex);
 
 	///////////////////////////////////////////////////////////////////////
 	///////////	 Groups	 //////////////////////////////////////////////////

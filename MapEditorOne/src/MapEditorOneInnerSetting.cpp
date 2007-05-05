@@ -7,17 +7,17 @@
 
 mapeditorone::MapEditorOneInnerSetting::MapEditorOneInnerSetting(const char* tagNameFilePath, const char* dataFilePath)
 {
-    ifstream ifs;
+    std::ifstream ifs;
     ifs.open(tagNameFilePath);
     if(!ifs.is_open()){
-        MessageBox(L"Cannot open tag file", MB_OK);
+        MessageBox(NULL, L"Cannot open tag file", L"", MB_OK);
         exit(-1);
     }
     ifs.close();
 
     ifs.open(dataFilePath);
-    if(!ifs.is_open){
-        MessageBox(L"Cannot open inner data file", MB_OK);
+    if(!ifs.is_open()){
+        MessageBox(NULL, L"Cannot open inner data file", L"", MB_OK);
         exit(-1);
     }
     ifs.close();
@@ -31,10 +31,6 @@ mapeditorone::MapEditorOneInnerSetting::~MapEditorOneInnerSetting()
 std::string mapeditorone::MapEditorOneInnerSetting::getString(int type)
 {
     std::string str = this->datas[type];
-    if(str == NULL){
-        MessageBox(L"Cannot find setting:", MB_OK);
-        exit(-1);
-    }
     return str;
 }
 int mapeditorone::MapEditorOneInnerSetting::getInt(int type)

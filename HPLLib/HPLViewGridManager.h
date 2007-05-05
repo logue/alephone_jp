@@ -39,7 +39,7 @@ namespace view{
         int zoomDivision;
 
         /**View座標のオフセット*/
-        int viewOffset;
+        int viewOffset[2];
     public:
         HPLViewGridManager(ZoomProperties *zoomProp);
         ~HPLViewGridManager();
