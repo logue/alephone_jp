@@ -207,6 +207,9 @@ public:
     /**選択中の倍率*/
     int zoomDivision;
 
+    //
+    hpl::aleph::view::HPLViewGridManager* gridManager;
+
     /**グリッド表示用間隔(世界距離に対応し、拡大縮小で大きさ変化)*/
     int gridIntervals[NUMBER_OF_GLID];
 

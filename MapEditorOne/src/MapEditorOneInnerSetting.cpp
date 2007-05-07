@@ -5,6 +5,8 @@
 
 #include <windows.h>
 
+const int MAX_FILE_PATH = 260;
+
 mapeditorone::MapEditorOneInnerSetting::MapEditorOneInnerSetting(const char* tagNameFilePath, const char* dataFilePath)
 {
     std::ifstream ifs;
@@ -13,12 +15,31 @@ mapeditorone::MapEditorOneInnerSetting::MapEditorOneInnerSetting(const char* tag
         MessageBox(NULL, L"Cannot open tag file", L"", MB_OK);
         exit(-1);
     }
+    //ƒ^ƒO“Ç‚ÝŽæ‚è
+    char buf[MAX_FILE_PATH];
+    int counter = 0;
+    while(ifs.readLine(buf, MAX_FILE_PATH) != NULL){
+        if(strcmp(buf, "")){
+            continue;
+        }
+        std::string src(buf);
+        tagMap[counter] = src;
+    }
     ifs.close();
 
     ifs.open(dataFilePath);
     if(!ifs.is_open()){
         MessageBox(NULL, L"Cannot open inner data file", L"", MB_OK);
         exit(-1);
+    }
+    while(ifs.readLine(buf, MAX_FILE_PATH) != NULL){
+        std::string src(buf);
+        std::vector<std::string> pair = hpl::string::Split(src, "=");
+        for(int i = 0; i < mapeditorone::TagType::MaxTagTypes; i ++){
+            if(pair[0].compare(tagMap[i]) == 0){
+
+            }
+        }
     }
     ifs.close();
 }

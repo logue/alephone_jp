@@ -179,11 +179,17 @@ bool CMapEditorSDIApp::initialize(){
     mapeditorone::MapEditorOneInnerSetting innerSetting = 
         mapeditorone::MapEditorOneInnerSetting(tagNameFilePath, innerDataFilePath);
 
-
     //Zoom
     //innerSetting.getInt(mapeditorone::TagType::ZOOM_DIVISION_DEFAULT);
     zoomDivision = ZOOM_DIVISION_DEFAULT;
-
+    hpl::aleph::view::ZoomProperties zoomProp;
+    zoomProp.zoomDivisionStep = innerSetting.getInt(mapeditorone::TagType::ZOOM_DIVISION_STEP);
+    zoomProp.zoomDivisionDefault = innerSetting.getInt(mapeditorone::TagType::ZOOM_DIVISION_DEFAULT);
+    zoomProp.zoomDivisionMin = innerSetting.getInt(mapeditorone::TagType::ZOOM_DIVISION_MIN);
+    zoomProp.zoomDivisionMax = innerSetting.getInt(mapeditorone::TagType::ZOOM_DIVISION_MAX);
+    zoomProp.zoomDivStepThreshold = innerSetting.getInt(mapeditorone::TagType::ZOOM_DIV_STEP_THRESHOLD);
+    zoomProp.zoomDivisionStepDetail = innerSetting.getInt(mapeditorone::TagType::ZOOM_DIVISION_STEP_DETAIL);
+    this->gridManager = new hpl::aleph::view::HPLViewGridManager(&zoomProp);
     isPressLButtonWithCtrl = false;
 
     offset.x = 0;

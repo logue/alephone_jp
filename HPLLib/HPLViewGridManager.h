@@ -26,6 +26,8 @@ namespace view{
         /**最小値*/
         int zoomDivisionMin;
 
+        /**初期値・規定値*/
+        int zoomDivisionDefault;
     };
     /**
         拡大縮小、スクロールなどの管理
