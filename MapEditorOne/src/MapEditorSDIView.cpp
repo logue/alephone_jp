@@ -105,9 +105,11 @@ void CMapEditorSDIView::drawGrid(CDC *cdc)
 	smallPen.CreatePen(PS_SOLID, 1, theApp.setting.getColorSetting()->gridLine);
 	midiumPen.CreatePen(PS_SOLID, 2, theApp.setting.getColorSetting()->gridLine);
 
-	int OFFSET_X_VIEW = theApp.offset.x;
-	int OFFSET_Y_VIEW = theApp.offset.y;
-	int DIV = theApp.zoomDivision;
+    int offset[2];
+    theApp.gridManager->getOffset(offset);
+	int OFFSET_X_VIEW = offset[0];
+	int OFFSET_Y_VIEW = offset[1];
+	int DIV = theApp.gridManager->getZoomDivision();
 
 	for(int i = OFFSET_X_WORLD / DIV; i <= OFFSET_X_WORLD * 2 / DIV;
 			i += theApp.gridIntervals[theApp.setting.getGridSizeIndex()] / DIV){
@@ -568,9 +570,11 @@ void CMapEditorSDIView::OnDraw(CDC* pDC)
 
 	//範囲
 	{
-		int OFFSET_X_VIEW = theApp.offset.x;
-		int OFFSET_Y_VIEW = theApp.offset.y;
-		int DIV = theApp.zoomDivision;
+        int offset[2];
+        theApp.gridManager->getOffset(offset);
+		int OFFSET_X_VIEW = offset[0];
+		int OFFSET_Y_VIEW = offset[1];
+		int DIV = theApp.gridManager->getZoomDivision();
 		int ICON_SIZE = 16;
 
 		CPen pen;
@@ -607,6 +611,8 @@ void CMapEditorSDIView::OnDraw(CDC* pDC)
 	//アノテーション（マップに表示される文字）の描画
 	drawStrings(cdc);
 
+    int mpoint[2];
+    theApp.gridManager->getNewMousePoint(mpoint);
 	//選択範囲
 	if(theApp.isSelectingGroup){
 		bool selecting = true;
@@ -623,10 +629,12 @@ void CMapEditorSDIView::OnDraw(CDC* pDC)
 			cdc->SelectObject(&pen);
 
 			cdc->Rectangle(theApp.selectStartPoint.x, theApp.selectStartPoint.y,
-				theApp.nowMousePoint.x, theApp.nowMousePoint.y);
+				mpoint[0], mpoint[1]);
 
 			pen.DeleteObject();
 		}
+
+        //ポリゴン追加モードなら追加予定ポリゴンを表示？
 	}
 
 	//裏画面をメインへ転送
@@ -943,6 +951,7 @@ void CMapEditorSDIView::OnEditPaste()
     
     theApp.selectDatas.clear();
 
+    int div = theApp.gridManager->getZoomDivision();
     for(std::map<int, endpoint_data>::iterator it = cpoints->begin();
         it != cpoints->end(); it ++){
         //コピー元のID
@@ -953,8 +962,8 @@ void CMapEditorSDIView::OnEditPaste()
         memcpy(&ep, &cep, sizeof(endpoint_data));
 
         //位置修正
-        ep.vertex.x += theApp.storedDataPointDelta[0] * theApp.zoomDivision;
-        ep.vertex.y += theApp.storedDataPointDelta[1] * theApp.zoomDivision;
+        ep.vertex.x += theApp.storedDataPointDelta[0] * div;
+        ep.vertex.y += theApp.storedDataPointDelta[1] * div;
 
         //他は触らず。
         EndpointList.push_back(ep);
@@ -1013,8 +1022,8 @@ void CMapEditorSDIView::OnEditPaste()
         memcpy(&ep, &cep, sizeof(polygon_data));
 
         //
-        ep.center.x += theApp.storedDataPointDelta[0] * theApp.zoomDivision;
-        ep.center.y += theApp.storedDataPointDelta[1] * theApp.zoomDivision;
+        ep.center.x += theApp.storedDataPointDelta[0] * div;
+        ep.center.y += theApp.storedDataPointDelta[1] * div;
         for(int i = 0; i < ep.vertex_count; i ++){
             ep.endpoint_indexes[i] = pointIndexTable[cep.endpoint_indexes[i]];
         }
@@ -1046,8 +1055,8 @@ void CMapEditorSDIView::OnEditPaste()
         memcpy(&ep, &cep, sizeof(map_object));
 
         //
-        ep.location.x += theApp.storedDataPointDelta[0] * theApp.zoomDivision;
-        ep.location.y += theApp.storedDataPointDelta[1] * theApp.zoomDivision;
+        ep.location.x += theApp.storedDataPointDelta[0] * theApp.gridManager->getZoomDivision();
+        ep.location.y += theApp.storedDataPointDelta[1] * theApp.gridManager->getZoomDivision();
 
         SavedObjectList.push_back(ep);
         int newIndex = (int)SavedObjectList.size() - 1;

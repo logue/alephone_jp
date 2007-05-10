@@ -1,4 +1,6 @@
 #include "MapEditorOneInnerSetting.h"
+#include "HPLLib/HPLAlephLib.h"
+
 #include <fstream>
 #include <cstdio>
 #include <cstdlib>
@@ -18,7 +20,7 @@ mapeditorone::MapEditorOneInnerSetting::MapEditorOneInnerSetting(const char* tag
     //ƒ^ƒO“Ç‚ÝŽæ‚è
     char buf[MAX_FILE_PATH];
     int counter = 0;
-    while(ifs.readLine(buf, MAX_FILE_PATH) != NULL){
+    while(ifs.getline(buf, MAX_FILE_PATH) != NULL){
         if(strcmp(buf, "")){
             continue;
         }
@@ -32,12 +34,16 @@ mapeditorone::MapEditorOneInnerSetting::MapEditorOneInnerSetting(const char* tag
         MessageBox(NULL, L"Cannot open inner data file", L"", MB_OK);
         exit(-1);
     }
-    while(ifs.readLine(buf, MAX_FILE_PATH) != NULL){
+    while(ifs.getline(buf, MAX_FILE_PATH) != NULL){
         std::string src(buf);
         std::vector<std::string> pair = hpl::string::Split(src, "=");
+        if(pair.size() < 2){
+            //‹ó”’‚Í–³Ž‹
+            continue;
+        }
         for(int i = 0; i < mapeditorone::TagType::MaxTagTypes; i ++){
             if(pair[0].compare(tagMap[i]) == 0){
-
+                datas[i] = pair[1];
             }
         }
     }

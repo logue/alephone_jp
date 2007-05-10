@@ -181,22 +181,10 @@ bool CMapEditorSDIApp::initialize(){
 
     //Zoom
     //innerSetting.getInt(mapeditorone::TagType::ZOOM_DIVISION_DEFAULT);
-    zoomDivision = ZOOM_DIVISION_DEFAULT;
-    hpl::aleph::view::ZoomProperties zoomProp;
-    zoomProp.zoomDivisionStep = innerSetting.getInt(mapeditorone::TagType::ZOOM_DIVISION_STEP);
-    zoomProp.zoomDivisionDefault = innerSetting.getInt(mapeditorone::TagType::ZOOM_DIVISION_DEFAULT);
-    zoomProp.zoomDivisionMin = innerSetting.getInt(mapeditorone::TagType::ZOOM_DIVISION_MIN);
-    zoomProp.zoomDivisionMax = innerSetting.getInt(mapeditorone::TagType::ZOOM_DIVISION_MAX);
-    zoomProp.zoomDivStepThreshold = innerSetting.getInt(mapeditorone::TagType::ZOOM_DIV_STEP_THRESHOLD);
-    zoomProp.zoomDivisionStepDetail = innerSetting.getInt(mapeditorone::TagType::ZOOM_DIVISION_STEP_DETAIL);
-    this->gridManager = new hpl::aleph::view::HPLViewGridManager(&zoomProp);
-    isPressLButtonWithCtrl = false;
-
-    offset.x = 0;
-    offset.y = 0;
-
-    objectPropertyDialog = NULL;
-
+//    zoomDivision = ZOOM_DIVISION_DEFAULT;
+//    theApp.gridManager->
+//    offset.x = 0;
+//    offset.y = 0;
     //1WU 1/2WU 1/4WU 1/8 WU
     int intervals[]={
         WORLD_ONE * 2, WORLD_ONE, WORLD_ONE / 2, WORLD_ONE / 4, WORLD_ONE / 8
@@ -204,8 +192,28 @@ bool CMapEditorSDIApp::initialize(){
     for(int i = 0; i < NUMBER_OF_GLID; i ++){
         gridIntervals[i] = intervals[i];
     }
+
+    //Šg‘åŠÖ˜A‚ÌÝ’è
+    hpl::aleph::view::ZoomProperties zoomProp;
+    zoomProp.zoomDivisionStep = innerSetting.getInt(mapeditorone::TagType::ZOOM_DIVISION_STEP);
+    zoomProp.zoomDivisionDefault = innerSetting.getInt(mapeditorone::TagType::ZOOM_DIVISION_DEFAULT);
+    zoomProp.zoomDivisionMin = innerSetting.getInt(mapeditorone::TagType::ZOOM_DIVISION_MIN);
+    zoomProp.zoomDivisionMax = innerSetting.getInt(mapeditorone::TagType::ZOOM_DIVISION_MAX);
+    zoomProp.zoomDivStepThreshold = innerSetting.getInt(mapeditorone::TagType::ZOOM_DIV_STEP_THRESHOLD);
+    zoomProp.zoomDivisionStepDetail = innerSetting.getInt(mapeditorone::TagType::ZOOM_DIVISION_STEP_DETAIL);
+    for(int i = 0; i < NUMBER_OF_GLID; i ++){
+        zoomProp.gridIntervals[i] = intervals[i];
+    }
+    this->gridManager = new hpl::aleph::view::HPLViewGridManager(&zoomProp);
+
+    isPressLButtonWithCtrl = false;
+
+    objectPropertyDialog = NULL;
+
+
     AfxInitRichEdit();
 
+    //‘I‘ðŠÖŒW
     this->selectDatas.clear();
     isSelectingGroup = false;
 
@@ -479,22 +487,6 @@ int searchSelectPolygon(int viewPX, int viewPY)
     return -1;
 }
 
-//convert view <-> world point
-world_point2d getWorldPoint2DFromViewPoint(int viewPX, int viewPY)
-{
-    world_point2d point;
-    point.x = (world_distance)((viewPX - theApp.offset.x) *
-        theApp.zoomDivision - OFFSET_X_WORLD);
-    point.y = (world_distance)((viewPY - theApp.offset.y) *
-        theApp.zoomDivision - OFFSET_Y_WORLD);
-    return point;
-}
-void getViewPointFromWorldPoint2D(world_point2d& point, int *dest)
-{
-    dest[0] = (point.x + OFFSET_X_WORLD)/theApp.zoomDivision + theApp.offset.x;
-    dest[1] = (point.y + OFFSET_Y_WORLD)/theApp.zoomDivision + theApp.offset.y;
-}
-
 //TODO
 void setCursor()
 {
@@ -665,7 +657,7 @@ int addPoint(struct world_point2d &world_point)
             continue;
         }
         if(hpl::aleph::map::isSelectPoint(world_point, point->vertex,
-            POINT_DISTANCE_EPSILON * theApp.zoomDivision))
+            POINT_DISTANCE_EPSILON * theApp.gridManager->getZoomDivision()))
         {
             //’Ç‰Á‚µ‚È‚¢
             isFound = true;
@@ -692,7 +684,7 @@ int addPoint(struct world_point2d &world_point)
         endpoint_data *begin = &EndpointList[line->endpoint_indexes[0]];
         endpoint_data *end = &EndpointList[line->endpoint_indexes[1]];
         if(hpl::aleph::map::isSelectLine(world_point, begin->vertex, end->vertex,
-            LINE_DISTANCE_EPSILON * theApp.zoomDivision))
+            LINE_DISTANCE_EPSILON * theApp.gridManager->getZoomDivision()))
         {
             isFound = true;
             lineIndex = i;

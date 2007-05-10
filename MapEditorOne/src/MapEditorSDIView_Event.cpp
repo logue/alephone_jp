@@ -7,6 +7,30 @@
 #include "SelectLevelDialog.h"
 
 /**
+    簡易バージョン
+*/
+void getViewPointFromWorldPoint2D(world_point2d wpoint, int* dest){
+    int offset[2];
+    theApp.gridManager->getOffset(offset);
+    int div = theApp.gridManager->getZoomDivision();
+    hpl::aleph::map::getViewPointFromWorldPoint2D(wpoint, dest, OFFSET_X_WORLD, OFFSET_Y_WORLD,
+        div, offset[0], offset[1]);
+}
+void getViewPointFromWorldPoint2D(int x, int y, int* dest){
+    world_point2d point = {x,y};
+    getViewPointFromWorldPoint2D(point, dest);
+}
+world_point2d getWorldPoint2DFromViewPoint(int x, int y){
+    int offset[2];
+    theApp.gridManager->getOffset(offset);
+    int div = theApp.gridManager->getZoomDivision();
+    world_point2d wpoint = hpl::aleph::map::getWorldPoint2DFromViewPoint(x, y, OFFSET_X_WORLD, OFFSET_Y_WORLD, div, offset[0], offset[1]);
+    return wpoint;
+}
+
+//static void getWorldPointFromViewPoint2D(
+
+/**
     マウス座標が点に近いかどうかを調べて選択情報に設定
     @param mousePoint view座標系のマウスポイント座標
     @param offsetViewX view座標系のズレ補正
@@ -55,9 +79,11 @@ void CMapEditorSDIView::setStartPointForSelectGroup(int px, int py){
 */
 void CMapEditorSDIView::doLButtonDownDrawMode(UINT nFlags, CPoint &point)
 {
-    int OFFSET_X_VIEW = theApp.offset.x;
-    int OFFSET_Y_VIEW = theApp.offset.y;
-    int DIV = theApp.zoomDivision;
+    int viewOffset[2];
+    theApp.gridManager->getOffset(viewOffset);
+    int OFFSET_X_VIEW = viewOffset[0];
+    int OFFSET_Y_VIEW = viewOffset[1];
+    int DIV = theApp.gridManager->getZoomDivision();
 
     if(theApp.selectingToolType == TI_ARROW){
         //selecting tool = TI_ARROW
@@ -93,12 +119,13 @@ void CMapEditorSDIView::doLButtonDownDrawMode(UINT nFlags, CPoint &point)
                         //set pos to view
                         int x = ep->vertex.x;
                         int y = ep->vertex.y;
-                        int drawX = (x + OFFSET_X_WORLD) / DIV + OFFSET_X_VIEW;
-                        int drawY = (y + OFFSET_Y_WORLD) / DIV + OFFSET_Y_VIEW;
+                        //ビュー座標に変換
+                        int drawP[2];
+                        getViewPointFromWorldPoint2D(ep->vertex, drawP);
 
                         //sub to offset
-                        selpoints->at(i).offset[0] = drawX - point.x;
-                        selpoints->at(i).offset[1] = drawY - point.y;
+                        selpoints->at(i).offset[0] = drawP[0] - point.x;
+                        selpoints->at(i).offset[1] = drawP[1] - point.y;
                     }
 
                     //lines
@@ -108,22 +135,18 @@ void CMapEditorSDIView::doLButtonDownDrawMode(UINT nFlags, CPoint &point)
                         line_data* line = &LineList[selData->index];
                         endpoint_data* begin = &EndpointList[line->endpoint_indexes[0]];
                         endpoint_data* end = &EndpointList[line->endpoint_indexes[1]];
+                        int beginViewP[2], endViewP[2];
+                        getViewPointFromWorldPoint2D(begin->vertex, beginViewP);
+                        getViewPointFromWorldPoint2D(end->vertex, endViewP);
                         //set offsets
-                        sellines->at(i).offset[0][0] =
-                            (begin->vertex.x + OFFSET_X_WORLD) / DIV + OFFSET_X_VIEW
-                            - point.x;
-                        sellines->at(i).offset[0][1] =
-                            (begin->vertex.y + OFFSET_Y_WORLD) / DIV + OFFSET_Y_VIEW
-                            - point.y;
-                        sellines->at(i).offset[1][0] =
-                            (end->vertex.x + OFFSET_X_WORLD) / DIV + OFFSET_X_VIEW
-                            - point.x;
-                       sellines->at(i).offset[1][1] =
-                            (end->vertex.y + OFFSET_Y_WORLD) / DIV + OFFSET_Y_VIEW
-                            - point.y;
+                        sellines->at(i).offset[0][0] = beginViewP[0] - point.x;
+                        sellines->at(i).offset[0][1] = beginViewP[1] - point.y;
+                        sellines->at(i).offset[1][0] = endViewP[0] - point.x;
+                        sellines->at(i).offset[1][1] = endViewP[1] - point.y;
 
                     }
 
+                    /*
                     //polygons
                     std::vector<struct hpl::aleph::map::SelPolygon>* selpolygons = theApp.selectDatas.getSelPolygons();
                     for(int i = 0; i < (int)selpolygons->size(); i ++){
@@ -133,29 +156,25 @@ void CMapEditorSDIView::doLButtonDownDrawMode(UINT nFlags, CPoint &point)
                         int num = polygon->vertex_count;
                         selpolygons->at(i).num = num;
                         for(int j = 0; j < num; j ++){
-                            int drawX = (EndpointList[polygon->endpoint_indexes[j]].vertex.x + OFFSET_X_WORLD) / DIV
-                                + OFFSET_X_VIEW;
-                            int drawY = (EndpointList[polygon->endpoint_indexes[j]].vertex.y + OFFSET_Y_WORLD) / DIV
-                                + OFFSET_Y_VIEW;
-                            selData->offset[j][0] = drawX - point.x;
-                            selData->offset[j][1] = drawY - point.y;
+                            int drawViewP[2];
+                            hpl::aleph::map::getViewPointFromWorldPoint2D(EndpointList[polygon->endpoint_indexes[j]].vertex, drawViewP,
+                                OFFSET_X_WORLD, OFFSET_Y_WORLD, DIV, viewOffset[0], viewOffset[1]);
+
                         }
                     }
-
+                    */
                     //objects
                     std::vector<struct hpl::aleph::map::SelObject>* selobjects = theApp.selectDatas.getSelObjects();
                     for(int i = 0; i < (int)selobjects->size(); i ++){
                         struct hpl::aleph::map::SelObject* selData = &selobjects->at(i);
                         map_object* obj = &SavedObjectList[selData->index];
                         //set pos to view
-                        int x = obj->location.x;
-                        int y = obj->location.y;
-                        int drawX = (x + OFFSET_X_WORLD) / DIV + OFFSET_X_VIEW;
-                        int drawY = (y + OFFSET_Y_WORLD) / DIV + OFFSET_Y_VIEW;
+                        int drawViewP[2];
+                        getViewPointFromWorldPoint2D(obj->location.x, obj->location.y, drawViewP);
 
                         //sub to offset
-                        selData->offset[0] = drawX - point.x;
-                        selData->offset[1] = drawY - point.y;
+                        selData->offset[0] = drawViewP[0] - point.x;
+                        selData->offset[1] = drawViewP[1] - point.y;
                     }
                 }else{
                     //release all selection
@@ -190,12 +209,12 @@ void CMapEditorSDIView::doLButtonDownDrawMode(UINT nFlags, CPoint &point)
                             x, y, OFFSET_X_VIEW, OFFSET_Y_VIEW,
                             OFFSET_X_WORLD, OFFSET_Y_WORLD, DIV, OBJECT_DISTANCE_EPSILON))
                         {
-                            int drawX = (x + OFFSET_X_WORLD) / DIV + OFFSET_X_VIEW;
-                            int drawY = (y + OFFSET_Y_WORLD) / DIV + OFFSET_Y_VIEW;
+                            int drawViewP[2];
+                            getViewPointFromWorldPoint2D(obj->location.x, obj->location.y, drawViewP);
 
                             int offset[2];
-                            offset[0] = drawX - point.x;
-                            offset[1] = drawY - point.y;
+                            offset[0] = drawViewP[0] - point.x;
+                            offset[1] = drawViewP[1] - point.y;
                             theApp.selectDatas.addSelObject(i, offset);
                             //選択したオブジェクトの情報を表示
                             theApp.objectPropertyDialog->setupDialog(i);
@@ -216,7 +235,7 @@ void CMapEditorSDIView::doLButtonDownDrawMode(UINT nFlags, CPoint &point)
                 ////////////////////
                 //points
                 if(!theApp.selectDatas.isSelected()){
-                    checkSelectPoint(point, OFFSET_X_VIEW, OFFSET_Y_VIEW,
+                    checkSelectPoint(point, viewOffset[0], viewOffset[1],
                         OFFSET_X_WORLD, OFFSET_Y_WORLD, DIV, POINT_DISTANCE_EPSILON);
                 }
                 if(theApp.selectDatas.isSelected()){
@@ -238,16 +257,16 @@ void CMapEditorSDIView::doLButtonDownDrawMode(UINT nFlags, CPoint &point)
                             //オフセット記録
                             int offset[2][2];
                             offset[0][0] = 
-                                (begin->vertex.x + OFFSET_X_WORLD) / DIV + OFFSET_X_VIEW
+                                (begin->vertex.x + OFFSET_X_WORLD) / DIV + viewOffset[0]
                                 - point.x;
                             offset[0][1] = 
-                                (begin->vertex.y + OFFSET_Y_WORLD) / DIV + OFFSET_Y_VIEW
+                                (begin->vertex.y + OFFSET_Y_WORLD) / DIV + viewOffset[1]
                                 - point.y;
                             offset[1][0] = 
-                                (end->vertex.x + OFFSET_X_WORLD) / DIV + OFFSET_X_VIEW
+                                (end->vertex.x + OFFSET_X_WORLD) / DIV + viewOffset[0]
                                 - point.x;
                             offset[1][1] = 
-                                (end->vertex.y + OFFSET_Y_WORLD) / DIV + OFFSET_Y_VIEW
+                                (end->vertex.y + OFFSET_Y_WORLD) / DIV + viewOffset[1]
                                 - point.y;
                             theApp.selectDatas.addSelLine(i, offset);
 
@@ -281,8 +300,7 @@ void CMapEditorSDIView::doLButtonDownDrawMode(UINT nFlags, CPoint &point)
                         //set offset
                         for(int j = 0; j < num; j ++){
                             int drawPoint[2];
-                            getViewPointFromWorldPoint2D(EndpointList[polygon->endpoint_indexes[j]].vertex,
-                                drawPoint);
+                            getViewPointFromWorldPoint2D(EndpointList[polygon->endpoint_indexes[j]].vertex, drawPoint);
                             int drawX = drawPoint[0];
                             int drawY = drawPoint[1];
                             offset[j][0] = drawX - point.x;
@@ -390,7 +408,8 @@ void CMapEditorSDIView::doLButtonDownDrawMode(UINT nFlags, CPoint &point)
         //show dialog
         CAnnotationDialog dlg(this);
         if(dlg.DoModal() == IDOK){
-            struct world_point2d world_point = getWorldPoint2DFromViewPoint(point.x, point.y);
+            struct world_point2d world_point = hpl::aleph::map::getWorldPoint2DFromViewPoint(point.x, point.y,
+                OFFSET_X_WORLD, OFFSET_Y_WORLD, DIV, OFFSET_X_VIEW, OFFSET_Y_VIEW);
 
             int polygonIndex = getPolygonIdPointIn(world_point);
 
@@ -453,12 +472,13 @@ void CMapEditorSDIView::OnLButtonDown(UINT nFlags, CPoint point)
     }else{
         theApp.isPressLButtonWithCtrl = false;
     }
-    theApp.nowMousePoint = point;
-    theApp.oldMousePoint = point;
+    theApp.gridManager->setNewMousePoint(point.x, point.y);
 
-    int OFFSET_X_VIEW = theApp.offset.x;
-    int OFFSET_Y_VIEW = theApp.offset.y;
-    int DIV = theApp.zoomDivision;
+    int offset[2];
+    theApp.gridManager->getOffset(offset);
+    int OFFSET_X_VIEW = offset[0];
+    int OFFSET_Y_VIEW = offset[1];
+    int DIV = theApp.gridManager->getZoomDivision();
 
 
     switch(theApp.getEditMode()){
@@ -508,10 +528,15 @@ void CMapEditorSDIView::OnLButtonDown(UINT nFlags, CPoint point)
 }
 
 void CMapEditorSDIView::moveMapOffset(int newPx, int newPy){
-    int deltaX = newPx - theApp.oldMousePoint.x;
-    int deltaY = newPy - theApp.oldMousePoint.y;
-    theApp.offset.x += deltaX;
-    theApp.offset.y += deltaY;
+    int oldMousePoint[2];
+    theApp.gridManager->getOldMousePoint(oldMousePoint);
+    int deltaX = newPx - oldMousePoint[0];
+    int deltaY = newPy - oldMousePoint[1];
+    int offset[2];
+    theApp.gridManager->getOffset(offset);
+    offset[0] += deltaX;
+    offset[1] += deltaY;
+    theApp.gridManager->setOffset(offset[0], offset[1]);
 }
 /****************************************************************/
 //マウス移動
@@ -520,9 +545,11 @@ void CMapEditorSDIView::OnMouseMove(UINT nFlags, CPoint point)
     setCursor();
 
     // TODO: ここにメッセージ ハンドラ コードを追加するか、既定の処理を呼び出します。
-    theApp.nowMousePoint = point;
+    theApp.gridManager->setNewMousePoint(point.x, point.y);
 
-    const int DIV = theApp.zoomDivision;
+    const int DIV = theApp.gridManager->getZoomDivision();
+    int offset[2];
+    theApp.gridManager->getOffset(offset);
 #ifdef MAP_VIEWER
     //クリックしていれば移動
     if(nFlags & MK_LBUTTON &&
@@ -546,8 +573,9 @@ void CMapEditorSDIView::OnMouseMove(UINT nFlags, CPoint point)
                 {
                     //選択物の移動
                     //world position of mouse pointer
-                    int x = (point.x - theApp.offset.x) * theApp.zoomDivision - OFFSET_X_WORLD;
-                    int y = (point.y - theApp.offset.y) * theApp.zoomDivision - OFFSET_Y_WORLD;
+                    world_point2d worldP = getWorldPoint2DFromViewPoint(point.x, point.y);
+                    int x = worldP.x; //(point.x - theApp.offset.x) * DIV - OFFSET_X_WORLD;
+                    int y = worldP.y; //(point.y - theApp.offset.y) * DIV - OFFSET_Y_WORLD;
                     if(theApp.selectDatas.isSelected()){
                         //グループを選択している
                         //->グループを移動
@@ -614,7 +642,7 @@ void CMapEditorSDIView::OnMouseMove(UINT nFlags, CPoint point)
                     {
                         continue;
                     }
-                    if(hpl::aleph::map::isSelectPoint(world_point, point->vertex, POINT_DISTANCE_EPSILON * theApp.zoomDivision))
+                    if(hpl::aleph::map::isSelectPoint(world_point, point->vertex, POINT_DISTANCE_EPSILON * theApp.gridManager->getZoomDivision()))
                     {
                         theApp.isNowOnThePoint = true;
                         found = true;
@@ -634,7 +662,7 @@ void CMapEditorSDIView::OnMouseMove(UINT nFlags, CPoint point)
     }// if/not ctrled
 #endif
     Invalidate(FALSE);
-    theApp.oldMousePoint = point;
+    theApp.gridManager->setNewMousePoint(point.x, point.y);
 
     CView::OnMouseMove(nFlags, point);
 }
@@ -672,19 +700,21 @@ void CMapEditorSDIView::OnLButtonUp(UINT nFlags, CPoint point)
         if(okSelect){
             //if selecting is only 1 object. setup property dialog
 
+            //int OFFSET_X_VIEW = theApp.offset.x;
+            //int OFFSET_Y_VIEW = theApp.offset.y;
             theApp.selectDatas.clear();
 
-            int DIV = theApp.zoomDivision;
-            int OFFSET_X_VIEW = theApp.offset.x;
-            int OFFSET_Y_VIEW = theApp.offset.y;
+            int DIV = theApp.gridManager->getZoomDivision();
             //選択されているものをリストに登録する
             //点
             for(int i = 0; i < (int)EndpointList.size(); i ++){
                 endpoint_data* ep = &EndpointList[i];
                 int x = ep->vertex.x;
                 int y = ep->vertex.y;
-                int drawX = (x + OFFSET_X_WORLD)/DIV + OFFSET_X_VIEW;
-                int drawY = (y + OFFSET_Y_WORLD)/DIV + OFFSET_Y_VIEW;
+                int drawP[2];
+                getViewPointFromWorldPoint2D(ep->vertex, drawP);
+                int drawX = drawP[0];
+                int drawY = drawP[1];
                 //チェック
                 if(hpl::math::isPointInRect<int>(drawX, drawY, point.x, point.y,
                     theApp.selectStartPoint.x, theApp.selectStartPoint.y))
@@ -701,10 +731,13 @@ void CMapEditorSDIView::OnLButtonUp(UINT nFlags, CPoint point)
                 line_data* line = &LineList[i];
                 endpoint_data* begin = &EndpointList[line->endpoint_indexes[0]];
                 endpoint_data* end = &EndpointList[line->endpoint_indexes[1]];
-                int x0 = (begin->vertex.x + OFFSET_X_WORLD) / DIV + OFFSET_X_VIEW;
-                int y0 = (begin->vertex.y + OFFSET_Y_WORLD) / DIV + OFFSET_Y_VIEW;
-                int x1 = (end->vertex.x + OFFSET_X_WORLD) / DIV + OFFSET_X_VIEW;
-                int y1 = (end->vertex.y + OFFSET_Y_WORLD) / DIV + OFFSET_Y_VIEW;
+                int vpoint[2];
+                getViewPointFromWorldPoint2D(begin->vertex, vpoint);
+                int x0 = vpoint[0];
+                int y0 = vpoint[1];
+                getViewPointFromWorldPoint2D(end->vertex, vpoint);
+                int x1 = vpoint[0];
+                int y1 = vpoint[1];
                 if(hpl::math::isLineInRect(x0, y0, x1, y1, point.x, point.y,
                     theApp.selectStartPoint.x, theApp.selectStartPoint.y))
                 {
@@ -726,8 +759,10 @@ void CMapEditorSDIView::OnLButtonUp(UINT nFlags, CPoint point)
                 }
                 for(int j = 0; j < vertexCount && inner; j ++){
                     endpoint_data* ep = &EndpointList[polygon->endpoint_indexes[j]];
-                    int drawX = (ep->vertex.x + OFFSET_X_WORLD) / DIV + OFFSET_X_VIEW;
-                    int drawY = (ep->vertex.y + OFFSET_Y_WORLD) / DIV + OFFSET_Y_VIEW;
+                    int vpoint[2];
+                    getViewPointFromWorldPoint2D(ep->vertex, vpoint);
+                    int drawX = vpoint[0];
+                    int drawY = vpoint[1];
                     if(!hpl::math::isPointInRect<int>(drawX, drawY, point.x, point.y,
                         theApp.selectStartPoint.x, theApp.selectStartPoint.y))
                     {
@@ -751,8 +786,10 @@ void CMapEditorSDIView::OnLButtonUp(UINT nFlags, CPoint point)
                 map_object* obj = &SavedObjectList[i];
                 int x = obj->location.x;
                 int y = obj->location.y;
-                int drawX = (x + OFFSET_X_WORLD)/DIV + OFFSET_X_VIEW;
-                int drawY = (y + OFFSET_Y_WORLD)/DIV + OFFSET_Y_VIEW;
+                int vpoint[2];
+                getViewPointFromWorldPoint2D(obj->location.x, obj->location.y, vpoint);
+                int drawX = vpoint[0];
+                int drawY = vpoint[1];
 
                 //チェック
                 if(hpl::math::isPointInRect<int>(drawX, drawY, point.x, point.y,
@@ -798,12 +835,12 @@ void CMapEditorSDIView::OnRButtonDown(UINT nFlags, CPoint point)
 {
     // TODO: ここにメッセージ ハンドラ コードを追加するか、既定の処理を呼び出します。
 
-    theApp.nowMousePoint = point;
-    theApp.oldMousePoint = point;
-
+    theApp.gridManager->setNewMousePoint(point.x, point.y);
+/*
     int OFFSET_X_VIEW = theApp.offset.x;
     int OFFSET_Y_VIEW = theApp.offset.y;
-    int DIV = theApp.zoomDivision;
+    */
+    int DIV = theApp.gridManager->getZoomDivision();
 
     if(theApp.selectingToolType != TI_LINE){
         theApp.isFirstOfLineToAdd = true;

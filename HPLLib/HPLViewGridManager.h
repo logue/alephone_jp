@@ -7,6 +7,15 @@
 #ifndef _HPL_VIEW_GRID_MANAGER_
 #define _HPL_VIEW_GRID_MANAGER_
 
+const int NUMBER_OF_GLID = 5;
+const int ZOOM_DIVISION_STEP = 5;
+const int ZOOM_DIVISION_MAX = 200;
+const int ZOOM_DIVISION_MIN = 1;
+const int ZOOM_DIVISION_DEFAULT = 100;
+const int OFFSET_X_WORLD = 32768;
+const int OFFSET_Y_WORLD = 32768;
+
+
 namespace hpl{
 namespace aleph{
 namespace view{
@@ -28,6 +37,8 @@ namespace view{
 
         /**初期値・規定値*/
         int zoomDivisionDefault;
+
+        int gridIntervals[NUMBER_OF_GLID];
     };
     /**
         拡大縮小、スクロールなどの管理
@@ -42,6 +53,9 @@ namespace view{
 
         /**View座標のオフセット*/
         int viewOffset[2];
+
+        int oldMousePoint[2];
+        int newMousePoint[2];
     public:
         HPLViewGridManager(ZoomProperties *zoomProp);
         ~HPLViewGridManager();
@@ -62,6 +76,23 @@ namespace view{
             zoom out
         */
         void zoomOut(int viewW, int viewH);
+
+        /**
+            拡大率初期化
+        */
+        void zoomReset();
+
+        //void setOldMousePoint(int x, int y);
+        /**
+            マウス座標をセットします
+            set mouse position info (view coordinate)
+        */
+        void setNewMousePoint(int x, int y);
+        void getNewMousePoint(int* point);
+        void getOldMousePoint(int* point);
+
+        void setOffset(int x, int y);
+        void getOffset(int* point);
     private:
         /**
             ズーム調整

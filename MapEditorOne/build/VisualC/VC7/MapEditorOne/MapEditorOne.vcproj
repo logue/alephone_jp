@@ -423,6 +423,21 @@
 				</File>
 			</Filter>
 		</Filter>
+		<File
+			RelativePath="..\..\..\..\README_E.txt">
+		</File>
+		<File
+			RelativePath="..\..\..\..\README_J.txt">
+		</File>
+		<File
+			RelativePath="..\..\..\..\Reminder.txt">
+		</File>
+		<File
+			RelativePath="..\..\..\..\TODO.txt">
+		</File>
+		<File
+			RelativePath="..\..\..\..\‚â‚é‚×‚«‚±‚Æ(TODO_jp).txt">
+		</File>
 	</Files>
 	<Globals>
 	</Globals>

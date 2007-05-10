@@ -72,14 +72,6 @@ using namespace std;
 //
 
 const int NUMBER_OF_POLYGON_TYPE = 24;
-const int ZOOM_DIVISION_STEP = 5;
-const int ZOOM_DIVISION_MAX = 200;
-const int ZOOM_DIVISION_MIN = 1;
-const int ZOOM_DIVISION_DEFAULT = 100;
-const int OFFSET_X_WORLD = 32768;
-const int OFFSET_Y_WORLD = 32768;
-const int NUMBER_OF_GLID = 5;
-
 const int NUMBER_OF_OBJECT_TYPES = 6;
 const int NUMBER_OF_ACTIVATE_TYPES = 4;
 const int NUMBER_OF_MAP_OBJECT_TYPES = 6;
@@ -197,15 +189,15 @@ public:
     int editLevelIndex;
 
 
+public:
     ///////////////////////////
     //グリッド・表示関係
 
-public:
     /**拡大縮小・スクロール管理マネージャー*/
     hpl::aleph::view::HPLViewGridManager* viewGrid;
 
     /**選択中の倍率*/
-    int zoomDivision;
+    //int zoomDivision;
 
     //
     hpl::aleph::view::HPLViewGridManager* gridManager;
@@ -214,13 +206,13 @@ public:
     int gridIntervals[NUMBER_OF_GLID];
 
     //位置オフセット
-    POINT offset;
+    //POINT offset;
 
     /**現在のマウス座標*/
-    POINT nowMousePoint;
+    //POINT nowMousePoint;
 
     /**一つ前のマウス座標*/
-    POINT oldMousePoint;
+    //POINT oldMousePoint;
 
     //ポリゴンタイプの色
     COLORREF polygonTypeColor[NUMBER_OF_POLYGON_TYPE];
@@ -403,10 +395,6 @@ int searchSelectObject(int viewPX, int viewPY);
 int searchSelectLine(int viewPX, int viewPY);
 int searchSelectPolygon(int viewPX, int viewPY);
 
-//convert view <-> world point
-world_point2d getWorldPoint2DFromViewPoint(int viewPX, int viewPY);
-void getViewPointFromWorldPoint2D(world_point2d& point, int *dest);
-
 void setCursor();
 /**
     change is this 
@@ -450,4 +438,8 @@ int getPolygonIndexFromPointIndex(int pointIndex);
 int searchPlatformIndexByPolygonIndex(int index);
 
 //CString GetModulePathFileName(CString pName);
+
+//簡易版
+//
+void getViewPointFromWorldPoint2D(world_point2d wpoint, int* dest);
 

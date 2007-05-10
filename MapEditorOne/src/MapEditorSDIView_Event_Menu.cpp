@@ -87,7 +87,7 @@ void CMapEditorSDIView::OnFileOpen()
         //setStatusBar(0, theApp.LevelNameList.GetAt(0));
 
         //default zoom
-        theApp.zoomDivision = ZOOM_DIVISION_DEFAULT;
+        theApp.gridManager->zoomReset();
         
         //default position(center)
         OnItemCentering();
@@ -153,65 +153,21 @@ void CMapEditorSDIView::On32776()
     }
 }
 
-//zoom in / out
-void CMapEditorSDIView::addZoom(int step)
-{
-    int oldZoomDiv = theApp.zoomDivision;
-
-    //拡大率が上がったら拡大率の増減速度を落とす
-    if( theApp.zoomDivision < 50){
-        step = hpl::math::sgn<int>(step);
-    }
-
-    //拡大率増減
-    theApp.zoomDivision += step;
-
-    //補正
-    if(theApp.zoomDivision < ZOOM_DIVISION_MIN){
-        theApp.zoomDivision = ZOOM_DIVISION_MIN;
-    }else if(theApp.zoomDivision > ZOOM_DIVISION_MAX){
-        theApp.zoomDivision = ZOOM_DIVISION_MAX;
-    }
-    CRect rect;
-    GetClientRect(&rect);
-
-    POINT oldOffset = theApp.offset;
-    POINT center;
-    center.x = rect.Width() / 2;
-    center.y = rect.Height() / 2;
-    int newZoomDiv = theApp.zoomDivision;
-
-    //拡大時は画面の中心ではなく表示領域の中心を真ん中として拡大縮小を行う
-    //そのためズレを補正する必要がある
-    int ax = center.x - oldOffset.x;
-    theApp.offset.x = center.x - (ax * oldZoomDiv / newZoomDiv);
-    int ay = center.y - oldOffset.y;
-    theApp.offset.y = center.y - (ay * oldZoomDiv / newZoomDiv);
-    /*
-    int delta = OFFSET_X_WORLD / theApp.zoomDivision -
-        //(rect.Width() / 2) +
-        OFFSET_X_WORLD / oldZoomDiv;
-    theApp.offset.x -= delta;
-    delta = OFFSET_Y_WORLD / theApp.zoomDivision -
-        //(rect.Height() / 2) +
-        OFFSET_Y_WORLD / oldZoomDiv;
-    theApp.offset.y -= delta;
-    */
-}
-
 //拡大
 void CMapEditorSDIView::OnZoomIn()
 {
-    // TODO: ここにコマンド ハンドラ コードを追加します。
-    addZoom(-ZOOM_DIVISION_STEP);
+    CRect rect;
+    GetClientRect(&rect);
+    theApp.gridManager->zoomIn(rect.Width(), rect.Height());
     this->Invalidate(FALSE);
 }
 
 //縮小
 void CMapEditorSDIView::OnZoomOut()
 {
-    // TODO: ここにコマンド ハンドラ コードを追加します。
-    addZoom(ZOOM_DIVISION_STEP);
+    CRect rect;
+    GetClientRect(&rect);
+    theApp.gridManager->zoomOut(rect.Width(), rect.Height());
     this->Invalidate(FALSE);
 }
 
@@ -219,15 +175,14 @@ void CMapEditorSDIView::OnZoomOut()
 void CMapEditorSDIView::OnItemCentering()
 {
     // TODO: ここにコマンド ハンドラ コードを追加します。
-    theApp.offset.x = 0;
-    theApp.offset.y = 0;
+    theApp.gridManager->setOffset(0,0);
     Invalidate(FALSE);
 }
 //拡大標準
 void CMapEditorSDIView::OnItemZoomDefault()
 {
     // TODO: ここにコマンド ハンドラ コードを追加します。
-    theApp.zoomDivision = ZOOM_DIVISION_DEFAULT;
+    theApp.gridManager->zoomReset();
     Invalidate(FALSE);
 }
 //object info dialog on/off

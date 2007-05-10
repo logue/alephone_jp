@@ -14,6 +14,9 @@ MapEditorSDI.hおよびMapEditorSDI.cppにはいくつかMap関連の関数がある。
 もうすこし整備してHPLLibに収められると良い。
 特に点の追加・削除・セットアップなどなどは煩雑になりそうだし、良く分からん部分が多すぎる
 
+
+--------------------------------
+--フラグが立った！
 ・theApp(CMapEditorOne)の持ち物チェック(イベント管理上特に重要なもの)
 
 -bool isSelectingGroup;
@@ -22,7 +25,10 @@ ViewEvent.cppの
 void CMapEditorSDIView::setStartPointForSelectGroup(int px, int py)
 でtrue。
 
+-POINT selectStartPoint
+「選択開始座標」
 
+-----------------------------
 ・そうでもないけど書いちゃったもの
 -CStringArray LevelNameList;
 MapEditorSDIView_Event_mMenu.cppで登録
