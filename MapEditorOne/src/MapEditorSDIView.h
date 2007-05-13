@@ -18,7 +18,6 @@ public:
 // 操作
 public:
 
-// オーバーライド
 public:
     void drawBackground(CDC *cdc);
     void drawGrid(CDC *cdc);
@@ -27,14 +26,16 @@ public:
     void drawPoints(CDC *cdc);
     void drawObjects(CDC *cdc);
     void drawStrings(CDC *cdc);
+    void setupSelectDataGroupOffsets(POINT point);
 
+// オーバーライド
 	virtual void OnDraw(CDC* pDC);  // このビューを描画するためにオーバーライドされます。
 	virtual BOOL PreCreateWindow(CREATESTRUCT& cs);
 protected:
 	virtual BOOL OnPreparePrinting(CPrintInfo* pInfo);
 	virtual void OnBeginPrinting(CDC* pDC, CPrintInfo* pInfo);
 	virtual void OnEndPrinting(CDC* pDC, CPrintInfo* pInfo);
-    void addZoom(int step);
+    //void addZoom(int step);
     void createDoubleBuffer();
     void moveMapOffset(int newPx, int newPy);
     void setStartPointForSelectGroup(int px, int py);

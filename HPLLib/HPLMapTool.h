@@ -117,6 +117,13 @@ namespace map{
 	*/
 	void fixLine(int index, bool isDeleteOldSide);
 
+    /**
+        線情報を線を構成する点によって取得します
+        get line index with two point indexes
+        @return 線が存在しない場合NONE
+    */
+    int getLineIndexFromTwoLPoints(int pindex0, int pindex1);
+
 	////////////////////////////////////////////////////////////////////////
 	///////////	 Sides	////////////////////////////////////////////////////
 
@@ -155,6 +162,18 @@ namespace map{
         @param index index of polygon which is checked 検査対象のポリゴンインデックス
     */
     bool isValidPolygon(int index);
+
+    /**
+        座標を取り囲むポリゴンのうち、ポリゴンとして成立しているものをさがします
+        すでにポリゴンが存在している場合は無視します
+        @param wpoint 探索基点。ここを囲むポリゴンを探す
+        @param heightMin 高さ制限最小値
+        @param heightMax 高さ制限最大値
+        @param pointIndexes 見つかった場合ここに点番号が「右回り順」で入れられます
+        @param lineIndexes 見つかった場合ここに線番号が「右回り順」で入れられます
+    */
+    bool searchValidPolygon(world_point2d wpoint, int heightMin, int heightMax,
+        int poinIndexes[]. int lineIndexes[]);
 
     /**
         二つの線が織り成す角度を求めます

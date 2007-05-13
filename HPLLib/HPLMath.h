@@ -3,6 +3,17 @@
 
 namespace hpl{
 namespace math{
+    /**
+        線の種類
+    */
+    namespace LineType{
+        enum{
+            Normal,
+            Horizontal,
+            Vertical,
+        };
+    };
+
     //exchange between a and b
     template<class T>
     void exchange(T *a, T *b)
@@ -113,6 +124,55 @@ namespace math{
     */
     double optimizeDegree(double deg);
     double optimizeRadian(double rad);
+
+    /////////////////////////////////////////////////////
+    /////////////  cross  ///////////////////////////////
+    /**
+        2つの線分が交差した点を取得します。
+        @param line0 線0
+        @param line1 線1
+        @return 2つの線分が交差していない場合偽
+    */
+    bool getCrossPointOfTwoLines(double line0[2][2],
+        double line1[2][2], double dest[2]);
+
+    /**
+        線分の端点データから、その線の傾きと切片を求めます
+        水平線か垂直な線の場合は傾きが逆軸になってるので注意
+        @param line line datas ([0][0],[0][1])-([1][0],[1][1])
+        @param 
+    */
+    int getLineAngleAndSlice(double line[2][2], double *degree, double *slice);
+    
+    /**
+        線の傾きを角度から得ます
+    */
+    double getAngleFromDegree(double degree);
+
+    ///////////////////
+    /**
+        点から線分への距離（垂線の長さ）を求めます
+        <en>get 
+    */
+    double getPointDistanceFromLine(double px, double py, 
+                             double lx0, double ly0, double lx1, double ly1);
+
+    /**
+        <jp>三平方の定理で長さを求める
+        <en>get length of (0,0)-(x,y)
+    */
+    double getLength(double x, double y);
+
+    /**
+        <jp>内積を求めます
+    */
+    double getInnerProduct(double x0, double y0, double x1, double y1);
+
+    /**
+        点から降ろした垂線が線分と交差するか判断
+    */
+    bool isCrossPointLine(double px, double py, 
+                             double lx0, double ly0, double lx1, double ly1);
 };
 };
 #endif

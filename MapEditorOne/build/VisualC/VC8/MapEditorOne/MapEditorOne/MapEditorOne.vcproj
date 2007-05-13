@@ -45,7 +45,7 @@
 				Name="VCCLCompilerTool"
 				Optimization="0"
 				AdditionalIncludeDirectories="..\..\..\..\..\..\AlephOneSrc;..\..\..\..\..\..\MapEditorOne\src;..\..\..\..\..\..\;..\..\..\..\..\..\MapEditorOne\SDLToWin32"
-				PreprocessorDefinitions="WIN32;_WINDOWS;_DEBUG;__WIN32__;SDL"
+				PreprocessorDefinitions="WIN32;_WINDOWS;_DEBUG;__WIN32__;SDL;__MVCPP__"
 				MinimalRebuild="true"
 				BasicRuntimeChecks="3"
 				RuntimeLibrary="3"
@@ -68,7 +68,7 @@
 			/>
 			<Tool
 				Name="VCLinkerTool"
-				AdditionalDependencies="SDL.lib ..\..\..\..\..\AlephOneSrc\lib\AlephOneSrcD.lib"
+				AdditionalDependencies="SDL.lib ..\..\..\..\..\..\AlephOneSrc\lib\AlephOneSrcD.lib"
 				OutputFile="$(OutDir)\$(ProjectName)D.exe"
 				LinkIncremental="2"
 				IgnoreDefaultLibraryNames=""
@@ -244,6 +244,10 @@
 				>
 			</File>
 			<File
+				RelativePath="..\..\..\..\..\src\PresetPolygon.cpp"
+				>
+			</File>
+			<File
 				RelativePath="..\..\..\..\..\src\stdafx.cpp"
 				>
 			</File>
@@ -290,6 +294,10 @@
 				>
 			</File>
 			<File
+				RelativePath="..\..\..\..\..\src\PresetPolygon.h"
+				>
+			</File>
+			<File
 				RelativePath="..\..\..\..\..\src\resource.h"
 				>
 			</File>
@@ -329,6 +337,10 @@
 			</File>
 			<File
 				RelativePath="..\..\..\..\..\src\res\bmp00005.bmp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\..\..\src\res\Marathon Toolbar\bmp00005.bmp"
 				>
 			</File>
 			<File

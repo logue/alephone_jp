@@ -89,93 +89,26 @@ void CMapEditorSDIView::doLButtonDownDrawMode(UINT nFlags, CPoint &point)
         //selecting tool = TI_ARROW
         //矢印ツール時
 
-        if(/*!(nFlags & MK_SHIFT) && */!(nFlags & MK_CONTROL)){
+        if(!(nFlags & MK_CONTROL)){
             //コントロールキーを押さずに
             //clik without modify key
-            
-            //→移動準備
-            //->ready for move
 
-            //既に選択している状態
-            //group selected
-            if(//theApp.isSelectingGroup && 
-                theApp.selectDatas.isSelected()){
+            if(theApp.selectDatas.isSelected())
+            {
+                //複数を選択中
 
-                //点をクリックしたかどうか
-                //is point in objects/points/lines/polygons?
                 if(isPointInSelection(point.x, point.y,
                     OFFSET_X_VIEW, OFFSET_Y_VIEW, OFFSET_X_WORLD, OFFSET_Y_WORLD,
                     POINT_DISTANCE_EPSILON, LINE_DISTANCE_EPSILON, OBJECT_DISTANCE_EPSILON,
                     &theApp.selectDatas, theApp.viewHeightMax, theApp.viewHeightMin,
                     DIV))
                 {
+                    //複数選択をクリック
+
                     //click on selecting group
                     //->remember offset, ready to move
+                    this->setupSelectDataGroupOffsets(point);
 
-                    //points
-                    std::vector<struct hpl::aleph::map::SelPoint>* selpoints = theApp.selectDatas.getSelPoints();
-                    for(int i = 0; i < (int)selpoints->size(); i ++){
-                        endpoint_data* ep = &EndpointList[selpoints->at(i).index];
-                        //set pos to view
-                        int x = ep->vertex.x;
-                        int y = ep->vertex.y;
-                        //ビュー座標に変換
-                        int drawP[2];
-                        getViewPointFromWorldPoint2D(ep->vertex, drawP);
-
-                        //sub to offset
-                        selpoints->at(i).offset[0] = drawP[0] - point.x;
-                        selpoints->at(i).offset[1] = drawP[1] - point.y;
-                    }
-
-                    //lines
-                    std::vector<struct hpl::aleph::map::SelLine>* sellines = theApp.selectDatas.getSelLines();
-                    for(int i = 0; i < (int)sellines->size(); i ++){
-                        struct hpl::aleph::map::SelLine* selData = &sellines->at(i);
-                        line_data* line = &LineList[selData->index];
-                        endpoint_data* begin = &EndpointList[line->endpoint_indexes[0]];
-                        endpoint_data* end = &EndpointList[line->endpoint_indexes[1]];
-                        int beginViewP[2], endViewP[2];
-                        getViewPointFromWorldPoint2D(begin->vertex, beginViewP);
-                        getViewPointFromWorldPoint2D(end->vertex, endViewP);
-                        //set offsets
-                        sellines->at(i).offset[0][0] = beginViewP[0] - point.x;
-                        sellines->at(i).offset[0][1] = beginViewP[1] - point.y;
-                        sellines->at(i).offset[1][0] = endViewP[0] - point.x;
-                        sellines->at(i).offset[1][1] = endViewP[1] - point.y;
-
-                    }
-
-                    /*
-                    //polygons
-                    std::vector<struct hpl::aleph::map::SelPolygon>* selpolygons = theApp.selectDatas.getSelPolygons();
-                    for(int i = 0; i < (int)selpolygons->size(); i ++){
-                        struct hpl::aleph::map::SelPolygon* selData = &selpolygons->at(i);
-                        //set offset
-                        polygon_data *polygon = &PolygonList[selData->index];
-                        int num = polygon->vertex_count;
-                        selpolygons->at(i).num = num;
-                        for(int j = 0; j < num; j ++){
-                            int drawViewP[2];
-                            hpl::aleph::map::getViewPointFromWorldPoint2D(EndpointList[polygon->endpoint_indexes[j]].vertex, drawViewP,
-                                OFFSET_X_WORLD, OFFSET_Y_WORLD, DIV, viewOffset[0], viewOffset[1]);
-
-                        }
-                    }
-                    */
-                    //objects
-                    std::vector<struct hpl::aleph::map::SelObject>* selobjects = theApp.selectDatas.getSelObjects();
-                    for(int i = 0; i < (int)selobjects->size(); i ++){
-                        struct hpl::aleph::map::SelObject* selData = &selobjects->at(i);
-                        map_object* obj = &SavedObjectList[selData->index];
-                        //set pos to view
-                        int drawViewP[2];
-                        getViewPointFromWorldPoint2D(obj->location.x, obj->location.y, drawViewP);
-
-                        //sub to offset
-                        selData->offset[0] = drawViewP[0] - point.x;
-                        selData->offset[1] = drawViewP[1] - point.y;
-                    }
                 }else{
                     //release all selection
                     theApp.selectDatas.clear();
@@ -314,8 +247,12 @@ void CMapEditorSDIView::doLButtonDownDrawMode(UINT nFlags, CPoint &point)
                 //////////////////////////////////
                 //ここからの処理はほかよりも後に書く
                 if(!theApp.selectDatas.isSelected()){
+                    //選択されなかった
+                    //no selection found
+
                     //範囲選択
                     //始点登録
+                    //
                     setStartPointForSelectGroup(point.x, point.y);
 
                     theApp.selectDatas.clear();
@@ -436,6 +373,78 @@ void CMapEditorSDIView::doLButtonDownDrawMode(UINT nFlags, CPoint &point)
 }
 
 /**
+    セットアップ
+*/
+void CMapEditorSDIView::setupSelectDataGroupOffsets(POINT point)
+{
+    //points
+    std::vector<struct hpl::aleph::map::SelPoint>* selpoints = theApp.selectDatas.getSelPoints();
+    for(int i = 0; i < (int)selpoints->size(); i ++){
+        endpoint_data* ep = &EndpointList[selpoints->at(i).index];
+        //set pos to view
+        int x = ep->vertex.x;
+        int y = ep->vertex.y;
+        //ビュー座標に変換
+        int drawP[2];
+        getViewPointFromWorldPoint2D(ep->vertex, drawP);
+
+        //sub to offset
+        selpoints->at(i).offset[0] = drawP[0] - point.x;
+        selpoints->at(i).offset[1] = drawP[1] - point.y;
+    }
+
+    //lines
+    std::vector<struct hpl::aleph::map::SelLine>* sellines = theApp.selectDatas.getSelLines();
+    for(int i = 0; i < (int)sellines->size(); i ++){
+        struct hpl::aleph::map::SelLine* selData = &sellines->at(i);
+        line_data* line = &LineList[selData->index];
+        endpoint_data* begin = &EndpointList[line->endpoint_indexes[0]];
+        endpoint_data* end = &EndpointList[line->endpoint_indexes[1]];
+        int beginViewP[2], endViewP[2];
+        getViewPointFromWorldPoint2D(begin->vertex, beginViewP);
+        getViewPointFromWorldPoint2D(end->vertex, endViewP);
+        //set offsets
+        sellines->at(i).offset[0][0] = beginViewP[0] - point.x;
+        sellines->at(i).offset[0][1] = beginViewP[1] - point.y;
+        sellines->at(i).offset[1][0] = endViewP[0] - point.x;
+        sellines->at(i).offset[1][1] = endViewP[1] - point.y;
+
+    }
+
+    //polygons
+    std::vector<struct hpl::aleph::map::SelPolygon>* selpolygons = theApp.selectDatas.getSelPolygons();
+    for(int i = 0; i < (int)selpolygons->size(); i ++){
+        struct hpl::aleph::map::SelPolygon* selData = &selpolygons->at(i);
+        //set offset
+        polygon_data *polygon = &PolygonList[selData->index];
+        int num = polygon->vertex_count;
+        selpolygons->at(i).num = num;
+        for(int j = 0; j < num; j ++){
+            int drawViewP[2];
+            getViewPointFromWorldPoint2D(
+                EndpointList[polygon->endpoint_indexes[j]].vertex, drawViewP);
+            selData->offset[j][0] = drawViewP[0] - point.x;
+            selData->offset[j][1] = drawViewP[1] - point.y;
+        }
+    }
+
+    //objects
+    std::vector<struct hpl::aleph::map::SelObject>* selobjects = theApp.selectDatas.getSelObjects();
+    for(int i = 0; i < (int)selobjects->size(); i ++){
+        struct hpl::aleph::map::SelObject* selData = &selobjects->at(i);
+        map_object* obj = &SavedObjectList[selData->index];
+        //set pos to view
+        int drawViewP[2];
+        getViewPointFromWorldPoint2D(obj->location.x, obj->location.y, drawViewP);
+
+        //sub to offset
+        selData->offset[0] = drawViewP[0] - point.x;
+        selData->offset[1] = drawViewP[1] - point.y;
+    }
+}
+
+
+/**
     ポリゴンを選択したかどうか判断します
 */
 void checkPolygonSelect(UINT nFlags, CPoint point)
@@ -491,6 +500,7 @@ void CMapEditorSDIView::OnLButtonDown(UINT nFlags, CPoint point)
             theApp.isPressLButtonWithCtrl = true;
         }
         if(nFlags & MK_CONTROL){
+            //Ctrlを押しながら
         }else{
             doLButtonDownDrawMode(nFlags, point);
         }
@@ -527,11 +537,15 @@ void CMapEditorSDIView::OnLButtonDown(UINT nFlags, CPoint point)
     SetCapture();
 }
 
+/**
+    オフセット移動
+*/
 void CMapEditorSDIView::moveMapOffset(int newPx, int newPy){
     int oldMousePoint[2];
     theApp.gridManager->getOldMousePoint(oldMousePoint);
     int deltaX = newPx - oldMousePoint[0];
     int deltaY = newPy - oldMousePoint[1];
+
     int offset[2];
     theApp.gridManager->getOffset(offset);
     offset[0] += deltaX;
@@ -561,12 +575,16 @@ void CMapEditorSDIView::OnMouseMove(UINT nFlags, CPoint point)
     }
 #else
     if(nFlags & MK_LBUTTON && ((nFlags & MK_CONTROL && theApp.isPressLButtonWithCtrl) ||
-        (theApp.getEditMode() == EM_DRAW && theApp.selectingToolType == TI_HAND))){
+        (theApp.getEditMode() == EM_DRAW && theApp.selectingToolType == TI_HAND)))
+    {
+        //コントロールキー押しながら左→オフセット移動
         //Control+L=move map view
         moveMapOffset(point.x, point.y);
     }else{
         if(theApp.getEditMode() == EM_DRAW){
+            //ドローモード
             if(theApp.selectingToolType == TI_ARROW){
+                //矢印ツール
                 if(!theApp.isPressLButtonWithCtrl && 
                     (nFlags & MK_LBUTTON) && /*!(nFlags & MK_CONTROL) && */
                     !(nFlags & MK_CONTROL))
@@ -671,6 +689,8 @@ void CMapEditorSDIView::OnMouseMove(UINT nFlags, CPoint point)
 void CMapEditorSDIView::OnLButtonUp(UINT nFlags, CPoint point)
 {
     // TODO: ここにメッセージ ハンドラ コードを追加するか、既定の処理を呼び出します。
+
+    //Ctrlを押しながら左ボタンを押しているか
     theApp.isPressLButtonWithCtrl = false;
 
     if(theApp.selectingToolType == TI_ARROW){
@@ -686,18 +706,11 @@ void CMapEditorSDIView::OnLButtonUp(UINT nFlags, CPoint point)
             //ポリゴン情報更新
             theApp.polygonPropertyDialog->setupDialog(theApp.selectDatas.getSelPolygons()->at(0).index);
         }
+
         if(theApp.isSelectingGroup){
-            /*if(isNearbyPoints(point.x, point.y, 
-                theApp.selectStartPoint.x, theApp.selectStartPoint.y, SELECT_GROUP_DISTANCE_THRESHOLD))
-            {
-                //
-                theApp.selectDatas.setSelected(false);
-            }else{
-                okSelect = true;
-            }*/
-            okSelect = true;
-        }
-        if(okSelect){
+            //範囲選択中
+
+
             //if selecting is only 1 object. setup property dialog
 
             //int OFFSET_X_VIEW = theApp.offset.x;
@@ -823,6 +836,7 @@ void CMapEditorSDIView::OnLButtonUp(UINT nFlags, CPoint point)
     }else if(theApp.selectingToolType == TI_SKULL){
     }else if(theApp.selectingToolType == TI_TEXT){
     }
+    //ボタンアップ→選択解除
     theApp.isSelectingGroup = false;
     Invalidate(FALSE);
     ReleaseCapture();

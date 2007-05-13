@@ -104,6 +104,7 @@ double hpl::aleph::map::getPointsDistance(world_point2d& pointA, world_point2d& 
 */
 void hpl::aleph::map::fixLine(int index, bool isDeleteOldSide)
 {
+    //TODO
     if(index < 0 || index >= (int)LineList.size()){
         return;
     }
@@ -149,6 +150,28 @@ void hpl::aleph::map::fixLine(int index, bool isDeleteOldSide)
 
     double length = hpl::aleph::map::getLineLength(index);
     line->length = static_cast<int>(length);
+}
+
+/**
+    üî•ñ‚ğü‚ğ\¬‚·‚é“_‚É‚æ‚Á‚Äæ“¾‚µ‚Ü‚·
+    get line index with two point indexes
+    @return ü‚ª‘¶İ‚µ‚È‚¢ê‡NONE
+*/
+int hpl::aleph::map::getLineIndexFromTwoLPoints(int pindex0, int pindex1)
+{
+    for(int i = 0; i < (int)LineList.size(); i ++){
+        line_data* line = get_line_data(i);
+        int ep0 = line->endpoint_indexes[0];
+        int ep1 = line->endpoint_indexes[1];
+
+        if((ep0 == pindex0 && ep1 == pindex1) ||
+            (ep1 == pindex0 && ep0 == pindex1))
+        {
+            //‘o•û‚ªˆê’v‚µ‚½ê‡‚Ì‚İ•Ô‚·
+            return i;
+        }
+    }
+    return NONE;
 }
 
 ///////////////////////  Sides  ////////////////////////////////////////////

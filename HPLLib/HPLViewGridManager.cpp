@@ -34,7 +34,7 @@ int hpl::aleph::view::HPLViewGridManager::getZoomDivision()
 */
 void hpl::aleph::view::HPLViewGridManager::zoomIn(int viewW, int viewH)
 {
-    this->addZoom(this->zoomProperties.zoomDivisionStep, viewW, viewH);
+    this->addZoom(-this->zoomProperties.zoomDivisionStep, viewW, viewH);
 }
 
 /**
@@ -61,12 +61,13 @@ void hpl::aleph::view::HPLViewGridManager::zoomReset()
 void hpl::aleph::view::HPLViewGridManager::addZoom(int step, int viewW, int viewH)
 {
     int oldZoomDiv = this->zoomDivision;
-
+    
     //Šg‘åŠ„—¦‚ªè‡’l‚ğ‰z‚¦‚½‚ç‘Œ¸‘¬“xDown
     //<en>set zoom step small when division num is over threshold
     if(zoomDivision < this->zoomProperties.zoomDivStepThreshold){
         step = hpl::math::sgn<int>(step) * this->zoomProperties.zoomDivisionStepDetail;
     }
+    this->zoomDivision += step;
 
     //adjustment
     if(this->zoomDivision < this->zoomProperties.zoomDivisionMin){

@@ -3,40 +3,12 @@
 #include <cmath>
 
 static double PI = 3.1415926;
-
-/////////////////////////////////////////////////////////////////////////////
-////////////  Static Methods (Private / Inner Methods)  /////////////////////
-////////////  Prototypes  ///////////////////////////////////////////////////
-/////////////////////////////////////////////////////////////////////////////
-/**
-    点から線分への距離（垂線の長さ）を求めます
-    <en>get 
-*/
-static double getPointDistanceFromLine(double px, double py, 
-                         double lx0, double ly0, double lx1, double ly1);
+const int ROUND_DEGREE = 360;
 
 /**
-    <jp>三平方の定理で長さを求める
-    <en>get length of (0,0)-(x,y)
+    点(px,py)から線(lx0,ly0)-(lx1,ly1)への垂線の距離を求める
 */
-static double getLength(double x, double y);
-
-/**
-    <jp>内積を求めます
-*/
-static double getInnerProduct(double x0, double y0, double x1, double y1);
-
-/**
-    点から降ろした垂線が線分と交差するか判断
-*/
-static bool isCrossPointLine(double px, double py, 
-                         double lx0, double ly0, double lx1, double ly1);
-
-
-/////////////////////////////////////////////////////////////////////////////
-//////////////  Static Methods  /////////////////////////////////////////////
-/////////////////////////////////////////////////////////////////////////////
-double getPointDistanceFromLine(double px, double py, 
+double hpl::math::getPointDistanceFromLine(double px, double py, 
                          double lx0, double ly0, double lx1, double ly1)
 {
     //start->end
@@ -80,22 +52,24 @@ double getPointDistanceFromLine(double px, double py,
     double distance = ((double)pointvectorDistance * sqrt(1 - costheta * costheta));
     return distance;
 }
-static double getLength(double x, double y)
+double hpl::math::getLength(double x, double y)
 {
     double length = (double)sqrt((double)(x * x + y * y));
     return length;
 }
 
-static double getInnerProduct(double x0, double y0, double x1, double y1)
+double hpl::math::getInnerProduct(double x0, double y0, double x1, double y1)
 {
     double num = x0 * x1 + y0 * y1;
     return num;
 }
 
-static bool isCrossPointLine(double px, double py, 
+/**線と点の近さの閾値*/
+const double EPSILON = 0.01;
+
+bool hpl::math::isCrossPointLine(double px, double py, 
                          double lx0, double ly0, double lx1, double ly1)
 {
-    const double EPSILON = 0.00001;
     double lineDeltaX = lx1 - lx0;
     double lineDeltaY = ly1 - ly0;
 
@@ -353,4 +327,173 @@ double hpl::math::optimizeRadian(double rad)
     double optDeg = hpl::math::optimizeDegree(deg);
     double optRad = hpl::math::getRadianFromDegree(optDeg);
     return optRad;
+}
+
+/////////////////////////////////////////////////////
+/////////////  cross  ///////////////////////////////
+/**
+    2つの線分が交差した点を取得します。
+    @return 2つの線分が交差していない場合偽
+*/
+bool hpl::math::getCrossPointOfTwoLines(double line0[2][2],
+    double line1[2][2], double dest[2])
+{
+    //それぞれの線の傾きと切片
+    double degree[2] = {0,0};
+    double slice[2] = {0,0};
+
+    int lineType0 = hpl::math::getLineAngleAndSlice(line0, &degree[0], &slice[0]);
+    int lineType1 = hpl::math::getLineAngleAndSlice(line1, &degree[1], &slice[1]);
+
+    //平行線
+    if(degree[0] == degree[1]){
+        return false;
+    }
+    if(lineType0 == hpl::math::LineType::Normal){
+        if(lineType1 == hpl::math::LineType::Normal){
+            //傾き
+            //y=a0x+b0
+            //y=a1x+b1
+            //x=(b1-b0)/(a1-a0)
+            double angle[2];
+            for(int i = 0; i < 2; i ++){
+                angle[i] = hpl::math::getAngleFromDegree(degree[i]);
+            }
+            dest[0] = (slice[1] - slice[0]) / (angle[1] - angle[0]);
+            dest[1] = dest[0] * angle[0] + slice[0];
+        }else if(lineType1 == hpl::math::LineType::Vertical){
+            //垂直
+            //交点はx=line1[0][0]のもの
+            //y=ax+b
+            //傾き
+            double angle0 = hpl::math::getAngleFromDegree(degree[0]);
+            dest[0] = line1[0][0];
+            dest[1] = angle0 * dest[0] + slice[0];
+        }else{
+            //水平
+            //交点はy=line1[0][1]のもの
+            //x=(y-b)/a
+            double angle0 = hpl::math::getAngleFromDegree(degree[0]);
+            dest[1] = line1[0][1];
+            dest[0] = (dest[1] - slice[0]) / angle0;
+        }
+    }else if(lineType0 == hpl::math::LineType::Horizontal){
+        if(lineType1 == hpl::math::LineType::Normal){
+            //交点はy=line0[0][1]
+            //x=(y-b)/a
+            double angle1 = hpl::math::getAngleFromDegree(degree[1]);
+            dest[1] = line0[0][1];
+            dest[0] = (dest[1] - slice[1]) / angle1;
+        }else if(lineType1 == hpl::math::LineType::Vertical){
+            //水平線0 AND 垂直線1
+            //交点はx=line1[0][0], y=line0[0][1]
+            dest[0] = line1[0][0];
+            dest[1] = line0[0][1];
+        }else{
+            //水平線＊水平線
+            return false;
+        }
+    }else{
+        //垂直線0
+        if(lineType1 == hpl::math::LineType::Normal){
+            //交点はx=line0[0][0]
+            //y=ax+b
+            double angle1 = hpl::math::getAngleFromDegree(degree[1]);
+            dest[0] = line0[0][0];
+            dest[1] = angle1 * dest[0] + slice[1];
+        }else if(lineType1 == hpl::math::LineType::Vertical){
+            //垂直線0 AND 垂直線1
+            return false;
+        }else{
+            //垂直線0＊水平線1
+            //交点はx=line0[0][0], y=line1[0][1]
+            dest[0] = line0[0][0];
+            dest[1] = line1[0][1];
+        }
+    }
+
+
+    //範囲チェック
+    if(!hpl::math::isPointInRect<double>(dest[0], dest[1],
+        line0[0][0], line0[0][1], line0[1][0], line0[1][1]))
+    {
+        return false;
+    }
+    if(!hpl::math::isPointInRect<double>(dest[0], dest[1],
+        line1[0][0], line1[0][1], line1[1][0], line1[1][1]))
+    {
+        return false;
+    }
+
+    return true;
+}
+
+/**
+    線分の端点データから、その線の傾きと切片を求めます
+    水平線か垂直な線の場合は傾きが反対の軸
+    @param line line datas ([0][0],[0][1])-([1][0],[1][1])
+    @param 
+    @return LineType 
+*/
+int getLineAngleAndSlice(double line[2][2], double *degree, double *slice)
+{
+    double lineDeltaX = line[1][0] - line[0][0];
+    double lineDeltaY = line[1][1] - line[0][1];
+
+    //線が垂直、水平
+    if((int)lineDeltaX == 0){
+        //垂直  x0==x1
+
+        if(lineDeltaY > 0){
+            //下向き
+            *degree = ROUND_DEGREE / 4.0;
+        }else{
+            //上向き
+            *degree = ROUND_DEGREE / 4.0 * 3.0;
+        }
+        return hpl::math::LineType::Vertical;
+    }
+    if((int)lineDeltaY == 0){
+        //水平  y0==y1
+        if(lineDeltaX > 0){
+            //右向き
+            *degree = 0;
+        }else{
+            //左向き
+            *degree = ROUND_DEGREE / 2.0;
+        }
+        return hpl::math::LineType::Horizontal;
+    }
+
+    //傾き
+    double angle = lineDeltaY / lineDeltaX;
+    *degree = hpl::math::getDegreeFromVector(lineDeltaX, lineDeltaY);
+    
+    //切片(x=0)
+    //y0=ax0+b  (1)
+    //y1=ax1+b  (2)
+    //bで代入
+    //a=(y2-y1)/(x2-x1)
+    //(1)に代入
+    //b=y0-ax0
+    *slice = line[0][1] - lineDeltaY / lineDeltaX * line[0][0];
+
+    return hpl::math::LineType::Normal;
+}
+
+/**
+    線の傾きを角度から得ます
+*/
+double hpl::math::getAngleFromDegree(double degree)
+{
+    //ラジアンにします
+    double rad = hpl::math::getRadianFromDegree(degree);
+    double cs = cos(rad);
+    if(cs == 0){
+        //X軸移動量が0（垂直）ならば
+        //0.000001くらいにする
+        cs = 0.0000001;
+    }
+    double angle = sin(rad) / cs;
+    return angle;
 }

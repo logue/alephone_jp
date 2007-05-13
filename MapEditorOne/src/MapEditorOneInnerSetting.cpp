@@ -11,43 +11,59 @@ const int MAX_FILE_PATH = 260;
 
 mapeditorone::MapEditorOneInnerSetting::MapEditorOneInnerSetting(const char* tagNameFilePath, const char* dataFilePath)
 {
-    std::ifstream ifs;
-    ifs.open(tagNameFilePath);
-    if(!ifs.is_open()){
-        MessageBox(NULL, L"Cannot open tag file", L"", MB_OK);
-        exit(-1);
-    }
-    //タグ読み取り
     char buf[MAX_FILE_PATH];
-    int counter = 0;
-    while(ifs.getline(buf, MAX_FILE_PATH) != NULL){
-        if(strcmp(buf, "")){
-            continue;
+    {
+        std::ifstream ifs;
+        ifs.open(tagNameFilePath);
+        if(!ifs.is_open()){
+            MessageBox(NULL, L"Cannot open tag file", L"", MB_OK);
+            exit(-1);
         }
-        std::string src(buf);
-        tagMap[counter] = src;
+        //タグ読み取り
+        int counter = 0;
+        while(ifs.getline(buf, MAX_FILE_PATH) != NULL){
+            if(strcmp(buf, "") == 0){
+                continue;
+            }
+            std::string src(buf);
+            tagMap[counter] = src;
+            counter ++;
+        }
+        if(counter < mapeditorone::TagType::MaxTagTypes){
+            MessageBox(NULL, L"The number of InnerSetting tags is too few", L"Error", MB_OK);
+            exit(1);
+        }
+        ifs.close();
     }
-    ifs.close();
 
-    ifs.open(dataFilePath);
-    if(!ifs.is_open()){
-        MessageBox(NULL, L"Cannot open inner data file", L"", MB_OK);
-        exit(-1);
-    }
-    while(ifs.getline(buf, MAX_FILE_PATH) != NULL){
-        std::string src(buf);
-        std::vector<std::string> pair = hpl::string::Split(src, "=");
-        if(pair.size() < 2){
-            //空白は無視
-            continue;
+    {
+        ifstream ifs(dataFilePath);
+        if(!ifs.is_open()){
+            MessageBox(NULL, L"Cannot open inner data file", L"", MB_OK);
+            exit(-1);
         }
-        for(int i = 0; i < mapeditorone::TagType::MaxTagTypes; i ++){
-            if(pair[0].compare(tagMap[i]) == 0){
-                datas[i] = pair[1];
+        int counter = 0;
+        while(ifs.getline(buf, MAX_FILE_PATH) != NULL){
+            std::string src(buf);
+            std::vector<std::string> pair = hpl::string::Split(src, "=");
+            if(pair.size() < 2){
+                //空白は無視
+                continue;
+            }
+            for(int i = 0; i < mapeditorone::TagType::MaxTagTypes; i ++){
+                if(pair[0].compare(tagMap[i]) == 0){
+                    datas[i] = pair[1];
+                    counter ++;
+                    break;
+                }
             }
         }
+        if(counter < mapeditorone::TagType::MaxTagTypes){
+            MessageBox(NULL, L"The number of InnerSetting datas is too few", L"Error", MB_OK);
+            exit(1);
+        }
+        ifs.close();
     }
-    ifs.close();
 }
 mapeditorone::MapEditorOneInnerSetting::~MapEditorOneInnerSetting()
 {

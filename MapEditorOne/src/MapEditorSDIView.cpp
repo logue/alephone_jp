@@ -700,12 +700,19 @@ CMapEditorSDIDoc* CMapEditorSDIView::GetDocument() const // デバッグ以外のバージ
 */
 BOOL CMapEditorSDIView::OnMouseWheel(UINT nFlags, short zDelta, CPoint pt)
 {
-	static short oldZDelta = zDelta;
+//	static short oldZDelta = zDelta;
 
 	
 	// TODO: ここにメッセージ ハンドラ コードを追加するか、既定の処理を呼び出します。
 	if(nFlags & MK_CONTROL){
-		addZoom( -1 * hpl::math::sgn<int>(zDelta) * ZOOM_DIVISION_STEP);
+		//addZoom( -1 * hpl::math::sgn<int>(zDelta) * ZOOM_DIVISION_STEP);
+        CRect rect;
+        GetClientRect(&rect);
+        if(zDelta < 0){
+            theApp.gridManager->zoomIn(rect.Width(), rect.Height());
+        }else{
+            theApp.gridManager->zoomOut(rect.Width(), rect.Height());
+        }
 		Invalidate(FALSE);
 	}
 	return CView::OnMouseWheel(nFlags, zDelta, pt);

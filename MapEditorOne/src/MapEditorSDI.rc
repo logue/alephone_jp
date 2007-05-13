@@ -107,6 +107,7 @@ IDB_BITMAP_POLYGON5     BITMAP                  "res\\marathon toolbar\\bmp00001
 IDB_BITMAP_POLYGON6     BITMAP                  "res\\marathon toolbar\\bmp00002.bmp"
 IDB_BITMAP_POLYGON7     BITMAP                  "res\\marathon toolbar\\bmp00003.bmp"
 IDB_BITMAP_POLYGON8     BITMAP                  "res\\marathon toolbar\\bmp00004.bmp"
+IDB_BITMAP_PATTERN_INVALID BITMAP                  "res\\marathon toolbar\\bmp00005.bmp"
 
 /////////////////////////////////////////////////////////////////////////////
 //

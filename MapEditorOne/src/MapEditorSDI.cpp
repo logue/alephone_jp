@@ -289,6 +289,7 @@ CMapEditorSDIApp::CMapEditorSDIApp()
 
 CMapEditorSDIApp::~CMapEditorSDIApp()
 {
+    delete gridManager;
     if(!setting.saveSetting()){
         AfxMessageBox(CString("fail to save setting:") + setting.getFilePath());
     }

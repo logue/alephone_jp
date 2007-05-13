@@ -82,6 +82,8 @@
 #define IDD_DIALOG_TEXTURE              247
 #define IDD_DIALOG6                     248
 #define IDD_DIALOG_TEXTURE_CHILD        248
+#define IDB_BITMAP1                     249
+#define IDB_BITMAP_PATTERN_INVALID      249
 #define IDC_LIST1                       1000
 #define IDC_LIST2                       1002
 #define IDC_COMBO1                      1003
@@ -210,7 +212,7 @@
 // 
 #ifdef APSTUDIO_INVOKED
 #ifndef APSTUDIO_READONLY_SYMBOLS
-#define _APS_NEXT_RESOURCE_VALUE        249
+#define _APS_NEXT_RESOURCE_VALUE        250
 #define _APS_NEXT_COMMAND_VALUE         32809
 #define _APS_NEXT_CONTROL_VALUE         1059
 #define _APS_NEXT_SYMED_VALUE           104
