@@ -41,7 +41,7 @@
 				Name="VCCLCompilerTool"
 				Optimization="0"
 				AdditionalIncludeDirectories="..\..\..\..\"
-				PreprocessorDefinitions="WIN32;_DEBUG;_LIB;SDL;__WIN32__"
+				PreprocessorDefinitions="WIN32;_DEBUG;_LIB;SDL;__WIN32__;__MVCPP__"
 				IgnoreStandardIncludePath="false"
 				MinimalRebuild="true"
 				BasicRuntimeChecks="3"
@@ -107,7 +107,7 @@
 			<Tool
 				Name="VCCLCompilerTool"
 				AdditionalIncludeDirectories="..\..\..\..\"
-				PreprocessorDefinitions="WIN32;NDEBUG;_LIB;SDL;__WIN32__"
+				PreprocessorDefinitions="WIN32;NDEBUG;_LIB;SDL;__WIN32__;__MVCPP__"
 				RuntimeLibrary="2"
 				UsePrecompiledHeader="0"
 				WarningLevel="3"
