@@ -244,7 +244,7 @@ double hpl::math::getTwoLinesRadian(double pax, double pay, double pbx, double p
     double deltaABX = pbx - pax;
     double deltaABY = pby - pay;
     //|AB|
-    double lengthAB = getLength(deltaABX, deltaABY);
+//    double lengthAB = getLength(deltaABX, deltaABY);
     //∠BAX
     double radABX = getRadianFromVector(deltaABX, deltaABY);
 
@@ -252,7 +252,7 @@ double hpl::math::getTwoLinesRadian(double pax, double pay, double pbx, double p
     double deltaCDX = pdx - pcx;
     double deltaCDY = pdy - pcy;
     //|CD|
-    double lengthCD = getLength(deltaCDX, deltaCDY);
+//    double lengthCD = getLength(deltaCDX, deltaCDY);
     //∠DCX
     double radCDX = getRadianFromVector(deltaCDX, deltaCDY);
 
@@ -435,7 +435,7 @@ bool hpl::math::getCrossPointOfTwoLines(double line0[2][2],
     @param 
     @return LineType 
 */
-int getLineAngleAndSlice(double line[2][2], double *degree, double *slice)
+int hpl::math::getLineAngleAndSlice(double line[2][2], double *degree, double *slice)
 {
     double lineDeltaX = line[1][0] - line[0][0];
     double lineDeltaY = line[1][1] - line[0][1];
@@ -496,4 +496,63 @@ double hpl::math::getAngleFromDegree(double degree)
     }
     double angle = sin(rad) / cs;
     return angle;
+}
+
+/**
+    指定した範囲に収まるn角形を生成します。
+    作り方は
+    @param (x0,y0)-(x1,y1) range of rectangle. the polygon you want will be create fitting with this.
+    @param points destraction of this function. you can add points and lines and polygon
+*/
+bool hpl::math::getRectangleScaledPreparedPolygon(double x0, double y0, double x1, double y1, int n, 
+                                                  double points[8][2])
+{
+    if(n < 3){
+        return false;
+    }
+
+    //範囲指定を左上・右下にする
+    if(x0 > x1){
+        hpl::math::exchange<double>(&x0, &x1);
+    }
+    if(y0 > y1){
+        hpl::math::exchange<double>(&y0, &y1);
+    }
+    
+    //円周上の位置を求めます
+    double circulatePoints[8][2];
+    double intervalDeg = ROUND_DEGREE / n;
+
+    //中心座標
+    double center[] = {(x1 - x0) / 2, (y1 - y0) / 2};
+    //長径 = 中心から(x0,y0)への直線距離
+    double deltaX = center[0] - x0;
+    double deltaY = center[1] - y0;
+
+    double maxLength = hpl::math::getLength(deltaX, deltaY);
+
+    for(int i = 0; i < n; i ++){
+        double deg = - ROUND_DEGREE / 4 + intervalDeg * i;
+        double rad = hpl::math::getRadianFromDegree(deg);
+        circulatePoints[i][0] = cos(rad) * maxLength;
+        circulatePoints[i][1] = sin(rad) * maxLength;
+    }
+
+    //線分CPと矩形の交点を求めます
+    //上辺・右辺・下辺・左辺
+    for(int p = 0; p < n; p ++){
+        double rectangleLinePoint[4][2][2] = {{{x0,y0},{x1,y0}},{{x1,y0},{x1,y1}}, {{x0,y1},{x1,y1}}, {{x0,y0},{x0,y1}}};
+        bool result = false;
+        for(int i = 0 ; i < 4; i ++){
+            double circulateLine[2][2] = {{center[0],center[1]}, {circulatePoints[p][0],circulatePoints[p][1]}};
+            result = hpl::math::getCrossPointOfTwoLines(rectangleLinePoint[i], circulateLine, points[p]);
+            if(result){
+                break;
+            }
+        }
+        if(!result){
+            return false;
+        }
+    }
+    return true;
 }

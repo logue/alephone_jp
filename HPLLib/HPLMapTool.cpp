@@ -70,6 +70,14 @@ bool hpl::aleph::map::isSelectLine(int viewPX, int viewPY,
     bool isSelect = hpl::math::isNearbyPointToLine(viewPX, viewPY, x0, y0, x1, y1, distance);
     return isSelect;
 }
+/**
+    指定した座標では線を選択できたか？
+    @param point 指定ポイント
+    @param linePoint0 線の端点0
+    @param linePoint1 線の端点1
+    @param distance 閾値
+    @return 選択できるなら真
+*/
 bool hpl::aleph::map::isSelectLine(world_point2d &point,
                   world_point2d &linePoint0, world_point2d &linePoint1,
                   int distance)
@@ -79,7 +87,10 @@ bool hpl::aleph::map::isSelectLine(world_point2d &point,
     return isSelect;
 }
 
-
+/**
+    線の長さを求めます
+    @param index 線インデックス
+*/
 double hpl::aleph::map::getLineLength(int index)
 {
     line_data* l = get_line_data(index);
@@ -90,6 +101,7 @@ double hpl::aleph::map::getLineLength(int index)
 }
 
 /**
+    2点の距離を求めます
 */
 double hpl::aleph::map::getPointsDistance(world_point2d& pointA, world_point2d& pointB)
 {
@@ -295,22 +307,64 @@ bool hpl::aleph::map::isValidPolygon(int index)
     int startPointIndex = polygon->endpoint_indexes[0];
     int pointA, pointB, pointC;
     
+    
     //時計回りか、反時計回りか
     RotationType polygonRotationType = Clockwise;
+    bool isFirstLoop = true;
 
-    //点iと点i+1を含む線をAB, 点i+1と点i+2を含む線をBCとする。
-    //最初の線[点0,点1]と線[点1,点2]の角度から、時計回りか、反時計回りかを判定する
-    pointA = startPointIndex;
-    pointB = polygon->endpoint_indexes[1];
-    pointC = polygon->endpoint_indexes[2];
-    
-    //二つの線AB,BCが織り成す角度を求める
-    double firstDegree = hpl::aleph::map::getTwoLinesDegree(pointA, pointB, pointB, pointC);
-    //optimize degree to [0,360)
-    double optFirstDeg = hpl::math::optimizeDegree(firstDegree);
-    //if degree is in [180,360),
-    
+    for(int i = 0; i < vertexCount - 2; i ++){
+        //点iと点i+1を含む線をAB, 点i+1と点i+2を含む線をBCとする。
+        //最初の線[点0,点1]と線[点1,点2]の角度から、時計回りか、反時計回りかを判定する
+        pointA = polygon->endpoint_indexes[i];
+        pointB = polygon->endpoint_indexes[i + 1];
+        pointC = polygon->endpoint_indexes[i + 2];
+        
+        //二つの線AB,BCが織り成す角度を求める
+        double firstDegree = hpl::aleph::map::getTwoLinesDegree(pointA, pointB, pointB, pointC);
+        int lineABIndex = hpl::aleph::map::getLineIndexFromTwoLPoints(pointA, pointB);
+        int lineBCIndex = hpl::aleph::map::getLineIndexFromTwoLPoints(pointB, pointC);
+        if(lineABIndex == NONE || lineBCIndex == NONE){
+            //線の並び順が正しくない
+            return false;
+        }
+        //line_indexesのならびに対応しているかどうか
+        if(polygon->line_indexes[i] != lineABIndex ||
+            polygon->line_indexes[i + 1] != lineBCIndex){
+            return false;
+        }
+        //optimize degree to [0,360)
+        double optDeg = hpl::math::optimizeDegree(firstDegree);
+
+        if(isFirstLoop){
+            //もし角度が[0,180)ならば、右回りである
+            //それ以外（[180,360)）ならば、左回りである
+            if(optDeg >= 180.0){
+                polygonRotationType = Counterclockwise;
+            }
+            isFirstLoop = false;
+        }else{
+            //ポリゴンが逆鋭角（切り込んでる）状態ならば異常であるとする
+            if((polygonRotationType == Clockwise && optDeg >= 180) ||
+                (polygonRotationType == Counterclockwise && optDeg < 180)){
+                return false;
+            }
+        }
+    }
     return true;
+}
+
+/**
+    座標を取り囲むポリゴンのうち、ポリゴンとして成立しているものをさがします
+    すでにポリゴンが存在している場合は無視します
+    @param wpoint 探索基点。ここを囲むポリゴンを探す
+    @return ポリゴンの実データ候補。これを元に生成すると良い。データはcreatePolygonで生成すべし
+*/
+std::vector<polygon_data> hpl::aleph::map::searchValidPolygon(world_point2d wpoint)
+{
+    std::vector<polygon_data> polyDatas;
+
+
+    return polyDatas;
 }
 
 /**

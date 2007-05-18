@@ -19,6 +19,8 @@ public:
 public:
 
 public:
+    void draw(CDC* pDC);
+
     void drawBackground(CDC *cdc);
     void drawGrid(CDC *cdc);
     void drawPolygons(CDC *cdc);

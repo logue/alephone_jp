@@ -169,10 +169,23 @@ namespace math{
     double getInnerProduct(double x0, double y0, double x1, double y1);
 
     /**
-        点から降ろした垂線が線分と交差するか判断
+        点から降ろした垂線が「線分」と交差するか判断（直線や半直線ではない）
     */
     bool isCrossPointLine(double px, double py, 
                              double lx0, double ly0, double lx1, double ly1);
+
+    /////////////////////////////////////////////////////////
+    //////  polygons  ///////////////////////////////////////
+    /**
+        指定した範囲に収まるn角形を生成します。
+        作り方は
+        @param (x0,y0)-(x1,y1) range of rectangle. the polygon you want will be create fitting with this.
+        @param n
+        @param points destraction of this function. you can add points and lines and polygon
+        @return true when succeeded
+    */
+    bool getRectangleScaledPreparedPolygon(double x0, double y0, double x1, double y1, int n,
+                                                            double points[8][2]);
 };
 };
 #endif

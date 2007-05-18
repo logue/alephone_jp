@@ -574,12 +574,19 @@ void CMapEditorSDIView::OnMouseMove(UINT nFlags, CPoint point)
         moveMapOffset(point.x, point.y);
     }
 #else
+/*    if(nFlags & MK_LBUTTON){
+        //表示更新
+        CDC* pDC = this->GetDC();
+        draw(pDC);
+    }
+    */
     if(nFlags & MK_LBUTTON && ((nFlags & MK_CONTROL && theApp.isPressLButtonWithCtrl) ||
         (theApp.getEditMode() == EM_DRAW && theApp.selectingToolType == TI_HAND)))
     {
         //コントロールキー押しながら左→オフセット移動
         //Control+L=move map view
         moveMapOffset(point.x, point.y);
+
     }else{
         if(theApp.getEditMode() == EM_DRAW){
             //ドローモード

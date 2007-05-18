@@ -7,6 +7,10 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "MapViewerOne", "..\..\..\..
 	ProjectSection(ProjectDependencies) = postProject
 	EndProjectSection
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "TestMathematics", "..\TestMathematics\TestMathematics.vcproj", "{E4E706CD-71B5-440D-8F0C-0765F9C7BE15}"
+	ProjectSection(ProjectDependencies) = postProject
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfiguration) = preSolution
 		Debug = Debug
@@ -21,6 +25,10 @@ Global
 		{ACE498C0-00F1-4274-AAAB-33D03A5864D9}.Debug.Build.0 = Debug|Win32
 		{ACE498C0-00F1-4274-AAAB-33D03A5864D9}.Release.ActiveCfg = Release|Win32
 		{ACE498C0-00F1-4274-AAAB-33D03A5864D9}.Release.Build.0 = Release|Win32
+		{E4E706CD-71B5-440D-8F0C-0765F9C7BE15}.Debug.ActiveCfg = Debug|Win32
+		{E4E706CD-71B5-440D-8F0C-0765F9C7BE15}.Debug.Build.0 = Debug|Win32
+		{E4E706CD-71B5-440D-8F0C-0765F9C7BE15}.Release.ActiveCfg = Release|Win32
+		{E4E706CD-71B5-440D-8F0C-0765F9C7BE15}.Release.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 	EndGlobalSection

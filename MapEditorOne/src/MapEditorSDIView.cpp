@@ -239,7 +239,14 @@ void CMapEditorSDIView::drawPolygons(CDC *cdc)
 			theApp.selectDatas.containsPolygon(index)){
 			cdc->SelectObject(&netBrush);
 		}else{
+            /*
 			//check polygon invalidate
+            if(!hpl::aleph::map::isValidPolygon(index)){
+                //不正なポリゴンです
+                brush.DeleteObject();
+                brush.CreateSolidBrush(RGB(255,0,0));
+                cdc->SelectObject(&brush);
+            }*/
 		}
 		Polygon(cdc->m_hDC, points, vertexCount);
 
@@ -553,7 +560,10 @@ void CMapEditorSDIView::OnDraw(CDC* pDC)
 	ASSERT_VALID(pDoc);
 	if (!pDoc)
 		return;
-
+    draw(pDC);
+}
+void CMapEditorSDIView::draw(CDC* pDC){
+    
 	// TODO: この場所にネイティブ データ用の描画コードを追加します。
 
 
@@ -713,6 +723,9 @@ BOOL CMapEditorSDIView::OnMouseWheel(UINT nFlags, short zDelta, CPoint pt)
         }else{
             theApp.gridManager->zoomOut(rect.Width(), rect.Height());
         }
+/*        //表示更新
+        CDC* pDC = this->GetDC();
+        draw(pDC);*/
 		Invalidate(FALSE);
 	}
 	return CView::OnMouseWheel(nFlags, zDelta, pt);

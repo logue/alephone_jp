@@ -113,6 +113,8 @@ namespace map{
 	/**
 		<jp>線情報を更新する
 		<en>Fix line_data up
+        1:calc length
+        2:set side
 		@param isDeleteOldSide descide which deletes or not 使われていない壁情報を削除するか
 	*/
 	void fixLine(int index, bool isDeleteOldSide);
@@ -167,13 +169,9 @@ namespace map{
         座標を取り囲むポリゴンのうち、ポリゴンとして成立しているものをさがします
         すでにポリゴンが存在している場合は無視します
         @param wpoint 探索基点。ここを囲むポリゴンを探す
-        @param heightMin 高さ制限最小値
-        @param heightMax 高さ制限最大値
-        @param pointIndexes 見つかった場合ここに点番号が「右回り順」で入れられます
-        @param lineIndexes 見つかった場合ここに線番号が「右回り順」で入れられます
+        @return ポリゴンの実データ候補。これを元に生成すると良い。データはcreatePolygonで生成すべし
     */
-    bool searchValidPolygon(world_point2d wpoint, int heightMin, int heightMax,
-        int poinIndexes[]. int lineIndexes[]);
+    std::vector<polygon_data> searchValidPolygon(world_point2d wpoint);
 
     /**
         二つの線が織り成す角度を求めます
@@ -182,6 +180,18 @@ namespace map{
     */
     double getTwoLinesDegree(int pIndexA1, int pIndexA2, int pIndexB1, int pIndexB2);
     double getTwoLinesRadian(int pIndexA1, int pIndexA2, int pIndexB1, int pIndexB2);
+
+    /**
+        ポリゴンデータを作ります
+        TODO
+    */
+    polygon_data createPolygon(int epindexes[8]);
+
+    /**
+        ポリゴン情報を修正します
+        TODO
+    */
+    void fixPolygon(int pindex);
 
     /**
         ポリゴンをセットアップします

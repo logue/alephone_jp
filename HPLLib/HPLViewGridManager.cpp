@@ -81,10 +81,10 @@ void hpl::aleph::view::HPLViewGridManager::addZoom(int step, int viewW, int view
 
     int newZoomDiv = this->zoomDivision;
     //ˆÊ’uC³
-    int ax = center[0] - oldOffset[1];
-    this->viewOffset[0] = center[0] - ax * oldZoomDiv / newZoomDiv;
-    int ay = center[1] - oldOffset[1];
-    this->viewOffset[1] = center[1] - ay * oldZoomDiv / newZoomDiv;
+    for(int i = 0; i < VIEW_DIMENSION; i ++){
+        int a = center[i] - oldOffset[i];
+        this->viewOffset[i] = center[i] - a * oldZoomDiv / newZoomDiv;
+    }
 }
 
 //void setOldMousePoint(int x, int y);
