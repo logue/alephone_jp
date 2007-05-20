@@ -188,6 +188,26 @@ namespace map{
     polygon_data createPolygon(int epindexes[8]);
 
     /**
+        世界座標からポリゴンデータを作ります
+        TODO 整合性
+        @param points 世界座標
+        @param ep 生成された点データ
+        @param ld 生成された線データ
+        @param n n角形
+    */
+    polygon_data createPolygon(world_point2d points[], endpoint_data epd[], line_data ld[],
+        int n);
+
+    /**
+        独立したポリゴンデータを追加します
+    */
+    void addNewPolygon(polygon_data& pdata, endpoint_data epd[], line_data ld[], int n);
+    void addNewPolygon(world_distance points[][2], int n);
+    void addNewPolygon(world_point2d points[], int n);
+
+//    void addNewPoint(endpoint_data point);
+
+    /**
         ポリゴン情報を修正します
         TODO
     */

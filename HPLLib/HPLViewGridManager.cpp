@@ -8,11 +8,16 @@
 */
 const int VIEW_DIMENSION = 2;
 
-hpl::aleph::view::HPLViewGridManager::HPLViewGridManager(ZoomProperties *zoomProp)
+hpl::aleph::view::HPLViewGridManager::HPLViewGridManager()
 {
-    memcpy(&this->zoomProperties, zoomProp, sizeof(struct ZoomProperties));
     //オフセット初期化
     this->viewOffset[0] = viewOffset[1] = 0;
+    //割り算率初期化
+    this->zoomReset();
+}
+void hpl::aleph::view::HPLViewGridManager::setProp(ZoomProperties *zoomProp)
+{
+    memcpy(&this->zoomProperties, zoomProp, sizeof(struct ZoomProperties));
     //割り算率初期化
     this->zoomReset();
 }

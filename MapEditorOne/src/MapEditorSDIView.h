@@ -28,6 +28,19 @@ public:
     void drawPoints(CDC *cdc);
     void drawObjects(CDC *cdc);
     void drawStrings(CDC *cdc);
+
+    /** 
+        ひとつのアイテムを選択することを試みる
+    */
+    bool tryToSelectOneItem(UINT nFlags, POINT &point);
+
+    /**
+        矢印ツールでLボタンを押した
+    */
+    void onLButtonDownArrowTool(UINT nFlags, POINT &point);
+    /**
+        選択情報のオフセットを設定
+    */
     void setupSelectDataGroupOffsets(POINT point);
 
 // オーバーライド

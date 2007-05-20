@@ -186,6 +186,16 @@ namespace math{
     */
     bool getRectangleScaledPreparedPolygon(double x0, double y0, double x1, double y1, int n,
                                                             double points[8][2]);
+    /**
+        矩形の中心位置を得ます
+    */
+    void getCenterOfRectangle(double x0, double y0, double x1, double y1, double center[2]);
+
+    /**
+        円周に沿った正n角形の点を得ます
+    */
+    void getCirculatePolygonPoints(double centerx, double centery, double radius,
+        int n, double dest[][2]);
 };
 };
 #endif

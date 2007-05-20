@@ -1,10 +1,12 @@
 #include "HPLMath.h"
 
 #include <cmath>
+#include <float.h>
 
 static double PI = 3.1415926;
 const int ROUND_DEGREE = 360;
-
+//変形多角形作成用の円のサイズ(任意)
+const double POLYGON_CIRCLE_RADIUS = 30;
 /**
     点(px,py)から線(lx0,ly0)-(lx1,ly1)への垂線の距離を求める
 */
@@ -134,20 +136,20 @@ double hpl::math::getRadianFromDegree(double deg)
     return rad;
 }
 
-double hpl::math::getDegreeFromVector(double dx, double dy)
+double hpl::math::getRadianFromVector(double dx, double dy)
 {
     if(dx == 0){
         if(dy <= 0){
-            return 270;
+            return PI * 3.0 / 2.0;
         }else{
-            return 90;
+            return PI / 2.0;
         }
     }
     if(dy == 0){
         if(dx >= 0){
             return 0;
         }else{
-            return 180;
+            return PI;
         }
     }
 
@@ -278,10 +280,10 @@ double hpl::math::getDegreeFromVector(double x, double y){
     return rad;
 }
 */
-double hpl::math::getRadianFromVector(double x, double y){
-    double deg = hpl::math::getDegreeFromVector(x, y);
-    double rad = hpl::math::getRadianFromDegree(deg);
-    return rad;
+double hpl::math::getDegreeFromVector(double x, double y){
+    double rad = hpl::math::getRadianFromVector(x, y);
+    double deg = hpl::math::getDegreeFromRadian(rad);
+    return deg;
 /*    //atanで求める
     //垂直
     if(x == 0){
@@ -359,7 +361,7 @@ bool hpl::math::getCrossPointOfTwoLines(double line0[2][2],
             for(int i = 0; i < 2; i ++){
                 angle[i] = hpl::math::getAngleFromDegree(degree[i]);
             }
-            dest[0] = (slice[1] - slice[0]) / (angle[1] - angle[0]);
+            dest[0] = -(slice[1] - slice[0]) / (angle[1] - angle[0]);
             dest[1] = dest[0] * angle[0] + slice[0];
         }else if(lineType1 == hpl::math::LineType::Vertical){
             //垂直
@@ -440,6 +442,7 @@ int hpl::math::getLineAngleAndSlice(double line[2][2], double *degree, double *s
     double lineDeltaX = line[1][0] - line[0][0];
     double lineDeltaY = line[1][1] - line[0][1];
 
+    *slice = 0;
     //線が垂直、水平
     if((int)lineDeltaX == 0){
         //垂直  x0==x1
@@ -454,6 +457,7 @@ int hpl::math::getLineAngleAndSlice(double line[2][2], double *degree, double *s
         return hpl::math::LineType::Vertical;
     }
     if((int)lineDeltaY == 0){
+        *slice = line[0][1];
         //水平  y0==y1
         if(lineDeltaX > 0){
             //右向き
@@ -473,7 +477,7 @@ int hpl::math::getLineAngleAndSlice(double line[2][2], double *degree, double *s
     //y0=ax0+b  (1)
     //y1=ax1+b  (2)
     //bで代入
-    //a=(y2-y1)/(x2-x1)
+    //a=(y1-y0)/(x1-x0)
     //(1)に代入
     //b=y0-ax0
     *slice = line[0][1] - lineDeltaY / lineDeltaX * line[0][0];
@@ -489,7 +493,7 @@ double hpl::math::getAngleFromDegree(double degree)
     //ラジアンにします
     double rad = hpl::math::getRadianFromDegree(degree);
     double cs = cos(rad);
-    if(cs == 0){
+    if(cs == 0.000000){
         //X軸移動量が0（垂直）ならば
         //0.000001くらいにする
         cs = 0.0000001;
@@ -511,37 +515,85 @@ bool hpl::math::getRectangleScaledPreparedPolygon(double x0, double y0, double x
         return false;
     }
 
-    //範囲指定を左上・右下にする
-    if(x0 > x1){
-        hpl::math::exchange<double>(&x0, &x1);
-    }
-    if(y0 > y1){
-        hpl::math::exchange<double>(&y0, &y1);
-    }
-    
-    //円周上の位置を求めます
-    double circulatePoints[8][2];
-    double intervalDeg = ROUND_DEGREE / n;
-
     //中心座標
-    double center[] = {(x1 - x0) / 2, (y1 - y0) / 2};
-    //長径 = 中心から(x0,y0)への直線距離
-    double deltaX = center[0] - x0;
-    double deltaY = center[1] - y0;
+    double center[2];
+    hpl::math::getCenterOfRectangle(x0,y0,x1,y1,center);
 
-    double maxLength = hpl::math::getLength(deltaX, deltaY);
+    //原点を中心とした半径POLYGON_CIRCLE_RADIUS(てきとー)の円を想定し、
+    double r = POLYGON_CIRCLE_RADIUS;
+    //その円周上に正n角形を作成
+    double circulatePoints[8][2];
+    hpl::math::getCirculatePolygonPoints(0,0, r, n,
+        circulatePoints);
+
+    //正n角形に外接する長方形を作成
+    //最小値と最大値をそれぞれtop/leftとright/bottomにする
+    double top = DBL_MAX;
+    double left = DBL_MAX;
+    double right = DBL_MIN;
+    double bottom = DBL_MIN;
+    for(int i = 0; i < n; i ++){
+        double x = circulatePoints[i][0];
+        double y = circulatePoints[i][1];
+        if(x < left){
+            left = x;
+        }
+        if(x > right){
+            right = x;
+        }
+        if(y < top){
+            top = y;
+        }
+        if(y > bottom){
+            bottom = y;
+        }
+    }
+    double rect[2][2] = {{left, top}, {right, bottom}};
+    double rectCenter[2];
+    hpl::math::getCenterOfRectangle(left,top,right,bottom,rectCenter);
+
+    double inputWidth = fabs(x1 - x0);
+    double inputHeight = fabs(y1-y0);
+    double rectWidth = right - left;
+    double rectHeight = bottom - top;
+    //位置を拡大縮小で調整
+    double xZoom = 0;
+    if( rectWidth != 0) xZoom = inputWidth / rectWidth;
+    double yZoom = 0;
+    if(rectHeight != 0) yZoom = inputHeight / rectHeight;
 
     for(int i = 0; i < n; i ++){
-        double deg = - ROUND_DEGREE / 4 + intervalDeg * i;
-        double rad = hpl::math::getRadianFromDegree(deg);
-        circulatePoints[i][0] = cos(rad) * maxLength;
-        circulatePoints[i][1] = sin(rad) * maxLength;
+        points[i][0] = (circulatePoints[i][0] - rectCenter[0]) * xZoom + center[0];
+        points[i][1] = (circulatePoints[i][1] - rectCenter[1]) * yZoom + center[1];
     }
-
+    if(points[0][1] != points[1][1] && points[0][1] != points[2][1])
+    {
+        //右側、下側が1ピクセルオーバーするので調整する
+        //                    0,1,2,3,4,5,6,7,8
+        int leftMaxTable[] = {0,0,0,2,2,4,4,4,4};
+        for(int i = 0; i < leftMaxTable[n]; i ++){
+            points[i][0] -= 1.0;
+        }
+        const int BOTTOM_INDEX_MAX = 10;
+        int upMaxTable[][BOTTOM_INDEX_MAX] ={
+            {-1},{-1},{-1},
+            {1,2,-1},
+            {1,2,-1},
+            {1,2,3,4,-1},
+            {1,2,3,4,5,-1},
+            {1,2,3,4,5,6,-1},
+            {1,2,3,4,5,6,-1}
+        };
+        for(int i = 0; upMaxTable[n][i] >= 0; i ++){
+            points[upMaxTable[n][i]][1] -= 1.0;
+        }
+    }
+/*
     //線分CPと矩形の交点を求めます
     //上辺・右辺・下辺・左辺
     for(int p = 0; p < n; p ++){
-        double rectangleLinePoint[4][2][2] = {{{x0,y0},{x1,y0}},{{x1,y0},{x1,y1}}, {{x0,y1},{x1,y1}}, {{x0,y0},{x0,y1}}};
+        double rectangleLinePoint[4][2][2] = {
+            {{x0,y0},{x1,y0}},{{x1,y0},{x1,y1}}, {{x0,y1},{x1,y1}}, {{x0,y0},{x0,y1}}};
         bool result = false;
         for(int i = 0 ; i < 4; i ++){
             double circulateLine[2][2] = {{center[0],center[1]}, {circulatePoints[p][0],circulatePoints[p][1]}};
@@ -554,5 +606,55 @@ bool hpl::math::getRectangleScaledPreparedPolygon(double x0, double y0, double x
             return false;
         }
     }
+    */
     return true;
+}
+
+/**
+    矩形の中心位置を得ます
+*/
+void hpl::math::getCenterOfRectangle(double x0, double y0, double x1, double y1, double center[2])
+{
+    //範囲指定を左上・右下にする
+    if(x0 > x1){
+        hpl::math::exchange<double>(&x0, &x1);
+    }
+    if(y0 > y1){
+        hpl::math::exchange<double>(&y0, &y1);
+    }
+    
+    //中心座標
+    center[0] = (x1 - x0) / 2.0 + x0;
+    center[1] = (y1 - y0) / 2.0 + y0;
+}
+
+/**
+    円周に沿った正n角形の点を得ます
+*/
+void hpl::math::getCirculatePolygonPoints(double centerx, double centery, double radius,
+                                          int n, double dest[][2])
+{
+    //円周上の位置を求めます
+    double intervalDeg = (double)ROUND_DEGREE / n / 2;
+
+    double startDeg = - (double)ROUND_DEGREE / 8.0;
+    if(n == 4){
+        startDeg = - (double)ROUND_DEGREE / 8.0 + (double)ROUND_DEGREE / 16.0;
+    }
+    if(n == 8){
+        startDeg = - (double)ROUND_DEGREE / 8.0 + (double)ROUND_DEGREE / 32.0;
+    }
+    for(int i = 0; i < n; i ++){
+        double deg = startDeg + intervalDeg * i;//
+        double rad = hpl::math::getRadianFromDegree(deg);
+        dest[i][0] = cos(rad) * radius + centerx;
+        dest[i][1] = sin(rad) * radius + centery;
+    }
+    if(n != 6){
+        //下に来る2点がずれるので、同じ高さにする
+        //             0,1,2,3,4,5,6,7,8
+        int table[] = {0,0,0,1,1,2,0,3,3};
+        int t = table[n];
+        dest[t][1] = dest[t + 1][1];
+    }
 }

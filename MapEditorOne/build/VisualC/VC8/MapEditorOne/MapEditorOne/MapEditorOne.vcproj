@@ -157,7 +157,7 @@
 			/>
 			<Tool
 				Name="VCLinkerTool"
-				AdditionalDependencies="SDL.lib ..\..\..\..\..\AlephOneSrc\lib\AlephOneSrc.lib"
+				AdditionalDependencies="SDL.lib ..\..\..\..\..\..\AlephOneSrc\lib\AlephOneSrc.lib"
 				LinkIncremental="1"
 				GenerateDebugInformation="true"
 				SubSystem="2"
@@ -199,6 +199,10 @@
 			Filter="cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx"
 			UniqueIdentifier="{4FC737F1-C7A5-4376-A066-2A32D752A2FF}"
 			>
+			<File
+				RelativePath="..\..\..\..\..\src\EventManager.cpp"
+				>
+			</File>
 			<File
 				RelativePath="..\..\..\..\..\src\HPLLibCommon.cpp"
 				>
@@ -244,10 +248,6 @@
 				>
 			</File>
 			<File
-				RelativePath="..\..\..\..\..\src\PresetPolygon.cpp"
-				>
-			</File>
-			<File
 				RelativePath="..\..\..\..\..\src\stdafx.cpp"
 				>
 			</File>
@@ -257,6 +257,10 @@
 			Filter="h;hpp;hxx;hm;inl;inc;xsd"
 			UniqueIdentifier="{93995380-89BD-4b04-88EB-625FBE52EBFB}"
 			>
+			<File
+				RelativePath="..\..\..\..\..\src\EventManager.h"
+				>
+			</File>
 			<File
 				RelativePath="..\..\..\..\..\src\HPLLibCommon.h"
 				>
@@ -291,10 +295,6 @@
 			</File>
 			<File
 				RelativePath="..\..\..\..\..\src\MapEditorSDIView.h"
-				>
-			</File>
-			<File
-				RelativePath="..\..\..\..\..\src\PresetPolygon.h"
 				>
 			</File>
 			<File

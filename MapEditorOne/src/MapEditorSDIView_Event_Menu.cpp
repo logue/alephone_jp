@@ -87,7 +87,7 @@ void CMapEditorSDIView::OnFileOpen()
         //setStatusBar(0, theApp.LevelNameList.GetAt(0));
 
         //default zoom
-        theApp.gridManager->zoomReset();
+        theApp.gridManager.zoomReset();
         
         //default position(center)
         OnItemCentering();
@@ -158,7 +158,7 @@ void CMapEditorSDIView::OnZoomIn()
 {
     CRect rect;
     GetClientRect(&rect);
-    theApp.gridManager->zoomIn(rect.Width(), rect.Height());
+    theApp.gridManager.zoomIn(rect.Width(), rect.Height());
     this->Invalidate(FALSE);
 }
 
@@ -167,7 +167,7 @@ void CMapEditorSDIView::OnZoomOut()
 {
     CRect rect;
     GetClientRect(&rect);
-    theApp.gridManager->zoomOut(rect.Width(), rect.Height());
+    theApp.gridManager.zoomOut(rect.Width(), rect.Height());
     this->Invalidate(FALSE);
 }
 
@@ -175,14 +175,14 @@ void CMapEditorSDIView::OnZoomOut()
 void CMapEditorSDIView::OnItemCentering()
 {
     // TODO: ここにコマンド ハンドラ コードを追加します。
-    theApp.gridManager->setOffset(0,0);
+    theApp.gridManager.setOffset(0,0);
     Invalidate(FALSE);
 }
 //拡大標準
 void CMapEditorSDIView::OnItemZoomDefault()
 {
     // TODO: ここにコマンド ハンドラ コードを追加します。
-    theApp.gridManager->zoomReset();
+    theApp.gridManager.zoomReset();
     Invalidate(FALSE);
 }
 //object info dialog on/off
@@ -232,9 +232,9 @@ void CMapEditorSDIView::On32790()
 
 void CMapEditorSDIView::changeMode(int mode)
 {
-    int oldMode = theApp.getEditMode();
+    int oldMode = theApp.getEventManager()->getEditModeType();
     int nextMode = mode;
-    theApp.setEditMode(nextMode);
+    theApp.getEventManager()->setEditModeType(nextMode);
     //チェックを変更
     int flags = 0;
     flags = MF_BYCOMMAND | MF_UNCHECKED;
@@ -243,10 +243,10 @@ void CMapEditorSDIView::changeMode(int mode)
     //GetMenu()->CheckMenuItem(theApp.menuIDMap[nextMode], flags);
 
     //change mode
-    if(mode != EM_DRAW){
+    if(mode != EditModeType::EM_DRAW){
         theApp.selectDatas.clear();
     }
-    if(mode != EM_FLOOR_TEXTURE && mode != EM_CEILING_TEXTURE){
+    if(mode != EditModeType::EM_FLOOR_TEXTURE && mode != EditModeType::EM_CEILING_TEXTURE){
         //hide texture palette
         theApp.textureDialog->ShowWindow(FALSE);
     }
@@ -256,17 +256,17 @@ void CMapEditorSDIView::changeMode(int mode)
 //draw polygon mode
 void CMapEditorSDIView::On32795()
 {
-    changeMode(EM_DRAW);
+    changeMode(EditModeType::EM_DRAW);
 }
 //height -> floor
 void CMapEditorSDIView::OnHeightFloor()
 {
-    changeMode(EM_FLOOR_HEIGHT);
+    changeMode(EditModeType::EM_FLOOR_HEIGHT);
 }
 //polygontype mode
 void CMapEditorSDIView::OnModePolygontype()
 {
-    changeMode(EM_POLYGON_TYPE);
+    changeMode(EditModeType::EM_POLYGON_TYPE);
 
     //show polygon type dialog
     theApp.polygonTypeDialog->ShowWindow(TRUE);
@@ -352,7 +352,7 @@ void CMapEditorSDIView::On32808()
 //texture mode
 void CMapEditorSDIView::OnTextureFloor()
 {
-    changeMode(EM_FLOOR_TEXTURE);
+    changeMode(EditModeType::EM_FLOOR_TEXTURE);
 #ifdef MAP_VIEWER
 #else
     //show texture palette

@@ -64,6 +64,7 @@ using namespace std;
 
 #include "MapEditorOneSetting.h"
 #include "MapEditorOneInnerSetting.h"
+#include "EventManager.h"
 
 #include <HPLLib/HPLAlephLib.h>
 
@@ -102,35 +103,6 @@ enum
     NUMBER_OF_MAP_ICONS
 };
 
-//tools
-enum
-{
-    TI_ARROW = 0,
-    TI_FILL,
-    TI_HAND,
-    TI_LINE,
-    TI_MAGNIFY,
-    TI_SKULL,
-    TI_TEXT,
-    TI_POLYGON,
-    NUMBER_OF_TOOLS //7
-};
-
-//編集モード
-enum
-{
-    EM_DRAW,
-    EM_VISUAL,
-    EM_FLOOR_HEIGHT,
-    EM_CEILING_HEIGHT,
-    EM_FLOOR_TEXTURE,
-    EM_CEILING_TEXTURE,
-    EM_FLOOR_LIGHT,
-    EM_CEILING_LIGHT,
-    EM_MEDIA,
-    EM_SOUND,
-    EM_POLYGON_TYPE,
-};
 
 //point flags
 enum
@@ -193,14 +165,11 @@ public:
     ///////////////////////////
     //グリッド・表示関係
 
-    /**拡大縮小・スクロール管理マネージャー*/
-    hpl::aleph::view::HPLViewGridManager* viewGrid;
-
     /**選択中の倍率*/
     //int zoomDivision;
 
     //
-    hpl::aleph::view::HPLViewGridManager* gridManager;
+    hpl::aleph::view::HPLViewGridManager gridManager;
 
     /**グリッド表示用間隔(世界距離に対応し、拡大縮小で大きさ変化)*/
     int gridIntervals[NUMBER_OF_GLID];
@@ -286,16 +255,6 @@ public:
 
 
     /////////////////////
-    //イベント管理
-
-    //ボタン押してる？
-    bool isPressLButtonWithCtrl;
-
-    //選択範囲始点
-    POINT selectStartPoint;
-
-    //グループ選択中か？
-    bool isSelectingGroup;
 
     //複数選択時の選択物リスト
     //TODO add selection
@@ -320,9 +279,6 @@ public:
     //map icons
     vector<HBITMAP> bitmapList;
 
-    //select tool type
-    //選択ツールタイプ
-    int selectingToolType;
 
     //show / hide polygons, lines. points
     //表示している高さの範囲。選択にも反映される
@@ -337,15 +293,16 @@ public:
     //flag of first adding of lines
     bool isFirstOfLineToAdd;
 
+    /////////////////////////////////////
+    //線情報
+    //前回の選択した点のインデックス
     //prev point user clicked.
     //if there is not, set NONE
     int previousPointIndex;
 
+    //編集設定
     //Editor setting
     MapEditorOneSetting setting;
-
-    //initialize all datas for application
-    bool initialize();
 
     //is shapes file loaded
     bool isLoadedShapesFile;
@@ -359,14 +316,36 @@ public:
     //texture bitmaps
     vector<vector<CBitmap*> > textureBitmaps;
 
-private:
-    //edit mode
-    int editMode;
-public:
+    /**編集モードとメニューIDの対応*/
     map<int, int> menuIDMap;
-    void setEditMode(int mode);
-    int getEditMode();
+private:
+    //イベント管理
+    mapeditorone::EventManager eventManager;
+public:
+    /**
+        イベントマネージャー取得
+    */
+    mapeditorone::EventManager* getEventManager();
+
+    //initialize all datas for application
+    bool initialize();
+
+    /**
+        色設定をファイルから読み込む
+    */
+    bool loadColorSetting();
     
+    /**
+        グリッド関連をセットアップ
+    */
+    void setupGridManager(hpl::aleph::view::HPLViewGridManager* mgr,
+        mapeditorone::MapEditorOneInnerSetting* innerSetting);
+
+    /**
+        アイコン用画像を読み込み
+    */
+    void loadIconBitmaps();
+
     DECLARE_MESSAGE_MAP()
 public:
     afx_msg void OnFileOpen();

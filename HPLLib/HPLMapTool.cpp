@@ -1,5 +1,6 @@
 #include "HPLMapTool.h"
 #include "HPLMath.h"
+#include <limits.h>
 
 static double getLengthDouble(double x, double y)
 {
@@ -365,6 +366,180 @@ std::vector<polygon_data> hpl::aleph::map::searchValidPolygon(world_point2d wpoi
 
 
     return polyDatas;
+}
+
+    /**
+        世界座標からポリゴンデータを作ります
+        TODO 整合性
+        @param points 世界座標
+        @param ep 生成された点データ
+        @param ld 生成された線データ
+        @param n n角形
+    */
+polygon_data hpl::aleph::map::createPolygon(world_point2d points[],
+                                            endpoint_data epd[], line_data ld[],
+        int n)
+{
+    //点生成
+    for(int i = 0; i < n; i ++){
+        epd[i].flags = 0;
+        epd[i].highest_adjacent_floor_height = 0;
+        epd[i].lowest_adjacent_ceiling_height = WORLD_ONE;
+        epd[i].vertex.x = points[i].x;
+        epd[i].vertex.y = points[i].y;
+
+        epd[i].supporting_polygon_index = 0;
+    }
+
+    //線
+    for(int i = 0; i < n ; i ++){
+        ld[i].endpoint_indexes[0] = i;
+        ld[i].endpoint_indexes[1] = i + 1;
+        if(i == n - 1){
+            ld[i].endpoint_indexes[0] = i;
+            ld[i].endpoint_indexes[1] = 0;
+        }
+        ld[i].flags = SOLID_LINE_BIT | ELEVATION_LINE_BIT;
+
+        ld[i].highest_adjacent_floor = 0;
+        ld[i].lowest_adjacent_ceiling = WORLD_ONE;
+	    ld[i].clockwise_polygon_side_index = NONE;
+        ld[i].counterclockwise_polygon_side_index = NONE;
+    	
+	    ld[i].clockwise_polygon_owner = 0;
+        ld[i].counterclockwise_polygon_owner = NONE;
+
+        ld[i].length = hpl::aleph::map::getPointsDistance(
+            epd[ld[i].endpoint_indexes[0]].vertex, epd[ld[i].endpoint_indexes[1]].vertex);
+    }
+
+    //ポリゴン
+    polygon_data pdata;
+	pdata.type = _polygon_is_normal;
+	pdata.flags = 0;
+	pdata.permutation = 0;
+
+	pdata.vertex_count = n;
+    for(int i = 0; i < n; i ++){
+        pdata.endpoint_indexes[i] = i; /* clockwise */
+        pdata.line_indexes[i] = i;
+    }
+	
+	pdata.floor_texture = NONE;
+    pdata.ceiling_texture = NONE;
+	pdata.floor_height = 0;
+    pdata.ceiling_height = WORLD_ONE;
+	pdata.floor_lightsource_index = NONE;
+    pdata.ceiling_lightsource_index = NONE;
+	
+//	pdata.area; /* in world_distance^2 units */
+	
+	pdata.first_object = NONE;
+	
+//	pdata.first_exclusion_zone_index;
+//	pdata.line_exclusion_zone_count;
+//	pdata.point_exclusion_zone_count;
+
+	pdata.floor_transfer_mode = 0;
+	pdata.ceiling_transfer_mode = 0;
+	
+//	pdata.adjacent_polygon_indexes[MAXIMUM_VERTICES_PER_POLYGON];
+	
+	pdata.first_neighbor_index = NONE;
+	pdata.neighbor_count = 0;
+	
+    //
+//    pdata.center;
+	
+//	pdata.side_indexes[MAXIMUM_VERTICES_PER_POLYGON];
+	
+//	pdata.floor_origin;
+//  pdata.ceiling_origin;
+	
+	pdata.media_index = NONE;
+	pdata.media_lightsource_index = NONE;
+	
+	pdata.sound_source_indexes = NONE;
+	
+	pdata.ambient_sound_image_index = NONE;
+	pdata.random_sound_image_index = NONE;
+	
+    return pdata;
+}
+/**
+    独立したポリゴンデータを追加します
+*/
+void hpl::aleph::map::addNewPolygon(polygon_data& pdata, endpoint_data epd[],
+                                    line_data ld[], int n)
+{
+    //点
+    std::map<int,int> epIndexTable;
+    std::string str;
+    for(int i = 0; i < n; i ++){
+        EndpointList.push_back(epd[i]);
+        dynamic_world->endpoint_count ++;
+        int newIndex = EndpointList.size() - 1;
+        epIndexTable[i] = newIndex;
+
+/*        char buf[256];
+        sprintf(buf, "%d,", newIndex);
+        str += std::string(buf);
+        const char *bauf = str.c_str();
+        const char *baauf = str.c_str();*/
+    }
+//    const char *buf = str.c_str();
+
+    std::map<int,int> lIndexTable;
+    for(int i = 0; i < n; i ++){
+        //修正
+        for(int j = 0; j < 2; j ++){
+            ld[i].endpoint_indexes[j] = epIndexTable[ld[i].endpoint_indexes[j]];
+        }
+
+        LineList.push_back(ld[i]);
+        dynamic_world->line_count ++;
+        int newIndex = LineList.size() - 1;
+        lIndexTable[i] = newIndex;
+    }
+    
+    //ポリゴン
+    for(int i = 0; i < n; i ++){
+        pdata.endpoint_indexes[i] = epIndexTable[pdata.endpoint_indexes[i]];
+    }
+    for(int i = 0; i < n - 1; i ++){
+        pdata.line_indexes[i] = lIndexTable[pdata.line_indexes[i]];
+    }
+    PolygonList.push_back(pdata);
+    dynamic_world->polygon_count ++;
+
+    int newPolygonIndex = PolygonList.size() - 1;
+    for(int i = 0; i < n; i ++){
+        int newIndex = epIndexTable[i];
+        endpoint_data* ep = &(EndpointList[newIndex]);//get_endpoint_data(newIndex);
+        ep->supporting_polygon_index = newPolygonIndex;
+    }
+    for(int i = 0; i < n - 1; i ++){
+        int newIndex = lIndexTable[i];
+        line_data* l = &(LineList[newIndex]);
+        l->clockwise_polygon_owner = newPolygonIndex;
+    }
+   
+}
+void hpl::aleph::map::addNewPolygon(world_distance points[][2], int n)
+{
+    world_point2d pt[MAXIMUM_VERTICES_PER_POLYGON];
+    for(int i = 0; i < n; i ++){
+        pt[i].x = points[i][0];
+        pt[i].y = points[i][1];
+    }
+    hpl::aleph::map::addNewPolygon(pt, n);
+}
+void hpl::aleph::map::addNewPolygon(world_point2d points[], int n)
+{
+    endpoint_data epd[MAXIMUM_VERTICES_PER_POLYGON];
+    line_data ld[8];
+    polygon_data pdata = hpl::aleph::map::createPolygon(points, epd, ld, n);
+    hpl::aleph::map::addNewPolygon(pdata, epd, ld, n);
 }
 
 /**

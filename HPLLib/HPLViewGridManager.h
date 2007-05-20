@@ -57,7 +57,8 @@ namespace view{
         int oldMousePoint[2];
         int newMousePoint[2];
     public:
-        HPLViewGridManager(ZoomProperties *zoomProp);
+        HPLViewGridManager();
+        void setProp(ZoomProperties *zoomProp);
         ~HPLViewGridManager();
 
     public:

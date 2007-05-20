@@ -7,6 +7,8 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "MapViewerOne", "..\..\..\..
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestPolygon", "TestPolygon\TestPolygon.csproj", "{5BC03069-219E-4D0A-B6B3-25D41D6DA69D}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "TestMathematics", "TestMathematics\TestMathematics.vcproj", "{46D1F0C8-3CD4-4C13-BC91-8FB454D3E632}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -47,6 +49,16 @@ Global
 		{5BC03069-219E-4D0A-B6B3-25D41D6DA69D}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
 		{5BC03069-219E-4D0A-B6B3-25D41D6DA69D}.Release|Mixed Platforms.Build.0 = Release|Any CPU
 		{5BC03069-219E-4D0A-B6B3-25D41D6DA69D}.Release|Win32.ActiveCfg = Release|Any CPU
+		{46D1F0C8-3CD4-4C13-BC91-8FB454D3E632}.Debug|Any CPU.ActiveCfg = Debug|Win32
+		{46D1F0C8-3CD4-4C13-BC91-8FB454D3E632}.Debug|Mixed Platforms.ActiveCfg = Debug|Win32
+		{46D1F0C8-3CD4-4C13-BC91-8FB454D3E632}.Debug|Mixed Platforms.Build.0 = Debug|Win32
+		{46D1F0C8-3CD4-4C13-BC91-8FB454D3E632}.Debug|Win32.ActiveCfg = Debug|Win32
+		{46D1F0C8-3CD4-4C13-BC91-8FB454D3E632}.Debug|Win32.Build.0 = Debug|Win32
+		{46D1F0C8-3CD4-4C13-BC91-8FB454D3E632}.Release|Any CPU.ActiveCfg = Release|Win32
+		{46D1F0C8-3CD4-4C13-BC91-8FB454D3E632}.Release|Mixed Platforms.ActiveCfg = Release|Win32
+		{46D1F0C8-3CD4-4C13-BC91-8FB454D3E632}.Release|Mixed Platforms.Build.0 = Release|Win32
+		{46D1F0C8-3CD4-4C13-BC91-8FB454D3E632}.Release|Win32.ActiveCfg = Release|Win32
+		{46D1F0C8-3CD4-4C13-BC91-8FB454D3E632}.Release|Win32.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

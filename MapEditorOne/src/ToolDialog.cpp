@@ -51,12 +51,12 @@ CToolDialog::CToolDialog(CWnd* pParent /*=NULL*/)
         IDB_BITMAP19,
     };
     */
-    for(int i = 0; i < NUMBER_OF_TOOLS * 2; i ++){
+    for(int i = 0; i < ToolType::NUMBER_OF_TOOLS * 2; i ++){
         CString path = CString(DATA_DIR_NAME) + CString(TOOL_BAR_ICONS_DIR_NAMR);
-        if(i >= NUMBER_OF_TOOLS){
+        if(i >= ToolType::NUMBER_OF_TOOLS){
             path += CString(SELECTED_ICONS_DIR_NAME);
         }
-        path += imageNameInformations[i % NUMBER_OF_TOOLS].jname;
+        path += imageNameInformations[i % ToolType::NUMBER_OF_TOOLS].jname;
         strToChar(path, cstr);
         HBITMAP bmp = loadBitmapFromFile(cstr);
         
@@ -146,7 +146,7 @@ void CToolDialog::OnPaint()
     CDC memDC;
     memDC.CreateCompatibleDC(&dc);
 //    CBitmap* old = memDC.SelectObject(bitmaps[0]);
-    for(int i = 0; i < NUMBER_OF_TOOLS; i ++){
+    for(int i = 0; i < ToolType::NUMBER_OF_TOOLS; i ++){
         POINT pt;
 #ifdef MAP_VIEWER
         if(i % 2 == 1 || i >= 6){
@@ -158,8 +158,8 @@ void CToolDialog::OnPaint()
 
         //imageList.Draw(&dc, i, pt, SRCCOPY);
         int index = i;
-        if(theApp.selectingToolType == i){
-            index += NUMBER_OF_TOOLS;
+        if(theApp.getEventManager()->getToolType() == i){
+            index += ToolType::NUMBER_OF_TOOLS;
         }
         CBitmap* bmp = CBitmap::FromHandle(bitmaps[index]);
         BITMAP bmpInfo;
@@ -177,7 +177,7 @@ void CToolDialog::OnPaint()
 void CToolDialog::OnLButtonDown(UINT nFlags, CPoint point)
 {
     // TODO: ここにメッセージ ハンドラ コードを追加するか、既定の処理を呼び出します。
-    for(int i = 0; i < NUMBER_OF_TOOLS; i ++){
+    for(int i = 0; i < ToolType::NUMBER_OF_TOOLS; i ++){
         CRect rect;
         rect.left = (i % 2) * TOOL_WIDTH;
         rect.top = (i / 2) * TOOL_HEIGHT;
@@ -187,11 +187,11 @@ void CToolDialog::OnLButtonDown(UINT nFlags, CPoint point)
             rect.left, rect.top, rect.right, rect.bottom))
         {
             //ツール変化
-            theApp.selectingToolType = i;
-            if(i == TI_SKULL){
+            theApp.getEventManager()->setToolType(i);
+            if(i == ToolType::TI_SKULL){
                 //show object property's dialog
                 theApp.objectPropertyDialog->ShowWindow(TRUE);
-            }else if(i == TI_POLYGON){
+            }else if(i == ToolType::TI_POLYGON){
                 //show polygon dialog
                 CSelectPolygonDialog dlg(this);
                 dlg.DoModal();

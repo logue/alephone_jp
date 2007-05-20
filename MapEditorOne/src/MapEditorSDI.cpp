@@ -56,23 +56,10 @@ void loadInformations(const char* filename, int max,
     f.Close();
 }
 
+/**
+    初期設定
+*/
 bool CMapEditorSDIApp::initialize(){
-    //try to load ini file
-    /*CString path = GetModulePathFileName(CString(INI_FILE_NAME));
-    char pname[_MAX_PATH];
-    strToChar(path, pname);*/
-    WCHAR buf[1024];
-    WCHAR wstr[256];
-    charToWChar(INI_FILE_NAME, wstr);
-    GetFullPathName(wstr, sizeof(wstr), buf, NULL);
-    char pname[_MAX_PATH];
-    wcharToChar(buf, pname); 
-    setting.setIniFileName(pname);
-    if(!setting.loadSetting()){
-        AfxMessageBox(L"no setting file. I'll make default one");
-        setting.setSettingToDefault();
-    }
-    m_SDLToWindows = NULL;
 
     //ファイルからコンボ用文字列読み込み
     //大別
@@ -143,82 +130,27 @@ bool CMapEditorSDIApp::initialize(){
 
     //色設定
     //ファイルから読み込み
-    {
-        ifstream is;
-        const char* filename = POLYGON_COLOR_FILE_NAME;
-        is.open(filename);
-
-        if(!is.is_open()){
-            CString errMsg = CString("Couldn't open color datas of polygon type:");
-            errMsg += L"[" + CString(filename) + L"]";
-            MessageBox(NULL, errMsg, L"Error", MB_OK);
-            return false;
-        }
-        char cstr[260];
-        int count = 0;
-        while(is.getline(cstr, sizeof(cstr))){
-            string line = string(cstr);
-            if(line.compare("") == 0){
-                continue;
-            }
-            vector<string> sp = hpl::string::Split(line, ",");
-            int col[3];
-            for(int i = 0; i < 3; i ++){
-                col[i] = atoi(sp[i].c_str());
-            }
-            this->polygonTypeColor[count] = RGB(col[0], col[1], col[2]);
-            count ++;
-        }
-        is.close();
+    if(!loadColorSetting()){
+        return false;
     }
 
-    //内部専用設定さん
-    char* tagNameFilePath = "data/InnerSettingTagList.ini";
-    char* innerDataFilePath = "data/InnerSetting.ini";
-    //設定読み込み
-    mapeditorone::MapEditorOneInnerSetting innerSetting = 
-        mapeditorone::MapEditorOneInnerSetting(tagNameFilePath, innerDataFilePath);
 
-    //Zoom
-    //innerSetting.getInt(mapeditorone::TagType::ZOOM_DIVISION_DEFAULT);
-//    zoomDivision = ZOOM_DIVISION_DEFAULT;
-//    theApp.gridManager->
-//    offset.x = 0;
-//    offset.y = 0;
-    //1WU 1/2WU 1/4WU 1/8 WU
-    int intervals[]={
-        WORLD_ONE * 2, WORLD_ONE, WORLD_ONE / 2, WORLD_ONE / 4, WORLD_ONE / 8
-    };
-    for(int i = 0; i < NUMBER_OF_GLID; i ++){
-        gridIntervals[i] = intervals[i];
-    }
 
-    //拡大関連の設定
-    hpl::aleph::view::ZoomProperties zoomProp;
-    zoomProp.zoomDivisionStep = innerSetting.getInt(mapeditorone::TagType::ZOOM_DIVISION_STEP);
-    zoomProp.zoomDivisionDefault = innerSetting.getInt(mapeditorone::TagType::ZOOM_DIVISION_DEFAULT);
-    zoomProp.zoomDivisionMin = innerSetting.getInt(mapeditorone::TagType::ZOOM_DIVISION_MIN);
-    zoomProp.zoomDivisionMax = innerSetting.getInt(mapeditorone::TagType::ZOOM_DIVISION_MAX);
-    zoomProp.zoomDivStepThreshold = innerSetting.getInt(mapeditorone::TagType::ZOOM_DIV_STEP_THRESHOLD);
-    zoomProp.zoomDivisionStepDetail = innerSetting.getInt(mapeditorone::TagType::ZOOM_DIVISION_STEP_DETAIL);
-    for(int i = 0; i < NUMBER_OF_GLID; i ++){
-        zoomProp.gridIntervals[i] = intervals[i];
-    }
-    this->gridManager = new hpl::aleph::view::HPLViewGridManager(&zoomProp);
-
-    isPressLButtonWithCtrl = false;
 
     objectPropertyDialog = NULL;
+    {
+//        isPressLButtonWithCtrl = false;
+
+    }
+
 
 
     AfxInitRichEdit();
 
     //選択関係
     this->selectDatas.clear();
-    isSelectingGroup = false;
 
 
-    selectingToolType = TI_ARROW;
     viewHeightMin = - SHRT_MAX;
     viewHeightMax = -viewHeightMin;
     isRevealHiddenLines = false;
@@ -226,6 +158,7 @@ bool CMapEditorSDIApp::initialize(){
     //no changes found(new)
     isChanged = false;
 
+    //ログファイル
     logger = HPLLogger(LOG_FILE_NAME);
     if(!logger.open()){
         MessageBox(NULL, L"Cannot open log file for writing. Close it!", L"Error", 
@@ -233,43 +166,12 @@ bool CMapEditorSDIApp::initialize(){
         return false;
     }
 
-    {
-        char cstr[260];
-        //load image file name list from file
-        //bitmapList.resize();
-        const int NUMBER_OF_MAP_ICON_FILES = NUMBER_OF_DEFINED_ITEMS +
-            NUMBER_OF_MAP_ICONS;
-        Information mapIconFileNameInformations[NUMBER_OF_MAP_ICON_FILES];
-
-        sprintf(cstr, "%s%s", DATA_DIR_NAME, MAP_ICONS_IMAGE_NAME_LIST_FILE_NAME);
-        loadInformations(cstr, NUMBER_OF_MAP_ICON_FILES, mapIconFileNameInformations);
-
-        for(int i = 0; i < 2 * NUMBER_OF_DEFINED_ITEMS + 2 * NUMBER_OF_MAP_ICONS; i ++){
-            string path = string(DATA_DIR_NAME) +
-                string(MAP_ICONS_DIR_NAME);
-            const int SELECTED_OFFSET = NUMBER_OF_DEFINED_ITEMS + NUMBER_OF_MAP_ICONS;
-            if( i >= SELECTED_OFFSET){
-                path += string(HILIGHTED_ICONS_DIR_NAME);
-            }
-            int index = i;
-
-            //selected
-            if(i >= SELECTED_OFFSET){
-                index -= SELECTED_OFFSET;
-            }
-            strToChar(mapIconFileNameInformations[index].jname, cstr);
-            path += string(cstr);
-            //strToChar(path, cstr);
-            HBITMAP bitmap = loadBitmapFromFile(path.c_str());
-            bitmapList.push_back(bitmap);
-        }
-
-    }
+    //アイコン用ビットマップを開いて保持する
+    loadIconBitmaps();
 
     //menu name to id
-    menuIDMap[EM_DRAW] = ID_32795;
-    menuIDMap[EM_VISUAL] = ID_32796;
-    setEditMode(EM_DRAW);
+    menuIDMap[EditModeType::EM_DRAW] = ID_32795;
+    menuIDMap[EditModeType::EM_VISUAL] = ID_32796;
 
     isNowOnThePoint = false;
 
@@ -279,17 +181,140 @@ bool CMapEditorSDIApp::initialize(){
     return true;
 }
 
+/**
+    イベントマネージャー取得
+*/
+mapeditorone::EventManager* CMapEditorSDIApp::getEventManager()
+{
+    return &this->eventManager;
+}
+
+//アイコン画像読み込み
+void CMapEditorSDIApp::loadIconBitmaps()
+{
+    char cstr[260];
+    //load image file name list from file
+    //bitmapList.resize();
+    const int NUMBER_OF_MAP_ICON_FILES = NUMBER_OF_DEFINED_ITEMS +
+        NUMBER_OF_MAP_ICONS;
+    Information mapIconFileNameInformations[NUMBER_OF_MAP_ICON_FILES];
+
+    sprintf(cstr, "%s%s", DATA_DIR_NAME, MAP_ICONS_IMAGE_NAME_LIST_FILE_NAME);
+    loadInformations(cstr, NUMBER_OF_MAP_ICON_FILES, mapIconFileNameInformations);
+
+    for(int i = 0; i < 2 * NUMBER_OF_DEFINED_ITEMS + 2 * NUMBER_OF_MAP_ICONS; i ++){
+        string path = string(DATA_DIR_NAME) +
+            string(MAP_ICONS_DIR_NAME);
+        const int SELECTED_OFFSET = NUMBER_OF_DEFINED_ITEMS + NUMBER_OF_MAP_ICONS;
+        if( i >= SELECTED_OFFSET){
+            path += string(HILIGHTED_ICONS_DIR_NAME);
+        }
+        int index = i;
+
+        //selected
+        if(i >= SELECTED_OFFSET){
+            index -= SELECTED_OFFSET;
+        }
+        strToChar(mapIconFileNameInformations[index].jname, cstr);
+        path += string(cstr);
+        //strToChar(path, cstr);
+        HBITMAP bitmap = loadBitmapFromFile(path.c_str());
+        bitmapList.push_back(bitmap);
+    }
+
+}
+
+//グリッドセットアップ
+void CMapEditorSDIApp::setupGridManager(hpl::aleph::view::HPLViewGridManager* mgr,
+                                        mapeditorone::MapEditorOneInnerSetting* innerSetting)
+{
+    //1WU 1/2WU 1/4WU 1/8 WU
+    int intervals[]={
+        WORLD_ONE * 2, WORLD_ONE, WORLD_ONE / 2, WORLD_ONE / 4, WORLD_ONE / 8
+    };
+    for(int i = 0; i < NUMBER_OF_GLID; i ++){
+        gridIntervals[i] = intervals[i];
+    }
+
+    hpl::aleph::view::ZoomProperties zoomProp;
+    zoomProp.zoomDivisionStep = innerSetting->getInt(mapeditorone::TagType::ZOOM_DIVISION_STEP);
+    zoomProp.zoomDivisionDefault = innerSetting->getInt(mapeditorone::TagType::ZOOM_DIVISION_DEFAULT);
+    zoomProp.zoomDivisionMin = innerSetting->getInt(mapeditorone::TagType::ZOOM_DIVISION_MIN);
+    zoomProp.zoomDivisionMax = innerSetting->getInt(mapeditorone::TagType::ZOOM_DIVISION_MAX);
+    zoomProp.zoomDivStepThreshold = innerSetting->getInt(mapeditorone::TagType::ZOOM_DIV_STEP_THRESHOLD);
+    zoomProp.zoomDivisionStepDetail = innerSetting->getInt(mapeditorone::TagType::ZOOM_DIVISION_STEP_DETAIL);
+    for(int i = 0; i < NUMBER_OF_GLID; i ++){
+        zoomProp.gridIntervals[i] = intervals[i];
+    }
+    mgr->setProp(&zoomProp);
+}
+
+//カラー設定読み込み
+bool CMapEditorSDIApp::loadColorSetting()
+{
+    ifstream is;
+    const char* filename = POLYGON_COLOR_FILE_NAME;
+    is.open(filename);
+
+    if(!is.is_open()){
+        CString errMsg = CString("Couldn't open color datas of polygon type:");
+        errMsg += L"[" + CString(filename) + L"]";
+        MessageBox(NULL, errMsg, L"Error", MB_OK);
+        return false;
+    }
+    char cstr[260];
+    int count = 0;
+    while(is.getline(cstr, sizeof(cstr))){
+        string line = string(cstr);
+        if(line.compare("") == 0){
+            continue;
+        }
+        vector<string> sp = hpl::string::Split(line, ",");
+        int col[3];
+        for(int i = 0; i < 3; i ++){
+            col[i] = atoi(sp[i].c_str());
+        }
+        this->polygonTypeColor[count] = RGB(col[0], col[1], col[2]);
+        count ++;
+    }
+    is.close();
+    return true;
+}
+
+/********************************************
+*/
 CMapEditorSDIApp::CMapEditorSDIApp()
 {
-	// TODO: この位置に構築用コードを追加してください。
-	// ここに InitInstance 中の重要な初期化処理をすべて記述してください。
+    //try to load ini file
+    /*CString path = GetModulePathFileName(CString(INI_FILE_NAME));
+    char pname[_MAX_PATH];
+    strToChar(path, pname);*/
+    WCHAR buf[1024];
+    WCHAR wstr[256];
+    charToWChar(INI_FILE_NAME, wstr);
+    GetFullPathName(wstr, sizeof(wstr), buf, NULL);
+    char pname[_MAX_PATH];
+    wcharToChar(buf, pname); 
+    setting.setIniFileName(pname);
+    if(!setting.loadSetting()){
+        AfxMessageBox(L"no setting file. I'll make default one");
+        setting.setSettingToDefault();
+    }
+    m_SDLToWindows = NULL;
 
+    //内部専用設定さん
+    char* tagNameFilePath = "data/InnerSettingTagList.ini";
+    char* innerDataFilePath = "data/InnerSetting.ini";
+    //設定読み込み
+    mapeditorone::MapEditorOneInnerSetting innerSetting = 
+        mapeditorone::MapEditorOneInnerSetting(tagNameFilePath, innerDataFilePath);
+    //拡大関連の設定
+    this->setupGridManager(&this->gridManager, &innerSetting);
 
 }
 
 CMapEditorSDIApp::~CMapEditorSDIApp()
 {
-    delete gridManager;
     if(!setting.saveSetting()){
         AfxMessageBox(CString("fail to save setting:") + setting.getFilePath());
     }
@@ -442,15 +467,6 @@ void CMapEditorSDIApp::OnFileOpen()
     //開くダイアログ
 }
 
-void CMapEditorSDIApp::setEditMode(int mode)
-{
-    this->editMode = mode;
-}
-int CMapEditorSDIApp::getEditMode()
-{
-    return this->editMode;
-}
-
 
 void loadIcon(int id, CImageList* imageList){
     HICON icon;
@@ -502,8 +518,9 @@ void setCursor()
         (IDC_CURSOR_TEXT),//ibeam
         (IDC_CURSOR_POLYGON)    //polygon
     };
-    int cursorId = cursors[theApp.selectingToolType];
-    if(theApp.selectingToolType == TI_LINE && theApp.isNowOnThePoint){
+    int toolType = theApp.getEventManager()->getToolType();
+    int cursorId = cursors[toolType];
+    if(toolType == ToolType::TI_LINE && theApp.isNowOnThePoint){
         cursorId = IDC_CURSOR_POINT;
     }
     //カーソル変化
@@ -658,7 +675,7 @@ int addPoint(struct world_point2d &world_point)
             continue;
         }
         if(hpl::aleph::map::isSelectPoint(world_point, point->vertex,
-            POINT_DISTANCE_EPSILON * theApp.gridManager->getZoomDivision()))
+            POINT_DISTANCE_EPSILON * theApp.gridManager.getZoomDivision()))
         {
             //追加しない
             isFound = true;
@@ -685,7 +702,7 @@ int addPoint(struct world_point2d &world_point)
         endpoint_data *begin = &EndpointList[line->endpoint_indexes[0]];
         endpoint_data *end = &EndpointList[line->endpoint_indexes[1]];
         if(hpl::aleph::map::isSelectLine(world_point, begin->vertex, end->vertex,
-            LINE_DISTANCE_EPSILON * theApp.gridManager->getZoomDivision()))
+            LINE_DISTANCE_EPSILON * theApp.gridManager.getZoomDivision()))
         {
             isFound = true;
             lineIndex = i;

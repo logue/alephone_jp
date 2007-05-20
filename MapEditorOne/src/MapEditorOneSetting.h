@@ -59,6 +59,7 @@ private:
 
 public:
     MapEditorOneSetting();
+    ~MapEditorOneSetting(){}
 public:
     void setIniFileName(const char *iniFileName);
     /**
