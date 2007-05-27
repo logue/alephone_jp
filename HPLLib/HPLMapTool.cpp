@@ -194,6 +194,16 @@ void hpl::aleph::map::fixSide(int sideIndex)
 }
 
 ///////////////////////  Groups  ////////////////////////////////////////////
+/**
+	マウスが既に選択されているアイテムをクリックしているか確かめます
+	<en>is point in select groups?
+	@param px point locatin(view)				マウス位置（ビュー座標）
+	@param offsetViewX offset(view)				ビュー座標ズレ
+	@param offsetWorldX offset(world)			実座標
+	@param pointDistance distance as nearby		点用閾値
+	@param lineDistance distance as nearby		線用閾値
+	@param selectInfo select group for check	グループクラス
+*/
 bool hpl::aleph::map::isPointInSelection(int px, int py,
                         int offsetViewX, int offsetViewY,
                         int offsetWorldX, int offsetWorldY,
@@ -364,18 +374,19 @@ std::vector<polygon_data> hpl::aleph::map::searchValidPolygon(world_point2d wpoi
 {
     std::vector<polygon_data> polyDatas;
 
+    //近くにある線を探す
 
     return polyDatas;
 }
 
-    /**
-        世界座標からポリゴンデータを作ります
-        TODO 整合性
-        @param points 世界座標
-        @param ep 生成された点データ
-        @param ld 生成された線データ
-        @param n n角形
-    */
+/**
+    世界座標からポリゴンデータを作ります
+    TODO 整合性
+    @param points 世界座標
+    @param ep 生成された点データ
+    @param ld 生成された線データ
+    @param n n角形
+*/
 polygon_data hpl::aleph::map::createPolygon(world_point2d points[],
                                             endpoint_data epd[], line_data ld[],
         int n)

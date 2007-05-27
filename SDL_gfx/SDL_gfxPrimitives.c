@@ -3587,10 +3587,10 @@ int texturedPolygon(SDL_Surface * dst, const Sint16 * vx, const Sint16 * vy, int
         }
     }
     if (maxx <0 || minx > dst->w){
-      return;
+      return 0;
     }
     if (maxy <0 || miny > dst->h){
-      return;
+      return 0;
     }
     
     /*
@@ -3598,43 +3598,43 @@ int texturedPolygon(SDL_Surface * dst, const Sint16 * vx, const Sint16 * vy, int
      */
     result = 0;
     for (y = miny; (y <= maxy); y++) {
-	ints = 0;
-	for (i = 0; (i < n); i++) {
-	    if (!i) {
-		ind1 = n - 1;
-		ind2 = 0;
-	    } else {
-		ind1 = i - 1;
-		ind2 = i;
+	    ints = 0;
+	    for (i = 0; (i < n); i++) {
+	        if (!i) {
+		    ind1 = n - 1;
+		    ind2 = 0;
+	        } else {
+		    ind1 = i - 1;
+		    ind2 = i;
+	        }
+	        y1 = vy[ind1];
+	        y2 = vy[ind2];
+	        if (y1 < y2) {
+		    x1 = vx[ind1];
+		    x2 = vx[ind2];
+	        } else if (y1 > y2) {
+		    y2 = vy[ind1];
+		    y1 = vy[ind2];
+		    x2 = vx[ind1];
+		    x1 = vx[ind2];
+	        } else {
+		    continue;
+	        }
+	        if ( ((y >= y1) && (y < y2)) || ((y == maxy) && (y > y1) && (y <= y2)) ) {
+		    gfxPrimitivesPolyInts[ints++] = ((65536 * (y - y1)) / (y2 - y1)) * (x2 - x1) + (65536 * x1);
+	        } 
+    	    
 	    }
-	    y1 = vy[ind1];
-	    y2 = vy[ind2];
-	    if (y1 < y2) {
-		x1 = vx[ind1];
-		x2 = vx[ind2];
-	    } else if (y1 > y2) {
-		y2 = vy[ind1];
-		y1 = vy[ind2];
-		x2 = vx[ind1];
-		x1 = vx[ind2];
-	    } else {
-		continue;
-	    }
-	    if ( ((y >= y1) && (y < y2)) || ((y == maxy) && (y > y1) && (y <= y2)) ) {
-		gfxPrimitivesPolyInts[ints++] = ((65536 * (y - y1)) / (y2 - y1)) * (x2 - x1) + (65536 * x1);
-	    } 
-	    
-	}
-	
-	qsort(gfxPrimitivesPolyInts, ints, sizeof(int), gfxPrimitivesCompareInt);
+    	
+	    qsort(gfxPrimitivesPolyInts, ints, sizeof(int), gfxPrimitivesCompareInt);
 
-	for (i = 0; (i < ints); i += 2) {
-	    xa = gfxPrimitivesPolyInts[i] + 1;
-	    xa = (xa >> 16) + ((xa & 32768) >> 15);
-	    xb = gfxPrimitivesPolyInts[i+1] - 1;
-	    xb = (xb >> 16) + ((xb & 32768) >> 15);
-	    result |= _texturedHLine(dst, xa, xb, y, texture,texture_dx,texture_dy);
-	}
+	    for (i = 0; (i < ints); i += 2) {
+	        xa = gfxPrimitivesPolyInts[i] + 1;
+	        xa = (xa >> 16) + ((xa & 32768) >> 15);
+	        xb = gfxPrimitivesPolyInts[i+1] - 1;
+	        xb = (xb >> 16) + ((xb & 32768) >> 15);
+	        result |= _texturedHLine(dst, xa, xb, y, texture,texture_dx,texture_dy);
+	    }
     }
 
 
@@ -3945,8 +3945,8 @@ int bezierColor(SDL_Surface * dst, const Sint16 * vx, const Sint16 * vy, int n, 
      */
     result = 0;
     t=0.0;
-    x1=evaluateBezier(x,n+1,t);
-    y1=evaluateBezier(y,n+1,t);
+    x1=(Sint16)evaluateBezier(x,n+1,t);
+    y1=(Sint16)evaluateBezier(y,n+1,t);
     for (i = 0; i <= (n*s); i++) {
 	t += stepsize;
 	x2=(Sint16)evaluateBezier(x,n,t);

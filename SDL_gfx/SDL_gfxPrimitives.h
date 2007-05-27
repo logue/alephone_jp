@@ -39,8 +39,9 @@ extern "C" {
 #else
 #define DLLINTERFACE
 #endif
+#ifndef DLLINTERFACE
 #define DLLINTERFACE
-
+#endif
 /* ----- Prototypes */
 
 /* Note: all ___Color routines expect the color to be in format 0xRRGGBBAA */
