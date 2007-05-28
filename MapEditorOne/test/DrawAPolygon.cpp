@@ -29,20 +29,57 @@ void onMouseMotion(SDL_Event ev){
     }
 }
 
+static int checkTypeColor[][4] ={
+    {200,0,0,255},
+    {0,200,0,255},
+    {0,0,200,255}
+};
+static char CHECK_TYPE_STRING[][100] = {
+    "Is Point In Polygon",
+        "Can Fill Polygon From The Point",
+        "Is Valid This Polygon",
+};
+
 void drawStrings(SDL_Surface* screen, int startY)
 {
     int y = startY;
     drawString(screen, 0, y, 255, 255, 255, 255, "Search polygon");
     //点の数表示
     drawString(screen, 0, y + FONT_SIZE, 255, 255, 255, 255, "Points num:%d", globalData.nPolygon);
+    //チェックタイプ表示
+    int c = globalData.checkTypeTable[globalData.checkType];
+    drawString(screen, 0, y + 2 * FONT_SIZE, checkTypeColor[c][0], checkTypeColor[c][1], 
+        checkTypeColor[c][2], checkTypeColor[c][3], 
+        CHECK_TYPE_STRING[c]);
 }
 
 void draw(SDL_Surface* screen)
 {
     //消去
     SDL_FillRect(screen, NULL, 0);
-    //モード表示
-    drawStrings(screen, 0);
+
+    //点がポリゴンの中にあるかチェック
+    bool enable = false;
+    CheckType::CheckType ch = globalData.checkType;
+    int c = globalData.checkTypeTable[ch];
+    if(ch == CheckType::IsPointInPolygon){
+        if(
+    }else if(ch == CheckType::IsCanFillPolygonFromPoint){
+    }else if(ch == CheckType::IsValidPolygon){
+    }else{
+    }
+
+    if(enable){
+        //ポリゴン表示
+        int vx[MAX_POLYGON], vy[MAX_POLYGON];
+        int n = globalData.nPolygon;
+        for(int i = 0; i < n; i ++){
+            vx[n] = globalData.polygonBalls[i]->x;
+            vy[n] = globalData.polygonBalls[i]->y;
+        }
+        polygonRGBA(screenm, vx, vy, n, checkTypeColor[c][0], checkTypeColor[c][1], 
+        checkTypeColor[c][2], checkTypeColor[c][3]);
+    }
 
     //点表示
     for(int i = 0; i < A_POLY_BALL_NUM - 1; i ++){
@@ -75,6 +112,9 @@ void draw(SDL_Surface* screen)
         double y1 = globalData.polygonBalls[nextIndex]->y;
         drawArrow(screen, x0, y0, x1, y1, 255, 100, 0, 255, ARROW_LENGTH);
     }
+
+    //モード表示
+    drawStrings(screen, 0);
 }
 
 #endif

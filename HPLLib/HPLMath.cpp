@@ -127,12 +127,12 @@ bool hpl::math::isCrossPointLine(double px, double py,
 
 double hpl::math::getDegreeFromRadian(double rad)
 {
-    double deg = rad * 180.0 / (2.0 * PI);
+    double deg = rad * 180.0 / (PI);
     return deg;
 }
 double hpl::math::getRadianFromDegree(double deg)
 {
-    double rad = deg * 2.0 * PI / 180.0;
+    double rad = deg * PI / 180.0;
     return rad;
 }
 
@@ -273,43 +273,11 @@ double hpl::math::getTwoLinesDegree(double pax, double pay, double pbx, double p
 
 /**
     ベクトルの角度を求めます(0 deg = (1,0))
-*
-double hpl::math::getDegreeFromVector(double x, double y){
-    double rad = hpl::math::getRadianFromVector(x,y);
-    double deg = hpl::math::getDegreeFromRadian(rad);
-    return rad;
-}
 */
 double hpl::math::getDegreeFromVector(double x, double y){
     double rad = hpl::math::getRadianFromVector(x, y);
     double deg = hpl::math::getDegreeFromRadian(rad);
     return deg;
-/*    //atanで求める
-    //垂直
-    if(x == 0){
-        if(y > 0){
-            //90度
-            return PI / 2.f;
-        }else if(y < 0){
-            //270度
-            return PI * 1.5f;
-        }else{  //y == 0
-            return 0;
-        }
-    }
-
-    float div = y / x;
-    if( x > 0){
-        float rad = atan(div);
-        if( rad < 0){
-            rad += 2 * PI;
-        }
-        return rad;
-    }else{
-        float rad = atan(div) + PI;
-        return rad;
-    }
-    */
 }
 
 /**

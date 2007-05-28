@@ -47,6 +47,9 @@ void init()
 {
     //初期化設定だよ
     globalData.isRunning = true;
+    globalData.checkTypeTable[CheckType::IsPointInPolygon] = 0;
+    globalData.checkTypeTable[CheckType::IsCanFillPolygonFromPoint] = 1;
+    globalData.checkTypeTable[CheckType::IsValidPolygon] = 2;
 
     //ball setup
     for(int i = 0; i < BALL_NUM; i ++){
@@ -55,8 +58,16 @@ void init()
     globalData.catchedBall = -1;
     globalData.nPolygon = 3;
 
+    //正8角形でスタート
+    double points[MAX_POLYGON][2];
+    hpl::math::getCirculatePolygonPoints(WINDOW_WIDTH / 2, WINDOW_HEIGHT / 2,
+        radius, 8, points);
     for(int i = 0; i < A_POLY_BALL_NUM; i ++){
         globalData.polygonBalls[i] = getRandomNewBounceBall();
+        if(i < MAX_POLYGON){
+            globalData.polygonBalls[i]->x = points[i][0];
+            globalData.polygonBalls[i]->y = points[i][1];
+        }
     }
 
 }
@@ -145,7 +156,7 @@ void drawArrow(SDL_Surface* screen, double x0, double y0, double x1, double y1, 
     double deg = hpl::math::getDegreeFromVector(dx, dy);
     //135度ずらす
     for(int i = -1; i < 2; i += 2){
-        double newDeg = deg + (double)i * 45.0;
+        double newDeg = deg + (double)i * 120;
         double rad = hpl::math::getRadianFromDegree(newDeg);
         //
         double newX = x1 + cos(rad) * length;

@@ -38,6 +38,15 @@ const int FONT_SIZE = 12;
 //鏃の長さ
 const double ARROW_LENGTH = 10;
 
+//ポリゴンチェックタイプ
+namespace CheckType{
+enum CheckType{
+    IsPointInPolygon,
+    IsCanFillPolygonFromPoint,
+    IsValidPolygon,
+};
+};
+
 /////////////////////////////////////
 //#define PREPARED
 #define SEARCH_POLY
@@ -50,13 +59,19 @@ public:
     //n角形
     int nPolygon;
 
-    //ボールx4
-    BounceBall *balls[BALL_NUM];
     int catchedBall;
 
+    ///////////////////
+    //ボールx4
+    BounceBall *balls[BALL_NUM];
+
+    /////////////////////
     //ボール n + 1
     BounceBall *polygonBalls[A_POLY_BALL_NUM];
 
+    //調査種類
+    CheckType::CheckType checkType;
+    std::map<CheckType::CheckType, int> checkTypeTable;
 public:
     GlobalData(){}
     ~GlobalData(){
