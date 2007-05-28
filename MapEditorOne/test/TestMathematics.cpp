@@ -2,6 +2,7 @@
 
 GlobalData globalData;
 
+const double A_POLYGON_RADIUS = 300;
 void init();
 void loop(SDL_Surface* screen);
 void doEvent();
@@ -60,6 +61,7 @@ void init()
 
     //正8角形でスタート
     double points[MAX_POLYGON][2];
+    double radius = A_POLYGON_RADIUS;
     hpl::math::getCirculatePolygonPoints(WINDOW_WIDTH / 2, WINDOW_HEIGHT / 2,
         radius, 8, points);
     for(int i = 0; i < A_POLY_BALL_NUM; i ++){

@@ -63,7 +63,8 @@ void draw(SDL_Surface* screen)
     CheckType::CheckType ch = globalData.checkType;
     int c = globalData.checkTypeTable[ch];
     if(ch == CheckType::IsPointInPolygon){
-        if(
+        //“_‚ªƒ|ƒŠƒSƒ““à‚É‚ ‚ê‚Î^
+        //if(isPointInPolygon(
     }else if(ch == CheckType::IsCanFillPolygonFromPoint){
     }else if(ch == CheckType::IsValidPolygon){
     }else{
@@ -77,7 +78,7 @@ void draw(SDL_Surface* screen)
             vx[n] = globalData.polygonBalls[i]->x;
             vy[n] = globalData.polygonBalls[i]->y;
         }
-        polygonRGBA(screenm, vx, vy, n, checkTypeColor[c][0], checkTypeColor[c][1], 
+        polygonRGBA(screen, (const Sint16*)vx, (const Sint16*)vy, n, checkTypeColor[c][0], checkTypeColor[c][1], 
         checkTypeColor[c][2], checkTypeColor[c][3]);
     }
 
