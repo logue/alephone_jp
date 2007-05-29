@@ -65,6 +65,7 @@ void draw(SDL_Surface* screen)
     if(ch == CheckType::IsPointInPolygon){
         //点がポリゴン内にあれば真
         //if(isPointInPolygon(
+        //AlephOneのポリゴンチェッカーには任せておけない！
     }else if(ch == CheckType::IsCanFillPolygonFromPoint){
     }else if(ch == CheckType::IsValidPolygon){
     }else{

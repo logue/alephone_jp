@@ -196,6 +196,11 @@ namespace math{
     */
     void getCirculatePolygonPoints(double centerx, double centery, double radius,
         int n, double dest[][2]);
+
+    /**
+        点がポリゴンのなかに存在するかをチェックします
+    */
+    bool isPointInPolygon(double px, double py, double polygonPoints[][2], int n);
 };
 };
 #endif
