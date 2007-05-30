@@ -47,39 +47,58 @@ void drawStrings(SDL_Surface* screen, int startY)
     //点の数表示
     drawString(screen, 0, y + FONT_SIZE, 255, 255, 255, 255, "Points num:%d", globalData.nPolygon);
     //チェックタイプ表示
-    int c = globalData.checkTypeTable[globalData.checkType];
+    int c = globalData.checkType;
     drawString(screen, 0, y + 2 * FONT_SIZE, checkTypeColor[c][0], checkTypeColor[c][1], 
         checkTypeColor[c][2], checkTypeColor[c][3], 
         CHECK_TYPE_STRING[c]);
 }
 
-void draw(SDL_Surface* screen)
+bool isEnablePolygonDraw()
 {
-    //消去
-    SDL_FillRect(screen, NULL, 0);
-
-    //点がポリゴンの中にあるかチェック
+    int ch = globalData.checkType;
     bool enable = false;
-    CheckType::CheckType ch = globalData.checkType;
-    int c = globalData.checkTypeTable[ch];
+    int px = globalData.polygonBalls[A_POLY_BALL_NUM - 1]->x;
+    int py = globalData.polygonBalls[A_POLY_BALL_NUM - 1]->y;
+    //ポリゴン位置情報
+    double polyPoints[MAX_POLYGON][2];
+    for(int i = 0; i < MAX_POLYGON; i ++){
+        polyPoints[i][0] = globalData.polygonBalls[i]->x;
+        polyPoints[i][1] = globalData.polygonBalls[i]->y;
+    }
+    //n角形の頂点の数
+    int n = globalData.nPolygon;
     if(ch == CheckType::IsPointInPolygon){
         //点がポリゴン内にあれば真
         //if(isPointInPolygon(
         //AlephOneのポリゴンチェッカーには任せておけない！
+        if(hpl::math::isPointInPolygon(px, py, polyPoints, n)){
+            enable = true;
+        }
     }else if(ch == CheckType::IsCanFillPolygonFromPoint){
     }else if(ch == CheckType::IsValidPolygon){
     }else{
     }
+    return enable;
+}
+
+void draw(SDL_Surface* screen)
+{
+
+    //点がポリゴンの中にあるかチェック
+    bool enable = false;
+    int ch = globalData.checkType;
+    int c = ch;
+    enable = isEnablePolygonDraw();
 
     if(enable){
         //ポリゴン表示
-        int vx[MAX_POLYGON], vy[MAX_POLYGON];
+        Sint16 vx[MAX_POLYGON], vy[MAX_POLYGON];
         int n = globalData.nPolygon;
         for(int i = 0; i < n; i ++){
-            vx[n] = globalData.polygonBalls[i]->x;
-            vy[n] = globalData.polygonBalls[i]->y;
+            vx[i] = (Sint16)globalData.polygonBalls[i]->x;
+            vy[i] = (Sint16)globalData.polygonBalls[i]->y;
         }
-        polygonRGBA(screen, (const Sint16*)vx, (const Sint16*)vy, n, checkTypeColor[c][0], checkTypeColor[c][1], 
+        filledPolygonRGBA(screen, (const Sint16*)vx, (const Sint16*)vy, n, checkTypeColor[c][0], checkTypeColor[c][1], 
         checkTypeColor[c][2], checkTypeColor[c][3]);
     }
 

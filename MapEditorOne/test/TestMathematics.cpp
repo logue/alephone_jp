@@ -2,11 +2,12 @@
 
 GlobalData globalData;
 
-const double A_POLYGON_RADIUS = 300;
+const double A_POLYGON_RADIUS = 100;
 void init();
 void loop(SDL_Surface* screen);
 void doEvent();
 void step();
+void drawCommon(SDL_Surface* screen);
 
 double getRandomDouble(double min, double max)
 {
@@ -48,9 +49,6 @@ void init()
 {
     //初期化設定だよ
     globalData.isRunning = true;
-    globalData.checkTypeTable[CheckType::IsPointInPolygon] = 0;
-    globalData.checkTypeTable[CheckType::IsCanFillPolygonFromPoint] = 1;
-    globalData.checkTypeTable[CheckType::IsValidPolygon] = 2;
 
     //ball setup
     for(int i = 0; i < BALL_NUM; i ++){
@@ -63,7 +61,7 @@ void init()
     double points[MAX_POLYGON][2];
     double radius = A_POLYGON_RADIUS;
     hpl::math::getCirculatePolygonPoints(WINDOW_WIDTH / 2, WINDOW_HEIGHT / 2,
-        radius, 8, points);
+        radius, MAX_POLYGON, points);
     for(int i = 0; i < A_POLY_BALL_NUM; i ++){
         globalData.polygonBalls[i] = getRandomNewBounceBall();
         if(i < MAX_POLYGON){
@@ -72,6 +70,8 @@ void init()
         }
     }
 
+    //チェックタイプ
+    globalData.checkType = CheckType::IsPointInPolygon;
 }
 
 void loop(SDL_Surface* screen)
@@ -82,7 +82,7 @@ void loop(SDL_Surface* screen)
 
         step();
 
-
+        drawCommon(screen);
         draw(screen);
 
         SDL_Flip(screen);
@@ -103,6 +103,20 @@ void downNPolygon()
     globalData.nPolygon --;
     if(globalData.nPolygon < MIN_POLYGON){
         globalData.nPolygon = MAX_POLYGON;
+    }
+}
+void upPolyCheckType()
+{
+    globalData.checkType ++;
+    if(globalData.checkType >= CheckType::MAX_CHECK_TYPES){
+        globalData.checkType = 0;
+    }
+}
+void downPolyCheckType()
+{
+    globalData.checkType --;
+    if(globalData.checkType < 0){
+        globalData.checkType = CheckType::MAX_CHECK_TYPES - 1;
     }
 }
 
@@ -131,6 +145,10 @@ void doEvent()
                 upNPolygon();
             }else if(key == SDLK_DOWN){
                 downNPolygon();
+            }else if(key == SDLK_a){
+                upPolyCheckType();
+            }else if(key == SDLK_z){
+                downPolyCheckType();
             }
             break;
         }
@@ -158,7 +176,7 @@ void drawArrow(SDL_Surface* screen, double x0, double y0, double x1, double y1, 
     double deg = hpl::math::getDegreeFromVector(dx, dy);
     //135度ずらす
     for(int i = -1; i < 2; i += 2){
-        double newDeg = deg + (double)i * 120;
+        double newDeg = deg + (double)i * 160;
         double rad = hpl::math::getRadianFromDegree(newDeg);
         //
         double newX = x1 + cos(rad) * length;
@@ -216,4 +234,18 @@ void drawString(SDL_Surface* screen, double x, double y, int r, int g, int b, in
         int tempY = y + FONT_SIZE * i;
         stringRGBA(screen, (Sint16)x, (Sint16)tempY, lines[i].c_str(), r, g, b, a);
     }
+}
+
+/**
+    操作説明を記します
+*/
+void drawCommon(SDL_Surface* screen)
+{
+    //消去
+    SDL_FillRect(screen, NULL, 0);
+    double x = WINDOW_WIDTH - 200;
+    double y = 0;
+    drawString(screen, x, y, 255,255,255,255, "up/down : change num of polygon's edges");
+    y += FONT_SIZE;
+    drawString(screen, x, y, 255,255,255,255, "a/z     : change polygon check type");
 }

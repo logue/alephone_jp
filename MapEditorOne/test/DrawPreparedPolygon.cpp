@@ -33,7 +33,6 @@ void onMouseMotion(SDL_Event ev){
 
 void draw(SDL_Surface* screen)
 {
-    SDL_FillRect(screen, NULL, SDL_MapRGB(screen->format, 0,0,0));
 
     for(int i = 0; i < BALL_NUM; i ++){
         int x = (int)globalData.balls[i]->x;

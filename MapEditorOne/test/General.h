@@ -1,7 +1,8 @@
 #ifndef _GENERAL_
 #define _GENERAL_
 
-#include <HPLLib/HPLAlephLib.h>
+#include <HPLLib/HPLMath.h>
+#include <HPLLib/HPLStringModifier.h>
 #include <SDL.h>
 #include <cmath>
 #include <cstdlib>
@@ -9,6 +10,7 @@
 #include <stdarg.h>
 #include <string>
 #include <vector>
+#include <map>
 
 #include <SDL_gfxPrimitives.h>
 #include "BounceBall.h"
@@ -39,10 +41,11 @@ const double ARROW_LENGTH = 10;
 
 //ポリゴンチェックタイプ
 namespace CheckType{
-enum CheckType{
+enum {
     IsPointInPolygon,
     IsCanFillPolygonFromPoint,
     IsValidPolygon,
+    MAX_CHECK_TYPES
 };
 };
 
@@ -69,8 +72,7 @@ public:
     BounceBall *polygonBalls[A_POLY_BALL_NUM];
 
     //調査種類
-    CheckType::CheckType checkType;
-    std::map<CheckType::CheckType, int> checkTypeTable;
+    int checkType;
 public:
     GlobalData(){}
     ~GlobalData(){

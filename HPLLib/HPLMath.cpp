@@ -603,14 +603,14 @@ void hpl::math::getCirculatePolygonPoints(double centerx, double centery, double
                                           int n, double dest[][2])
 {
     //円周上の位置を求めます
-    double intervalDeg = (double)ROUND_DEGREE / n / 2;
+    double intervalDeg = (double)ROUND_DEGREE / n;
 
-    double startDeg = - (double)ROUND_DEGREE / 8.0;
+    double startDeg = - (double)ROUND_DEGREE / 4.0;
     if(n == 4){
-        startDeg = - (double)ROUND_DEGREE / 8.0 + (double)ROUND_DEGREE / 16.0;
+        startDeg += (double)ROUND_DEGREE / 8.0;
     }
     if(n == 8){
-        startDeg = - (double)ROUND_DEGREE / 8.0 + (double)ROUND_DEGREE / 32.0;
+        startDeg += (double)ROUND_DEGREE / 16.0;
     }
     for(int i = 0; i < n; i ++){
         double deg = startDeg + intervalDeg * i;//
@@ -626,3 +626,40 @@ void hpl::math::getCirculatePolygonPoints(double centerx, double centery, double
         dest[t][1] = dest[t + 1][1];
     }
 }
+
+/**
+    点がポリゴンのなかに存在するかをチェックします
+*/
+bool hpl::math::isPointInPolygon(double px, double py, double polygonPoints[][2], int n)
+{
+    /*
+        Algorithm:
+        点を通る直線を考えます（線分でも半直線でもない！）
+        その線とポリゴンの交点を求め、交点の数を数えます。
+        その交点の数が偶数であればポリゴンの中に点があるとし、
+        奇数であれば中にはない
+        ただし、コの字型の中間に点が存在する場合、外にあるのに偶数となる。
+        そのため左右上下方向を考慮する必要がある
+        参考文献
+        http://alienryderflex.com/polygon/
+    */
+    //偶数回交差
+    bool oddNodes = false;
+    int j = 0;
+    for(int i = 0; i < n; i ++){
+        j ++;
+        if(j == n) j = 0;
+        if((polygonPoints[i][1] < py && polygonPoints[j][1] >= py) ||
+            (polygonPoints[j][1] < py && polygonPoints[i][1] >= py))
+        {
+            if(polygonPoints[i][0] + (py - polygonPoints[i][1]) / 
+                (polygonPoints[j][1] - polygonPoints[i][1]) *
+                (polygonPoints[j][0] - polygonPoints[i][0]) < px)
+            {
+                oddNodes = !oddNodes;
+            }
+        }
+    }
+    return oddNodes;
+}
+
