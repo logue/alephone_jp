@@ -75,7 +75,13 @@ bool isEnablePolygonDraw()
             enable = true;
         }
     }else if(ch == CheckType::IsCanFillPolygonFromPoint){
+        //この点から塗りつぶせるポリゴンを探します
+        //この点で塗りつぶせるポリゴンを見つけたら真
+
     }else if(ch == CheckType::IsValidPolygon){
+        //ポリゴンが正しいか判断します
+        //・指定以上の点を持たないこと
+        //・内向き鋭角を持たないこと
     }else{
     }
     return enable;

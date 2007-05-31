@@ -1,8 +1,7 @@
 #ifndef _GENERAL_
 #define _GENERAL_
 
-#include <HPLLib/HPLMath.h>
-#include <HPLLib/HPLStringModifier.h>
+#include <HPLLib/HPLAlephLib.h>
 #include <SDL.h>
 #include <cmath>
 #include <cstdlib>

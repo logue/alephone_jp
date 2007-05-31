@@ -1,15 +1,9 @@
 #include "HPLQuickSort.h"
 #include "HPLMath.h"
 
-/**
-    クイックソート用。ピボット交換を行います
-    返り値は左から見て異なる数値のうち大きいもの
-    select axis-num 
-    -find two different nums from indexes' left
-    -return bigger one
-    -if all nums are equal, return -1
-*/
-static int pivot(int *indexes, int start, int end);
+/////////////////////////////////////////////////////////////////////////////
+//////////////  Static Methods  /////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////////
 
 /**
     ピボットで得たアクシス数より大きいもの、以下のものをより分けます
@@ -17,55 +11,59 @@ static int pivot(int *indexes, int start, int end);
     -smaller is left, bigger is right
     -return offset of start of biggers
 */
-static int partition(int *indexes, int start, int end, int axis);
-
-/**
-    クイックソートを求める再起処理部分です
-    @param indexes データ
-    @param start,end ソート範囲
-*/
-static void repeatbleQuickSort(int *indexes, int start, int end);
-
-/////////////////////////////////////////////////////////////////////////////
-//////////////  Static Methods  /////////////////////////////////////////////
-/////////////////////////////////////////////////////////////////////////////
-
-int partition(int *indexes, int start, int end, int axis)
+template<class T>
+int partition(struct hpl::math::qsort::Pair<T> *dataArray, int start, int end, T axis)
 {
     int left = start, right = end;
     while( left <= right){
-        while(left <= end && indexes[left] < axis)left ++;
-        while(right >= start && indexes[right] >= axis)right --;
+        while(left <= end && dataArray[left] < axis)left ++;
+        while(right >= start && dataArray[right] >= axis)right --;
         if(left > right)break;
-        hpl::math::exchange(&indexes[left], &indexes[right]);
+        //交換
+        hpl::math::exchange<struct hpl::math::qsort::Pair<T>>(&dataArray[left], &dataArray[right]);
     }
     return left;
 }
 
-int pivot(int *indexes, int start, int end)
+/**
+    クイックソート用。ピボット交換を行います
+    返り値は左から見て異なる数値のうち大きいもののある位置
+    select axis-num 
+    -find two different nums from indexes' left
+    -return bigger one
+    -if all nums are equal, return -1
+*/
+template<class T>
+int pivot(struct hpl::math::qsort::Pair<T> *dataArray, int start, int end)
 {
     int k = start + 1;
-    while( k <= end && indexes[start] == indexes[k])k ++;
+    while( k <= end && dataArray[start] == dataArray[k])k ++;
     //all are same
     if(k > end) return -1;
     //if not
-    if(indexes[start] >= indexes[k]){
+    if(dataArray[start] >= dataArray[k]){
         return start;
     }else{
         return k;
     }
 }
 
-void repeatbleQuickSort(int *indexes, int start, int end)
+/**
+    クイックソートを求める再起処理部分です
+    @param indexes データ
+    @param start,end ソート範囲
+*/
+template<class T>
+void repeatbleQuickSort(struct hpl::math::qsort::Pair<T> *dataArray, int start, int end)
 {
     if( start == end){
         return;
     }
-    int p = pivot(indexes, start, end);
+    int p = pivot(dataArray, start, end, destIndexes);
     if(p != -1){
-        int offset = partition(indexes, start, end, indexes[p]);
-        repeatbleQuickSort(indexes, start, offset - 1);
-        repeatbleQuickSort(indexes, offset, end);
+        int offset = partition(dataArray, start, end, dataArray[p]);
+        repeatbleQuickSort(dataArray, start, offset - 1, destIndexes);
+        repeatbleQuickSort(dataArray, offset, end, destIndexes);
     }
 }
 
@@ -73,14 +71,17 @@ void repeatbleQuickSort(int *indexes, int start, int end)
 //////////////  Global Methods  /////////////////////////////////////////////
 /////////////////////////////////////////////////////////////////////////////
 
-void hpl::math::qsort::quickSort(int *indexes, int max)
+template<class T>
+void hpl::math::qsort::quickSort(struct hpl::math::qsort::Pair<T> *dataArray, int max)
 {
-    int *temp = new int[max];
     if(max == 1){
-        indexes[0] = 0;
+        destIndexes[0] = (T)0;
     }else{
+        //init indexes
+        for(int i = 0; i < max; i ++){
+            destIndexes[i] = i;
+        }
         //sort it
-        repeatbleQuickSort(indexes, 0, max);
+        repeatbleQuickSort(dataArray, 0, max);
     }
-    delete temp;
 }

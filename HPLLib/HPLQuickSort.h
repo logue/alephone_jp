@@ -4,7 +4,13 @@
 namespace hpl{
 namespace math{
 namespace qsort{
-    void quickSort(int *indexes, int max);
+    template<class T>
+    struct Pair{
+        int index;
+        T data;
+    };
+    template<class T>
+    void quickSort(Pair<T>* dataArray, int max);
 };
 };
 };

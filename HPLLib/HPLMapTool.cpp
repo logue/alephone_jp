@@ -1,6 +1,7 @@
 #include "HPLMapTool.h"
 #include "HPLMath.h"
 #include <limits.h>
+#include "HPLQuickSort.h"
 
 static double getLengthDouble(double x, double y)
 {
@@ -374,8 +375,29 @@ std::vector<polygon_data> hpl::aleph::map::searchValidPolygon(world_point2d wpoi
 {
     std::vector<polygon_data> polyDatas;
 
-    //‹ß‚­‚É‚ ‚éü‚ğ’T‚·
+    int max = (int)LineList.size();
+    //ü‚Ö‚Ì‚ü‚Ì‹——£‡‚Å®—ñ‚·‚é
+    //‘S•”‚Ìü‚Ö‚Ì‚ü‚ğ‹‚ß‚é
+    double *length = new double[max];
 
+    for(int i = 0; i < max; i ++){
+        line_data* line = get_line_data(i);
+        endpoint_data* epStart = get_endpoint_data(line->endpoint_indexes[0]);
+        endpoint_data* epEnd = get_endpoint_data(line->endpoint_indexes[1]);
+        length[i] = hpl::math::getPointDistanceFromLine(wpoint.x, wpoint.y, 
+            epStart->vertex.x, epStart->vertex.y, epEnd->vertex.x, epEnd->vertex.y);
+    }
+    struct hpl::math::qsort::Pair* pairs = new struct hpl::math::qsort::Pair[max];
+    hpl::math::qsort::quickSort(pairs, max);
+
+    //‹ß‚­‚É‚ ‚éü‚©‚çŒ©‚Ä‚¢‚­
+    for(int i = 0; i < max; i ++){
+        
+    }
+    
+    //‰ğ•ú
+    delete sortedIndex;
+    delete length;
     return polyDatas;
 }
 
