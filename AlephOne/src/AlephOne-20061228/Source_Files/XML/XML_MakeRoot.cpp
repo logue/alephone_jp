@@ -29,7 +29,7 @@
 #include "XML_ParseTreeRoot.h"
 #include "TextStrings.h"
 #include "interface.h"
-//#include "game_window.h"
+#include "game_window.h"
 #include "PlayerName.h"
 #include "motion_sensor.h"
 #include "world.h"

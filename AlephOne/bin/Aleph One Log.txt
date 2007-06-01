@@ -75,3 +75,39 @@ while opening resource file V:\cvs_\cvs_sf\marathon\AlephOne\bin\Map (v:\cvs_\cv
 
 while opening resource file V:\cvs_\cvs_sf\marathon\AlephOne\bin\Map (v:\cvs_\cvs_sf\marathon\alephone\src\alephone-20061228\source_files\files\resource_manager.cpp:338)
   file's resource header corrupt (v:\cvs_\cvs_sf\marathon\alephone\src\alephone-20061228\source_files\files\resource_manager.cpp:227)
+
+-------------------- Mon Mar 12 23:01:59 2007
+
+
+while initializing preferences (v:\cvs_\cvs_sf\marathon\alephone\src\alephone-20061228\source_files\misc\preferences.cpp:238)
+  fatal alert (ID=-1): Please be sure the files 'Map', 'Shapes', 'Images' and 'Sounds' are correctly installed and try again. (v:\cvs_\cvs_sf\marathon\alephone\src\alephone-20061228\source_files\cseries\csalerts_sdl.cpp:96)
+
+-------------------- Mon Mar 12 23:06:01 2007
+
+
+while initializing preferences (v:\cvs_\cvs_sf\marathon\alephone\src\alephone-20061228\source_files\misc\preferences.cpp:238)
+  fatal alert (ID=-1): Please be sure the files 'Map', 'Shapes', 'Images' and 'Sounds' are correctly installed and try again. (v:\cvs_\cvs_sf\marathon\alephone\src\alephone-20061228\source_files\cseries\csalerts_sdl.cpp:96)
+
+-------------------- Mon Mar 12 23:06:39 2007
+
+
+
+-------------------- Mon Mar 12 23:22:42 2007
+
+
+
+-------------------- Mon Mar 12 23:48:19 2007
+
+
+
+-------------------- Mon Mar 12 23:49:30 2007
+
+
+
+-------------------- Mon Mar 12 23:50:21 2007
+
+
+
+-------------------- Wed Mar 21 01:23:13 2007
+
+

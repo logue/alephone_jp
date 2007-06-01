@@ -18,6 +18,7 @@ AlephOne-SDLで日本語を表示できるようにしたもの
 OSX 10.4+Marathon Infinity 日本語版
 Windows2000+M1A1 J
 
+
 今できること：
 Soft描画/OpenGLでの日本語表示
 Shift-JIS/(EUC-JP?/UTF-8?)でのMML
