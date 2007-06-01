@@ -221,6 +221,13 @@ namespace map{
         ・
     */
     //void setupPolygon(int index);
+
+    /**
+        指定した点がポリゴンの中に存在するかどうかを確かめます
+        @
+    */
+    bool isPointInPolygon(int viewPX, int viewPY, int polygonIndex,
+        int offsetXWorld, int offsetYWorld, int zoomDivision, int offsetx, int offsety);
 };
 };
 };

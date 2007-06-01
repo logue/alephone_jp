@@ -21,7 +21,7 @@
 				Name="VCCLCompilerTool"
 				Optimization="0"
 				AdditionalIncludeDirectories="..\..\..\..\..\AlephOneSrc;..\..\..\..\..\..\marathon;..\..\..\..\..\SDL_gfx"
-				PreprocessorDefinitions="WIN32;_DEBUG;_CONSOLE"
+				PreprocessorDefinitions="WIN32;_DEBUG;_CONSOLE;SDL;__WIN32__"
 				MinimalRebuild="TRUE"
 				BasicRuntimeChecks="3"
 				RuntimeLibrary="3"
@@ -33,7 +33,7 @@
 				Name="VCCustomBuildTool"/>
 			<Tool
 				Name="VCLinkerTool"
-				AdditionalDependencies="SDL.lib SDLmain.lib"
+				AdditionalDependencies="SDL.lib SDLmain.lib ..\..\..\..\..\AlephOneSrc\lib\AlephOneSrc2007D.lib"
 				OutputFile="$(OutDir)/TestMathematics2007D.exe"
 				LinkIncremental="2"
 				GenerateDebugInformation="TRUE"
@@ -154,16 +154,61 @@
 			Name="HPLLib"
 			Filter="">
 			<File
+				RelativePath="..\..\..\..\..\HPLLib\HPLAlephLib.h">
+			</File>
+			<File
+				RelativePath="..\..\..\..\..\HPLLib\HPLDoneHistory.cpp">
+			</File>
+			<File
+				RelativePath="..\..\..\..\..\HPLLib\HPLDoneHistory.h">
+			</File>
+			<File
+				RelativePath="..\..\..\..\..\HPLLib\HPLMapTool.cpp">
+			</File>
+			<File
+				RelativePath="..\..\..\..\..\HPLLib\HPLMapTool.h">
+			</File>
+			<File
 				RelativePath="..\..\..\..\..\HPLLib\HPLMath.cpp">
 			</File>
 			<File
 				RelativePath="..\..\..\..\..\HPLLib\HPLMath.h">
 			</File>
 			<File
+				RelativePath="..\..\..\..\..\HPLLib\HPLQuickSort.cpp">
+			</File>
+			<File
+				RelativePath="..\..\..\..\..\HPLLib\HPLQuickSort.h">
+			</File>
+			<File
+				RelativePath="..\..\..\..\..\HPLLib\HPLRealMapData.cpp">
+			</File>
+			<File
+				RelativePath="..\..\..\..\..\HPLLib\HPLRealMapData.h">
+			</File>
+			<File
+				RelativePath="..\..\..\..\..\HPLLib\HPLSelectData.cpp">
+			</File>
+			<File
+				RelativePath="..\..\..\..\..\HPLLib\HPLSelectData.h">
+			</File>
+			<File
 				RelativePath="..\..\..\..\..\HPLLib\HPLStringModifier.cpp">
 			</File>
 			<File
 				RelativePath="..\..\..\..\..\HPLLib\HPLStringModifier.h">
+			</File>
+			<File
+				RelativePath="..\..\..\..\..\HPLLib\HPLSurfaceModifier.cpp">
+			</File>
+			<File
+				RelativePath="..\..\..\..\..\HPLLib\HPLSurfaceModifier.h">
+			</File>
+			<File
+				RelativePath="..\..\..\..\..\HPLLib\HPLViewGridManager.cpp">
+			</File>
+			<File
+				RelativePath="..\..\..\..\..\HPLLib\HPLViewGridManager.h">
 			</File>
 		</Filter>
 		<Filter

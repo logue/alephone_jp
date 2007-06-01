@@ -16,11 +16,11 @@ int partition(struct hpl::math::qsort::Pair<T> *dataArray, int start, int end, T
 {
     int left = start, right = end;
     while( left <= right){
-        while(left <= end && dataArray[left] < axis)left ++;
-        while(right >= start && dataArray[right] >= axis)right --;
+        while(left <= end && dataArray[left].data < axis)left ++;
+        while(right >= start && dataArray[right].data >= axis)right --;
         if(left > right)break;
         //ŒğŠ·
-        hpl::math::exchange<struct hpl::math::qsort::Pair<T>>(&dataArray[left], &dataArray[right]);
+        hpl::math::exchange<struct hpl::math::qsort::Pair<T> >(&dataArray[left], &dataArray[right]);
     }
     return left;
 }
@@ -37,11 +37,11 @@ template<class T>
 int pivot(struct hpl::math::qsort::Pair<T> *dataArray, int start, int end)
 {
     int k = start + 1;
-    while( k <= end && dataArray[start] == dataArray[k])k ++;
+    while( k <= end && dataArray[start].data == dataArray[k].data)k ++;
     //all are same
     if(k > end) return -1;
     //if not
-    if(dataArray[start] >= dataArray[k]){
+    if(dataArray[start].data >= dataArray[k].data){
         return start;
     }else{
         return k;
@@ -59,11 +59,11 @@ void repeatbleQuickSort(struct hpl::math::qsort::Pair<T> *dataArray, int start, 
     if( start == end){
         return;
     }
-    int p = pivot(dataArray, start, end, destIndexes);
+    int p = pivot(dataArray, start, end);
     if(p != -1){
-        int offset = partition(dataArray, start, end, dataArray[p]);
-        repeatbleQuickSort(dataArray, start, offset - 1, destIndexes);
-        repeatbleQuickSort(dataArray, offset, end, destIndexes);
+        int offset = partition(dataArray, start, end, dataArray[p].data);
+        repeatbleQuickSort(dataArray, start, offset - 1);
+        repeatbleQuickSort(dataArray, offset, end);
     }
 }
 
@@ -75,13 +75,16 @@ template<class T>
 void hpl::math::qsort::quickSort(struct hpl::math::qsort::Pair<T> *dataArray, int max)
 {
     if(max == 1){
-        destIndexes[0] = (T)0;
+        dataArray[0].index = 0;
     }else{
         //init indexes
         for(int i = 0; i < max; i ++){
-            destIndexes[i] = i;
+            dataArray[i].index = i;
         }
         //sort it
         repeatbleQuickSort(dataArray, 0, max);
     }
 }
+
+template void hpl::math::qsort::quickSort(struct hpl::math::qsort::Pair<int> *dataArray, int max);
+template void hpl::math::qsort::quickSort(struct hpl::math::qsort::Pair<double> *dataArray, int max);

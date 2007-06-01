@@ -378,26 +378,23 @@ std::vector<polygon_data> hpl::aleph::map::searchValidPolygon(world_point2d wpoi
     int max = (int)LineList.size();
     //線への垂線の距離順で整列する
     //全部の線への垂線を求める
-    double *length = new double[max];
-
+    struct hpl::math::qsort::Pair<double>* pairs = new struct hpl::math::qsort::Pair<double>[max];
     for(int i = 0; i < max; i ++){
         line_data* line = get_line_data(i);
         endpoint_data* epStart = get_endpoint_data(line->endpoint_indexes[0]);
         endpoint_data* epEnd = get_endpoint_data(line->endpoint_indexes[1]);
-        length[i] = hpl::math::getPointDistanceFromLine(wpoint.x, wpoint.y, 
+        pairs[i].data = hpl::math::getPointDistanceFromLine(wpoint.x, wpoint.y, 
             epStart->vertex.x, epStart->vertex.y, epEnd->vertex.x, epEnd->vertex.y);
     }
-    struct hpl::math::qsort::Pair* pairs = new struct hpl::math::qsort::Pair[max];
-    hpl::math::qsort::quickSort(pairs, max);
+    hpl::math::qsort::quickSort<double>(pairs, max);
 
     //近くにある線から見ていく
     for(int i = 0; i < max; i ++){
-        
+        line_data* startLine = get_line_data(pairs[i].index);
     }
     
     //解放
-    delete sortedIndex;
-    delete length;
+    delete pairs;
     return polyDatas;
 }
 
@@ -600,3 +597,28 @@ double hpl::aleph::map::getTwoLinesRadian(int pIndexA1, int pIndexA2, int pIndex
         b2->vertex.x, b2->vertex.y);
     return rad;
 }
+
+/**
+    指定した点がポリゴンの中に存在するかどうかを確かめます
+    @
+*/
+bool hpl::aleph::map::isPointInPolygon(int viewPX, int viewPY, int polygonIndex,
+                                       int offsetXWorld, int offsetYWorld, int zoomDivision, int offsetx, int offsety)
+{
+    //ワールド座標に変換します
+    world_point2d wpoint = hpl::aleph::map::getWorldPoint2DFromViewPoint(viewPX, viewPY, 
+        offsetXWorld, offsetYWorld, zoomDivision, offsetx, offsety);
+    double points[MAXIMUM_VERTICES_PER_POLYGON][2];
+    //ポリゴン情報を得ます
+    polygon_data* poly = get_polygon_data(polygonIndex);
+    int n = poly->vertex_count;
+    for(int i = 0; i < n; i ++){
+        endpoint_data* ep = get_endpoint_data(poly->endpoint_indexes[i]);
+        points[i][0] = ep->vertex.x;
+        points[i][1] = ep->vertex.y;
+    }
+    //位置検査します
+    bool isPointIn = hpl::math::isPointInPolygon(wpoint.x, wpoint.y, points, n);
+    return isPointIn;
+}
+
