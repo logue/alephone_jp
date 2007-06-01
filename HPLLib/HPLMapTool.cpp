@@ -291,13 +291,6 @@ bool hpl::aleph::map::isPointInSelection(int px, int py,
     return false;
 }
 
-//線の回り方が時計回りか、反時計回りか
-enum RotationType{
-    Clockwise,
-    Counterclockwise,
-
-    MAX_POLYGON_ROTATION_TYPES
-};
 
 /**
     ポリゴンが存在として正しいかどうかを判定します
@@ -314,14 +307,30 @@ bool hpl::aleph::map::isValidPolygon(int index)
         return false;
     }
 
-    //ポリゴンに所属する線を取得します
+    //線の並びが正しいかチェック
     int vertexCount = polygon->vertex_count;
+    for(int i = 0; i < vertexCount - 1; i ++){
+        int a = polygon->endpoint_indexes[i];
+        int next = i + 1;
+        if(i == vertexCount - 2){
+            next = 0;
+        }
+        int b = polygon->endpoint_indexes[next];
+        int lineIndex = hpl::aleph::map::getLineIndexFromTwoLPoints(a, b);
+        if(lineIndex == NONE){
+            return false;
+        }
+
+    }
+    double points[MAX_VERTEX_PER_POLYGON][2];
+    bool isValid = hpl::math::isValidPolygon(points, vertexCount);
+
     int startPointIndex = polygon->endpoint_indexes[0];
     int pointA, pointB, pointC;
     
     
     //時計回りか、反時計回りか
-    RotationType polygonRotationType = Clockwise;
+    int polygonRotationType = RotationType::Clockwise;
     bool isFirstLoop = true;
 
     for(int i = 0; i < vertexCount - 2; i ++){
@@ -356,8 +365,8 @@ bool hpl::aleph::map::isValidPolygon(int index)
             isFirstLoop = false;
         }else{
             //ポリゴンが逆鋭角（切り込んでる）状態ならば異常であるとする
-            if((polygonRotationType == Clockwise && optDeg >= 180) ||
-                (polygonRotationType == Counterclockwise && optDeg < 180)){
+            if((polygonRotationType == RotationType::Clockwise && optDeg >= 180) ||
+                (polygonRotationType == RotationType::Counterclockwise && optDeg < 180)){
                 return false;
             }
         }
@@ -391,6 +400,9 @@ std::vector<polygon_data> hpl::aleph::map::searchValidPolygon(world_point2d wpoi
     //近くにある線から見ていく
     for(int i = 0; i < max; i ++){
         line_data* startLine = get_line_data(pairs[i].index);
+        //線の左右どちらの側に点があるかをチェックします
+        RotationType rot = Clockwise;
+        //
     }
     
     //解放

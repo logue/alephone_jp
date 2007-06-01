@@ -663,3 +663,56 @@ bool hpl::math::isPointInPolygon(double px, double py, double polygonPoints[][2]
     return oddNodes;
 }
 
+/**
+    点が線の右回り方向にあるか、左回り方向にあるか判断します
+    @param line0x,y 始点
+    @param line1x,y 終点
+*/
+int hpl::math::getPointRotationTypeFromLine(double px, double py, double line0x, double line0y,
+    double line1x, double line1y)
+{
+    int rotType = RotationType::Clockwise;
+    //二つの線l0-l1とl0-pが成す角を求めます
+    double deg = hpl::math::getTwoLinesDegree(line0x, line0y, line1x, line1y,
+        line0x, line0y, px, py);
+    double optDeg = hpl::math::optimizeDegree(deg);
+    if(deg < ROUND_DEGREE / 2){
+        //もし[0,180)ならば
+        rotType = RotationType::Clockwise;
+    }else{
+        //でなければ（[180,360)）
+        rotType = RotationType::Counterclockwise;
+    }
+    return rotType;
+}
+
+/**
+    ポリゴンに内向き鋭角が存在しないかどうか確認します
+*/
+bool hpl::math::isValidPolygon(double points[][2], int maxVertex)
+{
+    bool isFirst = true;
+    int rotTypeRemember = 0;
+    for(int i = 0; i < maxVertex - 1; i ++){
+        int pAIndex = i;
+        int pBIndex = i + 1;
+        int pCIndex = i + 2;
+        if(i == maxVertex - 2){
+            pCIndex = 0;
+        }
+        int rotType = hpl::math::getPointRotationTypeFromLine(
+            points[pCIndex][0], points[pCIndex][1],
+            points[pAIndex][0], points[pAIndex][1],
+            points[pBIndex][0], points[pBIndex][1]);
+        if(isFirst){
+            rotTypeRemember = rotType;
+            isFirst = false;
+        }else{
+            if(rotTypeRemember != rotType){
+                //正しくない！
+                return false;
+            }
+        }
+    }
+    return true;
+}

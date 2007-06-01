@@ -38,7 +38,15 @@ namespace math{
         }
     }
 
+    namespace RotationType{
+        //線の回り方が時計回りか、反時計回りか
+        enum {
+            Clockwise,
+            Counterclockwise,
 
+            MAX_POLYGON_ROTATION_TYPES
+        };
+    };
     /**
         ラジアンと度の変換
     */
@@ -201,6 +209,17 @@ namespace math{
         点がポリゴンのなかに存在するかをチェックします
     */
     bool isPointInPolygon(double px, double py, double polygonPoints[][2], int n);
+
+    /**
+        点が線の右回り方向にあるか、左回り方向にあるか判断します
+    */
+    int getPointRotationTypeFromLine(double px, double py, double line0x, double line0y,
+        double line1x, double line1y);
+
+    /**
+        ポリゴンに内向き鋭角が存在しないかどうか確認します
+    */
+    bool isValidPolygon(double points[][2], int maxVertex);
 };
 };
 #endif
