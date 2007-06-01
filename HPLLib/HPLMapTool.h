@@ -228,6 +228,7 @@ namespace map{
     */
     bool isPointInPolygon(int viewPX, int viewPY, int polygonIndex,
         int offsetXWorld, int offsetYWorld, int zoomDivision, int offsetx, int offsety);
+    bool isPointInPolygon(world_point2d& wpoint, int polygonIndex);
 };
 };
 };

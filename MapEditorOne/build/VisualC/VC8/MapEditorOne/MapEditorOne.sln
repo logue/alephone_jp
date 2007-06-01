@@ -1,11 +1,9 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 9.00
-# Visual Studio 2005
+# Visual C++ Express 2005
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "MapEditorOne", "MapEditorOne\MapEditorOne.vcproj", "{5AB9FF71-670A-4C43-9F65-75678796DE1B}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "MapViewerOne", "..\..\..\..\..\MapViewerOne\build\VisualC\VC8\MapViewerOne\MapViewerOne.vcproj", "{9379CC7E-20EB-47D8-9B66-3BA56EA651CE}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestPolygon", "TestPolygon\TestPolygon.csproj", "{5BC03069-219E-4D0A-B6B3-25D41D6DA69D}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "TestMathematics", "TestMathematics\TestMathematics.vcproj", "{46D1F0C8-3CD4-4C13-BC91-8FB454D3E632}"
 EndProject
@@ -39,16 +37,6 @@ Global
 		{9379CC7E-20EB-47D8-9B66-3BA56EA651CE}.Release|Mixed Platforms.Build.0 = Release|Win32
 		{9379CC7E-20EB-47D8-9B66-3BA56EA651CE}.Release|Win32.ActiveCfg = Release|Win32
 		{9379CC7E-20EB-47D8-9B66-3BA56EA651CE}.Release|Win32.Build.0 = Release|Win32
-		{5BC03069-219E-4D0A-B6B3-25D41D6DA69D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{5BC03069-219E-4D0A-B6B3-25D41D6DA69D}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{5BC03069-219E-4D0A-B6B3-25D41D6DA69D}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
-		{5BC03069-219E-4D0A-B6B3-25D41D6DA69D}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
-		{5BC03069-219E-4D0A-B6B3-25D41D6DA69D}.Debug|Win32.ActiveCfg = Debug|Any CPU
-		{5BC03069-219E-4D0A-B6B3-25D41D6DA69D}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{5BC03069-219E-4D0A-B6B3-25D41D6DA69D}.Release|Any CPU.Build.0 = Release|Any CPU
-		{5BC03069-219E-4D0A-B6B3-25D41D6DA69D}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
-		{5BC03069-219E-4D0A-B6B3-25D41D6DA69D}.Release|Mixed Platforms.Build.0 = Release|Any CPU
-		{5BC03069-219E-4D0A-B6B3-25D41D6DA69D}.Release|Win32.ActiveCfg = Release|Any CPU
 		{46D1F0C8-3CD4-4C13-BC91-8FB454D3E632}.Debug|Any CPU.ActiveCfg = Debug|Win32
 		{46D1F0C8-3CD4-4C13-BC91-8FB454D3E632}.Debug|Mixed Platforms.ActiveCfg = Debug|Win32
 		{46D1F0C8-3CD4-4C13-BC91-8FB454D3E632}.Debug|Mixed Platforms.Build.0 = Debug|Win32

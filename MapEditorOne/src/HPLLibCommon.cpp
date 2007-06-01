@@ -55,19 +55,10 @@ void addAnnotationText(world_point2d& point, string text)
     search polygon include point stated.
     @return points included in a new or existing valid polygon
         if no points returned, no valid polygon can create or found
-*/
+*
 vector<int> getValidPoligon(world_point2d& point, short maxHeight, short minHeight)
 {
     vector<int> points;
-    /*
-    //get nearest point
-    int nearestPointIndex = getNearestPoint(point);
-
-    //点が存在しない
-    if(nearestPointIndex < 0){
-        return points;
-    }
-    */
     //sort point index
     int pointMax = static_cast<int>(EndpointList.size());
     int* indexes = new int[pointMax];
@@ -79,7 +70,8 @@ vector<int> getValidPoligon(world_point2d& point, short maxHeight, short minHeig
     int polygonMax = static_cast<int>(PolygonList.size());
     int* includingPolygons = new int[polygonMax];
     for(int i = 0; i < polygonMax; i ++){
-        if(point_in_polygon(i, &point)){
+		if(hpl::aleph::map::isPointInPolygon(point, i))
+		{//point_in_polygon(i, &point)){
         }
     }
     //距離を求めてデータに入れる
@@ -178,7 +170,7 @@ int getNearestPoint(world_point2d& pointFrom)
 /**
 //1対1対応のマップをソートする。値側を比較する
     @param indexes インデックス
-*/
+*
 void sortMap(int *indexes, int max, int* datas)
 {
     //datasをソート
@@ -209,7 +201,7 @@ void sortMap(int *indexes, int max, int* datas)
 
 /**
     get point list ordered by length from a point
-*/
+*
 void getPointListLengthOrder(world_point2d& pointFrom, int* indexes)
 {
     int max = static_cast<int>(EndpointList.size());

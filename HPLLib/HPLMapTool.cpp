@@ -261,7 +261,7 @@ bool hpl::aleph::map::isPointInSelection(int px, int py,
         std::vector<struct hpl::aleph::map::SelLine>* sellines = 
             selectInfo->getSelLines();
         for(int i = 0; i < (int)sellines->size(); i ++){
-            line_data* line = &LineList[sellines->at(i).index];
+            line_data* line = get_line_data(sellines->at(i).index);
             endpoint_data* begin = &EndpointList[line->endpoint_indexes[0]];
             endpoint_data* end = &EndpointList[line->endpoint_indexes[1]];
             if(hpl::aleph::map::isSelectLine(px, py, begin->vertex.x, begin->vertex.y,
@@ -281,7 +281,10 @@ bool hpl::aleph::map::isPointInSelection(int px, int py,
             world_point.x = (world_distance)((px - offsetViewX) * div - offsetWorldX);
             world_point.y = (world_distance)((py - offsetViewY) * div - offsetWorldY);
 
-            if(point_in_polygon(selpolygons->at(i).index, &world_point)){
+			if(hpl::aleph::map::isPointInPolygon(px, py, selpolygons->at(i).index,
+				offsetWorldX, offsetWorldY, div, offsetViewX, offsetViewY))
+			{
+				//point_in_polygon(selpolygons->at(i).index, &world_point)){
                 return true;
             }
         }
@@ -322,7 +325,7 @@ bool hpl::aleph::map::isValidPolygon(int index)
         }
 
     }
-    double points[MAX_VERTEX_PER_POLYGON][2];
+    double points[MAXIMUM_VERTICES_PER_POLYGON][2];
     bool isValid = hpl::math::isValidPolygon(points, vertexCount);
 
     int startPointIndex = polygon->endpoint_indexes[0];
@@ -330,7 +333,7 @@ bool hpl::aleph::map::isValidPolygon(int index)
     
     
     //時計回りか、反時計回りか
-    int polygonRotationType = RotationType::Clockwise;
+	int polygonRotationType = hpl::math::RotationType::Clockwise;
     bool isFirstLoop = true;
 
     for(int i = 0; i < vertexCount - 2; i ++){
@@ -360,13 +363,13 @@ bool hpl::aleph::map::isValidPolygon(int index)
             //もし角度が[0,180)ならば、右回りである
             //それ以外（[180,360)）ならば、左回りである
             if(optDeg >= 180.0){
-                polygonRotationType = Counterclockwise;
+				polygonRotationType = hpl::math::RotationType::Counterclockwise;
             }
             isFirstLoop = false;
         }else{
             //ポリゴンが逆鋭角（切り込んでる）状態ならば異常であるとする
-            if((polygonRotationType == RotationType::Clockwise && optDeg >= 180) ||
-                (polygonRotationType == RotationType::Counterclockwise && optDeg < 180)){
+            if((polygonRotationType == hpl::math::RotationType::Clockwise && optDeg >= 180) ||
+                (polygonRotationType == hpl::math::RotationType::Counterclockwise && optDeg < 180)){
                 return false;
             }
         }
@@ -401,7 +404,7 @@ std::vector<polygon_data> hpl::aleph::map::searchValidPolygon(world_point2d wpoi
     for(int i = 0; i < max; i ++){
         line_data* startLine = get_line_data(pairs[i].index);
         //線の左右どちらの側に点があるかをチェックします
-        RotationType rot = Clockwise;
+		int rot = hpl::math::RotationType::Clockwise;
         //
     }
     
@@ -451,7 +454,7 @@ polygon_data hpl::aleph::map::createPolygon(world_point2d points[],
 	    ld[i].clockwise_polygon_owner = 0;
         ld[i].counterclockwise_polygon_owner = NONE;
 
-        ld[i].length = hpl::aleph::map::getPointsDistance(
+        ld[i].length = (world_distance)hpl::aleph::map::getPointsDistance(
             epd[ld[i].endpoint_indexes[0]].vertex, epd[ld[i].endpoint_indexes[1]].vertex);
     }
 
@@ -520,7 +523,7 @@ void hpl::aleph::map::addNewPolygon(polygon_data& pdata, endpoint_data epd[],
     for(int i = 0; i < n; i ++){
         EndpointList.push_back(epd[i]);
         dynamic_world->endpoint_count ++;
-        int newIndex = EndpointList.size() - 1;
+        int newIndex = (int)EndpointList.size() - 1;
         epIndexTable[i] = newIndex;
 
 /*        char buf[256];
@@ -540,7 +543,7 @@ void hpl::aleph::map::addNewPolygon(polygon_data& pdata, endpoint_data epd[],
 
         LineList.push_back(ld[i]);
         dynamic_world->line_count ++;
-        int newIndex = LineList.size() - 1;
+        int newIndex = (int)LineList.size() - 1;
         lIndexTable[i] = newIndex;
     }
     
@@ -554,7 +557,7 @@ void hpl::aleph::map::addNewPolygon(polygon_data& pdata, endpoint_data epd[],
     PolygonList.push_back(pdata);
     dynamic_world->polygon_count ++;
 
-    int newPolygonIndex = PolygonList.size() - 1;
+    int newPolygonIndex = (int)PolygonList.size() - 1;
     for(int i = 0; i < n; i ++){
         int newIndex = epIndexTable[i];
         endpoint_data* ep = &(EndpointList[newIndex]);//get_endpoint_data(newIndex);
@@ -620,6 +623,12 @@ bool hpl::aleph::map::isPointInPolygon(int viewPX, int viewPY, int polygonIndex,
     //ワールド座標に変換します
     world_point2d wpoint = hpl::aleph::map::getWorldPoint2DFromViewPoint(viewPX, viewPY, 
         offsetXWorld, offsetYWorld, zoomDivision, offsetx, offsety);
+	bool isPointIn = hpl::aleph::map::isPointInPolygon(wpoint, polygonIndex);
+	return isPointIn;
+}
+
+bool hpl::aleph::map::isPointInPolygon(world_point2d& wpoint, int polygonIndex)
+{
     double points[MAXIMUM_VERTICES_PER_POLYGON][2];
     //ポリゴン情報を得ます
     polygon_data* poly = get_polygon_data(polygonIndex);

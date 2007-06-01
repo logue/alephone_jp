@@ -51,14 +51,21 @@ void drawStrings(SDL_Surface* screen, int startY)
     drawString(screen, 0, y + 2 * FONT_SIZE, checkTypeColor[c][0], checkTypeColor[c][1], 
         checkTypeColor[c][2], checkTypeColor[c][3], 
         CHECK_TYPE_STRING[c]);
+
+	//点の番号
+	for(int i = 0; i < MAX_POLYGON; i ++){
+		int x = globalData.polygonBalls[i]->x;
+		y = globalData.polygonBalls[i]->y;
+		drawString(screen, x, y, 255,255,255,255, "%d", i);
+	}
 }
 
 bool isEnablePolygonDraw()
 {
     int ch = globalData.checkType;
     bool enable = false;
-    int px = globalData.polygonBalls[A_POLY_BALL_NUM - 1]->x;
-    int py = globalData.polygonBalls[A_POLY_BALL_NUM - 1]->y;
+    int px = (int)globalData.polygonBalls[A_POLY_BALL_NUM - 1]->x;
+    int py = (int)globalData.polygonBalls[A_POLY_BALL_NUM - 1]->y;
     //ポリゴン位置情報
     double polyPoints[MAX_POLYGON][2];
     for(int i = 0; i < MAX_POLYGON; i ++){
@@ -82,6 +89,9 @@ bool isEnablePolygonDraw()
         //ポリゴンが正しいか判断します
         //・指定以上の点を持たないこと
         //・内向き鋭角を持たないこと
+		if(hpl::math::isValidPolygon(polyPoints, n)){
+			enable = true;
+		}
     }else{
     }
     return enable;

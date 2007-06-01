@@ -231,7 +231,7 @@ void drawString(SDL_Surface* screen, double x, double y, int r, int g, int b, in
 
     //ˆês‚¸‚Â•\¦
     for(int i = 0; i < (int)lines.size(); i ++){
-        int tempY = y + FONT_SIZE * i;
+        int tempY = (int)(y + FONT_SIZE * i);
         stringRGBA(screen, (Sint16)x, (Sint16)tempY, lines[i].c_str(), r, g, b, a);
     }
 }

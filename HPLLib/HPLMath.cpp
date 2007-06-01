@@ -676,7 +676,7 @@ int hpl::math::getPointRotationTypeFromLine(double px, double py, double line0x,
     double deg = hpl::math::getTwoLinesDegree(line0x, line0y, line1x, line1y,
         line0x, line0y, px, py);
     double optDeg = hpl::math::optimizeDegree(deg);
-    if(deg < ROUND_DEGREE / 2){
+    if(optDeg < ROUND_DEGREE / 2){
         //‚à‚µ[0,180)‚È‚ç‚Î
         rotType = RotationType::Clockwise;
     }else{
@@ -693,13 +693,17 @@ bool hpl::math::isValidPolygon(double points[][2], int maxVertex)
 {
     bool isFirst = true;
     int rotTypeRemember = 0;
-    for(int i = 0; i < maxVertex - 1; i ++){
+    for(int i = 0; i < maxVertex; i ++){
         int pAIndex = i;
         int pBIndex = i + 1;
         int pCIndex = i + 2;
         if(i == maxVertex - 2){
             pCIndex = 0;
         }
+		if(i == maxVertex - 1){
+			pBIndex = 0;
+			pCIndex = 1;
+		}
         int rotType = hpl::math::getPointRotationTypeFromLine(
             points[pCIndex][0], points[pCIndex][1],
             points[pAIndex][0], points[pAIndex][1],

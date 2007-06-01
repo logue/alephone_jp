@@ -38,7 +38,8 @@ inline int getPolygonIdPointIn(world_point2d& point)
 {
     for(int i = 0; i < (int)PolygonList.size(); i ++){
 
-        if(point_in_polygon(i, &point)){
+		if(hpl::aleph::map::isPointInPolygon(point, i))
+		{///point_in_polygon(i, &point)){
             return i;
         }
     }
@@ -70,7 +71,7 @@ int getNearestPoint(world_point2d& pointFrom, short maxHeight, short minHeight);
 bool isPointInHeight(endpoint_data* point, short maxHeight, short minHeight);
 
 //data‚ðƒ\[ƒg‚·‚é
-void sortMap(int *indexes, int max, int* datas);
+//void sortMap(int *indexes, int max, int* datas);
 
 /**
     get point list ordered by length from a point
