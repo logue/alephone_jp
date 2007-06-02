@@ -80,8 +80,11 @@ public:
 	short Height;			// How tall is it?
 	short LineSpacing;		// From same positions in each line
 	short Ascent, Descent, Leading;
+#if 0
+	short Widths[256];
+#else
 	short Widths(uint16 t) const { return Info->width_table[t]; }
-	
+#endif
 	// MacOS- and SDL-specific stuff
 #if defined(mac)
 	short ID;
@@ -107,7 +110,11 @@ public:
 	int TextWidth(const char *Text);
 
 	// Get width of one character
+#if 0
+	int CharWidth(char c) const { return Widths[static_cast<int>(c)]; }
+#else
 	int CharWidth(uint16 c) const { return Widths(static_cast<const int>(c)); }
+#endif
 	
 #ifdef HAVE_OPENGL	
 	// Reset the OpenGL fonts; its arg indicates whether this is for starting an OpenGL session
@@ -153,7 +160,11 @@ public:
 	short TxtrWidth, TxtrHeight;
 	int GetTxtrSize() {return int(TxtrWidth)*int(TxtrHeight);}
 	GLuint TxtrID;
+#if 0
+	uint32 DispList;
+#else
 	void DrawGryphGLJ(const char*);
+#endif
 #endif
 };
 

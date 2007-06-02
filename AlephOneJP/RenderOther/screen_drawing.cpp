@@ -344,19 +344,16 @@ void _draw_screen_shape_at_x_y(shape_descriptor shape_id, short x, short y)
 /*
  *  Draw text
  */
-uint16 sjis2jis(const char** data);
+#if 0
+// Calculate width of single character
 int8 char_width(uint8 c, const sdl_font_info *font, uint16 style)
 {
-	static uint8 continued;
-	if (font == NULL || c < 31)
+	if (font == NULL || c < font->first_character || c > font->last_character)
 		return 0;
-	int8 width;
-	if( c < 128 ) { width = font->width_table[c]; } 
-	else if( continued ) { continued = 0; return 0; } 
-	else { width = font->width_table[48]*2; continued = 1;}
-	if (width == 0)	// non-existant character
-		width = font->width_table[48];
-	return width  +  ((style & styleBold) ? 2 : 0);
+	int8 width = font->width_table[(c - font->first_character) * 2 + 1] + ((style & styleBold) ? 1 : 0);
+	if (width == -1)	// non-existant character
+		width = font->width_table[(font->last_character - font->first_character + 1) * 2 + 1] + ((style & styleBold) ? 1 : 0);
+	return width;
 }
 
 // Calculate width of text string
@@ -398,18 +395,22 @@ int trunc_text(const char *text, int max_width, const sdl_font_info *font, uint1
 
 // Draw single glyph at given position in frame buffer, return glyph width
 template <class T>
-static int draw_glyph(uint16 c, int x, int y, T *p, int pitch, int clip_left, int clip_top, int clip_right, int clip_bottom, uint32 pixel, const sdl_font_info *font, bool oblique)
+inline static int draw_glyph(uint8 c, int x, int y, T *p, int pitch, int clip_left, int clip_top, int clip_right, int clip_bottom, uint32 pixel, const sdl_font_info *font, bool oblique)
 {
 
+	int cpos = c - font->first_character;
+
 	// Calculate source and destination pointers (kerning, ascent etc.)
-	uint8 *src = font->pixmap + font->location_table[c];
-	int width = font->width_table[c];
-	int height = font->bytes_per_row;
-	int advance = font->width_table[c];
+	uint8 *src = font->pixmap + font->location_table[cpos];
+	int width = font->location_table[cpos + 1] - font->location_table[cpos];
+	int height = font->rect_height;
+	int advance = font->width_table[cpos * 2 + 1];
 	y -= font->ascent;
+	x += font->maximum_kerning + font->width_table[cpos * 2];
 	p += y * pitch / sizeof(T) + x;
 	if (oblique)
 		p += font->ascent / 2 - 1;
+
 	// Clip on top
 	if (y < clip_top) {
 		height -= clip_top - y;
@@ -456,41 +457,35 @@ static int draw_glyph(uint16 c, int x, int y, T *p, int pitch, int clip_left, in
 
 	return advance;
 }
-static inline bool IsTwoByte(unsigned char t ) { return (t>0x81 && t<0xa0) || (t>0xe0 && t<0xfd) ; } 
-static inline unsigned char s2u(char i) { return i>0 ? i : 256+i; }
 
 // Draw text at given position in frame buffer, return width
 template <class T>
-inline static int draw_text(const uint8 *text2, size_t length, int x, int y, T *p, int pitch, int clip_left, int clip_top, int clip_right, int clip_bottom, uint32 pixel, const sdl_font_info *font, uint16 style)
+inline static int draw_text(const uint8 *text, size_t length, int x, int y, T *p, int pitch, int clip_left, int clip_top, int clip_right, int clip_bottom, uint32 pixel, const sdl_font_info *font, uint16 style)
 {
-	uint8* texts = (uint8*)malloc(length+2), *text = texts;
 	bool oblique = ((style & styleItalic) != 0);
-	strncpy((char*)text,(const char*)text2,length);
-	text[length] = 0;
-	text[length+1] = 0;
 	int total_width = 0;
-	uint16 c;
-	while (length-- ) {
-		int width;
-		if(IsTwoByte(*text)) {
-			if(length) {
-				length--;
-			} 
-		}
-		c = sjis2jis((const char**)&text);
-		if(style & styleOutline) {
-			draw_glyph(c, x-1, y-1, p, pitch, clip_left, clip_top, clip_right, clip_bottom, pixel, font, oblique);
-			draw_glyph(c, x  , y-1, p, pitch, clip_left, clip_top, clip_right, clip_bottom, pixel, font, oblique);
-			draw_glyph(c, x+1, y-1, p, pitch, clip_left, clip_top, clip_right, clip_bottom, pixel, font, oblique);
-			draw_glyph(c, x-1, y  , p, pitch, clip_left, clip_top, clip_right, clip_bottom, pixel, font, oblique);
-			draw_glyph(c, x+1, y  , p, pitch, clip_left, clip_top, clip_right, clip_bottom, pixel, font, oblique);
-			draw_glyph(c, x-1, y+1, p, pitch, clip_left, clip_top, clip_right, clip_bottom, pixel, font, oblique);
-			draw_glyph(c, x  , y+1, p, pitch, clip_left, clip_top, clip_right, clip_bottom, pixel, font, oblique);
-			width =
-				draw_glyph(c, x+1, y+1, p, pitch, clip_left, clip_top, clip_right, clip_bottom, pixel, font, oblique);
-		}
-		else
-			width = draw_glyph(c, x, y, p, pitch, clip_left, clip_top, clip_right, clip_bottom, pixel, font, oblique);
+
+	uint8 c;
+	while (length--) {
+		c = *text++;
+		if (c < font->first_character || c > font->last_character)
+			continue;
+
+                int width;
+
+                if(style & styleOutline) {
+                    draw_glyph(c, x-1, y-1, p, pitch, clip_left, clip_top, clip_right, clip_bottom, pixel, font, oblique);
+                    draw_glyph(c, x  , y-1, p, pitch, clip_left, clip_top, clip_right, clip_bottom, pixel, font, oblique);
+                    draw_glyph(c, x+1, y-1, p, pitch, clip_left, clip_top, clip_right, clip_bottom, pixel, font, oblique);
+                    draw_glyph(c, x-1, y  , p, pitch, clip_left, clip_top, clip_right, clip_bottom, pixel, font, oblique);
+                    draw_glyph(c, x+1, y  , p, pitch, clip_left, clip_top, clip_right, clip_bottom, pixel, font, oblique);
+                    draw_glyph(c, x-1, y+1, p, pitch, clip_left, clip_top, clip_right, clip_bottom, pixel, font, oblique);
+                    draw_glyph(c, x  , y+1, p, pitch, clip_left, clip_top, clip_right, clip_bottom, pixel, font, oblique);
+                    width =
+                    draw_glyph(c, x+1, y+1, p, pitch, clip_left, clip_top, clip_right, clip_bottom, pixel, font, oblique);
+                }
+                else
+                    width = draw_glyph(c, x, y, p, pitch, clip_left, clip_top, clip_right, clip_bottom, pixel, font, oblique);
 		if (style & styleBold) {
 			draw_glyph(c, x + 1, y, p, pitch, clip_left, clip_top, clip_right, clip_bottom, pixel, font, oblique);
 			width++;
@@ -503,7 +498,6 @@ inline static int draw_text(const uint8 *text2, size_t length, int x, int y, T *
 		total_width += width;
 		x += width;
 	}
-	free(texts);
 	return total_width;
 }
 
@@ -580,10 +574,9 @@ void _draw_screen_text(const char *text, screen_rectangle *destination, short fl
 		unsigned count = 0;
 		while (count < strlen(text_to_draw) && text_width < RECTANGLE_WIDTH(destination)) {
 			text_width += char_width(text_to_draw[count], font, style);
-			if (text_to_draw[count] == ' ' || text_to_draw[count] > 127 )  
+			if (text_to_draw[count] == ' ')
 				last_non_printing_character = count;
 			count++;
-			if(IsTwoByte(s2u(text_to_draw[count]))) { count++; }
 		}
 		
 		if( count != strlen(text_to_draw)) {
@@ -642,7 +635,303 @@ void _draw_screen_text(const char *text, screen_rectangle *destination, short fl
 	// Now draw it
 	draw_text(text_to_draw, x, y, SDL_MapRGB(draw_surface->format, color.r, color.g, color.b), font, style);
 }
+#else
+uint16 sjis2jis(char** data);
+int8 char_width(uint8 c, const sdl_font_info *font, uint16 style)
+{
+	static uint8 continued;
+	if (font == NULL || c < 31)
+		return 0;
+	int8 width;
+	if( c < 128 ) { width = font->width_table[c]; } 
+	else if( continued ) { continued = 0; return 0; } 
+	else { width = font->width_table[48]*2; continued = 1;}
+	if (width == 0)	// non-existant character
+		width = font->width_table[48];
+	return width  +  ((style & styleBold) ? 2 : 0);
+}
 
+// Calculate width of text string
+uint16 text_width(const char *text, const sdl_font_info *font, uint16 style)
+{
+	int width = 0;
+	char c;
+	while ((c = *text++) != 0)
+		width += char_width(c, font, style);
+	assert(0 <= width);
+	assert(width == static_cast<int>(static_cast<uint16>(width)));
+	return width;
+}
+
+uint16 text_width(const char *text, size_t length, const sdl_font_info *font, uint16 style)
+{
+	int width = 0;
+	while (length--)
+		width += char_width(*text++, font, style); 
+	assert(0 <= width);
+	assert(width == static_cast<int>(static_cast<uint16>(width)));
+	return width;
+}
+
+// Determine how many characters of a string fit into a given width
+int trunc_text(const char *text, int max_width, const sdl_font_info *font, uint16 style)
+{
+	int width = 0;
+	int num = 0;
+	char c;
+	while ((c = *text++) != 0) {
+		width += char_width(c, font, style);
+		if (width > max_width)
+			break;
+		num++;
+	}
+	return num;
+}
+
+// Draw single glyph at given position in frame buffer, return glyph width
+template <class T>
+static int draw_glyph(uint16 c, int x, int y, T *p, int pitch, int clip_left, int clip_top, int clip_right, int clip_bottom, uint32 pixel, const sdl_font_info *font, bool oblique)
+{
+	if( c < 32 ) return 0;
+	// Calculate source and destination pointers (kerning, ascent etc.)
+	uint8 *src = font->pixmap + font->location_table[c];
+	int width = font->width_table[c];
+	int height = font->bytes_per_row;
+	int advance = font->width_table[c];
+	y -= font->ascent;
+	p += y * pitch / sizeof(T) + x;
+	if (oblique)
+		p += font->ascent / 2 - 1;
+	// Clip on top
+	if (y < clip_top) {
+		height -= clip_top - y;
+		if (height <= 0)
+			return advance;
+		p += (clip_top - y) * pitch / sizeof(T);
+		src += (clip_top - y) * font->bytes_per_row;
+	}
+	
+	// Clip on bottom
+	if (y + height - 1 > clip_bottom) {
+		height -= y + height - 1 - clip_bottom;
+		if (height <= 0)
+			return advance;
+	}
+	
+	// Clip on left
+	if (x < clip_left) {
+		width -= (clip_left - x);
+		if (width <= 0)
+			return advance;
+		p += (clip_left - x);
+		src += (clip_left - x);
+	}
+	
+	// Clip on right
+	if (x + width - 1 > clip_right) {
+		width -= x + width - 1 - clip_right;
+		if (width <= 0)
+			return advance;
+	}
+	
+	// Blit glyph to screen
+	for (int iy=0; iy<height; iy++) {
+		for (int ix=0; ix<width; ix++) {
+			if (src[ix])
+				p[ix] = pixel;			
+		}
+		if (oblique && (iy % 2) == 1)
+			p--;
+		src += font->bytes_per_row;
+		p += pitch / sizeof(T);
+	}
+	
+	return advance;
+}
+static inline bool IsTwoByte(unsigned char t ) { return (t>0x81 && t<0xa0) || (t>0xe0 && t<0xfd) ; } 
+
+// Draw text at given position in frame buffer, return width
+template <class T>
+inline static int draw_text(const uint8 *text2, size_t length, int x, int y, T *p, int pitch, int clip_left, int clip_top, int clip_right, int clip_bottom, uint32 pixel, const sdl_font_info *font, uint16 style)
+{
+	uint8* texts = (uint8*)calloc(1,length+2), *text = texts;
+	bool oblique = ((style & styleItalic) != 0);
+	strncpy((char*)text,(const char*)text2,length);
+	int total_width = 0;
+	uint16 c;
+	while (length-- ) {
+		int width;
+		if(IsTwoByte(*text)) {
+			if(length) {
+				length--;
+			} 
+		}
+		c = sjis2jis((char**)&text);
+		if(style & styleOutline) {
+			draw_glyph(c, x-1, y-1, p, pitch, clip_left, clip_top, clip_right, clip_bottom, pixel, font, oblique);
+			draw_glyph(c, x  , y-1, p, pitch, clip_left, clip_top, clip_right, clip_bottom, pixel, font, oblique);
+			draw_glyph(c, x+1, y-1, p, pitch, clip_left, clip_top, clip_right, clip_bottom, pixel, font, oblique);
+			draw_glyph(c, x-1, y  , p, pitch, clip_left, clip_top, clip_right, clip_bottom, pixel, font, oblique);
+			draw_glyph(c, x+1, y  , p, pitch, clip_left, clip_top, clip_right, clip_bottom, pixel, font, oblique);
+			draw_glyph(c, x-1, y+1, p, pitch, clip_left, clip_top, clip_right, clip_bottom, pixel, font, oblique);
+			draw_glyph(c, x  , y+1, p, pitch, clip_left, clip_top, clip_right, clip_bottom, pixel, font, oblique);
+			width =
+				draw_glyph(c, x+1, y+1, p, pitch, clip_left, clip_top, clip_right, clip_bottom, pixel, font, oblique);
+		}
+		else
+			width = draw_glyph(c, x, y, p, pitch, clip_left, clip_top, clip_right, clip_bottom, pixel, font, oblique);
+		if (style & styleBold) {
+			draw_glyph(c, x + 1, y, p, pitch, clip_left, clip_top, clip_right, clip_bottom, pixel, font, oblique);
+			width++;
+		}
+		if (style & styleUnderline) {
+			for (int i=0; i<width; i++)
+				p[y * pitch / sizeof(T) + x + i] = pixel;
+		}
+		
+		total_width += width;
+		x += width;
+	}
+	free(texts);
+	return total_width;
+}
+
+// Draw text at given coordinates, return total width
+int draw_text(SDL_Surface *s, const char *text, size_t length, int x, int y, uint32 pixel, const sdl_font_info *font, uint16 style)
+{
+	if (font == NULL)
+		return 0;
+	
+	// Get clipping rectangle
+	int clip_top, clip_bottom, clip_left, clip_right;
+	if (draw_clip_rect_active) {
+		clip_top = draw_clip_rect.top;
+		clip_bottom = draw_clip_rect.bottom - 1;
+		clip_left = draw_clip_rect.left;
+		clip_right = draw_clip_rect.right - 1;
+	} else {
+		clip_top = clip_left = 0;
+		clip_right = s->w - 1;
+		clip_bottom = s->h - 1;
+	}
+	
+	if (SDL_MUSTLOCK (s)) {
+		if (SDL_LockSurface(s) < 0) return 0;
+	}
+	int width = 0;
+	switch (s->format->BytesPerPixel) {
+		case 1:
+			width = draw_text((const uint8 *)text, length, x, y, (pixel8 *)s->pixels, s->pitch, clip_left, clip_top, clip_right, clip_bottom, pixel, font, style);
+			break;
+		case 2:
+			width = draw_text((const uint8 *)text, length, x, y, (pixel16 *)s->pixels, s->pitch, clip_left, clip_top, clip_right, clip_bottom, pixel, font, style);
+			break;
+		case 4:
+			width = draw_text((const uint8 *)text, length, x, y, (pixel32 *)s->pixels, s->pitch, clip_left, clip_top, clip_right, clip_bottom, pixel, font, style);
+			break;
+	}
+	if (SDL_MUSTLOCK (s)) {
+		SDL_UnlockSurface(s);
+	}
+	if (s == SDL_GetVideoSurface())
+		SDL_UpdateRect(s, x, y - font->ascent, text_width(text, font, style), font->rect_height);
+	return width;
+}
+
+static void draw_text(const char *text, int x, int y, uint32 pixel, const sdl_font_info *font, uint16 style)
+{
+	draw_text(draw_surface, text, strlen(text), x, y, pixel, font, style);
+}
+
+void _draw_screen_text(const char *text, screen_rectangle *destination, short flags, short font_id, short text_color)
+{
+	int x, y;
+	
+	// Find font information
+	assert(font_id >= 0 && font_id < NUMBER_OF_INTERFACE_FONTS);
+	uint16 style = InterfaceFonts[font_id].Style;
+	const sdl_font_info *font = InterfaceFonts[font_id].Info;
+	if (font == NULL)
+		return;
+	
+	// Get color
+	SDL_Color color;
+	_get_interface_color(text_color, &color);
+	
+	// Copy the text to draw
+	char text_to_draw[256];
+	strncpy(text_to_draw, text, 256);
+	text_to_draw[255] = 0;
+	
+	// Check for wrapping, and if it occurs, be recursive
+	if (flags & _wrap_text) {
+		int last_non_printing_character = 0, text_width = 0;
+		unsigned count = 0;
+		while (count < strlen(text_to_draw) && text_width < RECTANGLE_WIDTH(destination)) {
+			text_width += char_width(text_to_draw[count], font, style);
+			if (text_to_draw[count] == ' ' )  
+				last_non_printing_character = count;
+			count++;
+			if(IsTwoByte(text_to_draw[count])) { count++; }
+		}
+		
+		if( count != strlen(text_to_draw)) {
+			char remaining_text_to_draw[256];
+			screen_rectangle new_destination;
+			
+			// If we ever have to wrap text, we can't also center vertically. Sorry.
+			flags &= ~_center_vertical;
+			flags |= _top_justified;
+			
+			// Pass the rest of it back in, recursively, on the next line
+			memcpy(remaining_text_to_draw, text_to_draw + last_non_printing_character + 1, strlen(text_to_draw + last_non_printing_character + 1) + 1);
+			
+			new_destination = *destination;
+			new_destination.top += InterfaceFonts[font_id].LineSpacing;
+			_draw_screen_text(remaining_text_to_draw, &new_destination, flags, font_id, text_color);
+			
+			// Now truncate our text to draw
+			text_to_draw[last_non_printing_character] = 0;
+		}
+	}
+	
+	// Truncate text if necessary
+	int t_width = text_width(text_to_draw, font, style);
+	if (t_width > RECTANGLE_WIDTH(destination)) {
+		text_to_draw[trunc_text(text_to_draw, RECTANGLE_WIDTH(destination), font, style)] = 0;
+		t_width = text_width(text_to_draw, font, style);
+	}
+	
+	// Horizontal positioning
+	if (flags & _center_horizontal)
+		x = destination->left + (((destination->right - destination->left) - t_width) / 2);
+	else if (flags & _right_justified)
+		x = destination->right - t_width;
+	else
+		x = destination->left;
+	
+	// Vertical positioning
+	int t_height = InterfaceFonts[font_id].Height;
+	if (flags & _center_vertical) {
+		if (t_height > RECTANGLE_HEIGHT(destination))
+			y = destination->top;
+		else {
+			y = destination->bottom;
+			int offset = RECTANGLE_HEIGHT(destination) - t_height;
+			y -= (offset / 2) + (offset & 1) + 1;
+		}
+	} else if (flags & _top_justified) {
+		if (t_height > RECTANGLE_HEIGHT(destination))
+			y = destination->bottom;
+		else
+			y = destination->top + t_height;
+	} else
+		y = destination->bottom;
+	
+	// Now draw it
+	draw_text(text_to_draw, x, y, SDL_MapRGB(draw_surface->format, color.r, color.g, color.b), font, style);
+}
+#endif
 static TextSpec NullSpec = {0, 0, 0};
 
 TextSpec *_get_font_spec(short font_index)

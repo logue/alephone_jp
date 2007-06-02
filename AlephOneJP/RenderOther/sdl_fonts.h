@@ -43,24 +43,30 @@ class sdl_font_info {
 public:
 	sdl_font_info() : first_character(0), last_character(0),
 		ascent(0), descent(0), leading(0), pixmap(NULL), ref_count(0) {}
+#if 0
+	~sdl_font_info() {if (pixmap) free(pixmap);}
+#else
 	~sdl_font_info() {if (pixmap) delete [] pixmap;}
-
+#endif
 	uint16 get_ascent(void) const {return ascent;}
 	uint16 get_height(void) const {return ascent + descent;}
 	uint16 get_line_height(void) const {return ascent + descent + leading;}
 	uint16 get_descent(void) const {return descent; }
 	int16 get_leading(void) const { return leading;}
 
-	uint16 first_character, last_character;
+	uint8 first_character, last_character;
 	int16 maximum_kerning;
 	int16 rect_width, rect_height;
 	uint16 ascent, descent;
 	int16 leading;
 
-	uint8* pixmap;			// Font image (1 byte/pixel)
+	uint8 *pixmap;			// Font image (1 byte/pixel)
 	int bytes_per_row;		// Bytes per row in pixmap
-
-	uint32 *location_table;	// Table of byte-offsets into pixmap (points into resource)
+#if 0
+	uint16 *location_table;	// Table of byte-offsets into pixmap (points into resource)
+#else
+	uint32 * location_table;  // Table of byte-offsets into pixmap (points into resource)
+#endif
 	int8 *width_table;		// Table of kerning/width info (points into resource)
 
 private:
