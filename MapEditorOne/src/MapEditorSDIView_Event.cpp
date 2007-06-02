@@ -6,6 +6,11 @@
 #include ".\mapeditorsdiview.h"
 #include "SelectLevelDialog.h"
 
+
+//マウスボタンを押している間にValidity情報を更新する間隔
+const int UPDATE_VALIDITY_INTERVAL = 100;
+
+
 /**
     簡易バージョン
 */
@@ -285,8 +290,8 @@ void CMapEditorSDIView::doLButtonDownDrawMode(UINT nFlags, CPoint &point)
         //TODO
 
         //塗れるポリゴンっぽい線の集合を探す
-        int lines[7];
-        int points[8];
+//        int lines[7];
+//        int points[8];
 
     }else if(toolType == ToolType::TI_HAND){
         //全体を移動
@@ -560,6 +565,9 @@ void CMapEditorSDIView::OnLButtonDown(UINT nFlags, CPoint point)
     default:
         AfxMessageBox(L"Illigal edit mode!");
     }
+	//ポリゴン状態を更新します
+	theApp.updatePolygonValidityStored();
+
     this->Invalidate(FALSE);
     CView::OnLButtonDown(nFlags, point);
     SetCapture();
@@ -585,6 +593,9 @@ void CMapEditorSDIView::moveMapOffset(int newPx, int newPy){
 /****************************************************************/
 /****************************************************************/
 /****************************************************************/
+const int UPDATE_POLYGON_VALIDITY_INTERVAL = 10;
+static int updatePolygonValidityCount = 100;
+
 //マウス移動
 void CMapEditorSDIView::OnMouseMove(UINT nFlags, CPoint point)
 {
@@ -613,6 +624,14 @@ void CMapEditorSDIView::OnMouseMove(UINT nFlags, CPoint point)
     }
     */
 
+	updatePolygonValidityCount ++;
+
+	if(updatePolygonValidityCount >= UPDATE_POLYGON_VALIDITY_INTERVAL){
+		//更新
+		//ポリゴン状態を更新します
+		theApp.updatePolygonValidityStored();
+		updatePolygonValidityCount = 0;
+	}
 
     if(isPressLWithCtrl || 
         (editModeType == EditModeType::EM_DRAW && 
@@ -891,7 +910,9 @@ void CMapEditorSDIView::OnLButtonUp(UINT nFlags, CPoint point)
             world_point2d polyPointsWorld[8];
             for(int i = 0; i < n; i ++){
                 polyPointsWorld[i] = 
-                    getWorldPoint2DFromViewPoint(polyPointsView[i][0], polyPointsView[i][1]);
+                    getWorldPoint2DFromViewPoint(
+						(int)polyPointsView[i][0], 
+						(int)polyPointsView[i][1]);
             }
             //ポリゴン生成
             hpl::aleph::map::addNewPolygon(polyPointsWorld, n);
@@ -901,6 +922,8 @@ void CMapEditorSDIView::OnLButtonUp(UINT nFlags, CPoint point)
     }
     //ボタンアップ→選択解除
     theApp.getEventManager()->setSelectingGroup(false);
+	//ポリゴン状態を更新します
+	theApp.updatePolygonValidityStored();
     Invalidate(FALSE);
     ReleaseCapture();
 
@@ -949,6 +972,8 @@ void CMapEditorSDIView::OnRButtonDown(UINT nFlags, CPoint point)
 void CMapEditorSDIView::OnRButtonUp(UINT nFlags, CPoint point)
 {
     // TODO: ここにメッセージ ハンドラ コードを追加するか、既定の処理を呼び出します。
+	//ポリゴン状態を更新します
+	theApp.updatePolygonValidityStored();
 
     Invalidate(FALSE);
     ReleaseCapture();

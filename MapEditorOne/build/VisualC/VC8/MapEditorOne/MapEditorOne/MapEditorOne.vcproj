@@ -68,7 +68,7 @@
 			/>
 			<Tool
 				Name="VCLinkerTool"
-				AdditionalDependencies="SDL.lib ..\..\..\..\..\..\AlephOneSrc\lib\AlephOneSrcD.lib"
+				AdditionalDependencies="SDL.lib ..\..\..\..\..\..\AlephOneSrc\lib\AlephOneSrcD.lib stlportd.5.1.lib"
 				OutputFile="$(OutDir)\$(ProjectName)D.exe"
 				LinkIncremental="2"
 				IgnoreDefaultLibraryNames=""
@@ -336,11 +336,11 @@
 				>
 			</File>
 			<File
-				RelativePath="..\..\..\..\..\src\res\bmp00005.bmp"
+				RelativePath="..\..\..\..\..\src\res\Marathon Toolbar\bmp00005.bmp"
 				>
 			</File>
 			<File
-				RelativePath="..\..\..\..\..\src\res\Marathon Toolbar\bmp00005.bmp"
+				RelativePath="..\..\..\..\..\src\res\bmp00005.bmp"
 				>
 			</File>
 			<File

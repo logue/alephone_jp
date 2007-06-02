@@ -12,8 +12,8 @@
 #define new DEBUG_NEW
 #endif
 
+//グループ選択の距離閾値
 int SELECT_GROUP_DISTANCE_THRESHOLD = 2;
-
 
 // CMapEditorSDIView
 
@@ -204,8 +204,6 @@ void CMapEditorSDIView::drawPolygons(CDC *cdc)
 			points[j].x = viewPoint[0];
 			points[j].y = viewPoint[1];
 		}
-        //ポリゴンの整合性を確かめる
-        bool validity = isValidPolygon(index);
 
 		CBrush brush;
 		int type = 0;
@@ -239,14 +237,14 @@ void CMapEditorSDIView::drawPolygons(CDC *cdc)
 			theApp.selectDatas.containsPolygon(index)){
 			cdc->SelectObject(&netBrush);
 		}else{
-            /*
 			//check polygon invalidate
-            if(!hpl::aleph::map::isValidPolygon(index)){
+			if(!theApp.isPolygonValidityStored(index)){
+				//!hpl::aleph::map::isValidPolygon(index)){
                 //不正なポリゴンです
                 brush.DeleteObject();
                 brush.CreateSolidBrush(RGB(255,0,0));
                 cdc->SelectObject(&brush);
-            }*/
+            }
 		}
 		Polygon(cdc->m_hDC, points, vertexCount);
 
@@ -655,8 +653,8 @@ void CMapEditorSDIView::draw(CDC* pDC){
 				mpoint[0], mpoint[1], n, polygonPoints);
             POINT lpPoints[8];
             for(int i = 0; i < n; i ++){
-                lpPoints[i].x = polygonPoints[i][0];
-                lpPoints[i].y = polygonPoints[i][1];
+                lpPoints[i].x = (LONG)polygonPoints[i][0];
+                lpPoints[i].y = (LONG)polygonPoints[i][1];
             }
             cdc->Polygon(lpPoints, n);
         }

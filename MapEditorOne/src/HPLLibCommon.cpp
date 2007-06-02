@@ -105,14 +105,6 @@ vector<int> getValidPoligon(world_point2d& point, short maxHeight, short minHeig
 }
 
 /**
-    check which is the polygon valid.
-*/
-bool isValidPolygon(int polygonIndex)
-{
-    return false;
-}
-
-/**
     get point nearby
     (in the range)
 */

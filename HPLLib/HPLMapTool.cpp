@@ -312,23 +312,26 @@ bool hpl::aleph::map::isValidPolygon(int index)
 
     //線の並びが正しいかチェック
     int vertexCount = polygon->vertex_count;
-    for(int i = 0; i < vertexCount - 1; i ++){
-        int a = polygon->endpoint_indexes[i];
-        int next = i + 1;
-        if(i == vertexCount - 2){
-            next = 0;
-        }
-        int b = polygon->endpoint_indexes[next];
-        int lineIndex = hpl::aleph::map::getLineIndexFromTwoLPoints(a, b);
-        if(lineIndex == NONE){
-            return false;
-        }
-
-    }
     double points[MAXIMUM_VERTICES_PER_POLYGON][2];
+    for(int i = 0; i < vertexCount; i ++){
+        //int a = polygon->endpoint_indexes[i];
+        //int next = i + 1;
+        //if(i == vertexCount - 2){
+        //    next = 0;
+        //}
+        //int b = polygon->endpoint_indexes[next];
+        //int lineIndex = hpl::aleph::map::getLineIndexFromTwoLPoints(a, b);
+        //if(lineIndex == NONE){
+        //    return false;
+        //}
+		endpoint_data* ep = get_endpoint_data(polygon->endpoint_indexes[i]);
+		points[i][0] = ep->vertex.x;
+		points[i][1] = ep->vertex.y;
+    }
     bool isValid = hpl::math::isValidPolygon(points, vertexCount);
+	return isValid;
 
-    int startPointIndex = polygon->endpoint_indexes[0];
+/*    int startPointIndex = polygon->endpoint_indexes[0];
     int pointA, pointB, pointC;
     
     
@@ -375,7 +378,8 @@ bool hpl::aleph::map::isValidPolygon(int index)
         }
     }
     return true;
-}
+*/
+	}
 
 /**
     座標を取り囲むポリゴンのうち、ポリゴンとして成立しているものをさがします
@@ -403,9 +407,14 @@ std::vector<polygon_data> hpl::aleph::map::searchValidPolygon(world_point2d wpoi
     //近くにある線から見ていく
     for(int i = 0; i < max; i ++){
         line_data* startLine = get_line_data(pairs[i].index);
+		endpoint_data* epStart = get_endpoint_data(startLine->endpoint_indexes[0]);
+		endpoint_data* epEnd = get_endpoint_data(startLine->endpoint_indexes[1]);
+
         //線の左右どちらの側に点があるかをチェックします
-		int rot = hpl::math::RotationType::Clockwise;
-        //
+		int rotRem = hpl::math::getPointRotationTypeFromLine(
+			wpoint.x, wpoint.y, epStart->vertex.x, epStart->vertex.y,
+			epEnd->vertex.x, epEnd->vertex.y);
+		int previousPoint;
     }
     
     //解放

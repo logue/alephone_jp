@@ -175,8 +175,12 @@ bool CMapEditorSDIApp::initialize(){
 
     isNowOnThePoint = false;
 
+	//プレイヤー情報初期化＋アロケート
     allocate_player_memory();
 
+	//ポリゴン整合性情報の更新
+	//this->polygonValidity;
+	
     //int id = new_player(0, 0, 0);
     return true;
 }
@@ -835,4 +839,31 @@ CString GetModulePathFileName(CString pName)
 void addPolygon(polygon_data* data)
 {
     PolygonList.push_back(*data);
+}
+
+//ポリゴンが正しいかどうかを検査します（高速版）
+bool CMapEditorSDIApp::isPolygonValidityStored(int polyIndex)
+{
+	if(polyIndex < 0){
+		return false;
+	}else if(polyIndex >= this->polygonValidity.size()){
+		//存在しないもの
+		//更新
+		updatePolygonValidityStored();
+		if(polyIndex >= this->polygonValidity.size()){
+			//無視
+			return false;
+		}
+	}
+
+	return this->polygonValidity[polyIndex];
+}
+//ポリゴンの整合性を更新します
+void CMapEditorSDIApp::updatePolygonValidityStored()
+{
+	polygonValidity.clear();
+	for(int i = 0; i < PolygonList.size(); i ++){
+		bool isValid = hpl::aleph::map::isValidPolygon(i);
+		this->polygonValidity.push_back(isValid);
+	}
 }

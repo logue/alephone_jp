@@ -318,9 +318,17 @@ public:
 
     /**編集モードとメニューIDの対応*/
     map<int, int> menuIDMap;
+
+	//ポリゴンが正しいかどうかを検査します（高速版）
+	bool isPolygonValidityStored(int polyIndex);
+
+	//ポリゴンの整合性を更新します
+	void updatePolygonValidityStored();
 private:
     //イベント管理
     mapeditorone::EventManager eventManager;
+	//ポリゴンの整合性情報
+	std::vector<bool> polygonValidity;
 public:
     /**
         イベントマネージャー取得

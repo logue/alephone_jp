@@ -54,11 +54,6 @@ inline int getPolygonIdPointIn(world_point2d& point)
 vector<int> getValidPoligon(world_point2d& point, short maxHeight, short minHeight);
 
 /**
-    check which is the polygon valid.
-*/
-bool isValidPolygon(int polygonIndex);
-
-/**
     get point nearest the one
 */
 int getNearestPoint(world_point2d& pointFrom);
