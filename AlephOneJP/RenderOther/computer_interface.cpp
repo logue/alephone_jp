@@ -109,7 +109,7 @@ Jan 25, 2002 (Br'fin (Jeremy Parsons)):
 #include "computer_interface.h"
 #include "screen_drawing.h"
 #include "overhead_map.h"
-#include "mysound.h"
+#include "SoundManager.h"
 #include "interface.h" // for the error strings.
 #include "shell.h"
 #include "platforms.h" // for tagged platforms
@@ -118,9 +118,6 @@ Jan 25, 2002 (Br'fin (Jeremy Parsons)):
 
 #include "images.h"
 #include "Packing.h"
-
-//CP Addition: scripting support
-#include "scripting.h"
 
 // MH: Lua scripting
 #include "lua_script.h"
@@ -370,11 +367,6 @@ static void encode_text(terminal_text_t *terminal_text);
 static void decode_text(terminal_text_t *terminal_text);
 #endif
 
-/* ------------ machine-specific code */
-
-#if defined(mac)
-#include "computer_interface_mac.h"
-#elif defined(SDL)
 #include "sdl_fonts.h"
 
 
@@ -431,7 +423,7 @@ extern SDL_Surface *draw_surface;
 static void	set_text_face(struct text_face_data *text_face)
 {
 	current_style = styleNormal;
-	
+
 	// Set style
 	if (text_face->face & _bold_text)
 		current_style |= styleBold;
@@ -439,15 +431,53 @@ static void	set_text_face(struct text_face_data *text_face)
 		current_style |= styleItalic;
 	if (text_face->face & _underline_text)
 		current_style |= styleUnderline;
-	
+
 	// Set color
 	SDL_Color color;
 	_get_interface_color(text_face->color + _computer_interface_text_color, &color);
 	current_pixel = SDL_MapRGB(/*world_pixels*/draw_surface->format, color.r, color.g, color.b);
 }
 
+#if 0
+static bool calculate_line(char *base_text, short width, short start_index, short text_end_index, short *end_index)
+{
+	bool done = false;
+
+	if (base_text[start_index]) {
+		int index = start_index, running_width = 0;
+		
+		// terminal_font no longer a global, since it may change
+		sdl_font_info *terminal_font = GetInterfaceFont(_computer_interface_font);
+
+		while (running_width < width && base_text[index] && base_text[index] != MAC_LINE_END) {
+			running_width += char_width(base_text[index], terminal_font, current_style);
+			index++;
+		}
+		
+		// Now go backwards, looking for whitespace to split on
+		if (base_text[index] == MAC_LINE_END)
+			index++;
+		else if (base_text[index]) {
+			int break_point = index;
+
+			while (break_point>start_index) {
+				if (base_text[break_point] == ' ')
+					break; 	// Non printing
+				break_point--;	// this needs to be in front of the test
+			}
+			
+			if (break_point != start_index)
+				index = break_point+1;	// Space at the end of the line
+		}
+		
+		*end_index= index;
+	} else
+		done = true;
+	
+	return done;
+}
+# else
 static inline bool IsTwoByte(unsigned char t ) { return (t>0x81 && t<0xa0) || (t>0xe0 && t<0xfd) ; } 
-static inline unsigned char s2u(char i) { return i>0 ? i : 256+i; }
 
 static bool calculate_line(char *base_text, short width, short start_index, short text_end_index, short *end_index)
 {
@@ -489,9 +519,7 @@ static bool calculate_line(char *base_text, short width, short start_index, shor
 	
 	return done;
 }
-extern SDL_Surface *draw_surface;
 #endif
-
 /* ------------ code begins */
 
 player_terminal_data *get_player_terminal_data(
@@ -533,8 +561,6 @@ void initialize_player_terminal_info(
 	//CP Addition: trap for logout!
 	if (terminal->state != _no_terminal_state)
         {
-		activate_terminal_exit_trap(terminal->terminal_id);
-                // MH: call the Lua trap as well
                 L_Call_Terminal_Exit(terminal->terminal_id, player_index);
         }
 
@@ -830,7 +856,6 @@ void abort_terminal_mode(
 	if(terminal->state != _no_terminal_state)
 	{
 		terminal->state= _no_terminal_state;
-		activate_terminal_exit_trap(terminal->terminal_id);
 		L_Call_Terminal_Exit(terminal->terminal_id, player_index);
 	}
 }
@@ -2110,7 +2135,7 @@ static void calculate_bounds_for_object(
 			/* Just return the normal frame.  Aspect ratio will take care of us.. */
 		} else {
 			InsetRect(bounds, (RECTANGLE_WIDTH(frame)-RECTANGLE_WIDTH(source))/2,
-				(RECTANGLE_HEIGHT(frame)-RECTANGLE_WIDTH(source))/2);
+				(RECTANGLE_HEIGHT(frame)-RECTANGLE_HEIGHT(source))/2);
 		}
 	} 
 	else if(flags & _draw_object_on_right)
