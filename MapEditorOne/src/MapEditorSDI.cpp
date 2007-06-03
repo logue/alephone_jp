@@ -491,22 +491,6 @@ void setObjectPropertyToDefault()
     theApp.objectPropertyDialog->setupDialogByStore();
 }
 
-int searchSelectEndpoint(int viewPX, int viewPY)
-{
-    return -1;
-}
-int searchSelectObject(int viewPX, int viewPY)
-{
-    return -1;
-}
-int searchSelectLine(int viewPX, int viewPY)
-{
-    return -1;
-}
-int searchSelectPolygon(int viewPX, int viewPY)
-{
-    return -1;
-}
 
 //TODO
 void setCursor()
@@ -537,50 +521,6 @@ void setCursor()
     ShowCursor(TRUE);
 }
 
-//get placement from index(0 ~ DEFINED_ITEMS ~ DEFINED_ITEMS + MONSTERS)
-object_frequency_definition *getIndexOfPlacement(int index)
-{
-    object_frequency_definition *place;
-    if(!item_placement_info || !monster_placement_info){
-        return NULL;
-    }
-    if( index < NUMBER_OF_DEFINED_ITEMS){
-        place = &item_placement_info[index];
-    }else{
-        int mons_index = index - NUMBER_OF_DEFINED_ITEMS;
-        place = &monster_placement_info[mons_index];
-    }
-    return place;
-}
-
-void addInitialPlacement(int objectType, int index, int num)
-{
-    object_frequency_definition *place;
-    if(objectType == _saved_item || objectType == _saved_monster){
-        if(objectType == _saved_item){
-            place = getIndexOfPlacement(index);
-        }else if(objectType == _saved_monster){
-            place = getIndexOfPlacement(index + NUMBER_OF_DEFINED_ITEMS);
-        }
-        if(place){
-            //
-            place->initial_count += num;
-        }
-    }
-}
-void subInitialPlacement(int objectType, int index, int num)
-{
-    object_frequency_definition *place;
-    if(objectType == _saved_item || objectType == _saved_monster){
-        if(objectType == _saved_item){
-            place = getIndexOfPlacement(index);
-        }else if(objectType == _saved_monster){
-            place = getIndexOfPlacement(index + NUMBER_OF_DEFINED_ITEMS);
-        }
-        //
-        place->initial_count -= num;
-    }
-}
 
 
 /**
@@ -779,8 +719,7 @@ int addLine(int beginPointIndex, int endPointIndex)
     double dx = EndpointList[newLine.endpoint_indexes[0]].vertex.x - EndpointList[newLine.endpoint_indexes[1]].vertex.x;
     double dy = EndpointList[newLine.endpoint_indexes[0]].vertex.y - EndpointList[newLine.endpoint_indexes[1]].vertex.y;
     newLine.length = (world_distance)sqrt(dx * dx + dy * dy);
-    LineList.push_back(newLine);
-    int newLineIndex = (int)LineList.size() - 1;
+	int newLineIndex = hpl::aleph::map::addLine(newLine);
     return newLineIndex;
 }
 
@@ -794,6 +733,7 @@ int getLineIndexFromPointIndex(int pointIndex)
     AfxMessageBox(L"not yet");
     exit(1);
 }
+/*
 int getPolygonIndexFromLineIndex(int lineIndex)
 {
     for(int i = 0; i < (int)PolygonList.size(); i ++){
@@ -808,6 +748,7 @@ int getPolygonIndexFromLineIndex(int lineIndex)
     }
     return NONE;
 }
+*/
 int getPolygonIndexFromPointIndex(int pointIndex)
 {
     AfxMessageBox(L"not yet");

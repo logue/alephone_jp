@@ -126,6 +126,22 @@ namespace map{
     */
     int getLineIndexFromTwoLPoints(int pindex0, int pindex1);
 
+	/**
+		点を共有する線インデックスのリストを取得します
+	*/
+	std::vector<int> getLineIndexesIncludePoint(int endpointIndex);
+
+	/**
+		線を共有するポリゴンのリストを取得します
+		line_dataには右側ポリゴンと左側ポリゴンのインデックスが入ってるのでそれを活用してもいい
+		** それ使えば良いじゃん…
+	*
+	std::vector<int> getPolygonIndexesIncludeLine(int lineIndex);
+	*/
+	/**
+		点を共有するポリゴンのリストを取得します
+	*/
+	std::vector<int> getPolygonIndexesIncludePoint(int endpointIndex);
 	////////////////////////////////////////////////////////////////////////
 	///////////	 Sides	////////////////////////////////////////////////////
 
@@ -198,20 +214,8 @@ namespace map{
     polygon_data createPolygon(world_point2d points[], endpoint_data epd[], line_data ld[],
         int n);
 
-    /**
-        独立したポリゴンデータを追加します
-    */
-    void addNewPolygon(polygon_data& pdata, endpoint_data epd[], line_data ld[], int n);
-    void addNewPolygon(world_distance points[][2], int n);
-    void addNewPolygon(world_point2d points[], int n);
-
 //    void addNewPoint(endpoint_data point);
 
-    /**
-        ポリゴン情報を修正します
-        TODO
-    */
-    void fixPolygon(int pindex);
 
     /**
         ポリゴンをセットアップします
@@ -229,6 +233,69 @@ namespace map{
     bool isPointInPolygon(int viewPX, int viewPY, int polygonIndex,
         int offsetXWorld, int offsetYWorld, int zoomDivision, int offsetx, int offsety);
     bool isPointInPolygon(world_point2d& wpoint, int polygonIndex);
+
+    ///////////////////////////////////////////////////////////////////////////////
+    ////////// add delete modify it /////////////////////////////////////////////////
+	/**
+		点情報を追加します
+		@param ep 追加する点データ（値渡しなのでコピーされます）
+		@return 追加された点のインデックス値
+	*/
+	int addEndpoint(endpoint_data ep);
+	int addLine(line_data line);
+	int addSide(side_data side);
+	int addPolygon(polygon_data polygon);
+	int addMapSavedObject(map_object object);
+	int addAnnotation(map_annotation annotation);
+
+	/**
+		点情報を削除します
+		@param index 削除対象のインデックス
+		@return 削除失敗時に偽。インデックスが正しくない場合など
+	*/
+	bool deleteEndpoint(int index);
+	bool deleteLine(int index);
+	bool deleteSide(int index);
+	bool deletePolygon(int index);
+	bool deleteMapSavedObject(int index);
+
+    /**
+        ポリゴン情報を修正します
+        TODO
+    */
+    void fixPolygon(int pindex);
+
+    /**
+        独立したポリゴンデータを追加します
+		ポリゴンデータやポイントデータなどから実際に追加します
+    */
+    void addNewPolygon(polygon_data& pdata, endpoint_data epd[], line_data ld[], int n);
+    void addNewPolygon(world_distance points[][2], int n);
+    void addNewPolygon(world_point2d points[], int n);
+
+	////////////////////////////////////////////////
+	////// objects ////////////////////////////////
+	/**
+		初期配置数の設定
+		@param objectType オブジェクトタイプ
+			_saved_item
+			_saved_monster
+		@param index どのオブジェクトの初期は位置をいじるか
+		@param num 増減させる値
+		@return 増減の結果の数。配置情報が得られない場合NONE(負数)
+	*/
+	int addInitialPlacementNum(int objectType, int index, int num);
+	/**
+		配置情報を取得
+		@param objectType オブジェクトタイプ
+			_saved_item
+			_saved_monster
+		@param index どのオブジェクトの初期は位置をいじるか
+		@return 配置情報。配置数やランダムマックスなど
+			取得できない場合はNULLが返されます
+	*/
+	struct object_frequency_definition* getPlacementData(int objectType, int index);
+
 };
 };
 };

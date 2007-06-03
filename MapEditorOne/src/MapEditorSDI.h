@@ -375,14 +375,8 @@ HBITMAP loadBitmapFromFile(const char *pathName);
 //set object property to default
 void setObjectPropertyToDefault();
 
-//@return if failure, return under 0(-1)
-//TODO construct these
-int searchSelectEndpoint(int viewPX, int viewPY);
-int searchSelectObject(int viewPX, int viewPY);
-int searchSelectLine(int viewPX, int viewPY);
-int searchSelectPolygon(int viewPX, int viewPY);
-
 void setCursor();
+
 /**
     change is this 
 */

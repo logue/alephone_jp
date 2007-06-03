@@ -54,8 +54,8 @@ void drawStrings(SDL_Surface* screen, int startY)
 
 	//ì_ÇÃî‘çÜ
 	for(int i = 0; i < MAX_POLYGON; i ++){
-		int x = globalData.polygonBalls[i]->x;
-		y = globalData.polygonBalls[i]->y;
+		int x = (int)globalData.polygonBalls[i]->x;
+		y = (int)globalData.polygonBalls[i]->y;
 		drawString(screen, x, y, 255,255,255,255, "%d", i);
 	}
 }
