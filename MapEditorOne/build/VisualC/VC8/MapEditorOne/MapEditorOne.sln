@@ -1,11 +1,13 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 9.00
-# Visual C++ Express 2005
+# Visual Studio 2005
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "MapEditorOne", "MapEditorOne\MapEditorOne.vcproj", "{5AB9FF71-670A-4C43-9F65-75678796DE1B}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "MapViewerOne", "..\..\..\..\..\MapViewerOne\build\VisualC\VC8\MapViewerOne\MapViewerOne.vcproj", "{9379CC7E-20EB-47D8-9B66-3BA56EA651CE}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "TestMathematics", "TestMathematics\TestMathematics.vcproj", "{46D1F0C8-3CD4-4C13-BC91-8FB454D3E632}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "MapEditorOneWX", "..\..\..\..\..\MapEditorWX\build\VisualC\VC8\MapEditorOneWX\MapEditorOneWX.vcproj", "{BEE766B1-7B73-4CBE-9DBB-17E850A66564}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -47,6 +49,16 @@ Global
 		{46D1F0C8-3CD4-4C13-BC91-8FB454D3E632}.Release|Mixed Platforms.Build.0 = Release|Win32
 		{46D1F0C8-3CD4-4C13-BC91-8FB454D3E632}.Release|Win32.ActiveCfg = Release|Win32
 		{46D1F0C8-3CD4-4C13-BC91-8FB454D3E632}.Release|Win32.Build.0 = Release|Win32
+		{BEE766B1-7B73-4CBE-9DBB-17E850A66564}.Debug|Any CPU.ActiveCfg = Debug|Win32
+		{BEE766B1-7B73-4CBE-9DBB-17E850A66564}.Debug|Mixed Platforms.ActiveCfg = Debug|Win32
+		{BEE766B1-7B73-4CBE-9DBB-17E850A66564}.Debug|Mixed Platforms.Build.0 = Debug|Win32
+		{BEE766B1-7B73-4CBE-9DBB-17E850A66564}.Debug|Win32.ActiveCfg = Debug|Win32
+		{BEE766B1-7B73-4CBE-9DBB-17E850A66564}.Debug|Win32.Build.0 = Debug|Win32
+		{BEE766B1-7B73-4CBE-9DBB-17E850A66564}.Release|Any CPU.ActiveCfg = Release|Win32
+		{BEE766B1-7B73-4CBE-9DBB-17E850A66564}.Release|Mixed Platforms.ActiveCfg = Release|Win32
+		{BEE766B1-7B73-4CBE-9DBB-17E850A66564}.Release|Mixed Platforms.Build.0 = Release|Win32
+		{BEE766B1-7B73-4CBE-9DBB-17E850A66564}.Release|Win32.ActiveCfg = Release|Win32
+		{BEE766B1-7B73-4CBE-9DBB-17E850A66564}.Release|Win32.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

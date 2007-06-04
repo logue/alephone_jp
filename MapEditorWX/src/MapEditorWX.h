@@ -23,27 +23,12 @@
 #include "AlephOne/scenery_definitions.h"
 #include "AlephOne/mysound.h"
 
+#include <HPLAlephLib.h>
+
 #include <vector>
 #include <string>
 using namespace std;
 
-const int NUMBER_OF_POLYGON_TYPE = 24;
-const int NUMBER_OF_ZOOM_DIVISION = 3;
-const int ZOOM_DIVISION_STEP = 10;
-const int ZOOM_DIVISION_MAX = 200;
-const int ZOOM_DIVISION_MIN = 1;
-const int ZOOM_DIVISION_DEFAULT = 100;
-const int OFFSET_X_WORLD = 32768;
-const int OFFSET_Y_WORLD = 32768;
-const int NUMBER_OF_GLID = 5;
-
-const int NUMBER_OF_OBJECT_TYPES = 6;
-const int NUMBER_OF_ACTIVATE_TYPES = 4;
-const int NUMBER_OF_MAP_OBJECT_TYPES = 6;
-
-//点とクリック地点の距離がこれ以下であれば選択する。
-//リスト順に探索する
-const int POINT_DISTANCE_EPSILON = 5;
 
 //選択したものの種類
 enum{

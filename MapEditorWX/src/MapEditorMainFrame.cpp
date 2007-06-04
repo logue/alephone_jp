@@ -1,4 +1,22 @@
 #include "MapEditorMainFrame.h"
+const int NUMBER_OF_POLYGON_TYPE = 24;
+const int NUMBER_OF_ZOOM_DIVISION = 3;
+/*const int ZOOM_DIVISION_STEP = 10;
+const int ZOOM_DIVISION_MAX = 200;
+const int ZOOM_DIVISION_MIN = 1;
+const int ZOOM_DIVISION_DEFAULT = 100;
+const int OFFSET_X_WORLD = 32768;
+const int OFFSET_Y_WORLD = 32768;
+const int NUMBER_OF_GLID = 5;
+*/
+
+const int NUMBER_OF_OBJECT_TYPES = 6;
+const int NUMBER_OF_ACTIVATE_TYPES = 4;
+const int NUMBER_OF_MAP_OBJECT_TYPES = 6;
+
+//点とクリック地点の距離がこれ以下であれば選択する。
+//リスト順に探索する
+const int POINT_DISTANCE_EPSILON = 5;
 
 BEGIN_EVENT_TABLE(MapEditorMainFrame, wxFrame)
     EVT_MENU(ID_Quit, MapEditorMainFrame::OnQuit)
@@ -50,6 +68,20 @@ void MapEditorMainFrame::OnAbout(wxCommandEvent& WXUNUSED(event))
         _T("about this..."), wxOK | wxICON_INFORMATION, this);
 }
 
+//簡易変換
+static void getViewPointFromWorldPoint2D(world_point2d wpoint, int vpoint[2])
+{
+    int DIV = wxGetApp().zoomDivision;
+    int OFFSET_X_VIEW = wxGetApp().offsetX;
+    int OFFSET_Y_VIEW = wxGetApp().offsetY;
+    hpl::aleph::map::getViewPointFromWorldPoint2D(
+        wpoint, vpoint,
+        OFFSET_X_WORLD, OFFSET_Y_WORLD, DIV, OFFSET_X_VIEW, OFFSET_Y_VIEW);
+}
+
+/**
+    描画
+*/
 void MapEditorMainFrame::OnPaint(wxPaintEvent& WXUNUSED(event))
 {
     wxPaintDC dc(this);
@@ -85,9 +117,12 @@ void MapEditorMainFrame::OnPaint(wxPaintEvent& WXUNUSED(event))
             int type = polygon->type;
             int flags = polygon->flags;
             int vertexCount = polygon->vertex_count;
+            int vpoint[2];
             for(int j = 0; j < vertexCount; j ++){
-                points[j].x = EndpointList[polygon->endpoint_indexes[j]].vertex.x;
-                points[j].y = EndpointList[polygon->endpoint_indexes[j]].vertex.y;
+                getViewPointFromWorldPoint2D(EndpointList[polygon->endpoint_indexes[j]].vertex,
+                    vpoint);
+                points[j].x = vpoint[0];
+                points[j].y = vpoint[1];
             }
             dc.DrawPolygon(vertexCount, points);
         }
@@ -189,15 +224,15 @@ void MapEditorMainFrame::OnOpen(wxCommandEvent& WXUNUSED(event))
 
 void MapEditorMainFrame::OnLeftDown(wxMouseEvent &ev)
 {
-
+    
 }
 void MapEditorMainFrame::OnMotion(wxMouseEvent &ev)
 {
     static int oldX = ev.m_x, oldY = ev.m_y;
 
-    /*if(ev.ButtonIsDown(wxLEFT)){// && ev.ShiftDown()){
+    if(ev.ButtonIsDown(wxMOUSE_BTN_LEFT)){// && ev.ShiftDown()){
         //平行移動
-    }*/
+    }
 }
 void MapEditorMainFrame::OnMouseWheel(wxMouseEvent &ev)
 {
