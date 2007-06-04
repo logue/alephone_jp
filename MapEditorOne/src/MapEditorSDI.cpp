@@ -544,7 +544,7 @@ int addObject(struct world_point2d &world_point, int polygonIndex)
     SavedObjectList.push_back(obj);
     int objectIndex = (int)SavedObjectList.size() - 1;
     //add
-    addInitialPlacement(obj.type, obj.index, 1);
+    hpl::aleph::map::addInitialPlacementNum(obj.type, obj.index, 1);
     theApp.objectPropertyDialog->setupDialog(objectIndex);
 
     //check polygon's first object
@@ -655,8 +655,10 @@ int addPoint(struct world_point2d &world_point)
     }
 
     if(isFound){
-        int polygonIndex = getPolygonIndexFromLineIndex(lineIndex);
-        if(polygonIndex != NONE){
+        line_data* line = get_line_data(lineIndex);
+//        int polygonIndex = getPolygonIndexFromLineIndex(lineIndex);
+        if(line->clockwise_polygon_owner != NONE ||
+            line->counterclockwise_polygon_owner != NONE){
             // there is already a polygon! delete it before add point!
             MessageBeep(MB_OK);
             AfxMessageBox(L"Couldn't add point because there is already a polygon. Delete it before add point");
@@ -748,13 +750,13 @@ int getPolygonIndexFromLineIndex(int lineIndex)
     }
     return NONE;
 }
-*/
+
 int getPolygonIndexFromPointIndex(int pointIndex)
 {
     AfxMessageBox(L"not yet");
     exit(1);
 }
-
+*/
 CString GetModulePathFileName(CString pName)
 {
 	//exeファイルのフルパスを取得
@@ -787,11 +789,11 @@ bool CMapEditorSDIApp::isPolygonValidityStored(int polyIndex)
 {
 	if(polyIndex < 0){
 		return false;
-	}else if(polyIndex >= this->polygonValidity.size()){
+	}else if(polyIndex >= (int)this->polygonValidity.size()){
 		//存在しないもの
 		//更新
 		updatePolygonValidityStored();
-		if(polyIndex >= this->polygonValidity.size()){
+		if(polyIndex >= (int)this->polygonValidity.size()){
 			//無視
 			return false;
 		}
@@ -803,7 +805,7 @@ bool CMapEditorSDIApp::isPolygonValidityStored(int polyIndex)
 void CMapEditorSDIApp::updatePolygonValidityStored()
 {
 	polygonValidity.clear();
-	for(int i = 0; i < PolygonList.size(); i ++){
+	for(int i = 0; i < (int)PolygonList.size(); i ++){
 		bool isValid = hpl::aleph::map::isValidPolygon(i);
 		this->polygonValidity.push_back(isValid);
 	}

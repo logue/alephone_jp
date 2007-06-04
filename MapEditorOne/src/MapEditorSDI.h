@@ -378,13 +378,6 @@ void setObjectPropertyToDefault();
 void setCursor();
 
 /**
-    change is this 
-*/
-object_frequency_definition *getIndexOfPlacement(int index);
-void addInitialPlacement(int objectType, int index, int num);
-void subInitialPlacement(int objectType, int index, int num);
-
-/**
    add objet on polygon
    return added object's index
 */
@@ -400,15 +393,6 @@ int addPoint(struct world_point2d &world_point);
 int addLine(int beginPointIndex, int endPointIndex);
 
 void addPolygon(polygon_data* data);
-
-/**
-    get line index from point of edge.
-    @return index of point
-        NONE : not found
-*/
-int getLineIndexFromPointIndex(int pointIndex);
-int getPolygonIndexFromLineIndex(int lineIndex);
-int getPolygonIndexFromPointIndex(int pointIndex);
 
 /**
     get platform_data by using polygon index

@@ -795,7 +795,7 @@ bool hpl::aleph::map::deleteEndpoint(int index)
 	//関連するインデックスをそれぞれ直す必要あり
 	//この点を有する線とポリゴン、オブジェクト等を削除する
 	std::vector<int> lineIndexes = hpl::aleph::map::getLineIndexesIncludePoint(index);
-	for(int i = 0; i < lineIndexes.size(); i ++){
+	for(int i = 0; i < (int)lineIndexes.size(); i ++){
 		//線削除
 		//そのとき、線の左右にあるポリゴンが削除される
 		//ポリゴンを削除すると中にあるオブジェクトも消す
@@ -805,13 +805,13 @@ bool hpl::aleph::map::deleteEndpoint(int index)
 
 	//ポリゴンと線の点インデックス張りなおし
 	//TODO 他にも必要かも？
-	for(int i = 0; i < LineList.size(); i ++){
+	for(int i = 0; i < (int)LineList.size(); i ++){
 		line_data* line = get_line_data(i);
 		for(int j = 0; j < 2; j ++){
 			line->endpoint_indexes[j] = indexMap[line->endpoint_indexes[j]];
 		}
 	}
-	for(int i = 0; i < PolygonList.size(); i ++){
+	for(int i = 0; i < (int)PolygonList.size(); i ++){
 		polygon_data* polygon = get_polygon_data(i);
 		int n = polygon->vertex_count;
 		for(int j = 0; j < n; j ++){
@@ -821,7 +821,7 @@ bool hpl::aleph::map::deleteEndpoint(int index)
 	//削除！
 	hpl::aleph::removeIndexInVector<endpoint_data>(&EndpointList, index);
 	//dynamic!
-	dynamic_world->endpoint_count = EndpointList.size();
+	dynamic_world->endpoint_count = (int16)EndpointList.size();
 	return true;
 }
 bool hpl::aleph::map::deleteLine(int index)
@@ -851,20 +851,20 @@ bool hpl::aleph::map::deleteLine(int index)
 	//インデックスを張りなおします
 	//TODO
 	//ポリゴンとSideのインデックス張りなおし
-	for(int i = 0; i < PolygonList.size(); i ++){
+	for(int i = 0; i < (int)PolygonList.size(); i ++){
 		polygon_data* polygon = get_polygon_data(i);
 		int n = polygon->vertex_count;
 		for(int j = 0; j < n; j ++){
 			polygon->line_indexes[j] = indexMap[polygon->line_indexes[j]];
 		}
 	}
-	for(int i = 0; i < SideList.size(); i ++){
+	for(int i = 0; i < (int)SideList.size(); i ++){
 		side_data* side = get_side_data(i);
 		side->line_index = indexMap[side->line_index];
 	}
 	//削除
 	hpl::aleph::removeIndexInVector<line_data>(&LineList, index);
-	dynamic_world->line_count = LineList.size();
+	dynamic_world->line_count = (int16)LineList.size();
 	return true;
 }
 bool hpl::aleph::map::deleteSide(int index)
@@ -890,7 +890,7 @@ bool hpl::aleph::map::deleteSide(int index)
 
 	//TODO
 	//線の情報を張り直します
-	for(int i = 0; i < LineList.size(); i ++){
+	for(int i = 0; i < (int)LineList.size(); i ++){
 		line_data* line = get_line_data(i);
 		if(line->counterclockwise_polygon_side_index != NONE){
 			line->counterclockwise_polygon_side_index =
@@ -904,7 +904,7 @@ bool hpl::aleph::map::deleteSide(int index)
 
 	//削除します
 	hpl::aleph::removeIndexInVector(&SideList, index);
-	dynamic_world->side_count = SideList.size();
+	dynamic_world->side_count = (int16)SideList.size();
 	return true;
 }
 bool hpl::aleph::map::deletePolygon(int index)
@@ -915,7 +915,7 @@ bool hpl::aleph::map::deletePolygon(int index)
 		return false;
 	}
 	//のっかっているオブジェクトを削除します
-	for(int i = 0; i < SavedObjectList.size(); i ++){
+	for(int i = 0; i < (int)SavedObjectList.size(); i ++){
 		map_object* obj = &SavedObjectList[i];
 		if(obj->polygon_index == index){
 			//削除
@@ -923,13 +923,13 @@ bool hpl::aleph::map::deletePolygon(int index)
 		}
 	}
 
-	std::map<int,int> indexMap = getIndexMapSkipped(PolygonList, index);
+	std::map<int,int> indexMap = getIndexMapSkipped(PolygonList.size(), index);
 	//情報を更新します
 	//TODO
 	//線情報を更新します
-	for(int i = 0; i < LineList.size(); i ++){
+	for(int i = 0; i < (int)LineList.size(); i ++){
 		line_data* line = get_line_data(i);
-		if(line->clockwise_polygon_ow)ner != NONE){
+		if(line->clockwise_polygon_owner != NONE){
 			line->clockwise_polygon_owner = 
 				indexMap[line->clockwise_polygon_owner];
 		}
@@ -939,19 +939,19 @@ bool hpl::aleph::map::deletePolygon(int index)
 		}
 	}
 	//オブジェクト情報を更新します
-	for(int i = 0; i < SavedObjectList.size(); i ++){
+	for(int i = 0; i < (int)SavedObjectList.size(); i ++){
 		map_object* obj = &SavedObjectList[i];
 		obj->polygon_index = indexMap[obj->polygon_index];
 	}
 	//削除
 	hpl::aleph::removeIndexInVector(&PolygonList, index);
-	dynamic_world->polygon_count = PolygonList.size();
+	dynamic_world->polygon_count = (int16)PolygonList.size();
 	return true;
 }
 bool hpl::aleph::map::deleteMapSavedObject(int index)
 {
 	//TODO
-	if(index < 0 || index >= SavedObjectList.size()){
+	if(index < 0 || index >= (int)SavedObjectList.size()){
 		return false;
 	}
 	//削除
@@ -975,6 +975,7 @@ int hpl::aleph::map::addInitialPlacementNum(int objectType, int index, int num)
 	struct object_frequency_definition* place = hpl::aleph::map::getPlacementData(objectType, index);
 	if(place){
 		place->initial_count += num;
+        return place->initial_count;
 	}else{
 		return NONE;
 	}

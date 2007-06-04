@@ -429,7 +429,7 @@ void CMonsterPropertyDialog::OnCbnSelchangeCombo2()
         this->objectClassedTypeCmb.SetCurSel(0);
     }
     //äÓñ{êîëùâ¡
-    addInitialPlacement(store.type, store.index, 1);
+    hpl::aleph::map::addInitialPlacementNum(store.type, store.index, 1);
     UpdateData();
 }
 //classed type combo
@@ -443,7 +443,7 @@ void CMonsterPropertyDialog::OnCbnSelchangeCombo3()
 
     if(index != oldIndex){
         //initial ++;
-        addInitialPlacement(store.type, index, 1);
+        hpl::aleph::map::addInitialPlacementNum(store.type, index, 1);
     }
     //enable changing
     store.index = index;

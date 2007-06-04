@@ -14,6 +14,19 @@ IMPLEMENT_DYNAMIC(CObjectPlacementDialog, CDialog)
 
 static char cstr[256];
 static WCHAR wstr[256];
+/**
+    @param index モンスターはNUMBER_OF_DEFINED_ITEMS以上の値を持つ
+*/
+static struct object_frequency_definition* getIndexOfPlacement(int index){
+    int objType = _saved_item;
+    if(index >= NUMBER_OF_DEFINED_ITEMS){
+        index -= NUMBER_OF_DEFINED_ITEMS;
+        objType = _saved_monster;
+    }
+    struct object_frequency_definition* place = hpl::aleph::map::getPlacementData(objType, index);
+    return place;
+}
+
 
 void CObjectPlacementDialog::setListControlItem( CListCtrl *ctrl, object_frequency_definition *place,
                                                 LVITEM *item)
