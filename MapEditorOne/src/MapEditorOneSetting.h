@@ -1,7 +1,7 @@
 #ifndef _MAP_EDITOR_ONE_SETTING_
 #define _MAP_EDITOR_ONE_SETTING_
 
-#include "stdafx.h"
+//#include "stdafx.h"
 
 //#include "MapEditorSDI.h"
 

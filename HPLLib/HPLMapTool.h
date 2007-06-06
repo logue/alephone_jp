@@ -11,10 +11,26 @@
 //#include "HPLMath.h"
 #include "HPLSelectData.h"
 
+
+
+
 //分類できないもの
 namespace hpl{
 namespace aleph{
-	/**
+    //名称
+    typedef struct Information_tag{
+        std::string jname;
+    }Information;
+
+    //値つき名称
+    typedef struct InformationBinded_tag{
+        std::string jname;
+        int bind;
+    }InformationBinded;
+
+    void loadInformation(const char* filePath, int maxLines, std::vector<std::string>* infos);
+
+    /**
 		vectorの第index番目の要素を削除します
 		＊注意！index+1番目以降が全てずれる！
 	*/

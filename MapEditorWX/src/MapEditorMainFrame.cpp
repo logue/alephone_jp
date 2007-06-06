@@ -34,19 +34,7 @@ MapEditorMainFrame::MapEditorMainFrame(const wxString& title,
                                        :wxFrame((wxFrame*)NULL,
                                        wxID_ANY, title, pos, size)
 {
-    wxMenu *menuFile = new wxMenu;
-    menuFile->Append(ID_Open, _T("&Open"), _T("open map file"));
-    menuFile->AppendSeparator();
-    menuFile->Append(ID_Quit, _T("E&xit"), _T("exit program"));
-
-    wxMenu *menuHelp = new wxMenu;
-    menuHelp->Append(ID_About, _T("&Aboud..."), _T("about this program"));
-
-    wxMenuBar *menuBar = new wxMenuBar;
-    menuBar->Append(menuFile, _T("&File"));
-    menuBar->Append(menuHelp, _T("&Help"));
-
-    SetMenuBar(menuBar);
+    this->setupMenus();
 
     CreateStatusBar();
     SetStatusText( _T("get ready..."));
@@ -56,6 +44,26 @@ MapEditorMainFrame::MapEditorMainFrame(const wxString& title,
     wxGetApp().offsetY = 0;
     wxGetApp().zoomDivision = ZOOM_DIVISION_DEFAULT;
 }
+
+void MapEditorMainFrame::setupMenus()
+{
+    //メニューの追加
+    //ファイルメニュー
+    wxMenu *menuFile = new wxMenu;
+    menuFile->Append(ID_Open, _T("&Open"), _T("open map file"));
+    menuFile->AppendSeparator();
+    menuFile->Append(ID_Quit, _T("E&xit"), _T("exit program"));
+
+    wxMenu *menuHelp = new wxMenu;
+    menuHelp->Append(ID_About, _T("&About..."), _T("about this program"));
+
+    wxMenuBar *menuBar = new wxMenuBar;
+    menuBar->Append(menuFile, _T("&File"));
+    menuBar->Append(menuHelp, _T("&Help"));
+
+    SetMenuBar(menuBar);
+}
+
 
 void MapEditorMainFrame::OnQuit(wxCommandEvent& WXUNUSED(event))
 {
@@ -177,13 +185,12 @@ void MapEditorMainFrame::OnOpen(wxCommandEvent& WXUNUSED(event))
 
     if(fileDialog.ShowModal() == wxID_OK){
         wxString path = fileDialog.GetPath();
-        char filename[256];
-        wxStringToChar(path, filename);
 
         //タイトル
         SetTitle(path);
         
-        FileSpecifier mapFile = FileSpecifier(filename);
+        FileSpecifier mapFile = FileSpecifier(path.mb_str());
+
         //set map file
         set_map_file(mapFile);
 

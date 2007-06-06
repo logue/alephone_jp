@@ -12,5 +12,6 @@
 #include "HPLStringModifier.h"
 #include "HPLQuickSort.h"
 #include "HPLSurfaceModifier.h"
+#include "HPLError.h"
 
 #endif

@@ -37,4 +37,6 @@ public:
     //zoom def
     DECLARE_EVENT_TABLE()
 
+private:
+    void setupMenus();
 };

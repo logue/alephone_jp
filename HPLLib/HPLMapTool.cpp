@@ -9,6 +9,12 @@ static double getLengthDouble(double x, double y)
     return length;
 }
 
+void hpl::aleph::loadInformation(const char* filePath, int maxLines, std::vector<std::string>* infos)
+{
+    
+}
+
+
 ///////////////////////  Points  ////////////////////////////////////////////
 bool hpl::aleph::map::isSelectPoint(int viewPX, int viewPY, 
                    int worldPX, int worldPY,

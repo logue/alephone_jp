@@ -22,6 +22,9 @@ namespace string{
         @return vector<string>
     */
     std::vector<std::string> loadFromFile(const char* path);
+
+    /**
+    */
 };
 };
 

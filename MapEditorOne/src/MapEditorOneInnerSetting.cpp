@@ -5,9 +5,14 @@
 #include <cstdio>
 #include <cstdlib>
 
+#ifdef WIN32
 #include <windows.h>
+#endif
 
 const int MAX_FILE_PATH = 260;
+
+static void messageBox(const char* format, ...){
+}
 
 mapeditorone::MapEditorOneInnerSetting::MapEditorOneInnerSetting(const char* tagNameFilePath, const char* dataFilePath)
 {
@@ -16,7 +21,12 @@ mapeditorone::MapEditorOneInnerSetting::MapEditorOneInnerSetting(const char* tag
         std::ifstream ifs;
         ifs.open(tagNameFilePath);
         if(!ifs.is_open()){
+#ifdef WIN32
             MessageBox(NULL, L"Cannot open tag file", L"", MB_OK);
+#else
+            fprintf(stderr, "Couldn't open tag file");
+#endif
+
             exit(-1);
         }
         //ƒ^ƒO“Ç‚ÝŽæ‚è

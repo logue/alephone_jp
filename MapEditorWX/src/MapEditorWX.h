@@ -23,12 +23,12 @@
 #include "AlephOne/scenery_definitions.h"
 #include "AlephOne/mysound.h"
 
-#include <HPLAlephLib.h>
+#include <HPLLib/HPLAlephLib.h>
 
 #include <vector>
 #include <string>
-using namespace std;
 
+static wxString TITLE_TEXT_BASE = wxString(_T("Map Editor One"));
 
 //選択したものの種類
 enum{
@@ -39,40 +39,48 @@ enum{
     _selected_object,
 };
 
-//名称
-typedef struct Information_tag{
-    string jname;
-}Information;
-//値つき名称
-typedef struct InformationBinded_tag{
-    string jname;
-    int bind;
-}InformationBinded;
-
 /**
     アプリケーションのメインクラス
 */
 class MapEditorWX: public wxApp
 {
 public:
-    virtual bool OnInit();
+
+    //////////////////////////////////////////////
+    ////// Level names
     //level names stock
-    vector<string> levelNameList;
+    std::vector<std::string> levelNameList;
 
     //editing level index
     int editLevelIndex;
-    
-    //divide map scale
-    int zoomDivision;
-    
-    //drawing offset
-    int offsetX, offsetY;
-    
+
     //color for polygon type
     vector<wxColor> polygonTypeColorList;
     
     //color for height(variables)
     vector<wxColor> heightColorList;
+
+public:
+    /**
+        ビューグリッドの調整マネージャーを取得します
+    */
+    hpl::aleph::view::HPLViewGridManager* getViewGridManager();
+
+    virtual bool OnInit();
+    bool initialize();
+private:
+    ///////////////////////
+    // view grid
+    /** ビュー＆グリッドマネージャー */
+    hpl::aleph::view::HPLViewGridManager viewGridManager;
+
+    /**
+        データ文字列を取得します
+        load data strings from file
+        @param filePath ファイルパス file path
+        @param maxLines 最大行数
+    */
+    void loadInfo(const char* filePath, int maxLines);
 };
 
 //wxString->char
@@ -80,4 +88,4 @@ public:
 
 DECLARE_APP(MapEditorWX)
 
-void wxStringToChar(wxString& str, char* cstr);
+//void wxStringToChar(wxString& str, char* cstr);
