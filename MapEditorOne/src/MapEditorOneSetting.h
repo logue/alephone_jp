@@ -5,8 +5,9 @@
 
 //#include "MapEditorSDI.h"
 
+#include <vector>
 #include <string>
-using namespace std;
+#include <cstdio>
 
 //color presets
 enum{
@@ -17,14 +18,16 @@ enum{
     NUMBER_OF_COLOR_PRESETS
 };
 
+const int COL_NUM = 3;
+
 typedef struct ColorSettings_tag{
     int type;
-    COLORREF background;
-    COLORREF gridLine;
-    COLORREF lines;
-    COLORREF polygons;
-    COLORREF strings;
-    COLORREF points;
+    int background[COL_NUM];
+    int gridLine[COL_NUM];
+    int lines[COL_NUM];
+    int polygons[COL_NUM];
+    int strings[COL_NUM];
+    int points[COL_NUM];
 }ColorSettings;
 
 enum{
@@ -49,13 +52,17 @@ enum{
 */
 class MapEditorOneSetting{
 private:
-    string initialSettingFileName;
+    std::string initialSettingFileName;
 
     //grid size(index)
     int gridSizeIndex;
 
     //color setting
     ColorSettings colorSetting;
+public:
+    //flags
+    bool flags[NUMBER_OF_EDITOR_FLAGS];
+
 
 public:
     MapEditorOneSetting();
@@ -75,11 +82,18 @@ public:
     ColorSettings *getColorSetting();
     void setColorSetting(ColorSettings *setting);
     void setColorSetting(int type);
+
+    //カラー設定
     static void setColorSetting(int type, ColorSettings *setting);
+
+    //カラー設定のコピー
     static void copyColorSetting(ColorSettings *dest, ColorSettings *src);
-    CString getFilePath();
-    //flags
-    bool flags[NUMBER_OF_EDITOR_FLAGS];
+
+    //ファイルパス
+    std::string getFilePath();
+
+    //色情報を出力します
+    void outputColor(FILE* fp, int col[], int colNum);
 };
 
 #endif

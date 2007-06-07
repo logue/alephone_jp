@@ -51,6 +51,12 @@ namespace aleph{
     void loadInformation(const char* filePath, int maxLines, std::vector<std::string>* infos);
 
     /**
+        カラーデータをファイルから読み込みます
+        @return 失敗時に偽
+    */
+    bool loadColorSetting(const char* filePath, int colors[][3], int max);
+
+    /**
 		vectorの第index番目の要素を削除します
 		＊注意！index+1番目以降が全てずれる！
 	*/

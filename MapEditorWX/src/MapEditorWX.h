@@ -58,10 +58,11 @@ public:
     int editLevelIndex;
 
     //color for polygon type
-    std::vector<wxColor> polygonTypeColorList;
+    int polygonTypeColors[NUMBER_OF_POLYGON_TYPE][3];
     
     //color for height(variables)
-    std::vector<wxColor> heightColorList;
+    //TODO height 用途
+    int heightColorList[2][3];
 
     ///////////////////////
     //オブジェクト関連
@@ -115,8 +116,13 @@ public:
     //ずらす位置
     int storedDataDiffPointDelta[2];
 
+    //アイテムアイコン
+    wxBitmap itemIconBitmaps[NUMBER_OF_DEFINED_ITEMS];
+    wxBitmap hilightedItemIconBitmaps[NUMBER_OF_DEFINED_ITEMS];
+
     //マップアイコン
-    std::vector<wxBitmap> iconBitmaps;
+    wxBitmap mapIconBitmaps[NUMBER_OF_MAP_ICONS];
+    wxBitmap hilightedMapIconBitmaps[NUMBER_OF_MAP_ICONS];
 
     ///////////////////////
     // 線追加
@@ -153,10 +159,10 @@ private:
     //イベント管理
     hpl::aleph::HPLEventManager eventManager;
 
-    //色設定をファイルから読み込む
-    bool loadColorSetting();
 public:
-
+    ///////////////////////////////////
+    ///////////////////////////////////
+    // 関数
 
     /**
         ビューグリッドの調整マネージャーを取得します
@@ -179,11 +185,23 @@ public:
 
     //イベントマネージャーを取得します
     hpl::aleph::HPLEventManager* getEventManager();
+
+    //ビュー座標をワールド座標に直す操作の簡易版
+    world_point2d getWorldPointFromViewPoint(int vx, int vy);
+    //
+    void getViewPointFromWorldPoint(world_point2d& wpoint, int vpoint[2]);
+
+private:
+    /**
+        アイコン用のビットマップファイルを読み込みます
+    */
+    void loadIconBitmaps(const char* baseDirPath);
+
+    /**
+        ビットマップの読み込み（簡易版）
+    */
+    void loadBitmap(const char* fname, wxBitmap* bitmap);
 };
 
-//wxString->char
-///disabled
-
+//実体を持たせます
 DECLARE_APP(MapEditorWX)
-
-//void wxStringToChar(wxString& str, char* cstr);

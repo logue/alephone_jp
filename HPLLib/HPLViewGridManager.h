@@ -61,7 +61,7 @@ namespace view{
         int newMousePoint[2];
 
         //表示・編集できる高さ
-        int viewHeighMax;
+        int viewHeightMax;
         int viewHeightMin;
         //高さ範囲外のポリゴン線を表示するか？
         bool isRevealHiddenLines_;

@@ -3,11 +3,21 @@
 #include <limits.h>
 #include "HPLQuickSort.h"
 #include <fstream>
+#include "HPLError.h"
+#include "HPLStringModifier.h"
 
 //文字列仮読み込みのサイズ
 //<en>size for buffering string
 const int BUF_MAX = 1024;
 
+//色情報の区切り文字
+static char* COLOR_ITEM_SEPARATER = ",";
+//色情報の次元
+const int COL_NUM = 3;
+
+/**
+    直線距離を求めます
+*/
 static double getLengthDouble(double x, double y)
 {
     double length = (double)sqrt((double)(x * x + y * y));
@@ -37,6 +47,41 @@ void hpl::aleph::loadInformation(const char* filePath, int maxLines, std::vector
         }
     }
     ifs.close();
+}
+
+/**
+    カラーデータをファイルから読み込みます
+    @return 失敗時に偽
+*/
+bool hpl::aleph::loadColorSetting(const char* filePath, int colors[][3], int max)
+{
+    const char* fname = filePath;
+    std::ifstream ifs(fname);
+    if(!ifs.is_open()){
+        hpl::error::halt("Couldn't open Color setting[%s]", fname);
+    }
+    char buf[BUF_MAX];
+    int count = 0;
+    while(ifs.getline(buf, BUF_MAX)){
+        std::string line = std::string(buf);
+        if(line.compare("") == 0){
+            continue;
+        }
+        std::vector<std::string> sp = hpl::string::Split(line, COLOR_ITEM_SEPARATER);
+        int col[3];
+        if(sp.size() < COL_NUM){
+            hpl::error::halt("Color setting format is invalid:%s", line.c_str());
+        }
+        for(int i = 0; i < COL_NUM; i ++){
+            colors[count][i] = atoi(sp[i].c_str());
+        }
+        count ++;
+        if(count >= max){
+            break;
+        }
+    }
+    ifs.close();
+    return true;
 }
 
 

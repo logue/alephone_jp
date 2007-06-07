@@ -59,17 +59,17 @@ bool MapEditorWX::initialize()
     //情報読み込み
 
     //オブジェクト全般
-    hpl::aleph::loadInformation("data/ObjectTypes.txt", NUMBER_OF_OBJECT_TYPES, &this->objectTypeInfo);
+    hpl::aleph::loadInformation("data/ObjectTypes.txt", NUMBER_OF_OBJECT_TYPES, this->objectTypeInfo);
     //モンスター
-    hpl::aleph::loadInformation("data/MonsterTypes.txt", NUMBER_OF_MONSTER_TYPES,, &this->monsterTypeInfo);
+    hpl::aleph::loadInformation("data/MonsterTypes.txt", NUMBER_OF_MONSTER_TYPES,, this->monsterTypeInfo);
     //オブジェ
-    hpl::aleph::loadInformation("data/SceneryTypes.txt", NUMBER_OF_SCENERY_DEFINITIONS, &this->sceneryTypeInfo);
+    hpl::aleph::loadInformation("data/SceneryTypes.txt", NUMBER_OF_SCENERY_DEFINITIONS, this->sceneryTypeInfo);
     //アイテム
-    hpl::aleph::loadInformation("data/DefinedItemsTypes.txt", NUMBER_OF_DEFINED_ITEMS, &this->itemTypeInfo);
+    hpl::aleph::loadInformation("data/DefinedItemsTypes.txt", NUMBER_OF_DEFINED_ITEMS, this->itemTypeInfo);
     //音
-    hpl::aleph::loadInformation("data/SoundSourceTypes.txt", NUMBER_OF_AMBIENT_SOUND_DEFINITIONS, &this->soundSourceTypeInfo);
+    hpl::aleph::loadInformation("data/SoundSourceTypes.txt", NUMBER_OF_AMBIENT_SOUND_DEFINITIONS, this->soundSourceTypeInfo);
     //起動
-    hpl::aleph::loadInformation("data/ActivateTypes.txt", NUMBER_OF_ACTIVATE_TYPES, &this->activateTypeInfo);
+    hpl::aleph::loadInformation("data/ActivateTypes.txt", NUMBER_OF_ACTIVATE_TYPES, this->activateTypeInfo);
 
     //フラグ
     this->flagInfo[0].bind = _map_object_is_invisible;
@@ -80,15 +80,15 @@ bool MapEditorWX::initialize()
     this->flagInfo[5].bind = _map_object_is_network_only;
 
     //ターミナル
-    hpl::aleph::loadInformation("data/TerminalGroupTypes.txt", NUMBER_OF_GROUP_TYPES, &this->terminalTypeInfo);
+    hpl::aleph::loadInformation("data/TerminalGroupTypes.txt", NUMBER_OF_GROUP_TYPES, this->terminalTypeInfo);
 
     //ポリゴン
-    hpl::aleph::loadInformation("data/PolygonType.txt", NUMBER_OF_POLYGON_TYPE, &this->polygonTypeInfo);
+    hpl::aleph::loadInformation("data/PolygonType.txt", NUMBER_OF_POLYGON_TYPE, this->polygonTypeInfo);
 
     //環境
-    hpl::aleph::loadInformation("data/Environments.txt", NUMBER_OF_ENVIRONMENTS, &this->envInfo);
+    hpl::aleph::loadInformation("data/Environments.txt", NUMBER_OF_ENVIRONMENTS, this->envInfo);
     //背景
-    hpl::aleph::loadInformation("data/Landscapes.txt", NUMBER_OF_LANDSPACES, &this->landscapeInfo);
+    hpl::aleph::loadInformation("data/Landscapes.txt", NUMBER_OF_LANDSPACES, this->landscapeInfo);
 
     //env type(bind)
     this->envTypeInfo[0].bind = _environment_normal;
@@ -107,12 +107,12 @@ bool MapEditorWX::initialize()
     this->missionTypeInfo[5].bind = _mission_rescue;
 
     //背景
-    hpl::aleph::loadInformation("data/AmbientSoundTypes.txt", NUMBER_OF_AMBIENT_SOUND_DEFINITIONS, &this->ambientSoundTypeInfo);
+    hpl::aleph::loadInformation("data/AmbientSoundTypes.txt", NUMBER_OF_AMBIENT_SOUND_DEFINITIONS, this->ambientSoundTypeInfo);
     //背景
-    hpl::aleph::loadInformation("data/RandomSoundTypes.txt", NUMBER_OF_RANDOM_SOUND_DEFINITIONS, &this->randomSoundTypeInfo);
+    hpl::aleph::loadInformation("data/RandomSoundTypes.txt", NUMBER_OF_RANDOM_SOUND_DEFINITIONS, this->randomSoundTypeInfo);
 
     //色設定読み込み
-    if(!this->loadColorSetting()){
+    if(!hpl::aleph::loadColorSetting(POLYGON_COLOR_FILE_NAME, this->polygonTypeColors, NUMBER_OF_POLYGON_TYPE)){
         return false;
     }
 
@@ -136,22 +136,13 @@ bool MapEditorWX::initialize()
 
     nPolygonPoints = 3;
 
-    //iconBitmaps
-    //textureBitmaps
+    //マップのアイコンビットマップをファイルから読み込み
+    this->loadIconBitmaps(DATA_DIR_NAME);
+
+    //TODO textureBitmaps
     return true;
 }
 
-/*
-void wxStringToChar(wxString& str, char* cstr)
-{
-    int i = 0;
-    for(i = 0; i < (int)str.length(); i ++){
-        cstr[i] = str.GetChar(i);
-    }
-    cstr[i] = '\0';
-}
-
-*/
 hpl::aleph::view::HPLViewGridManager* MapEditorWX::getViewGridManager()
 {
     return &this->viewGridManager;
@@ -162,10 +153,82 @@ hpl::aleph::HPLEventManager* MapEditorWX::getEventManager()
     return &this->eventManager;
 }
 
-//色設定をファイルから読み込む
-bool MapEditorWX::loadColorSetting()
+//ビュー座標をワールド座標に直す操作の簡易版
+world_point2d MapEditorWX::getWorldPointFromViewPoint(int vx, int vy)
 {
-    //TODO
-    return false;
+    hpl::aleph::map::HPLViewGridManager* mgr = this->getViewGridManager();
+    int offset[2];
+    mgr->getOffset(offset);
+    int DIV = mgr->getZoomDivision();
+    world_point2d wpoint = hpl::aleph::map::getWorldPoint2DFromViewPoint(
+        OFFSET_X_WORLD, OFFSET_Y_WORLD, DIV, offset[0], offset[1]);
+    return wpoint;
+}
+//
+void MapEditorWX::getViewPointFromWorldPoint(world_point2d& wpoint, int vpoint[2])
+{
+    hpl::aleph::map::HPLViewGridManager* mgr = this->getViewGridManager();
+    int offset[2];
+    mgr->getOffset(offset);
+    int DIV = mgr->getZoomDivision();
+    hpl::aleph::map::getViewPointFromWorldPoint2D(wpoint.x, wpoint.y, vpoint,
+        OFFSET_X_WORLD, OFFSET_Y_WORLD, DIV, offset[0], offset[1]);
 }
 
+/**
+    アイコン用のビットマップファイルを読み込みます
+*/
+void MapEditorWX::loadIconBitmaps(const char* baseDirPath)
+{
+    //アイコンビットマップとファイル名、そしてアイテムIDとの対応データをファイルから読み込みます
+    const int NUMBER_OF_MAP_ICON_FILES = NUMBER_OF_DEFINED_ITEMS +
+        NUMBER_OF_MAP_ICONS;
+    hpl::aleph::Information mapIconInfo[NUMBER_OF_MAP_ICON_FILES];
+
+    //ファイル名作成
+    char buf[BUF_MAX];
+    sprintf(buf, "%s%s", baseDirPath, MAP_ICONS_IMAGE_NAME_LIST_FILE_NAME);
+    hpl::aleph::loadInformations(buf, NUMBER_OF_MAP_ICON_FILES, mapIconInfo);
+
+    for(int i = 0; i < 2 * NUMBER_OF_DEFINED_ITEMS + 2 * NUMBER_OF_MAP_ICONS; i ++){
+        std::string path = std::string(baseDirPath) + std::string(MAP_ICONS_DIR_NAME);
+        const int HILIGHTED_OFFSET = NUMBER_OF_DEFINED_ITEMS + NUMBER_OF_MAP_ICONS;
+
+        int index = i;
+        if(i >= HILIGHTED_OFFSET){
+            //選択（ハイライト状態）
+            path += std::string(HILIGHTED_ICONS_DIR_NAME);
+            index -= HILIGHTED_OFFSET;
+        }
+        path += mapIconInfo[index].jname;
+
+        //TODO ビットマップファイル読み込み
+        if(i < HILIGHTED_OFFSET){
+            //通常状態
+            if(index < NUMBER_OF_DEFINED_ITEMS){
+                //アイテム
+                this->loadBitmap(path.c_str(), &this->itemIconBitmaps[index]);
+            }else{
+                //マップアイコン
+                this->loadBitmap(path.c_str(), &this->mapIconBitmaps[index]);
+            }
+        }else{
+            //選択＝ハイライト状態
+            if(index < NUMBER_OF_DEFINED_ITEMS){
+                //アイテム
+                this->loadBitmap(path.c_str(), &this->hilightedItemIconBitmaps[index]);
+            }else{
+                //マップアイコン
+                this->loadBitmap(path.c_str(), &this->hilightedMapIconBitmaps[index]);
+            }
+        }
+    }
+}
+
+/**
+    ビットマップの読み込み（簡易版）
+*/
+void MapEditorWX::loadBitmap(const char* fname, wxBitmap* bitmap)
+{
+    bitmap->LoadFile(wxConvCurrent->cMB2WX(fname), wxBITMAP_TYPE_BMP);
+}

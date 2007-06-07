@@ -28,6 +28,7 @@ public:
     void OnOpen(wxCommandEvent& event);
 
     void OnLeftDown(wxMouseEvent& ev);
+    void OnRightDown(wxMouseEvent& ev);
     void OnMotion(wxMouseEvent& ev);
     void OnMouseWheel(wxMouseEvent& ev);
 
@@ -38,5 +39,31 @@ public:
     DECLARE_EVENT_TABLE()
 
 private:
+    /**
+        メニューのセットアップ
+    */
     void setupMenus();
+
+    /**
+        マップデータの表示
+    */
+    void drawBackground(wxPaintDC dc);
+    void drawPolygons(wxPaintDC dc);
+    void drawLines(wxPaintDC dc);
+    void drawSides(wxPaintDC dc);
+    void drawPoints(wxPaintDC dc);
+    void drawObjects(wxPaintDC dc);
+
+    /**
+        マウスイベント処理
+    */
+    void doLButtonOnDrawMode(wxMouseEvent& ev);
+    void doLButtonOnPolygonMode(wxMouseEvent& ev);
+    void doLButtonOnFloorHeightMode(wxMouseEvent& ev);
+    void doLButtonOnCeilingHeightMode(wxMouseEvent& ev);
+    void doLButtonOnFloorLightMode(wxMouseEvent& ev);
+    void doLButtonOnCeilingLightMode(wxMouseEvent& ev);
+    void doLButtonOnMediaMode(wxMouseEvent& ev);
+    void doLButtonOnFloorTextureMode(wxMouseEvent& ev);
+    void doLButtonOnCeilingTextureMode(wxMouseEvent& ev);
 };

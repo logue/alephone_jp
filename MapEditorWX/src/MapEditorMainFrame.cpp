@@ -24,6 +24,7 @@ BEGIN_EVENT_TABLE(MapEditorMainFrame, wxFrame)
     EVT_PAINT(MapEditorMainFrame::OnPaint)
     EVT_MENU(ID_Open, MapEditorMainFrame::OnOpen)
     EVT_LEFT_DOWN(MapEditorMainFrame::OnLeftDown)
+    EVT_RIGHT_DOWN(MapEditorMainFrame::OnRightDown)
     EVT_MOTION(MapEditorMainFrame::OnMotion)
     EVT_MOUSEWHEEL(MapEditorMainFrame::OnMouseWheel)
 END_EVENT_TABLE()
@@ -101,18 +102,9 @@ void MapEditorMainFrame::OnPaint(wxPaintEvent& WXUNUSED(event))
     int DIV = wxGetApp().zoomDivision;
     int OFFSET_X_VIEW = wxGetApp().offsetX;
     int OFFSET_Y_VIEW = wxGetApp().offsetY;
-    
-    //îÕàÕ
-    {
-        dc.SetPen(*wxBLACK_PEN);
-        dc.SetBrush(wxNullBrush);
-        int left = OFFSET_X_VIEW;
-        int top = OFFSET_Y_VIEW;
-        int width = (2 * OFFSET_X_WORLD) / DIV;
-        int height = (2 * OFFSET_Y_WORLD) / DIV;
-        dc.DrawRectangle(left, top, width, height);
-    }
-    //ÉOÉäÉbÉh
+
+    //îwåiï`âÊ
+    this->drawBackground();
     
     //É|ÉäÉSÉì
     {
@@ -229,18 +221,3 @@ void MapEditorMainFrame::OnOpen(wxCommandEvent& WXUNUSED(event))
     }
 }
 
-void MapEditorMainFrame::OnLeftDown(wxMouseEvent &ev)
-{
-    
-}
-void MapEditorMainFrame::OnMotion(wxMouseEvent &ev)
-{
-    static int oldX = ev.m_x, oldY = ev.m_y;
-
-    if(ev.ButtonIsDown(wxMOUSE_BTN_LEFT)){// && ev.ShiftDown()){
-        //ïΩçsà⁄ìÆ
-    }
-}
-void MapEditorMainFrame::OnMouseWheel(wxMouseEvent &ev)
-{
-}
