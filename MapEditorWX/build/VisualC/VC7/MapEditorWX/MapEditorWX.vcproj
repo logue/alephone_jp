@@ -210,6 +210,12 @@
 				RelativePath="..\..\..\..\..\HPLLib\HPLError.h">
 			</File>
 			<File
+				RelativePath="..\..\..\..\..\HPLLib\HPLEventManager.cpp">
+			</File>
+			<File
+				RelativePath="..\..\..\..\..\HPLLib\HPLEventManager.h">
+			</File>
+			<File
 				RelativePath="..\..\..\..\..\HPLLib\HPLMapTool.cpp">
 			</File>
 			<File

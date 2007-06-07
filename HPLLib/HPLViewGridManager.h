@@ -38,7 +38,9 @@ namespace view{
         /**初期値・規定値*/
         int zoomDivisionDefault;
 
+        //グリッド
         int gridIntervals[NUMBER_OF_GLID];
+
     };
     /**
         拡大縮小、スクロールなどの管理
@@ -54,8 +56,15 @@ namespace view{
         /**View座標のオフセット*/
         int viewOffset[2];
 
+        //マウス座標（旧）
         int oldMousePoint[2];
         int newMousePoint[2];
+
+        //表示・編集できる高さ
+        int viewHeighMax;
+        int viewHeightMin;
+        //高さ範囲外のポリゴン線を表示するか？
+        bool isRevealHiddenLines_;
     public:
         HPLViewGridManager();
         void setProp(ZoomProperties *zoomProp);
@@ -94,6 +103,12 @@ namespace view{
 
         void setOffset(int x, int y);
         void getOffset(int* point);
+        void setViewHeightMax(int max);
+        void setViewHeightMin(int min);
+        int getViewHeightMax();
+        int getViewHeightMin();
+        void setRevealHiddenLines(bool show);
+        bool isRevealHiddenLines();
     private:
         /**
             ズーム調整

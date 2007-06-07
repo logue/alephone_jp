@@ -98,3 +98,24 @@ double mapeditorone::MapEditorOneInnerSetting::getDouble(int type)
     double num = atof(str.c_str());
     return num;
 }
+
+
+//グリッド情報をセットアップする
+void mapeditorone::MapEditorOneInnerSetting::setupGridManager(hpl::aleph::view::HPLViewGridManager* mgr,
+    mapeditorone::MapEditorOneInnerSetting* innerSetting)
+{
+    int intervals[] ={
+        WORLD_ONE * 2, WORLD_ONE, WORLD_ONE / 2, WORLD_ONE / 4, WORLD_ONE / 8
+    };
+    hpl::aleph::view::ZoomProperties zoomProp;
+    zoomProp.zoomDivisionStep = innerSetting->getInt(mapeditorone::TagType::ZOOM_DIVISION_STEP);
+    zoomProp.zoomDivisionDefault = innerSetting->getInt(mapeditorone::TagType::ZOOM_DIVISION_DEFAULT);
+    zoomProp.zoomDivisionMin = innerSetting->getInt(mapeditorone::TagType::ZOOM_DIVISION_MIN);
+    zoomProp.zoomDivisionMax = innerSetting->getInt(mapeditorone::TagType::ZOOM_DIVISION_MAX);
+    zoomProp.zoomDivStepThreshold = innerSetting->getInt(mapeditorone::TagType::ZOOM_DIV_STEP_THRESHOLD);
+    zoomProp.zoomDivisionStepDetail = innerSetting->getInt(mapeditorone::TagType::ZOOM_DIVISION_STEP_DETAIL);
+    for(int i = 0; i < NUMBER_OF_GLID; i ++){
+        zoomProp.gridIntervals[i] = intervals[i];
+    }
+    mgr->setProp(&zoomProp);
+}

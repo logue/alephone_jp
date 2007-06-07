@@ -7,6 +7,8 @@
 #ifndef _MAP_EDITOR_ONE_INNER_SETTING_
 #define _MAP_EDITOR_ONE_INNER_SETTING_
 
+#include <HPLLib/HPLViewGridManager.h>
+
 //#include <vector>
 #include <string>
 #include <map>
@@ -49,6 +51,11 @@ namespace mapeditorone{
         int getInt(int type);
         double getDouble(int type);
     };
+
+    
+    //グリッド情報をセットアップする
+    void MapEditorWX::setupGridManager(hpl::aleph::view::HPLViewGridManager* mgr,
+        mapeditorone::MapEditorOneInnerSetting* innerSetting);
 
 };
 

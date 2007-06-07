@@ -6,6 +6,7 @@
 #include "HPLSelectData.h"
 #include "HPLDoneHistory.h"
 #include "HPLViewGridManager.h"
+#include "HPLEventManager.h"
 
 //ˆê”ÊŒü‚¯
 #include "HPLMath.h"

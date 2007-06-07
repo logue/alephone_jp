@@ -1,0 +1,5 @@
+very slow
+slow
+fast
+very fast
+blindingly fast

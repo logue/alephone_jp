@@ -2,6 +2,11 @@
 #include "HPLMath.h"
 #include <limits.h>
 #include "HPLQuickSort.h"
+#include <fstream>
+
+//ï∂éöóÒâºì«Ç›çûÇ›ÇÃÉTÉCÉY
+//<en>size for buffering string
+const int BUF_MAX = 1024;
 
 static double getLengthDouble(double x, double y)
 {
@@ -9,9 +14,29 @@ static double getLengthDouble(double x, double y)
     return length;
 }
 
+/**
+*/
 void hpl::aleph::loadInformation(const char* filePath, int maxLines, std::vector<std::string>* infos)
 {
-    
+    std::ifstream ifs(filePath);
+    if(!ifs.is_open()){
+        hpl::error::halt("Fail to open tag file:%s", filePath);
+    }
+    int lineCounter = 0;
+    char buf[BUF_MAX];
+    while((ifs.getline(buf, BUF_MAX)) != NULL){
+        if(strcmp(buf, "") == 0){
+            continue;
+        }
+        //stringÇ…Ç∑ÇÈ
+        std::string str(buf);
+        infos->push_back(str);
+        lineCounter ++;
+        if(lineCounter >= maxLines){
+            break;
+        }
+    }
+    ifs.close();
 }
 
 

@@ -1,5 +1,5 @@
-#include "stdafx.h"
-#include "HPLLibCommon.h"
+//#include "stdafx.h"
+//#include "HPLLibCommon.h"
 #include "MapEditorOneSetting.h"
 
 MapEditorOneSetting::MapEditorOneSetting()
@@ -8,7 +8,7 @@ MapEditorOneSetting::MapEditorOneSetting()
 }
 void MapEditorOneSetting::setIniFileName(const char *iniFileName)
 {
-    initialSettingFileName = string(iniFileName);
+    initialSettingFileName = std::string(iniFileName);
 }
 
 static char *GRID_SIZE_INDEX_TAG = "GRID_SIZE_INDEX";

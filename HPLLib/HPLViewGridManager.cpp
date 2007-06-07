@@ -1,6 +1,7 @@
 #include "HPLViewGridManager.h"
 #include <memory.h>
 #include "HPLMath.h"
+#include <limits.h>
 
 /**
     ƒrƒ…[‚ÌŽŸŒ³
@@ -14,6 +15,9 @@ hpl::aleph::view::HPLViewGridManager::HPLViewGridManager()
     this->viewOffset[0] = viewOffset[1] = 0;
     //Š„‚èŽZ—¦‰Šú‰»
     this->zoomReset();
+    //‚‚³§ŒÀÅ‘å’l
+    this->setViewHeightMax(SHRT_MAX);
+    this->setViewHeightMin(SHRT_MIN);
 }
 void hpl::aleph::view::HPLViewGridManager::setProp(ZoomProperties *zoomProp)
 {
@@ -128,4 +132,29 @@ void hpl::aleph::view::HPLViewGridManager::getOffset(int* point)
     for(int i = 0; i < VIEW_DIMENSION; i ++){
         point[i] = this->viewOffset[i];
     }
+}
+
+void hpl::aleph::view::HPLViewGridManager::setViewHeightMax(int max)
+{
+    this->viewHeightMax = max;
+}
+void hpl::aleph::view::HPLViewGridManager::setViewHeightMin(int min)
+{
+    this->viewHeightMin = min;
+}
+int hpl::aleph::view::HPLViewGridManager::getViewHeightMax()
+{
+    return this->viewHeighMax;
+}
+int hpl::aleph::view::HPLViewGridManager::getViewHeightMin()
+{
+    return this->viewHeightMin;
+}
+void hpl::aleph::view::HPLViewGridManager::setRevealHiddenLines(bool show)
+{
+    this->isRevealHiddenLines_ = show;
+}
+bool hpl::aleph::view::HPLViewGridManager::isRevealHiddenLines()
+{
+    return this->isRevealHiddenLines_;
 }
