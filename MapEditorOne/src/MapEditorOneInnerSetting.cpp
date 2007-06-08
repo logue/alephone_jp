@@ -101,7 +101,7 @@ double mapeditorone::MapEditorOneInnerSetting::getDouble(int type)
 
 
 //グリッド情報をセットアップする
-void mapeditorone::MapEditorOneInnerSetting::setupGridManager(hpl::aleph::view::HPLViewGridManager* mgr,
+void mapeditorone::setupGridManager(hpl::aleph::view::HPLViewGridManager* mgr,
     mapeditorone::MapEditorOneInnerSetting* innerSetting)
 {
     int intervals[] ={

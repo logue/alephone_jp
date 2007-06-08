@@ -4,6 +4,32 @@
 //#include "stdafx.h"
 
 //#include "MapEditorSDI.h"
+const int NUMBER_OF_POLYGON_TYPE = 24;
+const int NUMBER_OF_OBJECT_TYPES = 6;
+const int NUMBER_OF_ACTIVATE_TYPES = 4;
+const int NUMBER_OF_MAP_OBJECT_TYPES = 6;
+
+const int NUMBER_OF_LANDSPACES = 4;
+//点とクリック地点の距離がこれ以下であれば選択する。
+//リスト順に探索する
+const int POINT_DISTANCE_EPSILON = 5;
+const int OBJECT_DISTANCE_EPSILON = 8;
+const int LINE_DISTANCE_EPSILON = 5;
+
+// CMonsterPropertyDialog ダイアログ
+const int NUMBER_OF_OBJECT_FLAGS = 6;
+const int NUMBER_OF_MISSION_TYPES = 6;
+const int NUMBER_OF_ENV_TYPES = 7;
+enum
+{
+    MI_CenterX = 0,
+    MI_Goal,
+    MI_Scenery,
+    MI_Sound,
+    NUMBER_OF_MAP_ICONS
+};
+static char* POLYGON_COLOR_FILE_NAME = "data/PolygonColor.txt";
+static char* LOG_FILE_NAME = "log.txt";
 
 #include <vector>
 #include <string>

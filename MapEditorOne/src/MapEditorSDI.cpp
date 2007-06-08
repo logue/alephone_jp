@@ -12,8 +12,6 @@
 #define new DEBUG_NEW
 #endif
 
-static char* POLYGON_COLOR_FILE_NAME = "data/PolygonColor.txt";
-static char* LOG_FILE_NAME = "log.txt";
 
 //logger
 HPLLogger logger;

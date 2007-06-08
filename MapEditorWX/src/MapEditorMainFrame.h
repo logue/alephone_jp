@@ -47,12 +47,12 @@ private:
     /**
         マップデータの表示
     */
-    void drawBackground(wxPaintDC dc);
-    void drawPolygons(wxPaintDC dc);
-    void drawLines(wxPaintDC dc);
-    void drawSides(wxPaintDC dc);
-    void drawPoints(wxPaintDC dc);
-    void drawObjects(wxPaintDC dc);
+    void drawBackground(wxPaintDC* dc);
+    void drawPolygons(wxPaintDC* dc);
+    void drawLines(wxPaintDC* dc);
+    void drawSides(wxPaintDC* dc);
+    void drawPoints(wxPaintDC* dc);
+    void drawObjects(wxPaintDC* dc);
 
     /**
         マウスイベント処理

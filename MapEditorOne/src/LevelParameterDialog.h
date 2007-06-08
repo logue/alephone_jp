@@ -2,8 +2,6 @@
 #include "afxwin.h"
 #include "map.h"
 
-const int NUMBER_OF_MISSION_TYPES = 6;
-const int NUMBER_OF_ENV_TYPES = 7;
 
 // CLevelParameterDialog ダイアログ
 

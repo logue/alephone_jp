@@ -8,6 +8,7 @@
 
 
 const int NUMBER_OF_TOOL_BAR_ICON_FILES = 8;
+static char *DATA_DIR_NAME = "./data/";
 
 // CToolDialog ダイアログ
 
@@ -102,7 +103,6 @@ BOOL CToolDialog::Create(CWnd* par)
 
 void CToolDialog::PostNcDestroy()
 {
-    // TODO: ここに特定なコードを追加するか、もしくは基本クラスを呼び出してください。
     if(parent != NULL){
         delete this;
     }
@@ -112,7 +112,6 @@ void CToolDialog::PostNcDestroy()
 
 void CToolDialog::OnClose()
 {
-    // TODO: ここにメッセージ ハンドラ コードを追加するか、既定の処理を呼び出します。
     if(parent != NULL){
         DestroyWindow();
     }else{
@@ -122,7 +121,6 @@ void CToolDialog::OnClose()
 
 BOOL CToolDialog::DestroyWindow()
 {
-    // TODO: ここに特定なコードを追加するか、もしくは基本クラスを呼び出してください。
     ShowWindow(FALSE);
     return TRUE;//CDialog::DestroyWindow();
 }
@@ -131,8 +129,6 @@ BOOL CToolDialog::OnInitDialog()
 {
     CDialog::OnInitDialog();
 
-    // TODO:  ここに初期化を追加してください
-
     return TRUE;  // return TRUE unless you set the focus to a control
     // 例外 : OCX プロパティ ページは必ず FALSE を返します。
 }
@@ -140,7 +136,6 @@ BOOL CToolDialog::OnInitDialog()
 void CToolDialog::OnPaint()
 {
     CPaintDC dc(this); // device context for painting
-    // TODO: ここにメッセージ ハンドラ コードを追加します。
     // 描画メッセージで CDialog::OnPaint() を呼び出さないでください。
     //draw tools
     CDC memDC;

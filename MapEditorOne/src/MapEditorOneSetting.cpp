@@ -231,7 +231,7 @@ void MapEditorOneSetting::setColorSetting(int type, ColorSettings *setting)
         setting->points[2] = 0;
         break;
     default:
-        hpl::error::halt("Invalid color preset type:[%d]", type));
+        hpl::error::halt("Invalid color preset type:[%d]", type);
     }
 }
 

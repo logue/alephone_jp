@@ -46,6 +46,8 @@ bool MapEditorWX::initialize()
     if(!setting.loadSetting()){
         hpl::error::caution("No setting file found. I'll make default one.");
         setting.setSettingToDefault();
+        //保存
+        setting.saveSetting();
     }
 
     //levelNameList
@@ -61,11 +63,11 @@ bool MapEditorWX::initialize()
     //オブジェクト全般
     hpl::aleph::loadInformation("data/ObjectTypes.txt", NUMBER_OF_OBJECT_TYPES, this->objectTypeInfo);
     //モンスター
-    hpl::aleph::loadInformation("data/MonsterTypes.txt", NUMBER_OF_MONSTER_TYPES,, this->monsterTypeInfo);
+    hpl::aleph::loadInformation("data/MonsterTypes.txt", NUMBER_OF_MONSTER_TYPES, this->monsterTypeInfo);
     //オブジェ
     hpl::aleph::loadInformation("data/SceneryTypes.txt", NUMBER_OF_SCENERY_DEFINITIONS, this->sceneryTypeInfo);
     //アイテム
-    hpl::aleph::loadInformation("data/DefinedItemsTypes.txt", NUMBER_OF_DEFINED_ITEMS, this->itemTypeInfo);
+    hpl::aleph::loadInformation("data/DefinedItems.txt", NUMBER_OF_DEFINED_ITEMS, this->itemTypeInfo);
     //音
     hpl::aleph::loadInformation("data/SoundSourceTypes.txt", NUMBER_OF_AMBIENT_SOUND_DEFINITIONS, this->soundSourceTypeInfo);
     //起動
@@ -120,7 +122,6 @@ bool MapEditorWX::initialize()
     this->selectData.clear();
 
     //コピペ用ストック
-    storedMapData.removeAll();
     storedDataDiffPointDelta[0] = storedDataDiffPointDelta[1] = 0;
 
     //線の最初の点
@@ -132,7 +133,7 @@ bool MapEditorWX::initialize()
     mapeditorone::MapEditorOneInnerSetting innerSetting =
         mapeditorone::MapEditorOneInnerSetting(TAG_NAME_FILE_PATH, INNER_DATA_FILE_PATH);
     mapeditorone::setupGridManager(this->getViewGridManager(),
-        &innserSetting);
+        &innerSetting);
 
     nPolygonPoints = 3;
 
@@ -156,22 +157,22 @@ hpl::aleph::HPLEventManager* MapEditorWX::getEventManager()
 //ビュー座標をワールド座標に直す操作の簡易版
 world_point2d MapEditorWX::getWorldPointFromViewPoint(int vx, int vy)
 {
-    hpl::aleph::map::HPLViewGridManager* mgr = this->getViewGridManager();
+    hpl::aleph::view::HPLViewGridManager* mgr = this->getViewGridManager();
     int offset[2];
     mgr->getOffset(offset);
     int DIV = mgr->getZoomDivision();
-    world_point2d wpoint = hpl::aleph::map::getWorldPoint2DFromViewPoint(
+    world_point2d wpoint = hpl::aleph::map::getWorldPoint2DFromViewPoint(vx, vy,
         OFFSET_X_WORLD, OFFSET_Y_WORLD, DIV, offset[0], offset[1]);
     return wpoint;
 }
 //
 void MapEditorWX::getViewPointFromWorldPoint(world_point2d& wpoint, int vpoint[2])
 {
-    hpl::aleph::map::HPLViewGridManager* mgr = this->getViewGridManager();
+    hpl::aleph::view::HPLViewGridManager* mgr = this->getViewGridManager();
     int offset[2];
     mgr->getOffset(offset);
     int DIV = mgr->getZoomDivision();
-    hpl::aleph::map::getViewPointFromWorldPoint2D(wpoint.x, wpoint.y, vpoint,
+    hpl::aleph::map::getViewPointFromWorldPoint2D(wpoint, vpoint,
         OFFSET_X_WORLD, OFFSET_Y_WORLD, DIV, offset[0], offset[1]);
 }
 
@@ -188,7 +189,7 @@ void MapEditorWX::loadIconBitmaps(const char* baseDirPath)
     //ファイル名作成
     char buf[BUF_MAX];
     sprintf(buf, "%s%s", baseDirPath, MAP_ICONS_IMAGE_NAME_LIST_FILE_NAME);
-    hpl::aleph::loadInformations(buf, NUMBER_OF_MAP_ICON_FILES, mapIconInfo);
+    hpl::aleph::loadInformation(buf, NUMBER_OF_MAP_ICON_FILES, mapIconInfo);
 
     for(int i = 0; i < 2 * NUMBER_OF_DEFINED_ITEMS + 2 * NUMBER_OF_MAP_ICONS; i ++){
         std::string path = std::string(baseDirPath) + std::string(MAP_ICONS_DIR_NAME);
@@ -209,6 +210,7 @@ void MapEditorWX::loadIconBitmaps(const char* baseDirPath)
                 //アイテム
                 this->loadBitmap(path.c_str(), &this->itemIconBitmaps[index]);
             }else{
+                index -= NUMBER_OF_DEFINED_ITEMS;
                 //マップアイコン
                 this->loadBitmap(path.c_str(), &this->mapIconBitmaps[index]);
             }
@@ -218,6 +220,7 @@ void MapEditorWX::loadIconBitmaps(const char* baseDirPath)
                 //アイテム
                 this->loadBitmap(path.c_str(), &this->hilightedItemIconBitmaps[index]);
             }else{
+                index -= NUMBER_OF_DEFINED_ITEMS;
                 //マップアイコン
                 this->loadBitmap(path.c_str(), &this->hilightedMapIconBitmaps[index]);
             }
@@ -230,5 +233,7 @@ void MapEditorWX::loadIconBitmaps(const char* baseDirPath)
 */
 void MapEditorWX::loadBitmap(const char* fname, wxBitmap* bitmap)
 {
-    bitmap->LoadFile(wxConvCurrent->cMB2WX(fname), wxBITMAP_TYPE_BMP);
+    if(!bitmap->LoadFile(wxConvCurrent->cMB2WX(fname), wxBITMAP_TYPE_BMP)){
+        hpl::error::halt("Couldn't load bitmap[%s]", fname);
+    }
 }

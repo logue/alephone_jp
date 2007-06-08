@@ -54,7 +54,7 @@ namespace mapeditorone{
 
     
     //グリッド情報をセットアップする
-    void MapEditorWX::setupGridManager(hpl::aleph::view::HPLViewGridManager* mgr,
+    void setupGridManager(hpl::aleph::view::HPLViewGridManager* mgr,
         mapeditorone::MapEditorOneInnerSetting* innerSetting);
 
 };

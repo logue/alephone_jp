@@ -26,7 +26,7 @@ static double getLengthDouble(double x, double y)
 
 /**
 */
-void hpl::aleph::loadInformation(const char* filePath, int maxLines, std::vector<std::string>* infos)
+void hpl::aleph::loadInformation(const char* filePath, int maxLines, hpl::aleph::Information infos[])
 {
     std::ifstream ifs(filePath);
     if(!ifs.is_open()){
@@ -39,8 +39,7 @@ void hpl::aleph::loadInformation(const char* filePath, int maxLines, std::vector
             continue;
         }
         //string‚É‚·‚é
-        std::string str(buf);
-        infos->push_back(str);
+        infos[lineCounter].jname = std::string(buf);
         lineCounter ++;
         if(lineCounter >= maxLines){
             break;
@@ -68,7 +67,6 @@ bool hpl::aleph::loadColorSetting(const char* filePath, int colors[][3], int max
             continue;
         }
         std::vector<std::string> sp = hpl::string::Split(line, COLOR_ITEM_SEPARATER);
-        int col[3];
         if(sp.size() < COL_NUM){
             hpl::error::halt("Color setting format is invalid:%s", line.c_str());
         }

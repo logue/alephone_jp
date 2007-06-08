@@ -71,7 +71,7 @@ using namespace std;
 // CMapEditorSDIApp:
 // このクラスの実装については、MapEditorSDI.cpp を参照してください。
 //
-
+/*
 const int NUMBER_OF_POLYGON_TYPE = 24;
 const int NUMBER_OF_OBJECT_TYPES = 6;
 const int NUMBER_OF_ACTIVATE_TYPES = 4;
@@ -89,20 +89,12 @@ static char *INI_FILE_NAME = "./setting.ini";
 static char * MAP_ICONS_DIR_NAME = "Map Icons/";
 static char * HILIGHTED_ICONS_DIR_NAME = "Highlighted/";
 static char * MAP_ICONS_IMAGE_NAME_LIST_FILE_NAME = "MapIconImageList.txt";
+*/
 const int START_OF_TEXTURE = _collection_walls1;
 
 extern HPLLogger logger;
 
 //map icons
-enum
-{
-    MI_CenterX = 0,
-    MI_Goal,
-    MI_Scenery,
-    MI_Sound,
-    NUMBER_OF_MAP_ICONS
-};
-
 
 //point flags
 enum

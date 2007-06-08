@@ -1,6 +1,6 @@
 #ifndef _EVENT_MANAGER_
 #define _EVENT_MANAGER_
-
+/*
 //tools
 namespace ToolType{
     enum
@@ -34,7 +34,7 @@ namespace EditModeType{
         EM_POLYGON_TYPE,
     };
 };
-
+*/
 namespace mapeditorone{
     /**
         マウスイベントなどのイベント情報の記憶などを保持・管理する

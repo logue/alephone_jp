@@ -12,19 +12,15 @@
 //#include "HPLMath.h"
 #include "HPLSelectData.h"
 
+
+
+/*
 const int NUMBER_OF_POLYGON_TYPE = 24;
+const int NUMBER_OF_ZOOM_DIVISION = 3;
 const int NUMBER_OF_OBJECT_TYPES = 6;
 const int NUMBER_OF_ACTIVATE_TYPES = 4;
 const int NUMBER_OF_MAP_OBJECT_TYPES = 6;
-
-const int NUMBER_OF_LANDSPACES = 4;
-//点とクリック地点の距離がこれ以下であれば選択する。
-//リスト順に探索する
-const int POINT_DISTANCE_EPSILON = 5;
-const int OBJECT_DISTANCE_EPSILON = 8;
-const int LINE_DISTANCE_EPSILON = 5;
-
-
+*/
 
 
 //分類できないもの
@@ -48,7 +44,7 @@ namespace aleph{
         @param maxLines 最大行数
         @param infos 出力
     */
-    void loadInformation(const char* filePath, int maxLines, std::vector<std::string>* infos);
+    void loadInformation(const char* filePath, int maxLines, hpl::aleph::Information infos[]);
 
     /**
         カラーデータをファイルから読み込みます

@@ -10,11 +10,11 @@ void MapEditorMainFrame::OnLeftDown(wxMouseEvent &ev)
     //マウス座標記録
     wxGetApp().getViewGridManager()->setNewMousePoint(ev.m_x, ev.m_y);
     bool shift = ev.ShiftDown();
-    bool ctrl = ev.CtrlDown();
+    bool ctrl = ev.ControlDown();
 
 //    int toolType = wxGetApp().getEventManager()->getToolType();
 
-    switch(wxGetApp().getEventManager()->getEditMode()){
+    switch(wxGetApp().getEventManager()->getEditModeType()){
     case EditModeType::EM_DRAW:
         if(ctrl){
         }else{
@@ -100,7 +100,7 @@ void MapEditorMainFrame::OnMotion(wxMouseEvent &ev)
     if(ev.ButtonIsDown(wxMOUSE_BTN_LEFT)){
         //左ボタンを押しながら動いている
         bool shift = ev.ShiftDown();
-        bool ctrl = ev.CtrlDown();
+        bool ctrl = ev.ControlDown();
 
         //編集モードごとに動作が異なる
         

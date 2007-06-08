@@ -1,6 +1,4 @@
 #include "MapEditorMainFrame.h"
-const int NUMBER_OF_POLYGON_TYPE = 24;
-const int NUMBER_OF_ZOOM_DIVISION = 3;
 /*const int ZOOM_DIVISION_STEP = 10;
 const int ZOOM_DIVISION_MAX = 200;
 const int ZOOM_DIVISION_MIN = 1;
@@ -10,13 +8,10 @@ const int OFFSET_Y_WORLD = 32768;
 const int NUMBER_OF_GLID = 5;
 */
 
-const int NUMBER_OF_OBJECT_TYPES = 6;
-const int NUMBER_OF_ACTIVATE_TYPES = 4;
-const int NUMBER_OF_MAP_OBJECT_TYPES = 6;
 
 //点とクリック地点の距離がこれ以下であれば選択する。
 //リスト順に探索する
-const int POINT_DISTANCE_EPSILON = 5;
+//const int POINT_DISTANCE_EPSILON = 5;
 
 BEGIN_EVENT_TABLE(MapEditorMainFrame, wxFrame)
     EVT_MENU(ID_Quit, MapEditorMainFrame::OnQuit)
@@ -39,11 +34,6 @@ MapEditorMainFrame::MapEditorMainFrame(const wxString& title,
 
     CreateStatusBar();
     SetStatusText( _T("get ready..."));
-    
-
-    wxGetApp().offsetX = 0;
-    wxGetApp().offsetY = 0;
-    wxGetApp().zoomDivision = ZOOM_DIVISION_DEFAULT;
 }
 
 void MapEditorMainFrame::setupMenus()
@@ -77,17 +67,6 @@ void MapEditorMainFrame::OnAbout(wxCommandEvent& WXUNUSED(event))
         _T("about this..."), wxOK | wxICON_INFORMATION, this);
 }
 
-//簡易変換
-static void getViewPointFromWorldPoint2D(world_point2d wpoint, int vpoint[2])
-{
-    int DIV = wxGetApp().zoomDivision;
-    int OFFSET_X_VIEW = wxGetApp().offsetX;
-    int OFFSET_Y_VIEW = wxGetApp().offsetY;
-    hpl::aleph::map::getViewPointFromWorldPoint2D(
-        wpoint, vpoint,
-        OFFSET_X_WORLD, OFFSET_Y_WORLD, DIV, OFFSET_X_VIEW, OFFSET_Y_VIEW);
-}
-
 /**
     描画
 */
@@ -99,12 +78,15 @@ void MapEditorMainFrame::OnPaint(wxPaintEvent& WXUNUSED(event))
 
     //dc.DrawLine(10,10,100,20);
     
-    int DIV = wxGetApp().zoomDivision;
-    int OFFSET_X_VIEW = wxGetApp().offsetX;
-    int OFFSET_Y_VIEW = wxGetApp().offsetY;
+    hpl::aleph::view::HPLViewGridManager* mgr = wxGetApp().getViewGridManager();
+    int DIV = mgr->getZoomDivision();
+    int voffset[2];
+    mgr->getOffset(voffset);
+    int OFFSET_X_VIEW = voffset[0];
+    int OFFSET_Y_VIEW = voffset[1];
 
     //背景描画
-    this->drawBackground();
+    this->drawBackground(&dc);
     
     //ポリゴン
     {
@@ -119,7 +101,7 @@ void MapEditorMainFrame::OnPaint(wxPaintEvent& WXUNUSED(event))
             int vertexCount = polygon->vertex_count;
             int vpoint[2];
             for(int j = 0; j < vertexCount; j ++){
-                getViewPointFromWorldPoint2D(EndpointList[polygon->endpoint_indexes[j]].vertex,
+                wxGetApp().getViewPointFromWorldPoint(EndpointList[polygon->endpoint_indexes[j]].vertex,
                     vpoint);
                 points[j].x = vpoint[0];
                 points[j].y = vpoint[1];
@@ -210,12 +192,10 @@ void MapEditorMainFrame::OnOpen(wxCommandEvent& WXUNUSED(event))
                 wxGetApp().levelNameList.push_back(string(cstr) + string(ep.level_name));
             }
         }*/
-        //normal division
-        wxGetApp().zoomDivision = ZOOM_DIVISION_DEFAULT;
-        //centering
-        wxGetApp().offsetX = 0;
-        wxGetApp().offsetY = 0;
-
+        //ズーム・オフセットを初期化
+        
+        wxGetApp().getViewGridManager()->zoomReset();
+        wxGetApp().getViewGridManager()->setOffset(0,0);
         //再描画
         Refresh();
     }

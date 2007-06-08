@@ -13,16 +13,17 @@
 #endif
 #include "wx/settings.h"
 
-#include "AlephOne/header.h"
-#include "AlephOne/extensions.h"
-#include "AlephOne/FileHandler.h"
-#include "AlephOne/map.h"
-#include "AlephOne/game_wad.h"
-#include "AlephOne/weapons.h"
-#include "AlephOne/items.h"
-#include "AlephOne/monsters.h"
-#include "AlephOne/scenery_definitions.h"
-#include "AlephOne/mysound.h"
+#include "header.h"
+#include "extensions.h"
+#include "FileHandler.h"
+#include "map.h"
+#include "game_wad.h"
+#include "weapons.h"
+#include "items.h"
+#include "monsters.h"
+#include "scenery_definitions.h"
+#include "mysound.h"
+#include "computer_interface.h"
 
 #include <HPLLib/HPLAlephLib.h>
 #include <MapEditorOneSetting.h>

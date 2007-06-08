@@ -144,7 +144,7 @@ void hpl::aleph::view::HPLViewGridManager::setViewHeightMin(int min)
 }
 int hpl::aleph::view::HPLViewGridManager::getViewHeightMax()
 {
-    return this->viewHeighMax;
+    return this->viewHeightMax;
 }
 int hpl::aleph::view::HPLViewGridManager::getViewHeightMin()
 {

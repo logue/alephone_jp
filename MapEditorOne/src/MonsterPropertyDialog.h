@@ -2,8 +2,6 @@
 #include "afxwin.h"
 
 
-// CMonsterPropertyDialog ダイアログ
-const int NUMBER_OF_OBJECT_FLAGS = 6;
 
 class CMonsterPropertyDialog : public CDialog
 {
