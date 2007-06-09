@@ -1,0 +1,4 @@
+#ifndef _EDITOR_PREFERENCES_DIALOG_
+#define _EDITOR_PREFERENCES_DIALOG_
+
+#endif

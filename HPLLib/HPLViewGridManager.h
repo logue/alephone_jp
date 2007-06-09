@@ -60,6 +60,9 @@ namespace view{
         int oldMousePoint[2];
         int newMousePoint[2];
 
+        //グリッド
+        int gridIndex;
+
         //表示・編集できる高さ
         int viewHeightMax;
         int viewHeightMin;
@@ -109,6 +112,8 @@ namespace view{
         int getViewHeightMin();
         void setRevealHiddenLines(bool show);
         bool isRevealHiddenLines();
+        int getGridInterval();
+        void setGridIntervalIndex(int index);
     private:
         /**
             ズーム調整

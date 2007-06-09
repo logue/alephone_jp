@@ -51,6 +51,31 @@ void MapEditorMainFrame::OnLeftDown(wxMouseEvent &ev)
 void MapEditorMainFrame::doLButtonOnDrawMode(wxMouseEvent& ev)
 {
 }
+void MapEditorMainFrame::doLButtonOnArrowTool(wxMouseEvent& ev)
+{
+}
+void MapEditorMainFrame::doLButtonOnFillTool(wxMouseEvent& ev)
+{
+}
+void MapEditorMainFrame::doLButtonOnHandTool(wxMouseEvent& ev)
+{
+}
+void MapEditorMainFrame::doLButtonOnLineTool(wxMouseEvent& ev)
+{
+}
+void MapEditorMainFrame::doLButtonOnMagnifyTool(wxMouseEvent& ev)
+{
+}
+void MapEditorMainFrame::doLButtonOnSkullTool(wxMouseEvent& ev)
+{
+}
+void MapEditorMainFrame::doLButtonOnTextTool(wxMouseEvent& ev)
+{
+}
+void MapEditorMainFrame::doLButtonOnPolygonTool(wxMouseEvent& ev)
+{
+}
+
 void MapEditorMainFrame::doLButtonOnPolygonMode(wxMouseEvent& ev)
 {
 }
@@ -94,26 +119,151 @@ void MapEditorMainFrame::OnRightDown(wxMouseEvent& ev)
 */
 void MapEditorMainFrame::OnMotion(wxMouseEvent &ev)
 {
+    //カーソル設定
+    //TODO 
+    //wxGetApp()->setCursor();
+
     //マウス座標記録
     wxGetApp().getViewGridManager()->setNewMousePoint(ev.m_x, ev.m_y);
 
+    int editModeType = wxGetApp().getEventManager()->getEditModeType();
+
+    const int UPDATE_POLYGON_VALIDITY_INTERVAL = 10;
+    static int updatePolygonValidityCount = UPDATE_POLYGON_VALIDITY_INTERVAL;
+
+    //ポリゴン整合性チェックカウント
+    updatePolygonValidityCount ++;
+
+    if(updatePolygonValidityCount >= UPDATE_POLYGON_VALIDITY_INTERVAL){
+        //TODO
+    }
     if(ev.ButtonIsDown(wxMOUSE_BTN_LEFT)){
         //左ボタンを押しながら動いている
         bool shift = ev.ShiftDown();
         bool ctrl = ev.ControlDown();
+#ifdef MAP_VIEWER
+        //Viewer専用の動作
+        //クリックしていれば移動
+        if(ctrl ||
+            editModeType == EditModeType::EM_DRAW && toolType == ToolType::TI_HAND)
+        {
+            
+        }
+#else
 
         //編集モードごとに動作が異なる
         
         int toolType = wxGetApp().getEventManager()->getToolType();
+        
+        if(ctrl ||
+            editModeType == EditModeType::EM_DRAW && toolType == ToolType::TI_HAND)
+        {
+            this->moveMapOffset(ev.m_x, ev.m_y);
+        }else{
+            //Ctrl押さない
+            if(editModeType == EditModeType::EM_DRAW){
+                //ドローモード
+                if(toolType == ToolType::TI_ARROW){
+                    //矢印ツールでD&D
 
-#ifdef MAP_VIEWER
-        //Viewer専用の動作
-#else
+                }
+            }
+        }
+
 
 #endif
-
+        Refresh();
     }
+
+    //更新
+    wxGetApp().getViewGridManager()->setNewMousePoint(ev.m_x, ev.m_y);
+
 }
+void MapEditorMainFrame::doMouseMotionOnDrawMode(wxMouseEvent& ev)
+{
+}
+void MapEditorMainFrame::doMouseMotionOnArrowTool(wxMouseEvent& ev)
+{
+}
+void MapEditorMainFrame::doMouseMotionOnFillTool(wxMouseEvent& ev)
+{
+}
+void MapEditorMainFrame::doMouseMotionOnHandTool(wxMouseEvent& ev)
+{
+}
+void MapEditorMainFrame::doMouseMotionOnLineTool(wxMouseEvent& ev)
+{
+}
+void MapEditorMainFrame::doMouseMotionOnMagnifyTool(wxMouseEvent& ev)
+{
+}
+void MapEditorMainFrame::doMouseMotionOnSkullTool(wxMouseEvent& ev)
+{
+}
+void MapEditorMainFrame::doMouseMotionOnTextTool(wxMouseEvent& ev)
+{
+}
+void MapEditorMainFrame::doMouseMotionOnPolygonTool(wxMouseEvent& ev)
+{
+}
+
+void MapEditorMainFrame::doMouseMotionOnPolygonMode(wxMouseEvent& ev)
+{
+}
+void MapEditorMainFrame::doMouseMotionOnFloorHeightMode(wxMouseEvent& ev)
+{
+}
+void MapEditorMainFrame::doMouseMotionOnCeilingHeightMode(wxMouseEvent& ev)
+{
+}
+void MapEditorMainFrame::doMouseMotionOnFloorLightMode(wxMouseEvent& ev)
+{
+}
+void MapEditorMainFrame::doMouseMotionOnCeilingLightMode(wxMouseEvent& ev)
+{
+}
+void MapEditorMainFrame::doMouseMotionOnMediaMode(wxMouseEvent& ev)
+{
+}
+void MapEditorMainFrame::doMouseMotionOnFloorTextureMode(wxMouseEvent& ev)
+{
+}
+void MapEditorMainFrame::doMouseMotionOnCeilingTextureMode(wxMouseEvent& ev)
+{
+}
+
 void MapEditorMainFrame::OnMouseWheel(wxMouseEvent &ev)
 {
+    int zDelta = ev.m_wheelRotation;
+    hpl::aleph::view::HPLViewGridManager* mgr = wxGetApp().getViewGridManager();
+
+    //コントロールキー
+    bool ctrl = ev.ControlDown();
+    if(ctrl){
+        wxSize size = wxFrame::GetSize();
+        if(zDelta < 0){
+            mgr->zoomIn(size.GetWidth(), size.GetHeight());
+        }else{
+            mgr->zoomOut(size.GetWidth(), size.GetHeight());
+        }
+        Refresh();
+    }
+}
+
+// オフセットを指定したマウスポイントによって移動させます
+void MapEditorMainFrame::moveMapOffset(int x, int y)
+{
+    hpl::aleph::view::HPLViewGridManager* mgr = wxGetApp().getViewGridManager();
+    //以前のマウスポジションを得ます
+    int oldMPoint[2];
+    mgr->getOldMousePoint(oldMPoint);
+    int deltaX = x - oldMPoint[0];
+    int deltaY = y - oldMPoint[1];
+
+    //オフセットを設定します
+    int voffset[2];
+    mgr->getOffset(voffset);
+    voffset[0] += deltaX;
+    voffset[1] += deltaY;
+    mgr->setOffset(voffset[0], voffset[1]);
 }

@@ -11,14 +11,6 @@ const int WINDOW_DEFAULT_X = 50;
 const int WINDOW_DEFAULT_Y = 50;
 const int BUF_MAX = 1024;
 
-static char *DATA_DIR_NAME = "./data/";
-static char *INI_FILE_NAME = "./setting.ini";
-static char * MAP_ICONS_DIR_NAME = "Map Icons/";
-static char * HILIGHTED_ICONS_DIR_NAME = "Highlighted/";
-static char * MAP_ICONS_IMAGE_NAME_LIST_FILE_NAME = "MapIconImageList.txt";
-const int START_OF_TEXTURE = _collection_walls1;
-static char* TAG_NAME_FILE_PATH = "data/InnerSettingTagList.ini";
-static char* INNER_DATA_FILE_PATH = "data/InnerSetting.ini";
 
 bool MapEditorWX::OnInit()
 {
@@ -49,7 +41,6 @@ bool MapEditorWX::initialize()
         //保存
         setting.saveSetting();
     }
-
     //levelNameList
 
     //面
@@ -134,13 +125,14 @@ bool MapEditorWX::initialize()
         mapeditorone::MapEditorOneInnerSetting(TAG_NAME_FILE_PATH, INNER_DATA_FILE_PATH);
     mapeditorone::setupGridManager(this->getViewGridManager(),
         &innerSetting);
-
+    this->getViewGridManager()->setGridIntervalIndex(this->setting.getGridSizeIndex());
     nPolygonPoints = 3;
 
     //マップのアイコンビットマップをファイルから読み込み
     this->loadIconBitmaps(DATA_DIR_NAME);
 
     //TODO textureBitmaps
+
     return true;
 }
 
@@ -236,4 +228,12 @@ void MapEditorWX::loadBitmap(const char* fname, wxBitmap* bitmap)
     if(!bitmap->LoadFile(wxConvCurrent->cMB2WX(fname), wxBITMAP_TYPE_BMP)){
         hpl::error::halt("Couldn't load bitmap[%s]", fname);
     }
+}
+
+/**
+    現在のモード・ツールにあわせてカーソルを変更します
+*/
+void MapEditorWX::setCursor()
+{
+    //TODO カーソル
 }

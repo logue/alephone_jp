@@ -106,9 +106,6 @@ enum
     NUMBER_OF_POINT_FLAGS
 };
 
-const int TOOL_WIDTH = 24;
-const int TOOL_HEIGHT = 21;
-
 //‘I‘ð‚µ‚½‚à‚Ì‚ÌŽí—Þ
 enum{
     _no_selected,

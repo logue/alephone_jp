@@ -7,8 +7,6 @@
 #include ".\tooldialog.h"
 
 
-const int NUMBER_OF_TOOL_BAR_ICON_FILES = 8;
-static char *DATA_DIR_NAME = "./data/";
 
 // CToolDialog ダイアログ
 
@@ -18,9 +16,6 @@ CToolDialog::CToolDialog(CWnd* pParent /*=NULL*/)
 {
     //imageList.Create(TOOL_WIDTH, TOOL_HEIGHT, ILC_COLOR32, NUMBER_OF_TOOLS * 2, 2);
 
-    char *TOOL_BAR_ICONS_DIR_NAMR = "Toolbar/";
-    char *SELECTED_ICONS_DIR_NAME = "Selected/";
-    char *TOOL_BAR_ICONS_IMAGE_LIST_FILE_NAME = "ToolBarImageList.txt";
 
     //イメージ名リスト読み込み
     Information imageNameInformations[NUMBER_OF_TOOL_BAR_ICON_FILES];

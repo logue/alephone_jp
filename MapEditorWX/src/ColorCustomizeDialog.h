@@ -1,0 +1,4 @@
+#ifndef _COLOR_CUSTOMIZE_DIALOG_
+#define _COLOR_CUSTOMIZE_DIALOG_
+
+#endif

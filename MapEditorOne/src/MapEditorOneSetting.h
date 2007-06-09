@@ -2,6 +2,18 @@
 #define _MAP_EDITOR_ONE_SETTING_
 
 //#include "stdafx.h"
+#include "header.h"
+#include "extensions.h"
+#include "FileHandler.h"
+#include "map.h"
+#include "game_wad.h"
+#include "weapons.h"
+#include "items.h"
+#include "monsters.h"
+#include "scenery_definitions.h"
+#include "mysound.h"
+#include "computer_interface.h"
+#include "editor.h"
 
 //#include "MapEditorSDI.h"
 const int NUMBER_OF_POLYGON_TYPE = 24;
@@ -30,6 +42,34 @@ enum
 };
 static char* POLYGON_COLOR_FILE_NAME = "data/PolygonColor.txt";
 static char* LOG_FILE_NAME = "log.txt";
+
+//ポリゴン選択時のあみかけbmp
+static char* POLYGON_SELECT_STLIPPLE_BITMAP_FILE_PATH = "data/img/bmp00005.bmp";
+
+//ツールダイアログのサイズ
+const int TOOL_DIALOG_W = 75;
+const int TOOL_DIALOG_H = 100;
+
+//ツールパレット
+static char *TOOL_BAR_ICONS_DIR_NAMR = "Toolbar/";
+static char *SELECTED_ICONS_DIR_NAME = "Selected/";
+static char *TOOL_BAR_ICONS_IMAGE_LIST_FILE_NAME = "ToolBarImageList.txt";
+
+//ツールアイテムのサイズ
+const int TOOL_WIDTH = 24;
+const int TOOL_HEIGHT = 21;
+
+//ツールパレットのアイコンビットマップファイルの数
+const int NUMBER_OF_TOOL_BAR_ICON_FILES = 8;
+static char *DATA_DIR_NAME = "./data/";
+
+static char *INI_FILE_NAME = "./setting.ini";
+static char * MAP_ICONS_DIR_NAME = "Map Icons/";
+static char * HILIGHTED_ICONS_DIR_NAME = "Highlighted/";
+static char * MAP_ICONS_IMAGE_NAME_LIST_FILE_NAME = "MapIconImageList.txt";
+const int START_OF_TEXTURE = _collection_walls1;
+static char* TAG_NAME_FILE_PATH = "data/InnerSettingTagList.ini";
+static char* INNER_DATA_FILE_PATH = "data/InnerSetting.ini";
 
 #include <vector>
 #include <string>

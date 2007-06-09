@@ -1,0 +1,4 @@
+#ifndef _HEIGHT_PALLET_DIALOG_
+#define _HEIGHT_PALLET_DIALOG_
+
+#endif

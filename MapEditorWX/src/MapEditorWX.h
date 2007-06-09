@@ -1,7 +1,28 @@
+/*
+MapEditorOne
+Marathon and AlephOne's Map file editor
+Copyright (C) 2007  Koji Koizumi(HN:HogePiyo)
+
+This program is free software; you can redistribute it and/or
+modify it under the terms of the GNU General Public License
+as published by the Free Software Foundation; either version 2
+of the License, or (at your option) any later version.
+
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License
+along with this program; if not, write to the Free Software
+Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+*/
 #pragma once
 
 #include <wx/wxprec.h>
 #include <wx/bitmap.h>
+#include <wx/dcbuffer.h>
+#include <wx/bmpbuttn.h>
 
 #ifdef __BORLANDC__
 #pragma hdrstop
@@ -13,21 +34,13 @@
 #endif
 #include "wx/settings.h"
 
-#include "header.h"
-#include "extensions.h"
-#include "FileHandler.h"
-#include "map.h"
-#include "game_wad.h"
-#include "weapons.h"
-#include "items.h"
-#include "monsters.h"
-#include "scenery_definitions.h"
-#include "mysound.h"
-#include "computer_interface.h"
 
 #include <HPLLib/HPLAlephLib.h>
 #include <MapEditorOneSetting.h>
 #include <MapEditorOneInnerSetting.h>
+
+//dialogues
+#include "ToolDialog.h"
 
 #include <vector>
 #include <string>
@@ -142,9 +155,11 @@ public:
     int nPolygonPoints;
 
     //テクスチャデータ
+    //TODO texture
     std::vector<std::vector<wxBitmap> > textureBitmaps;
 
     //編集モードとメニューIDの対応
+    //TODO menu
     std::map<int, int> menuIDMap;
 
 private:
@@ -160,6 +175,9 @@ private:
     //イベント管理
     hpl::aleph::HPLEventManager eventManager;
 
+    //ポリゴンを高さ順に表示する際の順番
+    //TODO poly height order
+    std::vector<int> polygonDrawOrderByHeight;
 public:
     ///////////////////////////////////
     ///////////////////////////////////
@@ -192,16 +210,21 @@ public:
     //
     void getViewPointFromWorldPoint(world_point2d& wpoint, int vpoint[2]);
 
+    /**
+        ビットマップの読み込み（簡易版）
+    */
+    void loadBitmap(const char* fname, wxBitmap* bitmap);
+
+    /**
+        現在のモード・ツールにあわせてカーソルを変更します
+    */
+    void setCursor();
 private:
     /**
         アイコン用のビットマップファイルを読み込みます
     */
     void loadIconBitmaps(const char* baseDirPath);
 
-    /**
-        ビットマップの読み込み（簡易版）
-    */
-    void loadBitmap(const char* fname, wxBitmap* bitmap);
 };
 
 //実体を持たせます

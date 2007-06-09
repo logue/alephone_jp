@@ -2,6 +2,7 @@
 #include <memory.h>
 #include "HPLMath.h"
 #include <limits.h>
+#include "HPLError.h"
 
 /**
     ƒrƒ…[‚ÌŽŸŒ³
@@ -157,4 +158,15 @@ void hpl::aleph::view::HPLViewGridManager::setRevealHiddenLines(bool show)
 bool hpl::aleph::view::HPLViewGridManager::isRevealHiddenLines()
 {
     return this->isRevealHiddenLines_;
+}
+int hpl::aleph::view::HPLViewGridManager::getGridInterval()
+{
+    return this->zoomProperties.gridIntervals[this->gridIndex];
+}
+void hpl::aleph::view::HPLViewGridManager::setGridIntervalIndex(int index)
+{
+    if(index < 0 || index >= NUMBER_OF_GLID){
+        hpl::error::halt("array out of index @ HPLViewGridManager::setGridInterval index = %d", index);
+    }
+    this->gridIndex = index;
 }

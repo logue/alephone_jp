@@ -193,7 +193,7 @@
 			<Tool
 				Name="VCCLCompilerTool"
 				Optimization="0"
-				AdditionalIncludeDirectories="..\..\..\..\..\..\marathon;..\..\..\..\..\AlephOneSrc"
+				AdditionalIncludeDirectories="..\..\..\..\..\..\marathon;..\..\..\..\..\AlephOneSrc;..\..\..\..\..\MapEditorCommonSrc"
 				PreprocessorDefinitions="WIN32;_DEBUG;_WINDOWS;SDL;__WIN32__;__WINDOWS__;_WINDOWS;__WXMSW__;__WXDEBUG__;WXUSINGDLL;WX;UNICODE;__wxUSEUNICODE__"
 				MinimalRebuild="true"
 				BasicRuntimeChecks="3"
@@ -261,6 +261,10 @@
 			</File>
 			<File
 				RelativePath="..\..\..\..\src\MainFrameEvent.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\..\src\MainFrameMenuEvent.cpp"
 				>
 			</File>
 			<File
@@ -392,21 +396,169 @@
 			Name="Common"
 			>
 			<File
-				RelativePath="..\..\..\..\..\MapEditorOne\src\MapEditorOneInnerSetting.cpp"
+				RelativePath="..\..\..\..\..\MapEditorCommonSrc\MapEditorOneInnerSetting.cpp"
 				>
 			</File>
 			<File
-				RelativePath="..\..\..\..\..\MapEditorOne\src\MapEditorOneInnerSetting.h"
+				RelativePath="..\..\..\..\..\MapEditorCommonSrc\MapEditorOneInnerSetting.h"
 				>
 			</File>
 			<File
-				RelativePath="..\..\..\..\..\MapEditorOne\src\MapEditorOneSetting.cpp"
+				RelativePath="..\..\..\..\..\MapEditorCommonSrc\MapEditorOneSetting.cpp"
 				>
 			</File>
 			<File
-				RelativePath="..\..\..\..\..\MapEditorOne\src\MapEditorOneSetting.h"
+				RelativePath="..\..\..\..\..\MapEditorCommonSrc\MapEditorOneSetting.h"
 				>
 			</File>
+		</Filter>
+		<Filter
+			Name="Dialogues"
+			>
+			<Filter
+				Name="headers"
+				>
+				<File
+					RelativePath="..\..\..\..\src\AnnotationDialog.h"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\..\src\ColorCustomizeDialog.h"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\..\src\EditorPreferencesDialog.h"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\..\src\HeightDialog.h"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\..\src\HeightPalletDialog.h"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\..\src\LevelInfoDialog.h"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\..\src\LinePropDialog.h"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\..\src\ObjectPropDialog.h"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\..\src\PlatformDialog.h"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\..\src\PointPropDialog.h"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\..\src\PolygonPropDialog.h"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\..\src\PolygonTypeDialog.h"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\..\src\SelectLevelDialog.h"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\..\src\SidePropDialog.h"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\..\src\TextureDialog.h"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\..\src\ToolDialog.h"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\..\src\VisualDialog.h"
+					>
+				</File>
+			</Filter>
+			<Filter
+				Name="src"
+				>
+				<File
+					RelativePath="..\..\..\..\src\AnnotationDialog.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\..\src\ColorCustomizeDialog.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\..\src\EditorPreferencesDialog.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\..\src\HeightDialog.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\..\src\HeightPalletDialog.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\..\src\LevelInfoDialog.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\..\src\LinePropDialog.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\..\src\ObjectPropDialog.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\..\src\PlatformDialog.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\..\src\PointPropDialog.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\..\src\PolygonPropDialog.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\..\src\PolygonTypeDialog.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\..\src\SelectLevelDialog.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\..\src\SidePropDialog.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\..\src\TextureDialog.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\..\src\ToolDialog.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\..\src\VisualDialog.cpp"
+					>
+				</File>
+			</Filter>
 		</Filter>
 		<File
 			RelativePath="..\..\..\..\WXTODOƒŠƒXƒg.txt"
