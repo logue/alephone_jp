@@ -24,6 +24,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 #include <wx/dcbuffer.h>
 #include <wx/bmpbuttn.h>
 #include <wx/sizer.h>
+#include <wx/cursor.h>
 
 #ifdef __BORLANDC__
 #pragma hdrstop
@@ -47,6 +48,8 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 #include <string>
 
 static wxString TITLE_TEXT_BASE = wxString(_T("Map Editor One"));
+
+class MapEditorMainFrame;
 
 //選択したものの種類
 enum{
@@ -179,6 +182,12 @@ private:
     //ポリゴンを高さ順に表示する際の順番
     //TODO poly height order
     std::vector<int> polygonDrawOrderByHeight;
+
+    //ツールごとのカーソル
+    wxCursor cursors[ToolType::NUMBER_OF_TOOLS];
+
+    //ウインドウフレーム
+    MapEditorMainFrame *frame;
 public:
     ///////////////////////////////////
     ///////////////////////////////////

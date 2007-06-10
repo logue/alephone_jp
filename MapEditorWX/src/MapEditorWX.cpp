@@ -21,7 +21,7 @@ bool MapEditorWX::OnInit()
     }
 
     //ウインドウフレームを生成します
-    MapEditorMainFrame *frame = new MapEditorMainFrame(
+    frame = new MapEditorMainFrame(
         TITLE_TEXT_BASE,
         wxPoint(WINDOW_DEFAULT_X, WINDOW_DEFAULT_Y), wxSize(WINDOW_DEFAULT_WIDTH, WINDOW_DEFAULT_HEIGHT));
     frame->Show(true);
@@ -133,6 +133,51 @@ bool MapEditorWX::initialize()
 
     //TODO textureBitmaps
 
+    /*
+        TI_ARROW = 0,
+        TI_FILL,
+        TI_HAND,
+        TI_LINE,
+        TI_MAGNIFY,
+        TI_SKULL,
+        TI_TEXT,
+        TI_POLYGON,
+    */
+    char CURSOR_BASE_DIR[] = "data/img/";
+    char *cursorSkull = "cursor2.cur";
+    char *cursorPolygon = "cur00004.cur";
+    int cursorId[] ={
+        wxCURSOR_ARROW,
+        wxCURSOR_PAINT_BRUSH,
+        wxCURSOR_HAND,
+        wxCURSOR_PENCIL,
+        wxCURSOR_MAGNIFIER,
+        -1,
+        wxCURSOR_IBEAM,
+        -1
+    };
+    //カーソルデータ読み込み
+    for(int i = 0; i < ToolType::NUMBER_OF_TOOLS; i ++){
+        if(cursorId[i] != -1){
+            cursors[i] = wxCursor(cursorId[i]);
+        }else{
+            //ファイルパス
+            char* fname;
+            if(i == ToolType::TI_SKULL){
+                fname = cursorSkull;
+            }else if(i == ToolType::TI_POLYGON){
+                fname = cursorPolygon;
+            }
+            wxString path = wxConvCurrent->cMB2WX(CURSOR_BASE_DIR);
+            wxString pathF = wxConvCurrent->cMB2WX(fname);
+            path.Append(pathF);
+            //読み込み
+            wxImage bmp;
+            bmp.LoadFile(path, wxBITMAP_TYPE_CUR);
+            //カーソル設定
+            cursors[i] = wxCursor(bmp);
+        }
+    }
     return true;
 }
 
@@ -235,5 +280,11 @@ void MapEditorWX::loadBitmap(const char* fname, wxBitmap* bitmap)
 */
 void MapEditorWX::setCursor()
 {
-    //TODO カーソル
+    int editMode = this->getEventManager()->getEditModeType();
+    if(editMode == EditModeType::EM_DRAW){
+        int toolType = this->getEventManager()->getToolType();
+        //TODO カーソル
+        ::wxSetCursor(cursors[toolType]);
+    }else{
+    }
 }

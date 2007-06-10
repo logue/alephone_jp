@@ -35,10 +35,6 @@ ToolDialog::ToolDialog():wxDialog()
         }
     }
 
-    wxBitmapButton *bmpBtn = new wxBitmapButton(this, -1, toolBitmaps[0]);
-    wxGridSizer *boxSizer = new wxGridSizer(2);
-    this->SetSizer(boxSizer);
-    boxSizer->Add(bmpBtn);
 }
 ToolDialog::~ToolDialog()
 {
@@ -48,18 +44,23 @@ bool ToolDialog::Create(wxWindow* parent, wxWindowID id, const wxString& title)
 {
     //wxTHICK_FRAME wxSTAY_ON_TOP
     long style = wxCAPTION;
-    return wxDialog::Create(parent, id, title, wxDefaultPosition,
-        wxSize(TOOL_DIALOG_W, TOOL_DIALOG_H), style);
+    bool result = wxDialog::Create(parent, id, title, wxDefaultPosition//);
+    ,        wxSize(TOOL_DIALOG_W, TOOL_DIALOG_H), style);
+/*    wxBitmapButton *bmpBtn = new wxBitmapButton(this, -1, toolBitmaps[0]);
+    wxGridSizer *boxSizer = new wxGridSizer(2);
+    this->SetSizer(boxSizer);
+    boxSizer->Add(bmpBtn);
+*/
+    return result;
 }
 
 //paint
 void ToolDialog::OnPaint(wxPaintEvent& ev)
 {
-
     //ツールアイコン表示
     wxPaintDC dc(this);
     PrepareDC(dc);
-return ;
+
     for(int i = 0; i < ToolType::NUMBER_OF_TOOLS; i ++){
 #ifdef MAP_VIEWER
         //マップビューアー仕様
