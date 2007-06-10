@@ -32,6 +32,7 @@ const int LINE_DISTANCE_EPSILON = 5;
 const int NUMBER_OF_OBJECT_FLAGS = 6;
 const int NUMBER_OF_MISSION_TYPES = 6;
 const int NUMBER_OF_ENV_TYPES = 7;
+
 enum
 {
     MI_CenterX = 0,

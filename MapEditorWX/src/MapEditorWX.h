@@ -23,6 +23,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 #include <wx/bitmap.h>
 #include <wx/dcbuffer.h>
 #include <wx/bmpbuttn.h>
+#include <wx/sizer.h>
 
 #ifdef __BORLANDC__
 #pragma hdrstop

@@ -35,8 +35,10 @@ ToolDialog::ToolDialog():wxDialog()
         }
     }
 
-    //wxBitmapButton *bmpBtn = new wxBitmapButton(this, -1, toolBitmaps[0]);
-    //this->AddChild(bmpBtn);
+    wxBitmapButton *bmpBtn = new wxBitmapButton(this, -1, toolBitmaps[0]);
+    wxGridSizer *boxSizer = new wxGridSizer(2);
+    this->SetSizer(boxSizer);
+    boxSizer->Add(bmpBtn);
 }
 ToolDialog::~ToolDialog()
 {
@@ -57,7 +59,7 @@ void ToolDialog::OnPaint(wxPaintEvent& ev)
     //ツールアイコン表示
     wxPaintDC dc(this);
     PrepareDC(dc);
-
+return ;
     for(int i = 0; i < ToolType::NUMBER_OF_TOOLS; i ++){
 #ifdef MAP_VIEWER
         //マップビューアー仕様

@@ -4,6 +4,9 @@
 /**
     マップデータの表示
 */
+/**
+    背景の描画 <en> draw background 
+*/
 void MapEditorMainFrame::drawBackground(wxDC* dc)
 {
     wxSize size = wxFrame::GetClientSize();
@@ -165,4 +168,5 @@ void MapEditorMainFrame::drawPoints(wxDC* dc)
 }
 void MapEditorMainFrame::drawObjects(wxDC* dc)
 {
+
 }

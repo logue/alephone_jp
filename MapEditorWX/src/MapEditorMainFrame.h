@@ -92,6 +92,28 @@ private:
     //ポリゴン選択網掛けブラシ
     wxBrush polySelNetBrush;
 
+    //アイテムビットマップ
+    wxBitmap itemBitmaps[NUMBER_OF_DEFINED_ITEMS];
+    //マップ要素ビットマップ（特殊）
+    wxBitmap mapItemBitmaps[NUMBER_OF_MAP_ICONS];
+    //
+//    wxBitmap 
+    //モンスターペン
+    wxPen monsterPen;
+    wxPen selectedMonsterPen;
+    wxBrush monsterBrush;
+    wxBrush selectedMonsterBrush;
+    //プレイヤーペン・ブラシ
+    wxPen playerPen;
+    wxPen selectedPlayerPen;
+    wxBrush playerBrush;
+    wxBrush selectedPlayerBrush;
+    //味方ペン・ブラシ <en> ally
+    wxPen allyPen;
+    wxPen selectedAllyPen;
+    wxBrush allyBrush;
+    wxBrush selectedAllyBrush;
+
 public:
     MapEditorMainFrame(const wxString& title,
         const wxPoint& pos = wxDefaultPosition,
