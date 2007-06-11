@@ -119,7 +119,7 @@
 				Name="VCCLCompilerTool"
 				Optimization="0"
 				AdditionalIncludeDirectories="..\..\..\..\..\AlephOneSrc;..\..\..\..\..\..\marathon;..\..\..\..\..\MapEditorCommonSrc"
-				PreprocessorDefinitions="WIN32;_DEBUG;_WINDOWS;SDL;__WIN32__;WXUSINGDLL;__WXMSW__;__WXDEBUG__;wxUSE_UNICODE;UNICODE;WX"
+				PreprocessorDefinitions="WIN32;_DEBUG;_WINDOWS;SDL;__WIN32__;__WXMSW__;__WXDEBUG__;wxUSE_UNICODE;UNICODE;WX"
 				MinimalRebuild="TRUE"
 				BasicRuntimeChecks="3"
 				RuntimeLibrary="3"
@@ -131,10 +131,62 @@
 				Name="VCCustomBuildTool"/>
 			<Tool
 				Name="VCLinkerTool"
-				AdditionalDependencies="SDL.lib ..\..\..\..\..\AlephOneSrc\lib\AlephOneSrc2007D.lib wxbase28ud.lib wxmsw28ud_core.lib"
+				AdditionalDependencies="SDL.lib ..\..\..\..\..\AlephOneSrc\lib\AlephOneSrc2007D.lib wxmsw28ud_richtext.lib wxmsw28ud_aui.lib wxmsw28ud_core.lib wxbase28ud.lib wxtiffd.lib wxjpegd.lib wxpngd.lib wxzlibd.lib wxregexud.lib wxmsw28ud_adv.lib wxmsw28ud_html.lib wxmsw28ud_xrc.lib wxbase28ud_net.lib wxbase28ud_xml.lib wxexpatd.lib"
 				OutputFile="$(OutDir)/MapEditorWX2007DU.exe"
 				LinkIncremental="2"
-				AdditionalLibraryDirectories="..\..\..\..\..\lib\win\wx\wxvc71\debug"
+				AdditionalLibraryDirectories="..\..\..\..\..\lib\win\wx\wxvc71\debug\vc_lib"
+				GenerateDebugInformation="TRUE"
+				ProgramDatabaseFile="$(OutDir)/MapEditorWX.pdb"
+				SubSystem="2"
+				TargetMachine="1"/>
+			<Tool
+				Name="VCMIDLTool"/>
+			<Tool
+				Name="VCPostBuildEventTool"/>
+			<Tool
+				Name="VCPreBuildEventTool"/>
+			<Tool
+				Name="VCPreLinkEventTool"/>
+			<Tool
+				Name="VCResourceCompilerTool"/>
+			<Tool
+				Name="VCWebServiceProxyGeneratorTool"/>
+			<Tool
+				Name="VCXMLDataGeneratorTool"/>
+			<Tool
+				Name="VCWebDeploymentTool"/>
+			<Tool
+				Name="VCManagedWrapperGeneratorTool"/>
+			<Tool
+				Name="VCAuxiliaryManagedWrapperGeneratorTool"/>
+		</Configuration>
+		<Configuration
+			Name="Debug Unicode DLL|Win32"
+			OutputDirectory="$(ConfigurationName)"
+			IntermediateDirectory="$(ConfigurationName)"
+			ConfigurationType="1"
+			UseOfMFC="0"
+			CharacterSet="1">
+			<Tool
+				Name="VCCLCompilerTool"
+				Optimization="0"
+				AdditionalIncludeDirectories="..\..\..\..\..\AlephOneSrc;..\..\..\..\..\..\marathon;..\..\..\..\..\MapEditorCommonSrc"
+				PreprocessorDefinitions="WIN32;_DEBUG;_WINDOWS;SDL;__WIN32__;__WXMSW__;__WXDEBUG__;wxUSE_UNICODE;UNICODE;WX;WXUSINGDLL"
+				MinimalRebuild="TRUE"
+				BasicRuntimeChecks="3"
+				RuntimeLibrary="3"
+				UsePrecompiledHeader="0"
+				WarningLevel="3"
+				Detect64BitPortabilityProblems="TRUE"
+				DebugInformationFormat="4"/>
+			<Tool
+				Name="VCCustomBuildTool"/>
+			<Tool
+				Name="VCLinkerTool"
+				AdditionalDependencies="SDL.lib ..\..\..\..\..\AlephOneSrc\lib\AlephOneSrc2007D.lib wxmsw28ud_core.lib wxbase28ud.lib"
+				OutputFile="$(OutDir)/MapEditorWX2007DU.exe"
+				LinkIncremental="2"
+				AdditionalLibraryDirectories="..\..\..\..\..\lib\win\wx\wxvc71\debug\vc_dll"
 				GenerateDebugInformation="TRUE"
 				ProgramDatabaseFile="$(OutDir)/MapEditorWX.pdb"
 				SubSystem="2"
@@ -173,6 +225,9 @@
 			</File>
 			<File
 				RelativePath="..\..\..\..\src\MainFrameEvent.cpp">
+			</File>
+			<File
+				RelativePath="..\..\..\..\src\MainFrameMenuEvent.cpp">
 			</File>
 			<File
 				RelativePath="..\..\..\..\src\MapEditorMainFrame.cpp">
