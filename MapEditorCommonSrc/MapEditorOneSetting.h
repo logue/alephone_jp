@@ -47,8 +47,8 @@ static char* LOG_FILE_NAME = "log.txt";
 static char* POLYGON_SELECT_STLIPPLE_BITMAP_FILE_PATH = "data/img/bmp00005.bmp";
 
 //ツールダイアログのサイズ
-const int TOOL_DIALOG_W = 75;
-const int TOOL_DIALOG_H = 100;
+const int TOOL_DIALOG_W = 50;
+const int TOOL_DIALOG_H = 150;
 
 //ツールパレット
 static char *TOOL_BAR_ICONS_DIR_NAMR = "Toolbar/";

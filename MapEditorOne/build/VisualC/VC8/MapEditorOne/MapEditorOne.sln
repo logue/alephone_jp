@@ -11,6 +11,9 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "MapEditorOneWX", "..\..\..\
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug Unicode DLL|Any CPU = Debug Unicode DLL|Any CPU
+		Debug Unicode DLL|Mixed Platforms = Debug Unicode DLL|Mixed Platforms
+		Debug Unicode DLL|Win32 = Debug Unicode DLL|Win32
 		Debug Unicode|Any CPU = Debug Unicode|Any CPU
 		Debug Unicode|Mixed Platforms = Debug Unicode|Mixed Platforms
 		Debug Unicode|Win32 = Debug Unicode|Win32
@@ -22,6 +25,11 @@ Global
 		Release|Win32 = Release|Win32
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{5AB9FF71-670A-4C43-9F65-75678796DE1B}.Debug Unicode DLL|Any CPU.ActiveCfg = Debug Unicode DLL|Win32
+		{5AB9FF71-670A-4C43-9F65-75678796DE1B}.Debug Unicode DLL|Mixed Platforms.ActiveCfg = Debug Unicode DLL|Win32
+		{5AB9FF71-670A-4C43-9F65-75678796DE1B}.Debug Unicode DLL|Mixed Platforms.Build.0 = Debug Unicode DLL|Win32
+		{5AB9FF71-670A-4C43-9F65-75678796DE1B}.Debug Unicode DLL|Win32.ActiveCfg = Debug Unicode DLL|Win32
+		{5AB9FF71-670A-4C43-9F65-75678796DE1B}.Debug Unicode DLL|Win32.Build.0 = Debug Unicode DLL|Win32
 		{5AB9FF71-670A-4C43-9F65-75678796DE1B}.Debug Unicode|Any CPU.ActiveCfg = Debug Unicode|Win32
 		{5AB9FF71-670A-4C43-9F65-75678796DE1B}.Debug Unicode|Mixed Platforms.ActiveCfg = Debug Unicode|Win32
 		{5AB9FF71-670A-4C43-9F65-75678796DE1B}.Debug Unicode|Mixed Platforms.Build.0 = Debug Unicode|Win32
@@ -37,6 +45,11 @@ Global
 		{5AB9FF71-670A-4C43-9F65-75678796DE1B}.Release|Mixed Platforms.Build.0 = Release|Win32
 		{5AB9FF71-670A-4C43-9F65-75678796DE1B}.Release|Win32.ActiveCfg = Release|Win32
 		{5AB9FF71-670A-4C43-9F65-75678796DE1B}.Release|Win32.Build.0 = Release|Win32
+		{9379CC7E-20EB-47D8-9B66-3BA56EA651CE}.Debug Unicode DLL|Any CPU.ActiveCfg = Debug Unicode DLL|Win32
+		{9379CC7E-20EB-47D8-9B66-3BA56EA651CE}.Debug Unicode DLL|Mixed Platforms.ActiveCfg = Debug Unicode DLL|Win32
+		{9379CC7E-20EB-47D8-9B66-3BA56EA651CE}.Debug Unicode DLL|Mixed Platforms.Build.0 = Debug Unicode DLL|Win32
+		{9379CC7E-20EB-47D8-9B66-3BA56EA651CE}.Debug Unicode DLL|Win32.ActiveCfg = Debug Unicode DLL|Win32
+		{9379CC7E-20EB-47D8-9B66-3BA56EA651CE}.Debug Unicode DLL|Win32.Build.0 = Debug Unicode DLL|Win32
 		{9379CC7E-20EB-47D8-9B66-3BA56EA651CE}.Debug Unicode|Any CPU.ActiveCfg = Debug Unicode|Win32
 		{9379CC7E-20EB-47D8-9B66-3BA56EA651CE}.Debug Unicode|Mixed Platforms.ActiveCfg = Debug Unicode|Win32
 		{9379CC7E-20EB-47D8-9B66-3BA56EA651CE}.Debug Unicode|Mixed Platforms.Build.0 = Debug Unicode|Win32
@@ -52,6 +65,11 @@ Global
 		{9379CC7E-20EB-47D8-9B66-3BA56EA651CE}.Release|Mixed Platforms.Build.0 = Release|Win32
 		{9379CC7E-20EB-47D8-9B66-3BA56EA651CE}.Release|Win32.ActiveCfg = Release|Win32
 		{9379CC7E-20EB-47D8-9B66-3BA56EA651CE}.Release|Win32.Build.0 = Release|Win32
+		{46D1F0C8-3CD4-4C13-BC91-8FB454D3E632}.Debug Unicode DLL|Any CPU.ActiveCfg = Debug Unicode DLL|Win32
+		{46D1F0C8-3CD4-4C13-BC91-8FB454D3E632}.Debug Unicode DLL|Mixed Platforms.ActiveCfg = Debug Unicode DLL|Win32
+		{46D1F0C8-3CD4-4C13-BC91-8FB454D3E632}.Debug Unicode DLL|Mixed Platforms.Build.0 = Debug Unicode DLL|Win32
+		{46D1F0C8-3CD4-4C13-BC91-8FB454D3E632}.Debug Unicode DLL|Win32.ActiveCfg = Debug Unicode DLL|Win32
+		{46D1F0C8-3CD4-4C13-BC91-8FB454D3E632}.Debug Unicode DLL|Win32.Build.0 = Debug Unicode DLL|Win32
 		{46D1F0C8-3CD4-4C13-BC91-8FB454D3E632}.Debug Unicode|Any CPU.ActiveCfg = Debug Unicode|Win32
 		{46D1F0C8-3CD4-4C13-BC91-8FB454D3E632}.Debug Unicode|Mixed Platforms.ActiveCfg = Debug Unicode|Win32
 		{46D1F0C8-3CD4-4C13-BC91-8FB454D3E632}.Debug Unicode|Mixed Platforms.Build.0 = Debug Unicode|Win32
@@ -67,6 +85,11 @@ Global
 		{46D1F0C8-3CD4-4C13-BC91-8FB454D3E632}.Release|Mixed Platforms.Build.0 = Release|Win32
 		{46D1F0C8-3CD4-4C13-BC91-8FB454D3E632}.Release|Win32.ActiveCfg = Release|Win32
 		{46D1F0C8-3CD4-4C13-BC91-8FB454D3E632}.Release|Win32.Build.0 = Release|Win32
+		{BEE766B1-7B73-4CBE-9DBB-17E850A66564}.Debug Unicode DLL|Any CPU.ActiveCfg = Debug Unicode DLL|Win32
+		{BEE766B1-7B73-4CBE-9DBB-17E850A66564}.Debug Unicode DLL|Mixed Platforms.ActiveCfg = Debug Unicode DLL|Win32
+		{BEE766B1-7B73-4CBE-9DBB-17E850A66564}.Debug Unicode DLL|Mixed Platforms.Build.0 = Debug Unicode DLL|Win32
+		{BEE766B1-7B73-4CBE-9DBB-17E850A66564}.Debug Unicode DLL|Win32.ActiveCfg = Debug Unicode DLL|Win32
+		{BEE766B1-7B73-4CBE-9DBB-17E850A66564}.Debug Unicode DLL|Win32.Build.0 = Debug Unicode DLL|Win32
 		{BEE766B1-7B73-4CBE-9DBB-17E850A66564}.Debug Unicode|Any CPU.ActiveCfg = Debug Unicode|Win32
 		{BEE766B1-7B73-4CBE-9DBB-17E850A66564}.Debug Unicode|Mixed Platforms.ActiveCfg = Debug Unicode|Win32
 		{BEE766B1-7B73-4CBE-9DBB-17E850A66564}.Debug Unicode|Mixed Platforms.Build.0 = Debug Unicode|Win32
