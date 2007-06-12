@@ -168,5 +168,22 @@ void MapEditorMainFrame::drawPoints(wxDC* dc)
 }
 void MapEditorMainFrame::drawObjects(wxDC* dc)
 {
+}
+void MapEditorMainFrame::drawAnnotations(wxDC* dc)
+{
+    wxColor oldCol = dc->GetTextForeground();
+    wxColor col(wxGetApp().setting.getColorSetting()->strings[0],
+                wxGetApp().setting.getColorSetting()->strings[1],
+                wxGetApp().setting.getColorSetting()->strings[2]);
+    dc->SetTextForeground(col);
+    for(int i = 0; i < (int)MapAnnotationList.size(); i ++){
+        map_annotation *annotation = &MapAnnotationList[i];
+        int drawPoint[2];
+        wxGetApp().getViewPointFromWorldPoint(annotation->location, drawPoint);
 
+        //
+        wxString str(wxConvCurrent->cMB2WX(annotation->text));
+        dc->DrawText(str, drawPoint[0], drawPoint[1]);
+    }
+    dc->SetTextForeground(oldCol);
 }

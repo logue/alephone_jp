@@ -247,6 +247,9 @@ void MapEditorMainFrame::OnPaint(wxPaintEvent& WXUNUSED(event))
         }
     }
     
+    //アノテーション
+    this->drawAnnotations(drawDC);
+
     //バッファから画面へコピー
     dc.Blit(wxPoint(0,0), size,
         drawDC,

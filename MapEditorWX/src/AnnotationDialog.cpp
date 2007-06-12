@@ -3,17 +3,22 @@
 
 //EVT_BUTTON(id, func)
 BEGIN_EVENT_TABLE(AnnotationDialog, wxDialog)
+//EVT_BUTTON(, func)
+    //チェックボックス変更
+    EVT_BUTTON(wxID_OK, AnnotationDialog::OnOk)
+    EVT_BUTTON(wxID_CANCEL, AnnotationDialog::OnCancel)
 END_EVENT_TABLE()
 
 enum{
-    ID_ANNOTATION_TEXT_AREA = 1000,
+    ID_ANNOTATION_TEXT_AREA = 0,
     ID_ANNOTATION_CHECK_BOX,
-
+    
 };
 
-AnnotationDialog::AnnotationDialog()
+AnnotationDialog::AnnotationDialog():wxDialog()
 {
 }
+
 AnnotationDialog::~AnnotationDialog()
 {
 }
@@ -26,13 +31,22 @@ bool AnnotationDialog::Create(wxWindow* parent, wxWindowID id, const wxString& t
     wxBoxSizer* boxSizer = new wxBoxSizer(wxVERTICAL);
     this->SetSizer(boxSizer);
 
+    //タイプ選択
+    //横置きサイザー
+    wxBoxSizer* typeBox = new wxBoxSizer(wxHORIZONTAL);
+        //スタティックテキスト
+        wxStaticText* typeSt = new wxStaticText(_T("Type"));
+        //チョイス
+
     //テキストボックス
-    wxTextCtrl* textArea = new wxTextCtrl(this, ID_ANNOTATION_TEXT_AREA);
+    this->textArea = new wxTextCtrl(this, ID_ANNOTATION_TEXT_AREA);
     boxSizer->Add(textArea);
 
-    //チェックボックス
-    wxCheckBox* check = new wxCheckBox(this, ID_ANNOTATION_CHECK_BOX);
-    boxSizer->Add(check);
+    //依存ポリゴン指定
+    //最後にNONEを付加
 
+    //OKボタン
+    boxSizer->Add(new wxButton(_T("OK")));
+    boxSizer->Add(new wxButton(_T("Cancel")));
     return result;
 }

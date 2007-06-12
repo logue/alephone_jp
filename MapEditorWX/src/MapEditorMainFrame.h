@@ -211,6 +211,7 @@ private:
     void drawSides(wxDC* dc);
     void drawPoints(wxDC* dc);
     void drawObjects(wxDC* dc);
+    void drawAnnotations(wxDC* dc);
 
     //////////////////////////////////
     // 名称規定：doLButtonOn[編集モード名]
