@@ -301,5 +301,24 @@ void MapEditorMainFrame::setupPenAndBrush(ColorSettings* setting)
     wxGetApp().loadBitmap(POLYGON_SELECT_STLIPPLE_BITMAP_FILE_PATH, &bmp);
     this->polySelNetBrush = wxBrush(bmp);
 
+    //オブジェクトカラー
+    //プレイヤーペン(yellow)
+    this->playerPen.SetColour(wxColor(255,255,0));
+    this->playerBrush.SetColour(wxColor(255,255,0));
+    //選択プレイヤー
+    this->selectedPlayerPen.SetColour(wxColor(255,0,255));
+    this->selectedPlayerBrush.SetColour(wxColor(255,0,255));
+    //味方
+    this->allyPen.SetColour(wxColor(0,0,255));
+    this->allyBrush.SetColour(wxColor(0,0,255));
+    //選択味方
+    this->selectedAllyPen.SetColour(wxColor(100,0,255));
+    this->selectedAllyBrush.SetColour(wxColor(100,0,255));
+    //モンスター
+    this->monsterPen.SetColour(wxColor(255,0,0));
+    this->monsterBrush.SetColour(wxColor(255,0,0));
+    //選択モンスター
+    this->selectedMonsterPen.SetColour(wxColor(0,255,0));
+    this->selectedMonsterBrush.SetColour(wxColor(0,255,0));
 }
 

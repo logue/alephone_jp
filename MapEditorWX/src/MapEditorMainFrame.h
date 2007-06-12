@@ -52,11 +52,21 @@ enum
     ID_TerminalViewer,
 };  
 
+//リソースID
+enum{
+    ID_ANNOTATION_DIALOG,
+
+};
+
 /**
     editor's main frame
 */
 class MapEditorMainFrame: public wxFrame
 {
+public:
+    //ToolDialog・this(オブジェクト選択)が呼び出す
+    ObjectPropDialog objectPropDialog;
+
 private:
     //ダブルバッファリング用Bitmap
     wxBitmap doubleBufferingBitmap;
@@ -66,13 +76,12 @@ private:
     /////////////////////
     //ダイアログ(モードレス)
     ToolDialog toolDialog;
-    //TODO ObjectPropDialog objectPropDialog
-    //TODO PolygonTypeDialog polyTypeDialog
-    //TODO HeightDialog heightDialog
-    //TODO PolyPropDialog polyPropDialog
-    //TODO PointPropDialog pointPropDialog
-    //TODO LinePropDialog linePropDialog
-    //TODO TextureDialog textureDialog
+    PolygonTypeDialog polyTypeDialog
+    HeightDialog heightDialog
+    PolyPropDialog polyPropDialog
+    PointPropDialog pointPropDialog
+    LinePropDialog linePropDialog
+    TextureDialog textureDialog
 
     //TODO モーダルだが、Side選択ダイアログも作ろう
     //TODO JumpLevel, LevelInfo, Placements, TerminalViewer
@@ -179,6 +188,7 @@ public:
     //ダブルバッファリング時の背景削除停止用<en>to disable erasing backgroud for double buffering
     void OnEraseBackground(wxEraseEvent& ev);
 
+    //
     //イベントテーブル作成<en>declare
     DECLARE_EVENT_TABLE()
 
@@ -270,4 +280,5 @@ private:
         @param setting カラー設定データ <en> setting data for color
     */
     void setupPenAndBrush(ColorSettings* setting);
+
 };

@@ -1,4 +1,5 @@
 #include "MapEditorMainFrame.h"
+#include "AnnotationDialog.h"
 
 ////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////
@@ -50,9 +51,31 @@ void MapEditorMainFrame::OnLeftDown(wxMouseEvent &ev)
 }
 void MapEditorMainFrame::doLButtonOnDrawMode(wxMouseEvent& ev)
 {
+    int tool = wxGetApp().getEventManager()->getToolType();
+    switch(tool){
+    case ToolType::TI_ARROW:
+        break;
+    case ToolType::TI_FILL:
+        break;
+    case ToolType::TI_HAND:
+        break;
+    case ToolType::TI_LINE:
+        break;
+    case ToolType::TI_MAGNIFY:
+        break;
+    case ToolType::TI_SKULL:
+        break;
+    case ToolType::TI_TEXT:
+        break;
+    case ToolType::TI_POLYGON:
+        break;
+    default:
+        hpl::error::halt("Invalid tool type");
+    }
 }
 void MapEditorMainFrame::doLButtonOnArrowTool(wxMouseEvent& ev)
 {
+    //選択
 }
 void MapEditorMainFrame::doLButtonOnFillTool(wxMouseEvent& ev)
 {
@@ -71,6 +94,30 @@ void MapEditorMainFrame::doLButtonOnSkullTool(wxMouseEvent& ev)
 }
 void MapEditorMainFrame::doLButtonOnTextTool(wxMouseEvent& ev)
 {
+    //アノテーション追加
+    //ダイアログ準備
+    AnnotationDialog dlg;
+    map_annotation sample;
+    //初期化
+    memset(&sample, 0, SIZEOF_map_annotation);
+
+    //マウス座標の位置に追加する
+    int viewX = ev.m_x;
+    int viewY = ev.m_y;
+    world_point2d wpoint = wxGetApp().getWorldPointFromViewPoint(viewX, viewY);
+    sample.location.x = wpoint.x;
+    sample.location.y = wpoint.y;
+    sample.polygon_index = NONE;
+
+    //ダイアログ表示
+    dlg.Create(this, ID_ANNOTATION_DIALOG, annotation);
+    if(dlg.ShowModal() == wxID_OK){
+        //決定
+        //アノテーションデータを取得
+        map_annotation annotation = dlg.getAnnotation();
+        //追加
+        hpl::aleph::map::addAnnotation(annotation);
+    }
 }
 void MapEditorMainFrame::doLButtonOnPolygonTool(wxMouseEvent& ev)
 {

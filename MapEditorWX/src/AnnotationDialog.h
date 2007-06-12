@@ -42,12 +42,14 @@ private:
     wxTextCtrl* viewX;
     wxTextCtrl* viewY;
 
+    //ポリゴン依存
+    wxChoice* polyChoice;
 public:
     AnnotationDialog();
     /**
         @param annotation 選択したアノテーションデータ、あるいは新規作成の位置＆ポリゴン番号
     */
-    bool Create(wxWindow* parent, wxWindowID id, const wxString& title,
+    bool Create(wxWindow* parent, wxWindowID id,
         map_annotation& annotation);
 
     virtual ~AnnotationDialog();

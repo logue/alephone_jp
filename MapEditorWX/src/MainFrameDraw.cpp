@@ -1,5 +1,8 @@
 #include "MapEditorMainFrame.h"
 
+const double ROUND_DEGREE = 360.0;
+const double OBJECT_TRIANGLE_LENGTH = 10.0;
+const double OBJECT_TRIANGLE_WING_DEGREE = 120.0;
 
 /**
     マップデータの表示
@@ -168,6 +171,106 @@ void MapEditorMainFrame::drawPoints(wxDC* dc)
 }
 void MapEditorMainFrame::drawObjects(wxDC* dc)
 {
+    wxPoint points[3];
+    //高さ制限
+    int zMin = wxGetApp().getViewGridManager()->getViewHeightMin();
+    int zMax = wxGetApp().getViewGridManager()->getViewHeightMax();
+
+    for(int i = 0; i < (int)SavedObjectList.size(); i ++){
+        map_object* obj = &(SavedObjectList[i]);
+
+        int type = obj->type;
+        int index = obj->index;
+
+        int facing = obj->facing;
+    
+        int x = obj->location.x;
+        int y = obj->location.y;
+        int z = obj->location.z;
+
+        //check height
+        //高さ制限の範囲外なら表示しない
+        if(z < zMin || z > zMax){
+            continue;
+        }
+
+        int vpoing[2];
+        world_point2d wpoint = {x,y};
+        wxGetApp().getViewPointFromWorldPoint(wpoint, vpoint);
+
+        //選択状態をチェック
+        bool select = false;
+        if(wxGetApp().selectData.isSelected() &&
+            wxGetApp().selectData.containsObject(i)){
+                select = true;
+        }
+        if(type == _saved_monster || type == _saved_player){
+            //三角形を描く
+            if(type == _saved_monster){
+                //モンスター
+                if(index >= _civilian_crew &&
+					index <= _civilian_security ||
+					index >= _civilian_fusion_crew &&
+					index <= _civilian_fusion_security)
+                {
+                    //ボブ
+                    if(select){
+                        dc->SetPen(this->selectedAllyPen);
+                        dc->SetBrush(this->selectedAllyBrush);
+                    }else{
+                        dc->SetPen(this->allyPen);
+                        dc->SetBrush(this->allyBrush);
+                    }
+                }else{
+                    //moonster
+                    if(select){
+                        dc->SetPen(this->selectedMonsterPen);
+                        dc->SetBrush(this->selectedMonsterBrush);
+                    }else{
+                        dc->SetPen(this->monsterPen);
+                        dc->SetBrush(this->monsterBrush);
+                    }
+                }
+
+            }else{
+                //player
+                if(select){
+                    dc->SetPen(this->selectedPlayerPen);
+                    dc->SetBrush(this->selectedPlayerBrush);
+                }else{
+                    dc->SetPen(this->playerPen);
+                    dc->SetBrush(this->playerBrush);
+                }
+            }
+
+            double deg = (double)facing / (1<<ANGULAR_BITS) * ROUND_DEGREE;
+            double rad = hpl::math::getRadianFromDegree(deg);
+            double rad1 = hpl::math::getRadianFromDegree(deg + OBJECT_TRIANGLE_WING_DEGREE);
+            double rad2 = hpl::math::getRadianFromDegree(deg - OBJECT_TRIANGLE_WING_DEGREE);
+
+            //三角形を描く
+            points[0].x = vpoint[0] + (int)(OBJECT_TRIANGLE_LENGTH * cos(rad));
+            points[0].y = vpoint[1] + (int)(OBJECT_TRIANGLE_LENGTH * sin(rad));
+            points[1].x = vpoint[0] + (int)(OBJECT_TRIANGLE_LENGTH / 2.0 * cos(rad1));
+            points[1].y = vpoint[1] + (int)(OBJECT_TRIANGLE_LENGTH / 2.0 * sin(rad1));
+            points[2].x = vpoint[0] + (int)(OBJECT_TRIANGLE_LENGTH / 2.0 * cos(rad2));
+            points[2].y = vpoint[1] + (int)(OBJECT_TRIANGLE_LENGTH / 2.0 * sin(rad2));
+            dc->DrawPolygon(3. points);
+
+        }else{
+            //
+            //ビットマップ表示
+            case _saved_item:
+                break;
+            case _saved_object:
+                //scenery
+                break;
+            case _saved_goal:
+                break;
+            default:
+            //sound
+        }
+    }
 }
 void MapEditorMainFrame::drawAnnotations(wxDC* dc)
 {

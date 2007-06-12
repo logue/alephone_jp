@@ -43,6 +43,23 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
 //dialogues
 #include "ToolDialog.h"
+#include "AnnotationDialog.h"
+#include "ColorCustomizeDialog.h"
+#include "EditorPreferencesDialog.h"
+#include "HeightDialog.h"
+#include "HeightPalletDialog.h"
+#include "LevelInfoDialog.h"
+#include "LinePropDialog.h"
+#include "ObjectPropDialog.h"
+#include "PlatformDialog.h"
+#include "PointPropDialog.h"
+#include "PolygonNumDialog.h"
+#include "PolygonPropDialog.h"
+#include "PolygonTypeDialog.h"
+#include "SelectLevelDialog.h"
+#include "SidePropDialog.h"
+#include "TextureDialog.h"
+#include "VisualDialog.h"
 
 #include <vector>
 #include <string>

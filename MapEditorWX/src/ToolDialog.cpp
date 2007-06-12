@@ -99,11 +99,13 @@ void ToolDialog::OnLeftDown(wxMouseEvent& ev)
                 //オブジェクトツール
                 //プロパティを表示する
                 //TODO wxGetApp().objectPropDialog.Show();
+
             }else if(i == ToolType::TI_POLYGON){
                 //ポリゴンツール
                 //規定のポリゴン追加ツール
                 //TODO Preset polygons
-
+                PolygonNumDialog polyNumDialog;
+                
             }
             Refresh();
             //カーソル変化
