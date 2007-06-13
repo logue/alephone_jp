@@ -249,7 +249,7 @@
 		</Configuration>
 		<Configuration
 			Name="Debug Unicode DLL|Win32"
-			OutputDirectory="$(ConfigurationName)"
+			OutputDirectory="..\..\..\..\..\MapEditorWX"
 			IntermediateDirectory="$(ConfigurationName)"
 			ConfigurationType="1"
 			CharacterSet="1"

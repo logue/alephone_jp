@@ -73,7 +73,7 @@ void ToolDialog::OnPaint(wxPaintEvent& ev)
         int y = (i / 2) * TOOL_HEIGHT;
 
         bool select = (wxGetApp().getEventManager()->getToolType() == i);
-        wxBitmap* bmp = &this->toolBitmaps[i];
+        wxImage* bmp = &this->toolBitmaps[i];
         if(select){
             bmp = &this->selectedToolBitmaps[i];
         }

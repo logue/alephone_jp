@@ -3,17 +3,19 @@
 
 #include <wx/dialog.h>
 #include <wx/bitmap.h>
+#include <wx/image.h>
 #include <wx/bmpbuttn.h>
 #include "HPLLib/HPLEventManager.h"
 #include <string>
+
 /**
     ツール選択ダイアログ
 */
 class ToolDialog: public wxDialog{
 private:
     //イメージビットマップ
-    wxBitmap toolBitmaps[ToolType::NUMBER_OF_TOOLS];
-    wxBitmap selectedToolBitmaps[ToolType::NUMBER_OF_TOOLS];
+    wxImage toolBitmaps[ToolType::NUMBER_OF_TOOLS];
+    wxImage selectedToolBitmaps[ToolType::NUMBER_OF_TOOLS];
 public:
     /**
         @param parent 親ウインドウNULLでも可能

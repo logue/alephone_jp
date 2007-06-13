@@ -330,7 +330,7 @@ void MapEditorMainFrame::drawObjects(wxDC* dc)
 
             double deg = (double)facing / (1<<ANGULAR_BITS) * ROUND_DEGREE;
             double rad = hpl::math::getRadianFromDegree(deg);
-            double rad_1 = hpl::math::getRadianFromDegree(deg);
+            double rad_1 = hpl::math::getRadianFromDegree(deg + WING_DEG);
             double rad_2 = hpl::math::getRadianFromDegree((double)(deg - WING_DEG));
 
             //三角形を描く
@@ -343,7 +343,7 @@ void MapEditorMainFrame::drawObjects(wxDC* dc)
             dc->DrawPolygon(3, points);
 
         }else{
-            wxBitmap* bmp;
+            wxImage* bmp;
 
             //ビットマップ表示
             switch(type){
