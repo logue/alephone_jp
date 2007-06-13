@@ -1,6 +1,27 @@
 #pragma once
 
+//dialogues
+#include "ToolDialog.h"
+#include "AnnotationDialog.h"
+#include "ColorCustomizeDialog.h"
+#include "EditorPreferencesDialog.h"
+#include "HeightDialog.h"
+#include "HeightPalletDialog.h"
+#include "LevelInfoDialog.h"
+#include "LinePropDialog.h"
+#include "ObjectPropDialog.h"
+#include "PlatformDialog.h"
+#include "PointPropDialog.h"
+#include "PolygonNumDialog.h"
+#include "PolygonPropDialog.h"
+#include "PolygonTypeDialog.h"
+#include "SelectLevelDialog.h"
+#include "SidePropDialog.h"
+#include "TextureDialog.h"
+#include "VisualDialog.h"
+
 #include "MapEditorWX.h"
+#include "HPLLib/HPLAlephLib.h"
 
 /**
     event id
@@ -76,12 +97,12 @@ private:
     /////////////////////
     //ダイアログ(モードレス)
     ToolDialog toolDialog;
-    PolygonTypeDialog polyTypeDialog
-    HeightDialog heightDialog
-    PolyPropDialog polyPropDialog
-    PointPropDialog pointPropDialog
-    LinePropDialog linePropDialog
-    TextureDialog textureDialog
+    PolygonTypeDialog polyTypeDialog;
+    HeightDialog heightDialog;
+    PolygonPropDialog polyPropDialog;
+    PointPropDialog pointPropDialog;
+    LinePropDialog linePropDialog;
+    TextureDialog textureDialog;
 
     //TODO モーダルだが、Side選択ダイアログも作ろう
     //TODO JumpLevel, LevelInfo, Placements, TerminalViewer
@@ -100,11 +121,28 @@ private:
     wxBrush polyTypeBrushes[NUMBER_OF_POLYGON_TYPE];
     //ポリゴン選択網掛けブラシ
     wxBrush polySelNetBrush;
+    //インヴァリッドなポリゴン
+    wxBrush invalidBrush;
+    //選択色
+    wxPen selectedLinePen;
+    //通常線
+    wxPen linePen;
+    //通常点
+    wxPen pointPen;
+    wxBrush pointBrush;
+    //通常ポリゴン
+    wxBrush polyBrush;
 
     //アイテムビットマップ
-    wxBitmap itemBitmaps[NUMBER_OF_DEFINED_ITEMS];
+    wxImage itemBitmaps[NUMBER_OF_DEFINED_ITEMS];
+    //ハイライト版
+    wxImage hilightedItemBitmaps[NUMBER_OF_DEFINED_ITEMS];
+
     //マップ要素ビットマップ（特殊）
-    wxBitmap mapItemBitmaps[NUMBER_OF_MAP_ICONS];
+    wxImage mapItemBitmaps[NUMBER_OF_MAP_ICONS];
+    //ハイライト版
+    wxImage hilightedMapItemBitmaps[NUMBER_OF_MAP_ICONS];
+
     //
 //    wxBitmap 
     //モンスターペン
@@ -281,4 +319,13 @@ private:
     */
     void setupPenAndBrush(ColorSettings* setting);
 
+    /**
+        アイコン用のビットマップファイルを読み込みます
+    */
+    void loadIconBitmaps(const char* baseDirPath);
+
+    /**
+        編集モードメニューのチェックを全てはずします
+    */
+    void uncheckModesOnMenu();
 };

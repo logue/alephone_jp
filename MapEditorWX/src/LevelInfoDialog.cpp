@@ -8,9 +8,9 @@ LevelInfoDialog::LevelInfoDialog()
 LevelInfoDialog::~LevelInfoDialog()
 {
 }
-bool LevelInfoDialog::Create(wxWindow* parent, wxWindowID id, const wxString& title)
+bool LevelInfoDialog::Create(wxWindow* parent, wxWindowID id)
 {
-    bool result = wxDialog::Create(parent, id, title);
+    bool result = wxDialog::Create(parent, id, _T("Level Information"));
 
     return result;
 }

@@ -8,9 +8,9 @@ LinePropDialog::LinePropDialog()
 LinePropDialog::~LinePropDialog()
 {
 }
-bool LinePropDialog::Create(wxWindow* parent, wxWindowID id, const wxString& title)
+bool LinePropDialog::Create(wxWindow* parent, wxWindowID id)
 {
-    bool result = wxDialog::Create(parent, id, title);
+    bool result = wxDialog::Create(parent, id, _T("Line Properties"));
 
     return result;
 }

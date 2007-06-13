@@ -6,7 +6,7 @@
 class VisualDialog: public wxDialog{
 public:
     VisualDialog();
-    bool Create(wxWindow* parent, wxWindowID id, const wxString& title);
+    bool Create(wxWindow* parent, wxWindowID id);
     virtual ~VisualDialog();
 
     void OnClose();

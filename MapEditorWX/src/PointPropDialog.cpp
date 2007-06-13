@@ -8,9 +8,9 @@ PointPropDialog::PointPropDialog()
 PointPropDialog::~PointPropDialog()
 {
 }
-bool PointPropDialog::Create(wxWindow* parent, wxWindowID id, const wxString& title)
+bool PointPropDialog::Create(wxWindow* parent, wxWindowID id)
 {
-    bool result = wxDialog::Create(parent, id, title);
+    bool result = wxDialog::Create(parent, id, _T("Point Properties"));
 
     return result;
 }

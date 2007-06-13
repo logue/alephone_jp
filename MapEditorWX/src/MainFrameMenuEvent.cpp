@@ -15,9 +15,12 @@ void MapEditorMainFrame::OnPrintSetup(wxCommandEvent& ev)
 }
 void MapEditorMainFrame::OnNew(wxCommandEvent& ev)
 {
+    //ついでにレベル設定
+    this->OnNewLevel(ev);
 }
 void MapEditorMainFrame::OnNewLevel(wxCommandEvent& ev)
 {
+    //レベル設定
 }
 
 void MapEditorMainFrame::OnOpen(wxCommandEvent& WXUNUSED(ev))
@@ -103,15 +106,20 @@ void MapEditorMainFrame::OnPreference(wxCommandEvent& ev)
 
 /////////////////////////////////////////////////////////////////////
 /////////////////////////////////////////////////////////////////////
-// show menus
+// show/hide menus
 void MapEditorMainFrame::OnToolDialog(wxCommandEvent& ev)
 {
+    //TODO tool dialog
 }
 void MapEditorMainFrame::OnZoomIn(wxCommandEvent& ev)
 {
+    wxSize size = this->GetSize();
+    wxGetApp().getViewGridManager()->zoomIn(size.GetWidth(), size.GetHeight());
 }
 void MapEditorMainFrame::OnZoomOut(wxCommandEvent& ev)
 {
+    wxSize size = this->GetSize();
+    wxGetApp().getViewGridManager()->zoomOut(size.GetWidth(), size.GetHeight());
 }
 void MapEditorMainFrame::OnZoomDefault(wxCommandEvent& ev)
 {
@@ -131,6 +139,20 @@ void MapEditorMainFrame::OnHeightDialog(wxCommandEvent& ev)
 // mode menus
 void MapEditorMainFrame::OnDrawPolygonMode(wxCommandEvent& ev)
 {
+    //現在の状態を取得
+    bool checked = ev.IsChecked();
+    
+    //前の段階
+    int editMode = wxGetApp().getEventManager()->getEditModeType();
+
+    //一旦全てチェックをはずします
+    this->uncheckModesOnMenu();
+
+    //ドローモードにします
+    wxGetApp().getEventManager()->setEditModeType(EditModeType::EM_DRAW);
+
+    //ポリゴンタイプダイアログを閉じます
+    this->polyTypeDialog.Show(false);
 }
 void MapEditorMainFrame::OnVisualMode(wxCommandEvent& ev)
 {

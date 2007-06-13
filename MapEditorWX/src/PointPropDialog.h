@@ -6,7 +6,7 @@
 class PointPropDialog: public wxDialog{
 public:
     PointPropDialog();
-    bool Create(wxWindow* parent, wxWindowID id, const wxString& title);
+    bool Create(wxWindow* parent, wxWindowID id);
     virtual ~PointPropDialog();
     //イベントテーブル作成<en>declare
     DECLARE_EVENT_TABLE()

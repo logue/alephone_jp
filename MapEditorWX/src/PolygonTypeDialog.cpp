@@ -8,9 +8,9 @@ PolygonTypeDialog::PolygonTypeDialog()
 PolygonTypeDialog::~PolygonTypeDialog()
 {
 }
-bool PolygonTypeDialog::Create(wxWindow* parent, wxWindowID id, const wxString& title)
+bool PolygonTypeDialog::Create(wxWindow* parent, wxWindowID id)
 {
-    bool result = wxDialog::Create(parent, id, title);
+    bool result = wxDialog::Create(parent, id, _T("Polygon Type"));
 
     return result;
 }

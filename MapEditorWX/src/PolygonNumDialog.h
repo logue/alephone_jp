@@ -6,7 +6,7 @@
 class PolygonNumDialog: public wxDialog{
 public:
     PolygonNumDialog();
-    bool Create(wxWindow* parent, wxWindowID id, const wxString& title);
+    bool Create(wxWindow* parent, wxWindowID id);
     virtual ~PolygonNumDialog();
     //イベントテーブル作成<en>declare
     DECLARE_EVENT_TABLE()

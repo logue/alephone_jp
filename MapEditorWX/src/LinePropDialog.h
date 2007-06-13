@@ -6,7 +6,7 @@
 class LinePropDialog: public wxDialog{
 public:
     LinePropDialog();
-    bool Create(wxWindow* parent, wxWindowID id, const wxString& title);
+    bool Create(wxWindow* parent, wxWindowID id);
     virtual ~LinePropDialog();
     //イベントテーブル作成<en>declare
     DECLARE_EVENT_TABLE()

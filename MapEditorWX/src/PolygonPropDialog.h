@@ -6,7 +6,7 @@
 class PolygonPropDialog: public wxDialog{
 public:
     PolygonPropDialog();
-    bool Create(wxWindow* parent, wxWindowID id, const wxString& title);
+    bool Create(wxWindow* parent, wxWindowID id);
     virtual ~PolygonPropDialog();
 
     //イベントテーブル作成<en>declare

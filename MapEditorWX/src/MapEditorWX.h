@@ -25,6 +25,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 #include <wx/bmpbuttn.h>
 #include <wx/sizer.h>
 #include <wx/cursor.h>
+#include <wx/xrc/xmlres.h>
 
 #ifdef __BORLANDC__
 #pragma hdrstop
@@ -41,25 +42,6 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 #include <MapEditorOneSetting.h>
 #include <MapEditorOneInnerSetting.h>
 
-//dialogues
-#include "ToolDialog.h"
-#include "AnnotationDialog.h"
-#include "ColorCustomizeDialog.h"
-#include "EditorPreferencesDialog.h"
-#include "HeightDialog.h"
-#include "HeightPalletDialog.h"
-#include "LevelInfoDialog.h"
-#include "LinePropDialog.h"
-#include "ObjectPropDialog.h"
-#include "PlatformDialog.h"
-#include "PointPropDialog.h"
-#include "PolygonNumDialog.h"
-#include "PolygonPropDialog.h"
-#include "PolygonTypeDialog.h"
-#include "SelectLevelDialog.h"
-#include "SidePropDialog.h"
-#include "TextureDialog.h"
-#include "VisualDialog.h"
 
 #include <vector>
 #include <string>
@@ -151,13 +133,14 @@ public:
     //ずらす位置
     int storedDataDiffPointDelta[2];
 
-    //アイテムアイコン
+/*    //アイテムアイコン
     wxBitmap itemIconBitmaps[NUMBER_OF_DEFINED_ITEMS];
     wxBitmap hilightedItemIconBitmaps[NUMBER_OF_DEFINED_ITEMS];
 
     //マップアイコン
     wxBitmap mapIconBitmaps[NUMBER_OF_MAP_ICONS];
     wxBitmap hilightedMapIconBitmaps[NUMBER_OF_MAP_ICONS];
+*/
 
     ///////////////////////
     // 線追加
@@ -183,6 +166,11 @@ public:
     //TODO menu
     std::map<int, int> menuIDMap;
 
+    //リソースファイル
+    wxXmlResource xrc;
+
+    //高さが範囲外の線を表示するかどうか(デフォルト:false)
+    bool isRevealHiddenLines;
 private:
     
     ///////////////////////
@@ -240,17 +228,13 @@ public:
     /**
         ビットマップの読み込み（簡易版）
     */
-    void loadBitmap(const char* fname, wxBitmap* bitmap);
+    void loadBitmap(const char* fname, wxImage* bitmap);
 
     /**
         現在のモード・ツールにあわせてカーソルを変更します
     */
     void setCursor();
 private:
-    /**
-        アイコン用のビットマップファイルを読み込みます
-    */
-    void loadIconBitmaps(const char* baseDirPath);
 
 };
 

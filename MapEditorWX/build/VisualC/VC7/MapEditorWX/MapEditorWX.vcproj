@@ -162,7 +162,7 @@
 		</Configuration>
 		<Configuration
 			Name="Debug Unicode DLL|Win32"
-			OutputDirectory="$(ConfigurationName)"
+			OutputDirectory="..\..\..\..\..\MapEditorWX"
 			IntermediateDirectory="$(ConfigurationName)"
 			ConfigurationType="1"
 			UseOfMFC="0"
@@ -186,7 +186,7 @@
 				AdditionalDependencies="SDL.lib ..\..\..\..\..\AlephOneSrc\lib\AlephOneSrc2007D.lib wxmsw28ud_core.lib wxbase28ud.lib"
 				OutputFile="$(OutDir)/MapEditorWX2007DU.exe"
 				LinkIncremental="2"
-				AdditionalLibraryDirectories="..\..\..\..\..\lib\win\wx\wxvc71\debug\vc_dll"
+				AdditionalLibraryDirectories="&quot;C:\wxWidgets-2.8.4\lib\vc_dll&quot;"
 				GenerateDebugInformation="TRUE"
 				ProgramDatabaseFile="$(OutDir)/MapEditorWX.pdb"
 				SubSystem="2"
@@ -405,6 +405,12 @@
 				RelativePath="..\..\..\..\src\PointPropDialog.h">
 			</File>
 			<File
+				RelativePath="..\..\..\..\src\PolygonNumDialog.cpp">
+			</File>
+			<File
+				RelativePath="..\..\..\..\src\PolygonNumDialog.h">
+			</File>
+			<File
 				RelativePath="..\..\..\..\src\PolygonPropDialog.cpp">
 			</File>
 			<File
@@ -447,6 +453,9 @@
 				RelativePath="..\..\..\..\src\VisualDialog.h">
 			</File>
 		</Filter>
+		<File
+			RelativePath="..\..\..\..\WXTODOƒŠƒXƒg.txt">
+		</File>
 	</Files>
 	<Globals>
 	</Globals>

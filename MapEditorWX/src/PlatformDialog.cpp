@@ -8,9 +8,9 @@ PlatformDialog::PlatformDialog()
 PlatformDialog::~PlatformDialog()
 {
 }
-bool PlatformDialog::Create(wxWindow* parent, wxWindowID id, const wxString& title)
+bool PlatformDialog::Create(wxWindow* parent, wxWindowID id)
 {
-    bool result = wxDialog::Create(parent, id, title);
+    bool result = wxDialog::Create(parent, id, _T("Platform"));
 
     return result;
 }

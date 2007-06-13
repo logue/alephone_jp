@@ -8,6 +8,8 @@
 */
 void MapEditorMainFrame::OnLeftDown(wxMouseEvent &ev)
 {
+    //カーソル設定
+    wxGetApp().setCursor();
     //マウス座標記録
     wxGetApp().getViewGridManager()->setNewMousePoint(ev.m_x, ev.m_y);
     bool shift = ev.ShiftDown();
@@ -110,13 +112,13 @@ void MapEditorMainFrame::doLButtonOnTextTool(wxMouseEvent& ev)
     sample.polygon_index = NONE;
 
     //ダイアログ表示
-    dlg.Create(this, ID_ANNOTATION_DIALOG, annotation);
+    dlg.Create(this, ID_ANNOTATION_DIALOG, sample);
     if(dlg.ShowModal() == wxID_OK){
         //決定
         //アノテーションデータを取得
-        map_annotation annotation = dlg.getAnnotation();
+        map_annotation newAnnotation = dlg.getAnnotation();
         //追加
-        hpl::aleph::map::addAnnotation(annotation);
+        hpl::aleph::map::addAnnotation(newAnnotation);
     }
 }
 void MapEditorMainFrame::doLButtonOnPolygonTool(wxMouseEvent& ev)
@@ -167,8 +169,7 @@ void MapEditorMainFrame::OnRightDown(wxMouseEvent& ev)
 void MapEditorMainFrame::OnMotion(wxMouseEvent &ev)
 {
     //カーソル設定
-    //TODO 
-    //wxGetApp()->setCursor();
+    wxGetApp().setCursor();
 
     //マウス座標記録
     wxGetApp().getViewGridManager()->setNewMousePoint(ev.m_x, ev.m_y);
@@ -281,6 +282,9 @@ void MapEditorMainFrame::doMouseMotionOnCeilingTextureMode(wxMouseEvent& ev)
 
 void MapEditorMainFrame::OnMouseWheel(wxMouseEvent &ev)
 {
+    //カーソル設定
+    wxGetApp().setCursor();
+
     int zDelta = ev.m_wheelRotation;
     hpl::aleph::view::HPLViewGridManager* mgr = wxGetApp().getViewGridManager();
 

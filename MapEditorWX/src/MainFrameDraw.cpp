@@ -1,8 +1,10 @@
 #include "MapEditorMainFrame.h"
 
+#include <cmath>
+
 const double ROUND_DEGREE = 360.0;
 const double OBJECT_TRIANGLE_LENGTH = 10.0;
-const double OBJECT_TRIANGLE_WING_DEGREE = 120.0;
+const double WING_DEG = 120.0;
 
 /**
     マップデータの表示
@@ -68,12 +70,8 @@ void MapEditorMainFrame::drawBackground(wxDC* dc)
 */
 void MapEditorMainFrame::drawPolygons(wxDC* dc)
 {
-    //色設定
-    wxPen linePen(wxGetApp().setting.getColorSetting()->lines[0],
-        wxGetApp().setting.getColorSetting()->lines[1],
-        wxGetApp().setting.getColorSetting()->lines[2]);
-
-    dc->SetPen(linePen);
+    //ペン設定
+    dc->SetPen(this->linePen);
 //    dc->SetBrush(*wxLIGHT_GREY_BRUSH);
 
     //TODO 高さ順ソート？
@@ -112,12 +110,9 @@ void MapEditorMainFrame::drawPolygons(wxDC* dc)
         int editMode = wxGetApp().getEventManager()->getEditModeType();
         wxBrush brush;
         switch(editMode){
-        case EditModeType::EM_DRAW:
-            brush.SetColour(wxGetApp().setting.getColorSetting()->polygons[0],
-                wxGetApp().setting.getColorSetting()->polygons[1],
-                wxGetApp().setting.getColorSetting()->polygons[2]);
-            dc->SetBrush(brush);
-            break;
+/*        case EditModeType::EM_DRAW:
+            dc->SetBrush(this->polySelNetBrush);
+            break;*/
         case EditModeType::EM_POLYGON_TYPE:
             dc->SetBrush(this->polyTypeBrushes[polygon->type]);
             break;
@@ -135,13 +130,34 @@ void MapEditorMainFrame::drawPolygons(wxDC* dc)
             dc->SetBrush(brush);
             break;
         default:
-            brush.SetColour(wxGetApp().setting.getColorSetting()->polygons[0],
-                wxGetApp().setting.getColorSetting()->polygons[1],
-                wxGetApp().setting.getColorSetting()->polygons[2]);
-            dc->SetBrush(brush);
+            //デフォルト
+            dc->SetBrush(this->polyBrush);
         }
         //TODO 選択情報
 
+        bool select = false;
+        if(wxGetApp().selectData.isSelected() &&
+            wxGetApp().selectData.containsPolygon(i))
+        {
+            select = true;
+        }
+        if(select){
+            //色
+            wxColor col = dc->GetBrush().GetColour();
+            this->polySelNetBrush.SetColour(col);
+            //ネットポリゴン
+            dc->SetBrush(this->polySelNetBrush);
+        }else{
+            //そのまま
+
+            //ポリゴンチェック
+            if(editMode == EditModeType::EM_DRAW &&
+                !wxGetApp().isPolygonValidityStored(i))
+            {
+                //不正なポリゴン
+                dc->SetBrush(this->invalidBrush);
+            }
+        }
         //TODO 整合性
 
         dc->DrawPolygon(vertexCount, points);
@@ -153,13 +169,51 @@ void MapEditorMainFrame::drawPolygons(wxDC* dc)
 void MapEditorMainFrame::drawLines(wxDC* dc)
 {
     dc->SetPen(*wxBLACK_PEN);
+    //高さ制限
+    int zMin = wxGetApp().getViewGridManager()->getViewHeightMin();
+    int zMax = wxGetApp().getViewGridManager()->getViewHeightMax();
+
     for(int i = 0; i < (int)LineList.size(); i ++){
         line_data* line = &LineList[i];
         endpoint_data* begin = get_endpoint_data(line->endpoint_indexes[0]);
         endpoint_data* end = get_endpoint_data(line->endpoint_indexes[1]);
+
+        //高さ
+        int floor = line->highest_adjacent_floor;
+        int ceiling = line->lowest_adjacent_ceiling;
+
+        bool isHidden = false;
+        if(floor < zMin || ceiling > zMax){
+            isHidden = true;
+            if(wxGetApp().isRevealHiddenLines){
+                //見えない線をうっすら表示。をしない
+                continue;
+            }
+        }
+
         int beginP[2], endP[2];
         wxGetApp().getViewPointFromWorldPoint(begin->vertex, beginP);
         wxGetApp().getViewPointFromWorldPoint(end->vertex, endP);
+
+        //隠れ線
+        if(isHidden){
+        }else{
+            bool select = false;
+            //選択チェック
+            if(wxGetApp().selectData.isSelected() &&
+                wxGetApp().selectData.containsLine(i))
+            {
+                select = true;
+            }
+            if(select){
+                dc->SetPen(this->selectedLinePen);
+            }else{
+                //通常ペン
+                dc->SetPen(this->linePen);
+            }
+
+        }
+        //選択チェック
         dc->DrawLine(beginP[0], beginP[1], endP[0], endP[1]);
     }
 }
@@ -168,6 +222,37 @@ void MapEditorMainFrame::drawSides(wxDC* dc)
 }
 void MapEditorMainFrame::drawPoints(wxDC* dc)
 {
+    //高さ制限
+    int zMin = wxGetApp().getViewGridManager()->getViewHeightMin();
+    int zMax = wxGetApp().getViewGridManager()->getViewHeightMax();
+
+    //点表示
+    for(int i = 0; i < (int)EndpointList.size(); i ++){
+        endpoint_data* ep = get_endpoint_data(i);
+        int floor = ep->highest_adjacent_floor_height;
+		int ceil = ep->lowest_adjacent_ceiling_height;
+		if( floor < zMin || ceil > zMax){
+			continue;
+		}
+
+        int vpoint[2];
+        wxGetApp().getViewPointFromWorldPoint(ep->vertex, vpoint);
+
+        //点（小さい四角）を打つ
+        dc->SetPen(this->pointPen);
+        dc->SetBrush(this->pointBrush);
+
+        //選択中ならしるしをつける
+        if(wxGetApp().selectData.isSelected() &&
+            wxGetApp().selectData.containsPoint(i))
+        {
+            dc->SetPen(this->selectedLinePen);
+            dc->SetBrush(wxNullBrush);
+            int SIZE = 5;
+            dc->DrawRectangle(vpoint[0] - SIZE / 2, vpoint[1] - SIZE / 2,
+                SIZE, SIZE);
+        }
+    }
 }
 void MapEditorMainFrame::drawObjects(wxDC* dc)
 {
@@ -194,7 +279,7 @@ void MapEditorMainFrame::drawObjects(wxDC* dc)
             continue;
         }
 
-        int vpoing[2];
+        int vpoint[2];
         world_point2d wpoint = {x,y};
         wxGetApp().getViewPointFromWorldPoint(wpoint, vpoint);
 
@@ -245,30 +330,58 @@ void MapEditorMainFrame::drawObjects(wxDC* dc)
 
             double deg = (double)facing / (1<<ANGULAR_BITS) * ROUND_DEGREE;
             double rad = hpl::math::getRadianFromDegree(deg);
-            double rad1 = hpl::math::getRadianFromDegree(deg + OBJECT_TRIANGLE_WING_DEGREE);
-            double rad2 = hpl::math::getRadianFromDegree(deg - OBJECT_TRIANGLE_WING_DEGREE);
+            double rad_1 = hpl::math::getRadianFromDegree(deg);
+            double rad_2 = hpl::math::getRadianFromDegree((double)(deg - WING_DEG));
 
             //三角形を描く
             points[0].x = vpoint[0] + (int)(OBJECT_TRIANGLE_LENGTH * cos(rad));
             points[0].y = vpoint[1] + (int)(OBJECT_TRIANGLE_LENGTH * sin(rad));
-            points[1].x = vpoint[0] + (int)(OBJECT_TRIANGLE_LENGTH / 2.0 * cos(rad1));
-            points[1].y = vpoint[1] + (int)(OBJECT_TRIANGLE_LENGTH / 2.0 * sin(rad1));
-            points[2].x = vpoint[0] + (int)(OBJECT_TRIANGLE_LENGTH / 2.0 * cos(rad2));
-            points[2].y = vpoint[1] + (int)(OBJECT_TRIANGLE_LENGTH / 2.0 * sin(rad2));
-            dc->DrawPolygon(3. points);
+            points[1].x = vpoint[0] + (int)(OBJECT_TRIANGLE_LENGTH / 2.0 * cos(rad_1));
+            points[1].y = vpoint[1] + (int)(OBJECT_TRIANGLE_LENGTH / 2.0 * sin(rad_1));
+            points[2].x = vpoint[0] + (int)(OBJECT_TRIANGLE_LENGTH / 2.0 * cos(rad_2));
+            points[2].y = vpoint[1] + (int)(OBJECT_TRIANGLE_LENGTH / 2.0 * sin(rad_2));
+            dc->DrawPolygon(3, points);
 
         }else{
-            //
+            wxBitmap* bmp;
+
             //ビットマップ表示
+            switch(type){
             case _saved_item:
+                if(select){
+                    bmp = &this->hilightedItemBitmaps[index];
+                }else{
+                    bmp = &this->itemBitmaps[index];
+                }
                 break;
             case _saved_object:
                 //scenery
+                if(select){
+                    bmp = &this->hilightedMapItemBitmaps[MI_Scenery];
+                }else{
+                    bmp = &this->mapItemBitmaps[MI_Scenery];
+                }
                 break;
             case _saved_goal:
+                //goal(flag)
+                if(select){
+                    bmp = &this->hilightedMapItemBitmaps[MI_Goal];
+                }else{
+                    bmp = &this->mapItemBitmaps[MI_Goal];
+                }
                 break;
             default:
-            //sound
+                //sound
+                if(select){
+                    bmp = &this->hilightedMapItemBitmaps[MI_Sound];
+                }else{
+                    bmp = &this->mapItemBitmaps[MI_Sound];
+                }
+            }
+
+            //描画
+            bool transparent = true;
+            dc->DrawBitmap(*bmp, vpoint[0], vpoint[1], transparent);
         }
     }
 }

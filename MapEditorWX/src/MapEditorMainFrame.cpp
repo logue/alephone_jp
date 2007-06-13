@@ -2,6 +2,8 @@
 
 //大きいペンのサイズ
 const int LARGE_PEN_SIZE = 2;
+//バッファサイズ
+const int BUF_MAX = 1024;
 
 //点とクリック地点の距離がこれ以下であれば選択する。
 //リスト順に探索する
@@ -74,11 +76,21 @@ MapEditorMainFrame::MapEditorMainFrame(const wxString& title,
 
     //ダイアログ
     //TODO dlg
-    this->toolDialog.Create(this, -1, wxT("ToolDialog"));
+    this->toolDialog.Create(this, wxID_ANY);
     this->toolDialog.Show();
 
     //ペン・ブラシのセットアップ
     this->setupPenAndBrush(wxGetApp().setting.getColorSetting());
+
+    //マップのアイコンビットマップをファイルから読み込み
+    this->loadIconBitmaps(DATA_DIR_NAME);
+
+    //ドローモードでスタート
+    wxCommandEvent dummy;
+    OnDrawPolygonMode(dummy);
+
+    //高さ制限ダイアログの表示
+    this->heightDialog.Create(this, wxID_ANY);
 
     //ダブルバッファリングのバッファ用意
 //    this->createDoubleBuffer();
@@ -224,31 +236,13 @@ void MapEditorMainFrame::OnPaint(wxPaintEvent& WXUNUSED(event))
     this->drawLines(drawDC);
 
     //ポイント
-    {
-        wxBrush yellowBrush = wxBrush(wxColor(255,255,0));
-        wxPen bluePen = wxPen(wxColor(0,0,255));
-        //wxPen yellowPen = wxPen(wxColor(255,255,0));
-        drawDC->SetBrush(yellowBrush);
-        drawDC->SetPen(bluePen);
-        for(int i = 0; i < (int)EndpointList.size(); i ++){
-            endpoint_data* point = &EndpointList[i];
-            int x = point->vertex.x;
-            int y = point->vertex.y;
-            int drawX = (x + OFFSET_X_WORLD)/DIV + OFFSET_X_VIEW;
-            int drawY = (y + OFFSET_Y_WORLD)/DIV + OFFSET_Y_VIEW;
-            int SIZE = 1;
-            int left = drawX - SIZE;
-            int right = drawX + SIZE;
-            int top = drawY - SIZE;
-            int bottom = drawY + SIZE;
-
-            //点を打つ
-            drawDC->DrawRectangle(left, top, right - left, bottom - top);
-        }
-    }
+    this->drawPoints(drawDC);
     
     //アノテーション
     this->drawAnnotations(drawDC);
+
+    //ドローモードならオブジェクトも表示
+    this->drawObjects(drawDC);
 
     //バッファから画面へコピー
     dc.Blit(wxPoint(0,0), size,
@@ -297,9 +291,36 @@ void MapEditorMainFrame::setupPenAndBrush(ColorSettings* setting)
     }
 
     //ポリゴン選択ネットブラシ
-    wxBitmap bmp;
+    wxImage bmp;
     wxGetApp().loadBitmap(POLYGON_SELECT_STLIPPLE_BITMAP_FILE_PATH, &bmp);
     this->polySelNetBrush = wxBrush(bmp);
+
+    //ダメポリゴンブラシ
+    this->invalidBrush.SetColour(wxColor(255,0,0));
+
+    //選択ペン
+    this->selectedLinePen.SetColour(wxColor(255,0,0));
+    this->selectedLinePen.SetWidth(2);
+
+    //線
+    this->linePen.SetColour(
+        wxGetApp().setting.getColorSetting()->lines[0],
+        wxGetApp().setting.getColorSetting()->lines[1],
+        wxGetApp().setting.getColorSetting()->lines[2]);
+
+    //点
+    wxColor pcol(
+        wxGetApp().setting.getColorSetting()->points[0],
+        wxGetApp().setting.getColorSetting()->points[1],
+        wxGetApp().setting.getColorSetting()->points[2]);
+    this->pointPen.SetColour(pcol);
+    this->pointBrush.SetColour(pcol);
+
+    //ポリゴン
+    this->polyBrush.SetColour(
+        wxGetApp().setting.getColorSetting()->polygons[0],
+        wxGetApp().setting.getColorSetting()->polygons[1],
+        wxGetApp().setting.getColorSetting()->polygons[2]);
 
     //オブジェクトカラー
     //プレイヤーペン(yellow)
@@ -322,3 +343,72 @@ void MapEditorMainFrame::setupPenAndBrush(ColorSettings* setting)
     this->selectedMonsterBrush.SetColour(wxColor(0,255,0));
 }
 
+/**
+    アイコン用のビットマップファイルを読み込みます
+*/
+void MapEditorMainFrame::loadIconBitmaps(const char* baseDirPath)
+{
+    //アイコンビットマップとファイル名、そしてアイテムIDとの対応データをファイルから読み込みます
+    const int NUMBER_OF_MAP_ICON_FILES = NUMBER_OF_DEFINED_ITEMS +
+        NUMBER_OF_MAP_ICONS;
+    hpl::aleph::Information mapIconInfo[NUMBER_OF_MAP_ICON_FILES];
+
+    //ファイル名作成
+    char buf[BUF_MAX];
+    sprintf(buf, "%s%s", baseDirPath, MAP_ICONS_IMAGE_NAME_LIST_FILE_NAME);
+    hpl::aleph::loadInformation(buf, NUMBER_OF_MAP_ICON_FILES, mapIconInfo);
+
+    for(int i = 0; i < 2 * NUMBER_OF_DEFINED_ITEMS + 2 * NUMBER_OF_MAP_ICONS; i ++){
+        std::string path = std::string(baseDirPath) + std::string(MAP_ICONS_DIR_NAME);
+        const int HILIGHTED_OFFSET = NUMBER_OF_DEFINED_ITEMS + NUMBER_OF_MAP_ICONS;
+
+        int index = i;
+        if(i >= HILIGHTED_OFFSET){
+            //選択（ハイライト状態）
+            path += std::string(HILIGHTED_ICONS_DIR_NAME);
+            index -= HILIGHTED_OFFSET;
+        }
+        path += mapIconInfo[index].jname;
+
+        //TODO ビットマップファイル読み込み
+        if(i < HILIGHTED_OFFSET){
+            //通常状態
+            if(index < NUMBER_OF_DEFINED_ITEMS){
+                //アイテム
+                wxGetApp().loadBitmap(path.c_str(), &this->itemBitmaps[index]);
+                this->itemBitmaps[index].SetMaskColour(255,255,255);
+            }else{
+                index -= NUMBER_OF_DEFINED_ITEMS;
+                //マップアイコン
+                wxGetApp().loadBitmap(path.c_str(), &this->mapItemBitmaps[index]);
+                this->mapItemBitmaps[index].SetMaskColour(255,255,255);
+            }
+        }else{
+            //選択＝ハイライト状態
+            if(index < NUMBER_OF_DEFINED_ITEMS){
+                //アイテム
+                wxGetApp().loadBitmap(path.c_str(), &this->hilightedItemBitmaps[index]);
+                this->hilightedItemBitmaps[index].SetMaskColour(255,255,255);
+            }else{
+                index -= NUMBER_OF_DEFINED_ITEMS;
+                //マップアイコン
+                wxGetApp().loadBitmap(path.c_str(), &this->hilightedMapItemBitmaps[index]);
+                this->hilightedMapItemBitmaps[index].SetMaskColour(255,255,255);
+            }
+        }
+    }
+}
+/**
+    編集モードメニューのチェックを全てはずします
+*/
+void MapEditorMainFrame::uncheckModesOnMenu()
+{
+    //TODO menu
+    //ドローモード
+    wxMenuBar* menuBar = wxFrame::GetMenuBar();
+    //モードメニュー
+    wxMenu* menu = menuBar->GetMenu(3);
+    //アイテム取得
+    wxMenuItemList lst = menu->GetMenuItems();
+//    lst.
+}

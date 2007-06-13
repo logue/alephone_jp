@@ -8,9 +8,9 @@ PolygonPropDialog::PolygonPropDialog()
 PolygonPropDialog::~PolygonPropDialog()
 {
 }
-bool PolygonPropDialog::Create(wxWindow* parent, wxWindowID id, const wxString& title)
+bool PolygonPropDialog::Create(wxWindow* parent, wxWindowID id)
 {
-    bool result = wxDialog::Create(parent, id, title);
+    bool result = wxDialog::Create(parent, id, _T("Polygon Properties"));
 
     return result;
 }

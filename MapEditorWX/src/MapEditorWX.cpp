@@ -128,9 +128,6 @@ bool MapEditorWX::initialize()
     this->getViewGridManager()->setGridIntervalIndex(this->setting.getGridSizeIndex());
     nPolygonPoints = 3;
 
-    //マップのアイコンビットマップをファイルから読み込み
-    this->loadIconBitmaps(DATA_DIR_NAME);
-
     //TODO textureBitmaps
 
     /*
@@ -144,8 +141,8 @@ bool MapEditorWX::initialize()
         TI_POLYGON,
     */
     char CURSOR_BASE_DIR[] = "data/img/";
-    char *cursorSkull = "cursor2.cur";
-    char *cursorPolygon = "cur00004.cur";
+    char *cursorSkull = "cursor2.bmp";
+    char *cursorPolygon = "cur00004.bmp";
     int cursorId[] ={
         wxCURSOR_ARROW,
         wxCURSOR_PAINT_BRUSH,
@@ -159,6 +156,7 @@ bool MapEditorWX::initialize()
     //カーソルデータ読み込み
     for(int i = 0; i < ToolType::NUMBER_OF_TOOLS; i ++){
         if(cursorId[i] != -1){
+            //規定のもので使えるもの
             cursors[i] = wxCursor(cursorId[i]);
         }else{
             //ファイルパス
@@ -173,12 +171,29 @@ bool MapEditorWX::initialize()
             path.Append(pathF);
             //読み込み
             wxImage bmp;
-            bmp.LoadFile(path, wxBITMAP_TYPE_CUR);
+            bmp.LoadFile(path);
+            bmp.SetMaskColour(255,255,255);
             //カーソル設定
             cursors[i] = wxCursor(bmp);
         }
     }
+
+    //対象外の線を表示するかどうか
+    this->isRevealHiddenLines = false;
     return true;
+}
+
+//ポリゴンが正しいかどうかを検査します(高速版)
+bool MapEditorWX::isPolygonValidityStored(int polyIndex)
+{
+    //TODO
+    return true;
+}
+
+//ポリゴン整合性情報を更新します
+void MapEditorWX::updatePolygonValidityStored()
+{
+    //TODO
 }
 
 hpl::aleph::view::HPLViewGridManager* MapEditorWX::getViewGridManager()
@@ -213,62 +228,11 @@ void MapEditorWX::getViewPointFromWorldPoint(world_point2d& wpoint, int vpoint[2
         OFFSET_X_WORLD, OFFSET_Y_WORLD, DIV, offset[0], offset[1]);
 }
 
-/**
-    アイコン用のビットマップファイルを読み込みます
-*/
-void MapEditorWX::loadIconBitmaps(const char* baseDirPath)
-{
-    //アイコンビットマップとファイル名、そしてアイテムIDとの対応データをファイルから読み込みます
-    const int NUMBER_OF_MAP_ICON_FILES = NUMBER_OF_DEFINED_ITEMS +
-        NUMBER_OF_MAP_ICONS;
-    hpl::aleph::Information mapIconInfo[NUMBER_OF_MAP_ICON_FILES];
-
-    //ファイル名作成
-    char buf[BUF_MAX];
-    sprintf(buf, "%s%s", baseDirPath, MAP_ICONS_IMAGE_NAME_LIST_FILE_NAME);
-    hpl::aleph::loadInformation(buf, NUMBER_OF_MAP_ICON_FILES, mapIconInfo);
-
-    for(int i = 0; i < 2 * NUMBER_OF_DEFINED_ITEMS + 2 * NUMBER_OF_MAP_ICONS; i ++){
-        std::string path = std::string(baseDirPath) + std::string(MAP_ICONS_DIR_NAME);
-        const int HILIGHTED_OFFSET = NUMBER_OF_DEFINED_ITEMS + NUMBER_OF_MAP_ICONS;
-
-        int index = i;
-        if(i >= HILIGHTED_OFFSET){
-            //選択（ハイライト状態）
-            path += std::string(HILIGHTED_ICONS_DIR_NAME);
-            index -= HILIGHTED_OFFSET;
-        }
-        path += mapIconInfo[index].jname;
-
-        //TODO ビットマップファイル読み込み
-        if(i < HILIGHTED_OFFSET){
-            //通常状態
-            if(index < NUMBER_OF_DEFINED_ITEMS){
-                //アイテム
-                this->loadBitmap(path.c_str(), &this->itemIconBitmaps[index]);
-            }else{
-                index -= NUMBER_OF_DEFINED_ITEMS;
-                //マップアイコン
-                this->loadBitmap(path.c_str(), &this->mapIconBitmaps[index]);
-            }
-        }else{
-            //選択＝ハイライト状態
-            if(index < NUMBER_OF_DEFINED_ITEMS){
-                //アイテム
-                this->loadBitmap(path.c_str(), &this->hilightedItemIconBitmaps[index]);
-            }else{
-                index -= NUMBER_OF_DEFINED_ITEMS;
-                //マップアイコン
-                this->loadBitmap(path.c_str(), &this->hilightedMapIconBitmaps[index]);
-            }
-        }
-    }
-}
 
 /**
     ビットマップの読み込み（簡易版）
 */
-void MapEditorWX::loadBitmap(const char* fname, wxBitmap* bitmap)
+void MapEditorWX::loadBitmap(const char* fname, wxImage* bitmap)
 {
     if(!bitmap->LoadFile(wxConvCurrent->cMB2WX(fname), wxBITMAP_TYPE_BMP)){
         hpl::error::halt("Couldn't load bitmap[%s]", fname);

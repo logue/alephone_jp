@@ -6,7 +6,7 @@
 class SidePropDialog: public wxDialog{
 public:
     SidePropDialog();
-    bool Create(wxWindow* parent, wxWindowID id, const wxString& title);
+    bool Create(wxWindow* parent, wxWindowID id);
     virtual ~SidePropDialog();
     //イベントテーブル作成<en>declare
     DECLARE_EVENT_TABLE()

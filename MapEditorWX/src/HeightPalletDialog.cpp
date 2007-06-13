@@ -8,9 +8,9 @@ HeightPalletDialog::HeightPalletDialog()
 HeightPalletDialog::~HeightPalletDialog()
 {
 }
-bool HeightPalletDialog::Create(wxWindow* parent, wxWindowID id, const wxString& title)
+bool HeightPalletDialog::Create(wxWindow* parent, wxWindowID id)
 {
-    bool result = wxDialog::Create(parent, id, title);
+    bool result = wxDialog::Create(parent, id, _T("Height Pallet"));
 
     return result;
 }

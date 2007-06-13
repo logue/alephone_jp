@@ -8,9 +8,9 @@ VisualDialog::VisualDialog()
 VisualDialog::~VisualDialog()
 {
 }
-bool VisualDialog::Create(wxWindow* parent, wxWindowID id, const wxString& title)
+bool VisualDialog::Create(wxWindow* parent, wxWindowID id)
 {
-    bool result = wxDialog::Create(parent, id, title);
+    bool result = wxDialog::Create(parent, id, _T("Visual"));
 
     return result;
 }

@@ -2,6 +2,7 @@
 #include "MapEditorWX.h"
 
 #include <string>
+#include "PolygonNumDialog.h"
 
 BEGIN_EVENT_TABLE(ToolDialog, wxDialog)
     EVT_PAINT(ToolDialog::OnPaint)
@@ -40,11 +41,11 @@ ToolDialog::~ToolDialog()
 {
     
 }
-bool ToolDialog::Create(wxWindow* parent, wxWindowID id, const wxString& title)
+bool ToolDialog::Create(wxWindow* parent, wxWindowID id)
 {
     //wxTHICK_FRAME wxSTAY_ON_TOP
     long style = wxCAPTION;
-    bool result = wxDialog::Create(parent, id, title, wxDefaultPosition//);
+    bool result = wxDialog::Create(parent, id, _T("Tool"), wxDefaultPosition//);
     ,        wxSize(TOOL_DIALOG_W, TOOL_DIALOG_H), style);
 /*    wxBitmapButton *bmpBtn = new wxBitmapButton(this, -1, toolBitmaps[0]);
     wxGridSizer *boxSizer = new wxGridSizer(2);
@@ -110,6 +111,7 @@ void ToolDialog::OnLeftDown(wxMouseEvent& ev)
             Refresh();
             //ÉJÅ[É\Éãïœâª
             //TODO cursor
+            wxGetApp().setCursor();
         }
     }
 }

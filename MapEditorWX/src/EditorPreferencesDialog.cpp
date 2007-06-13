@@ -8,9 +8,9 @@ EditorPreferencesDialog::EditorPreferencesDialog()
 EditorPreferencesDialog::~EditorPreferencesDialog()
 {
 }
-bool EditorPreferencesDialog::Create(wxWindow* parent, wxWindowID id, const wxString& title)
+bool EditorPreferencesDialog::Create(wxWindow* parent, wxWindowID id)
 {
-    bool result = wxDialog::Create(parent, id, title);
+    bool result = wxDialog::Create(parent, id, _T("Editor Preferences"));
 
     return result;
 }

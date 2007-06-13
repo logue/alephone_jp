@@ -8,9 +8,9 @@ PolygonNumDialog::PolygonNumDialog()
 PolygonNumDialog::~PolygonNumDialog()
 {
 }
-bool PolygonNumDialog::Create(wxWindow* parent, wxWindowID id, const wxString& title)
+bool PolygonNumDialog::Create(wxWindow* parent, wxWindowID id)
 {
-    bool result = wxDialog::Create(parent, id, title);
+    bool result = wxDialog::Create(parent, id, _T("Polygon Num"));
 
     return result;
 }

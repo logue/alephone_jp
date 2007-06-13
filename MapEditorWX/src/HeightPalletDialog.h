@@ -6,7 +6,7 @@
 class HeightPalletDialog: public wxDialog{
 public:
     HeightPalletDialog();
-    bool Create(wxWindow* parent, wxWindowID id, const wxString& title);
+    bool Create(wxWindow* parent, wxWindowID id);
     virtual ~HeightPalletDialog();
     //イベントテーブル作成<en>declare
     DECLARE_EVENT_TABLE()

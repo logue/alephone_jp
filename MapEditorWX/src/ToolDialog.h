@@ -20,7 +20,7 @@ public:
         @param wxWindowID 識別ID。-1ならデフォルト
     */
     ToolDialog();
-    bool Create(wxWindow* parent, wxWindowID id, const wxString& title);
+    bool Create(wxWindow* parent, wxWindowID id);
     virtual ~ToolDialog();
 
     //イベントテーブル作成<en>declare

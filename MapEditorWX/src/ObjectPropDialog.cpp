@@ -8,9 +8,9 @@ ObjectPropDialog::ObjectPropDialog()
 ObjectPropDialog::~ObjectPropDialog()
 {
 }
-bool ObjectPropDialog::Create(wxWindow* parent, wxWindowID id, const wxString& title)
+bool ObjectPropDialog::Create(wxWindow* parent, wxWindowID id)
 {
-    bool result = wxDialog::Create(parent, id, title);
+    bool result = wxDialog::Create(parent, id, _T("Object Properties"));
 
     return result;
 }
