@@ -217,7 +217,9 @@ public:
     void OnPaint(wxPaintEvent& ev);
 
     void OnLeftDown(wxMouseEvent& ev);
+    void OnLeftUp(wxMouseEvent& ev);
     void OnRightDown(wxMouseEvent& ev);
+    void OnRightUp(wxMouseEvent& ev);
     void OnMotion(wxMouseEvent& ev);
     void OnMouseWheel(wxMouseEvent& ev);
 
@@ -328,4 +330,16 @@ private:
         編集モードメニューのチェックを全てはずします
     */
     void uncheckModesOnMenu();
+
+    /**
+        オフセットを設定します
+        @param mx,my ビュー座標の基点位置
+    */
+    void setupSelectDataGroupOffsets(int mx, int my);
+
+    /**
+        @param ev
+        @return 選択に成功した場合真
+    */
+    bool tryToSelectOneItem(wxMouseEvent& ev);
 };

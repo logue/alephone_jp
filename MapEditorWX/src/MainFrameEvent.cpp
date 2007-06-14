@@ -50,35 +50,335 @@ void MapEditorMainFrame::OnLeftDown(wxMouseEvent &ev)
         //TODO
         break;
     }
+    Refresh();
 }
 void MapEditorMainFrame::doLButtonOnDrawMode(wxMouseEvent& ev)
 {
     int tool = wxGetApp().getEventManager()->getToolType();
     switch(tool){
     case ToolType::TI_ARROW:
+        doLButtonOnArrowTool(ev);
         break;
     case ToolType::TI_FILL:
+        doLButtonOnFillTool(ev);
         break;
     case ToolType::TI_HAND:
+        doLButtonOnHandTool(ev);
         break;
     case ToolType::TI_LINE:
+        doLButtonOnLineTool(ev);
         break;
     case ToolType::TI_MAGNIFY:
+        doLButtonOnMagnifyTool(ev);
         break;
     case ToolType::TI_SKULL:
+        doLButtonOnSkullTool(ev);
         break;
     case ToolType::TI_TEXT:
+        doLButtonOnTextTool(ev);
         break;
     case ToolType::TI_POLYGON:
+        doLButtonOnPolygonTool(ev);
         break;
     default:
         hpl::error::halt("Invalid tool type");
     }
 }
+
 void MapEditorMainFrame::doLButtonOnArrowTool(wxMouseEvent& ev)
 {
-    //選択
+    //選択データ
+    hpl::aleph::map::HPLSelectData* sel = &wxGetApp().selectData;
+    
+    //グリッドマネージャー
+    hpl::aleph::view::HPLViewGridManager* vmgr = wxGetApp().getViewGridManager();
+    //ビューオフセット
+    int voffset[2];
+    vmgr->getOffset(voffset);
+    int div = vmgr->getZoomDivision();
+
+    int zMin = vmgr->getViewHeightMin();
+    int zMax = vmgr->getViewHeightMax();
+    int mx = ev.m_x;
+    int my = ev.m_y;
+
+    if(sel->isSelected()){
+        //既に選択中
+
+        //マウス座標が選択部分に含まれるかチェック
+        if(hpl::aleph::map::isPointInSelection(mx, my,
+            voffset[0], voffset[1], OFFSET_X_WORLD, OFFSET_Y_WORLD,
+            POINT_DISTANCE_EPSILON, LINE_DISTANCE_EPSILON, OBJECT_DISTANCE_EPSILON,
+            sel, zMax, zMin, div))
+        {
+            //選択部分をクリックしている
+            //→オフセットを設定する
+            //<en> clicked on selection datas
+            //-> set offsets
+            this->setupSelectDataGroupOffsets(mx, my);
+        }else{
+            //クリックしていない
+            //→選択解除
+            //<en> no click on selection datas
+            //-> release all selections
+            sel->clear();
+        }
+
+    }else{
+        //何も選択していない状態
+        //一つを選択できるか試してみます
+        if(this->tryToSelectOneItem(ev)){
+            //選択範囲は解除します
+            wxGetApp().getEventManager()->setSelectingGroup(false);
+        }else{
+            //選択されなかった
+            //範囲選択の開始
+            wxGetApp().getEventManager()->setSelectGroupStartPoint(mx, my);
+            //選択情報の解除
+            sel->clear();
+        }
+    }
 }
+
+/**
+    オフセットを設定します
+    @param mx,my ビュー座標の基点位置
+*/
+void MapEditorMainFrame::setupSelectDataGroupOffsets(int mx, int my)
+{
+    hpl::aleph::map::HPLSelectData* sel = &wxGetApp().selectData;
+
+    //点 <en> points
+    for(int i = 0; i < (int)sel->getSelPoints()->size(); i ++){
+        endpoint_data* ep = get_endpoint_data(sel->getSelPoints()->at(i).index);
+        //ビュー座標に変換
+        int vpoint[2];
+        wxGetApp().getViewPointFromWorldPoint(ep->vertex, vpoint);
+
+        //引き算
+        sel->getSelPoints()->at(i).offset[0] = vpoint[0] - mx;
+        sel->getSelPoints()->at(i).offset[1] = vpoint[1] - my;
+    }
+
+    //線 <en> lines
+    for(int i = 0; (int)sel->getSelLines()->size(); i ++){
+        line_data* line = get_line_data(sel->getSelLines()->at(i).index);
+        endpoint_data* begin = get_endpoint_data(line->endpoint_indexes[0]);
+        endpoint_data* end = get_endpoint_data(line->endpoint_indexes[1]);
+        int vpointStart[2];
+        int vpointEnd[2];
+        wxGetApp().getViewPointFromWorldPoint(begin->vertex, vpointStart);
+        wxGetApp().getViewPointFromWorldPoint(end->vertex, vpointEnd);
+
+        //オフセット設定
+        sel->getSelLines()->at(i).offset[0][0] = vpointStart[0] - mx;
+        sel->getSelLines()->at(i).offset[0][1] = vpointStart[1] - my;
+        sel->getSelLines()->at(i).offset[1][0] = vpointEnd[0] - mx;
+        sel->getSelLines()->at(i).offset[1][1] = vpointEnd[1] - my;
+    }
+
+    //ポリゴン
+    for(int i = 0; (int)sel->getSelPolygons()->size(); i ++){
+        hpl::aleph::map::SelPolygon* selpoly = &sel->getSelPolygons()->at(i);
+        polygon_data* poly = get_polygon_data(selpoly->index);
+        int n = poly->vertex_count;
+        selpoly->num = n;
+        for(int j = 0; j < n; j ++){
+            int vpoint[2];
+            endpoint_data* ep = get_endpoint_data(poly->endpoint_indexes[j]);
+            wxGetApp().getViewPointFromWorldPoint(ep->vertex, vpoint);
+
+            //オフセット
+            selpoly->offset[j][0] = vpoint[0] - mx;
+            selpoly->offset[j][1] = vpoint[1] - my;
+        }
+    }
+
+    //オブジェクト
+    for(int i = 0; i < (int)sel->getSelObjects()->size(); i ++){
+        map_object* obj = &SavedObjectList[sel->getSelObjects()->at(i).index];
+        //ビュー座標に変換
+        int vpoint[2];
+        wxGetApp().getViewPointFromWorldPoint(obj->location.x, obj->location.y, vpoint);
+
+        //引き算
+        sel->getSelObjects()->at(i).offset[0] = vpoint[0] - mx;
+        sel->getSelObjects()->at(i).offset[1] = vpoint[1] - my;
+    }
+
+}
+
+/**
+    @param ev
+    @return 選択に成功した場合真
+*/
+bool MapEditorMainFrame::tryToSelectOneItem(wxMouseEvent& ev)
+{
+    //シフトキー
+    bool shift = ev.ShiftDown();
+
+    hpl::aleph::map::HPLSelectData* sel = &wxGetApp().selectData;
+    //イベントマネージャー
+    hpl::aleph::HPLEventManager* emgr = wxGetApp().getEventManager();
+    hpl::aleph::view::HPLViewGridManager* vmgr = wxGetApp().getViewGridManager();
+
+    //ビューオフセット
+    int voffset[2];
+    vmgr->getOffset(voffset);
+    int div = vmgr->getZoomDivision();
+
+    int zMin = vmgr->getViewHeightMin();
+    int zMax = vmgr->getViewHeightMax();
+    int mx = ev.m_x;
+    int my = ev.m_y;
+
+    if(!shift){
+        //シフトキーを押さずにクリックしたら一旦解放する
+        sel->clear();
+        emgr->setSelectingGroup(false);
+    }
+
+    //選択の優先順位は
+    //1:オブジェクト
+    //2:点
+    //3:線
+    //4:ポリゴン
+
+
+    //オブジェクト
+    for(int i = 0; i < (int)SavedObjectList.size(); i ++){
+        map_object* obj = &SavedObjectList[i];
+        int x = obj->location.x;
+        int y = obj->location.y;
+        int z = obj->location.z;
+
+        //高さが範囲外かどうか
+        if(z > zMax || z < zMin){
+            continue;
+        }
+
+        //点選択検査
+        if(hpl::aleph::map::isSelectPoint(mx, my,
+            x, y, voffset[0], voffset[1],
+            OFFSET_X_WORLD, OFFSET_Y_WORLD, div, OBJECT_DISTANCE_EPSILON))
+        {
+            //
+            int vpoint[2];
+            wxGetApp().getViewPointFromWorldPoint(x, y, vpoint);
+            int offset[2];
+            offset[0] = vpoint[0] - mx;
+            offset[1] = vpoint[1] - my;
+            sel->addSelObject(i, offset);
+            //オブジェクトのプロパティ・ダイアログを表示する
+            //TODO
+            //this->objectPropDialog.Show(true);
+            return true;
+        }
+    }
+
+    //no obj selected
+    //TODO 選択ID関連の実装
+    //this->objectPropDialog->setSelectedObjectIndex(NONE);
+
+
+    //////////
+    //点
+    for(int i = 0; i < (int)EndpointList.size(); i ++){
+        endpoint_data* ep = get_endpoint_data(i);
+
+        //高さチェック
+        int floor = ep->highest_adjacent_floor_height;
+        int ceiling = ep->lowest_adjacent_ceiling_height;
+        if(floor > zMax || ceiling < zMin){
+            continue;
+        }
+        if(hpl::aleph::map::isSelectPoint(mx, my,
+            ep->vertex.x, ep->vertex.y,
+            voffset[0], voffset[1], OFFSET_X_WORLD, OFFSET_Y_WORLD,
+            div, POINT_DISTANCE_EPSILON))
+        {
+            //見つかった
+            int vpoint[2];
+            wxGetApp().getViewPointFromWorldPoint(ep->vertex, vpoint);
+            int offset[2];
+            offset[0] = vpoint[0] - mx;
+            offset[1] = vpoint[1] - my;
+            sel->addSelPoint(i, offset);
+            return true;
+        }
+    }
+
+    /////////////////////////
+    //lines
+    for(int i = 0; i < (int)LineList.size(); i ++){
+        line_data* line = get_line_data(i);
+        endpoint_data* start = get_endpoint_data(line->endpoint_indexes[0]);
+        endpoint_data* end = get_endpoint_data(line->endpoint_indexes[1]);
+
+        //高さチェック
+        int floor = line->highest_adjacent_floor;
+        int ceiling = line->lowest_adjacent_ceiling;
+        if(floor > zMax || ceiling < zMin){
+            continue;
+        }
+
+        if(hpl::aleph::map::isSelectLine(mx, my,
+            start->vertex.x, start->vertex.y, end->vertex.x, end->vertex.y,
+            voffset[0], voffset[1], OFFSET_X_WORLD, OFFSET_Y_WORLD, div, LINE_DISTANCE_EPSILON))
+        {
+            //選択
+            int vstart[2];
+            int vend[2];
+            wxGetApp().getViewPointFromWorldPoint(start->vertex, vstart);
+            wxGetApp().getViewPointFromWorldPoint(end->vertex, vend);
+
+            int offset[2][2];
+            offset[0][0] = vstart[0] - mx;
+            offset[0][1] = vstart[1] - my;
+            offset[1][0] = vend[0] - mx;
+            offset[1][1] = vend[1] - my;
+            sel->addSelLine(i, offset);
+            return true;
+        }
+    }
+
+    //ポリゴン
+    //TODO 高さ順にソートする
+    int polyIndex = NONE;
+    for(int i = 0; i < (int)PolygonList.size(); i ++){
+        if(hpl::aleph::map::isPointInPolygon(mx, my,
+            i, OFFSET_X_WORLD, OFFSET_Y_WORLD, div,
+            voffset[0], voffset[1]))
+        {
+            polyIndex = i;
+            break;
+        }
+    }
+    if(polyIndex != NONE){
+        polygon_data* poly = get_polygon_data(polyIndex);
+        int n = poly->vertex_count;
+        int offset[MAXIMUM_VERTICES_PER_POLYGON][2];
+        
+        //ポリゴンプロパティ表示
+        //TODO
+
+        //オフセット
+        for(int j = 0; j < n; j ++){
+            int vpoint[2];
+            wxGetApp().getViewPointFromWorldPoint(get_endpoint_data(poly->endpoint_indexes[j])->vertex, vpoint);
+            offset[j][0] = vpoint[0] - mx;
+            offset[j][1] = vpoint[1] - my;
+        }
+
+        sel->addSelPolygon(polyIndex, offset, n);
+        return true;
+    }
+
+    return false;
+}
+
+
+/////////////////////////////////////////////////////////////
 void MapEditorMainFrame::doLButtonOnFillTool(wxMouseEvent& ev)
 {
 }
@@ -157,6 +457,23 @@ void MapEditorMainFrame::doLButtonOnCeilingTextureMode(wxMouseEvent& ev)
 */
 void MapEditorMainFrame::OnRightDown(wxMouseEvent& ev)
 {
+    //カーソル設定
+    wxGetApp().setCursor();
+    //マウス座標記録
+    wxGetApp().getViewGridManager()->setNewMousePoint(ev.m_x, ev.m_y);
+}
+///////////////////////////////////////////////////////
+void MapEditorMainFrame::OnRightUp(wxMouseEvent& ev)
+{
+    //カーソル設定
+    wxGetApp().setCursor();
+    //マウス座標記録
+    wxGetApp().getViewGridManager()->setNewMousePoint(ev.m_x, ev.m_y);
+}
+void MapEditorMainFrame::OnLeftUp(wxMouseEvent& ev)
+{
+    //カーソル設定
+    wxGetApp().setCursor();
     //マウス座標記録
     wxGetApp().getViewGridManager()->setNewMousePoint(ev.m_x, ev.m_y);
 }

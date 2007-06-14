@@ -224,6 +224,11 @@ public:
     world_point2d getWorldPointFromViewPoint(int vx, int vy);
     //
     void getViewPointFromWorldPoint(world_point2d& wpoint, int vpoint[2]);
+    void getViewPointFromWorldPoint(int x, int y, int vpoint[2])
+    {
+        world_point2d wpoint = {x,y};
+        this->getViewPointFromWorldPoint(wpoint, vpoint);
+    }
 
     /**
         ビットマップの読み込み（簡易版）
