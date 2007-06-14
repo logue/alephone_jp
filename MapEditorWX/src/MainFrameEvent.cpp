@@ -116,6 +116,7 @@ void MapEditorMainFrame::doLButtonOnArrowTool(wxMouseEvent& ev)
             //<en> clicked on selection datas
             //-> set offsets
             this->setupSelectDataGroupOffsets(mx, my);
+            return;
         }else{
             //クリックしていない
             //→選択解除
@@ -123,20 +124,18 @@ void MapEditorMainFrame::doLButtonOnArrowTool(wxMouseEvent& ev)
             //-> release all selections
             sel->clear();
         }
-
+    }
+    //何も選択していない状態
+    //一つを選択できるか試してみます
+    if(this->tryToSelectOneItem(ev)){
+        //選択範囲は解除します
+        wxGetApp().getEventManager()->setSelectingGroup(false);
     }else{
-        //何も選択していない状態
-        //一つを選択できるか試してみます
-        if(this->tryToSelectOneItem(ev)){
-            //選択範囲は解除します
-            wxGetApp().getEventManager()->setSelectingGroup(false);
-        }else{
-            //選択されなかった
-            //範囲選択の開始
-            wxGetApp().getEventManager()->setSelectGroupStartPoint(mx, my);
-            //選択情報の解除
-            sel->clear();
-        }
+        //選択されなかった
+        //範囲選択の開始
+        wxGetApp().getEventManager()->setSelectGroupStartPoint(mx, my);
+        //選択情報の解除
+        sel->clear();
     }
 }
 
@@ -161,7 +160,7 @@ void MapEditorMainFrame::setupSelectDataGroupOffsets(int mx, int my)
     }
 
     //線 <en> lines
-    for(int i = 0; (int)sel->getSelLines()->size(); i ++){
+    for(int i = 0; i < (int)sel->getSelLines()->size(); i ++){
         line_data* line = get_line_data(sel->getSelLines()->at(i).index);
         endpoint_data* begin = get_endpoint_data(line->endpoint_indexes[0]);
         endpoint_data* end = get_endpoint_data(line->endpoint_indexes[1]);
@@ -178,7 +177,7 @@ void MapEditorMainFrame::setupSelectDataGroupOffsets(int mx, int my)
     }
 
     //ポリゴン
-    for(int i = 0; (int)sel->getSelPolygons()->size(); i ++){
+    for(int i = 0; i < (int)sel->getSelPolygons()->size(); i ++){
         hpl::aleph::map::SelPolygon* selpoly = &sel->getSelPolygons()->at(i);
         polygon_data* poly = get_polygon_data(selpoly->index);
         int n = poly->vertex_count;

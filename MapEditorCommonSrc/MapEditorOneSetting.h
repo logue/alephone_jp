@@ -24,8 +24,8 @@ const int NUMBER_OF_MAP_OBJECT_TYPES = 6;
 const int NUMBER_OF_LANDSPACES = 4;
 //点とクリック地点の距離がこれ以下であれば選択する。
 //リスト順に探索する
-const int POINT_DISTANCE_EPSILON = 5;
-const int OBJECT_DISTANCE_EPSILON = 8;
+const int POINT_DISTANCE_EPSILON = 10;
+const int OBJECT_DISTANCE_EPSILON = 10;
 const int LINE_DISTANCE_EPSILON = 5;
 
 // CMonsterPropertyDialog ダイアログ

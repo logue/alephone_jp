@@ -70,9 +70,12 @@ bool AnnotationDialog::Create(wxWindow* parent, wxWindowID id, map_annotation& a
         polyChoice->Insert(wxString(_T("NONE")), n);
         polygonBox->Add(polyChoice);
 
-    //OKボタン
-    boxSizer->Add(new wxButton(this, wxID_OK, _T("OK")));
-    boxSizer->Add(new wxButton(this, wxID_CANCEL, _T("Cancel")));
+    //ボタンは横置き！
+    wxBoxSizer* btnBox = new wxBoxSizer(wxHORIZONTAL);
+        //OKボタン
+        btnBox->Add(new wxButton(this, wxID_OK, _T("OK")));
+        btnBox->Add(new wxButton(this, wxID_CANCEL, _T("Cancel")));
+        boxSizer->Add(btnBox);
     boxSizer->Fit(this);
     Layout();
     return result;

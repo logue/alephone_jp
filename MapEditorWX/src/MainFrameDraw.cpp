@@ -381,7 +381,8 @@ void MapEditorMainFrame::drawObjects(wxDC* dc)
 
             //•`‰æ
             bool transparent = true;
-            dc->DrawBitmap(*bmp, vpoint[0], vpoint[1], transparent);
+            dc->DrawBitmap(*bmp, vpoint[0] - bmp->GetWidth() / 2, vpoint[1] - bmp->GetHeight() /2,
+                transparent);
         }
     }
 }
