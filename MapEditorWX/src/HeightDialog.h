@@ -18,6 +18,13 @@ public:
     virtual  ~HeightDialog();
     //イベントテーブル作成<en>declare
     DECLARE_EVENT_TABLE()
+
+    void OnEditFloor(wxCommandEvent& ev);
+    void OnEditCeiling(wxCommandEvent& ev);
+    void OnSliderFloor(wxCommandEvent& ev);
+    void OnSliderCeiling(wxCommandEvent& ev);
+    void OnDrawCheck(wxCommandEvent& ev);
+
 };
 
 #endif

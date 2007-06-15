@@ -25,3 +25,27 @@ TODO リスト
 -右クリックor Alt+クリックでメニュー
 
 ///MAXIMUM_VERTICES_PER_POLYGON=8
+
+・配置
+・データ読み込み部分作成
+・データ書き出し部分作成
+Annotation		:配置済み
+ColorCustomize	:配置済み
+EditPreferences	:配置済み
+Height			:配置済み。
+HeightPallet	:
+LevelInfo
+LineProp
+ObjectProp
+Placement		:配置済み
+Platform		:配置済み。
+PointProp
+PolygonNum
+PolygonProp
+PolygonType
+SelectLevel
+SideProp
+Terminal		:配置済み
+Texture
+Tool			:配置済み
+Visual

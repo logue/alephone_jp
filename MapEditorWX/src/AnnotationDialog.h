@@ -20,23 +20,13 @@ struct map_annotation
 */
 class AnnotationDialog: public wxDialog{
 private:
-//    wxBoxSizer* boxSizer;
-    //テキストデータ
-    wxTextCtrl* textArea;
-
-    //タイプ選択
-    wxChoice* typeChoice;
-
-    //ワールド座標
-    wxTextCtrl* worldX;
-    wxTextCtrl* worldY;
-
-    //ビュー座標
-    wxTextCtrl* viewX;
-    wxTextCtrl* viewY;
-
-    //ポリゴン依存
-    wxChoice* polyChoice;
+    wxStaticText* label_12;
+    wxChoice* choice_8;
+    wxTextCtrl* text_ctrl_7;
+    wxStaticText* label_11;
+    wxChoice* choice_7;
+    wxButton* button_3;
+    wxButton* button_4;
 public:
     AnnotationDialog();
     /**

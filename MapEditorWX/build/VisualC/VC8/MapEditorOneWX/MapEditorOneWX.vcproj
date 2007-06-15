@@ -512,6 +512,10 @@
 				>
 			</File>
 			<File
+				RelativePath="..\..\..\..\src\DlgCommon.h"
+				>
+			</File>
+			<File
 				RelativePath="..\..\..\..\src\EditorPreferencesDialog.cpp"
 				>
 			</File>
@@ -557,6 +561,14 @@
 			</File>
 			<File
 				RelativePath="..\..\..\..\src\ObjectPropDialog.h"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\..\src\PlacementDialog.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\..\src\PlacementDialog.h"
 				>
 			</File>
 			<File
@@ -613,6 +625,14 @@
 			</File>
 			<File
 				RelativePath="..\..\..\..\src\SidePropDialog.h"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\..\src\TerminalDialog.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\..\src\TerminalDialog.h"
 				>
 			</File>
 			<File

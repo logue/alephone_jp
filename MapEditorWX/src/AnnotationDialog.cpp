@@ -27,57 +27,40 @@ AnnotationDialog::~AnnotationDialog()
 bool AnnotationDialog::Create(wxWindow* parent, wxWindowID id, map_annotation& annotation)
 {
     bool result = wxDialog::Create(parent, id, _T("Annotation"));
-    //アイテム貼り付け
+    label_12 = new wxStaticText(this, wxID_ANY, wxT("Type"));
+    const wxString choice_8_choices[] = {
+        wxT("Normal")
+    };
+    choice_8 = new wxChoice(this, wxID_ANY, wxDefaultPosition, wxDefaultSize, 1, choice_8_choices, 0);
+    text_ctrl_7 = new wxTextCtrl(this, wxID_ANY, wxEmptyString, wxDefaultPosition, wxDefaultSize, wxTE_MULTILINE|wxHSCROLL);
+    label_11 = new wxStaticText(this, wxID_ANY, wxT("Dependency polygon index"));
+    choice_7 = new wxChoice(this, wxID_ANY);
+    button_3 = new wxButton(this, wxID_OK, wxT("OK"));
+    button_4 = new wxButton(this, wxID_CANCEL, wxT("Cancel"));
 
-    //縦置きサイザー
-    wxBoxSizer* boxSizer = new wxBoxSizer(wxVERTICAL);
-    this->SetSizer(boxSizer);
+    //setup
+    choice_8->SetSelection(0);
+    text_ctrl_7->SetMinSize(wxSize(250, 60));
 
-    //タイプ選択
-    //横置きサイザー
-    wxBoxSizer* typeBox = new wxBoxSizer(wxHORIZONTAL);
-    boxSizer->Add(typeBox);
-//    typeBox->Fit(boxSizer);
-        //スタティックテキスト
-        wxStaticText* typeSt = new wxStaticText(this, wxID_ANY, _T("Type"));
-        typeBox->Add(typeSt);
-        //チョイス
-        this->typeChoice = new wxChoice(this, ID_TYPE_CHOICE);
-        typeBox->Add(this->typeChoice);
-        //タイプ項目追加
-        this->typeChoice->Insert(wxString(_T("Normal")), 0 );
-        
-    //テキストボックス
-    this->textArea = new wxTextCtrl(this, ID_ANNOTATION_TEXT_AREA);
-    boxSizer->Add(textArea);
-
-    //依存ポリゴン指定
-    wxBoxSizer* polygonBox = new wxBoxSizer(wxHORIZONTAL);
-    boxSizer->Add(polygonBox);
-//    polygonBox->Fit(boxSizer);
-        wxStaticText* polySt = new wxStaticText(this, wxID_ANY, wxString(_T("Depend polygon")));
-        polygonBox->Add(polySt);
-        //ポリゴンチョイス
-        this->polyChoice = new wxChoice();
-        //現存するポリゴン番号を追加
-        //最後にNONEを付加
-        int n = (int)PolygonList.size();
-        for(int i = 0; i < n; i ++){
-            char buf[BUF_MAX];
-            sprintf(buf, "%d", i);
-            polyChoice->Insert(wxConvCurrent->cMB2WX(buf), i);
-        }
-        polyChoice->Insert(wxString(_T("NONE")), n);
-        polygonBox->Add(polyChoice);
-
-    //ボタンは横置き！
-    wxBoxSizer* btnBox = new wxBoxSizer(wxHORIZONTAL);
-        //OKボタン
-        btnBox->Add(new wxButton(this, wxID_OK, _T("OK")));
-        btnBox->Add(new wxButton(this, wxID_CANCEL, _T("Cancel")));
-        boxSizer->Add(btnBox);
-    boxSizer->Fit(this);
+    //layout
+    wxFlexGridSizer* sizer_33 = new wxFlexGridSizer(4, 1, 0, 0);
+    wxBoxSizer* sizer_34 = new wxBoxSizer(wxHORIZONTAL);
+    wxBoxSizer* sizer_35 = new wxBoxSizer(wxHORIZONTAL);
+    wxBoxSizer* sizer_36 = new wxBoxSizer(wxHORIZONTAL);
+    sizer_36->Add(label_12, 0, 0, 0);
+    sizer_36->Add(choice_8, 0, 0, 0);
+    sizer_33->Add(sizer_36, 1, wxEXPAND, 0);
+    sizer_33->Add(text_ctrl_7, 0, wxEXPAND, 0);
+    sizer_35->Add(label_11, 0, 0, 0);
+    sizer_35->Add(choice_7, 0, 0, 0);
+    sizer_33->Add(sizer_35, 1, wxEXPAND, 0);
+    sizer_34->Add(button_3, 0, 0, 0);
+    sizer_34->Add(button_4, 0, 0, 0);
+    sizer_33->Add(sizer_34, 1, wxEXPAND, 0);
+    SetSizer(sizer_33);
+    sizer_33->Fit(this);
     Layout();
+
     return result;
 }
 /**
@@ -86,7 +69,7 @@ bool AnnotationDialog::Create(wxWindow* parent, wxWindowID id, map_annotation& a
 map_annotation AnnotationDialog::getAnnotation()
 {
     //TODO
-    map_annotation annotation;
+    map_annotation annotation = {NULL};
     return annotation;
 }
 //OKボタン押した時
