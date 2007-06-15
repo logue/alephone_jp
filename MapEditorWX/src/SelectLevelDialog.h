@@ -1,7 +1,7 @@
 #ifndef _SELECT_LEVEL_DIALOG_
 #define _SELECT_LEVEL_DIALOG_
 
-#include <wx/dialog.h>
+#include "DlgCommon.h"
 
 class SelectLevelDialog: public wxDialog{
 public:

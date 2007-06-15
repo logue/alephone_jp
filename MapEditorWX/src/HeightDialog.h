@@ -1,16 +1,15 @@
 #ifndef _HEIGHT_DIALOG_
 #define _HEIGHT_DIALOG_
 
-#include <wx/dialog.h>
-#include <wx/checkbox.h>
-#include <wx/slider.h>
-#include <wx/textctrl.h>
+#include "DlgCommon.h"
 
 class HeightDialog: public wxDialog{
 protected:
+    wxStaticText* label_9;
     wxTextCtrl* text_ctrl_5;
     wxSlider* slider_2;
     wxSlider* slider_3;
+    wxStaticText* label_10;
     wxTextCtrl* text_ctrl_6;
     wxCheckBox* checkbox_11;
 public:

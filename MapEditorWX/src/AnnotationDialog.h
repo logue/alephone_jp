@@ -1,14 +1,7 @@
 #ifndef _ANNOTATION_DIALOG_
 #define _ANNOTATION_DIALOG_
 
-#include "map.h"
-
-#include <wx/dialog.h>
-#include <wx/button.h>
-#include <wx/checkbox.h>
-#include <wx/stattext.h>
-#include <wx/choice.h>
-#include <wx/textctrl.h>
+#include "DlgCommon.h"
 
 /*
 struct map_annotation

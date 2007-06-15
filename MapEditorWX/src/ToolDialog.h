@@ -1,12 +1,7 @@
 #ifndef _TOOL_DIALOG_
 #define _TOOL_DIALOG_
 
-#include <wx/dialog.h>
-#include <wx/bitmap.h>
-#include <wx/image.h>
-#include <wx/bmpbuttn.h>
-#include "HPLLib/HPLEventManager.h"
-#include <string>
+#include "DlgCommon.h"
 
 /**
     ツール選択ダイアログ

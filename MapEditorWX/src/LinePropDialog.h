@@ -1,7 +1,7 @@
 #ifndef _LINE_PROP_DIALOG_
 #define _LINE_PROP_DIALOG_
 
-#include <wx/dialog.h>
+#include "DlgCommon.h"
 
 class LinePropDialog: public wxDialog{
 public:

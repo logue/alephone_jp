@@ -1,7 +1,7 @@
 #ifndef _COLOR_CUSTOMIZE_DIALOG_
 #define _COLOR_CUSTOMIZE_DIALOG_
 
-#include <wx/dialog.h>
+#include "DlgCommon.h"
 
 class ColorCustomizeDialog: public wxDialog{
 public:

@@ -94,8 +94,13 @@ MapEditorMainFrame::MapEditorMainFrame(const wxString& title,
     //高さ制限ダイアログの表示
     this->heightDialog.Create(this, wxID_ANY);
 
-    //ダブルバッファリングのバッファ用意
-//    this->createDoubleBuffer();
+    //TODO
+    //テスト
+    //プラットフォームダイアログ
+    PlatformDialog dlg;
+    dlg.Create(this, wxID_ANY);
+    int id = dlg.ShowModal();
+    hpl::error::halt("%d", id);
 }
 MapEditorMainFrame::~MapEditorMainFrame()
 {

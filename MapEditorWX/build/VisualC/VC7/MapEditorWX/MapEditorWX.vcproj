@@ -357,6 +357,9 @@
 				RelativePath="..\..\..\..\src\ColorCustomizeDialog.h">
 			</File>
 			<File
+				RelativePath="..\..\..\..\src\DlgCommon.h">
+			</File>
+			<File
 				RelativePath="..\..\..\..\src\EditorPreferencesDialog.cpp">
 			</File>
 			<File

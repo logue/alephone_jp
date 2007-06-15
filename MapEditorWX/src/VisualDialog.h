@@ -1,7 +1,7 @@
 #ifndef _VISUAL_DIALOG_
 #define _VISUAL_DIALOG_
 
-#include <wx/dialog.h>
+#include "DlgCommon.h"
 
 class VisualDialog: public wxDialog{
 public:

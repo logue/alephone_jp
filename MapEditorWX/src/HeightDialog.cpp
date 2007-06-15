@@ -9,6 +9,8 @@ enum{
 };
 
 BEGIN_EVENT_TABLE(HeightDialog, wxDialog)
+EVT_BUTTON(wxID_OK, HeightDialog::OnOk)
+EVT_BUTTON(wxID_CANCEL, HeightDialog::OnCancel)
 END_EVENT_TABLE()
 HeightDialog::HeightDialog()
 {
@@ -21,16 +23,15 @@ bool HeightDialog::Create(wxWindow* parent, wxWindowID id)
     bool result = wxDialog::Create(parent, id, _T("Height"));
 
     //create items
-    wxStaticText* label_9 = new wxStaticText(this, wxID_ANY, wxT("Floor"));
+    label_9 = new wxStaticText(this, wxID_ANY, wxT("Floor"));
     text_ctrl_5 = new wxTextCtrl(this, wxID_ANY, wxEmptyString);
     slider_2 = new wxSlider(this, wxID_ANY, 0, 0, 10, wxDefaultPosition, wxDefaultSize, wxSL_VERTICAL);
     slider_3 = new wxSlider(this, wxID_ANY, 0, 0, 10, wxDefaultPosition, wxDefaultSize, wxSL_VERTICAL);
-    wxStaticText* label_10 = new wxStaticText(this, wxID_ANY, wxT("Ceiling"));
+    label_10 = new wxStaticText(this, wxID_ANY, wxT("Ceiling"));
     text_ctrl_6 = new wxTextCtrl(this, wxID_ANY, wxEmptyString);
     checkbox_11 = new wxCheckBox(this, wxID_ANY, wxT("Draw hidden lines"));
 
     //set properties
-    SetTitle(wxT("Height"));
     text_ctrl_5->SetMinSize(wxSize(50, -1));
     slider_2->SetMinSize(wxSize(-1, 200));
     slider_3->SetMinSize(wxSize(-1, 200));

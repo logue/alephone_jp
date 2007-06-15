@@ -1,7 +1,7 @@
 #ifndef _TEXTURE_DIALOG_
 #define _TEXTURE_DIALOG_
 
-#include <wx/dialog.h>
+#include "DlgCommon.h"
 
 class TextureDialog: public wxDialog{
 public:

@@ -1,7 +1,7 @@
 #ifndef _POLYGON_NUM_DIALOG_
 #define _POLYGON_NUM_DIALOG_
 
-#include <wx/dialog.h>
+#include "DlgCommon.h"
 
 class PolygonNumDialog: public wxDialog{
 public:

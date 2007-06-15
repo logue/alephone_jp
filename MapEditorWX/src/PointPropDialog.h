@@ -1,7 +1,7 @@
 #ifndef _POINT_PROP_DIALOG_
 #define _POINT_PROP_DIALOG_
 
-#include <wx/dialog.h>
+#include "DlgCommon.h"
 
 class PointPropDialog: public wxDialog{
 public:

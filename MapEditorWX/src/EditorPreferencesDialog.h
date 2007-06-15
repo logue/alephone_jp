@@ -1,7 +1,7 @@
 #ifndef _EDITOR_PREFERENCES_DIALOG_
 #define _EDITOR_PREFERENCES_DIALOG_
 
-#include <wx/dialog.h>
+#include "DlgCommon.h"
 
 class EditorPreferencesDialog: public wxDialog{
 public:

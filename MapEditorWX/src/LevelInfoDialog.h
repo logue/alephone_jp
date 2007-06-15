@@ -1,7 +1,7 @@
 #ifndef _LEVEL_INFO_DIALOG_
 #define _LEVEL_INFO_DIALOG_
 
-#include <wx/dialog.h>
+#include "DlgCommon.h"
 
 class LevelInfoDialog: public wxDialog{
 public:

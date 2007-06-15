@@ -1,7 +1,7 @@
 #ifndef _SIDE_PROP_DIALOG_
 #define _SIDE_PROP_DIALOG_
 
-#include <wx/dialog.h>
+#include "DlgCommon.h"
 
 class SidePropDialog: public wxDialog{
 public:

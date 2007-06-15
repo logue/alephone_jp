@@ -1,7 +1,7 @@
 #ifndef _POLYGON_PROP_DIALOG_
 #define _POLYGON_PROP_DIALOG_
 
-#include <wx/dialog.h>
+#include "DlgCommon.h"
 
 class PolygonPropDialog: public wxDialog{
 public:

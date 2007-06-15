@@ -1,7 +1,7 @@
 #ifndef _HEIGHT_PALLET_DIALOG_
 #define _HEIGHT_PALLET_DIALOG_
 
-#include <wx/dialog.h>
+#include "DlgCommon.h"
 
 class HeightPalletDialog: public wxDialog{
 public:

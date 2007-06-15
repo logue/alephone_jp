@@ -92,10 +92,12 @@ map_annotation AnnotationDialog::getAnnotation()
 //OKƒ{ƒ^ƒ“‰Ÿ‚µ‚½Žž
 void AnnotationDialog::OnOk(wxCommandEvent& wv)
 {
+    SetReturnCode(wxID_OK);
     Destroy();
 }
 void AnnotationDialog::OnCancel(wxCommandEvent &ev)
 {
+    SetReturnCode(wxID_CANCEL);
     Destroy();
 }
 
