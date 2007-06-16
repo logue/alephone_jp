@@ -26,6 +26,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 #include <wx/sizer.h>
 #include <wx/cursor.h>
 #include <wx/xrc/xmlres.h>
+#include <wx/filedlg.h>
 
 #ifdef __BORLANDC__
 #pragma hdrstop
@@ -180,6 +181,8 @@ private:
 
     //マップが変更されたか
     bool isChanged;
+    //ファイルパス
+    wxString filePath;
 
     //イベント管理
     hpl::aleph::HPLEventManager eventManager;

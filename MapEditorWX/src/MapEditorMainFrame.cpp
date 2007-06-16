@@ -78,8 +78,13 @@ MapEditorMainFrame::MapEditorMainFrame(const wxString& title,
 
     //ダイアログ
     //TODO dlg
+    //tool
     this->toolDialog.Create(this, wxID_ANY);
     this->toolDialog.Show();
+
+    //height
+    this->heightDialog.Create(this, wxID_ANY);
+    this->heightDialog.Show();
 
     //ペン・ブラシのセットアップ
     this->setupPenAndBrush(wxGetApp().setting.getColorSetting());
@@ -97,10 +102,10 @@ MapEditorMainFrame::MapEditorMainFrame(const wxString& title,
     //TODO
     //テスト
     //プラットフォームダイアログ
-    PlatformDialog dlg;
+/*    PlatformDialog dlg;
     dlg.Create(this, wxID_ANY);
     int id = dlg.ShowModal();
-    hpl::error::halt("%d", id);
+    hpl::error::halt("%d", id);*/
 }
 MapEditorMainFrame::~MapEditorMainFrame()
 {
@@ -418,4 +423,60 @@ void MapEditorMainFrame::uncheckModesOnMenu()
     //アイテム取得
     wxMenuItemList lst = menu->GetMenuItems();
 //    lst.
+}
+
+/**
+    新しいモードに切り替えます
+*/
+void MapEditorMainFrame::changeEditMode(int mode)
+{
+    //モードのチェックをすべてはずします
+    this->uncheckModesOnMenu();
+
+    //チェックをつけます
+    //TODO 
+    if(mode != EditModeType::EM_DRAW){
+        //選択状態を解除
+        wxGetApp().selectData.clear();
+
+        //線・点・プラットフォーム・オブジェクト
+        //以上のプロパティダイアログを消します
+        this->linePropDialog.Show(false);
+        this->pointPropDialog.Show(false);
+        this->polyPropDialog.Show(false);
+        this->objPropDialog.Show(false);
+    }
+    if(mode != EditModeType::EM_FLOOR_TEXTURE &&
+        mode != EditModeType::EM_CEILING_TEXTURE)
+    {
+        //テクスチャモード以外
+        //hide texture palette
+        this->textureDialog.Show(false);
+    }
+
+    if(mode != EditModeType::EM_POLYGON_TYPE){
+        //ポリゴンタイプダイアログを消す
+        this->polyTypeDialog.Show(false);
+    }
+    if(mode != EditModeType::EM_CEILING_HEIGHT &&
+        mode != EditModeType::EM_FLOOR_HEIGHT)
+    {
+        //高さウインドウを消す
+        this->heightPaletteDialog.Show(false);
+    }
+    if(mode != EditModeType::EM_CEILING_LIGHT &&
+        mode != EditModeType::EM_FLOOR_LIGHT)
+    {
+        //TODO ライトパレットを消す
+    }
+    if(mode != EditModeType::EM_MEDIA)
+    {
+        //TODO メディアパレットを消す
+    }
+    if(mode != EditModeType::EM_SOUND)
+    {
+        //TODO サウンドパレットを消す
+    }
+
+    Refresh();
 }

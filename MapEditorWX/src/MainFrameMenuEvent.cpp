@@ -6,6 +6,7 @@
 
 void MapEditorMainFrame::OnPrint(wxCommandEvent& ev)
 {
+    //マップの全体像を紙サイズに合わせて印刷
 }
 void MapEditorMainFrame::OnPrintPreview(wxCommandEvent& ev)
 {
@@ -15,12 +16,34 @@ void MapEditorMainFrame::OnPrintSetup(wxCommandEvent& ev)
 }
 void MapEditorMainFrame::OnNew(wxCommandEvent& ev)
 {
+    if(wxGetApp().isChanged){
+        wxMessageDialog dlg(this, _T("Map has been modified. Are you sure that delete this and create new one?"));
+        if(dlg.ShowModal() == wxID_CANCEL){
+            //拒否
+            return;
+        }
+    }
+    initialize_map_for_new_game();
+    //レベル一覧削除
+    wxGetApp().levelNameList.clear();
+
+    wxGetApp().isChanged = false;
+
     //ついでにレベル設定
     this->OnNewLevel(ev);
+
+    Refresh();
 }
 void MapEditorMainFrame::OnNewLevel(wxCommandEvent& ev)
 {
-    //レベル設定
+    //新規レベルの追加
+    //TODO
+    //レベル設定ダイアログ表示
+    LevelInfoDialog dlg;
+    dlg.Create(this, wxID_ANY);
+    dlg.ShowModal();
+    //内容をマップデータに反映
+    //TODO
 }
 
 void MapEditorMainFrame::OnOpen(wxCommandEvent& WXUNUSED(ev))
@@ -73,16 +96,46 @@ void MapEditorMainFrame::OnOpen(wxCommandEvent& WXUNUSED(ev))
         wxCommandEvent dummy;
         this->OnZoomDefault(dummy);
         this->OnMoveToCenter(dummy);
+
+        wxGetApp().filePath = path;
+        wxGetApp().isChanged = false;
         //再描画
         Refresh();
     }
 }void MapEditorMainFrame::OnSave(wxCommandEvent& ev)
 {
     //TODO save correctly
-
+    if(wxGetApp().isChanged){
+        OnSaveAs(ev);
+    }else{
+        //現在のファイル名で保存
+        if(save_level(wxGetApp().filePath.mb_str())){
+            wxGetApp().isChanged = false;
+            wxGetApp().filePath = fname;
+        }else{
+            hpl::error::caution("save failure");
+        }
+    }
 }
 void MapEditorMainFrame::OnSaveAs(wxCommandEvent& ev)
 {
+    int style = wxFD_SAVE | wxFD_OVERWRITE_PROMPT;
+    wxString wildcard(_T("AlephOne map (*.sceA)|*.sceA|Any file|*.*"));
+    wxFileDialog dlg(this, wxString(_T("Save at...")), 
+        wxString(_T("")), wxString(_T("")), wildcard,
+        style);
+    if(dlg.ShowModal() == wxID_OK){
+        //
+        wxString fname = dlg.GetPath();
+        SetTitle(fname);
+
+        if(save_level(fname.mb_str())){
+            wxGetApp().isChanged = false;
+            filePath = fname;
+        }else{
+            hpl::error::caution("save failure");
+        }
+    }
 }
 
 /////////////////////////////////////////////////////////////////////
@@ -132,6 +185,14 @@ void MapEditorMainFrame::OnMoveToCenter(wxCommandEvent& ev)
 }
 void MapEditorMainFrame::OnHeightDialog(wxCommandEvent& ev)
 {
+    //TODO height dialog
+    bool shown = this->heightDialog.IsShown();
+    this->heightDialog.Show(!shown);
+    if(shown){
+        //TODO メニューにチェックを入れる
+        //this->GetMenuBar()->GetMenu(0)->Get
+    }else{
+    }
 }
 
 /////////////////////////////////////////////////////////////////////
@@ -156,30 +217,68 @@ void MapEditorMainFrame::OnDrawPolygonMode(wxCommandEvent& ev)
 }
 void MapEditorMainFrame::OnVisualMode(wxCommandEvent& ev)
 {
+    //モーダル表示
+    VisualDialog dlg;
+    dlg.Create(this, wxID_ANY);
+    if(dlg.ShowModal() == wxID_OK){
+    }
+
 }
 void MapEditorMainFrame::OnPolygonTypeMode(wxCommandEvent& ev)
 {
+    //モード変更
+    this->changeEditMode(EditModeType::EM_POLYGON_TYPE);
+    //ポリゴンタイプダイアログ表示
+    this->polyTypeDialog.Show(true);
 }
 void MapEditorMainFrame::OnFloorHeightMode(wxCommandEvent& ev)
 {
+    //モード変更
+    this->changeEditMode(EditModeType::EM_FLOOR_HEIGHT);
+    //高さパレットダイアログ表示
+    this->heightPaletteDialog.Show(true);
 }
 void MapEditorMainFrame::OnCeilingHeightMode(wxCommandEvent& ev)
 {
+    //モード変更
+    this->changeEditMode(EditModeType::EM_CEILING_HEIGHT);
+    //高さパレットダイアログ表示
+    this->heightPaletteDialog.Show(true);
 }
 void MapEditorMainFrame::OnFloorLightMode(wxCommandEvent& ev)
 {
+    //モード変更
+    this->changeEditMode(EditModeType::EM_FLOOR_LIGHT);
+    //ライトパレットダイアログ表示
+    //TODO this->lightPaletteDialog.Show(true);
 }
 void MapEditorMainFrame::OnCeilingLightMode(wxCommandEvent& ev)
 {
+    //モード変更
+    this->changeEditMode(EditModeType::EM_CEILING_LIGHT);
+    //ライトパレットダイアログ表示
+    //TODO this->lightPaletteDialog.Show(true);
 }
 void MapEditorMainFrame::OnMediaMode(wxCommandEvent& ev)
 {
+    //モード変更
+    this->changeEditMode(EditModeType::EM_MEDIA);
+    //メディアパレットダイアログ表示
+    //TODO this->mediaPaletteDialog.Show(true);
 }
 void MapEditorMainFrame::OnFloorTextureMode(wxCommandEvent& ev)
 {
+    //モード変更
+    this->changeEditMode(EditModeType::EM_FLOOR_TEXTURE);
+    //テクスチャダイアログ表示
+    this->textureDialog.Show(true);
 }
 void MapEditorMainFrame::OnCeilingTextureMode(wxCommandEvent& ev)
 {
+    //モード変更
+    this->changeEditMode(EditModeType::EM_CEILING_TEXTURE);
+    //テクスチャダイアログ表示
+    this->textureDialog.Show(true);
 }
 
 /////////////////////////////////////////////////////////////////////
@@ -187,14 +286,31 @@ void MapEditorMainFrame::OnCeilingTextureMode(wxCommandEvent& ev)
 // special menus
 void MapEditorMainFrame::OnJumpLevel(wxCommandEvent& ev)
 {
+    //TODO
+    //JumpLevelDialog dlg;
+    //dlg.Create(this, wxID_ANY);
 }
 void MapEditorMainFrame::OnLevelInfo(wxCommandEvent& ev)
 {
+    LevelInfoDialog dlg;
+    dlg.Create(this, wxID_ANY);
+    if(dlg.ShowModal() == wxID_OK){
+        //内容変更
+        //TODO
+    }
 }
 void MapEditorMainFrame::OnObjectPlacement(wxCommandEvent& ev)
 {
+    //オブジェクト配置ダイアログ
+    PlacementDialog dlg;
+    dlg.Create(this, wxID_ANY);
+    dlg.ShowModal();
 }
 void MapEditorMainFrame::OnTerminalViewer(wxCommandEvent& ev)
 {
+    //
+    TerminalDialog dlg;
+    dlg.Create(this, wxID_ANY);
+    dlg.ShowModal();
 }
 

@@ -17,37 +17,37 @@ void MapEditorMainFrame::OnLeftDown(wxMouseEvent &ev)
 
 //    int toolType = wxGetApp().getEventManager()->getToolType();
 
+    if(ctrl){
+        Refresh();
+        return;
+    }
     switch(wxGetApp().getEventManager()->getEditModeType()){
     case EditModeType::EM_DRAW:
-        if(ctrl){
-        }else{
-            //押さずにクリック
-            doLButtonOnDrawMode(ev);
-        }
+        doLButtonOnDrawMode(ev);
         break;
     case EditModeType::EM_POLYGON_TYPE:
-        //TODO
+        doLButtonOnPolygonMode(ev);
         break;
     case EditModeType::EM_FLOOR_HEIGHT:
-        //TODO
+        doLButtonOnFloorHeightMode(ev);
         break;
     case EditModeType::EM_CEILING_HEIGHT:
-        //TODO
+        doLButtonOnCeilingHeightMode(ev);
         break;
     case EditModeType::EM_FLOOR_LIGHT:
-        //TODO
+        doLButtonOnFloorLightMode(ev);
         break;
     case EditModeType::EM_CEILING_LIGHT:
-        //TODO
+        doLButtonOnCeilingLightMode(ev);
         break;
     case EditModeType::EM_MEDIA:
-        //TODO
+        doLButtonOnMediaMode(ev);
         break;
     case EditModeType::EM_FLOOR_TEXTURE:
-        //TODO
+        doLButtonOnFloorTextureMode(ev);
         break;
     case EditModeType::EM_CEILING_TEXTURE:
-        //TODO
+        doLButtonOnCeilingTextureMode(ev);
         break;
     }
     Refresh();
@@ -380,21 +380,73 @@ bool MapEditorMainFrame::tryToSelectOneItem(wxMouseEvent& ev)
 /////////////////////////////////////////////////////////////
 void MapEditorMainFrame::doLButtonOnFillTool(wxMouseEvent& ev)
 {
+    //TODO
+    //塗りつぶし可能なポリゴンデータを取得します
+    //hp::aleph::map::getValidPolygons();
 }
 void MapEditorMainFrame::doLButtonOnHandTool(wxMouseEvent& ev)
 {
+    //MouseMotionに丸投げ
+    
 }
 void MapEditorMainFrame::doLButtonOnLineTool(wxMouseEvent& ev)
 {
+    //線追加
+#ifdef MAP_VIEWER
+#else
+    //選択解除
+    wxGetApp().selectDatas.clear();
+
+    int mx = ev.m_x;
+    int my = ev.m_y;
+    //世界座標にする
+    world_point2d wpoint = wxGetApp().getWorldPointFromViewPoint(mx, my);
+
+    //重なる点があるかどうかチェック
+    if(hpl::aleph::map::isSelectPoint(mx, my, wpoint.x, wpoint.y,
+        voffset[0], voffset[1], OFFSET_X_WORLD, OFFSET_Y_WORLD, div))
+    {
+        //既存の点
+        //中継点・始点・終点にする
+        wxGetApp().isFirstOfLineToAdd = false;
+        //同じ点をクリックしていたら何もしない
+        //TODO
+        //でなけば線を作成する
+        //TODO
+    }else{
+        //新規追加
+        //点を追加してから線を追加する
+    }
+#endif
 }
 void MapEditorMainFrame::doLButtonOnMagnifyTool(wxMouseEvent& ev)
 {
+    bool shift = ev.ShiftDown();
+    wxCommandEvent dummy;
+    if(shift){
+        //縮小
+        this->OnZoomOut(dummy);
+    }else{
+        this->OnZoomIn(dummy);
+    }
 }
 void MapEditorMainFrame::doLButtonOnSkullTool(wxMouseEvent& ev)
 {
+    //オブジェクト配置
+#ifdef MAP_VIEWER
+#else
+    int mx = ev.m_x;
+    int my = ev.m_y;
+    world_point2d wpoint = wxGetApp().getWorldPointFromViewPoint(mx, my);
+    //点の中に入るポリゴンを取得します
+    //std::vector<int> polyIndexes = hpl::aleph::map::getPolygonIndexesIncludePoint(wpoint);
+    //TODO
+#endif
 }
 void MapEditorMainFrame::doLButtonOnTextTool(wxMouseEvent& ev)
 {
+#ifdef MAP_VIEWER
+#else
     //アノテーション追加
     //ダイアログ準備
     AnnotationDialog dlg;
@@ -419,9 +471,16 @@ void MapEditorMainFrame::doLButtonOnTextTool(wxMouseEvent& ev)
         //追加
         hpl::aleph::map::addAnnotation(newAnnotation);
     }
+#endif
 }
 void MapEditorMainFrame::doLButtonOnPolygonTool(wxMouseEvent& ev)
 {
+#ifdef MAP_VIEWER
+#else
+    //範囲選択開始
+    //TODO
+    //wxGetApp().getEventManager()->
+#endif
 }
 
 void MapEditorMainFrame::doLButtonOnPolygonMode(wxMouseEvent& ev)

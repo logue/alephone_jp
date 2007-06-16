@@ -1,7 +1,6 @@
 #pragma once
 
 //dialogues
-#include "ToolDialog.h"
 #include "AnnotationDialog.h"
 #include "ColorCustomizeDialog.h"
 #include "EditorPreferencesDialog.h"
@@ -10,6 +9,7 @@
 #include "LevelInfoDialog.h"
 #include "LinePropDialog.h"
 #include "ObjectPropDialog.h"
+#include "PlacementDialog.h"
 #include "PlatformDialog.h"
 #include "PointPropDialog.h"
 #include "PolygonNumDialog.h"
@@ -17,8 +17,14 @@
 #include "PolygonTypeDialog.h"
 #include "SelectLevelDialog.h"
 #include "SidePropDialog.h"
+#include "TerminalDialog.h"
 #include "TextureDialog.h"
+#include "ToolDialog.h"
 #include "VisualDialog.h"
+
+#include "LightPalletDialog.h"
+#include "MediaPalletDialog.h"
+#include "SoundPalletDialog.h"
 
 #include "MapEditorWX.h"
 #include "HPLLib/HPLAlephLib.h"
@@ -84,10 +90,6 @@ enum{
 */
 class MapEditorMainFrame: public wxFrame
 {
-public:
-    //ToolDialog・this(オブジェクト選択)が呼び出す
-    ObjectPropDialog objectPropDialog;
-
 private:
     //ダブルバッファリング用Bitmap
     wxBitmap doubleBufferingBitmap;
@@ -96,13 +98,19 @@ private:
 
     /////////////////////
     //ダイアログ(モードレス)
-    ToolDialog toolDialog;
-    PolygonTypeDialog polyTypeDialog;
+    //高さ
     HeightDialog heightDialog;
-    PolygonPropDialog polyPropDialog;
-    PointPropDialog pointPropDialog;
+    //高さパレット
+    HeightPaletteDialog heightPaletteDialog;
     LinePropDialog linePropDialog;
+    ObjectPropDialog objPropDialog;
+    PointPropDialog pointPropDialog;
+    PolygonTypeDialog polyTypeDialog;
+    PolygonPropDialog polyPropDialog;
     TextureDialog textureDialog;
+    ToolDialog toolDialog;
+    //TODO サウンド・メディア・ライト
+    //TODO 以上のパレットダイアログをさくせいすること
 
     //TODO モーダルだが、Side選択ダイアログも作ろう
     //TODO JumpLevel, LevelInfo, Placements, TerminalViewer
@@ -342,4 +350,9 @@ private:
         @return 選択に成功した場合真
     */
     bool tryToSelectOneItem(wxMouseEvent& ev);
+
+    /**
+        新しいモードに切り替えます
+    */
+    void changeEditMode(int mode);
 };

@@ -540,6 +540,14 @@
 				>
 			</File>
 			<File
+				RelativePath="..\..\..\..\src\JumpLevelDialog.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\..\src\JumpLevelDialog.h"
+				>
+			</File>
+			<File
 				RelativePath="..\..\..\..\src\LevelInfoDialog.cpp"
 				>
 			</File>
@@ -548,11 +556,27 @@
 				>
 			</File>
 			<File
+				RelativePath="..\..\..\..\src\LightPaletteDialog.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\..\src\LightPaletteDialog.h"
+				>
+			</File>
+			<File
 				RelativePath="..\..\..\..\src\LinePropDialog.cpp"
 				>
 			</File>
 			<File
 				RelativePath="..\..\..\..\src\LinePropDialog.h"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\..\src\MediaPaletteDialog.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\..\src\MediaPaletteDialog.h"
 				>
 			</File>
 			<File
@@ -625,6 +649,14 @@
 			</File>
 			<File
 				RelativePath="..\..\..\..\src\SidePropDialog.h"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\..\src\SoundPaletteDialog.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\..\src\SoundPaletteDialog.h"
 				>
 			</File>
 			<File

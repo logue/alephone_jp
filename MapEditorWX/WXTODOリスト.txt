@@ -26,9 +26,11 @@ TODO リスト
 
 ///MAXIMUM_VERTICES_PER_POLYGON=8
 
+・wxGladeる
 ・配置
 ・データ読み込み部分作成
 ・データ書き出し部分作成
+
 Annotation		:配置済み
 ColorCustomize	:配置済み
 EditPreferences	:配置済み
@@ -36,12 +38,12 @@ Height			:配置済み。
 HeightPallet	:
 LevelInfo
 LineProp
-ObjectProp
+ObjectProp		:wx
 Placement		:配置済み
 Platform		:配置済み。
-PointProp
-PolygonNum
-PolygonProp
+PointProp		:wx
+PolygonNum		:wx
+PolygonProp		:wx
 PolygonType
 SelectLevel
 SideProp
@@ -49,3 +51,38 @@ Terminal		:配置済み
 Texture
 Tool			:配置済み
 Visual
+
+JumpLevel
+MediaPalette
+LightPalette
+SoundPalette
+
+○イベント処理の記述は終わっているか？のリスト
+・TODOありならその内容を書く
+・完成なら完成と書く
+Draw
+	Arrow
+		・単一選択は可能
+		・テキスト選択→アノテーションダイアログを出す
+	Fill
+		・塗れるポリゴン探しが未完
+	Hand
+	Line
+		・点の独立追加
+		・線はすでにある点を指定しての追加にする
+		・線を分断する際は調整すべし
+	Magnify
+		・Shiftを押している間はアイコンをマイナスにする
+	Skull
+	Text
+		・まだテキストを追加できていない
+	Polygon
+		・プリセット選択ダイアログを出す
+Poly
+FloorHeight
+CeilingHeight
+FloorLight
+CeilingLight
+Media
+FloorTexture
+CeilingTexture

@@ -250,5 +250,7 @@ void MapEditorWX::setCursor()
         //TODO ƒJ[ƒ\ƒ‹
         ::wxSetCursor(cursors[toolType]);
     }else{
+        //–îˆó‚É‚·‚é
+        ::wxSetCursor(cursors[0]);
     }
 }
