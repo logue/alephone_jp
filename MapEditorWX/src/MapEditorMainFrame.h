@@ -169,6 +169,9 @@ private:
     wxBrush allyBrush;
     wxBrush selectedAllyBrush;
 
+    //”ÍˆÍ‘I‘ð•\Ž¦
+    wxPen selectingPen;
+
 public:
     MapEditorMainFrame(const wxString& title,
         const wxPoint& pos = wxDefaultPosition,

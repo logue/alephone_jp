@@ -306,6 +306,13 @@ namespace map{
 	int addMapSavedObject(map_object object);
 	int addAnnotation(map_annotation annotation);
 
+    /**
+        既存の点を用いて線やポリゴンを作成します
+        <en> create new line and polygon with points already exist
+    */
+    line_data createLine(int beginPointIndex, int endPointIndex);
+    polygon_data createPolygon(int pointIndexes[], int n);
+
 	/**
 		点情報を削除します
 		@param index 削除対象のインデックス

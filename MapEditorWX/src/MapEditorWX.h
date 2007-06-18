@@ -220,6 +220,8 @@ public:
     //ポリゴン整合性情報を更新します
     void updatePolygonValidityStored();
 
+    std::vector<bool> polygonValidity;
+
     //イベントマネージャーを取得します
     hpl::aleph::HPLEventManager* getEventManager();
 

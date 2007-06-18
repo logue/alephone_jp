@@ -841,6 +841,86 @@ int hpl::aleph::map::addAnnotation(map_annotation annotation)
 	return index;
 }
 
+line_data hpl::aleph::map::createLine(int beginPointIndex, int endPointIndex)
+{
+    endpoint_data* begin = get_endpoint_data(beginPointIndex);
+    endpoint_data* end = get_endpoint_data(endPointIndex);
+    if(begin == NULL || end == NULL){
+        return NONE;
+    }
+    line_data line;
+    line.clockwise_polygon_owner = NONE;
+    line.clockwise_polygon_side_index = NONE;
+    line.counterclockwise_polygon_owner = NONE;
+    line.counterclockwise_polygon_side_index = NONE;
+    line.endpoint_indexes[0] = beginPointIndex;
+    line.endpoint_indexes[1] = endPointIndex;
+    line.flags = 0;
+    //TODO 点のうち高い方のフロア高度
+    line.highest_adjacent_floor = 0;
+    return line;
+}
+polygon_data hpl::aleph::map::createPolygon(int pointIndexes[], int n)
+{
+    endpoint_data* ep[MAXIMUM_VERTICES_PER_POLYGON];
+    polygon_data poly;
+    for(int i = 0; i < n; i ++){
+        ep[i] = get_endpoint_data(pointIndexes[i]);
+        if(ep[i] == NULL){
+            return NONE;
+        }
+        poly.endpoint_indexes[i] = pointIndexes[i];
+    }
+    for(int i = 0; i < n; i ++){
+        int next = i + 1;
+        if(i == n - 1){
+            next = 0;
+        }
+        int lIndex = hpl::aleph::map::getLineIndexFromTwoLPoints(pointIndexes[i], pointIndexes[next]);
+        if(lIndex == NONE){
+            return NONE;
+        }
+        poly.line_indexes[i] = lIndex;
+    }
+    poly.adjacent_polygon_indexes = NONE;
+    poly.ambient_sound_image_index = NONE;
+    //TODO area?
+    poly.area = 0;
+    //TODO 点のうち一番高い高度
+    poly.ceiling_height = WORLD_ONE;
+    poly.ceiling_lightsource_index = NONE;
+    //TODO ?
+    poly.ceiling_origin.x = 0;
+    poly.ceiling_origin.y = 0;
+    poly.ceiling_texture = NONE;
+    //TODO ?
+    poly.ceiling_transfer_mode = 0;
+    //TODO center?
+    poly.center.x = 0;
+    poly.center.y = 0;
+    //TODO ZONE?
+    poly.first_exclusion_zone_index = NONE;
+    poly.line_exclusion_zone_count = 0;
+    poly.point_exclusion_zone_count = 0;
+    //TODO ?
+    poly.first_neighbor_index = NONE;
+    poly.first_object = NONE;
+    //TODO flags?
+    poly.flags = 0;
+    poly.media_index = NONE;
+    poly.media_lightsource_index = NONE;
+    //TODO count 線の反対側の
+    poly.neighbor_count = 0;
+    //TODO ?
+    poly.permutation = 0;
+    poly.random_sound_image_index = NONE;
+    //poly.side_indexes[0] = NONE;
+    //poly.sound_source_indexes;
+    poly.type = _polygon_is_normal;
+    poly.vertex_count = n;
+    return poly;
+}
+
 /**
 	一部を飛ばした新しいインデックス表を作ります
 */

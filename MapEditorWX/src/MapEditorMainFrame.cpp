@@ -256,6 +256,32 @@ void MapEditorMainFrame::OnPaint(wxPaintEvent& WXUNUSED(event))
     //ドローモードならオブジェクトも表示
     this->drawObjects(drawDC);
 
+    if(wxGetApp().getEventManager()->isSelectingGroup()){
+        //範囲指定中なら範囲を示す矩形を表示
+        int vpoint[2];
+        wxGetApp().getEventManager()->getSelectGroupStartPoint(vpoint);
+        int mpoint[2];
+        wxGetApp().getViewGridManager()->getNewMousePoint(mpoint);
+
+        //x,y,w,hを計算
+        int x = vpoint[0];
+        int y = vpoint[1];
+        int w = mpoint[0] - x;
+        itn h = mpoint[1] - y;
+        if(mpoint[0] < x){
+            x = mpoint[0];
+            w = vpoint[0] - x;
+        }
+        if(mpoint[1] < y){
+            y = mpoint[1];
+            h = vpoint[1] - y;
+        }
+        drawDC->SetPen(this->selectingPen);
+        drawDC->SetPen(wxNullBrush);
+        drawDC->DrawRectangle(x,y,w,h);
+
+    }
+
     //バッファから画面へコピー
     dc.Blit(wxPoint(0,0), size,
         drawDC,
@@ -353,6 +379,10 @@ void MapEditorMainFrame::setupPenAndBrush(ColorSettings* setting)
     //選択モンスター
     this->selectedMonsterPen.SetColour(wxColor(0,255,0));
     this->selectedMonsterBrush.SetColour(wxColor(0,255,0));
+
+    //選択中
+    int style = wxDOT;
+    this->selectingPen = wxPen(wxColor(255,0,0), 1, style);
 }
 
 /**

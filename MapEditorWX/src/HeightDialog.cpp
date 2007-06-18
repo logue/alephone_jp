@@ -67,20 +67,25 @@ bool HeightDialog::Create(wxWindow* parent, wxWindowID id)
 void HeightDialog::OnEditFloor(wxCommandEvent& ev)
 {
     //TODO
+    //スライダーの位置を変更する
 }
 void HeightDialog::OnEditCeiling(wxCommandEvent& ev)
 {
     //TODO
+    //同上
 }
 void HeightDialog::OnSliderFloor(wxCommandEvent& ev)
 {
     //TODO
+    //テキストボックスの値を変更する
 }
 void HeightDialog::OnSliderCeiling(wxCommandEvent& ev)
 {
     //TODO
+    //同上
 }
 void HeightDialog::OnDrawCheck(wxCommandEvent& ev)
 {
     //TODO
+    //シングルトンさんのisDrawHiddenLinesを操作する
 }
