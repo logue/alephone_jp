@@ -149,7 +149,7 @@ public:
     bool isFirstOfLineToAdd;
     //前回選択した点のインデックス
     int prevPointIndex;
-
+    
     //編集設定
     MapEditorOneSetting setting;
 

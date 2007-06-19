@@ -395,28 +395,90 @@ void MapEditorMainFrame::doLButtonOnLineTool(wxMouseEvent& ev)
 #ifdef MAP_VIEWER
 #else
     //選択解除
-    wxGetApp().selectDatas.clear();
+    wxGetApp().selectData.clear();
 
     int mx = ev.m_x;
     int my = ev.m_y;
     //世界座標にする
     world_point2d wpoint = wxGetApp().getWorldPointFromViewPoint(mx, my);
 
+    bool isFirst = wxGetApp().isFirstOfLineToAdd;
+
+    hpl::aleph::HPLEventManager* emgr = wxGetApp().getEventManager();
+    
+    
     //重なる点があるかどうかチェック
-    if(hpl::aleph::map::isSelectPoint(mx, my, wpoint.x, wpoint.y,
-        voffset[0], voffset[1], OFFSET_X_WORLD, OFFSET_Y_WORLD, div))
+    int pointIndex = NONE;
+    for(int i = 0; i < (int)EndpointList.size(); i ++){
+        endpoint_data* ep = get_endpoint_data(i);
+        if(hpl::aleph::map::isSelectPoint(mx, my, ep->vertex.x, ep->vertex.y,
+            voffset[0], voffset[1], OFFSET_X_WORLD, OFFSET_Y_WORLD, div))
+        {
+            pointIndex = i;
+            break;
+        }
+    }
+    //重なる線があるか判定する
+
+    if(pointIndex != NONE)
     {
-        //既存の点
+        //既存の点をクリックしている
+        /*
+        1:点の上でクリック
+	        1:最初のクリック
+		        前回クリック点の更新
+	        2:二回目以降のクリック
+		        1:既に線が存在している
+			        何もしない
+		        2:線は存在していない
+			        線の追加
+		        前回クリック点の更新
+        */
+        if(isFirst){
+            //最初のクリック
+            //始点とする
+            wxGetApp().prevPointIndex = 
+        }else{
+            //2回目以降のクリック
+            //同じ点をクリックしていたら何もしない
+            //TODO
+            //でなけば線を作成する
+            //TODO
+        }
+
         //中継点・始点・終点にする
         wxGetApp().isFirstOfLineToAdd = false;
-        //同じ点をクリックしていたら何もしない
-        //TODO
-        //でなけば線を作成する
-        //TODO
     }else{
-        //新規追加
-        //点を追加してから線を追加する
+        //線を踏んでいないかチェックします
+        bool onLine = false;
+        for(int i = 0; i < (int)LineList.size(); i ++){
+            line_data* line = get_line_data(i);
+            endpoint_data* begin = get_endpoint_data(line->endpoint_indexes[0]);
+            endpoint_data* end = get_endpoint_data(line->endpoint_indexes[1]);
+            if(hpl::aleph::map::isSelectLine(mx, my, begin->vertex.x, begin->vertex.y,
+                end->vertex.x, end->vertex.y, voffset[0], voffset[1], OFFSET_X_WORLD, OFFSET_Y_WORLD,
+                div, LINE_DISTANCE_EPSILON))
+            {
+                //線を踏んでいる
+                //TODO 切断します
+                //TODO 点を追加して接続しなおします
+                onLine = true;
+                break;
+            }
+        }
+        if(onLine){
+        }else{
+            //新規追加
+            if(wxGetApp().isFirstOfLineToAdd){
+                //最初の点
+            }else{
+                //点を追加
+            }
+
+            //点を追加してから線を追加する
+        }
     }
+    wxGetApp().isFirstOfLineToAdd = isFirst;
 #endif
 }
 void MapEditorMainFrame::doLButtonOnMagnifyTool(wxMouseEvent& ev)

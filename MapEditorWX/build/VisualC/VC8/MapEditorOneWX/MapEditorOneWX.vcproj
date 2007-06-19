@@ -532,11 +532,11 @@
 				>
 			</File>
 			<File
-				RelativePath="..\..\..\..\src\HeightPalletDialog.cpp"
+				RelativePath="..\..\..\..\src\HeightPaletteDialog.cpp"
 				>
 			</File>
 			<File
-				RelativePath="..\..\..\..\src\HeightPalletDialog.h"
+				RelativePath="..\..\..\..\src\HeightPaletteDialog.h"
 				>
 			</File>
 			<File

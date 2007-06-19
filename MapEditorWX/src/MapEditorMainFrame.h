@@ -5,7 +5,7 @@
 #include "ColorCustomizeDialog.h"
 #include "EditorPreferencesDialog.h"
 #include "HeightDialog.h"
-#include "HeightPalletDialog.h"
+#include "HeightPaletteDialog.h"
 #include "LevelInfoDialog.h"
 #include "LinePropDialog.h"
 #include "ObjectPropDialog.h"
@@ -22,9 +22,9 @@
 #include "ToolDialog.h"
 #include "VisualDialog.h"
 
-#include "LightPalletDialog.h"
-#include "MediaPalletDialog.h"
-#include "SoundPalletDialog.h"
+#include "LightPaletteDialog.h"
+#include "MediaPaletteDialog.h"
+#include "SoundPaletteDialog.h"
 
 #include "MapEditorWX.h"
 #include "HPLLib/HPLAlephLib.h"
