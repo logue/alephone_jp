@@ -12,8 +12,12 @@
 #include <wx/sizer.h>
 #include <wx/image.h>
 #include <wx/radiobut.h>
+#include <wx/listctrl.h>
+#include <wx/listbox.h>
 
 #include "HPLLib/HPLEventManager.h"
 #include <string>
+
+#include <iostream>
 
 #endif

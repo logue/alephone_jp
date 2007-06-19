@@ -31,7 +31,8 @@ public:
     virtual ~ColorCustomizeDialog();
     //イベントテーブル作成<en>declare
     DECLARE_EVENT_TABLE()
-    void OnOk(wxCommandEvent& wv);
+
+    void OnOk(wxCommandEvent& ev);
     void OnCancel(wxCommandEvent &ev);
     void OnBackground(wxCommandEvent &event); // wxGlade: <event_handler>
     void OnGrid(wxCommandEvent &event); // wxGlade: <event_handler>

@@ -9,15 +9,16 @@ enum{
     ID_POINTS,
 };
 BEGIN_EVENT_TABLE(ColorCustomizeDialog, wxDialog)
-    EVT_BUTTON(ID_BACKGROUND, ColorCustomize::OnBackground)
-    EVT_BUTTON(ID_GRID, ColorCustomize::OnGrid)
-    EVT_BUTTON(ID_LINES, ColorCustomize::OnLines)
-    EVT_BUTTON(ID_POLYGONS, ColorCustomize::OnPolygons)
-    EVT_BUTTON(ID_STRINGS, ColorCustomize::OnStrings)
-    EVT_BUTTON(ID_POINTS, ColorCustomize::OnPoints)
-    EVT_COMMAND(wxID_OK, ColorCustomizeDialog::OnOk)
-    EVT_COMMAND(wxID_CANCEL, ColorCustomizeDialog::OnCancel)
+    EVT_BUTTON(ID_BACKGROUND, ColorCustomizeDialog::OnBackground)
+    EVT_BUTTON(ID_GRID, ColorCustomizeDialog::OnGrid)
+    EVT_BUTTON(ID_LINES, ColorCustomizeDialog::OnLines)
+    EVT_BUTTON(ID_POLYGONS, ColorCustomizeDialog::OnPolygons)
+    EVT_BUTTON(ID_STRINGS, ColorCustomizeDialog::OnStrings)
+    EVT_BUTTON(ID_POINTS, ColorCustomizeDialog::OnPoints)
+    EVT_BUTTON(wxID_OK, ColorCustomizeDialog::OnOk)
+    EVT_BUTTON(wxID_CANCEL, ColorCustomizeDialog::OnCancel)
 END_EVENT_TABLE()
+
 ColorCustomizeDialog::ColorCustomizeDialog()
 {
 }
@@ -92,7 +93,7 @@ bool ColorCustomizeDialog::Create(wxWindow* parent, wxWindowID id)
 
     return result;
 }
-void ColorCustomize::OnOk(wxCommandEvent& wv)
+void ColorCustomize::OnOk(wxCommandEvent& ev)
 {
     SetReturnCode(wxID_OK);
     Destroy();

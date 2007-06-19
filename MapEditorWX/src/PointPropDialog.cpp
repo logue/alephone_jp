@@ -18,6 +18,8 @@ BEGIN_EVENT_TABLE(PointPropDialog, wxDialog)
     EVT_TEXT(ID_TX, PointPropDialog::OnEditTX)
     EVT_TEXT(ID_TY, PointPropDialog::OnEditTY)
     EVT_CHOICE(ID_POLY_INDEX, PointPropDialog::OnPolyChoice)
+END_EVENT_TABLE()
+
 PointPropDialog::PointPropDialog()
 {
 }

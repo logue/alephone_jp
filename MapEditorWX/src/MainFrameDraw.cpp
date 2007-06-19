@@ -158,7 +158,6 @@ void MapEditorMainFrame::drawPolygons(wxDC* dc)
                 dc->SetBrush(this->invalidBrush);
             }
         }
-        //TODO ®‡«
 
         dc->DrawPolygon(vertexCount, points);
     }

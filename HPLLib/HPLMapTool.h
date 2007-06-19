@@ -310,8 +310,8 @@ namespace map{
         既存の点を用いて線やポリゴンを作成します
         <en> create new line and polygon with points already exist
     */
-    line_data createLine(int beginPointIndex, int endPointIndex);
-    polygon_data createPolygon(int pointIndexes[], int n);
+    bool createLine(int beginPointIndex, int endPointIndex, line_data* line);
+    bool createPolygon(int pointIndexes[], int n, polygon_data* poly);
 
 	/**
 		点情報を削除します
