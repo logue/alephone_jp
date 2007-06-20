@@ -181,6 +181,10 @@ public:
     //プリセットで追加するポリゴンの頂点数
     int presetPolygonVertexCount;
 
+    //現在のポイントは点の上にあるか？
+    //ただし、高さ範囲の外にある場合考慮しない
+    bool isNowOnThePoint;
+    bool isNowOnTheLine;
 private:
     
     ///////////////////////

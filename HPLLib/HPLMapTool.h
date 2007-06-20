@@ -121,6 +121,13 @@ namespace map{
 	void getViewPointFromWorldPoint2D(world_point2d& point, int *dest,
 	    int offsetXWorld, int offsetYWorld, int zoomDivision, int offsetx, int offsety);
 
+    /**
+        指定した場所に点があるかどうかを得ます
+        @return その場所に点があればそのインデックスがかえります。
+            なければNONE
+    */
+    int getSelectPointIndex(world_point2d& wpoint, int threshold);
+
 	///////////////////////	 Lines	////////////////////////////////////////////
 	/**
 		指定した点を用いたときに線を選択できているかを判定
@@ -305,6 +312,17 @@ namespace map{
 	int addPolygon(polygon_data polygon);
 	int addMapSavedObject(map_object object);
 	int addAnnotation(map_annotation annotation);
+
+    /**
+        簡略バージョン
+    */
+    bool createPoint(world_point2d& wpoint, endpoint_data* ep,
+        int threshold);
+    /**
+        @param polyIndex 載せるポリゴンのインデックス
+    */
+    bool createObject(worldpoint2d& wpoint, int polyIndex, map_object* obj,
+                                   int flags);
 
     /**
         既存の点を用いて線やポリゴンを作成します

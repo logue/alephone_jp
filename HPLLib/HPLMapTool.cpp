@@ -127,6 +127,23 @@ void hpl::aleph::map::getViewPointFromWorldPoint2D(world_point2d& point, int *de
     dest[0] = (point.x + offsetXWorld)/zoomDivision + offsetx;
     dest[1] = (point.y + offsetYWorld)/zoomDivision + offsety;
 }
+/**
+    指定した場所に点があるかどうかを得ます
+    @return その場所に点があればそのインデックスがかえります。
+        なければNONE
+*/
+int hpl::aleph::map::getSelectPointIndex(world_point2d& wpoint, int threshold)
+{
+    int pointIndex = NONE;
+    for(int i = 0; i < (int)EndpointList.size(); i ++){
+        endpoint_data* ep = get_endpoint_data(i);
+        if(hpl::aleph::map::isSelectPoint(wpoint, ep->vertex, threshold)){
+            pointIndex = i;
+            break;
+        }
+    }
+    return pointIndex;
+}
 
 ///////////////////////  Lines  ////////////////////////////////////////////
 
@@ -841,6 +858,52 @@ int hpl::aleph::map::addAnnotation(map_annotation annotation)
 	return index;
 }
 
+/**
+    簡略バージョン
+*/
+bool hpl::aleph::map::createPoint(world_point2d& wpoint, endpoint_data* ep,
+                                  int threshold)
+{
+    //TODO
+    ep->flags = POINT_FLAG_SOLID;
+    ep->vertex.x = wpoint.x;
+    ep->vertex.y = wpoint.y;
+
+    //他の点を踏んでいないか確認
+    int pIndex = hpl::aleph::map::getSelectPointIndex(wpoint, threshold);
+    if(pIndex != NONE){
+        //踏んでる
+        //→作成できない
+        return false;
+    }
+    ep->highest_adjacent_floor_height = 0;
+    ep->lowest_adjacent_ceiling_height = WORLD_ONE;
+    ep->supporting_polygon_index = NONE;
+    return true;
+}
+/**
+    @param polyIndex 載せるポリゴンのインデックス
+*/
+bool hpl::aleph::map::createObject(worldpoint2d& wpoint, int polyIndex, map_object* obj,
+                                   int flags)
+{
+    //TODO
+    obj->polygon_index = polygonIndex;
+    obj->location.x = wpoint.x;
+    obj->location.y = wpoint.y;
+    polygon_data* poly = get_polygon_data(polygonIndex);
+    if(poly == NULL){
+        return false;
+    }
+    //TODO flag?
+    if(flags & _map_object_hanging_from_ceiling){
+        obj->location.z = poly->ceiling_height;
+    }else{
+        obj->location.z = poly->floor_height;
+    }
+    obj->flags = flags;
+}
+
 bool hpl::aleph::map::createLine(int beginPointIndex, int endPointIndex, line_data* line)
 {
     endpoint_data* begin = get_endpoint_data(beginPointIndex);
@@ -854,7 +917,7 @@ bool hpl::aleph::map::createLine(int beginPointIndex, int endPointIndex, line_da
     line->counterclockwise_polygon_side_index = NONE;
     line->endpoint_indexes[0] = beginPointIndex;
     line->endpoint_indexes[1] = endPointIndex;
-    line->flags = 0;
+    line->flags = SOLID_LINE_BIT;
     //TODO 点のうち高い方のフロア高度
     line->highest_adjacent_floor = 0;
     return true;

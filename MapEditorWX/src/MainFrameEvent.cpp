@@ -411,16 +411,7 @@ void MapEditorMainFrame::doLButtonOnLineTool(wxMouseEvent& ev)
     int div = wxGetApp().getViewGridManager()->getZoomDivision();
 
     //重なる点があるかどうかチェック
-    int pointIndex = NONE;
-    for(int i = 0; i < (int)EndpointList.size(); i ++){
-        endpoint_data* ep = get_endpoint_data(i);
-        if(hpl::aleph::map::isSelectPoint(mx, my, ep->vertex.x, ep->vertex.y,
-            voffset[0], voffset[1], OFFSET_X_WORLD, OFFSET_Y_WORLD, div, POINT_DISTANCE_EPSILON))
-        {
-            pointIndex = i;
-            break;
-        }
-    }
+    int pointIndex = hpl::aleph::map::getSelectPointIndex(wpoint, POINT_DISTANCE_EPSILON);
     //重なる線があるか判定する
 
     if(pointIndex != NONE)
@@ -440,13 +431,25 @@ void MapEditorMainFrame::doLButtonOnLineTool(wxMouseEvent& ev)
         if(isFirst){
             //最初のクリック
             //始点とする
-            //wxGetApp().prevPointIndex = 
+            wxGetApp().prevPointIndex = pointIndex;
+
         }else{
             //2回目以降のクリック
-            //同じ点をクリックしていたら何もしない
-            //TODO
-            //でなけば線を作成する
-            //TODO
+            //同じ点をクリックしているか？
+            if(wxGetApp().prevPointIndex == pointIndex){
+                //始点とする
+            }else{
+                //既に線が存在しているか？
+                int lineIndex = hpl::aleph::map::getLineIndexFromTwoLPoints(
+                    wxGetApp().prevPointIndex, pointIndex);
+                if(lineIndex != NONE){
+                    //何もせず現在の点を始点とする
+                    wxGetApp().prevPointIndex = pointIndex;
+                }else{
+                    //でなけば線を作成する
+                    //TODO
+                }
+            }
         }
 
         //中継点・始点・終点にする
@@ -799,10 +802,15 @@ void MapEditorMainFrame::OnMotion(wxMouseEvent &ev)
     //ポリゴン整合性チェックカウント
     updatePolygonValidityCount ++;
 
-    if(updatePolygonValidityCount >= UPDATE_POLYGON_VALIDITY_INTERVAL){
-        //TODO
-    }
+
+    int mx = ev.m_x;
+    int my = ev.m_y;
     if(ev.ButtonIsDown(wxMOUSE_BTN_LEFT)){
+        if(updatePolygonValidityCount >= UPDATE_POLYGON_VALIDITY_INTERVAL){
+            //ポリゴン整合性
+            //TODO
+        }
+
         //左ボタンを押しながら動いている
         bool shift = ev.ShiftDown();
         bool ctrl = ev.ControlDown();
@@ -812,7 +820,8 @@ void MapEditorMainFrame::OnMotion(wxMouseEvent &ev)
         if(ctrl ||
             editModeType == EditModeType::EM_DRAW && toolType == ToolType::TI_HAND)
         {
-            
+            //オフセット移動
+            moveMapOffset(mx, my);
         }
 #else
 
@@ -823,6 +832,9 @@ void MapEditorMainFrame::OnMotion(wxMouseEvent &ev)
         if(ctrl ||
             editModeType == EditModeType::EM_DRAW && toolType == ToolType::TI_HAND)
         {
+            //コントロール押しながら、
+            //あるいはハンドツールでD&D
+            //→オフセット移動
             this->moveMapOffset(ev.m_x, ev.m_y);
         }else{
             //Ctrl押さない
@@ -861,6 +873,13 @@ void MapEditorMainFrame::OnMotion(wxMouseEvent &ev)
 
 #endif
         Refresh();
+    }else{
+        //押していない状態
+        if(editModeType == EditModeType::EM_DRAW &&
+            wxGetApp().getEventManager()->getToolType() == ToolType::TI_LINE)
+        {
+            this->doMouseMotionOnLineTool(ev);
+        }
     }
 
     //更新
@@ -880,7 +899,8 @@ void MapEditorMainFrame::doMouseMotionOnDrawMode(wxMouseEvent& ev)
         doMouseMotionOnHandTool(ev);
         break;
     case ToolType::TI_LINE:
-        doMouseMotionOnLineTool(ev);
+        //線ツールはD&Dは考慮しない
+        //doMouseMotionOnLineTool(ev);
         break;
     case ToolType::TI_MAGNIFY:
         doMouseMotionOnMagnifyTool(ev);
@@ -904,15 +924,97 @@ void MapEditorMainFrame::doMouseMotionOnArrowTool(wxMouseEvent& ev)
     //ここですることはない
 
     //もし選択中のマップアイテムがあれば、それらを移動させる
+    
+    //選択情報
+    hpl::aleph::map::HPLSelectData* sel = &wxGetApp().selectData;
+
+    hpl::aleph::view::HPLViewGridManager* vmgr = wxGetApp().getViewGridManager();
+    int div = vmgr->getZoomDivision();
+
+    if(sel->isSelected()){
+        //選択中
+        //選択物の移動
+        
+        //ワールド座標系にする
+        world_point2d wmp = wxGetApp().getWorldPointFromViewPoint(mx, my);
+
+        //点
+        for(int i = 0; i < (int)sel->getSelPoints()->size(); i ++){
+            struct hpl::aleph::map::SelPoint* selp = &sel->getSelPoints()->at(i);
+            //位置変更
+            get_endpoint_data(selp->index)->vertex.x = wmp.x + selp->offset[0] * div;
+            get_endpoint_data(selp->index)->vertex.y = wmp.x + selp->offset[1] * div;
+        }
+
+        //線
+        for(int i = 0; i < (int)sel->getSelLines()->size(); i ++){
+            struct hpl::aleph::map::SelLine* sell = &sel->getSelLines()->at(i);
+            int index = sell->index;
+            line_data* line = get_line_data(index);
+            for(int j = 0; j < 2; j ++){
+                get_endpoint_data(line->endpoint_indexes[j])->vertex.x =
+                    wmp.x + sell->offset[j][0] * div;
+                get_endpoint_data(line->endpoint_indexes[j])->vertex.y =
+                    wmp.y + sell->offset[j][1] * div;
+            }
+        }
+
+        //ポリゴン
+        for(int i = 0; i < (int)sel->getSelPolygons()->size(); i ++){
+            struct hpl::aleph::map::SelPolygon* selp = &sel->getSelPolygons()->at(i);
+            polygon_data* poly = get_polygon_data(selp->index);
+            for(int j = 0; j < selp->num; j ++){
+                get_endpoint_data(poly->endpoint_indexes[j])->vertex.x =
+                    wmp.x + selp->offset[j][0] * div;
+                get_endpoint_data(poly->endpoint_indexes[j])->vertex.y =
+                    wmp.y + selp->offset[j][1] * div;
+            }
+        }
+
+        //オブジェクト
+        for(int i = 0; i < (int)sel->getSelObjects()->size(); i ++){
+            struct hpl::aleph::map::SelObject* selo = &sel->getSelObjects()->at(i);
+            SavedObjectList[selo->index].location.x = wmp.x + selo->offset[0] * div;
+            SavedObjectList[selo->index].location.y = wmp.y + selo->offset[1] * div;
+        }
+    }
 }
 void MapEditorMainFrame::doMouseMotionOnFillTool(wxMouseEvent& ev)
 {
 }
 void MapEditorMainFrame::doMouseMotionOnHandTool(wxMouseEvent& ev)
 {
+    //移動
+    this->moveMapOffset(ev.m_x, ev.m_y);
 }
 void MapEditorMainFrame::doMouseMotionOnLineTool(wxMouseEvent& ev)
 {
+    //点を踏んでいないか確認
+    int endpointIndex = NONE;
+    bool found = false;
+    world_point2d wmp = wxGetApp().getWorldPointFromViewPoint(ev.m_x, ev.m_y);
+    for(int i = 0; i < (int)EndpointList.size(); i ++){
+        endpoint_data* ep = get_endpoint_data(i);
+        if(!wxGetApp().getViewGridManager()->isValidHeight(
+            ep->highest_adjacent_floor_height, ep->lowest_adjacent_ceiling_height)
+        {
+            continue;
+        }
+
+        if(hpl::aleph::map::isSelectPoint(ev.m_x, ev.m_y, ep->vertex.x, ep->vertex.y,
+            voffset[0], voffset[1], OFFSET_X_WORLD, OFFSET_Y_WORLD, div, POINT_DISTANCE_EPSILON))
+        {
+            wxGetApp().isNowOnThePoint = true;
+            found = true;
+            break;
+        }
+    }
+    if(!found){
+        wxGetApp().isNowOnThePoint = false;
+
+        //線の上にいるかどうか？
+        //TODO
+    }
 }
 void MapEditorMainFrame::doMouseMotionOnMagnifyTool(wxMouseEvent& ev)
 {
