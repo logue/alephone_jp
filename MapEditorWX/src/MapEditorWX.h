@@ -172,6 +172,15 @@ public:
 
     //高さが範囲外の線を表示するかどうか(デフォルト:false)
     bool isRevealHiddenLines;
+
+    //マップが変更されたか
+    bool isChanged;
+    //ファイルパス
+    wxString filePath;
+
+    //プリセットで追加するポリゴンの頂点数
+    int presetPolygonVertexCount;
+
 private:
     
     ///////////////////////
@@ -179,10 +188,6 @@ private:
     /** ビュー＆グリッドマネージャー */
     hpl::aleph::view::HPLViewGridManager viewGridManager;
 
-    //マップが変更されたか
-    bool isChanged;
-    //ファイルパス
-    wxString filePath;
 
     //イベント管理
     hpl::aleph::HPLEventManager eventManager;

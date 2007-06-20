@@ -56,7 +56,7 @@ bool TerminalDialog::Create(wxWindow* parent, wxWindowID id)
     Layout();
     return result;
 }
-void PlacementDialog::OnOk(wxCommandEvent& ev)
+void TerminalDialog::OnOk(wxCommandEvent& ev)
 {
     SetReturnCode(wxID_OK);
     Destroy();

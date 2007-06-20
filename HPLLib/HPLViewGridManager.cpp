@@ -170,3 +170,13 @@ void hpl::aleph::view::HPLViewGridManager::setGridIntervalIndex(int index)
     }
     this->gridIndex = index;
 }
+//高さチェック
+bool hpl::aleph::view::HPLViewGridManager::isValidHeight(int zMin, int zMax)
+{
+    if(zMin > this->getViewHeightMax() ||
+        zMax < this->getViewHeightMin())
+    {
+        return false;
+    }
+    return true;
+}

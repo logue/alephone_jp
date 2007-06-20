@@ -83,6 +83,8 @@ void ToolDialog::OnPaint(wxPaintEvent& ev)
 
 void ToolDialog::OnLeftDown(wxMouseEvent& ev)
 {
+    hpl::aleph::HPLEventManager* emgr = wxGetApp().getEventManager();
+    int oldIndex = emgr->getToolType();
     //選択したツールに設定する
     for(int i = 0; i < ToolType::NUMBER_OF_TOOLS; i ++){
         int left = (i % 2) * TOOL_WIDTH;
@@ -94,7 +96,7 @@ void ToolDialog::OnLeftDown(wxMouseEvent& ev)
             left, top, right, bottom))
         {
             //変化
-            wxGetApp().getEventManager()->setToolType(i);
+            emgr->setToolType(i);
 
             if(i == ToolType::TI_SKULL){
                 //オブジェクトツール
@@ -106,7 +108,20 @@ void ToolDialog::OnLeftDown(wxMouseEvent& ev)
                 //規定のポリゴン追加ツール
                 //TODO Preset polygons
                 PolygonNumDialog polyNumDialog;
+                polyNumDialog.Create(this, wxID_ANY);
+                int num = polyNumDialog.ShowModal();
+                if(num >= 3 && num <= 8){
+                    //値を設定
+                    wxGetApp().presetPolygonVertexCount = num;
+                }
                 
+            }
+            if(i != oldIndex){
+                //TODO
+                //範囲選択モードを解除
+                emgr->setSelectingGroup(false);
+                //選択情報を解除
+                //wxGetApp().selectData.clear();
             }
             Refresh();
             //カーソル変化

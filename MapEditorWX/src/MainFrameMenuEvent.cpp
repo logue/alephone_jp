@@ -23,7 +23,7 @@ void MapEditorMainFrame::OnNew(wxCommandEvent& ev)
             return;
         }
     }
-    initialize_map_for_new_game();
+    initialize_map_for_new_level();
     //レベル一覧削除
     wxGetApp().levelNameList.clear();
 
@@ -111,7 +111,7 @@ void MapEditorMainFrame::OnOpen(wxCommandEvent& WXUNUSED(ev))
         //現在のファイル名で保存
         if(save_level(wxGetApp().filePath.mb_str())){
             wxGetApp().isChanged = false;
-            wxGetApp().filePath = fname;
+//            wxGetApp().filePath = fname;
         }else{
             hpl::error::caution("save failure");
         }
@@ -131,7 +131,7 @@ void MapEditorMainFrame::OnSaveAs(wxCommandEvent& ev)
 
         if(save_level(fname.mb_str())){
             wxGetApp().isChanged = false;
-            filePath = fname;
+            wxGetApp().filePath = fname;
         }else{
             hpl::error::caution("save failure");
         }

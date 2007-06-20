@@ -372,10 +372,10 @@
 				RelativePath="..\..\..\..\src\HeightDialog.h">
 			</File>
 			<File
-				RelativePath="..\..\..\..\src\HeightPalletDialog.cpp">
+				RelativePath="..\..\..\..\src\HeightPaletteDialog.cpp">
 			</File>
 			<File
-				RelativePath="..\..\..\..\src\HeightPalletDialog.h">
+				RelativePath="..\..\..\..\src\HeightPaletteDialog.h">
 			</File>
 			<File
 				RelativePath="..\..\..\..\src\LevelInfoDialog.cpp">
@@ -384,16 +384,34 @@
 				RelativePath="..\..\..\..\src\LevelInfoDialog.h">
 			</File>
 			<File
+				RelativePath="..\..\..\..\src\LightPaletteDialog.cpp">
+			</File>
+			<File
+				RelativePath="..\..\..\..\src\LightPaletteDialog.h">
+			</File>
+			<File
 				RelativePath="..\..\..\..\src\LinePropDialog.cpp">
 			</File>
 			<File
 				RelativePath="..\..\..\..\src\LinePropDialog.h">
 			</File>
 			<File
+				RelativePath="..\..\..\..\src\MediaPaletteDialog.cpp">
+			</File>
+			<File
+				RelativePath="..\..\..\..\src\MediaPaletteDialog.h">
+			</File>
+			<File
 				RelativePath="..\..\..\..\src\ObjectPropDialog.cpp">
 			</File>
 			<File
 				RelativePath="..\..\..\..\src\ObjectPropDialog.h">
+			</File>
+			<File
+				RelativePath="..\..\..\..\src\PlacementDialog.cpp">
+			</File>
+			<File
+				RelativePath="..\..\..\..\src\PlacementDialog.h">
 			</File>
 			<File
 				RelativePath="..\..\..\..\src\PlatformDialog.cpp">
@@ -436,6 +454,18 @@
 			</File>
 			<File
 				RelativePath="..\..\..\..\src\SidePropDialog.h">
+			</File>
+			<File
+				RelativePath="..\..\..\..\src\SoundPaletteDialog.cpp">
+			</File>
+			<File
+				RelativePath="..\..\..\..\src\SoundPaletteDialog.h">
+			</File>
+			<File
+				RelativePath="..\..\..\..\src\TerminalDialog.cpp">
+			</File>
+			<File
+				RelativePath="..\..\..\..\src\TerminalDialog.h">
 			</File>
 			<File
 				RelativePath="..\..\..\..\src\TextureDialog.cpp">

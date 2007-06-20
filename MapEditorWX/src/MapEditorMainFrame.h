@@ -300,6 +300,12 @@ private:
     void doLButtonOnFloorTextureMode(wxMouseEvent& ev);
     void doLButtonOnCeilingTextureMode(wxMouseEvent& ev);
 
+    /**
+        マウス左ボタンをあげたとき
+    */
+    void doLUpOnArrowTool(wxMouseEvent& ev);
+    void doLUpOnPolygonTool(wxMouseEvent& ev);
+
     // オフセットを指定したマウスポイントによって移動させます
     void moveMapOffset(int x, int y);
 

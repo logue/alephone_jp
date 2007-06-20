@@ -114,6 +114,9 @@ namespace view{
         bool isRevealHiddenLines();
         int getGridInterval();
         void setGridIntervalIndex(int index);
+
+        //高さチェック
+        bool isValidHeight(int zMin, int zMax);
     private:
         /**
             ズーム調整

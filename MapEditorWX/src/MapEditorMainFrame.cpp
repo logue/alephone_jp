@@ -96,9 +96,6 @@ MapEditorMainFrame::MapEditorMainFrame(const wxString& title,
     wxCommandEvent dummy;
     OnDrawPolygonMode(dummy);
 
-    //高さ制限ダイアログの表示
-    this->heightDialog.Create(this, wxID_ANY);
-
     //TODO
     //テスト
     //プラットフォームダイアログ
@@ -213,80 +210,6 @@ void MapEditorMainFrame::OnAbout(wxCommandEvent& WXUNUSED(event))
         _T("about this..."), wxOK | wxICON_INFORMATION, this);
 }
 
-/**
-    描画
-*/
-void MapEditorMainFrame::OnPaint(wxPaintEvent& WXUNUSED(event))
-{
-    wxSize size = wxFrame::GetSize();
-    if(!wxWindow::IsExposed(0,0,size.GetWidth(), size.GetHeight())){
-        return;
-    }
-    wxBufferedPaintDC dc(this, this->doubleBufferingBitmap);
-    PrepareDC(dc);
-    //dc.Clear();
-//    wxRegionIerator region(GetUpdateRegion());
-//    while(
-    //dc.DrawLine(10,10,100,20);
-    
-    wxDC* drawDC = &dc;//&this->doubleBufferingDC;
-
-    hpl::aleph::view::HPLViewGridManager* mgr = wxGetApp().getViewGridManager();
-    int DIV = mgr->getZoomDivision();
-    int voffset[2];
-    mgr->getOffset(voffset);
-    int OFFSET_X_VIEW = voffset[0];
-    int OFFSET_Y_VIEW = voffset[1];
-
-    //背景描画
-    this->drawBackground(drawDC);
-    
-    //ポリゴン
-    this->drawPolygons(drawDC);
-
-    //ライン
-    this->drawLines(drawDC);
-
-    //ポイント
-    this->drawPoints(drawDC);
-    
-    //アノテーション
-    this->drawAnnotations(drawDC);
-
-    //ドローモードならオブジェクトも表示
-    this->drawObjects(drawDC);
-
-    if(wxGetApp().getEventManager()->isSelectingGroup()){
-        //範囲指定中なら範囲を示す矩形を表示
-        int vpoint[2];
-        wxGetApp().getEventManager()->getSelectGroupStartPoint(vpoint);
-        int mpoint[2];
-        wxGetApp().getViewGridManager()->getNewMousePoint(mpoint);
-
-        //x,y,w,hを計算
-        int x = vpoint[0];
-        int y = vpoint[1];
-        int w = mpoint[0] - x;
-        itn h = mpoint[1] - y;
-        if(mpoint[0] < x){
-            x = mpoint[0];
-            w = vpoint[0] - x;
-        }
-        if(mpoint[1] < y){
-            y = mpoint[1];
-            h = vpoint[1] - y;
-        }
-        drawDC->SetPen(this->selectingPen);
-        drawDC->SetPen(wxNullBrush);
-        drawDC->DrawRectangle(x,y,w,h);
-
-    }
-
-    //バッファから画面へコピー
-    dc.Blit(wxPoint(0,0), size,
-        drawDC,
-        wxPoint(0,0));
-}
 
 
 //サイズ変更

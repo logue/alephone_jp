@@ -14,6 +14,7 @@
 #include <wx/radiobut.h>
 #include <wx/listctrl.h>
 #include <wx/listbox.h>
+#include <wx/bmpbuttn.h>
 
 #include "HPLLib/HPLEventManager.h"
 #include <string>

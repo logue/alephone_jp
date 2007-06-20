@@ -6,9 +6,107 @@ const double ROUND_DEGREE = 360.0;
 const double OBJECT_TRIANGLE_LENGTH = 10.0;
 const double WING_DEG = 120.0;
 
+
 /**
     マップデータの表示
 */
+/**
+    描画
+*/
+void MapEditorMainFrame::OnPaint(wxPaintEvent& WXUNUSED(event))
+{
+    wxSize size = wxFrame::GetSize();
+    if(!wxWindow::IsExposed(0,0,size.GetWidth(), size.GetHeight())){
+        return;
+    }
+    wxBufferedPaintDC dc(this, this->doubleBufferingBitmap);
+    PrepareDC(dc);
+    //dc.Clear();
+//    wxRegionIerator region(GetUpdateRegion());
+//    while(
+    //dc.DrawLine(10,10,100,20);
+    
+    wxDC* drawDC = &dc;//&this->doubleBufferingDC;
+
+    hpl::aleph::view::HPLViewGridManager* mgr = wxGetApp().getViewGridManager();
+    int DIV = mgr->getZoomDivision();
+    int voffset[2];
+    mgr->getOffset(voffset);
+    int OFFSET_X_VIEW = voffset[0];
+    int OFFSET_Y_VIEW = voffset[1];
+
+    //背景描画
+    this->drawBackground(drawDC);
+    
+    //ポリゴン
+    this->drawPolygons(drawDC);
+
+    //ライン
+    this->drawLines(drawDC);
+
+    //ポイント
+    this->drawPoints(drawDC);
+    
+    //アノテーション
+    this->drawAnnotations(drawDC);
+
+    //ドローモードならオブジェクトも表示
+    this->drawObjects(drawDC);
+
+    hpl::aleph::HPLEventManager* emgr = wxGetApp().getEventManager();
+
+    if(emgr->isSelectingGroup()){
+        //範囲指定中なら範囲を示す矩形を表示
+        int vpoint[2];
+        emgr->getSelectGroupStartPoint(vpoint);
+        int mpoint[2];
+        wxGetApp().getViewGridManager()->getNewMousePoint(mpoint);
+
+        //x,y,w,hを計算
+        int x = vpoint[0];
+        int y = vpoint[1];
+        int w = mpoint[0] - x;
+        int h = mpoint[1] - y;
+        if(mpoint[0] < x){
+            x = mpoint[0];
+            w = vpoint[0] - x;
+        }
+        if(mpoint[1] < y){
+            y = mpoint[1];
+            h = vpoint[1] - y;
+        }
+        drawDC->SetPen(this->selectingPen);
+        drawDC->SetBrush(*wxTRANSPARENT_BRUSH);
+        drawDC->DrawRectangle(x,y,w,h);
+
+        if(emgr->getEditModeType() == EditModeType::EM_DRAW &&
+            emgr->getToolType() == ToolType::TI_POLYGON)
+        {
+            int mx = mpoint[0];
+            int my = mpoint[1];
+            int selStartPoint[2];
+            emgr->getSelectingGroupStartPoint(selStartPoint);
+            //ポリゴン追加モード
+            //追加予定ポリゴンを表示
+            double polygonPoints[MAXIMUM_VERTICES_PER_POLYGON][2];
+            int n = wxGetApp().presetPolygonVertexCount;
+            hpl::math::getRectangleScaledPreparedPolygon(mx, my,
+                selStartPoint[0], selStartPoint[1], n, polygonPoints);
+            wxPoint points[MAXIMUM_VERTICES_PER_POLYGON];
+            for(int i = 0; i < n; i ++){
+                points[i].x = (int)polygonPoints[i][0];
+                points[i].y = (int)polygonPoints[i][1];
+            }
+            drawDC->DrawPolygon(points, n);
+        }
+    }
+
+    //バッファから画面へコピー
+    dc.Blit(wxPoint(0,0), size,
+        drawDC,
+        wxPoint(0,0));
+}
+
 /**
     背景の描画 <en> draw background 
 */
@@ -31,7 +129,7 @@ void MapEditorMainFrame::drawBackground(wxDC* dc)
 
     //枠描画
     dc->SetPen(this->gridLargePen);
-    dc->SetBrush(wxNullBrush);
+    dc->SetBrush(*wxTRANSPARENT_BRUSH);
     left = voffset[0];
     top = voffset[1];
     width = OFFSET_X_WORLD * 2 / DIV;
@@ -246,7 +344,7 @@ void MapEditorMainFrame::drawPoints(wxDC* dc)
             wxGetApp().selectData.containsPoint(i))
         {
             dc->SetPen(this->selectedLinePen);
-            dc->SetBrush(wxNullBrush);
+            dc->SetBrush(*wxTRANSPARENT_BRUSH);
             int SIZE = 5;
             dc->DrawRectangle(vpoint[0] - SIZE / 2, vpoint[1] - SIZE / 2,
                 SIZE, SIZE);

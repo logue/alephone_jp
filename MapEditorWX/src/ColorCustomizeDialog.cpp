@@ -93,53 +93,53 @@ bool ColorCustomizeDialog::Create(wxWindow* parent, wxWindowID id)
 
     return result;
 }
-void ColorCustomize::OnOk(wxCommandEvent& ev)
+void ColorCustomizeDialog::OnOk(wxCommandEvent& ev)
 {
     SetReturnCode(wxID_OK);
     Destroy();
 }
-void ColorCustomize::OnCancel(wxCommandEvent &ev)
+void ColorCustomizeDialog::OnCancel(wxCommandEvent &ev)
 {
     SetReturnCode(wxID_OK);
     Destroy();
 }
-void ColorCustomize::OnBackground(wxCommandEvent &event)
+void ColorCustomizeDialog::OnBackground(wxCommandEvent &event)
 {
     event.Skip();
-    std::cout<<"Event handler (ColorCustomize::OnBackground) not implemented yet"<<std::endl; //notify the user that he hasn't implemented the event handler yet
+    std::cout<<"Event handler (ColorCustomizeDialog::OnBackground) not implemented yet"<<std::endl; //notify the user that he hasn't implemented the event handler yet
 }
 
 
-void ColorCustomize::OnGrid(wxCommandEvent &event)
+void ColorCustomizeDialog::OnGrid(wxCommandEvent &event)
 {
     event.Skip();
-    std::cout<<"Event handler (ColorCustomize::OnGrid) not implemented yet"<<std::endl; //notify the user that he hasn't implemented the event handler yet
+    std::cout<<"Event handler (ColorCustomizeDialog::OnGrid) not implemented yet"<<std::endl; //notify the user that he hasn't implemented the event handler yet
 }
 
 
-void ColorCustomize::OnLines(wxCommandEvent &event)
+void ColorCustomizeDialog::OnLines(wxCommandEvent &event)
 {
     event.Skip();
-    std::cout<<"Event handler (ColorCustomize::OnLines) not implemented yet"<<std::endl; //notify the user that he hasn't implemented the event handler yet
+    std::cout<<"Event handler (ColorCustomizeDialog::OnLines) not implemented yet"<<std::endl; //notify the user that he hasn't implemented the event handler yet
 }
 
 
-void ColorCustomize::OnPolygons(wxCommandEvent &event)
+void ColorCustomizeDialog::OnPolygons(wxCommandEvent &event)
 {
     event.Skip();
-    std::cout<<"Event handler (ColorCustomize::OnPolygons) not implemented yet"<<std::endl; //notify the user that he hasn't implemented the event handler yet
+    std::cout<<"Event handler (ColorCustomizeDialog::OnPolygons) not implemented yet"<<std::endl; //notify the user that he hasn't implemented the event handler yet
 }
 
 
-void ColorCustomize::OnStrings(wxCommandEvent &event)
+void ColorCustomizeDialog::OnStrings(wxCommandEvent &event)
 {
     event.Skip();
-    std::cout<<"Event handler (ColorCustomize::OnStrings) not implemented yet"<<std::endl; //notify the user that he hasn't implemented the event handler yet
+    std::cout<<"Event handler (ColorCustomizeDialog::OnStrings) not implemented yet"<<std::endl; //notify the user that he hasn't implemented the event handler yet
 }
 
 
-void ColorCustomize::OnPoints(wxCommandEvent &event)
+void ColorCustomizeDialog::OnPoints(wxCommandEvent &event)
 {
     event.Skip();
-    std::cout<<"Event handler (ColorCustomize::OnPoints) not implemented yet"<<std::endl; //notify the user that he hasn't implemented the event handler yet
+    std::cout<<"Event handler (ColorCustomizeDialog::OnPoints) not implemented yet"<<std::endl; //notify the user that he hasn't implemented the event handler yet
 }

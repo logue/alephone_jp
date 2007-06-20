@@ -406,13 +406,16 @@ void MapEditorMainFrame::doLButtonOnLineTool(wxMouseEvent& ev)
 
     hpl::aleph::HPLEventManager* emgr = wxGetApp().getEventManager();
     
-    
+    int voffset[2];
+    wxGetApp().getViewGridManager()->getOffset(voffset);
+    int div = wxGetApp().getViewGridManager()->getZoomDivision();
+
     //重なる点があるかどうかチェック
     int pointIndex = NONE;
     for(int i = 0; i < (int)EndpointList.size(); i ++){
         endpoint_data* ep = get_endpoint_data(i);
         if(hpl::aleph::map::isSelectPoint(mx, my, ep->vertex.x, ep->vertex.y,
-            voffset[0], voffset[1], OFFSET_X_WORLD, OFFSET_Y_WORLD, div))
+            voffset[0], voffset[1], OFFSET_X_WORLD, OFFSET_Y_WORLD, div, POINT_DISTANCE_EPSILON))
         {
             pointIndex = i;
             break;
@@ -437,7 +440,7 @@ void MapEditorMainFrame::doLButtonOnLineTool(wxMouseEvent& ev)
         if(isFirst){
             //最初のクリック
             //始点とする
-            wxGetApp().prevPointIndex = 
+            //wxGetApp().prevPointIndex = 
         }else{
             //2回目以降のクリック
             //同じ点をクリックしていたら何もしない
@@ -596,6 +599,183 @@ void MapEditorMainFrame::OnLeftUp(wxMouseEvent& ev)
     wxGetApp().setCursor();
     //マウス座標記録
     wxGetApp().getViewGridManager()->setNewMousePoint(ev.m_x, ev.m_y);
+
+    //イベントマネージャー
+    hpl::aleph::HPLEventManager* emgr = wxGetApp().getEventManager();
+
+    int editMode = emgr->getEditModeType();
+    int toolType = emgr->getToolType();
+    if(editMode == EditModeType::EM_DRAW){
+        if(toolType == ToolType::TI_ARROW){
+            this->doLUpOnArrowTool(ev);
+        }else if(toolType == ToolType::TI_POLYGON){
+            this->doLUpOnPolygonTool(ev);
+        }
+    }
+    emgr->setSelectingGroup(false);
+
+    //ポリゴン状態を更新します
+    wxGetApp().updatePolygonValidityStored();
+    Refresh();
+}
+
+void MapEditorMainFrame::doLUpOnArrowTool(wxMouseEvent& ev)
+{
+    //選択データ
+    hpl::aleph::map::HPLSelectData* sel = &wxGetApp().selectData;
+
+    //グリッドマネージャー
+    hpl::aleph::view::HPLViewGridManager* vmgr = wxGetApp().getViewGridManager();
+    hpl::aleph::HPLEventManager* emgr = wxGetApp().getEventManager();
+
+    if(sel->isSelectOneObject){
+        //オブジェクトを選択していたら
+        //オブジェクト情報ダイアログ表示
+        //TODO
+        this->objPropDialog.Show(true);
+    }else if(sel->isSelectOnePolygon){
+        //ポリゴン情報ダイアログ表示
+    }
+    //TODO
+    //点、線、Sideは右クリックメニューでプロパティを選択した時のみ表示する
+    
+    int mx = ev.m_x;
+    int my = ev.m_y;
+
+    if(emgr->isSelectingGroup()){
+        //範囲選択中だった。矩形内のアイテムを選択とする
+        //選択開始位置
+        int selStartPoint[2];
+        emgr->getSelectGroupStartPoint(selStartPoint);
+        
+        //選択情報初期化
+        sel->clear();
+        
+        //点 <en> points
+        for(int i = 0; i < (int)EndpointList.size(); i ++){
+            endpoint_data* ep = get_endpoint_data(i);
+            //高さチェック
+            if(!vmgr->isValidHeight(ep->highest_adjacent_floor_height,
+                ep->lowest_adjacent_ceiling_height))
+            {
+                continue;
+            }
+            int vpoint[2];
+            wxGetApp().getViewPointFromWorldPoint(ep->vertex, vpoint);
+            if(hpl::math::isPointInRect<int>(vpoint[0], vpoint[1],
+                mx, my, selStartPoint[0], selStartPoint[1]))
+            {
+                //追加
+                int offset[2] = {0,0};
+                sel->addSelPoint(i, offset);
+            }
+        }
+
+        //線 <en> lines
+        for(int i = 0; i < (int)LineList.size(); i ++){
+            line_data* line = get_line_data(i);
+            endpoint_data* begin = get_endpoint_data(line->endpoint_indexes[0]);
+            endpoint_data* end = get_endpoint_data(line->endpoint_indexes[1]);
+            int beginVPoint[2];
+            int endVPoint[2];
+            wxGetApp().getViewPointFromWorldPoint(begin->vertex, beginVPoint);
+            wxGetApp().getViewPointFromWorldPoint(end->vertex, endVPoint);
+
+            //高さチェック
+            if(!vmgr->isValidHeight(line->highest_adjacent_floor,
+                line->lowest_adjacent_ceiling))
+            {
+                continue;
+            }
+            if(hpl::math::isLineInRect(beginVPoint[0], beginVPoint[1],
+                endVPoint[0], endVPoint[1],
+                mx, my, selStartPoint[0], selStartPoint[1]))
+            {
+                //追加
+                int offset[2][2] = {{0,0},{0,0}};
+                sel->addSelLine(i, offset);
+            }
+        }
+
+        //ポリゴン
+        for(int i = 0; i < (int)PolygonList.size(); i ++){
+            polygon_data* poly = get_polygon_data(i);
+            int n = poly->vertex_count;
+            if(n < 1 || n >= MAXIMUM_VERTICES_PER_POLYGON){
+                continue;
+            }
+            //高さチェック
+            if(!vmgr->isValidHeight(poly->floor_height,
+                poly->ceiling_height))
+            {
+                continue;
+            }
+            //全ての点が矩形内ならポリゴンを選択
+            bool inner = true;
+            for(int j = 0; j < n; j ++){
+                endpoint_data* ep = get_endpoint_data(poly->endpoint_indexes[j]);
+                int vpoint[2];
+                wxGetApp().getViewPointFromWorldPoint(ep->vertex, vpoint);
+                if(!hpl::math::isPointInRect<int>(vpoint[0], vpoint[1],
+                    mx, my, selStartPoint[0], selStartPoint[1]))
+                {
+                    inner = false;
+                    break;
+                }
+            }
+            if(inner){
+                //登録
+                int offset[MAXIMUM_VERTICES_PER_POLYGON][2];
+                memset(offset, 0, sizeof(int) * MAXIMUM_VERTICES_PER_POLYGON * 2);
+                sel->addSelPolygon(i, offset, n);
+            }
+        }
+    
+
+        //オブジェクト
+        for(int i = 0; i < (int)SavedObjectList.size(); i ++){
+            map_object* obj = &(SavedObjectList[i]);
+            //高さチェック
+            if(!vmgr->isValidHeight(obj->location.z,
+                obj->location.z))
+            {
+                continue;
+            }
+            int vpoint[2];
+            wxGetApp().getViewPointFromWorldPoint(obj->location.x, 
+                obj->location.y, vpoint);
+            if(hpl::math::isPointInRect<int>(vpoint[0], vpoint[1],
+                mx, my, selStartPoint[0], selStartPoint[1]))
+            {
+                //追加
+                int offset[2] = {0,0};
+                sel->addSelObject(i, offset);
+            }
+        }
+
+    }
+}
+void MapEditorMainFrame::doLUpOnPolygonTool(wxMouseEvent& ev)
+{
+    int selStartPoint[2];
+    wxGetApp().getEventManager()->getSelectGroupStartPoint(selStartPoint);
+    hpl::aleph::HPLEventManager* emgr = wxGetApp().getEventManager();
+    if(emgr->isSelectingGroup()){
+        //n角形の座標を計算
+        double polyPointsView[MAXIMUM_VERTICES_PER_POLYGON][2];
+        int n = wxGetApp().presetPolygonVertexCount;
+        hpl::math::getRectangleScaledPreparedPolygon(ev.m_x, ev.m_y,
+            selStartPoint[0], selStartPoint[1], n,
+            polyPointsView);
+        //ワールド座標形に変換
+        world_point2d polyPointsWorld[MAXIMUM_VERTICES_PER_POLYGON];
+        for(int i = 0; i < n; i ++){
+            polyPointsWorld[i] = wxGetApp().getWorldPointFromViewPoint(
+                (int)polyPointsView[i][0], (int)polyPointsView[i][1]);
+        }
+        //ポリゴン生成
+        hpl::aleph::map::addNewPolygon(polyPointsWorld, n);
+    }
 }
 
 /////////////////////////////////////////////////////
@@ -646,12 +826,35 @@ void MapEditorMainFrame::OnMotion(wxMouseEvent &ev)
             this->moveMapOffset(ev.m_x, ev.m_y);
         }else{
             //Ctrl押さない
-            if(editModeType == EditModeType::EM_DRAW){
-                //ドローモード
-                if(toolType == ToolType::TI_ARROW){
-                    //矢印ツールでD&D
 
-                }
+            switch(editModeType){
+            case EditModeType::EM_DRAW:
+                doMouseMotionOnDrawMode(ev);
+                break;
+            case EditModeType::EM_POLYGON_TYPE:
+                doMouseMotionOnPolygonMode(ev);
+                break;
+            case EditModeType::EM_FLOOR_HEIGHT:
+                doMouseMotionOnFloorHeightMode(ev);
+                break;
+            case EditModeType::EM_CEILING_HEIGHT:
+                doMouseMotionOnCeilingHeightMode(ev);
+                break;
+            case EditModeType::EM_FLOOR_LIGHT:
+                doMouseMotionOnFloorLightMode(ev);
+                break;
+            case EditModeType::EM_CEILING_LIGHT:
+                doMouseMotionOnCeilingLightMode(ev);
+                break;
+            case EditModeType::EM_MEDIA:
+                doMouseMotionOnMediaMode(ev);
+                break;
+            case EditModeType::EM_FLOOR_TEXTURE:
+                doMouseMotionOnFloorTextureMode(ev);
+                break;
+            case EditModeType::EM_CEILING_TEXTURE:
+                doMouseMotionOnCeilingTextureMode(ev);
+                break;
             }
         }
 
@@ -666,9 +869,41 @@ void MapEditorMainFrame::OnMotion(wxMouseEvent &ev)
 }
 void MapEditorMainFrame::doMouseMotionOnDrawMode(wxMouseEvent& ev)
 {
+    switch(wxGetApp().getEventManager()->getToolType()){
+    case ToolType::TI_ARROW:
+        doMouseMotionOnArrowTool(ev);
+        break;
+    case ToolType::TI_FILL:
+        doMouseMotionOnFillTool(ev);
+        break;
+    case ToolType::TI_HAND:
+        doMouseMotionOnHandTool(ev);
+        break;
+    case ToolType::TI_LINE:
+        doMouseMotionOnLineTool(ev);
+        break;
+    case ToolType::TI_MAGNIFY:
+        doMouseMotionOnMagnifyTool(ev);
+        break;
+    case ToolType::TI_SKULL:
+        doMouseMotionOnSkullTool(ev);
+        break;
+    case ToolType::TI_TEXT:
+        doMouseMotionOnTextTool(ev);
+        break;
+    case ToolType::TI_POLYGON:
+        doMouseMotionOnPolygonTool(ev);
+        break;
+    default:
+        hpl::error::halt("Invalid tool type");
+    }
 }
 void MapEditorMainFrame::doMouseMotionOnArrowTool(wxMouseEvent& ev)
 {
+    //もし範囲選択中なら？
+    //ここですることはない
+
+    //もし選択中のマップアイテムがあれば、それらを移動させる
 }
 void MapEditorMainFrame::doMouseMotionOnFillTool(wxMouseEvent& ev)
 {
