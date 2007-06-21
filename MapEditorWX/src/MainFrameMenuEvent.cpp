@@ -30,13 +30,6 @@ void MapEditorMainFrame::OnNew(wxCommandEvent& ev)
     wxGetApp().isChanged = false;
 
     //ついでにレベル設定
-    this->OnNewLevel(ev);
-
-    Refresh();
-}
-void MapEditorMainFrame::OnNewLevel(wxCommandEvent& ev)
-{
-    //新規レベルの追加
     //TODO
     //レベル設定ダイアログ表示
     LevelInfoDialog dlg;
@@ -44,6 +37,19 @@ void MapEditorMainFrame::OnNewLevel(wxCommandEvent& ev)
     dlg.ShowModal();
     //内容をマップデータに反映
     //TODO
+
+    //削除対象の覚え書きを初期化
+    wxGetApp().getStockManager()->toDeleteList.clear();
+
+    Refresh();
+}
+void MapEditorMainFrame::OnNewLevel(wxCommandEvent& ev)
+{
+    //新規レベル作成
+    //TODO 不要？
+    //マージされているマップは保存できない
+
+
 }
 
 void MapEditorMainFrame::OnOpen(wxCommandEvent& WXUNUSED(ev))

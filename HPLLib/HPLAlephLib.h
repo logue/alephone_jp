@@ -7,6 +7,7 @@
 #include "HPLDoneHistory.h"
 #include "HPLViewGridManager.h"
 #include "HPLEventManager.h"
+#include "HPLStockManager.h"
 
 //ˆê”ÊŒü‚¯
 #include "HPLMath.h"

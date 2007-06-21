@@ -183,36 +183,6 @@ bool MapEditorWX::initialize()
     return true;
 }
 
-//ポリゴンが正しいかどうかを検査します(高速版)
-bool MapEditorWX::isPolygonValidityStored(int polyIndex)
-{
-	if(polyIndex < 0){
-		return false;
-	}else if(polyIndex >= (int)this->polygonValidity.size()){
-		//存在しないもの
-		//更新
-		updatePolygonValidityStored();
-		if(polyIndex >= (int)this->polygonValidity.size()){
-			//それでもやっぱりない→無視
-			return false;
-		}
-	}
-
-	return this->polygonValidity[polyIndex];
-}
-
-//ポリゴン整合性情報を更新します
-void MapEditorWX::updatePolygonValidityStored()
-{
-	this->polygonValidity.clear();
-	for(int i = 0; i < (int)PolygonList.size(); i ++){
-		bool isValid = hpl::aleph::map::isValidPolygon(i);
-		this->polygonValidity.push_back(isValid);
-	}
-
-    //ついでに高さ順をソートする
-    //this->polygonDrawOrderByHeight.clear();
-}
 
 hpl::aleph::view::HPLViewGridManager* MapEditorWX::getViewGridManager()
 {
@@ -222,6 +192,11 @@ hpl::aleph::view::HPLViewGridManager* MapEditorWX::getViewGridManager()
 hpl::aleph::HPLEventManager* MapEditorWX::getEventManager()
 {
     return &this->eventManager;
+}
+//ストックマネージャを取得します
+hpl::aleph::HPLStockManager* MapEditorWX::getStockManager()
+{
+    return &this->stockManager;
 }
 
 //ビュー座標をワールド座標に直す操作の簡易版

@@ -3,6 +3,7 @@
 #include "HPLMath.h"
 #include <limits.h>
 #include "HPLError.h"
+#include "HPLMapTool.h"
 
 /**
     ビューの次元
@@ -173,10 +174,7 @@ void hpl::aleph::view::HPLViewGridManager::setGridIntervalIndex(int index)
 //高さチェック
 bool hpl::aleph::view::HPLViewGridManager::isValidHeight(int zMin, int zMax)
 {
-    if(zMin > this->getViewHeightMax() ||
-        zMax < this->getViewHeightMin())
-    {
-        return false;
-    }
-    return true;
+    //高さチェック
+    bool result = hpl::aleph::map::isValidHeight(zMin, zMax, this->getViewHeightMin(), this->getViewHeightMax());
+    return result;
 }

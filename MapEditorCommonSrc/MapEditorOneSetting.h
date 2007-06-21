@@ -71,6 +71,17 @@ const int START_OF_TEXTURE = _collection_walls1;
 static char* TAG_NAME_FILE_PATH = "data/InnerSettingTagList.ini";
 static char* INNER_DATA_FILE_PATH = "data/InnerSetting.ini";
 
+//point flags
+enum
+{
+    POINT_FLAG_SOLID = 1,
+    POINT_FLAG_MULTI_HIGHEST = 2,
+    POINT_FLAG_TRANSPARENCY = 4,
+
+    NUMBER_OF_POINT_FLAGS
+};
+
+
 #include <vector>
 #include <string>
 #include <cstdio>

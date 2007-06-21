@@ -1,12 +1,19 @@
 #include "HPLError.h"
 #include "stdarg.h"
+#include <cstdio>
+#include <cstdlib>
 
 const int BUF_MAX = 1024;
 
 #ifdef WX
+
 #include <wx/wx.h>
-#elif define(WIN32)
+
+#endif
+#ifdef WIN32
+
 #include <windows.h>
+
 #endif
 
 /**
@@ -28,7 +35,8 @@ void hpl::error::caution(const char* format, ...)
 #else
     wxMessageBox(message);
 #endif
-#elif define(WIN32)
+#endif
+#ifdef WIN32
 //    MessageBox(NULL, 
 #endif
     fprintf(stderr, message);

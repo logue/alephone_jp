@@ -263,6 +263,18 @@
 				RelativePath="..\..\..\..\..\HPLLib\HPLDoneHistory.h">
 			</File>
 			<File
+				RelativePath="..\..\..\..\..\HPLLib\HPLError.cpp">
+			</File>
+			<File
+				RelativePath="..\..\..\..\..\HPLLib\HPLError.h">
+			</File>
+			<File
+				RelativePath="..\..\..\..\..\HPLLib\HPLEventManager.cpp">
+			</File>
+			<File
+				RelativePath="..\..\..\..\..\HPLLib\HPLEventManager.h">
+			</File>
+			<File
 				RelativePath="..\..\..\..\..\HPLLib\HPLMapTool.cpp">
 			</File>
 			<File
@@ -291,6 +303,9 @@
 			</File>
 			<File
 				RelativePath="..\..\..\..\..\HPLLib\HPLSelectData.h">
+			</File>
+			<File
+				RelativePath="..\..\..\..\..\HPLLib\HPLStockManager.h">
 			</File>
 			<File
 				RelativePath="..\..\..\..\..\HPLLib\HPLStringModifier.cpp">

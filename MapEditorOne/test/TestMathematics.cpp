@@ -15,7 +15,53 @@ double getRandomDouble(double min, double max)
     return r;
 }
 
+    const int NUM = 3;
+std::vector<int> hogeVec;
+std::list<int> hogeList;
+std::map<int, int> hogeMap;
+static void printLists(){
+    printf("#Vector\n");
+    for(int i = 0; i < hogeVec.size(); i ++){
+        printf("%d:%d\n", i, &hogeVec[i]);
+    }
+    printf("#List\n");
+    int counter = 0;
+    for(std::list<int>::iterator it = hogeList.begin(); it != hogeList.end(); it ++){
+        int* add = &(*it);
+        printf("%d:%d\n", counter, add);
+        counter ++;
+    }
+    printf("#Map\n");
+    counter = 0;
+    for(std::map<int,int>::iterator it = hogeMap.begin(); it != hogeMap.end(); it ++){
+        int* add = &(*it).second;
+        printf("%d:%d\n", counter, add);
+        counter ++;
+    }
+}
 int main(int argc, char** argv){
+
+    for(int i = 0; i < NUM; i ++){
+        hogeVec.push_back(i);
+        hogeList.push_back(i);
+        hogeMap[i] = i;
+    }
+
+    //アドレスを表示してみる
+    printLists();
+
+    //先頭を削除してみる
+    std::vector<int>::iterator it = hogeVec.begin();
+    it += 1;
+    hogeVec.erase(it);
+    hogeList.pop_front();
+    hogeMap.erase(hogeMap.begin());
+    
+    //また表示してみる
+    printLists();
+
+    return 0;
+
     //SDL初期化するよ
     SDL_Init(SDL_INIT_VIDEO);
 

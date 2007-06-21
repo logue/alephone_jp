@@ -397,6 +397,8 @@ void MapEditorMainFrame::doLButtonOnLineTool(wxMouseEvent& ev)
     //選択解除
     wxGetApp().selectData.clear();
 
+    hpl::aleph::view::HPLViewGridManager* vmgr = wxGetApp().getViewGridManager();
+
     int mx = ev.m_x;
     int my = ev.m_y;
     //世界座標にする
@@ -407,12 +409,15 @@ void MapEditorMainFrame::doLButtonOnLineTool(wxMouseEvent& ev)
     hpl::aleph::HPLEventManager* emgr = wxGetApp().getEventManager();
     
     int voffset[2];
-    wxGetApp().getViewGridManager()->getOffset(voffset);
+    vmgr->getOffset(voffset);
     int div = wxGetApp().getViewGridManager()->getZoomDivision();
+    int zMin = vmgr->getViewHeightMin();
+    int zMax = vmgr->getViewHeightMax();
 
     //重なる点があるかどうかチェック
-    int pointIndex = hpl::aleph::map::getSelectPointIndex(wpoint, POINT_DISTANCE_EPSILON);
+    int pointIndex = hpl::aleph::map::getSelectPointIndex(wpoint, POINT_DISTANCE_EPSILON, zMin, zMax);
     //重なる線があるか判定する
+    int lineIndex = hpl::aleph::map::getLineIndexFromOnPoint(wpoint, LINE_DISTANCE_EPSILON, zMin, zMax);
 
     if(pointIndex != NONE)
     {
@@ -456,23 +461,62 @@ void MapEditorMainFrame::doLButtonOnLineTool(wxMouseEvent& ev)
         wxGetApp().isFirstOfLineToAdd = false;
     }else{
         //線を踏んでいないかチェックします
-        bool onLine = false;
-        for(int i = 0; i < (int)LineList.size(); i ++){
-            line_data* line = get_line_data(i);
-            endpoint_data* begin = get_endpoint_data(line->endpoint_indexes[0]);
-            endpoint_data* end = get_endpoint_data(line->endpoint_indexes[1]);
-            if(hpl::aleph::map::isSelectLine(mx, my, begin->vertex.x, begin->vertex.y,
-                end->vertex.x, end->vertex.y, voffset[0], voffset[1], OFFSET_X_WORLD, OFFSET_Y_WORLD,
-                div, LINE_DISTANCE_EPSILON))
+        if(lineIndex != NONE){
+            /*
+                2:線の上でクリック
+	                1:最初のクリック
+		                1:ポリゴンに所属する線
+			                警告を出して何もしない
+		                2:所属しない線
+			                その線を削除
+			                点を追加
+			                線の始点→新点を終点とした新線を追加
+			                新点→線の終点を終点とした新線を追加
+			                前回クリック点の更新
+	                2:二回目以降のクリック
+		                同上
+            */
+            line_data* line = get_line_data(lineIndex);
+            assert(line != NULL);
+
+            int newPointIndex = NONE;
+            //ポリゴンに所属しているか確かめます
+            if(line->clockwise_polygon_owner != NONE || 
+                line->counterclockwise_polygon_owner != NONE)
             {
-                //線を踏んでいる
-                //TODO 切断します
-                //TODO 点を追加して接続しなおします
-                onLine = true;
-                break;
+                //ポリゴンに属する線
+                //警告を出す。線を分断したりしない
+                hpl::error::caution("cannot divide line , because line belongs to polygon (line's index:%d, clockwise polygon's index:%d, counterclockwise polygon's index:%d)",
+                    lineIndex, line->clockwise_polygon_owner, line->counterclockwise_polygon_owner);
+                //独立した点を追加する
+                endpoint_data ep;
+                hpl::aleph::map::createPoint(wpoint, &ep, POINT_DISTANCE_EPSILON);
+                newPointIndex = hpl::aleph::map::addEndpoint(ep);
+                assert(newPointIndex != NONE);
+            }else{
+                //始点、終点の情報取得
+                //endpoint_data* begin = get_endpoint_data(line->endpoint_indexes[0]);
+                //endpoint_data* end = get_endpoint_data(line->endpoint_indexes[1]);
+
+                //線を削除
+                hpl::aleph::map::deleteLine(lineIndex);
+                //点を追加
+                endpoint_data ep;
+                assert(hpl::aleph::map::createPoint(wpoint, &ep, POINT_DISTANCE_EPSILON));
+                newPointIndex = hpl::aleph::map::addEndpoint(ep);
+                assert(newPointIndex != NONE);
+                endpoint_data *newEp = get_endpoint_data(newPointIndex);
+
+                //始点→点の線を追加
+                line_data newLine1;
+                assert(hpl::aleph::map::createLine(line->endpoint_indexes[0], line->endpoint_indexes[1], &newLine1));
+                int newLine1Index = hpl::aleph::map::addLine(newLine1);
+                assert(newLine1Index != NONE);
+
+                //点→終点の線を追加
+                line_data newLine2;
+
             }
-        }
-        if(onLine){
         }else{
             //新規追加
             if(wxGetApp().isFirstOfLineToAdd){
@@ -618,7 +662,7 @@ void MapEditorMainFrame::OnLeftUp(wxMouseEvent& ev)
     emgr->setSelectingGroup(false);
 
     //ポリゴン状態を更新します
-    wxGetApp().updatePolygonValidityStored();
+    wxGetApp().getStockManager()->updatePolygonValidityStored();
     Refresh();
 }
 
@@ -631,12 +675,12 @@ void MapEditorMainFrame::doLUpOnArrowTool(wxMouseEvent& ev)
     hpl::aleph::view::HPLViewGridManager* vmgr = wxGetApp().getViewGridManager();
     hpl::aleph::HPLEventManager* emgr = wxGetApp().getEventManager();
 
-    if(sel->isSelectOneObject){
+    if(sel->isSelectOneObject()){
         //オブジェクトを選択していたら
         //オブジェクト情報ダイアログ表示
         //TODO
         this->objPropDialog.Show(true);
-    }else if(sel->isSelectOnePolygon){
+    }else if(sel->isSelectOnePolygon()){
         //ポリゴン情報ダイアログ表示
     }
     //TODO
@@ -807,8 +851,8 @@ void MapEditorMainFrame::OnMotion(wxMouseEvent &ev)
     int my = ev.m_y;
     if(ev.ButtonIsDown(wxMOUSE_BTN_LEFT)){
         if(updatePolygonValidityCount >= UPDATE_POLYGON_VALIDITY_INTERVAL){
-            //ポリゴン整合性
-            //TODO
+            //ポリゴン整合性を更新
+            wxGetApp().getStockManager()->updatePolygonValidityStored();
         }
 
         //左ボタンを押しながら動いている
@@ -931,6 +975,9 @@ void MapEditorMainFrame::doMouseMotionOnArrowTool(wxMouseEvent& ev)
     hpl::aleph::view::HPLViewGridManager* vmgr = wxGetApp().getViewGridManager();
     int div = vmgr->getZoomDivision();
 
+    int mx = ev.m_x;
+    int my = ev.m_y;
+
     if(sel->isSelected()){
         //選択中
         //選択物の移動
@@ -989,14 +1036,20 @@ void MapEditorMainFrame::doMouseMotionOnHandTool(wxMouseEvent& ev)
 }
 void MapEditorMainFrame::doMouseMotionOnLineTool(wxMouseEvent& ev)
 {
+    hpl::aleph::view::HPLViewGridManager* vmgr = wxGetApp().getViewGridManager();
+
+    int voffset[2];
+    vmgr->getOffset(voffset);
     //点を踏んでいないか確認
     int endpointIndex = NONE;
     bool found = false;
+    int div = vmgr->getZoomDivision();
+
     world_point2d wmp = wxGetApp().getWorldPointFromViewPoint(ev.m_x, ev.m_y);
     for(int i = 0; i < (int)EndpointList.size(); i ++){
         endpoint_data* ep = get_endpoint_data(i);
         if(!wxGetApp().getViewGridManager()->isValidHeight(
-            ep->highest_adjacent_floor_height, ep->lowest_adjacent_ceiling_height)
+            ep->highest_adjacent_floor_height, ep->lowest_adjacent_ceiling_height))
         {
             continue;
         }

@@ -132,17 +132,61 @@ void hpl::aleph::map::getViewPointFromWorldPoint2D(world_point2d& point, int *de
     @return その場所に点があればそのインデックスがかえります。
         なければNONE
 */
-int hpl::aleph::map::getSelectPointIndex(world_point2d& wpoint, int threshold)
+int hpl::aleph::map::getSelectPointIndex(world_point2d& wpoint, int threshold, int zMin, int zMax)
 {
-    int pointIndex = NONE;
     for(int i = 0; i < (int)EndpointList.size(); i ++){
         endpoint_data* ep = get_endpoint_data(i);
+        //高さチェック
+        if(!hpl::aleph::map::isValidHeight(ep->highest_adjacent_floor_height, ep->lowest_adjacent_ceiling_height,  zMin, zMax)){
+            continue;
+        }
         if(hpl::aleph::map::isSelectPoint(wpoint, ep->vertex, threshold)){
-            pointIndex = i;
-            break;
+            return i;
         }
     }
-    return pointIndex;
+    return NONE;
+}
+
+/**
+    ある高さが規定範囲内にあるかを確かめます
+    @return ある高度の範囲が規定範囲と共有する部分を持たない場合負
+*/
+bool hpl::aleph::map::isValidHeight(int checkMin, int checkMax, int validMin, int validMax)
+{
+    if(checkMin > checkMax || checkMin > validMax || checkMax < validMin){
+        //・高さ指定が逆
+        //・床が許容範囲より上にある
+        //・天井が許容範囲より下にある
+        //→以上の場合規定範囲外（不正）とみなす
+        return false;
+    }else{
+        return true;
+    }
+}
+/**
+    指定した点が線を踏んでいる場合、その点
+*/
+int hpl::aleph::map::getSelectLineIndex(world_point2d& wpoint, int threshold, int zMin, int zMax)
+{
+    for(int i = 0; i < (int)LineList.size(); i ++){
+        line_data* line = get_line_data(i);
+        //高さチェック
+        if(!hpl::aleph::map::isValidHeight(line->highest_adjacent_floor, line->lowest_adjacent_ceiling,
+            zMin, zMax))
+        {
+            continue;
+        }
+
+        endpoint_data* begin = get_endpoint_data(line->endpoint_indexes[0]);
+        endpoint_data* end = get_endpoint_data(line->endpoint_indexes[1]);
+
+        //選択しているか判定
+        if(hpl::aleph::map::isSelectLine(wpoint, begin->vertex, end->vertex, threshold)){
+            //選択できている（online）
+            return i;
+        }
+    }
+    return NONE;
 }
 
 ///////////////////////  Lines  ////////////////////////////////////////////
@@ -865,12 +909,13 @@ bool hpl::aleph::map::createPoint(world_point2d& wpoint, endpoint_data* ep,
                                   int threshold)
 {
     //TODO
-    ep->flags = POINT_FLAG_SOLID;
+    ep->flags = 1;
     ep->vertex.x = wpoint.x;
     ep->vertex.y = wpoint.y;
 
     //他の点を踏んでいないか確認
-    int pIndex = hpl::aleph::map::getSelectPointIndex(wpoint, threshold);
+    int pIndex = hpl::aleph::map::getSelectPointIndex(wpoint, threshold,
+        -SHRT_MIN, SHRT_MAX);
     if(pIndex != NONE){
         //踏んでる
         //→作成できない
@@ -884,14 +929,14 @@ bool hpl::aleph::map::createPoint(world_point2d& wpoint, endpoint_data* ep,
 /**
     @param polyIndex 載せるポリゴンのインデックス
 */
-bool hpl::aleph::map::createObject(worldpoint2d& wpoint, int polyIndex, map_object* obj,
+bool hpl::aleph::map::createObject(world_point2d& wpoint, int polyIndex, map_object* obj,
                                    int flags)
 {
     //TODO
-    obj->polygon_index = polygonIndex;
+    obj->polygon_index = polyIndex;
     obj->location.x = wpoint.x;
     obj->location.y = wpoint.y;
-    polygon_data* poly = get_polygon_data(polygonIndex);
+    polygon_data* poly = get_polygon_data(polyIndex);
     if(poly == NULL){
         return false;
     }

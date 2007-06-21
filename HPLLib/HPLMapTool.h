@@ -123,10 +123,24 @@ namespace map{
 
     /**
         指定した場所に点があるかどうかを得ます
+        @param wpoint ワールド座標の点
+        @param threshold 点との距離がこれ以下ならば近いと見なす
+        @param zMin, zMax 高さチェック用
         @return その場所に点があればそのインデックスがかえります。
             なければNONE
     */
-    int getSelectPointIndex(world_point2d& wpoint, int threshold);
+    int getSelectPointIndex(world_point2d& wpoint, int threshold, int zMin, int zMax);
+    
+    /**
+        ある高さが規定範囲内にあるかを確かめます
+        @return ある高度の範囲が規定範囲と共有する部分を持たない場合負
+    */
+    bool isValidHeight(int checkMin, int checkMax, int validMin, int validMax);
+
+    /**
+        指定した点が線を踏んでいる場合、その点
+    */
+    int getSelectLineIndex(world_point2d& wpoint, int threshold, int zMin, int zMax);
 
 	///////////////////////	 Lines	////////////////////////////////////////////
 	/**
@@ -313,6 +327,9 @@ namespace map{
 	int addMapSavedObject(map_object object);
 	int addAnnotation(map_annotation annotation);
 
+    //TODO
+    int getEndpointIndexFromAddress(endpoint_data* ep);
+
     /**
         簡略バージョン
     */
@@ -321,7 +338,7 @@ namespace map{
     /**
         @param polyIndex 載せるポリゴンのインデックス
     */
-    bool createObject(worldpoint2d& wpoint, int polyIndex, map_object* obj,
+    bool createObject(world_point2d& wpoint, int polyIndex, map_object* obj,
                                    int flags);
 
     /**
@@ -336,11 +353,26 @@ namespace map{
 		@param index 削除対象のインデックス
 		@return 削除失敗時に偽。インデックスが正しくない場合など
 	*/
+    /*
 	bool deleteEndpoint(int index);
 	bool deleteLine(int index);
 	bool deleteSide(int index);
 	bool deletePolygon(int index);
 	bool deleteMapSavedObject(int index);
+    */
+    /**
+        マップアイテム（点・線・Side・ポリゴン・オブジェクト）
+        を削除します
+        手法としては、
+        １：線の端点など、参照元が削除対象となっている場合、
+            ・参照をNONEにする
+            ・自分自身も削除対象とする
+        ２：
+
+        @param 
+    */
+    bool deleteMapItems(std::vector<bool>* delPoints, std::vector<bool>* delLines, std::vector<bool>* delSides,
+        std::vector<bool>* delPolygons, std::vector<bool>* delObjects);
 
     /**
         ポリゴン情報を修正します

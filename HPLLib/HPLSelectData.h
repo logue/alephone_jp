@@ -8,6 +8,7 @@
 #include "map.h"
 #include "wad.h"
 #include <vector>
+//#include <set>
 
 namespace hpl{
 namespace aleph{

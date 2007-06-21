@@ -10,6 +10,7 @@
 #include <string>
 #include <vector>
 #include <map>
+#include <list>
 
 #include <SDL_gfxPrimitives.h>
 #include "BounceBall.h"

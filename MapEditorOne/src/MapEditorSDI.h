@@ -96,15 +96,6 @@ extern HPLLogger logger;
 
 //map icons
 
-//point flags
-enum
-{
-    POINT_FLAG_SOLID = 1,
-    POINT_FLAG_MULTI_HIGHEST = 2,
-    POINT_FLAG_TRANSPARENCY = 4,
-
-    NUMBER_OF_POINT_FLAGS
-};
 
 //‘I‘ð‚µ‚½‚à‚Ì‚ÌŽí—Þ
 enum{

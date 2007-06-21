@@ -97,7 +97,7 @@ void MapEditorMainFrame::OnPaint(wxPaintEvent& WXUNUSED(event))
                 points[i].x = (int)polygonPoints[i][0];
                 points[i].y = (int)polygonPoints[i][1];
             }
-            drawDC->DrawPolygon(points, n);
+            drawDC->DrawPolygon(n, points);
         }
     }
 
@@ -250,7 +250,7 @@ void MapEditorMainFrame::drawPolygons(wxDC* dc)
 
             //ポリゴンチェック
             if(editMode == EditModeType::EM_DRAW &&
-                !wxGetApp().isPolygonValidityStored(i))
+                !wxGetApp().getStockManager()->isPolygonValidityStored(i))
             {
                 //不正なポリゴン
                 dc->SetBrush(this->invalidBrush);

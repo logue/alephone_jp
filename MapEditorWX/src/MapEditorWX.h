@@ -192,13 +192,12 @@ private:
     /** ビュー＆グリッドマネージャー */
     hpl::aleph::view::HPLViewGridManager viewGridManager;
 
-
     //イベント管理
     hpl::aleph::HPLEventManager eventManager;
 
-    //ポリゴンを高さ順に表示する際の順番
-    //TODO poly height order
-    std::vector<int> polygonDrawOrderByHeight;
+    //ストック情報管理
+    hpl::aleph::HPLStockManager stockManager;
+
 
     //ツールごとのカーソル
     wxCursor cursors[ToolType::NUMBER_OF_TOOLS];
@@ -221,18 +220,12 @@ public:
     */
     bool initialize();
 
-    //////////////////////////
-    // ポリゴン整合性
-    //ポリゴンが正しいかどうかを検査します(高速版)
-    bool isPolygonValidityStored(int polyIndex);
-
-    //ポリゴン整合性情報を更新します
-    void updatePolygonValidityStored();
-
-    std::vector<bool> polygonValidity;
 
     //イベントマネージャーを取得します
     hpl::aleph::HPLEventManager* getEventManager();
+
+    //ストックマネージャを取得します
+    hpl::aleph::HPLStockManager* getStockManager();
 
     //ビュー座標をワールド座標に直す操作の簡易版
     world_point2d getWorldPointFromViewPoint(int vx, int vy);
