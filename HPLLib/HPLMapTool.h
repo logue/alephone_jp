@@ -221,6 +221,12 @@ namespace map{
 		点を共有するポリゴンのリストを取得します
 	*/
 	std::vector<int> getPolygonIndexesIncludePoint(int endpointIndex);
+
+    /**
+        ポリゴンに乗っているオブジェクトのインデックスを取得します
+    */
+    std::vector<int> getObjectIndexesOnPolygon(int polygonIndex);
+
 	////////////////////////////////////////////////////////////////////////
 	///////////	 Sides	////////////////////////////////////////////////////
 
@@ -367,12 +373,15 @@ namespace map{
         １：線の端点など、参照元が削除対象となっている場合、
             ・参照をNONEにする
             ・自分自身も削除対象とする
-        ２：
+        ２：削除対象を削除していく
+            ・削除番号の列を作る
+            ・後ろ側から消していく
 
         @param 
     */
-    bool deleteMapItems(std::vector<bool>* delPoints, std::vector<bool>* delLines, std::vector<bool>* delSides,
-        std::vector<bool>* delPolygons, std::vector<bool>* delObjects);
+    bool deleteMapItems(std::vector<bool>& delPoints, std::vector<bool>& delLines,
+        std::vector<bool>& delSides,
+        std::vector<bool>& delPolygons, std::vector<bool>& delObjects);
 
     /**
         ポリゴン情報を修正します

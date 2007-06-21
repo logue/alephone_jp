@@ -416,6 +416,10 @@
 				>
 			</File>
 			<File
+				RelativePath="..\..\..\..\..\HPLLib\HPLMapToolModifier.cpp"
+				>
+			</File>
+			<File
 				RelativePath="..\..\..\..\..\HPLLib\HPLMath.cpp"
 				>
 			</File>
@@ -445,6 +449,14 @@
 			</File>
 			<File
 				RelativePath="..\..\..\..\..\HPLLib\HPLSelectData.h"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\..\..\HPLLib\HPLStockManager.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\..\..\HPLLib\HPLStockManager.h"
 				>
 			</File>
 			<File
