@@ -283,6 +283,9 @@
 				RelativePath="..\..\..\..\..\HPLLib\HPLMapTool.h">
 			</File>
 			<File
+				RelativePath="..\..\..\..\..\HPLLib\HPLMapToolModifier.cpp">
+			</File>
+			<File
 				RelativePath="..\..\..\..\..\HPLLib\HPLMath.cpp">
 			</File>
 			<File
