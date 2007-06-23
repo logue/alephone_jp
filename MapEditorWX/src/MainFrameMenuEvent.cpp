@@ -294,8 +294,10 @@ void MapEditorMainFrame::OnCeilingTextureMode(wxCommandEvent& ev)
 void MapEditorMainFrame::OnJumpLevel(wxCommandEvent& ev)
 {
     //TODO
-    //JumpLevelDialog dlg;
-    //dlg.Create(this, wxID_ANY);
+    JumpLevelDialog dlg;
+    dlg.Create(this, wxID_ANY);
+    if(dlg.ShowModal() == wxID_OK){
+    }
 }
 void MapEditorMainFrame::OnLevelInfo(wxCommandEvent& ev)
 {

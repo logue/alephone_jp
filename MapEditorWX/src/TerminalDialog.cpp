@@ -54,6 +54,16 @@ bool TerminalDialog::Create(wxWindow* parent, wxWindowID id)
     SetSizer(grid_sizer_5);
     grid_sizer_5->Fit(this);
     Layout();
+
+    //terminal index -> listbox_1
+    for(int i = 0; i < (int)map_terminal_text.size(); i ++){
+        //terminal_text_t* terminal = &map_terminal_text[i];
+        char cstr[256];
+        sprintf(cstr, "terminal%3d", i);
+        list_box_1->Insert(i, wxConvertMB2WX(cstr));
+    }
+    if(map_terminal_text.size() > 0){
+    }
     return result;
 }
 void TerminalDialog::OnOk(wxCommandEvent& ev)

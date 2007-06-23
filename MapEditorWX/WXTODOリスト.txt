@@ -26,12 +26,12 @@ TODO リスト
 
 ///MAXIMUM_VERTICES_PER_POLYGON=8
 
-・wxGladeる
-・配置
-・呼び出し処理記述
-・データ入出力記述
+１：wxGladeる
+２：配置
+３：呼び出し処理記述
+４：データ入出力記述
 
-Annotation		:配置済み
+Annotation		:入出力
 ColorCustomize	:配置済み
 EditPreferences	:配置済み
 Height			:配置済み。
@@ -53,9 +53,9 @@ Tool			:配置済み
 Visual
 
 JumpLevel		:wx
-MediaPalette
-LightPalette
-SoundPalette
+MediaPalette	:
+LightPalette	:
+SoundPalette	:
 
 ○イベント処理の記述は終わっているか？のリスト
 ・TODOありならその内容を書く

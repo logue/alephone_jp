@@ -37,13 +37,13 @@ BEGIN_EVENT_TABLE(PolygonPropDialog, wxDialog)
     EVT_TEXT(PolyProp::ID_Perm, PolygonPropDialog::OnPermuEdit)
     EVT_TEXT(PolyProp::ID_CenterX, PolygonPropDialog::OnCenterXEdit)
     EVT_CHOICE(PolyProp::ID_FloorLight, PolygonPropDialog::OnFloorLightEdit)
-    EVT_TEXT(PolyProp::CenterY, PolygonPropDialog::OnCenterYEdit)
-    EVT_CHOICE(PolyProp::CeilingLight, PolygonPropDialog::OnCeilingLightEdit)
+    EVT_TEXT(PolyProp::ID_CenterY, PolygonPropDialog::OnCenterYEdit)
+    EVT_CHOICE(PolyProp::ID_CeilingLight, PolygonPropDialog::OnCeilingLightEdit)
     EVT_TEXT(PolyProp::ID_Area, PolygonPropDialog::OnAreaEdit)
-    EVT_TEXT(PolyProp::FloorOriginX, PolygonPropDialog::OnFloorOriginXEdit)
-    EVT_TEXT(PolyProp::FloorOriginY, PolygonPropDialog::OnFloorOriginYEdit)
-    EVT_TEXT(PolyProp::CeilingOriginX, PolygonPropDialog::OnCeilingOriginXEdit)
-    EVT_TEXT(PolyProp::CeilingOriginY, PolygonPropDialog::OnCeilingOriginYEdit)
+    EVT_TEXT(PolyProp::ID_FloorOriginX, PolygonPropDialog::OnFloorOriginXEdit)
+    EVT_TEXT(PolyProp::ID_FloorOriginY, PolygonPropDialog::OnFloorOriginYEdit)
+    EVT_TEXT(PolyProp::ID_CeilingOriginX, PolygonPropDialog::OnCeilingOriginXEdit)
+    EVT_TEXT(PolyProp::ID_CeilingOriginY, PolygonPropDialog::OnCeilingOriginYEdit)
     EVT_CHOICE(PolyProp::ID_FirstObj, PolygonPropDialog::OnFirstObjChoice)
     EVT_CHOICE(PolyProp::ID_Media, PolygonPropDialog::OnMediaChoice)
     EVT_TEXT(PolyProp::ID_FirstExZone, PolygonPropDialog::OnFirstExZoneEdit)
@@ -80,19 +80,19 @@ bool PolygonPropDialog::Create(wxWindow* parent, wxWindowID id)
     label_37 = new wxStaticText(this, wxID_ANY, wxT("Floor light"));
     choice_13 = new wxChoice(this, PolyProp::ID_FloorLight);
     label_49 = new wxStaticText(this, wxID_ANY, wxT("Center Y"));
-    text_ctrl_24 = new wxTextCtrl(this, PolyProp::CenterY, wxEmptyString);
+    text_ctrl_24 = new wxTextCtrl(this, PolyProp::ID_CenterY, wxEmptyString);
     label_38 = new wxStaticText(this, wxID_ANY, wxT("Ceiling light"));
-    choice_14 = new wxChoice(this, PolyProp::CeilingLight);
+    choice_14 = new wxChoice(this, PolyProp::ID_CeilingLight);
     label_26 = new wxStaticText(this, wxID_ANY, wxT("Floor origin"));
-    text_ctrl_33 = new wxTextCtrl(this, PolyProp::FloorOriginX, wxEmptyString);
+    text_ctrl_33 = new wxTextCtrl(this, PolyProp::ID_FloorOriginX, wxEmptyString);
     label_27 = new wxStaticText(this, wxID_ANY, wxT("x"));
-    text_ctrl_35 = new wxTextCtrl(this, PolyProp::FloorOriginY, wxEmptyString);
+    text_ctrl_35 = new wxTextCtrl(this, PolyProp::ID_FloorOriginY, wxEmptyString);
     label_39 = new wxStaticText(this, wxID_ANY, wxT("Area"));
     text_ctrl_26 = new wxTextCtrl(this, PolyProp::ID_Area, wxEmptyString);
     label_55 = new wxStaticText(this, wxID_ANY, wxT("Ceiling origin"));
-    text_ctrl_34 = new wxTextCtrl(this, PolyProp::CeilingOriginX, wxEmptyString);
+    text_ctrl_34 = new wxTextCtrl(this, PolyProp::ID_CeilingOriginX, wxEmptyString);
     label_28 = new wxStaticText(this, wxID_ANY, wxT("x"));
-    text_ctrl_36 = new wxTextCtrl(this, PolyProp::CeilingOriginY, wxEmptyString);
+    text_ctrl_36 = new wxTextCtrl(this, PolyProp::ID_CeilingOriginY, wxEmptyString);
     label_40 = new wxStaticText(this, wxID_ANY, wxT("First object"));
     choice_19 = new wxChoice(this, PolyProp::ID_FirstObj);
     label_54 = new wxStaticText(this, wxID_ANY, wxT("Media"));
@@ -112,7 +112,7 @@ bool PolygonPropDialog::Create(wxWindow* parent, wxWindowID id)
     label_44 = new wxStaticText(this, wxID_ANY, wxT("Ceiling trans"));
     text_ctrl_31 = new wxTextCtrl(this, PolyProp::ID_CeilingTrans, wxEmptyString);
     label_50 = new wxStaticText(this, wxID_ANY, wxT("Rnd snd"));
-    choice_18 = new wxChoice(this, wxID_PolyProp::ID_RndSndANY);
+    choice_18 = new wxChoice(this, PolyProp::ID_RndSnd);
     button_21 = new wxButton(this, PolyProp::ID_Platform, wxT("Platform settings"));
     panel_10 = new wxPanel(this, wxID_ANY);
     panel_11 = new wxPanel(this, wxID_ANY);

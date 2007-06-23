@@ -16,7 +16,7 @@ struct map_annotation
 */
 
 /**
-    あのテーション追加・変更ダイアログ
+    アノテーション追加・変更ダイアログ
 */
 class AnnotationDialog: public wxDialog{
 private:
@@ -45,6 +45,9 @@ public:
         設定した値でデータを取得する
     */
     map_annotation getAnnotation();
+    
+    //位置
+    world_point2d wpoint;
 
     //イベントテーブル作成<en>declare
     DECLARE_EVENT_TABLE()

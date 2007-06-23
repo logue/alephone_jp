@@ -61,6 +61,25 @@ bool AnnotationDialog::Create(wxWindow* parent, wxWindowID id, map_annotation& a
     sizer_33->Fit(this);
     Layout();
 
+    //値設定
+    choice_8->SetSelection(annotation.type);
+    text_ctrl_7->SetValue(wxConvertMB2WX(annotation.text));
+    this->wpoint.x = annotation.location.x;
+    this->wpoint.y = annotation.location.y;
+    //ポリゴン情報を代入
+    //TODO
+    for(int i = 0; i < (int)PolygonList.size(); i ++){
+        char buf[BUF_MAX];
+        sprintf(buf, "%d", i);
+        choice_7->Insert(wxConvertMB2WX(buf), i);
+    }
+    //最後にNONE
+    choice_7->Insert(_T("NONE"), PolygonList.size());
+    if(annotation.polygon_index == NONE){
+        choice_7->SetSelection(PolygonList.size());
+    }else{
+        choice_7->SetSelection(annotation.polygon_index);
+    }
     return result;
 }
 /**
@@ -70,6 +89,14 @@ map_annotation AnnotationDialog::getAnnotation()
 {
     //TODO
     map_annotation annotation = {NULL};
+    annotation.location.x = this->wpoint.x;
+    annotation.location.y = this->wpoint.y;
+    strcpy(annotation.text, wxConvertWX2MB(text_ctrl_7->GetValue()));
+    annotation.type = choice_8->GetSelection();
+    annotation.polygon_index = choice_7->GetSelection();
+    if(annotation.polygon_index == PolygonList.size()){
+        annotation.polygon_index = NONE;
+    }
     return annotation;
 }
 //OKボタン押した時
