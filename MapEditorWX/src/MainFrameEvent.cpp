@@ -417,8 +417,9 @@ void MapEditorMainFrame::doLButtonOnLineTool(wxMouseEvent& ev)
     //重なる点があるかどうかチェック
     int pointIndex = hpl::aleph::map::getSelectPointIndex(wpoint, POINT_DISTANCE_EPSILON, zMin, zMax);
     //重なる線があるか判定する
-    int lineIndex = hpl::aleph::map::getLineIndexFromOnPoint(wpoint, LINE_DISTANCE_EPSILON, zMin, zMax);
+    int lineIndex = hpl::aleph::map::getSelectLineIndex(wpoint, LINE_DISTANCE_EPSILON, zMin, zMax);
 
+    hpl::aleph::HPLStockManager* smgr = wxGetApp().getStockManager();
     if(pointIndex != NONE)
     {
         //既存の点をクリックしている
@@ -499,7 +500,8 @@ void MapEditorMainFrame::doLButtonOnLineTool(wxMouseEvent& ev)
                 //endpoint_data* end = get_endpoint_data(line->endpoint_indexes[1]);
 
                 //線を削除
-                hpl::aleph::map::deleteLine(lineIndex);
+                smgr->deleteLine(lineIndex);
+                smgr->updateDeletes();
                 //点を追加
                 endpoint_data ep;
                 assert(hpl::aleph::map::createPoint(wpoint, &ep, POINT_DISTANCE_EPSILON));
@@ -631,6 +633,11 @@ void MapEditorMainFrame::OnRightDown(wxMouseEvent& ev)
     wxGetApp().setCursor();
     //マウス座標記録
     wxGetApp().getViewGridManager()->setNewMousePoint(ev.m_x, ev.m_y);
+
+    //ポップアップメニューを出す
+    //TODO
+    //テスト
+    PopupMenu(&wxGetApp().linePopupMenu);
 }
 ///////////////////////////////////////////////////////
 void MapEditorMainFrame::OnRightUp(wxMouseEvent& ev)
@@ -1034,39 +1041,34 @@ void MapEditorMainFrame::doMouseMotionOnHandTool(wxMouseEvent& ev)
     //移動
     this->moveMapOffset(ev.m_x, ev.m_y);
 }
+/**
+    線ツール
+*/
 void MapEditorMainFrame::doMouseMotionOnLineTool(wxMouseEvent& ev)
 {
     hpl::aleph::view::HPLViewGridManager* vmgr = wxGetApp().getViewGridManager();
 
     int voffset[2];
     vmgr->getOffset(voffset);
-    //点を踏んでいないか確認
-    int endpointIndex = NONE;
-    bool found = false;
+    world_point2d wmp = wxGetApp().getWorldPointFromViewPoint(ev.m_x, ev.m_y);
+    int zMin = vmgr->getViewHeightMin();
+    int zMax = vmgr->getViewHeightMax();
     int div = vmgr->getZoomDivision();
 
-    world_point2d wmp = wxGetApp().getWorldPointFromViewPoint(ev.m_x, ev.m_y);
-    for(int i = 0; i < (int)EndpointList.size(); i ++){
-        endpoint_data* ep = get_endpoint_data(i);
-        if(!wxGetApp().getViewGridManager()->isValidHeight(
-            ep->highest_adjacent_floor_height, ep->lowest_adjacent_ceiling_height))
-        {
-            continue;
-        }
-
-        if(hpl::aleph::map::isSelectPoint(ev.m_x, ev.m_y, ep->vertex.x, ep->vertex.y,
-            voffset[0], voffset[1], OFFSET_X_WORLD, OFFSET_Y_WORLD, div, POINT_DISTANCE_EPSILON))
-        {
-            wxGetApp().isNowOnThePoint = true;
-            found = true;
-            break;
-        }
-    }
-    if(!found){
+    //点を踏んでいないか確認
+    int endpointIndex = hpl::aleph::map::getSelectPointIndex(wmp, POINT_DISTANCE_EPSILON * div, zMin, zMax);
+    if(endpointIndex != NONE){
+        wxGetApp().isNowOnThePoint = true;
+        wxGetApp().isNowOnTheLine = false;
+    }else{
         wxGetApp().isNowOnThePoint = false;
 
-        //線の上にいるかどうか？
-        //TODO
+        int lineIndex = hpl::aleph::map::getSelectLineIndex(wmp, POINT_DISTANCE_EPSILON * div, zMin, zMax);
+        if(lineIndex != NONE){
+            wxGetApp().isNowOnTheLine = true;
+        }else{
+            wxGetApp().isNowOnTheLine = false;
+        }
     }
 }
 void MapEditorMainFrame::doMouseMotionOnMagnifyTool(wxMouseEvent& ev)

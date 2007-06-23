@@ -85,7 +85,7 @@ void MapEditorMainFrame::OnPaint(wxPaintEvent& WXUNUSED(event))
             int mx = mpoint[0];
             int my = mpoint[1];
             int selStartPoint[2];
-            emgr->getSelectingGroupStartPoint(selStartPoint);
+            emgr->getSelectGroupStartPoint(selStartPoint);
             //ポリゴン追加モード
             //追加予定ポリゴンを表示
             double polygonPoints[MAXIMUM_VERTICES_PER_POLYGON][2];
@@ -282,7 +282,7 @@ void MapEditorMainFrame::drawLines(wxDC* dc)
         bool isHidden = false;
         if(floor < zMin || ceiling > zMax){
             isHidden = true;
-            if(wxGetApp().isRevealHiddenLines){
+            if(!wxGetApp().isRevealHiddenLines){
                 //見えない線をうっすら表示。をしない
                 continue;
             }
@@ -292,8 +292,8 @@ void MapEditorMainFrame::drawLines(wxDC* dc)
         wxGetApp().getViewPointFromWorldPoint(begin->vertex, beginP);
         wxGetApp().getViewPointFromWorldPoint(end->vertex, endP);
 
-        //隠れ線
         if(isHidden){
+            dc->SetPen(*wxGREY_PEN);
         }else{
             bool select = false;
             //選択チェック
@@ -312,6 +312,22 @@ void MapEditorMainFrame::drawLines(wxDC* dc)
         }
         //選択チェック
         dc->DrawLine(beginP[0], beginP[1], endP[0], endP[1]);
+#ifdef DEBUG
+        //デバッグモード
+        //矢印にして表示
+        const double WING_DEG = 150;
+        const int WING_LEN = 10;
+        double deg = hpl::math::getDegreeFromVector(endP[0] - beginP[0], endP[1] - beginP[1]);
+        for(int j = -1; j < 2; j += 2){
+            double wingDeg = deg + j * WING_DEG;
+            double rad = hpl::math::getRadianFromDegree(wingDeg);
+            int wingP[2] ={
+                endP[0] + WING_LEN * cos(rad),
+                endP[1] + WING_LEN * sin(rad),
+            };
+            dc->DrawLine(endP[0], endP[1], wingP[0], wingP[1]);
+        }
+#endif
     }
 }
 void MapEditorMainFrame::drawSides(wxDC* dc)

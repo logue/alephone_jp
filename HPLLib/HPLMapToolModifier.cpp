@@ -5,6 +5,7 @@
 #include <fstream>
 #include "HPLError.h"
 #include "HPLStringModifier.h"
+#include "map.h"
 
 /**
     マップアイテム（点・線・Side・ポリゴン・オブジェクト）
@@ -24,13 +25,13 @@ bool hpl::aleph::map::deleteMapItems(std::vector<bool>& delPoints, std::vector<b
     std::vector<bool>& delPolygons, std::vector<bool>& delObjects)
 {
     if(delPoints.size() != EndpointList.size() ||
-        delPoints.size() != dynamic_world.endpoint_count ||
+        delPoints.size() != dynamic_world->endpoint_count ||
         delLines.size() != LineList.size() ||
-        delLines.size() != dynamic_world.line_count ||
+        delLines.size() != dynamic_world->line_count ||
         delSides.size() != SideList.size() ||
-        delSides.size() != dynamic_world.side_count ||
+        delSides.size() != dynamic_world->side_count ||
         delPolygons.size() != PolygonList.size() ||
-        delPolygons.size() != dynamic_world.polygon_count ||
+        delPolygons.size() != dynamic_world->polygon_count ||
         delObjects.size() != SavedObjectList.size())
     {
         hpl::error::halt("数があっていない");
@@ -66,5 +67,67 @@ bool hpl::aleph::map::deleteMapItems(std::vector<bool>& delPoints, std::vector<b
     counter = 0;
     for(int i = 0; i < (int)delObjects.size(); i ++){
         if(!delObjects[i]){   indexMapObjects[i] = counter;   counter ++;}
+    }
+
+    //インデックスを付け直す
+    for(int i = 0; i < (int)EndpointList.size(); i ++){
+        if(!delPoints[i]){
+            endpoint_data* ep = get_endpoint_data(i);
+            ep->supporting_polygon_index = indexMapPolygons[ep->supporting_polygon_index];
+        }
+    }
+    for(int i = 0; i < (int)LineList.size(); i ++){
+        if(!delLines[i]){
+            line_data* line = get_line_data(i);
+            assert(line);
+            if(line->clockwise_polygon_owner != NONE){
+                line->clockwise_polygon_owner = indexMapPolygons[line->clockwise_polygon_owner];
+            }
+            if(line->clockwise_polygon_side_index != NONE){
+                line->clockwise_polygon_side_index = indexMapSides[line->clockwise_polygon_side_index];
+            }
+            if(line->counterclockwise_polygon_owner != NONE){
+                line->counterclockwise_polygon_owner = indexMapPolygons[line->counterclockwise_polygon_owner];
+            }
+            if(line->counterclockwise_polygon_side_index != NONE){
+                line->counterclockwise_polygon_side_index = indexMapSides[line->counterclockwise_polygon_side_index];
+            }
+            for(int j = 0; j < 2; j ++){
+                line->endpoint_indexes[j] = indexMapPoints[line->endpoint_indexes[j]];
+            }
+        }
+    }
+    for(int i = 0; i < (int)SideList.size(); i ++){
+        if(!delSides[i]){
+            side_data* side = get_side_data(i);
+            assert(side);
+            side->line_index = indexMapLines[side->line_index];
+            side->polygon_index = indexMapPolygons[side->polygon_index];
+        }
+    }
+    for(int i = 0; i < (int)PolygonList.size(); i ++){
+        if(!delPolygons[i]){
+            polygon_data* poly = get_polygon_data(i);
+            assert(poly);
+            int n = poly->vertex_count;
+            for(int j = 0; j < n; j ++){
+                if(poly->adjacent_polygon_indexes[j] != NONE){
+                    poly->adjacent_polygon_indexes[j] =
+                        indexMapPolygons[poly->adjacent_polygon_indexes[j]];
+                }
+                poly->line_indexes[j] = indexMapLines[poly->line_indexes[j]];
+                poly->endpoint_indexes[j] = indexMapPoints[poly->endpoint_indexes[j]];
+                poly->side_indexes[j] = indexMapSides[poly->side_indexes[j]];
+            }
+            if(poly->first_object != NONE){
+                poly->first_object = indexMapObjects[poly->first_object];
+            }
+        }
+    }
+    for(int i = 0; i < (int)SavedObjectList.size(); i ++){
+        if(!delObjects[i]){
+            map_object* obj = &SavedObjectList[i];
+            obj->polygon_index = indexMapPolygons[obj->polygon_index];
+        }
     }
 }

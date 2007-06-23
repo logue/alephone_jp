@@ -38,9 +38,8 @@ void MapEditorMainFrame::OnNew(wxCommandEvent& ev)
     //内容をマップデータに反映
     //TODO
 
-    //削除対象の覚え書きを初期化
-    wxGetApp().getStockManager()->toDeleteList.clear();
-
+    //データの初期化
+    wxGetApp().getStockManager()->resetDeletes();
     Refresh();
 }
 void MapEditorMainFrame::OnNewLevel(wxCommandEvent& ev)
@@ -105,6 +104,8 @@ void MapEditorMainFrame::OnOpen(wxCommandEvent& WXUNUSED(ev))
 
         wxGetApp().filePath = path;
         wxGetApp().isChanged = false;
+
+        wxGetApp().getStockManager()->resetDeletes();
         //再描画
         Refresh();
     }

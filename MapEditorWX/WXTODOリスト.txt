@@ -28,8 +28,8 @@ TODO リスト
 
 ・wxGladeる
 ・配置
-・データ読み込み部分作成
-・データ書き出し部分作成
+・呼び出し処理記述
+・データ入出力記述
 
 Annotation		:配置済み
 ColorCustomize	:配置済み
@@ -41,9 +41,9 @@ LineProp
 ObjectProp		:wx
 Placement		:配置済み
 Platform		:配置済み。
-PointProp		:wx
-PolygonNum		:wx
-PolygonProp		:wx
+PointProp		:配置
+PolygonNum		:配置
+PolygonProp		:配置
 PolygonType
 SelectLevel
 SideProp
@@ -52,7 +52,7 @@ Texture
 Tool			:配置済み
 Visual
 
-JumpLevel
+JumpLevel		:wx
 MediaPalette
 LightPalette
 SoundPalette

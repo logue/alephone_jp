@@ -104,6 +104,7 @@ namespace math{
 
     /**
         点と点の距離が所定以内か判定
+        @param distance ビュー座標での距離閾値
         <en>check distance between points be under threshold
     */
     bool isNearbyPoints(double px0, double py0, 

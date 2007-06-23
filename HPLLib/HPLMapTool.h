@@ -334,7 +334,7 @@ namespace map{
 	int addAnnotation(map_annotation annotation);
 
     //TODO
-    int getEndpointIndexFromAddress(endpoint_data* ep);
+    //int getEndpointIndexFromAddress(endpoint_data* ep);
 
     /**
         ŠÈ—ªƒo[ƒWƒ‡ƒ“

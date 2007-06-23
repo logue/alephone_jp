@@ -77,6 +77,12 @@ enum
     ID_LevelInfo,
     ID_ObjectPlacement,
     ID_TerminalViewer,
+
+    //popup menu
+    ID_LineProp,
+    ID_ClockwiseSideProp,
+    ID_CounterclockwiseSideProp,
+    ID_PointProp,
 };  
 
 //ÉäÉ\Å[ÉXID

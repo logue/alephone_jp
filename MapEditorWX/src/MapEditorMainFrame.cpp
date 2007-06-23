@@ -196,6 +196,13 @@ void MapEditorMainFrame::setupMenus()
     menuBar->Append(menuHelp, _T("&Help"));
 
     SetMenuBar(menuBar);
+
+    wxGetApp().linePopupMenu.SetTitle(_T("line menu"));
+    wxGetApp().linePopupMenu.Append(ID_LineProp, _T("Properties..."));
+    wxGetApp().linePopupMenu.Append(ID_ClockwiseSideProp, _T("Clockwise side prop..."));
+    wxGetApp().linePopupMenu.Append(ID_CounterclockwiseSideProp, _T("Counterclockwise side prop..."));
+    wxGetApp().pointPopupMenu.SetTitle(_T("point menu"));
+    wxGetApp().pointPopupMenu.Append(ID_PointProp, _T("Properties..."));
 }
 
 

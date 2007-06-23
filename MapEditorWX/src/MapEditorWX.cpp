@@ -130,6 +130,7 @@ bool MapEditorWX::initialize()
 
     //TODO textureBitmaps
 
+    //カーソル読み込み <en> load cursor images
     /*
         TI_ARROW = 0,
         TI_FILL,
@@ -177,9 +178,23 @@ bool MapEditorWX::initialize()
             cursors[i] = wxCursor(bmp);
         }
     }
+    {
+        wxImage img;
+        wxString str = wxConvCurrent->cMB2WX("data/img/onLine.bmp");
+        img.LoadFile(str);
+        img.SetMaskColour(255,255,255);
+        this->onLineCursor = wxCursor(img);
+        img = wxImage();
+        img.LoadFile(wxString(wxConvCurrent->cMB2WX("data/img/onPoint.bmp")));
+        img.SetMaskColour(255,255,255);
+        this->onPointCursor = wxCursor(img);
+    }
 
     //対象外の線を表示するかどうか
     this->isRevealHiddenLines = false;
+    
+    this->isNowOnTheLine = this->isNowOnThePoint = false;
+
     return true;
 }
 
@@ -238,10 +253,18 @@ void MapEditorWX::loadBitmap(const char* fname, wxImage* bitmap)
 void MapEditorWX::setCursor()
 {
     int editMode = this->getEventManager()->getEditModeType();
+    int toolType = this->getEventManager()->getToolType();
     if(editMode == EditModeType::EM_DRAW){
-        int toolType = this->getEventManager()->getToolType();
-        //TODO カーソル
-        ::wxSetCursor(cursors[toolType]);
+        if(toolType == ToolType::TI_LINE && this->isNowOnTheLine){
+            //線の上にいえる
+            wxSetCursor(this->onLineCursor);
+        }else if(toolType == ToolType::TI_LINE && this->isNowOnThePoint){
+            //点の上にいえる
+            wxSetCursor(this->onPointCursor);
+        }else{
+            //TODO カーソル
+            ::wxSetCursor(cursors[toolType]);
+        }
     }else{
         //矢印にする
         ::wxSetCursor(cursors[0]);

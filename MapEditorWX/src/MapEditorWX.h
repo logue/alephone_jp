@@ -185,6 +185,11 @@ public:
     //ただし、高さ範囲の外にある場合考慮しない
     bool isNowOnThePoint;
     bool isNowOnTheLine;
+
+    wxMenu linePopupMenu;
+    wxMenu pointPopupMenu;
+
+    //public メンバ変数 ここまで
 private:
     
     ///////////////////////
@@ -201,6 +206,11 @@ private:
 
     //ツールごとのカーソル
     wxCursor cursors[ToolType::NUMBER_OF_TOOLS];
+
+    //オンラインカーソル
+    wxCursor onLineCursor;
+    //オンポイントカーソル
+    wxCursor onPointCursor;
 
     //ウインドウフレーム
     MapEditorMainFrame *frame;
