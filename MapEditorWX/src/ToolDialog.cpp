@@ -3,6 +3,7 @@
 
 #include <string>
 #include "PolygonNumDialog.h"
+#include "MapEditorMainFrame.h"
 
 BEGIN_EVENT_TABLE(ToolDialog, wxDialog)
     EVT_PAINT(ToolDialog::OnPaint)
@@ -11,6 +12,7 @@ END_EVENT_TABLE()
 
 ToolDialog::ToolDialog():wxDialog()
 {
+    
     //イメージ名リスト読み込み
     hpl::aleph::Information infos[NUMBER_OF_TOOL_BAR_ICON_FILES];
     {
@@ -47,6 +49,7 @@ bool ToolDialog::Create(wxWindow* parent, wxWindowID id)
     long style = wxCAPTION;
     bool result = wxDialog::Create(parent, id, _T("Tool"), wxDefaultPosition//);
     ,        wxSize(TOOL_DIALOG_W, TOOL_DIALOG_H), style);
+
 /*    wxBitmapButton *bmpBtn = new wxBitmapButton(this, -1, toolBitmaps[0]);
     wxGridSizer *boxSizer = new wxGridSizer(2);
     this->SetSizer(boxSizer);
@@ -101,7 +104,8 @@ void ToolDialog::OnLeftDown(wxMouseEvent& ev)
             if(i == ToolType::TI_SKULL){
                 //オブジェクトツール
                 //プロパティを表示する
-                //TODO wxGetApp().objectPropDialog.Show();
+                ((MapEditorMainFrame*)GetParent())->objPropDialog.setObjIndex(NONE);
+                ((MapEditorMainFrame*)GetParent())->objPropDialog.Show();
 
             }else if(i == ToolType::TI_POLYGON){
                 //ポリゴンツール

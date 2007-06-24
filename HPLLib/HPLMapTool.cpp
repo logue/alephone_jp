@@ -146,6 +146,14 @@ int hpl::aleph::map::getSelectPointIndex(world_point2d& wpoint, int threshold, i
     }
     return NONE;
 }
+int hpl::aleph::map::getSelectPointIndex(int viewX, int viewY, int threshold, int zMin, int zMax,
+        int voffsetX, int voffsetY, int offsetXW, int offsetYW, int div)
+{
+    world_point2d wpoint = hpl::aleph::map::getWorldPoint2DFromViewPoint(viewX, viewY, offsetXW, offsetYW, div,
+        voffsetX, voffsetY);
+    int index = hpl::aleph::map::getSelectPointIndex(wpoint, threshold * div, zMin, zMax);
+    return index;
+}
 
 /**
     Ç†ÇÈçÇÇ≥Ç™ãKíËîÕàÕì‡Ç…Ç†ÇÈÇ©ÇämÇ©ÇﬂÇ‹Ç∑
@@ -187,6 +195,14 @@ int hpl::aleph::map::getSelectLineIndex(world_point2d& wpoint, int threshold, in
         }
     }
     return NONE;
+}
+int hpl::aleph::map::getSelectLineIndex(int viewX, int viewY, int threshold, int zMin, int zMax,
+        int voffsetX, int voffsetY, int offsetXW, int offsetYW, int div)
+{
+    world_point2d wpoint = hpl::aleph::map::getWorldPoint2DFromViewPoint(viewX, viewY, offsetXW, offsetYW, div,
+        voffsetX, voffsetY);
+    int index = hpl::aleph::map::getSelectLineIndex(wpoint, threshold * div, zMin, zMax);
+    return index;
 }
 
 ///////////////////////  Lines  ////////////////////////////////////////////

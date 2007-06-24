@@ -11,6 +11,7 @@ private:
     //イメージビットマップ
     wxImage toolBitmaps[ToolType::NUMBER_OF_TOOLS];
     wxImage selectedToolBitmaps[ToolType::NUMBER_OF_TOOLS];
+
 public:
     /**
         @param parent 親ウインドウNULLでも可能

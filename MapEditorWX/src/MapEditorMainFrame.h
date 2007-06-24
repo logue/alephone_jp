@@ -1,30 +1,37 @@
 #pragma once
 
 //dialogues
+//modal
 #include "AnnotationDialog.h"
 #include "ColorCustomizeDialog.h"
 #include "EditorPreferencesDialog.h"
-#include "HeightDialog.h"
-#include "HeightPaletteDialog.h"
 #include "LevelInfoDialog.h"
-#include "LinePropDialog.h"
-#include "ObjectPropDialog.h"
 #include "PlacementDialog.h"
 #include "PlatformDialog.h"
-#include "PointPropDialog.h"
 #include "PolygonNumDialog.h"
-#include "PolygonPropDialog.h"
-#include "PolygonTypeDialog.h"
 #include "SelectLevelDialog.h"
-#include "SidePropDialog.h"
 #include "TerminalDialog.h"
-#include "TextureDialog.h"
-#include "ToolDialog.h"
 #include "VisualDialog.h"
 
+//modeless
+//tool
+#include "ToolDialog.h"
+//height
+#include "HeightDialog.h"
+//palettes
+#include "HeightPaletteDialog.h"
 #include "LightPaletteDialog.h"
 #include "MediaPaletteDialog.h"
 #include "SoundPaletteDialog.h"
+#include "TextureDialog.h"
+//properties
+#include "ObjectPropDialog.h"
+#include "LinePropDialog.h"
+#include "PointPropDialog.h"
+#include "PolygonPropDialog.h"
+#include "PolygonTypeDialog.h"
+#include "SidePropDialog.h"
+
 
 #include "MapEditorWX.h"
 #include "HPLLib/HPLAlephLib.h"
@@ -96,6 +103,14 @@ enum{
 */
 class MapEditorMainFrame: public wxFrame
 {
+public:
+    //プロパティ類 <en> properties
+    ObjectPropDialog objPropDialog;
+    LinePropDialog linePropDialog;
+    PointPropDialog pointPropDialog;
+    PolygonTypeDialog polyTypeDialog;
+    PolygonPropDialog polyPropDialog;
+    SidePropDialog sidePropDialog;
 private:
     //ダブルバッファリング用Bitmap
     wxBitmap doubleBufferingBitmap;
@@ -104,17 +119,17 @@ private:
 
     /////////////////////
     //ダイアログ(モードレス)
-    //高さ
-    HeightDialog heightDialog;
-    //高さパレット
-    HeightPaletteDialog heightPaletteDialog;
-    LinePropDialog linePropDialog;
-    ObjectPropDialog objPropDialog;
-    PointPropDialog pointPropDialog;
-    PolygonTypeDialog polyTypeDialog;
-    PolygonPropDialog polyPropDialog;
-    TextureDialog textureDialog;
+    //tool
     ToolDialog toolDialog;
+    //高さ <en> height
+    HeightDialog heightDialog;
+    //パレット類 <en> palettes
+    HeightPaletteDialog heightPaletteDialog;
+    LightPaletteDialog lightPaletteDialog;
+    MediaPaletteDialog mediaPaletteDialog;
+    SoundPaletteDialog soundPaletteDialog;
+    TextureDialog textureDialog;
+
     //TODO サウンド・メディア・ライト
     //TODO 以上のパレットダイアログをさくせいすること
 

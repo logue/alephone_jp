@@ -30,24 +30,25 @@ TODO リスト
 ２：配置
 ３：呼び出し処理記述
 ４：データ入出力記述
+５：デバッグ完了
 
-Annotation		:入出力
+Annotation		:デバッグ完了（選択モードは未完）
 ColorCustomize	:配置済み
 EditPreferences	:配置済み
 Height			:配置済み。
 HeightPallet	:
 LevelInfo
-LineProp
+LineProp		:wx
 ObjectProp		:wx
 Placement		:配置済み
 Platform		:配置済み。
 PointProp		:配置
 PolygonNum		:配置
 PolygonProp		:配置
-PolygonType
-SelectLevel
+PolygonType		:wx
+SelectLevel		:配置
 SideProp
-Terminal		:配置済み
+Terminal		:入出力
 Texture
 Tool			:配置済み
 Visual
@@ -146,3 +147,7 @@ Fix時に順番整理もする
 点→線の端点（ポリゴンの一部）
 線→点、Side、ポリゴン
 ポリゴン→線、点、オブジェクト、Side
+
+Terminal encode->Marathon 文字列データ
+decode->char
+保存時にエンコードすることを忘れずに！

@@ -87,11 +87,17 @@ bool AnnotationDialog::Create(wxWindow* parent, wxWindowID id, map_annotation& a
 */
 map_annotation AnnotationDialog::getAnnotation()
 {
-    //TODO
     map_annotation annotation = {NULL};
     annotation.location.x = this->wpoint.x;
     annotation.location.y = this->wpoint.y;
-    strcpy(annotation.text, wxConvertWX2MB(text_ctrl_7->GetValue()));
+    //長さチェック
+    wxString str = wxString(text_ctrl_7->GetValue());
+    if(str.Length() > MAXIMUM_ANNOTATION_TEXT_LENGTH){
+        hpl::error::caution("annotation text is too long (over %d). ignored after limit.",
+            MAXIMUM_ANNOTATION_TEXT_LENGTH);
+        str = str.Mid(0, MAXIMUM_ANNOTATION_TEXT_LENGTH);
+    }
+    strcpy(annotation.text, str.mb_str());
     annotation.type = choice_8->GetSelection();
     annotation.polygon_index = choice_7->GetSelection();
     if(annotation.polygon_index == PolygonList.size()){

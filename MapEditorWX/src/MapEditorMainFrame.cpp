@@ -76,16 +76,7 @@ MapEditorMainFrame::MapEditorMainFrame(const wxString& title,
     CreateStatusBar();
     SetStatusText( _T("get ready..."));
 
-    //ダイアログ
-    //TODO dlg
-    //tool
-    this->toolDialog.Create(this, wxID_ANY);
-    this->toolDialog.Show();
-
-    //height
-    this->heightDialog.Create(this, wxID_ANY);
-    this->heightDialog.Show();
-
+    
     //ペン・ブラシのセットアップ
     this->setupPenAndBrush(wxGetApp().setting.getColorSetting());
 
@@ -103,6 +94,30 @@ MapEditorMainFrame::MapEditorMainFrame(const wxString& title,
     dlg.Create(this, wxID_ANY);
     int id = dlg.ShowModal();
     hpl::error::halt("%d", id);*/
+    //ダイアログ
+    //TODO dlg
+    //tool
+    this->toolDialog.Create(this, wxID_ANY);
+    this->toolDialog.Show();
+
+    //height
+    this->heightDialog.Create(this, wxID_ANY);
+    this->heightDialog.Show();
+
+    //パレット
+    this->heightPaletteDialog.Create(this, wxID_ANY);
+    this->lightPaletteDialog.Create(this, wxID_ANY);
+    this->mediaPaletteDialog.Create(this, wxID_ANY);
+    this->soundPaletteDialog.Create(this, wxID_ANY);
+    this->textureDialog.Create(this, wxID_ANY);
+
+    //プロパティ
+    this->objPropDialog.Create(this, wxID_ANY);
+    this->linePropDialog.Create(this, wxID_ANY);
+    this->pointPropDialog.Create(this, wxID_ANY);
+    this->polyTypeDialog.Create(this, wxID_ANY);
+    this->polyPropDialog.Create(this, wxID_ANY);
+    this->sidePropDialog.Create(this, wxID_ANY);
 }
 MapEditorMainFrame::~MapEditorMainFrame()
 {

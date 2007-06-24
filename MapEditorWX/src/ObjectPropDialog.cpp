@@ -14,3 +14,15 @@ bool ObjectPropDialog::Create(wxWindow* parent, wxWindowID id)
 
     return result;
 }
+void ObjectPropDialog::setObjIndex(int index)
+{
+    this->objIndex = index;
+    setupDialog();
+}
+int ObjectPropDialog::getObjIndex()
+{
+    return this->objIndex;
+}
+void ObjectPropDialog::setupDialog()
+{
+}

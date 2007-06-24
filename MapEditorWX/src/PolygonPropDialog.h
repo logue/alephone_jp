@@ -56,10 +56,16 @@ class PolygonPropDialog: public wxDialog{
     wxPanel* panel_10;
     wxPanel* panel_11;
     wxPanel* panel_12;
+
+    int polyIndex;
 public:
     PolygonPropDialog();
     bool Create(wxWindow* parent, wxWindowID id);
     virtual ~PolygonPropDialog();
+
+    void setPolyIndex(int index);
+    int getPolyIndex();
+    void setupDialog();
 
     //イベントテーブル作成<en>declare
     DECLARE_EVENT_TABLE()

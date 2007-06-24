@@ -552,14 +552,6 @@
 				>
 			</File>
 			<File
-				RelativePath="..\..\..\..\src\JumpLevelDialog.cpp"
-				>
-			</File>
-			<File
-				RelativePath="..\..\..\..\src\JumpLevelDialog.h"
-				>
-			</File>
-			<File
 				RelativePath="..\..\..\..\src\LevelInfoDialog.cpp"
 				>
 			</File>

@@ -1,4 +1,8 @@
 #include "TerminalDialog.h"
+#include "computer_interface.h"
+#include "MapEditorWX.h"
+
+const int BUF_MAX = 1024;
 
 enum{
     ID_TERMINAL,
@@ -32,11 +36,11 @@ bool TerminalDialog::Create(wxWindow* parent, wxWindowID id)
     list_box_2 = new wxListBox(this, ID_SCREEN);
     list_box_3 = new wxListBox(this, ID_INFO);
     panel_7 = new wxPanel(this, wxID_ANY);
-    text_ctrl_13 = new wxTextCtrl(this, ID_TEXT_EDIT, wxEmptyString);
+    text_ctrl_13 = new wxTextCtrl(this, ID_TEXT_EDIT, wxEmptyString, wxDefaultPosition, wxDefaultSize, wxTE_MULTILINE);
     button_20 = new wxButton(this, wxID_OK, wxEmptyString);
 
-    list_box_1->SetMinSize(wxSize(-1, 200));
-    list_box_2->SetMinSize(wxSize(-1, 100));
+    list_box_1->SetMinSize(wxSize(180, 200));
+    list_box_2->SetMinSize(wxSize(180, 100));
     panel_7->SetMinSize(wxSize(500, 200));
     text_ctrl_13->SetMinSize(wxSize(500, 200));
 
@@ -60,10 +64,16 @@ bool TerminalDialog::Create(wxWindow* parent, wxWindowID id)
         //terminal_text_t* terminal = &map_terminal_text[i];
         char cstr[256];
         sprintf(cstr, "terminal%3d", i);
-        list_box_1->Insert(i, wxConvertMB2WX(cstr));
+        list_box_1->Insert(wxString(wxConvertMB2WX(cstr)), i);
     }
-    if(map_terminal_text.size() > 0){
+/*    if(map_terminal_text.size() > 0){
+        //選択状態にする <en> select one
+        list_box_1->SetSelection(0);
+
+//        wxCommandEvent dummy;
+//        OnSelTerminal(dummy);
     }
+    */
     return result;
 }
 void TerminalDialog::OnOk(wxCommandEvent& ev)
@@ -73,15 +83,89 @@ void TerminalDialog::OnOk(wxCommandEvent& ev)
 }
 void TerminalDialog::OnSelTerminal(wxCommandEvent &event)
 {
-    event.Skip();
-    std::cout<<"Event handler (TerminalDialog::OnSelTerminal) not implemented yet"<<std::endl; //notify the user that he hasn't implemented the event handler yet
+    int sel = event.GetSelection();
+    if(sel < 0 || sel >= map_terminal_text.size()){
+        //illegal selecting
+    }else{
+        //スクリーンリストを初期化
+        this->list_box_2->Clear();
+        terminal_text_t *terminal = &map_terminal_text[sel];
+        for(int i = 0; i < terminal->groupings.size(); i ++){
+            terminal_groupings *group = &terminal->groupings[i];
+            list_box_2->Insert(
+                wxString(wxConvertMB2WX(wxGetApp().terminalTypeInfo[i].jname.c_str())),
+                i);
+        }
+    }
 }
 
+static void encode_text(
+    terminal_text_t *terminal_text)
+{
+	int length = terminal_text->text_length;
+	uint8 *p = terminal_text->text;
+
+	for (int i=0; i<length/4; i++) {
+		p += 2;
+		*p++ ^= 0xfe;
+		*p++ ^= 0xed;
+	}
+	for (int i=0; i<length%4; i++)
+		*p++ ^= 0xfe;
+
+	terminal_text->flags |= _text_is_encoded_flag;
+}
+static void decode_text(
+	terminal_text_t *terminal_text)
+{
+	if(terminal_text->flags & _text_is_encoded_flag)
+	{
+		encode_text(terminal_text);
+		terminal_text->flags &= ~_text_is_encoded_flag;
+	}
+}
 
 void TerminalDialog::OnSelScreen(wxCommandEvent &event)
 {
-    event.Skip();
-    std::cout<<"Event handler (TerminalDialog::OnSelScreen) not implemented yet"<<std::endl; //notify the user that he hasn't implemented the event handler yet
+    //Editに流し込みます
+    int tsel = this->list_box_1->GetSelection();
+    if(tsel < 0 || tsel >= map_terminal_text.size()){
+        return;
+    }
+
+    terminal_text_t *terminal = &map_terminal_text[tsel];
+    int sel = event.GetSelection();
+    if(sel < 0 || sel >= terminal->groupings.size()){
+        return;
+    }
+
+    //Edit初期化
+    this->text_ctrl_13->Clear();
+    decode_text(terminal);
+
+    //文字列データへ変換
+    int length = terminal->groupings[sel].length;
+    char *cstr = new char[length + 1];
+    for(int i = 0; i < length; i ++){
+        uint8 u = terminal->text[i + terminal->groupings[sel].start_index];
+        cstr[i] = static_cast<char>(u);
+    }
+    cstr[length] = '\0';
+//    hpl::error::caution("%s", cstr);
+    wxString str = wxString(wxConvertMB2WX(cstr));
+    this->text_ctrl_13->SetValue(str);
+//    this->text_ctrl_13->AppendText(str);
+    delete cstr;
+
+    //情報も入れる
+    this->list_box_3->Clear();
+    char buf[BUF_MAX];
+    sprintf(buf, "group_flags:%d", terminal->groupings[sel].flags);
+    this->list_box_3->Insert( wxConvertMB2WX(buf), 0);
+    sprintf(buf, "group_permutation:%d", terminal->groupings[sel].permutation);
+    this->list_box_3->Insert(wxConvertMB2WX(buf), 1);
+    sprintf(buf, "terminal_flags:%d", terminal->flags);
+    this->list_box_3->Insert(wxConvertMB2WX(buf), 2);
 }
 
 

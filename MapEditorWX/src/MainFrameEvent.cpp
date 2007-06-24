@@ -270,14 +270,15 @@ bool MapEditorMainFrame::tryToSelectOneItem(wxMouseEvent& ev)
             sel->addSelObject(i, offset);
             //オブジェクトのプロパティ・ダイアログを表示する
             //TODO
-            //this->objectPropDialog.Show(true);
+            this->objPropDialog.setObjIndex(i);
+            this->objPropDialog.Show(true);
             return true;
         }
     }
 
     //no obj selected
     //TODO 選択ID関連の実装
-    //this->objectPropDialog->setSelectedObjectIndex(NONE);
+    this->objPropDialog.setObjIndex(NONE);
 
 
     //////////
@@ -360,6 +361,8 @@ bool MapEditorMainFrame::tryToSelectOneItem(wxMouseEvent& ev)
         
         //ポリゴンプロパティ表示
         //TODO
+        this->polyPropDialog.setPolyIndex(polyIndex);
+        this->polyPropDialog.Show(true);
 
         //オフセット
         for(int j = 0; j < n; j ++){
@@ -631,13 +634,40 @@ void MapEditorMainFrame::OnRightDown(wxMouseEvent& ev)
 {
     //カーソル設定
     wxGetApp().setCursor();
+    int mx = ev.m_x;
+    int my = ev.m_y;
     //マウス座標記録
-    wxGetApp().getViewGridManager()->setNewMousePoint(ev.m_x, ev.m_y);
+    hpl::aleph::view::HPLViewGridManager* vmgr = wxGetApp().getViewGridManager();
+    vmgr->setNewMousePoint(mx, my);
 
     //ポップアップメニューを出す
     //TODO
-    //テスト
-    PopupMenu(&wxGetApp().linePopupMenu);
+    //マウス座標をワールド座標にする
+    world_point2d wmp = wxGetApp().getWorldPointFromViewPoint(mx, my);
+    hpl::aleph::HPLEventManager* emgr = wxGetApp().getEventManager();
+    int div = vmgr->getZoomDivision();
+    int zMin = vmgr->getViewHeightMin();
+    int zMax = vmgr->getViewHeightMax();
+
+    int editMode = emgr->getEditModeType();
+    int toolType = emgr->getToolType();
+    if(editMode == EditModeType::EM_DRAW && toolType == ToolType::TI_ARROW){
+        //点の上で右クリックしたか？
+        int epIndex = hpl::aleph::map::getSelectPointIndex(wmp, POINT_DISTANCE_EPSILON * div, zMin, zMax);
+        if(epIndex != NONE){
+            //点ポップアップ表示
+            PopupMenu(&wxGetApp().pointPopupMenu);
+        }else{
+            //点は押されなかった
+            int lineIndex = hpl::aleph::map::getSelectLineIndex(wmp, LINE_DISTANCE_EPSILON * div, zMin, zMax);
+            if(lineIndex != NONE){
+                //線が押された
+                //→線プロパティをだす
+                PopupMenu(&wxGetApp().linePopupMenu);
+            }
+        }
+    }
+
 }
 ///////////////////////////////////////////////////////
 void MapEditorMainFrame::OnRightUp(wxMouseEvent& ev)

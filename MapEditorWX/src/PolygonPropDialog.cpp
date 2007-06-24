@@ -195,6 +195,19 @@ bool PolygonPropDialog::Create(wxWindow* parent, wxWindowID id)
     return result;
 }
 
+void PolygonPropDialog::setPolyIndex(int index)
+{
+    this->polyIndex = index;
+    setupDialog();
+}
+int PolygonPropDialog::getPolyIndex()
+{
+    return polyIndex;
+}
+void PolygonPropDialog::setupDialog()
+{
+
+}
 void PolygonPropDialog::OnIDEdit(wxCommandEvent &event)
 {
     event.Skip();

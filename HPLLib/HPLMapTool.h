@@ -129,8 +129,10 @@ namespace map{
         @return その場所に点があればそのインデックスがかえります。
             なければNONE
     */
-    int getSelectPointIndex(world_point2d& wpoint, int threshold, int zMin, int zMax);
-    
+    int getSelectPointIndex(world_point2d& wpoint, int thresholdWorld, int zMin, int zMax);
+    int getSelectPointIndex(int viewX, int viewY, int threshold, int zMin, int zMax,
+        int voffsetX, int voffsetY, int offsetXW, int offsetYW, int div);
+
     /**
         ある高さが規定範囲内にあるかを確かめます
         @return ある高度の範囲が規定範囲と共有する部分を持たない場合負
@@ -141,6 +143,8 @@ namespace map{
         指定した点が線を踏んでいる場合、その点
     */
     int getSelectLineIndex(world_point2d& wpoint, int threshold, int zMin, int zMax);
+    int getSelectLineIndex(int viewX, int viewY, int threshold, int zMin, int zMax,
+        int voffsetX, int voffsetY, int offsetXW, int offsetYW, int div);
 
 	///////////////////////	 Lines	////////////////////////////////////////////
 	/**
