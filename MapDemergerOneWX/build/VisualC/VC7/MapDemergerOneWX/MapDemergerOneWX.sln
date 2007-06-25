@@ -1,0 +1,24 @@
+Microsoft Visual Studio Solution File, Format Version 8.00
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "MapDemergerOneWX", "MapDemergerOneWX.vcproj", "{085E6C22-951C-4235-8F26-57EF01465377}"
+	ProjectSection(ProjectDependencies) = postProject
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfiguration) = preSolution
+		Debug = Debug
+		Release = Release
+		Release Unicode = Release Unicode
+	EndGlobalSection
+	GlobalSection(ProjectConfiguration) = postSolution
+		{085E6C22-951C-4235-8F26-57EF01465377}.Debug.ActiveCfg = Debug|Win32
+		{085E6C22-951C-4235-8F26-57EF01465377}.Debug.Build.0 = Debug|Win32
+		{085E6C22-951C-4235-8F26-57EF01465377}.Release.ActiveCfg = Release|Win32
+		{085E6C22-951C-4235-8F26-57EF01465377}.Release.Build.0 = Release|Win32
+		{085E6C22-951C-4235-8F26-57EF01465377}.Release Unicode.ActiveCfg = Release Unicode|Win32
+		{085E6C22-951C-4235-8F26-57EF01465377}.Release Unicode.Build.0 = Release Unicode|Win32
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+	EndGlobalSection
+	GlobalSection(ExtensibilityAddIns) = postSolution
+	EndGlobalSection
+EndGlobal

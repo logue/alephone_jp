@@ -183,7 +183,7 @@
 				Name="VCCustomBuildTool"/>
 			<Tool
 				Name="VCLinkerTool"
-				AdditionalDependencies="SDL.lib ..\..\..\..\..\AlephOneSrc\lib\AlephOneSrc2007D.lib wxmsw28ud_core.lib wxbase28ud.lib"
+				AdditionalDependencies="SDL.lib ..\..\..\..\..\AlephOneSrc\lib\AlephOneSrc2007DU.lib wxmsw28ud_core.lib wxbase28ud.lib"
 				OutputFile="$(OutDir)/MapEditorWX2007DU.exe"
 				LinkIncremental="2"
 				AdditionalLibraryDirectories="&quot;C:\wxWidgets-2.8.4\lib\vc_dll&quot;"
