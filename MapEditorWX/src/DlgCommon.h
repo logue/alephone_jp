@@ -17,6 +17,7 @@
 #include <wx/bmpbuttn.h>
 
 #include "HPLLib/HPLEventManager.h"
+#include "MapEditorOneSetting.h"
 #include <string>
 
 #include <iostream>

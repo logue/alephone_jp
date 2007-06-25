@@ -4,7 +4,7 @@
 #include "DlgCommon.h"
 
 class ColorCustomizeDialog: public wxDialog{
-public:
+private:
     wxStaticText* label_13;
     wxButton* button_7;
     wxPanel* panel_1;
@@ -25,12 +25,13 @@ public:
     wxPanel* panel_6;
     wxButton* button_5;
     wxButton* button_6;
-
+    ColorSettings colorSetting;
+public:
     ColorCustomizeDialog();
-    bool Create(wxWindow* parent, wxWindowID id);
+    bool Create(wxWindow* parent, wxWindowID id, ColorSettings & color);
     virtual ~ColorCustomizeDialog();
-    //イベントテーブル作成<en>declare
-    DECLARE_EVENT_TABLE()
+    
+    ColorSettings getColor();
 
     void OnOk(wxCommandEvent& ev);
     void OnCancel(wxCommandEvent &ev);
@@ -40,6 +41,15 @@ public:
     void OnPolygons(wxCommandEvent &event); // wxGlade: <event_handler>
     void OnStrings(wxCommandEvent &event); // wxGlade: <event_handler>
     void OnPoints(wxCommandEvent &event); // wxGlade: <event_handler>
+    void OnPaint(wxPaintEvent &event);
+
+    //イベントテーブル作成<en>declare
+    DECLARE_EVENT_TABLE()
+private:
+    /**
+        @param type MapEditorOneSetting.hをみよう
+    */
+    void drawPanel(wxPanel* panel, int type);
 };
 
 #endif

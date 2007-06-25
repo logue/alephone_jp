@@ -249,3 +249,26 @@ std::string MapEditorOneSetting::getFilePath()
 {
     return initialSettingFileName;
 }
+
+MapEditorOneSetting MapEditorOneSetting::getDefaultSetting()
+{
+    MapEditorOneSetting setting;
+    setting.setSettingToDefault();
+    return setting;
+}
+
+int MapEditorOneSetting::checkColorType(ColorSettings *col)
+{
+    ColorSettings temp;
+    MapEditorOneSetting::setColorSetting(COL_FORGE, &temp);
+    if(memcmp(col, &temp, sizeof(ColorSettings)) == 0){
+        return COL_FORGE;
+    }
+    MapEditorOneSetting::setColorSetting(COL_MARATHON, &temp);
+    if(memcmp(col, &temp, sizeof(ColorSettings)) == 0){
+        return COL_MARATHON;
+    }
+
+    //ÉJÉXÉ^ÉÄ
+    return -1;
+}

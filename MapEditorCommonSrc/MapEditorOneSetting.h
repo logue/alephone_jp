@@ -88,15 +88,26 @@ enum
 
 //color presets
 enum{
-    COL_FORGE,
-    COL_MARATHON,
-    COL_CUSTOM,
+    COL_FORGE = 0,
+    COL_MARATHON = 1,
+    COL_CUSTOM = 2,
 
     NUMBER_OF_COLOR_PRESETS
 };
 
 const int COL_NUM = 3;
 
+namespace ColorType{
+    enum{
+        Background,
+        GridLine,
+        Lines,
+        Polygons,
+        Strings,
+        Points,
+        NUMBER_OF_COLOR_TYPES
+    };
+};
 typedef struct ColorSettings_tag{
     int type;
     int background[COL_NUM];
@@ -105,6 +116,7 @@ typedef struct ColorSettings_tag{
     int polygons[COL_NUM];
     int strings[COL_NUM];
     int points[COL_NUM];
+    //int colors[ColorType::NUMBER_OF_COLOR_TYPES][COL_NUM];
 }ColorSettings;
 
 enum{
@@ -128,6 +140,8 @@ enum{
     edtior's settings
 */
 class MapEditorOneSetting{
+public:
+    static MapEditorOneSetting getDefaultSetting();
 private:
     std::string initialSettingFileName;
 
@@ -153,10 +167,15 @@ public:
     bool loadSetting();
     bool saveSetting();
     void setSettingToDefault();
-public:
+
     int getGridSizeIndex();
     void setGridSizeIndex(int index);
     ColorSettings *getColorSetting();
+    /**
+        引数の色がどのタイプに当てはまるかを判断します
+        @return 何も当てはまらない場合は負数
+    */
+    static int checkColorType(ColorSettings *col);
     void setColorSetting(ColorSettings *setting);
     void setColorSetting(int type);
 

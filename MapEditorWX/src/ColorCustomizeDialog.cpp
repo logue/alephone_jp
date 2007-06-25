@@ -17,6 +17,7 @@ BEGIN_EVENT_TABLE(ColorCustomizeDialog, wxDialog)
     EVT_BUTTON(ID_POINTS, ColorCustomizeDialog::OnPoints)
     EVT_BUTTON(wxID_OK, ColorCustomizeDialog::OnOk)
     EVT_BUTTON(wxID_CANCEL, ColorCustomizeDialog::OnCancel)
+    EVT_PAINT(ColorCustomizeDialog::OnPaint)
 END_EVENT_TABLE()
 
 ColorCustomizeDialog::ColorCustomizeDialog()
@@ -25,7 +26,7 @@ ColorCustomizeDialog::ColorCustomizeDialog()
 ColorCustomizeDialog::~ColorCustomizeDialog()
 {
 }
-bool ColorCustomizeDialog::Create(wxWindow* parent, wxWindowID id)
+bool ColorCustomizeDialog::Create(wxWindow* parent, wxWindowID id, ColorSettings & color)
 {
     bool result = wxDialog::Create(parent, id, wxT("Color Customize"));
     label_13 = new wxStaticText(this, wxID_ANY, wxT("Background"));
@@ -91,6 +92,8 @@ bool ColorCustomizeDialog::Create(wxWindow* parent, wxWindowID id)
     sizer_37->Fit(this);
     Layout();
 
+    memcpy(&this->colorSetting, &color, sizeof(ColorSettings));
+
     return result;
 }
 void ColorCustomizeDialog::OnOk(wxCommandEvent& ev)
@@ -105,6 +108,7 @@ void ColorCustomizeDialog::OnCancel(wxCommandEvent &ev)
 }
 void ColorCustomizeDialog::OnBackground(wxCommandEvent &event)
 {
+    //TODO カラー選択ダイアログを出す
     event.Skip();
     std::cout<<"Event handler (ColorCustomizeDialog::OnBackground) not implemented yet"<<std::endl; //notify the user that he hasn't implemented the event handler yet
 }
@@ -142,4 +146,67 @@ void ColorCustomizeDialog::OnPoints(wxCommandEvent &event)
 {
     event.Skip();
     std::cout<<"Event handler (ColorCustomizeDialog::OnPoints) not implemented yet"<<std::endl; //notify the user that he hasn't implemented the event handler yet
+}
+
+void ColorCustomizeDialog::OnPaint(wxPaintEvent &event)
+{
+    //設定した色で塗る
+    this->drawPanel(this->panel_1, ColorType::Background);
+    this->drawPanel(this->panel_2, ColorType::GridLine);
+    this->drawPanel(this->panel_3, ColorType::Lines);
+    this->drawPanel(this->panel_4, ColorType::Polygons);
+    this->drawPanel(this->panel_5, ColorType::Strings);
+    this->drawPanel(this->panel_6, ColorType::Points);
+}
+/**
+    @param type MapEditorOneSetting.hをみよう
+*/
+void ColorCustomizeDialog::drawPanel(wxPanel* panel, int type)
+{
+    wxPaintDC dc(panel);
+    wxRect rect = panel->GetClientRect();
+    int col[COL_NUM];
+
+    switch(type){
+    case ColorType::Background:
+        for(int i = 0; i < COL_NUM; i ++){
+            col[i] = this->colorSetting.background[0];
+        }
+        break;
+    case ColorType::GridLine:
+        for(int i = 0; i < COL_NUM; i ++){
+            col[i] = this->colorSetting.gridLine[0];
+        }
+        break;
+    case ColorType::Lines:
+        for(int i = 0; i < COL_NUM; i ++){
+            col[i] = this->colorSetting.lines[0];
+        }
+        break;
+    case ColorType::Polygons:
+        for(int i = 0; i < COL_NUM; i ++){
+            col[i] = this->colorSetting.polygons[0];
+        }
+        break;
+    case ColorType::Strings:
+        for(int i = 0; i < COL_NUM; i ++){
+            col[i] = this->colorSetting.strings[0];
+        }
+        break;
+    case ColorType::Points:
+        for(int i = 0; i < COL_NUM; i ++){
+            col[i] = this->colorSetting.points[0];
+        }
+        break;
+    default:
+        break;
+    }
+    dc.SetBrush(wxBrush(wxColor(col[0], col[1], col[2])));
+    dc.DrawRectangle(rect);
+}
+ColorSettings ColorCustomizeDialog::getColor()
+{
+    ColorSettings color;
+    memcpy(&color, &this->colorSetting, sizeof(ColorSettings));
+    return color;
 }

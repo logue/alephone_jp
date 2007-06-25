@@ -151,3 +151,6 @@ Fix時に順番整理もする
 Terminal encode->Marathon 文字列データ
 decode->char
 保存時にエンコードすることを忘れずに！
+
+TODO ダイアログの作成
+TODO VisualMode oh visual mode!
