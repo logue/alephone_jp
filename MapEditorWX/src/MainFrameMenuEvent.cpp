@@ -162,6 +162,15 @@ void MapEditorMainFrame::OnPaste(wxCommandEvent& ev)
 }
 void MapEditorMainFrame::OnPreference(wxCommandEvent& ev)
 {
+    //Call up editor preferences dialog
+    EditorPreferencesDialog dlg;
+    dlg.Create(this, wxID_ANY);
+    if(dlg.ShowModal() == wxID_OK){
+        //ƒtƒ@ƒCƒ‹‚É•Û‘¶
+        if(!wxGetApp().setting.saveSetting()){
+            hpl::error::caution("Fail to save setting as [%s]", wxGetApp().setting.getFilePath().c_str());
+        }
+    }
 }
 
 /////////////////////////////////////////////////////////////////////
@@ -169,7 +178,7 @@ void MapEditorMainFrame::OnPreference(wxCommandEvent& ev)
 // show/hide menus
 void MapEditorMainFrame::OnToolDialog(wxCommandEvent& ev)
 {
-    //TODO tool dialog
+    this->toolDialog.Show(!this->toolDialog.IsShown());
 }
 void MapEditorMainFrame::OnZoomIn(wxCommandEvent& ev)
 {

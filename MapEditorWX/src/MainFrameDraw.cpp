@@ -19,6 +19,8 @@ void MapEditorMainFrame::OnPaint(wxPaintEvent& WXUNUSED(event))
     if(!wxWindow::IsExposed(0,0,size.GetWidth(), size.GetHeight())){
         return;
     }
+
+
     wxBufferedPaintDC dc(this, this->doubleBufferingBitmap);
     PrepareDC(dc);
     //dc.Clear();
@@ -182,6 +184,9 @@ void MapEditorMainFrame::drawPolygons(wxDC* dc)
         int flags = polygon->flags;
         int vertexCount = polygon->vertex_count;
 
+        if(wxGetApp().getStockManager()->delPolygons[i]){
+            continue;
+        }
         //‚Ü‚ –³‚¢‚Æv‚¤‚ªc
         if(vertexCount == 0){
             continue;

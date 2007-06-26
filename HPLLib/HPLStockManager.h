@@ -14,7 +14,7 @@ namespace aleph{
         ・削除予定のマップアイテム
     */
     class HPLStockManager{
-    private:
+    public:
         /**ポリゴンの整合性*/
         std::vector<bool> polygonValidity;
 
@@ -41,6 +41,11 @@ namespace aleph{
 
         //ポリゴン整合性情報を更新します
         void updatePolygonValidityStored();
+
+        /**
+            サイズを実際のものに合わせます
+        */
+        void resizeDeletes();
 
         //削除対象の覚え書き
         //hpl::aleph::map::HPLSelectData toDeleteList;

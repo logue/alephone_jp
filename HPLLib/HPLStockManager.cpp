@@ -42,6 +42,29 @@ void hpl::aleph::HPLStockManager::updatePolygonValidityStored()
 }
 
 /**
+    サイズを実際のものに合わせます
+*/
+void hpl::aleph::HPLStockManager::resizeDeletes()
+{
+    //points
+    for(int i = delPoints.size(); i < dynamic_world->endpoint_count; i ++){
+        delPoints.push_back(false);
+    }
+    for(int i = delLines.size(); i < dynamic_world->line_count; i ++){
+        delLines.push_back(false);
+    }
+    for(int i = delSides.size(); i < dynamic_world->side_count; i ++){
+        delSides.push_back(false);
+    }
+    for(int i = delPolygons.size(); i < dynamic_world->polygon_count; i ++){
+        delPolygons.push_back(false);
+    }
+    for(int i = delObjects.size(); i < SavedObjectList.size(); i ++){
+        delObjects.push_back(false);
+    }
+}
+
+/**
     削除情報を更新します。
     具体的にはdynamic_worldの値に合わせて要素数を増加させます
     増加分は削除対象ではないのですべてfalseです。
@@ -99,22 +122,7 @@ void hpl::aleph::HPLStockManager::updatePolygonValidityStored()
 */
 void hpl::aleph::HPLStockManager::updateDeletes()
 {
-    //points
-    for(int i = delPoints.size(); i < dynamic_world->endpoint_count; i ++){
-        delPoints.push_back(false);
-    }
-    for(int i = delLines.size(); i < dynamic_world->line_count; i ++){
-        delLines.push_back(false);
-    }
-    for(int i = delSides.size(); i < dynamic_world->side_count; i ++){
-        delSides.push_back(false);
-    }
-    for(int i = delPolygons.size(); i < dynamic_world->polygon_count; i ++){
-        delPolygons.push_back(false);
-    }
-    for(int i = delObjects.size(); i < SavedObjectList.size(); i ++){
-        delObjects.push_back(false);
-    }
+    this->resizeDeletes();
 
     //点関連の削除対象整理 <en> endpoints
     for(int i = 0; i < (int)delPoints.size(); i ++){

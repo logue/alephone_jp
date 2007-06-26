@@ -33,7 +33,7 @@ TODO リスト
 ５：デバッグ完了
 
 Annotation		:デバッグ完了（選択モードは未完）
-ColorCustomize	:配置済み
+ColorCustomize	:呼び出し
 EditPreferences	:配置済み
 Height			:配置済み。
 HeightPallet	:
@@ -154,3 +154,4 @@ decode->char
 
 TODO ダイアログの作成
 TODO VisualMode oh visual mode!
+TODO Polygon tool

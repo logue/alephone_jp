@@ -520,12 +520,15 @@ void MapEditorMainFrame::doLButtonOnLineTool(wxMouseEvent& ev)
 
                 //点→終点の線を追加
                 line_data newLine2;
-
+                //TODO
             }
         }else{
             //新規追加
             if(wxGetApp().isFirstOfLineToAdd){
                 //最初の点
+                endpoint_data ep;
+                assert(hpl::aleph::map::createPoint(wpoint, &ep, POINT_DISTANCE_EPSILON));
+
             }else{
                 //点を追加
             }
@@ -534,6 +537,10 @@ void MapEditorMainFrame::doLButtonOnLineTool(wxMouseEvent& ev)
         }
     }
     wxGetApp().isFirstOfLineToAdd = isFirst;
+
+    //情報を更新する
+    wxGetApp().getStockManager()->updateDeletes();
+    
 #endif
 }
 void MapEditorMainFrame::doLButtonOnMagnifyTool(wxMouseEvent& ev)
