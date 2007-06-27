@@ -520,20 +520,30 @@ void MapEditorMainFrame::doLButtonOnLineTool(wxMouseEvent& ev)
 
                 //点→終点の線を追加
                 line_data newLine2;
-                //TODO
+                hpl::aleph::map::createLine(wxGetApp().prevPointIndex, newPointIndex, &newLine2);
+                int newLine2Index = hpl::aleph::map::addLine(newLine2);
+
+                //前回→今回の点の間に線を追加
+                line_data line;
+                hpl::aleph::map::createLine(wxGetApp().prevPointIndex, newPointIndex, &line);
+                int lineIndex = hpl::aleph::map::addLine(line);
             }
         }else{
             //新規追加
+            endpoint_data ep;
+            assert(hpl::aleph::map::createPoint(wpoint, &ep, POINT_DISTANCE_EPSILON));
+            int newPointIndex = hpl::aleph::map::addEndpoint(ep);
             if(wxGetApp().isFirstOfLineToAdd){
-                //最初の点
-                endpoint_data ep;
-                assert(hpl::aleph::map::createPoint(wpoint, &ep, POINT_DISTANCE_EPSILON));
-
+                //最初の点なので追加しない
             }else{
-                //点を追加
+                //線を追加する
+                line_data line;
+                hpl::aleph::map::createLine(wxGetApp().prevPointIndex, newPointIndex, &line);
+                int newLineIndex = hpl::aleph::map::addLine(line);
             }
-
-            //点を追加してから線を追加する
+            
+            wxGetApp().isFirstOfLineToAdd = false;
+            wxGetApp().prevPointIndex = newPointIndex;
         }
     }
     wxGetApp().isFirstOfLineToAdd = isFirst;

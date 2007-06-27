@@ -246,6 +246,12 @@ public:
     void OnObjectPlacement(wxCommandEvent& ev);
     void OnTerminalViewer(wxCommandEvent& ev);
 
+    //ポップアップメニュー <en> popup menu
+    void OnLineProp(wxCommandEvent& ev);
+    void OnClockwiseSide(wxCommandEvent& ev);
+    void OnCounterclockwiseSide(wxCommandEvent& ev);
+    void OnPointProp(wxCommandEvent& ev);
+
     void OnPaint(wxPaintEvent& ev);
 
     void OnLeftDown(wxMouseEvent& ev);

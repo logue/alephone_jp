@@ -54,6 +54,12 @@ BEGIN_EVENT_TABLE(MapEditorMainFrame, wxFrame)
     EVT_MENU(ID_ObjectPlacement, MapEditorMainFrame::OnObjectPlacement)
     EVT_MENU(ID_TerminalViewer, MapEditorMainFrame::OnTerminalViewer)
 
+    //popup
+    EVT_MENU(ID_LineProp, MapEditorMainFrame::OnJumpLevel)
+    EVT_MENU(ID_ClockwiseSideProp, MapEditorMainFrame::OnJumpLevel)
+    EVT_MENU(ID_CounterclockwiseSideProp, MapEditorMainFrame::OnJumpLevel)
+    EVT_MENU(ID_PointProp, MapEditorMainFrame::OnJumpLevel)
+
     EVT_PAINT(MapEditorMainFrame::OnPaint)
     EVT_LEFT_DOWN(MapEditorMainFrame::OnLeftDown)
     EVT_RIGHT_DOWN(MapEditorMainFrame::OnRightDown)
