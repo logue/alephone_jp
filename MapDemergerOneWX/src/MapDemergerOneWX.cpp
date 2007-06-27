@@ -63,9 +63,6 @@ bool MapDemergerOneWX::OnInit()
     if(last != _T("\\") && last != _T("/")){
         dirPath.Append(_T("/"));
     }
-#ifdef MAC
-    //TODO separator in MacOSX may not be "/" nor "\".
-#endif
 
     //インデックス取得
     std::vector<std::string> names = getLevelList();

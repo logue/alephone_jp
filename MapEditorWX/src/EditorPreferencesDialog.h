@@ -18,16 +18,17 @@ public:
     EditorPreferencesDialog();
     bool Create(wxWindow* parent, wxWindowID id);
     virtual ~EditorPreferencesDialog();
-    //イベントテーブル作成<en>declare
 
 private:
     void setupDialog(MapEditorOneSetting* setting);
 
+    //イベントテーブル作成<en>declare
     DECLARE_EVENT_TABLE()
     void OnDefault(wxCommandEvent &event); // wxGlade: <event_handler>
     void OnOk(wxCommandEvent &event); // wxGlade: <event_handler>
     void OnCancel(wxCommandEvent &event); // wxGlade: <event_handler>
     void OnColor(wxCommandEvent &event);
+    void OnGrid(wxCommandEvent &event);
 };
 
 #endif

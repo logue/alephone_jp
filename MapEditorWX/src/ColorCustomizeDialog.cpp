@@ -106,46 +106,58 @@ void ColorCustomizeDialog::OnCancel(wxCommandEvent &ev)
     SetReturnCode(wxID_OK);
     Destroy();
 }
+void ColorCustomizeDialog::setColor(int cols[]){
+    wxColor col = wxGetColourFromUser(this);
+    cols[0] = col.Red();
+    cols[1] = col.Green();
+    cols[2] = col.Blue();
+}
+
 void ColorCustomizeDialog::OnBackground(wxCommandEvent &event)
 {
-    //TODO カラー選択ダイアログを出す
-    event.Skip();
-    std::cout<<"Event handler (ColorCustomizeDialog::OnBackground) not implemented yet"<<std::endl; //notify the user that he hasn't implemented the event handler yet
+    ColorSettings* cols = wxGetApp().setting.getColorSetting();
+    cols->type = COL_CUSTOM;
+    setColor(cols->background);
 }
 
 
 void ColorCustomizeDialog::OnGrid(wxCommandEvent &event)
 {
-    event.Skip();
-    std::cout<<"Event handler (ColorCustomizeDialog::OnGrid) not implemented yet"<<std::endl; //notify the user that he hasn't implemented the event handler yet
+    ColorSettings* cols = wxGetApp().setting.getColorSetting();
+    cols->type = COL_CUSTOM;
+    setColor(cols->gridLine);
 }
 
 
 void ColorCustomizeDialog::OnLines(wxCommandEvent &event)
 {
-    event.Skip();
-    std::cout<<"Event handler (ColorCustomizeDialog::OnLines) not implemented yet"<<std::endl; //notify the user that he hasn't implemented the event handler yet
+    ColorSettings* cols = wxGetApp().setting.getColorSetting();
+    cols->type = COL_CUSTOM;
+    setColor(cols->lines);
 }
 
 
 void ColorCustomizeDialog::OnPolygons(wxCommandEvent &event)
 {
-    event.Skip();
-    std::cout<<"Event handler (ColorCustomizeDialog::OnPolygons) not implemented yet"<<std::endl; //notify the user that he hasn't implemented the event handler yet
+    ColorSettings* cols = wxGetApp().setting.getColorSetting();
+    cols->type = COL_CUSTOM;
+    setColor(cols->polygons);
 }
 
 
 void ColorCustomizeDialog::OnStrings(wxCommandEvent &event)
 {
-    event.Skip();
-    std::cout<<"Event handler (ColorCustomizeDialog::OnStrings) not implemented yet"<<std::endl; //notify the user that he hasn't implemented the event handler yet
+    ColorSettings* cols = wxGetApp().setting.getColorSetting();
+    cols->type = COL_CUSTOM;
+    setColor(cols->strings);
 }
 
 
 void ColorCustomizeDialog::OnPoints(wxCommandEvent &event)
 {
-    event.Skip();
-    std::cout<<"Event handler (ColorCustomizeDialog::OnPoints) not implemented yet"<<std::endl; //notify the user that he hasn't implemented the event handler yet
+    ColorSettings* cols = wxGetApp().setting.getColorSetting();
+    cols->type = COL_CUSTOM;
+    setColor(cols->points);
 }
 
 void ColorCustomizeDialog::OnPaint(wxPaintEvent &event)
@@ -170,32 +182,32 @@ void ColorCustomizeDialog::drawPanel(wxPanel* panel, int type)
     switch(type){
     case ColorType::Background:
         for(int i = 0; i < COL_NUM; i ++){
-            col[i] = this->colorSetting.background[0];
+            col[i] = this->colorSetting.background[i];
         }
         break;
     case ColorType::GridLine:
         for(int i = 0; i < COL_NUM; i ++){
-            col[i] = this->colorSetting.gridLine[0];
+            col[i] = this->colorSetting.gridLine[i];
         }
         break;
     case ColorType::Lines:
         for(int i = 0; i < COL_NUM; i ++){
-            col[i] = this->colorSetting.lines[0];
+            col[i] = this->colorSetting.lines[i];
         }
         break;
     case ColorType::Polygons:
         for(int i = 0; i < COL_NUM; i ++){
-            col[i] = this->colorSetting.polygons[0];
+            col[i] = this->colorSetting.polygons[i];
         }
         break;
     case ColorType::Strings:
         for(int i = 0; i < COL_NUM; i ++){
-            col[i] = this->colorSetting.strings[0];
+            col[i] = this->colorSetting.strings[i];
         }
         break;
     case ColorType::Points:
         for(int i = 0; i < COL_NUM; i ++){
-            col[i] = this->colorSetting.points[0];
+            col[i] = this->colorSetting.points[i];
         }
         break;
     default:

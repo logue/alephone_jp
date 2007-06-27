@@ -613,12 +613,16 @@ void MapEditorMainFrame::doLButtonOnPolygonTool(wxMouseEvent& ev)
 #else
     //範囲選択開始
     //TODO
-    //wxGetApp().getEventManager()->
+    wxGetApp().getEventManager()->setSelectingGroup(true);
+    wxGetApp().getEventManager()->setSelectGroupStartPoint(ev.m_x, ev.m_y);
 #endif
 }
 
 void MapEditorMainFrame::doLButtonOnPolygonMode(wxMouseEvent& ev)
 {
+#ifdef MAP_VIEWER
+#else
+#endif
 }
 void MapEditorMainFrame::doLButtonOnFloorHeightMode(wxMouseEvent& ev)
 {
@@ -691,8 +695,46 @@ void MapEditorMainFrame::OnRightUp(wxMouseEvent& ev)
 {
     //カーソル設定
     wxGetApp().setCursor();
+    int mx = ev.m_x;
+    int my = ev.m_y;
+
     //マウス座標記録
-    wxGetApp().getViewGridManager()->setNewMousePoint(ev.m_x, ev.m_y);
+    wxGetApp().getViewGridManager()->setNewMousePoint(mx, my);
+
+    //ポリゴンモードの時新しいポリゴンを作る
+    hpl::aleph::HPLEventManager* emgr = wxGetApp().getEventManager();
+    int editMode = emgr->getEditModeType();
+    int toolType = emgr->getToolType();
+    if(editMode == EditModeType::EM_DRAW &&
+        toolType == ToolType::TI_POLYGON)
+    {
+        if(emgr->isSelectingGroup()){
+            //選択範囲中だった
+            //→独立ポリゴンの作成
+            int n = wxGetApp().nPolygonPoints;
+            int selStartPoint[2];
+            emgr->getSelectGroupStartPoint(selStartPoint);
+            //n角形の座標を取得
+            double polyPointsView[8][2];
+            hpl::math::getRectangleScaledPreparedPolygon(
+                selStartPoint[0], selStartPoint[1], mx, my,
+                n, polyPointsView);
+
+            //ワールド系に座標変換
+            world_point2d polyPointsWorld[8];
+            for(int i = 0; i < n; i ++){
+                polyPointsWorld[i] = 
+                    wxGetApp().getWorldPointFromViewPoint(
+						(int)polyPointsView[i][0], 
+						(int)polyPointsView[i][1]);
+            }
+
+            //ポリゴン生成
+            hpl::aleph::map::addNewPolygon(polyPointsWorld, n);
+        }
+
+    }
+
 }
 void MapEditorMainFrame::OnLeftUp(wxMouseEvent& ev)
 {
@@ -1044,7 +1086,7 @@ void MapEditorMainFrame::doMouseMotionOnArrowTool(wxMouseEvent& ev)
             struct hpl::aleph::map::SelPoint* selp = &sel->getSelPoints()->at(i);
             //位置変更
             get_endpoint_data(selp->index)->vertex.x = wmp.x + selp->offset[0] * div;
-            get_endpoint_data(selp->index)->vertex.y = wmp.x + selp->offset[1] * div;
+            get_endpoint_data(selp->index)->vertex.y = wmp.y + selp->offset[1] * div;
         }
 
         //線

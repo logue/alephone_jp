@@ -1,4 +1,5 @@
 #include "PlacementDialog.h"
+#include "MapEditorWX.h"
 
 enum{
     ID_INITIAL,
@@ -29,6 +30,32 @@ PlacementDialog::PlacementDialog():wxDialog()
 
 PlacementDialog::~PlacementDialog()
 {
+}
+
+const int COLUMN_NUM = 7;
+
+static void addListItem(wxListCtrl* lstctrl, object_frequency_definition* placement, wxString type,
+                        int id){
+    wxString str[COLUMN_NUM];
+    str[0] = type;
+    str[1] = getString("%d", placement->minimum_count);
+    str[2] = getString("%d", placement->maximum_count);
+    str[3] = getString("%d", placement->initial_count);
+    str[4] = getString("%d", placement->random_count);
+    str[5] = getString("%d", placement->random_chance);
+    str[6] = getString("%d", placement->flags);
+
+    for(int j = 0; j < COLUMN_NUM; j ++){
+        wxListItem item;
+        item.SetId(id);
+        item.SetColumn(j);
+        item.SetText(str[j]);
+        if(j == 0){
+            lstctrl->InsertItem(item);
+        }else{
+            lstctrl->SetItem(item);
+        }
+    }
 }
 bool PlacementDialog::Create(wxWindow* parent, wxWindowID id)
 {
@@ -82,6 +109,25 @@ bool PlacementDialog::Create(wxWindow* parent, wxWindowID id)
     grid_sizer_1->Fit(this);
     Layout();
 
+    //データ設定
+    char columnNames[][100] = {
+        "Type", "Min", "Max", "Initial", 
+        "Rnd Count", "Rnd Chance", "Flags"
+    };
+    for(int i = 0; i < COLUMN_NUM; i ++){
+        list_ctrl_1->InsertColumn(i, wxConvertMB2WX(columnNames[i]));
+    }
+    for(int i = 0; i < NUMBER_OF_DEFINED_ITEMS; i ++){
+        object_frequency_definition* placement = hpl::aleph::map::getPlacementData(_saved_item, i);
+        addListItem(this->list_ctrl_1, placement, 
+            wxConvertMB2WX(wxGetApp().itemTypeInfo[i].jname.c_str()), i);
+    }
+    for(int i = 0; i < NUMBER_OF_MONSTER_TYPES; i ++){
+        object_frequency_definition* placement = hpl::aleph::map::getPlacementData(_saved_monster, i);
+        addListItem(this->list_ctrl_1, placement, 
+            wxConvertMB2WX(wxGetApp().monsterTypeInfo[i].jname.c_str()),
+            i + NUMBER_OF_DEFINED_ITEMS);
+    }
     return result;
 }
 //OKボタン押した時
@@ -92,12 +138,15 @@ void PlacementDialog::OnOk(wxCommandEvent& ev)
 }
 void PlacementDialog::OnInf(wxCommandEvent &ev)
 {
+    //TODO
 }
 void PlacementDialog::OnAllInf(wxCommandEvent &ev)
 {
+    //TODO
 }
 void PlacementDialog::OnSetInitial(wxCommandEvent &ev)
 {
+    //TODO
 }
 void PlacementDialog::OnEditInitial(wxCommandEvent &event)
 {

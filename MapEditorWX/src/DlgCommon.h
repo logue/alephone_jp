@@ -15,9 +15,12 @@
 #include <wx/listctrl.h>
 #include <wx/listbox.h>
 #include <wx/bmpbuttn.h>
+#include <wx/colordlg.h>
 
 #include "HPLLib/HPLEventManager.h"
 #include "MapEditorOneSetting.h"
+#include "HPLLib/HPLMapTool.h"
+
 #include <string>
 
 #include <iostream>

@@ -5,6 +5,8 @@
 enum{
     ID_DEFAULT,
     ID_COLOR,
+    ID_GRID,
+    ID_FLAG,
 };
 
 BEGIN_EVENT_TABLE(EditorPreferencesDialog, wxDialog)
@@ -13,6 +15,7 @@ BEGIN_EVENT_TABLE(EditorPreferencesDialog, wxDialog)
     EVT_BUTTON(wxID_OK, EditorPreferencesDialog::OnOk)
     EVT_BUTTON(wxID_CANCEL, EditorPreferencesDialog::OnCancel)
     EVT_CHOICE(ID_COLOR, EditorPreferencesDialog::OnColor)
+    EVT_CHOICE(ID_GRID, EditorPreferencesDialog::OnGrid)
     // end wxGlade
 END_EVENT_TABLE();
 EditorPreferencesDialog::EditorPreferencesDialog()
@@ -25,24 +28,24 @@ bool EditorPreferencesDialog::Create(wxWindow* parent, wxWindowID id)
 {
     bool result = wxDialog::Create(parent, id, _T("Editor Preferences"));
     label_19 = new wxStaticText(this, wxID_ANY, wxT("Grid size"));
-    choice_9 = new wxChoice(this, wxID_ANY);
-    checkbox[0] = new wxCheckBox(this, wxID_ANY, wxT("Show grid"));
-    checkbox[1] = new wxCheckBox(this, wxID_ANY, wxT("Fit to grid"));
-    checkbox[2] = new wxCheckBox(this, wxID_ANY, wxT("Show monsters"));
-    checkbox[3] = new wxCheckBox(this, wxID_ANY, wxT("Show items"));
-    checkbox[4] = new wxCheckBox(this, wxID_ANY, wxT("Show scenery"));
-    checkbox[5] = new wxCheckBox(this, wxID_ANY, wxT("Show players"));
-    checkbox[6] = new wxCheckBox(this, wxID_ANY, wxT("Show goals"));
-    checkbox[7] = new wxCheckBox(this, wxID_ANY, wxT("Show sounds"));
-    checkbox[8] = new wxCheckBox(this, wxID_ANY, wxT("Show annotations"));
-    checkbox[9] = new wxCheckBox(this, wxID_ANY, wxT("Visual mode-Crossfair"));
+    choice_9 = new wxChoice(this, ID_GRID);
+    checkbox[0] = new wxCheckBox(this, ID_FLAG, wxT("Show grid"));
+    checkbox[1] = new wxCheckBox(this, ID_FLAG, wxT("Fit to grid"));
+    checkbox[2] = new wxCheckBox(this, ID_FLAG, wxT("Show monsters"));
+    checkbox[3] = new wxCheckBox(this, ID_FLAG, wxT("Show items"));
+    checkbox[4] = new wxCheckBox(this, ID_FLAG, wxT("Show scenery"));
+    checkbox[5] = new wxCheckBox(this, ID_FLAG, wxT("Show players"));
+    checkbox[6] = new wxCheckBox(this, ID_FLAG, wxT("Show goals"));
+    checkbox[7] = new wxCheckBox(this, ID_FLAG, wxT("Show sounds"));
+    checkbox[8] = new wxCheckBox(this, ID_FLAG, wxT("Show annotations"));
+    checkbox[9] = new wxCheckBox(this, ID_FLAG, wxT("Visual mode-Crossfair"));
     label_20 = new wxStaticText(this, wxID_ANY, wxT("Color set"));
     choice_10 = new wxChoice(this, ID_COLOR);
-    checkbox[10] = new wxCheckBox(this, wxID_ANY, wxT("Show polygons"));
-    checkbox[11] = new wxCheckBox(this, wxID_ANY, wxT("Show lines"));
+    checkbox[10] = new wxCheckBox(this, ID_FLAG, wxT("Show polygons"));
+    checkbox[11] = new wxCheckBox(this, ID_FLAG, wxT("Show lines"));
     button_15 = new wxButton(this, ID_DEFAULT, wxT("Set as default"));
-    button_13 = new wxButton(this, wxID_ANY, wxT("OK"));
-    button_14 = new wxButton(this, wxID_ANY, wxT("Cancel"));
+    button_13 = new wxButton(this, wxID_OK, wxT("OK"));
+    button_14 = new wxButton(this, wxID_CANCEL, wxT("Cancel"));
 
     wxFlexGridSizer* sizer_45 = new wxFlexGridSizer(3, 1, 0, 0);
     wxBoxSizer* sizer_48 = new wxBoxSizer(wxHORIZONTAL);
@@ -79,7 +82,7 @@ bool EditorPreferencesDialog::Create(wxWindow* parent, wxWindowID id)
     }
 
     char colorSets[][100] = {"Forge", "Marathon", "Customize..."};
-    for(int i = 0; i < NUMBER_OF_GLID; i ++){
+    for(int i = 0; i < 3; i ++){
         this->choice_10->Insert(wxString(wxConvertMB2WX(colorSets[i])), i);
     }
     
@@ -163,4 +166,8 @@ void EditorPreferencesDialog::OnDefault(wxCommandEvent &event)
     //ê›íËÇå≥Ç…ñﬂÇµÇ‹Ç∑
     MapEditorOneSetting def = MapEditorOneSetting::getDefaultSetting();
     setupDialog(&def);
+}
+void EditorPreferencesDialog::OnGrid(wxCommandEvent &ev)
+{
+
 }

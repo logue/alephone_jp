@@ -32,6 +32,7 @@ public:
     virtual ~ColorCustomizeDialog();
     
     ColorSettings getColor();
+    void setColor(int cols[]);
 
     void OnOk(wxCommandEvent& ev);
     void OnCancel(wxCommandEvent &ev);

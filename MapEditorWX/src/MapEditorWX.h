@@ -262,3 +262,6 @@ private:
 
 //ŽÀ‘Ì‚ðŽ‚½‚¹‚Ü‚·
 DECLARE_APP(MapEditorWX)
+
+//char->wx
+wxString getString(const char* format, ...);

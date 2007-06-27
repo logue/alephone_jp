@@ -33,17 +33,17 @@ TODO リスト
 ５：デバッグ完了
 
 Annotation		:デバッグ完了（選択モードは未完）
-ColorCustomize	:呼び出し
-EditPreferences	:配置済み
-Height			:配置済み。
+ColorCustomize	:入出力
+EditPreferences	:入出力
+Height			:入出力
 HeightPallet	:
 LevelInfo
 LineProp		:wx
 ObjectProp		:wx
-Placement		:配置済み
+Placement		:入出力
 Platform		:配置済み。
 PointProp		:配置
-PolygonNum		:配置
+PolygonNum		:入出力
 PolygonProp		:配置
 PolygonType		:wx
 SelectLevel		:配置
@@ -155,3 +155,7 @@ decode->char
 TODO ダイアログの作成
 TODO VisualMode oh visual mode!
 TODO Polygon tool
+TODO 範囲外のものが選択できるバグ
+TODO スライダーを動かすと0に固定されてしまう
+TODO 一番上がMinになってる
+TODO ObjectPlacement

@@ -40,6 +40,8 @@ void MapEditorMainFrame::OnNew(wxCommandEvent& ev)
 
     //ƒf[ƒ^‚Ì‰Šú‰»
     wxGetApp().getStockManager()->resetDeletes();
+    wxGetApp().getViewGridManager()->setViewHeightMin(SHRT_MAX);
+    wxGetApp().getViewGridManager()->setViewHeightMin(SHRT_MIN);
     Refresh();
 }
 void MapEditorMainFrame::OnNewLevel(wxCommandEvent& ev)

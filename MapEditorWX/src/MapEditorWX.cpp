@@ -270,3 +270,14 @@ void MapEditorWX::setCursor()
         ::wxSetCursor(cursors[0]);
     }
 }
+
+//char->wx
+wxString getString(const char* format, ...)
+{
+    char message[BUF_MAX];
+    va_list maker;
+    va_start(maker, format);
+    vsprintf(message, format, maker);
+    wxString str = wxConvertMB2WX(message);
+    return str;
+}
