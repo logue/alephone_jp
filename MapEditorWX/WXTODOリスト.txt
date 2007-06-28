@@ -37,21 +37,21 @@ ColorCustomize	:入出力
 EditPreferences	:入出力
 Height			:入出力
 HeightPallet	:
-LevelInfo
-LineProp		:wx
+LevelInfo		:
+LineProp		:配置
 ObjectProp		:wx
 Placement		:入出力
-Platform		:配置済み。
+Platform		:配置
 PointProp		:配置
 PolygonNum		:入出力
 PolygonProp		:配置
 PolygonType		:wx
 SelectLevel		:配置
-SideProp
+SideProp		:
 Terminal		:入出力
-Texture
-Tool			:配置済み
-Visual
+Texture			:
+Tool			:配置
+Visual			:
 
 JumpLevel		:wx
 MediaPalette	:

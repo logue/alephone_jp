@@ -30,25 +30,25 @@ bool ColorCustomizeDialog::Create(wxWindow* parent, wxWindowID id, ColorSettings
 {
     bool result = wxDialog::Create(parent, id, wxT("Color Customize"));
     label_13 = new wxStaticText(this, wxID_ANY, wxT("Background"));
-    button_7 = new wxButton(this, wxID_ANY, wxT("Choose color"));
+    button_7 = new wxButton(this, ID_BACKGROUND, wxT("Choose color"));
     panel_1 = new wxPanel(this, wxID_ANY);
     label_14 = new wxStaticText(this, wxID_ANY, wxT("Grid line"));
-    button_8 = new wxButton(this, wxID_ANY, wxT("Choose color"));
+    button_8 = new wxButton(this, ID_GRID, wxT("Choose color"));
     panel_2 = new wxPanel(this, wxID_ANY);
     label_16 = new wxStaticText(this, wxID_ANY, wxT("Lines"));
-    button_9 = new wxButton(this, wxID_ANY, wxT("Choose color"));
+    button_9 = new wxButton(this, ID_LINES, wxT("Choose color"));
     panel_3 = new wxPanel(this, wxID_ANY);
     label_15 = new wxStaticText(this, wxID_ANY, wxT("Polygons"));
-    button_10 = new wxButton(this, wxID_ANY, wxT("Choose color"));
+    button_10 = new wxButton(this, ID_POLYGONS, wxT("Choose color"));
     panel_4 = new wxPanel(this, wxID_ANY);
     label_17 = new wxStaticText(this, wxID_ANY, wxT("Strings"));
-    button_11 = new wxButton(this, wxID_ANY, wxT("Choose color"));
+    button_11 = new wxButton(this, ID_STRINGS, wxT("Choose color"));
     panel_5 = new wxPanel(this, wxID_ANY);
     label_18 = new wxStaticText(this, wxID_ANY, wxT("Points"));
-    button_12 = new wxButton(this, wxID_ANY, wxT("Choose color"));
+    button_12 = new wxButton(this, ID_POINTS, wxT("Choose color"));
     panel_6 = new wxPanel(this, wxID_ANY);
-    button_5 = new wxButton(this, wxID_ANY, wxT("OK"));
-    button_6 = new wxButton(this, wxID_ANY, wxT("Cancel"));
+    button_5 = new wxButton(this, wxID_OK, wxT("OK"));
+    button_6 = new wxButton(this, wxID_CANCEL, wxT("Cancel"));
 
     //setup
 
@@ -67,7 +67,7 @@ bool ColorCustomizeDialog::Create(wxWindow* parent, wxWindowID id, ColorSettings
     sizer_37->Add(sizer_38, 1, wxEXPAND, 0);
     sizer_39->Add(label_14, 0, 0, 0);
     sizer_39->Add(button_8, 0, 0, 0);
-    sizer_39->Add(panel_2, 1, 0, 0);
+    sizer_39->Add(panel_2, 1, wxEXPAND, 0);
     sizer_37->Add(sizer_39, 1, wxEXPAND, 0);
     sizer_40->Add(label_16, 0, 0, 0);
     sizer_40->Add(button_9, 0, 0, 0);
@@ -162,7 +162,11 @@ void ColorCustomizeDialog::OnPoints(wxCommandEvent &event)
 
 void ColorCustomizeDialog::OnPaint(wxPaintEvent &event)
 {
-    //Ý’è‚µ‚½F‚Å“h‚é
+     wxSize size = GetSize();
+    if(!wxWindow::IsExposed(0,0,size.GetWidth(), size.GetHeight())){
+        return;
+    }
+   //Ý’è‚µ‚½F‚Å“h‚é
     this->drawPanel(this->panel_1, ColorType::Background);
     this->drawPanel(this->panel_2, ColorType::GridLine);
     this->drawPanel(this->panel_3, ColorType::Lines);
@@ -175,6 +179,7 @@ void ColorCustomizeDialog::OnPaint(wxPaintEvent &event)
 */
 void ColorCustomizeDialog::drawPanel(wxPanel* panel, int type)
 {
+
     wxPaintDC dc(panel);
     wxRect rect = panel->GetClientRect();
     int col[COL_NUM];
