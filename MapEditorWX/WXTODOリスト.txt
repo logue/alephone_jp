@@ -36,16 +36,16 @@ Annotation		:デバッグ完了（選択モードは未完）
 ColorCustomize	:入出力
 EditPreferences	:入出力
 Height			:入出力
-HeightPallet	:
-LevelInfo		:
+HeightPallet	:wx
+LevelInfo		:配置
 LineProp		:配置
-ObjectProp		:wx
+ObjectProp		:配置
 Placement		:入出力
 Platform		:配置
 PointProp		:配置
 PolygonNum		:入出力
 PolygonProp		:配置
-PolygonType		:wx
+PolygonType		:配置
 SelectLevel		:配置
 SideProp		:
 Terminal		:入出力
@@ -53,10 +53,11 @@ Texture			:
 Tool			:配置
 Visual			:
 
-JumpLevel		:wx
-MediaPalette	:
-LightPalette	:
-SoundPalette	:
+XXXX JumpLevel
+SelectLevel		:配置
+MediaPalette	:配置
+LightPalette	:配置
+SoundPalette	:wx
 
 ○イベント処理の記述は終わっているか？のリスト
 ・TODOありならその内容を書く
@@ -156,6 +157,9 @@ TODO ダイアログの作成
 TODO VisualMode oh visual mode!
 TODO Polygon tool
 TODO 範囲外のものが選択できるバグ
-TODO スライダーを動かすと0に固定されてしまう
+済み TODO スライダーを動かすと0に固定されてしまう
+	→ev.ではなく、直接オブジェクトから値をとればOK。GetInt()は0が返る
 TODO 一番上がMinになってる
 TODO ObjectPlacement
+済み TODO MediaListって初期状態で入ってるものなの？
+	→たぶん入ってない？
