@@ -34,6 +34,7 @@ public:
     LinePropDialog();
     bool Create(wxWindow* parent, wxWindowID id);
     virtual ~LinePropDialog();
+
     //イベントテーブル作成<en>declare
     DECLARE_EVENT_TABLE()
     void OnEndpoint1Edit(wxCommandEvent &event); // wxGlade: <event_handler>
@@ -50,6 +51,8 @@ public:
     void OnClockwisePoly(wxCommandEvent &event); // wxGlade: <event_handler>
     void OnCClockwisePoly(wxCommandEvent &event); // wxGlade: <event_handler>
 
+    void setupDialog();
+    int getLineIndex();
 public:
     void setLineIndex(int index);
     

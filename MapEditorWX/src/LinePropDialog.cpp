@@ -103,6 +103,8 @@ bool LinePropDialog::Create(wxWindow* parent, wxWindowID id)
     Layout();
 
     this->lineIndex = NONE;
+
+    setupDialog();
     return result;
 }
 void LinePropDialog::OnEndpoint1Edit(wxCommandEvent &event)
@@ -126,7 +128,75 @@ void LinePropDialog::OnLandscape(wxCommandEvent &event)
         //line->flags 
     }
 }
+void LinePropDialog::getLineIndex()
+{
+    return this->lineIndex;
+}
+void LinePropDialog::setLineIndex(int index)
+{
+    this->lineIndex = index;
+}
+void LinePropDialog::setupDialog()
+{
+    //チョイスのセットアップ
+    choice_24->Clear();
+    choice_25->Clear();
+    for(int i = 0; i < (int)SideList.size(); i ++){
+        choice_24->Insert(getString("%d", i), i);
+        choice_25->Insert(getString("%d", i), i);
+    }
+    choice_24->Insert(_T("NONE"), (int)SideList.size());
+    choice_25->Insert(_T("NONE"), (int)SideList.size());
 
+    choice_26->Clear();
+    choice_27->Clear();
+    for(int i = 0; i < (int)PolygonList.size(); i ++){
+        choice_26->Insert(getString("%d", i), i);
+        choice_27->Insert(getString("%d", i), i);
+    }
+    choice_26->Insert(_T("NONE"), (int)PolygonList.size());
+    choice_27->Insert(_T("NONE"), (int)PolygonList.size());
+
+
+    if(this->getLineIndex() == NONE){
+        return;
+    }
+    
+    int index = getLineIndex();
+    line_data* line = get_line_data(index);
+
+    text_ctrl_42->SetValue(getString("%d", line->endpoint_indexes[0]));
+    text_ctrl_43->SetValue(getString("%d", line->endpoint_indexes[1]));
+    text_ctrl_45->SetValue(getString("%d", line->length));
+    text_ctrl_46->SetValue(getString("%d", line->highest_adjacent_floor));
+    text_ctrl_47->SetValue(getString("%d", line->lowest_adjacent_ceiling));
+    checkbox_45->SetValue(LINE_IS_LANDSCAPED(index));
+    checkbox_52->SetValue(LINE_IS_ELEVATION(index));
+    checkbox_53->SetValue(LINE_IS_VARIABLE_ELEVATION(index));
+    checkbox_54->SetValue(LINE_HAS_TRANSPARENT_SIDE(index));
+    int sel = LINE_IS_SOLID(index) ? 0: 1;
+    radio_box_1->SetSelection(sel);
+    index = line->clockwise_polygon_side_index;
+    if(index == NONE){
+        index = (int)SideList.size();
+    }
+    choice_24->SetSelection(index);
+    index = line->counterclockwise_polygon_side_index;
+    if(index == NONE){
+        index = (int)SideList.size();
+    }
+    choice_25->SetSelection(index);
+    index = line->clockwise_polygon_owner;
+    if(index == NONE){
+        index = (int)PolygonList.size();
+    }
+    choice_26->SetSelection(index);
+    index = line->counterclockwise_polygon_owner;
+    if(index == NONE){
+        index = (int)PolygonList.size();
+    }
+    choice_27->SetSelection(index);
+}
 
 void LinePropDialog::OnElevation(wxCommandEvent &event)
 {

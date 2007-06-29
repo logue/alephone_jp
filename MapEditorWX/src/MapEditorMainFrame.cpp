@@ -109,8 +109,9 @@ MapEditorMainFrame::MapEditorMainFrame(const wxString& title,
     //height
     this->heightDialog.Create(this, wxID_ANY);
     this->heightDialog.Show();
-
+    
     //ƒpƒŒƒbƒg
+    this->ceilingHeightPaletteDialog.Create(this, wx_ID_ANY);
     this->heightPaletteDialog.Create(this, wxID_ANY);
     this->lightPaletteDialog.Create(this, wxID_ANY);
     this->mediaPaletteDialog.Create(this, wxID_ANY);
@@ -124,6 +125,10 @@ MapEditorMainFrame::MapEditorMainFrame(const wxString& title,
     this->polyTypeDialog.Create(this, wxID_ANY);
     this->polyPropDialog.Create(this, wxID_ANY);
     this->sidePropDialog.Create(this, wxID_ANY);
+
+    //‰Šú‰»
+    wxCommandEvent dummy;
+    this->OnNew(dummy);
 }
 MapEditorMainFrame::~MapEditorMainFrame()
 {

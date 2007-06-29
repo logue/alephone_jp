@@ -22,6 +22,7 @@
 #include "HPLLib/HPLMapTool.h"
 
 #include <string>
+#include <set>
 
 #include <iostream>
 

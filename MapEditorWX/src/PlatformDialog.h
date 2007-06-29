@@ -5,9 +5,6 @@
 
 class PlatformDialog: public wxDialog{
 public:
-    PlatformDialog();
-    bool Create(wxWindow* parent, wxWindowID id);
-    virtual ~PlatformDialog();
     wxStaticBox* sizer_31_staticbox;
     wxStaticBox* sizer_27_staticbox;
     wxStaticBox* sizer_28_staticbox;
@@ -66,11 +63,17 @@ public:
     wxCheckBox* checkbox_26;
     wxButton* button_1;
     wxButton* button_2;
+
+public:
+    PlatformDialog();
+    bool Create(wxWindow* parent, wxWindowID id);
+    virtual ~PlatformDialog();
     DECLARE_EVENT_TABLE()
 
     void OnOk(wxCommandEvent& ev);
     void OnCancel(wxCommandEvent& ev);
-
+    
+public:
 };
 
 #endif

@@ -172,6 +172,9 @@ void MapEditorMainFrame::OnPreference(wxCommandEvent& ev)
         if(!wxGetApp().setting.saveSetting()){
             hpl::error::caution("Fail to save setting as [%s]", wxGetApp().setting.getFilePath().c_str());
         }
+        //ペンの作り直し
+        setupPenAndBrush(wxGetApp().setting.getColorSetting());
+        Refresh();
     }
 }
 
@@ -203,7 +206,6 @@ void MapEditorMainFrame::OnMoveToCenter(wxCommandEvent& ev)
 }
 void MapEditorMainFrame::OnHeightDialog(wxCommandEvent& ev)
 {
-    //TODO height dialog
     bool shown = this->heightDialog.IsShown();
     this->heightDialog.Show(!shown);
     if(shown){
@@ -216,6 +218,27 @@ void MapEditorMainFrame::OnHeightDialog(wxCommandEvent& ev)
 /////////////////////////////////////////////////////////////////////
 /////////////////////////////////////////////////////////////////////
 // mode menus
+/*
+    モードレスダイアログがいっぱいになるので、メニュー選択時に切り替える
+    それぞれのモードで開いている可能性のあるモードレスダイアログは以下のとおり
+    ・Draw(Polygon)Mode
+        点情報ダイアログ        PointProp
+        線情報ダイアログ        LineProp
+        ポリゴン情報ダイアログ  PolygonProp
+        Side情報ダイアログ      SideProp
+        オブジェクト情報ダイアログ  ObjectProp
+    ・PolygonType
+        PolygonType
+    ・Floor/Ceiling HeightMode
+        HeightPalette (setFloor(bool))
+    ・Floor/CeilingTexture
+        Texture
+    ・Media
+        MediaPalette
+    ・Light
+        LightPalette
+*/
+
 void MapEditorMainFrame::OnDrawPolygonMode(wxCommandEvent& ev)
 {
     //現在の状態を取得
@@ -230,9 +253,23 @@ void MapEditorMainFrame::OnDrawPolygonMode(wxCommandEvent& ev)
     //ドローモードにします
     wxGetApp().getEventManager()->setEditModeType(EditModeType::EM_DRAW);
 
-    //ポリゴンタイプダイアログを閉じます
-    this->polyTypeDialog.Show(false);
+    //全部のダイアログを閉じます
+    this->closeAllModelessDialogs();
 }
+void MapEditorMainFrame::closeAllModelessDialogs()
+{
+    this->objectPropDialog.Show(false);
+    this->pointPropDialog.Show(false);
+    this->polygonPropDialog.Show(false);
+    this->linPropDialog.Show(false);
+    this->sidePropDialog.Show(false);
+    this->polyTypeDialog.Show(false);
+    this->mediaPaletteDialog.Show(false);
+    this->heightPaletteDialog.Show(false);
+    this->lightPaletteDialog.Show(false);
+    this->textureDialog.Show(false);
+}
+
 void MapEditorMainFrame::OnVisualMode(wxCommandEvent& ev)
 {
     //モーダル表示

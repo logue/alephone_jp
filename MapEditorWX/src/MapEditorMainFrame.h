@@ -19,6 +19,7 @@
 //height
 #include "HeightDialog.h"
 //palettes
+#include "CeilingHeightPaletteDialog.h"
 #include "HeightPaletteDialog.h"
 #include "LightPaletteDialog.h"
 #include "MediaPaletteDialog.h"
@@ -124,17 +125,16 @@ private:
     //高さ <en> height
     HeightDialog heightDialog;
     //パレット類 <en> palettes
+    CeilingHeightPaletteDialog ceilingHeightPaletteDialog;
     HeightPaletteDialog heightPaletteDialog;
     LightPaletteDialog lightPaletteDialog;
     MediaPaletteDialog mediaPaletteDialog;
-    SoundPaletteDialog soundPaletteDialog;
     TextureDialog textureDialog;
 
-    //TODO サウンド・メディア・ライト
-    //TODO 以上のパレットダイアログをさくせいすること
+    SoundPaletteDialog soundPaletteDialog;
 
     //TODO モーダルだが、Side選択ダイアログも作ろう
-    //TODO JumpLevel, LevelInfo, Placements, TerminalViewer
+    //TODO JumpLevel, LevelInfo
 
     //起動時と、色設定変更時にこれらを変更すること
     //TODO 設定変更コード
@@ -391,4 +391,6 @@ private:
         新しいモードに切り替えます
     */
     void changeEditMode(int mode);
+
+    void closeAllModelessDialogs();
 };

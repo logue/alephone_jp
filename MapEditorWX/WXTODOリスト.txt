@@ -5,7 +5,7 @@ TODO リスト
 ・マウスイベントの記述
 
 -AlephOneSrcのDLL作りたいな…
--XRCだめすぎｗｗｗｗ。クラスのインスタンスそのまま作っちゃうって何だよｗｗｗｗどう拡張すればいいんだｗｗｗ
+-XRCだめすぎｗ。クラスのインスタンスそのまま作っちゃうって何だよwどう拡張すればいいんだｗ
 -rad1が#defineされてた。ネーヨｗ
 -rad2もか！
 
@@ -33,10 +33,12 @@ TODO リスト
 ５：デバッグ完了
 
 Annotation		:デバッグ完了（選択モードは未完）
+CeilingHeightPaletteDialog
+                :wx
 ColorCustomize	:入出力
 EditPreferences	:入出力
 Height			:入出力
-HeightPallet	:wx
+HeightPallet	:配置
 LevelInfo		:配置
 LineProp		:配置
 ObjectProp		:配置
@@ -49,7 +51,7 @@ PolygonType		:配置
 SelectLevel		:配置
 SideProp		:
 Terminal		:入出力
-Texture			:
+Texture			:配置
 Tool			:配置
 Visual			:
 
@@ -57,7 +59,7 @@ XXXX JumpLevel
 SelectLevel		:配置
 MediaPalette	:配置
 LightPalette	:配置
-SoundPalette	:wx
+SoundPalette	:配置
 
 ○イベント処理の記述は終わっているか？のリスト
 ・TODOありならその内容を書く

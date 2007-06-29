@@ -138,30 +138,32 @@ void MapEditorMainFrame::drawBackground(wxDC* dc)
     height = OFFSET_Y_WORLD * 2 / DIV;
     dc->DrawRectangle(left, top, width, height);
 
-    //グリッド
-    //TODO
-    //SHRT_MAXはgridの倍数ではない！
-    //中心から右、下の方向
-    for(int i = OFFSET_X_WORLD; i <= OFFSET_X_WORLD * 2; i += grid){
-        if(i == OFFSET_X_WORLD){
-            //中心＝太線
-            dc->SetPen(this->gridLargePen);
-        }else{
-            dc->SetPen(this->gridPen);
+    if(wxGetApp().setting.flags[IS_SHOW_GRID]){
+        //グリッド
+        //TODO
+        //SHRT_MAXはgridの倍数ではない！
+        //中心から右、下の方向
+        for(int i = OFFSET_X_WORLD; i <= OFFSET_X_WORLD * 2; i += grid){
+            if(i == OFFSET_X_WORLD){
+                //中心＝太線
+                dc->SetPen(this->gridLargePen);
+            }else{
+                dc->SetPen(this->gridPen);
+            }
+            int x0 = voffset[0] + i / DIV;
+            int y0 = voffset[1] + i / DIV;
+
+            dc->DrawLine(x0, voffset[1], x0, voffset[1] + OFFSET_Y_WORLD * 2 / DIV);
+            dc->DrawLine(voffset[0], y0, voffset[0] + OFFSET_X_WORLD * 2 / DIV, y0);
+
+            //左＆上
+            int j = OFFSET_X_WORLD * 2 - i;
+            int x1 = voffset[0] + j / DIV;
+            int y1 = voffset[1] + j / DIV;
+            dc->DrawLine(x1, voffset[1], x1, voffset[1] + OFFSET_Y_WORLD * 2 / DIV);
+            dc->DrawLine(voffset[0], y1, voffset[0] + OFFSET_X_WORLD * 2 / DIV, y1);
+            
         }
-        int x0 = voffset[0] + i / DIV;
-        int y0 = voffset[1] + i / DIV;
-
-        dc->DrawLine(x0, voffset[1], x0, voffset[1] + OFFSET_Y_WORLD * 2 / DIV);
-        dc->DrawLine(voffset[0], y0, voffset[0] + OFFSET_X_WORLD * 2 / DIV, y0);
-
-        //左＆上
-        int j = OFFSET_X_WORLD * 2 - i;
-        int x1 = voffset[0] + j / DIV;
-        int y1 = voffset[1] + j / DIV;
-        dc->DrawLine(x1, voffset[1], x1, voffset[1] + OFFSET_Y_WORLD * 2 / DIV);
-        dc->DrawLine(voffset[0], y1, voffset[0] + OFFSET_X_WORLD * 2 / DIV, y1);
-        
     }
 
 }
@@ -170,6 +172,9 @@ void MapEditorMainFrame::drawBackground(wxDC* dc)
 */
 void MapEditorMainFrame::drawPolygons(wxDC* dc)
 {
+    if(!wxGetApp().setting.flags[IS_SHOW_POLYGONS]){
+        return;
+    }
     //ペン設定
     dc->SetPen(this->linePen);
 //    dc->SetBrush(*wxLIGHT_GREY_BRUSH);
@@ -270,6 +275,9 @@ void MapEditorMainFrame::drawPolygons(wxDC* dc)
 */
 void MapEditorMainFrame::drawLines(wxDC* dc)
 {
+    if(!wxGetApp().setting.flags[IS_SHOW_LINES]){
+        return;
+    }
     dc->SetPen(*wxBLACK_PEN);
     //高さ制限
     int zMin = wxGetApp().getViewGridManager()->getViewHeightMin();
@@ -340,6 +348,9 @@ void MapEditorMainFrame::drawSides(wxDC* dc)
 }
 void MapEditorMainFrame::drawPoints(wxDC* dc)
 {
+    if(!wxGetApp().setting.flags[IS_SHOW_POINTS]){
+        return;
+    }
     //高さ制限
     int zMin = wxGetApp().getViewGridManager()->getViewHeightMin();
     int zMax = wxGetApp().getViewGridManager()->getViewHeightMax();
@@ -383,6 +394,30 @@ void MapEditorMainFrame::drawObjects(wxDC* dc)
         map_object* obj = &(SavedObjectList[i]);
 
         int type = obj->type;
+        if(type == _saved_monster &&
+            !wxGetApp().setting.flags[IS_SHOW_MONSTERS]){
+            continue;
+        }
+        if(type == _saved_player &&
+            !wxGetApp().setting.flags[IS_SHOW_PLAYER]){
+            continue;
+        }
+        if(type == _saved_item &&
+            !wxGetApp().setting.flags[IS_SHOW_ITEMS]){
+            continue;
+        }
+        if(type == _saved_goal &&
+            !wxGetApp().setting.flags[IS_SHOW_GLOALS]){
+            continue;
+        }
+        if(type == _saved_sound_source &&
+            !wxGetApp().setting.flags[IS_SHOW_SOUNDS]){
+            continue;
+        }
+        if(type == _saved_object &&
+            !wxGetApp().setting.flags[IS_SHOW_SCENERY]){
+            continue;
+        }
         int index = obj->index;
 
         int facing = obj->facing;
@@ -506,6 +541,9 @@ void MapEditorMainFrame::drawObjects(wxDC* dc)
 }
 void MapEditorMainFrame::drawAnnotations(wxDC* dc)
 {
+    if(!wxGetApp().setting.flags[IS_SHOW_ANNOTATIONS]){
+        return;
+    }
     wxColor oldCol = dc->GetTextForeground();
     wxColor col(wxGetApp().setting.getColorSetting()->strings[0],
                 wxGetApp().setting.getColorSetting()->strings[1],

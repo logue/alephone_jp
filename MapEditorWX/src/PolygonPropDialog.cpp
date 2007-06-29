@@ -1,4 +1,6 @@
 #include "PolygonPropDialog.h"
+#include "PlatformDialog.h"
+
 #include "MapEditorWX.h"
 namespace PolyProp{
 enum{
@@ -192,6 +194,14 @@ bool PolygonPropDialog::Create(wxWindow* parent, wxWindowID id)
     SetSizer(grid_sizer_13);
     grid_sizer_13->Fit(this);
     Layout();
+    this->setPolyIndex(NONE);
+
+    //Typeに追加
+    for(int i = 0; i < NUMBER_OF_POLYGON_TYPE; i ++){
+        choice_12->Insert(wxConvertMB2WX(wxGetApp().polyTypeInfo[i].jname.c_str()), i);
+    }
+
+
     return result;
 }
 
@@ -206,170 +216,329 @@ int PolygonPropDialog::getPolyIndex()
 }
 void PolygonPropDialog::setupDialog()
 {
+    //CHOICEをセットアップしなおす
+    //light floor/ceiling/media-light
+    choice_13->Clear();
+    choice_14->Clear();
+    choice_16->Clear();
+    for(int i = 0; i < (int)LightList.size(); i ++){
+        choice_13->Insert(getString("%d", i), i);
+        choice_14->Insert(getString("%d", i), i);
+        choice_16->Insert(getString("%d", i), i);
+    }
+    choice_13->Insert(_T("NONE"), LightList.size());
+    choice_14->Insert(_T("NONE"), LightList.size());
+    choice_16->Insert(_T("NONE"), LightList.size());
 
+    //first object
+    choice_19->Clear();
+    for(int i = 0; i < (int)SavedObjectList.size(); i ++){
+        choice_19->Insert(getString("%d", i), i);
+    }
+    choice_19->Insert(_T("NONE"), LightList.size());
+
+    //Media
+    choice_15->Clear();
+    for(int i = 0; i < (int)MediaList.size(); i ++){
+        choice_15->Insert(getString("%d", i), i);
+    }
+    choice_15->Insert(_T("NONE"), MediaList.size());
+    
+    //TODO snd src
+    choice_20->Clear();
+/*    for(int i = 0; i < (int).size(); i ++){
+        choice_20->Insert(getString("%d", i), i);
+    }
+    choice_20->Insert(_T("NONE"), .size());*/
+    choice_17->Clear();
+    for(int i = 0; i < (int)AmbientSoundImageList.size(); i ++){
+        choice_17->Insert(getString("%d", i), i);
+    }
+    choice_17->Insert(_T("NONE"), AmbientSoundImageList.size());
+    //random sound
+    choice_18->Clear();
+/*    for(int i = 0; i < (int).size(); i ++){
+        choice_18->Insert(getString("%d", i), i);
+    }
+    choice_18->Insert(_T("NONE"), .size());*/
+
+    if(this->getPolyIndex() == NONE){
+        return;
+    }
+    //ポリゴン情報をダイアログに設定
+    polygon_data* poly = get_polygon_data(this->getPolyIndex());
+    text_ctrl_20->SetValue(getString("%d", this->getPolyIndex()));
+    choice_12->SetSelection(poly->type);
+    text_ctrl_25->SetValue(getString("%d", poly->permutation);
+    choice_13->SetSelection(poly->floor_light);
+    choice_14->SetSelection(poly->ceiling_light);
+    text_ctrl_26->SetValue(getString("%d", poly->permutation);
+    int index = poly->first_object;
+    if(index == NONE){
+        index = SavedObjectList.size();
+    }
+    choice_19->SetSelection(index);
+    text_ctrl_28->SetValue(getString("%d", poly->first_exclusion_zone_index);
+    text_ctrl_29->SetValue(getString("%d", poly->line_exclusion_zone_index);
+    text_ctrl_30->SetValue(getString("%d", poly->floor_transfer_mode);
+    text_ctrl_31->SetValue(getString("%d", poly->ceiling_transfer_mode);
+
+    text_ctrl_21->SetValue(getString("%d", poly->first_neighbor_index);
+    text_ctrl_22->SetValue(getString("%d", poly->neighbor_count);
+    text_ctrl_23->SetValue(getString("%d", poly->center.x);
+    text_ctrl_24->SetValue(getString("%d", poly->center.y);
+    text_ctrl_33->SetValue(getString("%d", poly->floor_origin.x);
+    text_ctrl_35->SetValue(getString("%d", poly->floor_origin.y);
+    text_ctrl_34->SetValue(getString("%d", poly->ceiling_origin.x);
+    text_ctrl_36->SetValue(getString("%d", poly->ceiling_origin.y);
+    index = poly->media_index;
+    if(index == NONE){
+        index = MediaList.size();
+    }
+    choice_15->SetSelection(index);
+    index = poly->media_lightsource_index;
+    if(index == NONE){
+        index = LightList.size();
+    }
+    choice_16->SetSelection(index);
+    /* TODO snd src
+    index = poly->;
+    if(index == NONE){
+        index = .size();
+    }
+    choice_20->SetSelection(index);*/
+    index = poly->ambient_sound_image_index;
+    if(index == NONE){
+        index = AmbientSoundImageList.size();
+    }
+    choice_17->SetSelection(index);
+/*
+    TODO rnd snd
+    index = poly->;
+    if(index == NONE){
+        index = .size();
+    }
+    choice_18->SetSelection(index);
+    */
+    
 }
 void PolygonPropDialog::OnIDEdit(wxCommandEvent &event)
 {
-    event.Skip();
+    if(this->getPolyIndex() == NONE){
+        return ;
+    }
     std::cout<<"Event handler (PolygonPropDialog::OnIDEdit) not implemented yet"<<std::endl; //notify the user that he hasn't implemented the event handler yet
 }
 
 
 void PolygonPropDialog::OnFirstNeighborEdit(wxCommandEvent &event)
 {
-    event.Skip();
+    if(this->getPolyIndex() == NONE){
+        return ;
+    }
     std::cout<<"Event handler (PolygonPropDialog::OnFirstNeighborEdit) not implemented yet"<<std::endl; //notify the user that he hasn't implemented the event handler yet
 }
 
 
 void PolygonPropDialog::OnTypeChoice(wxCommandEvent &event)
 {
-    event.Skip();
+    if(this->getPolyIndex() == NONE){
+        return ;
+    }
     std::cout<<"Event handler (PolygonPropDialog::OnTypeChoice) not implemented yet"<<std::endl; //notify the user that he hasn't implemented the event handler yet
 }
 
 
 void PolygonPropDialog::OnNearCountEdit(wxCommandEvent &event)
 {
-    event.Skip();
+    if(this->getPolyIndex() == NONE){
+        return ;
+    }
     std::cout<<"Event handler (PolygonPropDialog::OnNearCountEdit) not implemented yet"<<std::endl; //notify the user that he hasn't implemented the event handler yet
 }
 
 
 void PolygonPropDialog::OnPermuEdit(wxCommandEvent &event)
 {
-    event.Skip();
+    if(this->getPolyIndex() == NONE){
+        return ;
+    }
     std::cout<<"Event handler (PolygonPropDialog::OnPermuEdit) not implemented yet"<<std::endl; //notify the user that he hasn't implemented the event handler yet
 }
 
 
 void PolygonPropDialog::OnCenterXEdit(wxCommandEvent &event)
 {
-    event.Skip();
+    if(this->getPolyIndex() == NONE){
+        return ;
+    }
     std::cout<<"Event handler (PolygonPropDialog::OnCenterXEdit) not implemented yet"<<std::endl; //notify the user that he hasn't implemented the event handler yet
 }
 
 
 void PolygonPropDialog::OnFloorLightEdit(wxCommandEvent &event)
 {
-    event.Skip();
+    if(this->getPolyIndex() == NONE){
+        return ;
+    }
     std::cout<<"Event handler (PolygonPropDialog::OnFloorLightEdit) not implemented yet"<<std::endl; //notify the user that he hasn't implemented the event handler yet
 }
 
 
 void PolygonPropDialog::OnCenterYEdit(wxCommandEvent &event)
 {
-    event.Skip();
+    if(this->getPolyIndex() == NONE){
+        return ;
+    }
     std::cout<<"Event handler (PolygonPropDialog::OnCenterYEdit) not implemented yet"<<std::endl; //notify the user that he hasn't implemented the event handler yet
 }
 
 
 void PolygonPropDialog::OnCeilingLightEdit(wxCommandEvent &event)
 {
-    event.Skip();
+    if(this->getPolyIndex() == NONE){
+        return ;
+    }
     std::cout<<"Event handler (PolygonPropDialog::OnCeilingLightEdit) not implemented yet"<<std::endl; //notify the user that he hasn't implemented the event handler yet
 }
 
 
 void PolygonPropDialog::OnAreaEdit(wxCommandEvent &event)
 {
-    event.Skip();
+    if(this->getPolyIndex() == NONE){
+        return ;
+    }
     std::cout<<"Event handler (PolygonPropDialog::OnAreaEdit) not implemented yet"<<std::endl; //notify the user that he hasn't implemented the event handler yet
 }
 void PolygonPropDialog::OnFloorOriginXEdit(wxCommandEvent &event)
 {
-    event.Skip();
+    if(this->getPolyIndex() == NONE){
+        return ;
+    }
     std::cout<<"Event handler (PolygonPropDialog::OnFloorOriginXEdit) not implemented yet"<<std::endl; //notify the user that he hasn't implemented the event handler yet
 }
 void PolygonPropDialog::OnFloorOriginYEdit(wxCommandEvent &event)
 {
-    event.Skip();
+    if(this->getPolyIndex() == NONE){
+        return ;
+    }
     std::cout<<"Event handler (PolygonPropDialog::OnFloorOriginYEdit) not implemented yet"<<std::endl; //notify the user that he hasn't implemented the event handler yet
 }
 void PolygonPropDialog::OnCeilingOriginXEdit(wxCommandEvent &event)
 {
-    event.Skip();
+    if(this->getPolyIndex() == NONE){
+        return ;
+    }
     std::cout<<"Event handler (PolygonPropDialog::OnCeilingOriginXEdit) not implemented yet"<<std::endl; //notify the user that he hasn't implemented the event handler yet
 }
 void PolygonPropDialog::OnCeilingOriginYEdit(wxCommandEvent &event)
 {
-    event.Skip();
+    if(this->getPolyIndex() == NONE){
+        return ;
+    }
     std::cout<<"Event handler (PolygonPropDialog::OnCeilingOriginYEdit) not implemented yet"<<std::endl; //notify the user that he hasn't implemented the event handler yet
 }
 
 
 void PolygonPropDialog::OnFirstObjChoice(wxCommandEvent &event)
 {
-    event.Skip();
+    if(this->getPolyIndex() == NONE){
+        return ;
+    }
     std::cout<<"Event handler (PolygonPropDialog::OnFirstObjChoice) not implemented yet"<<std::endl; //notify the user that he hasn't implemented the event handler yet
 }
 
 
 void PolygonPropDialog::OnMediaChoice(wxCommandEvent &event)
 {
-    event.Skip();
+    if(this->getPolyIndex() == NONE){
+        return ;
+    }
     std::cout<<"Event handler (PolygonPropDialog::OnMediaChoice) not implemented yet"<<std::endl; //notify the user that he hasn't implemented the event handler yet
 }
 
 
 void PolygonPropDialog::OnFirstExZoneEdit(wxCommandEvent &event)
 {
-    event.Skip();
+    if(this->getPolyIndex() == NONE){
+        return ;
+    }
     std::cout<<"Event handler (PolygonPropDialog::OnFirstExZoneEdit) not implemented yet"<<std::endl; //notify the user that he hasn't implemented the event handler yet
 }
 
 
 void PolygonPropDialog::OnMediaLightChoice(wxCommandEvent &event)
 {
-    event.Skip();
+    if(this->getPolyIndex() == NONE){
+        return ;
+    }
     std::cout<<"Event handler (PolygonPropDialog::OnMediaLightChoice) not implemented yet"<<std::endl; //notify the user that he hasn't implemented the event handler yet
 }
 
 
 void PolygonPropDialog::OnLineExZoneEdit(wxCommandEvent &event)
 {
-    event.Skip();
+    if(this->getPolyIndex() == NONE){
+        return ;
+    }
     std::cout<<"Event handler (PolygonPropDialog::OnLineExZoneEdit) not implemented yet"<<std::endl; //notify the user that he hasn't implemented the event handler yet
 }
 
 
 void PolygonPropDialog::OnSndSrcIndexChoice(wxCommandEvent &event)
 {
-    event.Skip();
+    if(this->getPolyIndex() == NONE){
+        return ;
+    }
     std::cout<<"Event handler (PolygonPropDialog::OnSndSrcIndexChoice) not implemented yet"<<std::endl; //notify the user that he hasn't implemented the event handler yet
 }
 
 
 void PolygonPropDialog::OnFloorTransEdit(wxCommandEvent &event)
 {
-    event.Skip();
+    if(this->getPolyIndex() == NONE){
+        return ;
+    }
     std::cout<<"Event handler (PolygonPropDialog::OnFloorTransEdit) not implemented yet"<<std::endl; //notify the user that he hasn't implemented the event handler yet
 }
 
 
 void PolygonPropDialog::OnAmbSndChoice(wxCommandEvent &event)
 {
-    event.Skip();
+    if(this->getPolyIndex() == NONE){
+        return ;
+    }
     std::cout<<"Event handler (PolygonPropDialog::OnAmbSndChoice) not implemented yet"<<std::endl; //notify the user that he hasn't implemented the event handler yet
 }
 
 
 void PolygonPropDialog::OnCeilingTransEdit(wxCommandEvent &event)
 {
-    event.Skip();
+    if(this->getPolyIndex() == NONE){
+        return ;
+    }
     std::cout<<"Event handler (PolygonPropDialog::OnCeilingTransEdit) not implemented yet"<<std::endl; //notify the user that he hasn't implemented the event handler yet
 }
 
 
 void PolygonPropDialog::OnRndSndChoice(wxCommandEvent &event)
 {
-    event.Skip();
+    if(this->getPolyIndex() == NONE){
+        return ;
+    }
     std::cout<<"Event handler (PolygonPropDialog::OnRndSndChoice) not implemented yet"<<std::endl; //notify the user that he hasn't implemented the event handler yet
 }
 
 
 void PolygonPropDialog::OnPlatformBtn(wxCommandEvent &event)
 {
-    event.Skip();
-    std::cout<<"Event handler (PolygonPropDialog::OnPlatformBtn) not implemented yet"<<std::endl; //notify the user that he hasn't implemented the event handler yet
+    if(this->getPolyIndex() == NONE){
+        return ;
+    }
+    PlatformDialog dlg;
+    dlg.Create(this, wxID_ANY);
+    if(dlg.ShowModal() == wxID_OK){
+        //TODO
+        //設定変更
+    }
 }

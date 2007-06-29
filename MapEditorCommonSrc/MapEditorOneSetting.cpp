@@ -214,9 +214,9 @@ void MapEditorOneSetting::setColorSetting(int type, ColorSettings *setting)
         setting->background[0] = 0;
         setting->background[1] = 0;
         setting->background[2] = 0;
-        setting->gridLine[0] = 10;
-        setting->gridLine[1] = 10;
-        setting->gridLine[2] = 10;
+        setting->gridLine[0] = 50;
+        setting->gridLine[1] = 50;
+        setting->gridLine[2] = 50;
         setting->lines[0] = 50;
         setting->lines[1] = 255;
         setting->lines[2] = 0;
