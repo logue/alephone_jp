@@ -17,7 +17,7 @@ BEGIN_EVENT_TABLE(ColorCustomizeDialog, wxDialog)
     EVT_BUTTON(ID_POINTS, ColorCustomizeDialog::OnPoints)
     EVT_BUTTON(wxID_OK, ColorCustomizeDialog::OnOk)
     EVT_BUTTON(wxID_CANCEL, ColorCustomizeDialog::OnCancel)
-    EVT_PAINT(ColorCustomizeDialog::OnPaint)
+//    EVT_PAINT(ColorCustomizeDialog::OnPaint)
 END_EVENT_TABLE()
 
 ColorCustomizeDialog::ColorCustomizeDialog()
@@ -94,94 +94,12 @@ bool ColorCustomizeDialog::Create(wxWindow* parent, wxWindowID id, ColorSettings
 
     memcpy(&this->colorSetting, &color, sizeof(ColorSettings));
 
+    //FÝ’è
+    this->setPanelColors();
     return result;
 }
-void ColorCustomizeDialog::OnOk(wxCommandEvent& ev)
+wxColor ColorCustomizeDialog::getColorFromSetting(int type)
 {
-    SetReturnCode(wxID_OK);
-    Destroy();
-}
-void ColorCustomizeDialog::OnCancel(wxCommandEvent &ev)
-{
-    SetReturnCode(wxID_OK);
-    Destroy();
-}
-void ColorCustomizeDialog::setColor(int cols[]){
-    wxColor col = wxGetColourFromUser(this);
-    cols[0] = col.Red();
-    cols[1] = col.Green();
-    cols[2] = col.Blue();
-}
-
-void ColorCustomizeDialog::OnBackground(wxCommandEvent &event)
-{
-    ColorSettings* cols = wxGetApp().setting.getColorSetting();
-    cols->type = COL_CUSTOM;
-    setColor(cols->background);
-}
-
-
-void ColorCustomizeDialog::OnGrid(wxCommandEvent &event)
-{
-    ColorSettings* cols = wxGetApp().setting.getColorSetting();
-    cols->type = COL_CUSTOM;
-    setColor(cols->gridLine);
-}
-
-
-void ColorCustomizeDialog::OnLines(wxCommandEvent &event)
-{
-    ColorSettings* cols = wxGetApp().setting.getColorSetting();
-    cols->type = COL_CUSTOM;
-    setColor(cols->lines);
-}
-
-
-void ColorCustomizeDialog::OnPolygons(wxCommandEvent &event)
-{
-    ColorSettings* cols = wxGetApp().setting.getColorSetting();
-    cols->type = COL_CUSTOM;
-    setColor(cols->polygons);
-}
-
-
-void ColorCustomizeDialog::OnStrings(wxCommandEvent &event)
-{
-    ColorSettings* cols = wxGetApp().setting.getColorSetting();
-    cols->type = COL_CUSTOM;
-    setColor(cols->strings);
-}
-
-
-void ColorCustomizeDialog::OnPoints(wxCommandEvent &event)
-{
-    ColorSettings* cols = wxGetApp().setting.getColorSetting();
-    cols->type = COL_CUSTOM;
-    setColor(cols->points);
-}
-
-void ColorCustomizeDialog::OnPaint(wxPaintEvent &event)
-{
-     wxSize size = GetSize();
-    if(!wxWindow::IsExposed(0,0,size.GetWidth(), size.GetHeight())){
-        return;
-    }
-   //Ý’è‚µ‚½F‚Å“h‚é
-    this->drawPanel(this->panel_1, ColorType::Background);
-    this->drawPanel(this->panel_2, ColorType::GridLine);
-    this->drawPanel(this->panel_3, ColorType::Lines);
-    this->drawPanel(this->panel_4, ColorType::Polygons);
-    this->drawPanel(this->panel_5, ColorType::Strings);
-    this->drawPanel(this->panel_6, ColorType::Points);
-}
-/**
-    @param type MapEditorOneSetting.h‚ð‚Ý‚æ‚¤
-*/
-void ColorCustomizeDialog::drawPanel(wxPanel* panel, int type)
-{
-
-    wxPaintDC dc(panel);
-    wxRect rect = panel->GetClientRect();
     int col[COL_NUM];
 
     switch(type){
@@ -218,6 +136,99 @@ void ColorCustomizeDialog::drawPanel(wxPanel* panel, int type)
     default:
         break;
     }
+    wxColor color(col[0], col[1], col[2]);
+    return color;
+}
+
+void ColorCustomizeDialog::setPanelColors()
+{
+    panel_1->SetBackgroundColour(getColorFromSetting(ColorType::Background));
+    panel_2->SetBackgroundColour(getColorFromSetting(ColorType::GridLine));
+    panel_3->SetBackgroundColour(getColorFromSetting(ColorType::Lines));
+    panel_4->SetBackgroundColour(getColorFromSetting(ColorType::Polygons));
+    panel_5->SetBackgroundColour(getColorFromSetting(ColorType::Strings));
+    panel_6->SetBackgroundColour(getColorFromSetting(ColorType::Points));
+    Refresh();
+}
+void ColorCustomizeDialog::OnOk(wxCommandEvent& ev)
+{
+    SetReturnCode(wxID_OK);
+    Destroy();
+}
+void ColorCustomizeDialog::OnCancel(wxCommandEvent &ev)
+{
+    SetReturnCode(wxID_OK);
+    Destroy();
+}
+void ColorCustomizeDialog::setColor(int cols[]){
+    wxColor defCol(cols[0], cols[1], cols[2]);
+    wxColor col = wxGetColourFromUser(this, defCol);
+    cols[0] = col.Red();
+    cols[1] = col.Green();
+    cols[2] = col.Blue();
+    this->colorSetting.type = COL_CUSTOM;
+    this->setPanelColors();
+}
+
+void ColorCustomizeDialog::OnBackground(wxCommandEvent &event)
+{
+    setColor(colorSetting.background);
+}
+
+
+void ColorCustomizeDialog::OnGrid(wxCommandEvent &event)
+{
+    setColor(colorSetting.gridLine);
+}
+
+
+void ColorCustomizeDialog::OnLines(wxCommandEvent &event)
+{
+    setColor(colorSetting.lines);
+}
+
+
+void ColorCustomizeDialog::OnPolygons(wxCommandEvent &event)
+{
+    setColor(colorSetting.polygons);
+}
+
+
+void ColorCustomizeDialog::OnStrings(wxCommandEvent &event)
+{
+    setColor(colorSetting.strings);
+}
+
+
+void ColorCustomizeDialog::OnPoints(wxCommandEvent &event)
+{
+    setColor(colorSetting.points);
+}
+
+void ColorCustomizeDialog::OnPaint(wxPaintEvent &event)
+{
+     wxSize size = GetSize();
+    if(!wxWindow::IsExposed(0,0,size.GetWidth(), size.GetHeight())){
+        return;
+    }
+   //Ý’è‚µ‚½F‚Å“h‚é
+    this->drawPanel(this->panel_1, ColorType::Background);
+    this->drawPanel(this->panel_2, ColorType::GridLine);
+    this->drawPanel(this->panel_3, ColorType::Lines);
+    this->drawPanel(this->panel_4, ColorType::Polygons);
+    this->drawPanel(this->panel_5, ColorType::Strings);
+    this->drawPanel(this->panel_6, ColorType::Points);
+}
+/**
+    @param type MapEditorOneSetting.h‚ð‚Ý‚æ‚¤
+*/
+void ColorCustomizeDialog::drawPanel(wxPanel* panel, int type)
+{
+
+    wxPaintDC dc(panel);
+    wxRect rect = panel->GetClientRect();
+    int col[COL_NUM];
+
     dc.SetBrush(wxBrush(wxColor(col[0], col[1], col[2])));
     dc.DrawRectangle(rect);
 }

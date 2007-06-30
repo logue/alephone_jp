@@ -16,6 +16,7 @@
 #include <wx/listbox.h>
 #include <wx/bmpbuttn.h>
 #include <wx/colordlg.h>
+#include <wx/scrolwin.h>
 
 #include "HPLLib/HPLEventManager.h"
 #include "MapEditorOneSetting.h"

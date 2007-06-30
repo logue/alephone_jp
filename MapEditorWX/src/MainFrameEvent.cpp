@@ -605,6 +605,9 @@ void MapEditorMainFrame::doLButtonOnTextTool(wxMouseEvent& ev)
         //追加
         hpl::aleph::map::addAnnotation(newAnnotation);
     }
+    //情報を更新する
+    wxGetApp().getStockManager()->updateDeletes();
+
 #endif
 }
 void MapEditorMainFrame::doLButtonOnPolygonTool(wxMouseEvent& ev)
@@ -675,17 +678,20 @@ void MapEditorMainFrame::OnRightDown(wxMouseEvent& ev)
     if(editMode == EditModeType::EM_DRAW && toolType == ToolType::TI_ARROW){
         //点の上で右クリックしたか？
         int epIndex = hpl::aleph::map::getSelectPointIndex(wmp, POINT_DISTANCE_EPSILON * div, zMin, zMax);
+        wxGetApp().popupEndpointIndex = epIndex;
         if(epIndex != NONE){
             //点ポップアップ表示
             PopupMenu(&wxGetApp().pointPopupMenu);
         }else{
             //点は押されなかった
             int lineIndex = hpl::aleph::map::getSelectLineIndex(wmp, LINE_DISTANCE_EPSILON * div, zMin, zMax);
+            wxGetApp().popupLineIndex = lineIndex;
             if(lineIndex != NONE){
                 //線が押された
                 //→線プロパティをだす
                 PopupMenu(&wxGetApp().linePopupMenu);
             }
+
         }
     }
 
@@ -701,39 +707,6 @@ void MapEditorMainFrame::OnRightUp(wxMouseEvent& ev)
     //マウス座標記録
     wxGetApp().getViewGridManager()->setNewMousePoint(mx, my);
 
-    //ポリゴンモードの時新しいポリゴンを作る
-    hpl::aleph::HPLEventManager* emgr = wxGetApp().getEventManager();
-    int editMode = emgr->getEditModeType();
-    int toolType = emgr->getToolType();
-    if(editMode == EditModeType::EM_DRAW &&
-        toolType == ToolType::TI_POLYGON)
-    {
-        if(emgr->isSelectingGroup()){
-            //選択範囲中だった
-            //→独立ポリゴンの作成
-            int n = wxGetApp().nPolygonPoints;
-            int selStartPoint[2];
-            emgr->getSelectGroupStartPoint(selStartPoint);
-            //n角形の座標を取得
-            double polyPointsView[8][2];
-            hpl::math::getRectangleScaledPreparedPolygon(
-                selStartPoint[0], selStartPoint[1], mx, my,
-                n, polyPointsView);
-
-            //ワールド系に座標変換
-            world_point2d polyPointsWorld[8];
-            for(int i = 0; i < n; i ++){
-                polyPointsWorld[i] = 
-                    wxGetApp().getWorldPointFromViewPoint(
-						(int)polyPointsView[i][0], 
-						(int)polyPointsView[i][1]);
-            }
-
-            //ポリゴン生成
-            hpl::aleph::map::addNewPolygon(polyPointsWorld, n);
-        }
-
-    }
 
 }
 void MapEditorMainFrame::OnLeftUp(wxMouseEvent& ev)
@@ -918,6 +891,8 @@ void MapEditorMainFrame::doLUpOnPolygonTool(wxMouseEvent& ev)
         }
         //ポリゴン生成
         hpl::aleph::map::addNewPolygon(polyPointsWorld, n);
+        //情報更新
+        wxGetApp().getStockManager()->updateDeletes();
     }
 }
 

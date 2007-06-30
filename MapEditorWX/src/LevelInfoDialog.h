@@ -38,6 +38,9 @@ public:
     virtual ~LevelInfoDialog();
     //イベントテーブル作成<en>declare
     DECLARE_EVENT_TABLE()
+
+    void OnOk(wxCommandEvent &event); // wxGlade: <event_handler>
+    void OnCancel(wxCommandEvent &event); // wxGlade: <event_handler>
 };
 
 #endif

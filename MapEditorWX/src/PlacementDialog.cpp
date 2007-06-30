@@ -23,7 +23,7 @@ BEGIN_EVENT_TABLE(PlacementDialog, wxDialog)
     EVT_BUTTON(ID_ALL_INF, PlacementDialog::OnAllInf)
     EVT_BUTTON(ID_SET_INITIAL, PlacementDialog::OnSetInitial)
     EVT_BUTTON(wxID_OK, PlacementDialog::OnOk)
-    EVT_LIST_ITEM_SELECTED(ID_SEL, 
+    EVT_LIST_ITEM_SELECTED(ID_SEL, PlacementDialog::OnSel)
 END_EVENT_TABLE()
 
 PlacementDialog::PlacementDialog():wxDialog()
@@ -37,7 +37,9 @@ PlacementDialog::~PlacementDialog()
 const int COLUMN_NUM = 7;
 
 static void addListItem(wxListCtrl* lstctrl, object_frequency_definition* placement, wxString type,
-                        int id){
+                        int id)
+{
+    assert(placement);
     wxString str[COLUMN_NUM];
     str[0] = type;
     str[1] = getString("%d", placement->minimum_count);
@@ -183,44 +185,45 @@ void PlacementDialog::OnRandomChance(wxCommandEvent &event)
     event.Skip();
     std::cout<<"Event handler (PlacementDialog::OnRandomChance) not implemented yet"<<std::endl; //notify the user that he hasn't implemented the event handler yet
 }
-void PlacementDialog::OnSel(wxCommandEvent &ev)
+void PlacementDialog::OnSel(wxListEvent &ev)
 {
+    int sel = ev.GetSelection();
 }
 void PlacementDialog::OnRandomPlace(wxCommandEvent& ev)
 {
 }
+/*
 void PlacementDialog::setPlacementText()
 {
-    int sel = this->list_ctrl_1->GetSelection();
-    if(sel >= 0){
-        object_frequency_definition* placement;
-        //対象をデータで書き換える
-        if(sel >= NUMBER_OF_DEFINED_ITEMS){
-            placement =
-                hpl::aleph::map::getPlacementData(_saved_item,
-                sel - NUMBER_OF_DEFINED_ITEMS);
-        }else{
-            placement =
-                hpl::aleph::map::getPlacementData(_saved_monster, sel);
-        }
-        assert(placement);
-
-        wxString str[COLUMN_NUM];
-        str[0] = type;
-        str[1] = getString("%d", placement->minimum_count);
-        str[2] = getString("%d", placement->maximum_count);
-        str[3] = getString("%d", placement->initial_count);
-        str[4] = getString("%d", placement->random_count);
-        str[5] = getString("%d", placement->random_chance);
-        str[6] = getString("%d", placement->flags);
-
-        for(int j = 0; j < COLUMN_NUM; j ++){
-            wxListItem item;
-            item.SetId(sel);
-            item.SetColumn(j);
-            item.SetText(str[j]);
-            lstctrl->SetItem(item);
-        }
-
+    object_frequency_definition* placement;
+    //対象をデータで書き換える
+    if(sel >= NUMBER_OF_DEFINED_ITEMS){
+        placement =
+            hpl::aleph::map::getPlacementData(_saved_item,
+            sel - NUMBER_OF_DEFINED_ITEMS);
+    }else{
+        placement =
+            hpl::aleph::map::getPlacementData(_saved_monster, sel);
     }
+    assert(placement);
+
+    wxString str[COLUMN_NUM];
+    str[0] = type;
+    str[1] = getString("%d", placement->minimum_count);
+    str[2] = getString("%d", placement->maximum_count);
+    str[3] = getString("%d", placement->initial_count);
+    str[4] = getString("%d", placement->random_count);
+    str[5] = getString("%d", placement->random_chance);
+    str[6] = getString("%d", placement->flags);
+
+    for(int j = 0; j < COLUMN_NUM; j ++){
+        wxListItem item;
+        item.SetId(sel);
+        item.SetColumn(j);
+        item.SetText(str[j]);
+        lstctrl->SetItem(item);
+    }
+
+    //}
 }
+*/

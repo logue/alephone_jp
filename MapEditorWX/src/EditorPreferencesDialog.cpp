@@ -15,7 +15,7 @@ BEGIN_EVENT_TABLE(EditorPreferencesDialog, wxDialog)
     EVT_BUTTON(wxID_OK, EditorPreferencesDialog::OnOk)
     EVT_BUTTON(wxID_CANCEL, EditorPreferencesDialog::OnCancel)
     EVT_CHOICE(ID_COLOR, EditorPreferencesDialog::OnColor)
-    EVT_CHOICE(ID_GRID, EditorPreferencesDialog::OnGrid)
+//    EVT_CHOICE(ID_GRID, EditorPreferencesDialog::OnGrid)
     // end wxGlade
 END_EVENT_TABLE();
 EditorPreferencesDialog::EditorPreferencesDialog()
@@ -121,6 +121,7 @@ void EditorPreferencesDialog::OnOk(wxCommandEvent& wv)
     //グリッド番号 <en> grid index
     int index = this->choice_9->GetSelection();
     setting->setGridSizeIndex(index);
+    wxGetApp().getViewGridManager()->setGridIntervalIndex(index);
 
     //カラー設定 <en> color setting
     int colType = this->choice_10->GetSelection();
@@ -166,8 +167,4 @@ void EditorPreferencesDialog::OnDefault(wxCommandEvent &event)
     //設定を元に戻します
     MapEditorOneSetting def = MapEditorOneSetting::getDefaultSetting();
     setupDialog(&def);
-}
-void EditorPreferencesDialog::OnGrid(wxCommandEvent &ev)
-{
-
 }

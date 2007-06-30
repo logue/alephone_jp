@@ -189,6 +189,9 @@ public:
     wxMenu linePopupMenu;
     wxMenu pointPopupMenu;
 
+    //popup用インデックス覚書
+    int popupEndpointIndex;
+    int popupLineIndex;
     //public メンバ変数 ここまで
 private:
     

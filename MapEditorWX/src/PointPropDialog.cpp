@@ -20,6 +20,11 @@ BEGIN_EVENT_TABLE(PointPropDialog, wxDialog)
     EVT_CHOICE(ID_POLY_INDEX, PointPropDialog::OnPolyChoice)
 END_EVENT_TABLE()
 
+void PointPropDialog::setIndex(int ind)
+{
+    this->index = ind;
+}
+
 PointPropDialog::PointPropDialog()
 {
 }

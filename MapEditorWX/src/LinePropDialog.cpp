@@ -128,7 +128,7 @@ void LinePropDialog::OnLandscape(wxCommandEvent &event)
         //line->flags 
     }
 }
-void LinePropDialog::getLineIndex()
+int LinePropDialog::getLineIndex()
 {
     return this->lineIndex;
 }
@@ -170,11 +170,11 @@ void LinePropDialog::setupDialog()
     text_ctrl_45->SetValue(getString("%d", line->length));
     text_ctrl_46->SetValue(getString("%d", line->highest_adjacent_floor));
     text_ctrl_47->SetValue(getString("%d", line->lowest_adjacent_ceiling));
-    checkbox_45->SetValue(LINE_IS_LANDSCAPED(index));
-    checkbox_52->SetValue(LINE_IS_ELEVATION(index));
-    checkbox_53->SetValue(LINE_IS_VARIABLE_ELEVATION(index));
-    checkbox_54->SetValue(LINE_HAS_TRANSPARENT_SIDE(index));
-    int sel = LINE_IS_SOLID(index) ? 0: 1;
+    checkbox_45->SetValue(LINE_IS_LANDSCAPED(line));
+    checkbox_52->SetValue(LINE_IS_ELEVATION(line));
+    checkbox_53->SetValue(LINE_IS_VARIABLE_ELEVATION(line));
+    checkbox_54->SetValue(LINE_HAS_TRANSPARENT_SIDE(line));
+    int sel = LINE_IS_SOLID(line) ? 0: 1;
     radio_box_1->SetSelection(sel);
     index = line->clockwise_polygon_side_index;
     if(index == NONE){

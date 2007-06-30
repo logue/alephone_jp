@@ -198,7 +198,7 @@ bool PolygonPropDialog::Create(wxWindow* parent, wxWindowID id)
 
     //Type‚É’Ç‰Á
     for(int i = 0; i < NUMBER_OF_POLYGON_TYPE; i ++){
-        choice_12->Insert(wxConvertMB2WX(wxGetApp().polyTypeInfo[i].jname.c_str()), i);
+        choice_12->Insert(wxConvertMB2WX(wxGetApp().polygonTypeInfo[i].jname.c_str()), i);
     }
 
 
@@ -269,28 +269,28 @@ void PolygonPropDialog::setupDialog()
     polygon_data* poly = get_polygon_data(this->getPolyIndex());
     text_ctrl_20->SetValue(getString("%d", this->getPolyIndex()));
     choice_12->SetSelection(poly->type);
-    text_ctrl_25->SetValue(getString("%d", poly->permutation);
-    choice_13->SetSelection(poly->floor_light);
-    choice_14->SetSelection(poly->ceiling_light);
-    text_ctrl_26->SetValue(getString("%d", poly->permutation);
+    text_ctrl_25->SetValue(getString("%d", poly->permutation));
+    choice_13->SetSelection(poly->floor_lightsource_index);
+    choice_14->SetSelection(poly->ceiling_lightsource_index);
+    text_ctrl_26->SetValue(getString("%d", poly->permutation));
     int index = poly->first_object;
     if(index == NONE){
         index = SavedObjectList.size();
     }
     choice_19->SetSelection(index);
-    text_ctrl_28->SetValue(getString("%d", poly->first_exclusion_zone_index);
-    text_ctrl_29->SetValue(getString("%d", poly->line_exclusion_zone_index);
-    text_ctrl_30->SetValue(getString("%d", poly->floor_transfer_mode);
-    text_ctrl_31->SetValue(getString("%d", poly->ceiling_transfer_mode);
+    text_ctrl_28->SetValue(getString("%d", poly->first_exclusion_zone_index));
+    text_ctrl_29->SetValue(getString("%d", poly->line_exclusion_zone_count));
+    text_ctrl_30->SetValue(getString("%d", poly->floor_transfer_mode));
+    text_ctrl_31->SetValue(getString("%d", poly->ceiling_transfer_mode));
 
-    text_ctrl_21->SetValue(getString("%d", poly->first_neighbor_index);
-    text_ctrl_22->SetValue(getString("%d", poly->neighbor_count);
-    text_ctrl_23->SetValue(getString("%d", poly->center.x);
-    text_ctrl_24->SetValue(getString("%d", poly->center.y);
-    text_ctrl_33->SetValue(getString("%d", poly->floor_origin.x);
-    text_ctrl_35->SetValue(getString("%d", poly->floor_origin.y);
-    text_ctrl_34->SetValue(getString("%d", poly->ceiling_origin.x);
-    text_ctrl_36->SetValue(getString("%d", poly->ceiling_origin.y);
+    text_ctrl_21->SetValue(getString("%d", poly->first_neighbor_index));
+    text_ctrl_22->SetValue(getString("%d", poly->neighbor_count));
+    text_ctrl_23->SetValue(getString("%d", poly->center.x));
+    text_ctrl_24->SetValue(getString("%d", poly->center.y));
+    text_ctrl_33->SetValue(getString("%d", poly->floor_origin.x));
+    text_ctrl_35->SetValue(getString("%d", poly->floor_origin.y));
+    text_ctrl_34->SetValue(getString("%d", poly->ceiling_origin.x));
+    text_ctrl_36->SetValue(getString("%d", poly->ceiling_origin.y));
     index = poly->media_index;
     if(index == NONE){
         index = MediaList.size();

@@ -1,5 +1,12 @@
 #include "TextureDialog.h"
 #include "MapEditorWX.h"
+
+const int TEX_ICON_SIZE = 32;
+const int INTERVAL_X = 10;
+const int INTERVAL_Y = 10;
+const int TEX_TOP = 10;
+const int TEX_LEFT = 10;
+
 enum{
     ID_TYPE,
 };
@@ -40,7 +47,11 @@ bool TextureDialog::Create(wxWindow* parent, wxWindowID id)
     if(false){
         hpl::error::caution("Shapes file not loaded");
         Destroy();
+        return false;
     }
+
+    //Shapesデータからサイズを計算します
+
     return result;
 }
 void TextureDialog::OnType(wxCommandEvent &event)

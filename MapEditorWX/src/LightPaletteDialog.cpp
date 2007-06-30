@@ -1,5 +1,9 @@
 #include "LightPaletteDialog.h"
 #include "MapEditorWX.h"
+enum{
+    ID_EDIT
+};
+
 BEGIN_EVENT_TABLE(LightPaletteDialog, wxDialog)
     EVT_BUTTON(wxID_ADD, LightPaletteDialog::OnAdd)
     EVT_BUTTON(wxID_DELETE, LightPaletteDialog::OnDelete)
@@ -13,11 +17,11 @@ LightPaletteDialog::~LightPaletteDialog()
 }
 bool LightPaletteDialog::Create(wxWindow* parent, wxWindowID id)
 {
-    bool result = wxDialog::Create(parent, id, _T("Height Pallet"));
+    bool result = wxDialog::Create(parent, id, _T("Light Pallet"));
 
     button_31 = new wxButton(this, wxID_ADD, wxEmptyString);
     button_30 = new wxButton(this, wxID_DELETE, wxEmptyString);
-    list_ctrl_5 = new wxListCtrl(this, wxID_ANY, wxDefaultPosition, wxDefaultSize, wxLC_REPORT|wxSUNKEN_BORDER);
+    list_ctrl_5 = new wxListCtrl(this, ID_EDIT, wxDefaultPosition, wxDefaultSize, wxLC_REPORT|wxSUNKEN_BORDER);
 
     list_ctrl_5->SetMinSize(wxSize(150, 200));
 
@@ -31,5 +35,23 @@ bool LightPaletteDialog::Create(wxWindow* parent, wxWindowID id)
     grid_sizer_40->Fit(this);
     Layout();
 
+    
     return result;
+}
+void LightPaletteDialog::OnAdd(wxCommandEvent &event)
+{
+    //TODO
+}
+void LightPaletteDialog::OnDelete(wxCommandEvent &event)
+{
+    //TODO
+}
+void LightPaletteDialog::OnEdit(wxListEvent &event)
+{
+    //TODO
+}
+
+void LightPaletteDialog::setFloor(bool fl)
+{
+    this->isFloor_ = fl;
 }

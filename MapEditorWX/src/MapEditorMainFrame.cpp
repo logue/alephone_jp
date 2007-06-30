@@ -55,10 +55,10 @@ BEGIN_EVENT_TABLE(MapEditorMainFrame, wxFrame)
     EVT_MENU(ID_TerminalViewer, MapEditorMainFrame::OnTerminalViewer)
 
     //popup
-    EVT_MENU(ID_LineProp, MapEditorMainFrame::OnJumpLevel)
-    EVT_MENU(ID_ClockwiseSideProp, MapEditorMainFrame::OnJumpLevel)
-    EVT_MENU(ID_CounterclockwiseSideProp, MapEditorMainFrame::OnJumpLevel)
-    EVT_MENU(ID_PointProp, MapEditorMainFrame::OnJumpLevel)
+    EVT_MENU(ID_LineProp, MapEditorMainFrame::OnLineProp)
+    EVT_MENU(ID_ClockwiseSideProp, MapEditorMainFrame::OnClockwiseSide)
+    EVT_MENU(ID_CounterclockwiseSideProp, MapEditorMainFrame::OnCounterclockwiseSide)
+    EVT_MENU(ID_PointProp, MapEditorMainFrame::OnPointProp)
 
     EVT_PAINT(MapEditorMainFrame::OnPaint)
     EVT_LEFT_DOWN(MapEditorMainFrame::OnLeftDown)
@@ -111,7 +111,6 @@ MapEditorMainFrame::MapEditorMainFrame(const wxString& title,
     this->heightDialog.Show();
     
     //パレット
-    this->ceilingHeightPaletteDialog.Create(this, wx_ID_ANY);
     this->heightPaletteDialog.Create(this, wxID_ANY);
     this->lightPaletteDialog.Create(this, wxID_ANY);
     this->mediaPaletteDialog.Create(this, wxID_ANY);
@@ -127,8 +126,10 @@ MapEditorMainFrame::MapEditorMainFrame(const wxString& title,
     this->sidePropDialog.Create(this, wxID_ANY);
 
     //初期化
-    wxCommandEvent dummy;
-    this->OnNew(dummy);
+    wxGetApp().isChanged = false;
+    this->initLevel();
+    //セットアップ
+    wxGetApp().getStockManager()->updateDeletes();
 }
 MapEditorMainFrame::~MapEditorMainFrame()
 {

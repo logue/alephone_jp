@@ -14,3 +14,7 @@ bool SidePropDialog::Create(wxWindow* parent, wxWindowID id)
 
     return result;
 }
+void SidePropDialog::setIndex(int ind)
+{
+    this->index = ind;
+}

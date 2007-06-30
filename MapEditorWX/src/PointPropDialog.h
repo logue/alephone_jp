@@ -23,7 +23,9 @@ private:
     wxTextCtrl* text_ctrl_19;
     wxStaticText* label_33;
     wxChoice* choice_11;
+    int index;
 public:
+    void setIndex(int ind);
     PointPropDialog();
     bool Create(wxWindow* parent, wxWindowID id);
     virtual ~PointPropDialog();

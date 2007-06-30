@@ -1,6 +1,29 @@
 #include "LevelInfoDialog.h"
 #include "MapEditorWX.h"
+/*
+enum{
+    ID_LABEL,
+    ID_ENV,
+    ID_LANDSCAPE,
+    ID_SINGLE_PLAYER,
+    ID_COOP,
+    ID_CTF,
+    ID_KOTH,
+    ID_BALL,
+    ID_DEFENSE,
+    ID_RUGBY,
+    ID_TAG,
+    ID_VACUUME,
+    ID_REBELLION,
+    ID_LOW_GRAVITY,
+    ID_MAGNETIC,
+    ID_EXTERMINATION,
+
+};
+*/
 BEGIN_EVENT_TABLE(LevelInfoDialog, wxDialog)
+    EVT_BUTTON(wxID_OK, LevelInfoDialog::OnOk)
+    EVT_BUTTON(wxID_CANCEL, LevelInfoDialog::OnCancel)
 END_EVENT_TABLE()
 LevelInfoDialog::LevelInfoDialog()
 {
@@ -14,7 +37,7 @@ bool LevelInfoDialog::Create(wxWindow* parent, wxWindowID id)
     sizer_58_staticbox = new wxStaticBox(this, -1, wxT("Env Type"));
     sizer_59_staticbox = new wxStaticBox(this, -1, wxT("Mission Type"));
     sizer_60_staticbox = new wxStaticBox(this, -1, wxT("Game Type"));
-    label_65 = new wxStaticText(this, wxID_ANY, wxT("Level lavel"));
+    label_65 = new wxStaticText(this, wxID_ANY, wxT("Level label"));
     text_ctrl_44 = new wxTextCtrl(this, wxID_ANY, wxEmptyString);
     label_73 = new wxStaticText(this, wxID_ANY, wxT("Environment"));
     choice_28 = new wxChoice(this, wxID_ANY);
@@ -27,7 +50,7 @@ bool LevelInfoDialog::Create(wxWindow* parent, wxWindowID id)
     checkbox_64 = new wxCheckBox(this, wxID_ANY, wxT("Kill Man With Ball (BALL)"));
     checkbox_65 = new wxCheckBox(this, wxID_ANY, wxT("Defense"));
     checkbox_67 = new wxCheckBox(this, wxID_ANY, wxT("Rugby"));
-    checkbox_61 = new wxCheckBox(this, ID_TAG, wxT("Tag"));
+    checkbox_61 = new wxCheckBox(this, wxID_ANY, wxT("Tag"));
     checkbox_41 = new wxCheckBox(this, wxID_ANY, wxT("Vacuum"));
     checkbox_42 = new wxCheckBox(this, wxID_ANY, wxT("Rebellion"));
     checkbox_43 = new wxCheckBox(this, wxID_ANY, wxT("LowGravity"));
@@ -90,5 +113,18 @@ bool LevelInfoDialog::Create(wxWindow* parent, wxWindowID id)
     SetSizer(grid_sizer_32);
     grid_sizer_32->Fit(this);
     Layout();
+
+    //ŠÂ‹«’Ç‰Á
+    //”wŒi’Ç‰Á
     return result;
+}
+void LevelInfoDialog::OnOk(wxCommandEvent &ev)
+{
+    SetReturnCode(wxID_OK);
+    Destroy();
+}
+void LevelInfoDialog::OnCancel(wxCommandEvent &ev)
+{
+    SetReturnCode(wxID_CANCEL);
+    Destroy();
 }

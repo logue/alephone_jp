@@ -19,7 +19,6 @@
 //height
 #include "HeightDialog.h"
 //palettes
-#include "CeilingHeightPaletteDialog.h"
 #include "HeightPaletteDialog.h"
 #include "LightPaletteDialog.h"
 #include "MediaPaletteDialog.h"
@@ -125,7 +124,6 @@ private:
     //çÇÇ≥ <en> height
     HeightDialog heightDialog;
     //ÉpÉåÉbÉgóﬁ <en> palettes
-    CeilingHeightPaletteDialog ceilingHeightPaletteDialog;
     HeightPaletteDialog heightPaletteDialog;
     LightPaletteDialog lightPaletteDialog;
     MediaPaletteDialog mediaPaletteDialog;
@@ -393,4 +391,6 @@ private:
     void changeEditMode(int mode);
 
     void closeAllModelessDialogs();
+
+    void initLevel();
 };

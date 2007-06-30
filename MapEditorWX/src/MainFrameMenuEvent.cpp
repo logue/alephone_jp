@@ -14,6 +14,32 @@ void MapEditorMainFrame::OnPrintPreview(wxCommandEvent& ev)
 void MapEditorMainFrame::OnPrintSetup(wxCommandEvent& ev)
 {
 }
+
+void MapEditorMainFrame::initLevel()
+{
+    //初期化
+    wxGetApp().editLevelIndex = 0;
+    build_trig_tables();
+    //allocate
+    if(dynamic_world == NULL){
+        allocate_map_memory();
+    }
+    //ズーム・オフセットを初期化
+    wxCommandEvent dummy;
+    this->OnZoomDefault(dummy);
+    this->OnMoveToCenter(dummy);
+
+
+    wxGetApp().getStockManager()->resetDeletes();
+    wxGetApp().isChanged = false;
+    //レベル一覧削除
+    wxGetApp().levelNameList.clear();
+    initialize_map_for_new_level();
+    //データの初期化
+    wxGetApp().getStockManager()->resetDeletes();
+    wxGetApp().getViewGridManager()->setViewHeightMin(SHRT_MAX);
+    wxGetApp().getViewGridManager()->setViewHeightMin(SHRT_MIN);
+}
 void MapEditorMainFrame::OnNew(wxCommandEvent& ev)
 {
     if(wxGetApp().isChanged){
@@ -23,11 +49,8 @@ void MapEditorMainFrame::OnNew(wxCommandEvent& ev)
             return;
         }
     }
-    initialize_map_for_new_level();
-    //レベル一覧削除
-    wxGetApp().levelNameList.clear();
+    initLevel();
 
-    wxGetApp().isChanged = false;
 
     //ついでにレベル設定
     //TODO
@@ -38,10 +61,6 @@ void MapEditorMainFrame::OnNew(wxCommandEvent& ev)
     //内容をマップデータに反映
     //TODO
 
-    //データの初期化
-    wxGetApp().getStockManager()->resetDeletes();
-    wxGetApp().getViewGridManager()->setViewHeightMin(SHRT_MAX);
-    wxGetApp().getViewGridManager()->setViewHeightMin(SHRT_MIN);
     Refresh();
 }
 void MapEditorMainFrame::OnNewLevel(wxCommandEvent& ev)
@@ -56,8 +75,6 @@ void MapEditorMainFrame::OnNewLevel(wxCommandEvent& ev)
 void MapEditorMainFrame::OnOpen(wxCommandEvent& WXUNUSED(ev))
 {
     //TODO 未セーブチェック
-
-    //file dialog open
     wxFileDialog fileDialog(this, _T("Choose a file"),
         _T("."), _T(""), _T("*.*"));
 
@@ -72,12 +89,10 @@ void MapEditorMainFrame::OnOpen(wxCommandEvent& WXUNUSED(ev))
         //set map file
         set_map_file(mapFile);
 
-        wxGetApp().editLevelIndex = 0;
-        build_trig_tables();
-        //allocate
-        if(dynamic_world == NULL){
-            allocate_map_memory();
-        }
+        wxGetApp().filePath = path;
+        //初期化
+        initLevel();
+
         //Level1を読み込み
         bool check = load_level_from_map(wxGetApp().editLevelIndex);
         if(!check){
@@ -99,15 +114,8 @@ void MapEditorMainFrame::OnOpen(wxCommandEvent& WXUNUSED(ev))
                 wxGetApp().levelNameList.push_back("unnamed");
             }
         }
-        //ズーム・オフセットを初期化
-        wxCommandEvent dummy;
-        this->OnZoomDefault(dummy);
-        this->OnMoveToCenter(dummy);
-
-        wxGetApp().filePath = path;
-        wxGetApp().isChanged = false;
-
-        wxGetApp().getStockManager()->resetDeletes();
+        //セットアップ
+        wxGetApp().getStockManager()->updateDeletes();
         //再描画
         Refresh();
     }
@@ -258,10 +266,10 @@ void MapEditorMainFrame::OnDrawPolygonMode(wxCommandEvent& ev)
 }
 void MapEditorMainFrame::closeAllModelessDialogs()
 {
-    this->objectPropDialog.Show(false);
+    this->objPropDialog.Show(false);
     this->pointPropDialog.Show(false);
-    this->polygonPropDialog.Show(false);
-    this->linPropDialog.Show(false);
+    this->polyPropDialog.Show(false);
+    this->linePropDialog.Show(false);
     this->sidePropDialog.Show(false);
     this->polyTypeDialog.Show(false);
     this->mediaPaletteDialog.Show(false);
@@ -283,6 +291,10 @@ void MapEditorMainFrame::OnPolygonTypeMode(wxCommandEvent& ev)
 {
     //モード変更
     this->changeEditMode(EditModeType::EM_POLYGON_TYPE);
+
+    //全部のダイアログを閉じます
+    this->closeAllModelessDialogs();
+
     //ポリゴンタイプダイアログ表示
     this->polyTypeDialog.Show(true);
 }
@@ -290,6 +302,12 @@ void MapEditorMainFrame::OnFloorHeightMode(wxCommandEvent& ev)
 {
     //モード変更
     this->changeEditMode(EditModeType::EM_FLOOR_HEIGHT);
+
+    //全部のダイアログを閉じます
+    this->closeAllModelessDialogs();
+
+    //床の高さ
+    this->heightPaletteDialog.setFloor(true);
     //高さパレットダイアログ表示
     this->heightPaletteDialog.Show(true);
 }
@@ -297,6 +315,12 @@ void MapEditorMainFrame::OnCeilingHeightMode(wxCommandEvent& ev)
 {
     //モード変更
     this->changeEditMode(EditModeType::EM_CEILING_HEIGHT);
+
+    //全部のダイアログを閉じます
+    this->closeAllModelessDialogs();
+
+    //天井の高さ
+    this->heightPaletteDialog.setFloor(false);
     //高さパレットダイアログ表示
     this->heightPaletteDialog.Show(true);
 }
@@ -304,34 +328,58 @@ void MapEditorMainFrame::OnFloorLightMode(wxCommandEvent& ev)
 {
     //モード変更
     this->changeEditMode(EditModeType::EM_FLOOR_LIGHT);
+
+    //全部のダイアログを閉じます
+    this->closeAllModelessDialogs();
+
+    this->lightPaletteDialog.setFloor(true);
     //ライトパレットダイアログ表示
-    //TODO this->lightPaletteDialog.Show(true);
+    this->lightPaletteDialog.Show(true);
 }
 void MapEditorMainFrame::OnCeilingLightMode(wxCommandEvent& ev)
 {
     //モード変更
     this->changeEditMode(EditModeType::EM_CEILING_LIGHT);
+
+    //全部のダイアログを閉じます
+    this->closeAllModelessDialogs();
+
+    this->lightPaletteDialog.setFloor(false);
     //ライトパレットダイアログ表示
-    //TODO this->lightPaletteDialog.Show(true);
+    this->lightPaletteDialog.Show(true);
 }
 void MapEditorMainFrame::OnMediaMode(wxCommandEvent& ev)
 {
     //モード変更
     this->changeEditMode(EditModeType::EM_MEDIA);
+ 
+    //全部のダイアログを閉じます
+    this->closeAllModelessDialogs();
+
     //メディアパレットダイアログ表示
-    //TODO this->mediaPaletteDialog.Show(true);
+    this->mediaPaletteDialog.Show(true);
 }
 void MapEditorMainFrame::OnFloorTextureMode(wxCommandEvent& ev)
 {
     //モード変更
     this->changeEditMode(EditModeType::EM_FLOOR_TEXTURE);
+
+    //全部のダイアログを閉じます
+    this->closeAllModelessDialogs();
+
     //テクスチャダイアログ表示
+    this->textureDialog.setFloor(true);
     this->textureDialog.Show(true);
 }
 void MapEditorMainFrame::OnCeilingTextureMode(wxCommandEvent& ev)
 {
     //モード変更
     this->changeEditMode(EditModeType::EM_CEILING_TEXTURE);
+
+    //全部のダイアログを閉じます
+    this->closeAllModelessDialogs();
+
+    this->textureDialog.setFloor(false);
     //テクスチャダイアログ表示
     this->textureDialog.Show(true);
 }
@@ -365,9 +413,39 @@ void MapEditorMainFrame::OnObjectPlacement(wxCommandEvent& ev)
 }
 void MapEditorMainFrame::OnTerminalViewer(wxCommandEvent& ev)
 {
-    //
+    //ターミナル
     TerminalDialog dlg;
     dlg.Create(this, wxID_ANY);
     dlg.ShowModal();
 }
 
+void MapEditorMainFrame::OnLineProp(wxCommandEvent& ev)
+{
+    LinePropDialog dlg;
+    dlg.Create(this, wxID_ANY);
+    dlg.setLineIndex(wxGetApp().popupLineIndex);
+    dlg.ShowModal();
+}
+void MapEditorMainFrame::OnClockwiseSide(wxCommandEvent& ev)
+{
+    //TODO
+    SidePropDialog dlg;
+    dlg.Create(this, wxID_ANY);
+    dlg.setIndex(get_line_data(wxGetApp().popupLineIndex)->clockwise_polygon_side_index);
+    dlg.ShowModal();
+}
+void MapEditorMainFrame::OnCounterclockwiseSide(wxCommandEvent& ev)
+{
+    //TODO
+    SidePropDialog dlg;
+    dlg.Create(this, wxID_ANY);
+    dlg.setIndex(get_line_data(wxGetApp().popupLineIndex)->counterclockwise_polygon_side_index);
+    dlg.ShowModal();
+}
+void MapEditorMainFrame::OnPointProp(wxCommandEvent& ev)
+{
+    PointPropDialog dlg;
+    dlg.Create(this, wxID_ANY);
+    dlg.setIndex(wxGetApp().popupEndpointIndex);
+    dlg.ShowModal();
+}

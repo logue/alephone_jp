@@ -35,12 +35,12 @@ public:
     void OnInf(wxCommandEvent &ev);
     void OnAllInf(wxCommandEvent &ev);
     void OnSetInitial(wxCommandEvent &ev);
-    void OnSel(wxCommandEvent &ev);
+    void OnSel(wxListEvent &ev);
     void OnRandomPlace(wxCommandEvent& ev);
     //イベントテーブル作成<en>declare
     DECLARE_EVENT_TABLE()
 public:
-    void setPlacementText();
+//    void setPlacementText();
 };
 
 #endif

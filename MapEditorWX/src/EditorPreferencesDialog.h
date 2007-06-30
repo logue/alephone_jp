@@ -28,7 +28,6 @@ private:
     void OnOk(wxCommandEvent &event); // wxGlade: <event_handler>
     void OnCancel(wxCommandEvent &event); // wxGlade: <event_handler>
     void OnColor(wxCommandEvent &event);
-    void OnGrid(wxCommandEvent &event);
 };
 
 #endif

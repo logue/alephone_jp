@@ -743,6 +743,7 @@ void hpl::aleph::map::addNewPolygon(polygon_data& pdata, endpoint_data epd[],
     std::map<int,int> epIndexTable;
     std::string str;
     for(int i = 0; i < n; i ++){
+        //“_‚Ì’Ç‰Á
 		int newIndex = hpl::aleph::map::addEndpoint(epd[i]);
         epIndexTable[i] = newIndex;
 
@@ -754,6 +755,7 @@ void hpl::aleph::map::addNewPolygon(polygon_data& pdata, endpoint_data epd[],
     }
 //    const char *buf = str.c_str();
 
+    //ü‚Ì’Ç‰Á
     std::map<int,int> lIndexTable;
     for(int i = 0; i < n; i ++){
         //C³
@@ -761,6 +763,7 @@ void hpl::aleph::map::addNewPolygon(polygon_data& pdata, endpoint_data epd[],
             ld[i].endpoint_indexes[j] = epIndexTable[ld[i].endpoint_indexes[j]];
         }
 
+        
 		int newIndex = hpl::aleph::map::addLine(ld[i]);
         lIndexTable[i] = newIndex;
     }
@@ -768,9 +771,8 @@ void hpl::aleph::map::addNewPolygon(polygon_data& pdata, endpoint_data epd[],
     //ƒ|ƒŠƒSƒ“î•ñC³
     for(int i = 0; i < n; i ++){
         pdata.endpoint_indexes[i] = epIndexTable[pdata.endpoint_indexes[i]];
-    }
-    for(int i = 0; i < n; i ++){
         pdata.line_indexes[i] = lIndexTable[pdata.line_indexes[i]];
+        pdata.side_indexes[i] = NONE;
     }
 	
 	//ƒ|ƒŠƒSƒ“’Ç‰Á
@@ -1077,6 +1079,13 @@ int hpl::aleph::map::addInitialPlacementNum(int objectType, int index, int num)
 */
 struct object_frequency_definition* hpl::aleph::map::getPlacementData(int objectType, int index)
 {
+    if(item_placement_info == NULL || monster_placement_info == NULL){
+	    item_placement_info = object_placement_info;
+	    monster_placement_info = object_placement_info+MAXIMUM_OBJECT_TYPES;
+
+	    /* Clear the arrays */
+	    objlist_clear(object_placement_info, 2*MAXIMUM_OBJECT_TYPES);
+    }
 	struct object_frequency_definition* place = NULL;
 	if(objectType == _saved_item && item_placement_info){
 		place = &item_placement_info[index];

@@ -4,7 +4,9 @@
 #include "DlgCommon.h"
 
 class SidePropDialog: public wxDialog{
+    int index;
 public:
+    void setIndex(int ind);
     SidePropDialog();
     bool Create(wxWindow* parent, wxWindowID id);
     virtual ~SidePropDialog();

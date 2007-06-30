@@ -36,7 +36,7 @@ bool HeightDialog::Create(wxWindow* parent, wxWindowID id)
     slider_2 = new wxSlider(this, ID_FLOOR_SLIDER, 0, 0, 10, wxDefaultPosition, wxDefaultSize,
         wxSL_VERTICAL | wxSL_INVERSE);
     slider_3 = new wxSlider(this, ID_CEILING_SLIDER, 0, 0, 10, wxDefaultPosition, wxDefaultSize,
-        wxSL_VERTICAL | wxSL_INVERSE;
+        wxSL_VERTICAL | wxSL_INVERSE);
     label_10 = new wxStaticText(this, wxID_ANY, wxT("Ceiling"));
     text_ctrl_6 = new wxTextCtrl(this, ID_CEILING_EDIT, wxEmptyString);
     checkbox_11 = new wxCheckBox(this, ID_DRAW_HIDDEN_CHECK, wxT("Draw hidden lines"));

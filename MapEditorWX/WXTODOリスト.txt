@@ -165,3 +165,18 @@ TODO ˆê”Ôã‚ªMin‚É‚È‚Á‚Ä‚é
 TODO ObjectPlacement
 Ï‚İ TODO MediaList‚Á‚Ä‰Šúó‘Ô‚Å“ü‚Á‚Ä‚é‚à‚Ì‚È‚ÌH
 	¨‚½‚Ô‚ñ“ü‚Á‚Ä‚È‚¢H
+--
+TODO 2007 07 01
+Jump (Select) other level
+object place
+placement dialog edit <-> listctrl
+object/point/side/line prop
+adding line
+no editable when layer disabled in preferences
+fit to grid
+color customize
+polygon type dialog
+heights/light/media/sound palette
+texture dialog
+load textures from shapes file
+level info dialog I/O

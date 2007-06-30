@@ -14,6 +14,8 @@
 #include "mysound.h"
 #include "computer_interface.h"
 #include "editor.h"
+#include "lightsource.h"
+#include "media.h"
 
 //#include "MapEditorSDI.h"
 const int NUMBER_OF_POLYGON_TYPE = 24;

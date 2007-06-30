@@ -51,6 +51,8 @@ private:
         @param type MapEditorOneSetting.h‚ð‚Ý‚æ‚¤
     */
     void drawPanel(wxPanel* panel, int type);
+    void setPanelColors();
+    wxColor getColorFromSetting(int type);
 };
 
 #endif

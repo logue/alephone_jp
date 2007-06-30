@@ -238,19 +238,21 @@ void hpl::aleph::HPLStockManager::updateDeletes()
             }
 
             //乗っているオブジェクトが一つもない場合はfirst_objectをNONEにする
-            if(delObjects[poly->first_object]){
-                int firstObjIndex = NONE;
-                for(int j = 0; j < (int)SavedObjectList.size(); j ++){
-                    if(!delObjects[j]){
-                        map_object* obj = &SavedObjectList[j];
-                        assert(obj);
-                        if(obj->polygon_index == i){
-                            firstObjIndex = j;
-                            break;
+            if(poly->first_object != NONE){
+                if(delObjects[poly->first_object]){
+                    int firstObjIndex = NONE;
+                    for(int j = 0; j < (int)SavedObjectList.size(); j ++){
+                        if(!delObjects[j]){
+                            map_object* obj = &SavedObjectList[j];
+                            assert(obj);
+                            if(obj->polygon_index == i){
+                                firstObjIndex = j;
+                                break;
+                            }
                         }
                     }
+                    poly->first_object = firstObjIndex;
                 }
-                poly->first_object = firstObjIndex;
             }
         }
     }

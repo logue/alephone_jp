@@ -348,9 +348,9 @@ void MapEditorMainFrame::drawSides(wxDC* dc)
 }
 void MapEditorMainFrame::drawPoints(wxDC* dc)
 {
-    if(!wxGetApp().setting.flags[IS_SHOW_POINTS]){
-        return;
-    }
+    //if(!wxGetApp().setting.flags[IS_SHOW]){
+    //    return;
+    //}
     //高さ制限
     int zMin = wxGetApp().getViewGridManager()->getViewHeightMin();
     int zMax = wxGetApp().getViewGridManager()->getViewHeightMax();
@@ -367,17 +367,18 @@ void MapEditorMainFrame::drawPoints(wxDC* dc)
         int vpoint[2];
         wxGetApp().getViewPointFromWorldPoint(ep->vertex, vpoint);
 
+        int SIZE = 5;
         //点（小さい四角）を打つ
         dc->SetPen(this->pointPen);
         dc->SetBrush(this->pointBrush);
-
+        dc->DrawRectangle(vpoint[0] - SIZE / 2, vpoint[1] - SIZE / 2,
+                SIZE, SIZE);
         //選択中ならしるしをつける
         if(wxGetApp().selectData.isSelected() &&
             wxGetApp().selectData.containsPoint(i))
         {
             dc->SetPen(this->selectedLinePen);
             dc->SetBrush(*wxTRANSPARENT_BRUSH);
-            int SIZE = 5;
             dc->DrawRectangle(vpoint[0] - SIZE / 2, vpoint[1] - SIZE / 2,
                 SIZE, SIZE);
         }
