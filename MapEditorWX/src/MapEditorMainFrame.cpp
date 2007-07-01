@@ -62,6 +62,7 @@ BEGIN_EVENT_TABLE(MapEditorMainFrame, wxFrame)
 
     EVT_PAINT(MapEditorMainFrame::OnPaint)
     EVT_LEFT_DOWN(MapEditorMainFrame::OnLeftDown)
+    EVT_LEFT_DCLICK(MapEditorMainFrame::OnLeftDoubleClick)
     EVT_RIGHT_DOWN(MapEditorMainFrame::OnRightDown)
     EVT_LEFT_UP(MapEditorMainFrame::OnLeftUp)
     EVT_RIGHT_UP(MapEditorMainFrame::OnRightUp)

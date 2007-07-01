@@ -6,7 +6,7 @@ enum{
 
 BEGIN_EVENT_TABLE(SelectLevelDialog, wxDialog)
     EVT_LISTBOX(ID_List, SelectLevelDialog::OnList)
-    EVT_BUTTON(wxID_OK, SelectLevelDialog::OnOk)
+//    EVT_BUTTON(wxID_OK, SelectLevelDialog::OnOk)
     EVT_BUTTON(wxID_CANCEL, SelectLevelDialog::OnCancel)
 END_EVENT_TABLE()
 SelectLevelDialog::SelectLevelDialog()
@@ -21,7 +21,7 @@ bool SelectLevelDialog::Create(wxWindow* parent, wxWindowID id)
     label_57 = new wxStaticText(this, wxID_ANY, wxT("Select level"));
 
     list_box_4 = new wxListBox(this, wxID_ANY);
-    button_22 = new wxButton(this, wxID_OK, wxEmptyString);
+//    button_22 = new wxButton(this, wxID_OK, wxEmptyString);
     button_23 = new wxButton(this, wxID_CANCEL, wxEmptyString);
 
     list_box_4->SetMinSize(wxSize(320, 320));
@@ -30,7 +30,7 @@ bool SelectLevelDialog::Create(wxWindow* parent, wxWindowID id)
     wxFlexGridSizer* grid_sizer_25 = new wxFlexGridSizer(1, 2, 0, 0);
     grid_sizer_17->Add(label_57, 0, 0, 0);
     grid_sizer_17->Add(list_box_4, 0, wxEXPAND, 0);
-    grid_sizer_25->Add(button_22, 0, wxRIGHT|wxALIGN_RIGHT, 0);
+//    grid_sizer_25->Add(button_22, 0, wxRIGHT|wxALIGN_RIGHT, 0);
     grid_sizer_25->Add(button_23, 0, wxRIGHT|wxALIGN_RIGHT, 0);
     grid_sizer_17->Add(grid_sizer_25, 1, wxALIGN_RIGHT, 0);
     SetSizer(grid_sizer_17);
@@ -41,8 +41,12 @@ bool SelectLevelDialog::Create(wxWindow* parent, wxWindowID id)
 }
 void SelectLevelDialog::OnList(wxCommandEvent &event)
 {
-    event.Skip();
-    std::cout<<"Event handler (SelectLevelDialog::OnList) not implemented yet"<<std::endl; //notify the user that he hasn't implemented the event handler yet
+    int sel = event.GetSelection();
+    this->selectLevel = sel;
+}
+int SelectLevelDialog::getSelectLevel()
+{
+    return this->selectLevel;
 }
 
 
@@ -55,6 +59,6 @@ void SelectLevelDialog::OnOk(wxCommandEvent &event)
 
 void SelectLevelDialog::OnCancel(wxCommandEvent &event)
 {
-    event.Skip();
-    std::cout<<"Event handler (SelectLevelDialog::OnCancel) not implemented yet"<<std::endl; //notify the user that he hasn't implemented the event handler yet
+    SetReturnCode(wxCANCEL);
+    Destroy();
 }

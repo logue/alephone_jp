@@ -207,7 +207,7 @@ void ColorCustomizeDialog::OnPoints(wxCommandEvent &event)
 
 void ColorCustomizeDialog::OnPaint(wxPaintEvent &event)
 {
-     wxSize size = GetSize();
+/*     wxSize size = GetSize();
     if(!wxWindow::IsExposed(0,0,size.GetWidth(), size.GetHeight())){
         return;
     }
@@ -217,7 +217,7 @@ void ColorCustomizeDialog::OnPaint(wxPaintEvent &event)
     this->drawPanel(this->panel_3, ColorType::Lines);
     this->drawPanel(this->panel_4, ColorType::Polygons);
     this->drawPanel(this->panel_5, ColorType::Strings);
-    this->drawPanel(this->panel_6, ColorType::Points);
+    this->drawPanel(this->panel_6, ColorType::Points);*/
 }
 /**
     @param type MapEditorOneSetting.h‚ð‚Ý‚æ‚¤
@@ -225,12 +225,6 @@ void ColorCustomizeDialog::OnPaint(wxPaintEvent &event)
 void ColorCustomizeDialog::drawPanel(wxPanel* panel, int type)
 {
 
-    wxPaintDC dc(panel);
-    wxRect rect = panel->GetClientRect();
-    int col[COL_NUM];
-
-    dc.SetBrush(wxBrush(wxColor(col[0], col[1], col[2])));
-    dc.DrawRectangle(rect);
 }
 ColorSettings ColorCustomizeDialog::getColor()
 {

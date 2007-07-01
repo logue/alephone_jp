@@ -11,8 +11,11 @@
 
 //#include "HPLMath.h"
 #include "HPLSelectData.h"
+//#include "HPLStockManager.h"
 
-
+namespace hpl{namespace aleph{
+class HPLStockManager;
+}};
 
 /*
 const int NUMBER_OF_POLYGON_TYPE = 24;
@@ -124,14 +127,17 @@ namespace map{
     /**
         指定した場所に点があるかどうかを得ます
         @param wpoint ワールド座標の点
-        @param threshold 点との距離がこれ以下ならば近いと見なす
+        @param threshold 点との距離がこれ以下ならば近いと見なす。View座標系の距離を指定する
         @param zMin, zMax 高さチェック用
         @return その場所に点があればそのインデックスがかえります。
             なければNONE
     */
-    int getSelectPointIndex(world_point2d& wpoint, int thresholdWorld, int zMin, int zMax);
+    int getSelectPointIndex(world_point2d& wpoint, int threshold,
+        int zMin, int zMax, int div,
+                                        hpl::aleph::HPLStockManager* smgr);
     int getSelectPointIndex(int viewX, int viewY, int threshold, int zMin, int zMax,
-        int voffsetX, int voffsetY, int offsetXW, int offsetYW, int div);
+        int voffsetX, int voffsetY, int offsetXW, int offsetYW, int div,
+                                        hpl::aleph::HPLStockManager* smgr);
 
     /**
         ある高さが規定範囲内にあるかを確かめます
@@ -142,9 +148,11 @@ namespace map{
     /**
         指定した点が線を踏んでいる場合、その点
     */
-    int getSelectLineIndex(world_point2d& wpoint, int threshold, int zMin, int zMax);
+    int getSelectLineIndex(world_point2d& wpoint, int threshold, int zMin, int zMax, int div,
+                                        hpl::aleph::HPLStockManager* smgr);
     int getSelectLineIndex(int viewX, int viewY, int threshold, int zMin, int zMax,
-        int voffsetX, int voffsetY, int offsetXW, int offsetYW, int div);
+        int voffsetX, int voffsetY, int offsetXW, int offsetYW, int div,
+                                        hpl::aleph::HPLStockManager* smgr);
 
 	///////////////////////	 Lines	////////////////////////////////////////////
 	/**
@@ -176,7 +184,7 @@ namespace map{
     */
 	bool isSelectLine(world_point2d &point,
 					  world_point2d &linePoint0, world_point2d &linePoint1,
-					  int distance);
+					  int distance, int div);
 
 	/**
 		線の長さを取得
@@ -276,7 +284,9 @@ namespace map{
         @param wpoint 探索基点。ここを囲むポリゴンを探す
         @return ポリゴンの実データ候補。これを元に生成すると良い。データはcreatePolygonで生成すべし
     */
-    std::vector<polygon_data> searchValidPolygon(world_point2d wpoint);
+    std::vector<polygon_data> searchValidPolygon(world_point2d wpoint,
+                                              hpl::aleph::HPLStockManager* smgr,
+                                              int zMin, int zMax);
 
     /**
         二つの線が織り成す角度を求めます
@@ -285,12 +295,6 @@ namespace map{
     */
     double getTwoLinesDegree(int pIndexA1, int pIndexA2, int pIndexB1, int pIndexB2);
     double getTwoLinesRadian(int pIndexA1, int pIndexA2, int pIndexB1, int pIndexB2);
-
-    /**
-        ポリゴンデータを作ります
-        TODO
-    */
-    polygon_data createPolygon(int epindexes[8]);
 
     /**
         世界座標からポリゴンデータを作ります
@@ -343,8 +347,7 @@ namespace map{
     /**
         簡略バージョン
     */
-    bool createPoint(world_point2d& wpoint, endpoint_data* ep,
-        int threshold);
+    bool createPoint(world_point2d& wpoint, endpoint_data* ep);
     /**
         @param polyIndex 載せるポリゴンのインデックス
     */
@@ -400,6 +403,15 @@ namespace map{
     void addNewPolygon(polygon_data& pdata, endpoint_data epd[], line_data ld[], int n);
     void addNewPolygon(world_distance points[][2], int n);
     void addNewPolygon(world_point2d points[], int n);
+
+    /**
+        選択データにオフセットを設定します。
+        @param mx, my マウス座標
+        @param sel 選択データ
+    */
+    void setupSelectDataGroupOffsets(int mx, int my, 
+        hpl::aleph::map::HPLSelectData* sel, 
+        int voffsetX, int voffsetY, int woffsetX, int woffsetY, int div);
 
 	////////////////////////////////////////////////
 	////// objects ////////////////////////////////

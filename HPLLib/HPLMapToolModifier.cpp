@@ -130,4 +130,6 @@ bool hpl::aleph::map::deleteMapItems(std::vector<bool>& delPoints, std::vector<b
             obj->polygon_index = indexMapPolygons[obj->polygon_index];
         }
     }
+
+    return true;
 }

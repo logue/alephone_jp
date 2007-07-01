@@ -226,23 +226,23 @@ void PolygonPropDialog::setupDialog()
         choice_14->Insert(getString("%d", i), i);
         choice_16->Insert(getString("%d", i), i);
     }
-    choice_13->Insert(_T("NONE"), LightList.size());
-    choice_14->Insert(_T("NONE"), LightList.size());
-    choice_16->Insert(_T("NONE"), LightList.size());
+    choice_13->Insert(_T("NONE"), (int)LightList.size());
+    choice_14->Insert(_T("NONE"), (int)LightList.size());
+    choice_16->Insert(_T("NONE"), (int)LightList.size());
 
     //first object
     choice_19->Clear();
     for(int i = 0; i < (int)SavedObjectList.size(); i ++){
         choice_19->Insert(getString("%d", i), i);
     }
-    choice_19->Insert(_T("NONE"), LightList.size());
+    choice_19->Insert(_T("NONE"), (int)LightList.size());
 
     //Media
     choice_15->Clear();
     for(int i = 0; i < (int)MediaList.size(); i ++){
         choice_15->Insert(getString("%d", i), i);
     }
-    choice_15->Insert(_T("NONE"), MediaList.size());
+    choice_15->Insert(_T("NONE"), (int)MediaList.size());
     
     //TODO snd src
     choice_20->Clear();
@@ -254,7 +254,7 @@ void PolygonPropDialog::setupDialog()
     for(int i = 0; i < (int)AmbientSoundImageList.size(); i ++){
         choice_17->Insert(getString("%d", i), i);
     }
-    choice_17->Insert(_T("NONE"), AmbientSoundImageList.size());
+    choice_17->Insert(_T("NONE"), (int)AmbientSoundImageList.size());
     //random sound
     choice_18->Clear();
 /*    for(int i = 0; i < (int).size(); i ++){
@@ -275,7 +275,7 @@ void PolygonPropDialog::setupDialog()
     text_ctrl_26->SetValue(getString("%d", poly->permutation));
     int index = poly->first_object;
     if(index == NONE){
-        index = SavedObjectList.size();
+        index = (int)SavedObjectList.size();
     }
     choice_19->SetSelection(index);
     text_ctrl_28->SetValue(getString("%d", poly->first_exclusion_zone_index));
@@ -293,12 +293,12 @@ void PolygonPropDialog::setupDialog()
     text_ctrl_36->SetValue(getString("%d", poly->ceiling_origin.y));
     index = poly->media_index;
     if(index == NONE){
-        index = MediaList.size();
+        index = (int)MediaList.size();
     }
     choice_15->SetSelection(index);
     index = poly->media_lightsource_index;
     if(index == NONE){
-        index = LightList.size();
+        index = (int)LightList.size();
     }
     choice_16->SetSelection(index);
     /* TODO snd src
@@ -309,7 +309,7 @@ void PolygonPropDialog::setupDialog()
     choice_20->SetSelection(index);*/
     index = poly->ambient_sound_image_index;
     if(index == NONE){
-        index = AmbientSoundImageList.size();
+        index = (int)AmbientSoundImageList.size();
     }
     choice_17->SetSelection(index);
 /*

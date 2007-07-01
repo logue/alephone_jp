@@ -8,8 +8,9 @@ class SelectLevelDialog: public wxDialog{
     wxListBox* list_box_4;
     wxButton* button_22;
     wxButton* button_23;
+    int selectLevel;
 public:
-    int polygonIndex;
+    int getSelectLevel();
 
     SelectLevelDialog();
     bool Create(wxWindow* parent, wxWindowID id);

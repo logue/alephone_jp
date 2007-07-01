@@ -74,9 +74,9 @@ bool AnnotationDialog::Create(wxWindow* parent, wxWindowID id, map_annotation& a
         choice_7->Insert(wxConvertMB2WX(buf), i);
     }
     //ÅŒã‚ÉNONE
-    choice_7->Insert(_T("NONE"), PolygonList.size());
+    choice_7->Insert(_T("NONE"), (int)PolygonList.size());
     if(annotation.polygon_index == NONE){
-        choice_7->SetSelection(PolygonList.size());
+        choice_7->SetSelection((int)PolygonList.size());
     }else{
         choice_7->SetSelection(annotation.polygon_index);
     }

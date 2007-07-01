@@ -84,13 +84,13 @@ void TerminalDialog::OnOk(wxCommandEvent& ev)
 void TerminalDialog::OnSelTerminal(wxCommandEvent &event)
 {
     int sel = event.GetSelection();
-    if(sel < 0 || sel >= map_terminal_text.size()){
+    if(sel < 0 || sel >= (int)map_terminal_text.size()){
         //illegal selecting
     }else{
         //スクリーンリストを初期化
         this->list_box_2->Clear();
         terminal_text_t *terminal = &map_terminal_text[sel];
-        for(int i = 0; i < terminal->groupings.size(); i ++){
+        for(int i = 0; i < (int)terminal->groupings.size(); i ++){
             terminal_groupings *group = &terminal->groupings[i];
             list_box_2->Insert(
                 wxString(wxConvertMB2WX(wxGetApp().terminalTypeInfo[i].jname.c_str())),
@@ -129,13 +129,13 @@ void TerminalDialog::OnSelScreen(wxCommandEvent &event)
 {
     //Editに流し込みます
     int tsel = this->list_box_1->GetSelection();
-    if(tsel < 0 || tsel >= map_terminal_text.size()){
+    if(tsel < 0 || tsel >= (int)map_terminal_text.size()){
         return;
     }
 
     terminal_text_t *terminal = &map_terminal_text[tsel];
     int sel = event.GetSelection();
-    if(sel < 0 || sel >= terminal->groupings.size()){
+    if(sel < 0 || sel >= (int)terminal->groupings.size()){
         return;
     }
 

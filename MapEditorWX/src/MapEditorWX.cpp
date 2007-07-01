@@ -270,6 +270,14 @@ void MapEditorWX::setCursor()
         ::wxSetCursor(cursors[0]);
     }
 }
+/**
+    ü•ÒWî•ñ‚ð‰Šú‰»‚µ‚Ü‚·
+*/
+void MapEditorWX::resetLineEditInfo()
+{
+    prevPointIndex = NONE;
+    isFirstOfLineToAdd = true;
+}
 
 //char->wx
 wxString getString(const char* format, ...)

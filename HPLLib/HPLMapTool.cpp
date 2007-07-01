@@ -1,22 +1,27 @@
-#include "HPLMapTool.h"
+ï»¿#include "HPLMapTool.h"
 #include "HPLMath.h"
 #include <limits.h>
 #include "HPLQuickSort.h"
 #include <fstream>
+#include <set>
 #include "HPLError.h"
 #include "HPLStringModifier.h"
+#include "HPLStockManager.h"
 
-//•¶š—ñ‰¼“Ç‚İ‚İ‚ÌƒTƒCƒY
+//æ–‡å­—åˆ—ä»®èª­ã¿è¾¼ã¿ã®ã‚µã‚¤ã‚º
 //<en>size for buffering string
 const int BUF_MAX = 1024;
 
-//Fî•ñ‚Ì‹æØ‚è•¶š
+//è‰²æƒ…å ±ã®åŒºåˆ‡ã‚Šæ–‡å­—
 static char* COLOR_ITEM_SEPARATER = ",";
-//Fî•ñ‚ÌŸŒ³
+//è‰²æƒ…å ±ã®æ¬¡å…ƒ
 const int COL_NUM = 3;
 
+//è§’åº¦ã®æœ€å¤§
+const double DEG_ROUND = 360.0;
+
 /**
-    ’¼ü‹——£‚ğ‹‚ß‚Ü‚·
+    ç›´ç·šè·é›¢ã‚’æ±‚ã‚ã¾ã™
 */
 static double getLengthDouble(double x, double y)
 {
@@ -38,7 +43,7 @@ void hpl::aleph::loadInformation(const char* filePath, int maxLines, hpl::aleph:
         if(strcmp(buf, "") == 0){
             continue;
         }
-        //string‚É‚·‚é
+        //stringã«ã™ã‚‹
         infos[lineCounter].jname = std::string(buf);
         lineCounter ++;
         if(lineCounter >= maxLines){
@@ -49,8 +54,8 @@ void hpl::aleph::loadInformation(const char* filePath, int maxLines, hpl::aleph:
 }
 
 /**
-    ƒJƒ‰[ƒf[ƒ^‚ğƒtƒ@ƒCƒ‹‚©‚ç“Ç‚İ‚İ‚Ü‚·
-    @return ¸”s‚É‹U
+    ã‚«ãƒ©ãƒ¼ãƒ‡ãƒ¼ã‚¿ã‚’ãƒ•ã‚¡ã‚¤ãƒ«ã‹ã‚‰èª­ã¿è¾¼ã¿ã¾ã™
+    @return å¤±æ•—æ™‚ã«å½
 */
 bool hpl::aleph::loadColorSetting(const char* filePath, int colors[][3], int max)
 {
@@ -128,80 +133,94 @@ void hpl::aleph::map::getViewPointFromWorldPoint2D(world_point2d& point, int *de
     dest[1] = (point.y + offsetYWorld)/zoomDivision + offsety;
 }
 /**
-    w’è‚µ‚½êŠ‚É“_‚ª‚ ‚é‚©‚Ç‚¤‚©‚ğ“¾‚Ü‚·
-    @return ‚»‚ÌêŠ‚É“_‚ª‚ ‚ê‚Î‚»‚ÌƒCƒ“ƒfƒbƒNƒX‚ª‚©‚¦‚è‚Ü‚·B
-        ‚È‚¯‚ê‚ÎNONE
+    æŒ‡å®šã—ãŸå ´æ‰€ã«ç‚¹ãŒã‚ã‚‹ã‹ã©ã†ã‹ã‚’å¾—ã¾ã™
+    @return ãã®å ´æ‰€ã«ç‚¹ãŒã‚ã‚Œã°ãã®ã‚¤ãƒ³ãƒ‡ãƒƒã‚¯ã‚¹ãŒã‹ãˆã‚Šã¾ã™ã€‚
+        ãªã‘ã‚Œã°NONE
 */
-int hpl::aleph::map::getSelectPointIndex(world_point2d& wpoint, int threshold, int zMin, int zMax)
+int hpl::aleph::map::getSelectPointIndex(world_point2d& wpoint,
+                                         int threshold, int zMin, int zMax, int div,
+                                         hpl::aleph::HPLStockManager* smgr)
 {
     for(int i = 0; i < (int)EndpointList.size(); i ++){
         endpoint_data* ep = get_endpoint_data(i);
-        //‚‚³ƒ`ƒFƒbƒN
+        //é«˜ã•ãƒã‚§ãƒƒã‚¯
         if(!hpl::aleph::map::isValidHeight(ep->highest_adjacent_floor_height, ep->lowest_adjacent_ceiling_height,  zMin, zMax)){
             continue;
         }
-        if(hpl::aleph::map::isSelectPoint(wpoint, ep->vertex, threshold)){
+        //å‰Šé™¤ãƒã‚§ãƒƒã‚¯
+        if(smgr->delPoints[i]){
+            continue;
+        }
+        if(hpl::aleph::map::isSelectPoint(wpoint, ep->vertex, threshold * div)){
             return i;
         }
     }
     return NONE;
 }
 int hpl::aleph::map::getSelectPointIndex(int viewX, int viewY, int threshold, int zMin, int zMax,
-        int voffsetX, int voffsetY, int offsetXW, int offsetYW, int div)
+        int voffsetX, int voffsetY, int offsetXW, int offsetYW, int div,
+        hpl::aleph::HPLStockManager* smgr)
 {
     world_point2d wpoint = hpl::aleph::map::getWorldPoint2DFromViewPoint(viewX, viewY, offsetXW, offsetYW, div,
         voffsetX, voffsetY);
-    int index = hpl::aleph::map::getSelectPointIndex(wpoint, threshold * div, zMin, zMax);
+    int index = hpl::aleph::map::getSelectPointIndex(wpoint, threshold, zMin, zMax, div, smgr);
     return index;
 }
 
 /**
-    ‚ ‚é‚‚³‚ª‹K’è”ÍˆÍ“à‚É‚ ‚é‚©‚ğŠm‚©‚ß‚Ü‚·
-    @return ‚ ‚é‚“x‚Ì”ÍˆÍ‚ª‹K’è”ÍˆÍ‚Æ‹¤—L‚·‚é•”•ª‚ğ‚½‚È‚¢ê‡•‰
+    ã‚ã‚‹é«˜ã•ãŒè¦å®šç¯„å›²å†…ã«ã‚ã‚‹ã‹ã‚’ç¢ºã‹ã‚ã¾ã™
+    @return ã‚ã‚‹é«˜åº¦ã®ç¯„å›²ãŒè¦å®šç¯„å›²ã¨å…±æœ‰ã™ã‚‹éƒ¨åˆ†ã‚’æŒãŸãªã„å ´åˆè² 
 */
 bool hpl::aleph::map::isValidHeight(int checkMin, int checkMax, int validMin, int validMax)
 {
     if(checkMin > checkMax || checkMin > validMax || checkMax < validMin){
-        //E‚‚³w’è‚ª‹t
-        //E°‚ª‹–—e”ÍˆÍ‚æ‚èã‚É‚ ‚é
-        //E“Vˆä‚ª‹–—e”ÍˆÍ‚æ‚è‰º‚É‚ ‚é
-        //¨ˆÈã‚Ìê‡‹K’è”ÍˆÍŠOi•s³j‚Æ‚İ‚È‚·
+        //ãƒ»é«˜ã•æŒ‡å®šãŒé€†
+        //ãƒ»åºŠãŒè¨±å®¹ç¯„å›²ã‚ˆã‚Šä¸Šã«ã‚ã‚‹
+        //ãƒ»å¤©äº•ãŒè¨±å®¹ç¯„å›²ã‚ˆã‚Šä¸‹ã«ã‚ã‚‹
+        //â†’ä»¥ä¸Šã®å ´åˆè¦å®šç¯„å›²å¤–ï¼ˆä¸æ­£ï¼‰ã¨ã¿ãªã™
         return false;
     }else{
         return true;
     }
 }
 /**
-    w’è‚µ‚½“_‚ªü‚ğ“¥‚ñ‚Å‚¢‚éê‡A‚»‚Ì“_
+    æŒ‡å®šã—ãŸç‚¹ãŒç·šã‚’è¸ã‚“ã§ã„ã‚‹å ´åˆã€ãã®ç‚¹
 */
-int hpl::aleph::map::getSelectLineIndex(world_point2d& wpoint, int threshold, int zMin, int zMax)
+int hpl::aleph::map::getSelectLineIndex(world_point2d& wpoint,
+                                        int threshold, int zMin, int zMax, int div,
+                                        hpl::aleph::HPLStockManager* smgr)
 {
     for(int i = 0; i < (int)LineList.size(); i ++){
         line_data* line = get_line_data(i);
-        //‚‚³ƒ`ƒFƒbƒN
+        //é«˜ã•ãƒã‚§ãƒƒã‚¯
         if(!hpl::aleph::map::isValidHeight(line->highest_adjacent_floor, line->lowest_adjacent_ceiling,
             zMin, zMax))
         {
             continue;
         }
-
+        if(smgr->delLines[i]){
+            continue;
+        }
         endpoint_data* begin = get_endpoint_data(line->endpoint_indexes[0]);
         endpoint_data* end = get_endpoint_data(line->endpoint_indexes[1]);
 
-        //‘I‘ğ‚µ‚Ä‚¢‚é‚©”»’è
-        if(hpl::aleph::map::isSelectLine(wpoint, begin->vertex, end->vertex, threshold)){
-            //‘I‘ğ‚Å‚«‚Ä‚¢‚éionlinej
+        //é¸æŠã—ã¦ã„ã‚‹ã‹åˆ¤å®š
+        if(hpl::aleph::map::isSelectLine(wpoint, begin->vertex, end->vertex, 
+            threshold, div)){
+            //é¸æŠã§ãã¦ã„ã‚‹ï¼ˆonlineï¼‰
             return i;
         }
     }
     return NONE;
 }
 int hpl::aleph::map::getSelectLineIndex(int viewX, int viewY, int threshold, int zMin, int zMax,
-        int voffsetX, int voffsetY, int offsetXW, int offsetYW, int div)
+        int voffsetX, int voffsetY, int offsetXW, int offsetYW, int div,
+        hpl::aleph::HPLStockManager* smgr)
 {
     world_point2d wpoint = hpl::aleph::map::getWorldPoint2DFromViewPoint(viewX, viewY, offsetXW, offsetYW, div,
         voffsetX, voffsetY);
-    int index = hpl::aleph::map::getSelectLineIndex(wpoint, threshold * div, zMin, zMax);
+    int index = hpl::aleph::map::getSelectLineIndex(wpoint,
+        threshold , zMin, zMax, div, smgr);
     return index;
 }
 
@@ -215,6 +234,7 @@ bool hpl::aleph::map::isSelectLine(int viewPX, int viewPY,
                    int div,
                    int distance)
 {
+    //ãƒ“ãƒ¥ãƒ¼åº§æ¨™ã«å¤‰æ›
     int x0 = (worldPX0 + offsetWorldX) / div + offsetViewX;
     int y0 = (worldPY0 + offsetWorldY) / div + offsetViewY;
     int x1 = (worldPX1 + offsetWorldX) / div + offsetViewX;
@@ -224,25 +244,25 @@ bool hpl::aleph::map::isSelectLine(int viewPX, int viewPY,
     return isSelect;
 }
 /**
-    w’è‚µ‚½À•W‚Å‚Íü‚ğ‘I‘ğ‚Å‚«‚½‚©H
-    @param point w’èƒ|ƒCƒ“ƒg
-    @param linePoint0 ü‚Ì’[“_0
-    @param linePoint1 ü‚Ì’[“_1
-    @param distance è‡’l
-    @return ‘I‘ğ‚Å‚«‚é‚È‚ç^
+    æŒ‡å®šã—ãŸåº§æ¨™ã§ã¯ç·šã‚’é¸æŠã§ããŸã‹ï¼Ÿ
+    @param point æŒ‡å®šãƒã‚¤ãƒ³ãƒˆ
+    @param linePoint0 ç·šã®ç«¯ç‚¹0
+    @param linePoint1 ç·šã®ç«¯ç‚¹1
+    @param distance é–¾å€¤
+    @return é¸æŠã§ãã‚‹ãªã‚‰çœŸ
 */
 bool hpl::aleph::map::isSelectLine(world_point2d &point,
                   world_point2d &linePoint0, world_point2d &linePoint1,
-                  int distance)
+                  int distance, int div)
 {
     bool isSelect = hpl::math::isNearbyPointToLine(point.x, point.y,
-        linePoint0.x, linePoint0.y, linePoint1.x, linePoint1.y, distance);
+        linePoint0.x, linePoint0.y, linePoint1.x, linePoint1.y, distance * div);
     return isSelect;
 }
 
 /**
-    ü‚Ì’·‚³‚ğ‹‚ß‚Ü‚·
-    @param index üƒCƒ“ƒfƒbƒNƒX
+    ç·šã®é•·ã•ã‚’æ±‚ã‚ã¾ã™
+    @param index ç·šã‚¤ãƒ³ãƒ‡ãƒƒã‚¯ã‚¹
 */
 double hpl::aleph::map::getLineLength(int index)
 {
@@ -254,7 +274,7 @@ double hpl::aleph::map::getLineLength(int index)
 }
 
 /**
-    2“_‚Ì‹——£‚ğ‹‚ß‚Ü‚·
+    2ç‚¹ã®è·é›¢ã‚’æ±‚ã‚ã¾ã™
 */
 double hpl::aleph::map::getPointsDistance(world_point2d& pointA, world_point2d& pointB)
 {
@@ -263,9 +283,9 @@ double hpl::aleph::map::getPointsDistance(world_point2d& pointA, world_point2d& 
 }
 
 /**
-    <jp>üî•ñ‚ğXV‚·‚é
+    <jp>ç·šæƒ…å ±ã‚’æ›´æ–°ã™ã‚‹
     <en>Fix line_data up
-    @param isDeleteOldSide descide which deletes or not g‚í‚ê‚Ä‚¢‚È‚¢•Çî•ñ‚ğíœ‚·‚é‚©
+    @param isDeleteOldSide descide which deletes or not ä½¿ã‚ã‚Œã¦ã„ãªã„å£æƒ…å ±ã‚’å‰Šé™¤ã™ã‚‹ã‹
 */
 void hpl::aleph::map::fixLine(int index, bool isDeleteOldSide)
 {
@@ -318,9 +338,9 @@ void hpl::aleph::map::fixLine(int index, bool isDeleteOldSide)
 }
 
 /**
-    üî•ñ‚ğü‚ğ\¬‚·‚é“_‚É‚æ‚Á‚Äæ“¾‚µ‚Ü‚·
+    ç·šæƒ…å ±ã‚’ç·šã‚’æ§‹æˆã™ã‚‹ç‚¹ã«ã‚ˆã£ã¦å–å¾—ã—ã¾ã™
     get line index with two point indexes
-    @return ü‚ª‘¶İ‚µ‚È‚¢ê‡NONE
+    @return ç·šãŒå­˜åœ¨ã—ãªã„å ´åˆNONE
 */
 int hpl::aleph::map::getLineIndexFromTwoLPoints(int pindex0, int pindex1)
 {
@@ -332,7 +352,7 @@ int hpl::aleph::map::getLineIndexFromTwoLPoints(int pindex0, int pindex1)
         if((ep0 == pindex0 && ep1 == pindex1) ||
             (ep1 == pindex0 && ep0 == pindex1))
         {
-            //‘o•û‚ªˆê’v‚µ‚½ê‡‚Ì‚İ•Ô‚·
+            //åŒæ–¹ãŒä¸€è‡´ã—ãŸå ´åˆã®ã¿è¿”ã™
             return i;
         }
     }
@@ -340,7 +360,7 @@ int hpl::aleph::map::getLineIndexFromTwoLPoints(int pindex0, int pindex1)
 }
 
 /**
-	“_‚ğ‹¤—L‚·‚éüƒCƒ“ƒfƒbƒNƒX‚ÌƒŠƒXƒg‚ğæ“¾‚µ‚Ü‚·
+	ç‚¹ã‚’å…±æœ‰ã™ã‚‹ç·šã‚¤ãƒ³ãƒ‡ãƒƒã‚¯ã‚¹ã®ãƒªã‚¹ãƒˆã‚’å–å¾—ã—ã¾ã™
 */
 std::vector<int> hpl::aleph::map::getLineIndexesIncludePoint(int endpointIndex)
 {
@@ -357,14 +377,14 @@ std::vector<int> hpl::aleph::map::getLineIndexesIncludePoint(int endpointIndex)
 }
 
 /**
-	ü‚ğ‹¤—L‚·‚éƒ|ƒŠƒSƒ“‚ÌƒŠƒXƒg‚ğæ“¾‚µ‚Ü‚·
+	ç·šã‚’å…±æœ‰ã™ã‚‹ãƒãƒªã‚´ãƒ³ã®ãƒªã‚¹ãƒˆã‚’å–å¾—ã—ã¾ã™
 *
 std::vector<int> hpl::aleph::map::getPolygonIndexesIncludeLine(int lineIndex)
 {
 	std::vector<int> polygonIndexes;
 	for(int i = 0; i < (int)LineList.size(); i ++){
 		polygon_data* polygon = get_polygon_data(i);
-		//’¸“_‚Ì”
+		//é ‚ç‚¹ã®æ•°
 		int n = polygon->vertex_count;
 
 		for(int i = 0; i < n; i ++){
@@ -379,14 +399,14 @@ std::vector<int> hpl::aleph::map::getPolygonIndexesIncludeLine(int lineIndex)
 }
 */
 /**
-	“_‚ğ‹¤—L‚·‚éƒ|ƒŠƒSƒ“‚ÌƒŠƒXƒg‚ğæ“¾‚µ‚Ü‚·
+	ç‚¹ã‚’å…±æœ‰ã™ã‚‹ãƒãƒªã‚´ãƒ³ã®ãƒªã‚¹ãƒˆã‚’å–å¾—ã—ã¾ã™
 */
 std::vector<int> hpl::aleph::map::getPolygonIndexesIncludePoint(int endpointIndex)
 {
 	std::vector<int> polygonIndexes;
 	for(int i = 0; i < (int)LineList.size(); i ++){
 		polygon_data* polygon = get_polygon_data(i);
-		//’¸“_‚Ì”
+		//é ‚ç‚¹ã®æ•°
 		int n = polygon->vertex_count;
 
 		for(int i = 0; i < n; i ++){
@@ -408,14 +428,14 @@ void hpl::aleph::map::fixSide(int sideIndex)
 
 ///////////////////////  Groups  ////////////////////////////////////////////
 /**
-	ƒ}ƒEƒX‚ªŠù‚É‘I‘ğ‚³‚ê‚Ä‚¢‚éƒAƒCƒeƒ€‚ğƒNƒŠƒbƒN‚µ‚Ä‚¢‚é‚©Šm‚©‚ß‚Ü‚·
+	ãƒã‚¦ã‚¹ãŒæ—¢ã«é¸æŠã•ã‚Œã¦ã„ã‚‹ã‚¢ã‚¤ãƒ†ãƒ ã‚’ã‚¯ãƒªãƒƒã‚¯ã—ã¦ã„ã‚‹ã‹ç¢ºã‹ã‚ã¾ã™
 	<en>is point in select groups?
-	@param px point locatin(view)				ƒ}ƒEƒXˆÊ’uiƒrƒ…[À•Wj
-	@param offsetViewX offset(view)				ƒrƒ…[À•WƒYƒŒ
-	@param offsetWorldX offset(world)			ÀÀ•W
-	@param pointDistance distance as nearby		“_—pè‡’l
-	@param lineDistance distance as nearby		ü—pè‡’l
-	@param selectInfo select group for check	ƒOƒ‹[ƒvƒNƒ‰ƒX
+	@param px point locatin(view)				ãƒã‚¦ã‚¹ä½ç½®ï¼ˆãƒ“ãƒ¥ãƒ¼åº§æ¨™ï¼‰
+	@param offsetViewX offset(view)				ãƒ“ãƒ¥ãƒ¼åº§æ¨™ã‚ºãƒ¬
+	@param offsetWorldX offset(world)			å®Ÿåº§æ¨™
+	@param pointDistance distance as nearby		ç‚¹ç”¨é–¾å€¤
+	@param lineDistance distance as nearby		ç·šç”¨é–¾å€¤
+	@param selectInfo select group for check	ã‚°ãƒ«ãƒ¼ãƒ—ã‚¯ãƒ©ã‚¹
 */
 bool hpl::aleph::map::isPointInSelection(int px, int py,
                         int offsetViewX, int offsetViewY,
@@ -508,21 +528,21 @@ bool hpl::aleph::map::isPointInSelection(int px, int py,
 
 
 /**
-    ƒ|ƒŠƒSƒ“‚ª‘¶İ‚Æ‚µ‚Ä³‚µ‚¢‚©‚Ç‚¤‚©‚ğ”»’è‚µ‚Ü‚·
-    @param index index of polygon which is checked ŒŸ¸‘ÎÛ‚Ìƒ|ƒŠƒSƒ“ƒCƒ“ƒfƒbƒNƒX
+    ãƒãƒªã‚´ãƒ³ãŒå­˜åœ¨ã¨ã—ã¦æ­£ã—ã„ã‹ã©ã†ã‹ã‚’åˆ¤å®šã—ã¾ã™
+    @param index index of polygon which is checked æ¤œæŸ»å¯¾è±¡ã®ãƒãƒªã‚´ãƒ³ã‚¤ãƒ³ãƒ‡ãƒƒã‚¯ã‚¹
 */
 bool hpl::aleph::map::isValidPolygon(int index)
 {
     //TODO
-    //ƒ|ƒŠƒSƒ“î•ñ‚ğæ“¾‚µ‚Ü‚·
+    //ãƒãƒªã‚´ãƒ³æƒ…å ±ã‚’å–å¾—ã—ã¾ã™
     polygon_data *polygon = get_polygon_data(index);
 
-    //ƒ|ƒŠƒSƒ“î•ñ‚ª–³‚¢
+    //ãƒãƒªã‚´ãƒ³æƒ…å ±ãŒç„¡ã„
     if(polygon == NULL){
         return false;
     }
 
-    //ü‚Ì•À‚Ñ‚ª³‚µ‚¢‚©ƒ`ƒFƒbƒN
+    //ç·šã®ä¸¦ã³ãŒæ­£ã—ã„ã‹ãƒã‚§ãƒƒã‚¯
     int vertexCount = polygon->vertex_count;
     double points[MAXIMUM_VERTICES_PER_POLYGON][2];
     for(int i = 0; i < vertexCount; i ++){
@@ -547,26 +567,26 @@ bool hpl::aleph::map::isValidPolygon(int index)
     int pointA, pointB, pointC;
     
     
-    //Œv‰ñ‚è‚©A”½Œv‰ñ‚è‚©
+    //æ™‚è¨ˆå›ã‚Šã‹ã€åæ™‚è¨ˆå›ã‚Šã‹
 	int polygonRotationType = hpl::math::RotationType::Clockwise;
     bool isFirstLoop = true;
 
     for(int i = 0; i < vertexCount - 2; i ++){
-        //“_i‚Æ“_i+1‚ğŠÜ‚Şü‚ğAB, “_i+1‚Æ“_i+2‚ğŠÜ‚Şü‚ğBC‚Æ‚·‚éB
-        //Å‰‚Ìü[“_0,“_1]‚Æü[“_1,“_2]‚ÌŠp“x‚©‚çAŒv‰ñ‚è‚©A”½Œv‰ñ‚è‚©‚ğ”»’è‚·‚é
+        //ç‚¹iã¨ç‚¹i+1ã‚’å«ã‚€ç·šã‚’AB, ç‚¹i+1ã¨ç‚¹i+2ã‚’å«ã‚€ç·šã‚’BCã¨ã™ã‚‹ã€‚
+        //æœ€åˆã®ç·š[ç‚¹0,ç‚¹1]ã¨ç·š[ç‚¹1,ç‚¹2]ã®è§’åº¦ã‹ã‚‰ã€æ™‚è¨ˆå›ã‚Šã‹ã€åæ™‚è¨ˆå›ã‚Šã‹ã‚’åˆ¤å®šã™ã‚‹
         pointA = polygon->endpoint_indexes[i];
         pointB = polygon->endpoint_indexes[i + 1];
         pointC = polygon->endpoint_indexes[i + 2];
         
-        //“ñ‚Â‚ÌüAB,BC‚ªD‚è¬‚·Šp“x‚ğ‹‚ß‚é
+        //äºŒã¤ã®ç·šAB,BCãŒç¹”ã‚Šæˆã™è§’åº¦ã‚’æ±‚ã‚ã‚‹
         double firstDegree = hpl::aleph::map::getTwoLinesDegree(pointA, pointB, pointB, pointC);
         int lineABIndex = hpl::aleph::map::getLineIndexFromTwoLPoints(pointA, pointB);
         int lineBCIndex = hpl::aleph::map::getLineIndexFromTwoLPoints(pointB, pointC);
         if(lineABIndex == NONE || lineBCIndex == NONE){
-            //ü‚Ì•À‚Ñ‡‚ª³‚µ‚­‚È‚¢
+            //ç·šã®ä¸¦ã³é †ãŒæ­£ã—ããªã„
             return false;
         }
-        //line_indexes‚Ì‚È‚ç‚Ñ‚É‘Î‰‚µ‚Ä‚¢‚é‚©‚Ç‚¤‚©
+        //line_indexesã®ãªã‚‰ã³ã«å¯¾å¿œã—ã¦ã„ã‚‹ã‹ã©ã†ã‹
         if(polygon->line_indexes[i] != lineABIndex ||
             polygon->line_indexes[i + 1] != lineBCIndex){
             return false;
@@ -575,14 +595,14 @@ bool hpl::aleph::map::isValidPolygon(int index)
         double optDeg = hpl::math::optimizeDegree(firstDegree);
 
         if(isFirstLoop){
-            //‚à‚µŠp“x‚ª[0,180)‚È‚ç‚ÎA‰E‰ñ‚è‚Å‚ ‚é
-            //‚»‚êˆÈŠOi[180,360)j‚È‚ç‚ÎA¶‰ñ‚è‚Å‚ ‚é
+            //ã‚‚ã—è§’åº¦ãŒ[0,180)ãªã‚‰ã°ã€å³å›ã‚Šã§ã‚ã‚‹
+            //ãã‚Œä»¥å¤–ï¼ˆ[180,360)ï¼‰ãªã‚‰ã°ã€å·¦å›ã‚Šã§ã‚ã‚‹
             if(optDeg >= 180.0){
 				polygonRotationType = hpl::math::RotationType::Counterclockwise;
             }
             isFirstLoop = false;
         }else{
-            //ƒ|ƒŠƒSƒ“‚ª‹t‰sŠpiØ‚è‚ñ‚Å‚éjó‘Ô‚È‚ç‚ÎˆÙí‚Å‚ ‚é‚Æ‚·‚é
+            //ãƒãƒªã‚´ãƒ³ãŒé€†é‹­è§’ï¼ˆåˆ‡ã‚Šè¾¼ã‚“ã§ã‚‹ï¼‰çŠ¶æ…‹ãªã‚‰ã°ç•°å¸¸ã§ã‚ã‚‹ã¨ã™ã‚‹
             if((polygonRotationType == hpl::math::RotationType::Clockwise && optDeg >= 180) ||
                 (polygonRotationType == hpl::math::RotationType::Counterclockwise && optDeg < 180)){
                 return false;
@@ -591,21 +611,155 @@ bool hpl::aleph::map::isValidPolygon(int index)
     }
     return true;
 */
-	}
+}
 
 /**
-    À•W‚ğæ‚èˆÍ‚Şƒ|ƒŠƒSƒ“‚Ì‚¤‚¿Aƒ|ƒŠƒSƒ“‚Æ‚µ‚Ä¬—§‚µ‚Ä‚¢‚é‚à‚Ì‚ğ‚³‚ª‚µ‚Ü‚·
-    ‚·‚Å‚Éƒ|ƒŠƒSƒ“‚ª‘¶İ‚µ‚Ä‚¢‚éê‡‚Í–³‹‚µ‚Ü‚·
-    @param wpoint ’TõŠî“_B‚±‚±‚ğˆÍ‚Şƒ|ƒŠƒSƒ“‚ğ’T‚·
-    @return ƒ|ƒŠƒSƒ“‚ÌÀƒf[ƒ^Œó•âB‚±‚ê‚ğŒ³‚É¶¬‚·‚é‚Æ—Ç‚¢Bƒf[ƒ^‚ÍcreatePolygon‚Å¶¬‚·‚×‚µ
+    åŸºæœ¬ã®ç·š&ç‚¹ã‹ã‚‰ã¤ãªãŒã‚‹ç·šã®ã†ã¡ã€ã‚µã‚¤ã‚ºãŒã‚‚ã£ã¨ã‚‚å°ã•ããªã‚‹ã‚ˆã†ã«
+    ç‚¹ã®ãƒªã‚¹ãƒˆã‚’å–å¾—ã—ã¾ã™ã€‚ç‚¹ã®ä¸¦ã³ã¯ãƒãƒªã‚´ãƒ³æŒ‡å®šã«ãã®ã¾ã¾ä½¿ãˆã‚‹ç‰©ã¨ãªã£ã¦ã„ã¾ã™ã€‚
+
+    å†å¸°çš„ã«å‘¼ã³å‡ºã—ã¾ã™ã€‚
+    @param pointIndexes ã“ã‚Œã¾ã§ã«ã¤ãªã’ã¦ããŸç‚¹ã®ãƒªã‚¹ãƒˆã€‚ã“ã®å€‹æ•°ãŒMAXIMUM_VERTEX_PER_POLYGON
+        ã‚’è¶…ãˆãŸã‚‰è¦‹ã¤ã‹ã‚‰ãªã‹ã£ãŸã‚‚ã®ã¨ã™ã‚‹
+    @return ãƒãƒªã‚´ãƒ³ãŒå®Œçµã—ãŸå ´åˆçœŸ
 */
-std::vector<polygon_data> hpl::aleph::map::searchValidPolygon(world_point2d wpoint)
+static bool getValidLines(int basePointIndex, int baseLineIndex,
+                          std::vector<int> *pointIndexes,
+                          hpl::aleph::HPLStockManager* smgr,
+                          int rotRem, std::set<int>* doneList,
+                          int zMin, int zMax,
+                          world_point2d& wpoint)
+{
+    //æœ€å°ã®è§’åº¦
+    double minDeg = 360;
+    int minLineIndex = NONE;
+
+    line_data* baseLine = get_line_data(baseLineIndex);
+    int startBasePointIndex = baseLine->endpoint_indexes[0];
+    int endBasePointIndex =  baseLine->endpoint_indexes[1];
+    if(startBasePointIndex == basePointIndex){
+        //å…¥ã‚Œæ›¿ãˆ
+        hpl::math::exchange(&startBasePointIndex, &endBasePointIndex);
+    }else if(endBasePointIndex == basePointIndex){
+    }else{
+        assert(false);
+    }
+
+    int lastPointIndex = NONE;
+    //ãƒ™ãƒ¼ã‚¹ãƒã‚¤ãƒ³ãƒˆã«ç¹‹ãŒã‚‹ç·šã‚’å–ã‚Šå‡ºã™
+    std::vector<int> conLines = hpl::aleph::map::getLineIndexesIncludePoint(basePointIndex);
+    for(int k = 0; k < (int)conLines.size(); k ++){
+        if(doneList->find(conLines[k]) != doneList->end()){
+            //æ—¢ã«è¦‹ã¤ã‘å‡ºã—ãŸã‚‚ã®ã¯çœã
+            continue;
+        }
+        //delLinesã¯çœã
+        if(smgr->delLines[conLines[k]]){
+            continue;
+        }
+        //ãƒ™ãƒ¼ã‚¹ã®ç·šã¨ä¸€ç·’ã®å ´åˆã‚‚é™¤å¤–ã™ã‚‹
+        if(baseLineIndex == conLines[k]){
+            continue;
+        }
+
+        line_data* line = get_line_data(conLines[k]);
+        assert(line);
+        //é«˜ã•ãƒã‚§ãƒƒã‚¯
+        if(!hpl::aleph::map::isValidHeight(line->highest_adjacent_floor,
+            line->lowest_adjacent_ceiling, zMin, zMax))
+        {
+            continue;
+        }
+
+        int ep0Index = line->endpoint_indexes[0];
+        int ep1Index = line->endpoint_indexes[1];
+        if(basePointIndex == ep0Index){
+        }else if(basePointIndex == ep1Index){
+            //å…¥ã‚Œæ›¿ãˆ
+            hpl::math::exchange(&ep0Index, &ep1Index);
+        }else{
+            assert(false);
+        }
+
+        endpoint_data* ep0 = get_endpoint_data(ep0Index);
+        endpoint_data* ep1 = get_endpoint_data(ep1Index);
+        double l0x = ep0->vertex.x;
+        double l0y = ep0->vertex.y;
+        double l1x = ep1->vertex.x;
+        double l1y = ep1->vertex.y;
+        //ç·šã‹ã‚‰æŒ‡å®šç‚¹ã«å¯¾ã™ã‚‹è§’åº¦ã‚’æ±‚ã‚ã‚‹ï¼ˆå·¦å³ã®ç¢ºèªï¼‰
+        int rot = hpl::math::getPointRotationTypeFromLine(
+            wpoint.x, wpoint.y, l0x, l0y, l1x, l1y);
+        //æœ€åˆã®ç·šã¨é•ã†ï¼ˆé€†å‘ãï¼‰ã«æŒ‡å®šç‚¹ãŒæ¥ã¦ã„ã‚‹å ´åˆã¯æ­£ã—ããªã„ã‚‚ã®ã¨ã™ã‚‹ã€‚
+        if(rotRem != rot){
+            continue;
+        }
+
+        //å‰ã®ç·šã®å§‹ç‚¹â†’å…±æœ‰ç‚¹â†’æœ€å¾Œã®ç‚¹ã§è§’åº¦ã‚’æ±‚ã‚ã‚‹
+        //å‰ã®ç·šã®å§‹ç‚¹
+        endpoint_data* prevStartEp = get_endpoint_data(startBasePointIndex);
+        assert(prevStartEp);
+        double deg = hpl::math::getTwoLinesDegree(prevStartEp->vertex.x,
+            prevStartEp->vertex.y, l0x, l0y,
+            l0x, l0y, l1x, l1y);
+        //[0,360)ã«åˆ¶é™ã™ã‚‹
+        deg = hpl::math::optimizeDegree(deg);
+        if(deg > DEG_ROUND / 2.0){
+            deg = DEG_ROUND - deg;
+        }
+        //è§’åº¦ãŒç¾åœ¨æœ€å°ã‹ã©ã†ã‹ç¢ºèªã™ã‚‹
+        if(deg < minDeg){
+            minDeg = deg;
+            //ä»Šã¾ã§ã‚ˆã‚Šå°ã•ã„
+            minLineIndex = conLines[k];
+            //æœ€å¾Œã®ç‚¹
+            lastPointIndex = ep1Index;
+        }
+        //æ¸ˆã¿
+        doneList->insert(conLines[k]);
+    }
+
+    if(minLineIndex == NONE){
+        //è¦‹ã¤ã‹ã‚‰ãªã‹ã£ãŸ
+        //ã‚ˆã£ã¦æˆ»ã£ã¦ã„ã
+        return false;
+    }else{
+        //è¦‹ã¤ã‹ã£ãŸ
+        //æœ€å¾Œã«è¿½åŠ ã™ã‚‹
+        pointIndexes->push_back(lastPointIndex);
+
+        //æœ€å¾Œã®ç‚¹ãŒpointIndexes[0]ã¨åŒä¸€ï¼ˆä¸€å‘¨ã—ã¦ããŸï¼‰ã ã£ãŸã‚‰
+        //çµ‚ã‚ã£ãŸã¨ã™ã‚‹
+        if(lastPointIndex == pointIndexes->at(0)){
+            //ãƒãƒªã‚´ãƒ³ã¨ã—ã¦æˆç«‹ã™ã‚‹ã‚»ãƒƒãƒˆã‚’è¦‹ã¤ã‘å‡ºã›ãŸ
+            return true;
+        }else{
+            //ã¾ã ã¾ã 
+            //æ¬¡ã‚’æ¢ã™
+            baseLineIndex = minLineIndex;
+            basePointIndex = lastPointIndex;
+            bool found = getValidLines(basePointIndex, baseLineIndex, pointIndexes,
+                smgr, rotRem, doneList, zMin, zMax, wpoint);
+            //çµå±€è¦‹ã¤ã‹ã£ãŸã‹ã©ã†ã‹ã¯å­ä¾›ã ã‘ãŒçŸ¥ã£ã¦ã„ã‚‹
+            return found;
+        }
+    }
+}
+
+/**
+    åº§æ¨™ã‚’å–ã‚Šå›²ã‚€ãƒãƒªã‚´ãƒ³ã®ã†ã¡ã€ãƒãƒªã‚´ãƒ³ã¨ã—ã¦æˆç«‹ã—ã¦ã„ã‚‹ã‚‚ã®ã‚’ã•ãŒã—ã¾ã™
+    ã™ã§ã«ãƒãƒªã‚´ãƒ³ãŒå­˜åœ¨ã—ã¦ã„ã‚‹å ´åˆã¯ç„¡è¦–ã—ã¾ã™
+    @param wpoint æ¢ç´¢åŸºç‚¹ã€‚ã“ã“ã‚’å›²ã‚€ãƒãƒªã‚´ãƒ³ã‚’æ¢ã™
+    @return ãƒãƒªã‚´ãƒ³ã®å®Ÿãƒ‡ãƒ¼ã‚¿å€™è£œã€‚ã“ã‚Œã‚’å…ƒã«ç”Ÿæˆã™ã‚‹ã¨è‰¯ã„ã€‚ãƒ‡ãƒ¼ã‚¿ã¯createPolygonã§ç”Ÿæˆã™ã¹ã—
+*/
+std::vector<polygon_data> hpl::aleph::map::searchValidPolygon(world_point2d wpoint,
+                                                              hpl::aleph::HPLStockManager* smgr,
+                                                              int zMin, int zMax)
 {
     std::vector<polygon_data> polyDatas;
 
     int max = (int)LineList.size();
-    //ü‚Ö‚Ì‚ü‚Ì‹——£‡‚Å®—ñ‚·‚é
-    //‘S•”‚Ìü‚Ö‚Ì‚ü‚ğ‹‚ß‚é
+    //ç·šã¸ã®å‚ç·šã®è·é›¢é †ã§æ•´åˆ—ã™ã‚‹
+    //å…¨éƒ¨ã®ç·šã¸ã®å‚ç·šã‚’æ±‚ã‚ã‚‹
     struct hpl::math::qsort::Pair<double>* pairs = new struct hpl::math::qsort::Pair<double>[max];
     for(int i = 0; i < max; i ++){
         line_data* line = get_line_data(i);
@@ -616,38 +770,109 @@ std::vector<polygon_data> hpl::aleph::map::searchValidPolygon(world_point2d wpoi
     }
     hpl::math::qsort::quickSort<double>(pairs, max);
 
-    //‹ß‚­‚É‚ ‚éü‚©‚çŒ©‚Ä‚¢‚­
-    for(int i = 0; i < max; i ++){
-        line_data* startLine = get_line_data(pairs[i].index);
-		endpoint_data* epStart = get_endpoint_data(startLine->endpoint_indexes[0]);
-		endpoint_data* epEnd = get_endpoint_data(startLine->endpoint_indexes[1]);
+    //æ—¢ã«èª¿ã¹ãŸãƒªã‚¹ãƒˆ(ç·šã®ã‚¤ãƒ³ãƒ‡ãƒƒã‚¯ã‚¹å€¤ã‚’å…¥ã‚Œã‚‹)
+    std::set<int> doneList;
 
-        //ü‚Ì¶‰E‚Ç‚¿‚ç‚Ì‘¤‚É“_‚ª‚ ‚é‚©‚ğƒ`ƒFƒbƒN‚µ‚Ü‚·
+    //è¿‘ãã«ã‚ã‚‹ç·šã‹ã‚‰è¦‹ã¦ã„ã
+    for(int i = 0; i < max; i ++){
+        //å‰Šé™¤å¯¾è±¡ãªã‚‰ç„¡è¦–
+        if(smgr->delLines[i]){
+            continue;
+        }
+        //ã™ã§ã«èª¿ã¹ãŸç·šãªã‚‰ç„¡è¦–
+        if(doneList.find(i) != doneList.end()){
+            continue;
+        }
+        int lineIndexBase = pairs[i].index;
+        line_data* startLine = get_line_data(lineIndexBase);
+        assert(startLine);
+        //é«˜ã•ãƒã‚§ãƒƒã‚¯
+        if(!hpl::aleph::map::isValidHeight(startLine->highest_adjacent_floor,
+            startLine->lowest_adjacent_ceiling, zMin, zMax))
+        {
+            continue;
+        }
+
+        int startPointIndex = startLine->endpoint_indexes[0];
+		endpoint_data* epStart = get_endpoint_data(startPointIndex);
+        assert(epStart);
+        int endPointIndex = startLine->endpoint_indexes[1];
+		endpoint_data* epEnd = get_endpoint_data(endPointIndex);
+        assert(epEnd);
+
+        //ç·šã®å·¦å³ã©ã¡ã‚‰ã®å´ã«ç‚¹ãŒã‚ã‚‹ã‹ã‚’ãƒã‚§ãƒƒã‚¯ã—ã¾ã™
 		int rotRem = hpl::math::getPointRotationTypeFromLine(
 			wpoint.x, wpoint.y, epStart->vertex.x, epStart->vertex.y,
 			epEnd->vertex.x, epEnd->vertex.y);
-		int previousPoint;
+        if(rotRem == hpl::math::RotationType::Clockwise &&
+            startLine->clockwise_polygon_owner != NONE)
+        {
+            //å³å‘¨ã‚Šã§ã€ã‹ã¤ç·šã®å³å´ï¼ˆæŒ‡å®šç‚¹ã®ã‚ã‚‹é ˜åŸŸï¼‰
+            //ã«ãƒãƒªã‚´ãƒ³ãŒæ—¢ã«ã‚ã‚‹å ´åˆã‚¹ã‚­ãƒƒãƒ—
+            continue;
+        }
+        if(rotRem == hpl::math::RotationType::Counterclockwise &&
+            startLine->counterclockwise_polygon_owner != NONE)
+        {
+            continue;
+        }
+        //ã“ã‚Œä»¥é™ã¯ã™ã§ã«æŒ‡å®šç‚¹ã®éƒ¨åˆ†ã«ãƒãƒªã‚´ãƒ³ãŒãªã„ã¨ä»®å®šã™ã‚‹
+
+        //åŸºç‚¹
+		int nowBasePointIndex = endPointIndex;
+        int prevLineIndex = lineIndexBase;
 		//TODO
+        //startLine->endpoint_indexes[1]ã‹ã‚‰ã¤ãªãŒã‚‹ç·šã‚’èª¿ã¹ã‚‹
+        std::vector<int> pointIndexes;
+        //æœ€åˆã®äºŒã¤ã‚’ä»£å…¥ã—ã¦ãŠã
+        pointIndexes.push_back(startPointIndex);
+        pointIndexes.push_back(endPointIndex);
+
+        bool found = getValidLines(nowBasePointIndex, prevLineIndex,
+            &pointIndexes, smgr, rotRem, &doneList,
+            zMin, zMax, wpoint);
+        if(found){
+            //ç™ºè¦‹ï¼
+            //ç‚¹ã‚¤ãƒ³ãƒ‡ãƒƒã‚¯ã‚¹ï¼ˆå€¤æ¸¡ã—ç”¨ï¼‰
+            int indexes[MAXIMUM_VERTICES_PER_POLYGON];
+
+            //ç‚¹ãƒ‡ãƒ¼ã‚¿é›†è¨ˆ
+            for(int l = 0; l < pointIndexes.size() - 2; i ++){
+                //
+                indexes[l] = pointIndexes[l];
+            }
+            int vertexCount = pointIndexes.size() - 1;
+            //ãƒãƒªã‚´ãƒ³ä½œæˆ
+            polygon_data poly;
+            hpl::aleph::map::createPolygon(indexes, vertexCount, &poly);
+            polyDatas.push_back(poly);
+
+            //TODO è¤‡æ•°è¦‹ã¤ã‘å‡ºã™ã®ã‹ï¼Ÿ
+            //é«˜ã•é †ï¼Ÿä½•ã®ã“ã¨ã‹ã­ï¼Ÿ
+            //æ„Ÿè¦šçš„ã«è¿‘ã„ç·šã‚’å–ã‚Œã°ã„ã„ã‚“ã˜ã‚ƒã­ï¼Ÿ
+            break;
+        }
+        doneList.insert(i);
     }
     
-    //‰ğ•ú
+    //è§£æ”¾
     delete pairs;
     return polyDatas;
 }
 
 /**
-    ¢ŠEÀ•W‚©‚çƒ|ƒŠƒSƒ“ƒf[ƒ^‚ğì‚è‚Ü‚·
-    TODO ®‡«
-    @param points ¢ŠEÀ•W
-    @param ep ¶¬‚³‚ê‚½“_ƒf[ƒ^
-    @param ld ¶¬‚³‚ê‚½üƒf[ƒ^
-    @param n nŠpŒ`
+    ä¸–ç•Œåº§æ¨™ã‹ã‚‰ãƒãƒªã‚´ãƒ³ãƒ‡ãƒ¼ã‚¿ã‚’ä½œã‚Šã¾ã™
+    TODO æ•´åˆæ€§
+    @param points ä¸–ç•Œåº§æ¨™
+    @param ep ç”Ÿæˆã•ã‚ŒãŸç‚¹ãƒ‡ãƒ¼ã‚¿
+    @param ld ç”Ÿæˆã•ã‚ŒãŸç·šãƒ‡ãƒ¼ã‚¿
+    @param n nè§’å½¢
 */
 polygon_data hpl::aleph::map::createPolygon(world_point2d points[],
                                             endpoint_data epd[], line_data ld[],
         int n)
 {
-    //“_¶¬
+    //ç‚¹ç”Ÿæˆ
     for(int i = 0; i < n; i ++){
         epd[i].flags = 0;
         epd[i].highest_adjacent_floor_height = 0;
@@ -658,7 +883,7 @@ polygon_data hpl::aleph::map::createPolygon(world_point2d points[],
         epd[i].supporting_polygon_index = 0;
     }
 
-    //ü
+    //ç·š
     for(int i = 0; i < n ; i ++){
         ld[i].endpoint_indexes[0] = i;
         ld[i].endpoint_indexes[1] = i + 1;
@@ -680,7 +905,7 @@ polygon_data hpl::aleph::map::createPolygon(world_point2d points[],
             epd[ld[i].endpoint_indexes[0]].vertex, epd[ld[i].endpoint_indexes[1]].vertex);
     }
 
-    //ƒ|ƒŠƒSƒ“
+    //ãƒãƒªã‚´ãƒ³
     polygon_data pdata;
 	pdata.type = _polygon_is_normal;
 	pdata.flags = 0;
@@ -734,16 +959,16 @@ polygon_data hpl::aleph::map::createPolygon(world_point2d points[],
     return pdata;
 }
 /**
-    “Æ—§‚µ‚½ƒ|ƒŠƒSƒ“ƒf[ƒ^‚ğ’Ç‰Á‚µ‚Ü‚·
+    ç‹¬ç«‹ã—ãŸãƒãƒªã‚´ãƒ³ãƒ‡ãƒ¼ã‚¿ã‚’è¿½åŠ ã—ã¾ã™
 */
 void hpl::aleph::map::addNewPolygon(polygon_data& pdata, endpoint_data epd[],
                                     line_data ld[], int n)
 {
-    //“_
+    //ç‚¹
     std::map<int,int> epIndexTable;
     std::string str;
     for(int i = 0; i < n; i ++){
-        //“_‚Ì’Ç‰Á
+        //ç‚¹ã®è¿½åŠ 
 		int newIndex = hpl::aleph::map::addEndpoint(epd[i]);
         epIndexTable[i] = newIndex;
 
@@ -755,10 +980,10 @@ void hpl::aleph::map::addNewPolygon(polygon_data& pdata, endpoint_data epd[],
     }
 //    const char *buf = str.c_str();
 
-    //ü‚Ì’Ç‰Á
+    //ç·šã®è¿½åŠ 
     std::map<int,int> lIndexTable;
     for(int i = 0; i < n; i ++){
-        //C³
+        //ä¿®æ­£
         for(int j = 0; j < 2; j ++){
             ld[i].endpoint_indexes[j] = epIndexTable[ld[i].endpoint_indexes[j]];
         }
@@ -768,16 +993,16 @@ void hpl::aleph::map::addNewPolygon(polygon_data& pdata, endpoint_data epd[],
         lIndexTable[i] = newIndex;
     }
     
-    //ƒ|ƒŠƒSƒ“î•ñC³
+    //ãƒãƒªã‚´ãƒ³æƒ…å ±ä¿®æ­£
     for(int i = 0; i < n; i ++){
         pdata.endpoint_indexes[i] = epIndexTable[pdata.endpoint_indexes[i]];
         pdata.line_indexes[i] = lIndexTable[pdata.line_indexes[i]];
         pdata.side_indexes[i] = NONE;
     }
 	
-	//ƒ|ƒŠƒSƒ“’Ç‰Á
+	//ãƒãƒªã‚´ãƒ³è¿½åŠ 
 	int newPolygonIndex = hpl::aleph::map::addPolygon(pdata);
-	//üî•ñC³
+	//ç·šæƒ…å ±ä¿®æ­£
     for(int i = 0; i < n; i ++){
         int newIndex = epIndexTable[i];
         endpoint_data* ep = get_endpoint_data(newIndex);
@@ -809,20 +1034,20 @@ void hpl::aleph::map::addNewPolygon(world_point2d points[], int n)
 }
 
 /**
-    “ñ‚Â‚Ìü‚ªD‚è¬‚·Šp“x‚ğ‹‚ß‚Ü‚·
-    @param pIndexA1,2 ü•ªA1-A2‚Ì“_ƒCƒ“ƒfƒbƒNƒX
-    @param pIndexB1,2 ü•ªB1-B2‚Ì“_ƒCƒ“ƒfƒbƒNƒX
+    äºŒã¤ã®ç·šãŒç¹”ã‚Šæˆã™è§’åº¦ã‚’æ±‚ã‚ã¾ã™
+    @param pIndexA1,2 ç·šåˆ†A1-A2ã®ç‚¹ã‚¤ãƒ³ãƒ‡ãƒƒã‚¯ã‚¹
+    @param pIndexB1,2 ç·šåˆ†B1-B2ã®ç‚¹ã‚¤ãƒ³ãƒ‡ãƒƒã‚¯ã‚¹
 */
 double hpl::aleph::map::getTwoLinesDegree(int pIndexA1, int pIndexA2, int pIndexB1, int pIndexB2)
 {
-    //degree‚É‚µ‚Ü‚·
+    //degreeã«ã—ã¾ã™
     double rad = hpl::aleph::map::getTwoLinesRadian(pIndexA1, pIndexA2, pIndexB1, pIndexB2);
     double deg = hpl::math::getDegreeFromRadian(rad);
     return deg;
 }
 double hpl::aleph::map::getTwoLinesRadian(int pIndexA1, int pIndexA2, int pIndexB1, int pIndexB2)
 {
-    //radian‚Å‹‚ß‚Ü‚·
+    //radianã§æ±‚ã‚ã¾ã™
     endpoint_data *a1 = get_endpoint_data(pIndexA1);
     endpoint_data *a2 = get_endpoint_data(pIndexA2);
     endpoint_data *b1 = get_endpoint_data(pIndexB1);
@@ -835,13 +1060,13 @@ double hpl::aleph::map::getTwoLinesRadian(int pIndexA1, int pIndexA2, int pIndex
 }
 
 /**
-    w’è‚µ‚½“_‚ªƒ|ƒŠƒSƒ“‚Ì’†‚É‘¶İ‚·‚é‚©‚Ç‚¤‚©‚ğŠm‚©‚ß‚Ü‚·
+    æŒ‡å®šã—ãŸç‚¹ãŒãƒãƒªã‚´ãƒ³ã®ä¸­ã«å­˜åœ¨ã™ã‚‹ã‹ã©ã†ã‹ã‚’ç¢ºã‹ã‚ã¾ã™
     @
 */
 bool hpl::aleph::map::isPointInPolygon(int viewPX, int viewPY, int polygonIndex,
                                        int offsetXWorld, int offsetYWorld, int zoomDivision, int offsetx, int offsety)
 {
-    //ƒ[ƒ‹ƒhÀ•W‚É•ÏŠ·‚µ‚Ü‚·
+    //ãƒ¯ãƒ¼ãƒ«ãƒ‰åº§æ¨™ã«å¤‰æ›ã—ã¾ã™
     world_point2d wpoint = hpl::aleph::map::getWorldPoint2DFromViewPoint(viewPX, viewPY, 
         offsetXWorld, offsetYWorld, zoomDivision, offsetx, offsety);
 	bool isPointIn = hpl::aleph::map::isPointInPolygon(wpoint, polygonIndex);
@@ -851,7 +1076,7 @@ bool hpl::aleph::map::isPointInPolygon(int viewPX, int viewPY, int polygonIndex,
 bool hpl::aleph::map::isPointInPolygon(world_point2d& wpoint, int polygonIndex)
 {
     double points[MAXIMUM_VERTICES_PER_POLYGON][2];
-    //ƒ|ƒŠƒSƒ“î•ñ‚ğ“¾‚Ü‚·
+    //ãƒãƒªã‚´ãƒ³æƒ…å ±ã‚’å¾—ã¾ã™
     polygon_data* poly = get_polygon_data(polygonIndex);
     int n = poly->vertex_count;
     for(int i = 0; i < n; i ++){
@@ -859,7 +1084,7 @@ bool hpl::aleph::map::isPointInPolygon(world_point2d& wpoint, int polygonIndex)
         points[i][0] = ep->vertex.x;
         points[i][1] = ep->vertex.y;
     }
-    //ˆÊ’uŒŸ¸‚µ‚Ü‚·
+    //ä½ç½®æ¤œæŸ»ã—ã¾ã™
     bool isPointIn = hpl::math::isPointInPolygon(wpoint.x, wpoint.y, points, n);
     return isPointIn;
 }
@@ -867,9 +1092,9 @@ bool hpl::aleph::map::isPointInPolygon(world_point2d& wpoint, int polygonIndex)
 //////////////////////////////////////////////////////
 /////// add delete and modify
 /**
-	“_î•ñ‚ğ’Ç‰Á‚µ‚Ü‚·
-	@param ep ’Ç‰Á‚·‚é“_ƒf[ƒ^i’l“n‚µ‚È‚Ì‚ÅƒRƒs[‚³‚ê‚Ü‚·j
-	@return ’Ç‰Á‚³‚ê‚½“_‚ÌƒCƒ“ƒfƒbƒNƒX’l
+	ç‚¹æƒ…å ±ã‚’è¿½åŠ ã—ã¾ã™
+	@param ep è¿½åŠ ã™ã‚‹ç‚¹ãƒ‡ãƒ¼ã‚¿ï¼ˆå€¤æ¸¡ã—ãªã®ã§ã‚³ãƒ”ãƒ¼ã•ã‚Œã¾ã™ï¼‰
+	@return è¿½åŠ ã•ã‚ŒãŸç‚¹ã®ã‚¤ãƒ³ãƒ‡ãƒƒã‚¯ã‚¹å€¤
 */
 int hpl::aleph::map::addEndpoint(endpoint_data ep)
 {
@@ -903,9 +1128,9 @@ int hpl::aleph::map::addMapSavedObject(map_object object)
 {
 	SavedObjectList.push_back(object);
 	//TODO
-	//ƒvƒŒ[ƒXƒƒ“ƒgî•ñ‚É•t‰Á
+	//ãƒ—ãƒ¬ãƒ¼ã‚¹ãƒ¡ãƒ³ãƒˆæƒ…å ±ã«ä»˜åŠ 
 
-	//TODO ‚Ç‚ê‚ğWŒv‚·‚ê‚Î—Ç‚¢‚Ì‚©H
+	//TODO ã©ã‚Œã‚’é›†è¨ˆã™ã‚Œã°è‰¯ã„ã®ã‹ï¼Ÿ
 //	dynamic_world->object_count ++;// SavedObjectList.size();
 	dynamic_world->initial_objects_count = (int16)SavedObjectList.size();
 	int index = dynamic_world->initial_objects_count - 1;
@@ -921,31 +1146,22 @@ int hpl::aleph::map::addAnnotation(map_annotation annotation)
 }
 
 /**
-    ŠÈ—ªƒo[ƒWƒ‡ƒ“
+    ç°¡ç•¥ãƒãƒ¼ã‚¸ãƒ§ãƒ³
 */
-bool hpl::aleph::map::createPoint(world_point2d& wpoint, endpoint_data* ep,
-                                  int threshold)
+bool hpl::aleph::map::createPoint(world_point2d& wpoint, endpoint_data* ep)
 {
     //TODO
     ep->flags = 1;
     ep->vertex.x = wpoint.x;
     ep->vertex.y = wpoint.y;
-
-    //‘¼‚Ì“_‚ğ“¥‚ñ‚Å‚¢‚È‚¢‚©Šm”F
-    int pIndex = hpl::aleph::map::getSelectPointIndex(wpoint, threshold,
-        -SHRT_MIN, SHRT_MAX);
-    if(pIndex != NONE){
-        //“¥‚ñ‚Å‚é
-        //¨ì¬‚Å‚«‚È‚¢
-        return false;
-    }
+    
     ep->highest_adjacent_floor_height = 0;
     ep->lowest_adjacent_ceiling_height = WORLD_ONE;
     ep->supporting_polygon_index = NONE;
     return true;
 }
 /**
-    @param polyIndex Ú‚¹‚éƒ|ƒŠƒSƒ“‚ÌƒCƒ“ƒfƒbƒNƒX
+    @param polyIndex è¼‰ã›ã‚‹ãƒãƒªã‚´ãƒ³ã®ã‚¤ãƒ³ãƒ‡ãƒƒã‚¯ã‚¹
 */
 bool hpl::aleph::map::createObject(world_point2d& wpoint, int polyIndex, map_object* obj,
                                    int flags)
@@ -965,6 +1181,7 @@ bool hpl::aleph::map::createObject(world_point2d& wpoint, int polyIndex, map_obj
         obj->location.z = poly->floor_height;
     }
     obj->flags = flags;
+    return true;
 }
 
 bool hpl::aleph::map::createLine(int beginPointIndex, int endPointIndex, line_data* line)
@@ -981,8 +1198,11 @@ bool hpl::aleph::map::createLine(int beginPointIndex, int endPointIndex, line_da
     line->endpoint_indexes[0] = beginPointIndex;
     line->endpoint_indexes[1] = endPointIndex;
     line->flags = SOLID_LINE_BIT;
-    //TODO “_‚Ì‚¤‚¿‚‚¢•û‚ÌƒtƒƒA‚“x
-    line->highest_adjacent_floor = 0;
+    //TODO ç‚¹ã®ã†ã¡é«˜ã„æ–¹ã®ãƒ•ãƒ­ã‚¢é«˜åº¦
+    line->highest_adjacent_floor = MIN(begin->highest_adjacent_floor_height,
+        end->highest_adjacent_floor_height);
+    line->lowest_adjacent_ceiling = MAX(begin->lowest_adjacent_ceiling_height,
+        end->lowest_adjacent_ceiling_height);
     return true;
 }
 
@@ -1013,7 +1233,7 @@ bool hpl::aleph::map::createPolygon(int pointIndexes[], int n, polygon_data* pol
     poly->ambient_sound_image_index = NONE;
     //TODO area?
     poly->area = 0;
-    //TODO “_‚Ì‚¤‚¿ˆê”Ô‚‚¢‚“x
+    //TODO ç‚¹ã®ã†ã¡ä¸€ç•ªé«˜ã„é«˜åº¦
     poly->ceiling_height = WORLD_ONE;
     poly->ceiling_lightsource_index = NONE;
     //TODO ?
@@ -1036,7 +1256,7 @@ bool hpl::aleph::map::createPolygon(int pointIndexes[], int n, polygon_data* pol
     poly->flags = 0;
     poly->media_index = NONE;
     poly->media_lightsource_index = NONE;
-    //TODO count ü‚Ì”½‘Î‘¤‚Ì
+    //TODO count ç·šã®åå¯¾å´ã®
     poly->neighbor_count = 0;
     //TODO ?
     poly->permutation = 0;
@@ -1048,16 +1268,90 @@ bool hpl::aleph::map::createPolygon(int pointIndexes[], int n, polygon_data* pol
     return true;
 }
 
+/**
+    é¸æŠãƒ‡ãƒ¼ã‚¿ã«ã‚ªãƒ•ã‚»ãƒƒãƒˆã‚’è¨­å®šã—ã¾ã™ã€‚
+    @param mx, my ãƒã‚¦ã‚¹åº§æ¨™
+    @param sel é¸æŠãƒ‡ãƒ¼ã‚¿
+*/
+void hpl::aleph::map::setupSelectDataGroupOffsets(int mx, int my, 
+    hpl::aleph::map::HPLSelectData* sel, 
+    int voffsetX, int voffsetY, int woffsetX, int woffsetY, int div)
+{
+    //ç‚¹ <en> points
+    for(int i = 0; i < (int)sel->getSelPoints()->size(); i ++){
+        endpoint_data* ep = get_endpoint_data(sel->getSelPoints()->at(i).index);
+        //ãƒ“ãƒ¥ãƒ¼åº§æ¨™ã«å¤‰æ›
+        int vpoint[2];
+        hpl::aleph::map::getViewPointFromWorldPoint2D(ep->vertex, vpoint,
+            woffsetX, woffsetY, div, voffsetX, voffsetY);
+
+        //å¼•ãç®—
+        sel->getSelPoints()->at(i).offset[0] = vpoint[0] - mx;
+        sel->getSelPoints()->at(i).offset[1] = vpoint[1] - my;
+    }
+
+    //ç·š <en> lines
+    for(int i = 0; i < (int)sel->getSelLines()->size(); i ++){
+        line_data* line = get_line_data(sel->getSelLines()->at(i).index);
+        endpoint_data* begin = get_endpoint_data(line->endpoint_indexes[0]);
+        endpoint_data* end = get_endpoint_data(line->endpoint_indexes[1]);
+        int vpointStart[2];
+        int vpointEnd[2];
+        hpl::aleph::map::getViewPointFromWorldPoint2D(begin->vertex, vpointStart,
+            woffsetX, woffsetY, div, voffsetX, voffsetY);
+        hpl::aleph::map::getViewPointFromWorldPoint2D(end->vertex, vpointEnd,
+            woffsetX, woffsetY, div, voffsetX, voffsetY);
+
+        //ã‚ªãƒ•ã‚»ãƒƒãƒˆè¨­å®š
+        sel->getSelLines()->at(i).offset[0][0] = vpointStart[0] - mx;
+        sel->getSelLines()->at(i).offset[0][1] = vpointStart[1] - my;
+        sel->getSelLines()->at(i).offset[1][0] = vpointEnd[0] - mx;
+        sel->getSelLines()->at(i).offset[1][1] = vpointEnd[1] - my;
+    }
+
+    //ãƒãƒªã‚´ãƒ³
+    for(int i = 0; i < (int)sel->getSelPolygons()->size(); i ++){
+        hpl::aleph::map::SelPolygon* selpoly = &sel->getSelPolygons()->at(i);
+        polygon_data* poly = get_polygon_data(selpoly->index);
+        int n = poly->vertex_count;
+        selpoly->num = n;
+        for(int j = 0; j < n; j ++){
+            int vpoint[2];
+            endpoint_data* ep = get_endpoint_data(poly->endpoint_indexes[j]);
+            hpl::aleph::map::getViewPointFromWorldPoint2D(ep->vertex, vpoint,
+                woffsetX, woffsetY, div, voffsetX, voffsetY);
+
+            //ã‚ªãƒ•ã‚»ãƒƒãƒˆ
+            selpoly->offset[j][0] = vpoint[0] - mx;
+            selpoly->offset[j][1] = vpoint[1] - my;
+        }
+    }
+
+    //ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆ
+    for(int i = 0; i < (int)sel->getSelObjects()->size(); i ++){
+        map_object* obj = &SavedObjectList[sel->getSelObjects()->at(i).index];
+        //ãƒ“ãƒ¥ãƒ¼åº§æ¨™ã«å¤‰æ›
+        int vpoint[2];
+        world_point2d worldP = {obj->location.x, obj->location.y};
+        hpl::aleph::map::getViewPointFromWorldPoint2D(worldP, vpoint,
+            woffsetX, woffsetY, div, voffsetX, voffsetY);
+
+        //å¼•ãç®—
+        sel->getSelObjects()->at(i).offset[0] = vpoint[0] - mx;
+        sel->getSelObjects()->at(i).offset[1] = vpoint[1] - my;
+    }
+}
+
 ////////////////////////////////////////////////
 //////// objects ///////////////////////////////
 /**
-	‰Šú”z’u”‚Ìİ’è
-	@param objectType ƒIƒuƒWƒFƒNƒgƒ^ƒCƒv
+	åˆæœŸé…ç½®æ•°ã®è¨­å®š
+	@param objectType ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã‚¿ã‚¤ãƒ—
 		_saved_item
 		_saved_monster
-	@param index ‚Ç‚ÌƒIƒuƒWƒFƒNƒg‚Ì‰Šú‚ÍˆÊ’u‚ğ‚¢‚¶‚é‚©
-	@param num ‘Œ¸‚³‚¹‚é’l
-	@return ‘Œ¸‚ÌŒ‹‰Ê‚Ì”
+	@param index ã©ã®ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã®åˆæœŸã¯ä½ç½®ã‚’ã„ã˜ã‚‹ã‹
+	@param num å¢—æ¸›ã•ã›ã‚‹å€¤
+	@return å¢—æ¸›ã®çµæœã®æ•°
 */
 int hpl::aleph::map::addInitialPlacementNum(int objectType, int index, int num)
 {
@@ -1070,12 +1364,12 @@ int hpl::aleph::map::addInitialPlacementNum(int objectType, int index, int num)
 	}
 }
 /**
-	”z’uî•ñ‚ğæ“¾
-	@param objectType ƒIƒuƒWƒFƒNƒgƒ^ƒCƒv
+	é…ç½®æƒ…å ±ã‚’å–å¾—
+	@param objectType ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã‚¿ã‚¤ãƒ—
 		_saved_item
 		_saved_monster
-	@param index ‚Ç‚ÌƒIƒuƒWƒFƒNƒg‚Ì‰Šú‚ÍˆÊ’u‚ğ‚¢‚¶‚é‚©
-	@return ”z’uî•ñB”z’u”‚âƒ‰ƒ“ƒ_ƒ€ƒ}ƒbƒNƒX‚È‚Ç
+	@param index ã©ã®ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã®åˆæœŸã¯ä½ç½®ã‚’ã„ã˜ã‚‹ã‹
+	@return é…ç½®æƒ…å ±ã€‚é…ç½®æ•°ã‚„ãƒ©ãƒ³ãƒ€ãƒ ãƒãƒƒã‚¯ã‚¹ãªã©
 */
 struct object_frequency_definition* hpl::aleph::map::getPlacementData(int objectType, int index)
 {

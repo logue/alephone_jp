@@ -258,6 +258,7 @@ public:
     void OnRightUp(wxMouseEvent& ev);
     void OnMotion(wxMouseEvent& ev);
     void OnMouseWheel(wxMouseEvent& ev);
+    void OnLeftDoubleClick(wxMouseEvent& ev);
 
     //サイズ変更<en>change window size event
     void OnSize(wxSizeEvent& ev);

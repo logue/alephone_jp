@@ -259,6 +259,11 @@ public:
         現在のモード・ツールにあわせてカーソルを変更します
     */
     void setCursor();
+
+    /**
+        線編集情報を初期化します
+    */
+    void resetLineEditInfo();
 private:
 
 };

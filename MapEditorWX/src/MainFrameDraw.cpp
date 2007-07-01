@@ -181,6 +181,7 @@ void MapEditorMainFrame::drawPolygons(wxDC* dc)
 
     //TODO 高さ順ソート？
     //ソートするならvalidityのように事前にやっておくべき
+    hpl::aleph::view::HPLViewGridManager* vmgr = wxGetApp().getViewGridManager();
 
     wxPoint points[8];
     for(int i = 0; i < (int)PolygonList.size(); i ++){
@@ -201,9 +202,8 @@ void MapEditorMainFrame::drawPolygons(wxDC* dc)
         //TODO 高さを求める方法
         int ceilHeight = polygon->ceiling_height;//get_endpoint_data(polygon->endpoint_indexes[0])->lowest_adjacent_ceiling_height;
         int floorHeight = polygon->floor_height;//get_endpoint_data(polygon->endpoint_indexes[0])->highest_adjacent_floor_height;
-        if(floorHeight < wxGetApp().getViewGridManager()->getViewHeightMin() ||
-            ceilHeight > wxGetApp().getViewGridManager()->getViewHeightMax()){
-                continue;
+        if(!vmgr->isValidHeight(floorHeight, ceilHeight)){
+            continue;
         }
         int vpoint[2];
         for(int j = 0; j < vertexCount; j ++){
@@ -288,6 +288,9 @@ void MapEditorMainFrame::drawLines(wxDC* dc)
         endpoint_data* begin = get_endpoint_data(line->endpoint_indexes[0]);
         endpoint_data* end = get_endpoint_data(line->endpoint_indexes[1]);
 
+        if(wxGetApp().getStockManager()->delLines[i]){
+            continue;
+        }
         //高さ
         int floor = line->highest_adjacent_floor;
         int ceiling = line->lowest_adjacent_ceiling;
@@ -357,6 +360,9 @@ void MapEditorMainFrame::drawPoints(wxDC* dc)
 
     //点表示
     for(int i = 0; i < (int)EndpointList.size(); i ++){
+        if(wxGetApp().getStockManager()->delPoints[i]){
+            continue;
+        }
         endpoint_data* ep = get_endpoint_data(i);
         int floor = ep->highest_adjacent_floor_height;
 		int ceil = ep->lowest_adjacent_ceiling_height;
@@ -392,6 +398,9 @@ void MapEditorMainFrame::drawObjects(wxDC* dc)
     int zMax = wxGetApp().getViewGridManager()->getViewHeightMax();
 
     for(int i = 0; i < (int)SavedObjectList.size(); i ++){
+        if(wxGetApp().getStockManager()->delObjects[i]){
+            continue;
+        }
         map_object* obj = &(SavedObjectList[i]);
 
         int type = obj->type;

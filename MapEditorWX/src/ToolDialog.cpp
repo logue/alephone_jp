@@ -101,6 +101,9 @@ void ToolDialog::OnLeftDown(wxMouseEvent& ev)
             //変化
             emgr->setToolType(i);
 
+            //線追加ツールの初期化
+            wxGetApp().resetLineEditInfo();
+
             if(i == ToolType::TI_SKULL){
                 //オブジェクトツール
                 //プロパティを表示する

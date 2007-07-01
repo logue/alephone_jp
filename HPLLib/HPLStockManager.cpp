@@ -47,19 +47,19 @@ void hpl::aleph::HPLStockManager::updatePolygonValidityStored()
 void hpl::aleph::HPLStockManager::resizeDeletes()
 {
     //points
-    for(int i = delPoints.size(); i < dynamic_world->endpoint_count; i ++){
+    for(int i = (int)delPoints.size(); i < dynamic_world->endpoint_count; i ++){
         delPoints.push_back(false);
     }
-    for(int i = delLines.size(); i < dynamic_world->line_count; i ++){
+    for(int i = (int)delLines.size(); i < dynamic_world->line_count; i ++){
         delLines.push_back(false);
     }
-    for(int i = delSides.size(); i < dynamic_world->side_count; i ++){
+    for(int i = (int)delSides.size(); i < dynamic_world->side_count; i ++){
         delSides.push_back(false);
     }
-    for(int i = delPolygons.size(); i < dynamic_world->polygon_count; i ++){
+    for(int i = (int)delPolygons.size(); i < dynamic_world->polygon_count; i ++){
         delPolygons.push_back(false);
     }
-    for(int i = delObjects.size(); i < SavedObjectList.size(); i ++){
+    for(int i = (int)delObjects.size(); i < (int)SavedObjectList.size(); i ++){
         delObjects.push_back(false);
     }
 }
@@ -296,29 +296,34 @@ bool hpl::aleph::HPLStockManager::deletePoint(int index)
 {
     assert(get_endpoint_data(index));
     this->delPoints[index] = true;
+    updateDeletes();
     return true;
 }
 bool hpl::aleph::HPLStockManager::deleteLine(int index)
 {
     assert(get_line_data(index));
     this->delLines[index] = true;
+    updateDeletes();
     return true;
 }
 bool hpl::aleph::HPLStockManager::deletePolygon(int index)
 {
     assert(get_polygon_data(index));
     this->delPolygons[index] = true;
+    updateDeletes();
     return true;
 }
 bool hpl::aleph::HPLStockManager::deleteSide(int index)
 {
     assert(get_side_data(index));
     this->delSides[index] = true;
+    updateDeletes();
     return true;
 }
 bool hpl::aleph::HPLStockManager::deleteObject(int index)
 {
     assert(index >= 0 && index < SavedObjectList.size());
     this->delObjects[index] = true;
+    updateDeletes();
     return true;
 }

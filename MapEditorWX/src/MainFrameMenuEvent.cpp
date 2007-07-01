@@ -397,11 +397,27 @@ void MapEditorMainFrame::OnJumpLevel(wxCommandEvent& ev)
 }
 void MapEditorMainFrame::OnLevelInfo(wxCommandEvent& ev)
 {
+    //保存確認
+    if(wxGetApp().isChanged){
+        if(wxMessageBox(_T("This level has been edited. Destruct it?"), _T("Message"), 
+            wxOK | wxCANCEL) == wxCANCEL)
+        {
+            return;
+        }
+    }
     LevelInfoDialog dlg;
     dlg.Create(this, wxID_ANY);
-    if(dlg.ShowModal() == wxID_OK){
-        //内容変更
-        //TODO
+    if(dlg.ShowModal() != wxCANCEL){
+        //初期化
+        this->initLevel();
+        
+        int index = wxGetApp().editLevelIndex;
+        //読み込み
+        bool check = load_level_from_map(index);
+        if(!check){
+            hpl::error::caution("Loading level[%d] failure", index);
+        }
+        wxGetApp().getStockManager()->updateDeletes();
     }
 }
 void MapEditorMainFrame::OnObjectPlacement(wxCommandEvent& ev)
@@ -418,6 +434,9 @@ void MapEditorMainFrame::OnTerminalViewer(wxCommandEvent& ev)
     dlg.Create(this, wxID_ANY);
     dlg.ShowModal();
 }
+
+//////////////////////////////////////////////////
+//////////////////////////////////////////////////
 
 void MapEditorMainFrame::OnLineProp(wxCommandEvent& ev)
 {
