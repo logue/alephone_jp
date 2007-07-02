@@ -184,3 +184,5 @@ double click when line tool using
 LineListなどのvectorにpush_back,removeなどをすると、メモリの再割り当て（サイズ変更）
 	によってポインタアドレスが変化することがある。
 追加・削除した場合、これまでに保持しているline_data*などのポインタは使わないこと！
+
+quickSortの検証

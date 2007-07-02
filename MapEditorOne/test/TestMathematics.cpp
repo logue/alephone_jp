@@ -15,10 +15,11 @@ double getRandomDouble(double min, double max)
     return r;
 }
 
-    const int NUM = 3;
 std::vector<int> hogeVec;
 std::list<int> hogeList;
 std::map<int, int> hogeMap;
+
+
 static void printLists(){
     printf("#Vector\n");
     for(int i = 0; i < hogeVec.size(); i ++){
@@ -39,8 +40,32 @@ static void printLists(){
         counter ++;
     }
 }
-int main(int argc, char** argv){
 
+static void printPairs(hpl::math::qsort::Pair<double> pairs[], int max){
+    for(int i = 0; i < max; i ++){
+        printf("[%d]=%lf\n", pairs[i].index, pairs[i].data);
+    }
+}
+
+int main(int argc, char** argv){
+    const int NUM = 3;
+
+    //quickSortの検証
+    hpl::math::qsort::Pair<double> pairs[NUM];
+    int max = NUM;
+    for(int i = 0; i < max; i ++){
+        pairs[i].index = i;
+        pairs[i].data = rand()%100;
+    }
+    //表示してみる
+    printPairs(pairs, max);
+    //ソート
+    hpl::math::qsort::quickSort(pairs, max);
+    printf("sorted\n");
+    //表示してみる
+    printPairs(pairs, max);
+    return 0;
+    /*
     for(int i = 0; i < NUM; i ++){
         hogeVec.push_back(i);
         hogeList.push_back(i);
@@ -61,6 +86,7 @@ int main(int argc, char** argv){
     printLists();
 
     return 0;
+    */
 
     //SDL初期化するよ
     SDL_Init(SDL_INIT_VIDEO);

@@ -227,6 +227,9 @@
 				RelativePath="..\..\..\..\src\MainFrameEvent.cpp">
 			</File>
 			<File
+				RelativePath="..\..\..\..\src\MainFrameLeftDown.cpp">
+			</File>
+			<File
 				RelativePath="..\..\..\..\src\MainFrameMenuEvent.cpp">
 			</File>
 			<File
