@@ -201,8 +201,11 @@ int hpl::aleph::map::getSelectLineIndex(world_point2d& wpoint,
         if(smgr->delLines[i]){
             continue;
         }
+        int *a = NULL;
         endpoint_data* begin = get_endpoint_data(line->endpoint_indexes[0]);
+        if(!begin)delete a;
         endpoint_data* end = get_endpoint_data(line->endpoint_indexes[1]);
+        if(!end)delete a;
 
         //選択しているか判定
         if(hpl::aleph::map::isSelectLine(wpoint, begin->vertex, end->vertex, 
@@ -629,9 +632,9 @@ static bool getValidLines(int basePointIndex, int baseLineIndex,
                           int zMin, int zMax,
                           world_point2d& wpoint)
 {
-    //最小の角度
-    double minDeg = 360;
-    int minLineIndex = NONE;
+    //最大の角度
+    double maxDeg = 0;
+    int maxLineIndex = NONE;
 
     line_data* baseLine = get_line_data(baseLineIndex);
     int startBasePointIndex = baseLine->endpoint_indexes[0];
@@ -641,28 +644,29 @@ static bool getValidLines(int basePointIndex, int baseLineIndex,
         hpl::math::exchange(&startBasePointIndex, &endBasePointIndex);
     }else if(endBasePointIndex == basePointIndex){
     }else{
-        assert(false);
+        hpl::error::halt("invalid basePointIndex");
     }
 
     int lastPointIndex = NONE;
     //ベースポイントに繋がる線を取り出す
     std::vector<int> conLines = hpl::aleph::map::getLineIndexesIncludePoint(basePointIndex);
     for(int k = 0; k < (int)conLines.size(); k ++){
+        int conLineIndex = conLines[k];
         if(doneList->find(conLines[k]) != doneList->end()){
             //既に見つけ出したものは省く
             continue;
         }
         //delLinesは省く
-        if(smgr->delLines[conLines[k]]){
+        if(smgr->delLines[conLineIndex]){
             continue;
         }
         //ベースの線と一緒の場合も除外する
-        if(baseLineIndex == conLines[k]){
+        if(baseLineIndex == conLineIndex){
             continue;
         }
 
-        line_data* line = get_line_data(conLines[k]);
-        assert(line);
+        line_data* line = get_line_data(conLineIndex);
+        if(!line)hpl::error::halt("line is null");
         //高さチェック
         if(!hpl::aleph::map::isValidHeight(line->highest_adjacent_floor,
             line->lowest_adjacent_ceiling, zMin, zMax))
@@ -681,7 +685,10 @@ static bool getValidLines(int basePointIndex, int baseLineIndex,
         }
 
         endpoint_data* ep0 = get_endpoint_data(ep0Index);
+        if(!ep0)hpl::error::halt("ep0 is null");
         endpoint_data* ep1 = get_endpoint_data(ep1Index);
+        if(!ep1)hpl::error::halt("ep1 is null");
+
         double l0x = ep0->vertex.x;
         double l0y = ep0->vertex.y;
         double l1x = ep1->vertex.x;
@@ -706,19 +713,19 @@ static bool getValidLines(int basePointIndex, int baseLineIndex,
         if(deg > DEG_ROUND / 2.0){
             deg = DEG_ROUND - deg;
         }
-        //角度が現在最小かどうか確認する
-        if(deg < minDeg){
-            minDeg = deg;
-            //今までより小さい
-            minLineIndex = conLines[k];
+        //角度が現在最大かどうか確認する
+        if(deg > maxDeg){
+            maxDeg = deg;
+            //今までより大きい
+            maxLineIndex = conLineIndex;
             //最後の点
             lastPointIndex = ep1Index;
         }
         //済み
-        doneList->insert(conLines[k]);
+        doneList->insert(conLineIndex);
     }
 
-    if(minLineIndex == NONE){
+    if(maxLineIndex == NONE){
         //見つからなかった
         //よって戻っていく
         return false;
@@ -734,8 +741,12 @@ static bool getValidLines(int basePointIndex, int baseLineIndex,
             return true;
         }else{
             //まだまだ
+            if(pointIndexes->size() >= MAXIMUM_VERTICES_PER_POLYGON + 1){
+                return false;
+            }
+            //もう最大数を超えている
             //次を探す
-            baseLineIndex = minLineIndex;
+            baseLineIndex = maxLineIndex;
             basePointIndex = lastPointIndex;
             bool found = getValidLines(basePointIndex, baseLineIndex, pointIndexes,
                 smgr, rotRem, doneList, zMin, zMax, wpoint);
@@ -763,8 +774,11 @@ std::vector<polygon_data> hpl::aleph::map::searchValidPolygon(world_point2d wpoi
     struct hpl::math::qsort::Pair<double>* pairs = new struct hpl::math::qsort::Pair<double>[max];
     for(int i = 0; i < max; i ++){
         line_data* line = get_line_data(i);
+        assert(line);
         endpoint_data* epStart = get_endpoint_data(line->endpoint_indexes[0]);
+        assert(epStart);
         endpoint_data* epEnd = get_endpoint_data(line->endpoint_indexes[1]);
+        assert(epEnd);
         pairs[i].data = hpl::math::getPointDistanceFromLine(wpoint.x, wpoint.y, 
             epStart->vertex.x, epStart->vertex.y, epEnd->vertex.x, epEnd->vertex.y);
     }
@@ -785,7 +799,7 @@ std::vector<polygon_data> hpl::aleph::map::searchValidPolygon(world_point2d wpoi
         }
         int lineIndexBase = pairs[i].index;
         line_data* startLine = get_line_data(lineIndexBase);
-        assert(startLine);
+        if(!startLine)hpl::error::halt("startLine is null");
         //高さチェック
         if(!hpl::aleph::map::isValidHeight(startLine->highest_adjacent_floor,
             startLine->lowest_adjacent_ceiling, zMin, zMax))
@@ -795,25 +809,27 @@ std::vector<polygon_data> hpl::aleph::map::searchValidPolygon(world_point2d wpoi
 
         int startPointIndex = startLine->endpoint_indexes[0];
 		endpoint_data* epStart = get_endpoint_data(startPointIndex);
-        assert(epStart);
+        if(!epStart)hpl::error::halt("epStart is null");
         int endPointIndex = startLine->endpoint_indexes[1];
 		endpoint_data* epEnd = get_endpoint_data(endPointIndex);
-        assert(epEnd);
+        if(!epEnd)hpl::error::halt("epEnd is null");
 
         //線の左右どちらの側に点があるかをチェックします
 		int rotRem = hpl::math::getPointRotationTypeFromLine(
 			wpoint.x, wpoint.y, epStart->vertex.x, epStart->vertex.y,
 			epEnd->vertex.x, epEnd->vertex.y);
         if(rotRem == hpl::math::RotationType::Clockwise &&
-            startLine->clockwise_polygon_owner != NONE)
+            startLine->counterclockwise_polygon_owner != NONE)
         {
             //右周りで、かつ線の右側（指定点のある領域）
             //にポリゴンが既にある場合スキップ
+            hpl::error::caution("already polygon exists");
             continue;
         }
         if(rotRem == hpl::math::RotationType::Counterclockwise &&
-            startLine->counterclockwise_polygon_owner != NONE)
+            startLine->clockwise_polygon_owner != NONE)
         {
+            hpl::error::caution("already polygon exists");
             continue;
         }
         //これ以降はすでに指定点の部分にポリゴンがないと仮定する
@@ -837,14 +853,15 @@ std::vector<polygon_data> hpl::aleph::map::searchValidPolygon(world_point2d wpoi
             int indexes[MAXIMUM_VERTICES_PER_POLYGON];
 
             //点データ集計
-            for(int l = 0; l < pointIndexes.size() - 2; i ++){
+            for(int l = 0; l < pointIndexes.size() - 1; l ++){
                 //
                 indexes[l] = pointIndexes[l];
             }
             int vertexCount = pointIndexes.size() - 1;
             //ポリゴン作成
             polygon_data poly;
-            hpl::aleph::map::createPolygon(indexes, vertexCount, &poly);
+            bool result = hpl::aleph::map::createPolygon(indexes, vertexCount, &poly);
+            if(!result)hpl::error::halt("polygon creation failure");
             polyDatas.push_back(poly);
 
             //TODO 複数見つけ出すのか？
@@ -915,6 +932,7 @@ polygon_data hpl::aleph::map::createPolygon(world_point2d points[],
     for(int i = 0; i < n; i ++){
         pdata.endpoint_indexes[i] = i; /* clockwise */
         pdata.line_indexes[i] = i;
+        pdata.side_indexes[i] = NONE;
     }
 	
 	pdata.floor_texture = NONE;
@@ -1122,6 +1140,10 @@ int hpl::aleph::map::addPolygon(polygon_data polygon)
 	PolygonList.push_back(polygon);
 	dynamic_world->polygon_count = (int16)PolygonList.size();
 	int index = dynamic_world->polygon_count - 1;
+
+    polygon_data* poly = get_polygon_data(index);
+    //点、線に登録する
+    //TODO for(int i = 0; i < poly->
 	return index;
 }
 int hpl::aleph::map::addMapSavedObject(map_object object)
@@ -1227,6 +1249,7 @@ bool hpl::aleph::map::createPolygon(int pointIndexes[], int n, polygon_data* pol
             return false;
         }
         poly->line_indexes[i] = lIndex;
+        poly->side_indexes[i] = NONE;
     }
     //TODO
     //poly->adjacent_polygon_indexes = NONE;

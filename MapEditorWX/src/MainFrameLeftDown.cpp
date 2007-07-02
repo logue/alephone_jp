@@ -345,10 +345,12 @@ void MapEditorMainFrame::doLButtonOnFillTool(wxMouseEvent& ev)
         wmp, smgr, zMin, zMax);
     if(polyDatas.size() == 0){
         //失敗
-        hpl::error::caution("No frame to fill as a polygon found");
+        hpl::error::caution("No frame to fill as a VALID polygon found (it seems to be a illegal polygon or a none)");
     }else{
         //追加
         hpl::aleph::map::addPolygon(polyDatas[0]);
+        //更新
+        smgr->updateDeletes();
     }
 }
 void MapEditorMainFrame::doLButtonOnHandTool(wxMouseEvent& ev)
@@ -424,8 +426,8 @@ void MapEditorMainFrame::doLButtonOnLineTool(wxMouseEvent& ev)
                 }else{
                     //でなけば線を作成する
                     line_data line;
-                    assert(hpl::aleph::map::createLine(wxGetApp().prevPointIndex,
-                        pointIndex, &line));
+                    if(!hpl::aleph::map::createLine(wxGetApp().prevPointIndex,
+                        pointIndex, &line))wxFAIL;//hpl::error::halt("line creation failure");
                     int newLineIndex = hpl::aleph::map::addLine(line);
                 }
                 wxGetApp().prevPointIndex = pointIndex;
@@ -498,11 +500,17 @@ void MapEditorMainFrame::doLButtonOnLineTool(wxMouseEvent& ev)
                     &newLine2);
                 int newLine2Index = hpl::aleph::map::addLine(newLine2);
 
-                //前回→今回の点の間に線を追加
-                line_data newLine;
-                hpl::aleph::map::createLine(wxGetApp().prevPointIndex, newPointIndex, &newLine);
-                int lineIndex = hpl::aleph::map::addLine(newLine);
 
+                if(wxGetApp().isFirstOfLineToAdd){
+                    //最初ならなにもしない
+                }else{
+                    //前回→今回の点の間に線を追加
+                    line_data newLine;
+                    if(!hpl::aleph::map::createLine(wxGetApp().prevPointIndex, newPointIndex, &newLine)){
+                        hpl::error::halt("line creation failure");
+                    }
+                    int lineIndex = hpl::aleph::map::addLine(newLine);
+                }
                 wxGetApp().prevPointIndex = newPointIndex;
             }
         }else{

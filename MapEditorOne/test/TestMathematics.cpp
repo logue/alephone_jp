@@ -64,6 +64,7 @@ int main(int argc, char** argv){
     printf("sorted\n");
     //•\Ž¦‚µ‚Ä‚Ý‚é
     printPairs(pairs, max);
+    getchar();
     return 0;
     /*
     for(int i = 0; i < NUM; i ++){

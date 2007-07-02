@@ -5,8 +5,16 @@
 //////////////  Static Methods  /////////////////////////////////////////////
 /////////////////////////////////////////////////////////////////////////////
 
+template<class T>
+void exchangePair(struct hpl::math::qsort::Pair<T> *data1, 
+                  struct hpl::math::qsort::Pair<T> *data2)
+{
+    struct hpl::math::qsort::Pair<T> temp;
+    temp.index = data1->index;
+    temp.data = data1->data;
+}
 /**
-    ピボットで得たアクシス数より大きいもの、以下のものをより分けます
+    指定した基準値より大きい物、小さい物で分割します
     divide [more than axis] and [less than axis]
     -smaller is left, bigger is right
     -return offset of start of biggers
@@ -26,8 +34,9 @@ int partition(struct hpl::math::qsort::Pair<T> *dataArray, int start, int end, T
 }
 
 /**
-    クイックソート用。ピボット交換を行います
-    返り値は左から見て異なる数値のうち大きいもののある位置
+    左から見たとき、最初の値より大きい物がくるか、小さい物が来るかを判定します
+    大きい物が来た場合は最初の位置、
+    小さい物が来た場合はその場所を基準値のインデックスとします。
     select axis-num 
     -find two different nums from indexes' left
     -return bigger one
@@ -36,14 +45,24 @@ int partition(struct hpl::math::qsort::Pair<T> *dataArray, int start, int end, T
 template<class T>
 int pivot(struct hpl::math::qsort::Pair<T> *dataArray, int start, int end)
 {
+    //startの右隣から始める。startの数値を基準値とする。
     int k = start + 1;
-    while( k <= end && dataArray[start].data == dataArray[k].data)k ++;
-    //all are same
-    if(k > end) return -1;
-    //if not
+
+    //startと異なる数値が出るまで調べる
+    while( k <= end && dataArray[start].data == dataArray[k].data){
+        k ++;
+    }
+    //全て同じ数字である場合（あるいは要素が一つしかない(end == start)場合）
+    if(k > end){
+        return -1;
+    }
+
     if(dataArray[start].data >= dataArray[k].data){
+        //k番目の値が基準値より大きい場合
+        //→基準値の場所を返す（基準値～kは大）
         return start;
     }else{
+        //基準値より小さい場合はその場所とする
         return k;
     }
 }
@@ -56,11 +75,15 @@ int pivot(struct hpl::math::qsort::Pair<T> *dataArray, int start, int end)
 template<class T>
 void repeatbleQuickSort(struct hpl::math::qsort::Pair<T> *dataArray, int start, int end)
 {
+    //ぶつかったら終了
     if( start == end){
         return;
     }
     int p = pivot(dataArray, start, end);
+
+    //pが-1（全て同じ数値か、）
     if(p != -1){
+        //指定された基準値を元に分割します
         int offset = partition(dataArray, start, end, dataArray[p].data);
         repeatbleQuickSort(dataArray, start, offset - 1);
         repeatbleQuickSort(dataArray, offset, end);
@@ -81,8 +104,8 @@ void hpl::math::qsort::quickSort(struct hpl::math::qsort::Pair<T> *dataArray, in
         for(int i = 0; i < max; i ++){
             dataArray[i].index = i;
         }
-        //sort it
-        repeatbleQuickSort(dataArray, 0, max);
+        //ソート開始 <en> sort it
+        repeatbleQuickSort(dataArray, 0, max - 1);
     }
 }
 

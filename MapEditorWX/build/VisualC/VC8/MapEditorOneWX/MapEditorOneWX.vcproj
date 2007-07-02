@@ -273,7 +273,7 @@
 				Name="VCCLCompilerTool"
 				Optimization="0"
 				AdditionalIncludeDirectories="..\..\..\..\..\..\marathon;..\..\..\..\..\AlephOneSrc;..\..\..\..\..\MapEditorCommonSrc"
-				PreprocessorDefinitions="WIN32;_DEBUG;_WINDOWS;SDL;__WIN32__;__WINDOWS__;_WINDOWS;__WXMSW__;__WXDEBUG__;WXUSINGDLL;WX;UNICODE;__wxUSEUNICODE__"
+				PreprocessorDefinitions="WIN32;_DEBUG;_WINDOWS;SDL;__WIN32__;__WINDOWS__;_WINDOWS;__WXMSW__;__WXDEBUG__;WXUSINGDLL;WX;UNICODE;__wxUSEUNICODE__;WX"
 				MinimalRebuild="true"
 				BasicRuntimeChecks="3"
 				RuntimeLibrary="3"
