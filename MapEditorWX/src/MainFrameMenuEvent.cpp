@@ -440,31 +440,23 @@ void MapEditorMainFrame::OnTerminalViewer(wxCommandEvent& ev)
 
 void MapEditorMainFrame::OnLineProp(wxCommandEvent& ev)
 {
-    LinePropDialog dlg;
-    dlg.Create(this, wxID_ANY);
-    dlg.setLineIndex(wxGetApp().popupLineIndex);
-    dlg.ShowModal();
+    this->linePropDialog.setLineIndex(wxGetApp().popupLineIndex);
+    this->linePropDialog.Show(true);
 }
 void MapEditorMainFrame::OnClockwiseSide(wxCommandEvent& ev)
 {
     //TODO
-    SidePropDialog dlg;
-    dlg.Create(this, wxID_ANY);
-    dlg.setIndex(get_line_data(wxGetApp().popupLineIndex)->clockwise_polygon_side_index);
-    dlg.ShowModal();
+    this->sidePropDialog.setIndex(get_line_data(wxGetApp().popupLineIndex)->clockwise_polygon_side_index);
+    this->sidePropDialog->Show(true);
 }
 void MapEditorMainFrame::OnCounterclockwiseSide(wxCommandEvent& ev)
 {
     //TODO
-    SidePropDialog dlg;
-    dlg.Create(this, wxID_ANY);
-    dlg.setIndex(get_line_data(wxGetApp().popupLineIndex)->counterclockwise_polygon_side_index);
-    dlg.ShowModal();
+    this->sidePropDialog.setIndex(get_line_data(wxGetApp().popupLineIndex)->counterclockwise_polygon_side_index);
+    this->sidePropDialog->Show(true);
 }
 void MapEditorMainFrame::OnPointProp(wxCommandEvent& ev)
 {
-    PointPropDialog dlg;
-    dlg.Create(this, wxID_ANY);
-    dlg.setIndex(wxGetApp().popupEndpointIndex);
-    dlg.ShowModal();
+    this->pointPropDialog.setIndex(wxGetApp().popupEndpointIndex);
+    this->pointPropDialog.Show(true);
 }

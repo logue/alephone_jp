@@ -5,6 +5,7 @@
 #include <vector>
 #include <map>
 #include <string>
+#include <set>
 
 #include "map.h"
 #include "wad.h"
@@ -12,6 +13,12 @@
 //#include "HPLMath.h"
 #include "HPLSelectData.h"
 //#include "HPLStockManager.h"
+
+
+#ifdef __WXDEBUG__
+#include <wx/defs.h>
+#include <wx/debug.h>
+#endif
 
 namespace hpl{namespace aleph{
 class HPLStockManager;
@@ -336,7 +343,7 @@ namespace map{
 	*/
 	int addEndpoint(endpoint_data ep);
 	int addLine(line_data line);
-	int addSide(side_data side);
+	int addSide(side_data side, bool isClockwise);
 	int addPolygon(polygon_data polygon);
 	int addMapSavedObject(map_object object);
 	int addAnnotation(map_annotation annotation);
@@ -347,19 +354,19 @@ namespace map{
     /**
         簡略バージョン
     */
-    bool createPoint(world_point2d& wpoint, endpoint_data* ep);
+    void createPoint(world_point2d& wpoint, endpoint_data* ep);
     /**
         @param polyIndex 載せるポリゴンのインデックス
     */
-    bool createObject(world_point2d& wpoint, int polyIndex, map_object* obj,
+    void createObject(world_point2d& wpoint, int polyIndex, map_object* obj,
                                    int flags);
 
     /**
         既存の点を用いて線やポリゴンを作成します
         <en> create new line and polygon with points already exist
     */
-    bool createLine(int beginPointIndex, int endPointIndex, line_data* line);
-    bool createPolygon(int pointIndexes[], int n, polygon_data* poly);
+    void createLine(int beginPointIndex, int endPointIndex, line_data* line);
+    void createPolygon(int pointIndexes[], int n, polygon_data* poly);
 
 	/**
 		点情報を削除します

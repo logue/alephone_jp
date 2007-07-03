@@ -170,10 +170,10 @@ void LinePropDialog::setupDialog()
     text_ctrl_45->SetValue(getString("%d", line->length));
     text_ctrl_46->SetValue(getString("%d", line->highest_adjacent_floor));
     text_ctrl_47->SetValue(getString("%d", line->lowest_adjacent_ceiling));
-    checkbox_45->SetValue(LINE_IS_LANDSCAPED(line));
-    checkbox_52->SetValue(LINE_IS_ELEVATION(line));
-    checkbox_53->SetValue(LINE_IS_VARIABLE_ELEVATION(line));
-    checkbox_54->SetValue(LINE_HAS_TRANSPARENT_SIDE(line));
+    checkbox_45->SetValue(LINE_IS_LANDSCAPED(line) != 0);
+    checkbox_52->SetValue(LINE_IS_ELEVATION(line) != 0);
+    checkbox_53->SetValue(LINE_IS_VARIABLE_ELEVATION(line) != 0);
+    checkbox_54->SetValue(LINE_HAS_TRANSPARENT_SIDE(line) != 0);
     int sel = LINE_IS_SOLID(line) ? 0: 1;
     radio_box_1->SetSelection(sel);
     index = line->clockwise_polygon_side_index;

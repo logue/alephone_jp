@@ -426,8 +426,8 @@ void MapEditorMainFrame::doLButtonOnLineTool(wxMouseEvent& ev)
                 }else{
                     //でなけば線を作成する
                     line_data line;
-                    if(!hpl::aleph::map::createLine(wxGetApp().prevPointIndex,
-                        pointIndex, &line))wxFAIL;//hpl::error::halt("line creation failure");
+                    hpl::aleph::map::createLine(wxGetApp().prevPointIndex,
+                        pointIndex, &line);
                     int newLineIndex = hpl::aleph::map::addLine(line);
                 }
                 wxGetApp().prevPointIndex = pointIndex;
@@ -482,23 +482,30 @@ void MapEditorMainFrame::doLButtonOnLineTool(wxMouseEvent& ev)
 
                 //点を追加
                 endpoint_data ep;
-                assert(hpl::aleph::map::createPoint(wpoint, &ep));
+                hpl::aleph::map::createPoint(wpoint, &ep);
                 int newPointIndex = hpl::aleph::map::addEndpoint(ep);
-                assert(newPointIndex != NONE);
+#ifdef __WXDEBUG__
+                wxASSERT(newPointIndex != NONE);
+#endif
                 endpoint_data *newEp = get_endpoint_data(newPointIndex);
 
                 //始点→点の線を追加
                 line_data newLine1;
-                assert(hpl::aleph::map::createLine(epStartIndex,
-                    newPointIndex, &newLine1));
+                hpl::aleph::map::createLine(epStartIndex,
+                    newPointIndex, &newLine1);
                 int newLine1Index = hpl::aleph::map::addLine(newLine1);
-                assert(newLine1Index != NONE);
+#ifdef __WXDEBUG__
+                wxASSERT(newLine1Index != NONE);
+#endif
 
                 //点→終点の線を追加
                 line_data newLine2;
                 hpl::aleph::map::createLine(newPointIndex, epEndIndex,
                     &newLine2);
                 int newLine2Index = hpl::aleph::map::addLine(newLine2);
+#ifdef __WXDEBUG__
+                wxASSERT(newLine2Index != NONE);
+#endif
 
 
                 if(wxGetApp().isFirstOfLineToAdd){
@@ -506,9 +513,7 @@ void MapEditorMainFrame::doLButtonOnLineTool(wxMouseEvent& ev)
                 }else{
                     //前回→今回の点の間に線を追加
                     line_data newLine;
-                    if(!hpl::aleph::map::createLine(wxGetApp().prevPointIndex, newPointIndex, &newLine)){
-                        hpl::error::halt("line creation failure");
-                    }
+                    hpl::aleph::map::createLine(wxGetApp().prevPointIndex, newPointIndex, &newLine);
                     int lineIndex = hpl::aleph::map::addLine(newLine);
                 }
                 wxGetApp().prevPointIndex = newPointIndex;
@@ -516,14 +521,14 @@ void MapEditorMainFrame::doLButtonOnLineTool(wxMouseEvent& ev)
         }else{
             //新規追加
             endpoint_data ep;
-            assert(hpl::aleph::map::createPoint(wpoint, &ep));
+            hpl::aleph::map::createPoint(wpoint, &ep);
             int newPointIndex = hpl::aleph::map::addEndpoint(ep);
             if(wxGetApp().isFirstOfLineToAdd){
                 //最初の点なので追加しない
             }else{
                 //線を追加する
                 line_data line;
-                assert(hpl::aleph::map::createLine(wxGetApp().prevPointIndex, newPointIndex, &line));
+                hpl::aleph::map::createLine(wxGetApp().prevPointIndex, newPointIndex, &line);
                 int newLineIndex = hpl::aleph::map::addLine(line);
             }
             
