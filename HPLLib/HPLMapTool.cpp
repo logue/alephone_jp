@@ -696,7 +696,7 @@ void hpl::aleph::map::createPoint(world_point2d& wpoint, endpoint_data* ep)
     @param polyIndex 載せるポリゴンのインデックス
 */
 void hpl::aleph::map::createObject(world_point2d& wpoint, int polyIndex, map_object* obj,
-                                   int flags)
+                                   int flags, int type, int index)
 {
     //TODO
     obj->polygon_index = polyIndex;
@@ -779,6 +779,7 @@ void hpl::aleph::map::createPolygon(int pointIndexes[], int n, polygon_data* pol
     poly->area = 0;
     //TODO 点のうち一番高い高度
     poly->ceiling_height = WORLD_ONE;
+    poly->floor_height = 0;
     poly->ceiling_lightsource_index = NONE;
     //TODO ?
     poly->ceiling_origin.x = 0;

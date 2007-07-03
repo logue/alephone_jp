@@ -289,6 +289,7 @@ void MapEditorMainFrame::setupPenAndBrush(ColorSettings* setting)
     //ポリゴン選択ネットブラシ
     wxImage bmp;
     wxGetApp().loadBitmap(POLYGON_SELECT_STLIPPLE_BITMAP_FILE_PATH, &bmp);
+    bmp.SetMaskColour(255,255,255);
     this->polySelNetBrush = wxBrush(bmp);
 
     //ダメポリゴンブラシ

@@ -39,6 +39,8 @@ public:
 
     void setObjIndex(int index);
     int getObjIndex();
+    map_object getObject();
+    void setObject(map_object& obj);
 private:
     void setupDialog();
     //イベントテーブル作成<en>declare
@@ -55,6 +57,8 @@ private:
     void OnXEdit(wxCommandEvent &event); // wxGlade: <event_handler>
     void OnYEdit(wxCommandEvent &event); // wxGlade: <event_handler>
     void OnZEdit(wxCommandEvent &event); // wxGlade: <event_handler>
+
+    void OnPaint(wxPaintEvent &event);
 };
 
 #endif

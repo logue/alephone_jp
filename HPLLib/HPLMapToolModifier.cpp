@@ -76,7 +76,8 @@ int hpl::aleph::map::addSide(side_data side, bool isClockwise)
     wxASSERT(lineIndexInPolygon != NONE);
 #else
     if(lineIndexInPolygon == NONE){
-        hpl::error::halt("line[%d] doesn't exist in polygon[%d]'s line_index", side->line_index, side->polygon_index);
+        hpl::error::halt("line[%d] doesn't exist in polygon[%d]'s line_index", newSide->line_index,
+            newSide->polygon_index);
     }
 #endif
     poly->side_indexes[lineIndexInPolygon] = index;

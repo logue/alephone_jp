@@ -518,6 +518,8 @@ void MapEditorMainFrame::doLButtonOnLineTool(wxMouseEvent& ev)
                 }
                 wxGetApp().prevPointIndex = newPointIndex;
             }
+            wxGetApp().isFirstOfLineToAdd = false;
+
         }else{
             //新規追加
             endpoint_data ep;
@@ -561,9 +563,25 @@ void MapEditorMainFrame::doLButtonOnSkullTool(wxMouseEvent& ev)
     int mx = ev.m_x;
     int my = ev.m_y;
     world_point2d wpoint = wxGetApp().getWorldPointFromViewPoint(mx, my);
-    //点の中に入るポリゴンを取得します
-    //std::vector<int> polyIndexes = hpl::aleph::map::getPolygonIndexesIncludePoint(wpoint);
-    //TODO
+
+    hpl::aleph::HPLStockManager* smgr = wxGetApp().getStockManager();
+
+    for(int i = 0; i < (int)PolygonList.size(); i ++){
+        if(smgr->delPolygons[i]){
+            continue;
+        }
+        polygon_data* poly = get_polygon_data(i);
+        if(hpl::aleph::map::isPointInPolygon(wpoint, i)){
+            //点が含まれる
+            //このポリゴン上に置く
+            //TODO
+            /*int flags = 0;
+            map_object objv = this->objPropDialog.getObject();
+            int type = this->objPropDialog.getObject();
+            hpl::aleph::map::createObject(wpoint, i, &obj, flags, type, index);
+            int newIndex = hpl::aleph::map::addMapSavedObject(obj);*/
+        }
+    }
 #endif
 }
 void MapEditorMainFrame::doLButtonOnTextTool(wxMouseEvent& ev)

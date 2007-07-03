@@ -214,6 +214,13 @@ private:
     wxCursor onLineCursor;
     //オンポイントカーソル
     wxCursor onPointCursor;
+    //通常ラインカーソル
+    //wxCursor lineToolCursor;
+
+    //追加中カーソル
+    wxCursor onLineCursorAdding;
+    wxCursor onPointCursorAdding;
+    wxCursor lineToolCursorAdding;
 
     //ウインドウフレーム
     MapEditorMainFrame *frame;

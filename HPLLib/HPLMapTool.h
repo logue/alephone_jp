@@ -359,7 +359,7 @@ namespace map{
         @param polyIndex 載せるポリゴンのインデックス
     */
     void createObject(world_point2d& wpoint, int polyIndex, map_object* obj,
-                                   int flags);
+                                   int flags, int type, int index);
 
     /**
         既存の点を用いて線やポリゴンを作成します

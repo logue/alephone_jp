@@ -447,13 +447,13 @@ void MapEditorMainFrame::OnClockwiseSide(wxCommandEvent& ev)
 {
     //TODO
     this->sidePropDialog.setIndex(get_line_data(wxGetApp().popupLineIndex)->clockwise_polygon_side_index);
-    this->sidePropDialog->Show(true);
+    this->sidePropDialog.Show(true);
 }
 void MapEditorMainFrame::OnCounterclockwiseSide(wxCommandEvent& ev)
 {
     //TODO
     this->sidePropDialog.setIndex(get_line_data(wxGetApp().popupLineIndex)->counterclockwise_polygon_side_index);
-    this->sidePropDialog->Show(true);
+    this->sidePropDialog.Show(true);
 }
 void MapEditorMainFrame::OnPointProp(wxCommandEvent& ev)
 {

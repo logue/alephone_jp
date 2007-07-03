@@ -28,6 +28,7 @@ BEGIN_EVENT_TABLE(ObjectPropDialog, wxDialog)
     EVT_TEXT(ID_X, ObjectPropDialog::OnXEdit)
     EVT_TEXT(ID_Y, ObjectPropDialog::OnYEdit)
     EVT_TEXT(ID_Z, ObjectPropDialog::OnZEdit)
+    EVT_PAINT(ObjectPropDialog::OnPaint)
 END_EVENT_TABLE()
 ObjectPropDialog::ObjectPropDialog()
 {
@@ -104,7 +105,7 @@ bool ObjectPropDialog::Create(wxWindow* parent, wxWindowID id)
     grid_sizer_19->Add(label_58, 0, 0, 0);
     grid_sizer_19->Add(text_ctrl_38, 0, 0, 0);
     grid_sizer_18->Add(grid_sizer_19, 1, wxEXPAND, 0);
-    grid_sizer_18->Add(panel_16, 1, 0, 0);
+    grid_sizer_18->Add(panel_16, 1, wxEXPAND, 0);
     grid_sizer_15->Add(grid_sizer_18, 1, wxEXPAND, 0);
     grid_sizer_20->Add(label_60, 0, 0, 0);
     grid_sizer_20->Add(choice_23, 0, 0, 0);
@@ -122,6 +123,13 @@ bool ObjectPropDialog::Create(wxWindow* parent, wxWindowID id)
     grid_sizer_15->Fit(this);
     Layout();
 
+    //type
+    for(int i = 0; i < NUMBER_OF_MAP_OBJECT_TYPES; i ++){
+        this->choice_21->Insert(wxConvertMB2WX(
+            wxGetApp().objectTypeInfo[i].jname.c_str()),
+            i);
+    }
+
     this->objIndex = NONE;
     return result;
 }
@@ -134,88 +142,183 @@ int ObjectPropDialog::getObjIndex()
 {
     return this->objIndex;
 }
+void ObjectPropDialog::setObject(map_object& obj){
+    int oldSel = choice_21->GetSelection();
+    this->text_ctrl_27->SetValue(getString("%d", obj.type));
+    this->choice_21->SetSelection(obj.type);
+
+    this->text_ctrl_32->SetValue(getString("%d", obj.index));
+    if(oldSel != obj.type){
+        this->choice_22->Clear();
+        switch(obj.type){
+        case _saved_monster:
+            for(int i = 0; i < NUMBER_OF_MONSTER_TYPES; i ++){
+                this->choice_22->Insert(wxConvertMB2WX(
+                    wxGetApp().monsterTypeInfo[i].jname.c_str()),
+                    i);
+            }
+            break;
+        case _saved_player:
+            this->choice_22->Insert(_T("Uh-huh?"), 0);
+            break;
+        case _saved_item:
+            for(int i = 0; i < NUMBER_OF_DEFINED_ITEMS; i ++){
+                this->choice_22->Insert(wxConvertMB2WX(
+                    wxGetApp().itemTypeInfo[i].jname.c_str()),
+                    i);
+            }
+            break;
+        case _saved_goal:
+            this->choice_22->Insert(_T("Anything go here"),0 );
+            break;
+        case _saved_object:
+            for(int i = 0; i < NUMBER_OF_SCENERY_DEFINITIONS; i ++){
+                this->choice_22->Insert(wxConvertMB2WX(
+                    wxGetApp().sceneryTypeInfo[i].jname.c_str()),
+                    i);
+            }
+            break;
+        case _saved_sound_source:
+            for(int i = 0; i < NUMBER_OF_SOUND_DEFINITIONS; i ++){
+                this->choice_22->Insert(wxConvertMB2WX(
+                    wxGetApp().monsterTypeInfo[i].jname.c_str()),
+                    i);
+            }
+            break;
+        }
+    }
+    this->choice_22->SetSelection(obj.index);
+
+    //flags
+    this->checkbox_46->SetValue((obj.flags & _map_object_is_invisible) != 0);
+    this->checkbox_47->SetValue((obj.flags & _map_object_hanging_from_ceiling) != 0);
+    this->checkbox_48->SetValue((obj.flags & _map_object_is_blind) != 0);
+    this->checkbox_49->SetValue((obj.flags & _map_object_is_deaf) != 0);
+    this->checkbox_50->SetValue((obj.flags & _map_object_floats) != 0);
+    this->checkbox_51->SetValue((obj.flags & _map_object_is_network_only) != 0);
+
+    this->text_ctrl_37->SetValue(getString("%d", obj.polygon_index));
+
+    this->text_ctrl_38->SetValue(getString("%d", obj.facing));
+
+    this->text_ctrl_39->SetValue(getString("%d", obj.location.x));
+    this->text_ctrl_41->SetValue(getString("%d", obj.location.y));
+    this->text_ctrl_40->SetValue(getString("%d", obj.location.z));
+    
+}
 void ObjectPropDialog::setupDialog()
 {
+    if(this->objIndex == NONE){
+        map_object obj;
+        memset(&obj, 0, sizeof(map_object));
+        this->setObject(obj);
+    }else{
+#ifdef __WXDEBUG__
+        wxASSERT(this->objIndex >= 0 && this->objIndex < SavedObjectList.size());
+#endif
+        map_object* obj = &SavedObjectList[this->objIndex];
+        this->setObject(*obj);
+    }
 }
+static bool isValidIndex(int *index)
+{
+    if(*index == NONE){
+        return false;
+    }
+    if(*index < 0 || *index >= SavedObjectList.size()){
+        hpl::error::caution("target object not found.");
+        *index = NONE;
+        return false;
+    }
+    return true;
+}
+
 void ObjectPropDialog::OnTypeChoice(wxCommandEvent &event)
 {
-    event.Skip();
-    std::cout<<"Event handler (ObjectPropDialog::OnTypeChoice) not implemented yet"<<std::endl; //notify the user that he hasn't implemented the event handler yet
+    if(!isValidIndex(&this->objIndex))return;
+    map_object* obj = &SavedObjectList[this->objIndex];
+    obj->type = event.GetSelection();
+
 }
 
 
 void ObjectPropDialog::OnIndexChoice(wxCommandEvent &event)
 {
-    event.Skip();
-    std::cout<<"Event handler (ObjectPropDialog::OnIndexChoice) not implemented yet"<<std::endl; //notify the user that he hasn't implemented the event handler yet
+    if(!isValidIndex(&this->objIndex))return;
 }
 
 
 void ObjectPropDialog::OnHiddenCheck(wxCommandEvent &event)
 {
-    event.Skip();
-    std::cout<<"Event handler (ObjectPropDialog::OnHiddenCheck) not implemented yet"<<std::endl; //notify the user that he hasn't implemented the event handler yet
+    if(!isValidIndex(&this->objIndex))return;
 }
 
 
 void ObjectPropDialog::OnCeilingCheck(wxCommandEvent &event)
 {
-    event.Skip();
-    std::cout<<"Event handler (ObjectPropDialog::OnCeilingCheck) not implemented yet"<<std::endl; //notify the user that he hasn't implemented the event handler yet
+    if(!isValidIndex(&this->objIndex))return;
 }
 
 
 void ObjectPropDialog::OnSeeCheck(wxCommandEvent &event)
 {
-    event.Skip();
-    std::cout<<"Event handler (ObjectPropDialog::OnSeeCheck) not implemented yet"<<std::endl; //notify the user that he hasn't implemented the event handler yet
+    if(!isValidIndex(&this->objIndex))return;
 }
 
 
 void ObjectPropDialog::OnHearCheck(wxCommandEvent &event)
 {
-    event.Skip();
-    std::cout<<"Event handler (ObjectPropDialog::OnHearCheck) not implemented yet"<<std::endl; //notify the user that he hasn't implemented the event handler yet
+    if(!isValidIndex(&this->objIndex))return;
 }
 
 
 void ObjectPropDialog::OnAerialCheck(wxCommandEvent &event)
 {
-    event.Skip();
-    std::cout<<"Event handler (ObjectPropDialog::OnAerialCheck) not implemented yet"<<std::endl; //notify the user that he hasn't implemented the event handler yet
+    if(!isValidIndex(&this->objIndex))return;
 }
 
 
 void ObjectPropDialog::OnNetCheck(wxCommandEvent &event)
 {
-    event.Skip();
-    std::cout<<"Event handler (ObjectPropDialog::OnNetCheck) not implemented yet"<<std::endl; //notify the user that he hasn't implemented the event handler yet
+    if(!isValidIndex(&this->objIndex))return;
 }
 
 
 void ObjectPropDialog::OnLaunchChoice(wxCommandEvent &event)
 {
-    event.Skip();
-    std::cout<<"Event handler (ObjectPropDialog::OnLaunchChoice) not implemented yet"<<std::endl; //notify the user that he hasn't implemented the event handler yet
+    if(!isValidIndex(&this->objIndex))return;
 }
 
 
 void ObjectPropDialog::OnXEdit(wxCommandEvent &event)
 {
-    event.Skip();
-    std::cout<<"Event handler (ObjectPropDialog::OnXEdit) not implemented yet"<<std::endl; //notify the user that he hasn't implemented the event handler yet
+    if(!isValidIndex(&this->objIndex))return;
 }
 
 
 void ObjectPropDialog::OnYEdit(wxCommandEvent &event)
 {
-    event.Skip();
-    std::cout<<"Event handler (ObjectPropDialog::OnYEdit) not implemented yet"<<std::endl; //notify the user that he hasn't implemented the event handler yet
+    if(!isValidIndex(&this->objIndex))return;
 }
 
 
 void ObjectPropDialog::OnZEdit(wxCommandEvent &event)
 {
-    event.Skip();
-    std::cout<<"Event handler (ObjectPropDialog::OnZEdit) not implemented yet"<<std::endl; //notify the user that he hasn't implemented the event handler yet
+    if(!isValidIndex(&this->objIndex))return;
+}
+map_object ObjectPropDialog::getObject()
+{
+    map_object obj;
+    obj.type = choice_21->GetSelection();
+    obj.index = choice_22->GetSelection();
+    //TODO obj.flags 
+    return obj;
+}
+
+void ObjectPropDialog::OnPaint(wxPaintEvent &event)
+{
+    wxDialog::OnPaint(event);
+
+    //panel_16‚Éfacing•ûŒü‚ð•`‚­
+    //TODO
 }

@@ -144,11 +144,13 @@ bool MapEditorWX::initialize()
     char CURSOR_BASE_DIR[] = "data/img/";
     char *cursorSkull = "cursor2.bmp";
     char *cursorPolygon = "cur00004.bmp";
+    char *cursorLine = "LineCursor1.bmp";
+
     int cursorId[] ={
         wxCURSOR_ARROW,
         wxCURSOR_PAINT_BRUSH,
         wxCURSOR_HAND,
-        wxCURSOR_PENCIL,
+        -1,
         wxCURSOR_MAGNIFIER,
         -1,
         wxCURSOR_IBEAM,
@@ -166,6 +168,8 @@ bool MapEditorWX::initialize()
                 fname = cursorSkull;
             }else if(i == ToolType::TI_POLYGON){
                 fname = cursorPolygon;
+            }else if(i == ToolType::TI_LINE){
+                fname = cursorLine;
             }
             wxString path = wxConvCurrent->cMB2WX(CURSOR_BASE_DIR);
             wxString pathF = wxConvCurrent->cMB2WX(fname);
@@ -188,6 +192,19 @@ bool MapEditorWX::initialize()
         img.LoadFile(wxString(wxConvCurrent->cMB2WX("data/img/onPoint.bmp")));
         img.SetMaskColour(255,255,255);
         this->onPointCursor = wxCursor(img);
+        //追加中
+        img = wxImage();
+        img.LoadFile(wxString(wxConvCurrent->cMB2WX("data/img/onPoint2.bmp")));
+        img.SetMaskColour(255,255,255);
+        this->onPointCursorAdding = wxCursor(img);
+        img = wxImage();
+        img.LoadFile(wxString(wxConvCurrent->cMB2WX("data/img/onLine2.bmp")));
+        img.SetMaskColour(255,255,255);
+        this->onLineCursorAdding = wxCursor(img);
+        img = wxImage();
+        img.LoadFile(wxString(wxConvCurrent->cMB2WX("data/img/LineCursor2.bmp")));
+        img.SetMaskColour(255,255,255);
+        this->lineToolCursorAdding = wxCursor(img);
     }
 
     //対象外の線を表示するかどうか
@@ -255,12 +272,28 @@ void MapEditorWX::setCursor()
     int editMode = this->getEventManager()->getEditModeType();
     int toolType = this->getEventManager()->getToolType();
     if(editMode == EditModeType::EM_DRAW){
-        if(toolType == ToolType::TI_LINE && this->isNowOnTheLine){
-            //線の上にいえる
-            wxSetCursor(this->onLineCursor);
-        }else if(toolType == ToolType::TI_LINE && this->isNowOnThePoint){
-            //点の上にいえる
-            wxSetCursor(this->onPointCursor);
+        if(toolType == ToolType::TI_LINE){
+            if(this->isNowOnTheLine){
+                if(this->isFirstOfLineToAdd){
+                    //線の上にいる
+                    wxSetCursor(this->onLineCursor);
+                }else{
+                    wxSetCursor(this->onLineCursorAdding);
+                }
+            }else if(toolType == ToolType::TI_LINE && this->isNowOnThePoint){
+                if(this->isFirstOfLineToAdd){
+                    //点の上にいる
+                    wxSetCursor(this->onPointCursor);
+                }else{
+                    wxSetCursor(this->onPointCursorAdding);
+                }
+            }else{
+                if(this->isFirstOfLineToAdd){
+                    wxSetCursor(cursors[toolType]);
+                }else{
+                    wxSetCursor(this->lineToolCursorAdding);
+                }
+            }
         }else{
             //TODO カーソル
             ::wxSetCursor(cursors[toolType]);

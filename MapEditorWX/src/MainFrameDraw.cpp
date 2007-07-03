@@ -202,6 +202,7 @@ void MapEditorMainFrame::drawPolygons(wxDC* dc)
         //TODO ‚‚³‚ð‹‚ß‚é•û–@
         int ceilHeight = polygon->ceiling_height;//get_endpoint_data(polygon->endpoint_indexes[0])->lowest_adjacent_ceiling_height;
         int floorHeight = polygon->floor_height;//get_endpoint_data(polygon->endpoint_indexes[0])->highest_adjacent_floor_height;
+//        hpl::error::caution("%d,%d",floorHeight,ceilHeight);
         if(!vmgr->isValidHeight(floorHeight, ceilHeight)){
             continue;
         }
