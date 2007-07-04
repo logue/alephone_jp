@@ -20,9 +20,11 @@ BEGIN_EVENT_TABLE(MapEditorMainFrame, wxFrame)
     EVT_MENU(ID_Open, MapEditorMainFrame::OnOpen)
     EVT_MENU(ID_Save, MapEditorMainFrame::OnSave)
     EVT_MENU(ID_SaveAs, MapEditorMainFrame::OnSaveAs)
+    EVT_MENU(ID_Merge, MapEditorMainFrame::OnMerge)
 
     //edit menu
     EVT_MENU(ID_Undo, MapEditorMainFrame::OnUndo)
+    EVT_MENU(ID_Redo, MapEditorMainFrame::OnRedo)
     EVT_MENU(ID_Cut, MapEditorMainFrame::OnCut)
     EVT_MENU(ID_Copy, MapEditorMainFrame::OnCopy)
     EVT_MENU(ID_Paste, MapEditorMainFrame::OnPaste)

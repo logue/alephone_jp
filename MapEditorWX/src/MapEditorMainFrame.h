@@ -53,13 +53,15 @@ enum
     ID_About = wxID_ABOUT,
 
     ID_Undo = wxID_UNDO,
+    ID_Redo = wxID_REDO,
     ID_Cut = wxID_CUT,
     ID_Copy = wxID_COPY,
     ID_Paste = wxID_PASTE,
     ID_Preference = wxID_PREFERENCES,
 
+    ID_Merge = 1,
     //show
-    ID_ToolDialog = 1,
+    ID_ToolDialog,
     ID_ZoomIn,
     ID_ZoomOut,
     ID_ZoomDefault,
@@ -209,9 +211,11 @@ public:
     void OnPrintSetup(wxCommandEvent& ev);
     void OnQuit(wxCommandEvent& ev);
     void OnAbout(wxCommandEvent& ev);
+    void OnMerge(wxCommandEvent& ev);
 
     //編集メニュー<en>Edit menus
     void OnUndo(wxCommandEvent& ev);
+    void OnRedo(wxCommandEvent& ev);
     void OnCut(wxCommandEvent& ev);
     void OnCopy(wxCommandEvent& ev);
     void OnPaste(wxCommandEvent& ev);
@@ -394,4 +398,12 @@ private:
     void closeAllModelessDialogs();
 
     void initLevel();
+
+    /**
+        ダイアログを出して編集中のマップを破壊してよいかを聞き出します。
+        
+        @param ユーザからOKが出れば真。出なければ偽。
+            また、編集されてなければ真が返る
+    */
+    bool askDestructMap();
 };

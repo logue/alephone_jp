@@ -37,6 +37,12 @@ bool SelectLevelDialog::Create(wxWindow* parent, wxWindowID id)
     grid_sizer_17->Fit(this);
     Layout();
 
+    for(int i = 0; i < (int)wxGetApp().levelNameList.size(); i ++){
+        list_box_4->Insert(wxConvertMB2WX(wxGetApp().levelNameList[i].c_str()), i);
+    }
+    if(wxGetApp().levelNameList.size() == 0){
+        list_box_4->Insert(_T("unknown"), 0);
+    }
     return result;
 }
 void SelectLevelDialog::OnList(wxCommandEvent &event)

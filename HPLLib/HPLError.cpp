@@ -8,6 +8,8 @@ const int BUF_MAX = 1024;
 #ifdef WX
 
 #include <wx/wx.h>
+#include <wx/defs.h>
+#include <wx/debug.h>
 
 #endif
 #ifdef WIN32
@@ -27,14 +29,8 @@ void hpl::error::caution(const char* format, ...)
     vsprintf(message, format, maker);
 //    int len = strlen(message);
 
-#ifdef WX
-#ifdef UNICODE/*
-    wchar_t wmsg[BUF_MAX];
-    size_t wlen = wxMBConv::MB2WC(wmsg, message, BUF_MAX);*/
+#ifdef __WXDEBUG__
     wxMessageBox(wxConvCurrent->cMB2WX(message));
-#else
-    wxMessageBox(message);
-#endif
 #endif
 #ifdef WIN32
 //    MessageBox(NULL, 
@@ -52,5 +48,9 @@ void hpl::error::halt(const char* format, ...)
     va_start(maker, format);
     vsprintf(message, format, maker);
     caution(message);
+#ifdef __WXDEBUG__
+    wxASSERT(false);
+#else
     exit(-1);
+#endif
 }

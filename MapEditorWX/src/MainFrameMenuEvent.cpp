@@ -10,9 +10,11 @@ void MapEditorMainFrame::OnPrint(wxCommandEvent& ev)
 }
 void MapEditorMainFrame::OnPrintPreview(wxCommandEvent& ev)
 {
+    //TODO
 }
 void MapEditorMainFrame::OnPrintSetup(wxCommandEvent& ev)
 {
+    //TODO
 }
 
 void MapEditorMainFrame::initLevel()
@@ -40,14 +42,30 @@ void MapEditorMainFrame::initLevel()
     wxGetApp().getViewGridManager()->setViewHeightMin(SHRT_MAX);
     wxGetApp().getViewGridManager()->setViewHeightMin(SHRT_MIN);
 }
-void MapEditorMainFrame::OnNew(wxCommandEvent& ev)
+
+/**
+    ダイアログを出して編集中のマップを破壊してよいかを聞き出します。
+    @param ユーザからOKが出れば真。出なければ偽。
+        また、編集されてなければ真が返る
+*/
+bool MapEditorMainFrame::askDestructMap()
 {
     if(wxGetApp().isChanged){
         wxMessageDialog dlg(this, _T("Map has been modified. Are you sure that delete this and create new one?"));
-        if(dlg.ShowModal() == wxID_CANCEL){
+        if(dlg.ShowModal() == wxID_OK){
+            return true;
+        }else{
             //拒否
-            return;
+            return false;
         }
+    }
+    return true;
+}
+
+void MapEditorMainFrame::OnNew(wxCommandEvent& ev)
+{
+    if(!this->askDestructMap()){
+        return ;
     }
     initLevel();
 
@@ -63,18 +81,22 @@ void MapEditorMainFrame::OnNew(wxCommandEvent& ev)
 
     Refresh();
 }
-void MapEditorMainFrame::OnNewLevel(wxCommandEvent& ev)
-{
-    //新規レベル作成
-    //TODO 不要？
-    //マージされているマップは保存できない
 
-
+static void loadLevel(int i){
+    bool check = load_level_from_map(wxGetApp().editLevelIndex);
+    if(!check){
+        wxMessageBox(_T("failed"));
+    }
+    //セットアップ
+    wxGetApp().getStockManager()->updateDeletes();
 }
-
 void MapEditorMainFrame::OnOpen(wxCommandEvent& WXUNUSED(ev))
 {
-    //TODO 未セーブチェック
+    //未セーブチェック
+    if(!this->askDestructMap()){
+        return ;
+    }
+
     wxFileDialog fileDialog(this, _T("Choose a file"),
         _T("."), _T(""), _T("*.*"));
 
@@ -94,10 +116,7 @@ void MapEditorMainFrame::OnOpen(wxCommandEvent& WXUNUSED(ev))
         initLevel();
 
         //Level1を読み込み
-        bool check = load_level_from_map(wxGetApp().editLevelIndex);
-        if(!check){
-            wxMessageBox(_T("failed"));
-        }
+        loadLevel(0);
 
         //インデックス
         wxGetApp().levelNameList.clear();
@@ -114,8 +133,6 @@ void MapEditorMainFrame::OnOpen(wxCommandEvent& WXUNUSED(ev))
                 wxGetApp().levelNameList.push_back("unnamed");
             }
         }
-        //セットアップ
-        wxGetApp().getStockManager()->updateDeletes();
         //再描画
         Refresh();
     }
@@ -155,20 +172,41 @@ void MapEditorMainFrame::OnSaveAs(wxCommandEvent& ev)
     }
 }
 
+void MapEditorMainFrame::OnMerge(wxCommandEvent& ev)
+{
+    //ディレクトリを指定し、フォーマットに従ってレベルをマージする
+    //TODO
+}
 /////////////////////////////////////////////////////////////////////
 /////////////////////////////////////////////////////////////////////
 // edit menus
 void MapEditorMainFrame::OnUndo(wxCommandEvent& ev)
 {
+    //TODO
+    /*
+        処理すべきは
+        ・マップアイテムの追加
+        ・              の削除
+        ・              の設定変更(移動含む)
+        くらいかな？（それ以外の処理については無視。要望があれば応える感じ）
+    */
+    //bool result = 
+}
+void MapEditorMainFrame::OnUndo(wxCommandEvent& ev)
+{
+    //TODO REDO
 }
 void MapEditorMainFrame::OnCut(wxCommandEvent& ev)
 {
+    //TODO
 }
 void MapEditorMainFrame::OnCopy(wxCommandEvent& ev)
 {
+    //TODO
 }
 void MapEditorMainFrame::OnPaste(wxCommandEvent& ev)
 {
+    //TODO
 }
 void MapEditorMainFrame::OnPreference(wxCommandEvent& ev)
 {
@@ -390,34 +428,27 @@ void MapEditorMainFrame::OnCeilingTextureMode(wxCommandEvent& ev)
 void MapEditorMainFrame::OnJumpLevel(wxCommandEvent& ev)
 {
     //TODO
+    //保存確認
+    //未セーブチェック
+    if(!this->askDestructMap()){
+        return ;
+    }
     SelectLevelDialog dlg;
     dlg.Create(this, wxID_ANY);
     if(dlg.ShowModal() == wxID_OK){
+        int sel = dlg.getSelectLevel();
+        wxGetApp().editLevelIndex = sel;
+        //ステージ読み込み
+        initLevel();
+        loadLevel(sel);
     }
 }
 void MapEditorMainFrame::OnLevelInfo(wxCommandEvent& ev)
 {
-    //保存確認
-    if(wxGetApp().isChanged){
-        if(wxMessageBox(_T("This level has been edited. Destruct it?"), _T("Message"), 
-            wxOK | wxCANCEL) == wxCANCEL)
-        {
-            return;
-        }
-    }
     LevelInfoDialog dlg;
     dlg.Create(this, wxID_ANY);
     if(dlg.ShowModal() != wxCANCEL){
-        //初期化
-        this->initLevel();
-        
-        int index = wxGetApp().editLevelIndex;
-        //読み込み
-        bool check = load_level_from_map(index);
-        if(!check){
-            hpl::error::caution("Loading level[%d] failure", index);
-        }
-        wxGetApp().getStockManager()->updateDeletes();
+        //設定反映
     }
 }
 void MapEditorMainFrame::OnObjectPlacement(wxCommandEvent& ev)

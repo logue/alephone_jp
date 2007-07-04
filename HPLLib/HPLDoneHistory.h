@@ -12,6 +12,7 @@
 #include <vector>
 #include "HPLSelectData.h"
 #include "HPLRealMapData.h"
+#include "HPLStockManager.h"
 
 namespace hpl{
 namespace aleph{
@@ -24,13 +25,25 @@ namespace map{
         };
     };
     
+    /**
+        ユーザの行った行動のまとめ
+    */
+    class HPLActionItem{
+    private:
+        HPLActionItem(){}
+    public:
+        HPLActionItem(int t, hpl::aleph::map::HPLSelectData& sel, hpl::aleph::map::HPLRealMapData& real);
+        ~HPLActionItem();
+        int type;
+        hpl::aleph::map::HPLSelectData selectData;
+        hpl::aleph::map::HPLRealMapData realData;
+    };
+
     class HPLDoneHistory{
     private:
-        //触ったデータ情報
-        std::vector<HPLSelectData> dataList;
+        std::vector<HPLActionItem> actionList;
 
-        //触った実データの控え
-        std::vector<HPLRealMapData> realList;
+        int index;
     public:
         HPLDoneHistory();
         ~HPLDoneHistory();
@@ -38,15 +51,29 @@ namespace map{
     public:
         /**
             情報を追加します
+            @param type ActionTypeで定義している、ユーザが取った行動
         */
-        void push_back(HPLSelectData selectData);
+        void push_back(int type, HPLSelectData& selectData);
 
         /**
-            最後からindex番目の要素を取り出します。
-            最大記憶量を超えていたらNULLが入り、falseが返ります
+            index番目のものを取り出します。
+            最大記憶量を超えていたらfalseが返ります。ポインタは無視されます
+            取り出したとしても、selectDataは
+            ・保存によって削除が実行された後
+            にインデックス値が変化してしまうため、updateIndexes()を呼ぶ必要がある
         */
-        bool getLastIndexOf(int index,
-            HPLSelectData* selectData, HPLRealMapData* realData);
+        bool back(int *type, hpl::aleph::map::HPLSelectData* selectData, hpl::aleph::map::HPLRealMapData* realData);
+
+        void forward(int *type, hpl::aleph::map::HPLSelectData* selectData,
+            hpl::aleph::map::HPLRealMapData* realData);
+        /**
+            インデックス番号を削除後のものに対応させます。
+        */
+        void updateIndexes(hpl::aleph::HPLStockManager* smgr);
+
+        int getIndex();
+        int getRemainUndoCount();
+        int getRemainRedoCount();
     private:
     };
 };
