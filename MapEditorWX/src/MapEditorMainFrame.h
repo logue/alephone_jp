@@ -42,7 +42,6 @@
 enum
 {
     ID_New = wxID_NEW,
-    ID_NewLevel = 0,
     ID_Open = wxID_OPEN,
     ID_Save = wxID_SAVE,
     ID_SaveAs = wxID_SAVEAS,
@@ -202,7 +201,6 @@ public:
     //メニュー<en> menu
     //ファイルメニュー <en>Files menu
     void OnNew(wxCommandEvent& ev);
-    void OnNewLevel(wxCommandEvent& ev);
     void OnOpen(wxCommandEvent& ev);
     void OnSave(wxCommandEvent& ev);
     void OnSaveAs(wxCommandEvent& ev);

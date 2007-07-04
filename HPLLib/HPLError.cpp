@@ -6,8 +6,11 @@
 const int BUF_MAX = 1024;
 
 #ifdef WX
-
 #include <wx/wx.h>
+#endif
+
+#ifdef __WXDEBUG__
+
 #include <wx/defs.h>
 #include <wx/debug.h>
 

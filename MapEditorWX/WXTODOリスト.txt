@@ -167,7 +167,7 @@ TODO ObjectPlacement
 	→たぶん入ってない？
 --
 TODO 2007 07 01
-Jump (Select) other level
+？ Jump (Select) other level
 object place
 placement dialog edit <-> listctrl
 object/point/side/line prop
@@ -180,10 +180,10 @@ heights/light/media/sound palette
 texture dialog
 load textures from shapes file
 level info dialog I/O
-double click when line tool using
-LineListなどのvectorにpush_back,removeなどをすると、メモリの再割り当て（サイズ変更）
+済み double click when line tool using
+注意 LineListなどのvectorにpush_back,removeなどをすると、メモリの再割り当て（サイズ変更）
 	によってポインタアドレスが変化することがある。
-追加・削除した場合、これまでに保持しているline_data*などのポインタは使わないこと！
+	追加・削除した場合、これまでに保持しているline_data*などのポインタは使わないこと！
 
 済み quickSortの検証
 済み TODO 線追加中と追加終了（開始前）とでカーソルの形を変える
@@ -198,3 +198,8 @@ TODO アイテムを動かしたらisChanged = trueにする
 	そのときタイトルを MapEditorOneWX * [レベル番号] [レベル名]にする
 TODO Merge Map メニューアイテムの追加
 TODO 読み込み→保存の時に、デフォルトをレベル名にする？
+
+TODO サウンド選択→死亡
+TODO 他のオブジェクトを選択しても、動かしたりしないと変わらない
+	Refresh?
+TODO ポリゴン塗りつぶし失敗の時のダイアログがうざい

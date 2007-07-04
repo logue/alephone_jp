@@ -192,7 +192,7 @@ void MapEditorMainFrame::OnUndo(wxCommandEvent& ev)
     */
     //bool result = 
 }
-void MapEditorMainFrame::OnUndo(wxCommandEvent& ev)
+void MapEditorMainFrame::OnRedo(wxCommandEvent& ev)
 {
     //TODO REDO
 }

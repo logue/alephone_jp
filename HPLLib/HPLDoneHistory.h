@@ -53,7 +53,7 @@ namespace map{
             情報を追加します
             @param type ActionTypeで定義している、ユーザが取った行動
         */
-        void push_back(int type, HPLSelectData& selectData);
+        void push_back(int type, HPLSelectData& selData);
 
         /**
             index番目のものを取り出します。
@@ -64,8 +64,8 @@ namespace map{
         */
         bool back(int *type, hpl::aleph::map::HPLSelectData* selectData, hpl::aleph::map::HPLRealMapData* realData);
 
-        void forward(int *type, hpl::aleph::map::HPLSelectData* selectData,
-            hpl::aleph::map::HPLRealMapData* realData);
+        bool forward(int *type, HPLSelectData* selectData, HPLRealMapData* realData);
+
         /**
             インデックス番号を削除後のものに対応させます。
         */

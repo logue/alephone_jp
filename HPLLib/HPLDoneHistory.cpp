@@ -1,8 +1,5 @@
 #include "HPLDoneHistory.h"
-
-#ifdef __WXDEBUG__
-#include <wx/debug.h>
-#endif
+#include "HPLError.h"
 
 hpl::aleph::map::HPLActionItem::HPLActionItem(int t, hpl::aleph::map::HPLSelectData& sel, hpl::aleph::map::HPLRealMapData& real)
 {
@@ -22,13 +19,12 @@ hpl::aleph::map::HPLDoneHistory::HPLDoneHistory()
 }
 hpl::aleph::map::HPLDoneHistory::~HPLDoneHistory()
 {
-    dataList.clear();
-    realList.clear();
+    actionList.clear();
 }
 /**
     情報を追加します
 */
-void hpl::aleph::map::HPLDoneHistory::push_back(int type, HPLSelectData& selectData)
+void hpl::aleph::map::HPLDoneHistory::push_back(int type, HPLSelectData& selData)
 {
     //現在の位置(index)から後ろ部分を削除します
     if(index >= 0){
@@ -38,22 +34,16 @@ void hpl::aleph::map::HPLDoneHistory::push_back(int type, HPLSelectData& selectD
             it = actionList.erase(it);
         }
     }
-    while(index >= 0 && index < actionList.size()){
-        actionList.
-    }
     //実データを取得します
     hpl::aleph::map::HPLRealMapData realData;
-    realData.set(&selectData);
+    realData.set(&selData);
 
-    //コピー
-    hpl::aleph::map::HPLSelectData selDat;
-    memcpy(&selData, &selectData, sizeof(hpl::aleph::map::HPLSelectData));
     //追加
-    hpl::aleph::map::HPLActionItem act = hpl::aleph::map::HPLActionItem(type, selDat, realData);
+    hpl::aleph::map::HPLActionItem act = hpl::aleph::map::HPLActionItem(type, selData, realData);
     this->actionList.push_back(act);
 
     
-    index = actionList.size() - 1;
+    index = (int)actionList.size() - 1;
 }
 
 /**
@@ -79,7 +69,7 @@ bool hpl::aleph::map::HPLDoneHistory::back(int *type, hpl::aleph::map::HPLSelect
 }
 bool hpl::aleph::map::HPLDoneHistory::forward(int *type, HPLSelectData* selectData, HPLRealMapData* realData)
 {
-    if(index >= this->actionList.size()){
+    if(index >= (int)this->actionList.size()){
         return false;
     }
     hpl::aleph::map::HPLActionItem act = this->actionList[index];
@@ -104,9 +94,9 @@ int hpl::aleph::map::HPLDoneHistory::getIndex()
 }
 int hpl::aleph::map::HPLDoneHistory::getRemainUndoCount()
 {
-    //TODO
+    return index;
 }
 int hpl::aleph::map::HPLDoneHistory::getRemainRedoCount()
 {
-    //TODO
+    return actionList.size() - index;
 }

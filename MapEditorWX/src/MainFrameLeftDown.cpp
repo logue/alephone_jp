@@ -8,6 +8,13 @@
 */
 void MapEditorMainFrame::OnLeftDown(wxMouseEvent &ev)
 {
+    //線・点・オブジェクト・ポリゴン・Sideの指定を解除する
+    linePropDialog.setLineIndex(NONE);
+    pointPropDialog.setIndex(NONE);
+    objPropDialog.setObjIndex(NONE);
+    polyPropDialog.setPolyIndex(NONE);
+    sidePropDialog.setIndex(NONE);
+
     //カーソル設定
     wxGetApp().setCursor();
     //マウス座標記録

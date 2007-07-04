@@ -16,7 +16,6 @@ BEGIN_EVENT_TABLE(MapEditorMainFrame, wxFrame)
     EVT_MENU(ID_PrintPreview, MapEditorMainFrame::OnPrintPreview)
     EVT_MENU(ID_PrintSetup, MapEditorMainFrame::OnPrintSetup)
     EVT_MENU(ID_New, MapEditorMainFrame::OnNew)
-    EVT_MENU(ID_NewLevel, MapEditorMainFrame::OnNewLevel)
     EVT_MENU(ID_Open, MapEditorMainFrame::OnOpen)
     EVT_MENU(ID_Save, MapEditorMainFrame::OnSave)
     EVT_MENU(ID_SaveAs, MapEditorMainFrame::OnSaveAs)
@@ -155,7 +154,6 @@ void MapEditorMainFrame::setupMenus()
     //ファイルメニュー <en> file menu
     wxMenu *menuFile = new wxMenu;
     menuFile->Append(ID_New, _T("&New"), _T("create new map"));
-    menuFile->Append(ID_NewLevel, _T("&NewLevel"), _T("insert new level"));
     menuFile->Append(ID_Open, _T("&Open"), _T("open map file"));
     menuFile->Append(ID_Save, _T("&Save"), _T("save current map"));
     menuFile->Append(ID_SaveAs, _T("SaveAs ..."), _T("save current map as another name"));
@@ -163,6 +161,8 @@ void MapEditorMainFrame::setupMenus()
     menuFile->Append(ID_Print, _T("&Print"), _T("print current level"));
     menuFile->Append(ID_PrintPreview, _T("Print Preview"), _T("print preview"));
     menuFile->Append(ID_PrintSetup, _T("Print Setup ..."), _T("print setup"));
+    menuFile->AppendSeparator();
+    menuFile->Append(ID_Merge, _T("&Merge ..."), _T("merge map"));
     menuFile->AppendSeparator();
     menuFile->Append(ID_Quit, _T("E&xit"), _T("exit program"));
 

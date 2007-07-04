@@ -28,7 +28,7 @@ BEGIN_EVENT_TABLE(ObjectPropDialog, wxDialog)
     EVT_TEXT(ID_X, ObjectPropDialog::OnXEdit)
     EVT_TEXT(ID_Y, ObjectPropDialog::OnYEdit)
     EVT_TEXT(ID_Z, ObjectPropDialog::OnZEdit)
-    EVT_PAINT(ObjectPropDialog::OnPaint)
+//    EVT_PAINT(ObjectPropDialog::OnPaint)
 END_EVENT_TABLE()
 ObjectPropDialog::ObjectPropDialog()
 {
@@ -225,7 +225,7 @@ static bool isValidIndex(int *index)
     if(*index == NONE){
         return false;
     }
-    if(*index < 0 || *index >= SavedObjectList.size()){
+    if(*index < 0 || *index >= (int)SavedObjectList.size()){
         hpl::error::caution("target object not found.");
         *index = NONE;
         return false;
