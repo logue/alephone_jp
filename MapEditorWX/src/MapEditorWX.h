@@ -206,6 +206,8 @@ private:
     //ストック情報管理
     hpl::aleph::HPLStockManager stockManager;
 
+    //Shapesマネージャー
+    hpl::shapes::HPLShapesManager shapesManager;
 
     //ツールごとのカーソル
     wxCursor cursors[ToolType::NUMBER_OF_TOOLS];
@@ -222,6 +224,11 @@ private:
     wxCursor onPointCursorAdding;
     wxCursor lineToolCursorAdding;
 
+    //バケツ
+    wxCursor fillCursor;
+    //虫眼鏡
+    wxCursor magCursor;
+
     //ウインドウフレーム
     MapEditorMainFrame *frame;
 public:
@@ -233,6 +240,9 @@ public:
         ビューグリッドの調整マネージャーを取得します
     */
     hpl::aleph::view::HPLViewGridManager* getViewGridManager();
+
+    //Shapesマネージャー取得
+    hpl::shapes::HPLShapesManager* getShapesManager();
 
     virtual bool OnInit();
     /**
@@ -261,6 +271,11 @@ public:
         ビットマップの読み込み（簡易版）
     */
     void loadBitmap(const char* fname, wxImage* bitmap);
+    void loadImage(const char* fname, wxImage* bitmap);
+    /**
+        カラーマスク付きで読み込み
+    */
+    void loadImage(const char* fname, wxImage* img, int r, int g, int b);
 
     /**
         現在のモード・ツールにあわせてカーソルを変更します

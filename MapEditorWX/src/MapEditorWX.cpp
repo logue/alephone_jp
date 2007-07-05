@@ -145,13 +145,15 @@ bool MapEditorWX::initialize()
     char *cursorSkull = "cursor2.bmp";
     char *cursorPolygon = "cur00004.bmp";
     char *cursorLine = "LineCursor1.bmp";
+    char *cursorFill = "pot.bmp";
+    char *cursorMag = "mag.bmp";
 
     int cursorId[] ={
         wxCURSOR_ARROW,
-        wxCURSOR_PAINT_BRUSH,
+        -1,
         wxCURSOR_HAND,
         -1,
-        wxCURSOR_MAGNIFIER,
+        -1,
         -1,
         wxCURSOR_IBEAM,
         -1
@@ -170,6 +172,10 @@ bool MapEditorWX::initialize()
                 fname = cursorPolygon;
             }else if(i == ToolType::TI_LINE){
                 fname = cursorLine;
+            }else if(i == ToolType::TI_FILL){
+                fname = cursorFill;
+            }else if(i == ToolType::TI_MAGNIFY){
+                fname = cursorMag;
             }
             wxString path = wxConvCurrent->cMB2WX(CURSOR_BASE_DIR);
             wxString pathF = wxConvCurrent->cMB2WX(fname);
@@ -184,27 +190,17 @@ bool MapEditorWX::initialize()
     }
     {
         wxImage img;
-        wxString str = wxConvCurrent->cMB2WX("data/img/onLine.bmp");
-        img.LoadFile(str);
-        img.SetMaskColour(255,255,255);
-        this->onLineCursor = wxCursor(img);
-        img = wxImage();
-        img.LoadFile(wxString(wxConvCurrent->cMB2WX("data/img/onPoint.bmp")));
-        img.SetMaskColour(255,255,255);
-        this->onPointCursor = wxCursor(img);
-        //追加中
-        img = wxImage();
-        img.LoadFile(wxString(wxConvCurrent->cMB2WX("data/img/onPoint2.bmp")));
-        img.SetMaskColour(255,255,255);
-        this->onPointCursorAdding = wxCursor(img);
-        img = wxImage();
-        img.LoadFile(wxString(wxConvCurrent->cMB2WX("data/img/onLine2.bmp")));
-        img.SetMaskColour(255,255,255);
-        this->onLineCursorAdding = wxCursor(img);
-        img = wxImage();
-        img.LoadFile(wxString(wxConvCurrent->cMB2WX("data/img/LineCursor2.bmp")));
-        img.SetMaskColour(255,255,255);
-        this->lineToolCursorAdding = wxCursor(img);
+        loadImage("data/img/onLine.bmp", &img, 255,255,255);
+        onLineCursor = wxCursor(img);
+        loadImage("data/img/onPoint.bmp", &img, 255,255,255);
+        onPointCursor = wxCursor(img);
+        loadImage("data/img/onPoint2.bmp", &img, 255,255,255);
+        onPointCursorAdding = wxCursor(img);
+        loadImage("data/img/onLine2.bmp", &img, 255,255,255);
+        onLineCursorAdding = wxCursor(img);
+        loadImage("data/img/LineCursor2.bmp", &img, 255,255,255);
+        lineToolCursorAdding = wxCursor(img);
+
     }
 
     //対象外の線を表示するかどうか
@@ -229,6 +225,11 @@ hpl::aleph::HPLEventManager* MapEditorWX::getEventManager()
 hpl::aleph::HPLStockManager* MapEditorWX::getStockManager()
 {
     return &this->stockManager;
+}
+//Shapesマネージャー取得
+hpl::shapes::HPLShapesManager* MapEditorWX::getShapesManager()
+{
+    return &this->shapesManager;
 }
 
 //ビュー座標をワールド座標に直す操作の簡易版
@@ -262,6 +263,20 @@ void MapEditorWX::loadBitmap(const char* fname, wxImage* bitmap)
     if(!bitmap->LoadFile(wxConvCurrent->cMB2WX(fname), wxBITMAP_TYPE_BMP)){
         hpl::error::halt("Couldn't load bitmap[%s]", fname);
     }
+
+}
+void MapEditorWX::loadImage(const char* fname, wxImage* bitmap)
+{
+    loadBitmap(fname, bitmap);
+}
+/**
+    カラーマスク付きで読み込み
+*/
+void MapEditorWX::loadImage(const char* fname, wxImage* img, int r, int g, int b)
+{
+    loadBitmap(fname, img);
+    //カラーマスク設定
+    img->SetMaskColour(r,g,b);
 }
 
 /**

@@ -324,10 +324,10 @@ map_object ObjectPropDialog::getObject()
 
     //obj.polygon_index = text_ctr
 
-    obj.facing = atoi(wxConvertWX2MB(text_ctrl_38));
-    obj.location.x = atoi(wxConvertWX2MB(text_ctrl_39));
-    obj.location.x = atoi(wxConvertWX2MB(text_ctrl_40));
-    obj.location.x = atoi(wxConvertWX2MB(text_ctrl_41));
+    obj.facing = atoi(wxConvertWX2MB(text_ctrl_38->GetValue()));
+    obj.location.x = atoi(wxConvertWX2MB(text_ctrl_39->GetValue()));
+    obj.location.x = atoi(wxConvertWX2MB(text_ctrl_40->GetValue()));
+    obj.location.x = atoi(wxConvertWX2MB(text_ctrl_41->GetValue()));
     return obj;
 }
 

@@ -560,12 +560,17 @@ void MapEditorMainFrame::drawAnnotations(wxDC* dc)
                 wxGetApp().setting.getColorSetting()->strings[1],
                 wxGetApp().setting.getColorSetting()->strings[2]);
     dc->SetTextForeground(col);
+    dc->SetPen(wxRED_PEN);
+    dc->SetBrush(wxTRANSPARENT_BRUSH);
+
     for(int i = 0; i < (int)MapAnnotationList.size(); i ++){
         map_annotation *annotation = &MapAnnotationList[i];
         int drawPoint[2];
         wxGetApp().getViewPointFromWorldPoint(annotation->location, drawPoint);
 
-        //
+        //“_‚ÌˆÊ’u‚ðÔŠÛ‚Å•\Ž¦
+        dc->DrawCircle(drawPoint[0], drawPoint[1], POINT_DISTANCE_EPSILON);
+        //•¶Žš—ñ•`‰æ
         wxString str(wxConvCurrent->cMB2WX(annotation->text));
         dc->DrawText(str, drawPoint[0], drawPoint[1]);
     }

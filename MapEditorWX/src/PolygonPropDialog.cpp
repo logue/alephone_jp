@@ -536,7 +536,7 @@ void PolygonPropDialog::OnPlatformBtn(wxCommandEvent &event)
         return ;
     }
     PlatformDialog dlg;
-    dlg.Create(this, wxID_ANY);
+    dlg.Create(this, wxID_ANY, this->getPolyIndex());
     if(dlg.ShowModal() == wxID_OK){
         //TODO
         //İ’è•ÏX

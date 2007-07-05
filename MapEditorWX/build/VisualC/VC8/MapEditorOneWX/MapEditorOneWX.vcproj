@@ -535,6 +535,14 @@
 				>
 			</File>
 			<File
+				RelativePath="..\..\..\..\..\HPLLib\HPLShapesManager.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\..\..\HPLLib\HPLShapesManager.h"
+				>
+			</File>
+			<File
 				RelativePath="..\..\..\..\..\HPLLib\HPLStockManager.cpp"
 				>
 			</File>

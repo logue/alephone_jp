@@ -8,6 +8,7 @@
 #include "HPLViewGridManager.h"
 #include "HPLEventManager.h"
 #include "HPLStockManager.h"
+#include "HPLShapesManager.h"
 
 //ˆê”ÊŒü‚¯
 #include "HPLMath.h"

@@ -135,6 +135,8 @@ void MapEditorMainFrame::doLButtonOnArrowTool(wxMouseEvent& ev)
         }
     }
     //何も選択していない状態
+
+
     //一つを選択できるか試してみます
     if(this->tryToSelectOneItem(ev)){
         //選択範囲は解除します
@@ -182,6 +184,7 @@ bool MapEditorMainFrame::tryToSelectOneItem(wxMouseEvent& ev)
     //選択の優先順位は
     //1:オブジェクト
     //2:点
+    //-:アノテーション
     //3:線
     //4:ポリゴン
 
@@ -586,7 +589,7 @@ void MapEditorMainFrame::doLButtonOnSkullTool(wxMouseEvent& ev)
             int flags = 0;
             map_object objv = this->objPropDialog.getObject();
             objv.polygon_index = i;
-            int newIndex = hpl::aleph::map::addMapSavedObject(obj);
+            int newIndex = hpl::aleph::map::addMapSavedObject(objv);
             found = true;
             break;
         }
@@ -600,33 +603,65 @@ void MapEditorMainFrame::doLButtonOnTextTool(wxMouseEvent& ev)
 {
 #ifdef MAP_VIEWER
 #else
-    //アノテーション追加
-    //ダイアログ準備
-    AnnotationDialog dlg;
-    map_annotation sample;
-    //初期化
-    memset(&sample, 0, SIZEOF_map_annotation);
+    //shiftを押しながらだと編集モードになる
+    if(ev.ShiftDown()){
+        int annotationIndex = NONE;
+        //アノテーションを選択できるか試してみます
+        for(int i = 0; i < (int)MapAnnotationList.size(); i ++){
+            map_annotation* annotation = &MapAnnotationList[i];
+            if(hpl::aleph::map::isSelectPoint(mx, my,
+                annotation->location.x, annotation->location.y,
+                voffset[0], voffset[1], OFFSET_X_WORLD, OFFSET_Y_WORLD,
+                div, POINT_DISTANCE_EPSILON))
+            {
+                //選択出来た
+                annotationIndex = i;
+                break;
+            }
+        }
+        if(annotationIndex != NONE){
+            //アノテーションを編集します
+            AnnotationDialog dlg;
+            dlg.Create(this, wxID_ANY, MapAnnotation[annotationIndex]);
+            if(dlg.ShowModal() == wxOK){
+                map_annotation newAn = dlg.getAnnotation();
+                //変更
+                memcpy(&MapAnnotation[annotationIndex],
+                    &newAn, sizeof(map_annotation));
+            }
+        }
 
-    //マウス座標の位置に追加する
-    int viewX = ev.m_x;
-    int viewY = ev.m_y;
-    world_point2d wpoint = wxGetApp().getWorldPointFromViewPoint(viewX, viewY);
-    sample.location.x = wpoint.x;
-    sample.location.y = wpoint.y;
-    sample.polygon_index = NONE;
+        //見つからなかった
+        hpl::error;;caution("No annotation found there");
+    }else{
 
-    //ダイアログ表示
-    dlg.Create(this, ID_ANNOTATION_DIALOG, sample);
-    if(dlg.ShowModal() == wxID_OK){
-        //決定
-        //アノテーションデータを取得
-        map_annotation newAnnotation = dlg.getAnnotation();
-        //追加
-        hpl::aleph::map::addAnnotation(newAnnotation);
+        //アノテーション追加
+        //ダイアログ準備
+        AnnotationDialog dlg;
+        map_annotation sample;
+        //初期化
+        memset(&sample, 0, SIZEOF_map_annotation);
+
+        //マウス座標の位置に追加する
+        int viewX = ev.m_x;
+        int viewY = ev.m_y;
+        world_point2d wpoint = wxGetApp().getWorldPointFromViewPoint(viewX, viewY);
+        sample.location.x = wpoint.x;
+        sample.location.y = wpoint.y;
+        sample.polygon_index = NONE;
+
+        //ダイアログ表示
+        dlg.Create(this, ID_ANNOTATION_DIALOG, sample);
+        if(dlg.ShowModal() == wxID_OK){
+            //決定
+            //アノテーションデータを取得
+            map_annotation newAnnotation = dlg.getAnnotation();
+            //追加
+            hpl::aleph::map::addAnnotation(newAnnotation);
+        }
+        //情報を更新する
+        wxGetApp().getStockManager()->updateDeletes();
     }
-    //情報を更新する
-    wxGetApp().getStockManager()->updateDeletes();
-
 #endif
 }
 void MapEditorMainFrame::doLButtonOnPolygonTool(wxMouseEvent& ev)
