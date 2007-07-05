@@ -313,6 +313,12 @@
 				RelativePath="..\..\..\..\..\HPLLib\HPLSelectData.h">
 			</File>
 			<File
+				RelativePath="..\..\..\..\src\HPLShapesManager.cpp">
+			</File>
+			<File
+				RelativePath="..\..\..\..\src\HPLShapesManager.h">
+			</File>
+			<File
 				RelativePath="..\..\..\..\..\HPLLib\HPLStockManager.cpp">
 			</File>
 			<File

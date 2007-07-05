@@ -10,7 +10,7 @@ PlatformDialog::PlatformDialog()
 PlatformDialog::~PlatformDialog()
 {
 }
-bool PlatformDialog::Create(wxWindow* parent, wxWindowID id)
+bool PlatformDialog::Create(wxWindow* parent, wxWindowID id, int pindex)
 {
     bool result = wxDialog::Create(parent, id, _T("Platform"));
 
@@ -213,11 +213,20 @@ bool PlatformDialog::Create(wxWindow* parent, wxWindowID id)
     sizer_1->Fit(this);
     Layout();
 
+    //チョイスの初期化
+    //TODO 
+    //値の設定
+    //TODO 
+    polyIndex = pindex;
+
     return result;
 }
 
 void PlatformDialog::OnOk(wxCommandEvent& ev)
 {
+    //値の反映
+    //TODO 
+
     SetReturnCode(wxID_OK);
     Destroy();
 }

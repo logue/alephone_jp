@@ -158,6 +158,9 @@ void LinePropDialog::setupDialog()
     choice_27->Insert(_T("NONE"), (int)PolygonList.size());
 
 
+    //ƒ^ƒCƒgƒ‹Ý’è
+    SetTitle(getString("line ID = [%d", getLineIndex()));
+
     if(this->getLineIndex() == NONE){
         return;
     }

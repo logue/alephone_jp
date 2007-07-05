@@ -38,22 +38,22 @@ ObjectPropDialog::~ObjectPropDialog()
 }
 bool ObjectPropDialog::Create(wxWindow* parent, wxWindowID id)
 {
-    bool result = wxDialog::Create(parent, id, _T("Object Properties"));
-    label_45 = new wxStaticText(this, wxID_ANY, wxT("Object type"));
+    bool result = wxDialog::Create(parent, id, _T("Edit Object"));
+    label_45 = new wxStaticText(this, wxID_ANY, wxT("Group"));
     text_ctrl_27 = new wxTextCtrl(this, wxID_ANY, wxEmptyString, wxDefaultPosition, wxDefaultSize, wxTE_READONLY);
     choice_21 = new wxChoice(this, wxID_ANY);
-    label_56 = new wxStaticText(this, wxID_ANY, wxT("Object index"));
+    label_56 = new wxStaticText(this, wxID_ANY, wxT("Type"));
     text_ctrl_32 = new wxTextCtrl(this, wxID_ANY, wxEmptyString, wxDefaultPosition, wxDefaultSize, wxTE_READONLY);
     choice_22 = new wxChoice(this, wxID_ANY);
-    checkbox_46 = new wxCheckBox(this, wxID_ANY, wxT("Hidden"));
-    checkbox_47 = new wxCheckBox(this, wxID_ANY, wxT("Hung on ceiling"));
-    checkbox_48 = new wxCheckBox(this, wxID_ANY, wxT("Can't seeing"));
-    checkbox_49 = new wxCheckBox(this, wxID_ANY, wxT("Can't hearing"));
-    checkbox_50 = new wxCheckBox(this, wxID_ANY, wxT("From aerial"));
-    checkbox_51 = new wxCheckBox(this, wxID_ANY, wxT("Only network game"));
+    checkbox_46 = new wxCheckBox(this, wxID_ANY, wxT("Teleports In"));
+    checkbox_47 = new wxCheckBox(this, wxID_ANY, wxT("From Ceiling"));
+    checkbox_48 = new wxCheckBox(this, wxID_ANY, wxT("Is Blind"));
+    checkbox_49 = new wxCheckBox(this, wxID_ANY, wxT("Is Deaf"));
+    checkbox_50 = new wxCheckBox(this, wxID_ANY, wxT("Teleports Out"));
+    checkbox_51 = new wxCheckBox(this, wxID_ANY, wxT("Network Only"));
     label_59 = new wxStaticText(this, wxID_ANY, wxT("Polygon ID"));
     text_ctrl_37 = new wxTextCtrl(this, wxID_ANY, wxEmptyString, wxDefaultPosition, wxDefaultSize, wxTE_READONLY);
-    label_58 = new wxStaticText(this, wxID_ANY, wxT("Facing/Direction"));
+    label_58 = new wxStaticText(this, wxID_ANY, wxT("Facing"));
     text_ctrl_38 = new wxTextCtrl(this, wxID_ANY, wxEmptyString, wxDefaultPosition, wxDefaultSize, wxTE_READONLY);
     panel_16 = new wxPanel(this, wxID_ANY);
     label_60 = new wxStaticText(this, wxID_ANY, wxT("Launch by"));
@@ -179,9 +179,9 @@ void ObjectPropDialog::setObject(map_object& obj){
             }
             break;
         case _saved_sound_source:
-            for(int i = 0; i < NUMBER_OF_SOUND_DEFINITIONS; i ++){
+            for(int i = 0; i < NUMBER_OF_AMBIENT_SOUND_DEFINITIONS; i ++){
                 this->choice_22->Insert(wxConvertMB2WX(
-                    wxGetApp().monsterTypeInfo[i].jname.c_str()),
+                    wxGetApp().soundSourceTypeInfo[i].jname.c_str()),
                     i);
             }
             break;
@@ -214,7 +214,7 @@ void ObjectPropDialog::setupDialog()
         this->setObject(obj);
     }else{
 #ifdef __WXDEBUG__
-        wxASSERT(this->objIndex >= 0 && this->objIndex < SavedObjectList.size());
+        wxASSERT(this->objIndex >= 0 && this->objIndex < (int)SavedObjectList.size());
 #endif
         map_object* obj = &SavedObjectList[this->objIndex];
         this->setObject(*obj);
@@ -309,9 +309,25 @@ void ObjectPropDialog::OnZEdit(wxCommandEvent &event)
 map_object ObjectPropDialog::getObject()
 {
     map_object obj;
+    memset(&obj, 0, sizeof(map_object));
+
     obj.type = choice_21->GetSelection();
     obj.index = choice_22->GetSelection();
-    //TODO obj.flags 
+
+    obj.flags = 0;
+    if(checkbox_46->GetValue()) obj.flags |= _map_object_is_invisible;
+    if(checkbox_47->GetValue()) obj.flags |= _map_object_hanging_from_ceiling;
+    if(checkbox_48->GetValue()) obj.flags |= _map_object_is_blind;
+    if(checkbox_49->GetValue()) obj.flags |= _map_object_is_deaf;
+    if(checkbox_50->GetValue()) obj.flags |= _map_object_floats;
+    if(checkbox_51->GetValue()) obj.flags |= _map_object_is_network_only;
+
+    //obj.polygon_index = text_ctr
+
+    obj.facing = atoi(wxConvertWX2MB(text_ctrl_38));
+    obj.location.x = atoi(wxConvertWX2MB(text_ctrl_39));
+    obj.location.x = atoi(wxConvertWX2MB(text_ctrl_40));
+    obj.location.x = atoi(wxConvertWX2MB(text_ctrl_41));
     return obj;
 }
 

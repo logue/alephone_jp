@@ -573,6 +573,7 @@ void MapEditorMainFrame::doLButtonOnSkullTool(wxMouseEvent& ev)
 
     hpl::aleph::HPLStockManager* smgr = wxGetApp().getStockManager();
 
+    bool found = false;
     for(int i = 0; i < (int)PolygonList.size(); i ++){
         if(smgr->delPolygons[i]){
             continue;
@@ -582,12 +583,16 @@ void MapEditorMainFrame::doLButtonOnSkullTool(wxMouseEvent& ev)
             //“_‚ªŠÜ‚Ü‚ê‚é
             //‚±‚Ìƒ|ƒŠƒSƒ“ã‚É’u‚­
             //TODO
-            /*int flags = 0;
+            int flags = 0;
             map_object objv = this->objPropDialog.getObject();
-            int type = this->objPropDialog.getObject();
-            hpl::aleph::map::createObject(wpoint, i, &obj, flags, type, index);
-            int newIndex = hpl::aleph::map::addMapSavedObject(obj);*/
+            objv.polygon_index = i;
+            int newIndex = hpl::aleph::map::addMapSavedObject(obj);
+            found = true;
+            break;
         }
+    }
+    if(!found){
+        hpl::error::caution("You must place objects ON POLYGON");
     }
 #endif
 }

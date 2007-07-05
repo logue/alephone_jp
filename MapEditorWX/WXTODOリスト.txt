@@ -48,11 +48,10 @@ PointProp		:配置
 PolygonNum		:入出力
 PolygonProp		:配置
 PolygonType		:配置
-SelectLevel		:配置
 SideProp		:
 Terminal		:入出力
 Texture			:配置
-Tool			:配置
+Tool			:入出力
 Visual			:
 
 XXXX JumpLevel
@@ -66,7 +65,7 @@ SoundPalette	:配置
 ・完成なら完成と書く
 Draw
 	Arrow
-		・単一選択は可能
+		済み・単一選択
 		・テキスト選択→アノテーションダイアログを出す
 	Fill
 		・塗れるポリゴン探しが未完
@@ -202,4 +201,5 @@ TODO 読み込み→保存の時に、デフォルトをレベル名にする？
 TODO サウンド選択→死亡
 TODO 他のオブジェクトを選択しても、動かしたりしないと変わらない
 	Refresh?
-TODO ポリゴン塗りつぶし失敗の時のダイアログがうざい
+済み TODO ポリゴン塗りつぶし失敗の時のダイアログがうざい
+EditPreferenceDiallogで追加すべきSizerが異なるCheckBoxがある

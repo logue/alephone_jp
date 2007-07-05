@@ -860,9 +860,6 @@ void hpl::aleph::map::setupSelectDataGroupOffsets(int mx, int my,
 #ifdef __WXDEBUG__
         wxASSERT(poly);
 #else
-        if(!poly){
-            hpl::error::halt("polygon[%d] doesn't exist", selpoly->index);
-        }
 #endif
         int n = poly->vertex_count;
         selpoly->num = n;
@@ -870,11 +867,8 @@ void hpl::aleph::map::setupSelectDataGroupOffsets(int mx, int my,
             int vpoint[2];
             endpoint_data* ep = get_endpoint_data(poly->endpoint_indexes[j]);
 #ifdef __WXDEBUG__
-        wxASSERT(ep);
+            wxASSERT(ep);
 #else
-        if(!ep){
-            hpl::error::halt("endpoint[%d] doesn't exist", poly->endpoint_indexes[j]);
-        }
 #endif
             hpl::aleph::map::getViewPointFromWorldPoint2D(ep->vertex, vpoint,
                 woffsetX, woffsetY, div, voffsetX, voffsetY);

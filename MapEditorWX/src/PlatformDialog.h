@@ -64,9 +64,10 @@ public:
     wxButton* button_1;
     wxButton* button_2;
 
+    int polyIndex;
 public:
     PlatformDialog();
-    bool Create(wxWindow* parent, wxWindowID id);
+    bool Create(wxWindow* parent, wxWindowID id, int pindex);
     virtual ~PlatformDialog();
     DECLARE_EVENT_TABLE()
 
