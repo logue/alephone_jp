@@ -146,7 +146,7 @@ bool MapEditorWX::initialize()
     char *cursorPolygon = "cur00004.bmp";
     char *cursorLine = "LineCursor1.bmp";
     char *cursorFill = "pot.bmp";
-    char *cursorMag = "mag.bmp";
+    char *cursorMag = "mag1.bmp";
 
     int cursorId[] ={
         wxCURSOR_ARROW,

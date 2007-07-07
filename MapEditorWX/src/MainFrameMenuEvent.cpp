@@ -439,15 +439,16 @@ void MapEditorMainFrame::OnJumpLevel(wxCommandEvent& ev)
         int sel = dlg.getSelectLevel();
         wxGetApp().editLevelIndex = sel;
         //ステージ読み込み
-        initLevel();
+//        initLevel();
         loadLevel(sel);
+        Refresh();
     }
 }
 void MapEditorMainFrame::OnLevelInfo(wxCommandEvent& ev)
 {
     LevelInfoDialog dlg;
     dlg.Create(this, wxID_ANY);
-    if(dlg.ShowModal() != wxCANCEL){
+    if(dlg.ShowModal() == wxID_OK){
         //設定反映
     }
 }

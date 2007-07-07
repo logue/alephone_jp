@@ -20,7 +20,7 @@ bool SelectLevelDialog::Create(wxWindow* parent, wxWindowID id)
     bool result = wxDialog::Create(parent, id, _T("Select Level"));
     label_57 = new wxStaticText(this, wxID_ANY, wxT("Select level"));
 
-    list_box_4 = new wxListBox(this, wxID_ANY);
+    list_box_4 = new wxListBox(this, ID_List);
 //    button_22 = new wxButton(this, wxID_OK, wxEmptyString);
     button_23 = new wxButton(this, wxID_CANCEL, wxEmptyString);
 
@@ -49,6 +49,10 @@ void SelectLevelDialog::OnList(wxCommandEvent &event)
 {
     int sel = event.GetSelection();
     this->selectLevel = sel;
+
+    //èIóπ
+    SetReturnCode(wxID_OK);
+    Destroy();
 }
 int SelectLevelDialog::getSelectLevel()
 {
@@ -65,6 +69,6 @@ void SelectLevelDialog::OnOk(wxCommandEvent &event)
 
 void SelectLevelDialog::OnCancel(wxCommandEvent &event)
 {
-    SetReturnCode(wxCANCEL);
+    SetReturnCode(wxID_CANCEL);
     Destroy();
 }

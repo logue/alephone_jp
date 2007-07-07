@@ -213,11 +213,15 @@ bool PlatformDialog::Create(wxWindow* parent, wxWindowID id, int pindex)
     sizer_1->Fit(this);
     Layout();
 
+    polyIndex = pindex;
+
+    platform_data *platform = &PlatformList[platformIndex];
+
     //チョイスの初期化
     //TODO 
     //値の設定
     //TODO 
-    polyIndex = pindex;
+    
 
     return result;
 }

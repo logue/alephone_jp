@@ -9,11 +9,11 @@
 void MapEditorMainFrame::OnLeftDown(wxMouseEvent &ev)
 {
     //線・点・オブジェクト・ポリゴン・Sideの指定を解除する
-    linePropDialog.setLineIndex(NONE);
+/*    linePropDialog.setLineIndex(NONE);
     pointPropDialog.setIndex(NONE);
     objPropDialog.setObjIndex(NONE);
     polyPropDialog.setPolyIndex(NONE);
-    sidePropDialog.setIndex(NONE);
+    sidePropDialog.setIndex(NONE);*/
 
     //カーソル設定
     wxGetApp().setCursor();
@@ -601,6 +601,15 @@ void MapEditorMainFrame::doLButtonOnSkullTool(wxMouseEvent& ev)
 }
 void MapEditorMainFrame::doLButtonOnTextTool(wxMouseEvent& ev)
 {
+    int mx = ev.m_x;
+    int my = ev.m_y;
+    int voffset[2];
+    //グリッドマネージャー
+    hpl::aleph::view::HPLViewGridManager* vmgr = wxGetApp().getViewGridManager();
+    vmgr->getOffset(voffset);
+    int div = wxGetApp().getViewGridManager()->getZoomDivision();
+    int zMin = vmgr->getViewHeightMin();
+    int zMax = vmgr->getViewHeightMax();
 #ifdef MAP_VIEWER
 #else
     //shiftを押しながらだと編集モードになる
@@ -622,17 +631,17 @@ void MapEditorMainFrame::doLButtonOnTextTool(wxMouseEvent& ev)
         if(annotationIndex != NONE){
             //アノテーションを編集します
             AnnotationDialog dlg;
-            dlg.Create(this, wxID_ANY, MapAnnotation[annotationIndex]);
-            if(dlg.ShowModal() == wxOK){
+            dlg.Create(this, wxID_ANY, MapAnnotationList[annotationIndex]);
+            if(dlg.ShowModal() == wxID_OK){
                 map_annotation newAn = dlg.getAnnotation();
                 //変更
-                memcpy(&MapAnnotation[annotationIndex],
+                memcpy(&MapAnnotationList[annotationIndex],
                     &newAn, sizeof(map_annotation));
             }
         }
 
         //見つからなかった
-        hpl::error;;caution("No annotation found there");
+        hpl::error::caution("No annotation found there");
     }else{
 
         //アノテーション追加

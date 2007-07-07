@@ -199,6 +199,9 @@ void LinePropDialog::setupDialog()
         index = (int)PolygonList.size();
     }
     choice_27->SetSelection(index);
+
+    //値代入
+    setupDialog();
 }
 
 void LinePropDialog::OnElevation(wxCommandEvent &event)
@@ -268,4 +271,55 @@ void LinePropDialog::OnCClockwisePoly(wxCommandEvent &event)
 {
     event.Skip();
     std::cout<<"Event handler (LinePropDialog::OnCClockwisePoly) not implemented yet"<<std::endl; //notify the user that he hasn't implemented the event handler yet
+}
+static void setupChoice(wxChoice* choice, int max){
+    for(int i = 0; i < max; i ++){
+        choice->Insert(getString("%d", i), i);
+    }
+    choice->Insert(_T("NONE"), max);
+}
+void LinePropDialog::setupDialog()
+{
+    //Side Choiceのセットアップ
+    setupChoice(this->choice_24, (int)SideList.size());
+    setupChoice(this->choice_25, (int)SideList.size());
+    //Polygon Choice
+    setupChoice(this->choice_26, (int)PolygonList.size());
+    setupChoice(this->choice_27, (int)PolygonList.size());
+
+    int index = getLineIndex();
+    if(index == NONE){
+        return;
+    }
+    
+    line_data* line = get_line_data(index);
+#ifdef __WXDEBUG__
+    wxASSERT(line);
+#endif
+    this->text_ctrl_42->SetValue(getString("%d", line->endpoint_indexes[0]));
+    this->text_ctrl_43->SetValue(getString("%d", line->endpoint_indexes[1]));
+
+    this->checkbox_45->SetValue(LINE_IS_LANDSCAPED(line) != 0);
+    this->checkbox_52->SetValue(LINE_IS_ELEVATION(line) != 0);
+    this->checkbox_53->SetValue(LINE_IS_VARIABLE_ELEVATION(line) != 0);
+    this->checkbox_54->SetValue(LINE_HAS_TRANSPARENT_SIDE(line) != 0);
+
+    this->radio_box_1->SetValue(LINE_IS_SOLID(line)?0:1);
+
+    this->text_ctrl_45->SetValue(getString("%d", line->length));
+    this->text_ctrl_46->SetValue(getString("%d", line->length));
+    this->text_ctrl_47->SetValue(getString("%d", line->length));
+
+    int n = line->clockwise_polygon_side_index;
+    if(n == NONE)   n = (int)SideList.size();
+    this->choice_24->SetSelection(n);
+    n = line->counterclockwise_polygon_side_index;
+    if(n == NONE)   n = (int)SideList.size();
+    this->choice_25->SetSelection(n);
+    n = line->clockwise_polygon_owner;
+    if(n == NONE)   n = (int)PolygonList.size();
+    this->choice_26->SetSelection(n);
+    n = line->counterclockwise_polygon_owner;
+    if(n == NONE)   n = (int)PolygonList.size();
+    this->choice_27->SetSelection(n);
 }

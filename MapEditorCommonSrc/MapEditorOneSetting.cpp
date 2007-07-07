@@ -270,5 +270,5 @@ int MapEditorOneSetting::checkColorType(ColorSettings *col)
     }
 
     //ÉJÉXÉ^ÉÄ
-    return -1;
+    return COL_CUSTOM;
 }

@@ -157,7 +157,7 @@ void ColorCustomizeDialog::OnOk(wxCommandEvent& ev)
 }
 void ColorCustomizeDialog::OnCancel(wxCommandEvent &ev)
 {
-    SetReturnCode(wxID_OK);
+    SetReturnCode(wxID_CANCEL);
     Destroy();
 }
 void ColorCustomizeDialog::setColor(int cols[]){

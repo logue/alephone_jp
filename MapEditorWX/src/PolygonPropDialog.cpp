@@ -209,6 +209,8 @@ void PolygonPropDialog::setPolyIndex(int index)
 {
     this->polyIndex = index;
     setupDialog();
+    //タイトル変更
+    SetTitle(getString("Polygon prop [index:%d]", this->getPolyIndex()));
 }
 int PolygonPropDialog::getPolyIndex()
 {

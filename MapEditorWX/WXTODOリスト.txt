@@ -166,7 +166,7 @@ TODO ObjectPlacement
 	→たぶん入ってない？
 --
 TODO 2007 07 01
-？ Jump (Select) other level
+済み Jump (Select) other level
 object place
 placement dialog edit <-> listctrl
 object/point/side/line prop
@@ -203,3 +203,11 @@ TODO 他のオブジェクトを選択しても、動かしたりしないと変わらない
 	Refresh?
 済み TODO ポリゴン塗りつぶし失敗の時のダイアログがうざい
 EditPreferenceDiallogで追加すべきSizerが異なるCheckBoxがある
+
+TODO Platform値反映、変更有効
+TODO Placementクリック→テキストボックスに表示
+
+ダイアログの返し記号はwxID_OKに統一。
+wxOKはスタイル設定用。
+
+TODO Shapesデータ読み込み

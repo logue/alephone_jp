@@ -67,9 +67,11 @@ bool ObjectPropDialog::Create(wxWindow* parent, wxWindowID id)
     text_ctrl_40 = new wxTextCtrl(this, wxID_ANY, wxEmptyString);
     panel_18 = new wxPanel(this, wxID_ANY);
 
-    text_ctrl_27->SetMinSize(wxSize(20, -1));
-    text_ctrl_32->SetMinSize(wxSize(20, -1));
+    text_ctrl_27->SetMinSize(wxSize(25, -1));
+    text_ctrl_32->SetMinSize(wxSize(25, -1));
     panel_16->SetMinSize(wxSize(120, 120));
+    choice_21->SetMinSize(wxSize(130, 22));
+    choice_22->SetMinSize(wxSize(130, 22));
     choice_23->SetMinSize(wxSize(90, 22));
     text_ctrl_39->SetMinSize(wxSize(50, -1));
     text_ctrl_41->SetMinSize(wxSize(50, -1));

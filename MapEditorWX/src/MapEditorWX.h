@@ -286,6 +286,8 @@ public:
         ü•ÒWî•ñ‚ğ‰Šú‰»‚µ‚Ü‚·
     */
     void resetLineEditInfo();
+
+    void getShapesImage(wxImage* img, int collection, int clut, int index);
 private:
 
 };

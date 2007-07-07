@@ -560,8 +560,8 @@ void MapEditorMainFrame::drawAnnotations(wxDC* dc)
                 wxGetApp().setting.getColorSetting()->strings[1],
                 wxGetApp().setting.getColorSetting()->strings[2]);
     dc->SetTextForeground(col);
-    dc->SetPen(wxRED_PEN);
-    dc->SetBrush(wxTRANSPARENT_BRUSH);
+    dc->SetPen(*wxRED_PEN);
+    dc->SetBrush(*wxTRANSPARENT_BRUSH);
 
     for(int i = 0; i < (int)MapAnnotationList.size(); i ++){
         map_annotation *annotation = &MapAnnotationList[i];

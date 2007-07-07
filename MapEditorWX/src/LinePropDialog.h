@@ -55,7 +55,7 @@ public:
     int getLineIndex();
 public:
     void setLineIndex(int index);
-    
+    void setupDialog();
 };
 
 #endif
