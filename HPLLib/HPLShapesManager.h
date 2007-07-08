@@ -18,6 +18,21 @@
 
 namespace hpl{
 namespace shapes{
+    /**
+        指定したShapesデータを取得します。
+        @return 失敗時にNULL
+    */
+    SDL_Surface* getSurface(int collection, int clut, int index, double illumination);
+    /**
+        Shapesファイルを読み込みます
+        <en> load Shapes file
+        @param path Shapesファイルパス <en> Shapes file's path
+    */
+    void loadShapesFile(const char* path);
+
+	/**
+		読み込み管理
+	*/
     class HPLShapesManager{
         //Shapesファイルを読み込めていたら真 <en> true when Shapes file loaded
         bool isLoadedShapesFile_;
@@ -28,18 +43,7 @@ namespace shapes{
 
     public:
         bool isLoadedShapesFile();
-        /**
-            Shapesファイルを読み込みます
-            <en> load Shapes file
-            @param path Shapesファイルパス <en> Shapes file's path
-        */
-        void loadShapesFile(const char* path);
-
-        /**
-            指定したShapesデータを取得します。
-            @return 失敗時にNULL
-        */
-        SDL_Surface* getSurface(int collection, int clut, int index);
+		void setLoadedShapesFile(bool loaded);
     };
 };
 };

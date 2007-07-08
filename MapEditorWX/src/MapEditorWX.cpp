@@ -327,6 +327,21 @@ void MapEditorWX::resetLineEditInfo()
     isFirstOfLineToAdd = true;
 }
 
+void MapEditorWX::getShapesImage(wxImage* img, int collection, int clut, int index)
+{
+	//サーフェイス取得
+	SDL_Surface* surface = hpl::surface::getSurface(collection, clut, index);
+	img->Create(surface->w, surface->h);
+	SDL_LockSurface(surface);
+	for(int x = 0; x < surface->w; x ++){
+		for(int y = 0; y < surface->h; y ++){
+
+		}
+	}
+	SDL_UnlockSurface(surface);
+	SDL_FreeSurface(surface);
+}
+
 //char->wx
 wxString getString(const char* format, ...)
 {

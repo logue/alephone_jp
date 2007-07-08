@@ -30,9 +30,9 @@ TODO リスト
 ２：配置
 ３：呼び出し処理記述
 ４：データ入出力記述
-５：デバッグ完了
+５：デバッグ完了（完）
 
-Annotation		:デバッグ完了（選択モードは未完）
+Annotation		:完（選択モードは未完）
 CeilingHeightPaletteDialog
                 :wx
 ColorCustomize	:入出力
@@ -45,17 +45,17 @@ ObjectProp		:配置
 Placement		:入出力
 Platform		:配置
 PointProp		:配置
-PolygonNum		:入出力
-PolygonProp		:配置
+PolygonNum		:完
+PolygonProp		:入力
 PolygonType		:配置
 SideProp		:
-Terminal		:入出力
+Terminal		:入力
 Texture			:配置
 Tool			:入出力
 Visual			:
 
 XXXX JumpLevel
-SelectLevel		:配置
+SelectLevel		:完
 MediaPalette	:配置
 LightPalette	:配置
 SoundPalette	:配置
@@ -68,8 +68,8 @@ Draw
 		済み・単一選択
 		・テキスト選択→アノテーションダイアログを出す
 	Fill
-		・塗れるポリゴン探しが未完
-	Hand
+		済み・塗れるポリゴン探しが未完
+	済み Hand
 	Line
 		・点の独立追加
 		・線はすでにある点を指定しての追加にする
@@ -211,3 +211,4 @@ TODO Placementクリック→テキストボックスに表示
 wxOKはスタイル設定用。
 
 TODO Shapesデータ読み込み
+TODO 壁（たかだか片方のポリゴンしか存在しない線）・高さが同じ線・高さが異なる線では描画が異なる
