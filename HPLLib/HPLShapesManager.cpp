@@ -1,6 +1,8 @@
 #include "HPLShapesManager.h"
 #include "HPLError.h"
 #include "HPLSurfaceModifier.h"
+#include "shapes_sdl.h"
+
 hpl::shapes::HPLShapesManager::HPLShapesManager()
 {
     this->isLoadedShapesFile_ = false;
@@ -17,6 +19,43 @@ void hpl::shapes::HPLShapesManager::setLoadedShapesFile(bool loaded)
 	this->isLoadedShapesFile_ = loaded;
 }
 
+static SDL_Surface* createSurface(int flags, int w, int h, int bpp)
+{
+    Uint32 rmask, gmask, bmask, amask;
+	//空のサーフェイスデータの作成
+#if SDL_BYTEORDER == SDL_BIG_ENDIAN
+    rmask = 0xff000000;
+    gmask = 0x00ff0000;
+    bmask = 0x0000ff00;
+    amask = 0x000000ff;
+#else
+    rmask = 0x000000ff;
+    gmask = 0x0000ff00;
+    bmask = 0x00ff0000;
+    amask = 0xff000000;
+#endif
+    SDL_Surface* surface = SDL_CreateRGBSurface(flags,
+		w, h, bpp,
+		rmask, gmask, bmask, amask);
+    return surface;
+}
+
+void hpl::shapes::initScreen()
+{
+    screenSurface = createSurface(SDL_SWSURFACE,
+		640, 480, 8);
+
+	struct screen_mode_data scr;
+	scr.acceleration = 0;
+	scr.bit_depth = screenSurface->format->BitsPerPixel;
+	scr.draw_every_other_line = 0;
+	scr.fullscreen = 0;
+	scr.gamma_level = 0;
+	scr.high_resolution = 1;
+	scr.size = 2;
+	initialize_screen(&scr, false);
+}
+
 /**
     Shapesファイルを読み込みます
     <en> load Shapes file
@@ -24,13 +63,15 @@ void hpl::shapes::HPLShapesManager::setLoadedShapesFile(bool loaded)
 */
 void hpl::shapes::loadShapesFile(const char* path)
 {
-	initialize_shape_handler();
+
+    initialize_shape_handler();
 
 	FileSpecifier ShapesFile(path);
 	if(!ShapesFile.Exists()){
         hpl::error::caution("no shapes file");
 	}else{
 		open_shapes_file(ShapesFile);
+
 		for(int i = 0; i < NUMBER_OF_COLLECTIONS; i ++){
 			mark_collection_for_loading(i);
 		}
@@ -49,7 +90,7 @@ SDL_Surface* hpl::shapes::getSurface(int collection, int clut, int index,
 
 	//コレクションを別指定。指定する必要がないのでNONE
 	int excol = NONE;
-	byte **outp = (byte**)malloc(siezof(byte*));
+	byte **outp = (byte**)malloc(sizeof(byte*));
 	int col = BUILD_COLLECTION(collection, clut);
 	int shape = BUILD_DESCRIPTOR(col, index);
 	SDL_Surface* surface = get_shape_surface(shape, excol, outp,
@@ -57,36 +98,24 @@ SDL_Surface* hpl::shapes::getSurface(int collection, int clut, int index,
 #ifdef __WXDEBUG__
 	wxASSERT(surface);
 #endif
-    Uint32 rmask, gmask, bmask, amask;
-	//空のサーフェイスデータの作成
-#if SDL_BYTEORDER == SDL_BIG_ENDIAN
-    rmask = 0xff000000;
-    gmask = 0x00ff0000;
-    bmask = 0x0000ff00;
-    amask = 0x000000ff;
-#else
-    rmask = 0x000000ff;
-    gmask = 0x0000ff00;
-    bmask = 0x00ff0000;
-    amask = 0xff000000;
-#endif
-	SDL_Surface* newSurface = SDL_CreateSurface(surface->flags,
-		surface->w, surface->h, surface->format->BitsPerPixel,
-		rmask, gmask, bmask, amask);
+	SDL_Surface* newSurface = createSurface(surface->flags,
+		surface->w, surface->h, 8);
 #ifdef __WXDEBUG__
 	wxASSERT(newSurface);
 #endif
 	SDL_LockSurface(surface);
 	SDL_LockSurface(newSurface);
-	for(int x = 0; x < surface->w; x ++){
-		for(int y = 0; y < surface->h; y ++){
+	for(int y = 0; y < surface->h; y ++){
+	    for(int x = 0; x < surface->w; x ++){
 			Uint32 pixel = hpl::surface::getpixel(surface, x, y);
 			hpl::surface::setpixel(newSurface, x, y,
 				SDL_MapRGB(newSurface->format, palette[pixel].r,
-					palette[pixel].g, palette[pixel].b);
+					palette[pixel].g, palette[pixel].b));
 		}
 	}
 	SDL_UnlockSurface(newSurface);
 	SDL_UnlockSurface(surface);
+    free(outp);
+
     return newSurface;
 }

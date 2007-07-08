@@ -103,6 +103,10 @@ void MapEditorMainFrame::OnPaint(wxPaintEvent& WXUNUSED(event))
         }
     }
 
+    //Shapesファイルから読み込みテスト
+    wxBitmap bmp = wxBitmap(this->texture);
+    dc.DrawBitmap(bmp,0,0,true);
+
     //バッファから画面へコピー
     dc.Blit(wxPoint(0,0), size,
         drawDC,
@@ -322,8 +326,30 @@ void MapEditorMainFrame::drawLines(wxDC* dc)
             if(select){
                 dc->SetPen(this->selectedLinePen);
             }else{
+                wxPen* lPen = &this->linePen;
+                
+                if(LINE_IS_TRANSPARENT(line) != 0){
+                    if(line->clockwise_polygon_owner == NONE ||
+                        line->counterclockwise_polygon_owner == NONE)
+                    {
+                        //nope
+                    }else{
+                        polygon_data* right = get_polygon_data(line->clockwise_polygon_owner);
+                        polygon_data* left = get_polygon_data(line->counterclockwise_polygon_owner);
+#ifdef __WXDEBUG__
+                        wxASSERT( right && left);
+#endif
+                        if(right->floor_height == left->floor_height &&
+                            right->ceiling_height == left->ceiling_height)
+                        {
+                            lPen = &this->sameHeightLinePen;
+                        }else{
+                            lPen = &this->stairLinePen;
+                        }
+                    }
+                }
                 //通常ペン
-                dc->SetPen(this->linePen);
+                dc->SetPen(*lPen);
             }
 
         }
@@ -556,9 +582,9 @@ void MapEditorMainFrame::drawAnnotations(wxDC* dc)
         return;
     }
     wxColor oldCol = dc->GetTextForeground();
-    wxColor col(wxGetApp().setting.getColorSetting()->strings[0],
-                wxGetApp().setting.getColorSetting()->strings[1],
-                wxGetApp().setting.getColorSetting()->strings[2]);
+    wxColor col(wxGetApp().setting.getColorSetting()->colors[ColorType::Strings][0],
+                wxGetApp().setting.getColorSetting()->colors[ColorType::Strings][1],
+                wxGetApp().setting.getColorSetting()->colors[ColorType::Strings][2]);
     dc->SetTextForeground(col);
     dc->SetPen(*wxRED_PEN);
     dc->SetBrush(*wxTRANSPARENT_BRUSH);

@@ -5,22 +5,6 @@
 
 const int BUF_MAX = 1024;
 
-#ifdef WX
-#include <wx/wx.h>
-#endif
-
-#ifdef __WXDEBUG__
-
-#include <wx/defs.h>
-#include <wx/debug.h>
-
-#endif
-#ifdef WIN32
-
-#include <windows.h>
-
-#endif
-
 /**
     メッセージを表示します
 */

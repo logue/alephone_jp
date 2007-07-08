@@ -1,5 +1,6 @@
 #include "PlatformDialog.h"
 #include "MapEditorWX.h"
+
 BEGIN_EVENT_TABLE(PlatformDialog, wxDialog)
     EVT_BUTTON(wxID_OK, PlatformDialog::OnOk)
     EVT_BUTTON(wxID_CANCEL, PlatformDialog::OnCancel)
@@ -214,6 +215,20 @@ bool PlatformDialog::Create(wxWindow* parent, wxWindowID id, int pindex)
     Layout();
 
     polyIndex = pindex;
+    //polygon_data* poly = get_polygon_data(polyIndex);
+
+    //search polygon's platform
+    platformIndex = NONE;
+    for(int i = 0; i < (int)PlatformList.size(); i ++){
+        platform_data* temp = &PlatformList[i];
+        if(temp->polygon_index == polyIndex){
+            platformIndex = i;
+            break;
+        }
+    }
+#ifdef __WXDEBUG__
+    wxASSERT(platformIndex == NONE);
+#endif
 
     platform_data *platform = &PlatformList[platformIndex];
 

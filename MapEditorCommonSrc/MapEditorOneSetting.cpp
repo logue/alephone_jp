@@ -15,14 +15,30 @@ void MapEditorOneSetting::setIniFileName(const char *iniFileName)
 }
 
 static char *GRID_SIZE_INDEX_TAG = "GRID_SIZE_INDEX";
-static char *COLOR_SETTING_COLOR_PRESET_TAG = "COLOR_PRESET";
-static char *COLOR_SETTING_BACKGROUND_TAG = "BACKGROUND";
-static char *COLOR_SETTING_GRID_TAG = "GRID";
-static char *COLOR_SETTING_LINES_TAG = "LINES";
-static char *COLOR_SETTING_POLYGONS_TAG = "POLYGONS";
-static char *COLOR_SETTING_STRINGS_TAG = "STRINGS";
-static char *COLOR_SETTING_POINTS_TAG = "POINTS";
 static char *EDITOR_FLAGS_TAG = "FLAGS";
+static char* COLOR_SETTING_COLOR_PRESET_TAG = "COLOR_PRESET";
+static char* COLOR_SETTING_TAGS[100] ={
+    "BACKGROUND",
+    "GRID",
+    "LINES",
+    "POLYGONS",
+    "STRINGS",
+    "POINTS",
+    "SAME_HEIGHT_LINES",
+    "STAIR_LINES"
+};
+
+void ColorSettings::setColor(int type, int r, int g, int b)
+{
+    colors[type][0] = r;
+    colors[type][1] = g;
+    colors[type][2] = b;
+}
+
+static void tagFault(const char* str)
+{
+    hpl::error::halt("Illegal setting tag:[%s]", str);
+}
 
 /**
     try to load file.
@@ -60,51 +76,29 @@ bool MapEditorOneSetting::loadSetting()
             }else if(splitted[0].compare(COLOR_SETTING_COLOR_PRESET_TAG) == 0){
                 colorSetting.type = atoi(splitted[1].c_str());
                 checksum ++;
-            }else if(splitted[0].compare(COLOR_SETTING_BACKGROUND_TAG) == 0){
-                for(int i = 0; i < COL_NUM; i ++){
-                    colorSetting.background[i] = atoi(colors[i].c_str());
-                }
-                checksum ++;
-            }else if(splitted[0].compare(COLOR_SETTING_GRID_TAG) == 0){
-                for(int i = 0; i < COL_NUM; i ++){
-                    colorSetting.gridLine[i] = atoi(colors[i].c_str());
-                }
-                checksum ++;
-            }else if(splitted[0].compare(COLOR_SETTING_LINES_TAG) == 0){
-                for(int i = 0; i < COL_NUM; i ++){
-                    colorSetting.lines[i] = atoi(colors[i].c_str());
-                }
-                checksum ++;
-            }else if(splitted[0].compare(COLOR_SETTING_POLYGONS_TAG) == 0){
-                for(int i = 0; i < COL_NUM; i ++){
-                    colorSetting.polygons[i] = atoi(colors[i].c_str());
-                }
-                checksum ++;
-            }else if(splitted[0].compare(COLOR_SETTING_STRINGS_TAG) == 0){
-                for(int i = 0; i < COL_NUM; i ++){
-                    colorSetting.strings[i] = atoi(colors[i].c_str());
-                }
-                checksum ++;
-            }else if(splitted[0].compare(COLOR_SETTING_POINTS_TAG) == 0){
-                for(int i = 0; i < COL_NUM; i ++){
-                    colorSetting.points[i] = atoi(colors[i].c_str());
-                }
-                checksum ++;
             }else if(splitted[0].compare(EDITOR_FLAGS_TAG) == 0){
                 for(int i = 0; i < NUMBER_OF_EDITOR_FLAGS; i ++){
                     flags[i] = (atoi(colors[i].c_str()) != 0)? true: false;
                 }
                 checksum ++;
-            }else {
-                std::string str = splitted[0];
-                hpl::error::halt("Illegal setting tag:[%s]", str.c_str());
+            }else{
+                bool found = false;
+                for(int tag = 0; tag < ColorType::NUMBER_OF_COLOR_TYPES; tag ++){
+                    if(splitted[0].compare(COLOR_SETTING_TAGS[tag]) == 0){
+                        for(int i = 0; i < COL_NUM; i ++){
+                            colorSetting.colors[tag][i] = atoi(colors[i].c_str());
+                        }
+                        found = true;
+                        checksum++;
+                        break;
+                    }
+                }
+                if(!found){
+                    tagFault(splitted[0].c_str());
+                }
             }
         }
         ifs.close();
-        /*if(checksum < CORRECT_CHECKSUM){
-            AfxMessageBox("invalid setting data");
-            return false;
-        }*/
     }
     return true;
 }
@@ -119,18 +113,10 @@ bool MapEditorOneSetting::saveSetting()
     }else{
         fprintf(fp, "%s=%d\n", GRID_SIZE_INDEX_TAG, gridSizeIndex);
         fprintf(fp, "%s=%d\n", COLOR_SETTING_COLOR_PRESET_TAG, colorSetting.type);
-        fprintf(fp, "%s=", COLOR_SETTING_BACKGROUND_TAG);
-        outputColor(fp, this->colorSetting.background, COL_NUM);
-        fprintf(fp, "\n%s=", COLOR_SETTING_GRID_TAG);
-        outputColor(fp, this->colorSetting.gridLine, COL_NUM);
-        fprintf(fp, "\n%s=", COLOR_SETTING_LINES_TAG);
-        outputColor(fp, this->colorSetting.lines, COL_NUM);
-        fprintf(fp, "\n%s=", COLOR_SETTING_POLYGONS_TAG);
-        outputColor(fp, this->colorSetting.polygons, COL_NUM);
-        fprintf(fp, "\n%s=", COLOR_SETTING_STRINGS_TAG);
-        outputColor(fp, this->colorSetting.strings, COL_NUM);
-        fprintf(fp, "\n%s=", COLOR_SETTING_POINTS_TAG);
-        outputColor(fp, this->colorSetting.points, COL_NUM);
+        for(int i = 0; i < ColorType::NUMBER_OF_COLOR_TYPES; i ++){
+            fprintf(fp, "%s=", i);
+            outputColor(fp, this->colorSetting.colors[i], COL_NUM);
+        }
         fprintf(fp, "\n%s=", EDITOR_FLAGS_TAG);
         for(int i = 0; i < NUMBER_OF_EDITOR_FLAGS; i ++){
             fprintf(fp, "%d,", flags[i]? 1: 0);
@@ -190,45 +176,25 @@ void MapEditorOneSetting::setColorSetting(int type, ColorSettings *setting)
     setting->type = type;
     switch(type){
     case COL_FORGE:
-        setting->background[0] = 255;
-        setting->background[1] = 255;
-        setting->background[2] = 255;
-        setting->gridLine[0] = 100;
-        setting->gridLine[1] = 100;
-        setting->gridLine[2] = 100;
-        setting->lines[0] = 0;
-        setting->lines[1] = 0;
-        setting->lines[2] = 0;
-        setting->polygons[0] = 200;
-        setting->polygons[1] = 200;
-        setting->polygons[2] = 200;
-        setting->strings[0] = 0;
-        setting->strings[1] = 0;
-        setting->strings[2] = 0;
-        setting->points[0] = 0;
-        setting->points[1] = 0;
-        setting->points[2] = 255;
+        setting->setColor(ColorType::Background, 255, 255, 255);
+        setting->setColor(1, 100, 100, 100);
+        setting->setColor(2, 0, 0, 0);
+        setting->setColor(3, 200, 200, 200);
+        setting->setColor(4, 0, 0, 0);
+        setting->setColor(5, 0, 0, 255);
+        setting->setColor(ColorType::SameHeightLines, 200, 100, 200);
+        setting->setColor(ColorType::StairLines, 150, 100, 150);
     case COL_CUSTOM:
         break;
     case COL_MARATHON:
-        setting->background[0] = 0;
-        setting->background[1] = 0;
-        setting->background[2] = 0;
-        setting->gridLine[0] = 50;
-        setting->gridLine[1] = 50;
-        setting->gridLine[2] = 50;
-        setting->lines[0] = 50;
-        setting->lines[1] = 255;
-        setting->lines[2] = 0;
-        setting->polygons[0] = 0;
-        setting->polygons[1] = 50;
-        setting->polygons[2] = 0;
-        setting->strings[0] = 100;
-        setting->strings[1] = 255;
-        setting->strings[2] = 0;
-        setting->points[0] = 255;
-        setting->points[1] = 255;
-        setting->points[2] = 0;
+        setting->setColor(ColorType::Background, 0, 0, 0);
+        setting->setColor(1, 50, 50, 50);
+        setting->setColor(2, 50, 255, 0);
+        setting->setColor(3, 0, 50, 0);
+        setting->setColor(4, 100, 255, 0);
+        setting->setColor(5, 255, 255, 0);
+        setting->setColor(ColorType::SameHeightLines, 50, 100, 50);
+        setting->setColor(ColorType::StairLines, 150, 200, 150);
         break;
     default:
         hpl::error::halt("Invalid color preset type:[%d]", type);
@@ -250,6 +216,9 @@ std::string MapEditorOneSetting::getFilePath()
     return initialSettingFileName;
 }
 
+/**
+    デフォルト設定を取得します
+*/
 MapEditorOneSetting MapEditorOneSetting::getDefaultSetting()
 {
     MapEditorOneSetting setting;
@@ -257,15 +226,35 @@ MapEditorOneSetting MapEditorOneSetting::getDefaultSetting()
     return setting;
 }
 
+/**
+    col1とcol2が一致するかどうか確かめます
+*/
+static bool equalsColorSetting(ColorSettings& col1, ColorSettings& col2)
+{
+    for(int i = 0; i < ColorType::NUMBER_OF_COLOR_TYPES; i ++){
+        if(col1.colors[i][0] != col2.colors[i][0] ||
+            col1.colors[i][1] != col2.colors[i][1] ||
+            col1.colors[i][2] != col2.colors[i][2])
+        {
+            return false;
+        }
+
+    }
+    return true;
+}
+
+/**
+    カラータイプを探り当てます
+*/
 int MapEditorOneSetting::checkColorType(ColorSettings *col)
 {
     ColorSettings temp;
     MapEditorOneSetting::setColorSetting(COL_FORGE, &temp);
-    if(memcmp(col, &temp, sizeof(ColorSettings)) == 0){
+    if(equalsColorSetting(*col, temp)){
         return COL_FORGE;
     }
     MapEditorOneSetting::setColorSetting(COL_MARATHON, &temp);
-    if(memcmp(col, &temp, sizeof(ColorSettings)) == 0){
+    if(equalsColorSetting(*col, temp)){
         return COL_MARATHON;
     }
 

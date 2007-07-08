@@ -12,7 +12,7 @@ namespace surface{
     /** 
         サーフェイスに指定したピクセルを打ちます
     */
-    void putpixel(SDL_Surface *surface, int x, int y, Uint32 pixel);
+    void setpixel(SDL_Surface *surface, int x, int y, Uint32 pixel);
 };
 };
 #endif

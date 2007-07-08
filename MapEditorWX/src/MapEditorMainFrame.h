@@ -161,6 +161,11 @@ private:
     //通常ポリゴン
     wxBrush polyBrush;
 
+    //同じ高さの線色
+    wxPen sameHeightLinePen;
+    //段差のある線色
+    wxPen stairLinePen;
+
     //アイテムビットマップ
     wxImage itemBitmaps[NUMBER_OF_DEFINED_ITEMS];
     //ハイライト版
@@ -192,6 +197,7 @@ private:
     //範囲選択表示
     wxPen selectingPen;
 
+    wxImage texture;
 public:
     MapEditorMainFrame(const wxString& title,
         const wxPoint& pos = wxDefaultPosition,

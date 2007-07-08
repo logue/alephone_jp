@@ -212,3 +212,16 @@ wxOKはスタイル設定用。
 
 TODO Shapesデータ読み込み
 TODO 壁（たかだか片方のポリゴンしか存在しない線）・高さが同じ線・高さが異なる線では描画が異なる
+・両方にポリゴンがない
+		→Lines
+・片方にポリゴンがない
+		→Lines
+・両方ある
+	・SOLIDだ
+		→Lines
+	・TRANSPARENTだ
+		・両方のポリゴンが同じ高さだ
+			→SameHeightLines
+		・異なる高さだ
+			→StairLines
+			

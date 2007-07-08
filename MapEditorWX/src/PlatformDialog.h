@@ -65,6 +65,7 @@ public:
     wxButton* button_2;
 
     int polyIndex;
+    int platformIndex;
 public:
     PlatformDialog();
     bool Create(wxWindow* parent, wxWindowID id, int pindex);

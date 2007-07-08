@@ -7,6 +7,8 @@ enum{
     ID_POLYGONS,
     ID_STRINGS,
     ID_POINTS,
+    ID_SAME_HEIGHT_LINES,
+    ID_STAIR_LINES,
 };
 BEGIN_EVENT_TABLE(ColorCustomizeDialog, wxDialog)
     EVT_BUTTON(ID_BACKGROUND, ColorCustomizeDialog::OnBackground)
@@ -15,6 +17,8 @@ BEGIN_EVENT_TABLE(ColorCustomizeDialog, wxDialog)
     EVT_BUTTON(ID_POLYGONS, ColorCustomizeDialog::OnPolygons)
     EVT_BUTTON(ID_STRINGS, ColorCustomizeDialog::OnStrings)
     EVT_BUTTON(ID_POINTS, ColorCustomizeDialog::OnPoints)
+    EVT_BUTTON(ID_SAME_HEIGHT_LINES, ColorCustomizeDialog::OnSameHeightLines)
+    EVT_BUTTON(ID_STAIR_LINES, ColorCustomizeDialog::OnStairLines)
     EVT_BUTTON(wxID_OK, ColorCustomizeDialog::OnOk)
     EVT_BUTTON(wxID_CANCEL, ColorCustomizeDialog::OnCancel)
 //    EVT_PAINT(ColorCustomizeDialog::OnPaint)
@@ -47,13 +51,19 @@ bool ColorCustomizeDialog::Create(wxWindow* parent, wxWindowID id, ColorSettings
     label_18 = new wxStaticText(this, wxID_ANY, wxT("Points"));
     button_12 = new wxButton(this, ID_POINTS, wxT("Choose color"));
     panel_6 = new wxPanel(this, wxID_ANY);
+    label_a = new wxStaticText(this, wxID_ANY, wxT("Same Height Lines"));
+    button_a = new wxButton(this, ID_SAME_HEIGHT_LINES, wxT("Choose color"));
+    panel_a = new wxPanel(this, wxID_ANY);
+    label_b = new wxStaticText(this, wxID_ANY, wxT("Stair Lines"));
+    button_b = new wxButton(this, ID_STAIR_LINES, wxT("Choose color"));
+    panel_b = new wxPanel(this, wxID_ANY);
     button_5 = new wxButton(this, wxID_OK, wxT("OK"));
     button_6 = new wxButton(this, wxID_CANCEL, wxT("Cancel"));
 
     //setup
 
     //layout
-    wxFlexGridSizer* sizer_37 = new wxFlexGridSizer(7, 1, 0, 0);
+    wxFlexGridSizer* sizer_37 = new wxFlexGridSizer(9, 1, 0, 0);
     wxBoxSizer* sizer_44 = new wxBoxSizer(wxHORIZONTAL);
     wxGridSizer* sizer_43 = new wxGridSizer(1, 3, 0, 0);
     wxGridSizer* sizer_42 = new wxGridSizer(1, 3, 0, 0);
@@ -61,6 +71,8 @@ bool ColorCustomizeDialog::Create(wxWindow* parent, wxWindowID id, ColorSettings
     wxGridSizer* sizer_40 = new wxGridSizer(1, 3, 0, 0);
     wxGridSizer* sizer_39 = new wxGridSizer(1, 3, 0, 0);
     wxGridSizer* sizer_38 = new wxGridSizer(1, 3, 0, 0);
+    wxGridSizer* sizer_a = new wxGridSizer(1, 3, 0, 0);
+    wxGridSizer* sizer_b = new wxGridSizer(1, 3, 0, 0);
     sizer_38->Add(label_13, 0, 0, 0);
     sizer_38->Add(button_7, 0, 0, 0);
     sizer_38->Add(panel_1, 1, wxEXPAND, 0);
@@ -85,6 +97,16 @@ bool ColorCustomizeDialog::Create(wxWindow* parent, wxWindowID id, ColorSettings
     sizer_43->Add(button_12, 0, 0, 0);
     sizer_43->Add(panel_6, 1, wxEXPAND, 0);
     sizer_37->Add(sizer_43, 1, wxEXPAND, 0);
+
+    sizer_a->Add(label_a, 0, 0, 0);
+    sizer_a->Add(button_a, 0, 0, 0);
+    sizer_a->Add(panel_a, 1, wxEXPAND, 0);
+    sizer_37->Add(sizer_a, 1, wxEXPAND, 0);
+    sizer_b->Add(label_b, 0, 0, 0);
+    sizer_b->Add(button_b, 0, 0, 0);
+    sizer_b->Add(panel_b, 1, wxEXPAND, 0);
+    sizer_37->Add(sizer_b, 1, wxEXPAND, 0);
+
     sizer_44->Add(button_5, 0, 0, 0);
     sizer_44->Add(button_6, 0, 0, 0);
     sizer_37->Add(sizer_44, 1, wxEXPAND, 0);
@@ -102,39 +124,13 @@ wxColor ColorCustomizeDialog::getColorFromSetting(int type)
 {
     int col[COL_NUM];
 
-    switch(type){
-    case ColorType::Background:
-        for(int i = 0; i < COL_NUM; i ++){
-            col[i] = this->colorSetting.background[i];
+    for(int tag = 0; tag < ColorType::NUMBER_OF_COLOR_TYPES; tag ++){
+        if(type == tag){
+            for(int i = 0; i < COL_NUM; i ++){
+                col[i] = this->colorSetting.colors[type][i];
+            }
+            break;
         }
-        break;
-    case ColorType::GridLine:
-        for(int i = 0; i < COL_NUM; i ++){
-            col[i] = this->colorSetting.gridLine[i];
-        }
-        break;
-    case ColorType::Lines:
-        for(int i = 0; i < COL_NUM; i ++){
-            col[i] = this->colorSetting.lines[i];
-        }
-        break;
-    case ColorType::Polygons:
-        for(int i = 0; i < COL_NUM; i ++){
-            col[i] = this->colorSetting.polygons[i];
-        }
-        break;
-    case ColorType::Strings:
-        for(int i = 0; i < COL_NUM; i ++){
-            col[i] = this->colorSetting.strings[i];
-        }
-        break;
-    case ColorType::Points:
-        for(int i = 0; i < COL_NUM; i ++){
-            col[i] = this->colorSetting.points[i];
-        }
-        break;
-    default:
-        break;
     }
     wxColor color(col[0], col[1], col[2]);
     return color;
@@ -172,52 +168,49 @@ void ColorCustomizeDialog::setColor(int cols[]){
 
 void ColorCustomizeDialog::OnBackground(wxCommandEvent &event)
 {
-    setColor(colorSetting.background);
+    setColor(colorSetting.colors[ColorType::Background]);
 }
 
 
 void ColorCustomizeDialog::OnGrid(wxCommandEvent &event)
 {
-    setColor(colorSetting.gridLine);
+    setColor(colorSetting.colors[ColorType::GridLine]);
 }
 
 
 void ColorCustomizeDialog::OnLines(wxCommandEvent &event)
 {
-    setColor(colorSetting.lines);
+    setColor(colorSetting.colors[ColorType::Lines]);
 }
 
 
 void ColorCustomizeDialog::OnPolygons(wxCommandEvent &event)
 {
-    setColor(colorSetting.polygons);
+    setColor(colorSetting.colors[ColorType::Polygons]);
 }
 
 
 void ColorCustomizeDialog::OnStrings(wxCommandEvent &event)
 {
-    setColor(colorSetting.strings);
+    setColor(colorSetting.colors[ColorType::Strings]);
 }
 
 
 void ColorCustomizeDialog::OnPoints(wxCommandEvent &event)
 {
-    setColor(colorSetting.points);
+    setColor(colorSetting.colors[ColorType::Points]);
+}
+void ColorCustomizeDialog::OnSameHeightLines(wxCommandEvent &event)
+{
+    setColor(colorSetting.colors[ColorType::SameHeightLines]);
+}
+void ColorCustomizeDialog::OnStairLines(wxCommandEvent &event)
+{
+    setColor(colorSetting.colors[ColorType::StairLines]);
 }
 
 void ColorCustomizeDialog::OnPaint(wxPaintEvent &event)
 {
-/*     wxSize size = GetSize();
-    if(!wxWindow::IsExposed(0,0,size.GetWidth(), size.GetHeight())){
-        return;
-    }
-   //Ý’è‚µ‚½F‚Å“h‚é
-    this->drawPanel(this->panel_1, ColorType::Background);
-    this->drawPanel(this->panel_2, ColorType::GridLine);
-    this->drawPanel(this->panel_3, ColorType::Lines);
-    this->drawPanel(this->panel_4, ColorType::Polygons);
-    this->drawPanel(this->panel_5, ColorType::Strings);
-    this->drawPanel(this->panel_6, ColorType::Points);*/
 }
 /**
     @param type MapEditorOneSetting.h‚ð‚Ý‚æ‚¤

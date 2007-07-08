@@ -153,9 +153,6 @@ public:
     //編集設定
     MapEditorOneSetting setting;
 
-    //Shapesモードか？
-    bool isLoadedShapesFile;
-
     //プリセットで追加するポリゴンの頂点数
     int nPolygonPoints;
 
@@ -287,7 +284,7 @@ public:
     */
     void resetLineEditInfo();
 
-    void getShapesImage(wxImage* img, int collection, int clut, int index);
+    void getShapesImage(wxImage* img, int collection, int clut, int index, double illumination);
 private:
 
 };

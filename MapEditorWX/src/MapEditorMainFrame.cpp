@@ -130,6 +130,20 @@ MapEditorMainFrame::MapEditorMainFrame(const wxString& title,
     //初期化
     wxGetApp().isChanged = false;
     this->initLevel();
+
+    hpl::shapes::initScreen();
+
+    //Shapesファイル読み込み
+    wxGetApp().getShapesManager()->setLoadedShapesFile(false);
+    const char* SHAPES_FILE_PATH = "Shapes.shpA";
+    hpl::shapes::loadShapesFile(SHAPES_FILE_PATH);
+
+    //
+    int collection = 5;
+    int clut = 0;
+    int index = 0;
+    double illumination = -1.0;
+    wxGetApp().getShapesImage(&texture, collection, clut, index, illumination);
     //セットアップ
     wxGetApp().getStockManager()->updateDeletes();
 }
@@ -267,16 +281,16 @@ void MapEditorMainFrame::OnEraseBackground(wxEraseEvent& ev)
 void MapEditorMainFrame::setupPenAndBrush(ColorSettings* setting)
 {
     //背景色
-    wxColor col = wxColor(wxGetApp().setting.getColorSetting()->background[0],
-        wxGetApp().setting.getColorSetting()->background[1],
-        wxGetApp().setting.getColorSetting()->background[2]);
+    wxColor col = wxColor(wxGetApp().setting.getColorSetting()->colors[ColorType::Background][0],
+        wxGetApp().setting.getColorSetting()->colors[ColorType::Background][1],
+        wxGetApp().setting.getColorSetting()->colors[ColorType::Background][2]);
     this->backgroundPen = wxPen(col);
     this->backgroundBrush = wxBrush(col);
 
     //グリッド色
-    wxColor edgeCol(wxGetApp().setting.getColorSetting()->gridLine[0],
-        wxGetApp().setting.getColorSetting()->gridLine[1],
-        wxGetApp().setting.getColorSetting()->gridLine[2]);
+    wxColor edgeCol(wxGetApp().setting.getColorSetting()->colors[ColorType::GridLine][0],
+        wxGetApp().setting.getColorSetting()->colors[ColorType::GridLine][1],
+        wxGetApp().setting.getColorSetting()->colors[ColorType::GridLine][2]);
     this->gridPen = wxPen(edgeCol);
     this->gridLargePen = wxPen(edgeCol, LARGE_PEN_SIZE);
 
@@ -303,23 +317,34 @@ void MapEditorMainFrame::setupPenAndBrush(ColorSettings* setting)
 
     //線
     this->linePen.SetColour(
-        wxGetApp().setting.getColorSetting()->lines[0],
-        wxGetApp().setting.getColorSetting()->lines[1],
-        wxGetApp().setting.getColorSetting()->lines[2]);
+        wxGetApp().setting.getColorSetting()->colors[ColorType::Lines][0],
+        wxGetApp().setting.getColorSetting()->colors[ColorType::Lines][1],
+        wxGetApp().setting.getColorSetting()->colors[ColorType::Lines][2]);
 
     //点
     wxColor pcol(
-        wxGetApp().setting.getColorSetting()->points[0],
-        wxGetApp().setting.getColorSetting()->points[1],
-        wxGetApp().setting.getColorSetting()->points[2]);
+        wxGetApp().setting.getColorSetting()->colors[ColorType::Points][0],
+        wxGetApp().setting.getColorSetting()->colors[ColorType::Points][1],
+        wxGetApp().setting.getColorSetting()->colors[ColorType::Points][2]);
     this->pointPen.SetColour(pcol);
     this->pointBrush.SetColour(pcol);
 
+    //同じ高さ線の色
+    sameHeightLinePen.SetColour(
+        wxGetApp().setting.getColorSetting()->colors[ColorType::SameHeightLines][0],
+        wxGetApp().setting.getColorSetting()->colors[ColorType::SameHeightLines][1],
+        wxGetApp().setting.getColorSetting()->colors[ColorType::SameHeightLines][2]);
+    //段差のある線の色
+    stairLinePen.SetColour(
+        wxGetApp().setting.getColorSetting()->colors[ColorType::StairLines][0],
+        wxGetApp().setting.getColorSetting()->colors[ColorType::StairLines][1],
+        wxGetApp().setting.getColorSetting()->colors[ColorType::StairLines][2]);
+
     //ポリゴン
     this->polyBrush.SetColour(
-        wxGetApp().setting.getColorSetting()->polygons[0],
-        wxGetApp().setting.getColorSetting()->polygons[1],
-        wxGetApp().setting.getColorSetting()->polygons[2]);
+        wxGetApp().setting.getColorSetting()->colors[ColorType::Polygons][0],
+        wxGetApp().setting.getColorSetting()->colors[ColorType::Polygons][1],
+        wxGetApp().setting.getColorSetting()->colors[ColorType::Polygons][2]);
 
     //オブジェクトカラー
     //プレイヤーペン(yellow)

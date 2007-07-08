@@ -57,7 +57,7 @@ bool EditorPreferencesDialog::Create(wxWindow* parent, wxWindowID id)
     sizer_46->Add(label_19, 0, 0, 0);
     sizer_46->Add(choice_9, 0, 0, 0);
     sizer_45->Add(sizer_46, 1, wxEXPAND, 0);
-    for(int i = 0; i < NUMBER_OF_EDITOR_FLAGS; i ++){
+    for(int i = 0; i <= IS_VISUAL_MODE_CROSSFAIR; i ++){
         sizer_49->Add(checkbox[i], 0, 0, 0);
     }
     sizer_47->Add(sizer_49, 1, wxEXPAND, 0);
@@ -65,6 +65,10 @@ bool EditorPreferencesDialog::Create(wxWindow* parent, wxWindowID id)
     sizer_51->Add(choice_10, 0, 0, 0);
     sizer_50->Add(sizer_51, 1, wxEXPAND, 0);
     sizer_50->Add(button_15, 0, 0, 0);
+    //checkbox Žc‚è <en> remains
+    for(int i = IS_VISUAL_MODE_CROSSFAIR + 1; i < NUMBER_OF_EDITOR_FLAGS; i ++){
+        sizer_50->Add(checkbox[i], 0, 0, 0);
+    }
     sizer_47->Add(sizer_50, 1, wxEXPAND, 0);
     sizer_45->Add(sizer_47, 1, wxEXPAND, 0);
     sizer_48->Add(button_13, 0, 0, 0);

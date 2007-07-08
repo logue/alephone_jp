@@ -1,3 +1,8 @@
+/**
+    Shapesファイルを用いる関数と管理マネージャー
+    Shapes<->SDL_Surface間の操作のみ行い、
+    SDL_Surface<->SDL_Surface, SDL_Surface<->wxImage等の操作は別で行うこと
+*/
 #ifndef _HPL_SHAPES_MANAGER_
 #define _HPL_SHAPES_MANAGER_
 
@@ -29,6 +34,8 @@ namespace shapes{
         @param path Shapesファイルパス <en> Shapes file's path
     */
     void loadShapesFile(const char* path);
+
+    void initScreen();
 
 	/**
 		読み込み管理

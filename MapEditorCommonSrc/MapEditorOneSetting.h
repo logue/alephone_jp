@@ -2,20 +2,21 @@
 #define _MAP_EDITOR_ONE_SETTING_
 
 //#include "stdafx.h"
-#include "header.h"
-#include "extensions.h"
-#include "FileHandler.h"
-#include "map.h"
-#include "game_wad.h"
-#include "weapons.h"
-#include "items.h"
-#include "monsters.h"
-#include "scenery_definitions.h"
-#include "mysound.h"
 #include "computer_interface.h"
 #include "editor.h"
+#include "extensions.h"
+#include "FileHandler.h"
+#include "game_wad.h"
+#include "header.h"
+#include "items.h"
 #include "lightsource.h"
+#include "map.h"
 #include "media.h"
+#include "monsters.h"
+#include "mysound.h"
+#include "platforms.h"
+#include "scenery_definitions.h"
+#include "weapons.h"
 
 //#include "MapEditorSDI.h"
 const int NUMBER_OF_POLYGON_TYPE = 24;
@@ -106,20 +107,18 @@ namespace ColorType{
         Lines,
         Polygons,
         Strings,
-        Points,
+        Points,             //5
+        SameHeightLines,
+        StairLines,
         NUMBER_OF_COLOR_TYPES
     };
 };
-typedef struct ColorSettings_tag{
+class ColorSettings{
+public:
     int type;
-    int background[COL_NUM];
-    int gridLine[COL_NUM];
-    int lines[COL_NUM];
-    int polygons[COL_NUM];
-    int strings[COL_NUM];
-    int points[COL_NUM];
-    //int colors[ColorType::NUMBER_OF_COLOR_TYPES][COL_NUM];
-}ColorSettings;
+    int colors[ColorType::NUMBER_OF_COLOR_TYPES][COL_NUM];
+    void setColor(int type, int r, int g, int b);
+};
 
 enum{
     IS_SHOW_GRID,

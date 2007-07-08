@@ -327,15 +327,18 @@ void MapEditorWX::resetLineEditInfo()
     isFirstOfLineToAdd = true;
 }
 
-void MapEditorWX::getShapesImage(wxImage* img, int collection, int clut, int index)
+void MapEditorWX::getShapesImage(wxImage* img, int collection, int clut, int index, double illumination)
 {
 	//サーフェイス取得
-	SDL_Surface* surface = hpl::surface::getSurface(collection, clut, index);
+	SDL_Surface* surface = hpl::shapes::getSurface(collection, clut, index, illumination);
 	img->Create(surface->w, surface->h);
 	SDL_LockSurface(surface);
 	for(int x = 0; x < surface->w; x ++){
 		for(int y = 0; y < surface->h; y ++){
-
+            Uint32 pixel = hpl::surface::getpixel(surface, x, y);
+            unsigned char r, g, b;
+            SDL_GetRGB(pixel, surface->format, &r, &g, &b);
+            img->SetRGB(x, y, r, g, b);
 		}
 	}
 	SDL_UnlockSurface(surface);

@@ -41,7 +41,7 @@ Uint32 hpl::surface::getpixel(Uint8* pixels, int pitch, int bpp, int x, int y)
     }
 }
 
-void hpl::surface::putpixel(SDL_Surface *surface, int x, int y, Uint32 pixel)
+void hpl::surface::setpixel(SDL_Surface *surface, int x, int y, Uint32 pixel)
 {
     int bpp = surface->format->BytesPerPixel;
     /* この p は取得したいピクセルを指すアドレス */

@@ -23,6 +23,12 @@ private:
     wxStaticText* label_18;
     wxButton* button_12;
     wxPanel* panel_6;
+    wxStaticText* label_a;
+    wxButton* button_a;
+    wxPanel* panel_a;
+    wxStaticText* label_b;
+    wxButton* button_b;
+    wxPanel* panel_b;
     wxButton* button_5;
     wxButton* button_6;
     ColorSettings colorSetting;
@@ -42,6 +48,8 @@ public:
     void OnPolygons(wxCommandEvent &event); // wxGlade: <event_handler>
     void OnStrings(wxCommandEvent &event); // wxGlade: <event_handler>
     void OnPoints(wxCommandEvent &event); // wxGlade: <event_handler>
+    void OnSameHeightLines(wxCommandEvent &event); // wxGlade: <event_handler>
+    void OnStairLines(wxCommandEvent &event); // wxGlade: <event_handler>
     void OnPaint(wxPaintEvent &event);
 
     //イベントテーブル作成<en>declare
