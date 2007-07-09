@@ -5,18 +5,12 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "AlephOneSrc", "AlephOneSrc\
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
-		Debug Unicode|Win32 = Debug Unicode|Win32
 		Debug|Win32 = Debug|Win32
-		Release Unicode|Win32 = Release Unicode|Win32
 		Release|Win32 = Release|Win32
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{734E3D3E-FBC1-45D8-B254-68A39C5E429A}.Debug Unicode|Win32.ActiveCfg = Debug Unicode|Win32
-		{734E3D3E-FBC1-45D8-B254-68A39C5E429A}.Debug Unicode|Win32.Build.0 = Debug Unicode|Win32
 		{734E3D3E-FBC1-45D8-B254-68A39C5E429A}.Debug|Win32.ActiveCfg = Debug|Win32
 		{734E3D3E-FBC1-45D8-B254-68A39C5E429A}.Debug|Win32.Build.0 = Debug|Win32
-		{734E3D3E-FBC1-45D8-B254-68A39C5E429A}.Release Unicode|Win32.ActiveCfg = Release Unicode|Win32
-		{734E3D3E-FBC1-45D8-B254-68A39C5E429A}.Release Unicode|Win32.Build.0 = Release Unicode|Win32
 		{734E3D3E-FBC1-45D8-B254-68A39C5E429A}.Release|Win32.ActiveCfg = Release|Win32
 		{734E3D3E-FBC1-45D8-B254-68A39C5E429A}.Release|Win32.Build.0 = Release|Win32
 	EndGlobalSection
