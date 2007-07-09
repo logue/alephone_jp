@@ -103,9 +103,11 @@ void MapEditorMainFrame::OnPaint(wxPaintEvent& WXUNUSED(event))
         }
     }
 
-    //Shapesファイルから読み込みテスト
-    wxBitmap bmp = wxBitmap(this->texture);
-    dc.DrawBitmap(bmp,0,0,true);
+	if(wxGetApp().getShapesManager()->isLoadedShapesFile()){
+		//Shapesファイルから読み込みテスト
+		wxBitmap bmp = wxBitmap(this->texture);
+		dc.DrawBitmap(bmp,0,0,true);
+	}
 
     //バッファから画面へコピー
     dc.Blit(wxPoint(0,0), size,

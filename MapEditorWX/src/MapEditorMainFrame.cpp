@@ -131,19 +131,21 @@ MapEditorMainFrame::MapEditorMainFrame(const wxString& title,
     wxGetApp().isChanged = false;
     this->initLevel();
 
-    hpl::shapes::initScreen();
+	hpl::shapes::HPLShapesManager* shpmgr = wxGetApp().getShapesManager();
+    shpmgr->initScreen();
 
     //Shapesファイル読み込み
-    wxGetApp().getShapesManager()->setLoadedShapesFile(false);
     const char* SHAPES_FILE_PATH = "Shapes.shpA";
-    hpl::shapes::loadShapesFile(SHAPES_FILE_PATH);
+    bool result = shpmgr->loadShapesFile(SHAPES_FILE_PATH);
+	if(result){
+		//
+		int collection = 5;
+		int clut = 0;
+		int index = 0;
+		double illumination = 1.0;
+		wxGetApp().getShapesImage(&texture, collection, clut, index, illumination);
+	}
 
-    //
-    int collection = 5;
-    int clut = 0;
-    int index = 0;
-    double illumination = -1.0;
-    wxGetApp().getShapesImage(&texture, collection, clut, index, illumination);
     //セットアップ
     wxGetApp().getStockManager()->updateDeletes();
 }
@@ -236,7 +238,7 @@ void MapEditorMainFrame::setupMenus()
     menuBar->Append(menuEdit, _T("&Edit"));
     menuBar->Append(menuShow, _T("&Show"));
     menuBar->Append(menuMode, _T("&Mode"));
-    menuBar->Append(menuSpecial, _T("&Special! (^o^)/"));
+    menuBar->Append(menuSpecial, _T("&Special! 8)"));
     menuBar->Append(menuHelp, _T("&Help"));
 
     SetMenuBar(menuBar);

@@ -3,9 +3,13 @@
 #include "HPLSurfaceModifier.h"
 #include "shapes_sdl.h"
 
+const int SCREEN_BPP = 32;
+const int NEW_SURFACE_BPP = SCREEN_BPP;
+
 hpl::shapes::HPLShapesManager::HPLShapesManager()
 {
     this->isLoadedShapesFile_ = false;
+	isInitialized = false;
 }
 hpl::shapes::HPLShapesManager::~HPLShapesManager()
 {
@@ -40,10 +44,10 @@ static SDL_Surface* createSurface(int flags, int w, int h, int bpp)
     return surface;
 }
 
-void hpl::shapes::initScreen()
+void hpl::shapes::HPLShapesManager::initScreen()
 {
-    screenSurface = createSurface(SDL_SWSURFACE,
-		640, 480, 8);
+    screenSurface = createSurface(SDL_HWSURFACE,
+		640, 480, SCREEN_BPP);
 
 	struct screen_mode_data scr;
 	scr.acceleration = 0;
@@ -54,6 +58,8 @@ void hpl::shapes::initScreen()
 	scr.high_resolution = 1;
 	scr.size = 2;
 	initialize_screen(&scr, false);
+
+	isInitialized = true;
 }
 
 /**
@@ -61,14 +67,17 @@ void hpl::shapes::initScreen()
     <en> load Shapes file
     @param path Shapesファイルパス <en> Shapes file's path
 */
-void hpl::shapes::loadShapesFile(const char* path)
+bool hpl::shapes::HPLShapesManager::loadShapesFile(const char* path)
 {
-
+	if(!isInitialized){
+		hpl::error::caution("Shapes Manager is not initialized yet");
+		return false;
+	}
     initialize_shape_handler();
 
 	FileSpecifier ShapesFile(path);
 	if(!ShapesFile.Exists()){
-        hpl::error::caution("no shapes file");
+        hpl::error::halt("cannot load shapes file[%s]", path);
 	}else{
 		open_shapes_file(ShapesFile);
 
@@ -76,15 +85,23 @@ void hpl::shapes::loadShapesFile(const char* path)
 			mark_collection_for_loading(i);
 		}
 		load_collections(false, false);
+		this->setLoadedShapesFile(true);
 	}
+	return true;
 }
 /**
     指定したShapesデータを取得します。
     @return 失敗時にNULL
 */
-SDL_Surface* hpl::shapes::getSurface(int collection, int clut, int index,
+SDL_Surface* hpl::shapes::HPLShapesManager::getSurface(int collection, int clut, int index,
 													   double illumination)
 {
+	if(!isInitialized){
+		hpl::error::halt("Shapes Manager is not initialized yet");
+	}
+	if(!this->isLoadedShapesFile()){
+		hpl::error::halt("Shapes Manager doesn't load Shapes file yet");
+	}
     //TODO
 	SDL_Color palette[256];
 
@@ -93,13 +110,16 @@ SDL_Surface* hpl::shapes::getSurface(int collection, int clut, int index,
 	byte **outp = (byte**)malloc(sizeof(byte*));
 	int col = BUILD_COLLECTION(collection, clut);
 	int shape = BUILD_DESCRIPTOR(col, index);
+	if(screenSurface->format->BitsPerPixel == 8 && illumination >= 0){
+		illumination = -1.0;
+	}
 	SDL_Surface* surface = get_shape_surface(shape, excol, outp,
 		illumination, false, palette);
 #ifdef __WXDEBUG__
 	wxASSERT(surface);
 #endif
-	SDL_Surface* newSurface = createSurface(surface->flags,
-		surface->w, surface->h, 8);
+	SDL_Surface* newSurface = createSurface(screenSurface->flags,
+		surface->w, surface->h, NEW_SURFACE_BPP);
 #ifdef __WXDEBUG__
 	wxASSERT(newSurface);
 #endif
@@ -109,8 +129,12 @@ SDL_Surface* hpl::shapes::getSurface(int collection, int clut, int index,
 	    for(int x = 0; x < surface->w; x ++){
 			Uint32 pixel = hpl::surface::getpixel(surface, x, y);
 			hpl::surface::setpixel(newSurface, x, y,
-				SDL_MapRGB(newSurface->format, palette[pixel].r,
-					palette[pixel].g, palette[pixel].b));
+				SDL_MapRGB(screenSurface->format, 
+/*				surface->format->palette->colors[pixel].r,
+				surface->format->palette->colors[pixel].g,
+				surface->format->palette->colors[pixel].b));
+				*/
+				palette[pixel].r, palette[pixel].g, palette[pixel].b));
 		}
 	}
 	SDL_UnlockSurface(newSurface);

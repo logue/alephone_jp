@@ -114,7 +114,7 @@ bool MapEditorOneSetting::saveSetting()
         fprintf(fp, "%s=%d\n", GRID_SIZE_INDEX_TAG, gridSizeIndex);
         fprintf(fp, "%s=%d\n", COLOR_SETTING_COLOR_PRESET_TAG, colorSetting.type);
         for(int i = 0; i < ColorType::NUMBER_OF_COLOR_TYPES; i ++){
-            fprintf(fp, "%s=", i);
+            fprintf(fp, "%s=", COLOR_SETTING_TAGS[i]);
             outputColor(fp, this->colorSetting.colors[i], COL_NUM);
         }
         fprintf(fp, "\n%s=", EDITOR_FLAGS_TAG);

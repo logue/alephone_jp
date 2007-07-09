@@ -225,3 +225,6 @@ TODO •Çi‚½‚©‚¾‚©•Ð•û‚Ìƒ|ƒŠƒSƒ“‚µ‚©‘¶Ý‚µ‚È‚¢üjE‚‚³‚ª“¯‚¶üE‚‚³‚ªˆÙ‚È‚éü‚
 		EˆÙ‚È‚é‚‚³‚¾
 			¨StairLines
 			
+TODO ‚‚³•Ê•\Ž¦
+TODO ƒeƒNƒXƒ`ƒƒ‚Åƒ|ƒŠƒSƒ“•\Ž¦
+TODO ƒRƒsƒy

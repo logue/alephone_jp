@@ -330,7 +330,7 @@ void MapEditorWX::resetLineEditInfo()
 void MapEditorWX::getShapesImage(wxImage* img, int collection, int clut, int index, double illumination)
 {
 	//サーフェイス取得
-	SDL_Surface* surface = hpl::shapes::getSurface(collection, clut, index, illumination);
+	SDL_Surface* surface = this->getShapesManager()->getSurface(collection, clut, index, illumination);
 	img->Create(surface->w, surface->h);
 	SDL_LockSurface(surface);
 	for(int x = 0; x < surface->w; x ++){
