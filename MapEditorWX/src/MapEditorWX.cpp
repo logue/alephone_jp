@@ -330,6 +330,7 @@ void MapEditorWX::resetLineEditInfo()
 void MapEditorWX::getShapesImage(wxImage* img, int collection, int clut, int index, double illumination)
 {
 	//サーフェイス取得
+    
 	SDL_Surface* surface = this->getShapesManager()->getSurface(collection, clut, index, illumination);
 	img->Create(surface->w, surface->h);
 	SDL_LockSurface(surface);
@@ -343,6 +344,21 @@ void MapEditorWX::getShapesImage(wxImage* img, int collection, int clut, int ind
 	}
 	SDL_UnlockSurface(surface);
 	SDL_FreeSurface(surface);
+    
+/*
+    SDL_Color palette[256];
+    byte** outp = (byte**)malloc(sizeof(byte*));
+    SDL_Surface* surface = this->getShapesManager()->getRawSurface(collection, clut, index, illumination,
+        palette, outp);
+    img->Create(surface->w, surface->h);
+	for(int x = 0; x < surface->w; x ++){
+		for(int y = 0; y < surface->h; y ++){
+            int pixel = (int)hpl::surface::getpixel(surface, x, y);
+            img->SetRGB(x, y, palette[pixel].b, palette[pixel].g, palette[pixel].r);
+        }
+    }
+    SDL_FreeSurface(surface);
+    free(outp);*/
 }
 
 //char->wx

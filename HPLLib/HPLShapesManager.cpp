@@ -25,7 +25,7 @@ void hpl::shapes::HPLShapesManager::setLoadedShapesFile(bool loaded)
 
 static SDL_Surface* createSurface(int flags, int w, int h, int bpp)
 {
-    Uint32 rmask, gmask, bmask, amask;
+    Uint32 rmask, gmask, bmask, amask = 0;
 	//空のサーフェイスデータの作成
 #if SDL_BYTEORDER == SDL_BIG_ENDIAN
     rmask = 0xff000000;
@@ -46,7 +46,7 @@ static SDL_Surface* createSurface(int flags, int w, int h, int bpp)
 
 void hpl::shapes::HPLShapesManager::initScreen()
 {
-    screenSurface = createSurface(SDL_HWSURFACE,
+    screenSurface = createSurface(SDL_SWSURFACE,
 		640, 480, SCREEN_BPP);
 
 	struct screen_mode_data scr;
@@ -89,6 +89,28 @@ bool hpl::shapes::HPLShapesManager::loadShapesFile(const char* path)
 	}
 	return true;
 }
+
+/**
+    読み込んだデータをそのまま取得します。
+    パレットの色番号しか持たないため、パレットが必要
+    @param palette カラーパレット。外部で用意する
+    @param outp 生データ。外部で用意する
+*/
+SDL_Surface* hpl::shapes::HPLShapesManager::getRawSurface(
+    int collection, int clut, int index, double illumination,
+    SDL_Color palette[256], byte **outp)
+{
+	//コレクションを別指定。指定する必要がないのでNONE
+	int excol = NONE;
+	int col = BUILD_COLLECTION(collection, clut);
+	int shape = BUILD_DESCRIPTOR(col, index);
+	if(screenSurface->format->BitsPerPixel == 8 && illumination >= 0){
+		illumination = -1.0;
+	}
+	SDL_Surface* surface = get_shape_surface(shape, excol, outp,
+		illumination, false, palette);
+    return surface;
+}
 /**
     指定したShapesデータを取得します。
     @return 失敗時にNULL
@@ -104,17 +126,9 @@ SDL_Surface* hpl::shapes::HPLShapesManager::getSurface(int collection, int clut,
 	}
     //TODO
 	SDL_Color palette[256];
-
-	//コレクションを別指定。指定する必要がないのでNONE
-	int excol = NONE;
 	byte **outp = (byte**)malloc(sizeof(byte*));
-	int col = BUILD_COLLECTION(collection, clut);
-	int shape = BUILD_DESCRIPTOR(col, index);
-	if(screenSurface->format->BitsPerPixel == 8 && illumination >= 0){
-		illumination = -1.0;
-	}
-	SDL_Surface* surface = get_shape_surface(shape, excol, outp,
-		illumination, false, palette);
+    SDL_Surface* surface = this->getRawSurface(collection, clut, index, illumination,
+        palette, outp);
 #ifdef __WXDEBUG__
 	wxASSERT(surface);
 #endif
@@ -134,7 +148,7 @@ SDL_Surface* hpl::shapes::HPLShapesManager::getSurface(int collection, int clut,
 				surface->format->palette->colors[pixel].g,
 				surface->format->palette->colors[pixel].b));
 				*/
-				palette[pixel].r, palette[pixel].g, palette[pixel].b));
+				palette[pixel].b, palette[pixel].g, palette[pixel].r));
 		}
 	}
 	SDL_UnlockSurface(newSurface);

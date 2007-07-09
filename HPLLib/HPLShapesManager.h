@@ -37,13 +37,23 @@ namespace shapes{
 
 	private:
 		void setLoadedShapesFile(bool loaded);
+
     public:
         bool isLoadedShapesFile();
+        /**
+            読み込んだデータをそのまま取得します。
+            パレットの色番号しか持たないため、パレットが必要
+            @param palette カラーパレット。外部で用意する
+            @param outp 生データ。外部で用意する
+        */
+        SDL_Surface* getRawSurface(int collection, int clut, int index, double illumination,
+            SDL_Color palette[256], byte **outp);
 		/**
 			指定したShapesデータを取得します。
 			@return 失敗時にNULL
 		*/
 		SDL_Surface* getSurface(int collection, int clut, int index, double illumination);
+
 		/**
 			Shapesファイルを読み込みます
 			<en> load Shapes file
