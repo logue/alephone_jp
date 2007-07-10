@@ -143,7 +143,45 @@ MapEditorMainFrame::MapEditorMainFrame(const wxString& title,
 		int clut = 0;
 		int index = 0;
 		double illumination = 1.0;
-		wxGetApp().getShapesImage(&texture, collection, clut, index, illumination);
+		//wxGetApp().getShapesImage(&texture, collection, clut, index, illumination);
+
+		//256x80
+		int palSizeW = 10;
+		int palSizeH = 10;
+		int pitch = 50;
+		int lineNum = 8;
+		this->paletteImg.Create(palSizeW * pitch, palSizeH * lineNum);
+		SDL_Color palette[256];
+		byte** outp = (byte**)malloc(sizeof(byte*));
+		SDL_Surface* surface = wxGetApp().getShapesManager()->getRawSurface(collection, clut, index,
+			illumination, palette, outp);
+		SDL_FreeSurface(surface);
+		free(outp);
+		//パレットに配置していく
+		//collection情報
+        struct collection_header* header = get_collection_header(collection);
+        int clutNum = header->collection->clut_count;
+		int colorNum = header->collection->color_count;
+		int color_table_offset = header->collection->color_table_offset;
+		int numColors = 0;
+        struct rgb_color_value* palette1 = get_collection_colors(collection, clut, numColors);
+		for(int i = 0; i < numColors; i ++){
+			int x = (i % pitch) * palSizeW;
+			int y = (i / pitch) * palSizeH;
+			int w = palSizeW;
+			int h = palSizeH;
+			wxRect rect(x, y, w, h);
+			paletteImg.SetRGB(rect,
+				palette1[i].red,
+				palette1[i].green,
+				palette1[i].blue);
+		}
+
+		surface = wxGetApp().getShapesManager()->getSurface(collection, clut, index,
+			illumination);
+		//色数の取得
+		wxGetApp().getShapesImageFromSurface(&texture, surface);
+		SDL_FreeSurface(surface);
 	}
 
     //セットアップ

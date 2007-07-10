@@ -1,7 +1,6 @@
 #include "HPLShapesManager.h"
 #include "HPLError.h"
 #include "HPLSurfaceModifier.h"
-#include "shapes_sdl.h"
 
 const int SCREEN_BPP = 32;
 const int NEW_SURFACE_BPP = SCREEN_BPP;
@@ -48,6 +47,7 @@ void hpl::shapes::HPLShapesManager::initScreen()
 {
     screenSurface = createSurface(SDL_SWSURFACE,
 		640, 480, SCREEN_BPP);
+	bit_depth = SCREEN_BPP;
 
 	struct screen_mode_data scr;
 	scr.acceleration = 0;
@@ -139,6 +139,10 @@ SDL_Surface* hpl::shapes::HPLShapesManager::getSurface(int collection, int clut,
 #endif
 	SDL_LockSurface(surface);
 	SDL_LockSurface(newSurface);
+	struct collection_header* header = get_collection_header(collection);
+	int numColors = 0;
+    struct rgb_color_value* palette1 = get_collection_colors(collection, clut, numColors);
+//	int colorPaletteOffset = header->collection->color_table_offset;
 	for(int y = 0; y < surface->h; y ++){
 	    for(int x = 0; x < surface->w; x ++){
 			Uint32 pixel = hpl::surface::getpixel(surface, x, y);
@@ -148,7 +152,9 @@ SDL_Surface* hpl::shapes::HPLShapesManager::getSurface(int collection, int clut,
 				surface->format->palette->colors[pixel].g,
 				surface->format->palette->colors[pixel].b));
 				*/
-				palette[pixel].b, palette[pixel].g, palette[pixel].r));
+				palette1[pixel].red,
+				palette1[pixel].green,
+				palette1[pixel].blue));
 		}
 	}
 	SDL_UnlockSurface(newSurface);

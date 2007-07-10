@@ -332,17 +332,7 @@ void MapEditorWX::getShapesImage(wxImage* img, int collection, int clut, int ind
 	//サーフェイス取得
     
 	SDL_Surface* surface = this->getShapesManager()->getSurface(collection, clut, index, illumination);
-	img->Create(surface->w, surface->h);
-	SDL_LockSurface(surface);
-	for(int x = 0; x < surface->w; x ++){
-		for(int y = 0; y < surface->h; y ++){
-            Uint32 pixel = hpl::surface::getpixel(surface, x, y);
-            unsigned char r, g, b;
-            SDL_GetRGB(pixel, surface->format, &r, &g, &b);
-            img->SetRGB(x, y, r, g, b);
-		}
-	}
-	SDL_UnlockSurface(surface);
+	this->getShapesImageFromSurface(img, surface);
 	SDL_FreeSurface(surface);
     
 /*
@@ -359,6 +349,20 @@ void MapEditorWX::getShapesImage(wxImage* img, int collection, int clut, int ind
     }
     SDL_FreeSurface(surface);
     free(outp);*/
+}
+void MapEditorWX::getShapesImageFromSurface(wxImage* img, SDL_Surface* surface)
+{
+	img->Create(surface->w, surface->h);
+	SDL_LockSurface(surface);
+	for(int x = 0; x < surface->w; x ++){
+		for(int y = 0; y < surface->h; y ++){
+            Uint32 pixel = hpl::surface::getpixel(surface, x, y);
+            unsigned char r, g, b;
+            SDL_GetRGB(pixel, surface->format, &r, &g, &b);
+            img->SetRGB(x, y, r, g, b);
+		}
+	}
+	SDL_UnlockSurface(surface);
 }
 
 //char->wx

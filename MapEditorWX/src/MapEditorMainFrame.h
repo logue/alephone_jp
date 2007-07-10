@@ -198,6 +198,7 @@ private:
     wxPen selectingPen;
 
     wxImage texture;
+	wxImage paletteImg;
 public:
     MapEditorMainFrame(const wxString& title,
         const wxPoint& pos = wxDefaultPosition,

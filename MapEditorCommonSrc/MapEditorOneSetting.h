@@ -17,6 +17,9 @@
 #include "platforms.h"
 #include "scenery_definitions.h"
 #include "weapons.h"
+#include "collection_definition.h"
+#include "shape_definitions.h"
+#include "shapes_sdl.h"
 
 //#include "MapEditorSDI.h"
 const int NUMBER_OF_POLYGON_TYPE = 24;

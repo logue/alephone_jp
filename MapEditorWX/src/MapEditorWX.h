@@ -285,6 +285,7 @@ public:
     void resetLineEditInfo();
 
     void getShapesImage(wxImage* img, int collection, int clut, int index, double illumination);
+	void getShapesImageFromSurface(wxImage* img, SDL_Surface* surface);
 private:
 
 };

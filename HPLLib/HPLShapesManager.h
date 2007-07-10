@@ -20,6 +20,9 @@
 #include "editor.h"
 #include "lightsource.h"
 #include "media.h"
+#include "collection_definition.h"
+#include "shape_definitions.h"
+#include "shapes_sdl.h"
 
 namespace hpl{
 namespace shapes{

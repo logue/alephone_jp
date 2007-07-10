@@ -107,6 +107,10 @@ void MapEditorMainFrame::OnPaint(wxPaintEvent& WXUNUSED(event))
 		//Shapesファイルから読み込みテスト
 		wxBitmap bmp = wxBitmap(this->texture);
 		dc.DrawBitmap(bmp,0,0,true);
+
+		bmp = wxBitmap(paletteImg);
+		dc.DrawBitmap(bmp, 100, 0, true);
+
 	}
 
     //バッファから画面へコピー
