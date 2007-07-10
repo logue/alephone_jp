@@ -106,11 +106,33 @@ void MapEditorMainFrame::OnPaint(wxPaintEvent& WXUNUSED(event))
 	if(wxGetApp().getShapesManager()->isLoadedShapesFile()){
 		//Shapesファイルから読み込みテスト
 		wxBitmap bmp = wxBitmap(this->texture);
-		dc.DrawBitmap(bmp,0,0,true);
+		dc.DrawBitmap(bmp,voffset[0],voffset[1],true);
 
 		bmp = wxBitmap(paletteImg);
-		dc.DrawBitmap(bmp, 100, 0, true);
+		dc.DrawBitmap(bmp, 100 + voffset[0], voffset[1], true);
 
+        int W = 100, H = 100, PITCH = 5;
+        int W_SPACE = 10, H_SPACE = 10, LINES = 10;
+        //draw walls
+        std::map<int, std::map<int, std::map<int, wxImage> > >::iterator it;
+        int counter = 0;
+        for(it = textureMap.begin(); it != textureMap.end(); it ++){
+            int collection = it->first;
+            std::map<int, std::map<int, wxImage> >::iterator it1;
+            for(it1 = it->second.begin(); it1 != it->second.end(); it1 ++){
+                int clut = it1->first;
+                std::map<int, wxImage>::iterator it2;
+                for(it2 = it1->second.begin(); it2 != it1->second.end(); it2 ++){
+                    int index = it2->first;
+                    wxImage* img = &it2->second;
+                    int x = 10 + (index % PITCH ) * (W + W_SPACE);
+                    int y = 200 + (index / PITCH) * (H + H_SPACE) + counter * LINES * (H + H_SPACE);
+                    wxBitmap bmpImg = wxBitmap(*img);
+                    dc.DrawBitmap(bmpImg, x+voffset[0], y+voffset[1]);
+                }
+            }
+            counter ++;
+        }
 	}
 
     //バッファから画面へコピー

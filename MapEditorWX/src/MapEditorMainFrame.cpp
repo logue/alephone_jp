@@ -145,43 +145,80 @@ MapEditorMainFrame::MapEditorMainFrame(const wxString& title,
 		double illumination = 1.0;
 		//wxGetApp().getShapesImage(&texture, collection, clut, index, illumination);
 
-		//256x80
-		int palSizeW = 10;
-		int palSizeH = 10;
-		int pitch = 50;
-		int lineNum = 8;
-		this->paletteImg.Create(palSizeW * pitch, palSizeH * lineNum);
-		SDL_Color palette[256];
-		byte** outp = (byte**)malloc(sizeof(byte*));
-		SDL_Surface* surface = wxGetApp().getShapesManager()->getRawSurface(collection, clut, index,
-			illumination, palette, outp);
-		SDL_FreeSurface(surface);
-		free(outp);
-		//パレットに配置していく
-		//collection情報
-        struct collection_header* header = get_collection_header(collection);
-        int clutNum = header->collection->clut_count;
-		int colorNum = header->collection->color_count;
-		int color_table_offset = header->collection->color_table_offset;
-		int numColors = 0;
-        struct rgb_color_value* palette1 = get_collection_colors(collection, clut, numColors);
-		for(int i = 0; i < numColors; i ++){
-			int x = (i % pitch) * palSizeW;
-			int y = (i / pitch) * palSizeH;
-			int w = palSizeW;
-			int h = palSizeH;
-			wxRect rect(x, y, w, h);
-			paletteImg.SetRGB(rect,
-				palette1[i].red,
-				palette1[i].green,
-				palette1[i].blue);
-		}
+        {
+		    //256x80
+		    int palSizeW = 10;
+		    int palSizeH = 10;
+		    int pitch = 50;
+		    int lineNum = 8;
+		    this->paletteImg.Create(palSizeW * pitch, palSizeH * lineNum);
+		    SDL_Color palette[256];
+		    byte** outp = (byte**)malloc(sizeof(byte*));
+		    SDL_Surface* surface = wxGetApp().getShapesManager()->getRawSurface(collection, clut, index,
+			    illumination, palette, outp);
+		    SDL_FreeSurface(surface);
+		    free(outp);
+		    //パレットに配置していく
+		    //collection情報
+            struct collection_header* header = get_collection_header(collection);
+            int clutNum = header->collection->clut_count;
+		    int colorNum = header->collection->color_count;
+		    int color_table_offset = header->collection->color_table_offset;
+		    int numColors = 0;
+            struct rgb_color_value* palette1 = get_collection_colors(collection, clut, numColors);
+		    for(int i = 0; i < numColors; i ++){
+			    int x = (i % pitch) * palSizeW;
+			    int y = (i / pitch) * palSizeH;
+			    int w = palSizeW;
+			    int h = palSizeH;
+			    wxRect rect(x, y, w, h);
+			    paletteImg.SetRGB(rect,
+				    palette1[i].red,
+				    palette1[i].green,
+				    palette1[i].blue);
+		    }
 
-		surface = wxGetApp().getShapesManager()->getSurface(collection, clut, index,
-			illumination);
-		//色数の取得
-		wxGetApp().getShapesImageFromSurface(&texture, surface);
-		SDL_FreeSurface(surface);
+		    surface = wxGetApp().getShapesManager()->getSurface(collection, clut, index,
+			    illumination);
+		    //色数の取得
+		    wxGetApp().getShapesImageFromSurface(&texture, surface);
+		    SDL_FreeSurface(surface);
+        }
+        //all texture loading
+        for(int i = 0; i < MAXIMUM_COLLECTIONS; i ++){
+            collection_definition* collectionDef = get_collection_definition(i);
+            if(collectionDef == NULL){
+                continue;
+            }
+            if(collectionDef->type != _wall_collection){
+                continue;
+            }
+            collection_header* header = get_collection_header(i);
+            if(header == NULL || header->collection == NULL){
+                continue;
+            }
+            if(header->collection->type != _wall_collection){
+                continue;
+            }
+            
+            int clutNum = header->collection->clut_count;
+            int bmpNum = header->collection->bitmap_count;
+            bool invalid = false;
+            if(bmpNum < 10){
+                invalid = true;
+            }
+            for(int clut = 0; clut < clutNum; clut ++){
+                for(int index = 0; index < bmpNum; index ++){
+                    wxImage img;
+                    if(invalid){
+                        img.Create(1,1);
+                    }else{
+                        wxGetApp().getShapesImage(&img, i, clut, index, illumination);
+                    }
+                    textureMap[i][clut][index] = img;
+                }
+            }
+        }
 	}
 
     //セットアップ
