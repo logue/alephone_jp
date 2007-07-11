@@ -51,10 +51,10 @@ public:
     void OnClockwisePoly(wxCommandEvent &event); // wxGlade: <event_handler>
     void OnCClockwisePoly(wxCommandEvent &event); // wxGlade: <event_handler>
 
-    int getLineIndex();
 public:
     void setupDialog();
     void setLineIndex(int index);
+    int getLineIndex();
 };
 
 #endif

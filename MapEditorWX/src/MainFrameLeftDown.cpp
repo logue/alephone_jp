@@ -159,16 +159,20 @@ void MapEditorMainFrame::doLButtonOnArrowTool(wxMouseEvent& ev)
 
 void MapEditorMainFrame::unselect()
 {
-	if(pointPropDialog.getPointIndex() != NONE)
-		this->pointPropDialog.setPointIndex(NONE);
-	if(objPropDialog.getObjectIndex() != NONE)
-		this->objPropDialog.setObjectIndex(NONE);
-	if(linePropDialog.getLineIndex() != NONE)
-		this->pointLineDialog.setLineIndex(NONE);
-	if(sidePropDialog.getSideIndex() != NONE)
-		this->pointSideDialog.setSideIndex(NONE);
-	if(polygonPropDialog.getPolygonIndex() != NONE)
-		this->pointPolygonDialog.setPolygonIndex(NONE);
+    hpl::aleph::map::HPLSelectData* sel = &wxGetApp().selectData;
+    //点を選択していないのにindexがNONEではない
+    if(!sel->isSelectOnePoint() && pointPropDialog.getIndex() != NONE){
+        //その場合選択をNONEにする
+		this->pointPropDialog.setIndex(NONE);
+    }
+	if(!sel->isSelectOneObject() && objPropDialog.getObjIndex() != NONE)
+		this->objPropDialog.setObjIndex(NONE);
+	if(!sel->isSelectOneLine() && linePropDialog.getLineIndex() != NONE)
+		this->linePropDialog.setLineIndex(NONE);
+	if(!sel->isSelectOneSide() && sidePropDialog.getIndex() != NONE)
+		this->sidePropDialog.setIndex(NONE);
+	if(!sel->isSelectOnePolygon() && polyPropDialog.getPolyIndex() != NONE)
+		this->polyPropDialog.setPolyIndex(NONE);
 }
 
 /**
@@ -224,7 +228,7 @@ bool MapEditorMainFrame::tryToSelectOneItem(wxMouseEvent& ev)
             continue;
         }
 
-        //点選択検査
+        //オブジェクト選択検査
         if(hpl::aleph::map::isSelectPoint(mx, my,
             x, y, voffset[0], voffset[1],
             OFFSET_X_WORLD, OFFSET_Y_WORLD, div, OBJECT_DISTANCE_EPSILON))

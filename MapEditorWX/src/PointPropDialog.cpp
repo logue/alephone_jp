@@ -130,3 +130,8 @@ void PointPropDialog::OnPolyChoice(wxCommandEvent &event)
     event.Skip();
     std::cout<<"Event handler (PointPropDialog::OnPolyChoice) not implemented yet"<<std::endl; //notify the user that he hasn't implemented the event handler yet
 }
+
+int PointPropDialog::getIndex()
+{
+    return this->index;
+}

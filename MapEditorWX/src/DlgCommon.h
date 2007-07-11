@@ -17,6 +17,7 @@
 #include <wx/bmpbuttn.h>
 #include <wx/colordlg.h>
 #include <wx/scrolwin.h>
+#include <wx/event.h>
 
 #include "HPLLib/HPLEventManager.h"
 #include "MapEditorOneSetting.h"
@@ -24,7 +25,8 @@
 
 #include <string>
 #include <set>
-
+#include <vector>
+#include <map>
 #include <iostream>
 
 #endif

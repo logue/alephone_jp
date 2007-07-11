@@ -112,6 +112,11 @@ public:
     PolygonTypeDialog polyTypeDialog;
     PolygonPropDialog polyPropDialog;
     SidePropDialog sidePropDialog;
+    /**
+        stocked textures
+        [collection][clut][index]
+    */
+    std::map<int, std::map<int, std::map<int, wxImage> > > textureMap;
 private:
     //ダブルバッファリング用Bitmap
     wxBitmap doubleBufferingBitmap;
@@ -200,11 +205,6 @@ private:
     wxImage texture;
 	wxImage paletteImg;
 
-    /**
-        stocked textures
-        [collection][clut][index]
-    */
-    std::map<int, std::map<int, std::map<int, wxImage> > > textureMap;
 public:
     MapEditorMainFrame(const wxString& title,
         const wxPoint& pos = wxDefaultPosition,

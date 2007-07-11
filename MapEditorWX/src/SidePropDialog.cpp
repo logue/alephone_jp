@@ -18,3 +18,7 @@ void SidePropDialog::setIndex(int ind)
 {
     this->index = ind;
 }
+int SidePropDialog::getIndex()
+{
+    return this->index;
+}

@@ -1,5 +1,13 @@
 #include "ObjectPropDialog.h"
 #include "MapEditorWX.h"
+static char* DIR_CIRCLE_IMG_PATH = "./data/Toolbar/ObjectProperties/direction circle.BMP";
+static char* DIR_MARKER_IMG_PATH = "./data/Toolbar/ObjectProperties/direction marker.BMP";
+//facingデータの一周
+const double FACING_ROUND = 512;
+const double DEGREE_ROUND = 360;
+//半径
+const double DIRECTION_MARKER_RADIUS = 20;
+
 enum{
     ID_TYPE,
     ID_INDEX,
@@ -28,6 +36,7 @@ BEGIN_EVENT_TABLE(ObjectPropDialog, wxDialog)
     EVT_TEXT(ID_X, ObjectPropDialog::OnXEdit)
     EVT_TEXT(ID_Y, ObjectPropDialog::OnYEdit)
     EVT_TEXT(ID_Z, ObjectPropDialog::OnZEdit)
+    EVT_PAINT(ObjectPropDialog::OnPaint)
 END_EVENT_TABLE()
 ObjectPropDialog::ObjectPropDialog()
 {
@@ -132,6 +141,11 @@ bool ObjectPropDialog::Create(wxWindow* parent, wxWindowID id)
     }
 
     this->objIndex = NONE;
+
+    //イメージファイル読み込み
+    wxGetApp().loadImage(DIR_CIRCLE_IMG_PATH, &this->directionCircle, 255,255,255);
+    wxGetApp().loadImage(DIR_MARKER_IMG_PATH, &this->directionMarker, 255,255,255);
+    
     return result;
 }
 void ObjectPropDialog::setObjIndex(int index)
@@ -143,7 +157,7 @@ int ObjectPropDialog::getObjIndex()
 {
     return this->objIndex;
 }
-void ObjectPropDialog::setObject(map_object& obj){
+void ObjectPropDialog::setObject(map_object obj){
     int oldSel = choice_21->GetSelection();
     this->text_ctrl_27->SetValue(getString("%d", obj.type));
     this->choice_21->SetSelection(obj.type);
@@ -205,7 +219,8 @@ void ObjectPropDialog::setObject(map_object& obj){
     this->text_ctrl_39->SetValue(getString("%d", obj.location.x));
     this->text_ctrl_41->SetValue(getString("%d", obj.location.y));
     this->text_ctrl_40->SetValue(getString("%d", obj.location.z));
-    
+ 
+    Refresh();
 }
 void ObjectPropDialog::setupDialog()
 {
@@ -246,66 +261,80 @@ void ObjectPropDialog::OnTypeChoice(wxCommandEvent &event)
 void ObjectPropDialog::OnIndexChoice(wxCommandEvent &event)
 {
     if(!isValidIndex(&this->objIndex))return;
+    map_object* obj = &SavedObjectList[this->objIndex];
+    obj->index = event.GetSelection();
 }
 
 
 void ObjectPropDialog::OnHiddenCheck(wxCommandEvent &event)
 {
     if(!isValidIndex(&this->objIndex))return;
+    map_object* obj = &SavedObjectList[this->objIndex];
 }
 
 
 void ObjectPropDialog::OnCeilingCheck(wxCommandEvent &event)
 {
     if(!isValidIndex(&this->objIndex))return;
+    map_object* obj = &SavedObjectList[this->objIndex];
 }
 
 
 void ObjectPropDialog::OnSeeCheck(wxCommandEvent &event)
 {
     if(!isValidIndex(&this->objIndex))return;
+    map_object* obj = &SavedObjectList[this->objIndex];
 }
 
 
 void ObjectPropDialog::OnHearCheck(wxCommandEvent &event)
 {
     if(!isValidIndex(&this->objIndex))return;
+    map_object* obj = &SavedObjectList[this->objIndex];
 }
 
 
 void ObjectPropDialog::OnAerialCheck(wxCommandEvent &event)
 {
     if(!isValidIndex(&this->objIndex))return;
+    map_object* obj = &SavedObjectList[this->objIndex];
 }
 
 
 void ObjectPropDialog::OnNetCheck(wxCommandEvent &event)
 {
     if(!isValidIndex(&this->objIndex))return;
+    map_object* obj = &SavedObjectList[this->objIndex];
+    
 }
 
 
 void ObjectPropDialog::OnLaunchChoice(wxCommandEvent &event)
 {
     if(!isValidIndex(&this->objIndex))return;
+    map_object* obj = &SavedObjectList[this->objIndex];
+    //TODO launch?
 }
 
 
 void ObjectPropDialog::OnXEdit(wxCommandEvent &event)
 {
     if(!isValidIndex(&this->objIndex))return;
+    map_object* obj = &SavedObjectList[this->objIndex];
 }
 
 
 void ObjectPropDialog::OnYEdit(wxCommandEvent &event)
 {
     if(!isValidIndex(&this->objIndex))return;
+    map_object* obj = &SavedObjectList[this->objIndex];
 }
 
 
 void ObjectPropDialog::OnZEdit(wxCommandEvent &event)
 {
     if(!isValidIndex(&this->objIndex))return;
+    map_object* obj = &SavedObjectList[this->objIndex];
 }
 map_object ObjectPropDialog::getObject()
 {
@@ -331,7 +360,39 @@ map_object ObjectPropDialog::getObject()
     obj.location.x = atoi(wxConvertWX2MB(text_ctrl_41->GetValue()));
     return obj;
 }
-void ObjectPropDialog::drawFacing(wxWindow* panel)
+void ObjectPropDialog::drawFacing(wxWindow* panel, int facing, wxDC* dc)
 {
-	//TODO
+    //degreeに変換
+    double degree = DEGREE_ROUND * (double)facing / FACING_ROUND;
+    //radianに変換
+    double rad = hpl::math::getRadianFromDegree(degree);
+    //中心位置
+    int centerX = this->directionCircle.GetWidth() / 2;
+    int centerY = this->directionCircle.GetHeight() / 2;
+    int x = centerX + DIRECTION_MARKER_RADIUS * cos(rad);
+    int y = centerY + DIRECTION_MARKER_RADIUS * sin(rad);
+    int markerW = this->directionMarker.GetWidth();
+    int markerH = this->directionMarker.GetHeight();
+    
+    //wxWindowDC dc(panel);
+    //circle
+    wxBitmap circleBmp(this->directionCircle);
+    dc->DrawBitmap(circleBmp, 0,0);
+
+    //marker
+    wxBitmap markerBmp(this->directionMarker);
+    dc->DrawBitmap(markerBmp, x - markerW / 2, y - markerH / 2);
+}
+
+void ObjectPropDialog::OnPaint(wxPaintEvent &event)
+{
+    wxPaintDC dc(this);
+    wxPaintDC dcw(panel_16);
+    //wxDialog::OnPaint();
+    if(this->getObjIndex() != NONE){
+        map_object* obj = &SavedObjectList[this->objIndex];
+        drawFacing(panel_16, obj->facing, &dcw);
+    }else{
+        drawFacing(panel_16, 0, &dcw);
+    }
 }

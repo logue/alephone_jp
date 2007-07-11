@@ -25,6 +25,7 @@ private:
     wxChoice* choice_11;
     int index;
 public:
+    int getIndex();
     void setIndex(int ind);
     PointPropDialog();
     bool Create(wxWindow* parent, wxWindowID id);

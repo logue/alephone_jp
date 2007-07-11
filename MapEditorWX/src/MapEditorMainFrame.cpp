@@ -117,7 +117,6 @@ MapEditorMainFrame::MapEditorMainFrame(const wxString& title,
     this->lightPaletteDialog.Create(this, wxID_ANY);
     this->mediaPaletteDialog.Create(this, wxID_ANY);
     this->soundPaletteDialog.Create(this, wxID_ANY);
-    this->textureDialog.Create(this, wxID_ANY);
 
     //プロパティ
     this->objPropDialog.Create(this, wxID_ANY);
@@ -219,6 +218,7 @@ MapEditorMainFrame::MapEditorMainFrame(const wxString& title,
                 }
             }
         }
+        this->textureDialog.Create(this, wxID_ANY);
 	}
 
     //セットアップ

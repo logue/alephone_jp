@@ -34,6 +34,9 @@ class ObjectPropDialog: public wxDialog{
 
 	//編集しているオブジェクトインデックス
     int objIndex;
+
+    wxImage directionCircle;
+    wxImage directionMarker;
 public:
     ObjectPropDialog();
     bool Create(wxWindow* parent, wxWindowID id);
@@ -42,7 +45,7 @@ public:
     void setObjIndex(int index);
     int getObjIndex();
     map_object getObject();
-    void setObject(map_object& obj);
+    void setObject(map_object obj);
 private:
     void setupDialog();
     //イベントテーブル作成<en>declare
@@ -62,7 +65,7 @@ private:
 
     void OnPaint(wxPaintEvent &event);
 
-	void drawFacing(wxWindow* panel);
+	void drawFacing(wxWindow* panel, int facing, wxDC* dc);
 };
 
 #endif

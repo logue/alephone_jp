@@ -12,6 +12,7 @@ enum{
 	ID_COLLECTION,
 	ID_CLUT,
     ID_TYPE,
+    ID_SCROLL,
 };
 
 BEGIN_EVENT_TABLE(TextureDialog, wxDialog)
@@ -19,6 +20,8 @@ BEGIN_EVENT_TABLE(TextureDialog, wxDialog)
     EVT_CHOICE(wxID_ANY, TextureDialog::OnType)
     EVT_CHOICE(wxID_ANY, TextureDialog::OnCollection)
     EVT_CHOICE(ID_TYPE, TextureDialog::OnCLUT)
+    EVT_PAINT(TextureDialog::OnPaint)
+    EVT_SCROLLWIN( TextureDialog::OnScroll)
     // end wxGlade
 END_EVENT_TABLE()
 TextureDialog::TextureDialog()
@@ -33,14 +36,17 @@ bool TextureDialog::Create(wxWindow* parent, wxWindowID id)
 
     label_75 = new wxStaticText(this, wxID_ANY, wxT("type"));
     choice_30 = new wxChoice(this, ID_TYPE);
-    panel_13 = new wxScrolledWindow(this, wxID_ANY, wxDefaultPosition, wxDefaultSize, wxSTATIC_BORDER|wxTAB_TRAVERSAL);
+    panel_13 = new wxScrolledWindow(this, ID_SCROLL, wxDefaultPosition, wxDefaultSize, wxSTATIC_BORDER|wxTAB_TRAVERSAL);
 	wxStaticText* label_collection = new wxStaticText(this, wxID_ANY, wxT("Collection"));
 	choice_collection = new wxChoice(this, ID_COLLECTION);
 	wxStaticText* label_clut = new wxStaticText(this, wxID_ANY, wxT("CLUT"));
 	choice_clut = new wxChoice(this, ID_CLUT);
 
     panel_13->SetMinSize(wxSize(480, 120));
+    panel_13->SetMaxSize(wxSize(480, 600));
+    panel_13->SetVirtualSize(wxSize(480, 600));
     panel_13->SetScrollRate(10, 10);
+    panel_13->SetScrollbars(100, 120, 5, 10);
 
     wxFlexGridSizer* grid_sizer_44 = new wxFlexGridSizer(2, 1, 0, 0);
     wxFlexGridSizer* grid_sizer_45 = new wxFlexGridSizer(1, 6, 0, 0);
@@ -57,7 +63,7 @@ bool TextureDialog::Create(wxWindow* parent, wxWindowID id)
     Layout();
 
     //TODO Shapesファイルが読み込まれていない場合は警告を出して閉じる
-    if(wxGetApp().getShapesManager()->isLoadedShapesFile()){
+    if(!wxGetApp().getShapesManager()->isLoadedShapesFile()){
         hpl::error::caution("Shapes file not loaded");
         Destroy();
         return false;
@@ -74,10 +80,12 @@ bool TextureDialog::Create(wxWindow* parent, wxWindowID id)
 		if(counter == 0){
 			collection = it->first;
 		}
-		choice_collection->Insert(counter, getString("%d", it->first));
+		choice_collection->Insert(getString("%d", it->first), counter);
+        collectionIndexTable.push_back(it->first);
 		counter ++;
 	}
-	
+    choice_collection->SetSelection(0);
+
 	//タイプ
 	//TODO 
 
@@ -92,25 +100,28 @@ void TextureDialog::OnType(wxCommandEvent &event)
 }
 void TextureDialog::OnCollection(wxCommandEvent &event)
 {
-	int collection = event.GetSelection();
+	int collection = collectionIndexTable[event.GetSelection()];
 	//TODO
+    setupDialog(collection);
 }
 void TextureDialog::OnCLUT(wxCommandEvent &event)
 {
 	int clut = event.GetSelection();
 	//TODO
+    setupDialog(collectionIndexTable[choice_collection->GetSelection()]);
 }
 void TextureDialog::setFloor(bool floor)
 {
     this->isFloor_ = floor;
 }
-void TextureDialog::drawPanel(int collection, int clut, std::map<int, wxImage>* imgMap)
+void TextureDialog::drawPanel(int collection, int clut, std::map<int, wxImage>* imgMap,
+                              wxDC* dc)
 {
-	wxPaintDC dc(panel_13);
-	wxSize size = panel_13->GetSize();
-	dc.SetPen(*wxWHITE_PEN);
-	dc.SetBrush(*wxWHITE_BRUSH);
-	dc.DrawRectangle(0,0,size.GetWidth(), size.GetHeight());
+//	wxWindowDC dc(panel_13);
+    wxSize size = panel_13->GetMaxSize();
+	dc->SetPen(*wxWHITE_PEN);
+	dc->SetBrush(*wxWHITE_BRUSH);
+	dc->DrawRectangle(0,0,size.GetWidth(), size.GetHeight());
 
 	//パレット表示
 	const int MERGIN_X = 10;
@@ -119,19 +130,62 @@ void TextureDialog::drawPanel(int collection, int clut, std::map<int, wxImage>* 
 	const int ITEM_H = ITEM_W;
 	const int ITEM_INTERVAL_X = 10;
 	const int ITEM_INTERVAL_Y = 10;
-	const int PITCH = 10;
+    const int PITCH = (size.GetWidth() - MERGIN_X * 2) / (ITEM_W + ITEM_INTERVAL_X);
+    
+    std::map<int, wxImage>::iterator it;
+    int counter = 0;
+    for(it = imgMap->begin(); it != imgMap->end(); it ++){
+        int x = (counter % PITCH) * (ITEM_W + ITEM_INTERVAL_X) + MERGIN_X;
+        int y = (counter / PITCH) * (ITEM_H + ITEM_INTERVAL_Y) + MERGIN_Y;
+        wxImage scaledImg = it->second.Scale(ITEM_W, ITEM_H);
+        wxBitmap bmp(scaledImg);
+        dc->DrawBitmap(bmp, x, y);
+        counter ++;
+    }
+
 }
 void TextureDialog::setupDialog(int collection)
 {
-	std::map<int, std::map<int, std::map<int, wxImage> > >* tmap = &((MapEditorMainFrame*)GetParent())->textureMap;
-	//setup clut choice
-	choice_clut->Clear();
-	std::map<int, std::map<int, wxImage> >::iterator it1;
-	int clutCounter = 0;
-	for(it1 = tmap->begin(); it1 != tmap->end(); it1 ++){
-		choice_clut->Insert(clutCounter, getString("%d", it1->second));
-		clutCounter ++;
-	}
-	//TODO
-	drawPanel(collection, clut, &tmap->get(collection)[clut]);
+    if(wxGetApp().getShapesManager()->isLoadedShapesFile()){
+	    std::map<int, std::map<int, std::map<int, wxImage> > >* tmap = &((MapEditorMainFrame*)GetParent())->textureMap;
+	    //setup clut choice
+	    choice_clut->Clear();
+	    std::map<int, std::map<int, wxImage> >::iterator it1;
+	    int clutCounter = 0;
+        for(it1 = tmap->find(collection)->second.begin(); it1 != tmap->find(collection)->second.end(); it1 ++){
+		    choice_clut->Insert(getString("%d", it1->first), clutCounter);
+		    clutCounter ++;
+	    }
+        choice_clut->SetSelection(0);
+        choice_30->SetSelection(0);
+
+        //drawPanel(collection, 0, &tmap->find(collection)->second[0]);
+        Refresh();
+    }
+}
+int TextureDialog::getIndexSelected()
+{
+    //選択されたテクスチャ
+    //TODO
+    return indexSelected;
+}
+
+void TextureDialog::OnPaint(wxPaintEvent &event)
+{
+    wxPaintDC dc(this);
+
+    wxPaintDC dcW(panel_13);
+    int colIndex = choice_collection->GetSelection();
+    if(colIndex >= 0){
+        int collection = collectionIndexTable[colIndex];
+        int clut = choice_clut->GetSelection();
+      
+        std::map<int, std::map<int, std::map<int, wxImage> > >* tmap = &((MapEditorMainFrame*)GetParent())->textureMap;
+        this->drawPanel(collection, clut, &tmap->find(collection)->second[clut], &dcW);
+    }
+}
+
+void TextureDialog::OnScroll(wxScrollWinEvent &event)
+{
+    Refresh();
 }
