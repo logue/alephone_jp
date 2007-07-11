@@ -228,3 +228,9 @@ TODO •Çi‚½‚©‚¾‚©•Ð•û‚Ìƒ|ƒŠƒSƒ“‚µ‚©‘¶Ý‚µ‚È‚¢üjE‚‚³‚ª“¯‚¶üE‚‚³‚ªˆÙ‚È‚éü‚
 TODO ‚‚³•Ê•\Ž¦
 TODO ƒeƒNƒXƒ`ƒƒ‚Åƒ|ƒŠƒSƒ“•\Ž¦
 TODO ƒRƒsƒy
+
+TODO ƒZƒŒƒNƒg‰ðœE‘¼‚ðƒZƒŒƒNƒg‚µ‚½ê‡‚Éƒ_ƒCƒAƒƒO‚ÌÝ’è‚ðNONE‚É‚·‚é•”•ª
+	ˆ—‚ª’x‚­‚È‚è‚ª‚¿‚È‚Ì‚ÅAd•¡ˆ—‚ðs‚í‚È‚¢‚æ‚¤‚É’²®
+TODO ObjPropDialog‚ÌFacing•`‰æB
+	ƒAƒNƒVƒ‡ƒ“‚ª‹N‚±‚Á‚½ê‡‚Ì‚Ý‚É•`‰æ‚·‚ê‚Î—Ç‚¢
+	

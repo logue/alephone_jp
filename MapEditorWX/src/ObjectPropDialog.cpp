@@ -28,7 +28,6 @@ BEGIN_EVENT_TABLE(ObjectPropDialog, wxDialog)
     EVT_TEXT(ID_X, ObjectPropDialog::OnXEdit)
     EVT_TEXT(ID_Y, ObjectPropDialog::OnYEdit)
     EVT_TEXT(ID_Z, ObjectPropDialog::OnZEdit)
-//    EVT_PAINT(ObjectPropDialog::OnPaint)
 END_EVENT_TABLE()
 ObjectPropDialog::ObjectPropDialog()
 {
@@ -332,11 +331,7 @@ map_object ObjectPropDialog::getObject()
     obj.location.x = atoi(wxConvertWX2MB(text_ctrl_41->GetValue()));
     return obj;
 }
-
-void ObjectPropDialog::OnPaint(wxPaintEvent &event)
+void ObjectPropDialog::drawFacing(wxWindow* panel)
 {
-    wxDialog::OnPaint(event);
-
-    //panel_16‚Éfacing•ûŒü‚ð•`‚­
-    //TODO
+	//TODO
 }

@@ -139,7 +139,10 @@ void MapEditorMainFrame::doLButtonOnArrowTool(wxMouseEvent& ev)
 
     //一つを選択できるか試してみます
     if(this->tryToSelectOneItem(ev)){
-        //選択範囲は解除します
+		this->unselect();
+
+		//選択できたので
+        //範囲選択は解除します
         wxGetApp().getEventManager()->setSelectingGroup(false);
     }else{
         //選択されなかった
@@ -147,9 +150,26 @@ void MapEditorMainFrame::doLButtonOnArrowTool(wxMouseEvent& ev)
         wxGetApp().getEventManager()->setSelectGroupStartPoint(mx, my);
         //選択情報の解除
         sel->clear();
+
+		//選択＆編集中だったアイテムを初期化
+		//TODO 遅くなる可能性があるので、修正が必要かも
+		this->unselect();
     }
 }
 
+void MapEditorMainFrame::unselect()
+{
+	if(pointPropDialog.getPointIndex() != NONE)
+		this->pointPropDialog.setPointIndex(NONE);
+	if(objPropDialog.getObjectIndex() != NONE)
+		this->objPropDialog.setObjectIndex(NONE);
+	if(linePropDialog.getLineIndex() != NONE)
+		this->pointLineDialog.setLineIndex(NONE);
+	if(sidePropDialog.getSideIndex() != NONE)
+		this->pointSideDialog.setSideIndex(NONE);
+	if(polygonPropDialog.getPolygonIndex() != NONE)
+		this->pointPolygonDialog.setPolygonIndex(NONE);
+}
 
 /**
     @param ev

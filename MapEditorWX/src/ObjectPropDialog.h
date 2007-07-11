@@ -31,6 +31,8 @@ class ObjectPropDialog: public wxDialog{
     wxStaticText* label_62;
     wxTextCtrl* text_ctrl_40;
     wxPanel* panel_18;
+
+	//編集しているオブジェクトインデックス
     int objIndex;
 public:
     ObjectPropDialog();
@@ -59,6 +61,8 @@ private:
     void OnZEdit(wxCommandEvent &event); // wxGlade: <event_handler>
 
     void OnPaint(wxPaintEvent &event);
+
+	void drawFacing(wxWindow* panel);
 };
 
 #endif

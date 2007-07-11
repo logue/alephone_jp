@@ -417,4 +417,6 @@ private:
             ‚Ü‚½A•ÒW‚³‚ê‚Ä‚È‚¯‚ê‚Î^‚ª•Ô‚é
     */
     bool askDestructMap();
+
+	void unselect();
 };
