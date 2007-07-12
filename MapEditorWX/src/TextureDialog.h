@@ -3,6 +3,16 @@
 
 #include "DlgCommon.h"
 
+class TextureArea: public wxScrolledWindow{
+public:
+	TextureArea(wxWindow* parent, wxWindowID id);
+	virtual ~TextureArea();
+protected:
+    DECLARE_EVENT_TABLE()
+    void OnScroll(wxScrollWinEvent &event);
+	void OnDraw();
+};
+
 class TextureDialog: public wxDialog{
     wxStaticText* label_75;
     wxChoice* choice_30;

@@ -95,7 +95,7 @@ int hpl::aleph::map::addPolygon(polygon_data polygon)
 #ifdef __WXDEBUG__
     wxASSERT(poly);
 #else
-    if(!poly)continue;
+    if(!poly)return NONE;
 #endif
 
     //ˆÈ‰º‚ÌˆË‘¶‚·‚é€–Ú‚ğC³‚·‚é
@@ -354,7 +354,7 @@ static bool getValidLines(int basePointIndex, int baseLineIndex,
 #ifdef __WXDEBUG__
         wxASSERT(false);
 #else
-        return;
+        return false;
 #endif
 
     }

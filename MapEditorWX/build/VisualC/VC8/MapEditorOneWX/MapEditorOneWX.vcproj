@@ -353,7 +353,7 @@
 			<Tool
 				Name="VCCLCompilerTool"
 				AdditionalIncludeDirectories="..\..\..\..\..\..\marathon;..\..\..\..\..\AlephOneSrc;..\..\..\..\..\MapEditorCommonSrc"
-				PreprocessorDefinitions="WIN32;NDEBUG;_WINDOWS;SDL;__WIN32__;__WINDOWS__;_WINDOWS;__WXMSW__;WXUSINGDLL;WX;UNICODE;__wxUSEUNICODE__"
+				PreprocessorDefinitions="WIN32;NDEBUG;_WINDOWS;SDL;__WIN32__;__WINDOWS__;_WINDOWS;__WXMSW__;WXUSINGDLL;WX;UNICODE;__wxUSEUNICODE__;WX"
 				RuntimeLibrary="2"
 				UsePrecompiledHeader="0"
 				WarningLevel="3"

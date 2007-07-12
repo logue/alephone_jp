@@ -46,7 +46,8 @@ bool TextureDialog::Create(wxWindow* parent, wxWindowID id)
     panel_13->SetMaxSize(wxSize(480, 600));
     panel_13->SetVirtualSize(wxSize(480, 600));
     panel_13->SetScrollRate(10, 10);
-    panel_13->SetScrollbars(100, 120, 5, 10);
+    panel_13->SetScrollbars(100, 10, 5, 60);
+	panel_13->EnableScrolling(true, true);
 
     wxFlexGridSizer* grid_sizer_44 = new wxFlexGridSizer(2, 1, 0, 0);
     wxFlexGridSizer* grid_sizer_45 = new wxFlexGridSizer(1, 6, 0, 0);
@@ -175,6 +176,7 @@ void TextureDialog::OnPaint(wxPaintEvent &event)
     wxPaintDC dc(this);
 
     wxPaintDC dcW(panel_13);
+	//panel_13->PrepareDC(dcW);
     int colIndex = choice_collection->GetSelection();
     if(colIndex >= 0){
         int collection = collectionIndexTable[colIndex];
@@ -187,5 +189,7 @@ void TextureDialog::OnPaint(wxPaintEvent &event)
 
 void TextureDialog::OnScroll(wxScrollWinEvent &event)
 {
+	wxPaintEvent dummy;
+	OnPaint(dummy);
     Refresh();
 }
