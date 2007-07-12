@@ -15,15 +15,87 @@ enum{
     ID_SCROLL,
 };
 
+static void drawPanel(int collection, int clut, std::map<int, wxImage>* imgMap,
+                              wxDC* dc, TextureArea* panel)
+{
+//	wxWindowDC dc(panel_13);
+    wxSize size = panel->GetMaxSize();
+	dc->SetPen(*wxWHITE_PEN);
+	dc->SetBrush(*wxWHITE_BRUSH);
+	dc->DrawRectangle(0,0,size.GetWidth(), size.GetHeight());
+
+	//パレット表示
+	const int MERGIN_X = 10;
+	const int MERGIN_Y = 10;
+	const int ITEM_W = 100;
+	const int ITEM_H = ITEM_W;
+	const int ITEM_INTERVAL_X = 10;
+	const int ITEM_INTERVAL_Y = 10;
+    const int PITCH = (size.GetWidth() - MERGIN_X * 2) / (ITEM_W + ITEM_INTERVAL_X);
+    
+    std::map<int, wxImage>::iterator it;
+    int counter = 0;
+    for(it = imgMap->begin(); it != imgMap->end(); it ++){
+        int x = (counter % PITCH) * (ITEM_W + ITEM_INTERVAL_X) + MERGIN_X;
+        int y = (counter / PITCH) * (ITEM_H + ITEM_INTERVAL_Y) + MERGIN_Y;
+        wxImage scaledImg = it->second.Scale(ITEM_W, ITEM_H);
+        wxBitmap bmp(scaledImg);
+        dc->DrawBitmap(bmp, x, y);
+        counter ++;
+    }
+
+}
+
+BEGIN_EVENT_TABLE(TextureArea, wxScrolledWindow)
+    EVT_SCROLLWIN( TextureArea::OnScroll)
+    // end wxGlade
+END_EVENT_TABLE()
+
+TextureArea::TextureArea(wxWindow* parent, wxWindowID id):
+wxScrolledWindow(parent, id,  wxDefaultPosition, wxDefaultSize, wxSTATIC_BORDER|wxTAB_TRAVERSAL)
+{
+}
+TextureArea::~TextureArea()
+{
+}
+
+void TextureArea::OnScroll(wxScrollWinEvent &event)
+{
+	wxScrolledWindow::OnScroll(event);
+	Refresh();
+}
+void TextureArea::OnDraw(wxDC& dc)
+{
+	if(wxGetApp().getShapesManager()->isLoadedShapesFile()){
+		//wxBufferedPaintDC dcB(this);
+		//wxMemoryDC memDC(dc);
+
+		//親
+		TextureDialog* par = (TextureDialog*)GetParent();
+		//wxPaintDC dcW(par->panel_13);
+		//panel_13->PrepareDC(dcW);
+		int colIndex = par->choice_collection->GetSelection();
+		if(colIndex >= 0){
+			int collection = par->collectionIndexTable[colIndex];
+			int clut = par->choice_clut->GetSelection();
+	      
+			std::map<int, std::map<int, std::map<int, wxImage> > >* tmap = &((MapEditorMainFrame*)par->GetParent())->textureMap;
+			drawPanel(collection, clut, &tmap->find(collection)->second[clut], &dc,
+				par->panel_13);
+		}
+	}
+}
+////////////////////////////////////////////
 BEGIN_EVENT_TABLE(TextureDialog, wxDialog)
     // begin wxGlade: TextureDialog::event_table
     EVT_CHOICE(wxID_ANY, TextureDialog::OnType)
     EVT_CHOICE(wxID_ANY, TextureDialog::OnCollection)
     EVT_CHOICE(ID_TYPE, TextureDialog::OnCLUT)
     EVT_PAINT(TextureDialog::OnPaint)
-    EVT_SCROLLWIN( TextureDialog::OnScroll)
+//    EVT_SCROLLWIN( TextureDialog::OnScroll)
     // end wxGlade
 END_EVENT_TABLE()
+
 TextureDialog::TextureDialog()
 {
 }
@@ -36,7 +108,7 @@ bool TextureDialog::Create(wxWindow* parent, wxWindowID id)
 
     label_75 = new wxStaticText(this, wxID_ANY, wxT("type"));
     choice_30 = new wxChoice(this, ID_TYPE);
-    panel_13 = new wxScrolledWindow(this, ID_SCROLL, wxDefaultPosition, wxDefaultSize, wxSTATIC_BORDER|wxTAB_TRAVERSAL);
+    panel_13 = new TextureArea(this, ID_SCROLL);
 	wxStaticText* label_collection = new wxStaticText(this, wxID_ANY, wxT("Collection"));
 	choice_collection = new wxChoice(this, ID_COLLECTION);
 	wxStaticText* label_clut = new wxStaticText(this, wxID_ANY, wxT("CLUT"));
@@ -115,36 +187,6 @@ void TextureDialog::setFloor(bool floor)
 {
     this->isFloor_ = floor;
 }
-void TextureDialog::drawPanel(int collection, int clut, std::map<int, wxImage>* imgMap,
-                              wxDC* dc)
-{
-//	wxWindowDC dc(panel_13);
-    wxSize size = panel_13->GetMaxSize();
-	dc->SetPen(*wxWHITE_PEN);
-	dc->SetBrush(*wxWHITE_BRUSH);
-	dc->DrawRectangle(0,0,size.GetWidth(), size.GetHeight());
-
-	//パレット表示
-	const int MERGIN_X = 10;
-	const int MERGIN_Y = 10;
-	const int ITEM_W = 100;
-	const int ITEM_H = ITEM_W;
-	const int ITEM_INTERVAL_X = 10;
-	const int ITEM_INTERVAL_Y = 10;
-    const int PITCH = (size.GetWidth() - MERGIN_X * 2) / (ITEM_W + ITEM_INTERVAL_X);
-    
-    std::map<int, wxImage>::iterator it;
-    int counter = 0;
-    for(it = imgMap->begin(); it != imgMap->end(); it ++){
-        int x = (counter % PITCH) * (ITEM_W + ITEM_INTERVAL_X) + MERGIN_X;
-        int y = (counter / PITCH) * (ITEM_H + ITEM_INTERVAL_Y) + MERGIN_Y;
-        wxImage scaledImg = it->second.Scale(ITEM_W, ITEM_H);
-        wxBitmap bmp(scaledImg);
-        dc->DrawBitmap(bmp, x, y);
-        counter ++;
-    }
-
-}
 void TextureDialog::setupDialog(int collection)
 {
     if(wxGetApp().getShapesManager()->isLoadedShapesFile()){
@@ -175,7 +217,7 @@ void TextureDialog::OnPaint(wxPaintEvent &event)
 {
     wxPaintDC dc(this);
 
-    wxPaintDC dcW(panel_13);
+/*    wxPaintDC dcW(panel_13);
 	//panel_13->PrepareDC(dcW);
     int colIndex = choice_collection->GetSelection();
     if(colIndex >= 0){
@@ -183,13 +225,14 @@ void TextureDialog::OnPaint(wxPaintEvent &event)
         int clut = choice_clut->GetSelection();
       
         std::map<int, std::map<int, std::map<int, wxImage> > >* tmap = &((MapEditorMainFrame*)GetParent())->textureMap;
-        this->drawPanel(collection, clut, &tmap->find(collection)->second[clut], &dcW);
-    }
+        drawPanel(collection, clut, &tmap->find(collection)->second[clut], &dcW,
+			panel_13);
+    }*/
 }
 
-void TextureDialog::OnScroll(wxScrollWinEvent &event)
+/*void TextureDialog::OnScroll(wxScrollWinEvent &event)
 {
 	wxPaintEvent dummy;
 	OnPaint(dummy);
     Refresh();
-}
+}*/

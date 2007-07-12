@@ -3,6 +3,7 @@
 
 #include "DlgCommon.h"
 
+
 class TextureArea: public wxScrolledWindow{
 public:
 	TextureArea(wxWindow* parent, wxWindowID id);
@@ -10,23 +11,23 @@ public:
 protected:
     DECLARE_EVENT_TABLE()
     void OnScroll(wxScrollWinEvent &event);
-	void OnDraw();
+	void OnDraw(wxDC& dc);
 };
 
 class TextureDialog: public wxDialog{
-    wxStaticText* label_75;
-    wxChoice* choice_30;
-    wxScrolledWindow* panel_13;
-
-	wxChoice* choice_collection;
-	wxChoice* choice_clut;
 
     bool isFloor_;
     int indexSelected;
 
+public:
     //コレクションチョイスと実際のコレクション番号との対応リスト
     std::vector<int> collectionIndexTable;
-public:
+    wxStaticText* label_75;
+    wxChoice* choice_30;
+
+	wxChoice* choice_collection;
+	wxChoice* choice_clut;
+    TextureArea* panel_13;
     TextureDialog();
     bool Create(wxWindow* parent, wxWindowID id);
     virtual ~TextureDialog();
@@ -40,7 +41,6 @@ public:
 
 public:
     void setFloor(bool floor);
-	void drawPanel(int collection, int clut, std::map<int, wxImage>* imgMap, wxDC* dc);
 	void setupDialog(int collection);
 
     int getIndexSelected();

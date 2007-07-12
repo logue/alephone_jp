@@ -21,13 +21,7 @@ mapeditorone::MapEditorOneInnerSetting::MapEditorOneInnerSetting(const char* tag
         std::ifstream ifs;
         ifs.open(tagNameFilePath);
         if(!ifs.is_open()){
-#ifdef WIN32
-            MessageBox(NULL, L"Cannot open tag file", L"", MB_OK);
-#else
-            fprintf(stderr, "Couldn't open tag file");
-#endif
-
-            exit(-1);
+			hpl::error::halt("Couldn't open inner setting file[%s]", tagNameFilePath);
         }
         //ƒ^ƒO“Ç‚ÝŽæ‚è
         int counter = 0;
@@ -40,8 +34,7 @@ mapeditorone::MapEditorOneInnerSetting::MapEditorOneInnerSetting(const char* tag
             counter ++;
         }
         if(counter < mapeditorone::TagType::MaxTagTypes){
-            MessageBox(NULL, L"The number of InnerSetting tags is too few", L"Error", MB_OK);
-            exit(1);
+            hpl::error::halt("The number of InnerSetting tags is too few");
         }
         ifs.close();
     }
@@ -49,8 +42,7 @@ mapeditorone::MapEditorOneInnerSetting::MapEditorOneInnerSetting(const char* tag
     {
         ifstream ifs(dataFilePath);
         if(!ifs.is_open()){
-            MessageBox(NULL, L"Cannot open inner data file", L"", MB_OK);
-            exit(-1);
+            hpl::error::halt("Cannot open inner data file");
         }
         int counter = 0;
         while(ifs.getline(buf, MAX_FILE_PATH) != NULL){
@@ -69,8 +61,7 @@ mapeditorone::MapEditorOneInnerSetting::MapEditorOneInnerSetting(const char* tag
             }
         }
         if(counter < mapeditorone::TagType::MaxTagTypes){
-            MessageBox(NULL, L"The number of InnerSetting datas is too few", L"Error", MB_OK);
-            exit(1);
+            hpl::error::halt("The number of InnerSetting datas is too few");
         }
         ifs.close();
     }
