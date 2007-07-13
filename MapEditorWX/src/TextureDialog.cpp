@@ -38,7 +38,7 @@ static void drawPanel(int collection, int clut, std::map<int, wxImage>* imgMap,
     for(it = imgMap->begin(); it != imgMap->end(); it ++){
         int x = (counter % PITCH) * (ITEM_W + ITEM_INTERVAL_X) + MERGIN_X;
         int y = (counter / PITCH) * (ITEM_H + ITEM_INTERVAL_Y) + MERGIN_Y;
-        wxImage scaledImg = it->second.Scale(ITEM_W, ITEM_H);
+        wxImage scaledImg = it->second.Scale(ITEM_W, ITEM_H);//.Rotate(90);
         wxBitmap bmp(scaledImg);
         dc->DrawBitmap(bmp, x, y);
         counter ++;
