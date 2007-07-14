@@ -247,3 +247,7 @@ render_screen
 	・ついでにプロパティも用意
 ビジュアルモードスタートポイント
 Clear()するとカラムまで消される
+
+
+Map icons (modified) original to Bungie
+Bobwithkeycard

@@ -18,6 +18,7 @@
 #include "collection_definition.h"
 #include "shape_definitions.h"
 #include "shapes_sdl.h"
+#include "player.h"
 
 /**
 	ビジュアルモードでの操作を全般的に管理します
@@ -28,9 +29,12 @@ namespace hpl{
 namespace shapes{
 	class HPLVisualModeManager{
 		world_point3d playerPosition;
+		int playerIndex;
+		int playerIdentifier;
 	public:
 		HPLVisualModeManager();
 		~HPLVisualModeManager();
+		void init();
 		void setPlayerPosition(world_point3d location);
 		void setPlayerPosition(int x, int y, int z);
 		world_point3d getPlayerPosition();

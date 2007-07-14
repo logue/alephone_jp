@@ -100,6 +100,7 @@ static void loadLevel(int i){
 			break;
 		}
 	}
+	wxGetApp().getVisualModeManager()->init();
 }
 void MapEditorMainFrame::OnOpen(wxCommandEvent& WXUNUSED(ev))
 {
