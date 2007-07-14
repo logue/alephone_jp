@@ -231,6 +231,19 @@ TODO コピペ
 
 TODO セレクト解除・他をセレクトした場合にダイアログの設定をNONEにする部分
 	処理が遅くなりがちなので、重複処理を行わないように調整
-TODO ObjPropDialogのFacing描画。
+done TODO ObjPropDialogのFacing描画。
 	アクションが起こった場合のみに描画すれば良い
-	
+
+TODO setup lights/media/sounds/height dialog
+TODO polygon type color
+TODO color customizer
+
+ビジュアルモード
+render_screen
+プレイヤーの位置
+・初期値はマップ情報から。
+・ポリゴン右クリックでサブメニュー
+	・ビジュアルモードスタートポイントの設置を用意
+	・ついでにプロパティも用意
+ビジュアルモードスタートポイント
+Clear()するとカラムまで消される

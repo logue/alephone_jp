@@ -19,6 +19,7 @@
 #include <wx/scrolwin.h>
 #include <wx/event.h>
 #include <wx/dcbuffer.h>
+#include <wx/regex.h>
 
 #include "HPLLib/HPLEventManager.h"
 #include "MapEditorOneSetting.h"

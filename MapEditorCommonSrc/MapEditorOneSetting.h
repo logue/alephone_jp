@@ -76,6 +76,7 @@ static char * MAP_ICONS_IMAGE_NAME_LIST_FILE_NAME = "MapIconImageList.txt";
 const int START_OF_TEXTURE = _collection_walls1;
 static char* TAG_NAME_FILE_PATH = "data/InnerSettingTagList.ini";
 static char* INNER_DATA_FILE_PATH = "data/InnerSetting.ini";
+static char* START_POINT_IMAGE_FILE_PATH = "data/Map Icons/center X.bmp";
 
 //point flags
 enum

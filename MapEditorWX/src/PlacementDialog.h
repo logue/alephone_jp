@@ -21,6 +21,8 @@ private:
     wxCheckBox* checkbox_39;
     wxListCtrl* list_ctrl_1;
     wxButton* button_16;
+
+	int listSelectIndex;
 public:
     PlacementDialog();
     virtual ~PlacementDialog();

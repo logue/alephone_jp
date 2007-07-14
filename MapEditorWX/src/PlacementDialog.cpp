@@ -1,6 +1,8 @@
 #include "PlacementDialog.h"
 #include "MapEditorWX.h"
 
+static wxRegEx REG_NUM = _T("[0-9]*");
+
 enum{
     ID_INITIAL,
     ID_MINIMUM,
@@ -59,6 +61,26 @@ static void addListItem(wxListCtrl* lstctrl, object_frequency_definition* placem
         }else{
             lstctrl->SetItem(item);
         }
+    }
+}
+static void setListItem(wxListCtrl* lstctrl, object_frequency_definition* placement, int id)
+{
+    assert(placement);
+    wxString str[COLUMN_NUM];
+    str[0] = _T("");
+    str[1] = getString("%d", placement->minimum_count);
+    str[2] = getString("%d", placement->maximum_count);
+    str[3] = getString("%d", placement->initial_count);
+    str[4] = getString("%d", placement->random_count);
+    str[5] = getString("%d", placement->random_chance);
+    str[6] = getString("%d", placement->flags);
+
+    for(int j = 1; j < COLUMN_NUM; j ++){
+        wxListItem item;
+        item.SetId(id);
+        item.SetColumn(j);
+        item.SetText(str[j]);
+        lstctrl->SetItem(item);
     }
 }
 bool PlacementDialog::Create(wxWindow* parent, wxWindowID id)
@@ -134,6 +156,7 @@ bool PlacementDialog::Create(wxWindow* parent, wxWindowID id)
     }
     return result;
 }
+
 //OKƒ{ƒ^ƒ“‰Ÿ‚µ‚½Žž
 void PlacementDialog::OnOk(wxCommandEvent& ev)
 {
@@ -142,7 +165,7 @@ void PlacementDialog::OnOk(wxCommandEvent& ev)
 }
 void PlacementDialog::OnInf(wxCommandEvent &ev)
 {
-    //TODO
+	//TODO
 }
 void PlacementDialog::OnAllInf(wxCommandEvent &ev)
 {
@@ -151,6 +174,17 @@ void PlacementDialog::OnAllInf(wxCommandEvent &ev)
 void PlacementDialog::OnSetInitial(wxCommandEvent &ev)
 {
     //TODO
+}
+
+static int getType(int sel)
+{
+	int type = (sel >= NUMBER_OF_DEFINED_ITEMS) ? _saved_monster: _saved_item;
+	return type;
+}
+static int getIndex(int sel)
+{
+	int index = (sel >= NUMBER_OF_DEFINED_ITEMS) ? (sel - NUMBER_OF_DEFINED_ITEMS) :(sel ) ;
+	return index;
 }
 void PlacementDialog::OnEditInitial(wxCommandEvent &event)
 {
@@ -161,8 +195,16 @@ void PlacementDialog::OnEditInitial(wxCommandEvent &event)
 
 void PlacementDialog::OnEditMinimum(wxCommandEvent &event)
 {
-    event.Skip();
-    std::cout<<"Event handler (PlacementDialog::OnEditMinimum) not implemented yet"<<std::endl; //notify the user that he hasn't implemented the event handler yet
+
+	int type = getType(this->listSelectIndex);
+	int index = getIndex(this->listSelectIndex);
+	object_frequency_definition* placement = hpl::aleph::map::getPlacementData(type, index);
+	wxASSERT(placement);
+	wxString str = event.GetString();
+	if(REG_NUM.Matches(str)){
+		placement->minimum_count = atoi(wxConvertWX2MB(str));
+		setListItem(this->list_ctrl_1, placement, listSelectIndex);
+	}
 }
 
 
@@ -187,7 +229,21 @@ void PlacementDialog::OnRandomChance(wxCommandEvent &event)
 }
 void PlacementDialog::OnSel(wxListEvent &ev)
 {
-    int sel = ev.GetSelection();
+    int sel = ev.GetIndex();
+	if(sel >= 0 && list_ctrl_1->GetSelectedItemCount() == 1){
+		listSelectIndex = sel;
+		int type = (sel >= NUMBER_OF_DEFINED_ITEMS) ? _saved_monster: _saved_item;
+		int index = (type == _saved_item) ? (sel ) : (sel - NUMBER_OF_DEFINED_ITEMS);
+		object_frequency_definition* placement = hpl::aleph::map::getPlacementData(type, index);
+
+		this->text_ctrl_8->SetValue(getString("%d", placement->minimum_count));
+		this->text_ctrl_9->SetValue(getString("%d", placement->maximum_count));
+		this->text_ctrl_10->SetValue(getString("%d", placement->initial_count));
+		this->text_ctrl_11->SetValue(getString("%d", placement->random_count));
+		this->text_ctrl_12->SetValue(getString("%d", placement->random_chance));
+		checkbox_39->SetValue(placement->flags != 0);
+		Refresh();
+	}
 }
 void PlacementDialog::OnRandomPlace(wxCommandEvent& ev)
 {

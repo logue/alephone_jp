@@ -16,6 +16,8 @@ public:
     void OnAdd(wxCommandEvent &event); // wxGlade: <event_handler>
     void OnDelete(wxCommandEvent &event); // wxGlade: <event_handler>
     void OnEdit(wxListEvent &event); // wxGlade: <event_handler>
+public:
+	void setupDialog();
 };
 
 #endif

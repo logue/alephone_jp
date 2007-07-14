@@ -285,63 +285,45 @@ bool MapEditorMainFrame::tryToSelectOneItem(wxMouseEvent& ev)
 
     /////////////////////////
     //lines
-    for(int i = 0; i < (int)LineList.size(); i ++){
-        if(wxGetApp().getStockManager()->delLines[i]){
-            continue;
-        }
-        line_data* line = get_line_data(i);
-        endpoint_data* start = get_endpoint_data(line->endpoint_indexes[0]);
-        endpoint_data* end = get_endpoint_data(line->endpoint_indexes[1]);
+	int lineIndex = hpl::aleph::map::getSelectLineIndex(mx ,my,
+		LINE_DISTANCE_EPSILON, zMin, zMax,
+		voffset[0], voffset[1], OFFSET_X_WORLD, OFFSET_Y_WORLD, div, 
+		wxGetApp().getStockManager());
+	if(lineIndex != NONE){
+		line_data* line = get_line_data(lineIndex);
+		endpoint_data* start = get_endpoint_data(line->endpoint_indexes[0]);
+		endpoint_data* end = get_endpoint_data(line->endpoint_indexes[1]);
 
-        //高さチェック
-        int floor = line->highest_adjacent_floor;
-        int ceiling = line->lowest_adjacent_ceiling;
-        if(floor > zMax || ceiling < zMin){
-            continue;
-        }
+        //選択
+        int vstart[2];
+        int vend[2];
+        wxGetApp().getViewPointFromWorldPoint(start->vertex, vstart);
+        wxGetApp().getViewPointFromWorldPoint(end->vertex, vend);
 
-        if(hpl::aleph::map::isSelectLine(mx, my,
-            start->vertex.x, start->vertex.y, end->vertex.x, end->vertex.y,
-            voffset[0], voffset[1], OFFSET_X_WORLD, OFFSET_Y_WORLD, div, LINE_DISTANCE_EPSILON))
-        {
-            //選択
-            int vstart[2];
-            int vend[2];
-            wxGetApp().getViewPointFromWorldPoint(start->vertex, vstart);
-            wxGetApp().getViewPointFromWorldPoint(end->vertex, vend);
-
-            int offset[2][2];
-            offset[0][0] = vstart[0] - mx;
-            offset[0][1] = vstart[1] - my;
-            offset[1][0] = vend[0] - mx;
-            offset[1][1] = vend[1] - my;
-            sel->addSelLine(i, offset);
-            return true;
-        }
+        int offset[2][2];
+        offset[0][0] = vstart[0] - mx;
+        offset[0][1] = vstart[1] - my;
+        offset[1][0] = vend[0] - mx;
+        offset[1][1] = vend[1] - my;
+        sel->addSelLine(lineIndex, offset);
+        return true;
     }
 
     //ポリゴン
-    //TODO 高さ順にソートする
-    int polyIndex = NONE;
-    for(int i = 0; i < (int)PolygonList.size(); i ++){
-        if(wxGetApp().getStockManager()->delPolygons[i]){
-            continue;
-        }
-        if(hpl::aleph::map::isPointInPolygon(mx, my,
-            i, OFFSET_X_WORLD, OFFSET_Y_WORLD, div,
-            voffset[0], voffset[1]))
-        {
-            polyIndex = i;
-            break;
-        }
-    }
-    if(polyIndex != NONE){
+    //TODO 高さ順にソートする(まだやってない)
+	int polyIndex = hpl::aleph::map::getSelectPolygonIndex(mx ,my,
+		zMin, zMax,
+		voffset[0], voffset[1], OFFSET_X_WORLD, OFFSET_Y_WORLD, div, 
+		wxGetApp().getStockManager());
+	if(polyIndex != NONE){
         polygon_data* poly = get_polygon_data(polyIndex);
+#ifdef __WXDEBUG__
+		wxASSERT(poly);
+#endif
         int n = poly->vertex_count;
         int offset[MAXIMUM_VERTICES_PER_POLYGON][2];
         
         //ポリゴンプロパティ表示
-        //TODO
         this->polyPropDialog.setPolyIndex(polyIndex);
         this->polyPropDialog.Show(true);
 
@@ -710,8 +692,41 @@ void MapEditorMainFrame::doLButtonOnPolygonTool(wxMouseEvent& ev)
 
 void MapEditorMainFrame::doLButtonOnPolygonMode(wxMouseEvent& ev)
 {
+	//矢印ツール→選択・閲覧
+	int tool = wxGetApp().getEventManager()->getToolType();
+	int mx = ev.m_x;
+	int my = ev.m_y;
+	int voffset[2];
+	hpl::aleph::view::HPLViewGridManager* vmgr = wxGetApp().getViewGridManager();
+	vmgr->getOffset(voffset);
+	int div = vmgr->getZoomDivision();
+	hpl::aleph::HPLStockManager* smgr = wxGetApp().getStockManager();
+	int zMin = vmgr->getViewHeightMin();
+	int zMax = vmgr->getViewHeightMax();
+
+	int polyIndex = hpl::aleph::map::getSelectPolygonIndex(mx ,my,
+		voffset[0], voffset[1], OFFSET_X_WORLD, OFFSET_Y_WORLD, zMin, zMax, div,
+		smgr);
+	polygon_data* poly = get_polygon_data(polyIndex);
+	if(tool == ToolType::TI_ARROW){
+		if(poly){
+			//選択内容をリストコントロールに反映
+			this->polyTypeDialog.setType(poly->type);
+		}
+	}
 #ifdef MAP_VIEWER
 #else
+	//塗りつぶしツール→現在選択しているタイプで塗りつぶし
+	if(tool == ToolType::TI_FILL){
+		if(poly){
+			int polyType = this->polyTypeDialog.getType();
+			if(polyType >= 0){
+				//タイプを変更
+				poly->type = polyType;
+				Refresh();
+			}
+		}
+	}
 #endif
 }
 void MapEditorMainFrame::doLButtonOnFloorHeightMode(wxMouseEvent& ev)

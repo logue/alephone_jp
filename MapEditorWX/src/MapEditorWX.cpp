@@ -231,6 +231,12 @@ hpl::shapes::HPLShapesManager* MapEditorWX::getShapesManager()
 {
     return &this->shapesManager;
 }
+//ビジュアルモードマネージャを取得します
+hpl::shapes::HPLVisualModeManager* MapEditorWX::getVisualModeManager()
+{
+	return &this->visualModeManager;
+}
+
 
 //ビュー座標をワールド座標に直す操作の簡易版
 world_point2d MapEditorWX::getWorldPointFromViewPoint(int vx, int vy)
@@ -364,6 +370,12 @@ void MapEditorWX::getShapesImageFromSurface(wxImage* img, SDL_Surface* surface)
 	}
 	SDL_UnlockSurface(surface);
 }
+void MapEditorWX::getYXShapesImage(wxImage* img, int collection, int clut, int index, double illumination)
+{
+	SDL_Surface* surface = this->getShapesManager()->getYXSurface(collection, clut, index, illumination);
+	this->getShapesImageFromSurface(img, surface);
+	SDL_FreeSurface(surface);
+}
 
 //char->wx
 wxString getString(const char* format, ...)
@@ -374,4 +386,62 @@ wxString getString(const char* format, ...)
     vsprintf(message, format, maker);
     wxString str = wxConvertMB2WX(message);
     return str;
+}
+
+/**
+	setup palette list control
+*/
+void MapEditorWX::setupPaletteListControl(int max, wxListCtrl* ctrl)
+{
+	wxString* strings = new wxString[max];
+	wxColor* colors = new wxColor[max];
+	for(int i = 0; i < max; i ++){
+		strings[i] = getString("%d", i);
+		int COL_INTERVAL = 12;
+		int MULTIPLE = 20;
+		colors[i] = wxColor(
+			(i > COL_INTERVAL && i < COL_INTERVAL * 2)?((i-10) * MULTIPLE):0,
+			(i < COL_INTERVAL) ? i * MULTIPLE:0,
+			(i > COL_INTERVAL * 2 && i < COL_INTERVAL * 3)?((i-20) * MULTIPLE):0
+			);
+	}
+	delete [] colors;
+	delete [] strings;
+}
+void MapEditorWX::setupPaletteListControl(int max, wxListCtrl* ctrl, wxString strings[],
+										  wxColor colors[])
+{
+	const int COLUMN_NUM = 2;
+
+	ctrl->DeleteAllItems();
+	for(int i = 0; i < max; i ++){
+		for(int column = 0; column < COLUMN_NUM; column ++){
+			wxListItem item;
+			item.SetColumn(column);
+			item.SetId(i);
+			if(column == 0){
+				item.SetText(strings[i]);
+				ctrl->InsertItem(item);
+			}else{
+				item.SetBackgroundColour(colors[i]);
+				//item.SetText(_T("######"));
+				ctrl->SetItem(item);
+			}
+		}
+	}
+}
+
+wxColor MapEditorWX::getColorFromHeight(int height)
+{
+	wxColor color;
+    if(height < 0){
+        //負→黒赤
+        int red = (int)(255.0 * (1.0 - (-(double)height / (double)MAXIMUM_FLOOR_HEIGHT)));
+        color = wxColor(red, 0, 0);
+    }else{
+        //正→赤→白
+        int notRed = (int)(255.0 * ((double)height / (double)MAXIMUM_FLOOR_HEIGHT));
+        color = wxColor(255, notRed, notRed);
+    }
+	return color;
 }

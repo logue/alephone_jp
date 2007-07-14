@@ -89,6 +89,17 @@ static void loadLevel(int i){
     }
     //セットアップ
     wxGetApp().getStockManager()->updateDeletes();
+
+	//プレイヤーポジションを設定
+	//プレイヤーを捜す
+	for(int i = 0 ; i < (int)SavedObjectList.size(); i ++){
+		map_object* obj = &SavedObjectList[i];
+		if(obj->type == _saved_player){
+			//位置取得
+			wxGetApp().getVisualModeManager()->setPlayerPosition(obj->location);
+			break;
+		}
+	}
 }
 void MapEditorMainFrame::OnOpen(wxCommandEvent& WXUNUSED(ev))
 {
@@ -290,14 +301,11 @@ void MapEditorMainFrame::OnDrawPolygonMode(wxCommandEvent& ev)
     //現在の状態を取得
     bool checked = ev.IsChecked();
     
-    //前の段階
-    int editMode = wxGetApp().getEventManager()->getEditModeType();
+    //モード変更
+	this->changeEditMode(EditModeType::EM_DRAW);
 
     //一旦全てチェックをはずします
     this->uncheckModesOnMenu();
-
-    //ドローモードにします
-    wxGetApp().getEventManager()->setEditModeType(EditModeType::EM_DRAW);
 
     //全部のダイアログを閉じます
     this->closeAllModelessDialogs();
@@ -331,9 +339,10 @@ void MapEditorMainFrame::OnPolygonTypeMode(wxCommandEvent& ev)
     this->changeEditMode(EditModeType::EM_POLYGON_TYPE);
 
     //全部のダイアログを閉じます
-    this->closeAllModelessDialogs();
+    //this->closeAllModelessDialogs();
 
     //ポリゴンタイプダイアログ表示
+	this->polyTypeDialog.setupDialog();
     this->polyTypeDialog.Show(true);
 }
 void MapEditorMainFrame::OnFloorHeightMode(wxCommandEvent& ev)
@@ -395,6 +404,7 @@ void MapEditorMainFrame::OnMediaMode(wxCommandEvent& ev)
     this->closeAllModelessDialogs();
 
     //メディアパレットダイアログ表示
+	this->mediaPaletteDialog.setupDialog();
     this->mediaPaletteDialog.Show(true);
 }
 void MapEditorMainFrame::OnFloorTextureMode(wxCommandEvent& ev)
@@ -491,4 +501,24 @@ void MapEditorMainFrame::OnPointProp(wxCommandEvent& ev)
 {
     this->pointPropDialog.setIndex(wxGetApp().popupEndpointIndex);
     this->pointPropDialog.Show(true);
+}
+void MapEditorMainFrame::OnPolygonProp(wxCommandEvent& ev)
+{
+    this->polyPropDialog.setPolyIndex(wxGetApp().popupPolygonIndex);
+    this->polyPropDialog.Show(true);
+}
+void MapEditorMainFrame::OnSetVisualModePlayerPosition(wxCommandEvent& ev)
+{
+	//wxASSERT(wxGetApp().popupPolygonIndex != NONE);
+	//ポリゴンの床の高さを取得
+	polygon_data* poly = get_polygon_data(wxGetApp().popupPolygonIndex);
+#ifdef __WXDEBUG__
+	hpl::error::halt("polygon index was invalid", wxGetApp().popupPolygonIndex);
+#endif
+	int height = poly->floor_height;
+	int mpoint[2];
+	wxGetApp().getViewGridManager()->getNewMousePoint(mpoint);
+	//ワールド座標に変換
+	world_point2d wpoint = wxGetApp().getWorldPointFromViewPoint(mpoint[0], mpoint[1]);
+	wxGetApp().getVisualModeManager()->setPlayerPosition(wpoint.x, wpoint.y, height);
 }

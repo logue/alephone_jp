@@ -10,6 +10,7 @@ public:
     virtual ~VisualDialog();
 
     void OnClose();
+	void OnPaint(wxPaintEvent &ev);
     //イベントテーブル作成<en>declare
     DECLARE_EVENT_TABLE()
 };

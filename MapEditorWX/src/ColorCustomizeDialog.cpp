@@ -144,6 +144,8 @@ void ColorCustomizeDialog::setPanelColors()
     panel_4->SetBackgroundColour(getColorFromSetting(ColorType::Polygons));
     panel_5->SetBackgroundColour(getColorFromSetting(ColorType::Strings));
     panel_6->SetBackgroundColour(getColorFromSetting(ColorType::Points));
+	panel_a->SetBackgroundColour(getColorFromSetting(ColorType::SameHeightLines));
+    panel_b->SetBackgroundColour(getColorFromSetting(ColorType::StairLines));
     Refresh();
 }
 void ColorCustomizeDialog::OnOk(wxCommandEvent& ev)

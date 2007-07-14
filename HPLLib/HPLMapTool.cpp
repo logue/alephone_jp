@@ -229,6 +229,36 @@ int hpl::aleph::map::getSelectLineIndex(int viewX, int viewY, int threshold, int
     return index;
 }
 
+/**
+	指定した点がポリゴンを踏んでいる場合、そのポリゴンを返します
+*/
+int hpl::aleph::map::getSelectPolygonIndex(int viewX, int viewY, int zMin, int zMax,
+	int voffsetX, int voffsetY, int offsetXW, int offsetYW, int div,
+	hpl::aleph::HPLStockManager* smgr)
+{
+	for(int i = 0; i < (int)PolygonList.size(); i ++){
+		polygon_data* poly = get_polygon_data(i);
+		//削除チェック
+		if(smgr->delPolygons[i]){
+			continue;
+		}
+		//高さチェック
+		if(!hpl::aleph::map::isValidHeight(poly->floor_height, poly->ceiling_height,
+            zMin, zMax))
+        {
+			continue;
+		}
+		//選択出来ているか判定
+		if(hpl::aleph::map::isPointInPolygon(viewX, viewY,
+            i, offsetXW, offsetYW, div,
+            voffsetX, voffsetY))
+		{
+			return i;
+		}
+	}
+	return NONE;
+}
+
 ///////////////////////  Lines  ////////////////////////////////////////////
 
 bool hpl::aleph::map::isSelectLine(int viewPX, int viewPY,

@@ -377,11 +377,11 @@ void ObjectPropDialog::drawFacing(wxWindow* panel, int facing, wxDC* dc)
     //wxWindowDC dc(panel);
     //circle
     wxBitmap circleBmp(this->directionCircle);
-    dc->DrawBitmap(circleBmp, 0,0);
+    dc->DrawBitmap(circleBmp, 0,0, true);
 
     //marker
     wxBitmap markerBmp(this->directionMarker);
-    dc->DrawBitmap(markerBmp, x - markerW / 2, y - markerH / 2);
+    dc->DrawBitmap(markerBmp, x - markerW / 2, y - markerH / 2, true);
 }
 
 void ObjectPropDialog::OnPaint(wxPaintEvent &event)

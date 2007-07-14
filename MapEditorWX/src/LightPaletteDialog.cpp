@@ -1,5 +1,8 @@
 #include "LightPaletteDialog.h"
 #include "MapEditorWX.h"
+
+const int COLUMN_NUM = 2;
+
 enum{
     ID_EDIT
 };
@@ -35,7 +38,12 @@ bool LightPaletteDialog::Create(wxWindow* parent, wxWindowID id)
     grid_sizer_40->Fit(this);
     Layout();
 
-    
+	//setup columns
+	char *columnNames[100] = {"Index", "Color"};
+    for(int i = 0; i < COLUMN_NUM; i ++){
+        list_ctrl_5->InsertColumn(i, wxConvertMB2WX(columnNames[i]));
+    }
+
     return result;
 }
 void LightPaletteDialog::OnAdd(wxCommandEvent &event)
@@ -54,4 +62,7 @@ void LightPaletteDialog::OnEdit(wxListEvent &event)
 void LightPaletteDialog::setFloor(bool fl)
 {
     this->isFloor_ = fl;
+	//setup list
+	wxGetApp().setupPaletteListControl((int)LightList.size(), list_ctrl_5);
+
 }

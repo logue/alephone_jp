@@ -60,6 +60,8 @@ BEGIN_EVENT_TABLE(MapEditorMainFrame, wxFrame)
     EVT_MENU(ID_ClockwiseSideProp, MapEditorMainFrame::OnClockwiseSide)
     EVT_MENU(ID_CounterclockwiseSideProp, MapEditorMainFrame::OnCounterclockwiseSide)
     EVT_MENU(ID_PointProp, MapEditorMainFrame::OnPointProp)
+    EVT_MENU(ID_PolygonProp, MapEditorMainFrame::OnPolygonProp)
+    EVT_MENU(ID_SetVisualModePlayerStartPosition, MapEditorMainFrame::OnSetVisualModePlayerPosition)
 
     EVT_PAINT(MapEditorMainFrame::OnPaint)
     EVT_LEFT_DOWN(MapEditorMainFrame::OnLeftDown)
@@ -210,9 +212,9 @@ MapEditorMainFrame::MapEditorMainFrame(const wxString& title,
                 for(int index = 0; index < bmpNum; index ++){
                     wxImage img;
                     if(invalid){
-                        img.Create(1,1);
+                        img.Create(100,100);
                     }else{
-                        wxGetApp().getShapesImage(&img, i, clut, index, illumination);
+                        wxGetApp().getYXShapesImage(&img, i, clut, index, illumination);
                     }
                     textureMap[i][clut][index] = img;
                 }
@@ -324,6 +326,9 @@ void MapEditorMainFrame::setupMenus()
     wxGetApp().linePopupMenu.Append(ID_CounterclockwiseSideProp, _T("Counterclockwise side prop..."));
     wxGetApp().pointPopupMenu.SetTitle(_T("point menu"));
     wxGetApp().pointPopupMenu.Append(ID_PointProp, _T("Properties..."));
+    wxGetApp().polygonPopupMenu.SetTitle(_T("polygon menu"));
+    wxGetApp().polygonPopupMenu.Append(ID_PolygonProp, _T("Properties..."));
+    wxGetApp().polygonPopupMenu.Append(ID_SetVisualModePlayerStartPosition, _T("Set visual mode start position"));
 }
 
 
@@ -502,6 +507,8 @@ void MapEditorMainFrame::loadIconBitmaps(const char* baseDirPath)
             }
         }
     }
+	wxGetApp().loadImage(START_POINT_IMAGE_FILE_PATH, &this->visualModeStartPositionImage,
+		255,255,255);
 }
 /**
     編集モードメニューのチェックを全てはずします
@@ -538,6 +545,9 @@ void MapEditorMainFrame::changeEditMode(int mode)
         this->pointPropDialog.Show(false);
         this->polyPropDialog.Show(false);
         this->objPropDialog.Show(false);
+
+		//矢印ツールに戻す
+		wxGetApp().getEventManager()->setToolType(ToolType::TI_ARROW);
     }
     if(mode != EditModeType::EM_FLOOR_TEXTURE &&
         mode != EditModeType::EM_CEILING_TEXTURE)
@@ -560,16 +570,18 @@ void MapEditorMainFrame::changeEditMode(int mode)
     if(mode != EditModeType::EM_CEILING_LIGHT &&
         mode != EditModeType::EM_FLOOR_LIGHT)
     {
-        //TODO ライトパレットを消す
+        this->lightPaletteDialog.Show(false);
     }
     if(mode != EditModeType::EM_MEDIA)
     {
-        //TODO メディアパレットを消す
+		this->mediaPaletteDialog.Show(false);
     }
     if(mode != EditModeType::EM_SOUND)
     {
-        //TODO サウンドパレットを消す
+		this->soundPaletteDialog.Show(false);
     }
+
+	wxGetApp().getEventManager()->setEditModeType(mode);
 
     Refresh();
 }

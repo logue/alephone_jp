@@ -27,6 +27,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 #include <wx/cursor.h>
 #include <wx/xrc/xmlres.h>
 #include <wx/filedlg.h>
+#include <wx/listctrl.h>
 
 #ifdef __BORLANDC__
 #pragma hdrstop
@@ -183,12 +184,16 @@ public:
     bool isNowOnThePoint;
     bool isNowOnTheLine;
 
+	//線右クリックをしたときのメニュー
     wxMenu linePopupMenu;
     wxMenu pointPopupMenu;
+	wxMenu polygonPopupMenu;
 
     //popup用インデックス覚書
     int popupEndpointIndex;
     int popupLineIndex;
+	int popupPolygonIndex;
+
     //public メンバ変数 ここまで
 private:
     
@@ -205,6 +210,9 @@ private:
 
     //Shapesマネージャー
     hpl::shapes::HPLShapesManager shapesManager;
+
+	//ビジュアルモード管理 <en> manager for visual mode
+	hpl::shapes::HPLVisualModeManager visualModeManager;
 
     //ツールごとのカーソル
     wxCursor cursors[ToolType::NUMBER_OF_TOOLS];
@@ -253,6 +261,9 @@ public:
 
     //ストックマネージャを取得します
     hpl::aleph::HPLStockManager* getStockManager();
+	
+	//ビジュアルモードマネージャを取得します
+	hpl::shapes::HPLVisualModeManager* getVisualModeManager();
 
     //ビュー座標をワールド座標に直す操作の簡易版
     world_point2d getWorldPointFromViewPoint(int vx, int vy);
@@ -286,6 +297,19 @@ public:
 
     void getShapesImage(wxImage* img, int collection, int clut, int index, double illumination);
 	void getShapesImageFromSurface(wxImage* img, SDL_Surface* surface);
+	void getYXShapesImage(wxImage* img, int collection, int clut, int index, double illumination);
+	/**
+		setup palette list control
+	*/
+	void setupPaletteListControl(int max, wxListCtrl* ctrl);
+	void setupPaletteListControl(int max, wxListCtrl* ctrl, wxString strings[], wxColor colors[]);
+
+	/**
+		高さと色の対応を取得
+	*/
+	wxColor getColorFromHeight(int height);
+
+	
 private:
 
 };

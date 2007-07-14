@@ -34,7 +34,14 @@ bool MediaPaletteDialog::Create(wxWindow* parent, wxWindowID id)
     SetSizer(grid_sizer_30);
     grid_sizer_30->Fit(this);
     Layout();
-    return result;
+
+	//setup columns
+	char *columnNames[100] = {"Index", "Color"};
+	const int COLUMN_NUM = 2;
+    for(int i = 0; i < COLUMN_NUM; i ++){
+        list_ctrl_4->InsertColumn(i, wxConvertMB2WX(columnNames[i]));
+    }
+return result;
 }
 void MediaPaletteDialog::OnAdd(wxCommandEvent &event)
 {
@@ -54,4 +61,8 @@ void MediaPaletteDialog::OnEdit(wxListEvent &event)
 {
     event.Skip();
     std::cout<<"Event handler (MediaPaletteDialog::OnEdit) not implemented yet"<<std::endl; //notify the user that he hasn't implemented the event handler yet
+}
+void MediaPaletteDialog::setupDialog()
+{
+	wxGetApp().setupPaletteListControl((int)MediaList.size(), list_ctrl_4);
 }

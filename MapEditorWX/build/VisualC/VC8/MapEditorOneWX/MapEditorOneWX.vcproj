@@ -575,6 +575,14 @@
 				RelativePath="..\..\..\..\..\HPLLib\HPLViewGridManager.h"
 				>
 			</File>
+			<File
+				RelativePath="..\..\..\..\..\HPLLib\HPLVisualModeManager.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\..\..\HPLLib\HPLVisualModeManager.h"
+				>
+			</File>
 		</Filter>
 		<Filter
 			Name="Common"

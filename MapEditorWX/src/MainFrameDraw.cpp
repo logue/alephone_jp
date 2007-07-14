@@ -6,7 +6,6 @@ const double ROUND_DEGREE = 360.0;
 const double OBJECT_TRIANGLE_LENGTH = 10.0;
 const double WING_DEG = 120.0;
 
-
 /**
     マップデータの表示
 */
@@ -103,6 +102,7 @@ void MapEditorMainFrame::OnPaint(wxPaintEvent& WXUNUSED(event))
         }
     }
 
+	/*
 	if(wxGetApp().getShapesManager()->isLoadedShapesFile()){
 		//Shapesファイルから読み込みテスト
 		wxBitmap bmp = wxBitmap(this->texture);
@@ -134,7 +134,7 @@ void MapEditorMainFrame::OnPaint(wxPaintEvent& WXUNUSED(event))
             counter ++;
         }
 	}
-
+*/
     //バッファから画面へコピー
     dc.Blit(wxPoint(0,0), size,
         drawDC,
@@ -199,6 +199,8 @@ void MapEditorMainFrame::drawBackground(wxDC* dc)
     }
 
 }
+
+
 /**
     ポリゴン描画
 */
@@ -258,18 +260,25 @@ void MapEditorMainFrame::drawPolygons(wxDC* dc)
             dc->SetBrush(this->polyTypeBrushes[polygon->type]);
             break;
         case EditModeType::EM_FLOOR_HEIGHT:
-            //床高さ
-            if(polygon->floor_height < 0){
-                //負→黒赤
-                int red = (int)(255 * (1.0 - (-(double)polygon->floor_height / MAXIMUM_FLOOR_HEIGHT)));
-                brush.SetColour(red, 0, 0);
-            }else{
-                //正→赤→白
-                int notRed = (int)(255 * (polygon->floor_height / MAXIMUM_FLOOR_HEIGHT));
-                brush.SetColour(255, notRed, notRed);
-            }
+			brush.SetColour(wxGetApp().getColorFromHeight(polygon->floor_height));
             dc->SetBrush(brush);
             break;
+        case EditModeType::EM_CEILING_HEIGHT:
+			brush.SetColour(wxGetApp().getColorFromHeight(polygon->ceiling_height));
+            dc->SetBrush(brush);
+            break;
+		case EditModeType::EM_FLOOR_TEXTURE:
+			if(wxGetApp().getShapesManager()->isLoadedShapesFile()){
+				wxBrush tbr = this->getTexturedBrush(polygon->floor_texture);
+				dc->SetBrush(tbr);
+			}
+			break;
+		case EditModeType::EM_CEILING_TEXTURE:
+			if(wxGetApp().getShapesManager()->isLoadedShapesFile()){
+				wxBrush tbr = this->getTexturedBrush(polygon->ceiling_texture);
+				dc->SetBrush(tbr);
+			}
+			break;
         default:
             //デフォルト
             dc->SetBrush(this->polyBrush);
@@ -303,6 +312,16 @@ void MapEditorMainFrame::drawPolygons(wxDC* dc)
         dc->DrawPolygon(vertexCount, points);
     }
 }
+wxBrush MapEditorMainFrame::getTexturedBrush(int shapesDescriptor)
+{
+	int collectionCLUT = GET_DESCRIPTOR_COLLECTION(shapesDescriptor);
+	int collection = GET_COLLECTION(collectionCLUT);
+	int clut = GET_COLLECTION_CLUT(collectionCLUT);
+	int index = GET_DESCRIPTOR_SHAPE(shapesDescriptor);
+	wxBrush tbr(this->textureMap[collection][clut][index]);
+	return tbr;
+}
+
 /**
     線描画
 */
@@ -603,6 +622,21 @@ void MapEditorMainFrame::drawObjects(wxDC* dc)
                 transparent);
         }
     }
+
+	//ビジュアルモードのスタートポイントの表示
+	{
+		//座標変換
+		int vpoint[2];
+		world_point3d location = wxGetApp().getVisualModeManager()->getPlayerPosition();
+		world_point2d wpoint = {location.x, location.y};
+		wxGetApp().getViewPointFromWorldPoint(wpoint, vpoint);
+		wxImage* img = &visualModeStartPositionImage;
+		bool transparent = true;
+		dc->DrawBitmap(*img, vpoint[0] - img->GetWidth() / 2, vpoint[1] - img->GetHeight() / 2, 
+			transparent );
+			
+	}
+
 }
 void MapEditorMainFrame::drawAnnotations(wxDC* dc)
 {

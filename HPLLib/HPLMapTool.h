@@ -153,7 +153,7 @@ namespace map{
     bool isValidHeight(int checkMin, int checkMax, int validMin, int validMax);
 
     /**
-        指定した点が線を踏んでいる場合、その点
+        指定した点が線を踏んでいる場合、その線番号を返します
     */
     int getSelectLineIndex(world_point2d& wpoint, int threshold, int zMin, int zMax, int div,
                                         hpl::aleph::HPLStockManager* smgr);
@@ -161,6 +161,12 @@ namespace map{
         int voffsetX, int voffsetY, int offsetXW, int offsetYW, int div,
                                         hpl::aleph::HPLStockManager* smgr);
 
+	/**
+		指定した点がポリゴンを踏んでいる場合、そのポリゴンを返します
+	*/
+	int getSelectPolygonIndex(int viewX, int viewY, int zMin, int zMax,
+		int voffsetX, int voffsetY, int offsetXW, int offsetYW, int div,
+		hpl::aleph::HPLStockManager* smgr);
 	///////////////////////	 Lines	////////////////////////////////////////////
 	/**
 		指定した点を用いたときに線を選択できているかを判定

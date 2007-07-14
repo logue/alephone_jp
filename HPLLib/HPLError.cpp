@@ -16,7 +16,7 @@ void hpl::error::caution(const char* format, ...)
     vsprintf(message, format, maker);
 //    int len = strlen(message);
 
-#ifdef __WXDEBUG__
+#ifdef WX
     wxMessageBox(wxConvCurrent->cMB2WX(message));
 #endif
 #ifdef WIN32

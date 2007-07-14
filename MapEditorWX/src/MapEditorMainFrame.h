@@ -91,6 +91,8 @@ enum
     ID_ClockwiseSideProp,
     ID_CounterclockwiseSideProp,
     ID_PointProp,
+	ID_PolygonProp,
+	ID_SetVisualModePlayerStartPosition,
 };  
 
 //リソースID
@@ -181,6 +183,9 @@ private:
     //ハイライト版
     wxImage hilightedMapItemBitmaps[NUMBER_OF_MAP_ICONS];
 
+	//ビジュアルモードスタートポイント
+	wxImage visualModeStartPositionImage;
+
     //
 //    wxBitmap 
     //モンスターペン
@@ -264,6 +269,8 @@ public:
     void OnClockwiseSide(wxCommandEvent& ev);
     void OnCounterclockwiseSide(wxCommandEvent& ev);
     void OnPointProp(wxCommandEvent& ev);
+    void OnPolygonProp(wxCommandEvent& ev);
+    void OnSetVisualModePlayerPosition(wxCommandEvent& ev);
 
     void OnPaint(wxPaintEvent& ev);
 
@@ -274,7 +281,7 @@ public:
     void OnMotion(wxMouseEvent& ev);
     void OnMouseWheel(wxMouseEvent& ev);
     void OnLeftDoubleClick(wxMouseEvent& ev);
-
+	
     //サイズ変更<en>change window size event
     void OnSize(wxSizeEvent& ev);
     //ダブルバッファリング時の背景削除停止用<en>to disable erasing backgroud for double buffering
@@ -418,5 +425,10 @@ private:
     */
     bool askDestructMap();
 
+	/**
+		the mothod to do when unselect
+	*/
 	void unselect();
+
+	wxBrush getTexturedBrush(int shapesDescriptor);
 };

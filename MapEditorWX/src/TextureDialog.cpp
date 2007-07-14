@@ -27,23 +27,27 @@ static void drawPanel(int collection, int clut, std::map<int, wxImage>* imgMap,
 	//パレット表示
 	const int MERGIN_X = 10;
 	const int MERGIN_Y = 10;
-	const int ITEM_W = 100;
+	const int ITEM_W = 40;
 	const int ITEM_H = ITEM_W;
 	const int ITEM_INTERVAL_X = 10;
 	const int ITEM_INTERVAL_Y = 10;
     const int PITCH = (size.GetWidth() - MERGIN_X * 2) / (ITEM_W + ITEM_INTERVAL_X);
     
-    std::map<int, wxImage>::iterator it;
-    int counter = 0;
-    for(it = imgMap->begin(); it != imgMap->end(); it ++){
-        int x = (counter % PITCH) * (ITEM_W + ITEM_INTERVAL_X) + MERGIN_X;
-        int y = (counter / PITCH) * (ITEM_H + ITEM_INTERVAL_Y) + MERGIN_Y;
-        wxImage scaledImg = it->second.Scale(ITEM_W, ITEM_H);//.Rotate(90);
-        wxBitmap bmp(scaledImg);
-        dc->DrawBitmap(bmp, x, y);
-        counter ++;
-    }
+	if(wxGetApp().getShapesManager()->isLoadedShapesFile()){
 
+		std::map<int, wxImage>::iterator it;
+		int counter = 0;
+		double rad = hpl::math::getRadianFromDegree(90);
+		for(it = imgMap->begin(); it != imgMap->end(); it ++){
+			int x = (counter % PITCH) * (ITEM_W + ITEM_INTERVAL_X) + MERGIN_X;
+			int y = (counter / PITCH) * (ITEM_H + ITEM_INTERVAL_Y) + MERGIN_Y;
+			wxImage scaledImg = it->second.Scale(ITEM_W, ITEM_H);
+
+			wxBitmap bmp(scaledImg);
+			dc->DrawBitmap(bmp, x, y);
+			counter ++;
+		}
+	}
 }
 
 BEGIN_EVENT_TABLE(TextureArea, wxScrolledWindow)

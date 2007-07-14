@@ -33,6 +33,12 @@ bool HeightPaletteDialog::Create(wxWindow* parent, wxWindowID id)
     SetSizer(grid_sizer_28);
     grid_sizer_28->Fit(this);
     Layout();
+	//setup columns
+	char *columnNames[100] = {"Index", "Color"};
+	const int COLUMN_NUM = 2;
+    for(int i = 0; i < COLUMN_NUM; i ++){
+        list_ctrl_3->InsertColumn(i, wxConvertMB2WX(columnNames[i]));
+    }
     return result;
 }
 void HeightPaletteDialog::OnAdd(wxCommandEvent &event)
@@ -104,6 +110,33 @@ void HeightPaletteDialog::updateHeights()
 void HeightPaletteDialog::setFloor(bool floor)
 {
     this->isFloor_ = floor;
+	//TODO
+	std::set<int> heightStock;
+	for(int i = 0; i < (int)PolygonList.size(); i ++){
+		polygon_data* poly = get_polygon_data(i);
+		int height = poly->ceiling_height;
+		if(this->isFloor()){
+			height = poly->floor_height;
+		}
+		if(heightStock.find(height) == heightStock.end()){
+			//new height stock
+			heightStock.insert(height);
+		}
+	}
+	int max = (int)heightStock.size();
+	wxString* strings = new wxString[max];
+	wxColor* colors = new wxColor[max];
+	int counter = 0;
+	for(std::set<int>::iterator it = heightStock.begin(); it != heightStock.end(); it ++){
+		int val = (*it);
+		strings[counter] = getString("%d", val);
+		colors[counter] = wxGetApp().getColorFromHeight(val);
+		counter ++;
+	}
+	wxGetApp().setupPaletteListControl(max, list_ctrl_3,
+		strings, colors);
+	delete [] colors;
+	delete [] strings;
 }
 bool HeightPaletteDialog::isFloor(){
     return this->isFloor_;

@@ -77,7 +77,8 @@ bool hpl::shapes::HPLShapesManager::loadShapesFile(const char* path)
 
 	FileSpecifier ShapesFile(path);
 	if(!ShapesFile.Exists()){
-        hpl::error::halt("cannot load shapes file[%s]", path);
+        hpl::error::caution("cannot load shapes file[%s]", path);
+		return false;
 	}else{
 		open_shapes_file(ShapesFile);
 
@@ -161,5 +162,30 @@ SDL_Surface* hpl::shapes::HPLShapesManager::getSurface(int collection, int clut,
 	SDL_UnlockSurface(surface);
     free(outp);
 
+    return newSurface;
+}
+/**
+	walls/landscapes are inversed between X and Y
+	get surface inversed
+*/
+SDL_Surface* hpl::shapes::HPLShapesManager::getYXSurface(int collection, int clut, int index, double illumination)
+{
+	SDL_Surface* surface = getSurface(collection, clut, index, illumination);
+
+	SDL_Surface* newSurface = createSurface(screenSurface->flags,
+		surface->h, surface->w, NEW_SURFACE_BPP);
+	SDL_LockSurface(surface);
+	SDL_LockSurface(newSurface);
+//	int colorPaletteOffset = header->collection->color_table_offset;
+	for(int y = 0; y < surface->h; y ++){
+	    for(int x = 0; x < surface->w; x ++){
+			Uint32 pixel = hpl::surface::getpixel(surface, x, y);
+			hpl::surface::setpixel(newSurface, y, x, pixel);
+		}
+	}
+	SDL_UnlockSurface(newSurface);
+	SDL_UnlockSurface(surface);
+
+	SDL_FreeSurface(surface);
     return newSurface;
 }

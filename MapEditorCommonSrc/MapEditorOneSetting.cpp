@@ -121,6 +121,7 @@ bool MapEditorOneSetting::saveSetting()
         for(int i = 0; i < NUMBER_OF_EDITOR_FLAGS; i ++){
             fprintf(fp, "%d,", flags[i]? 1: 0);
         }
+        fprintf(fp,"\n");
         fclose(fp);
     }
     return true;
@@ -134,6 +135,7 @@ void MapEditorOneSetting::outputColor(FILE* fp, int col[], int colNum)
             fprintf(fp, ",");
         }
     }
+	fprintf(fp,"\n");
 }
 
 void MapEditorOneSetting::setSettingToDefault()
@@ -164,10 +166,14 @@ void MapEditorOneSetting::setColorSetting(ColorSettings *setting)
     }else{
         memcpy(&colorSetting, setting, sizeof(ColorSettings));
     }
+
+	//save setting
+	this->saveSetting();
 }
 void MapEditorOneSetting::setColorSetting(int type)
 {
     MapEditorOneSetting::setColorSetting(type, &colorSetting);
+	this->saveSetting();
 }
 
 //static

@@ -58,6 +58,12 @@ namespace shapes{
 		SDL_Surface* getSurface(int collection, int clut, int index, double illumination);
 
 		/**
+			walls/landscapes are inversed between X and Y
+			get surface inversed
+		*/
+		SDL_Surface* getYXSurface(int collection, int clut, int index, double illumination);
+
+		/**
 			Shapesファイルを読み込みます
 			<en> load Shapes file
 			@param path Shapesファイルパス <en> Shapes file's path
