@@ -996,19 +996,19 @@ extern vector<object_data> ObjectList;
 
 // extern struct object_data *objects;
 
-extern vector<endpoint_data> EndpointList;
+extern std::vector<endpoint_data> EndpointList;
 #define map_endpoints (&EndpointList[0])
 #define MAXIMUM_ENDPOINTS_PER_MAP (EndpointList.size())
 
-extern vector<line_data> LineList;
+extern std::vector<line_data> LineList;
 #define map_lines (&LineList[0])
 #define MAXIMUM_LINES_PER_MAP (LineList.size())
 
-extern vector<side_data> SideList;
+extern std::vector<side_data> SideList;
 #define map_sides (&SideList[0])
 #define MAXIMUM_SIDES_PER_MAP (SideList.size())
 
-extern vector<polygon_data> PolygonList;
+extern std::vector<polygon_data> PolygonList;
 #define map_polygons (&PolygonList[0])
 #define MAXIMUM_POLYGONS_PER_MAP (PolygonList.size())
 

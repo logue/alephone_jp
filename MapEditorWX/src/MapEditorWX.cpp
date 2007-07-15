@@ -423,8 +423,9 @@ void MapEditorWX::setupPaletteListControl(int max, wxListCtrl* ctrl, wxString st
 				item.SetText(strings[i]);
 				ctrl->InsertItem(item);
 			}else{
-				item.SetBackgroundColour(colors[i]);
-				//item.SetText(_T("######"));
+				//item.SetBackgroundColour(colors[i]);
+//				item.SetTextColour(colors[i]);
+				item.SetText(_T("######"));
 				ctrl->SetItem(item);
 			}
 		}

@@ -8,6 +8,7 @@ BEGIN_EVENT_TABLE(VisualDialog, wxDialog)
 END_EVENT_TABLE()
 VisualDialog::VisualDialog()
 {
+	wxGetApp().getVisualModeManager()->init();
 }
 VisualDialog::~VisualDialog()
 {

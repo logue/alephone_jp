@@ -180,31 +180,31 @@ struct static_data *static_world = NULL;
 struct dynamic_data *dynamic_world = NULL;
 
 // These are allocated here because the numbers of these objects vary as a game progresses.
-vector<effect_data> EffectList(MAXIMUM_EFFECTS_PER_MAP);
-vector<object_data> ObjectList(MAXIMUM_OBJECTS_PER_MAP);
-vector<monster_data> MonsterList(MAXIMUM_MONSTERS_PER_MAP);
-vector<projectile_data> ProjectileList(MAXIMUM_PROJECTILES_PER_MAP);
+std::vector<effect_data> EffectList(MAXIMUM_EFFECTS_PER_MAP);
+std::vector<object_data> ObjectList(MAXIMUM_OBJECTS_PER_MAP);
+std::vector<monster_data> MonsterList(MAXIMUM_MONSTERS_PER_MAP);
+std::vector<projectile_data> ProjectileList(MAXIMUM_PROJECTILES_PER_MAP);
 // struct object_data *objects = NULL;
 // struct monster_data *monsters = NULL;
 // struct projectile_data *projectiles = NULL;
 
-vector<endpoint_data> EndpointList;
-vector<line_data> LineList;
-vector<side_data> SideList;
-vector<polygon_data> PolygonList;
-vector<platform_data> PlatformList;
+std::vector<endpoint_data> EndpointList;
+std::vector<line_data> LineList;
+std::vector<side_data> SideList;
+std::vector<polygon_data> PolygonList;
+std::vector<platform_data> PlatformList;
 // struct polygon_data *map_polygons = NULL;
 // struct side_data *map_sides = NULL;
 // struct line_data *map_lines = NULL;
 // struct endpoint_data *map_endpoints = NULL;
 // struct platform_data *platforms = NULL;
 
-vector<ambient_sound_image_data> AmbientSoundImageList;
-vector<random_sound_image_data> RandomSoundImageList;
+std::vector<ambient_sound_image_data> AmbientSoundImageList;
+std::vector<random_sound_image_data> RandomSoundImageList;
 // struct ambient_sound_image_data *ambient_sound_images = NULL;
 // struct random_sound_image_data *random_sound_images = NULL;
 
-vector<int16> MapIndexList;
+std::vector<int16> MapIndexList;
 // short *map_indexes = NULL;
 
 vector<uint8> AutomapLineList;
@@ -212,10 +212,10 @@ vector<uint8> AutomapPolygonList;
 // byte *automap_lines = NULL;
 // byte *automap_polygons = NULL;
 
-vector<map_annotation> MapAnnotationList;
+std::vector<map_annotation> MapAnnotationList;
 // struct map_annotation *map_annotations = NULL;
 
-vector<map_object> SavedObjectList;
+std::vector<map_object> SavedObjectList;
 // struct map_object *saved_objects = NULL;
 struct item_placement_data *placement_information = NULL;
 

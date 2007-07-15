@@ -614,11 +614,11 @@ static void recreate_player(
 	get_random_player_starting_location_and_facing(player_index, placement_team, &location);
 
 	/* create an object and a monster for this player */
-	monster_index= new_monster(&location, _monster_marine);
-	monster= get_monster_data(monster_index);
+//	monster_index= new_monster(&location, _monster_marine);
+//	monster= get_monster_data(monster_index);
 
 	/* add our parasitic torso */
-	attach_parasitic_object(monster->object_index, 0, location.yaw);
+//	attach_parasitic_object(monster->object_index, 0, location.yaw);
 	
 	/* and initialize it */
 	if(PLAYER_IS_TOTALLY_DEAD(player) || PLAYER_IS_DEAD(player))
@@ -628,8 +628,8 @@ static void recreate_player(
 
 	/* Clear the transient flags, leave the persistant flags, like Player has cheated */
 	player->flags &= (_player_is_teleporting_flag | _player_is_interlevel_teleporting_flag | PLAYER_PERSISTANT_FLAGS );
-	player->monster_index= monster_index;
-	player->object_index= monster->object_index;
+	//player->monster_index= monster_index;
+	//player->object_index= monster->object_index;
 
 	/* initialize_player_physics_variables sets all of these */
 	player->facing= player->elevation= 0;
