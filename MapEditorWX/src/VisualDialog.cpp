@@ -29,13 +29,18 @@ void VisualDialog::OnPaint(wxPaintEvent &ev)
 	wxPaintDC dc(this);
 	
 	wxSize clientSize = this->GetClientSize();
-	dc.SetBrush(*wxWHITE_BRUSH);
-	dc.DrawRectangle(clientSize);
+//	dc.SetBrush(*wxWHITE_BRUSH);
+//	dc.DrawRectangle(clientSize);
 
 	if(wxGetApp().getShapesManager()->isLoadedShapesFile()){
 		//プレイヤーの位置に設定
-		render_screen(0);
+		render_screen(-1);
 		//スクリーンからコピー
+		wxImage screenImage;
+		wxGetApp().getShapesImageFromSurface(&screenImage, main_surface);
+		dc.DrawBitmap(screenImage, 0,0);
 
+//		dc.SetBrush(*wxWHITE_BRUSH);
+//		dc.DrawRectangle(0,0,100,100);
 	}
 }
