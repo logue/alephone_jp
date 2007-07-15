@@ -98,5 +98,5 @@ int hpl::aleph::map::HPLDoneHistory::getRemainUndoCount()
 }
 int hpl::aleph::map::HPLDoneHistory::getRemainRedoCount()
 {
-    return actionList.size() - index;
+    return (int)actionList.size() - index;
 }

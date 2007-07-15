@@ -22,6 +22,8 @@ world_point3d hpl::shapes::HPLVisualModeManager::getPlayerPosition()
 }
 void hpl::shapes::HPLVisualModeManager::init()
 {
+	allocate_render_memory();
+	allocate_texture_tables();
 	allocate_player_memory();
 	initialize_players();
 	playerIdentifier = 0;

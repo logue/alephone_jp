@@ -602,7 +602,7 @@ void recreate_players_for_new_level(
 static void recreate_player(
 	short player_index)
 {
-	short monster_index;
+	short monster_index = 0;
 	struct monster_data *monster;
 	struct player_data *player= get_player_data(player_index);
 	short placement_team;
@@ -614,6 +614,16 @@ static void recreate_player(
 	get_random_player_starting_location_and_facing(player_index, placement_team, &location);
 
 	/* create an object and a monster for this player */
+	player->location.x = location.p.x;
+	player->location.y = location.p.y;
+	player->location.z = location.p.z;
+	player->camera_location.x = location.p.x;
+	player->camera_location.y = location.p.y;
+	player->camera_location.z = location.p.z;
+
+	player->camera_polygon_index = location.polygon_index;
+	player->facing = location.yaw;
+	player->elevation = location.pitch;
 //	monster_index= new_monster(&location, _monster_marine);
 //	monster= get_monster_data(monster_index);
 
@@ -632,9 +642,9 @@ static void recreate_player(
 	//player->object_index= monster->object_index;
 
 	/* initialize_player_physics_variables sets all of these */
-	player->facing= player->elevation= 0;
-	player->location.x= player->location.y= player->location.z= 0;
-	player->camera_location.x= player->camera_location.y= player->camera_location.z= 0;
+	//player->facing= player->elevation= 0;
+	//player->location.x= player->location.y= player->location.z= 0;
+	//player->camera_location.x= player->camera_location.y= player->camera_location.z= 0;
 
 	/* We don't change... */
 	/* physics_model, suit_energy, suit_oxygen, current_weapon, desired_weapon */
@@ -664,7 +674,7 @@ static void recreate_player(
 	// LP addition: handles the current player's chase cam;
 	// in screen.c, we find that it's the current player whose view gets rendered
 	//if (player_index == current_player_index) ChaseCam_Reset();
-	
+
 	// Done here so that players' missiles will always be guided
 	// if they are intended to be guided
 	//adjust_player_physics(get_monster_data(player->monster_index));

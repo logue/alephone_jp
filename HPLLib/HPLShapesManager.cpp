@@ -47,6 +47,7 @@ void hpl::shapes::HPLShapesManager::initScreen()
 {
     screenSurface = createSurface(SDL_SWSURFACE,
 		640, 480, SCREEN_BPP);
+	main_surface = screenSurface;
 	bit_depth = SCREEN_BPP;
 
 	struct screen_mode_data scr;

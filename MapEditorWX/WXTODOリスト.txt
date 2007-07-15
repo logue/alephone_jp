@@ -251,3 +251,6 @@ Clear()するとカラムまで消される
 
 Map icons (modified) original to Bungie
 Bobwithkeycard
+
+TODO Soloは読めるが、Networkマップが見れない
+TODO サードパーティ製Shapesが読めない（M2とか）

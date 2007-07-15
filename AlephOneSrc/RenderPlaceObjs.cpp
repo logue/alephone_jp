@@ -127,7 +127,8 @@ void RenderPlaceObjsClass::build_render_object_list()
 			short base_node_count;
 			sorted_node_data *base_nodes[MAXIMUM_OBJECT_BASE_NODES];
 			
-			float Opacity = 1;//(object_index == self_index) ? GetChaseCamData().Opacity : 1;
+			//float Opacity = 1;(object_index == self_index) ? GetChaseCamData().Opacity : 1;
+			float Opacity = (object_index == self_index) ? 0.4 : 1;
 			render_object_data *render_object= build_render_object(NULL, floor_intensity, ceiling_intensity,
 				base_nodes, &base_node_count, object_index, Opacity);
 			
