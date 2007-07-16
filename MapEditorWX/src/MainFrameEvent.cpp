@@ -470,6 +470,14 @@ void MapEditorMainFrame::doMouseMotionOnArrowTool(wxMouseEvent& ev)
             SavedObjectList[selo->index].location.x = wmp.x + selo->offset[0] * div;
             SavedObjectList[selo->index].location.y = wmp.y + selo->offset[1] * div;
         }
+
+		//アノテーション
+		//<en> annotation string
+		for(int i = 0; i < (int)sel->getSelAnnotations()->size(); i ++){
+			hpl::aleph::map::SelAnnotation* sela = &sel->getSelAnnotations()->at(i);
+			MapAnnotationList[sela->index].location.x = wmp.x + sela->offset[0] * div;
+			MapAnnotationList[sela->index].location.y = wmp.y + sela->offset[1] * div;
+		}
     }
 }
 void MapEditorMainFrame::doMouseMotionOnFillTool(wxMouseEvent& ev)

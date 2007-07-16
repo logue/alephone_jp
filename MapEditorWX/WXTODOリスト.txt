@@ -33,8 +33,6 @@ TODO リスト
 ５：デバッグ完了（完）
 
 Annotation		:完（選択モードは未完）
-CeilingHeightPaletteDialog
-                :wx
 ColorCustomize	:入出力
 EditPreferences	:入出力
 Height			:入出力
@@ -254,3 +252,5 @@ Bobwithkeycard
 
 TODO Soloは読めるが、Networkマップが見れない
 TODO サードパーティ製Shapesが読めない（M2とか）
+
+モンスターの起動条件とか意味不明

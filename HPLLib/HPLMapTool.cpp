@@ -258,6 +258,22 @@ int hpl::aleph::map::getSelectPolygonIndex(int viewX, int viewY, int zMin, int z
 	}
 	return NONE;
 }
+int hpl::aleph::map::getSelectAnnotationIndex(int viewX, int viewY, int threshold, int zMin, int zMax,
+        int voffsetX, int voffsetY, int offsetXW, int offsetYW, int div,
+                                        hpl::aleph::HPLStockManager* smgr)
+{
+	for(int i = 0; i < (int)MapAnnotationList.size(); i ++){
+		map_annotation* annotation = &MapAnnotationList[i];
+		//選択出来ているか判定
+		if(hpl::aleph::map::isSelectPoint(viewX, viewY,
+            annotation->location.x, annotation->location.y, voffsetX, voffsetY,
+			offsetXW, offsetYW, div, threshold))
+		{
+			return i;
+		}
+	}
+	return NONE;
+}
 
 ///////////////////////  Lines  ////////////////////////////////////////////
 

@@ -283,6 +283,23 @@ bool MapEditorMainFrame::tryToSelectOneItem(wxMouseEvent& ev)
         }
     }
 
+	//////////////////////////////////////
+	//アノテーション
+	int annotationIndex = hpl::aleph::map::getSelectAnnotationIndex(mx, my,
+		POINT_DISTANCE_EPSILON, zMin, zMax,
+		voffset[0], voffset[1], OFFSET_X_WORLD, OFFSET_Y_WORLD, div, 
+		wxGetApp().getStockManager());
+	if(annotationIndex != NONE){
+		map_annotation* annotation = &MapAnnotationList[annotationIndex];
+		//オフセット設定
+		int offset[2];
+		int vpoint[2];
+		wxGetApp().getViewPointFromWorldPoint(annotation->location, vpoint);
+		offset[0] = vpoint[0] - mx;
+		offset[1] = vpoint[1] - my;
+		sel->addSelAnnotation(annotationIndex, offset);
+		return true;
+	}
     /////////////////////////
     //lines
 	int lineIndex = hpl::aleph::map::getSelectLineIndex(mx ,my,
@@ -338,6 +355,7 @@ bool MapEditorMainFrame::tryToSelectOneItem(wxMouseEvent& ev)
         sel->addSelPolygon(polyIndex, offset, n);
         return true;
     }
+
 
     return false;
 }

@@ -134,7 +134,8 @@ void MapEditorMainFrame::OnOpen(wxCommandEvent& WXUNUSED(ev))
         {
             short index = 0;
             struct entry_point ep;
-            int type = 3;
+			//全てのマップを読み込み
+            int type = 0xff;
             char cstr[256];
             while(get_indexed_entry_point(&ep, &index, type)){
                 sprintf(cstr, "%d", ep.level_number);
@@ -150,7 +151,7 @@ void MapEditorMainFrame::OnOpen(wxCommandEvent& WXUNUSED(ev))
 }void MapEditorMainFrame::OnSave(wxCommandEvent& ev)
 {
     //TODO save correctly
-    if(wxGetApp().isChanged){
+    if(wxGetApp().isChanged || wxGetApp().levelNameList.size() > 1){
         OnSaveAs(ev);
     }else{
         //現在のファイル名で保存

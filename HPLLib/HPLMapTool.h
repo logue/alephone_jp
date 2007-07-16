@@ -167,6 +167,13 @@ namespace map{
 	int getSelectPolygonIndex(int viewX, int viewY, int zMin, int zMax,
 		int voffsetX, int voffsetY, int offsetXW, int offsetYW, int div,
 		hpl::aleph::HPLStockManager* smgr);
+
+	/**
+		選択できたアノテーションのインデックスを取得します
+	*/
+	int getSelectAnnotationIndex(int viewX, int viewY, int threshold, int zMin, int zMax,
+        int voffsetX, int voffsetY, int offsetXW, int offsetYW, int div,
+                                        hpl::aleph::HPLStockManager* smgr);
 	///////////////////////	 Lines	////////////////////////////////////////////
 	/**
 		指定した点を用いたときに線を選択できているかを判定

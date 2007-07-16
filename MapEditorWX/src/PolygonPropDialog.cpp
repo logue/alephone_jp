@@ -29,6 +29,9 @@ enum{
     ID_CeilingTrans,
     ID_RndSnd,
     ID_Platform,
+	ID_FloorHeight,
+	ID_CeilingHeight,
+
 };
 };
 BEGIN_EVENT_TABLE(PolygonPropDialog, wxDialog)
@@ -119,6 +122,8 @@ bool PolygonPropDialog::Create(wxWindow* parent, wxWindowID id)
     panel_10 = new wxPanel(this, wxID_ANY);
     panel_11 = new wxPanel(this, wxID_ANY);
     panel_12 = new wxPanel(this, wxID_ANY);
+	textFloorHeight = new wxTextCtrl(this, PolyProp::ID_FoorHeight);
+	textCeilingHeight = new wxTextCtrl(this, PolyProp::ID_CeilingHeight);
 
     choice_12->SetMinSize(wxSize(100, 22));
     choice_13->SetMinSize(wxSize(100, 22));
@@ -134,7 +139,7 @@ bool PolygonPropDialog::Create(wxWindow* parent, wxWindowID id)
     choice_17->SetMinSize(wxSize(100, 22));
     choice_18->SetMinSize(wxSize(100, 22));
 
-    wxFlexGridSizer* grid_sizer_13 = new wxFlexGridSizer(12, 4, 0, 0);
+    wxFlexGridSizer* grid_sizer_13 = new wxFlexGridSizer(14, 4, 0, 0);
     wxGridSizer* grid_sizer_9 = new wxGridSizer(1, 3, 0, 0);
     wxGridSizer* grid_sizer_8 = new wxGridSizer(1, 3, 0, 0);
     grid_sizer_13->Add(label_34, 0, 0, 0);
@@ -187,7 +192,17 @@ bool PolygonPropDialog::Create(wxWindow* parent, wxWindowID id)
     grid_sizer_13->Add(text_ctrl_31, 0, 0, 0);
     grid_sizer_13->Add(label_50, 0, 0, 0);
     grid_sizer_13->Add(choice_18, 0, 0, 0);
-    grid_sizer_13->Add(button_21, 0, 0, 0);
+
+    grid_sizer_13->Add(new wxStaticText(this, wxID_ANY, wxT("Floor Height")), 0, 0, 0);
+    grid_sizer_13->Add(textFloorHeight, 0, 0, 0);
+    grid_sizer_13->Add(new wxPanel(this, wxID_ANY), 1, wxEXPAND, 0);
+    grid_sizer_13->Add(new wxPanel(this, wxID_ANY), 1, wxEXPAND, 0);
+    grid_sizer_13->Add(new wxStaticText(this, wxID_ANY, wxT("Ceiling Height")), 0, 0, 0);
+    grid_sizer_13->Add(textCeilingHeight, 0, 0, 0);
+    grid_sizer_13->Add(new wxPanel(this, wxID_ANY), 1, wxEXPAND, 0);
+    grid_sizer_13->Add(new wxPanel(this, wxID_ANY), 1, wxEXPAND, 0);
+
+	grid_sizer_13->Add(button_21, 0, 0, 0);
     grid_sizer_13->Add(panel_10, 1, wxEXPAND, 0);
     grid_sizer_13->Add(panel_11, 1, wxEXPAND, 0);
     grid_sizer_13->Add(panel_12, 1, wxEXPAND, 0);
@@ -322,7 +337,8 @@ void PolygonPropDialog::setupDialog()
     }
     choice_18->SetSelection(index);
     */
-    
+    textFloorHeight->SetValue(getString("%d", poly->floor_height));
+    textCeilingHeight->SetValue(getString("%d", poly->ceiling_height));
 }
 void PolygonPropDialog::OnIDEdit(wxCommandEvent &event)
 {
@@ -543,4 +559,12 @@ void PolygonPropDialog::OnPlatformBtn(wxCommandEvent &event)
         //TODO
         //ê›íËïœçX
     }
+}
+void PolygonPropDialog::OnFloorHeightEdit(wxCommandEvent &event)
+{
+	//TODO
+}
+void PolygonPropDialog::OnceilingHeightEdit(wxCommandEvent &event)
+{
+	//TODO
 }

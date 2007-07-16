@@ -3,6 +3,22 @@
 
 #include "DlgCommon.h"
 
+class DirectionPanel: public wxPanel{
+    wxImage directionCircle;
+    wxImage directionMarker;
+public:
+	DirectionPanel(wxWindow* parent, wxWindowID id);
+	virtual ~DirectionPanel();
+    DECLARE_EVENT_TABLE()
+	void OnLeftDown(wxMouseEvent &ev);
+	void OnMotion(wxMouseEvent &ev);
+    void OnPaint(wxPaintEvent &event);
+
+	void setFacing(int mx, int my);
+	void drawFacing(wxWindow* panel, int facing, wxDC* dc);
+public:
+};
+
 class ObjectPropDialog: public wxDialog{
     wxStaticText* label_45;
     wxTextCtrl* text_ctrl_27;
@@ -20,7 +36,7 @@ class ObjectPropDialog: public wxDialog{
     wxTextCtrl* text_ctrl_37;
     wxStaticText* label_58;
     wxTextCtrl* text_ctrl_38;
-    wxPanel* panel_16;
+    DirectionPanel* panel_16;
     wxStaticText* label_60;
     wxChoice* choice_23;
     wxPanel* panel_17;
@@ -35,8 +51,6 @@ class ObjectPropDialog: public wxDialog{
 	//編集しているオブジェクトインデックス
     int objIndex;
 
-    wxImage directionCircle;
-    wxImage directionMarker;
 public:
     ObjectPropDialog();
     bool Create(wxWindow* parent, wxWindowID id);
@@ -63,9 +77,8 @@ private:
     void OnYEdit(wxCommandEvent &event); // wxGlade: <event_handler>
     void OnZEdit(wxCommandEvent &event); // wxGlade: <event_handler>
 
-    void OnPaint(wxPaintEvent &event);
-
-	void drawFacing(wxWindow* panel, int facing, wxDC* dc);
+public:
+	void refreshParent();
 };
 
 #endif

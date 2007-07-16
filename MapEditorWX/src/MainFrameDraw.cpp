@@ -648,7 +648,6 @@ void MapEditorMainFrame::drawAnnotations(wxDC* dc)
                 wxGetApp().setting.getColorSetting()->colors[ColorType::Strings][1],
                 wxGetApp().setting.getColorSetting()->colors[ColorType::Strings][2]);
     dc->SetTextForeground(col);
-    dc->SetPen(*wxRED_PEN);
     dc->SetBrush(*wxTRANSPARENT_BRUSH);
 
     for(int i = 0; i < (int)MapAnnotationList.size(); i ++){
@@ -656,7 +655,14 @@ void MapEditorMainFrame::drawAnnotations(wxDC* dc)
         int drawPoint[2];
         wxGetApp().getViewPointFromWorldPoint(annotation->location, drawPoint);
 
-        //点の位置を赤丸で表示
+        //点の位置を青丸で表示
+	    dc->SetPen(*wxRED_PEN);
+		//もし選択されていたら赤丸
+        if(wxGetApp().selectData.isSelected() &&
+            wxGetApp().selectData.containsAnnotation(i)){
+			dc->SetPen(*wxGREEN_PEN);
+        }
+
         dc->DrawCircle(drawPoint[0], drawPoint[1], POINT_DISTANCE_EPSILON);
         //文字列描画
         wxString str(wxConvCurrent->cMB2WX(annotation->text));

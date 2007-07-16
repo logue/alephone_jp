@@ -17,7 +17,7 @@ bool PolygonTypeDialog::Create(wxWindow* parent, wxWindowID id)
     bool result = wxDialog::Create(parent, id, _T("Polygon Type"));
 
     list_ctrl_2 = new wxListCtrl(this, ID_SEL, wxDefaultPosition, wxDefaultSize, wxLC_REPORT|wxSUNKEN_BORDER);
-    list_ctrl_2->SetMinSize(wxSize(120,120));
+    list_ctrl_2->SetMinSize(wxSize(200,300));
 
     wxBoxSizer* sizer_53 = new wxBoxSizer(wxHORIZONTAL);
     sizer_53->Add(list_ctrl_2, 1, wxEXPAND, 0);

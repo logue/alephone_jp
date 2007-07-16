@@ -23,7 +23,10 @@ private:
     wxTextCtrl* text_ctrl_19;
     wxStaticText* label_33;
     wxChoice* choice_11;
+
+
     int index;
+
 public:
     int getIndex();
     void setIndex(int ind);

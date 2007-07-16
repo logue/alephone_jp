@@ -22,7 +22,7 @@ bool HeightPaletteDialog::Create(wxWindow* parent, wxWindowID id)
     button_25 = new wxButton(this, wxID_DELETE, wxEmptyString);
     list_ctrl_3 = new wxListCtrl(this, ID_EDIT, wxDefaultPosition, wxDefaultSize, wxLC_REPORT|wxLC_EDIT_LABELS|wxSUNKEN_BORDER);
 
-    list_ctrl_3->SetMinSize(wxSize(154, 200));
+    list_ctrl_3->SetMinSize(wxSize(180, 200));
 
     wxFlexGridSizer* grid_sizer_28 = new wxFlexGridSizer(2, 1, 0, 0);
     wxFlexGridSizer* grid_sizer_29 = new wxFlexGridSizer(1, 2, 0, 0);

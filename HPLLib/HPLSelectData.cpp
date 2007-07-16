@@ -35,6 +35,10 @@ struct hpl::aleph::map::SelSide* hpl::aleph::map::HPLSelectData::getSelSide()
 {
     return &this->side;
 }
+std::vector<struct hpl::aleph::map::SelAnnotation>* hpl::aleph::map::HPLSelectData::getSelAnnotations()
+{
+    return &this->selannotations;
+}
 
 bool hpl::aleph::map::HPLSelectData::containsPoint(int index)
 {
@@ -89,6 +93,15 @@ bool hpl::aleph::map::HPLSelectData::isSelectSide(int index)
         return false;
     }
 }
+bool hpl::aleph::map::HPLSelectData::containsAnnotation(int index)
+{
+    for(int i = 0; i < static_cast<int>(this->selannotations.size()); i ++){
+        if(this->selannotations[i].index == index){
+            return true;
+        }
+    }
+    return false;
+}
 
 bool hpl::aleph::map::HPLSelectData::isSelected()
 {
@@ -108,6 +121,7 @@ void hpl::aleph::map::HPLSelectData::clear()
     this->selobjects.clear();
     this->selsides.clear();
     this->side.index = NONE;
+    this->selannotations.clear();
 
     // unselected
     this->setSelected(false);
@@ -120,7 +134,8 @@ bool hpl::aleph::map::HPLSelectData::isSelectOnePoint()
         static_cast<int>(sellines.size()) == 0 &&
         static_cast<int>(selpolygons.size()) == 0 &&
         static_cast<int>(selobjects.size()) == 0 &&
-        (int)(selsides.size()) == 0)
+        (int)(selsides.size()) == 0 &&
+        (int)(selannotations.size()) == 0)
     {
         return true;
     }else{
@@ -134,7 +149,8 @@ bool hpl::aleph::map::HPLSelectData::isSelectOneLine()
         static_cast<int>(sellines.size()) == 1 &&
         static_cast<int>(selpolygons.size()) == 0 &&
         static_cast<int>(selobjects.size()) == 0 &&
-        (int)(selsides.size()) == 0)
+        (int)(selsides.size()) == 0 &&
+        (int)(selannotations.size()) == 0)
     {
         return true;
     }else{
@@ -148,7 +164,8 @@ bool hpl::aleph::map::HPLSelectData::isSelectOnePolygon()
         static_cast<int>(sellines.size()) == 0 &&
         static_cast<int>(selpolygons.size()) == 1 &&
         static_cast<int>(selobjects.size()) == 0 &&
-        (int)(selsides.size()) == 0)
+        (int)(selsides.size()) == 0 &&
+        (int)(selannotations.size()) == 0)
     {
         return true;
     }else{
@@ -162,7 +179,8 @@ bool hpl::aleph::map::HPLSelectData::isSelectOneObject()
         static_cast<int>(sellines.size()) == 0 &&
         static_cast<int>(selpolygons.size()) == 0 &&
         static_cast<int>(selobjects.size()) == 1 &&
-        (int)(selsides.size()) == 0)
+        (int)(selsides.size()) == 0 &&
+        (int)(selannotations.size()) == 0)
     {
         return true;
     }else{
@@ -176,7 +194,23 @@ bool hpl::aleph::map::HPLSelectData::isSelectOneSide()
         static_cast<int>(sellines.size()) == 0 &&
         static_cast<int>(selpolygons.size()) == 0 &&
         static_cast<int>(selobjects.size()) == 0 &&
-        (int)(selsides.size()) == 1)
+        (int)(selsides.size()) == 1 &&
+        (int)(selannotations.size()) == 0)
+    {
+        return true;
+    }else{
+        return false;
+    }
+}
+bool hpl::aleph::map::HPLSelectData::isSelectOneAnnotation()
+{
+    if(this->isSelected() && 
+        static_cast<int>(selpoints.size()) == 0 &&
+        static_cast<int>(sellines.size()) == 0 &&
+        static_cast<int>(selpolygons.size()) == 0 &&
+        static_cast<int>(selobjects.size()) == 0 &&
+        (int)(selsides.size()) == 0 &&
+        (int)(selannotations.size()) == 1)
     {
         return true;
     }else{
@@ -237,5 +271,15 @@ void hpl::aleph::map::HPLSelectData::addSelSide(int index)
     sp.index = index;
     selsides.push_back(sp);*/
     this->side.index = index;
+    this->setSelected(true);
+}
+void hpl::aleph::map::HPLSelectData::addSelAnnotation(int index, int offset[2])
+{
+    struct hpl::aleph::map::SelAnnotation sp;
+    sp.index = index;
+    for(int i = 0; i < 2; i ++){
+        sp.offset[i] = offset[i];
+    }
+    this->selannotations.push_back(sp);
     this->setSelected(true);
 }

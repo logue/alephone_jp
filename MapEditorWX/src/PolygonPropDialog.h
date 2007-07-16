@@ -57,6 +57,8 @@ class PolygonPropDialog: public wxDialog{
     wxPanel* panel_11;
     wxPanel* panel_12;
 
+	wxTextCtrl* textFloorHeight;
+	wxTextCtrl* textCeilingHeight;
     int polyIndex;
 public:
     PolygonPropDialog();
@@ -94,6 +96,8 @@ public:
     void OnCeilingTransEdit(wxCommandEvent &event); // wxGlade: <event_handler>
     void OnRndSndChoice(wxCommandEvent &event); // wxGlade: <event_handler>
     void OnPlatformBtn(wxCommandEvent &event); // wxGlade: <event_handler>
+	void OnFloorHeightEdit(wxCommandEvent &event);
+	void OnceilingHeightEdit(wxCommandEvent &event);
 };
 
 #endif

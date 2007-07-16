@@ -33,6 +33,10 @@ namespace map{
     struct SelSide{
         int index;
     };
+	struct SelAnnotation{
+		int index;
+		int offset[2];
+	};
     class HPLSelectData{
     private:
         std::vector<struct SelPoint> selpoints;
@@ -40,6 +44,7 @@ namespace map{
         std::vector<struct SelPolygon> selpolygons;
         std::vector<struct SelObject> selobjects;
         std::vector<struct SelSide> selsides;
+		std::vector<struct SelAnnotation> selannotations;
         struct SelSide side;
         bool _isSelected;
     public:
@@ -52,6 +57,7 @@ namespace map{
         std::vector<struct SelPolygon>* getSelPolygons();
         std::vector<struct SelObject>* getSelObjects();
         std::vector<struct SelSide>* getSelSides();
+        std::vector<struct SelAnnotation>* getSelAnnotations();
         struct SelSide* getSelSide();
 
         bool containsPoint(int index);
@@ -59,6 +65,7 @@ namespace map{
         bool containsPolygon(int index);
         bool containsObject(int index);
         bool containsSide(int index);
+        bool containsAnnotation(int index);
         bool isSelectSide(int index);
 
         bool isSelected();
@@ -72,12 +79,14 @@ namespace map{
         bool isSelectOnePolygon();
         bool isSelectOneObject();
         bool isSelectOneSide();
+        bool isSelectOneAnnotation();
 
         void addSelPoint(int index, int offset[2]);
         void addSelLine(int index, int offset[2][2]);
         void addSelPolygon(int index, int offset[8][2], int num);
         void addSelObject(int index, int offset[2]);
         void addSelSide(int index);
+        void addSelAnnotation(int index, int offset[2]);
     };
 };
 };
