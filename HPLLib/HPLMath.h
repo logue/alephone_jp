@@ -221,6 +221,18 @@ namespace math{
         ポリゴンに内向き鋭角が存在しないかどうか確認します
     */
     bool isValidPolygon(double points[][2], int maxVertex);
+
+	/**
+		ポリゴンのArea（面積）を求めます
+		<en> calculate polygon's area
+	*/
+	double getPolygonArea(double points[][2], int maxVertex);
+
+	/**
+		ポリゴンのセントロイドを求めます
+		<en> calculate polygon's center(centre,centroid)
+	*/
+	void getPolygonCentroid(double points[][2], int maxVertex, double center[2]);
 };
 };
 #endif

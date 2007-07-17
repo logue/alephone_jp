@@ -342,55 +342,43 @@ void PolygonPropDialog::setupDialog()
 }
 void PolygonPropDialog::OnIDEdit(wxCommandEvent &event)
 {
-    if(this->getPolyIndex() == NONE){
-        return ;
-    }
-    std::cout<<"Event handler (PolygonPropDialog::OnIDEdit) not implemented yet"<<std::endl; //notify the user that he hasn't implemented the event handler yet
+	//変更不可
 }
 
 
 void PolygonPropDialog::OnFirstNeighborEdit(wxCommandEvent &event)
 {
-    if(this->getPolyIndex() == NONE){
-        return ;
-    }
-    std::cout<<"Event handler (PolygonPropDialog::OnFirstNeighborEdit) not implemented yet"<<std::endl; //notify the user that he hasn't implemented the event handler yet
+	//変更不可
 }
 
 
 void PolygonPropDialog::OnTypeChoice(wxCommandEvent &event)
 {
-    if(this->getPolyIndex() == NONE){
-        return ;
-    }
-    std::cout<<"Event handler (PolygonPropDialog::OnTypeChoice) not implemented yet"<<std::endl; //notify the user that he hasn't implemented the event handler yet
+	polygon_data* poly = get_polygon_data(this->getPolyIndex());
+    if(poly == NULL)	return ;
+	int sel = event.GetSelection();
+	if(sel >= 0){
+		poly->type = sel;
+	}
 }
 
 
 void PolygonPropDialog::OnNearCountEdit(wxCommandEvent &event)
 {
-    if(this->getPolyIndex() == NONE){
-        return ;
-    }
-    std::cout<<"Event handler (PolygonPropDialog::OnNearCountEdit) not implemented yet"<<std::endl; //notify the user that he hasn't implemented the event handler yet
+	//auto calculate. not ediablt
 }
 
 
 void PolygonPropDialog::OnPermuEdit(wxCommandEvent &event)
 {
-    if(this->getPolyIndex() == NONE){
-        return ;
-    }
-    std::cout<<"Event handler (PolygonPropDialog::OnPermuEdit) not implemented yet"<<std::endl; //notify the user that he hasn't implemented the event handler yet
+	//TODO what's the permutation?
+	//置換・配列・順序???
 }
 
 
 void PolygonPropDialog::OnCenterXEdit(wxCommandEvent &event)
 {
-    if(this->getPolyIndex() == NONE){
-        return ;
-    }
-    std::cout<<"Event handler (PolygonPropDialog::OnCenterXEdit) not implemented yet"<<std::endl; //notify the user that he hasn't implemented the event handler yet
+	//auto calculation. not editable
 }
 
 
