@@ -225,6 +225,8 @@ namespace math{
 	/**
 		ƒ|ƒŠƒSƒ“‚ÌAreai–ÊÏj‚ğ‹‚ß‚Ü‚·
 		<en> calculate polygon's area
+		referenced from
+		http://local.wasp.uwa.edu.au/~pbourke/geometry/polyarea/
 	*/
 	double getPolygonArea(double points[][2], int maxVertex);
 

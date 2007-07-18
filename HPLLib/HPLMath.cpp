@@ -720,3 +720,25 @@ bool hpl::math::isValidPolygon(double points[][2], int maxVertex)
     }
     return true;
 }
+
+/**
+	ポリゴンのArea（面積）を求めます
+	<en> calculate polygon's area
+*/
+double hpl::math::getPolygonArea(double points[][2], int maxVertex)
+{
+	double sum = 0;
+	for(int i = 0; i < maxVertex - 1; i ++){
+		sum += (points[i][0] * points[i + 1][1] - points[i + 1][0] * points[i][1]);
+	}
+	double area = sum / 2.0;
+	return area;
+}
+
+/**
+	ポリゴンのセントロイドを求めます
+	<en> calculate polygon's center(centre,centroid)
+*/
+void hpl::math::getPolygonCentroid(double points[][2], int maxVertex, double center[2])
+{
+}
