@@ -437,6 +437,10 @@ void MapEditorMainFrame::doMouseMotionOnArrowTool(wxMouseEvent& ev)
             //位置変更
             get_endpoint_data(selp->index)->vertex.x = wmp.x + selp->offset[0] * div;
             get_endpoint_data(selp->index)->vertex.y = wmp.y + selp->offset[1] * div;
+
+			//位置が変更されたことによる変更を行う
+			//関連する線
+			std::vector<int> lineIndexes = 
         }
 
         //線

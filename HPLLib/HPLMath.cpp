@@ -741,4 +741,19 @@ double hpl::math::getPolygonArea(double points[][2], int maxVertex)
 */
 void hpl::math::getPolygonCentroid(double points[][2], int maxVertex, double center[2])
 {
+	//面積を求めます
+	double area = hpl::math::getPolygonArea(points, maxVertex);
+	//セントロイド//千トロイ度
+	double sum = 0;
+	for(int i = 0; i < maxVertex - 1; i ++){
+		sum += (points[i][0] + points[i + 1][0]) * (points[i][0] * points[i + 1][1] - points[i + 1] * points[i][1]);
+	}
+	double x = sum / (6 * area);
+	sum = 0;
+	for(int i = 0; i < maxVertex - 1; i ++){
+		sum += (points[i][1] + points[i + 1][1]) * (points[i][0] * points[i + 1][1] - points[i + 1] * points[i][1]);
+	}
+	double y = sum / (6 * area);
+	center[0] = x;
+	center[1] = y;
 }
