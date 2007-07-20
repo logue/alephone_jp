@@ -90,6 +90,9 @@ static void loadLevel(int i){
     //セットアップ
     wxGetApp().getStockManager()->updateDeletes();
 
+	//履歴初期化
+	wxGetApp().getDoneHistoryManager()->init();
+
 	//プレイヤーポジションを設定
 	//プレイヤーを捜す
 	for(int i = 0 ; i < (int)SavedObjectList.size(); i ++){

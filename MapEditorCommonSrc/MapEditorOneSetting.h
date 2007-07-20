@@ -78,6 +78,10 @@ static char* TAG_NAME_FILE_PATH = "data/InnerSettingTagList.ini";
 static char* INNER_DATA_FILE_PATH = "data/InnerSetting.ini";
 static char* START_POINT_IMAGE_FILE_PATH = "data/Map Icons/center X.bmp";
 
+//アンドゥ・リドゥの回数（合計）
+const int UNDO_NUM = 10;
+
+
 //point flags
 enum
 {

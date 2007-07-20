@@ -17,10 +17,26 @@
 namespace hpl{
 namespace aleph{
 namespace map{
+	/**
+		行動タイプ
+	*/
     namespace ActionType{
         enum{
+			//何もしていない状態
+			//移動前の情報を入れておく
+			None,
+			//新規作成
+			//オブジェクト情報をそのまま保持。もし保存などを行いインデックスが整理されてしまった場合は
+			//最後に新規で作成され直すことになる。
             Add,
+			//削除
+			//Addと同様
             Delete,
+			//移動
+			//移動のみを扱い、それに伴う特性データを保持
+			Move,
+			//情報の変更
+			//特徴データの変更のみを行い、移動・追加・削除については無視
             Modify,
         };
     };
@@ -32,7 +48,13 @@ namespace map{
     private:
         HPLActionItem(){}
     public:
-        HPLActionItem(int t, hpl::aleph::map::HPLSelectData& sel, hpl::aleph::map::HPLRealMapData& real);
+		/**
+			@param t タイプ ActionType::
+			@param sel 選択している情報(インデックスのみ)
+			@param real 選択している物体の真の情報(memcpyの産物)
+		*/
+        HPLActionItem(int t, hpl::aleph::map::HPLSelectData& sel,
+			hpl::aleph::map::HPLRealMapData& real);
         ~HPLActionItem();
         int type;
         hpl::aleph::map::HPLSelectData selectData;
@@ -44,14 +66,19 @@ namespace map{
         std::vector<HPLActionItem> actionList;
 
         int index;
+		int indexMax;
     public:
         HPLDoneHistory();
         ~HPLDoneHistory();
 
     public:
+		/**
+			最大数を設定します
+		*/
+		void setIndexMax(int m);
+		int getIndexMax();
         /**
             情報を追加します
-            @param type ActionTypeで定義している、ユーザが取った行動
         */
         void push_back(int type, HPLSelectData& selData);
 
@@ -70,6 +97,11 @@ namespace map{
             インデックス番号を削除後のものに対応させます。
         */
         void updateIndexes(hpl::aleph::HPLStockManager* smgr);
+
+		/**
+			初期化します
+		*/
+		void init();
 
         int getIndex();
         int getRemainUndoCount();

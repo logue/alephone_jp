@@ -163,10 +163,10 @@ public:
 
     //編集モードとメニューIDの対応
     //TODO menu
-    std::map<int, int> menuIDMap;
+//    std::map<int, int> menuIDMap;
 
-    //リソースファイル
-    wxXmlResource xrc;
+    //リソースファイル(試験的に定義)
+//    wxXmlResource xrc;
 
     //高さが範囲外の線を表示するかどうか(デフォルト:false)
     bool isRevealHiddenLines;
@@ -214,6 +214,9 @@ private:
 	//ビジュアルモード管理 <en> manager for visual mode
 	hpl::shapes::HPLVisualModeManager visualModeManager;
 
+	//アンドゥ管理マネージャー
+	hpl::aleph::map::HPLDoneHistory doneHistoryManager;
+
     //ツールごとのカーソル
     wxCursor cursors[ToolType::NUMBER_OF_TOOLS];
 
@@ -240,6 +243,11 @@ public:
     ///////////////////////////////////
     ///////////////////////////////////
     // 関数
+
+	/**
+		履歴マネージャーを取得します
+	*/
+	hpl::aleph::map::HPLDoneHistory* getDoneHistoryManager();
 
     /**
         ビューグリッドの調整マネージャーを取得します

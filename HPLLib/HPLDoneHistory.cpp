@@ -1,6 +1,8 @@
 #include "HPLDoneHistory.h"
 #include "HPLError.h"
 
+const int DEFAULT_INDEX_MAX = 10;
+
 hpl::aleph::map::HPLActionItem::HPLActionItem(int t, hpl::aleph::map::HPLSelectData& sel, hpl::aleph::map::HPLRealMapData& real)
 {
     type = t;
@@ -16,11 +18,24 @@ hpl::aleph::map::HPLActionItem::~HPLActionItem()
 hpl::aleph::map::HPLDoneHistory::HPLDoneHistory()
 {
     index = -1;
+	setIndexMax(DEFAULT_INDEX_MAX);
 }
 hpl::aleph::map::HPLDoneHistory::~HPLDoneHistory()
 {
     actionList.clear();
 }
+/**
+	Å‘å”‚ðÝ’è‚µ‚Ü‚·
+*/
+void hpl::aleph::map::HPLDoneHistory::setIndexMax(int m)
+{
+	this->indexMax = m;
+}
+int hpl::aleph::map::HPLDoneHistory::getIndexMax()
+{
+	return this->indexMax;
+}
+
 /**
     î•ñ‚ð’Ç‰Á‚µ‚Ü‚·
 */
@@ -87,6 +102,9 @@ bool hpl::aleph::map::HPLDoneHistory::forward(int *type, HPLSelectData* selectDa
 void hpl::aleph::map::HPLDoneHistory::updateIndexes(hpl::aleph::HPLStockManager* smgr)
 {
     //TODO
+	//‚»‚ñ‚È‚à‚ñ•ÛŽ‚·‚é‚í‚¯‚È‚¢‚¾‚ë‚¤
+	//íŽ¯“I‚Él‚¦‚Äc
+	hpl::error::halt("Invalid function you called :/");
 }
 int hpl::aleph::map::HPLDoneHistory::getIndex()
 {
@@ -99,4 +117,12 @@ int hpl::aleph::map::HPLDoneHistory::getRemainUndoCount()
 int hpl::aleph::map::HPLDoneHistory::getRemainRedoCount()
 {
     return (int)actionList.size() - index;
+}
+
+/**
+	‰Šú‰»‚µ‚Ü‚·
+*/
+void hpl::aleph::map::HPLDoneHistory::init()
+{
+	this->actionList.clear();
 }

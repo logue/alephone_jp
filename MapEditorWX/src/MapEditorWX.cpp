@@ -236,6 +236,13 @@ hpl::shapes::HPLVisualModeManager* MapEditorWX::getVisualModeManager()
 {
 	return &this->visualModeManager;
 }
+/**
+	履歴マネージャーを取得します
+*/
+hpl::aleph::map::HPLDoneHistory* MapEditorWX::getDoneHistoryManager()
+{
+	return &this->doneHistoryManager;
+}
 
 
 //ビュー座標をワールド座標に直す操作の簡易版
