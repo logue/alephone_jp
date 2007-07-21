@@ -21,13 +21,13 @@
 #include "shape_definitions.h"
 #include "shapes_sdl.h"
 
-//#include "MapEditorSDI.h"
+//AlephOneのソースファイルで指定されていないものをここで設定
 const int NUMBER_OF_POLYGON_TYPE = 24;
 const int NUMBER_OF_OBJECT_TYPES = 6;
 const int NUMBER_OF_ACTIVATE_TYPES = 4;
 const int NUMBER_OF_MAP_OBJECT_TYPES = 6;
-
 const int NUMBER_OF_LANDSPACES = 4;
+
 //点とクリック地点の距離がこれ以下であれば選択する。
 //リスト順に探索する
 const int POINT_DISTANCE_EPSILON = 10;
@@ -81,6 +81,9 @@ static char* START_POINT_IMAGE_FILE_PATH = "data/Map Icons/center X.bmp";
 //アンドゥ・リドゥの回数（合計）
 const int UNDO_NUM = 10;
 
+//コピペの時のずらし間隔
+const int COPY_AND_PASTE_DELTA_X = 10;
+const int COPY_AND_PASTE_DELTA_Y = COPY_AND_PASTE_DELTA_X;
 
 //point flags
 enum

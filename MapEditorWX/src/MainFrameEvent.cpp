@@ -623,3 +623,17 @@ void MapEditorMainFrame::OnLeftDoubleClick(wxMouseEvent& ev)
 
     Refresh();
 }
+
+//キーダウン
+void MapEditorMainFrame::OnKeyDown(wxKeyEvent& ev)
+{
+	bool ctrl = ev.ControlDown();
+	int code = ev.GetKeyCode();
+	wxCommandEvent dummy;
+	if(ctrl){
+		if(code == WXK_c){
+			hpl::error::caution("Ctrl+C");
+			this->OnCopy(dummy);
+		}
+	}
+}

@@ -93,6 +93,7 @@ enum
     ID_PointProp,
 	ID_PolygonProp,
 	ID_SetVisualModePlayerStartPosition,
+
 };  
 
 //リソースID
@@ -287,6 +288,8 @@ public:
     //ダブルバッファリング時の背景削除停止用<en>to disable erasing backgroud for double buffering
     void OnEraseBackground(wxEraseEvent& ev);
 
+	//キーダウン
+	void OnKeyDown(wxKeyEvent& ev);
     //
     //イベントテーブル作成<en>declare
     DECLARE_EVENT_TABLE()

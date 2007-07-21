@@ -218,10 +218,24 @@ void MapEditorMainFrame::OnCut(wxCommandEvent& ev)
 void MapEditorMainFrame::OnCopy(wxCommandEvent& ev)
 {
     //TODO
+	hpl::aleph::map::HPLSelectData* sel = wxGetApp().selectDatas;
+	if(sel->isSelect()){
+		//‘I‘ğ’†‚Ì•¨‚ª‚ ‚é
+		//¨‹L‰¯‚·‚é
+		wxGetApp().storedMapData.set(sel);
+		//‚¸‚ç‚µ‚ğİ’è
+		wxGetApp().storedDataDiffPointDelta[0] = COPY_AND_PASTE_DELTA_X;
+		wxGetApp().storedDataDiffPointDelta[1] = COPY_AND_PASTE_DELTA_Y;
+	}
 }
 void MapEditorMainFrame::OnPaste(wxCommandEvent& ev)
 {
     //TODO
+	hpl::aleph::map::HPLRealMapData* real = &wxGetApp().storedMapData;
+	if(!real->isEmpty()){
+		//‰½‚©‚Á‚Ä‚¢‚é
+		//À‘Ì‚ğ’Ç‰Á‚µ‚Ü‚·
+	}
 }
 void MapEditorMainFrame::OnPreference(wxCommandEvent& ev)
 {

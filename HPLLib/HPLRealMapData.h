@@ -43,6 +43,8 @@ namespace map{
         std::map<int, polygon_data>* getPolygons();
         std::map<int, side_data>* getSides();
 
+		//データが存在するか確かめます
+		bool isEmpty();
     private:
         void addObject(int index);
         void addPoint(int index);
@@ -52,6 +54,8 @@ namespace map{
         //所持するデータを消します
         void removeAll();
 
+		bool containsPoint(int index);
+		bool containsLine(int index);
     };
 
 

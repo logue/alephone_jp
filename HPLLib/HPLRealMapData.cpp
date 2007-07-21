@@ -19,25 +19,29 @@ void hpl::aleph::map::HPLRealMapData::set(hpl::aleph::map::HPLSelectData* copyTa
         int index = copyTargetData->getSelObjects()->at(i).index;
         addObject(index);
     }
+
+
     //points
     for(int i = 0; i < (int)copyTargetData->getSelPoints()->size(); i ++){
         int index = copyTargetData->getSelPoints()->at(i).index;
+		addEndpoint(index);
     }
-
-
     //lines
     for(int i = 0; i < (int)copyTargetData->getSelLines()->size(); i ++){
         addLine(copyTargetData->getSelLines()->at(i).index);
-
-    }
-    //sides
-    for(int i = 0; i < (int)copyTargetData->getSelSides()->size(); i ++){
-        int index = copyTargetData->getSelSides()->at(i).index;
     }
     //polygons
     for(int i = 0; i < (int)copyTargetData->getSelPolygons()->size(); i ++){
         int index = copyTargetData->getSelPolygons()->at(i).index;
+		addPolygon(index);
     }
+/*	線と同時に追加される
+	//sides
+    for(int i = 0; i < (int)copyTargetData->getSelSides()->size(); i ++){
+        int index = copyTargetData->getSelSides()->at(i).index;
+//		addSide(index);
+    }
+	*/
 }
 
 void hpl::aleph::map::HPLRealMapData::addObject(int index){
@@ -60,7 +64,12 @@ void hpl::aleph::map::HPLRealMapData::addLine(int index){
 
     //線に所属する点を追加する
     for(int i = 0; i < 2; i ++){
-        addPoint(copy.endpoint_indexes[i]);
+		int epointIndex = copy.endpoint_indexes[i];
+		//既に追加していないかチェック
+		if(this->containsPoint(epointIndex){
+			continue;
+		}
+        addPoint(epointIndex);
     }
 }
 void hpl::aleph::map::HPLRealMapData::addPolygon(int index){
@@ -72,7 +81,12 @@ void hpl::aleph::map::HPLRealMapData::addPolygon(int index){
     //lines
     int vertexCount = copy.vertex_count;
     for(int i = 0; i < vertexCount - 1; i ++){
-        addLine(copy.line_indexes[i]);
+		int lineIndex = copy.line_indexes[i];
+		//既に追加した線はスキップ
+		if(this->containsLine(lineIndex)){
+			continue;
+		}
+        addLine(lineIndex);
     }
 }
 void hpl::aleph::map::HPLRealMapData::addSide(int index){
@@ -109,4 +123,43 @@ std::map<int, polygon_data>* hpl::aleph::map::HPLRealMapData::getPolygons()
 std::map<int, side_data>* hpl::aleph::map::HPLRealMapData::getSides()
 {
     return &this->realSides;
+}
+
+//データが存在するか確かめます
+bool hpl::aleph::map::HPLRealMapData::isEmpty()
+{
+	if( this->getObjects()->size() == 0 &&
+		this->getPoints()->size() == 0 &&
+		this->getLines()->size() == 0 &&
+		this->getPolygons()->size() == 0 &&
+		this->getSides()->size() == 0)
+	{
+		return true;
+	}
+	return false;
+}
+
+bool hpl::aleph::map::HPLRealMapData::containsPoint(int index)
+{
+	//既に追加していないかチェック
+	for(std::map<int, endpoint_data>::iterator it = this->getPoints()->begin();
+		it != this->getPoints()->end(); it ++)
+	{
+		if(it->first == index){
+			return true;
+		}
+	}
+	return false;
+}
+bool hpl::aleph::map::HPLRealMapData::containsLine(int index)
+{
+	//既に追加していないかチェック
+	for(std::map<int, line_data>::iterator it = this->getLines()->begin();
+		it != this->getLines()->end(); it ++)
+	{
+		if(it->first == index){
+			return true;
+		}
+	}
+	return false;
 }

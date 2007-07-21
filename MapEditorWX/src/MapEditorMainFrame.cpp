@@ -73,6 +73,8 @@ BEGIN_EVENT_TABLE(MapEditorMainFrame, wxFrame)
     EVT_MOUSEWHEEL(MapEditorMainFrame::OnMouseWheel)
     EVT_SIZE(MapEditorMainFrame::OnSize)
     EVT_ERASE_BACKGROUND(MapEditorMainFrame::OnEraseBackground)
+
+	EVT_KEY_DOWN(MapEditorMainFrame::OnKeyDown)
 END_EVENT_TABLE()
 
 MapEditorMainFrame::MapEditorMainFrame(const wxString& title,
