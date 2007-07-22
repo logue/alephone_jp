@@ -81,9 +81,6 @@ static char* START_POINT_IMAGE_FILE_PATH = "data/Map Icons/center X.bmp";
 //アンドゥ・リドゥの回数（合計）
 const int UNDO_NUM = 10;
 
-//コピペの時のずらし間隔
-const int COPY_AND_PASTE_DELTA_X = 10;
-const int COPY_AND_PASTE_DELTA_Y = COPY_AND_PASTE_DELTA_X;
 
 //point flags
 enum

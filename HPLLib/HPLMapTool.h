@@ -410,7 +410,42 @@ namespace map{
         std::vector<bool>& delSides,
         std::vector<bool>& delPolygons, std::vector<bool>& delObjects);
 
-    /**
+	/**
+		マップアイテムのインデックスを指定したテーブルに従って変更します。
+		グローバルデータであるEndpointListなどもそのまま使う点に注意。
+		<en> change map items' indexes with prepared index map
+		@param *List 元のマップインデックスで構成されたオブジェクトデータ
+		@param *IndexMap <originalIndex, newIndex>
+	*/
+	void changeIndexMapping(
+		std::vector<endpoint_data>& endpointList, std::vector<line_data>& lineList, 
+		std::vector<endpoint_data>& polygonList, std::vector<side_data>& sideList,
+		std::vector<map_object>& objectList,
+		int endpointIndexStart, int endpointIndexEnd,
+		int lineIndexStart, int lineIndexEnd,
+		int polygonIndexStart, int polygonIndexEnd,
+		int sideIndexStart, int sideIndexEnd,
+		int objectIndexStart, int objectIndexEnd,
+		std::map<int, int>& endpointIndexMap, std::map<int, int>& lineIndexMap, 
+		std::map<int, int>& polygonIndexMap, std::map<int, int>& sideIndexMap, 
+		std::map<int, int>& objectIndexMap);
+
+	/*
+		対象はEndpointListなど、直接いじるタイプ
+		@param *IndexStart *IndexEndを参照
+		@param *IndexEnd [*IndexStart, *IndexEnd)の範囲のデータに対して調整を行います
+	*
+	void changeIndexMappingRaw(
+		int endpointIndexStart, int endpointIndexEnd,
+		int lineIndexStart, int lineIndexEnd,
+		int polygonIndexStart, int polygonIndexEnd,
+		int sideIndexStart, int sideIndexEnd,
+		int objectIndexStart, int objectIndexEnd,
+		std::map<int, int>& endpointIndexMap, std::map<int, int>& lineIndexMap, 
+		std::map<int, int>& polygonIndexMap, std::map<int, int>& sideIndexMap, 
+		std::map<int, int>& sideIndexMap);
+		*/
+	/**
         ポリゴン情報を修正します
         TODO
     */

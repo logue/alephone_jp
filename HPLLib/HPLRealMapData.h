@@ -17,45 +17,48 @@ namespace aleph{
 namespace map{
     class HPLRealMapData{
     private:
-        //名前がかぶりまくるので扱いに注意。
-        //<en> names of field are all duplicated to 
-        // ones in AlephOne's original codes.
-        //点データ<index, data_structure>
-        std::map<int, endpoint_data> realPoints;
+        //点データ<data_structure>
+        std::vector<endpoint_data> realPoints;
         //オブジェクトデータ
-        std::map<int, map_object> realObjects;
+        std::vector<map_object> realObjects;
         //線データ
-        std::map<int, line_data> realLines;
+        std::vector<line_data> realLines;
         //サイドデータ
-        std::map<int, side_data> realSides;
+        std::vector<side_data> realSides;
         //ポリゴンデータ
-        std::map<int, polygon_data> realPolygons;
+        std::vector<polygon_data> realPolygons;
     public:
         HPLRealMapData();
         ~HPLRealMapData();
 
     public:
         //コピー対象のマップデータ(選択部分)
-        void set(hpl::aleph::map::HPLSelectData* copyTargetData);
-        std::map<int, map_object>* getObjects();
-        std::map<int, endpoint_data>* getPoints();
-        std::map<int, line_data>* getLines();
-        std::map<int, polygon_data>* getPolygons();
-        std::map<int, side_data>* getSides();
+        void set(hpl::aleph::map::HPLSelectData& copyTargetData);
+        std::vector<map_object>* getObjects();
+        std::vector<endpoint_data>* getPoints();
+        std::vector<line_data>* getLines();
+        std::vector<polygon_data>* getPolygons();
+        std::vector<side_data>* getSides();
 
 		//データが存在するか確かめます
 		bool isEmpty();
-    private:
-        void addObject(int index);
-        void addPoint(int index);
-        void addLine(int index);
-        void addSide(int index);
-        void addPolygon(int index);
         //所持するデータを消します
         void removeAll();
 
-		bool containsPoint(int index);
+	private:
+        void addObject(int index, std::map<int, int>& objectIndexMap);
+        void addPoint(int index, std::map<int, int>& pointIndexMap);
+        void addLine(int index, std::map<int, int>& lineIndexMap
+											  , std::map<int, int>& pointIndexMap);
+        void addPolygon(int index, std::map<int, int>& polygonIndexMap,
+												 std::map<int, int>& lineIndexMap,
+												 std::map<int, int>& pointIndexMap,
+												 std::map<int, int>& sideIndexMap);
+        void addSide(int index, std::map<int, int>& sideIndexMap);
+
+/*		bool containsPoint(int index);
 		bool containsLine(int index);
+		*/
     };
 
 

@@ -130,10 +130,6 @@ public:
     //選択対象のID
     hpl::aleph::map::HPLSelectData selectData;
 
-    //コピペで保持するデータ
-    hpl::aleph::map::HPLRealMapData storedMapData;
-    //ずらす位置
-    int storedDataDiffPointDelta[2];
 
 /*    //アイテムアイコン
     wxBitmap itemIconBitmaps[NUMBER_OF_DEFINED_ITEMS];
@@ -217,6 +213,9 @@ private:
 	//アンドゥ管理マネージャー
 	hpl::aleph::map::HPLDoneHistory doneHistoryManager;
 
+	//こぴぺ管理マネージャー
+	hpl::aleph::HPLCopyPasteManager copyPasteManager;
+
     //ツールごとのカーソル
     wxCursor cursors[ToolType::NUMBER_OF_TOOLS];
 
@@ -243,6 +242,11 @@ public:
     ///////////////////////////////////
     ///////////////////////////////////
     // 関数
+
+	/**
+		こぴぺ管理マネージャーを取得します
+	*/
+	hpl::aleph::HPLCopyPasteManager* getCopyPasteManager();
 
 	/**
 		履歴マネージャーを取得します

@@ -243,6 +243,13 @@ hpl::aleph::map::HPLDoneHistory* MapEditorWX::getDoneHistoryManager()
 {
 	return &this->doneHistoryManager;
 }
+/**
+	こぴぺ管理マネージャーを取得します
+*/
+hpl::aleph::HPLCopyPasteManager* MapEditorWX::getCopyPasteManager()
+{
+	return &this->copyPasteManager;
+}
 
 
 //ビュー座標をワールド座標に直す操作の簡易版

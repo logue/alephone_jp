@@ -256,12 +256,14 @@ bool hpl::aleph::map::deleteMapItems(std::vector<bool>& delPoints, std::vector<b
     }
 
     //インデックスを付け直す
+	//endpoints
     for(int i = 0; i < (int)EndpointList.size(); i ++){
         if(!delPoints[i]){
             endpoint_data* ep = get_endpoint_data(i);
             ep->supporting_polygon_index = indexMapPolygons[ep->supporting_polygon_index];
         }
     }
+	//lines
     for(int i = 0; i < (int)LineList.size(); i ++){
         if(!delLines[i]){
             line_data* line = get_line_data(i);
@@ -283,6 +285,7 @@ bool hpl::aleph::map::deleteMapItems(std::vector<bool>& delPoints, std::vector<b
             }
         }
     }
+	//sides
     for(int i = 0; i < (int)SideList.size(); i ++){
         if(!delSides[i]){
             side_data* side = get_side_data(i);
@@ -291,6 +294,7 @@ bool hpl::aleph::map::deleteMapItems(std::vector<bool>& delPoints, std::vector<b
             side->polygon_index = indexMapPolygons[side->polygon_index];
         }
     }
+	//polygons
     for(int i = 0; i < (int)PolygonList.size(); i ++){
         if(!delPolygons[i]){
             polygon_data* poly = get_polygon_data(i);
@@ -310,6 +314,7 @@ bool hpl::aleph::map::deleteMapItems(std::vector<bool>& delPoints, std::vector<b
             }
         }
     }
+	//objects
     for(int i = 0; i < (int)SavedObjectList.size(); i ++){
         if(!delObjects[i]){
             map_object* obj = &SavedObjectList[i];
@@ -319,6 +324,203 @@ bool hpl::aleph::map::deleteMapItems(std::vector<bool>& delPoints, std::vector<b
 
     return true;
 }
+
+
+/**
+	マップアイテムのインデックスを指定したテーブルに従って変更します。
+	<en> change map items' indexes with prepared index map
+	@param *List 元のマップインデックスで構成されたオブジェクトデータ
+	@param *IndexMap <originalIndex, newIndex>
+*/
+void hpl::aleph::map::changeIndexMapping(
+	std::vector<endpoint_data>& endpointList, std::vector<line_data>& lineList, 
+	std::vector<endpoint_data>& polygonList, std::vector<side_data>& sideList,
+	std::vector<map_object>& objectList,
+	int endpointIndexStart, int endpointIndexEnd,
+	int lineIndexStart, int lineIndexEnd,
+	int polygonIndexStart, int polygonIndexEnd,
+	int sideIndexStart, int sideIndexEnd,
+	int objectIndexStart, int objectIndexEnd,
+	std::map<int, int>& endpointIndexMap, std::map<int, int>& lineIndexMap, 
+	std::map<int, int>& polygonIndexMap, std::map<int, int>& sideIndexMap, 
+	std::map<int, int>& objectIndexMap)
+{
+	//points
+    for(int i = endpointIndexStart; i < endpointIndexEnd; i ++){
+#ifdef _WXDEBUG_
+		wxASSERT(endpointIndexStart >= 0 && endpointIndexStart < endpointList.size() &&
+			endpointIndexStart < endpointIndexEnd && endpointIndexEnd < endpointList.size());
+#endif
+		endpoint_data* ep = &endpointList[i];
+		//所属するポリゴンIndex
+		std::map<int, int>::iterator it = polygonIndexMap.find(ep->support_polygon);
+		if(it == polygonIndexMap.end()){
+			//存在しない
+			//点を有するポリゴンを探す
+			int orgIndex = getKeyByValue(pointIndexMap, i);
+			std::vector<int> belongPolygonIndexes = hpl::aleph::map::getPolygonIndexesIncludePoint(orgIndex);
+			bool found = false;
+			for(int j = 0; j < (int)belongPolygonIndexes.size(); j ++){
+				int polyIndex = belongPolygonIndexes[j];
+				//登録したポリゴンに含まれているかどうか検索します
+				if(polygonIndexMap.find(polyIndex) == polygonIndexMap.end()){
+					//含まれない
+				}else{
+					//中に含まれる
+					//それを対象とする
+					found = true;
+					break;
+				}
+			}
+			if(!found){
+				//追加するポリゴンはストックされていない
+				//NONEとする
+				ep->support_polygon = NONE;
+			}
+		}else{
+			ep->support_polygon = it->second;
+		}
+    }
+
+    //lines
+    for(int i = lineIndexStart; i < lineIndexEnd; i ++){
+		line_data* line = &lineList[i];
+		//所属してくる点データ
+		for(int j = 0; j < 2; j ++){
+			int epIndex = line->endpoint_indexes[j];
+			//更新
+			line->endpoint_indexes[j] = endpointIndexMaxp[epIndex];
+		}
+		//所属してくるサイドデータ
+		//所属するポリゴンデータ
+		{
+			int clockPoly = line->clockwise_polygon_owner;
+			int clockSide = line->clockwise_polygon_side;
+			if(clockPoly != NONE){
+				//ポリゴンを登録しているか
+				std::map<int, int>::iterator it = polygonIndexMap.find(clockPoly);
+				if(it != polygonIndexMap.end()){
+					if(clockSide != NONE && sideIndexMap.find(clockSide) != sideIndexMap.end()){
+						clockSide = sideIndexMap[clockSide];
+					}else{
+						clockSide = NONE;
+					}
+					clockPoly = it->second;
+				}else{
+					clockPoly = NONE;
+					clockSide = NONE;
+				}
+			}else{
+				clockSide = NONE;
+			}
+			line->clockwise_polygon_side = clockSide;
+			line->clockwise_polygon_owner = clockPolygon;
+		}
+
+		{
+			//counter clock side 
+			int counterPoly = line->counterclockwise_polygon_owner;
+			int counterSide = line->counterclockwise_polygon_side;
+			if(counterPoly != NONE){
+				//ポリゴンを登録しているか
+				std::map<int, int>::iterator it = polygonIndexMap.find(counterPoly);
+				if(it != polygonIndexMap.end()){
+					if(counterSide != NONE && sideIndexMap.find(counterSide) != sideIndexMap.end()){
+						counterSide = sideIndexMap[clockSide];
+					}else{
+						counterSide = NONE;
+					}
+					counterPoly = it->second;
+				}else{
+					counterSide = NONE;
+					counterPoly = NONE;
+				}
+			}else{
+				counterSide = NONE;
+			}
+			line->counterclockwise_polygon_side = counterSide;
+			line->counterclockwise_polygon_owner = counterPolygon;
+		}
+
+    }
+
+    //polygons
+    for(int i = polygonIndexStart; i < polygonIndexEnd; i ++){
+		polygon_data* poly = &polygonList[i];
+
+		int n = poly->vertex_count;
+
+		//所属する点インデックス
+		//<en> modify endpoint indexes
+		for(int i = 0; i < n; i ++){
+			poly->endpoint_indexes[i] = endpointIndexMap[poly->endpoint_indexes[i]];
+		}
+
+		//所属する線インデックス
+		//<en> modify line indexes
+		for(int i = 0; i < n; i ++){
+			poly->line_indexes[i] = endpointIndexMap[poly->line_indexes[i]];
+		}
+
+		//所属するSideインデックス
+		//<en> modify side indexes
+		for(int i = 0; i < n; i ++){
+			if(poly->side_indexes[i] == NONE){
+			}else{
+				poly->side_indexes[i] = endpointIndexMap[poly->side_indexes[i]];
+			}
+		}
+
+    }
+
+	//sides 
+	for(int i = sideIndexStart; i < sideIndexEnd; i ++){
+		side_data* side = &sideList[i];
+		//所属する線
+		int lineIndex = side->line_index;
+#ifdef _WXDEBUG_
+		wxASSERT(lineIndex != NONE);
+#endif
+		side->line_index = lineIndexMap[lineIndex];
+
+		//所属するポリゴン
+		int polyIndex = side->polygon_index;
+#ifdef _WXDEBUG_
+		wxASSERT(polyIndex != NONE);
+#endif
+		side->polygon_index = polygonIndexMap[polyIndex];
+	}
+
+	//objects
+    for(int i = objectIndexStart; i < objectIndexEnd; i ++){
+		map_object* obj = &objectList[i];
+		//所属するポリゴン
+		if(obj->polygon_index != NONE && polygonIndexMap.find(obj->polygon_index) != polygonIndexMap.end()){
+			obj->polygon_index = polygonIndexMap[obj->polygon_index];
+		}else{
+			obj->polygonIndex = NONE;
+		}
+		//結局はペースト時・移動時にそのとき乗っかっているポリゴンに所属することになるのでたいした意味はない
+    }
+}
+
+/**
+	対象はEndpointListなど、直接いじるタイプ
+	@param *IndexStart *IndexEndを参照
+	@param *IndexEnd [*IndexStart, *IndexEnd)の範囲のデータに対して調整を行います
+*/
+void hpl::aleph::map::changeIndexMappingRaw(
+	int endpointIndexStart, int endpointIndexEnd,
+	int lineIndexStart, int lineIndexEnd,
+	int polygonIndexStart, int polygonIndexEnd,
+	int sideIndexStart, int sideIndexEnd,
+	int objectIndexStart, int objectIndexEnd,
+	std::map<int, int>& endpointIndexMap, std::map<int, int>& lineIndexMap, 
+	std::map<int, int>& polygonIndexMap, std::map<int, int>& sideIndexMap, 
+	std::map<int, int>& sideIndexMap)
+{
+}
+
 
 ///////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////
@@ -620,6 +822,7 @@ std::vector<polygon_data> hpl::aleph::map::searchValidPolygon(world_point2d wpoi
     delete pairs;
     return polyDatas;
 }
+
 
 /**
     世界座標からポリゴンデータを作ります

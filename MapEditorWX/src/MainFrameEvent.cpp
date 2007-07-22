@@ -631,7 +631,7 @@ void MapEditorMainFrame::OnKeyDown(wxKeyEvent& ev)
 	int code = ev.GetKeyCode();
 	wxCommandEvent dummy;
 	if(ctrl){
-		if(code == WXK_c){
+		if(code == WXK_C){
 			hpl::error::caution("Ctrl+C");
 			this->OnCopy(dummy);
 		}

@@ -10,6 +10,7 @@
 #include "HPLStockManager.h"
 #include "HPLShapesManager.h"
 #include "HPLVisualModeManager.h"
+#include "HPLCopyPasteManager.h"
 
 //ˆê”ÊŒü‚¯
 #include "HPLMath.h"

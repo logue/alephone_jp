@@ -468,6 +468,14 @@
 				>
 			</File>
 			<File
+				RelativePath="..\..\..\..\..\HPLLib\HPLCopyPasteManager.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\..\..\HPLLib\HPLCopyPasteManager.h"
+				>
+			</File>
+			<File
 				RelativePath="..\..\..\..\..\HPLLib\HPLDoneHistory.cpp"
 				>
 			</File>

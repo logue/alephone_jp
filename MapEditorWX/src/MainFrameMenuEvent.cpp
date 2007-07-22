@@ -217,24 +217,20 @@ void MapEditorMainFrame::OnCut(wxCommandEvent& ev)
 }
 void MapEditorMainFrame::OnCopy(wxCommandEvent& ev)
 {
-    //TODO
-	hpl::aleph::map::HPLSelectData* sel = wxGetApp().selectDatas;
-	if(sel->isSelect()){
+    //TODO デバッグ
+	hpl::aleph::map::HPLSelectData* sel = wxGetApp().selectData;
+	if(sel->isSelected()){
 		//選択中の物がある
 		//→記憶する
-		wxGetApp().storedMapData.set(sel);
-		//ずらしを設定
-		wxGetApp().storedDataDiffPointDelta[0] = COPY_AND_PASTE_DELTA_X;
-		wxGetApp().storedDataDiffPointDelta[1] = COPY_AND_PASTE_DELTA_Y;
+		wxGetApp().getCopyPasteManager()->copy(&sel);
 	}
 }
 void MapEditorMainFrame::OnPaste(wxCommandEvent& ev)
 {
-    //TODO
-	hpl::aleph::map::HPLRealMapData* real = &wxGetApp().storedMapData;
-	if(!real->isEmpty()){
-		//何か持っている
-		//実体を追加します
+    //TODO デバッグ
+	int div = wxGetApp().getViewGridManager()->getZoomDivision();
+	if(!wxGetApp().getCopyPasteManager()->paste(div)){
+		//失敗
 	}
 }
 void MapEditorMainFrame::OnPreference(wxCommandEvent& ev)
@@ -243,11 +239,11 @@ void MapEditorMainFrame::OnPreference(wxCommandEvent& ev)
     EditorPreferencesDialog dlg;
     dlg.Create(this, wxID_ANY);
     if(dlg.ShowModal() == wxID_OK){
-        //ファイルに保存
+        //ファイルに保存 <en> save preference setting to file
         if(!wxGetApp().setting.saveSetting()){
             hpl::error::caution("Fail to save setting as [%s]", wxGetApp().setting.getFilePath().c_str());
         }
-        //ペンの作り直し
+        //ペンの作り直し <en> recreate pens and brushes
         setupPenAndBrush(wxGetApp().setting.getColorSetting());
         Refresh();
     }
