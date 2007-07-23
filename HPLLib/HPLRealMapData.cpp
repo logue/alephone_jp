@@ -9,7 +9,7 @@ hpl::aleph::map::HPLRealMapData::HPLRealMapData()
 }
 hpl::aleph::map::HPLRealMapData::~HPLRealMapData()
 {
-    removeAll();
+    //this->removeAll();
 }
 
 

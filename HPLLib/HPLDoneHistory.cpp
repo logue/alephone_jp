@@ -11,6 +11,7 @@ hpl::aleph::map::HPLActionItem::HPLActionItem(int t, hpl::aleph::map::HPLSelectD
 }
 hpl::aleph::map::HPLActionItem::~HPLActionItem()
 {
+	int a = 0;
 }
 
 //////////////////////////////////////////////////////
@@ -61,8 +62,8 @@ void hpl::aleph::map::HPLDoneHistory::push_back(int type, HPLSelectData& selData
 
     //’Ç‰Á
     hpl::aleph::map::HPLActionItem act = hpl::aleph::map::HPLActionItem(type, selData, realData);
-    this->actionList.push_back(act);
-
+/*    this->actionList.push_back(act);
+*/
     
     index = (int)actionList.size() - 1;
 }
