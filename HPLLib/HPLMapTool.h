@@ -13,6 +13,7 @@
 //#include "HPLMath.h"
 #include "HPLSelectData.h"
 //#include "HPLStockManager.h"
+#include "HPLError.h"
 
 
 #ifdef __WXDEBUG__
@@ -419,7 +420,7 @@ namespace map{
 	*/
 	void changeIndexMapping(
 		std::vector<endpoint_data>& endpointList, std::vector<line_data>& lineList, 
-		std::vector<endpoint_data>& polygonList, std::vector<side_data>& sideList,
+		std::vector<polygon_data>& polygonList, std::vector<side_data>& sideList,
 		std::vector<map_object>& objectList,
 		int endpointIndexStart, int endpointIndexEnd,
 		int lineIndexStart, int lineIndexEnd,
@@ -494,4 +495,6 @@ namespace map{
 };
 };
 };
+
+int getKeyByValue(std::map<int, int>& indexMap, int targetValue);
 #endif

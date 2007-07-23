@@ -10,12 +10,13 @@
 #include <wx/debug.h>
 
 #endif
+/*
 #ifdef WIN32
 
 #include <windows.h>
 
 #endif
-
+*/
 
 namespace hpl{
 namespace error{

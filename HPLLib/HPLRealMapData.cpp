@@ -1,4 +1,6 @@
 #include "HPLRealMapData.h"
+#include "HPLError.h"
+#include "HPLMapTool.h"
 
 #include <memory.h>
 
@@ -10,15 +12,6 @@ hpl::aleph::map::HPLRealMapData::~HPLRealMapData()
     removeAll();
 }
 
-static int getKeyByValue(std::map<int, int>& indexMap, int targetValue)
-{
-	for(std::map<int, int>::iterator it = indexMap.begin(); it != indexMap.end(); it ++){
-		if(it->second == targetValue){
-			return it->first;
-		}
-	}
-	hpl::error::halt("index not found");
-}
 
 //コピー対象のマップデータ(選択部分)
 void hpl::aleph::map::HPLRealMapData::set(hpl::aleph::map::HPLSelectData& copyTargetData)
@@ -29,30 +22,30 @@ void hpl::aleph::map::HPLRealMapData::set(hpl::aleph::map::HPLSelectData& copyTa
 	std::map<int, int> pointIndexMap;
 	
     //points
-    for(int i = 0; i < (int)copyTargetData->getSelPoints()->size(); i ++){
-        int index = copyTargetData->getSelPoints()->at(i).index;
-		addEndpoint(index, pointIndexMap);
+    for(int i = 0; i < (int)copyTargetData.getSelPoints()->size(); i ++){
+        int index = copyTargetData.getSelPoints()->at(i).index;
+		addPoint(index, pointIndexMap);
     }
 
-	std::map<int, int> lineIndexMax;
+	std::map<int, int> lineIndexMap;
     //lines
-    for(int i = 0; i < (int)copyTargetData->getSelLines()->size(); i ++){
-        addLine(copyTargetData->getSelLines()->at(i).index, lineIndexMap, pointIndexMap);
+    for(int i = 0; i < (int)copyTargetData.getSelLines()->size(); i ++){
+        addLine(copyTargetData.getSelLines()->at(i).index, lineIndexMap, pointIndexMap);
 
     }
 
 	std::map<int, int> polygonIndexMap;
 	std::map<int, int> sideIndexMap;
     //polygons
-    for(int i = 0; i < (int)copyTargetData->getSelPolygons()->size(); i ++){
-        int index = copyTargetData->getSelPolygons()->at(i).index;
-		addPolygon(index, &polygonIndexMap, lineIndexMap, pointIndexMap, sideIndexMap);
+    for(int i = 0; i < (int)copyTargetData.getSelPolygons()->size(); i ++){
+        int index = copyTargetData.getSelPolygons()->at(i).index;
+		addPolygon(index, polygonIndexMap, lineIndexMap, pointIndexMap, sideIndexMap);
     }
 
 	//objects
 	std::map<int, int> objectIndexMap;
-    for(int i = 0; i < (int)copyTargetData->getSelObjects()->size(); i ++){
-        int index = copyTargetData->getSelObjects()->at(i).index;
+    for(int i = 0; i < (int)copyTargetData.getSelObjects()->size(); i ++){
+        int index = copyTargetData.getSelObjects()->at(i).index;
         addObject(index, objectIndexMap);
     }
 
@@ -62,12 +55,12 @@ void hpl::aleph::map::HPLRealMapData::set(hpl::aleph::map::HPLSelectData& copyTa
 	//	存在が致命的である場合はエラー表示(バグ)
 	//	存在が致命的でない場合はNONEとする
 	hpl::aleph::map::changeIndexMapping(
-		*this->getPoinints(),
+		*this->getPoints(),
 		*this->getLines(),
 		*this->getPolygons(),
 		*this->getSides(),
 		*this->getObjects(),
-		0, this->getPoinints()->size(),
+		0, this->getPoints()->size(),
 		0, this->getLines()->size(),
 		0, this->getPolygons()->size(),
 		0, this->getSides()->size(),
@@ -86,55 +79,66 @@ void hpl::aleph::map::HPLRealMapData::addObject(int index, std::map<int, int>& o
     this->realObjects.push_back(copy);
 
 	//new index registering
-	objectIndexMap[index] = realObjects.size() - 1;
+	objectIndexMap[index] = (int)realObjects.size() - 1;
 }
-void hpl::aleph::map::HPLRealMapData::addPoint(int index, std::map<int, int>& pointIndexMap){
+void hpl::aleph::map::HPLRealMapData::addPoint(int index, std::map<int, int>& pointIndexMap)
+{
+	//既に追加していないかチェック
+	if(pointIndexMap.find(index) != pointIndexMap.end()){
+		return;
+	}
     endpoint_data* org = get_endpoint_data(index);
     endpoint_data copy;
     memcpy(&copy, org, sizeof(endpoint_data));
     this->realPoints.push_back(copy);
 
 	//new index registering
-	pointIndexMap[index] = realPoints.size() - 1;
+	pointIndexMap[index] = (int)realPoints.size() - 1;
 }
+
 void hpl::aleph::map::HPLRealMapData::addLine(int index, std::map<int, int>& lineIndexMap
-											  , std::map<int, int>& pointIndexMap){
+											  , std::map<int, int>& pointIndexMap)
+{
+	if(lineIndexMap.find(index) != lineIndexMap.end()){
+		return;
+	}
     line_data* org = get_line_data(index);
     line_data copy;
     memcpy(&copy, org, sizeof(line_data));
     this->realLines.push_back(copy);
 
 	//new index registering
-	lineIndexMap[index] = realLines.size() - 1;
+	lineIndexMap[index] = (int)realLines.size() - 1;
 
 	//線に所属する点を追加する <en> add points belonged to the line
 	for(int i = 0; i < 2; i ++){
 		int epointIndex = copy.endpoint_indexes[i];
-		//既に追加していないかチェック
-		if(pointIndexMap.find(epointIndex) != pointIndexMap.end()){
-			continue;
-		}
 		addPoint(epointIndex, pointIndexMap);
 	}
 }
 void hpl::aleph::map::HPLRealMapData::addPolygon(int index, std::map<int, int>& polygonIndexMap,
 												 std::map<int, int>& lineIndexMap,
 												 std::map<int, int>& pointIndexMap,
-												 std::map<int, int>& sideIndexMap){
-    polygon_data* org = get_polygon_data(index);
+												 std::map<int, int>& sideIndexMap)
+{
+	//すでに追加していたらスキップ
+	if(polygonIndexMap.find(index) != polygonIndexMap.end()){
+		return;
+	}
+	polygon_data* org = get_polygon_data(index);
     polygon_data copy;
     memcpy(&copy, org, sizeof(polygon_data));
     this->realPolygons.push_back(copy);
 
 	//new index registering
-	polygonIndexMap[index] = realPolygons.size() - 1;
+	polygonIndexMap[index] = (int)realPolygons.size() - 1;
 
 	//lines
 	int vertexCount = copy.vertex_count;
-	for(int i = 0; i < vertexCount - 1; i ++){
+	for(int i = 0; i < vertexCount; i ++){
 		int lineIndex = copy.line_indexes[i];
 		//既に追加した線はスキップ
-		if(this->containsLine(lineIndex)){
+		if(lineIndexMap.find(lineIndex) != lineIndexMap.end()){
 			continue;
 		}
 		addLine(lineIndex, lineIndexMap, pointIndexMap);
@@ -144,7 +148,9 @@ void hpl::aleph::map::HPLRealMapData::addPolygon(int index, std::map<int, int>& 
 		//<en> add side belonged to the line which belonged to this polygon
 		//TODO
 		int sideIndex = copy.side_indexes[i];
-		addSide(sideIndex, sideIndexMap);
+		if(sideIndex != NONE){
+			addSide(sideIndex, sideIndexMap);
+		}
 	}
 
 	
@@ -154,7 +160,7 @@ void hpl::aleph::map::HPLRealMapData::addSide(int index, std::map<int, int>& sid
     side_data copy;
     memcpy(&copy, org, sizeof(side_data));
     this->realSides.push_back(copy);
-	sideIndexMap[index] = realSides.size() - 1;
+	sideIndexMap[index] = (int)realSides.size() - 1;
 
 }
 //所持するデータを消します
@@ -166,23 +172,23 @@ void hpl::aleph::map::HPLRealMapData::removeAll()
     this->realPolygons.clear();
     this->realSides.clear();
 }
-std::map<int, map_object>* hpl::aleph::map::HPLRealMapData::getObjects()
+std::vector<map_object>* hpl::aleph::map::HPLRealMapData::getObjects()
 {
     return &this->realObjects;
 }
-std::map<int, endpoint_data>* hpl::aleph::map::HPLRealMapData::getPoints()
+std::vector<endpoint_data>* hpl::aleph::map::HPLRealMapData::getPoints()
 {
     return &this->realPoints;
 }
-std::map<int, line_data>* hpl::aleph::map::HPLRealMapData::getLines()
+std::vector<line_data>* hpl::aleph::map::HPLRealMapData::getLines()
 {
     return &this->realLines;
 }
-std::map<int, polygon_data>* hpl::aleph::map::HPLRealMapData::getPolygons()
+std::vector<polygon_data>* hpl::aleph::map::HPLRealMapData::getPolygons()
 {
     return &this->realPolygons;
 }
-std::map<int, side_data>* hpl::aleph::map::HPLRealMapData::getSides()
+std::vector<side_data>* hpl::aleph::map::HPLRealMapData::getSides()
 {
     return &this->realSides;
 }

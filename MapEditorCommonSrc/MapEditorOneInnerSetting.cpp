@@ -5,10 +5,11 @@
 #include <cstdio>
 #include <cstdlib>
 
+/*
 #ifdef WIN32
 #include <windows.h>
 #endif
-
+*/
 const int MAX_FILE_PATH = 260;
 
 static void messageBox(const char* format, ...){

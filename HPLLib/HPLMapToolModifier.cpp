@@ -7,6 +7,7 @@
 #include "HPLStringModifier.h"
 #include "map.h"
 #include "HPLStockManager.h"
+
 //角度の最大
 const double DEG_ROUND = 360.0;
 
@@ -334,7 +335,7 @@ bool hpl::aleph::map::deleteMapItems(std::vector<bool>& delPoints, std::vector<b
 */
 void hpl::aleph::map::changeIndexMapping(
 	std::vector<endpoint_data>& endpointList, std::vector<line_data>& lineList, 
-	std::vector<endpoint_data>& polygonList, std::vector<side_data>& sideList,
+	std::vector<polygon_data>& polygonList, std::vector<side_data>& sideList,
 	std::vector<map_object>& objectList,
 	int endpointIndexStart, int endpointIndexEnd,
 	int lineIndexStart, int lineIndexEnd,
@@ -353,11 +354,11 @@ void hpl::aleph::map::changeIndexMapping(
 #endif
 		endpoint_data* ep = &endpointList[i];
 		//所属するポリゴンIndex
-		std::map<int, int>::iterator it = polygonIndexMap.find(ep->support_polygon);
+		std::map<int, int>::iterator it = polygonIndexMap.find(ep->supporting_polygon_index);
 		if(it == polygonIndexMap.end()){
 			//存在しない
 			//点を有するポリゴンを探す
-			int orgIndex = getKeyByValue(pointIndexMap, i);
+			int orgIndex = getKeyByValue(endpointIndexMap, i);
 			std::vector<int> belongPolygonIndexes = hpl::aleph::map::getPolygonIndexesIncludePoint(orgIndex);
 			bool found = false;
 			for(int j = 0; j < (int)belongPolygonIndexes.size(); j ++){
@@ -375,10 +376,10 @@ void hpl::aleph::map::changeIndexMapping(
 			if(!found){
 				//追加するポリゴンはストックされていない
 				//NONEとする
-				ep->support_polygon = NONE;
+				ep->supporting_polygon_index = NONE;
 			}
 		}else{
-			ep->support_polygon = it->second;
+			ep->supporting_polygon_index = it->second;
 		}
     }
 
@@ -389,13 +390,13 @@ void hpl::aleph::map::changeIndexMapping(
 		for(int j = 0; j < 2; j ++){
 			int epIndex = line->endpoint_indexes[j];
 			//更新
-			line->endpoint_indexes[j] = endpointIndexMaxp[epIndex];
+			line->endpoint_indexes[j] = endpointIndexMap[epIndex];
 		}
 		//所属してくるサイドデータ
 		//所属するポリゴンデータ
 		{
 			int clockPoly = line->clockwise_polygon_owner;
-			int clockSide = line->clockwise_polygon_side;
+			int clockSide = line->clockwise_polygon_side_index;
 			if(clockPoly != NONE){
 				//ポリゴンを登録しているか
 				std::map<int, int>::iterator it = polygonIndexMap.find(clockPoly);
@@ -413,20 +414,20 @@ void hpl::aleph::map::changeIndexMapping(
 			}else{
 				clockSide = NONE;
 			}
-			line->clockwise_polygon_side = clockSide;
-			line->clockwise_polygon_owner = clockPolygon;
+			line->clockwise_polygon_side_index = clockSide;
+			line->clockwise_polygon_owner = clockPoly;
 		}
 
 		{
 			//counter clock side 
 			int counterPoly = line->counterclockwise_polygon_owner;
-			int counterSide = line->counterclockwise_polygon_side;
+			int counterSide = line->counterclockwise_polygon_side_index;
 			if(counterPoly != NONE){
 				//ポリゴンを登録しているか
 				std::map<int, int>::iterator it = polygonIndexMap.find(counterPoly);
 				if(it != polygonIndexMap.end()){
 					if(counterSide != NONE && sideIndexMap.find(counterSide) != sideIndexMap.end()){
-						counterSide = sideIndexMap[clockSide];
+						counterSide = sideIndexMap[counterSide];
 					}else{
 						counterSide = NONE;
 					}
@@ -438,8 +439,8 @@ void hpl::aleph::map::changeIndexMapping(
 			}else{
 				counterSide = NONE;
 			}
-			line->counterclockwise_polygon_side = counterSide;
-			line->counterclockwise_polygon_owner = counterPolygon;
+			line->counterclockwise_polygon_side_index = counterSide;
+			line->counterclockwise_polygon_owner = counterPoly;
 		}
 
     }
@@ -498,17 +499,17 @@ void hpl::aleph::map::changeIndexMapping(
 		if(obj->polygon_index != NONE && polygonIndexMap.find(obj->polygon_index) != polygonIndexMap.end()){
 			obj->polygon_index = polygonIndexMap[obj->polygon_index];
 		}else{
-			obj->polygonIndex = NONE;
+			obj->polygon_index = NONE;
 		}
 		//結局はペースト時・移動時にそのとき乗っかっているポリゴンに所属することになるのでたいした意味はない
     }
 }
-
+/*
 /**
 	対象はEndpointListなど、直接いじるタイプ
 	@param *IndexStart *IndexEndを参照
 	@param *IndexEnd [*IndexStart, *IndexEnd)の範囲のデータに対して調整を行います
-*/
+*
 void hpl::aleph::map::changeIndexMappingRaw(
 	int endpointIndexStart, int endpointIndexEnd,
 	int lineIndexStart, int lineIndexEnd,
@@ -519,7 +520,7 @@ void hpl::aleph::map::changeIndexMappingRaw(
 	std::map<int, int>& polygonIndexMap, std::map<int, int>& sideIndexMap, 
 	std::map<int, int>& sideIndexMap)
 {
-}
+}*/
 
 
 ///////////////////////////////////////////////////////

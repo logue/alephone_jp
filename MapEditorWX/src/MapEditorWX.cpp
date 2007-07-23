@@ -112,9 +112,6 @@ bool MapEditorWX::initialize()
     //選択関連
     this->selectData.clear();
 
-    //コピペ用ストック
-    storedDataDiffPointDelta[0] = storedDataDiffPointDelta[1] = 0;
-
     //線の最初の点
     isFirstOfLineToAdd = true;
     //以前選択した点

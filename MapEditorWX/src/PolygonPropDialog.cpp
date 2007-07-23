@@ -122,7 +122,7 @@ bool PolygonPropDialog::Create(wxWindow* parent, wxWindowID id)
     panel_10 = new wxPanel(this, wxID_ANY);
     panel_11 = new wxPanel(this, wxID_ANY);
     panel_12 = new wxPanel(this, wxID_ANY);
-	textFloorHeight = new wxTextCtrl(this, PolyProp::ID_FoorHeight);
+	textFloorHeight = new wxTextCtrl(this, PolyProp::ID_FloorHeight);
 	textCeilingHeight = new wxTextCtrl(this, PolyProp::ID_CeilingHeight);
 
     choice_12->SetMinSize(wxSize(100, 22));

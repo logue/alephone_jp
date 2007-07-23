@@ -1,4 +1,7 @@
 #include "HPLCopyPasteManager.h"
+#include "HPLError.h"
+#include "HPLMapTool.h"
+
 hpl::aleph::HPLCopyPasteManager::HPLCopyPasteManager()
 {
 }
@@ -27,7 +30,7 @@ void hpl::aleph::HPLCopyPasteManager::copy(hpl::aleph::map::HPLSelectData& sel)
 	//初期化
 	clear();
 
-	this->storedMapData.set(&sel);
+	this->storedMapData.set(sel);
 	//位置設定
 	storedDataDiffPointDelta[0] = COPY_AND_PASTE_DELTA_X;
 	storedDataDiffPointDelta[1] = COPY_AND_PASTE_DELTA_Y;
@@ -67,6 +70,7 @@ bool hpl::aleph::HPLCopyPasteManager::paste(int div)
 	
 	//add lines
 	std::vector<line_data>* lineList = this->storedMapData.getLines();
+	std::vector<side_data>* sideList = this->storedMapData.getSides();
 	for(int i = 0; i < (int)lineList->size(); i ++){
 		//データをコピーする
 		line_data line;
@@ -74,24 +78,43 @@ bool hpl::aleph::HPLCopyPasteManager::paste(int div)
 
 		//線自体は位置情報を持たないため、ずらす作業はいらない
 
-		int newIndex = hpl::aleph::map::addline(line);
+		int newIndex = hpl::aleph::map::addLine(line);
 		lineIndexMap[i] = newIndex;
+		if(line.clockwise_polygon_side_index != NONE &&
+			line.clockwise_polygon_side_index < (int)this->storedMapData.getSides()->size())
+		{
+			//Sideの追加
+			int oldSideIndex = line.clockwise_polygon_side_index;
+			int newSideIndex = hpl::aleph::map::addSide(sideList->at(oldSideIndex), true);
+			sideIndexMap[oldSideIndex] = newSideIndex;
+		}else{
+			line.clockwise_polygon_side_index = NONE;
+		}
+		if(line.counterclockwise_polygon_side_index != NONE &&
+			line.counterclockwise_polygon_side_index < (int)this->storedMapData.getSides()->size())
+		{
+			//逆
+			int oldSideIndex = line.counterclockwise_polygon_side_index;
+			int newSideIndex = hpl::aleph::map::addSide(sideList->at(oldSideIndex), false);
+			sideIndexMap[oldSideIndex] = newSideIndex;
+		}else{
+			line.counterclockwise_polygon_side_index = NONE;
+		}
 	}
 	
 	//add polygons
 	std::vector<polygon_data>* polygonList = this->storedMapData.getPolygons();
 	for(int i = 0; i < (int)polygonList->size(); i ++){
-		int newIndex = hpl::aleph::map::addPolygon(polygonList[i]);
+		int newIndex = hpl::aleph::map::addPolygon(polygonList->at(i));
 		polygonIndexMap[i] = newIndex;
 	}
 	
-	//add sides
-	std::vector<side_data>* sideList = this->storedMapData.getSides();
+/*	//add sides
 	for(int i = 0; i < (int)sideList->size(); i ++){
-		int newIndex = hpl::aleph::map::addSide(sideList[i]);
+		int newIndex = hpl::aleph::map::addSide(sideList->at(i));
 		sideIndexMap[i] = newIndex;
 	}
-	
+*/	
 	//add objects
 	std::vector<map_object>* objectList = this->storedMapData.getObjects();
 	for(int i = 0; i < (int)objectList->size(); i ++){
@@ -99,7 +122,7 @@ bool hpl::aleph::HPLCopyPasteManager::paste(int div)
 		memcpy(&obj, &objectList[i], sizeof(map_object));
 		obj.location.x += storedDataDiffPointDelta[0] * div;
 		obj.location.y += storedDataDiffPointDelta[1] * div;
-		int newIndex = hpl::aleph::map::addObject(obj);
+		int newIndex = hpl::aleph::map::addMapSavedObject(obj);
 		objectIndexMap[i] = newIndex;
 	}
 
@@ -110,12 +133,12 @@ bool hpl::aleph::HPLCopyPasteManager::paste(int div)
 		PolygonList,
 		SideList,
 		SavedObjectList,
-		EndpointList.size() - endpointList->size(), EndpointList.size(),
-		LineList.size() - lineList->size(), LineList.size(),
-		PolygonList.size() - polygonList->size(), PolygonList.size(),
-		SideList.size() - sideList->size(), SideList.size(),
-		SavedObjectList.size() - objectList->size(), SavedObjectList.size(),
-		pointIndexMap,
+		(int)(EndpointList.size() - endpointList->size()), (int)(EndpointList.size()),
+		(int)(LineList.size() - lineList->size()), (int)(LineList.size()),
+		(int)(PolygonList.size() - polygonList->size()), (int)(PolygonList.size()),
+		(int)(SideList.size() - sideList->size()), (int)(SideList.size()),
+		(int)(SavedObjectList.size() - objectList->size()), (int)(SavedObjectList.size()),
+		endpointIndexMap,
 		lineIndexMap,
 		polygonIndexMap,
 		sideIndexMap,

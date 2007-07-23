@@ -272,3 +272,9 @@ TODO サードパーティ製Shapesが読めない（M2とか）
 Deleteキーで削除
 Ctrl+C / コピー →記憶
 Ctrl+V / ペースト →貼り付け
+
+WinBase.h
+#define Yield()
+が悪さしていた。
+//#define Yield()
+にしたら黙った

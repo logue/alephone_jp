@@ -245,6 +245,12 @@ void MapEditorMainFrame::doLUpOnArrowTool(wxMouseEvent& ev)
         }
 
     }
+
+	if(sel->isSelected()){
+		//ƒRƒsƒyî•ñ“o˜^
+		wxGetApp().getDoneHistoryManager()->push_back(hpl::aleph::map::ActionType::Move, *sel);
+	}
+
 }
 void MapEditorMainFrame::doLUpOnPolygonTool(wxMouseEvent& ev)
 {
@@ -631,7 +637,7 @@ void MapEditorMainFrame::OnKeyDown(wxKeyEvent& ev)
 	int code = ev.GetKeyCode();
 	wxCommandEvent dummy;
 	if(ctrl){
-		if(code == WXK_C){
+		if(code == 'c'){
 			hpl::error::caution("Ctrl+C");
 			this->OnCopy(dummy);
 		}

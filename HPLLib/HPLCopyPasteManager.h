@@ -1,6 +1,8 @@
 #ifndef _HPL_COPY_PASTE_MANAGER_
 #define _HPL_COPY_PASTE_MANAGER_
 
+#include "HPLRealMapData.h"
+
 /**
 	コピー＆ペーストの管理と処理を行います
 */

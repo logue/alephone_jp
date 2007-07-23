@@ -218,11 +218,11 @@ void MapEditorMainFrame::OnCut(wxCommandEvent& ev)
 void MapEditorMainFrame::OnCopy(wxCommandEvent& ev)
 {
     //TODO デバッグ
-	hpl::aleph::map::HPLSelectData* sel = wxGetApp().selectData;
+	hpl::aleph::map::HPLSelectData* sel = &wxGetApp().selectData;
 	if(sel->isSelected()){
 		//選択中の物がある
 		//→記憶する
-		wxGetApp().getCopyPasteManager()->copy(&sel);
+		wxGetApp().getCopyPasteManager()->copy(*sel);
 	}
 }
 void MapEditorMainFrame::OnPaste(wxCommandEvent& ev)

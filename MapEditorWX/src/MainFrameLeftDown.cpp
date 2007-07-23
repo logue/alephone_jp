@@ -146,8 +146,8 @@ void MapEditorMainFrame::doLButtonOnArrowTool(wxMouseEvent& ev)
         wxGetApp().getEventManager()->setSelectingGroup(false);
 
 		//アンドゥ情報に追加しておきます
-		hpl::aleph::map::HPLDoneHistory* hmgr = wxGetApp().getDoneHistoryManager();
-		hmgr->push_back(&wxGetApp().selectData);
+//		hpl::aleph::map::HPLDoneHistory* hmgr = wxGetApp().getDoneHistoryManager();
+//		hmgr->push_back(hpl::aleph::map::ActionType::None, wxGetApp().selectData);
     }else{
         //選択されなかった
         //範囲選択の開始

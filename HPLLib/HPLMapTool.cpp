@@ -17,6 +17,17 @@ static char* COLOR_ITEM_SEPARATER = ",";
 //色情報の次元
 const int COL_NUM = 3;
 
+int getKeyByValue(std::map<int, int>& indexMap, int targetValue)
+{
+	for(std::map<int, int>::iterator it = indexMap.begin(); it != indexMap.end(); it ++){
+		if(it->second == targetValue){
+			return it->first;
+		}
+	}
+	hpl::error::halt("index not found");
+	return 0;
+}
+
 
 /**
     直線距離を求めます
@@ -455,7 +466,7 @@ std::vector<int> hpl::aleph::map::getPolygonIndexesIncludeLine(int lineIndex)
 std::vector<int> hpl::aleph::map::getPolygonIndexesIncludePoint(int endpointIndex)
 {
 	std::vector<int> polygonIndexes;
-	for(int i = 0; i < (int)LineList.size(); i ++){
+	for(int i = 0; i < (int)PolygonList.size(); i ++){
 		polygon_data* polygon = get_polygon_data(i);
 		//頂点の数
 		int n = polygon->vertex_count;

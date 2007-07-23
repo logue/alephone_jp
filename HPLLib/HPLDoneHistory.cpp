@@ -42,16 +42,22 @@ int hpl::aleph::map::HPLDoneHistory::getIndexMax()
 void hpl::aleph::map::HPLDoneHistory::push_back(int type, HPLSelectData& selData)
 {
     //現在の位置(index)から後ろ部分を削除します
-    if(index >= 0){
+    if(index >= 0 && index < actionList.size() - 1 && actionList.size() > 1){
         std::vector<hpl::aleph::map::HPLActionItem>::iterator it = actionList.begin();
-        it += (index + 1);
+        it += (index);
         while(it != actionList.end()){
             it = actionList.erase(it);
         }
     }
+	//全体の数がindexMax-1以下となるように最初の部分を削除します
+	int imax = getIndexMax();
+	for(int i = 0; this->actionList.size() > 0 && i < this->actionList.size() - imax + 1; i ++){
+		actionList.erase(actionList.begin());
+	}
+
     //実データを取得します
     hpl::aleph::map::HPLRealMapData realData;
-    realData.set(&selData);
+    realData.set(selData);
 
     //追加
     hpl::aleph::map::HPLActionItem act = hpl::aleph::map::HPLActionItem(type, selData, realData);
