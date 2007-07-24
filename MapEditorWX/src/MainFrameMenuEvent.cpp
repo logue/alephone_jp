@@ -41,6 +41,9 @@ void MapEditorMainFrame::initLevel()
     wxGetApp().getStockManager()->resetDeletes();
     wxGetApp().getViewGridManager()->setViewHeightMin(SHRT_MAX);
     wxGetApp().getViewGridManager()->setViewHeightMin(SHRT_MIN);
+
+	//プロパティコンボボックスを設定
+	this->polyPropDialog.updateCombo();
 }
 
 /**
@@ -148,6 +151,10 @@ void MapEditorMainFrame::OnOpen(wxCommandEvent& WXUNUSED(ev))
                 wxGetApp().levelNameList.push_back("unnamed");
             }
         }
+
+		//プロパティコンボボックスを設定
+		this->polyPropDialog.updateCombo();
+
         //再描画
         Refresh();
     }

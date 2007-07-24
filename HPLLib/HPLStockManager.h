@@ -1,3 +1,9 @@
+/***************************************************
+	マップデータについての情報を蓄えておくクラス
+	・ポリゴンの整合性情報
+	・削除予定のマップアイテム
+	・TODO 選択されているアイテム NEW!
+***************************************************/
 #ifndef _HPL_STOCK_MANAGER_
 #define _HPL_STOCK_MANAGER_
 
@@ -8,11 +14,6 @@
 
 namespace hpl{
 namespace aleph{
-    /**
-        マップデータについての情報を蓄えておくクラス
-        ・ポリゴンの整合性情報
-        ・削除予定のマップアイテム
-    */
     class HPLStockManager{
     public:
         /**ポリゴンの整合性*/
@@ -24,12 +25,21 @@ namespace aleph{
 
         //線の順番を高さ順にしたもの
         //TODO
+		std::vector<int> lineDrawOrderByHeight;
 
+		//要素の削除情報
         std::vector<bool> delPoints;
         std::vector<bool> delLines;
         std::vector<bool> delPolygons;
         std::vector<bool> delSides;
         std::vector<bool> delObjects;
+
+		//選択した要素の情報
+		std::vector<bool> selPoints;
+        std::vector<bool> selLines;
+        std::vector<bool> selPolygons;
+        std::vector<bool> selSides;
+        std::vector<bool> selObjects;
     public:
         HPLStockManager();
         ~HPLStockManager();
@@ -63,12 +73,28 @@ namespace aleph{
         */
         void resetDeletes();
 
+		/**
+			選択情報を更新
+		*/
+		void updateSelects(hpl::aleph::map::HPLSelectData& sel);
+
+		/**
+			指定したアイテムを削除
+		*/
         bool deletePoint(int index);
         bool deleteLine(int index);
         bool deletePolygon(int index);
         bool deleteSide(int index);
         bool deleteObject(int index);
 
+		/**
+			選択情報の取得
+		*/
+		bool isSelectPoint(int index);
+		bool isSelectLine(int index);
+		bool isSelectPolygon(int index);
+		bool isSelectSide(int index);
+		bool isSelectObject(int index);
     };
 };
 };

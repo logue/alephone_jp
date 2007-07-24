@@ -69,6 +69,8 @@ public:
     int getPolyIndex();
     void setupDialog();
 
+	void updateCombo();
+
     //イベントテーブル作成<en>declare
     DECLARE_EVENT_TABLE()
     void OnIDEdit(wxCommandEvent &event); // wxGlade: <event_handler>

@@ -131,7 +131,7 @@ void MapEditorMainFrame::doLButtonOnArrowTool(wxMouseEvent& ev)
             //→選択解除
             //<en> no click on selection datas
             //-> release all selections
-            sel->clear();
+            //sel->clear();
         }
     }
     //何も選択していない状態
@@ -139,6 +139,7 @@ void MapEditorMainFrame::doLButtonOnArrowTool(wxMouseEvent& ev)
 
     //一つを選択できるか試してみます
     if(this->tryToSelectOneItem(ev)){
+		
 		this->unselect();
 
 		//選択できたので
@@ -153,12 +154,15 @@ void MapEditorMainFrame::doLButtonOnArrowTool(wxMouseEvent& ev)
         //範囲選択の開始
         wxGetApp().getEventManager()->setSelectGroupStartPoint(mx, my);
         //選択情報の解除
-        sel->clear();
+        //sel->clear();
 
 		//選択＆編集中だったアイテムを初期化
 		//TODO 遅くなる可能性があるので、修正が必要かも
 		this->unselect();
     }
+
+	//選択情報の更新
+	wxGetApp().getStockManager()->updateSelects(wxGetApp().selectData);
 }
 
 void MapEditorMainFrame::unselect()
@@ -203,11 +207,6 @@ bool MapEditorMainFrame::tryToSelectOneItem(wxMouseEvent& ev)
     int mx = ev.m_x;
     int my = ev.m_y;
 
-    if(!shift){
-        //シフトキーを押さずにクリックしたら一旦解放する
-        sel->clear();
-        emgr->setSelectingGroup(false);
-    }
 
     //選択の優先順位は
     //1:オブジェクト
@@ -237,7 +236,13 @@ bool MapEditorMainFrame::tryToSelectOneItem(wxMouseEvent& ev)
             x, y, voffset[0], voffset[1],
             OFFSET_X_WORLD, OFFSET_Y_WORLD, div, OBJECT_DISTANCE_EPSILON))
         {
-            //
+		    if(!shift){
+				//シフトキーを押さずにクリックしたら一旦解放する
+				sel->clear();
+				emgr->setSelectingGroup(false);
+			}
+
+            //選択追加
             int vpoint[2];
             wxGetApp().getViewPointFromWorldPoint(x, y, vpoint);
             int offset[2];
@@ -276,6 +281,11 @@ bool MapEditorMainFrame::tryToSelectOneItem(wxMouseEvent& ev)
             voffset[0], voffset[1], OFFSET_X_WORLD, OFFSET_Y_WORLD,
             div, POINT_DISTANCE_EPSILON))
         {
+		    if(!shift){
+				//シフトキーを押さずにクリックしたら一旦解放する
+				sel->clear();
+				emgr->setSelectingGroup(false);
+			}
             //見つかった
             int vpoint[2];
             wxGetApp().getViewPointFromWorldPoint(ep->vertex, vpoint);
@@ -294,6 +304,11 @@ bool MapEditorMainFrame::tryToSelectOneItem(wxMouseEvent& ev)
 		voffset[0], voffset[1], OFFSET_X_WORLD, OFFSET_Y_WORLD, div, 
 		wxGetApp().getStockManager());
 	if(annotationIndex != NONE){
+	    if(!shift){
+			//シフトキーを押さずにクリックしたら一旦解放する
+			sel->clear();
+			emgr->setSelectingGroup(false);
+		}
 		map_annotation* annotation = &MapAnnotationList[annotationIndex];
 		//オフセット設定
 		int offset[2];
@@ -311,6 +326,11 @@ bool MapEditorMainFrame::tryToSelectOneItem(wxMouseEvent& ev)
 		voffset[0], voffset[1], OFFSET_X_WORLD, OFFSET_Y_WORLD, div, 
 		wxGetApp().getStockManager());
 	if(lineIndex != NONE){
+	    if(!shift){
+			//シフトキーを押さずにクリックしたら一旦解放する
+			sel->clear();
+			emgr->setSelectingGroup(false);
+		}
 		line_data* line = get_line_data(lineIndex);
 		endpoint_data* start = get_endpoint_data(line->endpoint_indexes[0]);
 		endpoint_data* end = get_endpoint_data(line->endpoint_indexes[1]);
@@ -337,6 +357,11 @@ bool MapEditorMainFrame::tryToSelectOneItem(wxMouseEvent& ev)
 		voffset[0], voffset[1], OFFSET_X_WORLD, OFFSET_Y_WORLD, div, 
 		wxGetApp().getStockManager());
 	if(polyIndex != NONE){
+	    if(!shift){
+			//シフトキーを押さずにクリックしたら一旦解放する
+			sel->clear();
+			emgr->setSelectingGroup(false);
+		}
         polygon_data* poly = get_polygon_data(polyIndex);
 #ifdef __WXDEBUG__
 		wxASSERT(poly);
@@ -360,6 +385,7 @@ bool MapEditorMainFrame::tryToSelectOneItem(wxMouseEvent& ev)
         return true;
     }
 
+	//選択できなかった
 
     return false;
 }

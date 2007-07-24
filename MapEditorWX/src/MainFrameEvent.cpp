@@ -107,6 +107,9 @@ void MapEditorMainFrame::OnLeftUp(wxMouseEvent& ev)
 
     //ポリゴン状態を更新します
     wxGetApp().getStockManager()->updatePolygonValidityStored();
+	//選択情報の更新
+	wxGetApp().getStockManager()->updateSelects(wxGetApp().selectData);
+
     Refresh();
 }
 
@@ -134,13 +137,14 @@ void MapEditorMainFrame::doLUpOnArrowTool(wxMouseEvent& ev)
     int my = ev.m_y;
 
     if(emgr->isSelectingGroup()){
+
+		//最初に選択項目に追加されたか
+		bool isFirst = true;
+
         //範囲選択中だった。矩形内のアイテムを選択とする
         //選択開始位置
         int selStartPoint[2];
         emgr->getSelectGroupStartPoint(selStartPoint);
-        
-        //選択情報初期化
-        sel->clear();
         
         //点 <en> points
         for(int i = 0; i < (int)EndpointList.size(); i ++){
@@ -156,6 +160,10 @@ void MapEditorMainFrame::doLUpOnArrowTool(wxMouseEvent& ev)
             if(hpl::math::isPointInRect<int>(vpoint[0], vpoint[1],
                 mx, my, selStartPoint[0], selStartPoint[1]))
             {
+				if(isFirst){
+					isFirst = false;
+					sel->clear();
+				}
                 //追加
                 int offset[2] = {0,0};
                 sel->addSelPoint(i, offset);
@@ -182,6 +190,10 @@ void MapEditorMainFrame::doLUpOnArrowTool(wxMouseEvent& ev)
                 endVPoint[0], endVPoint[1],
                 mx, my, selStartPoint[0], selStartPoint[1]))
             {
+				if(isFirst){
+					isFirst = false;
+					sel->clear();
+				}
                 //追加
                 int offset[2][2] = {{0,0},{0,0}};
                 sel->addSelLine(i, offset);
@@ -215,6 +227,10 @@ void MapEditorMainFrame::doLUpOnArrowTool(wxMouseEvent& ev)
                 }
             }
             if(inner){
+				if(isFirst){
+					isFirst = false;
+					sel->clear();
+				}
                 //登録
                 int offset[MAXIMUM_VERTICES_PER_POLYGON][2];
                 memset(offset, 0, sizeof(int) * MAXIMUM_VERTICES_PER_POLYGON * 2);
@@ -238,12 +254,32 @@ void MapEditorMainFrame::doLUpOnArrowTool(wxMouseEvent& ev)
             if(hpl::math::isPointInRect<int>(vpoint[0], vpoint[1],
                 mx, my, selStartPoint[0], selStartPoint[1]))
             {
+				if(isFirst){
+					isFirst = false;
+					sel->clear();
+				}
                 //追加
                 int offset[2] = {0,0};
                 sel->addSelObject(i, offset);
             }
         }
 
+		//どれも選択していないかチェック
+		if(isFirst && !sel->isSelected()){
+			//選択していない
+
+			//前回の位置
+			int oldVPoint[2];
+			wxGetApp().getViewGridManager()->getOldMousePoint(oldVPoint);
+			
+			//現在の位置との距離を計算
+			double distance = hpl::math::getLength(mx - oldVPoint[0], my - oldVPoint[1]);
+			if(distance < SAME_POSITION_CLICK_THRESHOLD){
+				//ほぼ現在の位置でクリックした
+				//	ならば選択解除
+				sel->clear();
+			}
+		}
     }
 
 	if(sel->isSelected()){

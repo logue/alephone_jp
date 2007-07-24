@@ -6,8 +6,10 @@ const int DEFAULT_INDEX_MAX = 10;
 hpl::aleph::map::HPLActionItem::HPLActionItem(int t, hpl::aleph::map::HPLSelectData& sel, hpl::aleph::map::HPLRealMapData& real)
 {
     type = t;
-    memcpy(&this->selectData, &sel, sizeof(hpl::aleph::map::HPLSelectData));
-    memcpy(&this->realData, &real, sizeof(hpl::aleph::map::HPLRealMapData));
+	this->selectData = sel;
+	this->realData = real;
+//    memcpy(&this->selectData, &sel, sizeof(hpl::aleph::map::HPLSelectData));
+//    memcpy(&this->realData, &real, sizeof(hpl::aleph::map::HPLRealMapData));
 }
 hpl::aleph::map::HPLActionItem::~HPLActionItem()
 {
@@ -62,10 +64,11 @@ void hpl::aleph::map::HPLDoneHistory::push_back(int type, HPLSelectData& selData
 
     //’Ç‰Á
     hpl::aleph::map::HPLActionItem act = hpl::aleph::map::HPLActionItem(type, selData, realData);
-/*    this->actionList.push_back(act);
-*/
+    this->actionList.push_back(act);
+
     
     index = (int)actionList.size() - 1;
+//	delete act;
 }
 
 /**

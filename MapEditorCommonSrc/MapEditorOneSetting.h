@@ -81,6 +81,8 @@ static char* START_POINT_IMAGE_FILE_PATH = "data/Map Icons/center X.bmp";
 //アンドゥ・リドゥの回数（合計）
 const int UNDO_NUM = 10;
 
+//現在位置で押したかどうかの判定距離
+const double SAME_POSITION_CLICK_THRESHOLD = 2;
 
 //point flags
 enum

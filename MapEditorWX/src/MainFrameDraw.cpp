@@ -215,6 +215,7 @@ void MapEditorMainFrame::drawPolygons(wxDC* dc)
 
     //TODO 高さ順ソート？
     //ソートするならvalidityのように事前にやっておくべき
+
     hpl::aleph::view::HPLViewGridManager* vmgr = wxGetApp().getViewGridManager();
 
     wxPoint points[8];
@@ -286,8 +287,9 @@ void MapEditorMainFrame::drawPolygons(wxDC* dc)
         //TODO 選択情報
 
         bool select = false;
-        if(wxGetApp().selectData.isSelected() &&
-            wxGetApp().selectData.containsPolygon(i))
+//        if(wxGetApp().selectData.isSelected() &&
+//            wxGetApp().selectData.containsPolygon(i))
+		if(wxGetApp().getStockManager()->isSelectPolygon(i))
         {
             select = true;
         }
@@ -365,8 +367,9 @@ void MapEditorMainFrame::drawLines(wxDC* dc)
         }else{
             bool select = false;
             //選択チェック
-            if(wxGetApp().selectData.isSelected() &&
-                wxGetApp().selectData.containsLine(i))
+//            if(wxGetApp().selectData.isSelected() &&
+//                wxGetApp().selectData.containsLine(i))
+			if(wxGetApp().getStockManager()->isSelectLine(i))
             {
                 select = true;
             }
@@ -454,8 +457,9 @@ void MapEditorMainFrame::drawPoints(wxDC* dc)
         dc->DrawRectangle(vpoint[0] - SIZE / 2, vpoint[1] - SIZE / 2,
                 SIZE, SIZE);
         //選択中ならしるしをつける
-        if(wxGetApp().selectData.isSelected() &&
-            wxGetApp().selectData.containsPoint(i))
+//        if(wxGetApp().selectData.isSelected() &&
+//			wxGetApp().selectData.containsPoint(i))
+		if(wxGetApp().getStockManager()->isSelectPoint(i))
         {
             dc->SetPen(this->selectedLinePen);
             dc->SetBrush(*wxTRANSPARENT_BRUSH);
@@ -522,8 +526,10 @@ void MapEditorMainFrame::drawObjects(wxDC* dc)
 
         //選択状態をチェック
         bool select = false;
-        if(wxGetApp().selectData.isSelected() &&
-            wxGetApp().selectData.containsObject(i)){
+//        if(wxGetApp().selectData.isSelected() &&
+//            wxGetApp().selectData.containsObject(i)){
+		if(wxGetApp().getStockManager()->isSelectObject(i))
+		{
                 select = true;
         }
         if(type == _saved_monster || type == _saved_player){

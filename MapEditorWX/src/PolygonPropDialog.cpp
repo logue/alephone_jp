@@ -216,7 +216,6 @@ bool PolygonPropDialog::Create(wxWindow* parent, wxWindowID id)
         choice_12->Insert(wxConvertMB2WX(wxGetApp().polygonTypeInfo[i].jname.c_str()), i);
     }
 
-
     return result;
 }
 
@@ -231,7 +230,12 @@ int PolygonPropDialog::getPolyIndex()
 {
     return polyIndex;
 }
-void PolygonPropDialog::setupDialog()
+
+/**
+	コンボボックスの再構成
+	時間がかかるので変化が起きた場合にのみ呼び出す
+*/
+void PolygonPropDialog::updateCombo()
 {
     //CHOICEをセットアップしなおす
     //light floor/ceiling/media-light
@@ -278,6 +282,11 @@ void PolygonPropDialog::setupDialog()
         choice_18->Insert(getString("%d", i), i);
     }
     choice_18->Insert(_T("NONE"), .size());*/
+}
+
+void PolygonPropDialog::setupDialog()
+{
+
 
     if(this->getPolyIndex() == NONE){
         return;

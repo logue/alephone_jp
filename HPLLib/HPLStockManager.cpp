@@ -327,3 +327,84 @@ bool hpl::aleph::HPLStockManager::deleteObject(int index)
     updateDeletes();
     return true;
 }
+
+/**
+	選択情報を更新
+*/
+void hpl::aleph::HPLStockManager::updateSelects(hpl::aleph::map::HPLSelectData& sel)
+{
+	//初期化
+	this->selPoints.clear();
+	this->selPoints.resize(EndpointList.size());
+	this->selLines.clear();
+	this->selLines.resize(LineList.size());
+	this->selPolygons.clear();
+	this->selPolygons.resize(PolygonList.size());
+	this->selObjects.clear();
+	this->selObjects.resize(SavedObjectList.size());
+	this->selSides.clear();
+	this->selSides.resize(SideList.size());
+
+	//points
+	for(int i = 0; i < (int)EndpointList.size(); i ++){
+		this->selPoints[i] = sel.containsPoint(i);
+	}
+
+	//lines
+	for(int i = 0; i < (int)LineList.size(); i ++){
+		this->selLines[i] = sel.containsLine(i);
+	}
+
+	//polygons
+	for(int i = 0; i < (int)PolygonList.size(); i ++){
+		this->selPolygons[i] = sel.containsPolygon(i);
+	}
+
+	//objects
+	for(int i = 0; i < (int)SavedObjectList.size(); i ++){
+		this->selObjects[i] = sel.containsObject(i);
+	}
+
+	//sides
+	for(int i = 0; i < (int)SideList.size(); i ++){
+		this->selSides[i] = sel.containsSide(i);
+	}
+}
+/**
+	選択情報の取得
+*/
+bool hpl::aleph::HPLStockManager::isSelectPoint(int index)
+{
+#ifdef _WXDEBUG_
+	wxASSERT(index >= 0 && index < this->selPoints.size());
+#endif
+	return this->selPoints[index];
+}
+bool hpl::aleph::HPLStockManager::isSelectLine(int index)
+{
+#ifdef _WXDEBUG_
+	wxASSERT(index >= 0 && index < this->selLines.size());
+#endif
+	return this->selLines[index];
+}
+bool hpl::aleph::HPLStockManager::isSelectPolygon(int index)
+{
+#ifdef _WXDEBUG_
+	wxASSERT(index >= 0 && index < this->selPolygons.size());
+#endif
+	return this->selPolygons[index];
+}
+bool hpl::aleph::HPLStockManager::isSelectSide(int index)
+{
+#ifdef _WXDEBUG_
+	wxASSERT(index >= 0 && index < this->selSides.size());
+#endif
+	return this->selSides[index];
+}
+bool hpl::aleph::HPLStockManager::isSelectObject(int index)
+{
+#ifdef _WXDEBUG_
+	wxASSERT(index >= 0 && index < this->selObjects.size());
+#endif
+	return this->selObjects[index];
+}
