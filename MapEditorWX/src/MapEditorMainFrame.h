@@ -429,9 +429,20 @@ private:
     bool askDestructMap();
 
 	/**
-		the mothod to do when unselect
+		選択変更によりダイアログの情報に意味がなくなったものに対して、
+		初期化する処理を選択・実行します
+		the function to do when unselect
 	*/
 	void unselect();
+	/**
+		the function called when select one thing
+		@param mx, my マウス座標 mouse cursor position
+	*/
+	void selectOneThing(int mx, int my);
+	//選択に成功した場合の前処理
+	void successSelectOneThing();
+
+	void selectNothing();
 
 	wxBrush getTexturedBrush(int shapesDescriptor);
 };

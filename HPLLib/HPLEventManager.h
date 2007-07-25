@@ -56,18 +56,29 @@ namespace aleph{
 
         //編集モード
         int editModeType;
+
+		//最後に選択した座標
+		int lastMouseSelectPoint[2];
     public:
         HPLEventManager();
         ~HPLEventManager();
+	private:
+        void setSelectingGroup(bool flag);
     public:
         void getSelectGroupStartPoint(int point[2]);
         void setSelectGroupStartPoint(int px, int py);
         bool isSelectingGroup();
-        void setSelectingGroup(bool flag);
+		void exitSelectingGroup();
         void setToolType(int type);
         int getToolType();
         void setEditModeType(int type);
         int getEditModeType();
+
+		/**
+			最後に選択したときのマウス座標を取得します
+		*/
+		void setLastMouseSelectPoint(int px, int py);
+		void getLastMouseSelectPoint(int point[2]);
     };
 };
 };

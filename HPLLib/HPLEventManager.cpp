@@ -29,10 +29,16 @@ bool hpl::aleph::HPLEventManager::isSelectingGroup()
 {
     return this->isSelGrp;
 }
+
 void hpl::aleph::HPLEventManager::setSelectingGroup(bool flag)
 {
     this->isSelGrp = flag;
 }
+void hpl::aleph::HPLEventManager::exitSelectingGroup()
+{
+	this->setSelectingGroup(false);
+}
+
 void hpl::aleph::HPLEventManager::setToolType(int type)
 {
     this->toolType = type;
@@ -48,4 +54,14 @@ void hpl::aleph::HPLEventManager::setEditModeType(int type)
 int hpl::aleph::HPLEventManager::getEditModeType()
 {
     return this->editModeType;
+}
+void hpl::aleph::HPLEventManager::setLastMouseSelectPoint(int px, int py)
+{
+	this->lastMouseSelectPoint[0] = px;
+	this->lastMouseSelectPoint[1] = py;
+}
+void hpl::aleph::HPLEventManager::getLastMouseSelectPoint(int point[2])
+{
+	point[0] = lastMouseSelectPoint[0];
+	point[1] = lastMouseSelectPoint[1];
 }

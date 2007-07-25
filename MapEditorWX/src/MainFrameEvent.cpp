@@ -136,10 +136,10 @@ void MapEditorMainFrame::doLUpOnArrowTool(wxMouseEvent& ev)
     int mx = ev.m_x;
     int my = ev.m_y;
 
-    if(emgr->isSelectingGroup()){
+	//最初に選択項目に追加されたか
+	bool isFirst = true;
 
-		//最初に選択項目に追加されたか
-		bool isFirst = true;
+    if(emgr->isSelectingGroup()){
 
         //範囲選択中だった。矩形内のアイテムを選択とする
         //選択開始位置
@@ -264,23 +264,23 @@ void MapEditorMainFrame::doLUpOnArrowTool(wxMouseEvent& ev)
             }
         }
 
-		//どれも選択していないかチェック
-		if(isFirst && !sel->isSelected()){
-			//選択していない
-
-			//前回の位置
-			int oldVPoint[2];
-			wxGetApp().getViewGridManager()->getOldMousePoint(oldVPoint);
-			
-			//現在の位置との距離を計算
-			double distance = hpl::math::getLength(mx - oldVPoint[0], my - oldVPoint[1]);
-			if(distance < SAME_POSITION_CLICK_THRESHOLD){
-				//ほぼ現在の位置でクリックした
-				//	ならば選択解除
-				sel->clear();
-			}
-		}
     }
+	//どれも選択していないかチェック
+	if(isFirst && !sel->isSelected()){
+		//選択していない
+
+		//前回の位置
+		int oldVPoint[2];
+		wxGetApp().getViewGridManager()->getOldMousePoint(oldVPoint);
+		
+		//現在の位置との距離を計算
+		double distance = hpl::math::getLength(mx - oldVPoint[0], my - oldVPoint[1]);
+		if(distance > SAME_POSITION_CLICK_THRESHOLD){
+			//ほぼ現在の位置でクリックした
+			//	ならば選択解除
+			sel->clear();
+		}
+	}
 
 	if(sel->isSelected()){
 		//コピペ情報登録

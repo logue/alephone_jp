@@ -109,6 +109,8 @@ void MapEditorMainFrame::doLButtonOnArrowTool(wxMouseEvent& ev)
     int mx = ev.m_x;
     int my = ev.m_y;
 
+	//アンドゥ情報に追加しておきます
+	hpl::aleph::map::HPLDoneHistory* hmgr = wxGetApp().getDoneHistoryManager();
     if(sel->isSelected()){
         //既に選択中
 
@@ -125,44 +127,66 @@ void MapEditorMainFrame::doLButtonOnArrowTool(wxMouseEvent& ev)
             hpl::aleph::map::setupSelectDataGroupOffsets(mx, my,
                 &wxGetApp().selectData, voffset[0], voffset[1],
                 OFFSET_X_WORLD, OFFSET_Y_WORLD, div);
-            return;
         }else{
             //クリックしていない
-            //→選択解除
-            //<en> no click on selection datas
-            //-> release all selections
-            //sel->clear();
+			
+			//何か一つ選択しているか判定
+			if(this->tryToSelectOneItem(ev)){
+				this->selectOneThing(mx, my);
+			}else{
+				this->selectNothing();
+			}
         }
-    }
-    //何も選択していない状態
+	}else{
+		//何も選択していない
+		//一つを選択できるか試してみます
+		if(this->tryToSelectOneItem(ev)){
+			this->selectOneThing(mx, my);
+		}else{
+			//選択されなかった
+			this->selectNothing();
+		}
 
-
-    //一つを選択できるか試してみます
-    if(this->tryToSelectOneItem(ev)){
-		
-		this->unselect();
-
-		//選択できたので
-        //範囲選択は解除します
-        wxGetApp().getEventManager()->setSelectingGroup(false);
-
-		//アンドゥ情報に追加しておきます
-//		hpl::aleph::map::HPLDoneHistory* hmgr = wxGetApp().getDoneHistoryManager();
-//		hmgr->push_back(hpl::aleph::map::ActionType::None, wxGetApp().selectData);
-    }else{
-        //選択されなかった
-        //範囲選択の開始
-        wxGetApp().getEventManager()->setSelectGroupStartPoint(mx, my);
-        //選択情報の解除
-        //sel->clear();
-
-		//選択＆編集中だったアイテムを初期化
-		//TODO 遅くなる可能性があるので、修正が必要かも
-		this->unselect();
-    }
+	}
 
 	//選択情報の更新
 	wxGetApp().getStockManager()->updateSelects(wxGetApp().selectData);
+}
+void MapEditorMainFrame::selectNothing()
+{
+	//範囲選択の開始
+	wxGetApp().getEventManager()->setSelectGroupStartPoint(mx, my);
+
+	//選択＆編集中だったアイテムを初期化
+	//TODO 遅くなる可能性があるので、修正が必要かも
+	//(主にダイアログのコンボボックスを再構築するのに時間が取られる)
+	this->unselect();
+
+	//選択解除
+	wxGetApp().selectData.clear();
+}
+
+/**
+	the function called when select one thing
+	@param mx, my マウス座標 mouse cursor position
+*/
+void MapEditorMainFrame::selectOneThing(int mx, int my)
+{
+	//選択されていない項目に関するダイアログの設定を解除します
+	this->unselect();
+	
+
+	//選択できたので
+	//範囲選択は解除します
+	hpl::aleph::HPLEventManager *emgr = &wxGetApp().getEventManager();
+	emgr->exitSelectingGroup();
+
+	//アンドゥ機能等のために記憶しておきます
+	wxGetApp().getDoneHistoryManager()->push_back(
+		hpl::aleph::map::ActionType::None, wxGetApp().selectData);
+
+	//最後に選択した位置のマウスポイントを記憶します
+	emgr->setLastMouseSelectPoint(mx, my);
 }
 
 void MapEditorMainFrame::unselect()
@@ -238,8 +262,7 @@ bool MapEditorMainFrame::tryToSelectOneItem(wxMouseEvent& ev)
         {
 		    if(!shift){
 				//シフトキーを押さずにクリックしたら一旦解放する
-				sel->clear();
-				emgr->setSelectingGroup(false);
+				successSelectOneThing();
 			}
 
             //選択追加
@@ -248,6 +271,9 @@ bool MapEditorMainFrame::tryToSelectOneItem(wxMouseEvent& ev)
             int offset[2];
             offset[0] = vpoint[0] - mx;
             offset[1] = vpoint[1] - my;
+
+			//選択に成功した場合の前処理
+			this->successSelectOneThing(mx, my);
             sel->addSelObject(i, offset);
             //オブジェクトのプロパティ・ダイアログを表示する
             //TODO
@@ -283,8 +309,7 @@ bool MapEditorMainFrame::tryToSelectOneItem(wxMouseEvent& ev)
         {
 		    if(!shift){
 				//シフトキーを押さずにクリックしたら一旦解放する
-				sel->clear();
-				emgr->setSelectingGroup(false);
+				successSelectOneThing();
 			}
             //見つかった
             int vpoint[2];
@@ -306,8 +331,7 @@ bool MapEditorMainFrame::tryToSelectOneItem(wxMouseEvent& ev)
 	if(annotationIndex != NONE){
 	    if(!shift){
 			//シフトキーを押さずにクリックしたら一旦解放する
-			sel->clear();
-			emgr->setSelectingGroup(false);
+			successSelectOneThing();
 		}
 		map_annotation* annotation = &MapAnnotationList[annotationIndex];
 		//オフセット設定
@@ -328,8 +352,7 @@ bool MapEditorMainFrame::tryToSelectOneItem(wxMouseEvent& ev)
 	if(lineIndex != NONE){
 	    if(!shift){
 			//シフトキーを押さずにクリックしたら一旦解放する
-			sel->clear();
-			emgr->setSelectingGroup(false);
+			successSelectOneThing();
 		}
 		line_data* line = get_line_data(lineIndex);
 		endpoint_data* start = get_endpoint_data(line->endpoint_indexes[0]);
@@ -359,8 +382,7 @@ bool MapEditorMainFrame::tryToSelectOneItem(wxMouseEvent& ev)
 	if(polyIndex != NONE){
 	    if(!shift){
 			//シフトキーを押さずにクリックしたら一旦解放する
-			sel->clear();
-			emgr->setSelectingGroup(false);
+			successSelectOneThing();
 		}
         polygon_data* poly = get_polygon_data(polyIndex);
 #ifdef __WXDEBUG__
@@ -388,6 +410,12 @@ bool MapEditorMainFrame::tryToSelectOneItem(wxMouseEvent& ev)
 	//選択できなかった
 
     return false;
+}
+//選択に成功した場合の前処理
+void MapEditorMainFrame::successSelectOneThing()
+{
+	//選択解除
+	wxGetApp().selectData.clear();
 }
 
 
