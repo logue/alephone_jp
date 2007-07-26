@@ -59,6 +59,8 @@ namespace aleph{
 
 		//最後に選択した座標
 		int lastMouseSelectPoint[2];
+
+		bool isGrabItems_;
     public:
         HPLEventManager();
         ~HPLEventManager();
@@ -73,7 +75,8 @@ namespace aleph{
         int getToolType();
         void setEditModeType(int type);
         int getEditModeType();
-
+		void setGrabItems(bool grab);
+		bool isGrabItems();
 		/**
 			最後に選択したときのマウス座標を取得します
 		*/

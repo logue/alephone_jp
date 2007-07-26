@@ -91,7 +91,16 @@ namespace map{
         */
         bool back(int *type, hpl::aleph::map::HPLSelectData* selectData, hpl::aleph::map::HPLRealMapData* realData);
 
+		/**
+			リドゥ
+		*/
         bool forward(int *type, HPLSelectData* selectData, HPLRealMapData* realData);
+
+		/**
+			最新版の状態を取得します
+			取得しても内容や位置は変化させません
+		*/
+		bool getTail(int *type, HPLSelectData* sel, HPLRealMapData* real);
 
         /**
             インデックス番号を削除後のものに対応させます。

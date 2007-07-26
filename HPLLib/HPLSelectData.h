@@ -47,10 +47,15 @@ namespace map{
 		std::vector<struct SelAnnotation> selannotations;
         struct SelSide side;
         bool _isSelected;
+		int mx, my;
     public:
         HPLSelectData();
         ~HPLSelectData();
     public:
+		//マウス座標
+		void setMousePosition(int x, int y);
+		void getMousePosition(int point[2]);
+
         //中身をそのまま取得。あまり使わないほうが良い
         std::vector<struct SelPoint>* getSelPoints();
         std::vector<struct SelLine>* getSelLines();

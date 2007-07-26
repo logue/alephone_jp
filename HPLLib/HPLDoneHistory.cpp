@@ -79,15 +79,16 @@ void hpl::aleph::map::HPLDoneHistory::push_back(int type, HPLSelectData& selData
     にインデックス値が変化してしまうため、updateIndexes()を呼ぶ必要がある
     @return 取り出せなかった場合偽
 */
-bool hpl::aleph::map::HPLDoneHistory::back(int *type, hpl::aleph::map::HPLSelectData* selectData,
+bool hpl::aleph::map::HPLDoneHistory::back(int *type,
+											hpl::aleph::map::HPLSelectData* selectData,
                                            hpl::aleph::map::HPLRealMapData* realData)
 {
     if(index < 0){
         return false;
     }
     hpl::aleph::map::HPLActionItem act = this->actionList[index];
-    memcpy(selectData, &act.selectData, sizeof(hpl::aleph::map::HPLSelectData));
-    memcpy(realData, &act.realData, sizeof(hpl::aleph::map::HPLRealMapData));
+    *selectData = act.selectData;
+    *realData = act.realData;
     *type = act.type;
     index --;
     return true;
@@ -98,13 +99,28 @@ bool hpl::aleph::map::HPLDoneHistory::forward(int *type, HPLSelectData* selectDa
         return false;
     }
     hpl::aleph::map::HPLActionItem act = this->actionList[index];
-    memcpy(selectData, &act.selectData, sizeof(hpl::aleph::map::HPLSelectData));
-    memcpy(realData, &act.realData, sizeof(hpl::aleph::map::HPLRealMapData));
+    *selectData = act.selectData;
+    *realData = act.realData;
     *type = act.type;
     index ++;
     return true;
 }
 
+/**
+	最新版の状態を取得します
+	取得しても内容や位置は変化させません
+*/
+bool hpl::aleph::map::HPLDoneHistory::getTail(int *type, HPLSelectData* sel, HPLRealMapData* real)
+{
+	if(actionList.size() == 0){
+		return false;
+	}
+	hpl::aleph::map::HPLActionItem *act = &this->actionList[actionList.size() - 1];
+	*sel = act->selectData;
+	*real = act->realData;
+	*type = act->type;
+	return true;
+}
 
 /**
     インデックス番号を削除後のものに対応させます。

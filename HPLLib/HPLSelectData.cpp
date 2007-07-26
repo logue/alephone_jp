@@ -10,6 +10,17 @@ hpl::aleph::map::HPLSelectData::~HPLSelectData()
 }
 ////////////////////////////////////////////
 
+//マウス座標
+void hpl::aleph::map::HPLSelectData::setMousePosition(int x, int y)
+{
+	this->mx = x;
+	this->my = y;
+}
+void hpl::aleph::map::HPLSelectData::getMousePosition(int point[2])
+{
+	point[0] = mx;
+	point[1] = my;
+}
 
 std::vector<struct hpl::aleph::map::SelPoint>* hpl::aleph::map::HPLSelectData::getSelPoints()
 {

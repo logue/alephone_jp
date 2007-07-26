@@ -419,6 +419,7 @@ private:
     void closeAllModelessDialogs();
 
     void initLevel();
+	void loadLevel(int i);
 
     /**
         ダイアログを出して編集中のマップを破壊してよいかを聞き出します。
@@ -454,7 +455,7 @@ private:
 	/**
 		ひとつも
 	*/
-	void selectNothing();
+	void selectNothing(int mx, int my);
 
 	wxBrush getTexturedBrush(int shapesDescriptor);
 };

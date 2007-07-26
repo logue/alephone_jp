@@ -33,40 +33,117 @@ void MapEditorMainFrame::OnRightDown(wxMouseEvent& ev)
 	int voffset[2];
 	vmgr->getOffset(voffset);
 
+	hpl::aleph::map::HPLSelectData* sel = &wxGetApp().selectData;
+
+	hpl::aleph::map::HPLDoneHistory* dmgr = wxGetApp().getDoneHistoryManager();
+
     if(editMode == EditModeType::EM_DRAW && toolType == ToolType::TI_ARROW){
-        //点の上で右クリックしたか？
-        int epIndex = hpl::aleph::map::getSelectPointIndex(mx ,my,
-			POINT_DISTANCE_EPSILON, zMin, zMax,
-			voffset[0], voffset[1], OFFSET_X_WORLD, OFFSET_Y_WORLD, div, 
-			smgr);
-        wxGetApp().popupEndpointIndex = epIndex;
-        if(epIndex != NONE){
-            //点ポップアップ表示
-            PopupMenu(&wxGetApp().pointPopupMenu);
-			return;
-        }
-        //点は押されなかった
-        int lineIndex = hpl::aleph::map::getSelectLineIndex(mx ,my,
-			LINE_DISTANCE_EPSILON, zMin, zMax,
-			voffset[0], voffset[1], OFFSET_X_WORLD, OFFSET_Y_WORLD, div, 
-			smgr);
-        wxGetApp().popupLineIndex = lineIndex;
-        if(lineIndex != NONE){
-            //線が押された
-            //→線プロパティをだす
-            PopupMenu(&wxGetApp().linePopupMenu);
-			return;
-        }
-	
-		//ポリゴン上で右クリックしたか？ TODO
-		int polygonIndex = hpl::aleph::map::getSelectPolygonIndex(mx ,my,
-			zMin, zMax,
-			voffset[0], voffset[1], OFFSET_X_WORLD, OFFSET_Y_WORLD, div, 
-			smgr);
-        wxGetApp().popupPolygonIndex = epIndex;
-		if(polygonIndex != NONE){
-			PopupMenu(&wxGetApp().polygonPopupMenu);
-			return;
+		if(sel->isSelected() && emgr->isGrabItems()){
+			//左ボタン押しながら右押した
+			if(sel->isSelected()){
+				//選択していた
+				if(emgr->isGrabItems()){
+					//つかんでいた
+
+					//つかんでいたのをはなす
+					emgr->setGrabItems(false);
+
+					//座標を元の位置に戻す
+					hpl::aleph::map::HPLSelectData selLast;
+					hpl::aleph::map::HPLRealMapData dummy;
+					int type;
+					dmgr->getTail(&type, &selLast, &dummy);
+					int lastMousePosition[2];
+					selLast.getMousePosition(lastMousePosition);
+					world_point2d worldLastMousePosition = 
+						wxGetApp().getWorldPointFromViewPoint(
+							lastMousePosition[0], lastMousePosition[1]);
+					//points
+					for(int i = 0; i < (int)selLast.getSelPoints()->size(); i ++){
+						hpl::aleph::map::SelPoint* selp = &selLast.getSelPoints()->at(i);
+						endpoint_data* ep = get_endpoint_data(selp->index);
+						ep->vertex.x = worldLastMousePosition.x + selp->offset[0] * div;
+						ep->vertex.y = worldLastMousePosition.y + selp->offset[1] * div;
+					}
+
+					//lines
+					for(int i = 0; i < (int)selLast.getSelLines()->size(); i ++){
+						hpl::aleph::map::SelLine* sell = &selLast.getSelLines()->at(i);
+						line_data* line = get_line_data(sell->index);
+						for(int j = 0; j < 2; j ++){
+							endpoint_data* ep = get_endpoint_data(line->endpoint_indexes[j]);
+							ep->vertex.x = worldLastMousePosition.x + sell->offset[j][0] * div;
+							ep->vertex.y = worldLastMousePosition.y + sell->offset[j][1] * div;
+						}
+					}
+
+					//polygons
+					for(int i = 0; i < (int)selLast.getSelPolygons()->size(); i ++){
+						hpl::aleph::map::SelPolygon* selp = &selLast.getSelPolygons()->at(i);
+						polygon_data* poly = get_polygon_data(selp->index);
+						int n = poly->vertex_count;
+						for(int j = 0; j < n; j ++){
+							endpoint_data* ep = get_endpoint_data(poly->endpoint_indexes[j]);
+							ep->vertex.x = worldLastMousePosition.x + selp->offset[j][0] * div;
+							ep->vertex.y = worldLastMousePosition.y + selp->offset[j][1] * div;
+						}
+					}
+
+					//objects
+					for(int i = 0; i < (int)selLast.getSelObjects()->size(); i ++){
+						hpl::aleph::map::SelObject* selp = &selLast.getSelObjects()->at(i);
+						map_object* obj = &SavedObjectList[selp->index];
+						obj->location.x = worldLastMousePosition.x + selp->offset[0] * div;
+						obj->location.y = worldLastMousePosition.y + selp->offset[1] * div;
+					}
+
+					//annotations
+					for(int i = 0; i < (int)selLast.getSelAnnotations()->size(); i ++){
+						hpl::aleph::map::SelAnnotation* selp =
+							&selLast.getSelAnnotations()->at(i);
+						map_annotation* annotation = &MapAnnotationList[selp->index];
+						annotation->location.x =
+							worldLastMousePosition.x + selp->offset[0] * div;
+						annotation->location.y =
+							worldLastMousePosition.y + selp->offset[1] * div;
+					}
+				}
+			}
+		}else{
+			//点の上で右クリックしたか？
+			int epIndex = hpl::aleph::map::getSelectPointIndex(mx ,my,
+				POINT_DISTANCE_EPSILON, zMin, zMax,
+				voffset[0], voffset[1], OFFSET_X_WORLD, OFFSET_Y_WORLD, div, 
+				smgr);
+			wxGetApp().popupEndpointIndex = epIndex;
+			if(epIndex != NONE){
+				//点ポップアップ表示
+				PopupMenu(&wxGetApp().pointPopupMenu);
+				return;
+			}
+			//点は押されなかった
+			int lineIndex = hpl::aleph::map::getSelectLineIndex(mx ,my,
+				LINE_DISTANCE_EPSILON, zMin, zMax,
+				voffset[0], voffset[1], OFFSET_X_WORLD, OFFSET_Y_WORLD, div, 
+				smgr);
+			wxGetApp().popupLineIndex = lineIndex;
+			if(lineIndex != NONE){
+				//線が押された
+				//→線プロパティをだす
+				PopupMenu(&wxGetApp().linePopupMenu);
+				return;
+			}
+		
+			//ポリゴン上で右クリックしたか？ TODO
+			int polygonIndex = hpl::aleph::map::getSelectPolygonIndex(mx ,my,
+				zMin, zMax,
+				voffset[0], voffset[1], OFFSET_X_WORLD, OFFSET_Y_WORLD, div, 
+				smgr);
+			wxGetApp().popupPolygonIndex = epIndex;
+			if(polygonIndex != NONE){
+				PopupMenu(&wxGetApp().polygonPopupMenu);
+				return;
+			}
 		}
     }
 
@@ -103,7 +180,7 @@ void MapEditorMainFrame::OnLeftUp(wxMouseEvent& ev)
             this->doLUpOnPolygonTool(ev);
         }
     }
-    emgr->setSelectingGroup(false);
+    emgr->exitSelectingGroup();
 
     //ポリゴン状態を更新します
     wxGetApp().getStockManager()->updatePolygonValidityStored();
@@ -121,7 +198,13 @@ void MapEditorMainFrame::doLUpOnArrowTool(wxMouseEvent& ev)
     //グリッドマネージャー
     hpl::aleph::view::HPLViewGridManager* vmgr = wxGetApp().getViewGridManager();
     hpl::aleph::HPLEventManager* emgr = wxGetApp().getEventManager();
+	hpl::aleph::map::HPLDoneHistory* dmgr = wxGetApp().getDoneHistoryManager();
 
+	//何かつかんでいたら行動履歴に残す
+	if(sel->isSelected() && emgr->isGrabItems()){
+		dmgr->push_back(
+			hpl::aleph::map::ActionType::Move, *sel);
+	}
     if(sel->isSelectOneObject()){
         //オブジェクトを選択していたら
         //オブジェクト情報ダイアログ表示
@@ -138,6 +221,9 @@ void MapEditorMainFrame::doLUpOnArrowTool(wxMouseEvent& ev)
 
 	//最初に選択項目に追加されたか
 	bool isFirst = true;
+
+	//つかみ中を解除
+	emgr->setGrabItems(false);
 
     if(emgr->isSelectingGroup()){
 
@@ -463,64 +549,74 @@ void MapEditorMainFrame::doMouseMotionOnArrowTool(wxMouseEvent& ev)
     hpl::aleph::view::HPLViewGridManager* vmgr = wxGetApp().getViewGridManager();
     int div = vmgr->getZoomDivision();
 
+	hpl::aleph::HPLEventManager* emgr = wxGetApp().getEventManager();
+
     int mx = ev.m_x;
     int my = ev.m_y;
 
-    if(sel->isSelected()){
+    if(sel->isSelected() && emgr->isGrabItems()){
         //選択中
         //選択物の移動
         
-        //ワールド座標系にする
-        world_point2d wmp = wxGetApp().getWorldPointFromViewPoint(mx, my);
+		//マウスが閾値以上動いていたらアイテムを動かす
+		//マウスが最後に選択した座標
+		int lastMousePosition[2];
+		sel->getMousePosition(lastMousePosition);
+		if(hpl::math::getLength(mx - lastMousePosition[0], my - lastMousePosition[1])
+			>SAME_POSITION_CLICK_THRESHOLD)
+		{
+			//ワールド座標系にする
+			world_point2d wmp = wxGetApp().getWorldPointFromViewPoint(mx, my);
 
-        //点
-        for(int i = 0; i < (int)sel->getSelPoints()->size(); i ++){
-            struct hpl::aleph::map::SelPoint* selp = &sel->getSelPoints()->at(i);
-			int index = selp->index;
-            //位置変更
-            get_endpoint_data(index)->vertex.x = wmp.x + selp->offset[0] * div;
-            get_endpoint_data(index)->vertex.y = wmp.y + selp->offset[1] * div;
+			//点
+			for(int i = 0; i < (int)sel->getSelPoints()->size(); i ++){
+				struct hpl::aleph::map::SelPoint* selp = &sel->getSelPoints()->at(i);
+				int index = selp->index;
+				//位置変更
+				get_endpoint_data(index)->vertex.x = wmp.x + selp->offset[0] * div;
+				get_endpoint_data(index)->vertex.y = wmp.y + selp->offset[1] * div;
 
-        }
+			}
 
-        //線
-        for(int i = 0; i < (int)sel->getSelLines()->size(); i ++){
-            struct hpl::aleph::map::SelLine* sell = &sel->getSelLines()->at(i);
-            int index = sell->index;
-            line_data* line = get_line_data(index);
-            for(int j = 0; j < 2; j ++){
-                get_endpoint_data(line->endpoint_indexes[j])->vertex.x =
-                    wmp.x + sell->offset[j][0] * div;
-                get_endpoint_data(line->endpoint_indexes[j])->vertex.y =
-                    wmp.y + sell->offset[j][1] * div;
-            }
-        }
+			//線
+			for(int i = 0; i < (int)sel->getSelLines()->size(); i ++){
+				struct hpl::aleph::map::SelLine* sell = &sel->getSelLines()->at(i);
+				int index = sell->index;
+				line_data* line = get_line_data(index);
+				for(int j = 0; j < 2; j ++){
+					get_endpoint_data(line->endpoint_indexes[j])->vertex.x =
+						wmp.x + sell->offset[j][0] * div;
+					get_endpoint_data(line->endpoint_indexes[j])->vertex.y =
+						wmp.y + sell->offset[j][1] * div;
+				}
+			}
 
-        //ポリゴン
-        for(int i = 0; i < (int)sel->getSelPolygons()->size(); i ++){
-            struct hpl::aleph::map::SelPolygon* selp = &sel->getSelPolygons()->at(i);
-            polygon_data* poly = get_polygon_data(selp->index);
-            for(int j = 0; j < selp->num; j ++){
-                get_endpoint_data(poly->endpoint_indexes[j])->vertex.x =
-                    wmp.x + selp->offset[j][0] * div;
-                get_endpoint_data(poly->endpoint_indexes[j])->vertex.y =
-                    wmp.y + selp->offset[j][1] * div;
-            }
-        }
+			//ポリゴン
+			for(int i = 0; i < (int)sel->getSelPolygons()->size(); i ++){
+				struct hpl::aleph::map::SelPolygon* selp = &sel->getSelPolygons()->at(i);
+				polygon_data* poly = get_polygon_data(selp->index);
+				for(int j = 0; j < selp->num; j ++){
+					get_endpoint_data(poly->endpoint_indexes[j])->vertex.x =
+						wmp.x + selp->offset[j][0] * div;
+					get_endpoint_data(poly->endpoint_indexes[j])->vertex.y =
+						wmp.y + selp->offset[j][1] * div;
+				}
+			}
 
-        //オブジェクト
-        for(int i = 0; i < (int)sel->getSelObjects()->size(); i ++){
-            struct hpl::aleph::map::SelObject* selo = &sel->getSelObjects()->at(i);
-            SavedObjectList[selo->index].location.x = wmp.x + selo->offset[0] * div;
-            SavedObjectList[selo->index].location.y = wmp.y + selo->offset[1] * div;
-        }
+			//オブジェクト
+			for(int i = 0; i < (int)sel->getSelObjects()->size(); i ++){
+				struct hpl::aleph::map::SelObject* selo = &sel->getSelObjects()->at(i);
+				SavedObjectList[selo->index].location.x = wmp.x + selo->offset[0] * div;
+				SavedObjectList[selo->index].location.y = wmp.y + selo->offset[1] * div;
+			}
 
-		//アノテーション
-		//<en> annotation string
-		for(int i = 0; i < (int)sel->getSelAnnotations()->size(); i ++){
-			hpl::aleph::map::SelAnnotation* sela = &sel->getSelAnnotations()->at(i);
-			MapAnnotationList[sela->index].location.x = wmp.x + sela->offset[0] * div;
-			MapAnnotationList[sela->index].location.y = wmp.y + sela->offset[1] * div;
+			//アノテーション
+			//<en> annotation string
+			for(int i = 0; i < (int)sel->getSelAnnotations()->size(); i ++){
+				hpl::aleph::map::SelAnnotation* sela = &sel->getSelAnnotations()->at(i);
+				MapAnnotationList[sela->index].location.x = wmp.x + sela->offset[0] * div;
+				MapAnnotationList[sela->index].location.y = wmp.y + sela->offset[1] * div;
+			}
 		}
     }
 }
@@ -673,9 +769,12 @@ void MapEditorMainFrame::OnKeyDown(wxKeyEvent& ev)
 	int code = ev.GetKeyCode();
 	wxCommandEvent dummy;
 	if(ctrl){
-		if(code == 'c'){
+		if(code == 'C'){
 			hpl::error::caution("Ctrl+C");
 			this->OnCopy(dummy);
+		}else if(code == 'V'){
+			hpl::error::caution("Ctrl+C");
+			this->OnPaste(dummy);
 		}
 	}
 }

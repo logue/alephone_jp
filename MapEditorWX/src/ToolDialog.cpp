@@ -126,7 +126,7 @@ void ToolDialog::OnLeftDown(wxMouseEvent& ev)
             if(i != oldIndex){
                 //TODO
                 //範囲選択モードを解除
-                emgr->setSelectingGroup(false);
+                emgr->exitSelectingGroup();
                 //選択情報を解除
                 //wxGetApp().selectData.clear();
             }

@@ -85,7 +85,7 @@ void MapEditorMainFrame::OnNew(wxCommandEvent& ev)
     Refresh();
 }
 
-static void loadLevel(int i){
+void MapEditorMainFrame::loadLevel(int i){
     bool check = load_level_from_map(wxGetApp().editLevelIndex);
     if(!check){
         wxMessageBox(_T("failed"));
@@ -106,6 +106,9 @@ static void loadLevel(int i){
 			break;
 		}
 	}
+
+	//‘I‘ðó‘Ô•\‚ð‰Šú‰»
+    wxGetApp().getStockManager()->updateSelects(wxGetApp().selectData);
 }
 void MapEditorMainFrame::OnOpen(wxCommandEvent& WXUNUSED(ev))
 {

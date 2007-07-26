@@ -8,6 +8,7 @@ hpl::aleph::HPLEventManager::HPLEventManager()
     this->setToolType(ToolType::TI_ARROW);
     this->setEditModeType(EditModeType::EM_DRAW);
     this->setSelectingGroup(false);
+	this->setGrabItems(false);
 }
 hpl::aleph::HPLEventManager::~HPLEventManager()
 {
@@ -64,4 +65,13 @@ void hpl::aleph::HPLEventManager::getLastMouseSelectPoint(int point[2])
 {
 	point[0] = lastMouseSelectPoint[0];
 	point[1] = lastMouseSelectPoint[1];
+}
+
+void hpl::aleph::HPLEventManager::setGrabItems(bool grab)
+{
+	this->isGrabItems_ = grab;
+}
+bool hpl::aleph::HPLEventManager::isGrabItems()
+{
+	return this->isGrabItems_;
 }
