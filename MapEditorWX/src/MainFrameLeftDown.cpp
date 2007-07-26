@@ -132,7 +132,8 @@ void MapEditorMainFrame::doLButtonOnArrowTool(wxMouseEvent& ev)
 			
 			//何か一つ選択しているか判定
 			if(this->tryToSelectOneItem(ev)){
-				this->selectOneThing(mx, my);
+				//ひとつ選択時の後処理
+				this->selectOneThingAfter(mx, my);
 			}else{
 				this->selectNothing();
 			}
@@ -141,7 +142,7 @@ void MapEditorMainFrame::doLButtonOnArrowTool(wxMouseEvent& ev)
 		//何も選択していない
 		//一つを選択できるか試してみます
 		if(this->tryToSelectOneItem(ev)){
-			this->selectOneThing(mx, my);
+			this->selectOneThingAfter(mx, my);
 		}else{
 			//選択されなかった
 			this->selectNothing();
@@ -170,11 +171,39 @@ void MapEditorMainFrame::selectNothing()
 	the function called when select one thing
 	@param mx, my マウス座標 mouse cursor position
 */
-void MapEditorMainFrame::selectOneThing(int mx, int my)
+void MapEditorMainFrame::selectOneThingAfter(int mx, int my)
 {
 	//選択されていない項目に関するダイアログの設定を解除します
 	this->unselect();
 	
+	//オフセット設定
+	hpl::aleph::map::setupSelectDataGroupOffsets(mx, my,
+		&wxGetApp().selectData, voffset[0], voffset[1],
+		OFFSET_X_WORLD, OFFSET_Y_WORLD, div);
+	
+	hpl::aleph::map::HPLSelectData* sel = &wxGetApp().selectData;
+	//種類に応じてダイアログを表示する
+	if(sel->isSelectOneObject()){
+        this->objPropDialog.setObjIndex(i);
+		this->objPropDialog.Show(true);
+	}else{
+        this->objPropDialog.setObjIndex(NONE);
+	}
+	if(sel->isSelectOnePoint()){
+	}else{
+	}
+	if(sel->isSelectOneAnnotation()){
+	}else{
+	}
+	if(sel->isSelectOneLine()){
+	}else{
+	}
+	if(sel->isSelectOnePolygon()){
+        this->polyPropDialog.setPolyIndex(polyIndex);
+        this->polyPropDialog.Show(true);
+	}else{
+        this->polyPropDialog.setPolyIndex(NONE);
+	}
 
 	//選択できたので
 	//範囲選択は解除します
@@ -266,27 +295,12 @@ bool MapEditorMainFrame::tryToSelectOneItem(wxMouseEvent& ev)
 			}
 
             //選択追加
-            int vpoint[2];
-            wxGetApp().getViewPointFromWorldPoint(x, y, vpoint);
             int offset[2];
-            offset[0] = vpoint[0] - mx;
-            offset[1] = vpoint[1] - my;
 
-			//選択に成功した場合の前処理
-			this->successSelectOneThing(mx, my);
             sel->addSelObject(i, offset);
-            //オブジェクトのプロパティ・ダイアログを表示する
-            //TODO
-            this->objPropDialog.setObjIndex(i);
-            this->objPropDialog.Show(true);
             return true;
         }
     }
-
-    //no obj selected
-    //TODO 選択ID関連の実装
-    this->objPropDialog.setObjIndex(NONE);
-
 
     //////////
     //点
@@ -312,11 +326,7 @@ bool MapEditorMainFrame::tryToSelectOneItem(wxMouseEvent& ev)
 				successSelectOneThing();
 			}
             //見つかった
-            int vpoint[2];
-            wxGetApp().getViewPointFromWorldPoint(ep->vertex, vpoint);
             int offset[2];
-            offset[0] = vpoint[0] - mx;
-            offset[1] = vpoint[1] - my;
             sel->addSelPoint(i, offset);
             return true;
         }
@@ -343,6 +353,7 @@ bool MapEditorMainFrame::tryToSelectOneItem(wxMouseEvent& ev)
 		sel->addSelAnnotation(annotationIndex, offset);
 		return true;
 	}
+
     /////////////////////////
     //lines
 	int lineIndex = hpl::aleph::map::getSelectLineIndex(mx ,my,
@@ -359,16 +370,8 @@ bool MapEditorMainFrame::tryToSelectOneItem(wxMouseEvent& ev)
 		endpoint_data* end = get_endpoint_data(line->endpoint_indexes[1]);
 
         //選択
-        int vstart[2];
-        int vend[2];
-        wxGetApp().getViewPointFromWorldPoint(start->vertex, vstart);
-        wxGetApp().getViewPointFromWorldPoint(end->vertex, vend);
 
         int offset[2][2];
-        offset[0][0] = vstart[0] - mx;
-        offset[0][1] = vstart[1] - my;
-        offset[1][0] = vend[0] - mx;
-        offset[1][1] = vend[1] - my;
         sel->addSelLine(lineIndex, offset);
         return true;
     }
@@ -391,18 +394,6 @@ bool MapEditorMainFrame::tryToSelectOneItem(wxMouseEvent& ev)
         int n = poly->vertex_count;
         int offset[MAXIMUM_VERTICES_PER_POLYGON][2];
         
-        //ポリゴンプロパティ表示
-        this->polyPropDialog.setPolyIndex(polyIndex);
-        this->polyPropDialog.Show(true);
-
-        //オフセット
-        for(int j = 0; j < n; j ++){
-            int vpoint[2];
-            wxGetApp().getViewPointFromWorldPoint(get_endpoint_data(poly->endpoint_indexes[j])->vertex, vpoint);
-            offset[j][0] = vpoint[0] - mx;
-            offset[j][1] = vpoint[1] - my;
-        }
-
         sel->addSelPolygon(polyIndex, offset, n);
         return true;
     }
@@ -412,7 +403,7 @@ bool MapEditorMainFrame::tryToSelectOneItem(wxMouseEvent& ev)
     return false;
 }
 //選択に成功した場合の前処理
-void MapEditorMainFrame::successSelectOneThing()
+void MapEditorMainFrame::selectOneThingBefore()
 {
 	//選択解除
 	wxGetApp().selectData.clear();

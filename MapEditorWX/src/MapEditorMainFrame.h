@@ -435,13 +435,25 @@ private:
 	*/
 	void unselect();
 	/**
+		ひとつを選択した場合の後処理
+		・範囲選択の解除
+		・ダイアログの表示・設定・解除
+		・アンドゥ機能への記録追加
+		・最後の選択ポイントを記録
 		the function called when select one thing
 		@param mx, my マウス座標 mouse cursor position
 	*/
-	void selectOneThing(int mx, int my);
-	//選択に成功した場合の前処理
-	void successSelectOneThing();
+	void selectOneThingAfter(int mx, int my);
 
+	/**
+		選択に成功した場合の前処理
+		・今まで選択していたアイテムを忘れ去る
+	*/
+	void selectOneThingBefore();
+
+	/**
+		ひとつも
+	*/
 	void selectNothing();
 
 	wxBrush getTexturedBrush(int shapesDescriptor);
