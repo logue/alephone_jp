@@ -58,7 +58,7 @@ bool hpl::aleph::HPLCopyPasteManager::paste(int div)
 	for(int i = 0; i < (int)endpointList->size(); i ++){
 		//データをコピーする
 		endpoint_data ep;
-		memcpy(&ep, &endpointList[i], sizeof(endpoint_data));
+		memcpy(&ep, &endpointList->at(i), sizeof(endpoint_data));
 
 		//位置をずらす
 		ep.vertex.x += storedDataDiffPointDelta[0] * div;
@@ -74,7 +74,7 @@ bool hpl::aleph::HPLCopyPasteManager::paste(int div)
 	for(int i = 0; i < (int)lineList->size(); i ++){
 		//データをコピーする
 		line_data line;
-		memcpy(&line, &lineList[i], sizeof(line_data));
+		memcpy(&line, &lineList->at(i), sizeof(line_data));
 
 		//線自体は位置情報を持たないため、ずらす作業はいらない
 
@@ -119,7 +119,7 @@ bool hpl::aleph::HPLCopyPasteManager::paste(int div)
 	std::vector<map_object>* objectList = this->storedMapData.getObjects();
 	for(int i = 0; i < (int)objectList->size(); i ++){
 		map_object obj;
-		memcpy(&obj, &objectList[i], sizeof(map_object));
+		memcpy(&obj, &objectList->at(i), sizeof(map_object));
 		obj.location.x += storedDataDiffPointDelta[0] * div;
 		obj.location.y += storedDataDiffPointDelta[1] * div;
 		int newIndex = hpl::aleph::map::addMapSavedObject(obj);

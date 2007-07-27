@@ -770,11 +770,14 @@ void MapEditorMainFrame::OnKeyDown(wxKeyEvent& ev)
 	wxCommandEvent dummy;
 	if(ctrl){
 		if(code == 'C'){
-			hpl::error::caution("Ctrl+C");
+			//Copy!
 			this->OnCopy(dummy);
 		}else if(code == 'V'){
-			hpl::error::caution("Ctrl+C");
+			//Paste!
 			this->OnPaste(dummy);
+		}else if(code == 'Z'){
+			//Undo!
+			this->OnUndo(dummy);
 		}
 	}
 }

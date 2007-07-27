@@ -278,3 +278,8 @@ WinBase.h
 が悪さしていた。
 //#define Yield()
 にしたら黙った
+
+・ポリゴンだけを選択している場合はEndpoints/Lines/Sidesもコピーする（selectData->realData）
+・ポリゴンを先に追加。
+・Side/Line/Endpoint/Objectはポリゴンが存在していなければポリゴンインデックスをNONEにする。
+・Sideはポリゴンが存在していない場合追加しない
