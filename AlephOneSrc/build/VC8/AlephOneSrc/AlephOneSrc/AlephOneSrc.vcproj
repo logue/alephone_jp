@@ -145,7 +145,7 @@
 		</Configuration>
 		<Configuration
 			Name="Debug Unicode|Win32"
-			OutputDirectory="..\..\..\..\lib"
+			OutputDirectory="..\..\..\..\..\AlephOneSrc\lib"
 			IntermediateDirectory="$(ConfigurationName)"
 			ConfigurationType="4"
 			CharacterSet="1"
