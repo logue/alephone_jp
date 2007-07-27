@@ -68,6 +68,13 @@ bool hpl::aleph::HPLCopyPasteManager::paste(int div)
 		endpointIndexMap[i] = newIndex;
 	}
 	
+	//add polygons
+	std::vector<polygon_data>* polygonList = this->storedMapData.getPolygons();
+	for(int i = 0; i < (int)polygonList->size(); i ++){
+		int newIndex = hpl::aleph::map::addPolygon(polygonList->at(i));
+		polygonIndexMap[i] = newIndex;
+	}
+
 	//add lines
 	std::vector<line_data>* lineList = this->storedMapData.getLines();
 	std::vector<side_data>* sideList = this->storedMapData.getSides();
@@ -78,6 +85,7 @@ bool hpl::aleph::HPLCopyPasteManager::paste(int div)
 
 		//ü©‘Ì‚ÍˆÊ’uî•ñ‚ğ‚½‚È‚¢‚½‚ßA‚¸‚ç‚·ì‹Æ‚Í‚¢‚ç‚È‚¢
 
+		
 		int newIndex = hpl::aleph::map::addLine(line);
 		lineIndexMap[i] = newIndex;
 		if(line.clockwise_polygon_side_index != NONE &&
@@ -100,21 +108,17 @@ bool hpl::aleph::HPLCopyPasteManager::paste(int div)
 		}else{
 			line.counterclockwise_polygon_side_index = NONE;
 		}
+		
 	}
 	
-	//add polygons
-	std::vector<polygon_data>* polygonList = this->storedMapData.getPolygons();
-	for(int i = 0; i < (int)polygonList->size(); i ++){
-		int newIndex = hpl::aleph::map::addPolygon(polygonList->at(i));
-		polygonIndexMap[i] = newIndex;
-	}
 	
-/*	//add sides
+	/*
+	//add sides
 	for(int i = 0; i < (int)sideList->size(); i ++){
 		int newIndex = hpl::aleph::map::addSide(sideList->at(i));
 		sideIndexMap[i] = newIndex;
-	}
-*/	
+	}*/
+	
 	//add objects
 	std::vector<map_object>* objectList = this->storedMapData.getObjects();
 	for(int i = 0; i < (int)objectList->size(); i ++){

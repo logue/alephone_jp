@@ -46,15 +46,21 @@ namespace map{
         void removeAll();
 
 	private:
-        void addObject(int index, std::map<int, int>& objectIndexMap);
-        void addPoint(int index, std::map<int, int>& pointIndexMap);
-        void addLine(int index, std::map<int, int>& lineIndexMap
-											  , std::map<int, int>& pointIndexMap);
+        void addObject(int index, std::map<int, int>& objectIndexMap,
+			hpl::aleph::map::HPLSelectData* sel);
+        void addPoint(int index, std::map<int, int>& pointIndexMap,
+			hpl::aleph::map::HPLSelectData* sel);
+        void addLine(int index, std::map<int, int>& lineIndexMap,
+			std::map<int, int>& pointIndexMap,
+			std::map<int, int>& sideIndexMap,
+			hpl::aleph::map::HPLSelectData* sel);
         void addPolygon(int index, std::map<int, int>& polygonIndexMap,
 												 std::map<int, int>& lineIndexMap,
 												 std::map<int, int>& pointIndexMap,
-												 std::map<int, int>& sideIndexMap);
-        void addSide(int index, std::map<int, int>& sideIndexMap);
+												 std::map<int, int>& sideIndexMap,
+			hpl::aleph::map::HPLSelectData* sel);
+        void addSide(int index, std::map<int, int>& sideIndexMap,
+			hpl::aleph::map::HPLSelectData* sel);
 
 /*		bool containsPoint(int index);
 		bool containsLine(int index);

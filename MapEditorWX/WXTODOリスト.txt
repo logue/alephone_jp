@@ -283,3 +283,4 @@ WinBase.h
 ・ポリゴンを先に追加。
 ・Side/Line/Endpoint/Objectはポリゴンが存在していなければポリゴンインデックスをNONEにする。
 ・Sideはポリゴンが存在していない場合追加しない
+

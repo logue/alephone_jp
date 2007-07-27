@@ -779,5 +779,34 @@ void MapEditorMainFrame::OnKeyDown(wxKeyEvent& ev)
 			//Undo!
 			this->OnUndo(dummy);
 		}
+	}else{
+		if(code == WXK_DELETE){
+			hpl::aleph::map::HPLSelectData* sel = &wxGetApp().selectData;
+			hpl::aleph::HPLStockManager* smgr = wxGetApp().getStockManager();
+			if(sel->isSelected()){
+				//‘I‘ğ‘ÎÛ‚ğíœ‘ÎÛ‚Æ‚·‚é
+				for(int i = 0; i < sel->getSelPoints()->size(); i ++){
+					hpl::aleph::map::SelPoint* opt = &sel->getSelPoints()->at(i);
+					smgr->deletePoint(opt->index);
+				}
+				//lines
+				for(int i = 0; i < sel->getSelLines()->size(); i ++){
+					smgr->deleteLine(sel->getSelLines()->at(i).index);
+				}
+				/*
+				//sides
+				for(int i = 0; i < sel->getSelSides()->size(); i ++){
+					smgr->deleteSide(sel->getSelSides()->at(i).index);
+				}*/
+				//polygons
+				for(int i = 0; i < sel->getSelPolygons()->size(); i ++){
+					smgr->deletePolygon(sel->getSelPolygons()->at(i).index);
+				}
+				//objects
+				for(int i = 0; i < sel->getSelObjects()->size(); i ++){
+					smgr->deleteObject(sel->getSelObjects()->at(i).index);
+				}
+			}
+		}
 	}
 }

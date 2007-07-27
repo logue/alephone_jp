@@ -19,34 +19,37 @@ void hpl::aleph::map::HPLRealMapData::set(hpl::aleph::map::HPLSelectData& copyTa
     removeAll();
 
 	//<int, int> = <originalIndex, newIndex>
-	std::map<int, int> pointIndexMap;
-	
-    //points
-    for(int i = 0; i < (int)copyTargetData.getSelPoints()->size(); i ++){
-        int index = copyTargetData.getSelPoints()->at(i).index;
-		addPoint(index, pointIndexMap);
-    }
-
-	std::map<int, int> lineIndexMap;
-    //lines
-    for(int i = 0; i < (int)copyTargetData.getSelLines()->size(); i ++){
-        addLine(copyTargetData.getSelLines()->at(i).index, lineIndexMap, pointIndexMap);
-
-    }
 
 	std::map<int, int> polygonIndexMap;
 	std::map<int, int> sideIndexMap;
+	std::map<int, int> lineIndexMap;
+	std::map<int, int> pointIndexMap;
     //polygons
     for(int i = 0; i < (int)copyTargetData.getSelPolygons()->size(); i ++){
         int index = copyTargetData.getSelPolygons()->at(i).index;
-		addPolygon(index, polygonIndexMap, lineIndexMap, pointIndexMap, sideIndexMap);
+		addPolygon(index, polygonIndexMap, lineIndexMap, pointIndexMap, sideIndexMap,
+			&copyTargetData);
     }
+
+    //lines
+    for(int i = 0; i < (int)copyTargetData.getSelLines()->size(); i ++){
+        addLine(copyTargetData.getSelLines()->at(i).index, lineIndexMap, pointIndexMap,
+			sideIndexMap, &copyTargetData);
+    }
+
+    //points
+    for(int i = 0; i < (int)copyTargetData.getSelPoints()->size(); i ++){
+        int index = copyTargetData.getSelPoints()->at(i).index;
+		addPoint(index, pointIndexMap, &copyTargetData);
+    }
+
+
 
 	//objects
 	std::map<int, int> objectIndexMap;
     for(int i = 0; i < (int)copyTargetData.getSelObjects()->size(); i ++){
         int index = copyTargetData.getSelObjects()->at(i).index;
-        addObject(index, objectIndexMap);
+        addObject(index, objectIndexMap, &copyTargetData);
     }
 
 	//////////////////////////////
@@ -72,7 +75,12 @@ void hpl::aleph::map::HPLRealMapData::set(hpl::aleph::map::HPLSelectData& copyTa
 		objectIndexMap);
 }
 
-void hpl::aleph::map::HPLRealMapData::addObject(int index, std::map<int, int>& objectIndexMap){
+void hpl::aleph::map::HPLRealMapData::addObject(int index, std::map<int, int>& objectIndexMap,
+			hpl::aleph::map::HPLSelectData* sel){
+	if(objectIndexMap.find(index) != objectIndexMap.end()){
+		//すでに追加されている
+		return;
+	}
     map_object* org = &SavedObjectList[index];
     map_object copy;
     memcpy(&copy, org, sizeof(map_object));
@@ -80,8 +88,11 @@ void hpl::aleph::map::HPLRealMapData::addObject(int index, std::map<int, int>& o
 
 	//new index registering
 	objectIndexMap[index] = (int)realObjects.size() - 1;
+
+	//乗っかっているポリゴンのインデックスは後で適当に変えられてしまうので放置
 }
-void hpl::aleph::map::HPLRealMapData::addPoint(int index, std::map<int, int>& pointIndexMap)
+void hpl::aleph::map::HPLRealMapData::addPoint(int index, std::map<int, int>& pointIndexMap,
+			hpl::aleph::map::HPLSelectData* sel)
 {
 	//既に追加していないかチェック
 	if(pointIndexMap.find(index) != pointIndexMap.end()){
@@ -94,10 +105,17 @@ void hpl::aleph::map::HPLRealMapData::addPoint(int index, std::map<int, int>& po
 
 	//new index registering
 	pointIndexMap[index] = (int)realPoints.size() - 1;
+
+	//点のサポートポリゴンが選択内に存在しない場合、NONEとする
+	if(!sel->containsPolygon(copy.supporting_polygon_index)){
+		copy.supporting_polygon_index = NONE;
+	}
 }
 
-void hpl::aleph::map::HPLRealMapData::addLine(int index, std::map<int, int>& lineIndexMap
-											  , std::map<int, int>& pointIndexMap)
+void hpl::aleph::map::HPLRealMapData::addLine(int index, std::map<int, int>& lineIndexMap,
+											  std::map<int, int>& pointIndexMap,
+											  std::map<int, int>& sideIndexMap,
+			hpl::aleph::map::HPLSelectData* sel)
 {
 	if(lineIndexMap.find(index) != lineIndexMap.end()){
 		return;
@@ -113,13 +131,38 @@ void hpl::aleph::map::HPLRealMapData::addLine(int index, std::map<int, int>& lin
 	//線に所属する点を追加する <en> add points belonged to the line
 	for(int i = 0; i < 2; i ++){
 		int epointIndex = copy.endpoint_indexes[i];
-		addPoint(epointIndex, pointIndexMap);
+		addPoint(epointIndex, pointIndexMap, sel);
+	}
+
+	//時計回り（右側）ポリゴンの確認
+	if(sel->containsPolygon(copy.clockwise_polygon_owner)){
+		//Sideもコピー
+		if(copy.clockwise_polygon_side_index != NONE){
+			addSide(copy.clockwise_polygon_side_index, sideIndexMap, sel);
+		}
+	}else{
+		//そのポリゴンは追加される予定はない
+		//よってそのSideは登録しない
+		copy.clockwise_polygon_side_index = NONE;
+	}
+
+	//反対回り（左側）ポリゴンの確認
+	if(sel->containsPolygon(copy.counterclockwise_polygon_owner)){
+		//Sideもコピー
+		if(copy.counterclockwise_polygon_side_index != NONE){
+			addSide(copy.counterclockwise_polygon_side_index, sideIndexMap, sel);
+		}
+	}else{
+		//そのポリゴンは追加される予定はない
+		//よってそのSideは登録しない
+		copy.counterclockwise_polygon_side_index = NONE;
 	}
 }
 void hpl::aleph::map::HPLRealMapData::addPolygon(int index, std::map<int, int>& polygonIndexMap,
 												 std::map<int, int>& lineIndexMap,
 												 std::map<int, int>& pointIndexMap,
-												 std::map<int, int>& sideIndexMap)
+												 std::map<int, int>& sideIndexMap,
+			hpl::aleph::map::HPLSelectData* sel)
 {
 	//すでに追加していたらスキップ
 	if(polygonIndexMap.find(index) != polygonIndexMap.end()){
@@ -137,13 +180,13 @@ void hpl::aleph::map::HPLRealMapData::addPolygon(int index, std::map<int, int>& 
 	int vertexCount = copy.vertex_count;
 	for(int i = 0; i < vertexCount; i ++){
 		int lineIndex = copy.line_indexes[i];
-		//既に追加した線はスキップ
+/*		//既に追加した線はスキップ
 		if(lineIndexMap.find(lineIndex) != lineIndexMap.end()){
 			continue;
-		}
-		addLine(lineIndex, lineIndexMap, pointIndexMap);
+		}*/
+		addLine(lineIndex, lineIndexMap, pointIndexMap, sideIndexMap, sel);
 
-		//線に所属し、かつポリゴン側のSideを追加する
+/*		//線に所属し、かつポリゴン側のSideを追加する
 		//これ以外の線はSideが追加されないのでNONEになる
 		//<en> add side belonged to the line which belonged to this polygon
 		//TODO
@@ -151,12 +194,23 @@ void hpl::aleph::map::HPLRealMapData::addPolygon(int index, std::map<int, int>& 
 		if(sideIndex != NONE){
 			addSide(sideIndex, sideIndexMap);
 		}
+		*/
 	}
 
 	
 }
-void hpl::aleph::map::HPLRealMapData::addSide(int index, std::map<int, int>& sideIndexMap){
+void hpl::aleph::map::HPLRealMapData::addSide(int index, std::map<int, int>& sideIndexMap,
+			hpl::aleph::map::HPLSelectData* sel)
+{
+	if(sideIndexMap.find(index) != sideIndexMap.end()){
+		//すでに追加していたらスキップ
+		return;
+	}
     side_data* org = get_side_data(index);
+	//ポリゴンが追加される予定がない場合追加しない
+	if(!sel->containsPolygon(org->polygon_index)){
+		return;
+	}
     side_data copy;
     memcpy(&copy, org, sizeof(side_data));
     this->realSides.push_back(copy);

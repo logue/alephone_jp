@@ -42,6 +42,7 @@ int hpl::aleph::map::addSide(side_data side, bool isClockwise)
     //・ポリゴン
     //・Side
     //TODO 左右の確認が必要
+	/*
     side_data* newSide = get_side_data(index);
     line_data* line = get_line_data(newSide->line_index);
 #ifdef __WXDEBUG__
@@ -82,7 +83,7 @@ int hpl::aleph::map::addSide(side_data side, bool isClockwise)
     }
 #endif
     poly->side_indexes[lineIndexInPolygon] = index;
-
+*/
 
 	return index;
 }
@@ -115,10 +116,10 @@ int hpl::aleph::map::addPolygon(polygon_data polygon)
 #else
         if(!ep1)continue;
 #endif
-        //関連ポリゴンの指定が無ければ指定
+/*        //関連ポリゴンの指定が無ければ指定
         if(ep1->supporting_polygon_index == NONE){
             ep1->supporting_polygon_index = index;
-        }
+        }*/
 
         endpoint_data* ep2 = get_endpoint_data(poly->endpoint_indexes[next]);
 #ifdef __WXDEBUG__
@@ -127,7 +128,7 @@ int hpl::aleph::map::addPolygon(polygon_data polygon)
         if(!ep2)continue;
 #endif
 
-        //線
+/*        //線
         line_data* line = get_line_data(poly->line_indexes[i]);
 #ifdef __WXDEBUG__
         wxASSERT(line);
@@ -153,7 +154,7 @@ int hpl::aleph::map::addPolygon(polygon_data polygon)
             continue;
 //            hpl::error::halt("invalid polygon frame");
 #endif
-        }
+        }*/
     }
 	return index;
 }
@@ -163,6 +164,7 @@ int hpl::aleph::map::addMapSavedObject(map_object object)
 	//TODO
 	//プレースメント情報に付加
 
+	//TODO 追加したとき、その点が乗るポリゴンにオブジェクトのポリゴン番号を設定する
 	//TODO どれを集計すれば良いのか？
 //	dynamic_world->object_count ++;// SavedObjectList.size();
 	dynamic_world->initial_objects_count = (int16)SavedObjectList.size();
@@ -170,7 +172,7 @@ int hpl::aleph::map::addMapSavedObject(map_object object)
 
     map_object* obj = &SavedObjectList[index];
 
-    //依存する項目を修正する
+/*    //依存する項目を修正する
     //・ポリゴン
     polygon_data* poly = get_polygon_data(obj->polygon_index);
 #ifdef __WXDEBUG__
@@ -182,7 +184,7 @@ int hpl::aleph::map::addMapSavedObject(map_object object)
 #endif
     if(poly->first_object == NONE){
         poly->first_object = index;
-    }
+    }*/
 	return index;
 }
 int hpl::aleph::map::addAnnotation(map_annotation annotation)

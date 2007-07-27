@@ -684,6 +684,8 @@ void MapEditorMainFrame::doLButtonOnSkullTool(wxMouseEvent& ev)
             //このポリゴン上に置く
             //TODO
             int flags = 0;
+
+			//ダイアログからオブジェクトを作成する
             map_object objv = this->objPropDialog.getObject();
             objv.polygon_index = i;
             int newIndex = hpl::aleph::map::addMapSavedObject(objv);
