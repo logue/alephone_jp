@@ -238,8 +238,14 @@ void MapEditorMainFrame::OnCopy(wxCommandEvent& ev)
 void MapEditorMainFrame::OnPaste(wxCommandEvent& ev)
 {
     //TODO デバッグ
+	hpl::aleph::map::HPLSelectData* sel = &wxGetApp().selectData;
 	int div = wxGetApp().getViewGridManager()->getZoomDivision();
-	if(!wxGetApp().getCopyPasteManager()->paste(div)){
+	if(wxGetApp().getCopyPasteManager()->paste(div, sel)){
+		//成功
+		//更新
+		wxGetApp().getStockManager()->updateDeletes();
+		wxGetApp().getStockManager()->updateSelects(sel);
+	}else{
 		//失敗
 	}
 }

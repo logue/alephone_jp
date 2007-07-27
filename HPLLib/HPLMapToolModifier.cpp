@@ -403,7 +403,9 @@ void hpl::aleph::map::changeIndexMapping(
 				//ƒ|ƒŠƒSƒ“‚ğ“o˜^‚µ‚Ä‚¢‚é‚©
 				std::map<int, int>::iterator it = polygonIndexMap.find(clockPoly);
 				if(it != polygonIndexMap.end()){
+					//ƒ|ƒŠƒSƒ“‚ª‘¶İ‚·‚é
 					if(clockSide != NONE && sideIndexMap.find(clockSide) != sideIndexMap.end()){
+						//Side‚à‘¶İ‚·‚é
 						clockSide = sideIndexMap[clockSide];
 					}else{
 						clockSide = NONE;

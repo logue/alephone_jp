@@ -167,7 +167,7 @@
 		</Configuration>
 		<Configuration
 			Name="Debug Unicode DLL|Win32"
-			OutputDirectory="$(SolutionDir)$(ConfigurationName)"
+			OutputDirectory="..\..\..\..\..\MapEditorWX"
 			IntermediateDirectory="$(ConfigurationName)"
 			ConfigurationType="1"
 			>
@@ -188,6 +188,9 @@
 			/>
 			<Tool
 				Name="VCCLCompilerTool"
+				AdditionalIncludeDirectories="..\..\..\..\..\..\marathon;..\..\..\..\..\AlephOneSrc;..\..\..\..\..\MapEditorCommonSrc"
+				PreprocessorDefinitions="WIN32;_DEBUG;_WINDOWS;SDL;__WIN32__;__WINDOWS__;_WINDOWS;__WXMSW__;__WXDEBUG__;WXUSINGDLL;WX;UNICODE;__wxUSEUNICODE__;WX"
+				RuntimeLibrary="3"
 			/>
 			<Tool
 				Name="VCManagedResourceCompilerTool"
@@ -200,6 +203,9 @@
 			/>
 			<Tool
 				Name="VCLinkerTool"
+				AdditionalDependencies="SDL.lib ..\..\..\..\..\AlephOneSrc\lib\AlephOneSrcD.lib wxmsw28ud_core.lib wxbase28ud.lib"
+				OutputFile="$(OutDir)\$(ProjectName)DU.exe"
+				AdditionalLibraryDirectories="&quot;C:\wxWidgets-2.8.4\lib\vc_dll&quot;"
 			/>
 			<Tool
 				Name="VCALinkTool"
@@ -228,6 +234,8 @@
 		</Configuration>
 		<Configuration
 			Name="Release Unicode DLL|Win32"
+			OutputDirectory="..\..\..\..\..\MapEditorWX"
+			IntermediateDirectory="$(ConfigurationName)"
 			ConfigurationType="1"
 			>
 			<Tool
@@ -247,6 +255,9 @@
 			/>
 			<Tool
 				Name="VCCLCompilerTool"
+				AdditionalIncludeDirectories="..\..\..\..\..\..\marathon;..\..\..\..\..\AlephOneSrc;..\..\..\..\..\MapEditorCommonSrc"
+				PreprocessorDefinitions="WIN32;NDEBUG;_WINDOWS;SDL;__WIN32__;__WINDOWS__;_WINDOWS;__WXMSW__;WXUSINGDLL;WX;UNICODE;__wxUSEUNICODE__;WX"
+				RuntimeLibrary="2"
 			/>
 			<Tool
 				Name="VCManagedResourceCompilerTool"
@@ -259,6 +270,9 @@
 			/>
 			<Tool
 				Name="VCLinkerTool"
+				AdditionalDependencies="SDL.lib ..\..\..\..\..\AlephOneSrc\lib\AlephOneSrc.lib wxmsw28u_core.lib wxbase28u.lib"
+				OutputFile="$(OutDir)\$(ProjectName)U.exe"
+				AdditionalLibraryDirectories="&quot;C:\wxWidgets-2.8.4\lib\vc_dll&quot;"
 			/>
 			<Tool
 				Name="VCALinkTool"
@@ -294,18 +308,394 @@
 			Filter="cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx"
 			UniqueIdentifier="{4FC737F1-C7A5-4376-A066-2A32D752A2FF}"
 			>
+			<File
+				RelativePath="..\..\..\..\src\MainFrameDraw.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\..\src\MainFrameEvent.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\..\src\MainFrameLeftDown.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\..\src\MainFrameMenuEvent.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\..\src\MapEditorMainFrame.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\..\src\MapEditorWX.cpp"
+				>
+			</File>
 		</Filter>
 		<Filter
 			Name="ヘッダー ファイル"
 			Filter="h;hpp;hxx;hm;inl;inc;xsd"
 			UniqueIdentifier="{93995380-89BD-4b04-88EB-625FBE52EBFB}"
 			>
+			<File
+				RelativePath="..\..\..\..\src\MapEditorMainFrame.h"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\..\src\MapEditorWX.h"
+				>
+			</File>
 		</Filter>
 		<Filter
 			Name="リソース ファイル"
 			Filter="rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav"
 			UniqueIdentifier="{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}"
 			>
+		</Filter>
+		<Filter
+			Name="Dialogues"
+			>
+			<File
+				RelativePath="..\..\..\..\src\AnnotationDialog.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\..\src\AnnotationDialog.h"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\..\src\ColorCustomizeDialog.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\..\src\ColorCustomizeDialog.h"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\..\src\DlgCommon.h"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\..\src\EditorPreferencesDialog.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\..\src\EditorPreferencesDialog.h"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\..\src\HeightDialog.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\..\src\HeightDialog.h"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\..\src\HeightPaletteDialog.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\..\src\HeightPaletteDialog.h"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\..\src\LevelInfoDialog.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\..\src\LevelInfoDialog.h"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\..\src\LightPaletteDialog.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\..\src\LightPaletteDialog.h"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\..\src\LinePropDialog.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\..\src\LinePropDialog.h"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\..\src\MediaPaletteDialog.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\..\src\MediaPaletteDialog.h"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\..\src\ObjectPropDialog.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\..\src\ObjectPropDialog.h"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\..\src\PlacementDialog.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\..\src\PlacementDialog.h"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\..\src\PlatformDialog.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\..\src\PlatformDialog.h"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\..\src\PointPropDialog.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\..\src\PointPropDialog.h"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\..\src\PolygonNumDialog.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\..\src\PolygonNumDialog.h"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\..\src\PolygonPropDialog.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\..\src\PolygonPropDialog.h"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\..\src\PolygonTypeDialog.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\..\src\PolygonTypeDialog.h"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\..\src\SelectLevelDialog.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\..\src\SelectLevelDialog.h"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\..\src\SidePropDialog.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\..\src\SidePropDialog.h"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\..\src\SoundPaletteDialog.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\..\src\SoundPaletteDialog.h"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\..\src\TerminalDialog.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\..\src\TerminalDialog.h"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\..\src\TextureDialog.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\..\src\TextureDialog.h"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\..\src\ToolDialog.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\..\src\ToolDialog.h"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\..\src\VisualDialog.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\..\src\VisualDialog.h"
+				>
+			</File>
+		</Filter>
+		<Filter
+			Name="Common"
+			>
+			<File
+				RelativePath="..\..\..\..\..\MapEditorCommonSrc\MapEditorOneInnerSetting.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\..\..\MapEditorCommonSrc\MapEditorOneInnerSetting.h"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\..\..\MapEditorCommonSrc\MapEditorOneSetting.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\..\..\MapEditorCommonSrc\MapEditorOneSetting.h"
+				>
+			</File>
+		</Filter>
+		<Filter
+			Name="HPLLib"
+			>
+			<File
+				RelativePath="..\..\..\..\..\HPLLib\HPLAlephLib.h"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\..\..\HPLLib\HPLCopyPasteManager.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\..\..\HPLLib\HPLCopyPasteManager.h"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\..\..\HPLLib\HPLDoneHistory.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\..\..\HPLLib\HPLDoneHistory.h"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\..\..\HPLLib\HPLError.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\..\..\HPLLib\HPLError.h"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\..\..\HPLLib\HPLEventManager.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\..\..\HPLLib\HPLEventManager.h"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\..\..\HPLLib\HPLMapTool.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\..\..\HPLLib\HPLMapTool.h"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\..\..\HPLLib\HPLMapToolModifier.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\..\..\HPLLib\HPLMath.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\..\..\HPLLib\HPLMath.h"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\..\..\HPLLib\HPLQuickSort.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\..\..\HPLLib\HPLQuickSort.h"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\..\..\HPLLib\HPLRealMapData.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\..\..\HPLLib\HPLRealMapData.h"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\..\..\HPLLib\HPLSelectData.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\..\..\HPLLib\HPLSelectData.h"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\..\..\HPLLib\HPLShapesManager.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\..\..\HPLLib\HPLShapesManager.h"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\..\..\HPLLib\HPLStockManager.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\..\..\HPLLib\HPLStockManager.h"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\..\..\HPLLib\HPLStringModifier.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\..\..\HPLLib\HPLStringModifier.h"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\..\..\HPLLib\HPLSurfaceModifier.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\..\..\HPLLib\HPLSurfaceModifier.h"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\..\..\HPLLib\HPLViewGridManager.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\..\..\HPLLib\HPLViewGridManager.h"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\..\..\HPLLib\HPLVisualModeManager.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\..\..\HPLLib\HPLVisualModeManager.h"
+				>
+			</File>
 		</Filter>
 	</Files>
 	<Globals>

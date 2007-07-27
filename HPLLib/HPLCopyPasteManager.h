@@ -2,6 +2,7 @@
 #define _HPL_COPY_PASTE_MANAGER_
 
 #include "HPLRealMapData.h"
+#include "HPLSelectData.h"
 
 /**
 	コピー＆ペーストの管理と処理を行います
@@ -37,9 +38,11 @@ namespace aleph{
 
 		/**
 			保持している内容をペーストします
+			@param div 拡大率。位置をずらすときに使用
+			@param sel 選択情報。ペーストしたアイテムを選択状態とするため必要
 			@return ペーストに失敗した場合（何も保持していないとき）に偽
 		*/
-		bool paste(int div);
+		bool paste(int div, hpl::aleph::map::HPLSelectData* sel);
 	};
 };
 };

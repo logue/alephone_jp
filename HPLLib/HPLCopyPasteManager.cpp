@@ -40,7 +40,7 @@ void hpl::aleph::HPLCopyPasteManager::copy(hpl::aleph::map::HPLSelectData& sel)
 	保持している内容をペーストします
 	@return ペーストに失敗した場合（何も保持していないとき）に偽
 */
-bool hpl::aleph::HPLCopyPasteManager::paste(int div)
+bool hpl::aleph::HPLCopyPasteManager::paste(int div, hpl::aleph::map::HPLSelectData* sel)
 {
 	if(this->storedMapData.isEmpty()){
 		hpl::error::caution("No map items stored. No items are pasted. Copy items first.");
@@ -148,6 +148,20 @@ bool hpl::aleph::HPLCopyPasteManager::paste(int div)
 		sideIndexMap,
 		objectIndexMap);
 
+	//選択状態にする
+	sel->clear();
+	for(int i = (int)endpointList->size(); i < (int)EndpointList.size(); i ++){
+		sel->addSelPoint(i);
+	}
+	for(int i = (int)lineList->size(); i < (int)LineList.size(); i ++){
+		sel->addSelLine(i);
+	}
+	for(int i = (int)polygonList->size(); i < (int)PolygonList.size(); i ++){
+		sel->addSelPolygon(i);
+	}
+	for(int i = (int)objectList->size(); i < (int)SavedObjectList.size(); i ++){
+		sel->addSelObject(i);
+	}
 
 	storedDataDiffPointDelta[0] += COPY_AND_PASTE_DELTA_X;
 	storedDataDiffPointDelta[1] += COPY_AND_PASTE_DELTA_Y;
