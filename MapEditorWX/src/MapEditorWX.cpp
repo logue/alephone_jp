@@ -105,7 +105,7 @@ bool MapEditorWX::initialize()
     hpl::aleph::loadInformation("data/RandomSoundTypes.txt", NUMBER_OF_RANDOM_SOUND_DEFINITIONS, this->randomSoundTypeInfo);
 
 	//プラットフォームタイプ
-	hpl::aleph::loadInformation("data/PlatformTypes.txt", NUMBER_OF_PLATFORM_TYPES,
+	hpl::aleph::loadInformation("data/PlatformType.txt", NUMBER_OF_PLATFORM_TYPES,
 		this->platformTypeInfo);
     //色設定読み込み
     if(!hpl::aleph::loadColorSetting(POLYGON_COLOR_FILE_NAME, this->polygonTypeColors, NUMBER_OF_POLYGON_TYPE)){
@@ -113,7 +113,7 @@ bool MapEditorWX::initialize()
     }
 	//スピード
 	//	文字列の読み込み
-	hpl::aleph::loadInformation("data/PolygonSpeeds.txt", NUMBER_OF_POLYGON_SPEEDS,
+	hpl::aleph::loadInformation("data/PlatformSpeed.txt", NUMBER_OF_PLATFORM_SPEEDS,
 		this->platformSpeedInfo);
 	//値の設定
 	this->platformSpeedInfo[0].bind = _very_slow_platform;
@@ -124,7 +124,7 @@ bool MapEditorWX::initialize()
 
 	//遅延
 	//	文字列の読み込み
-	hpl::aleph::loadInformation("data/PlatformDelays.txt", NUMBER_OF_POLYGON_DELAYS,
+	hpl::aleph::loadInformation("data/PlatformDelay.txt", NUMBER_OF_PLATFORM_DELAYS,
 		this->platformDelayInfo);
 	//値の設定
 	this->platformDelayInfo[0].bind = _very_slow_platform;

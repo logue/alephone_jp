@@ -284,3 +284,4 @@ WinBase.h
 ・Side/Line/Endpoint/Objectはポリゴンが存在していなければポリゴンインデックスをNONEにする。
 ・Sideはポリゴンが存在していない場合追加しない
 
+TODO 削除時の処理

@@ -785,12 +785,12 @@ void MapEditorMainFrame::OnKeyDown(wxKeyEvent& ev)
 			hpl::aleph::HPLStockManager* smgr = wxGetApp().getStockManager();
 			if(sel->isSelected()){
 				//選択対象を削除対象とする
-				for(int i = 0; i < sel->getSelPoints()->size(); i ++){
+				for(int i = 0; i < (int)sel->getSelPoints()->size(); i ++){
 					hpl::aleph::map::SelPoint* opt = &sel->getSelPoints()->at(i);
 					smgr->deletePoint(opt->index);
 				}
 				//lines
-				for(int i = 0; i < sel->getSelLines()->size(); i ++){
+				for(int i = 0; i < (int)sel->getSelLines()->size(); i ++){
 					smgr->deleteLine(sel->getSelLines()->at(i).index);
 				}
 				/*
@@ -799,19 +799,21 @@ void MapEditorMainFrame::OnKeyDown(wxKeyEvent& ev)
 					smgr->deleteSide(sel->getSelSides()->at(i).index);
 				}*/
 				//polygons
-				for(int i = 0; i < sel->getSelPolygons()->size(); i ++){
+				for(int i = 0; i < (int)sel->getSelPolygons()->size(); i ++){
 					smgr->deletePolygon(sel->getSelPolygons()->at(i).index);
 				}
 				//objects
-				for(int i = 0; i < sel->getSelObjects()->size(); i ++){
+				for(int i = 0; i < (int)sel->getSelObjects()->size(); i ++){
 					smgr->deleteObject(sel->getSelObjects()->at(i).index);
 				}
 
+				sel->clear();
 				//削除が実行されたのでコンボ更新
 				this->updateMapItems();
 			}
 		}
 	}
+	Refresh();
 }
 
 /**

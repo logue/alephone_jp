@@ -235,7 +235,7 @@ bool PlatformDialog::Create(wxWindow* parent, wxWindowID id, int pindex)
 			}
 		}
 #ifdef __WXDEBUG__
-	    wxASSERT(platformIndex == NONE);
+	    wxASSERT(platformIndex != NONE);
 #endif
 
 		platform = &PlatformList[platformIndex];
@@ -244,18 +244,18 @@ bool PlatformDialog::Create(wxWindow* parent, wxWindowID id, int pindex)
     //チョイスの初期化 init choices
 	//Type choice
 	for(int i = 0; i < NUMBER_OF_PLATFORM_TYPES; i ++){
-		choice_1->Insert(wxConvertMB2WX(wxGetApp().platformTypeInfo[i].jname.c_str()));
+		choice_1->Append(wxConvertMB2WX(wxGetApp().platformTypeInfo[i].jname.c_str()));
 	}
 	//Speed	choice
 	for(int i = 0; i < NUMBER_OF_PLATFORM_SPEEDS; i ++){
-		choice_2->Insert(wxConvertMB2WX(wxGetApp().platformSpeedInfo[i].jname.c_str()));
+		choice_2->Append(wxConvertMB2WX(wxGetApp().platformSpeedInfo[i].jname.c_str()));
 	}
-	choice_2->Insert(_T("Other"));
+	choice_2->Append(_T("Other"));
 	//Delay choice
 	for(int i = 0; i < NUMBER_OF_PLATFORM_DELAYS; i ++){
-		choice_3->Insert(wxConvertMB2WX(wxGetApp().platformDelayInfo[i].jname.c_str()));
+		choice_3->Append(wxConvertMB2WX(wxGetApp().platformDelayInfo[i].jname.c_str()));
 	}
-	choice_3->Insert(_T("Other"));
+	choice_3->Append(_T("Other"));
 	
 	//TODO tags
 	//TODO presets
@@ -266,7 +266,7 @@ bool PlatformDialog::Create(wxWindow* parent, wxWindowID id, int pindex)
 			//自分は除外
 			continue;
 		}
-		choice_5->Insert(getString("%d", i));
+		choice_5->Append(getString("%d", i));
 	}
 	
     //TODO 値の設定
@@ -277,7 +277,7 @@ bool PlatformDialog::Create(wxWindow* parent, wxWindowID id, int pindex)
 	int spdIndex = hpl::aleph::getIndexFromInformationBinded(platform->speed, wxGetApp().platformSpeedInfo,
 		NUMBER_OF_PLATFORM_SPEEDS);
 	if(spdIndex >= 0){
-		choice_2->SetSelection();
+		choice_2->SetSelection(spdIndex);
 	}else{
 		choice_2->SetSelection(NUMBER_OF_PLATFORM_SPEEDS);
 	}
@@ -290,7 +290,7 @@ bool PlatformDialog::Create(wxWindow* parent, wxWindowID id, int pindex)
 		wxGetApp().platformDelayInfo,
 		NUMBER_OF_PLATFORM_DELAYS);
 	if(delayIndex >= 0){
-		choice_3->SetSelection();
+		choice_3->SetSelection(delayIndex);
 	}else{
 		choice_3->SetSelection(NUMBER_OF_PLATFORM_DELAYS);
 	}
@@ -320,10 +320,21 @@ bool PlatformDialog::Create(wxWindow* parent, wxWindowID id, int pindex)
 	checkbox_15->SetValue(PLATFORM_ACTIVATES_ONLY_ONCE(platform));
 	checkbox_16->SetValue(PLATFORM_DEACTIVATES_LIGHT(platform));
 	checkbox_17->SetValue(PLATFORM_ACTIVATES_ADJACENT_PLATFORMS_WHEN_ACTIVATING(platform));
-	checkbox_18->SetValue(PLATFORM_ACTIVATES_ONLY_ONCE(platform));
-	checkbox_19->SetValue(PLATFORM_ACTIVATES_ONLY_ONCE(platform));
+	checkbox_18->SetValue(PLATFORM_DEACTIVATES_ADJACENT_PLATFORMS_WHEN_ACTIVATING(platform));
+	checkbox_19->SetValue(PLATFORM_ACTIVATES_ADJACENT_PLATFORMS_AT_EACH_LEVEL(platform));
 	//Deactivates
+	bool deactivateEachLevel = PLATFORM_DEACTIVATES_AT_EACH_LEVEL(platform);
+	bool deactivateInitialLevel = PLATFORM_DEACTIVATES_AT_INITIAL_LEVEL(platform);
+	if(!deactivateEachLevel && !deactivateInitialLevel){
+		radio_btn_4->SetValue(true);
+	}else if(deactivateEachLevel){
+		radio_btn_5->SetValue(true);
+	}else{
+		radio_btn_6->SetValue(true);
+	}
 
+	//Open
+	if(
     return result;
 }
 

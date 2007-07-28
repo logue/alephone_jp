@@ -45,7 +45,7 @@ int hpl::aleph::map::HPLDoneHistory::getIndexMax()
 void hpl::aleph::map::HPLDoneHistory::push_back(int type, HPLSelectData& selData)
 {
     //Œ»Ý‚ÌˆÊ’u(index)‚©‚çŒã‚ë•”•ª‚ðíœ‚µ‚Ü‚·
-    if(index >= 0 && index < actionList.size() - 1 && actionList.size() > 1){
+    if(index >= 0 && index < (int)actionList.size() - 1 && (int)actionList.size() > 1){
         std::vector<hpl::aleph::map::HPLActionItem>::iterator it = actionList.begin();
         it += (index);
         while(it != actionList.end()){
@@ -54,7 +54,7 @@ void hpl::aleph::map::HPLDoneHistory::push_back(int type, HPLSelectData& selData
     }
 	//‘S‘Ì‚Ì”‚ªindexMax-1ˆÈ‰º‚Æ‚È‚é‚æ‚¤‚ÉÅ‰‚Ì•”•ª‚ðíœ‚µ‚Ü‚·
 	int imax = getIndexMax();
-	for(int i = 0; this->actionList.size() > 0 && i < this->actionList.size() - imax + 1; i ++){
+	for(int i = 0; (int)this->actionList.size() > 0 && i < (int)this->actionList.size() - imax + 1; i ++){
 		actionList.erase(actionList.begin());
 	}
 

@@ -296,35 +296,35 @@ bool hpl::aleph::HPLStockManager::deletePoint(int index)
 {
     assert(get_endpoint_data(index));
     this->delPoints[index] = true;
-    updateDeletes();
+    //updateDeletes();
     return true;
 }
 bool hpl::aleph::HPLStockManager::deleteLine(int index)
 {
     assert(get_line_data(index));
     this->delLines[index] = true;
-    updateDeletes();
+    //updateDeletes();
     return true;
 }
 bool hpl::aleph::HPLStockManager::deletePolygon(int index)
 {
     assert(get_polygon_data(index));
     this->delPolygons[index] = true;
-    updateDeletes();
+    //updateDeletes();
     return true;
 }
 bool hpl::aleph::HPLStockManager::deleteSide(int index)
 {
     assert(get_side_data(index));
     this->delSides[index] = true;
-    updateDeletes();
+    //updateDeletes();
     return true;
 }
 bool hpl::aleph::HPLStockManager::deleteObject(int index)
 {
     assert(index >= 0 && index < (int)SavedObjectList.size());
     this->delObjects[index] = true;
-    updateDeletes();
+    //updateDeletes();
     return true;
 }
 
