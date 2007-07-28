@@ -150,17 +150,24 @@ bool hpl::aleph::HPLCopyPasteManager::paste(int div, hpl::aleph::map::HPLSelectD
 
 	//‘I‘ðó‘Ô‚É‚·‚é
 	sel->clear();
-	for(int i = (int)endpointList->size(); i < (int)EndpointList.size(); i ++){
-		sel->addSelPoint(i);
+	for(int i = (int)(EndpointList.size() - endpointList->size());
+			i < (int)EndpointList.size(); i ++)
+	{
+		int offset[2] = {0,0};
+		sel->addSelPoint(i, offset);
 	}
-	for(int i = (int)lineList->size(); i < (int)LineList.size(); i ++){
-		sel->addSelLine(i);
+	for(int i = (int)LineList.size() - (int)lineList->size(); i < (int)LineList.size(); i ++){
+		int offset[2][2] = {{0,0},{0,0}};
+		sel->addSelLine(i, offset);
 	}
-	for(int i = (int)polygonList->size(); i < (int)PolygonList.size(); i ++){
-		sel->addSelPolygon(i);
+	for(int i = (int)PolygonList.size() - (int)polygonList->size(); i < (int)PolygonList.size(); i ++){
+		int offset[MAXIMUM_VERTICES_PER_POLYGON][2] = {{0}};
+		polygon_data* poly = get_polygon_data(i);
+		sel->addSelPolygon(i, offset, poly->vertex_count);
 	}
-	for(int i = (int)objectList->size(); i < (int)SavedObjectList.size(); i ++){
-		sel->addSelObject(i);
+	for(int i = (int)SavedObjectList.size() - (int)objectList->size(); i < (int)SavedObjectList.size(); i ++){
+		int offset[2] = {0};
+		sel->addSelObject(i, offset);
 	}
 
 	storedDataDiffPointDelta[0] += COPY_AND_PASTE_DELTA_X;

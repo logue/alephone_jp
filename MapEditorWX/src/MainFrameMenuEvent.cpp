@@ -244,7 +244,7 @@ void MapEditorMainFrame::OnPaste(wxCommandEvent& ev)
 		//¬Œ÷
 		//XV
 		wxGetApp().getStockManager()->updateDeletes();
-		wxGetApp().getStockManager()->updateSelects(sel);
+		wxGetApp().getStockManager()->updateSelects(*sel);
 	}else{
 		//Ž¸”s
 	}
