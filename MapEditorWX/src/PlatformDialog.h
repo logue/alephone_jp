@@ -76,6 +76,8 @@ public:
     void OnCancel(wxCommandEvent& ev);
     
 public:
+	platform_data getPlatform();
+
 };
 
 #endif

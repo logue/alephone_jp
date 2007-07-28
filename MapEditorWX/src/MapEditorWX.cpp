@@ -104,12 +104,36 @@ bool MapEditorWX::initialize()
     //背景
     hpl::aleph::loadInformation("data/RandomSoundTypes.txt", NUMBER_OF_RANDOM_SOUND_DEFINITIONS, this->randomSoundTypeInfo);
 
+	//プラットフォームタイプ
+	hpl::aleph::loadInformation("data/PlatformTypes.txt", NUMBER_OF_PLATFORM_TYPES,
+		this->platformTypeInfo);
     //色設定読み込み
     if(!hpl::aleph::loadColorSetting(POLYGON_COLOR_FILE_NAME, this->polygonTypeColors, NUMBER_OF_POLYGON_TYPE)){
         return false;
     }
+	//スピード
+	//	文字列の読み込み
+	hpl::aleph::loadInformation("data/PolygonSpeeds.txt", NUMBER_OF_POLYGON_SPEEDS,
+		this->platformSpeedInfo);
+	//値の設定
+	this->platformSpeedInfo[0].bind = _very_slow_platform;
+	this->platformSpeedInfo[1].bind = _slow_platform;
+	this->platformSpeedInfo[2].bind = _fast_platform;
+	this->platformSpeedInfo[3].bind = _very_fast_platform;
+	this->platformSpeedInfo[4].bind = _blindingly_fast_platform;
 
-    //選択関連
+	//遅延
+	//	文字列の読み込み
+	hpl::aleph::loadInformation("data/PlatformDelays.txt", NUMBER_OF_POLYGON_DELAYS,
+		this->platformDelayInfo);
+	//値の設定
+	this->platformDelayInfo[0].bind = _very_slow_platform;
+	this->platformDelayInfo[1].bind = _slow_platform;
+	this->platformDelayInfo[2].bind = _fast_platform;
+	this->platformDelayInfo[3].bind = _very_fast_platform;
+	this->platformDelayInfo[4].bind = _blindingly_fast_platform;
+
+	//選択関連
     this->selectData.clear();
 
     //線の最初の点

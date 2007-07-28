@@ -84,6 +84,11 @@ const int UNDO_NUM = 10;
 //現在位置で押したかどうかの判定距離
 const double SAME_POSITION_CLICK_THRESHOLD = 2;
 
+//プラットフォームのスピード
+const int NUMBER_OF_PLATFORM_SPEEDS = 5;
+//プラットフォームのディレイ
+const int NUMBER_OF_PLATFORM_DELAYS = 5;
+
 //point flags
 enum
 {

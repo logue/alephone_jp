@@ -67,6 +67,50 @@ void hpl::aleph::loadInformation(const char* filePath, int maxLines, hpl::aleph:
 }
 
 /**
+	バインド型の文字列だけをファイルから読み込みます。
+	割り当て番号は設定されません
+*/
+void hpl::aleph::loadInformation(const char* filePath, int maxLines, hpl::aleph::InformationBinded infos[])
+{
+    std::ifstream ifs(filePath);
+    if(!ifs.is_open()){
+#ifdef __WXDEBUG__
+        wxASSERT(ifs.is_open());
+#else
+        hpl::error::halt("Fail to open tag file:%s", filePath);
+#endif
+    }
+    int lineCounter = 0;
+    char buf[BUF_MAX];
+    while((ifs.getline(buf, BUF_MAX)) != NULL){
+        if(strcmp(buf, "") == 0){
+            continue;
+        }
+        //stringにする
+        infos[lineCounter].jname = std::string(buf);
+        lineCounter ++;
+        if(lineCounter >= maxLines){
+            break;
+        }
+    }
+    ifs.close();
+}
+
+/**
+	指定した値に相当するインデックス値を取得します
+	存在しないなどの理由により失敗した場合は、負数が返されます
+*/
+int hpl::aleph::getIndexFromInformationBinded(int value, hpl::aleph::InformationBinded infos[], int max)
+{
+	for(int i = 0; i < max; i ++){
+		if(infos[i].bind == value){
+			return i;
+		}
+	}
+	return -1;
+}
+
+/**
     カラーデータをファイルから読み込みます
     @return 失敗時に偽
 */

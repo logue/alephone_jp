@@ -125,6 +125,13 @@ public:
     //ランダムサウンド
     hpl::aleph::Information randomSoundTypeInfo[NUMBER_OF_RANDOM_SOUND_DEFINITIONS];
 
+	//プラットフォームタイプ
+	hpl::aleph::Information platformTypeInfo[NUMBER_OF_PLATFORM_TYPES];
+	//Platform speed
+	hpl::aleph::InformationBinded platformSpeedInfo[NUMBER_OF_PLATFORM_SPEEDS];
+	//Platform delay
+	hpl::aleph::InformationBinded platformDelayInfo[NUMBER_OF_PLATFORM_DELAYS];
+
     ////////////////////////
     //選択情報
     //選択対象のID

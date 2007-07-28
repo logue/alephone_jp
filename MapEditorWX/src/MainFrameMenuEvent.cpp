@@ -242,9 +242,8 @@ void MapEditorMainFrame::OnPaste(wxCommandEvent& ev)
 	int div = wxGetApp().getViewGridManager()->getZoomDivision();
 	if(wxGetApp().getCopyPasteManager()->paste(div, sel)){
 		//成功
-		//更新
-		wxGetApp().getStockManager()->updateDeletes();
-		wxGetApp().getStockManager()->updateSelects(*sel);
+		//追加されたのでコンボを更新
+		this->updateMapItems();
 	}else{
 		//失敗
 	}

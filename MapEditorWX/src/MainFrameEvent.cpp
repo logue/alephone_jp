@@ -806,7 +806,29 @@ void MapEditorMainFrame::OnKeyDown(wxKeyEvent& ev)
 				for(int i = 0; i < sel->getSelObjects()->size(); i ++){
 					smgr->deleteObject(sel->getSelObjects()->at(i).index);
 				}
+
+				//削除が実行されたのでコンボ更新
+				this->updateMapItems();
 			}
 		}
 	}
 }
+
+/**
+	マップデータに編集があった場合に行われる処理を記述します
+	・点/線/Side/オブジェクト/ポリゴンのプロパティダイアログ再構築（追加のみでOK）
+	・選択情報の更新
+	・削除情報の更新
+*/
+void MapEditorMainFrame::updateMapItems()
+{
+	wxGetApp().getStockManager()->updateSelects(wxGetApp().selectData);
+	wxGetApp().getStockManager()->updateDeletes();
+
+	//モードレスダイアログ限定
+	//ポリゴンプロパティ
+	this->polyPropDialog.updateCombo();
+
+	
+}
+

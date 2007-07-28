@@ -33,7 +33,9 @@ class PolygonPropDialog: public wxDialog{
     wxStaticText* label_28;
     wxTextCtrl* text_ctrl_36;
     wxStaticText* label_40;
-    wxChoice* choice_19;
+	//first object (uneditable)
+    //wxChoice* choice_19;
+	wxTextCtrl* text_ctrl_firstObject;
     wxStaticText* label_54;
     wxChoice* choice_15;
     wxStaticText* label_41;

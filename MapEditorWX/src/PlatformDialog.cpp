@@ -215,37 +215,120 @@ bool PlatformDialog::Create(wxWindow* parent, wxWindowID id, int pindex)
     Layout();
 
     polyIndex = pindex;
-    //polygon_data* poly = get_polygon_data(polyIndex);
+	platform_data *platform = NULL;
+	platform_data dummy;
+	memset(&dummy, 0, sizeof(platform_data));
 
-    //search polygon's platform
-    platformIndex = NONE;
-    for(int i = 0; i < (int)PlatformList.size(); i ++){
-        platform_data* temp = &PlatformList[i];
-        if(temp->polygon_index == polyIndex){
-            platformIndex = i;
-            break;
-        }
-    }
+    //polygon_data* poly = get_polygon_data(polyIndex);
+	if(polyIndex == NONE){
+		platformIndex = NONE;
+		platform = &dummy;
+	}else{
+
+		//search polygon's platform
+		platformIndex = NONE;
+		for(int i = 0; i < (int)PlatformList.size(); i ++){
+			platform_data* temp = &PlatformList[i];
+			if(temp->polygon_index == polyIndex){
+				platformIndex = i;
+				break;
+			}
+		}
 #ifdef __WXDEBUG__
-    wxASSERT(platformIndex == NONE);
+	    wxASSERT(platformIndex == NONE);
 #endif
 
-    platform_data *platform = &PlatformList[platformIndex];
+		platform = &PlatformList[platformIndex];
+	}
 
-    //チョイスの初期化
-    //TODO 
-    //値の設定
-    //TODO 
-    
+    //チョイスの初期化 init choices
+	//Type choice
+	for(int i = 0; i < NUMBER_OF_PLATFORM_TYPES; i ++){
+		choice_1->Insert(wxConvertMB2WX(wxGetApp().platformTypeInfo[i].jname.c_str()));
+	}
+	//Speed	choice
+	for(int i = 0; i < NUMBER_OF_PLATFORM_SPEEDS; i ++){
+		choice_2->Insert(wxConvertMB2WX(wxGetApp().platformSpeedInfo[i].jname.c_str()));
+	}
+	choice_2->Insert(_T("Other"));
+	//Delay choice
+	for(int i = 0; i < NUMBER_OF_PLATFORM_DELAYS; i ++){
+		choice_3->Insert(wxConvertMB2WX(wxGetApp().platformDelayInfo[i].jname.c_str()));
+	}
+	choice_3->Insert(_T("Other"));
+	
+	//TODO tags
+	//TODO presets
+
+	//copy from (ほかのプラットフォームインデックスを追加？)
+	for(int i = 0; i < (int)PlatformList.size(); i ++){
+		if(polyIndex != NONE && platformIndex != NONE && i == platformIndex){
+			//自分は除外
+			continue;
+		}
+		choice_5->Insert(getString("%d", i));
+	}
+	
+    //TODO 値の設定
+	//Type
+	choice_1->SetSelection(platform->type);
+	//Speed
+	//インデックス値を取得
+	int spdIndex = hpl::aleph::getIndexFromInformationBinded(platform->speed, wxGetApp().platformSpeedInfo,
+		NUMBER_OF_PLATFORM_SPEEDS);
+	if(spdIndex >= 0){
+		choice_2->SetSelection();
+	}else{
+		choice_2->SetSelection(NUMBER_OF_PLATFORM_SPEEDS);
+	}
+	//値を設定
+    text_ctrl_1->SetValue(getString("%d", platform->speed));
+
+	//Delay
+	//インデックス値を取得
+	int delayIndex = hpl::aleph::getIndexFromInformationBinded(platform->delay,
+		wxGetApp().platformDelayInfo,
+		NUMBER_OF_PLATFORM_DELAYS);
+	if(delayIndex >= 0){
+		choice_3->SetSelection();
+	}else{
+		choice_3->SetSelection(NUMBER_OF_PLATFORM_DELAYS);
+	}
+	//値を設定
+	text_ctrl_2->SetValue(getString("%d", platform->delay));
+
+	//height
+	text_ctrl_3->SetValue(getString("%d", platform->minimum_floor_height));
+	text_ctrl_4->SetValue(getString("%d", platform->maximum_ceiling_height));
+
+	//initially
+	checkbox_1->SetValue(PLATFORM_IS_INITIALLY_ACTIVE(platform));
+	checkbox_2->SetValue(PLATFORM_IS_INITIALLY_EXTENDED(platform));
+	//Controlled by
+	checkbox_3->SetValue(PLATFORM_IS_PLAYER_CONTROLLABLE(platform));
+	checkbox_4->SetValue(PLATFORM_IS_MONSTER_CONTROLLABLE(platform));
+	//Bites!
+	checkbox_5->SetValue(PLATFORM_CAUSES_DAMAGE(platform));
+	checkbox_6->SetValue(PLATFORM_REVERSES_DIRECTION_WHEN_OBSTRUCTED(platform));
+
+	//Door
+	checkbox_9->SetValue(PLATFORM_IS_DOOR(platform));
+
+	//TODO radio button
+
+	//Activates
+	checkbox_15->SetValue(PLATFORM_ACTIVATES_ONLY_ONCE(platform));
+	checkbox_16->SetValue(PLATFORM_DEACTIVATES_LIGHT(platform));
+	checkbox_17->SetValue(PLATFORM_ACTIVATES_ADJACENT_PLATFORMS_WHEN_ACTIVATING(platform));
+	checkbox_18->SetValue(PLATFORM_ACTIVATES_ONLY_ONCE(platform));
+	checkbox_19->SetValue(PLATFORM_ACTIVATES_ONLY_ONCE(platform));
+	//Deactivates
 
     return result;
 }
 
 void PlatformDialog::OnOk(wxCommandEvent& ev)
 {
-    //値の反映
-    //TODO 
-
     SetReturnCode(wxID_OK);
     Destroy();
 }
@@ -254,4 +337,12 @@ void PlatformDialog::OnCancel(wxCommandEvent& ev)
     //
     SetReturnCode(wxID_CANCEL);
     Destroy();
+}
+
+platform_data PlatformDialog::getPlatform()
+{
+	platform_data data;
+	data.polygon_index = polyIndex;
+
+	return data;
 }

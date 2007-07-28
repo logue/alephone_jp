@@ -57,6 +57,17 @@ namespace aleph{
     */
     void loadInformation(const char* filePath, int maxLines, hpl::aleph::Information infos[]);
 
+	/**
+		指定した値に相当するインデックス値を取得します
+		存在しないなどの理由により失敗した場合は、負数が返されます
+	*/
+	int getIndexFromInformationBinded(int value, hpl::aleph::InformationBinded infos[], int max);
+	/**
+		バインド型の文字列だけをファイルから読み込みます。
+		割り当て番号は設定されません
+	*/
+	void loadInformation(const char* filePath, int maxLines, hpl::aleph::InformationBinded infos[]);
+
     /**
         カラーデータをファイルから読み込みます
         @return 失敗時に偽

@@ -430,11 +430,12 @@ private:
     bool askDestructMap();
 
 	/**
-		選択変更によりダイアログの情報に意味がなくなったものに対して、
-		初期化する処理を選択・実行します
+		選択変更によりダイアログの情報に意味がなくなることが考えられる。
+		それらのインデックス情報を初期化します
 		the function to do when unselect
 	*/
 	void unselect();
+
 	/**
 		ひとつを選択した場合の後処理
 		・範囲選択の解除
@@ -453,9 +454,20 @@ private:
 	void selectOneThingBefore();
 
 	/**
-		ひとつも
+		ひとつも選択されなかった場合に行われる処理
 	*/
 	void selectNothing(int mx, int my);
 
+	/**
+		テクスチャで塗りつぶされたブラシを取得します
+	*/
 	wxBrush getTexturedBrush(int shapesDescriptor);
+
+	/**
+		マップデータに編集があった場合に行われる処理を記述します
+		・点/線/Side/オブジェクト/ポリゴンのプロパティダイアログ再構築（追加のみでOK）
+		・選択情報の更新
+		・削除情報の更新
+	*/
+	void updateMapItems();
 };
