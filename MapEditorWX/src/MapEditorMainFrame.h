@@ -110,10 +110,10 @@ class MapEditorMainFrame: public wxFrame
 public:
     //プロパティ類 <en> properties
     ObjectPropDialog objPropDialog;
-    LinePropDialog linePropDialog;
+    //LinePropDialog linePropDialog;
     PointPropDialog pointPropDialog;
     PolygonTypeDialog polyTypeDialog;
-    PolygonPropDialog polyPropDialog;
+    //PolygonPropDialog polyPropDialog;
     SidePropDialog sidePropDialog;
     /**
         stocked textures

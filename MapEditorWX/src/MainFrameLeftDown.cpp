@@ -8,13 +8,6 @@
 */
 void MapEditorMainFrame::OnLeftDown(wxMouseEvent &ev)
 {
-    //線・点・オブジェクト・ポリゴン・Sideの指定を解除する
-/*    linePropDialog.setLineIndex(NONE);
-    pointPropDialog.setIndex(NONE);
-    objPropDialog.setObjIndex(NONE);
-    polyPropDialog.setPolyIndex(NONE);
-    sidePropDialog.setIndex(NONE);*/
-
     //カーソル設定
     wxGetApp().setCursor();
     //マウス座標記録
@@ -221,12 +214,14 @@ void MapEditorMainFrame::selectOneThingAfter(int mx, int my)
 	if(sel->isSelectOneLine()){
 	}else{
 	}
+	/*
 	if(sel->isSelectOnePolygon()){
-        this->polyPropDialog.setPolyIndex(sel->getSelPolygons()->at(0).index);
+        this->polyPropDialog.setPolyIndex(sel->getSelPolygons()->at(0).index,
+			wxGetApp().getStockManager());
         this->polyPropDialog.Show(true);
 	}else{
-        this->polyPropDialog.setPolyIndex(NONE);
-	}
+        this->polyPropDialog.setPolyIndex(NONE, wxGetApp().getStockManager());
+	}*/
 
 	//選択できたので
 	//範囲選択は解除します
@@ -252,12 +247,13 @@ void MapEditorMainFrame::unselect()
     }
 	if(!sel->isSelectOneObject() && objPropDialog.getObjIndex() != NONE)
 		this->objPropDialog.setObjIndex(NONE);
-	if(!sel->isSelectOneLine() && linePropDialog.getLineIndex() != NONE)
-		this->linePropDialog.setLineIndex(NONE);
+/*	if(!sel->isSelectOneLine() && linePropDialog.getLineIndex() != NONE)
+		this->linePropDialog.setLineIndex(NONE);*/
 	if(!sel->isSelectOneSide() && sidePropDialog.getIndex() != NONE)
 		this->sidePropDialog.setIndex(NONE);
-	if(!sel->isSelectOnePolygon() && polyPropDialog.getPolyIndex() != NONE)
-		this->polyPropDialog.setPolyIndex(NONE);
+/*	if(!sel->isSelectOnePolygon() && polyPropDialog.getPolyIndex() != NONE)
+		this->polyPropDialog.setPolyIndex(NONE, wxGetApp().getStockManager());
+		*/
 }
 
 /**

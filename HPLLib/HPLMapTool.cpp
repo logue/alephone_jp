@@ -8,6 +8,8 @@
 #include "HPLStringModifier.h"
 #include "HPLStockManager.h"
 
+#include "platforms.h"
+
 //文字列仮読み込みのサイズ
 //<en>size for buffering string
 const int BUF_MAX = 1024;
@@ -1042,3 +1044,21 @@ struct object_frequency_definition* hpl::aleph::map::getPlacementData(int object
 	return place;
 }
 
+
+
+///////////////////////////////////
+//	Platform
+int hpl::aleph::map::getPlatformIndexFromPolygonIndex(
+	int polyIndex, hpl::aleph::HPLStockManager* smgr)
+{
+	for(int i = 0; i < (int)PlatformList.size(); i ++){
+		if(smgr->delPlatforms[i]){
+			continue;
+		}
+		platform_data* temp = &PlatformList[i];
+		if(temp->polygon_index == polyIndex){
+			return i;
+		}
+	}
+	return NONE;
+}

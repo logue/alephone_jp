@@ -116,37 +116,57 @@ void MapEditorMainFrame::OnRightDown(wxMouseEvent& ev)
 				voffset[0], voffset[1], OFFSET_X_WORLD, OFFSET_Y_WORLD, div, 
 				smgr);
 			wxGetApp().popupEndpointIndex = epIndex;
-			if(epIndex != NONE){
-				//点ポップアップ表示
-				PopupMenu(&wxGetApp().pointPopupMenu);
-				return;
-			}
-			//点は押されなかった
 			int lineIndex = hpl::aleph::map::getSelectLineIndex(mx ,my,
 				LINE_DISTANCE_EPSILON, zMin, zMax,
 				voffset[0], voffset[1], OFFSET_X_WORLD, OFFSET_Y_WORLD, div, 
 				smgr);
 			wxGetApp().popupLineIndex = lineIndex;
-			if(lineIndex != NONE){
-				//線が押された
-				//→線プロパティをだす
-				PopupMenu(&wxGetApp().linePopupMenu);
-				return;
-			}
-		
-			//ポリゴン上で右クリックしたか？ TODO
 			int polygonIndex = hpl::aleph::map::getSelectPolygonIndex(mx ,my,
 				zMin, zMax,
 				voffset[0], voffset[1], OFFSET_X_WORLD, OFFSET_Y_WORLD, div, 
 				smgr);
-			wxGetApp().popupPolygonIndex = epIndex;
-			if(polygonIndex != NONE){
+			wxGetApp().popupPolygonIndex = polygonIndex;
+			if(epIndex != NONE){
+				//選択変更
+				selectOneThingBefore();
+				int offset[2] = {0};
+				sel->addSelPoint(epIndex, offset);
+				selectOneThingAfter(mx, my);
+				//選択情報の更新
+				smgr->updateSelects(wxGetApp().selectData);
+				Refresh();
+				//点ポップアップ表示
+				PopupMenu(&wxGetApp().pointPopupMenu);
+			}else if(lineIndex != NONE){
+				//線が押された
+				//選択変更
+				selectOneThingBefore();
+				int offset[2][2] = {{0}};
+				sel->addSelLine(lineIndex, offset);
+				selectOneThingAfter(mx, my);
+				//選択情報の更新
+				smgr->updateSelects(wxGetApp().selectData);
+				Refresh();
+				//→線プロパティをだす
+				PopupMenu(&wxGetApp().linePopupMenu);
+			}else if(polygonIndex != NONE){
+				//押した
+				//選択変更
+				selectOneThingBefore();
+				polygon_data* poly = get_polygon_data(polygonIndex);
+				int offset[MAXIMUM_VERTICES_PER_POLYGON][2] = {{0}};
+				int num = poly->vertex_count;
+				sel->addSelPolygon(polygonIndex, offset, num);
+				selectOneThingAfter(mx, my);
+				//選択情報の更新
+				smgr->updateSelects(wxGetApp().selectData);
+				Refresh();
 				PopupMenu(&wxGetApp().polygonPopupMenu);
-				return;
 			}
 		}
     }
-
+	//つかみ中を解除
+	emgr->setGrabItems(false);
 }
 ///////////////////////////////////////////////////////
 void MapEditorMainFrame::OnRightUp(wxMouseEvent& ev)
@@ -373,6 +393,8 @@ void MapEditorMainFrame::doLUpOnArrowTool(wxMouseEvent& ev)
 		wxGetApp().getDoneHistoryManager()->push_back(hpl::aleph::map::ActionType::Move, *sel);
 	}
 
+	//離した
+	emgr->setGrabItems(false);
 }
 void MapEditorMainFrame::doLUpOnPolygonTool(wxMouseEvent& ev)
 {
@@ -829,7 +851,7 @@ void MapEditorMainFrame::updateMapItems()
 
 	//モードレスダイアログ限定
 	//ポリゴンプロパティ
-	this->polyPropDialog.updateCombo();
+	//this->polyPropDialog.updateCombo();
 
 	
 }

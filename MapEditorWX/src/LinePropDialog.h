@@ -20,19 +20,21 @@ class LinePropDialog: public wxDialog{
     wxStaticText* label_70;
     wxTextCtrl* text_ctrl_47;
     wxStaticText* label_71;
-    wxChoice* choice_24;
+    wxTextCtrl* text_ctrl_50;
     wxStaticText* label_69;
-    wxChoice* choice_25;
+    wxTextCtrl* text_ctrl_51;
     wxStaticText* label_72;
-    wxChoice* choice_26;
+    wxTextCtrl* text_ctrl_52;
     wxStaticText* label_68;
-    wxChoice* choice_27;
+    wxTextCtrl* text_ctrl_53;
+    wxButton* button_35;
+    wxButton* button_36;
 
     //線対象
     int lineIndex;
 public:
     LinePropDialog();
-    bool Create(wxWindow* parent, wxWindowID id);
+    bool Create(wxWindow* parent, wxWindowID id, int lineIndex_);
     virtual ~LinePropDialog();
 
     //イベントテーブル作成<en>declare
@@ -50,11 +52,14 @@ public:
     void OnCClockwiseSide(wxCommandEvent &event); // wxGlade: <event_handler>
     void OnClockwisePoly(wxCommandEvent &event); // wxGlade: <event_handler>
     void OnCClockwisePoly(wxCommandEvent &event); // wxGlade: <event_handler>
+    void OnOk(wxCommandEvent &ev);
+    void OnCancel(wxCommandEvent &ev);
 
-public:
     void setupDialog();
     void setLineIndex(int index);
     int getLineIndex();
+public:
+	line_data getLine();
 };
 
 #endif

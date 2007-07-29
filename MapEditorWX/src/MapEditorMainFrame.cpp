@@ -124,10 +124,8 @@ MapEditorMainFrame::MapEditorMainFrame(const wxString& title,
 
     //プロパティ
     this->objPropDialog.Create(this, wxID_ANY);
-    this->linePropDialog.Create(this, wxID_ANY);
     this->pointPropDialog.Create(this, wxID_ANY);
     this->polyTypeDialog.Create(this, wxID_ANY);
-    this->polyPropDialog.Create(this, wxID_ANY);
     this->sidePropDialog.Create(this, wxID_ANY);
 
     //初期化
@@ -326,8 +324,10 @@ void MapEditorMainFrame::setupMenus()
     wxGetApp().linePopupMenu.Append(ID_LineProp, _T("Properties..."));
     wxGetApp().linePopupMenu.Append(ID_ClockwiseSideProp, _T("Clockwise side prop..."));
     wxGetApp().linePopupMenu.Append(ID_CounterclockwiseSideProp, _T("Counterclockwise side prop..."));
+
     wxGetApp().pointPopupMenu.SetTitle(_T("point menu"));
     wxGetApp().pointPopupMenu.Append(ID_PointProp, _T("Properties..."));
+
     wxGetApp().polygonPopupMenu.SetTitle(_T("polygon menu"));
     wxGetApp().polygonPopupMenu.Append(ID_PolygonProp, _T("Properties..."));
     wxGetApp().polygonPopupMenu.Append(ID_SetVisualModePlayerStartPosition, _T("Set visual mode start position"));
@@ -543,9 +543,8 @@ void MapEditorMainFrame::changeEditMode(int mode)
 
         //線・点・プラットフォーム・オブジェクト
         //以上のプロパティダイアログを消します
-        this->linePropDialog.Show(false);
+        //this->linePropDialog.Show(false);
         this->pointPropDialog.Show(false);
-        this->polyPropDialog.Show(false);
         this->objPropDialog.Show(false);
 
 		//矢印ツールに戻す

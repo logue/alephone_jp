@@ -1,7 +1,7 @@
 #include "LinePropDialog.h"
 #include "MapEditorWX.h"
 
-enum{
+/*enum{
     ID_LANDSCAPE,
     ID_ELEVATION,
     ID_VARIABLE,
@@ -13,9 +13,11 @@ enum{
     ID_CCLOCK_SIDE,
     ID_CLOCK_POLY,
     ID_CCLOCK_POLY,
+	
 };
-
+*/
 BEGIN_EVENT_TABLE(LinePropDialog, wxDialog)
+/*
 //    EVT_TEXT(wxID_ANY, LinePropDialog::OnEndpoint1Edit)
 //    EVT_TEXT(wxID_ANY, LinePropDialog::OnEndpoint2Edit)
     EVT_CHECKBOX(ID_LANDSCAPE, LinePropDialog::OnLandscape)
@@ -29,6 +31,9 @@ BEGIN_EVENT_TABLE(LinePropDialog, wxDialog)
     EVT_CHOICE(ID_CCLOCK_SIDE, LinePropDialog::OnCClockwiseSide)
     EVT_CHOICE(ID_CLOCK_POLY, LinePropDialog::OnClockwisePoly)
     EVT_CHOICE(ID_CCLOCK_POLY, LinePropDialog::OnCClockwisePoly)
+	*/
+    EVT_BUTTON(wxID_OK, LinePropDialog::OnOk)
+    EVT_BUTTON(wxID_CANCEL, LinePropDialog::OnCancel)
 END_EVENT_TABLE()
 LinePropDialog::LinePropDialog()
 {
@@ -36,36 +41,37 @@ LinePropDialog::LinePropDialog()
 LinePropDialog::~LinePropDialog()
 {
 }
-bool LinePropDialog::Create(wxWindow* parent, wxWindowID id)
+bool LinePropDialog::Create(wxWindow* parent, wxWindowID id,
+							int lineIndex_)
 {
     bool result = wxDialog::Create(parent, id, _T("Line Properties"));
     sizer_54_staticbox = new wxStaticBox(this, -1, wxT("flags"));
     label_64 = new wxStaticText(this, wxID_ANY, wxT("endpoint indexes"));
-    text_ctrl_42 = new wxTextCtrl(this, wxID_ANY, wxEmptyString);
-    text_ctrl_43 = new wxTextCtrl(this, wxID_ANY, wxEmptyString);
-    checkbox_45 = new wxCheckBox(this, ID_LANDSCAPE, wxT("Landscape"));
-    checkbox_52 = new wxCheckBox(this, ID_ELEVATION, wxT("Elevation"));
-    checkbox_53 = new wxCheckBox(this, ID_VARIABLE, wxT("Variable elev"));
-    checkbox_54 = new wxCheckBox(this, ID_HAS_TRANS_SIDE, wxT("Has trans side"));
+    text_ctrl_42 = new wxTextCtrl(this, wxID_ANY, wxEmptyString, wxDefaultPosition, wxDefaultSize, wxTE_READONLY);
+    text_ctrl_43 = new wxTextCtrl(this, wxID_ANY, wxEmptyString, wxDefaultPosition, wxDefaultSize, wxTE_READONLY);
+    checkbox_45 = new wxCheckBox(this, wxID_ANY, wxT("Landscape"));
+    checkbox_52 = new wxCheckBox(this, wxID_ANY, wxT("Elevation"));
+    checkbox_53 = new wxCheckBox(this, wxID_ANY, wxT("Variable elev"));
+    checkbox_54 = new wxCheckBox(this, wxID_ANY, wxT("Has trans side"));
     const wxString radio_box_1_choices[] = {
         wxT("Solid"),
         wxT("Transparent")
     };
-    radio_box_1 = new wxRadioBox(this, ID_SEL, wxT("solidity"), wxDefaultPosition, wxDefaultSize, 2, radio_box_1_choices, 2, wxRA_SPECIFY_ROWS);
+    radio_box_1 = new wxRadioBox(this, wxID_ANY, wxT("solidity"), wxDefaultPosition, wxDefaultSize, 2, radio_box_1_choices, 2, wxRA_SPECIFY_ROWS);
     label_66 = new wxStaticText(this, wxID_ANY, wxT("length"));
     text_ctrl_45 = new wxTextCtrl(this, wxID_ANY, wxEmptyString, wxDefaultPosition, wxDefaultSize, wxTE_READONLY);
     label_67 = new wxStaticText(this, wxID_ANY, wxT("highest floor"));
-    text_ctrl_46 = new wxTextCtrl(this, ID_FLOOR, wxEmptyString);
+    text_ctrl_46 = new wxTextCtrl(this, wxID_ANY, wxEmptyString, wxDefaultPosition, wxDefaultSize, wxTE_READONLY);
     label_70 = new wxStaticText(this, wxID_ANY, wxT("lowest ceiling"));
-    text_ctrl_47 = new wxTextCtrl(this, ID_CEILING, wxEmptyString);
+    text_ctrl_47 = new wxTextCtrl(this, wxID_ANY, wxEmptyString, wxDefaultPosition, wxDefaultSize, wxTE_READONLY);
     label_71 = new wxStaticText(this, wxID_ANY, wxT("clockwise side"));
-    choice_24 = new wxChoice(this, ID_CLOCK_SIDE);
+    text_ctrl_50 = new wxTextCtrl(this, wxID_ANY, wxEmptyString, wxDefaultPosition, wxDefaultSize, wxTE_READONLY);
     label_69 = new wxStaticText(this, wxID_ANY, wxT("c-clockwise side"));
-    choice_25 = new wxChoice(this, ID_CCLOCK_SIDE);
+    text_ctrl_51 = new wxTextCtrl(this, wxID_ANY, wxEmptyString, wxDefaultPosition, wxDefaultSize, wxTE_READONLY);
     label_72 = new wxStaticText(this, wxID_ANY, wxT("clockwise poly"));
-    choice_26 = new wxChoice(this, ID_CLOCK_POLY);
+    text_ctrl_52 = new wxTextCtrl(this, wxID_ANY, wxEmptyString, wxDefaultPosition, wxDefaultSize, wxTE_READONLY);
     label_68 = new wxStaticText(this, wxID_ANY, wxT("c-clockwise poly"));
-    choice_27 = new wxChoice(this, ID_CCLOCK_POLY);
+    text_ctrl_53 = new wxTextCtrl(this, wxID_ANY, wxEmptyString, wxDefaultPosition, wxDefaultSize, wxTE_READONLY);
 
     text_ctrl_42->SetMinSize(wxSize(50, -1));
     text_ctrl_43->SetMinSize(wxSize(50, -1));
@@ -91,20 +97,21 @@ bool LinePropDialog::Create(wxWindow* parent, wxWindowID id)
     grid_sizer_26->Add(label_70, 0, 0, 0);
     grid_sizer_26->Add(text_ctrl_47, 0, 0, 0);
     grid_sizer_26->Add(label_71, 0, 0, 0);
-    grid_sizer_26->Add(choice_24, 0, 0, 0);
+    grid_sizer_26->Add(text_ctrl_50, 0, 0, 0);
     grid_sizer_26->Add(label_69, 0, 0, 0);
-    grid_sizer_26->Add(choice_25, 0, 0, 0);
+    grid_sizer_26->Add(text_ctrl_51, 0, 0, 0);
     grid_sizer_26->Add(label_72, 0, 0, 0);
-    grid_sizer_26->Add(choice_26, 0, 0, 0);
+    grid_sizer_26->Add(text_ctrl_52, 0, 0, 0);
     grid_sizer_26->Add(label_68, 0, 0, 0);
-    grid_sizer_26->Add(choice_27, 0, 0, 0);
+    grid_sizer_26->Add(text_ctrl_53, 0, 0, 0);
     SetSizer(grid_sizer_26);
     grid_sizer_26->Fit(this);
     Layout();
 
-    this->lineIndex = NONE;
+    setLineIndex(lineIndex_);
 
     setupDialog();
+	
     return result;
 }
 int LinePropDialog::getLineIndex()
@@ -118,6 +125,7 @@ void LinePropDialog::setLineIndex(int index)
 void LinePropDialog::setupDialog()
 {
     //チョイスのセットアップ
+	/*
     choice_24->Clear();
     choice_25->Clear();
     for(int i = 0; i < (int)SideList.size(); i ++){
@@ -135,7 +143,7 @@ void LinePropDialog::setupDialog()
     }
     choice_26->Insert(_T("NONE"), (int)PolygonList.size());
     choice_27->Insert(_T("NONE"), (int)PolygonList.size());
-
+	*/
 
     //タイトル設定
     SetTitle(getString("line ID = [%d", getLineIndex()));
@@ -161,6 +169,8 @@ void LinePropDialog::setupDialog()
     checkbox_54->SetValue(LINE_HAS_TRANSPARENT_SIDE(line) != 0);
     int sel = LINE_IS_SOLID(line) ? 0: 1;
     radio_box_1->SetSelection(sel);
+
+	/*
     index = line->clockwise_polygon_side_index;
     if(index == NONE){
         index = (int)SideList.size();
@@ -181,96 +191,52 @@ void LinePropDialog::setupDialog()
         index = (int)PolygonList.size();
     }
     choice_27->SetSelection(index);
+	*/
 
+	text_ctrl_50->SetValue(getString("%d",
+		line->counterclockwise_polygon_side_index));
+	text_ctrl_51->SetValue(getString("%d",
+		line->counterclockwise_polygon_side_index));
+	text_ctrl_52->SetValue(getString("%d",
+		line->clockwise_polygon_owner));
+	text_ctrl_53->SetValue(getString("%d",
+		line->counterclockwise_polygon_owner));
     //値代入
     setupDialog();
 }
-void LinePropDialog::OnEndpoint1Edit(wxCommandEvent &event)
+void LinePropDialog::OnOk(wxCommandEvent &ev)
 {
-	if(getLineIndex() == NONE)return;
-	get_line_data(getLineIndex())->endpoint_indexes[0] = atoi(wxConvertWX2MB(event.GetString()));
+    SetReturnCode(wxID_OK);
+    Destroy();
+}
+void LinePropDialog::OnCancel(wxCommandEvent &ev)
+{
+    SetReturnCode(wxID_CANCEL);
+    Destroy();
+}
+line_data LinePropDialog::getLine()
+{
+	line_data data;
+	line_data* org = get_line_data(getLineIndex());
+	memcpy(&data, org, sizeof(line_data));
+
+	SET_LINE_SOLIDITY(&data, radio_box_1->GetSelection() == 0);
+	SET_LINE_TRANSPARENCY(&data, radio_box_1->GetSelection() == 1);
+	SET_LINE_LANDSCAPE_STATUS(&data, checkbox_45->GetValue());
+	SET_LINE_ELEVATION(&data, checkbox_52->GetValue());
+	SET_LINE_VARIABLE_ELEVATION(&data, checkbox_53->GetValue());
+	SET_LINE_HAS_TRANSPARENT_SIDE(&data, checkbox_54->GetValue());
+
+	//length
+	//height(uneditable)
+/*	data.highest_adjacent_floor = atoi(wxConvertWX2MB(
+		text_ctrl_46->GetValue()));
+	data.lowest_adjacent_ceiling = atoi(wxConvertWX2MB(
+		text_ctrl_47->GetValue()));
+		*/
+	//side
+	//polygon
+	return data;
 }
 
-
-void LinePropDialog::OnEndpoint2Edit(wxCommandEvent &event)
-{
-	if(getLineIndex() == NONE)return;
-	get_line_data(getLineIndex())->endpoint_indexes[1] = atoi(wxConvertWX2MB(event.GetString()));
-}
-
-
-void LinePropDialog::OnLandscape(wxCommandEvent &event)
-{
-	if(getLineIndex() == NONE)return;
-	SET_LINE_LANDSCAPE_STATUS(get_line_data(getLineIndex()), event.IsChecked());
-}
-
-void LinePropDialog::OnElevation(wxCommandEvent &event)
-{
-	if(getLineIndex() == NONE)return;
-	SET_LINE_ELEVATION(get_line_data(getLineIndex()), event.IsChecked());
-}
-
-
-void LinePropDialog::OnVariableElev(wxCommandEvent &event)
-{
-	if(getLineIndex() == NONE)return;
-	SET_LINE_ELEVATION(get_line_data(getLineIndex()), event.IsChecked());
-}
-
-
-void LinePropDialog::OnHasTransSide(wxCommandEvent &event)
-{
-	if(getLineIndex() == NONE)return;
-	SET_LINE_HAS_TRANSPARENT_SIDE(get_line_data(getLineIndex()), event.IsChecked());
-}
-
-
-void LinePropDialog::OnRadioSel(wxCommandEvent &event)
-{
-	if(getLineIndex() == NONE)return;
-	//TODO
-}
-
-
-void LinePropDialog::OnFloor(wxCommandEvent &event)
-{
-	if(getLineIndex() == NONE)return;
-	//TODO
-}
-
-
-void LinePropDialog::OnCeiling(wxCommandEvent &event)
-{
-	if(getLineIndex() == NONE)return;
-	//TODO
-}
-
-
-void LinePropDialog::OnClockwiseSide(wxCommandEvent &event)
-{
-	if(getLineIndex() == NONE)return;
-	//TODO
-}
-
-
-void LinePropDialog::OnCClockwiseSide(wxCommandEvent &event)
-{
-	if(getLineIndex() == NONE)return;
-	//TODO
-}
-
-
-void LinePropDialog::OnClockwisePoly(wxCommandEvent &event)
-{
-	if(getLineIndex() == NONE)return;
-	//TODO
-}
-
-
-void LinePropDialog::OnCClockwisePoly(wxCommandEvent &event)
-{
-	if(getLineIndex() == NONE)return;
-	//TODO
-}
 

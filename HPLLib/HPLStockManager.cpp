@@ -2,6 +2,7 @@
 #include "HPLMapTool.h"
 
 #include "map.h"
+#include "platforms.h"
 
 hpl::aleph::HPLStockManager::HPLStockManager()
 {
@@ -61,6 +62,9 @@ void hpl::aleph::HPLStockManager::resizeDeletes()
     }
     for(int i = (int)delObjects.size(); i < (int)SavedObjectList.size(); i ++){
         delObjects.push_back(false);
+    }
+    for(int i = (int)delPlatforms.size(); i < (int)PlatformList.size(); i ++){
+        delPlatforms.push_back(false);
     }
 }
 
@@ -275,6 +279,21 @@ void hpl::aleph::HPLStockManager::updateDeletes()
             //消さない
         }
     }
+
+	//platform
+	for(int i = 0; i < (int)delPlatforms.size(); i ++){
+		platform_data* platform = &PlatformList[i];
+		int polyIndex = platform->polygon_index;
+		if(polyIndex == NONE || delPolygons[polyIndex]){
+			delPlatforms[i] = true;
+		}else{
+			if(delPlatforms[i]){
+				//このプラットフォームは存在しない
+			}else{
+				//何もしない
+			}
+		}
+	}
 }
 
 /**
@@ -294,36 +313,55 @@ void hpl::aleph::HPLStockManager::resetDeletes()
 
 bool hpl::aleph::HPLStockManager::deletePoint(int index)
 {
-    assert(get_endpoint_data(index));
+#ifdef _WXDEBUG_
+    wxASSERT(get_endpoint_data(index));
+#endif
     this->delPoints[index] = true;
     //updateDeletes();
     return true;
 }
 bool hpl::aleph::HPLStockManager::deleteLine(int index)
 {
-    assert(get_line_data(index));
+#ifdef _WXDEBUG_
+    wxASSERT(get_line_data(index));
+#endif
     this->delLines[index] = true;
     //updateDeletes();
     return true;
 }
 bool hpl::aleph::HPLStockManager::deletePolygon(int index)
 {
-    assert(get_polygon_data(index));
+#ifdef _WXDEBUG_
+    wxASSERT(get_polygon_data(index));
+#endif
     this->delPolygons[index] = true;
     //updateDeletes();
     return true;
 }
 bool hpl::aleph::HPLStockManager::deleteSide(int index)
 {
-    assert(get_side_data(index));
+#ifdef _WXDEBUG_
+    wxASSERT(get_side_data(index));
+#endif
     this->delSides[index] = true;
     //updateDeletes();
     return true;
 }
 bool hpl::aleph::HPLStockManager::deleteObject(int index)
 {
-    assert(index >= 0 && index < (int)SavedObjectList.size());
+#ifdef _WXDEBUG_
+    wxASSERT(index >= 0 && index < (int)SavedObjectList.size());
+#endif
     this->delObjects[index] = true;
+    //updateDeletes();
+    return true;
+}
+bool hpl::aleph::HPLStockManager::deletePlatform(int index)
+{
+#ifdef _WXDEBUG_
+    wxASSERT(index >= 0 && index < (int)PlatformList.size());
+#endif
+    this->delPlatforms[index] = true;
     //updateDeletes();
     return true;
 }

@@ -351,8 +351,8 @@ void hpl::aleph::map::changeIndexMapping(
 	//points
     for(int i = endpointIndexStart; i < endpointIndexEnd; i ++){
 #ifdef _WXDEBUG_
-		wxASSERT(endpointIndexStart >= 0 && endpointIndexStart < endpointList.size() &&
-			endpointIndexStart < endpointIndexEnd && endpointIndexEnd < endpointList.size());
+		wxASSERT(endpointIndexStart >= 0 && endpointIndexStart <= endpointList.size() &&
+			endpointIndexStart <= endpointIndexEnd && endpointIndexEnd <= endpointList.size());
 #endif
 		endpoint_data* ep = &endpointList[i];
 		//Š‘®‚·‚éƒ|ƒŠƒSƒ“Index

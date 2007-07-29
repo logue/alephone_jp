@@ -503,6 +503,10 @@ namespace map{
 	*/
 	struct object_frequency_definition* getPlacementData(int objectType, int index);
 
+	///////////////////////////////////
+	//	Platform
+	int getPlatformIndexFromPolygonIndex(int polyIndex,
+		hpl::aleph::HPLStockManager* smgr);
 };
 };
 };

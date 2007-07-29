@@ -74,7 +74,17 @@ public:
 
     void OnOk(wxCommandEvent& ev);
     void OnCancel(wxCommandEvent& ev);
-    
+	void OnSpeedChoice(wxCommandEvent& ev);
+	void OnDelayChoice(wxCommandEvent& ev);
+	void OnSpeed(wxCommandEvent& ev);
+	void OnDelay(wxCommandEvent& ev);
+	void OnAutoMin(wxCommandEvent& ev);
+	void OnAutoMax(wxCommandEvent& ev);
+	void OnMinHeight(wxCommandEvent& ev);
+	void OnMaxHeight(wxCommandEvent& ev);
+	void OnCopyFrom(wxCommandEvent& ev);
+	void OnTag(wxCommandEvent& ev);
+	void OnPreset(wxCommandEvent& ev);
 public:
 	platform_data getPlatform();
 

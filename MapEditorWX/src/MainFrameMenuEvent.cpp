@@ -43,7 +43,7 @@ void MapEditorMainFrame::initLevel()
     wxGetApp().getViewGridManager()->setViewHeightMin(SHRT_MIN);
 
 	//プロパティコンボボックスを設定
-	this->polyPropDialog.updateCombo();
+//	this->polyPropDialog.updateCombo();
 }
 
 /**
@@ -156,7 +156,7 @@ void MapEditorMainFrame::OnOpen(wxCommandEvent& WXUNUSED(ev))
         }
 
 		//プロパティコンボボックスを設定
-		this->polyPropDialog.updateCombo();
+		//this->polyPropDialog.updateCombo();
 
         //再描画
         Refresh();
@@ -343,8 +343,8 @@ void MapEditorMainFrame::closeAllModelessDialogs()
 {
     this->objPropDialog.Show(false);
     this->pointPropDialog.Show(false);
-    this->polyPropDialog.Show(false);
-    this->linePropDialog.Show(false);
+    //this->polyPropDialog.Show(false);
+    //this->linePropDialog.Show(false);
     this->sidePropDialog.Show(false);
     this->polyTypeDialog.Show(false);
     this->mediaPaletteDialog.Show(false);
@@ -511,8 +511,19 @@ void MapEditorMainFrame::OnTerminalViewer(wxCommandEvent& ev)
 
 void MapEditorMainFrame::OnLineProp(wxCommandEvent& ev)
 {
-    this->linePropDialog.setLineIndex(wxGetApp().popupLineIndex);
-    this->linePropDialog.Show(true);
+    //this->linePropDialog.setLineIndex(wxGetApp().popupLineIndex);
+    //this->linePropDialog.Show(true);
+	int lineIndex = wxGetApp().popupLineIndex;
+	line_data* org = get_line_data(lineIndex);
+#ifdef __WXDEBUG__
+	wxASSERT(org);
+#endif
+	LinePropDialog dlg;
+	dlg.Create(this, wxID_ANY, lineIndex);
+	if(dlg.ShowModal() == wxID_OK){
+		line_data data = dlg.getLine();
+		memcpy(org, &data, sizeof(line_data));
+	}
 }
 void MapEditorMainFrame::OnClockwiseSide(wxCommandEvent& ev)
 {
@@ -533,8 +544,18 @@ void MapEditorMainFrame::OnPointProp(wxCommandEvent& ev)
 }
 void MapEditorMainFrame::OnPolygonProp(wxCommandEvent& ev)
 {
-    this->polyPropDialog.setPolyIndex(wxGetApp().popupPolygonIndex);
-    this->polyPropDialog.Show(true);
+	int polyIndex = wxGetApp().popupPolygonIndex;
+	polygon_data* org = get_polygon_data(polyIndex);
+#ifdef __WXDEBUG__
+	wxASSERT(org);
+#endif
+	PolygonPropDialog dlg;
+	dlg.Create(this, wxID_ANY, polyIndex);
+	if(dlg.ShowModal() == wxID_OK){
+		polygon_data data = dlg.getPolygon();
+		//コピー
+		memcpy(org, &data, sizeof(polygon_data));
+	}
 }
 void MapEditorMainFrame::OnSetVisualModePlayerPosition(wxCommandEvent& ev)
 {

@@ -33,6 +33,9 @@ namespace aleph{
         std::vector<bool> delPolygons;
         std::vector<bool> delSides;
         std::vector<bool> delObjects;
+		//platform
+		std::vector<bool> delPlatforms;
+		//light/media
 
 		//‘I‘ğ‚µ‚½—v‘f‚Ìî•ñ
 		std::vector<bool> selPoints;
@@ -86,6 +89,7 @@ namespace aleph{
         bool deletePolygon(int index);
         bool deleteSide(int index);
         bool deleteObject(int index);
+		bool deletePlatform(int index);
 
 		/**
 			‘I‘ğî•ñ‚Ìæ“¾

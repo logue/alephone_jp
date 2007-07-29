@@ -1,12 +1,18 @@
 #include "PolygonPropDialog.h"
 #include "PlatformDialog.h"
 
+static char* CREATE_BUTTON_LABEL = "Create platform";
+static char* DELETE_BUTTON_LABEL = "Delete platform";
+
 #include "MapEditorWX.h"
 namespace PolyProp{
 enum{
+	/*
     ID_ID,
     ID_FirstNeighbor,
+	*/
     ID_Type,
+	/*
     ID_NearCount,
     ID_Perm,
     ID_CenterX,
@@ -28,38 +34,21 @@ enum{
     ID_AmbSnd,
     ID_CeilingTrans,
     ID_RndSnd,
+	*/
     ID_Platform,
+	/*
 	ID_FloorHeight,
 	ID_CeilingHeight,
-
+	*/
+	ID_CreatePlatform,
 };
 };
 BEGIN_EVENT_TABLE(PolygonPropDialog, wxDialog)
-    EVT_TEXT(PolyProp::ID_ID, PolygonPropDialog::OnIDEdit)
-    EVT_TEXT(PolyProp::ID_FirstNeighbor, PolygonPropDialog::OnFirstNeighborEdit)
     EVT_CHOICE(PolyProp::ID_Type, PolygonPropDialog::OnTypeChoice)
-    EVT_TEXT(PolyProp::ID_NearCount, PolygonPropDialog::OnNearCountEdit)
-    EVT_TEXT(PolyProp::ID_Perm, PolygonPropDialog::OnPermuEdit)
-    EVT_TEXT(PolyProp::ID_CenterX, PolygonPropDialog::OnCenterXEdit)
-    EVT_CHOICE(PolyProp::ID_FloorLight, PolygonPropDialog::OnFloorLightEdit)
-    EVT_TEXT(PolyProp::ID_CenterY, PolygonPropDialog::OnCenterYEdit)
-    EVT_CHOICE(PolyProp::ID_CeilingLight, PolygonPropDialog::OnCeilingLightEdit)
-    EVT_TEXT(PolyProp::ID_Area, PolygonPropDialog::OnAreaEdit)
-    EVT_TEXT(PolyProp::ID_FloorOriginX, PolygonPropDialog::OnFloorOriginXEdit)
-    EVT_TEXT(PolyProp::ID_FloorOriginY, PolygonPropDialog::OnFloorOriginYEdit)
-    EVT_TEXT(PolyProp::ID_CeilingOriginX, PolygonPropDialog::OnCeilingOriginXEdit)
-    EVT_TEXT(PolyProp::ID_CeilingOriginY, PolygonPropDialog::OnCeilingOriginYEdit)
-    EVT_CHOICE(PolyProp::ID_FirstObj, PolygonPropDialog::OnFirstObjChoice)
-    EVT_CHOICE(PolyProp::ID_Media, PolygonPropDialog::OnMediaChoice)
-    EVT_TEXT(PolyProp::ID_FirstExZone, PolygonPropDialog::OnFirstExZoneEdit)
-    EVT_CHOICE(PolyProp::ID_MediaLight, PolygonPropDialog::OnMediaLightChoice)
-    EVT_TEXT(PolyProp::ID_LineExZone, PolygonPropDialog::OnLineExZoneEdit)
-    EVT_CHOICE(PolyProp::ID_SndSrcIndex, PolygonPropDialog::OnSndSrcIndexChoice)
-    EVT_TEXT(PolyProp::ID_FloorTrans, PolygonPropDialog::OnFloorTransEdit)
-    EVT_CHOICE(PolyProp::ID_AmbSnd, PolygonPropDialog::OnAmbSndChoice)
-    EVT_TEXT(PolyProp::ID_CeilingTrans, PolygonPropDialog::OnCeilingTransEdit)
-    EVT_CHOICE(PolyProp::ID_RndSnd, PolygonPropDialog::OnRndSndChoice)
     EVT_BUTTON(PolyProp::ID_Platform, PolygonPropDialog::OnPlatformBtn)
+    EVT_BUTTON(PolyProp::ID_CreatePlatform, PolygonPropDialog::OnCreatePlatformBtn)
+    EVT_BUTTON(wxID_OK, PolygonPropDialog::OnOk)
+    EVT_BUTTON(wxID_CANCEL, PolygonPropDialog::OnCancel)
 END_EVENT_TABLE()
 PolygonPropDialog::PolygonPropDialog()
 {
@@ -67,64 +56,69 @@ PolygonPropDialog::PolygonPropDialog()
 PolygonPropDialog::~PolygonPropDialog()
 {
 }
-bool PolygonPropDialog::Create(wxWindow* parent, wxWindowID id)
+bool PolygonPropDialog::Create(wxWindow* parent, wxWindowID id,
+							   int polygonIndex)
 {
     bool result = wxDialog::Create(parent, id, _T("Polygon Properties"));
     label_34 = new wxStaticText(this, wxID_ANY, wxT("Polygon ID"));
-    text_ctrl_20 = new wxTextCtrl(this, PolyProp::ID_ID, wxEmptyString, wxDefaultPosition, wxDefaultSize, wxTE_READONLY);
+    text_ctrl_20 = new wxTextCtrl(this, wxID_ANY, wxEmptyString, wxDefaultPosition, wxDefaultSize, wxTE_READONLY);
     label_46 = new wxStaticText(this, wxID_ANY, wxT("First neighbour"));
-    text_ctrl_21 = new wxTextCtrl(this, PolyProp::ID_FirstNeighbor, wxEmptyString, wxDefaultPosition, wxDefaultSize, wxTE_READONLY);
+    text_ctrl_21 = new wxTextCtrl(this, wxID_ANY, wxEmptyString, wxDefaultPosition, wxDefaultSize, wxTE_READONLY);
     label_35 = new wxStaticText(this, wxID_ANY, wxT("Type"));
     choice_12 = new wxChoice(this, PolyProp::ID_Type);
     label_47 = new wxStaticText(this, wxID_ANY, wxT("Near count"));
-    text_ctrl_22 = new wxTextCtrl(this, PolyProp::ID_NearCount, wxEmptyString, wxDefaultPosition, wxDefaultSize, wxTE_READONLY);
+    text_ctrl_22 = new wxTextCtrl(this, wxID_ANY, wxEmptyString, wxDefaultPosition, wxDefaultSize, wxTE_READONLY);
     label_36 = new wxStaticText(this, wxID_ANY, wxT("Permutation"));
-    text_ctrl_25 = new wxTextCtrl(this, PolyProp::ID_Perm, wxEmptyString, wxDefaultPosition, wxDefaultSize, wxTE_READONLY);
+    text_ctrl_25 = new wxTextCtrl(this, wxID_ANY, wxEmptyString, wxDefaultPosition, wxDefaultSize, wxTE_READONLY);
     label_48 = new wxStaticText(this, wxID_ANY, wxT("Center X"));
-    text_ctrl_23 = new wxTextCtrl(this, PolyProp::ID_CenterX, wxEmptyString, wxDefaultPosition, wxDefaultSize, wxTE_READONLY);
+    text_ctrl_23 = new wxTextCtrl(this, wxID_ANY, wxEmptyString, wxDefaultPosition, wxDefaultSize, wxTE_READONLY);
     label_37 = new wxStaticText(this, wxID_ANY, wxT("Floor light"));
-    choice_13 = new wxChoice(this, PolyProp::ID_FloorLight);
+    choice_13 = new wxChoice(this, wxID_ANY);
     label_49 = new wxStaticText(this, wxID_ANY, wxT("Center Y"), wxDefaultPosition, wxDefaultSize, wxTE_READONLY);
-    text_ctrl_24 = new wxTextCtrl(this, PolyProp::ID_CenterY, wxEmptyString);
+    text_ctrl_24 = new wxTextCtrl(this, wxID_ANY, wxEmptyString);
     label_38 = new wxStaticText(this, wxID_ANY, wxT("Ceiling light"));
-    choice_14 = new wxChoice(this, PolyProp::ID_CeilingLight);
+    choice_14 = new wxChoice(this, wxID_ANY);
     label_26 = new wxStaticText(this, wxID_ANY, wxT("Floor origin"));
-    text_ctrl_33 = new wxTextCtrl(this, PolyProp::ID_FloorOriginX, wxEmptyString, wxDefaultPosition, wxDefaultSize, wxTE_READONLY);
+    text_ctrl_33 = new wxTextCtrl(this, wxID_ANY, wxEmptyString, wxDefaultPosition, wxDefaultSize, wxTE_READONLY);
     label_27 = new wxStaticText(this, wxID_ANY, wxT("x"));
-    text_ctrl_35 = new wxTextCtrl(this, PolyProp::ID_FloorOriginY, wxEmptyString, wxDefaultPosition, wxDefaultSize, wxTE_READONLY);
+    text_ctrl_35 = new wxTextCtrl(this, wxID_ANY, wxEmptyString, wxDefaultPosition, wxDefaultSize, wxTE_READONLY);
     label_39 = new wxStaticText(this, wxID_ANY, wxT("Area"));
-    text_ctrl_26 = new wxTextCtrl(this, PolyProp::ID_Area, wxEmptyString, wxDefaultPosition, wxDefaultSize, wxTE_READONLY);
+    text_ctrl_26 = new wxTextCtrl(this, wxID_ANY, wxEmptyString, wxDefaultPosition, wxDefaultSize, wxTE_READONLY);
     label_55 = new wxStaticText(this, wxID_ANY, wxT("Ceiling origin"));
-    text_ctrl_34 = new wxTextCtrl(this, PolyProp::ID_CeilingOriginX, wxEmptyString, wxDefaultPosition, wxDefaultSize, wxTE_READONLY);
+    text_ctrl_34 = new wxTextCtrl(this, wxID_ANY, wxEmptyString, wxDefaultPosition, wxDefaultSize, wxTE_READONLY);
     label_28 = new wxStaticText(this, wxID_ANY, wxT("x"));
-    text_ctrl_36 = new wxTextCtrl(this, PolyProp::ID_CeilingOriginY, wxEmptyString, wxDefaultPosition, wxDefaultSize, wxTE_READONLY);
+    text_ctrl_36 = new wxTextCtrl(this, wxID_ANY, wxEmptyString, wxDefaultPosition, wxDefaultSize, wxTE_READONLY);
     label_40 = new wxStaticText(this, wxID_ANY, wxT("First object"));
     //choice_19 = new wxChoice(this, PolyProp::ID_FirstObj);
 	text_ctrl_firstObject = new wxTextCtrl(this, wxID_ANY, wxEmptyString, wxDefaultPosition, wxDefaultSize, wxTE_READONLY);
     label_54 = new wxStaticText(this, wxID_ANY, wxT("Media"));
-    choice_15 = new wxChoice(this, PolyProp::ID_Media);
+    choice_15 = new wxChoice(this, wxID_ANY);
     label_41 = new wxStaticText(this, wxID_ANY, wxT("First ex zone"));
-    text_ctrl_28 = new wxTextCtrl(this, PolyProp::ID_FirstExZone, wxEmptyString, wxDefaultPosition, wxDefaultSize, wxTE_READONLY);
+    text_ctrl_28 = new wxTextCtrl(this, wxID_ANY, wxEmptyString, wxDefaultPosition, wxDefaultSize, wxTE_READONLY);
     label_53 = new wxStaticText(this, wxID_ANY, wxT("Media light"));
-    choice_16 = new wxChoice(this, PolyProp::ID_MediaLight);
+    choice_16 = new wxChoice(this, wxID_ANY);
     label_42 = new wxStaticText(this, wxID_ANY, wxT("Line ex zone"));
-    text_ctrl_29 = new wxTextCtrl(this, PolyProp::ID_LineExZone, wxEmptyString, wxDefaultPosition, wxDefaultSize, wxTE_READONLY);
+    text_ctrl_29 = new wxTextCtrl(this, wxID_ANY, wxEmptyString, wxDefaultPosition, wxDefaultSize, wxTE_READONLY);
     label_52 = new wxStaticText(this, wxID_ANY, wxT("Snd src index"));
-    choice_20 = new wxChoice(this, PolyProp::ID_SndSrcIndex);
+    choice_20 = new wxChoice(this, wxID_ANY);
     label_43 = new wxStaticText(this, wxID_ANY, wxT("Floor trans"));
-    text_ctrl_30 = new wxTextCtrl(this, PolyProp::ID_FloorTrans, wxEmptyString, wxDefaultPosition, wxDefaultSize, wxTE_READONLY);
+    text_ctrl_30 = new wxTextCtrl(this, wxID_ANY, wxEmptyString, wxDefaultPosition, wxDefaultSize, wxTE_READONLY);
     label_51 = new wxStaticText(this, wxID_ANY, wxT("Amb snd"));
-    choice_17 = new wxChoice(this, PolyProp::ID_AmbSnd);
+    choice_17 = new wxChoice(this, wxID_ANY);
     label_44 = new wxStaticText(this, wxID_ANY, wxT("Ceiling trans"));
-    text_ctrl_31 = new wxTextCtrl(this, PolyProp::ID_CeilingTrans, wxEmptyString);
+    text_ctrl_31 = new wxTextCtrl(this, wxID_ANY, wxEmptyString);
     label_50 = new wxStaticText(this, wxID_ANY, wxT("Rnd snd"));
-    choice_18 = new wxChoice(this, PolyProp::ID_RndSnd);
+    choice_18 = new wxChoice(this, wxID_ANY);
     button_21 = new wxButton(this, PolyProp::ID_Platform, wxT("Platform settings"));
-    panel_10 = new wxPanel(this, wxID_ANY);
+	//プラットフォームデータの作成
+    //panel_10 = new wxPanel(this, wxID_ANY);
+	button_createPlatform = new wxButton(this, PolyProp::ID_CreatePlatform, wxConvertMB2WX(CREATE_BUTTON_LABEL));
     panel_11 = new wxPanel(this, wxID_ANY);
     panel_12 = new wxPanel(this, wxID_ANY);
-	textFloorHeight = new wxTextCtrl(this, PolyProp::ID_FloorHeight);
-	textCeilingHeight = new wxTextCtrl(this, PolyProp::ID_CeilingHeight);
+	textFloorHeight = new wxTextCtrl(this, wxID_ANY);
+	textCeilingHeight = new wxTextCtrl(this, wxID_ANY);
+	button_OK = new wxButton(this, wxID_OK);
+	button_Cancel = new wxButton(this, wxID_CANCEL);
 
     choice_12->SetMinSize(wxSize(100, 22));
     choice_13->SetMinSize(wxSize(100, 22));
@@ -206,13 +200,14 @@ bool PolygonPropDialog::Create(wxWindow* parent, wxWindowID id)
     grid_sizer_13->Add(new wxPanel(this, wxID_ANY), 1, wxEXPAND, 0);
 
 	grid_sizer_13->Add(button_21, 0, 0, 0);
-    grid_sizer_13->Add(panel_10, 1, wxEXPAND, 0);
-    grid_sizer_13->Add(panel_11, 1, wxEXPAND, 0);
-    grid_sizer_13->Add(panel_12, 1, wxEXPAND, 0);
+    //grid_sizer_13->Add(panel_10, 1, wxEXPAND, 0);
+	grid_sizer_13->Add(button_createPlatform, 0,0,0);
+    grid_sizer_13->Add(button_OK, 0, wxEXPAND, 0);
+    grid_sizer_13->Add(button_Cancel, 0, wxEXPAND, 0);
     SetSizer(grid_sizer_13);
     grid_sizer_13->Fit(this);
     Layout();
-    this->setPolyIndex(NONE);
+    this->setPolyIndex(polygonIndex, wxGetApp().getStockManager());
 
     //Typeに追加
     for(int i = 0; i < NUMBER_OF_POLYGON_TYPE; i ++){
@@ -237,13 +232,17 @@ bool PolygonPropDialog::Create(wxWindow* parent, wxWindowID id)
     }
     choice_18->Insert(_T("NONE"), .size());*/
 
+	//combo
+	updateCombo();
+	setupDialog(wxGetApp().getStockManager());
     return result;
 }
 
-void PolygonPropDialog::setPolyIndex(int index)
+void PolygonPropDialog::setPolyIndex(int index,
+									 hpl::aleph::HPLStockManager* smgr)
 {
     this->polyIndex = index;
-    setupDialog();
+//    setupDialog(smgr);
     //タイトル変更
     SetTitle(getString("Polygon prop [index:%d]", this->getPolyIndex()));
 }
@@ -295,24 +294,27 @@ void PolygonPropDialog::updateCombo()
     
 }
 
-void PolygonPropDialog::setupDialog()
+void PolygonPropDialog::setupDialog(hpl::aleph::HPLStockManager* smgr)
 {
 
 
-    if(this->getPolyIndex() == NONE){
-		button_21->Enable();
+/*    if(this->getPolyIndex() == NONE){
+		//プラットフォームボタン
+		button_21->Disable();
+		//プラットフォーム作成ボタン
+		button_createPlatform->SetLabel(wxConvertMB2WX(CREATE_BUTTON_LABEL));
+		button_createPlatform->Disable();
         return;
-    }
+    }*/
     //ポリゴン情報をダイアログに設定
     polygon_data* poly = get_polygon_data(this->getPolyIndex());
+#ifdef __WXDEBUG__
+	wxASSERT(poly);
+#endif
     text_ctrl_20->SetValue(getString("%d", this->getPolyIndex()));
     choice_12->SetSelection(poly->type);
 	//プラットフォームならボタンを有効にする
-	if(poly->type == _polygon_is_platform){
-		button_21->Enable();
-	}else{
-		button_21->Disable();
-	}
+	setupPlatformButton(smgr);
     text_ctrl_25->SetValue(getString("%d", poly->permutation));
     choice_13->SetSelection(poly->floor_lightsource_index);
     choice_14->SetSelection(poly->ceiling_lightsource_index);
@@ -371,6 +373,8 @@ void PolygonPropDialog::setupDialog()
 
 	
 }
+
+/*
 void PolygonPropDialog::OnIDEdit(wxCommandEvent &event)
 {
 	//変更不可
@@ -381,7 +385,7 @@ void PolygonPropDialog::OnFirstNeighborEdit(wxCommandEvent &event)
 {
 	//変更不可
 }
-
+*/
 
 void PolygonPropDialog::OnTypeChoice(wxCommandEvent &event)
 {
@@ -390,10 +394,46 @@ void PolygonPropDialog::OnTypeChoice(wxCommandEvent &event)
 	int sel = event.GetSelection();
 	if(sel >= 0){
 		poly->type = sel;
+		if(sel == _polygon_is_platform){
+			setupPlatformButton(wxGetApp().getStockManager());
+		}else{
+			disablePlatformButton();
+		}
 	}
 }
+void PolygonPropDialog::disablePlatformButton()
+{
+	//プラットフォームボタン
+	button_21->Disable();
+	//プラットフォーム作成ボタン
+	button_createPlatform->SetLabel(wxConvertMB2WX(CREATE_BUTTON_LABEL));
+	button_createPlatform->Disable();
+}
 
-
+void PolygonPropDialog::setupPlatformButton(hpl::aleph::HPLStockManager* smgr)
+{
+	polygon_data* poly = get_polygon_data(getPolyIndex());
+	if(!poly){
+		return;
+	}
+	if(poly->type == _polygon_is_platform){
+		int platformIndex = hpl::aleph::map::getPlatformIndexFromPolygonIndex(
+			this->getPolyIndex(), smgr);
+		//プラットフォーム
+		if(platformIndex != NONE){
+			//かつプラットフォームが存在する
+			this->readyForDeleting();
+		}else{
+			this->readyForCreating();
+		}
+	}else{
+		//ポリゴンはプラットフォームではない
+		button_21->Disable();
+		button_createPlatform->SetLabel(wxConvertMB2WX(CREATE_BUTTON_LABEL));
+		button_createPlatform->Disable();
+	}
+}
+/*
 void PolygonPropDialog::OnNearCountEdit(wxCommandEvent &event)
 {
 	//auto calculate. not ediablt
@@ -402,6 +442,7 @@ void PolygonPropDialog::OnNearCountEdit(wxCommandEvent &event)
 
 void PolygonPropDialog::OnPermuEdit(wxCommandEvent &event)
 {
+	//auto calculate. not ediablt
 	//TODO what's the permutation?
 	//置換・配列・順序???
 }
@@ -424,10 +465,7 @@ void PolygonPropDialog::OnFloorLightEdit(wxCommandEvent &event)
 
 void PolygonPropDialog::OnCenterYEdit(wxCommandEvent &event)
 {
-    if(this->getPolyIndex() == NONE){
-        return ;
-    }
-    std::cout<<"Event handler (PolygonPropDialog::OnCenterYEdit) not implemented yet"<<std::endl; //notify the user that he hasn't implemented the event handler yet
+	//auto calculate. not ediablt
 }
 
 
@@ -442,47 +480,29 @@ void PolygonPropDialog::OnCeilingLightEdit(wxCommandEvent &event)
 
 void PolygonPropDialog::OnAreaEdit(wxCommandEvent &event)
 {
-    if(this->getPolyIndex() == NONE){
-        return ;
-    }
-    std::cout<<"Event handler (PolygonPropDialog::OnAreaEdit) not implemented yet"<<std::endl; //notify the user that he hasn't implemented the event handler yet
+	//auto calculate. not ediablt
 }
 void PolygonPropDialog::OnFloorOriginXEdit(wxCommandEvent &event)
 {
-    if(this->getPolyIndex() == NONE){
-        return ;
-    }
-    std::cout<<"Event handler (PolygonPropDialog::OnFloorOriginXEdit) not implemented yet"<<std::endl; //notify the user that he hasn't implemented the event handler yet
+	//auto calculate. not ediablt
 }
 void PolygonPropDialog::OnFloorOriginYEdit(wxCommandEvent &event)
 {
-    if(this->getPolyIndex() == NONE){
-        return ;
-    }
-    std::cout<<"Event handler (PolygonPropDialog::OnFloorOriginYEdit) not implemented yet"<<std::endl; //notify the user that he hasn't implemented the event handler yet
+	//auto calculate. not ediablt
 }
 void PolygonPropDialog::OnCeilingOriginXEdit(wxCommandEvent &event)
 {
-    if(this->getPolyIndex() == NONE){
-        return ;
-    }
-    std::cout<<"Event handler (PolygonPropDialog::OnCeilingOriginXEdit) not implemented yet"<<std::endl; //notify the user that he hasn't implemented the event handler yet
+	//auto calculate. not ediablt
 }
 void PolygonPropDialog::OnCeilingOriginYEdit(wxCommandEvent &event)
 {
-    if(this->getPolyIndex() == NONE){
-        return ;
-    }
-    std::cout<<"Event handler (PolygonPropDialog::OnCeilingOriginYEdit) not implemented yet"<<std::endl; //notify the user that he hasn't implemented the event handler yet
+	//auto calculate. not ediablt
 }
 
 
 void PolygonPropDialog::OnFirstObjChoice(wxCommandEvent &event)
 {
-    if(this->getPolyIndex() == NONE){
-        return ;
-    }
-    std::cout<<"Event handler (PolygonPropDialog::OnFirstObjChoice) not implemented yet"<<std::endl; //notify the user that he hasn't implemented the event handler yet
+	//auto calculate. not ediablt
 }
 
 
@@ -497,10 +517,7 @@ void PolygonPropDialog::OnMediaChoice(wxCommandEvent &event)
 
 void PolygonPropDialog::OnFirstExZoneEdit(wxCommandEvent &event)
 {
-    if(this->getPolyIndex() == NONE){
-        return ;
-    }
-    std::cout<<"Event handler (PolygonPropDialog::OnFirstExZoneEdit) not implemented yet"<<std::endl; //notify the user that he hasn't implemented the event handler yet
+	//auto calculate. not ediablt
 }
 
 
@@ -515,10 +532,7 @@ void PolygonPropDialog::OnMediaLightChoice(wxCommandEvent &event)
 
 void PolygonPropDialog::OnLineExZoneEdit(wxCommandEvent &event)
 {
-    if(this->getPolyIndex() == NONE){
-        return ;
-    }
-    std::cout<<"Event handler (PolygonPropDialog::OnLineExZoneEdit) not implemented yet"<<std::endl; //notify the user that he hasn't implemented the event handler yet
+	//auto calculate. not ediablt
 }
 
 
@@ -566,19 +580,61 @@ void PolygonPropDialog::OnRndSndChoice(wxCommandEvent &event)
     std::cout<<"Event handler (PolygonPropDialog::OnRndSndChoice) not implemented yet"<<std::endl; //notify the user that he hasn't implemented the event handler yet
 }
 
-
+*/
 void PolygonPropDialog::OnPlatformBtn(wxCommandEvent &event)
+{
+    if(polyIndex == NONE){
+        return ;
+    }
+    PlatformDialog dlg;
+    dlg.Create(this, wxID_ANY, polyIndex);
+    if(dlg.ShowModal() == wxID_OK){
+        //設定変更
+		platform_data data = dlg.getPlatform();
+		polygon_data* poly = get_polygon_data(polyIndex);
+		hpl::aleph::HPLStockManager* smgr = wxGetApp().getStockManager();
+		int platformIndex = hpl::aleph::map::getPlatformIndexFromPolygonIndex(
+			polyIndex, smgr);
+		platform_data* org = &PlatformList[platformIndex];
+		memcpy(org, &data, sizeof(platform_data));
+    }
+}
+void PolygonPropDialog::OnCreatePlatformBtn(wxCommandEvent &event)
 {
     if(this->getPolyIndex() == NONE){
         return ;
     }
-    PlatformDialog dlg;
-    dlg.Create(this, wxID_ANY, this->getPolyIndex());
-    if(dlg.ShowModal() == wxID_OK){
-        //TODO
-        //設定変更
-    }
+	polygon_data* poly = get_polygon_data(getPolyIndex());
+#ifdef _WXDEBUG_
+	wxASSERT(poly);
+#endif
+	hpl::aleph::HPLStockManager* smgr = wxGetApp().getStockManager();
+	if(isCreatePlatform){
+		//TODO プラットフォームの作成
+		//this->readyForDeleting();
+	}else{
+		//TODO プラットフォームの削除
+		int platformIndex = hpl::aleph::map::getPlatformIndexFromPolygonIndex(
+			getPolyIndex(), smgr);
+		smgr->deletePlatform(platformIndex);
+		this->readyForCreating();
+	}
 }
+void PolygonPropDialog::readyForCreating()
+{
+	button_21->Disable();
+	button_createPlatform->SetLabel(wxConvertMB2WX(CREATE_BUTTON_LABEL));
+	button_createPlatform->Enable();
+	isCreatePlatform = true;
+}
+void PolygonPropDialog::readyForDeleting()
+{
+	button_21->Enable();
+	button_createPlatform->SetLabel(wxConvertMB2WX(DELETE_BUTTON_LABEL));
+	button_createPlatform->Enable();
+	isCreatePlatform = false;
+}
+/*
 void PolygonPropDialog::OnFloorHeightEdit(wxCommandEvent &event)
 {
 	//TODO
@@ -586,4 +642,78 @@ void PolygonPropDialog::OnFloorHeightEdit(wxCommandEvent &event)
 void PolygonPropDialog::OnceilingHeightEdit(wxCommandEvent &event)
 {
 	//TODO
+}
+*/
+
+/**
+	Choiceの値を取得します。
+	最大値を超えるものを選択した場合、
+	それをNONEとして変換します
+*/
+static int getIndexWithNONE(wxChoice* choice,
+							int max)
+{
+	int index = choice->GetSelection();
+	if(index >= max){
+		index = NONE;
+	}
+	return index;
+}
+
+polygon_data PolygonPropDialog::getPolygon()
+{
+	polygon_data data;
+	polygon_data* org = get_polygon_data(polyIndex);
+	memcpy(&data, org, sizeof(polygon_data));
+
+	//TODO 値をセット
+	//編集できる項目のみ変更する
+	data.type = choice_12->GetSelection();
+	//id
+	//permutation
+	data.floor_lightsource_index = getIndexWithNONE(choice_13,
+		LightList.size());
+	data.ceiling_lightsource_index = getIndexWithNONE(choice_14,
+		LightList.size());
+	//area
+	//first object
+	//first ex zone
+	//line ex zone
+	//TODO floor trans
+	//TODO ceiling trans
+	data.floor_height = atoi(wxConvertWX2MB(textFloorHeight->GetValue()));
+	data.ceiling_height = atoi(wxConvertWX2MB(textCeilingHeight->GetValue()));
+	
+	//first neighbour
+	//near count
+	//center x
+	//center y
+	//origins
+	//media
+	data.media_index = getIndexWithNONE(choice_15,
+		MediaList.size());
+	/*
+	//TODO
+	data.media_lightsource_index = getIndexWithNONE(choice_16,
+		LightList.size());
+	data.sound_source_indexes = getIndexWithNONE(choice_20,
+		SoundList.size());
+	data.ambient_sound_image_index = getIndexWithNONE(choice_17,
+		SoundList.size());
+	data.random_sound_image_index = getIndexWithNONE(choice_18,
+		SoundList.size());
+		*/
+
+	return data;
+}
+
+void PolygonPropDialog::OnOk(wxCommandEvent &ev)
+{
+    SetReturnCode(wxID_OK);
+    Destroy();
+}
+void PolygonPropDialog::OnCancel(wxCommandEvent &ev)
+{
+	SetReturnCode(wxID_CANCEL);
+    Destroy();
 }
