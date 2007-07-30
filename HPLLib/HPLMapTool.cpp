@@ -392,46 +392,90 @@ double hpl::aleph::map::getPointsDistance(world_point2d& pointA, world_point2d& 
 
 /**
     <jp>線情報を更新する
+		ポリゴンやSideの修正は別でやること。
+		スタックオーバーフローの温床
     <en>Fix line_data up
-    @param isDeleteOldSide descide which deletes or not 使われていない壁情報を削除するか
+//    @param isDeleteOldSide descide which deletes or not 使われていない壁情報を削除するか
 */
-void hpl::aleph::map::fixLine(int index, bool isDeleteOldSide)
+void hpl::aleph::map::fixLine(int index,// bool isDeleteOldSide,
+							  hpl::aleph::HPLStockManager* smgr)
 {
-    //TODO
-    if(index < 0 || index >= (int)LineList.size()){
-        return;
-    }
-
     line_data* line = get_line_data(index);
+#ifdef __WXDEBUG__
+	wxASSERT(line);
+#endif
 
-    //left poly
-    int leftPolyIndex = line->counterclockwise_polygon_owner;
-    int rightPolyIndex = line->clockwise_polygon_owner;
+
+	//endpoint_indexes
+	//flags
+	//length
+	line->length = hpl::aleph::map::getLineLength(index);
+	//ポリゴン・Sideの整合性調整
+	{
+		//削除されていたらNONEにする
+		//clockwise
+		if(line->clockwise_polygon_owner != NONE &&
+			smgr->delPolygons[line->clockwise_polygon_owner])
+		{
+			line->clockwise_polygon_owner = NONE;
+		}
+		if(line->clockwise_polygon_owner == NONE){
+			//ポリゴンが存在しないのでSideも消す
+			if(line->clockwise_polygon_side_index != NONE){
+				smgr->deleteSide(line->clockwise_polygon_side_index);
+				line->clockwise_polygon_side_index = NONE;
+			}
+		}
+		//counter-clockwise
+		if(line->counterclockwise_polygon_owner != NONE &&
+			smgr->delPolygons[line->counterclockwise_polygon_owner])
+		{
+			line->counterclockwise_polygon_owner = NONE;
+		}
+		if(line->counterclockwise_polygon_owner == NONE){
+			//ポリゴンは存在しないので消す
+			if(line->counterclockwise_polygon_side_index != NONE){
+				smgr->deleteSide(line->counterclockwise_polygon_side_index);
+				line->counterclockwise_polygon_side_index = NONE;
+			}
+		}
+	}
+	//height
     //	theMapLevel.theSides.SetupSide(leftPoly, rightPoly, &theLine->leftSide, index, deleteOldSides);
 /*    hpl::aleph::map::setupSide(leftPolyIndex, rightPolyIndex,
         line->left_side, index, isDeleteOldSide);
     hpl::aleph::map::setupSide(rightPolyIndex, leftPolyIndex,
         line->right_side, index, isDeleteOldSide);
-*/    if(leftPolyIndex != NONE){
-        polygon_data* leftPoly = get_polygon_data(leftPolyIndex);
-        if(rightPolyIndex != NONE){
-            polygon_data* rightPoly = get_polygon_data(rightPolyIndex);
-            if(line->highest_adjacent_floor < rightPoly->floor_height){
-                line->highest_adjacent_floor = rightPoly->floor_height;
-            }
-            if(line->lowest_adjacent_ceiling < rightPoly->ceiling_height){
-                line->lowest_adjacent_ceiling = rightPoly->ceiling_height;
-            }
-        }else{
-            line->highest_adjacent_floor = leftPoly->floor_height;
-            line->lowest_adjacent_ceiling = leftPoly->ceiling_height;
-        }
-    }else if(rightPolyIndex != NONE){
-        polygon_data* rightPoly = get_polygon_data(rightPolyIndex);
-        line->highest_adjacent_floor = rightPoly->floor_height;
-        line->lowest_adjacent_ceiling = rightPoly->ceiling_height;
+*/
+    polygon_data* counterClockPoly = get_polygon_data(line->counterclockwise_polygon_owner);
+    polygon_data* clockPoly = get_polygon_data(line->clockwise_polygon_owner);
+	if(counterClockPoly && clockPoly){
+		//両側にポリゴンがある
+		//高いほう・低いほうを高さとする。
+		line->highest_adjacent_floor = MAX(
+			counterClockPoly->floor_height,
+			clockPoly->floor_height);
+		line->lowest_adjacent_ceiling = MIN(
+			counterClockPoly->ceiling_height,
+			clockPoly->ceiling_height);
+	}else if(counterClockPoly && !clockPoly){
+		//左にあって右に無い
+        line->highest_adjacent_floor = counterClockPoly->floor_height;
+        line->lowest_adjacent_ceiling = counterClockPoly->ceiling_height;
+	}else if(!counterClockPoly && clockPoly){
+		//右にあって左に無い
+        line->highest_adjacent_floor = clockPoly->floor_height;
+        line->lowest_adjacent_ceiling = clockPoly->ceiling_height;
+    }else{
+		//両方無い
+        line->highest_adjacent_floor = 0;
+        line->lowest_adjacent_ceiling = 0;
     }
-    if(leftPolyIndex == NONE && rightPolyIndex != NONE){
+
+/*
+	TODO 真相解明
+	if(counterClockPolyIndex == NONE && clockPolyIndex != NONE){
+		//片方がある場合はかならず左側にポリゴンが来るようにするの？
         //reverse
         int temp;
         temp = line->endpoint_indexes[0];
@@ -439,10 +483,160 @@ void hpl::aleph::map::fixLine(int index, bool isDeleteOldSide)
         line->endpoint_indexes[1] = temp;
         hpl::math::exchange<int16>(&line->counterclockwise_polygon_side_index, &line->clockwise_polygon_side_index);
         hpl::math::exchange<int16>(&line->counterclockwise_polygon_owner, &line->clockwise_polygon_owner);
-    }
+    }*/
 
-    double length = hpl::aleph::map::getLineLength(index);
-    line->length = static_cast<int>(length);
+}
+
+/**
+    ポリゴン情報を修正します
+*/
+void hpl::aleph::map::fixPolygon(int pindex,
+	hpl::aleph::HPLStockManager* smgr)
+{
+	polygon_data* poly = get_polygon_data(pindex);
+#ifdef __WXDEBUG__
+	wxASSERT(poly);
+#endif
+	//types
+	//flags
+	//TODO permutation
+	//vertex_count
+	int num = poly->vertex_count;
+	//endpoint_indexes
+	//line_indexes
+	//floor_texture,ceiling_texture
+	//floor_height,ceiling_height
+	//TODO 無かったらNONE floor_lightsource_index,ceiling_lightsource_index
+	//area
+	double points[MAXIMUM_VERTICES_PER_POLYGON][2];
+	for(int i = 0; i < num; i ++){
+		endpoint_data* ep = get_endpoint_data(poly->endpoint_indexes[i]);
+#ifdef __WXDEBUG__
+		wxASSERT(ep);
+#endif
+		points[i][0] = ep->vertex.x;
+		points[i][1] = ep->vertex.y;
+	}
+	double area = hpl::math::getPolygonArea(points, num);
+	poly->area = area;
+
+	//first_object
+	if(poly->first_object == NONE){
+	}else{
+		//オブジェクトが存在する
+		if(smgr->delObjects[poly->first_object]){
+			//対象が消えていた
+			//ほかのオブジェクトを探す
+			bool found = false;
+			for(int i = 0; i < (int)SavedObjectList.size(); i ++){
+				if(smgr->delObjects[i]){
+					continue;
+				}
+				map_object* obj = &SavedObjectList[i];
+				if(obj->polygon_index == pindex){
+					found = true;
+					poly->first_object = i;
+					break;
+				}
+			}
+			if(found){
+
+			}else{
+				poly->first_object = NONE;
+			}
+		}
+	}
+
+	/*
+	TODO ???
+	int16 first_exclusion_zone_index;
+	int16 line_exclusion_zone_count;
+	int16 point_exclusion_zone_count;
+	int16 floor_transfer_mode;
+	int16 ceiling_transfer_mode;
+	*/
+
+	//隣接関係
+	//for adjacents
+	int neighbourCount = 0;
+	int firstNeighbour = NONE;
+	bool isFirst = true;
+	for(int i = 0; i < num; i ++){
+		line_data* line = get_line_data(poly->line_indexes[i]);
+#ifdef __WXDEBUG__
+		wxASSERT(line);
+#endif
+		//線の時計回りが隣接する他のポリゴンである場合真
+		bool isClockwiseNeighbour = true;
+		int adjacentPolyIndex = line->clockwise_polygon_owner;
+		if(adjacentPolyIndex == pindex){
+			//それ自分方向だよ
+			adjacentPolyIndex = line->counterclockwise_polygon_owner;
+			isClockwiseNeighbour = false;
+		}
+		if(adjacentPolyIndex != NONE){
+			if(smgr->delPolygons[adjacentPolyIndex]){
+				//削除されている
+				adjacentPolyIndex = NONE;
+				if(isClockwiseNeighbour){
+					if(line->clockwise_polygon_side != NONE){
+						//Sideも消す
+						smgr->deleteSide(line->clockwise_polygon_side);
+						line->clockwise_polygon_side = NONE;
+					}
+				}else{
+					if(line->counterclockwise_polygon_side != NONE){
+						//Sideも消す
+						smgr->deleteSide(line->counterclockwise_polygon_side);
+						line->counterclockwise_polygon_side = NONE;
+					}
+				}
+			}
+		}else{
+		}
+		if(adjacentPolyIndex != NONE){
+			neighbourCount ++;
+			if(isFirst){
+				isFirst = false;
+				firstNeighbour = adjacentPolyIndex;
+			}
+		}
+		poly->adjacent_polygon_indexes[i] = adjacentPolyIndex;
+
+		//自分方向のSideもチェック
+		if(isClockwiseNeighbour){
+			if(smgr->delSides[line->counterclockwise_polygon_side]){
+				line->counterclockwise_polygon_side = NONE;
+			}
+			poly->side_indexes[i] = line->counterclockwise_polygon_side;
+		}else{
+			if(smgr->delSides[line->clockwise_polygon_side]){
+				line->clockwise_polygon_side = NONE;
+			}
+			poly->side_indexes[i] = line->clockwise_polygon_side;
+		}
+	}
+	poly->neighbour_count = neighbourCount;
+	poly->first_neighbor_index = firstNeighbour;
+
+	//center
+	double center[2];
+	hpl::math::getPolygonCentroid(points, num, center);
+	poly->center.x = (int)center[0];
+	poly->center.y = (int)center[1];
+
+	//TODO floor_origin, ceiling_origin
+	/*
+	TODO 存在しなかったらNONE
+	int16 media_index;
+	int16 media_lightsource_index;
+	
+	int16 sound_source_indexes;
+	
+	// either can be NONE
+	int16 ambient_sound_image_index;
+	int16 random_sound_image_index;
+	*/
 }
 
 /**

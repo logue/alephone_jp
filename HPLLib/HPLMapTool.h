@@ -240,7 +240,13 @@ namespace map{
         2:set side
 		@param isDeleteOldSide descide which deletes or not 使われていない壁情報を削除するか
 	*/
-	void fixLine(int index, bool isDeleteOldSide);
+	void fixLine(int index,// bool isDeleteOldSide,
+		hpl::aleph::HPLStockManager* smgr);
+	/**
+        ポリゴン情報を修正します
+    */
+    void fixPolygon(int pindex,
+		hpl::aleph::HPLStockManager* smgr);
 
     /**
         線情報を線を構成する点によって取得します
@@ -457,11 +463,6 @@ namespace map{
 		std::map<int, int>& polygonIndexMap, std::map<int, int>& sideIndexMap, 
 		std::map<int, int>& sideIndexMap);
 		*/
-	/**
-        ポリゴン情報を修正します
-        TODO
-    */
-    void fixPolygon(int pindex);
 
     /**
         独立したポリゴンデータを追加します

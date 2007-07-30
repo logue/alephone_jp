@@ -846,13 +846,26 @@ void MapEditorMainFrame::OnKeyDown(wxKeyEvent& ev)
 */
 void MapEditorMainFrame::updateMapItems()
 {
-	wxGetApp().getStockManager()->updateSelects(wxGetApp().selectData);
-	wxGetApp().getStockManager()->updateDeletes();
+	hpl::aleph::HPLStockManager* smgr = wxGetApp().getStockManager();
+	smgr->updateSelects(wxGetApp().selectData);
+	smgr->updateDeletes();
 
 	//モードレスダイアログ限定
 	//ポリゴンプロパティ
 	//this->polyPropDialog.updateCombo();
 
-	
+	//ポリゴン・線のFixを行う
+	for(int i = 0; i < LineList.size(); i ++){
+		if(smgr->delLines[i]){
+			continue;
+		}
+		hpl::aleph::map::fixLine(i, smgr);
+	}
+	for(int i = 0; i < PolygonList.size(); i ++){
+		if(smgr->delPolygons[i]){
+			continue;
+		}
+		hpl::aleph::map::fixPolygon(i, smgr);
+	}
 }
 
