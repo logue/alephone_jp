@@ -579,16 +579,16 @@ void hpl::aleph::map::fixPolygon(int pindex,
 				//削除されている
 				adjacentPolyIndex = NONE;
 				if(isClockwiseNeighbour){
-					if(line->clockwise_polygon_side != NONE){
+					if(line->clockwise_polygon_side_index != NONE){
 						//Sideも消す
-						smgr->deleteSide(line->clockwise_polygon_side);
-						line->clockwise_polygon_side = NONE;
+						smgr->deleteSide(line->clockwise_polygon_side_index);
+						line->clockwise_polygon_side_index = NONE;
 					}
 				}else{
-					if(line->counterclockwise_polygon_side != NONE){
+					if(line->counterclockwise_polygon_side_index != NONE){
 						//Sideも消す
-						smgr->deleteSide(line->counterclockwise_polygon_side);
-						line->counterclockwise_polygon_side = NONE;
+						smgr->deleteSide(line->counterclockwise_polygon_side_index);
+						line->counterclockwise_polygon_side_index = NONE;
 					}
 				}
 			}
@@ -605,18 +605,18 @@ void hpl::aleph::map::fixPolygon(int pindex,
 
 		//自分方向のSideもチェック
 		if(isClockwiseNeighbour){
-			if(smgr->delSides[line->counterclockwise_polygon_side]){
-				line->counterclockwise_polygon_side = NONE;
+			if(smgr->delSides[line->counterclockwise_polygon_side_index]){
+				line->counterclockwise_polygon_side_index = NONE;
 			}
-			poly->side_indexes[i] = line->counterclockwise_polygon_side;
+			poly->side_indexes[i] = line->counterclockwise_polygon_side_index;
 		}else{
-			if(smgr->delSides[line->clockwise_polygon_side]){
-				line->clockwise_polygon_side = NONE;
+			if(smgr->delSides[line->clockwise_polygon_side_index]){
+				line->clockwise_polygon_side_index = NONE;
 			}
-			poly->side_indexes[i] = line->clockwise_polygon_side;
+			poly->side_indexes[i] = line->clockwise_polygon_side_index;
 		}
 	}
-	poly->neighbour_count = neighbourCount;
+	poly->neighbor_count = neighbourCount;
 	poly->first_neighbor_index = firstNeighbour;
 
 	//center
