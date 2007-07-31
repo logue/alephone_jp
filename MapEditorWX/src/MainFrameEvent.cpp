@@ -108,6 +108,7 @@ void MapEditorMainFrame::OnRightDown(wxMouseEvent& ev)
 						annotation->location.y =
 							worldLastMousePosition.y + selp->offset[1] * div;
 					}
+					Refresh();
 				}
 			}
 		}else{
@@ -225,6 +226,9 @@ void MapEditorMainFrame::doLUpOnArrowTool(wxMouseEvent& ev)
 	if(sel->isSelected() && emgr->isGrabItems()){
 		dmgr->push_back(
 			hpl::aleph::map::ActionType::Move, *sel);
+#ifdef __WXDEBUG__
+//		hpl::error::caution("undo index=%d", dmgr->getIndex());
+#endif
 	}
     if(sel->isSelectOneObject()){
         //オブジェクトを選択していたら
@@ -389,11 +393,12 @@ void MapEditorMainFrame::doLUpOnArrowTool(wxMouseEvent& ev)
 		}
 	}
 
+	/*
 	if(sel->isSelected()){
 		//コピペ情報登録
 		wxGetApp().getDoneHistoryManager()->push_back(hpl::aleph::map::ActionType::Move, *sel);
 	}
-
+	*/
 	//離した
 	emgr->setGrabItems(false);
 }
@@ -829,13 +834,13 @@ void MapEditorMainFrame::updateMapItems()
 	//this->polyPropDialog.updateCombo();
 
 	//ポリゴン・線のFixを行う
-	for(int i = 0; i < LineList.size(); i ++){
+	for(int i = 0; i < (int)LineList.size(); i ++){
 		if(smgr->isDeleteLine(i)){
 			continue;
 		}
 		hpl::aleph::map::fixLine(i, smgr);
 	}
-	for(int i = 0; i < PolygonList.size(); i ++){
+	for(int i = 0; i < (int)PolygonList.size(); i ++){
 		if(smgr->isDeletePolygon(i)){
 			continue;
 		}

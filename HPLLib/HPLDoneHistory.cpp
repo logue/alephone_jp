@@ -10,21 +10,57 @@ hpl::aleph::map::HPLActionItem::HPLActionItem(int t, hpl::aleph::map::HPLSelectD
 	this->realData = real;
 
 	//現在位置を覚えておきます
-	for(int i = 0; i < sel.getSelPoints()->size(); i ++){
-		int index = sel.getSelPoints()->at(i).index;
-		endpoint_data* ep = get_endpoint_data(index);
-		this->pointVertexMap[index][0] = ep->vertex.x;
-		this->pointVertexMap[index][1] = ep->vertex.y;
+	//points
+	for(int i = 0; i < (int)sel.getSelPoints()->size(); i ++){
+		this->storePointVertex(sel.getSelPoints()->at(i).index);
 	}
-	for(int i = 0; i < sel.getSelObjects()->size(); i ++){
+
+	//objects
+	for(int i = 0; i < (int)sel.getSelObjects()->size(); i ++){
 		int index = sel.getSelObjects()->at(i).index;
+#ifdef __WXDEBUG__
+		wxASSERT(index < (int)SavedObjectList.size());
+#endif
 		map_object* obj = &SavedObjectList[index];
-		this->objectLocationMap[index][0] = obj->location.x;
-		this->objectLocationMap[index][1] = obj->location.y;
-		this->objectLocationMap[index][2] = obj->location.z;
+		this->objectLocationMap[index] = obj->location;
 	}
+
+	//lines
+	for(int i = 0; i < (int)sel.getSelLines()->size(); i ++){
+		int index = sel.getSelLines()->at(i).index;
+		line_data* line = get_line_data(index);
+#ifdef __WXDEBUG__
+		wxASSERT(line);
+#endif
+		for(int j = 0; j < 2; j ++){
+			this->storePointVertex(line->endpoint_indexes[j]);
+		}
+	}
+	//polygons
+	for(int i = 0; i < (int)sel.getSelPolygons()->size(); i ++){
+		int index = sel.getSelPolygons()->at(i).index;
+		polygon_data* poly = get_polygon_data(index);
+#ifdef __WXDEBUG__
+		wxASSERT(poly);
+#endif
+		for(int j = 0; j < poly->vertex_count; j ++){
+			this->storePointVertex(poly->endpoint_indexes[j]);
+		}
+	}
+
 //    memcpy(&this->selectData, &sel, sizeof(hpl::aleph::map::HPLSelectData));
 //    memcpy(&this->realData, &real, sizeof(hpl::aleph::map::HPLRealMapData));
+}
+/**
+	点の位置を記憶
+*/
+void hpl::aleph::map::HPLActionItem::storePointVertex(int index)
+{
+	endpoint_data* ep = get_endpoint_data(index);
+#ifdef __WXDEBUG__
+	wxASSERT(ep);
+#endif
+	this->pointVertexMap[index] = ep->vertex;
 }
 hpl::aleph::map::HPLActionItem::~HPLActionItem()
 {
@@ -97,10 +133,19 @@ void hpl::aleph::map::HPLDoneHistory::push_back(int type, HPLSelectData& selData
 bool hpl::aleph::map::HPLDoneHistory::back(hpl::aleph::map::HPLActionItem* act)
 {
     if(index < 0){
+#ifdef __WXDEBUG__
+		hpl::error::caution("undo index=%d cannot undo", index);
+#endif
         return false;
     }
+#ifdef __WXDEBUG__
+//	hpl::error::caution("undo back() index=%d", index);
+#endif
     *act = this->actionList[index];
     index --;
+#ifdef __WXDEBUG__
+//	hpl::error::caution("undo back() index=%d", index);
+#endif
     return true;
 }
 bool hpl::aleph::map::HPLDoneHistory::forward(hpl::aleph::map::HPLActionItem* act)

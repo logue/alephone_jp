@@ -522,7 +522,7 @@ bool hpl::aleph::HPLStockManager::isDeleteObject(int index)
 bool hpl::aleph::HPLStockManager::isDeletePlatform(int index)
 {
 #ifdef _WXDEBUG_
-	wxASSERT(index >= 0 && index < this->del.size());
+	wxASSERT(index >= 0 && index < this->delPlatforms.size());
 #endif
 	return this->delPlatforms[index];
 }

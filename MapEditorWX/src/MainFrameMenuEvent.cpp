@@ -221,46 +221,69 @@ void MapEditorMainFrame::OnUndo(wxCommandEvent& ev)
 	hpl::aleph::map::HPLDoneHistory* dmgr = wxGetApp().getDoneHistoryManager();
 	hpl::aleph::HPLStockManager* smgr = wxGetApp().getStockManager();
 
-    bool result = dmgr->back(&act);
-	if(result){
-		if(act.type == hpl::aleph::map::ActionType::None ||
-			act.type == hpl::aleph::map::ActionType::Move)
-		{
-			//移動を元に戻す
-			for(int i = 0; i < (int)act.selectData.getSelPoints()->size(); i ++){
-				int index = act.selectData.getSelPoints()->at(i).index;
-				endpoint_data* ep = get_endpoint_data(index);
-				//TODO 削除・追加のUndo機能も実装しよう。
-				//これだけだと削除されている場合エラーになる
-				if(smgr->isDeletePoint(index) || ep == NULL){
-					//TODO 応急処置！
-					continue;
+	if(dmgr->getIndex() > 0){
+		bool result = dmgr->back(&act);
+		if(!result){
+			dmgr->forward(&act);
+		}
+		result = dmgr->back(&act);
+		if(result){
+			if(act.type == hpl::aleph::map::ActionType::None ||
+				act.type == hpl::aleph::map::ActionType::Move)
+			{
+				//移動を元に戻す
+				for(int i = 0; i < (int)act.selectData.getSelPoints()->size(); i ++){
+					int index = act.selectData.getSelPoints()->at(i).index;
+					endpoint_data* ep = get_endpoint_data(index);
+					//TODO 削除・追加のUndo機能も実装しよう。
+					//これだけだと削除されている場合エラーになる
+					if(smgr->isDeletePoint(index) || ep == NULL){
+						//TODO 応急処置！
+						continue;
+					}
+					ep->vertex = act.pointVertexMap[index];
 				}
-				ep->vertex.x = act.pointVertexMap[index][0];
-				ep->vertex.y = act.pointVertexMap[index][1];
-			}
-			for(int i = 0; i < act.selectData.getSelObjects()->size(); i ++){
-				int index = act.selectData.getSelObjects()->at(i).index;
-				if(smgr->isDeleteObject(index) || index >= SavedObjectList.size()){
-					continue;
+				for(int i = 0; i < (int)act.selectData.getSelObjects()->size(); i ++){
+					int index = act.selectData.getSelObjects()->at(i).index;
+					if(smgr->isDeleteObject(index) || index >= (int)SavedObjectList.size()){
+						continue;
+					}
+					map_object* obj = &SavedObjectList[index];
+					obj->location = act.objectLocationMap[index];
 				}
-				map_object* obj = &SavedObjectList[index];
-				obj->location.x = act.objectLocationMap[index][0];
-				obj->location.y = act.objectLocationMap[index][1];
-				obj->location.z = act.objectLocationMap[index][2];
+				//lines
+				for(int i = 0; i < (int)act.selectData.getSelLines()->size(); i ++){
+					int index = act.selectData.getSelLines()->at(i).index;
+					line_data* line = get_line_data(index);
+					for(int j = 0; j < 2; j ++){
+						int epIndex = line->endpoint_indexes[j];
+						get_endpoint_data(epIndex)->vertex = act.pointVertexMap[epIndex];
+					}
+				}
+
+				//polygons
+				for(int i = 0; i < (int)act.selectData.getSelPolygons()->size(); i ++){
+					int index = act.selectData.getSelPolygons()->at(i).index;
+					polygon_data* poly = get_polygon_data(index);
+					for(int j = 0; j < poly->vertex_count; j ++){
+						int epIndex = poly->endpoint_indexes[j];
+						get_endpoint_data(epIndex)->vertex = act.pointVertexMap[epIndex];
+					}
+				}
+
+			}else{
+				hpl::error::halt("This function is disable");
 			}
+
 		}else{
-			hpl::error::halt("This function is disable");
+	#ifdef __WXDEBUG__
+			hpl::error::caution("Undo失敗。index=%d", dmgr->getIndex());
+	#endif
 		}
 
-	}else{
-#ifdef __WXDEBUG__
-		hpl::error::caution("Undo失敗。index=%d", dmgr->getIndex());
-#endif
+		//更新
+		this->updateMapItems();
 	}
-
-	//更新
-	this->updateMapItems();
 }
 void MapEditorMainFrame::OnRedo(wxCommandEvent& ev)
 {

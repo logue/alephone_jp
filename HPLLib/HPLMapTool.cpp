@@ -575,7 +575,7 @@ void hpl::aleph::map::fixPolygon(int pindex,
 			isClockwiseNeighbour = false;
 		}
 		if(adjacentPolyIndex != NONE){
-			if(smgr->delPolygons[adjacentPolyIndex]){
+			if(smgr->isDeletePolygon(adjacentPolyIndex)){
 				//削除されている
 				adjacentPolyIndex = NONE;
 				if(isClockwiseNeighbour){
@@ -605,12 +605,14 @@ void hpl::aleph::map::fixPolygon(int pindex,
 
 		//自分方向のSideもチェック
 		if(isClockwiseNeighbour){
-			if(smgr->isDeleteSide(line->counterclockwise_polygon_side_index)){
+			if(line->counterclockwise_polygon_side_index != NONE &&
+				smgr->isDeleteSide(line->counterclockwise_polygon_side_index)){
 				line->counterclockwise_polygon_side_index = NONE;
 			}
 			poly->side_indexes[i] = line->counterclockwise_polygon_side_index;
 		}else{
-			if(smgr->isDeleteSide(line->clockwise_polygon_side_index)){
+			if(line->clockwise_polygon_side_index != NONE &&
+				smgr->isDeleteSide(line->clockwise_polygon_side_index)){
 				line->clockwise_polygon_side_index = NONE;
 			}
 			poly->side_indexes[i] = line->clockwise_polygon_side_index;

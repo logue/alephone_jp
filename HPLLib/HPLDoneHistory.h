@@ -47,6 +47,10 @@ namespace map{
     class HPLActionItem{
     private:
         HPLActionItem(){}
+		/**
+			点の位置を記憶
+		*/
+		void storePointVertex(int index);
     public:
 		/**
 			@param t タイプ ActionType::
@@ -59,8 +63,8 @@ namespace map{
         int type;
         hpl::aleph::map::HPLSelectData selectData;
 		//位置情報の記録
-		std::map<int, int[2]> pointVertexMap;
-		std::map<int, int[3]> objectLocationMap;
+		std::map<int, world_point2d> pointVertexMap;
+		std::map<int, world_point3d> objectLocationMap;
         hpl::aleph::map::HPLRealMapData realData;
     };
 

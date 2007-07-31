@@ -17,6 +17,15 @@ namespace aleph{
 namespace map{
     class HPLRealMapData{
     private:
+		//TODO インデックスの記憶
+		//こぴぺやUndo処理などで必要かもしれない
+		std::map<int, int> originalPointIndexMap;
+		std::map<int, int> originalLineIndexMap;
+		std::map<int, int> originalObjectIndexMap;
+		std::map<int, int> originalPolygonIndexMap;
+		std::map<int, int> originalSideIndexMap;
+		std::map<int, int> originalPlatformIndexMap;
+
         //点データ<data_structure>
         std::vector<endpoint_data> realPoints;
         //オブジェクトデータ
@@ -27,6 +36,9 @@ namespace map{
         std::vector<side_data> realSides;
         //ポリゴンデータ
         std::vector<polygon_data> realPolygons;
+
+		//TODO platform
+		std::vector<polygon_data> realPlatform;
     public:
         HPLRealMapData();
         ~HPLRealMapData();

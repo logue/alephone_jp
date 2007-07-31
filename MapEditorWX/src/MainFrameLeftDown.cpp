@@ -103,7 +103,7 @@ void MapEditorMainFrame::doLButtonOnArrowTool(wxMouseEvent& ev)
     int my = ev.m_y;
 
 	//ƒAƒ“ƒhƒDî•ñ‚É’Ç‰Á‚µ‚Ä‚¨‚«‚Ü‚·
-	hpl::aleph::map::HPLDoneHistory* hmgr = wxGetApp().getDoneHistoryManager();
+//	hpl::aleph::map::HPLDoneHistory* hmgr = wxGetApp().getDoneHistoryManager();
 	sel->setMousePosition(mx, my);
 	hpl::aleph::HPLEventManager* emgr = wxGetApp().getEventManager();
 
