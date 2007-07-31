@@ -27,8 +27,9 @@ BEGIN_EVENT_TABLE(MapEditorMainFrame, wxFrame)
     EVT_MENU(ID_Cut, MapEditorMainFrame::OnCut)
     EVT_MENU(ID_Copy, MapEditorMainFrame::OnCopy)
     EVT_MENU(ID_Paste, MapEditorMainFrame::OnPaste)
+	EVT_MENU(ID_Delete, MapEditorMainFrame::OnDelete)
     EVT_MENU(ID_Preference, MapEditorMainFrame::OnPreference)
-
+	
     //show
     EVT_MENU(ID_ToolDialog, MapEditorMainFrame::OnToolDialog)
     EVT_MENU(ID_ZoomIn, MapEditorMainFrame::OnZoomIn)
@@ -265,6 +266,7 @@ void MapEditorMainFrame::setupMenus()
     menuEdit->Append(ID_Cut, _T("C&ut"), _T("cut map items"));
     menuEdit->Append(ID_Copy, _T("&Copy"), _T("copy map items"));
     menuEdit->Append(ID_Paste, _T("&Paste"), _T("paste map items on"));
+	menuEdit->Append(ID_Delete, _T("&Delete select items"), _T("kill em all"));
     menuEdit->Append(ID_Preference, _T("P&references"), _T("preferences = setup = configure"));
 
     //show

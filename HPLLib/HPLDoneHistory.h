@@ -58,6 +58,9 @@ namespace map{
         ~HPLActionItem();
         int type;
         hpl::aleph::map::HPLSelectData selectData;
+		//位置情報の記録
+		std::map<int, int[2]> pointVertexMap;
+		std::map<int, int[3]> objectLocationMap;
         hpl::aleph::map::HPLRealMapData realData;
     };
 
@@ -89,18 +92,18 @@ namespace map{
             ・保存によって削除が実行された後
             にインデックス値が変化してしまうため、updateIndexes()を呼ぶ必要がある
         */
-        bool back(int *type, hpl::aleph::map::HPLSelectData* selectData, hpl::aleph::map::HPLRealMapData* realData);
+        bool back(hpl::aleph::map::HPLActionItem* act);
 
 		/**
 			リドゥ
 		*/
-        bool forward(int *type, HPLSelectData* selectData, HPLRealMapData* realData);
+        bool forward(hpl::aleph::map::HPLActionItem* act);
 
 		/**
 			最新版の状態を取得します
 			取得しても内容や位置は変化させません
 		*/
-		bool getTail(int *type, HPLSelectData* sel, HPLRealMapData* real);
+		bool getTail(hpl::aleph::map::HPLActionItem* act);
 
         /**
             インデックス番号を削除後のものに対応させます。

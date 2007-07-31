@@ -59,6 +59,7 @@ enum
     ID_Preference = wxID_PREFERENCES,
 
     ID_Merge = 1,
+	ID_Delete,
     //show
     ID_ToolDialog,
     ID_ZoomIn,
@@ -237,6 +238,7 @@ public:
     void OnCopy(wxCommandEvent& ev);
     void OnPaste(wxCommandEvent& ev);
     void OnPreference(wxCommandEvent& ev);
+	void OnDelete(wxCommandEvent& ev);
 
     //表示メニュー<en>show
     void OnToolDialog(wxCommandEvent& ev);
@@ -283,6 +285,7 @@ public:
     void OnMouseWheel(wxMouseEvent& ev);
     void OnLeftDoubleClick(wxMouseEvent& ev);
 	
+
     //サイズ変更<en>change window size event
     void OnSize(wxSizeEvent& ev);
     //ダブルバッファリング時の背景削除停止用<en>to disable erasing backgroud for double buffering

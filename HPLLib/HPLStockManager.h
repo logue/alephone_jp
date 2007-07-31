@@ -15,7 +15,17 @@
 namespace hpl{
 namespace aleph{
     class HPLStockManager{
-    public:
+	private:
+		//—v‘f‚Ìíœî•ñ
+        std::vector<bool> delPoints;
+        std::vector<bool> delLines;
+        std::vector<bool> delPolygons;
+        std::vector<bool> delSides;
+        std::vector<bool> delObjects;
+		//platform
+		std::vector<bool> delPlatforms;
+		//light/media
+
         /**ƒ|ƒŠƒSƒ“‚Ì®‡«*/
         std::vector<bool> polygonValidity;
 
@@ -27,22 +37,15 @@ namespace aleph{
         //TODO
 		std::vector<int> lineDrawOrderByHeight;
 
-		//—v‘f‚Ìíœî•ñ
-        std::vector<bool> delPoints;
-        std::vector<bool> delLines;
-        std::vector<bool> delPolygons;
-        std::vector<bool> delSides;
-        std::vector<bool> delObjects;
-		//platform
-		std::vector<bool> delPlatforms;
-		//light/media
-
 		//‘I‘ğ‚µ‚½—v‘f‚Ìî•ñ
 		std::vector<bool> selPoints;
         std::vector<bool> selLines;
         std::vector<bool> selPolygons;
         std::vector<bool> selSides;
         std::vector<bool> selObjects;
+	public:
+
+
     public:
         HPLStockManager();
         ~HPLStockManager();
@@ -90,10 +93,21 @@ namespace aleph{
         bool deleteSide(int index);
         bool deleteObject(int index);
 		bool deletePlatform(int index);
-
+		bool isDeletePoint(int index);
+		bool isDeleteLine(int index);
+		bool isDeletePolygon(int index);
+		bool isDeleteSide(int index);
+		bool isDeleteObject(int index);
+		bool isDeletePlatform(int index);
+		
 		/**
 			‘I‘ğî•ñ‚Ìæ“¾
 		*/
+		void setSelectPoint(int index, bool sel);
+		void setSelectLine(int index, bool sel);
+		void setSelectPolygon(int index, bool sel);
+		void setSelectSide(int index, bool sel);
+		void setSelectObject(int index, bool sel);
 		bool isSelectPoint(int index);
 		bool isSelectLine(int index);
 		bool isSelectPolygon(int index);

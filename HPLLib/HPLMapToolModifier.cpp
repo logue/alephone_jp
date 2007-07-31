@@ -576,7 +576,7 @@ static bool getValidLines(int basePointIndex, int baseLineIndex,
             continue;
         }
         //delLinesは省く
-        if(smgr->delLines[conLineIndex]){
+        if(smgr->isDeleteLine(conLineIndex)){
             continue;
         }
         //ベースの線と一緒の場合も除外する
@@ -729,7 +729,7 @@ std::vector<polygon_data> hpl::aleph::map::searchValidPolygon(world_point2d wpoi
     //近くにある線から見ていく
     for(int i = 0; i < max; i ++){
         //削除対象なら無視
-        if(smgr->delLines[i]){
+        if(smgr->isDeleteLine(i)){
             continue;
         }
         //すでに調べた線なら無視

@@ -446,3 +446,83 @@ bool hpl::aleph::HPLStockManager::isSelectObject(int index)
 #endif
 	return this->selObjects[index];
 }
+//Ý’è
+void hpl::aleph::HPLStockManager::setSelectPoint(int index, bool sel)
+{
+#ifdef _WXDEBUG_
+	wxASSERT(index >= 0 && index < this->selPoints.size());
+#endif
+	this->selPoints[index] = sel;
+}
+void hpl::aleph::HPLStockManager::setSelectLine(int index, bool sel)
+{
+#ifdef _WXDEBUG_
+	wxASSERT(index >= 0 && index < this->selLines.size());
+#endif
+	this->selLines[index] = sel;
+}
+void hpl::aleph::HPLStockManager::setSelectPolygon(int index, bool sel)
+{
+#ifdef _WXDEBUG_
+	wxASSERT(index >= 0 && index < this->selPolygons.size());
+#endif
+	this->selPolygons[index] = sel;
+}
+void hpl::aleph::HPLStockManager::setSelectSide(int index, bool sel)
+{
+#ifdef _WXDEBUG_
+	wxASSERT(index >= 0 && index < this->selSides.size());
+#endif
+	this->selSides[index] = sel;
+}
+void hpl::aleph::HPLStockManager::setSelectObject(int index, bool sel)
+{
+#ifdef _WXDEBUG_
+	wxASSERT(index >= 0 && index < this->selObjects.size());
+#endif
+	this->selObjects[index] = sel;
+}
+
+////////////////
+bool hpl::aleph::HPLStockManager::isDeletePoint(int index)
+{
+#ifdef _WXDEBUG_
+	wxASSERT(index >= 0 && index < this->delPoints.size());
+#endif
+	return this->delPoints[index];
+}
+bool hpl::aleph::HPLStockManager::isDeleteLine(int index)
+{
+#ifdef _WXDEBUG_
+	wxASSERT(index >= 0 && index < this->delLines.size());
+#endif
+	return this->delLines[index];
+}
+bool hpl::aleph::HPLStockManager::isDeletePolygon(int index)
+{
+#ifdef _WXDEBUG_
+	wxASSERT(index >= 0 && index < this->delPolygons.size());
+#endif
+	return this->delPolygons[index];
+}
+bool hpl::aleph::HPLStockManager::isDeleteSide(int index)
+{
+#ifdef _WXDEBUG_
+	wxASSERT(index >= 0 && index < this->delSides.size());
+#endif
+	return this->delSides[index];
+}
+bool hpl::aleph::HPLStockManager::isDeleteObject(int index)
+{
+#ifdef _WXDEBUG_
+	wxASSERT(index >= 0 && index < this->delObjects.size());
+#endif
+	return this->delObjects[index];
+}
+bool hpl::aleph::HPLStockManager::isDeletePlatform(int index)
+{
+#ifdef _WXDEBUG_
+	wxASSERT(index >= 0 && index < this->del.size());
+#endif
+	return this->delPlatforms[index];
+}

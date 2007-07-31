@@ -207,7 +207,7 @@ int hpl::aleph::map::getSelectPointIndex(world_point2d& wpoint,
             continue;
         }
         //削除チェック
-        if(smgr->delPoints[i]){
+        if(smgr->isDeletePoint(i)){
             continue;
         }
         if(hpl::aleph::map::isSelectPoint(wpoint, ep->vertex, threshold * div)){
@@ -257,7 +257,7 @@ int hpl::aleph::map::getSelectLineIndex(world_point2d& wpoint,
         {
             continue;
         }
-        if(smgr->delLines[i]){
+        if(smgr->isDeleteLine(i)){
             continue;
         }
         int *a = NULL;
@@ -296,7 +296,7 @@ int hpl::aleph::map::getSelectPolygonIndex(int viewX, int viewY, int zMin, int z
 	for(int i = 0; i < (int)PolygonList.size(); i ++){
 		polygon_data* poly = get_polygon_data(i);
 		//削除チェック
-		if(smgr->delPolygons[i]){
+		if(smgr->isDeletePolygon(i)){
 			continue;
 		}
 		//高さチェック
@@ -415,7 +415,7 @@ void hpl::aleph::map::fixLine(int index,// bool isDeleteOldSide,
 		//削除されていたらNONEにする
 		//clockwise
 		if(line->clockwise_polygon_owner != NONE &&
-			smgr->delPolygons[line->clockwise_polygon_owner])
+			smgr->isDeletePolygon(line->clockwise_polygon_owner))
 		{
 			line->clockwise_polygon_owner = NONE;
 		}
@@ -428,7 +428,7 @@ void hpl::aleph::map::fixLine(int index,// bool isDeleteOldSide,
 		}
 		//counter-clockwise
 		if(line->counterclockwise_polygon_owner != NONE &&
-			smgr->delPolygons[line->counterclockwise_polygon_owner])
+			smgr->isDeletePolygon(line->counterclockwise_polygon_owner))
 		{
 			line->counterclockwise_polygon_owner = NONE;
 		}
@@ -524,12 +524,12 @@ void hpl::aleph::map::fixPolygon(int pindex,
 	if(poly->first_object == NONE){
 	}else{
 		//オブジェクトが存在する
-		if(smgr->delObjects[poly->first_object]){
+		if(smgr->isDeleteObject(poly->first_object)){
 			//対象が消えていた
 			//ほかのオブジェクトを探す
 			bool found = false;
 			for(int i = 0; i < (int)SavedObjectList.size(); i ++){
-				if(smgr->delObjects[i]){
+				if(smgr->isDeleteObject(i)){
 					continue;
 				}
 				map_object* obj = &SavedObjectList[i];
@@ -605,12 +605,12 @@ void hpl::aleph::map::fixPolygon(int pindex,
 
 		//自分方向のSideもチェック
 		if(isClockwiseNeighbour){
-			if(smgr->delSides[line->counterclockwise_polygon_side_index]){
+			if(smgr->isDeleteSide(line->counterclockwise_polygon_side_index)){
 				line->counterclockwise_polygon_side_index = NONE;
 			}
 			poly->side_indexes[i] = line->counterclockwise_polygon_side_index;
 		}else{
-			if(smgr->delSides[line->clockwise_polygon_side_index]){
+			if(smgr->isDeleteSide(line->clockwise_polygon_side_index)){
 				line->clockwise_polygon_side_index = NONE;
 			}
 			poly->side_indexes[i] = line->clockwise_polygon_side_index;
@@ -1246,7 +1246,7 @@ int hpl::aleph::map::getPlatformIndexFromPolygonIndex(
 	int polyIndex, hpl::aleph::HPLStockManager* smgr)
 {
 	for(int i = 0; i < (int)PlatformList.size(); i ++){
-		if(smgr->delPlatforms[i]){
+		if(smgr->isDeletePlatform(i)){
 			continue;
 		}
 		platform_data* temp = &PlatformList[i];

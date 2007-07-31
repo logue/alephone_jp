@@ -291,7 +291,7 @@ bool MapEditorMainFrame::tryToSelectOneItem(wxMouseEvent& ev)
 
     //オブジェクト
     for(int i = 0; i < (int)SavedObjectList.size(); i ++){
-        if(wxGetApp().getStockManager()->delObjects[i]){
+        if(wxGetApp().getStockManager()->isDeleteObject(i)){
             continue;
         }
         map_object* obj = &SavedObjectList[i];
@@ -325,7 +325,7 @@ bool MapEditorMainFrame::tryToSelectOneItem(wxMouseEvent& ev)
     //////////
     //点
     for(int i = 0; i < (int)EndpointList.size(); i ++){
-        if(wxGetApp().getStockManager()->delPoints[i]){
+        if(wxGetApp().getStockManager()->isDeletePoint(i)){
             continue;
         }
         endpoint_data* ep = get_endpoint_data(i);
@@ -671,7 +671,7 @@ void MapEditorMainFrame::doLButtonOnSkullTool(wxMouseEvent& ev)
 
     bool found = false;
     for(int i = 0; i < (int)PolygonList.size(); i ++){
-        if(smgr->delPolygons[i]){
+        if(smgr->isDeletePolygon(i)){
             continue;
         }
         polygon_data* poly = get_polygon_data(i);

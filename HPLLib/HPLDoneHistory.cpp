@@ -8,6 +8,21 @@ hpl::aleph::map::HPLActionItem::HPLActionItem(int t, hpl::aleph::map::HPLSelectD
     type = t;
 	this->selectData = sel;
 	this->realData = real;
+
+	//現在位置を覚えておきます
+	for(int i = 0; i < sel.getSelPoints()->size(); i ++){
+		int index = sel.getSelPoints()->at(i).index;
+		endpoint_data* ep = get_endpoint_data(index);
+		this->pointVertexMap[index][0] = ep->vertex.x;
+		this->pointVertexMap[index][1] = ep->vertex.y;
+	}
+	for(int i = 0; i < sel.getSelObjects()->size(); i ++){
+		int index = sel.getSelObjects()->at(i).index;
+		map_object* obj = &SavedObjectList[index];
+		this->objectLocationMap[index][0] = obj->location.x;
+		this->objectLocationMap[index][1] = obj->location.y;
+		this->objectLocationMap[index][2] = obj->location.z;
+	}
 //    memcpy(&this->selectData, &sel, sizeof(hpl::aleph::map::HPLSelectData));
 //    memcpy(&this->realData, &real, sizeof(hpl::aleph::map::HPLRealMapData));
 }
@@ -79,29 +94,21 @@ void hpl::aleph::map::HPLDoneHistory::push_back(int type, HPLSelectData& selData
     にインデックス値が変化してしまうため、updateIndexes()を呼ぶ必要がある
     @return 取り出せなかった場合偽
 */
-bool hpl::aleph::map::HPLDoneHistory::back(int *type,
-											hpl::aleph::map::HPLSelectData* selectData,
-                                           hpl::aleph::map::HPLRealMapData* realData)
+bool hpl::aleph::map::HPLDoneHistory::back(hpl::aleph::map::HPLActionItem* act)
 {
     if(index < 0){
         return false;
     }
-    hpl::aleph::map::HPLActionItem act = this->actionList[index];
-    *selectData = act.selectData;
-    *realData = act.realData;
-    *type = act.type;
+    *act = this->actionList[index];
     index --;
     return true;
 }
-bool hpl::aleph::map::HPLDoneHistory::forward(int *type, HPLSelectData* selectData, HPLRealMapData* realData)
+bool hpl::aleph::map::HPLDoneHistory::forward(hpl::aleph::map::HPLActionItem* act)
 {
     if(index >= (int)this->actionList.size()){
         return false;
     }
-    hpl::aleph::map::HPLActionItem act = this->actionList[index];
-    *selectData = act.selectData;
-    *realData = act.realData;
-    *type = act.type;
+    *act = this->actionList[index];
     index ++;
     return true;
 }
@@ -110,15 +117,12 @@ bool hpl::aleph::map::HPLDoneHistory::forward(int *type, HPLSelectData* selectDa
 	最新版の状態を取得します
 	取得しても内容や位置は変化させません
 */
-bool hpl::aleph::map::HPLDoneHistory::getTail(int *type, HPLSelectData* sel, HPLRealMapData* real)
+bool hpl::aleph::map::HPLDoneHistory::getTail(hpl::aleph::map::HPLActionItem* act)
 {
 	if(actionList.size() == 0){
 		return false;
 	}
-	hpl::aleph::map::HPLActionItem *act = &this->actionList[actionList.size() - 1];
-	*sel = act->selectData;
-	*real = act->realData;
-	*type = act->type;
+	*act = this->actionList[actionList.size() - 1];
 	return true;
 }
 
@@ -151,4 +155,5 @@ int hpl::aleph::map::HPLDoneHistory::getRemainRedoCount()
 void hpl::aleph::map::HPLDoneHistory::init()
 {
 	this->actionList.clear();
+	index = 0;
 }

@@ -225,7 +225,7 @@ void MapEditorMainFrame::drawPolygons(wxDC* dc)
         int flags = polygon->flags;
         int vertexCount = polygon->vertex_count;
 
-        if(wxGetApp().getStockManager()->delPolygons[i]){
+        if(wxGetApp().getStockManager()->isDeletePolygon(i)){
             continue;
         }
         //まあ無いと思うが…
@@ -342,7 +342,7 @@ void MapEditorMainFrame::drawLines(wxDC* dc)
         endpoint_data* begin = get_endpoint_data(line->endpoint_indexes[0]);
         endpoint_data* end = get_endpoint_data(line->endpoint_indexes[1]);
 
-        if(wxGetApp().getStockManager()->delLines[i]){
+        if(wxGetApp().getStockManager()->isDeleteLine(i)){
             continue;
         }
         //高さ
@@ -437,7 +437,7 @@ void MapEditorMainFrame::drawPoints(wxDC* dc)
 
     //点表示
     for(int i = 0; i < (int)EndpointList.size(); i ++){
-        if(wxGetApp().getStockManager()->delPoints[i]){
+        if(wxGetApp().getStockManager()->isDeletePoint(i)){
             continue;
         }
         endpoint_data* ep = get_endpoint_data(i);
@@ -476,7 +476,7 @@ void MapEditorMainFrame::drawObjects(wxDC* dc)
     int zMax = wxGetApp().getViewGridManager()->getViewHeightMax();
 
     for(int i = 0; i < (int)SavedObjectList.size(); i ++){
-        if(wxGetApp().getStockManager()->delObjects[i]){
+        if(wxGetApp().getStockManager()->isDeleteObject(i)){
             continue;
         }
         map_object* obj = &(SavedObjectList[i]);

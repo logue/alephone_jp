@@ -215,7 +215,52 @@ void MapEditorMainFrame::OnUndo(wxCommandEvent& ev)
         ・              の設定変更(移動含む)
         くらいかな？（それ以外の処理については無視。要望があれば応える感じ）
     */
-    //bool result = 
+	hpl::aleph::map::HPLSelectData dummy1;
+	hpl::aleph::map::HPLRealMapData dummy2;
+	hpl::aleph::map::HPLActionItem act = hpl::aleph::map::HPLActionItem(0, dummy1, dummy2);
+	hpl::aleph::map::HPLDoneHistory* dmgr = wxGetApp().getDoneHistoryManager();
+	hpl::aleph::HPLStockManager* smgr = wxGetApp().getStockManager();
+
+    bool result = dmgr->back(&act);
+	if(result){
+		if(act.type == hpl::aleph::map::ActionType::None ||
+			act.type == hpl::aleph::map::ActionType::Move)
+		{
+			//移動を元に戻す
+			for(int i = 0; i < (int)act.selectData.getSelPoints()->size(); i ++){
+				int index = act.selectData.getSelPoints()->at(i).index;
+				endpoint_data* ep = get_endpoint_data(index);
+				//TODO 削除・追加のUndo機能も実装しよう。
+				//これだけだと削除されている場合エラーになる
+				if(smgr->isDeletePoint(index) || ep == NULL){
+					//TODO 応急処置！
+					continue;
+				}
+				ep->vertex.x = act.pointVertexMap[index][0];
+				ep->vertex.y = act.pointVertexMap[index][1];
+			}
+			for(int i = 0; i < act.selectData.getSelObjects()->size(); i ++){
+				int index = act.selectData.getSelObjects()->at(i).index;
+				if(smgr->isDeleteObject(index) || index >= SavedObjectList.size()){
+					continue;
+				}
+				map_object* obj = &SavedObjectList[index];
+				obj->location.x = act.objectLocationMap[index][0];
+				obj->location.y = act.objectLocationMap[index][1];
+				obj->location.z = act.objectLocationMap[index][2];
+			}
+		}else{
+			hpl::error::halt("This function is disable");
+		}
+
+	}else{
+#ifdef __WXDEBUG__
+		hpl::error::caution("Undo失敗。index=%d", dmgr->getIndex());
+#endif
+	}
+
+	//更新
+	this->updateMapItems();
 }
 void MapEditorMainFrame::OnRedo(wxCommandEvent& ev)
 {
@@ -223,8 +268,48 @@ void MapEditorMainFrame::OnRedo(wxCommandEvent& ev)
 }
 void MapEditorMainFrame::OnCut(wxCommandEvent& ev)
 {
-    //TODO
+    //TODO コピーして削除
+	OnCopy(ev);
+	OnDelete(ev);
 }
+void MapEditorMainFrame::OnDelete(wxCommandEvent& ev)
+{
+	hpl::aleph::map::HPLSelectData* sel = &wxGetApp().selectData;
+	hpl::aleph::HPLStockManager* smgr = wxGetApp().getStockManager();
+
+	if(sel->isSelected()){
+		//TODO 選択対象を記録してUndoに用いる
+		//
+
+		//選択対象を削除対象とする
+		for(int i = 0; i < (int)sel->getSelPoints()->size(); i ++){
+			hpl::aleph::map::SelPoint* opt = &sel->getSelPoints()->at(i);
+			smgr->deletePoint(opt->index);
+		}
+		//lines
+		for(int i = 0; i < (int)sel->getSelLines()->size(); i ++){
+			smgr->deleteLine(sel->getSelLines()->at(i).index);
+		}
+		/*
+		//sides
+		for(int i = 0; i < sel->getSelSides()->size(); i ++){
+			smgr->deleteSide(sel->getSelSides()->at(i).index);
+		}*/
+		//polygons
+		for(int i = 0; i < (int)sel->getSelPolygons()->size(); i ++){
+			smgr->deletePolygon(sel->getSelPolygons()->at(i).index);
+		}
+		//objects
+		for(int i = 0; i < (int)sel->getSelObjects()->size(); i ++){
+			smgr->deleteObject(sel->getSelObjects()->at(i).index);
+		}
+
+		sel->clear();
+		//削除が実行されたのでコンボ更新
+		this->updateMapItems();
+	}
+}
+
 void MapEditorMainFrame::OnCopy(wxCommandEvent& ev)
 {
     //TODO デバッグ
