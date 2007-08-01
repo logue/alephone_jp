@@ -20,6 +20,7 @@ BEGIN_EVENT_TABLE(MapEditorMainFrame, wxFrame)
     EVT_MENU(ID_Save, MapEditorMainFrame::OnSave)
     EVT_MENU(ID_SaveAs, MapEditorMainFrame::OnSaveAs)
     EVT_MENU(ID_Merge, MapEditorMainFrame::OnMerge)
+	EVT_MENU(ID_SavePhysicsFile, MapEditorMainFrame::OnSavePhysicsFile)
 
     //edit menu
     EVT_MENU(ID_Undo, MapEditorMainFrame::OnUndo)
@@ -257,6 +258,7 @@ void MapEditorMainFrame::setupMenus()
     menuFile->Append(ID_PrintSetup, _T("Print Setup ..."), _T("print setup"));
     menuFile->AppendSeparator();
     menuFile->Append(ID_Merge, _T("&Merge ..."), _T("merge map"));
+	menuFile->Append(ID_SavePhysicsFile, _T("Save Physics File As..."), _T("extract physics file"));
     menuFile->AppendSeparator();
     menuFile->Append(ID_Quit, _T("E&xit"), _T("exit program"));
 

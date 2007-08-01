@@ -1418,6 +1418,7 @@ struct wad_data* store_data_to_wad()
     return wad;
 }
 
+bool PhysicsModelLoaded = false;
 
 /* Load a level from a wad-> mainly used by the net stuff. */
 bool process_map_wad(
@@ -1432,6 +1433,7 @@ bool process_map_wad(
 
 	assert(version==MARATHON_INFINITY_DATA_VERSION || version==MARATHON_TWO_DATA_VERSION || version==MARATHON_ONE_DATA_VERSION);
 
+	PhysicsModelLoaded = false;
 	/* zero everything so no slots are used */	
 	initialize_map_for_new_level();
     staticPlatforms.clear();
@@ -1624,7 +1626,6 @@ bool process_map_wad(
 //    }
 
 	// LP addition: load the physics-model chunks (all fixed-size)
-	bool PhysicsModelLoaded = false;
 	
 	data= (uint8 *)extract_type_from_wad(wad, MONSTER_PHYSICS_TAG, &data_length);
 	count = data_length/SIZEOF_monster_definition;

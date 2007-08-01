@@ -3,6 +3,18 @@
 
 static wxRegEx REG_NUM = _T("[0-9]*");
 
+namespace PlacementType{
+	enum{
+		Initial,
+		Minimum,
+		Maximum,
+		RandomCount,
+		RandomChance,
+
+		MAX_PLACEMENT_TYPE
+	};
+};
+
 enum{
     ID_INITIAL,
     ID_MINIMUM,
@@ -188,44 +200,68 @@ static int getIndex(int sel)
 }
 void PlacementDialog::OnEditInitial(wxCommandEvent &event)
 {
-    event.Skip();
-    std::cout<<"Event handler (PlacementDialog::OnEditInitial) not implemented yet"<<std::endl; //notify the user that he hasn't implemented the event handler yet
+	this->setItem(PlacementType::Initial, event.GetString());
 }
 
 
+void PlacementDialog::setItem(int placementType, wxString str)
+{
+	int listIndex = this->listSelectIndex;
+	int type = getType(listIndex);
+	int index = getIndex(listIndex);
+	object_frequency_definition* placement = hpl::aleph::map::getPlacementData(type, index);
+	if(!placement){
+		hpl::error::caution("You must select item / monster first");
+		return;
+	}
+	if(REG_NUM.Matches(str)){
+		int val = atoi(str.mb_str());
+#ifdef __WXDEBUG__
+		wxASSERT(placementType >= 0 && placementType < PlacementType::MAX_PLACEMENT_TYPE);
+#endif
+		switch(placementType){
+		case PlacementType::Initial:
+			placement->initial_count = val;
+			break;
+		case PlacementType::Minimum:
+			placement->minimum_count = val;
+			break;
+		case PlacementType::Maximum:
+			placement->maximum_count = val;
+			break;
+		case PlacementType::RandomCount:
+			placement->random_count = val;
+			break;
+		case PlacementType::RandomChance:
+			placement->random_chance = val;
+			break;
+		}
+		setListItem(this->list_ctrl_1, placement, listIndex);
+	}else{
+		hpl::error::caution("Invalid argument. only number you can set");
+	}
+}
 void PlacementDialog::OnEditMinimum(wxCommandEvent &event)
 {
-
-	int type = getType(this->listSelectIndex);
-	int index = getIndex(this->listSelectIndex);
-	object_frequency_definition* placement = hpl::aleph::map::getPlacementData(type, index);
-	wxASSERT(placement);
-	wxString str = event.GetString();
-	if(REG_NUM.Matches(str)){
-		placement->minimum_count = atoi(wxConvertWX2MB(str));
-		setListItem(this->list_ctrl_1, placement, listSelectIndex);
-	}
+	this->setItem(PlacementType::Minimum, event.GetString());
 }
 
 
 void PlacementDialog::OnEditMaximum(wxCommandEvent &event)
 {
-    event.Skip();
-    std::cout<<"Event handler (PlacementDialog::OnEditMaximum) not implemented yet"<<std::endl; //notify the user that he hasn't implemented the event handler yet
+	this->setItem(PlacementType::Maximum, event.GetString());
 }
 
 
 void PlacementDialog::OnEditRandomCount(wxCommandEvent &event)
 {
-    event.Skip();
-    std::cout<<"Event handler (PlacementDialog::OnEditRandomCount) not implemented yet"<<std::endl; //notify the user that he hasn't implemented the event handler yet
+	this->setItem(PlacementType::RandomCount, event.GetString());
 }
 
 
 void PlacementDialog::OnRandomChance(wxCommandEvent &event)
 {
-    event.Skip();
-    std::cout<<"Event handler (PlacementDialog::OnRandomChance) not implemented yet"<<std::endl; //notify the user that he hasn't implemented the event handler yet
+	this->setItem(PlacementType::RandomChance, event.GetString());
 }
 void PlacementDialog::OnSel(wxListEvent &ev)
 {
@@ -247,6 +283,17 @@ void PlacementDialog::OnSel(wxListEvent &ev)
 }
 void PlacementDialog::OnRandomPlace(wxCommandEvent& ev)
 {
+	bool value = ev.IsChecked();
+	int listIndex = this->listSelectIndex;
+	int type = getType(listIndex);
+	int index = getIndex(listIndex);
+	object_frequency_definition* placement = hpl::aleph::map::getPlacementData(type, index);
+	if(!placement){
+		hpl::error::caution("You must select item / monster first");
+		return;
+	}
+	placement->flags = value ? _reappears_in_random_location : 0;
+	setListItem(this->list_ctrl_1, placement, listIndex);
 }
 /*
 void PlacementDialog::setPlacementText()

@@ -414,35 +414,35 @@ void hpl::aleph::HPLStockManager::updateSelects(hpl::aleph::map::HPLSelectData& 
 bool hpl::aleph::HPLStockManager::isSelectPoint(int index)
 {
 #ifdef _WXDEBUG_
-	wxASSERT(index >= 0 && index < this->selPoints.size());
+	wxASSERT(index >= 0 && index < (int)this->selPoints.size());
 #endif
 	return this->selPoints[index];
 }
 bool hpl::aleph::HPLStockManager::isSelectLine(int index)
 {
 #ifdef _WXDEBUG_
-	wxASSERT(index >= 0 && index < this->selLines.size());
+	wxASSERT(index >= 0 && index < (int)this->selLines.size());
 #endif
 	return this->selLines[index];
 }
 bool hpl::aleph::HPLStockManager::isSelectPolygon(int index)
 {
 #ifdef _WXDEBUG_
-	wxASSERT(index >= 0 && index < this->selPolygons.size());
+	wxASSERT(index >= 0 && index < (int)this->selPolygons.size());
 #endif
 	return this->selPolygons[index];
 }
 bool hpl::aleph::HPLStockManager::isSelectSide(int index)
 {
 #ifdef _WXDEBUG_
-	wxASSERT(index >= 0 && index < this->selSides.size());
+	wxASSERT(index >= 0 && index < (int)this->selSides.size());
 #endif
 	return this->selSides[index];
 }
 bool hpl::aleph::HPLStockManager::isSelectObject(int index)
 {
 #ifdef _WXDEBUG_
-	wxASSERT(index >= 0 && index < this->selObjects.size());
+	wxASSERT(index >= 0 && index < (int)this->selObjects.size());
 #endif
 	return this->selObjects[index];
 }
@@ -450,35 +450,35 @@ bool hpl::aleph::HPLStockManager::isSelectObject(int index)
 void hpl::aleph::HPLStockManager::setSelectPoint(int index, bool sel)
 {
 #ifdef _WXDEBUG_
-	wxASSERT(index >= 0 && index < this->selPoints.size());
+	wxASSERT(index >= 0 && index < (int)this->selPoints.size());
 #endif
 	this->selPoints[index] = sel;
 }
 void hpl::aleph::HPLStockManager::setSelectLine(int index, bool sel)
 {
 #ifdef _WXDEBUG_
-	wxASSERT(index >= 0 && index < this->selLines.size());
+	wxASSERT(index >= 0 && index < (int)this->selLines.size());
 #endif
 	this->selLines[index] = sel;
 }
 void hpl::aleph::HPLStockManager::setSelectPolygon(int index, bool sel)
 {
 #ifdef _WXDEBUG_
-	wxASSERT(index >= 0 && index < this->selPolygons.size());
+	wxASSERT(index >= 0 && index < (int)this->selPolygons.size());
 #endif
 	this->selPolygons[index] = sel;
 }
 void hpl::aleph::HPLStockManager::setSelectSide(int index, bool sel)
 {
 #ifdef _WXDEBUG_
-	wxASSERT(index >= 0 && index < this->selSides.size());
+	wxASSERT(index >= 0 && index < (int)this->selSides.size());
 #endif
 	this->selSides[index] = sel;
 }
 void hpl::aleph::HPLStockManager::setSelectObject(int index, bool sel)
 {
 #ifdef _WXDEBUG_
-	wxASSERT(index >= 0 && index < this->selObjects.size());
+	wxASSERT(index >= 0 && index < (int)this->selObjects.size());
 #endif
 	this->selObjects[index] = sel;
 }

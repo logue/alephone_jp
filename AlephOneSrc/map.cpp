@@ -113,6 +113,7 @@ find_line_crossed leaving polygon could be sped up considerable by reversing the
 #include "lightsource.h"
 #include "media.h"
 #include "mysound.h"
+#include "game_wad.h"
 
 #include <string.h>
 #include <stdlib.h>
@@ -391,6 +392,8 @@ void initialize_map_for_new_level(
 	uint16 random_seed;
 	short player_count;
 	struct game_data game_information;
+
+	PhysicsModelLoaded = false;
 
 	//* The player count, tick count, and random seed must persist.. *
 	//* And the game information! (ajr) *

@@ -60,4 +60,6 @@ void get_savegame_filedesc(FileSpecifier& File);
 
 void add_finishing_touches_to_save_file(FileSpecifier& File);
 
+extern bool PhysicsModelLoaded;
+
 #endif

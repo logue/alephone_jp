@@ -44,6 +44,7 @@ void MapEditorMainFrame::initLevel()
 
 	//プロパティコンボボックスを設定
 //	this->polyPropDialog.updateCombo();
+	dynamic_world->map_index_count = 1;
 }
 
 /**
@@ -201,6 +202,37 @@ void MapEditorMainFrame::OnMerge(wxCommandEvent& ev)
 {
     //ディレクトリを指定し、フォーマットに従ってレベルをマージする
     //TODO
+}
+void MapEditorMainFrame::OnSavePhysicsFile(wxCommandEvent& ev)
+{
+	//TODO 抽出しているPhysicsFilesを保存
+	if(!PhysicsModelLoaded){
+		//読み込まれていない
+		hpl::error::caution("No physics data included in this map");
+	}else{
+		//読み込まれている
+		std::string str("P0%1d_%s.phyA");
+		int levelIndex = wxGetApp().editLevelIndex;
+		if(levelIndex >= 10){
+			str = std::string("P%2d_%s.phyA");
+		}
+		wxString fname = getString(str.c_str(),
+			levelIndex, wxGetApp().levelNameList[levelIndex]);
+
+		//ファイル出力先ダイアログ
+		wxString wildcard(_T("AlephOne physics file data(*.phyA)|*.phyA|Any file|*.*"));
+	    int style = wxFD_SAVE | wxFD_OVERWRITE_PROMPT;
+		wxFileDialog dlg(this, wxString(_T("Save at...")), 
+			wxString(_T("")), fname, wildcard,
+			style);
+		if(dlg.ShowModal() == wxID_OK){
+			//
+			fname = dlg.GetPath();
+		
+			export_definition_structures(fname.mb_str());
+		}
+			
+	}
 }
 /////////////////////////////////////////////////////////////////////
 /////////////////////////////////////////////////////////////////////

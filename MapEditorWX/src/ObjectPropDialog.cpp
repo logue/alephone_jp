@@ -237,13 +237,14 @@ void ObjectPropDialog::setObjIndex(int index)
 {
     this->objIndex = index;
     setupDialog();
+	//
 }
 int ObjectPropDialog::getObjIndex()
 {
     return this->objIndex;
 }
 void ObjectPropDialog::setObject(map_object obj){
-    int oldSel = choice_21->GetSelection();
+    static int oldSel = 0;//choice_21->GetSelection();
     this->text_ctrl_27->SetValue(getString("%d", obj.type));
     this->choice_21->SetSelection(obj.type);
 
@@ -287,6 +288,7 @@ void ObjectPropDialog::setObject(map_object obj){
             break;
         }
     }
+	oldSel = obj.type;
     this->choice_22->SetSelection(obj.index);
 
     //flags
@@ -309,6 +311,9 @@ void ObjectPropDialog::setObject(map_object obj){
 }
 void ObjectPropDialog::setupDialog()
 {
+	//タイトルを変更
+	SetTitle(getString("Object index = [%d]", this->objIndex));
+
     if(this->objIndex == NONE){
         map_object obj;
         memset(&obj, 0, sizeof(map_object));
@@ -339,7 +344,7 @@ void ObjectPropDialog::OnTypeChoice(wxCommandEvent &event)
     if(!isValidIndex(&this->objIndex))return;
     map_object* obj = &SavedObjectList[this->objIndex];
     obj->type = event.GetSelection();
-
+	setupDialog();
 }
 
 

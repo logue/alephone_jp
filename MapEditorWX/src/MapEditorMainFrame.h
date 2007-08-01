@@ -59,6 +59,7 @@ enum
     ID_Preference = wxID_PREFERENCES,
 
     ID_Merge = 1,
+	ID_SavePhysicsFile,
 	ID_Delete,
     //show
     ID_ToolDialog,
@@ -230,6 +231,7 @@ public:
     void OnQuit(wxCommandEvent& ev);
     void OnAbout(wxCommandEvent& ev);
     void OnMerge(wxCommandEvent& ev);
+    void OnSavePhysicsFile(wxCommandEvent& ev);
 
     //ï“èWÉÅÉjÉÖÅ[<en>Edit menus
     void OnUndo(wxCommandEvent& ev);

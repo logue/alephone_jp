@@ -684,7 +684,22 @@ void MapEditorMainFrame::doLButtonOnSkullTool(wxMouseEvent& ev)
 			//ダイアログからオブジェクトを作成する
             map_object objv = this->objPropDialog.getObject();
             objv.polygon_index = i;
+			//ポリゴン位置を取得
+			objv.location.x = wpoint.x;
+			objv.location.y = wpoint.y;
+			objv.location.z = poly->floor_height;
+			if(objv.flags && _map_object_hanging_from_ceiling){
+				//TODO 天井からぶら下がっている場合、天井に座標を合わせるべきか？
+			}
+
             int newIndex = hpl::aleph::map::addMapSavedObject(objv);
+			//オブジェクトダイアログボックスを更新します
+			objPropDialog.setObjIndex(newIndex);
+			//選択をこのオブジェクトに変更します
+			wxGetApp().selectData.clear();
+			int offset[2] = {0};
+			wxGetApp().selectData.addSelObject(newIndex, offset);
+			//TODO Prepare "Add" Undo
             found = true;
             break;
         }
@@ -692,6 +707,7 @@ void MapEditorMainFrame::doLButtonOnSkullTool(wxMouseEvent& ev)
     if(!found){
         hpl::error::caution("You must place objects ON POLYGON");
     }
+	this->updateMapItems();
 #endif
 }
 void MapEditorMainFrame::doLButtonOnTextTool(wxMouseEvent& ev)

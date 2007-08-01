@@ -23,6 +23,7 @@ private:
     wxButton* button_16;
 
 	int listSelectIndex;
+
 public:
     PlacementDialog();
     virtual ~PlacementDialog();
@@ -41,6 +42,7 @@ public:
     void OnRandomPlace(wxCommandEvent& ev);
     //イベントテーブル作成<en>declare
     DECLARE_EVENT_TABLE()
+	void PlacementDialog::setItem(int type, wxString str);
 public:
 //    void setPlacementText();
 };

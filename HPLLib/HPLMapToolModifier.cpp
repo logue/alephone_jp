@@ -164,13 +164,34 @@ int hpl::aleph::map::addMapSavedObject(map_object object)
 	//TODO
 	//プレースメント情報に付加
 
-	//TODO 追加したとき、その点が乗るポリゴンにオブジェクトのポリゴン番号を設定する
+	//追加したとき、その点が乗るポリゴンにオブジェクトのポリゴン番号を設定する
+	//	外部でやってね
+
 	//TODO どれを集計すれば良いのか？
 //	dynamic_world->object_count ++;// SavedObjectList.size();
 	dynamic_world->initial_objects_count = (int16)SavedObjectList.size();
 	int index = dynamic_world->initial_objects_count - 1;
-
+	
+	
     map_object* obj = &SavedObjectList[index];
+
+	//placement 情報をチェック。
+	object_frequency_definition* placement =
+		hpl::aleph::map::getPlacementData(object.type, object.index);
+	int count = 0;
+	//数を数える
+	for(int i = 0; i < (int)SavedObjectList.size(); i ++){
+		map_object* other = &SavedObjectList[i];
+		if(other->type == obj->type && other->index == obj->index){
+			count ++;
+		}
+	}
+
+	//少なかったら追加する
+	if(placement->initial_count < count){
+		placement->initial_count = count;
+	}
+	//
 
 /*    //依存する項目を修正する
     //・ポリゴン
@@ -351,8 +372,8 @@ void hpl::aleph::map::changeIndexMapping(
 	//points
     for(int i = endpointIndexStart; i < endpointIndexEnd; i ++){
 #ifdef _WXDEBUG_
-		wxASSERT(endpointIndexStart >= 0 && endpointIndexStart <= endpointList.size() &&
-			endpointIndexStart <= endpointIndexEnd && endpointIndexEnd <= endpointList.size());
+		wxASSERT(endpointIndexStart >= 0 && endpointIndexStart <= (int)endpointList.size() &&
+			endpointIndexStart <= endpointIndexEnd && endpointIndexEnd <= (int)endpointList.size());
 #endif
 		endpoint_data* ep = &endpointList[i];
 		//所属するポリゴンIndex
