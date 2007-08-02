@@ -688,7 +688,7 @@ void MapEditorMainFrame::doLButtonOnSkullTool(wxMouseEvent& ev)
 			objv.location.x = wpoint.x;
 			objv.location.y = wpoint.y;
 			objv.location.z = poly->floor_height;
-			if(objv.flags && _map_object_hanging_from_ceiling){
+			if(objv.flags & _map_object_hanging_from_ceiling){
 				//TODO 天井からぶら下がっている場合、天井に座標を合わせるべきか？
 			}
 

@@ -300,3 +300,4 @@ TODO PhysicsFilesを保存できるようにする（MapDemergerへの布石）
 TODO オブジェクトダイアログで設定を変えた場合、Type/Indexが変更されたら
 	初期配置数も変える
 TODO オブジェクトのType変更しても実体が変更されない
+TODO _map_object_hanging_from_ceilingの時は天井からのDeltaで設定するべきか？

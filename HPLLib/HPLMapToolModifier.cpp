@@ -6,6 +6,7 @@
 #include "HPLError.h"
 #include "HPLStringModifier.h"
 #include "map.h"
+#include "platforms.h"
 #include "HPLStockManager.h"
 
 //角度の最大
@@ -278,9 +279,54 @@ bool hpl::aleph::map::deleteMapItems(std::vector<bool>& delPoints, std::vector<b
     for(int i = 0; i < (int)delObjects.size(); i ++){
         if(!delObjects[i]){   indexMapObjects[i] = counter;   counter ++;}
     }
-
+	
+	//削除します
+	for(int i = (int)delPoints.size() - 1; i >= 0; i --){
+		if(delPoints[i]){
+			EndpointList.erase(EndpointList.begin() + i);
+		}
+	}
+	for(int i = (int)delLines.size() - 1; i >= 0; i --){
+		if(delLines[i]){
+			LineList.erase(LineList.begin() + i);
+		}
+	}
+	for(int i = (int)delPolygons.size() - 1; i >= 0; i --){
+		if(delPolygons[i]){
+			PolygonList.erase(PolygonList.begin() + i);
+		}
+	}
+	for(int i = (int)delSides.size() - 1; i >= 0; i --){
+		if(delSides[i]){
+			SideList.erase(SideList.begin() + i);
+		}
+	}
+	for(int i = (int)delObjects.size() - 1; i >= 0; i --){
+		if(delObjects[i]){
+			SavedObjectList.erase(SavedObjectList.begin() + i);
+		}
+	}
+	/*
+	for(int i = (int)delPlatfor.size() - 1; i >= 0; i --){
+		if(delPlatforms[i]){
+			PlatformList.erase(PlatformList.begin() + i);
+		}
+	}*/
+	
     //インデックスを付け直す
-	//endpoints
+	hpl::aleph::map::changeIndexMapping(
+		EndpointList,
+		LineList,
+		PolygonList,
+		SideList,
+		SavedObjectList,
+		0, EndpointList.size(),
+		0, LineList.size(),
+		0, PolygonList.size(),
+		0, SideList.size(),
+		0, SavedObjectList.size(),
+		indexMapPoints, indexMapLines, indexMapPolygons, indexMapSides, indexMapObjects);
+/*	//endpoints
     for(int i = 0; i < (int)EndpointList.size(); i ++){
         if(!delPoints[i]){
             endpoint_data* ep = get_endpoint_data(i);
@@ -345,7 +391,7 @@ bool hpl::aleph::map::deleteMapItems(std::vector<bool>& delPoints, std::vector<b
             obj->polygon_index = indexMapPolygons[obj->polygon_index];
         }
     }
-
+*/
     return true;
 }
 

@@ -1203,7 +1203,7 @@ void hpl::aleph::map::setupSelectDataGroupOffsets(int mx, int my,
 	@param index どのオブジェクトの初期は位置をいじるか
 	@param num 増減させる値
 	@return 増減の結果の数
-*/
+*
 int hpl::aleph::map::addInitialPlacementNum(int objectType, int index, int num)
 {
 	struct object_frequency_definition* place = hpl::aleph::map::getPlacementData(objectType, index);
@@ -1213,7 +1213,7 @@ int hpl::aleph::map::addInitialPlacementNum(int objectType, int index, int num)
 	}else{
 		return NONE;
 	}
-}
+}*/
 /**
 	配置情報を取得
 	@param objectType オブジェクトタイプ
@@ -1240,6 +1240,35 @@ struct object_frequency_definition* hpl::aleph::map::getPlacementData(int object
 	return place;
 }
 
+/**
+	指定したType/Indexの数を求めます
+*/
+int hpl::aleph::map::getObjectCount(int type, int index)
+{
+	int counter = 0;
+	for(int i = 0; i < (int)SavedObjectList.size(); i ++){
+		map_object* obj = &SavedObjectList[i];
+		if(obj->type == type && obj->index == index){
+			counter ++;
+		}
+	}
+	return counter;
+}
+
+/**
+	特定のType/Indexの数を調べ、initial値より少ない場合は合わせる
+	@return 何か変化が生じた場合真
+*/
+bool hpl::aleph::map::updateObjectInitialPlacement(int type, int index)
+{
+	int counter = hpl::aleph::map::getObjectCount(type, index);
+	object_frequency_definition* place = hpl::aleph::map::getPlacementData(type, index);
+	if(counter > place->initial_count){
+		place->initial_count = counter;
+		return true;
+	}
+	return false;
+}
 
 
 ///////////////////////////////////

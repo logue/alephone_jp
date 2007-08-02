@@ -226,7 +226,8 @@ MapEditorMainFrame::MapEditorMainFrame(const wxString& title,
 	}
 
     //セットアップ
-    wxGetApp().getStockManager()->updateDeletes();
+    //wxGetApp().getStockManager()->updateDeletes();
+	this->updateMapItems();
 }
 MapEditorMainFrame::~MapEditorMainFrame()
 {

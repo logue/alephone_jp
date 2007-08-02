@@ -487,42 +487,42 @@ void hpl::aleph::HPLStockManager::setSelectObject(int index, bool sel)
 bool hpl::aleph::HPLStockManager::isDeletePoint(int index)
 {
 #ifdef _WXDEBUG_
-	wxASSERT(index >= 0 && index < this->delPoints.size());
+	wxASSERT(index >= 0 && index < (int)this->delPoints.size());
 #endif
 	return this->delPoints[index];
 }
 bool hpl::aleph::HPLStockManager::isDeleteLine(int index)
 {
 #ifdef _WXDEBUG_
-	wxASSERT(index >= 0 && index < this->delLines.size());
+	wxASSERT(index >= 0 && index < (int)this->delLines.size());
 #endif
 	return this->delLines[index];
 }
 bool hpl::aleph::HPLStockManager::isDeletePolygon(int index)
 {
 #ifdef _WXDEBUG_
-	wxASSERT(index >= 0 && index < this->delPolygons.size());
+	wxASSERT(index >= 0 && index < (int)this->delPolygons.size());
 #endif
 	return this->delPolygons[index];
 }
 bool hpl::aleph::HPLStockManager::isDeleteSide(int index)
 {
 #ifdef _WXDEBUG_
-	wxASSERT(index >= 0 && index < this->delSides.size());
+	wxASSERT(index >= 0 && index < (int)this->delSides.size());
 #endif
 	return this->delSides[index];
 }
 bool hpl::aleph::HPLStockManager::isDeleteObject(int index)
 {
 #ifdef _WXDEBUG_
-	wxASSERT(index >= 0 && index < this->delObjects.size());
+	wxASSERT(index >= 0 && index <(int) this->delObjects.size());
 #endif
 	return this->delObjects[index];
 }
 bool hpl::aleph::HPLStockManager::isDeletePlatform(int index)
 {
 #ifdef _WXDEBUG_
-	wxASSERT(index >= 0 && index < this->delPlatforms.size());
+	wxASSERT(index >= 0 && index < (int)this->delPlatforms.size());
 #endif
 	return this->delPlatforms[index];
 }

@@ -492,7 +492,7 @@ namespace map{
 		@param num 増減させる値
 		@return 増減の結果の数。配置情報が得られない場合NONE(負数)
 	*/
-	int addInitialPlacementNum(int objectType, int index, int num);
+//	int addInitialPlacementNum(int objectType, int index, int num);
 	/**
 		配置情報を取得
 		@param objectType オブジェクトタイプ
@@ -503,6 +503,18 @@ namespace map{
 			取得できない場合はNULLが返されます
 	*/
 	struct object_frequency_definition* getPlacementData(int objectType, int index);
+
+	/**
+		指定したType/Indexの数を求めます
+	*/
+	int getObjectCount(int type, int index);
+
+	/**
+		特定のType/Indexの数を調べ、initial値が存在数より少ない場合は合わせる
+		存在数がinitial数より少なくても別に困らない
+		@return 何か変化が生じた場合真
+	*/
+	bool updateObjectInitialPlacement(int type, int index);
 
 	///////////////////////////////////
 	//	Platform

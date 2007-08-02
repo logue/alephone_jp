@@ -96,7 +96,7 @@ void DirectionPanel::setFacing(int mx, int my)
 		((ObjectPropDialog*)GetParent())->refreshParent();
 	}
 }
-
+////////////////////////////////////////////////////
 enum{
     ID_TYPE,
     ID_INDEX,
@@ -137,30 +137,30 @@ bool ObjectPropDialog::Create(wxWindow* parent, wxWindowID id)
     bool result = wxDialog::Create(parent, id, _T("Edit Object"));
     label_45 = new wxStaticText(this, wxID_ANY, wxT("Group"));
     text_ctrl_27 = new wxTextCtrl(this, wxID_ANY, wxEmptyString, wxDefaultPosition, wxDefaultSize, wxTE_READONLY);
-    choice_21 = new wxChoice(this, wxID_ANY);
+    choice_21 = new wxChoice(this, ID_TYPE);
     label_56 = new wxStaticText(this, wxID_ANY, wxT("Type"));
     text_ctrl_32 = new wxTextCtrl(this, wxID_ANY, wxEmptyString, wxDefaultPosition, wxDefaultSize, wxTE_READONLY);
-    choice_22 = new wxChoice(this, wxID_ANY);
-    checkbox_46 = new wxCheckBox(this, wxID_ANY, wxT("Teleports In"));
-    checkbox_47 = new wxCheckBox(this, wxID_ANY, wxT("From Ceiling"));
-    checkbox_48 = new wxCheckBox(this, wxID_ANY, wxT("Is Blind"));
-    checkbox_49 = new wxCheckBox(this, wxID_ANY, wxT("Is Deaf"));
-    checkbox_50 = new wxCheckBox(this, wxID_ANY, wxT("Teleports Out"));
-    checkbox_51 = new wxCheckBox(this, wxID_ANY, wxT("Network Only"));
+    choice_22 = new wxChoice(this, ID_INDEX);
+    checkbox_46 = new wxCheckBox(this, ID_HIDDEN, wxT("Teleports In"));
+    checkbox_47 = new wxCheckBox(this, ID_CEILING, wxT("From Ceiling"));
+    checkbox_48 = new wxCheckBox(this, ID_SEE, wxT("Is Blind"));
+    checkbox_49 = new wxCheckBox(this, ID_HEAR, wxT("Is Deaf"));
+    checkbox_50 = new wxCheckBox(this, ID_AERIAL, wxT("Teleports Out"));
+    checkbox_51 = new wxCheckBox(this, ID_NET, wxT("Network Only"));
     label_59 = new wxStaticText(this, wxID_ANY, wxT("Polygon ID"));
     text_ctrl_37 = new wxTextCtrl(this, wxID_ANY, wxEmptyString, wxDefaultPosition, wxDefaultSize, wxTE_READONLY);
     label_58 = new wxStaticText(this, wxID_ANY, wxT("Facing"));
     text_ctrl_38 = new wxTextCtrl(this, wxID_ANY, wxEmptyString, wxDefaultPosition, wxDefaultSize, wxTE_READONLY);
     panel_16 = new DirectionPanel(this, wxID_ANY);
     label_60 = new wxStaticText(this, wxID_ANY, wxT("Launch by"));
-    choice_23 = new wxChoice(this, wxID_ANY);
+    choice_23 = new wxChoice(this, ID_LAUNCH);
     panel_17 = new wxPanel(this, wxID_ANY);
     label_61 = new wxStaticText(this, wxID_ANY, wxT("Location x"));
-    text_ctrl_39 = new wxTextCtrl(this, wxID_ANY, wxEmptyString);
+    text_ctrl_39 = new wxTextCtrl(this, ID_X, wxEmptyString);
     label_63 = new wxStaticText(this, wxID_ANY, wxT("y"));
-    text_ctrl_41 = new wxTextCtrl(this, wxID_ANY, wxEmptyString);
-    label_62 = new wxStaticText(this, wxID_ANY, wxT("            z"));
-    text_ctrl_40 = new wxTextCtrl(this, wxID_ANY, wxEmptyString);
+    text_ctrl_41 = new wxTextCtrl(this, ID_Y, wxEmptyString);
+    label_62 = new wxStaticText(this, wxID_ANY, wxT("       delta z"));
+    text_ctrl_40 = new wxTextCtrl(this, ID_Z, wxEmptyString);
     panel_18 = new wxPanel(this, wxID_ANY);
 
     text_ctrl_27->SetMinSize(wxSize(25, -1));
@@ -244,12 +244,12 @@ int ObjectPropDialog::getObjIndex()
     return this->objIndex;
 }
 void ObjectPropDialog::setObject(map_object obj){
-    static int oldSel = 0;//choice_21->GetSelection();
+    static int oldSel = -1;//choice_21->GetSelection();
     this->text_ctrl_27->SetValue(getString("%d", obj.type));
     this->choice_21->SetSelection(obj.type);
 
     this->text_ctrl_32->SetValue(getString("%d", obj.index));
-    if(oldSel != obj.type){
+	if(oldSel != obj.type){
         this->choice_22->Clear();
         switch(obj.type){
         case _saved_monster:
@@ -305,6 +305,13 @@ void ObjectPropDialog::setObject(map_object obj){
 
     this->text_ctrl_39->SetValue(getString("%d", obj.location.x));
     this->text_ctrl_41->SetValue(getString("%d", obj.location.y));
+	int dz = obj.location.z;
+	if(getObjIndex() != NONE){
+		polygon_data* poly = get_polygon_data(obj.polygon_index);
+		if(poly){
+			int floor_height = poly->floor_height;
+		}
+	}
     this->text_ctrl_40->SetValue(getString("%d", obj.location.z));
  
     Refresh();
@@ -344,6 +351,8 @@ void ObjectPropDialog::OnTypeChoice(wxCommandEvent &event)
     if(!isValidIndex(&this->objIndex))return;
     map_object* obj = &SavedObjectList[this->objIndex];
     obj->type = event.GetSelection();
+
+	//index コンボを更新しないといけない
 	setupDialog();
 }
 
@@ -353,6 +362,8 @@ void ObjectPropDialog::OnIndexChoice(wxCommandEvent &event)
     if(!isValidIndex(&this->objIndex))return;
     map_object* obj = &SavedObjectList[this->objIndex];
     obj->index = event.GetSelection();
+	//数合わせチェック
+	hpl::aleph::map::updateObjectInitialPlacement(obj->type, obj->index);
 }
 
 static uint16 getFlag(uint16 flags, uint16 bit, bool status)
@@ -424,7 +435,7 @@ void ObjectPropDialog::OnXEdit(wxCommandEvent &event)
 {
     if(!isValidIndex(&this->objIndex))return;
     map_object* obj = &SavedObjectList[this->objIndex];
-	obj->location.x = atoi(wxConvertWX2MB(text_ctrl_39->GetValue()));
+	obj->location.x = atoi(wxConvertWX2MB(event.GetString()));
 }
 
 
@@ -432,7 +443,7 @@ void ObjectPropDialog::OnYEdit(wxCommandEvent &event)
 {
     if(!isValidIndex(&this->objIndex))return;
     map_object* obj = &SavedObjectList[this->objIndex];
-    obj->location.y = atoi(wxConvertWX2MB(text_ctrl_40->GetValue()));
+	obj->location.y = atoi(wxConvertWX2MB(event.GetString()));
 }
 
 
@@ -440,7 +451,13 @@ void ObjectPropDialog::OnZEdit(wxCommandEvent &event)
 {
     if(!isValidIndex(&this->objIndex))return;
     map_object* obj = &SavedObjectList[this->objIndex];
-    obj->location.z = atoi(wxConvertWX2MB(text_ctrl_41->GetValue()));
+	polygon_data* poly = get_polygon_data(obj->polygon_index);
+#ifdef __WXDEBUG__
+	wxASSERT(poly);
+#endif
+	//TODO should we add polygon's ceiling_height when from ceiling?
+    obj->location.z = poly->floor_height + 
+		atoi(wxConvertWX2MB(event.GetString()));
 }
 
 

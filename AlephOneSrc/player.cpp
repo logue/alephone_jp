@@ -603,7 +603,7 @@ static void recreate_player(
 	short player_index)
 {
 	short monster_index = 0;
-	struct monster_data *monster;
+//	struct monster_data *monster;
 	struct player_data *player= get_player_data(player_index);
 	short placement_team;
 	struct object_location location;

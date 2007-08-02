@@ -165,7 +165,8 @@ void MapEditorMainFrame::OnOpen(wxCommandEvent& WXUNUSED(ev))
 }void MapEditorMainFrame::OnSave(wxCommandEvent& ev)
 {
     //TODO save correctly
-    if(wxGetApp().isChanged || wxGetApp().levelNameList.size() > 1){
+	if(PhysicsModelLoaded || wxGetApp().levelNameList.size() > 1){
+		hpl::error::caution("This map seems to be merged. This editor cannot save as merged one. Please save as another file");
         OnSaveAs(ev);
     }else{
         //Œ»İ‚Ìƒtƒ@ƒCƒ‹–¼‚Å•Û‘¶

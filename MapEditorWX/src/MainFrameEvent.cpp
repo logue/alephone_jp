@@ -343,7 +343,7 @@ void MapEditorMainFrame::doLUpOnArrowTool(wxMouseEvent& ev)
 					sel->clear();
 				}
                 //“o˜^
-                int offset[MAXIMUM_VERTICES_PER_POLYGON][2];
+				int offset[MAXIMUM_VERTICES_PER_POLYGON][2] = {{0}};
                 memset(offset, 0, sizeof(int) * MAXIMUM_VERTICES_PER_POLYGON * 2);
                 sel->addSelPolygon(i, offset, n);
             }
@@ -794,8 +794,14 @@ void MapEditorMainFrame::OnLeftDoubleClick(wxMouseEvent& ev)
 void MapEditorMainFrame::OnKeyDown(wxKeyEvent& ev)
 {
 	bool ctrl = ev.ControlDown();
+	bool shift = ev.ShiftDown();
+	//alt or apple/command key ;)
+	bool alt = ev.AltDown() || ev.CmdDown();
+	
 	int code = ev.GetKeyCode();
 	wxCommandEvent dummy;
+	//memset(&dummy, 0, sizeof(wxCommandEvent));
+
 	if(ctrl){
 		if(code == 'C'){
 			//Copy!
@@ -806,6 +812,14 @@ void MapEditorMainFrame::OnKeyDown(wxKeyEvent& ev)
 		}else if(code == 'Z'){
 			//Undo!
 			this->OnUndo(dummy);
+		}else if(code == 'S'){
+			if(shift){
+				//Save As!
+				this->OnSaveAs(dummy);
+			}else{
+				//Save!
+				this->OnSave(dummy);
+			}
 		}
 	}else{
 		if(code == WXK_DELETE){
@@ -846,6 +860,9 @@ void MapEditorMainFrame::updateMapItems()
 		}
 		hpl::aleph::map::fixPolygon(i, smgr);
 	}
+
+	//•ÒW‚ğ’m‚ç‚¹‚é
+	wxGetApp().isChanged = true;
 	Refresh();
 
 }

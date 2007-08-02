@@ -651,10 +651,10 @@ void PolygonPropDialog::OnceilingHeightEdit(wxCommandEvent &event)
 	‚»‚ê‚ðNONE‚Æ‚µ‚Ä•ÏŠ·‚µ‚Ü‚·
 */
 static int getIndexWithNONE(wxChoice* choice,
-							int max)
+							size_t max)
 {
 	int index = choice->GetSelection();
-	if(index >= max){
+	if(index >= (int)max){
 		index = NONE;
 	}
 	return index;
