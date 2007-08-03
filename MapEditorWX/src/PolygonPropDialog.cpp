@@ -298,14 +298,6 @@ void PolygonPropDialog::setupDialog(hpl::aleph::HPLStockManager* smgr)
 {
 
 
-/*    if(this->getPolyIndex() == NONE){
-		//プラットフォームボタン
-		button_21->Disable();
-		//プラットフォーム作成ボタン
-		button_createPlatform->SetLabel(wxConvertMB2WX(CREATE_BUTTON_LABEL));
-		button_createPlatform->Disable();
-        return;
-    }*/
     //ポリゴン情報をダイアログに設定
     polygon_data* poly = get_polygon_data(this->getPolyIndex());
 #ifdef __WXDEBUG__
@@ -320,9 +312,9 @@ void PolygonPropDialog::setupDialog(hpl::aleph::HPLStockManager* smgr)
     choice_14->SetSelection(poly->ceiling_lightsource_index);
     text_ctrl_26->SetValue(getString("%d", poly->permutation));
     int index = poly->first_object;
-    if(index == NONE){
+/*    if(!hpl::aleph::map::isValidIndex(index, SavedObjectList.size())){
         index = (int)SavedObjectList.size();
-    }
+    }*/
     
 	//choice_19->SetSelection(index);
 	text_ctrl_firstObject->SetValue(getString("%d", poly->first_object));
@@ -340,12 +332,12 @@ void PolygonPropDialog::setupDialog(hpl::aleph::HPLStockManager* smgr)
     text_ctrl_34->SetValue(getString("%d", poly->ceiling_origin.x));
     text_ctrl_36->SetValue(getString("%d", poly->ceiling_origin.y));
     index = poly->media_index;
-    if(index == NONE){
+    if(!hpl::aleph::map::isValidIndex(index, MediaList.size())){
         index = (int)MediaList.size();
     }
     choice_15->SetSelection(index);
     index = poly->media_lightsource_index;
-    if(index == NONE){
+    if(!hpl::aleph::map::isValidIndex(index, MediaList.size())){
         index = (int)LightList.size();
     }
     choice_16->SetSelection(index);
@@ -356,7 +348,7 @@ void PolygonPropDialog::setupDialog(hpl::aleph::HPLStockManager* smgr)
     }
     choice_20->SetSelection(index);*/
     index = poly->ambient_sound_image_index;
-    if(index == NONE){
+    if(!hpl::aleph::map::isValidIndex(index, AmbientSoundImageList.size())){
         index = (int)AmbientSoundImageList.size();
     }
     choice_17->SetSelection(index);
@@ -420,7 +412,7 @@ void PolygonPropDialog::setupPlatformButton(hpl::aleph::HPLStockManager* smgr)
 		int platformIndex = hpl::aleph::map::getPlatformIndexFromPolygonIndex(
 			this->getPolyIndex(), smgr);
 		//プラットフォーム
-		if(platformIndex != NONE){
+		if(hpl::aleph::map::isValidIndex(platformIndex, PlatformList.size())){
 			//かつプラットフォームが存在する
 			this->readyForDeleting();
 		}else{
@@ -433,157 +425,10 @@ void PolygonPropDialog::setupPlatformButton(hpl::aleph::HPLStockManager* smgr)
 		button_createPlatform->Disable();
 	}
 }
-/*
-void PolygonPropDialog::OnNearCountEdit(wxCommandEvent &event)
-{
-	//auto calculate. not ediablt
-}
 
-
-void PolygonPropDialog::OnPermuEdit(wxCommandEvent &event)
-{
-	//auto calculate. not ediablt
-	//TODO what's the permutation?
-	//置換・配列・順序???
-}
-
-
-void PolygonPropDialog::OnCenterXEdit(wxCommandEvent &event)
-{
-	//auto calculation. not editable
-}
-
-
-void PolygonPropDialog::OnFloorLightEdit(wxCommandEvent &event)
-{
-    if(this->getPolyIndex() == NONE){
-        return ;
-    }
-    std::cout<<"Event handler (PolygonPropDialog::OnFloorLightEdit) not implemented yet"<<std::endl; //notify the user that he hasn't implemented the event handler yet
-}
-
-
-void PolygonPropDialog::OnCenterYEdit(wxCommandEvent &event)
-{
-	//auto calculate. not ediablt
-}
-
-
-void PolygonPropDialog::OnCeilingLightEdit(wxCommandEvent &event)
-{
-    if(this->getPolyIndex() == NONE){
-        return ;
-    }
-    std::cout<<"Event handler (PolygonPropDialog::OnCeilingLightEdit) not implemented yet"<<std::endl; //notify the user that he hasn't implemented the event handler yet
-}
-
-
-void PolygonPropDialog::OnAreaEdit(wxCommandEvent &event)
-{
-	//auto calculate. not ediablt
-}
-void PolygonPropDialog::OnFloorOriginXEdit(wxCommandEvent &event)
-{
-	//auto calculate. not ediablt
-}
-void PolygonPropDialog::OnFloorOriginYEdit(wxCommandEvent &event)
-{
-	//auto calculate. not ediablt
-}
-void PolygonPropDialog::OnCeilingOriginXEdit(wxCommandEvent &event)
-{
-	//auto calculate. not ediablt
-}
-void PolygonPropDialog::OnCeilingOriginYEdit(wxCommandEvent &event)
-{
-	//auto calculate. not ediablt
-}
-
-
-void PolygonPropDialog::OnFirstObjChoice(wxCommandEvent &event)
-{
-	//auto calculate. not ediablt
-}
-
-
-void PolygonPropDialog::OnMediaChoice(wxCommandEvent &event)
-{
-    if(this->getPolyIndex() == NONE){
-        return ;
-    }
-    std::cout<<"Event handler (PolygonPropDialog::OnMediaChoice) not implemented yet"<<std::endl; //notify the user that he hasn't implemented the event handler yet
-}
-
-
-void PolygonPropDialog::OnFirstExZoneEdit(wxCommandEvent &event)
-{
-	//auto calculate. not ediablt
-}
-
-
-void PolygonPropDialog::OnMediaLightChoice(wxCommandEvent &event)
-{
-    if(this->getPolyIndex() == NONE){
-        return ;
-    }
-    std::cout<<"Event handler (PolygonPropDialog::OnMediaLightChoice) not implemented yet"<<std::endl; //notify the user that he hasn't implemented the event handler yet
-}
-
-
-void PolygonPropDialog::OnLineExZoneEdit(wxCommandEvent &event)
-{
-	//auto calculate. not ediablt
-}
-
-
-void PolygonPropDialog::OnSndSrcIndexChoice(wxCommandEvent &event)
-{
-    if(this->getPolyIndex() == NONE){
-        return ;
-    }
-    std::cout<<"Event handler (PolygonPropDialog::OnSndSrcIndexChoice) not implemented yet"<<std::endl; //notify the user that he hasn't implemented the event handler yet
-}
-
-
-void PolygonPropDialog::OnFloorTransEdit(wxCommandEvent &event)
-{
-    if(this->getPolyIndex() == NONE){
-        return ;
-    }
-    std::cout<<"Event handler (PolygonPropDialog::OnFloorTransEdit) not implemented yet"<<std::endl; //notify the user that he hasn't implemented the event handler yet
-}
-
-
-void PolygonPropDialog::OnAmbSndChoice(wxCommandEvent &event)
-{
-    if(this->getPolyIndex() == NONE){
-        return ;
-    }
-    std::cout<<"Event handler (PolygonPropDialog::OnAmbSndChoice) not implemented yet"<<std::endl; //notify the user that he hasn't implemented the event handler yet
-}
-
-
-void PolygonPropDialog::OnCeilingTransEdit(wxCommandEvent &event)
-{
-    if(this->getPolyIndex() == NONE){
-        return ;
-    }
-    std::cout<<"Event handler (PolygonPropDialog::OnCeilingTransEdit) not implemented yet"<<std::endl; //notify the user that he hasn't implemented the event handler yet
-}
-
-
-void PolygonPropDialog::OnRndSndChoice(wxCommandEvent &event)
-{
-    if(this->getPolyIndex() == NONE){
-        return ;
-    }
-    std::cout<<"Event handler (PolygonPropDialog::OnRndSndChoice) not implemented yet"<<std::endl; //notify the user that he hasn't implemented the event handler yet
-}
-
-*/
 void PolygonPropDialog::OnPlatformBtn(wxCommandEvent &event)
 {
-    if(polyIndex == NONE){
+    if(!hpl::aleph::map::isValidIndex(polyIndex, PolygonList.size())){
         return ;
     }
     PlatformDialog dlg;
@@ -602,7 +447,7 @@ void PolygonPropDialog::OnPlatformBtn(wxCommandEvent &event)
 }
 void PolygonPropDialog::OnCreatePlatformBtn(wxCommandEvent &event)
 {
-    if(this->getPolyIndex() == NONE){
+    if(!hpl::aleph::map::isValidIndex(this->getPolyIndex(), PolygonList.size())){
         return ;
     }
 	polygon_data* poly = get_polygon_data(getPolyIndex());

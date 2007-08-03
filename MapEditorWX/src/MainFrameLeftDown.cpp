@@ -8,6 +8,7 @@
 */
 void MapEditorMainFrame::OnLeftDown(wxMouseEvent &ev)
 {
+	wxGetApp().isChanged = true;
     //カーソル設定
     wxGetApp().setCursor();
     //マウス座標記録
@@ -241,6 +242,8 @@ void MapEditorMainFrame::unselect()
 {
     hpl::aleph::map::HPLSelectData* sel = &wxGetApp().selectData;
     //点を選択していないのにindexがNONEではない
+	//***************************
+	//この数値は迷子の可能性もあるので、isValidなどは使わないこと！
     if(!sel->isSelectOnePoint() && pointPropDialog.getIndex() != NONE){
         //その場合選択をNONEにする
 		this->pointPropDialog.setIndex(NONE);
@@ -358,7 +361,7 @@ bool MapEditorMainFrame::tryToSelectOneItem(wxMouseEvent& ev)
 		POINT_DISTANCE_EPSILON, zMin, zMax,
 		voffset[0], voffset[1], OFFSET_X_WORLD, OFFSET_Y_WORLD, div, 
 		wxGetApp().getStockManager());
-	if(annotationIndex != NONE){
+	if(hpl::aleph::map::isValidIndex(annotationIndex, MapAnnotationList.size())){
 	    if(!shift){
 			//シフトキーを押さずにクリックしたら一旦解放する
 			selectOneThingBefore();
@@ -380,7 +383,8 @@ bool MapEditorMainFrame::tryToSelectOneItem(wxMouseEvent& ev)
 		LINE_DISTANCE_EPSILON, zMin, zMax,
 		voffset[0], voffset[1], OFFSET_X_WORLD, OFFSET_Y_WORLD, div, 
 		wxGetApp().getStockManager());
-	if(lineIndex != NONE){
+	
+	if(hpl::aleph::map::isValidIndex(lineIndex, LineList.size())){
 	    if(!shift){
 			//シフトキーを押さずにクリックしたら一旦解放する
 			selectOneThingBefore();
@@ -402,7 +406,7 @@ bool MapEditorMainFrame::tryToSelectOneItem(wxMouseEvent& ev)
 		zMin, zMax,
 		voffset[0], voffset[1], OFFSET_X_WORLD, OFFSET_Y_WORLD, div, 
 		wxGetApp().getStockManager());
-	if(polyIndex != NONE){
+	if(hpl::aleph::map::isValidIndex(polyIndex, EndpointList.size())){
 	    if(!shift){
 			//シフトキーを押さずにクリックしたら一旦解放する
 			selectOneThingBefore();
@@ -495,7 +499,7 @@ void MapEditorMainFrame::doLButtonOnLineTool(wxMouseEvent& ev)
     int lineIndex = hpl::aleph::map::getSelectLineIndex(
         wpoint, LINE_DISTANCE_EPSILON, zMin, zMax, div, smgr);
 
-    if(pointIndex != NONE)
+    if(hpl::aleph::map::isValidIndex(pointIndex, EndpointList.size()))
     {
         //既存の点をクリックしている
         /*
@@ -523,7 +527,7 @@ void MapEditorMainFrame::doLButtonOnLineTool(wxMouseEvent& ev)
                 //既に線が存在しているか？
                 int lineIndex = hpl::aleph::map::getLineIndexFromTwoLPoints(
                     wxGetApp().prevPointIndex, pointIndex);
-                if(lineIndex != NONE){
+                if(hpl::aleph::map::isValidIndex(lineIndex, LineList.size())){
                     //既に線が存在している
                     //何もしない
                 }else{
@@ -541,7 +545,7 @@ void MapEditorMainFrame::doLButtonOnLineTool(wxMouseEvent& ev)
         wxGetApp().isFirstOfLineToAdd = false;
     }else{
         //線を踏んでいないかチェックします
-        if(lineIndex != NONE){
+        if(hpl::aleph::map::isValidIndex(lineIndex, LineList.size())){
             /*
                 2:線の上でクリック
 	                1:最初のクリック
@@ -560,8 +564,8 @@ void MapEditorMainFrame::doLButtonOnLineTool(wxMouseEvent& ev)
             assert(line != NULL);
 
             //ポリゴンに所属しているか確かめます
-            if(line->clockwise_polygon_owner != NONE || 
-                line->counterclockwise_polygon_owner != NONE)
+            if(hpl::aleph::map::isValidIndex(line->clockwise_polygon_owner, PolygonList.size()) || 
+                hpl::aleph::map::isValidIndex(line->counterclockwise_polygon_owner, PolygonList.size()))
             {
                 //ポリゴンに属する線
                 //警告を出す。線を分断したりしない
@@ -571,7 +575,6 @@ void MapEditorMainFrame::doLButtonOnLineTool(wxMouseEvent& ev)
                 endpoint_data ep;
                 hpl::aleph::map::createPoint(wpoint, &ep);
                 int newPointIndex = hpl::aleph::map::addEndpoint(ep);
-                assert(newPointIndex != NONE);
             }else{
                 //始点、終点の情報取得
                 //endpoint_data* begin = get_endpoint_data(line->endpoint_indexes[0]);
@@ -587,9 +590,6 @@ void MapEditorMainFrame::doLButtonOnLineTool(wxMouseEvent& ev)
                 endpoint_data ep;
                 hpl::aleph::map::createPoint(wpoint, &ep);
                 int newPointIndex = hpl::aleph::map::addEndpoint(ep);
-#ifdef __WXDEBUG__
-                wxASSERT(newPointIndex != NONE);
-#endif
                 endpoint_data *newEp = get_endpoint_data(newPointIndex);
 
                 //始点→点の線を追加
@@ -597,18 +597,12 @@ void MapEditorMainFrame::doLButtonOnLineTool(wxMouseEvent& ev)
                 hpl::aleph::map::createLine(epStartIndex,
                     newPointIndex, &newLine1);
                 int newLine1Index = hpl::aleph::map::addLine(newLine1);
-#ifdef __WXDEBUG__
-                wxASSERT(newLine1Index != NONE);
-#endif
 
                 //点→終点の線を追加
                 line_data newLine2;
                 hpl::aleph::map::createLine(newPointIndex, epEndIndex,
                     &newLine2);
                 int newLine2Index = hpl::aleph::map::addLine(newLine2);
-#ifdef __WXDEBUG__
-                wxASSERT(newLine2Index != NONE);
-#endif
 
 
                 if(wxGetApp().isFirstOfLineToAdd){
@@ -739,7 +733,7 @@ void MapEditorMainFrame::doLButtonOnTextTool(wxMouseEvent& ev)
                 break;
             }
         }
-        if(annotationIndex != NONE){
+        if(hpl::aleph::map::isValidIndex(annotationIndex, MapAnnotationList.size())){
             //アノテーションを編集します
             AnnotationDialog dlg;
             dlg.Create(this, wxID_ANY, MapAnnotationList[annotationIndex]);

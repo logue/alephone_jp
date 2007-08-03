@@ -715,12 +715,12 @@ void MapEditorMainFrame::OnPolygonProp(wxCommandEvent& ev)
 }
 void MapEditorMainFrame::OnSetVisualModePlayerPosition(wxCommandEvent& ev)
 {
-	//wxASSERT(wxGetApp().popupPolygonIndex != NONE);
+	if(!hpl::aleph::map::isValidIndex(wxGetApp().popupPolygonIndex, PolygonList.size())){
+		return;
+	}
 	//ƒ|ƒŠƒSƒ“‚Ì°‚Ì‚‚³‚ðŽæ“¾
 	polygon_data* poly = get_polygon_data(wxGetApp().popupPolygonIndex);
-#ifdef __WXDEBUG__
-	hpl::error::halt("polygon index was invalid", wxGetApp().popupPolygonIndex);
-#endif
+
 	int height = poly->floor_height;
 	int mpoint[2];
 	wxGetApp().getViewGridManager()->getNewMousePoint(mpoint);

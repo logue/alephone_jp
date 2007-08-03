@@ -379,8 +379,8 @@ void MapEditorMainFrame::drawLines(wxDC* dc)
                 wxPen* lPen = &this->linePen;
                 
                 if(LINE_IS_TRANSPARENT(line) != 0){
-                    if(line->clockwise_polygon_owner == NONE ||
-                        line->counterclockwise_polygon_owner == NONE)
+                    if(!hpl::aleph::map::isValidIndex(line->clockwise_polygon_owner, PolygonList.size()) ||
+                        !hpl::aleph::map::isValidIndex(line->counterclockwise_polygon_owner, PolygonList.size()))
                     {
                         //nope
                     }else{
@@ -405,7 +405,7 @@ void MapEditorMainFrame::drawLines(wxDC* dc)
         }
         //選択チェック
         dc->DrawLine(beginP[0], beginP[1], endP[0], endP[1]);
-#ifdef DEBUG
+//#ifdef DEBUG
         //デバッグモード
         //矢印にして表示
         const double WING_DEG = 150;
@@ -420,7 +420,7 @@ void MapEditorMainFrame::drawLines(wxDC* dc)
             };
             dc->DrawLine(endP[0], endP[1], wingP[0], wingP[1]);
         }
-#endif
+//#endif
     }
 }
 void MapEditorMainFrame::drawSides(wxDC* dc)

@@ -270,19 +270,20 @@ bool PlatformDialog::Create(wxWindow* parent, wxWindowID id, int pindex)
     polyIndex = pindex;
 	platform_data *platform = NULL;
 	platform_data dummy;
-	memset(&dummy, 0, sizeof(platform_data));
+	memset(&dummy, 0, SIZEOF_platform_data);
 
-    //polygon_data* poly = get_polygon_data(polyIndex);
-	if(polyIndex == NONE){
+	if(!hpl::aleph::map::isValidIndex(polyIndex, PolygonList.size())){
+		//invalid
 		platformIndex = NONE;
 		platform = &dummy;
 	}else{
-
+		//valid number
 		hpl::aleph::HPLStockManager* smgr = wxGetApp().getStockManager();
 		//search polygon's platform
 		platformIndex = hpl::aleph::map::getPlatformIndexFromPolygonIndex(polyIndex, smgr);
 #ifdef __WXDEBUG__
-	    wxASSERT(platformIndex != NONE);
+	    wxASSERT(hpl::aleph::map::isValidIndex(platformIndex,
+			PlatformList.size()));
 #endif
 
 		platform = &PlatformList[platformIndex];
@@ -309,7 +310,10 @@ bool PlatformDialog::Create(wxWindow* parent, wxWindowID id, int pindex)
 
 	//copy from (ほかのプラットフォームインデックスを追加？)
 	for(int i = 0; i < (int)PlatformList.size(); i ++){
-		if(polyIndex != NONE && platformIndex != NONE && i == platformIndex){
+		if(hpl::aleph::map::isValidIndex(polyIndex, PolygonList.size()) &&
+			hpl::aleph::map::isValidIndex(platformIndex, PlatformList.size()) &&
+			i == platformIndex)
+		{
 			//自分は除外
 			continue;
 		}

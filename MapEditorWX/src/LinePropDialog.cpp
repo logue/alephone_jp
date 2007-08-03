@@ -148,15 +148,13 @@ void LinePropDialog::setupDialog()
     //タイトル設定
     SetTitle(getString("line ID = [%d", getLineIndex()));
 
-    if(this->getLineIndex() == NONE){
+	if(!hpl::aleph::map::isValidIndex(this->getLineIndex(), LineList.size())){
+		//インデックスが正しく指定されていない(NONE)
         return;
     }
     
     int index = getLineIndex();
     line_data* line = get_line_data(index);
-#ifdef __WXDEBUG__
-    wxASSERT(line);
-#endif
 
     text_ctrl_42->SetValue(getString("%d", line->endpoint_indexes[0]));
     text_ctrl_43->SetValue(getString("%d", line->endpoint_indexes[1]));
@@ -169,29 +167,6 @@ void LinePropDialog::setupDialog()
     checkbox_54->SetValue(LINE_HAS_TRANSPARENT_SIDE(line) != 0);
     int sel = LINE_IS_SOLID(line) ? 0: 1;
     radio_box_1->SetSelection(sel);
-
-	/*
-    index = line->clockwise_polygon_side_index;
-    if(index == NONE){
-        index = (int)SideList.size();
-    }
-    choice_24->SetSelection(index);
-    index = line->counterclockwise_polygon_side_index;
-    if(index == NONE){
-        index = (int)SideList.size();
-    }
-    choice_25->SetSelection(index);
-    index = line->clockwise_polygon_owner;
-    if(index == NONE){
-        index = (int)PolygonList.size();
-    }
-    choice_26->SetSelection(index);
-    index = line->counterclockwise_polygon_owner;
-    if(index == NONE){
-        index = (int)PolygonList.size();
-    }
-    choice_27->SetSelection(index);
-	*/
 
 	text_ctrl_50->SetValue(getString("%d",
 		line->counterclockwise_polygon_side_index));
@@ -216,6 +191,9 @@ void LinePropDialog::OnCancel(wxCommandEvent &ev)
 }
 line_data LinePropDialog::getLine()
 {
+	if(!hpl::aleph::map::isValidIndex(getLineIndex(), LineList.size())){
+		hpl::error::halt("invalid index:%d", getLineIndex());
+	}
 	line_data data;
 	line_data* org = get_line_data(getLineIndex());
 	data = *org;

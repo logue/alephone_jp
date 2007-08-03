@@ -128,7 +128,7 @@ void MapEditorMainFrame::OnRightDown(wxMouseEvent& ev)
 				voffset[0], voffset[1], OFFSET_X_WORLD, OFFSET_Y_WORLD, div, 
 				smgr);
 			wxGetApp().popupPolygonIndex = polygonIndex;
-			if(epIndex != NONE){
+			if(hpl::aleph::map::isValidIndex(epIndex, EndpointList.size())){
 				//選択変更
 				selectOneThingBefore();
 				int offset[2] = {0};
@@ -139,7 +139,7 @@ void MapEditorMainFrame::OnRightDown(wxMouseEvent& ev)
 				Refresh();
 				//点ポップアップ表示
 				PopupMenu(&wxGetApp().pointPopupMenu);
-			}else if(lineIndex != NONE){
+			}else if(hpl::aleph::map::isValidIndex(lineIndex, LineList.size())){
 				//線が押された
 				//選択変更
 				selectOneThingBefore();
@@ -151,7 +151,7 @@ void MapEditorMainFrame::OnRightDown(wxMouseEvent& ev)
 				Refresh();
 				//→線プロパティをだす
 				PopupMenu(&wxGetApp().linePopupMenu);
-			}else if(polygonIndex != NONE){
+			}else if(hpl::aleph::map::isValidIndex(polygonIndex, PolygonList.size())){
 				//押した
 				//選択変更
 				selectOneThingBefore();
@@ -673,7 +673,7 @@ void MapEditorMainFrame::doMouseMotionOnLineTool(wxMouseEvent& ev)
     //点を踏んでいないか確認
     int endpointIndex = hpl::aleph::map::getSelectPointIndex(wmp, 
         POINT_DISTANCE_EPSILON , zMin, zMax, div, wxGetApp().getStockManager());
-    if(endpointIndex != NONE){
+    if(hpl::aleph::map::isValidIndex(endpointIndex, EndpointList.size())){
         wxGetApp().isNowOnThePoint = true;
         wxGetApp().isNowOnTheLine = false;
     }else{
@@ -681,7 +681,7 @@ void MapEditorMainFrame::doMouseMotionOnLineTool(wxMouseEvent& ev)
 
         int lineIndex = hpl::aleph::map::getSelectLineIndex(wmp,
             LINE_DISTANCE_EPSILON, zMin, zMax, div, wxGetApp().getStockManager());
-        if(lineIndex != NONE){
+        if(hpl::aleph::map::isValidIndex(lineIndex, LineList.size())){
             wxGetApp().isNowOnTheLine = true;
         }else{
             wxGetApp().isNowOnTheLine = false;

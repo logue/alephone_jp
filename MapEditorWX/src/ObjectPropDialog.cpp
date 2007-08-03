@@ -67,7 +67,7 @@ void DirectionPanel::OnPaint(wxPaintEvent &event)
 
     wxPaintDC dc(this);
     //wxDialog::OnPaint();
-    if(objIndex != NONE){
+	if(hpl::aleph::map::isValidIndex(objIndex, SavedObjectList.size())){
         map_object* obj = &SavedObjectList[objIndex];
         drawFacing(this, obj->facing, &dc);
     }else{
@@ -77,7 +77,7 @@ void DirectionPanel::OnPaint(wxPaintEvent &event)
 void DirectionPanel::setFacing(int mx, int my)
 {
 	int objIndex = ((ObjectPropDialog*)GetParent())->getObjIndex();
-    if(objIndex != NONE){
+    if(hpl::aleph::map::isValidIndex(objIndex, SavedObjectList.size())){
 		//中心位置
 		int centerX = this->directionCircle.GetWidth() / 2;
 		int centerY = this->directionCircle.GetHeight() / 2;
@@ -306,7 +306,7 @@ void ObjectPropDialog::setObject(map_object obj){
     this->text_ctrl_39->SetValue(getString("%d", obj.location.x));
     this->text_ctrl_41->SetValue(getString("%d", obj.location.y));
 	int dz = obj.location.z;
-	if(getObjIndex() != NONE){
+	if(hpl::aleph::map::isValidIndex(getObjIndex(), SavedObjectList.size())){
 		polygon_data* poly = get_polygon_data(obj.polygon_index);
 		if(poly){
 			int floor_height = poly->floor_height;
@@ -321,9 +321,12 @@ void ObjectPropDialog::setupDialog()
 	//タイトルを変更
 	SetTitle(getString("Object index = [%d]", this->objIndex));
 
-    if(this->objIndex == NONE){
-        map_object obj;
-        memset(&obj, 0, sizeof(map_object));
+    if(!hpl::aleph::map::isValidIndex(objIndex, SavedObjectList.size())){
+		//指定されていない
+		//適当に用意する
+		map_object obj = {0};
+		//
+        //memset(&obj, 0, sizeof(map_object));
         this->setObject(obj);
     }else{
 #ifdef __WXDEBUG__
@@ -335,6 +338,8 @@ void ObjectPropDialog::setupDialog()
 }
 static bool isValidIndex(int *index)
 {
+	bool result = hpl::aleph::map::isValidIndex(*index, SavedObjectList.size());
+	/*
     if(*index == NONE){
         return false;
     }
@@ -343,7 +348,8 @@ static bool isValidIndex(int *index)
         *index = NONE;
         return false;
     }
-    return true;
+	*/
+    return result;
 }
 
 void ObjectPropDialog::OnTypeChoice(wxCommandEvent &event)
@@ -451,13 +457,14 @@ void ObjectPropDialog::OnZEdit(wxCommandEvent &event)
 {
     if(!isValidIndex(&this->objIndex))return;
     map_object* obj = &SavedObjectList[this->objIndex];
-	polygon_data* poly = get_polygon_data(obj->polygon_index);
-#ifdef __WXDEBUG__
-	wxASSERT(poly);
-#endif
-	//TODO should we add polygon's ceiling_height when from ceiling?
-    obj->location.z = poly->floor_height + 
-		atoi(wxConvertWX2MB(event.GetString()));
+
+	if(hpl::aleph::map::isValidIndex(obj->polygon_index, PolygonList.size())){
+		polygon_data* poly = get_polygon_data(obj->polygon_index);
+
+		//TODO should we add polygon's ceiling_height when from ceiling?
+		obj->location.z = poly->floor_height + 
+			atoi(wxConvertWX2MB(event.GetString()));
+	}
 }
 
 
@@ -487,7 +494,7 @@ map_object ObjectPropDialog::getObject()
 void ObjectPropDialog::refreshParent()
 {
 	int index = this->getObjIndex();
-	if(index != NONE){
+	if(hpl::aleph::map::isValidIndex(index, SavedObjectList.size())){
 		map_object* obj = &SavedObjectList[index];
 		//facing更新
 		this->text_ctrl_38->SetValue(getString("%d", obj->facing));
