@@ -414,27 +414,34 @@ void hpl::aleph::map::fixLine(int index,// bool isDeleteOldSide,
 	{
 		//削除されていたらNONEにする
 		//clockwise
-		if(line->clockwise_polygon_owner != NONE &&
+		if(hpl::aleph::map::isValidIndex(line->clockwise_polygon_owner, PolygonList.size()) &&
 			smgr->isDeletePolygon(line->clockwise_polygon_owner))
 		{
 			line->clockwise_polygon_owner = NONE;
 		}
-		if(line->clockwise_polygon_owner == NONE){
+		if(!hpl::aleph::map::isValidIndex(line->clockwise_polygon_owner, PolygonList.size()))
+		{
 			//ポリゴンが存在しないのでSideも消す
-			if(line->clockwise_polygon_side_index != NONE){
+			if(hpl::aleph::map::isValidIndex(line->clockwise_polygon_side_index,
+				SideList.size()))
+			{
 				smgr->deleteSide(line->clockwise_polygon_side_index);
 				line->clockwise_polygon_side_index = NONE;
 			}
 		}
 		//counter-clockwise
-		if(line->counterclockwise_polygon_owner != NONE &&
+		if(hpl::aleph::map::isValidIndex(line->counterclockwise_polygon_owner, PolygonList.size()) &&
 			smgr->isDeletePolygon(line->counterclockwise_polygon_owner))
 		{
 			line->counterclockwise_polygon_owner = NONE;
 		}
-		if(line->counterclockwise_polygon_owner == NONE){
+		if(!hpl::aleph::map::isValidIndex(line->counterclockwise_polygon_owner,
+			PolygonList.size()))
+		{
 			//ポリゴンは存在しないので消す
-			if(line->counterclockwise_polygon_side_index != NONE){
+			if(hpl::aleph::map::isValidIndex(line->counterclockwise_polygon_side_index,
+				PolygonList.size()))
+			{
 				smgr->deleteSide(line->counterclockwise_polygon_side_index);
 				line->counterclockwise_polygon_side_index = NONE;
 			}
@@ -521,8 +528,7 @@ void hpl::aleph::map::fixPolygon(int pindex,
 	poly->area = area;
 
 	//first_object
-	if(poly->first_object == NONE){
-	}else{
+	if(hpl::aleph::map::isValidIndex(poly->first_object, SavedObjectList.size())){
 		//オブジェクトが存在する
 		if(smgr->isDeleteObject(poly->first_object)){
 			//対象が消えていた
@@ -535,13 +541,17 @@ void hpl::aleph::map::fixPolygon(int pindex,
 				map_object* obj = &SavedObjectList[i];
 				if(obj->polygon_index == pindex){
 					found = true;
+					//見つかった
+					//そのオブジェクトを指定する
 					poly->first_object = i;
 					break;
 				}
 			}
 			if(found){
-
+				
 			}else{
+				//見つからない
+				//NONEとする
 				poly->first_object = NONE;
 			}
 		}
@@ -574,7 +584,8 @@ void hpl::aleph::map::fixPolygon(int pindex,
 			adjacentPolyIndex = line->counterclockwise_polygon_owner;
 			isClockwiseNeighbour = false;
 		}
-		if(adjacentPolyIndex != NONE){
+		if(hpl::aleph::map::isValidIndex(adjacentPolyIndex, PolygonList.size())){
+			//その番号は存在する
 			if(smgr->isDeletePolygon(adjacentPolyIndex)){
 				//削除されている
 				adjacentPolyIndex = NONE;
@@ -593,8 +604,16 @@ void hpl::aleph::map::fixPolygon(int pindex,
 				}
 			}
 		}else{
+			//NONEとする
+			if(isClockwiseNeighbour){
+				line->clockwise_polygon_side_index = NONE;
+				line->clockwise_polygon_owner = NONE;
+			}else{
+				line->counterclockwise_polygon_side_index = NONE;
+				line->counterclockwise_polygon_owner = NONE;
+			}
 		}
-		if(adjacentPolyIndex != NONE){
+		if(hpl::aleph::map::isValidIndex(adjacentPolyIndex, PolygonList.size())){
 			neighbourCount ++;
 			if(isFirst){
 				isFirst = false;
@@ -605,14 +624,20 @@ void hpl::aleph::map::fixPolygon(int pindex,
 
 		//自分方向のSideもチェック
 		if(isClockwiseNeighbour){
-			if(line->counterclockwise_polygon_side_index != NONE &&
-				smgr->isDeleteSide(line->counterclockwise_polygon_side_index)){
+			if(hpl::aleph::map::isValidIndex(line->counterclockwise_polygon_side_index,
+				SideList.size()) &&
+				smgr->isDeleteSide(line->counterclockwise_polygon_side_index))
+			{
+				//もともと存在してる＆消されている
+				//NONEとする
 				line->counterclockwise_polygon_side_index = NONE;
 			}
 			poly->side_indexes[i] = line->counterclockwise_polygon_side_index;
 		}else{
-			if(line->clockwise_polygon_side_index != NONE &&
-				smgr->isDeleteSide(line->clockwise_polygon_side_index)){
+			if(hpl::aleph::map::isValidIndex(line->clockwise_polygon_side_index,
+				SideList.size()) &&
+				smgr->isDeleteSide(line->clockwise_polygon_side_index))
+			{
 				line->clockwise_polygon_side_index = NONE;
 			}
 			poly->side_indexes[i] = line->clockwise_polygon_side_index;
@@ -837,84 +862,23 @@ bool hpl::aleph::map::isPointInSelection(int px, int py,
 */
 bool hpl::aleph::map::isValidPolygon(int index)
 {
+	if(!hpl::aleph::map::isValidIndex(index, PolygonList.size())){
+		return false;
+	}
     //TODO
     //ポリゴン情報を取得します
     polygon_data *polygon = get_polygon_data(index);
-
-    //ポリゴン情報が無い
-    if(polygon == NULL){
-        return false;
-    }
 
     //線の並びが正しいかチェック
     int vertexCount = polygon->vertex_count;
     double points[MAXIMUM_VERTICES_PER_POLYGON][2];
     for(int i = 0; i < vertexCount; i ++){
-        //int a = polygon->endpoint_indexes[i];
-        //int next = i + 1;
-        //if(i == vertexCount - 2){
-        //    next = 0;
-        //}
-        //int b = polygon->endpoint_indexes[next];
-        //int lineIndex = hpl::aleph::map::getLineIndexFromTwoLPoints(a, b);
-        //if(lineIndex == NONE){
-        //    return false;
-        //}
 		endpoint_data* ep = get_endpoint_data(polygon->endpoint_indexes[i]);
 		points[i][0] = ep->vertex.x;
 		points[i][1] = ep->vertex.y;
     }
     bool isValid = hpl::math::isValidPolygon(points, vertexCount);
 	return isValid;
-
-/*    int startPointIndex = polygon->endpoint_indexes[0];
-    int pointA, pointB, pointC;
-    
-    
-    //時計回りか、反時計回りか
-	int polygonRotationType = hpl::math::RotationType::Clockwise;
-    bool isFirstLoop = true;
-
-    for(int i = 0; i < vertexCount - 2; i ++){
-        //点iと点i+1を含む線をAB, 点i+1と点i+2を含む線をBCとする。
-        //最初の線[点0,点1]と線[点1,点2]の角度から、時計回りか、反時計回りかを判定する
-        pointA = polygon->endpoint_indexes[i];
-        pointB = polygon->endpoint_indexes[i + 1];
-        pointC = polygon->endpoint_indexes[i + 2];
-        
-        //二つの線AB,BCが織り成す角度を求める
-        double firstDegree = hpl::aleph::map::getTwoLinesDegree(pointA, pointB, pointB, pointC);
-        int lineABIndex = hpl::aleph::map::getLineIndexFromTwoLPoints(pointA, pointB);
-        int lineBCIndex = hpl::aleph::map::getLineIndexFromTwoLPoints(pointB, pointC);
-        if(lineABIndex == NONE || lineBCIndex == NONE){
-            //線の並び順が正しくない
-            return false;
-        }
-        //line_indexesのならびに対応しているかどうか
-        if(polygon->line_indexes[i] != lineABIndex ||
-            polygon->line_indexes[i + 1] != lineBCIndex){
-            return false;
-        }
-        //optimize degree to [0,360)
-        double optDeg = hpl::math::optimizeDegree(firstDegree);
-
-        if(isFirstLoop){
-            //もし角度が[0,180)ならば、右回りである
-            //それ以外（[180,360)）ならば、左回りである
-            if(optDeg >= 180.0){
-				polygonRotationType = hpl::math::RotationType::Counterclockwise;
-            }
-            isFirstLoop = false;
-        }else{
-            //ポリゴンが逆鋭角（切り込んでる）状態ならば異常であるとする
-            if((polygonRotationType == hpl::math::RotationType::Clockwise && optDeg >= 180) ||
-                (polygonRotationType == hpl::math::RotationType::Counterclockwise && optDeg < 180)){
-                return false;
-            }
-        }
-    }
-    return true;
-*/
 }
 
 
@@ -1062,9 +1026,9 @@ void hpl::aleph::map::createPolygon(int pointIndexes[], int n, polygon_data* pol
         }
         int lIndex = hpl::aleph::map::getLineIndexFromTwoLPoints(pointIndexes[i], pointIndexes[next]);
 #ifdef __WXDEBUG__
-        wxASSERT(lIndex != NONE);
+        wxASSERT(hpl::aleph::map::isValidIndex(lIndex, LineList.size()));
 #else
-        if(lIndex == NONE){
+        if(!hpl::aleph::map::isValidIndex(lIndex, LineList.size())){
             hpl::error::halt("endpoint[%d] doesn't exist", pointIndexes[i]);
         }
 #endif
@@ -1287,3 +1251,32 @@ int hpl::aleph::map::getPlatformIndexFromPolygonIndex(
 	}
 	return NONE;
 }
+
+ 
+/**
+	Check map items' validity
+	valid:		[0,n)
+	invalid:	-1], [n
+	-1ならばNONEなのでInvalid。
+	-2],[nの場合そもそもIndexの設定がおかしいのでアサーションをとばす
+	削除確認は行わないので注意
+	@return -1なら偽。正しい値なら真。
+*/
+template<class T>
+bool hpl::aleph::map::isValidIndex(int index, T numMax)
+{
+	int n = (int)numMax;
+	if(index == NONE){
+		return false;
+	}else if(n > 0 && index >= 0 && index < n){
+		return true;
+	}else{
+		hpl::error::halt("out of index [%d] (and not NONE=-1) EndpointList.size()=%d",
+			index, numMax);
+		return false;
+	}
+}
+
+template bool hpl::aleph::map::isValidIndex(int index, int numMax);
+template bool hpl::aleph::map::isValidIndex(int index, size_t numMax);
+template bool hpl::aleph::map::isValidIndex(int index, unsigned int numMax);

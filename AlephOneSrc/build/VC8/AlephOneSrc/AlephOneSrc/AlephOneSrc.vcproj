@@ -211,7 +211,7 @@
 		</Configuration>
 		<Configuration
 			Name="Release Unicode|Win32"
-			OutputDirectory="$(ConfigurationName)"
+			OutputDirectory="..\..\..\..\..\AlephOneSrc\lib"
 			IntermediateDirectory="$(ConfigurationName)"
 			ConfigurationType="4"
 			CharacterSet="1"
@@ -235,7 +235,7 @@
 			<Tool
 				Name="VCCLCompilerTool"
 				AdditionalIncludeDirectories="..\..\..\..\"
-				PreprocessorDefinitions="WIN32;NDEBUG;_LIB;SDL;__WIN32__"
+				PreprocessorDefinitions="WIN32;NDEBUG;_LIB;SDL;__WIN32__;__MVCPP__"
 				RuntimeLibrary="2"
 				UsePrecompiledHeader="0"
 				WarningLevel="3"

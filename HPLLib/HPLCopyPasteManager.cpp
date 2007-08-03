@@ -90,8 +90,8 @@ bool hpl::aleph::HPLCopyPasteManager::paste(int div, hpl::aleph::map::HPLSelectD
 		
 		int newIndex = hpl::aleph::map::addLine(line);
 		lineIndexMap[i] = newIndex;
-		if(line.clockwise_polygon_side_index != NONE &&
-			line.clockwise_polygon_side_index < (int)this->storedMapData.getSides()->size())
+		if(hpl::aleph::map::isValidIndex(line.clockwise_polygon_side_index,
+			SideList.size()))
 		{
 			//Side‚Ì’Ç‰Á
 			int oldSideIndex = line.clockwise_polygon_side_index;
@@ -100,8 +100,8 @@ bool hpl::aleph::HPLCopyPasteManager::paste(int div, hpl::aleph::map::HPLSelectD
 		}else{
 			line.clockwise_polygon_side_index = NONE;
 		}
-		if(line.counterclockwise_polygon_side_index != NONE &&
-			line.counterclockwise_polygon_side_index < (int)this->storedMapData.getSides()->size())
+		if(hpl::aleph::map::isValidIndex(line.counterclockwise_polygon_side_index,
+			SideList.size()))
 		{
 			//‹t
 			int oldSideIndex = line.counterclockwise_polygon_side_index;

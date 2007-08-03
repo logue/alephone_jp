@@ -141,7 +141,7 @@ void hpl::aleph::map::HPLRealMapData::addLine(int index, std::map<int, int>& lin
 	//時計回り（右側）ポリゴンの確認
 	if(sel->containsPolygon(copy.clockwise_polygon_owner)){
 		//Sideもコピー
-		if(copy.clockwise_polygon_side_index != NONE){
+		if(hpl::aleph::map::isValidIndex(copy.clockwise_polygon_side_index, SideList.size())){
 			addSide(copy.clockwise_polygon_side_index, sideIndexMap, sel);
 		}
 	}else{
@@ -153,7 +153,7 @@ void hpl::aleph::map::HPLRealMapData::addLine(int index, std::map<int, int>& lin
 	//反対回り（左側）ポリゴンの確認
 	if(sel->containsPolygon(copy.counterclockwise_polygon_owner)){
 		//Sideもコピー
-		if(copy.counterclockwise_polygon_side_index != NONE){
+		if(hpl::aleph::map::isValidIndex(copy.counterclockwise_polygon_side_index, SideList.size())){
 			addSide(copy.counterclockwise_polygon_side_index, sideIndexMap, sel);
 		}
 	}else{
@@ -186,21 +186,8 @@ void hpl::aleph::map::HPLRealMapData::addPolygon(int index, std::map<int, int>& 
 	int vertexCount = copy.vertex_count;
 	for(int i = 0; i < vertexCount; i ++){
 		int lineIndex = copy.line_indexes[i];
-/*		//既に追加した線はスキップ
-		if(lineIndexMap.find(lineIndex) != lineIndexMap.end()){
-			continue;
-		}*/
 		addLine(lineIndex, lineIndexMap, pointIndexMap, sideIndexMap, sel);
 
-/*		//線に所属し、かつポリゴン側のSideを追加する
-		//これ以外の線はSideが追加されないのでNONEになる
-		//<en> add side belonged to the line which belonged to this polygon
-		//TODO
-		int sideIndex = copy.side_indexes[i];
-		if(sideIndex != NONE){
-			addSide(sideIndex, sideIndexMap);
-		}
-		*/
 	}
 
 	

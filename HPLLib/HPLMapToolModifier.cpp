@@ -38,54 +38,6 @@ int hpl::aleph::map::addSide(side_data side, bool isClockwise)
 	SideList.push_back(side);
 	dynamic_world->side_count = (int16)SideList.size();
 	int index = dynamic_world->side_count - 1;
-    //依存するものを修正する
-    //・線
-    //・ポリゴン
-    //・Side
-    //TODO 左右の確認が必要
-	/*
-    side_data* newSide = get_side_data(index);
-    line_data* line = get_line_data(newSide->line_index);
-#ifdef __WXDEBUG__
-    wxASSERT(line);
-#else
-    if(!line){
-        hpl::error::halt("line[%d] doesn't exist", newSide->line_index);
-    }
-#endif
-    polygon_data* poly = get_polygon_data(newSide->polygon_index);
-#ifdef __WXDEBUG__
-    wxASSERT(poly);
-#else
-    if(!poly){
-        hpl::error::halt("polygon[%d] doesn't exist", newSide->polygon_index);
-    }
-#endif
-    if(isClockwise){
-        line->clockwise_polygon_side_index = index;
-    }else{
-        line->counterclockwise_polygon_side_index = index;
-    }
-
-    //ポリゴン
-    int lineIndexInPolygon = NONE;
-    for(int i = 0; i < poly->vertex_count; i ++){
-        if(poly->line_indexes[i] == newSide->line_index){
-            lineIndexInPolygon = i;
-            break;
-        }
-    }
-#ifdef __WXDEBUG__
-    wxASSERT(lineIndexInPolygon != NONE);
-#else
-    if(lineIndexInPolygon == NONE){
-        hpl::error::halt("line[%d] doesn't exist in polygon[%d]'s line_index", newSide->line_index,
-            newSide->polygon_index);
-    }
-#endif
-    poly->side_indexes[lineIndexInPolygon] = index;
-*/
-
 	return index;
 }
 int hpl::aleph::map::addPolygon(polygon_data polygon)
@@ -94,12 +46,10 @@ int hpl::aleph::map::addPolygon(polygon_data polygon)
 	dynamic_world->polygon_count = (int16)PolygonList.size();
 	int index = dynamic_world->polygon_count - 1;
 
-    polygon_data* poly = get_polygon_data(index);
-#ifdef __WXDEBUG__
-    wxASSERT(poly);
-#else
-    if(!poly)return NONE;
-#endif
+	if(!hpl::aleph::map::isValidIndex(index, PolygonList.size())){
+		return NONE;
+	}
+	polygon_data* poly = get_polygon_data(index);
 
     //以下の依存する項目を修正する
     //・点（adjacent）
@@ -117,10 +67,12 @@ int hpl::aleph::map::addPolygon(polygon_data polygon)
 #else
         if(!ep1)continue;
 #endif
-/*        //関連ポリゴンの指定が無ければ指定
-        if(ep1->supporting_polygon_index == NONE){
+        //関連ポリゴンの指定が無ければ指定
+        if(!hpl::aleph::map::isValidIndex(ep1->supporting_polygon_index,
+			PolygonList.size()))
+		{
             ep1->supporting_polygon_index = index;
-        }*/
+        }
 
         endpoint_data* ep2 = get_endpoint_data(poly->endpoint_indexes[next]);
 #ifdef __WXDEBUG__
@@ -183,18 +135,14 @@ int hpl::aleph::map::addMapSavedObject(map_object object)
 
     //依存する項目を修正する
     //・ポリゴン
-    polygon_data* poly = get_polygon_data(obj->polygon_index);
-#ifdef __WXDEBUG__
-    wxASSERT(poly);
-#else
-    if(!poly){
-        hpl::error::halt("poly[%d] not found", obj->polygon_index);
-    }
-#endif
+	hpl::aleph::map::isValidIndex(obj->polygon_index, PolygonList.size());
 	/*
-    if(poly->first_object == NONE){
-        poly->first_object = index;
-    }*/
+	if(!hpl::aleph::map::isValidIndex(obj->polygon_index)){
+		obj->polygon_index = NULL;
+	}else{
+	    polygon_data* poly = get_polygon_data(obj->polygon_index);
+	}
+	*/
 	return index;
 }
 int hpl::aleph::map::addAnnotation(map_annotation annotation)
@@ -220,20 +168,30 @@ int hpl::aleph::map::addAnnotation(map_annotation annotation)
     @param 
 */
 bool hpl::aleph::map::deleteMapItems(std::vector<bool>& delPoints, std::vector<bool>& delLines,
+									 std::vector<bool>& delPolygons,
                                      std::vector<bool>& delSides,
-    std::vector<bool>& delPolygons, std::vector<bool>& delObjects)
+								    std::vector<bool>& delObjects)
 {
-    if(delPoints.size() != EndpointList.size() ||
-        delPoints.size() != dynamic_world->endpoint_count ||
-        delLines.size() != LineList.size() ||
-        delLines.size() != dynamic_world->line_count ||
-        delSides.size() != SideList.size() ||
-        delSides.size() != dynamic_world->side_count ||
-        delPolygons.size() != PolygonList.size() ||
-        delPolygons.size() != dynamic_world->polygon_count ||
-        delObjects.size() != SavedObjectList.size())
+    if(delPoints.size() < EndpointList.size() ||
+        EndpointList.size() != dynamic_world->endpoint_count ||
+        delLines.size() < LineList.size() ||
+        LineList.size() != dynamic_world->line_count ||
+        delSides.size() < SideList.size() ||
+        SideList.size() != dynamic_world->side_count ||
+        delPolygons.size() < PolygonList.size() ||
+        PolygonList.size() != dynamic_world->polygon_count ||
+        delObjects.size() < SavedObjectList.size())
     {
-        hpl::error::halt("数があっていない");
+        hpl::error::caution("dismatch delP[%d],EndpointList.size()[%d],world.endpoint_count[%d]",
+			delPoints.size(), EndpointList.size(), dynamic_world->endpoint_count);
+        hpl::error::caution("dismatch delL[%d],LineList.size()[%d],world.line_count[%d]",
+			delLines.size(), LineList.size(), dynamic_world->line_count);
+        hpl::error::caution("dismatch delPoly[%d],PolygonList.size()[%d],world.polygon_count[%d]",
+			delPolygons.size(), PolygonList.size(), dynamic_world->polygon_count);
+        hpl::error::caution("dismatch delS[%d],SideList.size()[%d],world.side_count[%d]",
+			delSides.size(), SideList.size(), dynamic_world->side_count);
+        hpl::error::halt("dismatch delO[%d],SavedObjectList.size()[%d],world.initial[%d]",
+			delObjects.size(), SavedObjectList.size(), dynamic_world->initial_objects_count);
         return false;
     }
 
@@ -351,6 +309,8 @@ void hpl::aleph::map::changeIndexMapping(
 			//存在しない
 			//点を有するポリゴンを探す
 			int orgIndex = getKeyByValue(endpointIndexMap, i);
+			wxASSERT(orgIndex >= 0);
+
 			std::vector<int> belongPolygonIndexes = hpl::aleph::map::getPolygonIndexesIncludePoint(orgIndex);
 			bool found = false;
 			for(int j = 0; j < (int)belongPolygonIndexes.size(); j ++){
@@ -362,6 +322,8 @@ void hpl::aleph::map::changeIndexMapping(
 					//中に含まれる
 					//それを対象とする
 					found = true;
+					ep->supporting_polygon_index = belongPolygonIndexes[j];
+					wxASSERT(ep->supporting_polygon_index >= 0);
 					break;
 				}
 			}
@@ -371,7 +333,9 @@ void hpl::aleph::map::changeIndexMapping(
 				ep->supporting_polygon_index = NONE;
 			}
 		}else{
+			//存在する
 			ep->supporting_polygon_index = it->second;
+			wxASSERT(it->second >= 0);
 		}
     }
 
@@ -381,21 +345,26 @@ void hpl::aleph::map::changeIndexMapping(
 		//所属してくる点データ
 		for(int j = 0; j < 2; j ++){
 			int epIndex = line->endpoint_indexes[j];
+			wxASSERT(epIndex >= 0);
 			//更新
 			line->endpoint_indexes[j] = endpointIndexMap[epIndex];
+			wxASSERT(endpointIndexMap[epIndex] >= 0);
 		}
 		//所属してくるサイドデータ
 		//所属するポリゴンデータ
 		{
 			int clockPoly = line->clockwise_polygon_owner;
 			int clockSide = line->clockwise_polygon_side_index;
-			if(clockPoly != NONE){
+			if(clockPoly >= 0){
 				//ポリゴンを登録しているか
 				std::map<int, int>::iterator it = polygonIndexMap.find(clockPoly);
 				if(it != polygonIndexMap.end()){
 					//ポリゴンが存在する
-					if(clockSide != NONE && sideIndexMap.find(clockSide) != sideIndexMap.end()){
+					if(clockSide >= 0 &&
+						sideIndexMap.find(clockSide) != sideIndexMap.end())
+					{
 						//Sideも存在する
+						wxASSERT(sideIndexMap[clockSide] >= 0);
 						clockSide = sideIndexMap[clockSide];
 					}else{
 						clockSide = NONE;
@@ -406,6 +375,7 @@ void hpl::aleph::map::changeIndexMapping(
 					clockSide = NONE;
 				}
 			}else{
+				//ポリゴンが存在しない
 				clockSide = NONE;
 			}
 			line->clockwise_polygon_side_index = clockSide;
@@ -416,11 +386,11 @@ void hpl::aleph::map::changeIndexMapping(
 			//counter clock side 
 			int counterPoly = line->counterclockwise_polygon_owner;
 			int counterSide = line->counterclockwise_polygon_side_index;
-			if(counterPoly != NONE){
+			if(counterPoly >= 0){
 				//ポリゴンを登録しているか
 				std::map<int, int>::iterator it = polygonIndexMap.find(counterPoly);
 				if(it != polygonIndexMap.end()){
-					if(counterSide != NONE && sideIndexMap.find(counterSide) != sideIndexMap.end()){
+					if(counterSide >= 0 && sideIndexMap.find(counterSide) != sideIndexMap.end()){
 						counterSide = sideIndexMap[counterSide];
 					}else{
 						counterSide = NONE;
@@ -449,12 +419,14 @@ void hpl::aleph::map::changeIndexMapping(
 		//<en> modify endpoint indexes
 		for(int i = 0; i < n; i ++){
 			poly->endpoint_indexes[i] = endpointIndexMap[poly->endpoint_indexes[i]];
+			wxASSERT(poly->endpoint_indexes[i] >= 0);
 		}
 
 		//所属する線インデックス
 		//<en> modify line indexes
 		for(int i = 0; i < n; i ++){
 			poly->line_indexes[i] = endpointIndexMap[poly->line_indexes[i]];
+			wxASSERT(poly->line_indexes[i] >= 0);
 		}
 
 		//所属するSideインデックス
@@ -463,6 +435,7 @@ void hpl::aleph::map::changeIndexMapping(
 			if(poly->side_indexes[i] == NONE){
 			}else{
 				poly->side_indexes[i] = endpointIndexMap[poly->side_indexes[i]];
+				wxASSERT(poly->side_indexes[i] >= 0);
 			}
 		}
 
@@ -474,14 +447,15 @@ void hpl::aleph::map::changeIndexMapping(
 		//所属する線
 		int lineIndex = side->line_index;
 #ifdef _WXDEBUG_
-		wxASSERT(lineIndex != NONE);
+		wxASSERT(lineIndex >= 0);
 #endif
 		side->line_index = lineIndexMap[lineIndex];
+		wxASSERT(side->line_index >= 0);
 
 		//所属するポリゴン
 		int polyIndex = side->polygon_index;
 #ifdef _WXDEBUG_
-		wxASSERT(polyIndex != NONE);
+		wxASSERT(polyIndex >= 0);
 #endif
 		side->polygon_index = polygonIndexMap[polyIndex];
 	}
@@ -489,32 +463,18 @@ void hpl::aleph::map::changeIndexMapping(
 	//objects
     for(int i = objectIndexStart; i < objectIndexEnd; i ++){
 		map_object* obj = &objectList[i];
+		wxASSERT(obj->polygon_index >= -1);
 		//所属するポリゴン
-		if(obj->polygon_index != NONE && polygonIndexMap.find(obj->polygon_index) != polygonIndexMap.end()){
+		if(obj->polygon_index >= 0 && 
+			polygonIndexMap.find(obj->polygon_index) != polygonIndexMap.end()){
 			obj->polygon_index = polygonIndexMap[obj->polygon_index];
+			wxASSERT(obj->polygon_index >= 0);
 		}else{
 			obj->polygon_index = NONE;
 		}
 		//結局はペースト時・移動時にそのとき乗っかっているポリゴンに所属することになるのでたいした意味はない
     }
 }
-/*
-/**
-	対象はEndpointListなど、直接いじるタイプ
-	@param *IndexStart *IndexEndを参照
-	@param *IndexEnd [*IndexStart, *IndexEnd)の範囲のデータに対して調整を行います
-*
-void hpl::aleph::map::changeIndexMappingRaw(
-	int endpointIndexStart, int endpointIndexEnd,
-	int lineIndexStart, int lineIndexEnd,
-	int polygonIndexStart, int polygonIndexEnd,
-	int sideIndexStart, int sideIndexEnd,
-	int objectIndexStart, int objectIndexEnd,
-	std::map<int, int>& endpointIndexMap, std::map<int, int>& lineIndexMap, 
-	std::map<int, int>& polygonIndexMap, std::map<int, int>& sideIndexMap, 
-	std::map<int, int>& sideIndexMap)
-{
-}*/
 
 
 ///////////////////////////////////////////////////////
@@ -818,161 +778,6 @@ std::vector<polygon_data> hpl::aleph::map::searchValidPolygon(world_point2d wpoi
     return polyDatas;
 }
 
-
-/**
-    世界座標からポリゴンデータを作ります
-    TODO 整合性
-    @param points 世界座標
-    @param ep 生成された点データ
-    @param ld 生成された線データ
-    @param n n角形
-*
-polygon_data hpl::aleph::map::createPolygon(world_point2d points[],
-                                            endpoint_data epd[], line_data ld[],
-        int n)
-{
-    //点生成
-    for(int i = 0; i < n; i ++){
-        epd[i].flags = 0;
-        epd[i].highest_adjacent_floor_height = 0;
-        epd[i].lowest_adjacent_ceiling_height = WORLD_ONE;
-        epd[i].vertex.x = points[i].x;
-        epd[i].vertex.y = points[i].y;
-
-        epd[i].supporting_polygon_index = 0;
-    }
-
-    //線
-    for(int i = 0; i < n ; i ++){
-        ld[i].endpoint_indexes[0] = i;
-        ld[i].endpoint_indexes[1] = i + 1;
-        if(i == n - 1){
-            ld[i].endpoint_indexes[0] = i;
-            ld[i].endpoint_indexes[1] = 0;
-        }
-        ld[i].flags = SOLID_LINE_BIT | ELEVATION_LINE_BIT;
-
-        ld[i].highest_adjacent_floor = 0;
-        ld[i].lowest_adjacent_ceiling = WORLD_ONE;
-	    ld[i].clockwise_polygon_side_index = NONE;
-        ld[i].counterclockwise_polygon_side_index = NONE;
-    	
-	    ld[i].clockwise_polygon_owner = 0;
-        ld[i].counterclockwise_polygon_owner = NONE;
-
-        ld[i].length = (world_distance)hpl::aleph::map::getPointsDistance(
-            epd[ld[i].endpoint_indexes[0]].vertex, epd[ld[i].endpoint_indexes[1]].vertex);
-    }
-
-    //ポリゴン
-    polygon_data pdata;
-	pdata.type = _polygon_is_normal;
-	pdata.flags = 0;
-	pdata.permutation = 0;
-
-	pdata.vertex_count = n;
-    for(int i = 0; i < n; i ++){
-        pdata.endpoint_indexes[i] = i; //* clockwise *
-        pdata.line_indexes[i] = i;
-        pdata.side_indexes[i] = NONE;
-    }
-	
-	pdata.floor_texture = NONE;
-    pdata.ceiling_texture = NONE;
-	pdata.floor_height = 0;
-    pdata.ceiling_height = WORLD_ONE;
-	pdata.floor_lightsource_index = NONE;
-    pdata.ceiling_lightsource_index = NONE;
-	
-//	pdata.area; 
-	
-	pdata.first_object = NONE;
-	
-//	pdata.first_exclusion_zone_index;
-//	pdata.line_exclusion_zone_count;
-//	pdata.point_exclusion_zone_count;
-
-	pdata.floor_transfer_mode = 0;
-	pdata.ceiling_transfer_mode = 0;
-	
-//	pdata.adjacent_polygon_indexes[MAXIMUM_VERTICES_PER_POLYGON];
-	
-	pdata.first_neighbor_index = NONE;
-	pdata.neighbor_count = 0;
-	
-    //
-//    pdata.center;
-	
-//	pdata.side_indexes[MAXIMUM_VERTICES_PER_POLYGON];
-	
-//	pdata.floor_origin;
-//  pdata.ceiling_origin;
-	
-	pdata.media_index = NONE;
-	pdata.media_lightsource_index = NONE;
-	
-	pdata.sound_source_indexes = NONE;
-	
-	pdata.ambient_sound_image_index = NONE;
-	pdata.random_sound_image_index = NONE;
-	
-    return pdata;
-}
-*/
-/**
-    独立したポリゴンデータを追加します
-*
-void hpl::aleph::map::addNewPolygon(polygon_data& pdata, endpoint_data epd[],
-                                    line_data ld[], int n)
-{
-    //点
-    std::map<int,int> epIndexTable;
-    std::string str;
-    for(int i = 0; i < n; i ++){
-        //点の追加
-		int newIndex = hpl::aleph::map::addEndpoint(epd[i]);
-        epIndexTable[i] = newIndex;
-
-    }
-//    const char *buf = str.c_str();
-
-    //線の追加
-    std::map<int,int> lIndexTable;
-    for(int i = 0; i < n; i ++){
-        //修正
-        for(int j = 0; j < 2; j ++){
-            ld[i].endpoint_indexes[j] = epIndexTable[ld[i].endpoint_indexes[j]];
-        }
-
-        
-		int newIndex = hpl::aleph::map::addLine(ld[i]);
-        lIndexTable[i] = newIndex;
-    }
-    
-    //ポリゴン情報修正
-    for(int i = 0; i < n; i ++){
-        pdata.endpoint_indexes[i] = epIndexTable[pdata.endpoint_indexes[i]];
-        pdata.line_indexes[i] = lIndexTable[pdata.line_indexes[i]];
-        pdata.side_indexes[i] = NONE;
-    }
-	
-	//ポリゴン追加
-	int newPolygonIndex = hpl::aleph::map::addPolygon(pdata);
-	//線情報修正
-    for(int i = 0; i < n; i ++){
-        int newIndex = epIndexTable[i];
-        endpoint_data* ep = get_endpoint_data(newIndex);
-        ep->supporting_polygon_index = newPolygonIndex;
-    }
-    for(int i = 0; i < n - 1; i ++){
-        int newIndex = lIndexTable[i];
-        line_data* l = &(LineList[newIndex]);
-        l->clockwise_polygon_owner = newPolygonIndex;
-		l->counterclockwise_polygon_owner = NONE;
-    }
-   
-}
-*/
 
 void hpl::aleph::map::addNewPolygon(world_distance points[][2], int n)
 {

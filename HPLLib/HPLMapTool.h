@@ -425,8 +425,8 @@ namespace map{
         @param 
     */
     bool deleteMapItems(std::vector<bool>& delPoints, std::vector<bool>& delLines,
-        std::vector<bool>& delSides,
-        std::vector<bool>& delPolygons, std::vector<bool>& delObjects);
+        std::vector<bool>& delPolygons, std::vector<bool>& delSides,
+		std::vector<bool>& delObjects);
 
 	/**
 		マップアイテムのインデックスを指定したテーブルに従って変更します。
@@ -520,6 +520,18 @@ namespace map{
 	//	Platform
 	int getPlatformIndexFromPolygonIndex(int polyIndex,
 		hpl::aleph::HPLStockManager* smgr);
+
+	/**
+		Check map items' validity
+		valid:		[0,n)
+		invalid:	-1], [n
+		-1ならばNONEなのでInvalid。
+		-2],[nの場合そもそもIndexの設定がおかしいのでアサーションをとばす
+		削除確認は行わないので注意
+		@return -1なら偽。正しい値なら真。
+	*/
+	template<class T>
+	bool isValidIndex(int index, T numMax);
 };
 };
 };

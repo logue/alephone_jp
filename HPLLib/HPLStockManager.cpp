@@ -48,17 +48,17 @@ void hpl::aleph::HPLStockManager::updatePolygonValidityStored()
 void hpl::aleph::HPLStockManager::resizeDeletes()
 {
     //points
-    for(int i = (int)delPoints.size(); i < dynamic_world->endpoint_count; i ++){
+    for(int i = (int)delPoints.size(); i < (int)EndpointList.size(); i ++){
         delPoints.push_back(false);
     }
-    for(int i = (int)delLines.size(); i < dynamic_world->line_count; i ++){
+    for(int i = (int)delLines.size(); i < (int)LineList.size(); i ++){
         delLines.push_back(false);
     }
-    for(int i = (int)delSides.size(); i < dynamic_world->side_count; i ++){
-        delSides.push_back(false);
-    }
-    for(int i = (int)delPolygons.size(); i < dynamic_world->polygon_count; i ++){
+    for(int i = (int)delPolygons.size(); i < (int)PolygonList.size(); i ++){
         delPolygons.push_back(false);
+    }
+    for(int i = (int)delSides.size(); i < (int)SideList.size(); i ++){
+        delSides.push_back(false);
     }
     for(int i = (int)delObjects.size(); i < (int)SavedObjectList.size(); i ++){
         delObjects.push_back(false);
@@ -141,8 +141,7 @@ void hpl::aleph::HPLStockManager::updateDeletes()
         }else{
             //残る
             endpoint_data* ep = get_endpoint_data(i);
-            if(ep->supporting_polygon_index != NONE){
-                assert(get_polygon_data(ep->supporting_polygon_index));
+            if(hpl::aleph::map::isValidIndex(ep->supporting_polygon_index, PolygonList.size())){
                 if(delPolygons[ep->supporting_polygon_index]){
                     //関連ポリゴンが消されるならば対応を切っておく
                     ep->supporting_polygon_index = NONE;
@@ -157,21 +156,17 @@ void hpl::aleph::HPLStockManager::updateDeletes()
         assert(line);
         if(delLines[i]){
             //関連するポリゴンを削除する
-            if(line->clockwise_polygon_owner != NONE){
-                assert(get_polygon_data(line->clockwise_polygon_owner));
+            if(hpl::aleph::map::isValidIndex(line->clockwise_polygon_owner, PolygonList.size())){
                 delPolygons[line->clockwise_polygon_owner] = true;
             }
-            if(line->counterclockwise_polygon_owner != NONE){
-                assert(get_polygon_data(line->counterclockwise_polygon_owner));
+            if(hpl::aleph::map::isValidIndex(line->counterclockwise_polygon_owner, PolygonList.size())){
                 delPolygons[line->counterclockwise_polygon_owner] = true;
             }
             //線のSideを消す
-            if(line->clockwise_polygon_side_index != NONE){
-                assert(get_side_data(line->clockwise_polygon_side_index));
+            if(hpl::aleph::map::isValidIndex(line->clockwise_polygon_side_index, SideList.size())){
                 delSides[line->clockwise_polygon_side_index] = true;
             }
-            if(line->counterclockwise_polygon_side_index != NONE){
-                assert(get_side_data(line->counterclockwise_polygon_side_index));
+            if(hpl::aleph::map::isValidIndex(line->counterclockwise_polygon_side_index, SideList.size())){
                 delSides[line->counterclockwise_polygon_side_index] = true;
             }
         }else{
@@ -179,28 +174,24 @@ void hpl::aleph::HPLStockManager::updateDeletes()
             //点が消えていたら残っているわけがないので考慮しなくてよい
 
             //ポリゴンが消えていたら関連を切る
-            if(line->clockwise_polygon_owner != NONE){
-                assert(get_polygon_data(line->clockwise_polygon_owner));
+            if(hpl::aleph::map::isValidIndex(line->clockwise_polygon_owner, PolygonList.size())){
                 if(delPolygons.at(line->clockwise_polygon_owner)){
                     line->clockwise_polygon_owner = NONE;
                 }
             }
-            if(line->counterclockwise_polygon_owner != NONE){
-                assert(get_polygon_data(line->counterclockwise_polygon_owner));
+            if(hpl::aleph::map::isValidIndex(line->counterclockwise_polygon_owner, PolygonList.size())){
                 if(delPolygons[line->counterclockwise_polygon_owner]){
                     line->counterclockwise_polygon_owner = NONE;
                 }
             }
 
             //Sideが消えていたら関連を切る
-            if(line->clockwise_polygon_side_index != NONE){
-                assert(get_side_data(line->clockwise_polygon_side_index));
+            if(hpl::aleph::map::isValidIndex(line->clockwise_polygon_side_index, SideList.size())){
                 if(delSides.at(line->clockwise_polygon_side_index)){
                     line->clockwise_polygon_side_index = NONE;
                 }
             }
-            if(line->counterclockwise_polygon_side_index != NONE){
-                assert(get_side_data(line->counterclockwise_polygon_side_index));
+            if(hpl::aleph::map::isValidIndex(line->counterclockwise_polygon_side_index, SideList.size())){
                 if(delSides[line->counterclockwise_polygon_side_index]){
                     line->counterclockwise_polygon_side_index = NONE;
                 }
@@ -216,8 +207,7 @@ void hpl::aleph::HPLStockManager::updateDeletes()
             //削除対象
             //関連するsideも消す
             for(int j = 0; j < n; j ++){
-                if(poly->side_indexes[j] != NONE){
-                    assert(get_side_data(poly->side_indexes[j]));
+                if(hpl::aleph::map::isValidIndex(poly->side_indexes[j], SideList.size())){
                     delSides[poly->side_indexes[j]] = true;
                 }
             }
@@ -225,7 +215,6 @@ void hpl::aleph::HPLStockManager::updateDeletes()
             //オブジェクトも消す
             for(int j = 0; j < (int)SavedObjectList.size(); j ++){
                 map_object* obj = &SavedObjectList[j];
-                assert(obj);
                 if(obj->polygon_index == i){
                     delObjects[j] = true;
                 }
@@ -233,8 +222,7 @@ void hpl::aleph::HPLStockManager::updateDeletes()
         }else{
             //残る
             for(int j = 0; j < n; j ++){
-                if(poly->side_indexes[j] != NONE){
-                    assert(get_side_data(poly->side_indexes[j]));
+                if(hpl::aleph::map::isValidIndex(poly->side_indexes[j], SideList.size())){
                     if(delSides[poly->side_indexes[j]]){
                         poly->side_indexes[j] = NONE;
                     }
@@ -242,13 +230,12 @@ void hpl::aleph::HPLStockManager::updateDeletes()
             }
 
             //乗っているオブジェクトが一つもない場合はfirst_objectをNONEにする
-            if(poly->first_object != NONE){
+            if(hpl::aleph::map::isValidIndex(poly->first_object, SavedObjectList.size())){
                 if(delObjects[poly->first_object]){
                     int firstObjIndex = NONE;
                     for(int j = 0; j < (int)SavedObjectList.size(); j ++){
                         if(!delObjects[j]){
                             map_object* obj = &SavedObjectList[j];
-                            assert(obj);
                             if(obj->polygon_index == i){
                                 firstObjIndex = j;
                                 break;
@@ -284,7 +271,9 @@ void hpl::aleph::HPLStockManager::updateDeletes()
 	for(int i = 0; i < (int)delPlatforms.size(); i ++){
 		platform_data* platform = &PlatformList[i];
 		int polyIndex = platform->polygon_index;
-		if(polyIndex == NONE || delPolygons[polyIndex]){
+		if(!hpl::aleph::map::isValidIndex(polyIndex, PolygonList.size()) ||
+			delPolygons[polyIndex])
+		{
 			delPlatforms[i] = true;
 		}else{
 			if(delPlatforms[i]){
