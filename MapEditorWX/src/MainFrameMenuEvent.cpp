@@ -169,6 +169,13 @@ void MapEditorMainFrame::OnOpen(wxCommandEvent& WXUNUSED(ev))
 		hpl::error::caution("This map seems to be merged. This editor cannot save as merged one. Please save as another file");
         OnSaveAs(ev);
     }else{
+		hpl::aleph::HPLStockManager* smgr = wxGetApp().getStockManager();
+		hpl::aleph::map::deleteMapItems(
+			*smgr->getDelPoints(),
+			*smgr->getDelLines(),
+			*smgr->getDelPolygons(),
+			*smgr->getDelSides(),
+			*smgr->getDelObjects());
         //現在のファイル名で保存
         if(save_level(wxGetApp().filePath.mb_str())){
             wxGetApp().isChanged = false;
@@ -186,6 +193,13 @@ void MapEditorMainFrame::OnSaveAs(wxCommandEvent& ev)
         wxString(_T("")), wxString(_T("")), wildcard,
         style);
     if(dlg.ShowModal() == wxID_OK){
+		hpl::aleph::HPLStockManager* smgr = wxGetApp().getStockManager();
+		hpl::aleph::map::deleteMapItems(
+			*smgr->getDelPoints(),
+			*smgr->getDelLines(),
+			*smgr->getDelPolygons(),
+			*smgr->getDelSides(),
+			*smgr->getDelObjects());
         //
         wxString fname = dlg.GetPath();
         SetTitle(fname);
@@ -662,8 +676,8 @@ void MapEditorMainFrame::OnLineProp(wxCommandEvent& ev)
 	LinePropDialog dlg;
 	dlg.Create(this, wxID_ANY, lineIndex);
 	if(dlg.ShowModal() == wxID_OK){
-		line_data data = dlg.getLine();
-		memcpy(org, &data, sizeof(line_data));
+		*org = dlg.getLine();
+		//memcpy(org, &data, sizeof(line_data));
 	}
 }
 void MapEditorMainFrame::OnClockwiseSide(wxCommandEvent& ev)
@@ -695,7 +709,8 @@ void MapEditorMainFrame::OnPolygonProp(wxCommandEvent& ev)
 	if(dlg.ShowModal() == wxID_OK){
 		polygon_data data = dlg.getPolygon();
 		//コピー
-		memcpy(org, &data, sizeof(polygon_data));
+		//memcpy(org, &data, sizeof(polygon_data));
+		*org = data;
 	}
 }
 void MapEditorMainFrame::OnSetVisualModePlayerPosition(wxCommandEvent& ev)

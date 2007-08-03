@@ -746,8 +746,7 @@ void MapEditorMainFrame::doLButtonOnTextTool(wxMouseEvent& ev)
             if(dlg.ShowModal() == wxID_OK){
                 map_annotation newAn = dlg.getAnnotation();
                 //ïœçX
-                memcpy(&MapAnnotationList[annotationIndex],
-                    &newAn, sizeof(map_annotation));
+                MapAnnotationList[annotationIndex] = newAn;
             }
         }
 

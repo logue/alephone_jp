@@ -55,7 +55,7 @@ namespace map{
 		/**
 			@param t タイプ ActionType::
 			@param sel 選択している情報(インデックスのみ)
-			@param real 選択している物体の真の情報(memcpyの産物)
+			@param real 選択している物体の真の情報
 		*/
         HPLActionItem(int t, hpl::aleph::map::HPLSelectData& sel,
 			hpl::aleph::map::HPLRealMapData& real);

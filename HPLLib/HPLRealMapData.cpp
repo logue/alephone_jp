@@ -83,7 +83,9 @@ void hpl::aleph::map::HPLRealMapData::addObject(int index, std::map<int, int>& o
 	}
     map_object* org = &SavedObjectList[index];
     map_object copy;
-    memcpy(&copy, org, sizeof(map_object));
+    //memcpy(&copy, org, sizeof(map_object));
+	copy = *org;
+
     this->realObjects.push_back(copy);
 
 	//new index registering
@@ -100,7 +102,8 @@ void hpl::aleph::map::HPLRealMapData::addPoint(int index, std::map<int, int>& po
 	}
     endpoint_data* org = get_endpoint_data(index);
     endpoint_data copy;
-    memcpy(&copy, org, sizeof(endpoint_data));
+    //memcpy(&copy, org, sizeof(endpoint_data));
+	copy = *org;
     this->realPoints.push_back(copy);
 
 	//new index registering
@@ -122,7 +125,8 @@ void hpl::aleph::map::HPLRealMapData::addLine(int index, std::map<int, int>& lin
 	}
     line_data* org = get_line_data(index);
     line_data copy;
-    memcpy(&copy, org, sizeof(line_data));
+    //memcpy(&copy, org, sizeof(line_data));
+	copy = *org;
     this->realLines.push_back(copy);
 
 	//new index registering
@@ -170,7 +174,9 @@ void hpl::aleph::map::HPLRealMapData::addPolygon(int index, std::map<int, int>& 
 	}
 	polygon_data* org = get_polygon_data(index);
     polygon_data copy;
-    memcpy(&copy, org, sizeof(polygon_data));
+    //memcpy(&copy, org, sizeof(polygon_data));
+	copy = *org;
+
     this->realPolygons.push_back(copy);
 
 	//new index registering
@@ -212,7 +218,8 @@ void hpl::aleph::map::HPLRealMapData::addSide(int index, std::map<int, int>& sid
 		return;
 	}
     side_data copy;
-    memcpy(&copy, org, sizeof(side_data));
+    //memcpy(&copy, org, sizeof(side_data));
+	copy = *org;
     this->realSides.push_back(copy);
 	sideIndexMap[index] = (int)realSides.size() - 1;
 

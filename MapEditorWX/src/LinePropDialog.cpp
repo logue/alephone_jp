@@ -202,7 +202,7 @@ void LinePropDialog::setupDialog()
 	text_ctrl_53->SetValue(getString("%d",
 		line->counterclockwise_polygon_owner));
     //’l‘ã“ü
-    setupDialog();
+    //setupDialog();
 }
 void LinePropDialog::OnOk(wxCommandEvent &ev)
 {
@@ -218,7 +218,8 @@ line_data LinePropDialog::getLine()
 {
 	line_data data;
 	line_data* org = get_line_data(getLineIndex());
-	memcpy(&data, org, sizeof(line_data));
+	data = *org;
+	//memcpy(&data, org, sizeof(line_data));
 
 	SET_LINE_SOLIDITY(&data, radio_box_1->GetSelection() == 0);
 	SET_LINE_TRANSPARENCY(&data, radio_box_1->GetSelection() == 1);

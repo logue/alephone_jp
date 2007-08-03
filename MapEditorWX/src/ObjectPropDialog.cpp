@@ -478,8 +478,6 @@ map_object ObjectPropDialog::getObject()
     if(checkbox_50->GetValue()) obj.flags |= _map_object_floats;
     if(checkbox_51->GetValue()) obj.flags |= _map_object_is_network_only;
 
-    //obj.polygon_index = text_ctr
-
     obj.facing = atoi(wxConvertWX2MB(text_ctrl_38->GetValue()));
     obj.location.x = atoi(wxConvertWX2MB(text_ctrl_39->GetValue()));
     obj.location.y = atoi(wxConvertWX2MB(text_ctrl_40->GetValue()));

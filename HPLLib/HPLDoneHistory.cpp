@@ -48,8 +48,6 @@ hpl::aleph::map::HPLActionItem::HPLActionItem(int t, hpl::aleph::map::HPLSelectD
 		}
 	}
 
-//    memcpy(&this->selectData, &sel, sizeof(hpl::aleph::map::HPLSelectData));
-//    memcpy(&this->realData, &real, sizeof(hpl::aleph::map::HPLRealMapData));
 }
 /**
 	“_‚ÌˆÊ’u‚ð‹L‰¯

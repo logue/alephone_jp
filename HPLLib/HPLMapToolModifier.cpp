@@ -179,22 +179,9 @@ int hpl::aleph::map::addMapSavedObject(map_object object)
 	//placement 情報をチェック。
 	object_frequency_definition* placement =
 		hpl::aleph::map::getPlacementData(object.type, object.index);
-	int count = 0;
-	//数を数える
-	for(int i = 0; i < (int)SavedObjectList.size(); i ++){
-		map_object* other = &SavedObjectList[i];
-		if(other->type == obj->type && other->index == obj->index){
-			count ++;
-		}
-	}
+	hpl::aleph::map::updateObjectInitialPlacement(obj->type, obj->index);
 
-	//少なかったら追加する
-	if(placement->initial_count < count){
-		placement->initial_count = count;
-	}
-	//
-
-/*    //依存する項目を修正する
+    //依存する項目を修正する
     //・ポリゴン
     polygon_data* poly = get_polygon_data(obj->polygon_index);
 #ifdef __WXDEBUG__
@@ -204,6 +191,7 @@ int hpl::aleph::map::addMapSavedObject(map_object object)
         hpl::error::halt("poly[%d] not found", obj->polygon_index);
     }
 #endif
+	/*
     if(poly->first_object == NONE){
         poly->first_object = index;
     }*/
@@ -260,54 +248,55 @@ bool hpl::aleph::map::deleteMapItems(std::vector<bool>& delPoints, std::vector<b
     std::map<int, int> indexMapObjects;
     //対応表を作る
     int counter = 0;
-    for(int i = 0; i < (int)delPoints.size(); i ++){
+    for(int i = 0; i < (int)EndpointList.size(); i ++){
         if(!delPoints[i]){   indexMapPoints[i] = counter;   counter ++;}
     }
     counter = 0;
-    for(int i = 0; i < (int)delLines.size(); i ++){
+    for(int i = 0; i < (int)LineList.size(); i ++){
         if(!delLines[i]){   indexMapLines[i] = counter;   counter ++;}
     }
     counter = 0;
-    for(int i = 0; i < (int)delSides.size(); i ++){
-        if(!delSides[i]){   indexMapSides[i] = counter;   counter ++;}
-    }
-    counter = 0;
-    for(int i = 0; i < (int)delPolygons.size(); i ++){
+    for(int i = 0; i < (int)PolygonList.size(); i ++){
         if(!delPolygons[i]){   indexMapPolygons[i] = counter;   counter ++;}
     }
     counter = 0;
-    for(int i = 0; i < (int)delObjects.size(); i ++){
+    for(int i = 0; i < (int)SideList.size(); i ++){
+        if(!delSides[i]){   indexMapSides[i] = counter;   counter ++;}
+    }
+    counter = 0;
+    for(int i = 0; i < (int)SavedObjectList.size(); i ++){
         if(!delObjects[i]){   indexMapObjects[i] = counter;   counter ++;}
     }
+	//TODO Platform
 	
 	//削除します
-	for(int i = (int)delPoints.size() - 1; i >= 0; i --){
+	for(int i = (int)EndpointList.size() - 1; i >= 0; i --){
 		if(delPoints[i]){
 			EndpointList.erase(EndpointList.begin() + i);
 		}
 	}
-	for(int i = (int)delLines.size() - 1; i >= 0; i --){
+	for(int i = (int)LineList.size() - 1; i >= 0; i --){
 		if(delLines[i]){
 			LineList.erase(LineList.begin() + i);
 		}
 	}
-	for(int i = (int)delPolygons.size() - 1; i >= 0; i --){
+	for(int i = (int)PolygonList.size() - 1; i >= 0; i --){
 		if(delPolygons[i]){
 			PolygonList.erase(PolygonList.begin() + i);
 		}
 	}
-	for(int i = (int)delSides.size() - 1; i >= 0; i --){
+	for(int i = (int)SideList.size() - 1; i >= 0; i --){
 		if(delSides[i]){
 			SideList.erase(SideList.begin() + i);
 		}
 	}
-	for(int i = (int)delObjects.size() - 1; i >= 0; i --){
+	for(int i = (int)SavedObjectList.size() - 1; i >= 0; i --){
 		if(delObjects[i]){
 			SavedObjectList.erase(SavedObjectList.begin() + i);
 		}
 	}
 	/*
-	for(int i = (int)delPlatfor.size() - 1; i >= 0; i --){
+	for(int i = (int)delPlatforms.size() - 1; i >= 0; i --){
 		if(delPlatforms[i]){
 			PlatformList.erase(PlatformList.begin() + i);
 		}
@@ -320,78 +309,12 @@ bool hpl::aleph::map::deleteMapItems(std::vector<bool>& delPoints, std::vector<b
 		PolygonList,
 		SideList,
 		SavedObjectList,
-		0, EndpointList.size(),
-		0, LineList.size(),
-		0, PolygonList.size(),
-		0, SideList.size(),
-		0, SavedObjectList.size(),
+		0, (int)EndpointList.size(),
+		0, (int)LineList.size(),
+		0, (int)PolygonList.size(),
+		0, (int)SideList.size(),
+		0, (int)SavedObjectList.size(),
 		indexMapPoints, indexMapLines, indexMapPolygons, indexMapSides, indexMapObjects);
-/*	//endpoints
-    for(int i = 0; i < (int)EndpointList.size(); i ++){
-        if(!delPoints[i]){
-            endpoint_data* ep = get_endpoint_data(i);
-            ep->supporting_polygon_index = indexMapPolygons[ep->supporting_polygon_index];
-        }
-    }
-	//lines
-    for(int i = 0; i < (int)LineList.size(); i ++){
-        if(!delLines[i]){
-            line_data* line = get_line_data(i);
-            assert(line);
-            if(line->clockwise_polygon_owner != NONE){
-                line->clockwise_polygon_owner = indexMapPolygons[line->clockwise_polygon_owner];
-            }
-            if(line->clockwise_polygon_side_index != NONE){
-                line->clockwise_polygon_side_index = indexMapSides[line->clockwise_polygon_side_index];
-            }
-            if(line->counterclockwise_polygon_owner != NONE){
-                line->counterclockwise_polygon_owner = indexMapPolygons[line->counterclockwise_polygon_owner];
-            }
-            if(line->counterclockwise_polygon_side_index != NONE){
-                line->counterclockwise_polygon_side_index = indexMapSides[line->counterclockwise_polygon_side_index];
-            }
-            for(int j = 0; j < 2; j ++){
-                line->endpoint_indexes[j] = indexMapPoints[line->endpoint_indexes[j]];
-            }
-        }
-    }
-	//sides
-    for(int i = 0; i < (int)SideList.size(); i ++){
-        if(!delSides[i]){
-            side_data* side = get_side_data(i);
-            assert(side);
-            side->line_index = indexMapLines[side->line_index];
-            side->polygon_index = indexMapPolygons[side->polygon_index];
-        }
-    }
-	//polygons
-    for(int i = 0; i < (int)PolygonList.size(); i ++){
-        if(!delPolygons[i]){
-            polygon_data* poly = get_polygon_data(i);
-            assert(poly);
-            int n = poly->vertex_count;
-            for(int j = 0; j < n; j ++){
-                if(poly->adjacent_polygon_indexes[j] != NONE){
-                    poly->adjacent_polygon_indexes[j] =
-                        indexMapPolygons[poly->adjacent_polygon_indexes[j]];
-                }
-                poly->line_indexes[j] = indexMapLines[poly->line_indexes[j]];
-                poly->endpoint_indexes[j] = indexMapPoints[poly->endpoint_indexes[j]];
-                poly->side_indexes[j] = indexMapSides[poly->side_indexes[j]];
-            }
-            if(poly->first_object != NONE){
-                poly->first_object = indexMapObjects[poly->first_object];
-            }
-        }
-    }
-	//objects
-    for(int i = 0; i < (int)SavedObjectList.size(); i ++){
-        if(!delObjects[i]){
-            map_object* obj = &SavedObjectList[i];
-            obj->polygon_index = indexMapPolygons[obj->polygon_index];
-        }
-    }
-*/
     return true;
 }
 

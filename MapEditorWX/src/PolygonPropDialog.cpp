@@ -596,7 +596,8 @@ void PolygonPropDialog::OnPlatformBtn(wxCommandEvent &event)
 		int platformIndex = hpl::aleph::map::getPlatformIndexFromPolygonIndex(
 			polyIndex, smgr);
 		platform_data* org = &PlatformList[platformIndex];
-		memcpy(org, &data, sizeof(platform_data));
+		*org = data;
+		//memcpy(org, &data, sizeof(platform_data));
     }
 }
 void PolygonPropDialog::OnCreatePlatformBtn(wxCommandEvent &event)
@@ -664,7 +665,8 @@ polygon_data PolygonPropDialog::getPolygon()
 {
 	polygon_data data;
 	polygon_data* org = get_polygon_data(polyIndex);
-	memcpy(&data, org, sizeof(polygon_data));
+	//memcpy(&data, org, sizeof(polygon_data));
+	data = *org;
 
 	//TODO 値をセット
 	//編集できる項目のみ変更する

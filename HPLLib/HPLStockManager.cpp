@@ -408,6 +408,28 @@ void hpl::aleph::HPLStockManager::updateSelects(hpl::aleph::map::HPLSelectData& 
 		this->selSides[i] = sel.containsSide(i);
 	}
 }
+
+std::vector<bool>* hpl::aleph::HPLStockManager::getDelPoints()
+{
+	return &this->delPoints;
+}
+std::vector<bool>* hpl::aleph::HPLStockManager::getDelLines()
+{
+	return &this->delLines;
+}
+std::vector<bool>* hpl::aleph::HPLStockManager::getDelPolygons()
+{
+	return &this->delPolygons;
+}
+std::vector<bool>* hpl::aleph::HPLStockManager::getDelSides()
+{
+	return &this->delSides;
+}
+std::vector<bool>* hpl::aleph::HPLStockManager::getDelObjects()
+{
+	return &this->delObjects;
+}
+
 /**
 	‘I‘ğî•ñ‚Ìæ“¾
 */

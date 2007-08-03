@@ -47,6 +47,11 @@ namespace aleph{
 
 
     public:
+		std::vector<bool>* getDelPoints();
+		std::vector<bool>* getDelLines();
+		std::vector<bool>* getDelPolygons();
+		std::vector<bool>* getDelSides();
+		std::vector<bool>* getDelObjects();
         HPLStockManager();
         ~HPLStockManager();
 
