@@ -66,11 +66,15 @@ void ToolDialog::OnPaint(wxPaintEvent& ev)
     PrepareDC(dc);
 
     for(int i = 0; i < ToolType::NUMBER_OF_TOOLS; i ++){
-#ifdef MAP_VIEWER
-        //マップビューアー仕様
-        if(i % 2 == 1 || i >= 6){
-            continue;
-        }
+#ifdef MAPVIEWER
+		if(i == ToolType::TI_FILL ||
+			i == ToolType::TI_LINE ||
+			i == ToolType::TI_SKULL ||
+			i == ToolType::TI_TEXT ||
+			i == ToolType::TI_POLYGON)
+		{
+			continue;
+		}
 #endif
         int x = (i % 2) * TOOL_WIDTH;
         int y = (i / 2) * TOOL_HEIGHT;
@@ -90,6 +94,16 @@ void ToolDialog::OnLeftDown(wxMouseEvent& ev)
     int oldIndex = emgr->getToolType();
     //選択したツールに設定する
     for(int i = 0; i < ToolType::NUMBER_OF_TOOLS; i ++){
+#ifdef MAPVIEWER
+		if(i == ToolType::TI_FILL ||
+			i == ToolType::TI_LINE ||
+			i == ToolType::TI_SKULL ||
+			i == ToolType::TI_TEXT ||
+			i == ToolType::TI_POLYGON)
+		{
+			continue;
+		}
+#endif
         int left = (i % 2) * TOOL_WIDTH;
         int top = (i / 2) * TOOL_HEIGHT;
         int right = left + TOOL_WIDTH;

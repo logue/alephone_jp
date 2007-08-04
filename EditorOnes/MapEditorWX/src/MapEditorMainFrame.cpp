@@ -329,9 +329,10 @@ void MapEditorMainFrame::setupMenus()
 }
 
 
-void MapEditorMainFrame::OnQuit(wxCommandEvent& WXUNUSED(event))
+void MapEditorMainFrame::OnQuit(wxCommandEvent& event)
 {
-    Close(true);
+	wxCloseEvent dummy;
+    OnClose(dummy);
 }
 
 void MapEditorMainFrame::OnAbout(wxCommandEvent& WXUNUSED(event))

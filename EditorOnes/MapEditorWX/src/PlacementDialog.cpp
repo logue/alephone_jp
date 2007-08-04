@@ -3,6 +3,16 @@
 
 static wxRegEx REG_NUM = _T("[0-9]*");
 
+//元に戻したいときの記憶
+static struct object_frequency_definition placementStored[2*MAXIMUM_OBJECT_TYPES];
+
+const int LABEL_COLUMN_WIDTH = 200;
+
+// maximum random occurences of the object (from map.h
+//(-32766,32765] -1 = 65535 to infinity
+const int16 RANDOM_COUNT_INF = -1;
+const uint16 RANDOM_CHANCE_INF = 32765;
+
 namespace PlacementType{
 	enum{
 		Initial,
@@ -10,6 +20,7 @@ namespace PlacementType{
 		Maximum,
 		RandomCount,
 		RandomChance,
+		RandomPlace,
 
 		MAX_PLACEMENT_TYPE
 	};
@@ -25,6 +36,7 @@ enum{
     ID_ALL_INF,
     ID_SET_INITIAL,
     ID_SEL,
+	ID_RANDOM_PLACE,
 };
 
 BEGIN_EVENT_TABLE(PlacementDialog, wxDialog)
@@ -38,7 +50,19 @@ BEGIN_EVENT_TABLE(PlacementDialog, wxDialog)
     EVT_BUTTON(ID_SET_INITIAL, PlacementDialog::OnSetInitial)
     EVT_BUTTON(wxID_OK, PlacementDialog::OnOk)
     EVT_LIST_ITEM_SELECTED(ID_SEL, PlacementDialog::OnSel)
+	EVT_CHECKBOX(ID_RANDOM_PLACE, PlacementDialog::OnRandomPlace)
 END_EVENT_TABLE()
+
+static int getType(int sel)
+{
+	int type = (sel >= NUMBER_OF_DEFINED_ITEMS) ? _saved_monster: _saved_item;
+	return type;
+}
+static int getIndex(int sel)
+{
+	int index = (sel >= NUMBER_OF_DEFINED_ITEMS) ? (sel - NUMBER_OF_DEFINED_ITEMS) :(sel ) ;
+	return index;
+}
 
 PlacementDialog::PlacementDialog():wxDialog()
 {
@@ -56,9 +80,9 @@ static void addListItem(wxListCtrl* lstctrl, object_frequency_definition* placem
     assert(placement);
     wxString str[COLUMN_NUM];
     str[0] = type;
-    str[1] = getString("%d", placement->minimum_count);
-    str[2] = getString("%d", placement->maximum_count);
-    str[3] = getString("%d", placement->initial_count);
+    str[1] = getString("%d", placement->initial_count);
+    str[2] = getString("%d", placement->minimum_count);
+    str[3] = getString("%d", placement->maximum_count);
     str[4] = getString("%d", placement->random_count);
     str[5] = getString("%d", placement->random_chance);
     str[6] = getString("%d", placement->flags);
@@ -80,9 +104,9 @@ static void setListItem(wxListCtrl* lstctrl, object_frequency_definition* placem
     assert(placement);
     wxString str[COLUMN_NUM];
     str[0] = _T("");
-    str[1] = getString("%d", placement->minimum_count);
-    str[2] = getString("%d", placement->maximum_count);
-    str[3] = getString("%d", placement->initial_count);
+    str[1] = getString("%d", placement->initial_count);
+    str[2] = getString("%d", placement->minimum_count);
+    str[3] = getString("%d", placement->maximum_count);
     str[4] = getString("%d", placement->random_count);
     str[5] = getString("%d", placement->random_chance);
     str[6] = getString("%d", placement->flags);
@@ -114,7 +138,12 @@ bool PlacementDialog::Create(wxWindow* parent, wxWindowID id)
     button_17 = new wxButton(this, ID_INF, wxT("Supply this infinitly"));
     button_18 = new wxButton(this, ID_ALL_INF, wxT("We cannot exterminate all monsters"));
     button_19 = new wxButton(this, ID_SET_INITIAL, wxT("Set the number of monster to initial"));
-    checkbox_39 = new wxCheckBox(this, wxID_ANY, wxT("place at random location"));
+
+	//TODO いつの状態を保存するか？
+	//ダイアログを開いたときの状態?
+	button_19->Disable();
+
+    checkbox_39 = new wxCheckBox(this, ID_RANDOM_PLACE, wxT("place at random location"));
     list_ctrl_1 = new wxListCtrl(this, ID_SEL, wxDefaultPosition, wxDefaultSize, wxLC_REPORT|wxSUNKEN_BORDER);
     button_16 = new wxButton(this, wxID_OK, wxT("OK"));
 
@@ -149,12 +178,18 @@ bool PlacementDialog::Create(wxWindow* parent, wxWindowID id)
 
     //データ設定
     char columnNames[][100] = {
-        "Type", "Min", "Max", "Initial", 
+        "Type", "Initial", "Min", "Max", 
         "Rnd Count", "Rnd Chance", "Flags"
     };
     for(int i = 0; i < COLUMN_NUM; i ++){
-        list_ctrl_1->InsertColumn(i, wxConvertMB2WX(columnNames[i]));
+		int width = -1;
+
+		if(i == 0){
+			width = LABEL_COLUMN_WIDTH;
+		}else
+        list_ctrl_1->InsertColumn(i, wxConvertMB2WX(columnNames[i]), width);
     }
+
     for(int i = 0; i < NUMBER_OF_DEFINED_ITEMS; i ++){
         object_frequency_definition* placement = hpl::aleph::map::getPlacementData(_saved_item, i);
         addListItem(this->list_ctrl_1, placement, 
@@ -166,6 +201,12 @@ bool PlacementDialog::Create(wxWindow* parent, wxWindowID id)
             wxConvertMB2WX(wxGetApp().monsterTypeInfo[i].jname.c_str()),
             i + NUMBER_OF_DEFINED_ITEMS);
     }
+
+	//最初の状態を記憶しておく
+	for(int i = 0; i < 2*MAXIMUM_OBJECT_TYPES; i ++){
+		placementStored[i] = object_placement_info[i];
+	}
+
     return result;
 }
 
@@ -175,29 +216,67 @@ void PlacementDialog::OnOk(wxCommandEvent& ev)
     SetReturnCode(wxID_OK);
     Destroy();
 }
+
+static void setInfinity(int type, int index)
+{
+	object_frequency_definition* placement = hpl::aleph::map::getPlacementData(type, index);
+	wxASSERT(placement);
+	placement->random_count = RANDOM_COUNT_INF;
+	placement->random_chance = RANDOM_CHANCE_INF;
+}
+
 void PlacementDialog::OnInf(wxCommandEvent &ev)
 {
-	//TODO
+	//この項目を
+	//random_count=-1
+	//random_chance=65535
+	//に設定します。
+	//ただし、初期配置数も全体の数に関係してくる。
+	int listIndex = this->listSelectIndex;
+	int type = getType(listIndex);
+	int index = getIndex(listIndex);
+	object_frequency_definition* placement = hpl::aleph::map::getPlacementData(type, index);
+	if(!placement){
+		hpl::error::caution("You must select item / monster first");
+		return;
+	}
+	setInfinity(type, index);
+	setListItem(this->list_ctrl_1, placement, listIndex);
 }
 void PlacementDialog::OnAllInf(wxCommandEvent &ev)
 {
-    //TODO
+    //全ての要素についてOnInf設定を行います
+	for(int i = 0; i < NUMBER_OF_DEFINED_ITEMS + NUMBER_OF_MONSTER_TYPES; i ++){
+		int type = getType(i);
+		int index = getType(i);
+		object_frequency_definition* placement = hpl::aleph::map::getPlacementData(type, index);
+		wxASSERT(placement);
+		setInfinity(type, index);
+		setListItem(this->list_ctrl_1, placement, i);
+	}
 }
 void PlacementDialog::OnSetInitial(wxCommandEvent &ev)
 {
-    //TODO
+    //起動時に取得した情報を流し込む
+	//最初の状態を記憶しておく
+	for(int i = 0; i < 2*MAXIMUM_OBJECT_TYPES; i ++){
+		object_placement_info[i] = placementStored[i];
+	}
+	//更新
+	for(int i = 0; i < NUMBER_OF_DEFINED_ITEMS; i ++){
+		int type = _saved_item;
+		int index = i;
+		object_frequency_definition* placement = hpl::aleph::map::getPlacementData(type, index);
+		setListItem(this->list_ctrl_1, placement, i);
+	}
+	for(int i = 0; i < NUMBER_OF_MONSTER_TYPES; i ++){
+		int type = _saved_monster;
+		int index = i;
+		object_frequency_definition* placement = hpl::aleph::map::getPlacementData(type, index);
+		setListItem(this->list_ctrl_1, placement, i + NUMBER_OF_DEFINED_ITEMS);
+	}
 }
 
-static int getType(int sel)
-{
-	int type = (sel >= NUMBER_OF_DEFINED_ITEMS) ? _saved_monster: _saved_item;
-	return type;
-}
-static int getIndex(int sel)
-{
-	int index = (sel >= NUMBER_OF_DEFINED_ITEMS) ? (sel - NUMBER_OF_DEFINED_ITEMS) :(sel ) ;
-	return index;
-}
 void PlacementDialog::OnEditInitial(wxCommandEvent &event)
 {
 	this->setItem(PlacementType::Initial, event.GetString());
@@ -234,6 +313,9 @@ void PlacementDialog::setItem(int placementType, wxString str)
 			break;
 		case PlacementType::RandomChance:
 			placement->random_chance = val;
+			break;
+		case PlacementType::RandomPlace:
+			placement->flags = val;
 			break;
 		}
 		setListItem(this->list_ctrl_1, placement, listIndex);
@@ -284,7 +366,8 @@ void PlacementDialog::OnSel(wxListEvent &ev)
 void PlacementDialog::OnRandomPlace(wxCommandEvent& ev)
 {
 	bool value = ev.IsChecked();
-	int listIndex = this->listSelectIndex;
+	this->setItem(PlacementType::RandomChance, getString("%d", value ? _reappears_in_random_location : 0));
+/*	int listIndex = this->listSelectIndex;
 	int type = getType(listIndex);
 	int index = getIndex(listIndex);
 	object_frequency_definition* placement = hpl::aleph::map::getPlacementData(type, index);
@@ -293,5 +376,5 @@ void PlacementDialog::OnRandomPlace(wxCommandEvent& ev)
 		setListItem(this->list_ctrl_1, placement, listIndex);
 	}else{
 		hpl::error::caution("You must select item / monster first");
-	}
+	}*/
 }

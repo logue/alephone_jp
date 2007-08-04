@@ -292,7 +292,9 @@ public:
     void OnSize(wxSizeEvent& ev);
     //ダブルバッファリング時の背景削除停止用<en>to disable erasing backgroud for double buffering
     void OnEraseBackground(wxEraseEvent& ev);
-
+	
+	//終了時
+	void OnClose(wxCloseEvent& ev);
 	//キーダウン
 	void OnKeyDown(wxKeyEvent& ev);
     //
@@ -432,7 +434,7 @@ private:
         @param ユーザからOKが出れば真。出なければ偽。
             また、編集されてなければ真が返る
     */
-    bool askDestructMap();
+    int askDestructMap();
 
 	/**
 		選択変更によりダイアログの情報に意味がなくなることが考えられる。

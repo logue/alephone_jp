@@ -52,25 +52,29 @@ void MapEditorMainFrame::initLevel()
     @param ユーザからOKが出れば真。出なければ偽。
         また、編集されてなければ真が返る
 */
-bool MapEditorMainFrame::askDestructMap()
+int MapEditorMainFrame::askDestructMap()
 {
     if(wxGetApp().isChanged){
-        wxMessageDialog dlg(this, _T("Map has been modified. Are you sure that delete this and create new one?"));
-        if(dlg.ShowModal() == wxID_OK){
-            return true;
-        }else{
-            //拒否
-            return false;
-        }
+        wxMessageDialog dlg(this,
+			_T("Map has been modified. Are you sure that delete this and create new one?"),
+			_T("are you sure? :o"), wxYES_NO | wxCANCEL);
+        return dlg.ShowModal();
     }
-    return true;
+    return wxID_NO;
 }
 
 void MapEditorMainFrame::OnNew(wxCommandEvent& ev)
 {
-    if(!this->askDestructMap()){
-        return ;
-    }
+	int result = this->askDestructMap();
+	if(result == wxID_YES){
+		//保存します
+		wxCommandEvent dummy;
+		OnSaveAs(dummy);
+	}else if(result = wxID_NO){
+	}else{
+		//cancel
+		return;
+	}
     initLevel();
 
 
@@ -87,7 +91,6 @@ void MapEditorMainFrame::OnNew(wxCommandEvent& ev)
 }
 
 void MapEditorMainFrame::loadLevel(int i){
-	initLevel();
 
     bool check = load_level_from_map(wxGetApp().editLevelIndex);
     if(!check){
@@ -115,10 +118,16 @@ void MapEditorMainFrame::loadLevel(int i){
 }
 void MapEditorMainFrame::OnOpen(wxCommandEvent& ev)
 {
-    //未セーブチェック
-    if(!this->askDestructMap()){
-        return ;
-    }
+	int result = this->askDestructMap();
+	if(result == wxID_YES){
+		//保存します
+		wxCommandEvent dummy;
+		OnSaveAs(dummy);
+	}else if(result = wxID_NO){
+	}else{
+		//cancel
+		return;
+	}
 
     wxFileDialog fileDialog(this, _T("Choose a file"),
         _T("."), _T(""), _T("*.*"));
@@ -665,10 +674,18 @@ void MapEditorMainFrame::OnJumpLevel(wxCommandEvent& ev)
     //TODO
     //保存確認
     //未セーブチェック
-    if(!this->askDestructMap()){
-        return ;
-    }
-    SelectLevelDialog dlg;
+	int result = this->askDestructMap();
+	if(result == wxID_YES){
+		//保存します
+		wxCommandEvent dummy;
+		OnSaveAs(dummy);
+	}else if(result = wxID_NO){
+	}else{
+		//cancel
+		return;
+	}
+
+	SelectLevelDialog dlg;
     dlg.Create(this, wxID_ANY);
     if(dlg.ShowModal() == wxID_OK){
         int sel = dlg.getSelectLevel();
@@ -676,11 +693,14 @@ void MapEditorMainFrame::OnJumpLevel(wxCommandEvent& ev)
         //ステージ読み込み
 //        initLevel();
         loadLevel(sel);
+		this->updateMapItems();
         Refresh();
     }
 }
 void MapEditorMainFrame::OnLevelInfo(wxCommandEvent& ev)
 {
+	//編集設定
+	wxGetApp().isChanged = true;
     LevelInfoDialog dlg;
     dlg.Create(this, wxID_ANY);
     if(dlg.ShowModal() == wxID_OK){
@@ -689,6 +709,8 @@ void MapEditorMainFrame::OnLevelInfo(wxCommandEvent& ev)
 }
 void MapEditorMainFrame::OnObjectPlacement(wxCommandEvent& ev)
 {
+	//編集設定
+	wxGetApp().isChanged = true;
     //オブジェクト配置ダイアログ
     PlacementDialog dlg;
     dlg.Create(this, wxID_ANY);
@@ -707,51 +729,67 @@ void MapEditorMainFrame::OnTerminalViewer(wxCommandEvent& ev)
 
 void MapEditorMainFrame::OnLineProp(wxCommandEvent& ev)
 {
+	//編集設定
+	wxGetApp().isChanged = true;
     //this->linePropDialog.setLineIndex(wxGetApp().popupLineIndex);
     //this->linePropDialog.Show(true);
 	int lineIndex = wxGetApp().popupLineIndex;
 	line_data* org = get_line_data(lineIndex);
-#ifdef __WXDEBUG__
 	wxASSERT(org);
-#endif
 	LinePropDialog dlg;
 	dlg.Create(this, wxID_ANY, lineIndex);
 	if(dlg.ShowModal() == wxID_OK){
+#ifdef MAPVIEWER
+#else
 		*org = dlg.getLine();
+#endif
 		//memcpy(org, &data, sizeof(line_data));
 	}
 }
 void MapEditorMainFrame::OnClockwiseSide(wxCommandEvent& ev)
 {
+	//編集設定
+	wxGetApp().isChanged = true;
     //TODO
     this->sidePropDialog.setIndex(get_line_data(wxGetApp().popupLineIndex)->clockwise_polygon_side_index);
     this->sidePropDialog.Show(true);
 }
 void MapEditorMainFrame::OnCounterclockwiseSide(wxCommandEvent& ev)
 {
+	//編集設定
+	wxGetApp().isChanged = true;
     //TODO
     this->sidePropDialog.setIndex(get_line_data(wxGetApp().popupLineIndex)->counterclockwise_polygon_side_index);
     this->sidePropDialog.Show(true);
 }
 void MapEditorMainFrame::OnPointProp(wxCommandEvent& ev)
 {
+	//編集設定
+	wxGetApp().isChanged = true;
     this->pointPropDialog.setIndex(wxGetApp().popupEndpointIndex);
     this->pointPropDialog.Show(true);
 }
+
+/**
+	ポリゴンプロパティメニュー
+*/
 void MapEditorMainFrame::OnPolygonProp(wxCommandEvent& ev)
 {
+	//編集設定
+	wxGetApp().isChanged = true;
 	int polyIndex = wxGetApp().popupPolygonIndex;
 	polygon_data* org = get_polygon_data(polyIndex);
-#ifdef __WXDEBUG__
 	wxASSERT(org);
-#endif
 	PolygonPropDialog dlg;
 	dlg.Create(this, wxID_ANY, polyIndex);
 	if(dlg.ShowModal() == wxID_OK){
 		polygon_data data = dlg.getPolygon();
 		//コピー
 		//memcpy(org, &data, sizeof(polygon_data));
+#ifdef MAPVIEWER
+#else
 		*org = data;
+#endif
 	}
 }
 void MapEditorMainFrame::OnSetVisualModePlayerPosition(wxCommandEvent& ev)

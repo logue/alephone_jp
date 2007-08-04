@@ -9,6 +9,9 @@
 #include "HPLStockManager.h"
 
 #include "platforms.h"
+#include "map.h"
+#include "items.h"
+#include "monsters.h"
 
 //文字列仮読み込みのサイズ
 //<en>size for buffering string
@@ -400,6 +403,9 @@ double hpl::aleph::map::getPointsDistance(world_point2d& pointA, world_point2d& 
 void hpl::aleph::map::fixLine(int index,// bool isDeleteOldSide,
 							  hpl::aleph::HPLStockManager* smgr)
 {
+	if(smgr->isDeleteLine(index)){
+		return;
+	}
     line_data* line = get_line_data(index);
 #ifdef __WXDEBUG__
 	wxASSERT(line);
@@ -1176,6 +1182,13 @@ struct object_frequency_definition* hpl::aleph::map::getPlacementData(int object
 	    objlist_clear(object_placement_info, 2*MAXIMUM_OBJECT_TYPES);
     }
 	struct object_frequency_definition* place = NULL;
+	if(index < 0 || 
+		(objectType == _saved_item && index >= NUMBER_OF_DEFINED_ITEMS) ||
+		(objectType == _saved_monster && index >= NUMBER_OF_MONSTER_TYPES))
+	{
+		return NULL;
+	}
+
 	if(objectType == _saved_item && item_placement_info){
 		place = &item_placement_info[index];
 	}else if(objectType == _saved_monster && monster_placement_info){

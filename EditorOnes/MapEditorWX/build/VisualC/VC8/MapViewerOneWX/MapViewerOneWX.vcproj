@@ -170,6 +170,7 @@
 			OutputDirectory="..\..\..\..\..\MapEditorWX"
 			IntermediateDirectory="$(ConfigurationName)"
 			ConfigurationType="1"
+			CharacterSet="1"
 			>
 			<Tool
 				Name="VCPreBuildEventTool"
@@ -189,7 +190,7 @@
 			<Tool
 				Name="VCCLCompilerTool"
 				AdditionalIncludeDirectories="..\..\..\..\..\..\EditorOnes;..\..\..\..\..\AlephOneSrc;..\..\..\..\..\MapEditorCommonSrc"
-				PreprocessorDefinitions="WIN32;_DEBUG;_WINDOWS;SDL;__WIN32__;__WINDOWS__;_WINDOWS;__WXMSW__;__WXDEBUG__;WXUSINGDLL;WX;UNICODE;__wxUSEUNICODE__;WX"
+				PreprocessorDefinitions="WIN32;_DEBUG;_WINDOWS;SDL;__WIN32__;__WINDOWS__;__WXMSW__;__WXDEBUG__;WXUSINGDLL;WX;UNICODE;__wxUSEUNICODE__;MAPVIEWER"
 				RuntimeLibrary="3"
 			/>
 			<Tool
@@ -237,6 +238,7 @@
 			OutputDirectory="..\..\..\..\..\MapEditorWX"
 			IntermediateDirectory="$(ConfigurationName)"
 			ConfigurationType="1"
+			CharacterSet="1"
 			>
 			<Tool
 				Name="VCPreBuildEventTool"
@@ -256,7 +258,7 @@
 			<Tool
 				Name="VCCLCompilerTool"
 				AdditionalIncludeDirectories="..\..\..\..\..\..\EditorOnes;..\..\..\..\..\AlephOneSrc;..\..\..\..\..\MapEditorCommonSrc"
-				PreprocessorDefinitions="WIN32;NDEBUG;_WINDOWS;SDL;__WIN32__;__WINDOWS__;_WINDOWS;__WXMSW__;WXUSINGDLL;WX;UNICODE;__wxUSEUNICODE__;WX"
+				PreprocessorDefinitions="WIN32;NDEBUG;_WINDOWS;SDL;__WIN32__;__WINDOWS__;__WXMSW__;WXUSINGDLL;WX;UNICODE;__wxUSEUNICODE__;MAPVIEWER"
 				RuntimeLibrary="2"
 			/>
 			<Tool
@@ -610,6 +612,10 @@
 			</File>
 			<File
 				RelativePath="..\..\..\..\..\HPLLib\HPLMapTool.h"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\..\..\HPLLib\HPLMapToolIndexer.cpp"
 				>
 			</File>
 			<File

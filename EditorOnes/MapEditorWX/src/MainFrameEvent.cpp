@@ -451,6 +451,8 @@ void MapEditorMainFrame::OnMotion(wxMouseEvent &ev)
 
     int mx = ev.m_x;
     int my = ev.m_y;
+    int toolType = wxGetApp().getEventManager()->getToolType();
+#ifdef MAPVIEWER
     if(ev.ButtonIsDown(wxMOUSE_BTN_LEFT)){
         if(updatePolygonValidityCount >= UPDATE_POLYGON_VALIDITY_INTERVAL){
             //ポリゴン整合性を更新
@@ -460,20 +462,29 @@ void MapEditorMainFrame::OnMotion(wxMouseEvent &ev)
         //左ボタンを押しながら動いている
         bool shift = ev.ShiftDown();
         bool ctrl = ev.ControlDown();
-#ifdef MAP_VIEWER
-        //Viewer専用の動作
-        //クリックしていれば移動
-        if(ctrl ||
-            editModeType == EditModeType::EM_DRAW && toolType == ToolType::TI_HAND)
-        {
-            //オフセット移動
-            moveMapOffset(mx, my);
-        }
+		//Viewer専用の動作
+		//クリックしていれば移動
+		if(ctrl ||
+			editModeType == EditModeType::EM_DRAW && toolType == ToolType::TI_HAND)
+		{
+			//オフセット移動
+			moveMapOffset(mx, my);
+		}
+        Refresh();
+	}
 #else
+    if(ev.ButtonIsDown(wxMOUSE_BTN_LEFT)){
+        if(updatePolygonValidityCount >= UPDATE_POLYGON_VALIDITY_INTERVAL){
+            //ポリゴン整合性を更新
+            wxGetApp().getStockManager()->updatePolygonValidityStored();
+        }
+
+        //左ボタンを押しながら動いている
+        bool shift = ev.ShiftDown();
+        bool ctrl = ev.ControlDown();
 
         //編集モードごとに動作が異なる
         
-        int toolType = wxGetApp().getEventManager()->getToolType();
         
         if(ctrl ||
             editModeType == EditModeType::EM_DRAW && toolType == ToolType::TI_HAND)
@@ -517,7 +528,6 @@ void MapEditorMainFrame::OnMotion(wxMouseEvent &ev)
         }
 
 
-#endif
         Refresh();
     }else{
         //押していない状態
@@ -527,6 +537,7 @@ void MapEditorMainFrame::OnMotion(wxMouseEvent &ev)
             this->doMouseMotionOnLineTool(ev);
         }
     }
+#endif
 
     //更新
     wxGetApp().getViewGridManager()->setNewMousePoint(ev.m_x, ev.m_y);
@@ -868,3 +879,19 @@ void MapEditorMainFrame::updateMapItems()
 
 }
 
+
+//終了時
+void MapEditorMainFrame::OnClose(wxCloseEvent& ev)
+{
+	//編集後保存していなければ問いかけます
+	int result = this->askDestructMap();
+	if(result == wxID_YES){
+		//保存します
+		wxCommandEvent dummy;
+		OnSaveAs(dummy);
+	}else if(result = wxID_NO){
+		Close(true);
+	}else{
+		//cancel
+	}
+}

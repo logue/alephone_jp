@@ -468,7 +468,7 @@ void MapEditorMainFrame::doLButtonOnHandTool(wxMouseEvent& ev)
 void MapEditorMainFrame::doLButtonOnLineTool(wxMouseEvent& ev)
 {
     //線追加
-#ifdef MAP_VIEWER
+#ifdef MAPVIEWER
 #else
     //選択解除
     wxGetApp().selectData.clear();
@@ -655,7 +655,7 @@ void MapEditorMainFrame::doLButtonOnMagnifyTool(wxMouseEvent& ev)
 void MapEditorMainFrame::doLButtonOnSkullTool(wxMouseEvent& ev)
 {
     //オブジェクト配置
-#ifdef MAP_VIEWER
+#ifdef MAPVIEWER
 #else
     int mx = ev.m_x;
     int my = ev.m_y;
@@ -715,7 +715,7 @@ void MapEditorMainFrame::doLButtonOnTextTool(wxMouseEvent& ev)
     int div = wxGetApp().getViewGridManager()->getZoomDivision();
     int zMin = vmgr->getViewHeightMin();
     int zMax = vmgr->getViewHeightMax();
-#ifdef MAP_VIEWER
+#ifdef MAPVIEWER
 #else
     //shiftを押しながらだと編集モードになる
     if(ev.ShiftDown()){
@@ -779,7 +779,7 @@ void MapEditorMainFrame::doLButtonOnTextTool(wxMouseEvent& ev)
 }
 void MapEditorMainFrame::doLButtonOnPolygonTool(wxMouseEvent& ev)
 {
-#ifdef MAP_VIEWER
+#ifdef MAPVIEWER
 #else
     //範囲選択開始
     wxGetApp().getEventManager()->setSelectGroupStartPoint(ev.m_x, ev.m_y);
@@ -810,7 +810,7 @@ void MapEditorMainFrame::doLButtonOnPolygonMode(wxMouseEvent& ev)
 			this->polyTypeDialog.setType(poly->type);
 		}
 	}
-#ifdef MAP_VIEWER
+#ifdef MAPVIEWER
 #else
 	//塗りつぶしツール→現在選択しているタイプで塗りつぶし
 	if(tool == ToolType::TI_FILL){

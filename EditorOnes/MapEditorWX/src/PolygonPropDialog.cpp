@@ -366,19 +366,6 @@ void PolygonPropDialog::setupDialog(hpl::aleph::HPLStockManager* smgr)
 	
 }
 
-/*
-void PolygonPropDialog::OnIDEdit(wxCommandEvent &event)
-{
-	//変更不可
-}
-
-
-void PolygonPropDialog::OnFirstNeighborEdit(wxCommandEvent &event)
-{
-	//変更不可
-}
-*/
-
 void PolygonPropDialog::OnTypeChoice(wxCommandEvent &event)
 {
 	polygon_data* poly = get_polygon_data(this->getPolyIndex());
