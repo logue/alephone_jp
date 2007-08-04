@@ -1,5 +1,0 @@
-no
-short
-long
-very long
-extremely long
