@@ -1,0 +1,6 @@
+Monster
+Scenery
+Items
+Player
+Goal
+Sound
