@@ -24,17 +24,20 @@ private:
     wxStaticText* label_33;
     wxChoice* choice_11;
 
+	wxButton* buttonOK;
+	wxButton* buttonCancel;
 
     int index;
 
-public:
-    int getIndex();
     void setIndex(int ind);
+    int getIndex();
+public:
     PointPropDialog();
-    bool Create(wxWindow* parent, wxWindowID id);
+    bool Create(wxWindow* parent, wxWindowID id, int endpointIndex);
     virtual ~PointPropDialog();
     //イベントテーブル作成<en>declare
     DECLARE_EVENT_TABLE()
+	/*
     void OnEditFloor(wxCommandEvent &event); // wxGlade: <event_handler>
     void OnEditCeiling(wxCommandEvent &event); // wxGlade: <event_handler>
     void OnEditX(wxCommandEvent &event); // wxGlade: <event_handler>
@@ -42,6 +45,11 @@ public:
     void OnEditTX(wxCommandEvent &event); // wxGlade: <event_handler>
     void OnEditTY(wxCommandEvent &event); // wxGlade: <event_handler>
     void OnPolyChoice(wxCommandEvent &event); // wxGlade: <event_handler>
+	*/
+	void OnOk(wxCommandEvent &ev);
+	void OnCancel(wxCommandEvent &ev);
+public:
+	endpoint_data getEndpoint();
 };
 
 #endif

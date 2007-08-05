@@ -11,6 +11,7 @@ enum{
 };
 
 BEGIN_EVENT_TABLE(PointPropDialog, wxDialog)
+/*
     EVT_TEXT(ID_FLOOR, PointPropDialog::OnEditFloor)
     EVT_TEXT(ID_CEILING, PointPropDialog::OnEditCeiling)
     EVT_TEXT(ID_X, PointPropDialog::OnEditX)
@@ -18,6 +19,9 @@ BEGIN_EVENT_TABLE(PointPropDialog, wxDialog)
     EVT_TEXT(ID_TX, PointPropDialog::OnEditTX)
     EVT_TEXT(ID_TY, PointPropDialog::OnEditTY)
     EVT_CHOICE(ID_POLY_INDEX, PointPropDialog::OnPolyChoice)
+	*/
+	EVT_BUTTON(wxID_OK, OnOk)
+	EVT_BUTTON(wxID_CANCEL, OnCancel)
 END_EVENT_TABLE()
 
 void PointPropDialog::setIndex(int ind)
@@ -31,7 +35,7 @@ PointPropDialog::PointPropDialog()
 PointPropDialog::~PointPropDialog()
 {
 }
-bool PointPropDialog::Create(wxWindow* parent, wxWindowID id)
+bool PointPropDialog::Create(wxWindow* parent, wxWindowID id, int endpointIndex)
 {
     bool result = wxDialog::Create(parent, id, _T("Point Properties"));
     sizer_52_staticbox = new wxStaticBox(this, -1, wxT("Flags"));
@@ -53,11 +57,14 @@ bool PointPropDialog::Create(wxWindow* parent, wxWindowID id)
     label_33 = new wxStaticText(this, wxID_ANY, wxT("Supporting polygon index"));
     choice_11 = new wxChoice(this, ID_POLY_INDEX);
 
-    wxFlexGridSizer* grid_sizer_10 = new wxFlexGridSizer(3, 1, 0, 0);
+    wxFlexGridSizer* grid_sizer_10 = new wxFlexGridSizer(4, 1, 0, 0);
     wxGridSizer* grid_sizer_12 = new wxGridSizer(1, 2, 0, 0);
     wxGridSizer* grid_sizer_11 = new wxGridSizer(4, 3, 0, 0);
     wxStaticBoxSizer* sizer_52 = new wxStaticBoxSizer(sizer_52_staticbox, wxVERTICAL);
-    sizer_52->Add(radio_btn_7, 0, 0, 0);
+
+	wxGridSizer* grid_sizer_buttons = new wxFlexGridSizer(1, 2, 0, 0);
+
+	sizer_52->Add(radio_btn_7, 0, 0, 0);
     sizer_52->Add(radio_btn_8, 0, 0, 0);
     sizer_52->Add(checkbox_40, 0, 0, 0);
     grid_sizer_10->Add(sizer_52, 1, wxEXPAND, 0);
@@ -77,12 +84,28 @@ bool PointPropDialog::Create(wxWindow* parent, wxWindowID id)
     grid_sizer_12->Add(label_33, 0, 0, 0);
     grid_sizer_12->Add(choice_11, 0, 0, 0);
     grid_sizer_10->Add(grid_sizer_12, 1, wxEXPAND, 0);
+
+	grid_sizer_10->Add(grid_sizer_buttons, 1, wxEXPAND, 0);
+	grid_sizer_buttons->Add(buttonOK, 0, wxEXPAND, 0);
+	grid_sizer_buttons->Add(buttonCancel, 0, wxEXPAND, 0);
+
     SetSizer(grid_sizer_10);
     grid_sizer_10->Fit(this);
     Layout();
 
+	//ポリゴンセットアップ
+	for(int i = 0; i < (int)PolygonList.size(); i ++){
+		//polygon_data* poly = get_polygon_data(i);
+		choice_11->Insert(getString("%d", i), i);
+	}
+	choice_11->Insert(_T("NONE"), (int)PolygonList.size());
+	this->setIndex(endpointIndex);
+
+	//選択物の反映
     return result;
 }
+
+/*
 void PointPropDialog::OnEditFloor(wxCommandEvent &event)
 {
     event.Skip();
@@ -130,8 +153,31 @@ void PointPropDialog::OnPolyChoice(wxCommandEvent &event)
     event.Skip();
     std::cout<<"Event handler (PointPropDialog::OnPolyChoice) not implemented yet"<<std::endl; //notify the user that he hasn't implemented the event handler yet
 }
+*/
 
 int PointPropDialog::getIndex()
 {
     return this->index;
+}
+endpoint_data PointPropDialog::getEndpoint()
+{
+	endpoint_data data;
+	int sel = choice_11->GetSelection();
+	if(sel < 0 || sel >= PolygonList.size()){
+		sel = NONE;
+	}
+	data.supporting_polygon_index = sel;
+
+	//flags
+
+}
+void PointPropDialog::OnOk(wxCommandEvent &ev)
+{
+    SetReturnCode(wxID_OK);
+    Destroy();
+}
+void PointPropDialog::OnCancel(wxCommandEvent &ev)
+{
+    SetReturnCode(wxID_CANCEL);
+    Destroy();
 }

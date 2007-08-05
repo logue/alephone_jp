@@ -99,17 +99,27 @@ static void addListItem(wxListCtrl* lstctrl, object_frequency_definition* placem
         }
     }
 }
+static wxString getIntegerString(int num)
+{
+	wxString str;
+	if(num == 0){
+		str = wxString(_T(" "));
+	}else{
+		str = getString("%d", num);
+	}
+	return str;
+}
 static void setListItem(wxListCtrl* lstctrl, object_frequency_definition* placement, int id)
 {
     assert(placement);
     wxString str[COLUMN_NUM];
     str[0] = _T("");
-    str[1] = getString("%d", placement->initial_count);
-    str[2] = getString("%d", placement->minimum_count);
-    str[3] = getString("%d", placement->maximum_count);
-    str[4] = getString("%d", placement->random_count);
-    str[5] = getString("%d", placement->random_chance);
-    str[6] = getString("%d", placement->flags);
+	str[1] = getIntegerString(placement->initial_count);
+    str[2] = getIntegerString(placement->minimum_count);
+    str[3] = getIntegerString(placement->maximum_count);
+    str[4] = getIntegerString(placement->random_count);
+    str[5] = getIntegerString(placement->random_chance);
+    str[6] = getIntegerString(placement->flags);
 
     for(int j = 1; j < COLUMN_NUM; j ++){
         wxListItem item;
@@ -121,7 +131,8 @@ static void setListItem(wxListCtrl* lstctrl, object_frequency_definition* placem
 }
 bool PlacementDialog::Create(wxWindow* parent, wxWindowID id)
 {
-    bool result = wxDialog::Create(parent, id, _T("Placement"));
+    bool result = wxDialog::Create(parent, id, _T("Placement"),
+		wxDefaultPosition, wxDefaultSize, wxRESIZE_BORDER | wxDEFAULT_DIALOG_STYLE);
     if(!result){
         return result;
     }
@@ -186,7 +197,8 @@ bool PlacementDialog::Create(wxWindow* parent, wxWindowID id)
 
 		if(i == 0){
 			width = LABEL_COLUMN_WIDTH;
-		}else
+		}else{
+		}
         list_ctrl_1->InsertColumn(i, wxConvertMB2WX(columnNames[i]), width);
     }
 

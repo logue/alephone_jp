@@ -72,12 +72,14 @@ bool LinePropDialog::Create(wxWindow* parent, wxWindowID id,
     text_ctrl_52 = new wxTextCtrl(this, wxID_ANY, wxEmptyString, wxDefaultPosition, wxDefaultSize, wxTE_READONLY);
     label_68 = new wxStaticText(this, wxID_ANY, wxT("c-clockwise poly"));
     text_ctrl_53 = new wxTextCtrl(this, wxID_ANY, wxEmptyString, wxDefaultPosition, wxDefaultSize, wxTE_READONLY);
+    button_35 = new wxButton(this, wxID_OK, wxEmptyString);
+    button_36 = new wxButton(this, wxID_CANCEL, wxEmptyString);
 
     text_ctrl_42->SetMinSize(wxSize(50, -1));
     text_ctrl_43->SetMinSize(wxSize(50, -1));
     radio_box_1->SetSelection(0);
 
-    wxFlexGridSizer* grid_sizer_26 = new wxFlexGridSizer(9, 2, 0, 0);
+    wxFlexGridSizer* grid_sizer_26 = new wxFlexGridSizer(10, 2, 0, 0);
     wxStaticBoxSizer* sizer_54 = new wxStaticBoxSizer(sizer_54_staticbox, wxVERTICAL);
     wxFlexGridSizer* grid_sizer_27 = new wxFlexGridSizer(1, 2, 0, 0);
     grid_sizer_26->Add(label_64, 0, 0, 0);
@@ -104,6 +106,8 @@ bool LinePropDialog::Create(wxWindow* parent, wxWindowID id,
     grid_sizer_26->Add(text_ctrl_52, 0, 0, 0);
     grid_sizer_26->Add(label_68, 0, 0, 0);
     grid_sizer_26->Add(text_ctrl_53, 0, 0, 0);
+    grid_sizer_26->Add(button_35, 0, wxEXPAND, 0);
+    grid_sizer_26->Add(button_36, 0, wxEXPAND, 0);
     SetSizer(grid_sizer_26);
     grid_sizer_26->Fit(this);
     Layout();
