@@ -100,7 +100,7 @@ void EditorPreferencesDialog::setupDialog(MapEditorOneSetting* setting)
 {
     //メインから持ってくる
     for(int i = 0; i < NUMBER_OF_EDITOR_FLAGS; i ++){
-        this->checkbox[i]->SetValue(setting->flags[i]);
+        this->checkbox[i]->SetValue(setting->getFlag(i));
     }
     //グリッド
     this->choice_9->SetSelection(setting->getGridSizeIndex());
@@ -120,7 +120,7 @@ void EditorPreferencesDialog::OnOk(wxCommandEvent& wv)
     MapEditorOneSetting* setting = &wxGetApp().setting;
     //設定を反映します <en> feedback settings
     for(int i = 0; i < NUMBER_OF_EDITOR_FLAGS; i ++){
-        setting->flags[i] = this->checkbox[i]->GetValue();
+        setting->setFlag(i, this->checkbox[i]->GetValue());
     }
     //グリッド番号 <en> grid index
     int index = this->choice_9->GetSelection();

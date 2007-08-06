@@ -112,6 +112,10 @@ namespace view{
         int getViewHeightMin();
         void setRevealHiddenLines(bool show);
         bool isRevealHiddenLines();
+
+		/**
+			ƒOƒŠƒbƒhŠÔŠu
+		*/
         int getGridInterval();
         void setGridIntervalIndex(int index);
 

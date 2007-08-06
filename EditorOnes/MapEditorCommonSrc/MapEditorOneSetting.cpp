@@ -267,3 +267,17 @@ int MapEditorOneSetting::checkColorType(ColorSettings *col)
     //カスタム
     return COL_CUSTOM;
 }
+
+/**
+	フラグの取得
+*/
+bool MapEditorOneSetting::getFlag(int flagId)
+{
+	wxASSERT(flagId >= 0 && flagId < NUMBER_OF_EDITOR_FLAGS);
+	return this->flags[flagId];
+}
+void MapEditorOneSetting::setFlag(int flagId, bool flg)
+{
+	wxASSERT(flagId >= 0 && flagId < NUMBER_OF_EDITOR_FLAGS);
+	this->flags[flagId] = flg;
+}

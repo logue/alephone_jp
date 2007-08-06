@@ -322,8 +322,10 @@ void MapEditorMainFrame::OnUndo(wxCommandEvent& ev)
 		bool result = dmgr->back(&act);
 		if(!result){
 			dmgr->forward(&act);
+		}else if(act.type == hpl::aleph::map::ActionType::Move){
+			//もう一度取得を試みる
+			result = dmgr->back(&act);
 		}
-		result = dmgr->back(&act);
 		if(result){
 			if(act.type == hpl::aleph::map::ActionType::None ||
 				act.type == hpl::aleph::map::ActionType::Move)
@@ -813,3 +815,13 @@ void MapEditorMainFrame::OnSetVisualModePlayerPosition(wxCommandEvent& ev)
 	world_point2d wpoint = wxGetApp().getWorldPointFromViewPoint(mpoint[0], mpoint[1]);
 	wxGetApp().getVisualModeManager()->setPlayerPosition(wpoint.x, wpoint.y, height);
 }
+
+/**
+	マウスと元の座標からオフセットを計算します
+*
+void MapEditorMainFrame::getOffset(int mouseX, int mouseY,
+								   world_point2d targetWorldPoint, 
+								   int dest[2])
+{
+}
+*/

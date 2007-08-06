@@ -63,19 +63,28 @@ void MapEditorMainFrame::OnPaint(wxPaintEvent& WXUNUSED(event))
         int mpoint[2];
         wxGetApp().getViewGridManager()->getNewMousePoint(mpoint);
 
+		bool isPolygonCreating = emgr->getEditModeType() == EditModeType::EM_DRAW &&
+            emgr->getToolType() == ToolType::TI_POLYGON;
+		int vGridedPoint[2];
+		int mGridedPoint[2] = {mpoint[0], mpoint[1]};
+		if(isPolygonCreating){
+			this->getGridedViewPoint(mpoint, mGridedPoint);
+		}
+
         //x,y,w,hを計算
         int x = vpoint[0];
         int y = vpoint[1];
-        int w = mpoint[0] - x;
-        int h = mpoint[1] - y;
-        if(mpoint[0] < x){
-            x = mpoint[0];
+        int w = mGridedPoint[0] - x;
+        int h = mGridedPoint[1] - y;
+        if(mGridedPoint[0] < x){
+            x = mGridedPoint[0];
             w = vpoint[0] - x;
         }
-        if(mpoint[1] < y){
-            y = mpoint[1];
+        if(mGridedPoint[1] < y){
+            y = mGridedPoint[1];
             h = vpoint[1] - y;
         }
+
         drawDC->SetPen(this->selectingPen);
         drawDC->SetBrush(*wxTRANSPARENT_BRUSH);
         drawDC->DrawRectangle(x,y,w,h);
@@ -83,8 +92,8 @@ void MapEditorMainFrame::OnPaint(wxPaintEvent& WXUNUSED(event))
         if(emgr->getEditModeType() == EditModeType::EM_DRAW &&
             emgr->getToolType() == ToolType::TI_POLYGON)
         {
-            int mx = mpoint[0];
-            int my = mpoint[1];
+            int mx = mGridedPoint[0];
+            int my = mGridedPoint[1];
             int selStartPoint[2];
             emgr->getSelectGroupStartPoint(selStartPoint);
             //ポリゴン追加モード
@@ -170,7 +179,7 @@ void MapEditorMainFrame::drawBackground(wxDC* dc)
     height = OFFSET_Y_WORLD * 2 / DIV;
     dc->DrawRectangle(left, top, width, height);
 
-    if(wxGetApp().setting.flags[IS_SHOW_GRID]){
+    if(wxGetApp().setting.getFlag(IS_SHOW_GRID)){
         //グリッド
         //TODO
         //SHRT_MAXはgridの倍数ではない！
@@ -206,7 +215,7 @@ void MapEditorMainFrame::drawBackground(wxDC* dc)
 */
 void MapEditorMainFrame::drawPolygons(wxDC* dc)
 {
-    if(!wxGetApp().setting.flags[IS_SHOW_POLYGONS]){
+    if(!wxGetApp().setting.getFlag(IS_SHOW_POLYGONS)){
         return;
     }
     //ペン設定
@@ -329,7 +338,7 @@ wxBrush MapEditorMainFrame::getTexturedBrush(int shapesDescriptor)
 */
 void MapEditorMainFrame::drawLines(wxDC* dc)
 {
-    if(!wxGetApp().setting.flags[IS_SHOW_LINES]){
+    if(!wxGetApp().setting.getFlag(IS_SHOW_LINES)){
         return;
     }
     dc->SetPen(*wxBLACK_PEN);
@@ -428,9 +437,6 @@ void MapEditorMainFrame::drawSides(wxDC* dc)
 }
 void MapEditorMainFrame::drawPoints(wxDC* dc)
 {
-    //if(!wxGetApp().setting.flags[IS_SHOW]){
-    //    return;
-    //}
     //高さ制限
     int zMin = wxGetApp().getViewGridManager()->getViewHeightMin();
     int zMax = wxGetApp().getViewGridManager()->getViewHeightMax();
@@ -483,27 +489,27 @@ void MapEditorMainFrame::drawObjects(wxDC* dc)
 
         int type = obj->type;
         if(type == _saved_monster &&
-            !wxGetApp().setting.flags[IS_SHOW_MONSTERS]){
+            !wxGetApp().setting.getFlag(IS_SHOW_MONSTERS)){
             continue;
         }
         if(type == _saved_player &&
-            !wxGetApp().setting.flags[IS_SHOW_PLAYER]){
+            !wxGetApp().setting.getFlag(IS_SHOW_PLAYER)){
             continue;
         }
         if(type == _saved_item &&
-            !wxGetApp().setting.flags[IS_SHOW_ITEMS]){
+            !wxGetApp().setting.getFlag(IS_SHOW_ITEMS)){
             continue;
         }
         if(type == _saved_goal &&
-            !wxGetApp().setting.flags[IS_SHOW_GLOALS]){
+            !wxGetApp().setting.getFlag(IS_SHOW_GLOALS)){
             continue;
         }
         if(type == _saved_sound_source &&
-            !wxGetApp().setting.flags[IS_SHOW_SOUNDS]){
+            !wxGetApp().setting.getFlag(IS_SHOW_SOUNDS)){
             continue;
         }
         if(type == _saved_object &&
-            !wxGetApp().setting.flags[IS_SHOW_SCENERY]){
+            !wxGetApp().setting.getFlag(IS_SHOW_SCENERY)){
             continue;
         }
         int index = obj->index;
@@ -646,7 +652,7 @@ void MapEditorMainFrame::drawObjects(wxDC* dc)
 }
 void MapEditorMainFrame::drawAnnotations(wxDC* dc)
 {
-    if(!wxGetApp().setting.flags[IS_SHOW_ANNOTATIONS]){
+    if(!wxGetApp().setting.getFlag(IS_SHOW_ANNOTATIONS)){
         return;
     }
     wxColor oldCol = dc->GetTextForeground();

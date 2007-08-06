@@ -21,7 +21,8 @@ bool MediaPaletteDialog::Create(wxWindow* parent, wxWindowID id)
 
     button_27 = new wxButton(this, wxID_ADD, wxEmptyString);
     button_26 = new wxButton(this, wxID_DELETE, wxEmptyString);
-    list_ctrl_4 = new wxListCtrl(this, ID_EDIT, wxDefaultPosition, wxDefaultSize, wxLC_REPORT|wxSUNKEN_BORDER);
+    list_ctrl_4 = new wxListCtrl(this, ID_EDIT, wxDefaultPosition, wxDefaultSize,
+		wxLC_REPORT|wxSUNKEN_BORDER | wxLC_SINGLE_SEL);
 
     list_ctrl_4->SetMinSize(wxSize(154, 200));
 

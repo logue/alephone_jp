@@ -581,3 +581,30 @@ void MapEditorMainFrame::changeEditMode(int mode)
 
     Refresh();
 }
+
+/**
+	グリッドにあわせた座標を取得します
+*/
+world_point2d MapEditorMainFrame::getGridedWorldPoint(world_point2d src)
+{
+	if(wxGetApp().setting.getFlag(IS_FIT_TO_GRID)){
+		int grid = wxGetApp().getViewGridManager()->getGridInterval();
+		wxASSERT(grid > 0);
+		src.x = grid * (int)(src.x / grid + (src.x > 0?1:0));
+		src.y = grid * (int)(src.y / grid + (src.y > 0?1:0));
+	}
+	return src;
+}
+void MapEditorMainFrame::getGridedViewPoint(int vpointSrc[2], int vpointDest[2])
+{
+	world_point2d wpointSrc = wxGetApp().getWorldPointFromViewPoint(
+		vpointSrc[0], vpointSrc[1]);
+	world_point2d wpointDest = this->getGridedWorldPoint(wpointSrc);
+	wxGetApp().getViewPointFromWorldPoint(
+		wpointDest, vpointDest);
+}
+void MapEditorMainFrame::getGridedViewPoint(int vx, int vy, int vpointDest[2])
+{
+	int vpointSrc[2] = {vx, vy};
+	this->getGridedViewPoint(vpointSrc, vpointDest);
+}

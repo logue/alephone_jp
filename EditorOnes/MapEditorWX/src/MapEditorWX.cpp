@@ -454,13 +454,21 @@ void MapEditorWX::setupPaletteListControl(int max, wxListCtrl* ctrl, wxString st
 			wxListItem item;
 			item.SetColumn(column);
 			item.SetId(i);
+			item.SetBackgroundColour(colors[i]);
+			if(colors[i].Red() <= PALETTE_TEXT_COLOR_THRESHOLD &&
+				colors[i].Green() <= PALETTE_TEXT_COLOR_THRESHOLD &&
+				colors[i].Blue() <= PALETTE_TEXT_COLOR_THRESHOLD)
+			{
+				item.SetTextColour(*wxWHITE);
+			}else{
+				item.SetTextColour(*wxBLACK);
+			}
 			if(column == 0){
 				item.SetText(strings[i]);
 				ctrl->InsertItem(item);
 			}else{
-				item.SetBackgroundColour(colors[i]);
-//				item.SetTextColour(colors[i]);
 				item.SetText(_T("######"));
+//				item.SetTextColour(colors[i]);
 				ctrl->SetItem(item);
 			}
 		}

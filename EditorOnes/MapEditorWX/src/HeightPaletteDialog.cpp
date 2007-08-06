@@ -20,7 +20,8 @@ bool HeightPaletteDialog::Create(wxWindow* parent, wxWindowID id)
     bool result = wxDialog::Create(parent, id, _T("Height Pallet"));
     button_24 = new wxButton(this, wxID_ADD, wxEmptyString);
     button_25 = new wxButton(this, wxID_DELETE, wxEmptyString);
-    list_ctrl_3 = new wxListCtrl(this, ID_EDIT, wxDefaultPosition, wxDefaultSize, wxLC_REPORT|wxLC_EDIT_LABELS|wxSUNKEN_BORDER);
+    list_ctrl_3 = new wxListCtrl(this, ID_EDIT, wxDefaultPosition, wxDefaultSize,
+		wxLC_REPORT|wxLC_EDIT_LABELS|wxSUNKEN_BORDER | wxLC_SINGLE_SEL);
 
     list_ctrl_3->SetMinSize(wxSize(180, 200));
 
@@ -43,15 +44,26 @@ bool HeightPaletteDialog::Create(wxWindow* parent, wxWindowID id)
 }
 void HeightPaletteDialog::OnAdd(wxCommandEvent &event)
 {
-    event.Skip();
-    std::cout<<"Event handler (HeightPaletteDialog::OnAdd) not implemented yet"<<std::endl; //notify the user that he hasn't implemented the event handler yet
+	wxString str = ::wxGetTextFromUser(_T(""), _T("Input height"), _T("0"));
+	if(str != wxEmptyString){
+		wxListItem item;
+		//高さを追加
+		item.SetText(str);
+		item.SetId(list_ctrl_3->GetItemCount());
+		item.SetColumn(0);
+		item.SetBackgroundColour(wxGetApp().getColorFromHeight(atoi(str.mb_str())));
+		list_ctrl_3->InsertItem(item);
+		item.SetColumn(1);
+		item.SetText(_T("hoge"));
+		list_ctrl_3->SetItem(item);
+	}
 }
 
 
 void HeightPaletteDialog::OnDelete(wxCommandEvent &event)
 {
-    event.Skip();
-    std::cout<<"Event handler (HeightPaletteDialog::OnDelete) not implemented yet"<<std::endl; //notify the user that he hasn't implemented the event handler yet
+	int sel = event.GetSelection();
+	//TODO
 }
 
 
@@ -65,17 +77,8 @@ void HeightPaletteDialog::OnEdit(wxListEvent &event)
     高さから色を求めます
     @param heightPerOne 高さをWORLD_ONEで割ったもの
 */
-wxColor HeightPaletteDialog::getColorFromHeight(double heightPerOne){
-    wxColor col;
-    double zMax = MAXIMUM_FLOOR_HEIGHT / WORLD_ONE;
-    double zMin = MINIMUM_FLOOR_HEIGHT / WORLD_ONE;
-    if(!this->isFloor()){
-        //ceiling
-        zMax = MAXIMUM_CEILING_HEIGHT / WORLD_ONE;
-        zMin = MINIMUM_CEILING_HEIGHT / WORLD_ONE;
-    }
-    int r = heightPerOne / (zMax - zMin) * 255;
-    col.Set(r, 0, 0);
+wxColor HeightPaletteDialog::getColorFromHeight(double height){
+    wxColor col = wxGetApp().getColorFromHeight(height);
     return col;
 }
 /**
@@ -87,21 +90,25 @@ void HeightPaletteDialog::updateHeights()
     //初期化 <en> clear all items
     list_ctrl_3->ClearAll();
     //重複を除外するのでsetを用いる
-    std::set<int> heights;
+	//TODO すでに追加しておいた分はどうするのか？
+	//標準以外の高さ情報はどうするのか？
+	int numMax = (int)PolygonList.size();
+	wxString *strings = new wxString[numMax];
+	wxColor *colors = new wxColor[numMax];
+
     for(int i = 0; i < (int)PolygonList.size(); i ++){
         polygon_data* poly = get_polygon_data(i);
-        heights.insert(poly->floor_height);
+		int height = poly->ceiling_height;
+		if(this->isFloor()){
+			height = poly->floor_height;
+		}
+        strings[i] = getString("%d", height);
+		colors[i] = wxGetApp().getColorFromHeight(height);
     }
-    //listctrlに追加していく
-    std::set<int>::iterator it = heights.begin();
-    for(; it != heights.end(); it ++){
-        wxListItem item;
-        double num = (double)(*it) / WORLD_ONE;
-        item.SetText(getString("%f", num));
-        //色に変換する
-        //TODO
-        //list_ctrl_3->
-    }
+	wxGetApp().setupPaletteListControl(numMax, 
+		list_ctrl_3, strings, colors);
+	delete [] strings;
+	delete [] colors;
 }
 /**
     床なのか天井なのか
@@ -140,4 +147,23 @@ void HeightPaletteDialog::setFloor(bool floor)
 }
 bool HeightPaletteDialog::isFloor(){
     return this->isFloor_;
+}
+/**
+	指定した高さに該当するアイテムを選択状態にします
+*/
+void HeightPaletteDialog::setSelection(int height)
+{
+	int index = NONE;
+	for(int i = 0; i < list_ctrl_3->GetItemCount(); i ++){
+		wxListItem item;
+		item.SetId(i);
+		item.SetColumn(0);
+		list_ctrl_3->GetItem(item);
+		//
+		wxString heightStr = item.GetText();
+		if(atoi(heightStr.mb_str()) == height){
+			list_ctrl_3->SetItemState(i, wxLIST_STATE_SELECTED, 0);
+			break;
+		}
+	}
 }

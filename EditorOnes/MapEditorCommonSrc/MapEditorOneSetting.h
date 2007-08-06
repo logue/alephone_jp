@@ -99,6 +99,9 @@ enum
     NUMBER_OF_POINT_FLAGS
 };
 
+//パレットで文字色を黒から白に転換する閾値
+//R/G/Bがそれぞれこれ以下になったら白にする
+const int PALETTE_TEXT_COLOR_THRESHOLD = 50;
 
 #include <vector>
 #include <string>
@@ -166,10 +169,9 @@ private:
 
     //color setting
     ColorSettings colorSetting;
-public:
+
     //flags
     bool flags[NUMBER_OF_EDITOR_FLAGS];
-
 
 public:
     MapEditorOneSetting();
@@ -186,6 +188,16 @@ public:
 
     int getGridSizeIndex();
     void setGridSizeIndex(int index);
+
+	/**
+		フラグの取得
+	*/
+	bool getFlag(int flagId);
+	void setFlag(int flagId, bool flg);
+
+	/**
+		色情報の取得
+	*/
     ColorSettings *getColorSetting();
     /**
         引数の色がどのタイプに当てはまるかを判断します

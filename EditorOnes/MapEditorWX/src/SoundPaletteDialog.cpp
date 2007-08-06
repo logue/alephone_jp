@@ -23,7 +23,8 @@ bool SoundPaletteDialog::Create(wxWindow* parent, wxWindowID id)
 
     button_32 = new wxButton(this, wxID_ADD, wxEmptyString);
     button_33 = new wxButton(this, wxID_DELETE, wxEmptyString);
-    list_ctrl_6 = new wxListCtrl(this, ID_EDIT, wxDefaultPosition, wxDefaultSize, wxLC_REPORT|wxSUNKEN_BORDER);
+    list_ctrl_6 = new wxListCtrl(this, ID_EDIT, wxDefaultPosition, wxDefaultSize,
+		wxLC_REPORT|wxSUNKEN_BORDER | wxLC_SINGLE_SEL);
     return result;
 }
 void SoundPaletteDialog::OnAdd(wxCommandEvent &event)

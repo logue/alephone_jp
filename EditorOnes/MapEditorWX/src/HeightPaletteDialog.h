@@ -20,6 +20,7 @@ public:
     void OnDelete(wxCommandEvent &event); // wxGlade: <event_handler>
     void OnEdit(wxListEvent &event); // wxGlade: <event_handler>
 
+    wxColor getColorFromHeight(double height);
 public:
     /**
         現在のマップの高さ情報を代入します
@@ -33,7 +34,11 @@ public:
     */
     void setFloor(bool floor);
     bool isFloor();
-    wxColor getColorFromHeight(double heightPerOne);
+
+	/**
+		指定した高さに該当するアイテムを選択状態にします
+	*/
+	void setSelection(int height);
 };
 
 #endif

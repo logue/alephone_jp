@@ -296,6 +296,20 @@ int hpl::aleph::map::getSelectPolygonIndex(int viewX, int viewY, int zMin, int z
 	int voffsetX, int voffsetY, int offsetXW, int offsetYW, int div,
 	hpl::aleph::HPLStockManager* smgr)
 {
+	//世界座標に変換
+	world_point2d wp = hpl::aleph::map::getWorldPoint2DFromViewPoint(viewX, viewY, offsetXW, offsetYW,
+		div, voffsetX, voffsetY);
+	int polyIndex = hpl::aleph::map::getSelectPolygonIndex(wp.x, wp.y, zMin, zMax,
+		smgr);
+	return polyIndex;
+}
+int hpl::aleph::map::getSelectPolygonIndex(int wx, int wy,
+										   int zMin, int zMax,
+										   hpl::aleph::HPLStockManager* smgr)
+{
+	world_point2d wp;
+	wp.x = wx;
+	wp.y = wy;
 	for(int i = 0; i < (int)PolygonList.size(); i ++){
 		polygon_data* poly = get_polygon_data(i);
 		//削除チェック
@@ -309,15 +323,14 @@ int hpl::aleph::map::getSelectPolygonIndex(int viewX, int viewY, int zMin, int z
 			continue;
 		}
 		//選択出来ているか判定
-		if(hpl::aleph::map::isPointInPolygon(viewX, viewY,
-            i, offsetXW, offsetYW, div,
-            voffsetX, voffsetY))
+		if(hpl::aleph::map::isPointInPolygon(wp, i))
 		{
 			return i;
 		}
 	}
 	return NONE;
 }
+
 int hpl::aleph::map::getSelectAnnotationIndex(int viewX, int viewY, int threshold, int zMin, int zMax,
         int voffsetX, int voffsetY, int offsetXW, int offsetYW, int div,
                                         hpl::aleph::HPLStockManager* smgr)

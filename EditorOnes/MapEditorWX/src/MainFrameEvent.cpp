@@ -221,14 +221,55 @@ void MapEditorMainFrame::doLUpOnArrowTool(wxMouseEvent& ev)
     hpl::aleph::view::HPLViewGridManager* vmgr = wxGetApp().getViewGridManager();
     hpl::aleph::HPLEventManager* emgr = wxGetApp().getEventManager();
 	hpl::aleph::map::HPLDoneHistory* dmgr = wxGetApp().getDoneHistoryManager();
+	hpl::aleph::HPLStockManager* smgr = wxGetApp().getStockManager();
+
+	int zMin = vmgr->getViewHeightMin();
+	int zMax = vmgr->getViewHeightMax();
+	int div = vmgr->getZoomDivision();
+	int voffset[2];
+	vmgr->getOffset(voffset);
 
 	//何かつかんでいたら行動履歴に残す
 	if(sel->isSelected() && emgr->isGrabItems()){
 		dmgr->push_back(
 			hpl::aleph::map::ActionType::Move, *sel);
-#ifdef __WXDEBUG__
-//		hpl::error::caution("undo index=%d", dmgr->getIndex());
-#endif
+
+		//オブジェクトの移動先にポリゴンがない場合、消すかUndoするかの
+		//ダイアログを出す。
+		std::vector<int> deleteObjectIndexes;
+
+		for(int i = 0; i < (int)sel->getSelObjects()->size(); i ++){
+			int index = sel->getSelObjects()->at(i).index;
+			map_object* obj = &SavedObjectList[index];
+			int wx = obj->location.x;
+			int wy = obj->location.y;
+			world_point2d wpoint;
+			wpoint.x = wx;
+			wpoint.y;
+			int vpoint[2];
+			wxGetApp().getViewPointFromWorldPoint(wpoint, vpoint);
+			//ポリゴンの上にあるかチェック
+			int polyIndex = hpl::aleph::map::getSelectPolygonIndex(vpoint[0], vpoint[1],
+				zMin, zMax, voffset[0], voffset[1], OFFSET_X_WORLD, OFFSET_Y_WORLD,
+				div, smgr);
+			if(polyIndex == NONE){
+				deleteObjectIndexes.push_back(index);
+			}
+		}
+		if(deleteObjectIndexes.size() > 0){
+			int result = wxMessageBox(_T("Some objects are out of polygon. Whether you delete them or cancel moving?"),
+				_T("Caution"), wxOK | wxCANCEL);
+			if(result == wxOK){
+				//対象を削除
+				for(int i = 0; i < (int)deleteObjectIndexes.size(); i ++){
+					smgr->deleteObject(deleteObjectIndexes[i]);
+				}
+			}else{
+				//キャンセル
+				wxCommandEvent dummy;
+				this->OnUndo(dummy);
+			}
+		}
 	}
     if(sel->isSelectOneObject()){
         //オブジェクトを選択していたら
@@ -408,11 +449,18 @@ void MapEditorMainFrame::doLUpOnPolygonTool(wxMouseEvent& ev)
     wxGetApp().getEventManager()->getSelectGroupStartPoint(selStartPoint);
     hpl::aleph::HPLEventManager* emgr = wxGetApp().getEventManager();
     if(emgr->isSelectingGroup()){
+		//必要に合わせてグリッド座標を取得
+		int mx = ev.m_x;
+		int my = ev.m_y;
+		int vStartPoint[2];
+		int vEndPoint[2];
+		this->getGridedViewPoint(mx, my, vStartPoint);
+		this->getGridedViewPoint(selStartPoint, vEndPoint);
         //n角形の座標を計算
         double polyPointsView[MAXIMUM_VERTICES_PER_POLYGON][2];
         int n = wxGetApp().presetPolygonVertexCount;
-        hpl::math::getRectangleScaledPreparedPolygon(ev.m_x, ev.m_y,
-            selStartPoint[0], selStartPoint[1], n,
+        hpl::math::getRectangleScaledPreparedPolygon(vStartPoint[0], vStartPoint[1],
+            vEndPoint[0], vEndPoint[1], n,
             polyPointsView);
         //ワールド座標形に変換
         world_point2d polyPointsWorld[MAXIMUM_VERTICES_PER_POLYGON];
@@ -477,6 +525,7 @@ void MapEditorMainFrame::OnMotion(wxMouseEvent &ev)
         if(updatePolygonValidityCount >= UPDATE_POLYGON_VALIDITY_INTERVAL){
             //ポリゴン整合性を更新
             wxGetApp().getStockManager()->updatePolygonValidityStored();
+			updatePolygonValidityCount = 0;
         }
 
         //左ボタンを押しながら動いている
@@ -606,6 +655,10 @@ void MapEditorMainFrame::doMouseMotionOnArrowTool(wxMouseEvent& ev)
 		{
 			//ワールド座標系にする
 			world_point2d wmp = wxGetApp().getWorldPointFromViewPoint(mx, my);
+
+			//もし必要ならばグリッド座標にあわせた座標が得られる。
+			//必要かどうかの判断も行っているためとりあえず呼び出せばよい。
+			wmp = this->getGridedWorldPoint(wmp);
 
 			//点
 			for(int i = 0; i < (int)sel->getSelPoints()->size(); i ++){
@@ -893,5 +946,6 @@ void MapEditorMainFrame::OnClose(wxCloseEvent& ev)
 		Close(true);
 	}else{
 		//cancel
+		//
 	}
 }

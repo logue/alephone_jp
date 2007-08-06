@@ -179,6 +179,8 @@ namespace map{
 	int getSelectPolygonIndex(int viewX, int viewY, int zMin, int zMax,
 		int voffsetX, int voffsetY, int offsetXW, int offsetYW, int div,
 		hpl::aleph::HPLStockManager* smgr);
+	int getSelectPolygonIndex(int wx, int wy, int zMin, int zMax,
+		hpl::aleph::HPLStockManager* smgr);
 
 	/**
 		選択できたアノテーションのインデックスを取得します

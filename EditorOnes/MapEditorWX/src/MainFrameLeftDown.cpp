@@ -467,10 +467,11 @@ void MapEditorMainFrame::doLButtonOnLineTool(wxMouseEvent& ev)
 
     hpl::aleph::view::HPLViewGridManager* vmgr = wxGetApp().getViewGridManager();
 
-    int mx = ev.m_x;
-    int my = ev.m_y;
+//    int mx = ev.m_x;
+//    int my = ev.m_y;
     //世界座標にする
-    world_point2d wpoint = wxGetApp().getWorldPointFromViewPoint(mx, my);
+    world_point2d wpoint = wxGetApp().getWorldPointFromViewPoint(ev.m_x, ev.m_y);
+	wpoint = this->getGridedWorldPoint(wpoint);
 
     bool isFirst = wxGetApp().isFirstOfLineToAdd;
 
@@ -773,8 +774,13 @@ void MapEditorMainFrame::doLButtonOnPolygonTool(wxMouseEvent& ev)
 {
 #ifdef MAPVIEWER
 #else
+	int mx = ev.m_x;
+	int my = ev.m_y;
+	//必要ならグリッド座標を得る
+	int vPoint[2];
+	this->getGridedViewPoint(mx, my, vPoint);
     //範囲選択開始
-    wxGetApp().getEventManager()->setSelectGroupStartPoint(ev.m_x, ev.m_y);
+    wxGetApp().getEventManager()->setSelectGroupStartPoint(vPoint[0], vPoint[1]);
 #endif
 }
 
@@ -817,11 +823,60 @@ void MapEditorMainFrame::doLButtonOnPolygonMode(wxMouseEvent& ev)
 	}
 #endif
 }
+void MapEditorMainFrame::doLButtonOnHeightModeCommon(wxMouseEvent& ev, bool isFloor)
+{
+	hpl::aleph::view::HPLViewGridManager* vmgr = wxGetApp().getViewGridManager();
+	hpl::aleph::HPLStockManager* smgr = wxGetApp().getStockManager();
+	hpl::aleph::map::HPLSelectData* sel = &wxGetApp().selectData;
+
+	int toolType = wxGetApp().getEventManager()->getToolType();
+	
+	int zMin = vmgr->getViewHeightMin();
+	int zMax = vmgr->getViewHeightMax();
+	int div = vmgr->getZoomDivision();
+	//int voffset[2];
+
+	//世界座標になおします
+	int mx = ev.m_x;
+	int my = ev.m_y;
+	world_point2d wmp = wxGetApp().getWorldPointFromViewPoint(mx, my);
+	if(toolType == ToolType::TI_ARROW){
+
+		sel->clear();
+		//クリックできたポリゴンが無いか探します
+		int polyIndex = hpl::aleph::map::getSelectPolygonIndex(wmp.x, wmp.y,
+			zMin, zMax, smgr);
+		if(polyIndex != NONE){
+			//選択できた
+			//選択対象とする
+			polygon_data* poly = get_polygon_data(polyIndex);
+			wxASSERT(poly);
+			int offset[MAXIMUM_VERTICES_PER_POLYGON][2];
+			sel->addSelPolygon(polyIndex, offset, poly->vertex_count);
+			//高さダイアログを選択状態にする
+			int height = poly->ceiling_height;
+			if(isFloor){
+				height = poly->floor_height;
+			}
+			this->heightPaletteDialog.setSelection(height);
+		}else{
+			//選択できなかった
+			//選択解除しているので何もしない
+			//高さパレットの選択解除？
+			//…はしない
+		}
+		this->updateMapItems();
+
+	}
+}
+
 void MapEditorMainFrame::doLButtonOnFloorHeightMode(wxMouseEvent& ev)
 {
+	doLButtonOnHeightModeCommon(ev, true);
 }
 void MapEditorMainFrame::doLButtonOnCeilingHeightMode(wxMouseEvent& ev)
 {
+	doLButtonOnHeightModeCommon(ev, false);
 }
 void MapEditorMainFrame::doLButtonOnFloorLightMode(wxMouseEvent& ev)
 {

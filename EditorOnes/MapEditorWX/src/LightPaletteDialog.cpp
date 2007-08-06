@@ -24,7 +24,8 @@ bool LightPaletteDialog::Create(wxWindow* parent, wxWindowID id)
 
     button_31 = new wxButton(this, wxID_ADD, wxEmptyString);
     button_30 = new wxButton(this, wxID_DELETE, wxEmptyString);
-    list_ctrl_5 = new wxListCtrl(this, ID_EDIT, wxDefaultPosition, wxDefaultSize, wxLC_REPORT|wxSUNKEN_BORDER);
+    list_ctrl_5 = new wxListCtrl(this, ID_EDIT, wxDefaultPosition, wxDefaultSize,
+		wxLC_REPORT|wxSUNKEN_BORDER | wxLC_SINGLE_SEL);
 
     list_ctrl_5->SetMinSize(wxSize(150, 200));
 

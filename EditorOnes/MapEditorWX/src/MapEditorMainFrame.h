@@ -350,9 +350,11 @@ private:
         void doLButtonOnTextTool(wxMouseEvent& ev);
         void doLButtonOnPolygonTool(wxMouseEvent& ev);
     void doLButtonOnPolygonMode(wxMouseEvent& ev);
-    void doLButtonOnFloorHeightMode(wxMouseEvent& ev);
-    void doLButtonOnCeilingHeightMode(wxMouseEvent& ev);
-    void doLButtonOnFloorLightMode(wxMouseEvent& ev);
+
+	void doLButtonOnFloorHeightMode(wxMouseEvent& ev);
+	void doLButtonOnCeilingHeightMode(wxMouseEvent& ev);
+		void doLButtonOnHeightModeCommon(wxMouseEvent& ev, bool isFloor);
+	void doLButtonOnFloorLightMode(wxMouseEvent& ev);
     void doLButtonOnCeilingLightMode(wxMouseEvent& ev);
     void doLButtonOnMediaMode(wxMouseEvent& ev);
     void doLButtonOnFloorTextureMode(wxMouseEvent& ev);
@@ -477,4 +479,18 @@ private:
 		・削除情報の更新
 	*/
 	void updateMapItems();
+
+	/**
+		グリッドにあわせた座標を取得します
+		計算方法は一箇所にまとめたほうがいい
+	*/
+	world_point2d getGridedWorldPoint(world_point2d src);
+	void getGridedViewPoint(int vpointSrc[2], int vpointDest[2]);
+	void getGridedViewPoint(int vx, int vy, int vpointDest[2]);
+
+	/**
+		マウスと元の座標からオフセットを計算します
+	*
+	void getOffset(int mouseX, int mouseY, world_point2d targetWorldPoint, int dest[2]);
+	*/
 };
