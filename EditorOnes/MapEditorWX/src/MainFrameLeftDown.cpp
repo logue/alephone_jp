@@ -244,19 +244,11 @@ void MapEditorMainFrame::unselect()
     //点を選択していないのにindexがNONEではない
 	//***************************
 	//この数値は迷子の可能性もあるので、isValidなどは使わないこと！
-    if(!sel->isSelectOnePoint() && pointPropDialog.getIndex() != NONE){
-        //その場合選択をNONEにする
-		this->pointPropDialog.setIndex(NONE);
-    }
+	//点、線、Side、ポリゴンはモーダルなのでなし
 	if(!sel->isSelectOneObject() && objPropDialog.getObjIndex() != NONE)
 		this->objPropDialog.setObjIndex(NONE);
-/*	if(!sel->isSelectOneLine() && linePropDialog.getLineIndex() != NONE)
-		this->linePropDialog.setLineIndex(NONE);*/
 	if(!sel->isSelectOneSide() && sidePropDialog.getIndex() != NONE)
 		this->sidePropDialog.setIndex(NONE);
-/*	if(!sel->isSelectOnePolygon() && polyPropDialog.getPolyIndex() != NONE)
-		this->polyPropDialog.setPolyIndex(NONE, wxGetApp().getStockManager());
-		*/
 }
 
 /**

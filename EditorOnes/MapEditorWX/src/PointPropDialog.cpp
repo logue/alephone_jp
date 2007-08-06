@@ -57,6 +57,9 @@ bool PointPropDialog::Create(wxWindow* parent, wxWindowID id, int endpointIndex)
     label_33 = new wxStaticText(this, wxID_ANY, wxT("Supporting polygon index"));
     choice_11 = new wxChoice(this, ID_POLY_INDEX);
 
+	buttonOK = new wxButton(this, wxID_OK, wxEmptyString);
+	buttonCancel = new wxButton(this, wxID_CANCEL, wxEmptyString);
+
     wxFlexGridSizer* grid_sizer_10 = new wxFlexGridSizer(4, 1, 0, 0);
     wxGridSizer* grid_sizer_12 = new wxGridSizer(1, 2, 0, 0);
     wxGridSizer* grid_sizer_11 = new wxGridSizer(4, 3, 0, 0);
@@ -93,15 +96,33 @@ bool PointPropDialog::Create(wxWindow* parent, wxWindowID id, int endpointIndex)
     grid_sizer_10->Fit(this);
     Layout();
 
-	//ポリゴンセットアップ
+	//ポリゴンコンボセットアップ
 	for(int i = 0; i < (int)PolygonList.size(); i ++){
 		//polygon_data* poly = get_polygon_data(i);
 		choice_11->Insert(getString("%d", i), i);
 	}
 	choice_11->Insert(_T("NONE"), (int)PolygonList.size());
 	this->setIndex(endpointIndex);
-
+	wxASSERT(hpl::aleph::map::isValidIndex(endpointIndex, EndpointList.size()));
 	//選択物の反映
+	//polygon
+	endpoint_data* ep = get_endpoint_data(endpointIndex);
+	int sel = ep->supporting_polygon_index;
+	wxASSERT(hpl::aleph::map::isValidIndex(sel, PolygonList.size()));
+	choice_11->SetSelection(sel == NONE ? (int)EndpointList.size(): sel);
+
+	//flags
+	radio_btn_7->SetValue(ENDPOINT_IS_SOLID(ep) != 0);
+	radio_btn_8->SetValue(ENDPOINT_IS_TRANSPARENT(ep) != 0);
+	checkbox_40->SetValue(ENDPOINT_IS_ELEVATION(ep) != 0);
+
+	//height
+	text_ctrl_14->SetValue(getString("%d", ep->highest_adjacent_floor_height));
+	text_ctrl_15->SetValue(getString("%d", ep->lowest_adjacent_ceiling_height));
+	text_ctrl_16->SetValue(getString("%d", ep->vertex.x));
+	text_ctrl_18->SetValue(getString("%d", ep->vertex.y));
+	text_ctrl_17->SetValue(getString("%d", ep->transformed.x));
+	text_ctrl_19->SetValue(getString("%d", ep->transformed.y));
     return result;
 }
 
@@ -163,13 +184,24 @@ endpoint_data PointPropDialog::getEndpoint()
 {
 	endpoint_data data;
 	int sel = choice_11->GetSelection();
-	if(sel < 0 || sel >= PolygonList.size()){
+	if(sel < 0 || sel >= (int)PolygonList.size()){
 		sel = NONE;
 	}
 	data.supporting_polygon_index = sel;
 
 	//flags
+	SET_ENDPOINT_SOLIDITY(&data, radio_btn_7->GetValue());
+	SET_ENDPOINT_TRANSPARENCY(&data, radio_btn_8->GetValue());
+	SET_ENDPOINT_ELEVATION(&data, checkbox_40->GetValue());
 
+	//height
+	data.highest_adjacent_floor_height = atoi(text_ctrl_14->GetValue().mb_str());
+	data.lowest_adjacent_ceiling_height = atoi(text_ctrl_15->GetValue().mb_str());
+	data.vertex.x = atoi(text_ctrl_16->GetValue().mb_str());
+	data.vertex.y = atoi(text_ctrl_18->GetValue().mb_str());
+	data.transformed.x = atoi(text_ctrl_17->GetValue().mb_str());
+	data.transformed.y = atoi(text_ctrl_19->GetValue().mb_str());
+	return data;
 }
 void PointPropDialog::OnOk(wxCommandEvent &ev)
 {

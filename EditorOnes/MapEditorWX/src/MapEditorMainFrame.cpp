@@ -117,7 +117,6 @@ MapEditorMainFrame::MapEditorMainFrame(const wxString& title,
 
     //プロパティ
     this->objPropDialog.Create(this, wxID_ANY);
-    this->pointPropDialog.Create(this, wxID_ANY);
     this->polyTypeDialog.Create(this, wxID_ANY);
     this->sidePropDialog.Create(this, wxID_ANY);
 
@@ -540,7 +539,7 @@ void MapEditorMainFrame::changeEditMode(int mode)
         //線・点・プラットフォーム・オブジェクト
         //以上のプロパティダイアログを消します
         //this->linePropDialog.Show(false);
-        this->pointPropDialog.Show(false);
+//        this->pointPropDialog.Show(false);
         this->objPropDialog.Show(false);
 
 		//矢印ツールに戻す

@@ -113,7 +113,7 @@ public:
     //プロパティ類 <en> properties
     ObjectPropDialog objPropDialog;
     //LinePropDialog linePropDialog;
-    PointPropDialog pointPropDialog;
+    //PointPropDialog pointPropDialog;
     PolygonTypeDialog polyTypeDialog;
     //PolygonPropDialog polyPropDialog;
     SidePropDialog sidePropDialog;

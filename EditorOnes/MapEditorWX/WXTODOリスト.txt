@@ -305,6 +305,14 @@ TODO _map_object_hanging_from_ceilingの時は天井からのDeltaで設定するべきか？
 HPLMapToolModifier.cpp
 changeIndexMapping(...)
 はバグの温床。
+fixLine
+fixPolygonで失敗してる
+deleteMapItems単体は特に問題ない？
+削除したはずのものが削除されていない
 
 インデックスマップに登録されているものたちはそれらの中で完結しているものとし、
 登録されているもの以外へのリンクは基本的にNONEとする。
+
+
+オブジェクトをポリゴンのないところに移動したら警告
+他のポリゴンへ移動したら番号変更

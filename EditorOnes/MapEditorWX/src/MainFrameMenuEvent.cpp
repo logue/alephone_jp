@@ -216,11 +216,11 @@ void MapEditorMainFrame::OnSaveAs(wxCommandEvent& ev)
 		//dynamic_world->map_index_count = 1;
 
 		//インデックスが正しいかどうか検査
-		for(int i = 0; i < EndpointList.size(); i ++){
+		for(int i = 0; i < (int)EndpointList.size(); i ++){
 			endpoint_data* ep = get_endpoint_data(i);
 			wxASSERT(ep->supporting_polygon_index >= 0);
 		}
-		for(int i = 0; i < LineList.size(); i ++){
+		for(int i = 0; i < (int)LineList.size(); i ++){
 			line_data* line = get_line_data(i);
 			wxASSERT(line->clockwise_polygon_owner >= NONE);
 			wxASSERT(line->clockwise_polygon_side_index >= NONE);
@@ -230,7 +230,7 @@ void MapEditorMainFrame::OnSaveAs(wxCommandEvent& ev)
 				wxASSERT(line->endpoint_indexes[j] >= 0);
 			}
 		}
-		for(int i = 0; i < PolygonList.size(); i ++){
+		for(int i = 0; i < (int)PolygonList.size(); i ++){
 			polygon_data* poly = get_polygon_data(i);
 			wxASSERT(poly->first_object >= NONE);
 			for(int j = 0; j < poly->vertex_count; j ++){
@@ -240,13 +240,13 @@ void MapEditorMainFrame::OnSaveAs(wxCommandEvent& ev)
 				wxASSERT(poly->side_indexes[j] >= NONE);
 			}
 		}
-		for(int i = 0; i < SideList.size(); i ++){
+		for(int i = 0; i < (int)SideList.size(); i ++){
 			side_data* side = get_side_data(i);
 			wxASSERT(side->line_index >= 0);
 			wxASSERT(side->polygon_index >= 0);
 		}
 
-		for(int i = 0; i < PlatformList.size(); i ++){
+		for(int i = 0; i < (int)PlatformList.size(); i ++){
 			platform_data* platform = &PlatformList[i];
 			wxASSERT(platform->polygon_index >= 0);
 		}
@@ -547,7 +547,7 @@ void MapEditorMainFrame::OnDrawPolygonMode(wxCommandEvent& ev)
 void MapEditorMainFrame::closeAllModelessDialogs()
 {
     this->objPropDialog.Show(false);
-    this->pointPropDialog.Show(false);
+//    this->pointPropDialog.Show(false);
     //this->polyPropDialog.Show(false);
     //this->linePropDialog.Show(false);
     this->sidePropDialog.Show(false);
@@ -766,8 +766,14 @@ void MapEditorMainFrame::OnPointProp(wxCommandEvent& ev)
 {
 	//編集設定
 	wxGetApp().isChanged = true;
-    this->pointPropDialog.setIndex(wxGetApp().popupEndpointIndex);
-    this->pointPropDialog.Show(true);
+	PointPropDialog dlg;
+	int endpointIndex = wxGetApp().popupEndpointIndex;
+	dlg.Create(this, wxID_ANY, endpointIndex);
+	if(dlg.ShowModal() == wxID_OK){
+		endpoint_data data = dlg.getEndpoint();
+		endpoint_data* org = get_endpoint_data(endpointIndex);
+		obj_copy(*org, data);
+	}
 }
 
 /**
