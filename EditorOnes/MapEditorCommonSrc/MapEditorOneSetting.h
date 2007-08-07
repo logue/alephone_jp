@@ -89,6 +89,10 @@ const int NUMBER_OF_PLATFORM_SPEEDS = 5;
 //プラットフォームのディレイ
 const int NUMBER_OF_PLATFORM_DELAYS = 5;
 
+//Side nums
+const int NUMBER_OF_SIDE_FLAGS = 8;
+const int NUMBER_OF_SIDE_TYPES = 5;
+
 //point flags
 enum
 {

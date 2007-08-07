@@ -132,6 +132,11 @@ public:
 	//Platform delay
 	hpl::aleph::InformationBinded platformDelayInfo[NUMBER_OF_PLATFORM_DELAYS];
 
+	//Side flags
+	hpl::aleph::InformationBinded sideFlagInfo[NUMBER_OF_SIDE_FLAGS];
+	hpl::aleph::Information sideControlPanelTypeInfo[NUMBER_OF_CONTROL_PANELS];
+	hpl::aleph::Information sideTypeInfo[NUMBER_OF_SIDE_TYPES];
+
     ////////////////////////
     //ëIëèÓïÒ
     //ëIëëŒè€ÇÃID
