@@ -90,6 +90,10 @@ public:
     virtual ~SidePropDialog();
     //イベントテーブル作成<en>declare
     DECLARE_EVENT_TABLE()
+	void OnOk(wxCommandEvent& ev);
+	void OnCancel(wxCommandEvent& ev);
+	void OnControlPanelTypeChoice(wxCommandEvent& ev);
+	void setupPermutationChoice(int controlPanelType);
 public:
 	side_data getSide();
 };

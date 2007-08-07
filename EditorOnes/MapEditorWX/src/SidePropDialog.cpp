@@ -255,6 +255,67 @@ bool SidePropDialog::Create(wxWindow* parent, wxWindowID id, int sideIndex)
 	this->index = sideIndex;
 
 	//combo setup
+	//	type
+	for(int i = 0; i < NUMBER_OF_SIDE_TYPES; i ++){
+		this->choice_27->Insert(
+			wxConvertMB2WX(wxGetApp().sideTypeInfo[i].jname.c_str()), i);
+	}
+	//	control panel type
+	for(int i = 0; i < NUMBER_OF_CONTROL_PANELS; i ++){
+		this->choice_25->Insert(
+			wxConvertMB2WX(wxGetApp(),sideControlPanelTypeInfo[i].jname.c_str()), i);
+	}
+	//lights
+	for(int i = 0; i < (int)LightList.size(); i ++){
+		this->choice_24->Insert(getString("%d", i), i);
+		this->choice_24_copy->Insert(getString("%d", i), i);
+		this->choice_24_copy_1->Insert(getString("%d", i), i);
+	}
+	this->choice_24->Insert(_T("NONE"), i);
+	this->choice_24->Insert(_T("NONE"), i);
+	this->choice_24_copy->Insert(_T("NONE"), i);
+
+	side_data* side = get_side_data(sideIndex);
+	wxASSERT(hpl::aleph::map::isValidIndex(sideIndex, SideList.size()));
+
+	/*
+		permutation
+		スイッチ対象。
+		コントロールパネルタイプが
+		・ライトスイッチならライト番号
+		・プラットフォームスイッチならプラットフォーム番号
+		・TagスイッチならTag番号
+		が入ります。
+		ダイアログ起動時とコントロールパネルタイプ変更時にこれらを
+		切り替える必要があります。
+	*/
+	this->setupPermutationChoice(side->control_panel_type);
+
+	////////////////
+	//Sideを反映
+	this->text_ctrl_55->SetValue(getString("%d", sideIndex));
+	this->choice_27->SetSelection(side->type);
+	this->checkbox_68->SetValue(side->flags & _side_is_control_panel);
+	this->checkbox_69->SetValue(side->flags & _side_is_repair_switch);
+	this->checkbox_70->SetValue(side->flags & _control_panel_status);
+	this->choice_25->SetSelection(side->control_panel_type);
+	this->checkbox_71->SetValue(side->flags & _editor_dirty_bit);
+	this->checkbox_72->SetValue(side->flags & _side_is_destructive_switch);
+	this->checkbox_73->SetValue(side->flags & _side_is_lighted_switch);
+	this->checkbox_74->SetValue(side->flags & _side_switch_can_be_destroyed);
+	this->checkbox_75->SetValue(side->flags & _side_switch_can_only_be_hit_by_projectiles);
+	//exclusion
+	this->text_ctrl_61->SetValue(getString("%d", side->exclusion_zone.e0.x));
+	this->text_ctrl_65->SetValue(getString("%d", side->exclusion_zone.e0.y));
+	this->text_ctrl_62->SetValue(getString("%d", side->exclusion_zone.e1.x));
+	this->text_ctrl_66->SetValue(getString("%d", side->exclusion_zone.e1.y));
+	this->text_ctrl_63->SetValue(getString("%d", side->exclusion_zone.e2.x));
+	this->text_ctrl_67->SetValue(getString("%d", side->exclusion_zone.e2.y));
+	this->text_ctrl_64->SetValue(getString("%d", side->exclusion_zone.e3.x));
+	this->text_ctrl_68->SetValue(getString("%d", side->exclusion_zone.e3.y));
+	this->text_ctrl_70->SetValue(getString("%d", side->polygon_index));
+	this->text_ctrl_57->SetValue(getString("%d", side->line_index));
+	this->text_ctrl_69->SetValue(getString("%d", side->ambient_delta));
 
     return result;
 }
@@ -266,9 +327,43 @@ int SidePropDialog::getIndex()
 {
     return this->index;
 }
+void SidePropDialog::OnOk(wxCommandEvent& ev)
+{
+    SetReturnCode(wxID_OK);
+    Destroy();
+}
+void SidePropDialog::OnCancel(wxCommandEvent& ev)
+{
+    SetReturnCode(wxID_CANCEL);
+    Destroy();
+}
+void SidePropDialog::OnControlPanelTypeChoice(wxCommandEvent& ev)
+{
+	//スイッチング
+	this->setupPermutationChoice(ev.GetSelection());
+}
+void SidePropDialog::setupPermutationChoice(int controlPanelType)
+{
+	int max = (int)LightList.size();
+	if(controlPanelType == _panel_is_light_switch){
+	}else if(controlPanelType == _panel_is_platform_switch){
+		max = (int)PlatformList.size();
+	}else if(controlPanelType == _panel_is_tag_switch){
+		//TODO tag?
+		max = 0;
+	}else{
+		max = 0;
+	}
+	this->choice_26->Clear();
+	for(int i = 0; i < max; i ++){
+		this->choice_26->Insert(getString("%d", i), i);
+	}
+	this->choice_26->Insert(_T("NONE"), max);
+}
+
 side_data SidePropDialog::getSide()
 {
 	side_data data;
-	wxASSERT(false);
+	//設定を反映
 	return data;
 }
