@@ -116,7 +116,7 @@ public:
     //PointPropDialog pointPropDialog;
     PolygonTypeDialog polyTypeDialog;
     //PolygonPropDialog polyPropDialog;
-    SidePropDialog sidePropDialog;
+    //SidePropDialog sidePropDialog;
     /**
         stocked textures
         [collection][clut][index]
@@ -493,4 +493,6 @@ private:
 	*
 	void getOffset(int mouseX, int mouseY, world_point2d targetWorldPoint, int dest[2]);
 	*/
+
+	void openSidePropDialog(int sideIndex);
 };

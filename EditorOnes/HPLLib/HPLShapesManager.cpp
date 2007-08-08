@@ -5,6 +5,54 @@
 const int SCREEN_BPP = 32;
 const int NEW_SURFACE_BPP = SCREEN_BPP;
 
+ShapesImageInformation::ShapesImageInformation(int shapesDescriptor)
+{
+	int colAndCLUT = GET_DESCRIPTOR_COLLECTION(shapesDescriptor);
+	this->collection = GET_COLLECTION(colAndCLUT);
+	this->clut = GET_COLLECTION_CLUT(colAndCLUT);
+	this->shapes = GET_DESCRIPTOR_SHAPE(shapesDescriptor);
+}
+ShapesImageInformation::ShapesImageInformation(int col, int clut_, int shps)
+{
+	this->setCollection(col);
+	this->setCLUT(clut_);
+	this->setShapes(shps);
+}
+ShapesImageInformation::~ShapesImageInformation()
+{
+}
+int ShapesImageInformation::getCollection()
+{
+	return this->collection;
+}
+int ShapesImageInformation::getCLUT()
+{
+	return this->clut;
+}
+int ShapesImageInformation::getShapes()
+{
+	return this->shapes;
+}
+void ShapesImageInformation::setCollection(int col)
+{
+	this->collection = col;
+}
+void ShapesImageInformation::setCLUT(int clut_)
+{
+	this->clut = clut_;
+}
+void ShapesImageInformation::setShapes(int shps)
+{
+	this->shapes = shps;
+}
+int ShapesImageInformation::getDescriptor()
+{
+	int colAndCLUT = BUILD_COLLECTION(this->getCollection(), this->getCLUT());
+	int shapesDescriptor = BUILD_DESCRIPTOR(colAndCLUT, this->getShapes());
+	return shapesDescriptor;
+}
+
+/////////////////////////////////
 hpl::shapes::HPLShapesManager::HPLShapesManager()
 {
     this->isLoadedShapesFile_ = false;

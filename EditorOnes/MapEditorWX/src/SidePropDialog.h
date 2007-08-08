@@ -55,7 +55,8 @@ class SidePropDialog: public wxDialog{
     wxTextCtrl* text_ctrl_58;
     wxStaticText* label_84;
     wxTextCtrl* text_ctrl_59;
-    wxPanel* panel_14;
+    wxBitmapButton* bitmap_button_7;
+//    wxPanel* panel_14;
     wxStaticText* label_85;
     wxTextCtrl* text_ctrl_60;
     wxStaticText* label_86;
@@ -64,7 +65,8 @@ class SidePropDialog: public wxDialog{
     wxTextCtrl* text_ctrl_58_copy;
     wxStaticText* label_84_copy;
     wxTextCtrl* text_ctrl_59_copy;
-    wxPanel* panel_14_copy;
+//    wxPanel* panel_14_copy;
+    wxBitmapButton* bitmap_button_7_copy;
     wxStaticText* label_85_copy;
     wxTextCtrl* text_ctrl_60_copy;
     wxStaticText* label_86_copy;
@@ -73,7 +75,8 @@ class SidePropDialog: public wxDialog{
     wxTextCtrl* text_ctrl_58_copy_1;
     wxStaticText* label_84_copy_1;
     wxTextCtrl* text_ctrl_59_copy_1;
-    wxPanel* panel_14_copy_1;
+//    wxPanel* panel_14_copy_1;
+    wxBitmapButton* bitmap_button_7_copy_1;
     wxStaticText* label_85_copy_1;
     wxTextCtrl* text_ctrl_60_copy_1;
     wxStaticText* label_86_copy_1;
@@ -84,6 +87,11 @@ class SidePropDialog: public wxDialog{
     int index;
     void setIndex(int ind);
     int getIndex();
+	void setupTextureButtons(bool isLoadedShapesFile,
+		int sideIndex);
+	ShapesImageInformation primaryTextureImage;
+	ShapesImageInformation secondaryTextureImage;
+	ShapesImageInformation transparentTextureImage;
 public:
     SidePropDialog();
     bool Create(wxWindow* parent, wxWindowID id, int sideIndex);
@@ -94,6 +102,9 @@ public:
 	void OnCancel(wxCommandEvent& ev);
 	void OnControlPanelTypeChoice(wxCommandEvent& ev);
 	void setupPermutationChoice(int controlPanelType);
+	void setTextureButtonImage(int shapesDescriptor,
+								  wxBitmapButton* btn);
+
 public:
 	side_data getSide();
 };

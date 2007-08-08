@@ -165,16 +165,8 @@ public:
     //プリセットで追加するポリゴンの頂点数
     int nPolygonPoints;
 
-    //テクスチャデータ
-    //TODO texture
-    std::vector<std::vector<wxBitmap> > textureBitmaps;
-
-    //編集モードとメニューIDの対応
-    //TODO menu
-//    std::map<int, int> menuIDMap;
-
-    //リソースファイル(試験的に定義)
-//    wxXmlResource xrc;
+	//NONE bitmap
+	wxImage noneImage;
 
     //高さが範囲外の線を表示するかどうか(デフォルト:false)
     bool isRevealHiddenLines;

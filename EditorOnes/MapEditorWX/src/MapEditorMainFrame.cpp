@@ -118,12 +118,15 @@ MapEditorMainFrame::MapEditorMainFrame(const wxString& title,
     //プロパティ
     this->objPropDialog.Create(this, wxID_ANY);
     this->polyTypeDialog.Create(this, wxID_ANY);
-    this->sidePropDialog.Create(this, wxID_ANY);
+//    this->sidePropDialog.Create(this, wxID_ANY);
 
     this->initLevel();
 
 	hpl::shapes::HPLShapesManager* shpmgr = wxGetApp().getShapesManager();
     shpmgr->initScreen();
+
+	//load NONE image
+	wxGetApp().noneImage.LoadFile(_T("data/img/NONE.bmp"));
 
     //Shapesファイル読み込み
     const char* SHAPES_FILE_PATH = "Shapes.shpA";

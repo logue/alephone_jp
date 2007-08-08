@@ -1,7 +1,13 @@
 #include "SidePropDialog.h"
 #include "MapEditorWX.h"
+#include "MapEditorMainFrame.h"
+
+const int BTN_IMG_LBL_SIZE = 32;
+
+
 BEGIN_EVENT_TABLE(SidePropDialog, wxDialog)
 END_EVENT_TABLE()
+
 SidePropDialog::SidePropDialog()
 {
 }
@@ -13,6 +19,7 @@ bool SidePropDialog::Create(wxWindow* parent, wxWindowID id, int sideIndex)
     bool result = wxDialog::Create(parent, id, _T("Side Properties"));
 	wxASSERT(result);
 
+	wxImage noneImg = wxGetApp().noneImage.Scale(BTN_IMG_LBL_SIZE, BTN_IMG_LBL_SIZE);
     // begin wxGlade: SidePropDialog::SidePropDialog
     sizer_56_staticbox = new wxStaticBox(this, -1, wxT("Exclusion (Impassible) zone"));
     sizer_57_staticbox = new wxStaticBox(this, -1, wxT("Primary texture"));
@@ -22,10 +29,7 @@ bool SidePropDialog::Create(wxWindow* parent, wxWindowID id, int sideIndex)
     label_80 = new wxStaticText(this, wxID_ANY, wxT("id"));
     text_ctrl_55 = new wxTextCtrl(this, wxID_ANY, wxEmptyString);
     label_81 = new wxStaticText(this, wxID_ANY, wxT("type"));
-    const wxString choice_27_choices[] = {
-        
-    };
-    choice_27 = new wxChoice(this, wxID_ANY, wxDefaultPosition, wxDefaultSize, 0, choice_27_choices, 0);
+    choice_27 = new wxChoice(this, wxID_ANY);
     checkbox_68 = new wxCheckBox(this, wxID_ANY, wxT("control panel"));
     checkbox_69 = new wxCheckBox(this, wxID_ANY, wxT("repair switch"));
     checkbox_70 = new wxCheckBox(this, wxID_ANY, wxT("status"));
@@ -68,7 +72,9 @@ bool SidePropDialog::Create(wxWindow* parent, wxWindowID id, int sideIndex)
     text_ctrl_58 = new wxTextCtrl(this, wxID_ANY, wxEmptyString);
     label_84 = new wxStaticText(this, wxID_ANY, wxT("y"));
     text_ctrl_59 = new wxTextCtrl(this, wxID_ANY, wxEmptyString);
-    panel_14 = new wxPanel(this, wxID_ANY);
+//    panel_14 = new wxPanel(this, wxID_ANY);
+    bitmap_button_7 = new wxBitmapButton(this, wxID_ANY, noneImg);
+
     label_85 = new wxStaticText(this, wxID_ANY, wxT("transfer mode"));
     text_ctrl_60 = new wxTextCtrl(this, wxID_ANY, wxEmptyString);
     label_86 = new wxStaticText(this, wxID_ANY, wxT("light"));
@@ -77,7 +83,9 @@ bool SidePropDialog::Create(wxWindow* parent, wxWindowID id, int sideIndex)
     text_ctrl_58_copy = new wxTextCtrl(this, wxID_ANY, wxEmptyString);
     label_84_copy = new wxStaticText(this, wxID_ANY, wxT("y"));
     text_ctrl_59_copy = new wxTextCtrl(this, wxID_ANY, wxEmptyString);
-    panel_14_copy = new wxPanel(this, wxID_ANY);
+//    panel_14_copy = new wxPanel(this, wxID_ANY);
+    bitmap_button_7_copy = new wxBitmapButton(this, wxID_ANY, noneImg);
+
     label_85_copy = new wxStaticText(this, wxID_ANY, wxT("transfer mode"));
     text_ctrl_60_copy = new wxTextCtrl(this, wxID_ANY, wxEmptyString);
     label_86_copy = new wxStaticText(this, wxID_ANY, wxT("light"));
@@ -86,7 +94,9 @@ bool SidePropDialog::Create(wxWindow* parent, wxWindowID id, int sideIndex)
     text_ctrl_58_copy_1 = new wxTextCtrl(this, wxID_ANY, wxEmptyString);
     label_84_copy_1 = new wxStaticText(this, wxID_ANY, wxT("y"));
     text_ctrl_59_copy_1 = new wxTextCtrl(this, wxID_ANY, wxEmptyString);
-    panel_14_copy_1 = new wxPanel(this, wxID_ANY);
+//    panel_14_copy_1 = new wxPanel(this, wxID_ANY);
+    bitmap_button_7_copy_1 = new wxBitmapButton(this, wxID_ANY, noneImg);
+
     label_85_copy_1 = new wxStaticText(this, wxID_ANY, wxT("transfer mode"));
     text_ctrl_60_copy_1 = new wxTextCtrl(this, wxID_ANY, wxEmptyString);
     label_86_copy_1 = new wxStaticText(this, wxID_ANY, wxT("light"));
@@ -105,9 +115,14 @@ bool SidePropDialog::Create(wxWindow* parent, wxWindowID id, int sideIndex)
     text_ctrl_68->SetMinSize(wxSize(50, -1));
     text_ctrl_70->SetMinSize(wxSize(50, -1));
     text_ctrl_57->SetMinSize(wxSize(50, -1));
+	/*
     panel_14->SetMinSize(wxSize(45,45));
     panel_14_copy->SetMinSize(wxSize(45,45));
     panel_14_copy_1->SetMinSize(wxSize(45,45));
+	*/
+    bitmap_button_7->SetMinSize(wxSize(45, 45));
+    bitmap_button_7_copy->SetMinSize(wxSize(45, 45));
+    bitmap_button_7_copy_1->SetMinSize(wxSize(45, 45));
 
     wxFlexGridSizer* grid_sizer_47 = new wxFlexGridSizer(2, 2, 0, 0);
     wxFlexGridSizer* grid_sizer_48 = new wxFlexGridSizer(1, 2, 0, 0);
@@ -205,7 +220,9 @@ bool SidePropDialog::Create(wxWindow* parent, wxWindowID id, int sideIndex)
     grid_sizer_61->Add(label_84, 0, 0, 0);
     grid_sizer_61->Add(text_ctrl_59, 0, 0, 0);
     grid_sizer_60->Add(grid_sizer_61, 1, wxEXPAND, 0);
-    grid_sizer_60->Add(panel_14, 1, wxEXPAND, 0);
+//    grid_sizer_60->Add(panel_14, 1, wxEXPAND, 0);
+    grid_sizer_60->Add(bitmap_button_7, 0, wxEXPAND, 0);
+
     sizer_57->Add(grid_sizer_60, 1, wxEXPAND, 0);
     grid_sizer_62->Add(label_85, 0, 0, 0);
     grid_sizer_62->Add(text_ctrl_60, 0, 0, 0);
@@ -218,7 +235,9 @@ bool SidePropDialog::Create(wxWindow* parent, wxWindowID id, int sideIndex)
     grid_sizer_61_copy->Add(label_84_copy, 0, 0, 0);
     grid_sizer_61_copy->Add(text_ctrl_59_copy, 0, 0, 0);
     grid_sizer_60_copy->Add(grid_sizer_61_copy, 1, wxEXPAND, 0);
-    grid_sizer_60_copy->Add(panel_14_copy, 1, wxEXPAND, 0);
+//    grid_sizer_60_copy->Add(panel_14_copy, 1, wxEXPAND, 0);
+    grid_sizer_60_copy->Add(bitmap_button_7_copy, 0, wxEXPAND, 0);
+
     sizer_57_copy->Add(grid_sizer_60_copy, 1, wxEXPAND, 0);
     grid_sizer_62_copy->Add(label_85_copy, 0, 0, 0);
     grid_sizer_62_copy->Add(text_ctrl_60_copy, 0, 0, 0);
@@ -231,7 +250,9 @@ bool SidePropDialog::Create(wxWindow* parent, wxWindowID id, int sideIndex)
     grid_sizer_61_copy_1->Add(label_84_copy_1, 0, 0, 0);
     grid_sizer_61_copy_1->Add(text_ctrl_59_copy_1, 0, 0, 0);
     grid_sizer_60_copy_1->Add(grid_sizer_61_copy_1, 1, wxEXPAND, 0);
-    grid_sizer_60_copy_1->Add(panel_14_copy_1, 1, wxEXPAND, 0);
+//    grid_sizer_60_copy_1->Add(panel_14_copy_1, 1, wxEXPAND, 0);
+    grid_sizer_60_copy_1->Add(bitmap_button_7_copy_1, 0, wxEXPAND, 0);
+
     sizer_57_copy_1->Add(grid_sizer_60_copy_1, 1, wxEXPAND, 0);
     grid_sizer_62_copy_1->Add(label_85_copy_1, 0, 0, 0);
     grid_sizer_62_copy_1->Add(text_ctrl_60_copy_1, 0, 0, 0);
@@ -263,7 +284,7 @@ bool SidePropDialog::Create(wxWindow* parent, wxWindowID id, int sideIndex)
 	//	control panel type
 	for(int i = 0; i < NUMBER_OF_CONTROL_PANELS; i ++){
 		this->choice_25->Insert(
-			wxConvertMB2WX(wxGetApp(),sideControlPanelTypeInfo[i].jname.c_str()), i);
+			wxConvertMB2WX(wxGetApp().sideControlPanelTypeInfo[i].jname.c_str()), i);
 	}
 	//lights
 	for(int i = 0; i < (int)LightList.size(); i ++){
@@ -271,9 +292,10 @@ bool SidePropDialog::Create(wxWindow* parent, wxWindowID id, int sideIndex)
 		this->choice_24_copy->Insert(getString("%d", i), i);
 		this->choice_24_copy_1->Insert(getString("%d", i), i);
 	}
-	this->choice_24->Insert(_T("NONE"), i);
-	this->choice_24->Insert(_T("NONE"), i);
-	this->choice_24_copy->Insert(_T("NONE"), i);
+	int max = (int)LightList.size();
+	this->choice_24->Insert(_T("NONE"), max);
+	this->choice_24->Insert(_T("NONE"), max);
+	this->choice_24_copy->Insert(_T("NONE"), max);
 
 	side_data* side = get_side_data(sideIndex);
 	wxASSERT(hpl::aleph::map::isValidIndex(sideIndex, SideList.size()));
@@ -290,20 +312,29 @@ bool SidePropDialog::Create(wxWindow* parent, wxWindowID id, int sideIndex)
 		切り替える必要があります。
 	*/
 	this->setupPermutationChoice(side->control_panel_type);
+	for(int i = 0; i < (int)LightList.size(); i ++){
+		this->choice_24->Insert(getString("%d", i), i);
+		this->choice_24_copy->Insert(getString("%d", i), i);
+		this->choice_24_copy_1->Insert(getString("%d", i), i);
+	}
+	this->choice_24->Insert(_T("NONE"), (int)LightList.size());
+	this->choice_24_copy->Insert(_T("NONE"), (int)LightList.size());
+	this->choice_24_copy_1->Insert(_T("NONE"), (int)LightList.size());
 
 	////////////////
 	//Sideを反映
 	this->text_ctrl_55->SetValue(getString("%d", sideIndex));
+	this->choice_26->SetSelection(side->control_panel_permutation);
 	this->choice_27->SetSelection(side->type);
-	this->checkbox_68->SetValue(side->flags & _side_is_control_panel);
-	this->checkbox_69->SetValue(side->flags & _side_is_repair_switch);
-	this->checkbox_70->SetValue(side->flags & _control_panel_status);
+	this->checkbox_68->SetValue(side->flags & _side_is_control_panel != 0);
+	this->checkbox_69->SetValue(side->flags & _side_is_repair_switch != 0);
+	this->checkbox_70->SetValue(side->flags & _control_panel_status != 0);
 	this->choice_25->SetSelection(side->control_panel_type);
-	this->checkbox_71->SetValue(side->flags & _editor_dirty_bit);
-	this->checkbox_72->SetValue(side->flags & _side_is_destructive_switch);
-	this->checkbox_73->SetValue(side->flags & _side_is_lighted_switch);
-	this->checkbox_74->SetValue(side->flags & _side_switch_can_be_destroyed);
-	this->checkbox_75->SetValue(side->flags & _side_switch_can_only_be_hit_by_projectiles);
+	this->checkbox_71->SetValue(side->flags & _editor_dirty_bit != 0);
+	this->checkbox_72->SetValue(side->flags & _side_is_destructive_switch != 0);
+	this->checkbox_73->SetValue(side->flags & _side_is_lighted_switch != 0);
+	this->checkbox_74->SetValue(side->flags & _side_switch_can_be_destroyed != 0);
+	this->checkbox_75->SetValue(side->flags & _side_switch_can_only_be_hit_by_projectiles != 0);
 	//exclusion
 	this->text_ctrl_61->SetValue(getString("%d", side->exclusion_zone.e0.x));
 	this->text_ctrl_65->SetValue(getString("%d", side->exclusion_zone.e0.y));
@@ -317,8 +348,82 @@ bool SidePropDialog::Create(wxWindow* parent, wxWindowID id, int sideIndex)
 	this->text_ctrl_57->SetValue(getString("%d", side->line_index));
 	this->text_ctrl_69->SetValue(getString("%d", side->ambient_delta));
 
-    return result;
+	//textures / lights
+	this->setupTextureButtons(wxGetApp().getShapesManager()->isLoadedShapesFile(),
+		this->getIndex());
+	this->primaryTextureImage = ShapesImageInformation(side->primary_texture.texture);
+	this->secondaryTextureImage = ShapesImageInformation(side->secondary_texture.texture);
+	this->transparentTextureImage = ShapesImageInformation(side->transparent_texture.texture);
+	{
+		this->text_ctrl_58->SetValue(getString("%d", side->primary_texture.x0));
+		this->text_ctrl_59->SetValue(getString("%d", side->primary_texture.y0));
+		this->text_ctrl_60->SetValue(getString("%d", side->primary_transfer_mode));
+		int index = side->primary_lightsource_index;
+		if(index == NONE){
+			index = (int)LightList.size();
+		}
+		this->choice_24->SetSelection(index);
+	}
+
+	{
+		this->text_ctrl_58_copy->SetValue(getString("%d", side->secondary_texture.x0));
+		this->text_ctrl_59_copy->SetValue(getString("%d", side->secondary_texture.y0));
+		this->text_ctrl_60_copy->SetValue(getString("%d", side->secondary_transfer_mode));
+		int index = side->secondary_lightsource_index;
+		if(index == NONE){
+			index = (int)LightList.size();
+		}
+		this->choice_24_copy->SetSelection(index);
+	}
+	{
+		this->text_ctrl_58_copy_1->SetValue(getString("%d", side->transparent_texture.x0));
+		this->text_ctrl_59_copy_1->SetValue(getString("%d", side->transparent_texture.y0));
+		this->text_ctrl_60_copy_1->SetValue(getString("%d", side->transparent_transfer_mode));
+		int index = side->transparent_lightsource_index;
+		if(index == NONE){
+			index = (int)LightList.size();
+		}
+		this->choice_24_copy_1->SetSelection(index);
+	}
+	return result;
 }
+void SidePropDialog::setTextureButtonImage(int shapesDescriptor,
+								  wxBitmapButton* btn)
+{
+	if(shapesDescriptor == NONE || shapesDescriptor == UNONE){
+		//TODO put the "NONE" image label on this button
+		btn->SetImageLabel(wxGetApp().noneImage.Scale(BTN_IMG_LBL_SIZE, BTN_IMG_LBL_SIZE));
+	}else{
+		std::map<int, std::map<int, std::map<int, wxImage> > >* tmap = 
+			&((MapEditorMainFrame*)GetParent())->textureMap;
+
+		int collectionAndCLUT = GET_DESCRIPTOR_COLLECTION(shapesDescriptor);
+		int collection = GET_COLLECTION(collectionAndCLUT);
+		int clut = GET_COLLECTION_CLUT(collectionAndCLUT);
+		int shapes = GET_DESCRIPTOR_SHAPE(shapesDescriptor);
+
+		wxImage* img = &tmap->find(collection)->second[clut][shapes];
+		btn->SetImageLabel(wxBitmap(img->Scale(BTN_IMG_LBL_SIZE, BTN_IMG_LBL_SIZE)));
+	}
+}
+
+/**
+	テクスチャボタンを設定します
+*/
+void SidePropDialog::setupTextureButtons(bool isLoadedShapesFile,
+										 int sideIndex)
+{
+	if(isLoadedShapesFile){
+		//イメージデータを取得します
+		side_data* side = get_side_data(sideIndex);
+		wxASSERT(hpl::aleph::map::isValidIndex(sideIndex, SideList.size()));
+		setTextureButtonImage(side->primary_texture.texture, bitmap_button_7);
+		setTextureButtonImage(side->secondary_texture.texture, bitmap_button_7_copy);
+		setTextureButtonImage(side->transparent_texture.texture, bitmap_button_7_copy_1);
+		Refresh();
+	}
+}
+
 void SidePropDialog::setIndex(int ind)
 {
     this->index = ind;
@@ -365,5 +470,63 @@ side_data SidePropDialog::getSide()
 {
 	side_data data;
 	//設定を反映
+	//permutation
+	{
+		int index = this->choice_26->GetSelection();
+		if(index == this->choice_26->GetCount() - 1){
+			index = NONE;
+		}
+		data.control_panel_permutation = index;
+	}
+	data.type = choice_27->GetSelection();
+	SET_FLAG(data.flags, _side_is_control_panel, checkbox_68->GetValue());
+	SET_FLAG(data.flags, _side_is_repair_switch, checkbox_69->GetValue());
+	SET_FLAG(data.flags, _control_panel_status, checkbox_70->GetValue());
+	data.control_panel_type = choice_25->GetSelection();
+	SET_FLAG(data.flags, _editor_dirty_bit, checkbox_71->GetValue());
+	SET_FLAG(data.flags, _side_is_destructive_switch, checkbox_72->GetValue());
+	SET_FLAG(data.flags, _side_is_lighted_switch, checkbox_73->GetValue());
+	SET_FLAG(data.flags, _side_switch_can_be_destroyed, checkbox_74->GetValue());
+	SET_FLAG(data.flags, _side_switch_can_only_be_hit_by_projectiles, checkbox_75->GetValue());
+	//exclusion
+	data.exclusion_zone.e0.x = atoi(text_ctrl_61->GetValue().mb_str());
+	data.exclusion_zone.e0.y = atoi(text_ctrl_65->GetValue().mb_str());
+	data.exclusion_zone.e1.x = atoi(text_ctrl_62->GetValue().mb_str());
+	data.exclusion_zone.e1.y = atoi(text_ctrl_66->GetValue().mb_str());
+	data.exclusion_zone.e2.x = atoi(text_ctrl_63->GetValue().mb_str());
+	data.exclusion_zone.e2.y = atoi(text_ctrl_67->GetValue().mb_str());
+	data.exclusion_zone.e3.x = atoi(text_ctrl_64->GetValue().mb_str());
+	data.exclusion_zone.e3.y = atoi(text_ctrl_68->GetValue().mb_str());
+	data.polygon_index = atoi(text_ctrl_70->GetValue().mb_str());
+	data.line_index = atoi(text_ctrl_57->GetValue().mb_str());
+	data.ambient_delta = atoi(text_ctrl_69->GetValue().mb_str());
+	//texture / lights
+	{
+		data.primary_texture.texture = this->primaryTextureImage.getDescriptor();
+		data.primary_texture.x0 = atoi(text_ctrl_58->GetValue().mb_str());
+		data.primary_texture.y0 = atoi(text_ctrl_59->GetValue().mb_str());
+		data.primary_transfer_mode = atoi(text_ctrl_60->GetValue().mb_str());
+		int index = choice_24->GetSelection();
+		if(index == (int)LightList.size())	index = NONE;
+		data.primary_lightsource_index = index;
+	}
+	{
+		data.secondary_texture.texture = this->primaryTextureImage.getDescriptor();
+		data.secondary_texture.x0 = atoi(text_ctrl_58_copy->GetValue().mb_str());
+		data.secondary_texture.y0 = atoi(text_ctrl_59_copy->GetValue().mb_str());
+		data.secondary_transfer_mode = atoi(text_ctrl_60_copy->GetValue().mb_str());
+		int index = choice_24_copy->GetSelection();
+		if(index == (int)LightList.size())	index = NONE;
+		data.secondary_lightsource_index = index;
+	}
+	{
+		data.transparent_texture.texture = this->primaryTextureImage.getDescriptor();
+		data.transparent_texture.x0 = atoi(text_ctrl_58_copy_1->GetValue().mb_str());
+		data.transparent_texture.y0 = atoi(text_ctrl_59_copy_1->GetValue().mb_str());
+		data.transparent_transfer_mode = atoi(text_ctrl_60_copy_1->GetValue().mb_str());
+		int index = choice_24_copy_1->GetSelection();
+		if(index == (int)LightList.size())	index = NONE;
+		data.transparent_lightsource_index = index;
+	}
 	return data;
 }

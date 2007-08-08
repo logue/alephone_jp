@@ -24,6 +24,7 @@
 #include "HPLLib/HPLEventManager.h"
 #include "MapEditorOneSetting.h"
 #include "HPLLib/HPLMapTool.h"
+#include "HPLLib/HPLShapesManager.h"
 
 #include <string>
 #include <set>

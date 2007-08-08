@@ -135,14 +135,14 @@ bool MapEditorWX::initialize()
 
 	//sides
 	//	flags
-	this->sideFlagInfo[0] = _control_panel_status;
-	this->sideFlagInfo[1] = _side_is_control_panel;
-	this->sideFlagInfo[2] = _side_is_repair_switch;
-	this->sideFlagInfo[3] = _side_is_destructive_switch;
-	this->sideFlagInfo[4] = _side_is_lighted_switch;
-	this->sideFlagInfo[5] = _side_switch_can_be_destroyed;
-	this->sideFlagInfo[6] = _side_switch_can_only_be_hit_by_projectiles;
-	this->sideFlagInfo[7] = _editor_dirty_bit;
+	this->sideFlagInfo[0].bind = _control_panel_status;
+	this->sideFlagInfo[1].bind = _side_is_control_panel;
+	this->sideFlagInfo[2].bind = _side_is_repair_switch;
+	this->sideFlagInfo[3].bind = _side_is_destructive_switch;
+	this->sideFlagInfo[4].bind = _side_is_lighted_switch;
+	this->sideFlagInfo[5].bind = _side_switch_can_be_destroyed;
+	this->sideFlagInfo[6].bind = _side_switch_can_only_be_hit_by_projectiles;
+	this->sideFlagInfo[7].bind = _editor_dirty_bit;
 	//	control panel type
 	hpl::aleph::loadInformation("data/SideControlPanelTypes.txt",
 		NUMBER_OF_CONTROL_PANELS,
@@ -167,8 +167,6 @@ bool MapEditorWX::initialize()
         &innerSetting);
     this->getViewGridManager()->setGridIntervalIndex(this->setting.getGridSizeIndex());
     nPolygonPoints = 3;
-
-    //TODO textureBitmaps
 
     //ƒJ[ƒ\ƒ‹“Ç‚İ‚İ <en> load cursor images
     /*

@@ -247,8 +247,8 @@ void MapEditorMainFrame::unselect()
 	//点、線、Side、ポリゴンはモーダルなのでなし
 	if(!sel->isSelectOneObject() && objPropDialog.getObjIndex() != NONE)
 		this->objPropDialog.setObjIndex(NONE);
-	if(!sel->isSelectOneSide() && sidePropDialog.getIndex() != NONE)
-		this->sidePropDialog.setIndex(NONE);
+//	if(!sel->isSelectOneSide() && sidePropDialog.getIndex() != NONE)
+//		this->sidePropDialog.setIndex(NONE);
 }
 
 /**

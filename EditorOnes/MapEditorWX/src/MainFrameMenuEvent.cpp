@@ -552,7 +552,7 @@ void MapEditorMainFrame::closeAllModelessDialogs()
 //    this->pointPropDialog.Show(false);
     //this->polyPropDialog.Show(false);
     //this->linePropDialog.Show(false);
-    this->sidePropDialog.Show(false);
+//    this->sidePropDialog.Show(false);
     this->polyTypeDialog.Show(false);
     this->mediaPaletteDialog.Show(false);
     this->heightPaletteDialog.Show(false);
@@ -752,17 +752,38 @@ void MapEditorMainFrame::OnClockwiseSide(wxCommandEvent& ev)
 {
 	//編集設定
 	wxGetApp().isChanged = true;
-    //TODO
-    this->sidePropDialog.setIndex(get_line_data(wxGetApp().popupLineIndex)->clockwise_polygon_side_index);
-    this->sidePropDialog.Show(true);
+    //this->sidePropDialog.setIndex(get_line_data(wxGetApp().popupLineIndex)->clockwise_polygon_side_index);
+    //this->sidePropDialog.Show(true);
+	int index = get_line_data(wxGetApp().popupLineIndex)->clockwise_polygon_side_index;
+	this->openSidePropDialog(index);
 }
+void MapEditorMainFrame::openSidePropDialog(int sideIndex)
+{
+	if(hpl::aleph::map::isValidIndex(sideIndex, SideList.size())){
+		SidePropDialog dlg;
+		dlg.Create(this, wxID_ANY, sideIndex);
+		if(dlg.ShowModal() == wxID_OK){
+#ifdef MAPVIEWER
+#else
+			side_data data = dlg.getSide();
+			side_data* org = get_side_data(sideIndex);
+			*org = data;
+#endif
+		}
+	}else{
+		hpl::error::caution("invalid side index[%d]", sideIndex);
+	}
+}
+
 void MapEditorMainFrame::OnCounterclockwiseSide(wxCommandEvent& ev)
 {
 	//編集設定
 	wxGetApp().isChanged = true;
     //TODO
-    this->sidePropDialog.setIndex(get_line_data(wxGetApp().popupLineIndex)->counterclockwise_polygon_side_index);
-    this->sidePropDialog.Show(true);
+//    this->sidePropDialog.setIndex(get_line_data(wxGetApp().popupLineIndex)->counterclockwise_polygon_side_index);
+//    this->sidePropDialog.Show(true);
+	int index = get_line_data(wxGetApp().popupLineIndex)->counterclockwise_polygon_side_index;
+	this->openSidePropDialog(index);
 }
 void MapEditorMainFrame::OnPointProp(wxCommandEvent& ev)
 {
@@ -772,9 +793,12 @@ void MapEditorMainFrame::OnPointProp(wxCommandEvent& ev)
 	int endpointIndex = wxGetApp().popupEndpointIndex;
 	dlg.Create(this, wxID_ANY, endpointIndex);
 	if(dlg.ShowModal() == wxID_OK){
+#ifdef MAPVIEWER
+#else
 		endpoint_data data = dlg.getEndpoint();
 		endpoint_data* org = get_endpoint_data(endpointIndex);
 		obj_copy(*org, data);
+#endif
 	}
 }
 
@@ -816,12 +840,3 @@ void MapEditorMainFrame::OnSetVisualModePlayerPosition(wxCommandEvent& ev)
 	wxGetApp().getVisualModeManager()->setPlayerPosition(wpoint.x, wpoint.y, height);
 }
 
-/**
-	マウスと元の座標からオフセットを計算します
-*
-void MapEditorMainFrame::getOffset(int mouseX, int mouseY,
-								   world_point2d targetWorldPoint, 
-								   int dest[2])
-{
-}
-*/

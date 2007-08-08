@@ -24,6 +24,25 @@
 #include "shape_definitions.h"
 #include "shapes_sdl.h"
 
+class ShapesImageInformation{
+	int collection;
+	int clut;
+	int shapes;
+public:
+	ShapesImageInformation(){}
+	ShapesImageInformation(int shapesDescriptor);
+	ShapesImageInformation(int col, int clut_, int shps);
+	~ShapesImageInformation();
+	int getCollection();
+	int getCLUT();
+	int getShapes();
+	void setCollection(int col);
+	void setCLUT(int clut_);
+	void setShapes(int shps);
+	int getDescriptor();
+};
+
+
 namespace hpl{
 namespace shapes{
 	/**

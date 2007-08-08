@@ -459,6 +459,46 @@
 			Filter="rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav"
 			UniqueIdentifier="{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}"
 			>
+			<File
+				RelativePath="..\..\..\..\src\res\Dialogues.cpp"
+				>
+				<FileConfiguration
+					Name="Debug Unicode DLL|Win32"
+					ExcludedFromBuild="true"
+					>
+					<Tool
+						Name="VCCLCompilerTool"
+					/>
+				</FileConfiguration>
+				<FileConfiguration
+					Name="Release Unicode DLL|Win32"
+					ExcludedFromBuild="true"
+					>
+					<Tool
+						Name="VCCLCompilerTool"
+					/>
+				</FileConfiguration>
+			</File>
+			<File
+				RelativePath="..\..\..\..\src\res\Dialogues.h"
+				>
+				<FileConfiguration
+					Name="Debug Unicode DLL|Win32"
+					ExcludedFromBuild="true"
+					>
+					<Tool
+						Name="VCCustomBuildTool"
+					/>
+				</FileConfiguration>
+				<FileConfiguration
+					Name="Release Unicode DLL|Win32"
+					ExcludedFromBuild="true"
+					>
+					<Tool
+						Name="VCCustomBuildTool"
+					/>
+				</FileConfiguration>
+			</File>
 		</Filter>
 		<Filter
 			Name="HPLLib"
@@ -789,6 +829,14 @@
 			</File>
 			<File
 				RelativePath="..\..\..\..\src\TextureDialog.h"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\..\src\TextureSelectDialog.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\..\src\TextureSelectDialog.h"
 				>
 			</File>
 			<File
