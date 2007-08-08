@@ -245,7 +245,7 @@ void MapEditorMainFrame::doLUpOnArrowTool(wxMouseEvent& ev)
 			int wy = obj->location.y;
 			world_point2d wpoint;
 			wpoint.x = wx;
-			wpoint.y;
+			wpoint.y = wy;
 			int vpoint[2];
 			wxGetApp().getViewPointFromWorldPoint(wpoint, vpoint);
 			//ポリゴンの上にあるかチェック
