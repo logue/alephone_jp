@@ -154,16 +154,19 @@ bool HeightPaletteDialog::isFloor(){
 void HeightPaletteDialog::setSelection(int height)
 {
 	int index = NONE;
-	for(int i = 0; i < list_ctrl_3->GetItemCount(); i ++){
+	int max = list_ctrl_3->GetItemCount();
+	for(int i = 0; i < max; i ++){
 		wxListItem item;
 		item.SetId(i);
-		item.SetColumn(0);
-		list_ctrl_3->GetItem(item);
+		item.SetColumn(1);
+		wxASSERT(list_ctrl_3->GetItem(item));
 		//
-		wxString heightStr = item.GetText();
-		if(atoi(heightStr.mb_str()) == height){
+		wxString heightStr = list_ctrl_3->GetItemText(i);
+		const char* str = list_ctrl_3->GetItemText(i).mb_str();//heightStr.mb_str();
+		if(atoi(str) == height){
 			list_ctrl_3->SetItemState(i, wxLIST_STATE_SELECTED, 0);
-			break;
+			return;
 		}
 	}
+	wxASSERT(false);
 }
