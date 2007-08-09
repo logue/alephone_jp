@@ -69,7 +69,7 @@ void ToolDialog::OnPaint(wxPaintEvent& ev)
 #ifdef MAPVIEWER
 		if(i == ToolType::TI_FILL ||
 			i == ToolType::TI_LINE ||
-			i == ToolType::TI_SKULL ||
+//			i == ToolType::TI_SKULL ||
 			i == ToolType::TI_TEXT ||
 			i == ToolType::TI_POLYGON)
 		{
@@ -97,7 +97,7 @@ void ToolDialog::OnLeftDown(wxMouseEvent& ev)
 #ifdef MAPVIEWER
 		if(i == ToolType::TI_FILL ||
 			i == ToolType::TI_LINE ||
-			i == ToolType::TI_SKULL ||
+//			i == ToolType::TI_SKULL ||
 			i == ToolType::TI_TEXT ||
 			i == ToolType::TI_POLYGON)
 		{

@@ -189,9 +189,12 @@
 			/>
 			<Tool
 				Name="VCCLCompilerTool"
+				Optimization="0"
 				AdditionalIncludeDirectories="..\..\..\..\..\..\EditorOnes;..\..\..\..\..\AlephOneSrc;..\..\..\..\..\MapEditorCommonSrc"
-				PreprocessorDefinitions="WIN32;_DEBUG;_WINDOWS;SDL;__WIN32__;__WINDOWS__;__WXMSW__;__WXDEBUG__;WXUSINGDLL;WX;UNICODE;__wxUSEUNICODE__;MAPVIEWER"
+				PreprocessorDefinitions="WIN32;_DEBUG;_WINDOWS;SDL;__WIN32__;__WINDOWS__;__WXMSW__;__WXDEBUG__;WXUSINGDLL;WX;UNICODE;__wxUSEUNICODE__;MAPVIEWER;MAP_VIEWER"
+				MinimalRebuild="true"
 				RuntimeLibrary="3"
+				DebugInformationFormat="4"
 			/>
 			<Tool
 				Name="VCManagedResourceCompilerTool"
@@ -207,6 +210,8 @@
 				AdditionalDependencies="SDL.lib ..\..\..\..\..\AlephOneSrc\lib\AlephOneSrcD.lib wxmsw28ud_core.lib wxbase28ud.lib"
 				OutputFile="$(OutDir)\$(ProjectName)DU.exe"
 				AdditionalLibraryDirectories="&quot;C:\wxWidgets-2.8.4\lib\vc_dll&quot;"
+				GenerateDebugInformation="true"
+				EnableCOMDATFolding="1"
 			/>
 			<Tool
 				Name="VCALinkTool"
@@ -257,8 +262,9 @@
 			/>
 			<Tool
 				Name="VCCLCompilerTool"
+				WholeProgramOptimization="true"
 				AdditionalIncludeDirectories="..\..\..\..\..\..\EditorOnes;..\..\..\..\..\AlephOneSrc;..\..\..\..\..\MapEditorCommonSrc"
-				PreprocessorDefinitions="WIN32;NDEBUG;_WINDOWS;SDL;__WIN32__;__WINDOWS__;__WXMSW__;WXUSINGDLL;WX;UNICODE;__wxUSEUNICODE__;MAPVIEWER"
+				PreprocessorDefinitions="WIN32;NDEBUG;_WINDOWS;SDL;__WIN32__;__WINDOWS__;__WXMSW__;WXUSINGDLL;WX;UNICODE;__wxUSEUNICODE__;MAPVIEWER;MAP_VIEWER"
 				RuntimeLibrary="2"
 			/>
 			<Tool
@@ -275,6 +281,7 @@
 				AdditionalDependencies="SDL.lib ..\..\..\..\..\AlephOneSrc\lib\AlephOneSrc.lib wxmsw28u_core.lib wxbase28u.lib"
 				OutputFile="$(OutDir)\$(ProjectName)U.exe"
 				AdditionalLibraryDirectories="&quot;C:\wxWidgets-2.8.4\lib\vc_dll&quot;"
+				LinkTimeCodeGeneration="1"
 			/>
 			<Tool
 				Name="VCALinkTool"

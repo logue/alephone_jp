@@ -65,6 +65,8 @@ int MapEditorMainFrame::askDestructMap()
 
 void MapEditorMainFrame::OnNew(wxCommandEvent& ev)
 {
+#ifdef MAP_VIEWER
+#else
 	int result = this->askDestructMap();
 	if(result == wxID_YES){
 		//保存します
@@ -87,6 +89,7 @@ void MapEditorMainFrame::OnNew(wxCommandEvent& ev)
     //内容をマップデータに反映
     //TODO
 
+#endif
     Refresh();
 }
 
@@ -282,7 +285,7 @@ void MapEditorMainFrame::OnSavePhysicsFile(wxCommandEvent& ev)
 			str = std::string("P%2d_%s.phyA");
 		}
 		wxString fname = getString(str.c_str(),
-			levelIndex, wxGetApp().levelNameList[levelIndex]);
+			levelIndex, wxGetApp().levelNameList[levelIndex].c_str());
 
 		//ファイル出力先ダイアログ
 		wxString wildcard(_T("AlephOne physics file data(*.phyA)|*.phyA|Any file|*.*"));

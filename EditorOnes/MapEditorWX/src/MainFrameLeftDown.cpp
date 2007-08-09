@@ -648,8 +648,8 @@ void MapEditorMainFrame::doLButtonOnMagnifyTool(wxMouseEvent& ev)
 void MapEditorMainFrame::doLButtonOnSkullTool(wxMouseEvent& ev)
 {
     //オブジェクト配置
-#ifdef MAPVIEWER
-#else
+//#ifdef MAPVIEWER
+//#else
     int mx = ev.m_x;
     int my = ev.m_y;
     world_point2d wpoint = wxGetApp().getWorldPointFromViewPoint(mx, my);
@@ -695,7 +695,7 @@ void MapEditorMainFrame::doLButtonOnSkullTool(wxMouseEvent& ev)
         hpl::error::caution("You must place objects ON POLYGON");
     }
 	this->updateMapItems();
-#endif
+//#endif
 }
 void MapEditorMainFrame::doLButtonOnTextTool(wxMouseEvent& ev)
 {

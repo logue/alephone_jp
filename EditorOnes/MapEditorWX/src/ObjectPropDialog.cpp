@@ -305,14 +305,19 @@ void ObjectPropDialog::setObject(map_object obj){
 
     this->text_ctrl_39->SetValue(getString("%d", obj.location.x));
     this->text_ctrl_41->SetValue(getString("%d", obj.location.y));
-	int dz = obj.location.z;
+	int dz = 0;
 	if(hpl::aleph::map::isValidIndex(getObjIndex(), SavedObjectList.size())){
 		polygon_data* poly = get_polygon_data(obj.polygon_index);
 		if(poly){
 			int floor_height = poly->floor_height;
+			dz = obj.location.z - floor_height;
+		}else{
+			dz = 0;
 		}
+	}else{
+		dz = 0;
 	}
-    this->text_ctrl_40->SetValue(getString("%d", obj.location.z));
+    this->text_ctrl_40->SetValue(getString("%d", dz));
  
     Refresh();
 }
@@ -329,9 +334,7 @@ void ObjectPropDialog::setupDialog()
         //memset(&obj, 0, sizeof(map_object));
         this->setObject(obj);
     }else{
-#ifdef __WXDEBUG__
         wxASSERT(this->objIndex >= 0 && this->objIndex < (int)SavedObjectList.size());
-#endif
         map_object* obj = &SavedObjectList[this->objIndex];
         this->setObject(*obj);
     }
@@ -368,10 +371,10 @@ void ObjectPropDialog::OnIndexChoice(wxCommandEvent &event)
 {
     if(!isValidIndex(&this->objIndex))return;
     map_object* obj = &SavedObjectList[this->objIndex];
-#ifdef MAPVIEWER
-#else
+//#ifdef MAPVIEWER
+//#else
     obj->index = event.GetSelection();
-#endif
+//#endif
 	//数合わせチェック
 	hpl::aleph::map::updateObjectInitialPlacement(obj->type, obj->index);
 	this->refreshParent();
@@ -390,10 +393,10 @@ void ObjectPropDialog::OnHiddenCheck(wxCommandEvent &event)
 {
     if(!isValidIndex(&this->objIndex))return;
     map_object* obj = &SavedObjectList[this->objIndex];
-#ifdef MAPVIEWER
-#else
+//#ifdef MAPVIEWER
+//#else
 	obj->flags = getFlag(obj->flags, _map_object_is_invisible, event.IsChecked());
-#endif
+//#endif
 }
 
 
@@ -401,10 +404,10 @@ void ObjectPropDialog::OnCeilingCheck(wxCommandEvent &event)
 {
     if(!isValidIndex(&this->objIndex))return;
     map_object* obj = &SavedObjectList[this->objIndex];
-#ifdef MAPVIEWER
-#else
+//#ifdef MAPVIEWER
+//#else
 	obj->flags = getFlag(obj->flags, _map_object_hanging_from_ceiling, event.IsChecked());
-#endif
+//#endif
 }
 
 
@@ -412,10 +415,10 @@ void ObjectPropDialog::OnSeeCheck(wxCommandEvent &event)
 {
     if(!isValidIndex(&this->objIndex))return;
     map_object* obj = &SavedObjectList[this->objIndex];
-#ifdef MAPVIEWER
-#else
+//#ifdef MAPVIEWER
+//#else
 	obj->flags = getFlag(obj->flags, _map_object_is_blind, event.IsChecked());
-#endif
+//#endif
 }
 
 
@@ -423,10 +426,10 @@ void ObjectPropDialog::OnHearCheck(wxCommandEvent &event)
 {
     if(!isValidIndex(&this->objIndex))return;
     map_object* obj = &SavedObjectList[this->objIndex];
-#ifdef MAPVIEWER
-#else
+//#ifdef MAPVIEWER
+///#else
 	obj->flags = getFlag(obj->flags, _map_object_is_deaf, event.IsChecked());
-#endif
+//#endif
 }
 
 
@@ -434,10 +437,10 @@ void ObjectPropDialog::OnAerialCheck(wxCommandEvent &event)
 {
     if(!isValidIndex(&this->objIndex))return;
     map_object* obj = &SavedObjectList[this->objIndex];
-#ifdef MAPVIEWER
-#else
+//#ifdef MAPVIEWER
+//#else
 	obj->flags = getFlag(obj->flags, _map_object_floats, event.IsChecked());
-#endif
+//#endif
 }
 
 
@@ -445,10 +448,10 @@ void ObjectPropDialog::OnNetCheck(wxCommandEvent &event)
 {
     if(!isValidIndex(&this->objIndex))return;
     map_object* obj = &SavedObjectList[this->objIndex];
-#ifdef MAPVIEWER
-#else
+//#ifdef MAPVIEWER
+///#else
 	obj->flags = getFlag(obj->flags, _map_object_is_network_only, event.IsChecked());
-#endif
+//#endif
 
 }
 
@@ -465,10 +468,10 @@ void ObjectPropDialog::OnXEdit(wxCommandEvent &event)
 {
     if(!isValidIndex(&this->objIndex))return;
     map_object* obj = &SavedObjectList[this->objIndex];
-#ifdef MAPVIEWER
-#else
+//#ifdef MAPVIEWER
+//#else
 	obj->location.x = atoi(wxConvertWX2MB(event.GetString()));
-#endif
+//#endif
 }
 
 
@@ -476,10 +479,10 @@ void ObjectPropDialog::OnYEdit(wxCommandEvent &event)
 {
     if(!isValidIndex(&this->objIndex))return;
     map_object* obj = &SavedObjectList[this->objIndex];
-#ifdef MAPVIEWER
-#else
+//#ifdef MAPVIEWER
+//#else
 	obj->location.y = atoi(wxConvertWX2MB(event.GetString()));
-#endif
+//#endif
 }
 
 
@@ -488,16 +491,16 @@ void ObjectPropDialog::OnZEdit(wxCommandEvent &event)
     if(!isValidIndex(&this->objIndex))return;
     map_object* obj = &SavedObjectList[this->objIndex];
 
-#ifdef MAPVIEWER
-#else
+//#ifdef MAPVIEWER
+//#else
 	if(hpl::aleph::map::isValidIndex(obj->polygon_index, PolygonList.size())){
 		polygon_data* poly = get_polygon_data(obj->polygon_index);
-
+		
 		//TODO should we add polygon's ceiling_height when from ceiling?
 		obj->location.z = poly->floor_height + 
 			atoi(wxConvertWX2MB(event.GetString()));
 	}
-#endif
+//#endif
 }
 
 

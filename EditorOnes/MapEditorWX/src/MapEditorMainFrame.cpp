@@ -328,6 +328,28 @@ void MapEditorMainFrame::setupMenus()
     wxGetApp().polygonPopupMenu.SetTitle(_T("polygon menu"));
     wxGetApp().polygonPopupMenu.Append(ID_PolygonProp, _T("Properties..."));
     wxGetApp().polygonPopupMenu.Append(ID_SetVisualModePlayerStartPosition, _T("Set visual mode start position"));
+
+#ifdef MAP_VIEWER
+    wxMenuBar* menuBar1 = wxFrame::GetMenuBar();
+    //モードメニュー
+    wxMenu* menu = menuBar1->GetMenu(0);
+    //アイテム取得
+    //wxMenuItemList lst = menu->GetMenuItems();
+	menu->Enable(ID_New, false);
+	menu->Enable(ID_Print, false);
+	menu->Enable(ID_PrintPreview, false);
+	menu->Enable(ID_PrintSetup, false);
+	menu->Enable(ID_Merge, false);
+	menu->Enable(ID_SavePhysicsFile, false);
+
+	menu = menuBar->GetMenu(1);
+	menu->Enable(ID_Undo, false);
+	menu->Enable(ID_Cut, false);
+	menu->Enable(ID_Copy, false);
+	menu->Enable(ID_Paste, false);
+	menu->Enable(ID_Delete, false);
+#endif
+
 }
 
 
@@ -339,7 +361,7 @@ void MapEditorMainFrame::OnQuit(wxCommandEvent& event)
 
 void MapEditorMainFrame::OnAbout(wxCommandEvent& WXUNUSED(event))
 {
-    wxMessageBox(_T("This program is MapEditorOne for AlephOne!"),
+    wxMessageBox(_T("MapEditorOne for AlephOne! Author = HogePiyo. Free software. GPL license."),
         _T("about this..."), wxOK | wxICON_INFORMATION, this);
 }
 

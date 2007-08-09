@@ -7,6 +7,9 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "MapEditorOneWX", "MapEditor
 	EndProjectSection
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "MapViewerOneWX", "..\MapViewerOneWX\MapViewerOneWX.vcproj", "{4C5482EB-39A2-4D5F-8F0A-4C399DB359B3}"
+	ProjectSection(ProjectDependencies) = postProject
+		{734E3D3E-FBC1-45D8-B254-68A39C5E429A} = {734E3D3E-FBC1-45D8-B254-68A39C5E429A}
+	EndProjectSection
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "AlephOneSrc", "..\..\..\..\..\AlephOneSrc\build\VC8\AlephOneSrc\AlephOneSrc\AlephOneSrc.vcproj", "{734E3D3E-FBC1-45D8-B254-68A39C5E429A}"
 EndProject
