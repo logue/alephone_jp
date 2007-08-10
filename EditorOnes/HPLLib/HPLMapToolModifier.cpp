@@ -258,10 +258,16 @@ bool hpl::aleph::map::deleteMapItems(std::vector<bool>& delPoints, std::vector<b
 			SideList.erase(SideList.begin() + i);
 		}
 	}
-	for(int i = (int)SavedObjectList.size() - 1; i >= 0; i --){
-		if(delObjects[i]){
-			SavedObjectList.erase(SavedObjectList.begin() + i);
+	counter = 0;
+	for(std::vector<map_object>::iterator it = SavedObjectList.begin(); 
+		it != SavedObjectList.end(); )
+	{
+		if(delObjects[counter]){
+			it = SavedObjectList.erase(it);
+		}else{
+			it ++;
 		}
+		counter ++;
 	}
 	/*
 	for(int i = (int)delPlatforms.size() - 1; i >= 0; i --){

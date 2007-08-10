@@ -406,6 +406,16 @@ void MapEditorMainFrame::OnDelete(wxCommandEvent& ev)
 		//TODO 選択対象を記録してUndoに用いる
 		//
 
+#ifdef MAP_VIEWER
+		//objects
+		for(int i = 0; i < (int)sel->getSelObjects()->size(); i ++){
+			smgr->deleteObject(sel->getSelObjects()->at(i).index);
+		}
+#else
+		//objects
+		for(int i = 0; i < (int)sel->getSelObjects()->size(); i ++){
+			smgr->deleteObject(sel->getSelObjects()->at(i).index);
+		}
 		//選択対象を削除対象とする
 		for(int i = 0; i < (int)sel->getSelPoints()->size(); i ++){
 			hpl::aleph::map::SelPoint* opt = &sel->getSelPoints()->at(i);
@@ -424,11 +434,7 @@ void MapEditorMainFrame::OnDelete(wxCommandEvent& ev)
 		for(int i = 0; i < (int)sel->getSelPolygons()->size(); i ++){
 			smgr->deletePolygon(sel->getSelPolygons()->at(i).index);
 		}
-		//objects
-		for(int i = 0; i < (int)sel->getSelObjects()->size(); i ++){
-			smgr->deleteObject(sel->getSelObjects()->at(i).index);
-		}
-
+#endif
 		sel->clear();
 		//削除が実行されたのでコンボ更新
 		this->updateMapItems();
