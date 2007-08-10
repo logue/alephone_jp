@@ -312,7 +312,7 @@ void MapEditorMainFrame::setupMenus()
     menuBar->Append(menuEdit, _T("&Edit"));
     menuBar->Append(menuShow, _T("&Show"));
     menuBar->Append(menuMode, _T("&Mode"));
-    menuBar->Append(menuSpecial, _T("&Special! 8)"));
+    menuBar->Append(menuSpecial, _T("S&pecial!"));
     menuBar->Append(menuHelp, _T("&Help"));
 
     SetMenuBar(menuBar);
@@ -348,6 +348,13 @@ void MapEditorMainFrame::setupMenus()
 	menu->Enable(ID_Copy, false);
 	menu->Enable(ID_Paste, false);
 	menu->Enable(ID_Delete, false);
+
+	//mode
+	menu = menuBar->GetMenu(3);
+	menu->Enable(ID_VisualMode, false);
+	//menu->GetSubMenu();
+	//menu->Enable(ID_LightMode, false);
+	menu->Enable(ID_MediaMode, false);
 #endif
 
 }

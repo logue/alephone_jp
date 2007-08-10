@@ -4,6 +4,7 @@
 #include "DlgCommon.h"
 
 class LevelInfoDialog: public wxDialog{
+public:
     wxStaticBox* sizer_59_staticbox;
     wxStaticBox* sizer_58_staticbox;
     wxStaticBox* sizer_60_staticbox;
@@ -13,7 +14,7 @@ class LevelInfoDialog: public wxDialog{
     wxChoice* choice_28;
     wxStaticText* label_74;
     wxChoice* choice_29;
-    wxCheckBox* checkbox_60;
+/*    wxCheckBox* checkbox_60;
     wxCheckBox* checkbox_62;
     wxCheckBox* checkbox_66;
     wxCheckBox* checkbox_63;
@@ -21,6 +22,9 @@ class LevelInfoDialog: public wxDialog{
     wxCheckBox* checkbox_65;
     wxCheckBox* checkbox_67;
     wxCheckBox* checkbox_61;
+	*/
+    wxRadioBox* radio_box_2;
+
     wxCheckBox* checkbox_41;
     wxCheckBox* checkbox_42;
     wxCheckBox* checkbox_43;
@@ -32,6 +36,7 @@ class LevelInfoDialog: public wxDialog{
     wxCheckBox* checkbox_59;
     wxButton* button_28;
     wxButton* button_29;
+
 public:
     LevelInfoDialog();
     bool Create(wxWindow* parent, wxWindowID id);

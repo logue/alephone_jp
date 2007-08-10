@@ -1,5 +1,5 @@
-Set #1 Water
-Set #2 Lava
-Set #3 Sewage
-Set #4 Jjaro
-Set #5 Pfhor
+Water
+Lava
+Sewage
+Jjaro
+Pfhor

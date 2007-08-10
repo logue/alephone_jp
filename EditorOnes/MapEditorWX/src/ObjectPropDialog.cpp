@@ -309,8 +309,8 @@ void ObjectPropDialog::setObject(map_object obj){
 	if(hpl::aleph::map::isValidIndex(getObjIndex(), SavedObjectList.size())){
 		polygon_data* poly = get_polygon_data(obj.polygon_index);
 		if(poly){
-			int floor_height = poly->floor_height;
-			dz = obj.location.z - floor_height;
+			//int floor_height = poly->floor_height;
+			dz = obj.location.z;// - floor_height;
 		}else{
 			dz = 0;
 		}
@@ -497,7 +497,7 @@ void ObjectPropDialog::OnZEdit(wxCommandEvent &event)
 		polygon_data* poly = get_polygon_data(obj->polygon_index);
 		
 		//TODO should we add polygon's ceiling_height when from ceiling?
-		obj->location.z = poly->floor_height + 
+		obj->location.z = //poly->floor_height + 
 			atoi(wxConvertWX2MB(event.GetString()));
 	}
 //#endif

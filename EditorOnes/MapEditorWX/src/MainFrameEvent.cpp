@@ -868,14 +868,20 @@ void MapEditorMainFrame::OnKeyDown(wxKeyEvent& ev)
 
 	if(ctrl){
 		if(code == 'C'){
+#ifndef MAP_VIEWER
 			//Copy!
 			this->OnCopy(dummy);
+#endif
 		}else if(code == 'V'){
+#ifndef MAP_VIEWER
 			//Paste!
 			this->OnPaste(dummy);
+#endif
 		}else if(code == 'Z'){
+#ifndef MAP_VIEWER
 			//Undo!
 			this->OnUndo(dummy);
+#endif
 		}else if(code == 'S'){
 			if(shift){
 				//Save As!
@@ -884,6 +890,8 @@ void MapEditorMainFrame::OnKeyDown(wxKeyEvent& ev)
 				//Save!
 				this->OnSave(dummy);
 			}
+		}else if(code == 'O'){
+			this->OnOpen(dummy);
 		}
 	}else{
 		if(code == WXK_DELETE){

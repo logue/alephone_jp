@@ -40,6 +40,9 @@ bool HeightPaletteDialog::Create(wxWindow* parent, wxWindowID id)
     for(int i = 0; i < COLUMN_NUM; i ++){
         list_ctrl_3->InsertColumn(i, wxConvertMB2WX(columnNames[i]));
     }
+	//TODO Add/Delete‚Ì‹@”\•‚‚³î•ñ‚ÌŠÇ—
+	this->button_24->Disable();
+	this->button_25->Disable();
     return result;
 }
 void HeightPaletteDialog::OnAdd(wxCommandEvent &event)

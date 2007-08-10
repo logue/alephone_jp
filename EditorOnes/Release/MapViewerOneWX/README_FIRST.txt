@@ -1,6 +1,6 @@
 ----------------------------------
  Map Viewer One wxWidgets version
- Author:		Koji Koizumi (Handle name:HogePiyo)
- Uploaded date:	2007/07/10 01:01
+ Check the users manual in doc/index.html for detail informations.
  
+ HogePiyo :)
 ----------------------------------

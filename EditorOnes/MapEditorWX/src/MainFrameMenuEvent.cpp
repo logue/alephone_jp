@@ -162,8 +162,8 @@ void MapEditorMainFrame::OnOpen(wxCommandEvent& ev)
             int type = 0xff;
             char cstr[256];
             while(get_indexed_entry_point(&ep, &index, type)){
-                sprintf(cstr, "%d", ep.level_number);
-                wxGetApp().levelNameList.push_back(string(cstr) + string(ep.level_name));
+                //sprintf(cstr, "%d", ep.level_number);
+                wxGetApp().levelNameList.push_back(string(ep.level_name));
             }
             if(wxGetApp().levelNameList.size() == 0){
                 wxGetApp().levelNameList.push_back("unnamed");
@@ -491,20 +491,24 @@ void MapEditorMainFrame::OnZoomIn(wxCommandEvent& ev)
 {
     wxSize size = this->GetSize();
     wxGetApp().getViewGridManager()->zoomIn(size.GetWidth(), size.GetHeight());
+	Refresh();
 }
 void MapEditorMainFrame::OnZoomOut(wxCommandEvent& ev)
 {
     wxSize size = this->GetSize();
     wxGetApp().getViewGridManager()->zoomOut(size.GetWidth(), size.GetHeight());
+	Refresh();
 }
 void MapEditorMainFrame::OnZoomDefault(wxCommandEvent& ev)
 {
     wxGetApp().getViewGridManager()->zoomReset();
+	Refresh();
 }
 void MapEditorMainFrame::OnMoveToCenter(wxCommandEvent& ev)
 {
     //中心がワールド座標の真ん中に来るようにする
     wxGetApp().getViewGridManager()->setOffset(0,0);
+	Refresh();
 }
 void MapEditorMainFrame::OnHeightDialog(wxCommandEvent& ev)
 {
@@ -710,12 +714,50 @@ void MapEditorMainFrame::OnJumpLevel(wxCommandEvent& ev)
 }
 void MapEditorMainFrame::OnLevelInfo(wxCommandEvent& ev)
 {
+	if(dynamic_world == NULL || static_world == NULL){
+		hpl::error::caution("No map loaded yet");
+		return;
+	}
 	//編集設定
 	wxGetApp().isChanged = true;
     LevelInfoDialog dlg;
     dlg.Create(this, wxID_ANY);
     if(dlg.ShowModal() == wxID_OK){
         //設定反映
+		//TODO env
+		//static_world->environment_code = dlg.choice_28->GetSelection();
+		//TODO landscape
+		//TODO label
+		//env type
+		SET_FLAG16(
+			static_world->environment_flags, _environment_vacuum,
+			dlg.checkbox_41->GetValue());
+		SET_FLAG16(
+			static_world->environment_flags, _environment_rebellion,
+			dlg.checkbox_42->GetValue());
+		SET_FLAG16(
+			static_world->environment_flags, _environment_low_gravity,
+			dlg.checkbox_43->GetValue());
+		SET_FLAG16(
+			static_world->environment_flags, _environment_magnetic,
+			dlg.checkbox_44->GetValue());
+		//mission type
+		SET_FLAG16(
+			static_world->mission_flags, _mission_extermination,
+			dlg.checkbox_55->GetValue());
+		SET_FLAG16(
+			static_world->mission_flags, _mission_exploration,
+			dlg.checkbox_56->GetValue());
+		SET_FLAG16(
+			static_world->mission_flags, _mission_retrieval,
+			dlg.checkbox_57->GetValue());
+		SET_FLAG16(
+			static_world->mission_flags, _mission_repair,
+			dlg.checkbox_58->GetValue());
+		SET_FLAG16(
+			static_world->mission_flags, _mission_rescue,
+			dlg.checkbox_59->GetValue());
+		dynamic_world->game_information.game_type = dlg.radio_box_2->GetSelection();
     }
 }
 void MapEditorMainFrame::OnObjectPlacement(wxCommandEvent& ev)

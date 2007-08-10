@@ -7,7 +7,7 @@ static wxRegEx REG_NUM = _T("[0-9]*");
 static struct object_frequency_definition placementStored[2*MAXIMUM_OBJECT_TYPES];
 
 const int LABEL_COLUMN_WIDTH = 200;
-
+const int NUM_COLUMN_WIDTH = 100;
 // maximum random occurences of the object (from map.h
 //(-32766,32765] -1 = 65535 to infinity
 const int16 RANDOM_COUNT_INF = -1;
@@ -99,10 +99,17 @@ static void addListItem(wxListCtrl* lstctrl, object_frequency_definition* placem
     str[6] = getIntegerString(placement->flags);
 
     for(int j = 0; j < COLUMN_NUM; j ++){
+		int width = NUM_COLUMN_WIDTH;
+
+		if(j == 0){
+			width = LABEL_COLUMN_WIDTH;
+		}else{
+		}
         wxListItem item;
         item.SetId(id);
         item.SetColumn(j);
         item.SetText(str[j]);
+		item.SetWidth(width);
         if(j == 0){
             lstctrl->InsertItem(item);
         }else{
@@ -194,13 +201,14 @@ bool PlacementDialog::Create(wxWindow* parent, wxWindowID id)
         "Rnd Count", "Rnd Chance", "Flags"
     };
     for(int i = 0; i < COLUMN_NUM; i ++){
-		int width = -1;
+		int width = NUM_COLUMN_WIDTH;
 
 		if(i == 0){
 			width = LABEL_COLUMN_WIDTH;
 		}else{
 		}
-        list_ctrl_1->InsertColumn(i, wxConvertMB2WX(columnNames[i]), width);
+        list_ctrl_1->InsertColumn(i,
+			wxConvertMB2WX(columnNames[i]), width);
     }
 
     for(int i = 0; i < NUMBER_OF_DEFINED_ITEMS; i ++){
@@ -379,7 +387,8 @@ void PlacementDialog::OnSel(wxListEvent &ev)
 void PlacementDialog::OnRandomPlace(wxCommandEvent& ev)
 {
 	bool value = ev.IsChecked();
-	this->setItem(PlacementType::RandomChance, getString("%d", value ? _reappears_in_random_location : 0));
+	this->setItem(PlacementType::RandomPlace,
+		getString("%d", value ? _reappears_in_random_location : 0));
 /*	int listIndex = this->listSelectIndex;
 	int type = getType(listIndex);
 	int index = getIndex(listIndex);

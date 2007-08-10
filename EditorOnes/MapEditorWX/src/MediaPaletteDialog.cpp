@@ -17,7 +17,7 @@ MediaPaletteDialog::~MediaPaletteDialog()
 }
 bool MediaPaletteDialog::Create(wxWindow* parent, wxWindowID id)
 {
-    bool result = wxDialog::Create(parent, id, _T("Height Pallet"));
+    bool result = wxDialog::Create(parent, id, _T("Media Pallet"));
 
     button_27 = new wxButton(this, wxID_ADD, wxEmptyString);
     button_26 = new wxButton(this, wxID_DELETE, wxEmptyString);
@@ -42,7 +42,10 @@ bool MediaPaletteDialog::Create(wxWindow* parent, wxWindowID id)
     for(int i = 0; i < COLUMN_NUM; i ++){
         list_ctrl_4->InsertColumn(i, wxConvertMB2WX(columnNames[i]));
     }
-return result;
+	//TODO Add/Delete‚Ì‹@”\•‚‚³î•ñ‚ÌŠÇ—
+	this->button_27->Disable();
+	this->button_26->Disable();
+	return result;
 }
 void MediaPaletteDialog::OnAdd(wxCommandEvent &event)
 {

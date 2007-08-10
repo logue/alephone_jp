@@ -37,13 +37,25 @@ bool LevelInfoDialog::Create(wxWindow* parent, wxWindowID id)
     sizer_58_staticbox = new wxStaticBox(this, -1, wxT("Env Type"));
     sizer_59_staticbox = new wxStaticBox(this, -1, wxT("Mission Type"));
     sizer_60_staticbox = new wxStaticBox(this, -1, wxT("Game Type"));
-    label_65 = new wxStaticText(this, wxID_ANY, wxT("Level label"));
-    text_ctrl_44 = new wxTextCtrl(this, wxID_ANY, wxEmptyString);
+    label_65 = new wxStaticText(this, wxID_ANY, wxT("Label"));
+	//TODO only showing
+    text_ctrl_44 = new wxTextCtrl(this, wxID_ANY, wxEmptyString, wxDefaultPosition, wxDefaultSize, wxTE_READONLY);
     label_73 = new wxStaticText(this, wxID_ANY, wxT("Environment"));
     choice_28 = new wxChoice(this, wxID_ANY);
     label_74 = new wxStaticText(this, wxID_ANY, wxT("Landscape"));
     choice_29 = new wxChoice(this, wxID_ANY);
-    checkbox_60 = new wxCheckBox(this, wxID_ANY, wxT("Single Player"));
+    const wxString radio_box_2_choices[] = {
+        wxT("Single Player"),
+        wxT("Cooperation (COOP)"),
+        wxT("Capture The Flags (CTF)"),
+        wxT("King Of The Hill (KOTH)"),
+        wxT("Kill Man With Ball (BALL)"),
+        wxT("Defense"),
+        wxT("Rugby"),
+        wxT("Tag")
+    };
+    radio_box_2 = new wxRadioBox(this, wxID_ANY, wxT("Game Type"), wxDefaultPosition, wxDefaultSize, 8, radio_box_2_choices, 0, wxRA_SPECIFY_ROWS);
+/*    checkbox_60 = new wxCheckBox(this, wxID_ANY, wxT("Single Player"));
     checkbox_62 = new wxCheckBox(this, wxID_ANY, wxT("Cooperation (COOP)"));
     checkbox_66 = new wxCheckBox(this, wxID_ANY, wxT("Capture The Flags (CTF)"));
     checkbox_63 = new wxCheckBox(this, wxID_ANY, wxT("King Of The Hill (KOTH)"));
@@ -51,6 +63,7 @@ bool LevelInfoDialog::Create(wxWindow* parent, wxWindowID id)
     checkbox_65 = new wxCheckBox(this, wxID_ANY, wxT("Defense"));
     checkbox_67 = new wxCheckBox(this, wxID_ANY, wxT("Rugby"));
     checkbox_61 = new wxCheckBox(this, wxID_ANY, wxT("Tag"));
+	*/
     checkbox_41 = new wxCheckBox(this, wxID_ANY, wxT("Vacuum"));
     checkbox_42 = new wxCheckBox(this, wxID_ANY, wxT("Rebellion"));
     checkbox_43 = new wxCheckBox(this, wxID_ANY, wxT("LowGravity"));
@@ -84,7 +97,7 @@ bool LevelInfoDialog::Create(wxWindow* parent, wxWindowID id)
     grid_sizer_39->Add(label_74, 0, 0, 0);
     grid_sizer_39->Add(choice_29, 0, 0, 0);
     grid_sizer_37->Add(grid_sizer_39, 1, wxEXPAND, 0);
-    sizer_60->Add(checkbox_60, 0, 0, 0);
+/*    sizer_60->Add(checkbox_60, 0, 0, 0);
     sizer_60->Add(checkbox_62, 0, 0, 0);
     sizer_60->Add(checkbox_66, 0, 0, 0);
     sizer_60->Add(checkbox_63, 0, 0, 0);
@@ -92,7 +105,9 @@ bool LevelInfoDialog::Create(wxWindow* parent, wxWindowID id)
     sizer_60->Add(checkbox_65, 0, 0, 0);
     sizer_60->Add(checkbox_67, 0, 0, 0);
     sizer_60->Add(checkbox_61, 0, 0, 0);
-    grid_sizer_37->Add(sizer_60, 1, wxEXPAND, 0);
+	*/
+//    grid_sizer_37->Add(sizer_60, 1, wxEXPAND, 0);
+    grid_sizer_37->Add(radio_box_2, 0, 0, 0);
     grid_sizer_34->Add(grid_sizer_37, 1, wxEXPAND, 0);
     sizer_58->Add(checkbox_41, 0, 0, 0);
     sizer_58->Add(checkbox_42, 0, 0, 0);
@@ -115,7 +130,48 @@ bool LevelInfoDialog::Create(wxWindow* parent, wxWindowID id)
     Layout();
 
     //ŠÂ‹«’Ç‰Á
-    //”wŒi’Ç‰Á
+	for(int i = 0; i < NUMBER_OF_ENVIRONMENTS; i ++){
+		choice_28->Insert(wxConvertMB2WX(wxGetApp().envInfo[i].jname.c_str()), i);
+	}
+    //”wŒi’Ç‰Á()
+	for(int i = 0; i < NUMBER_OF_LANDSPACES; i ++){
+		choice_29->Insert(wxConvertMB2WX(wxGetApp().landscapeInfo[i].jname.c_str()), i);
+	}
+	if(dynamic_world != NULL && static_world != NULL){
+		//label
+		if(wxGetApp().levelNameList.size() > 0){
+			text_ctrl_44->SetValue(wxConvertMB2WX(
+				wxGetApp().levelNameList[wxGetApp().editLevelIndex].c_str()));
+		}else{
+			text_ctrl_44->SetValue(_T("unknown"));
+		}
+		//‘I‘ð
+		game_data* game = &dynamic_world->game_information;
+		//TODO	env
+		this->choice_28->Disable();//SetSelection(static_world->environment_code);
+		//TODO landscape
+		this->choice_29->Disable();
+		
+		//Env flags
+		int flags = static_world->environment_flags;
+		checkbox_41->SetValue(TEST_FLAG16(flags, _environment_vacuum));
+		checkbox_42->SetValue(TEST_FLAG16(flags, _environment_rebellion));
+		checkbox_43->SetValue(TEST_FLAG16(flags, _environment_low_gravity));
+		checkbox_44->SetValue(TEST_FLAG16(flags, _environment_magnetic));
+		//mission
+		flags = static_world->mission_flags;
+		checkbox_55->SetValue(TEST_FLAG16(flags, _mission_extermination));
+		checkbox_56->SetValue(TEST_FLAG16(flags, _mission_exploration));
+		checkbox_57->SetValue(TEST_FLAG16(flags, _mission_retrieval));
+		checkbox_58->SetValue(TEST_FLAG16(flags, _mission_repair));
+		checkbox_59->SetValue(TEST_FLAG16(flags, _mission_rescue));
+		//game type
+		int type = GET_GAME_TYPE();
+	    radio_box_2->SetSelection(type);
+	}else{
+		hpl::error::caution("No map loaded yet");
+	}
+
     return result;
 }
 void LevelInfoDialog::OnOk(wxCommandEvent &ev)

@@ -44,6 +44,9 @@ bool LightPaletteDialog::Create(wxWindow* parent, wxWindowID id)
     for(int i = 0; i < COLUMN_NUM; i ++){
         list_ctrl_5->InsertColumn(i, wxConvertMB2WX(columnNames[i]));
     }
+	//TODO Add/Delete‚Ì‹@”\•‚‚³î•ñ‚ÌŠÇ—
+	this->button_31->Disable();
+	this->button_30->Disable();
 
     return result;
 }
