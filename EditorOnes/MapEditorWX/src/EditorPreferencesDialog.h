@@ -13,6 +13,8 @@ class EditorPreferencesDialog: public wxDialog{
     wxButton* button_13;
     wxButton* button_14;
 
+	wxTextCtrl* text_ctrl_shapesFilePath;
+
     ColorSettings colorSetting;
 public:
     EditorPreferencesDialog();

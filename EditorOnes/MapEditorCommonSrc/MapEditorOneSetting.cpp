@@ -64,10 +64,17 @@ bool MapEditorOneSetting::loadSetting()
             if(buf[0] == '#' || line.compare("") == 0){
                 continue;
             }
-            std::vector<std::string> splitted = hpl::string::Split(line, "=");
-            if((int)splitted.size() < 2){
-                continue;
-            }
+			//=‚Ì‘OŒã‚Å•ª’f
+			int index = line.find("=");
+			if(index == std::string::npos){
+				continue;
+			}
+            std::vector<std::string> splitted;
+			std::string prev = line.substr(0, index);
+			std::string after = line.substr(index + 1);
+			splitted.push_back(prev);
+			splitted.push_back(after);
+
             std::vector<std::string> colors = hpl::string::Split(splitted[1], ",");
 
             if(splitted[0].compare(GRID_SIZE_INDEX_TAG) == 0){
@@ -111,12 +118,17 @@ bool MapEditorOneSetting::saveSetting()
     if(fp == NULL){
         return false;
     }else{
+		//grid
         fprintf(fp, "%s=%d\n", GRID_SIZE_INDEX_TAG, gridSizeIndex);
+
+		//color
         fprintf(fp, "%s=%d\n", COLOR_SETTING_COLOR_PRESET_TAG, colorSetting.type);
         for(int i = 0; i < ColorType::NUMBER_OF_COLOR_TYPES; i ++){
             fprintf(fp, "%s=", COLOR_SETTING_TAGS[i]);
             outputColor(fp, this->colorSetting.colors[i], COL_NUM);
         }
+
+		//editor flags
         fprintf(fp, "\n%s=", EDITOR_FLAGS_TAG);
         for(int i = 0; i < NUMBER_OF_EDITOR_FLAGS; i ++){
             fprintf(fp, "%d,", flags[i]? 1: 0);
@@ -140,11 +152,16 @@ void MapEditorOneSetting::outputColor(FILE* fp, int col[], int colNum)
 
 void MapEditorOneSetting::setSettingToDefault()
 {
+	//grid
     gridSizeIndex = 0;
+	//color
     setColorSetting(COL_FORGE);
+	//flags
     for(int i = 0; i < NUMBER_OF_EDITOR_FLAGS; i ++){
         flags[i] = true;
     }
+	//Shapes file path
+	this->shapesFilePath = std::string("Shapes.shpA");
 }
 
 int MapEditorOneSetting::getGridSizeIndex()
@@ -280,4 +297,8 @@ void MapEditorOneSetting::setFlag(int flagId, bool flg)
 {
 	wxASSERT(flagId >= 0 && flagId < NUMBER_OF_EDITOR_FLAGS);
 	this->flags[flagId] = flg;
+}
+std::string MapEditorOneSetting::getShapesFilePath()
+{
+	return this->shapesFilePath;
 }

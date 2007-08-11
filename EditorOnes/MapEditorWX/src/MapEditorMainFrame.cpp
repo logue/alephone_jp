@@ -129,7 +129,7 @@ MapEditorMainFrame::MapEditorMainFrame(const wxString& title,
 	wxGetApp().noneImage.LoadFile(_T("data/img/NONE.bmp"));
 
     //Shapesƒtƒ@ƒCƒ‹“Ç‚Ýž‚Ý
-    const char* SHAPES_FILE_PATH = "Shapes.shpA";
+    const char* SHAPES_FILE_PATH = wxGetApp().setting.getShapesFilePath().c_str();
     bool result = shpmgr->loadShapesFile(SHAPES_FILE_PATH);
 	if(result){
 		//

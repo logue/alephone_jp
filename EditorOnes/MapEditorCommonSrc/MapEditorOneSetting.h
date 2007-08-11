@@ -177,6 +177,8 @@ private:
     //flags
     bool flags[NUMBER_OF_EDITOR_FLAGS];
 
+	//Shapes file path
+	std::string shapesFilePath;
 public:
     MapEditorOneSetting();
     ~MapEditorOneSetting(){}
@@ -222,6 +224,8 @@ public:
 
     //Fî•ñ‚ğo—Í‚µ‚Ü‚·
     void outputColor(FILE* fp, int col[], int colNum);
+
+	std::string getShapesFilePath();
 };
 
 #endif
