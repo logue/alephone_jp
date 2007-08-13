@@ -27,6 +27,7 @@ static char* COLOR_SETTING_TAGS[100] ={
     "SAME_HEIGHT_LINES",
     "STAIR_LINES"
 };
+static char* SHAPES_FILE_PATH_TAG = "SHAPES";
 
 void ColorSettings::setColor(int type, int r, int g, int b)
 {
@@ -65,7 +66,7 @@ bool MapEditorOneSetting::loadSetting()
                 continue;
             }
 			//=‚Ì‘OŒã‚Å•ª’f
-			int index = line.find("=");
+			int index = (int)line.find("=");
 			if(index == std::string::npos){
 				continue;
 			}
@@ -88,7 +89,11 @@ bool MapEditorOneSetting::loadSetting()
                     flags[i] = (atoi(colors[i].c_str()) != 0)? true: false;
                 }
                 checksum ++;
-            }else{
+			}else if(splitted[0].compare(SHAPES_FILE_PATH_TAG) == 0){
+				shapesFilePath = std::string(splitted[1].c_str());
+				checksum ++;
+			}else{
+				//flags
                 bool found = false;
                 for(int tag = 0; tag < ColorType::NUMBER_OF_COLOR_TYPES; tag ++){
                     if(splitted[0].compare(COLOR_SETTING_TAGS[tag]) == 0){
@@ -129,11 +134,15 @@ bool MapEditorOneSetting::saveSetting()
         }
 
 		//editor flags
-        fprintf(fp, "\n%s=", EDITOR_FLAGS_TAG);
+        fprintf(fp, "%s=", EDITOR_FLAGS_TAG);
         for(int i = 0; i < NUMBER_OF_EDITOR_FLAGS; i ++){
             fprintf(fp, "%d,", flags[i]? 1: 0);
         }
         fprintf(fp,"\n");
+
+		//shapes file
+		fprintf(fp, "%s=%s\n", SHAPES_FILE_PATH_TAG,
+			this->shapesFilePath.c_str());
         fclose(fp);
     }
     return true;
