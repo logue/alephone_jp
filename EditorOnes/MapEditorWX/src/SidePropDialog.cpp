@@ -326,15 +326,15 @@ bool SidePropDialog::Create(wxWindow* parent, wxWindowID id, int sideIndex)
 	this->text_ctrl_55->SetValue(getString("%d", sideIndex));
 	this->choice_26->SetSelection(side->control_panel_permutation);
 	this->choice_27->SetSelection(side->type);
-	this->checkbox_68->SetValue(side->flags & _side_is_control_panel != 0);
-	this->checkbox_69->SetValue(side->flags & _side_is_repair_switch != 0);
-	this->checkbox_70->SetValue(side->flags & _control_panel_status != 0);
+	this->checkbox_68->SetValue((side->flags & _side_is_control_panel) != 0);
+	this->checkbox_69->SetValue((side->flags & _side_is_repair_switch) != 0);
+	this->checkbox_70->SetValue((side->flags & _control_panel_status) != 0);
 	this->choice_25->SetSelection(side->control_panel_type);
-	this->checkbox_71->SetValue(side->flags & _editor_dirty_bit != 0);
-	this->checkbox_72->SetValue(side->flags & _side_is_destructive_switch != 0);
-	this->checkbox_73->SetValue(side->flags & _side_is_lighted_switch != 0);
-	this->checkbox_74->SetValue(side->flags & _side_switch_can_be_destroyed != 0);
-	this->checkbox_75->SetValue(side->flags & _side_switch_can_only_be_hit_by_projectiles != 0);
+	this->checkbox_71->SetValue((side->flags & _editor_dirty_bit) != 0);
+	this->checkbox_72->SetValue((side->flags & _side_is_destructive_switch) != 0);
+	this->checkbox_73->SetValue((side->flags & _side_is_lighted_switch) != 0);
+	this->checkbox_74->SetValue((side->flags & _side_switch_can_be_destroyed) != 0);
+	this->checkbox_75->SetValue((side->flags & _side_switch_can_only_be_hit_by_projectiles) != 0);
 	//exclusion
 	this->text_ctrl_61->SetValue(getString("%d", side->exclusion_zone.e0.x));
 	this->text_ctrl_65->SetValue(getString("%d", side->exclusion_zone.e0.y));

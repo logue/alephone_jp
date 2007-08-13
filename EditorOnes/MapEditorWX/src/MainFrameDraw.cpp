@@ -65,7 +65,7 @@ void MapEditorMainFrame::OnPaint(wxPaintEvent& WXUNUSED(event))
 
 		bool isPolygonCreating = emgr->getEditModeType() == EditModeType::EM_DRAW &&
             emgr->getToolType() == ToolType::TI_POLYGON;
-		int vGridedPoint[2];
+//		int vGridedPoint[2];
 		int mGridedPoint[2] = {mpoint[0], mpoint[1]};
 		if(isPolygonCreating){
 			this->getGridedViewPoint(mpoint, mGridedPoint);
@@ -456,7 +456,7 @@ void MapEditorMainFrame::drawPoints(wxDC* dc)
         int vpoint[2];
         wxGetApp().getViewPointFromWorldPoint(ep->vertex, vpoint);
 
-        int SIZE = 5;
+        int SIZE = 4;
         //点（小さい四角）を打つ
         dc->SetPen(this->pointPen);
         dc->SetBrush(this->pointBrush);

@@ -162,8 +162,8 @@ void MapEditorMainFrame::OnOpen(wxCommandEvent& ev)
             int type = 0xff;
             char cstr[256];
             while(get_indexed_entry_point(&ep, &index, type)){
-                //sprintf(cstr, "%d", ep.level_number);
-                wxGetApp().levelNameList.push_back(string(ep.level_name));
+                sprintf(cstr, "%s", ep.level_name);
+				wxGetApp().levelNameList.push_back(std::string(cstr));
             }
             if(wxGetApp().levelNameList.size() == 0){
                 wxGetApp().levelNameList.push_back("unnamed");

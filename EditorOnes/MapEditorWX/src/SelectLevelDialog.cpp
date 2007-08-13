@@ -39,7 +39,8 @@ bool SelectLevelDialog::Create(wxWindow* parent, wxWindowID id)
 
     for(int i = 0; i < (int)wxGetApp().levelNameList.size(); i ++){
         list_box_4->Insert(getString("%d_%s", i,
-			wxConvertMB2WX(wxGetApp().levelNameList[i].c_str())), i);
+			wxGetApp().levelNameList[i].c_str()),
+			i);
     }
     if(wxGetApp().levelNameList.size() == 0){
         list_box_4->Insert(_T("unknown"), 0);
