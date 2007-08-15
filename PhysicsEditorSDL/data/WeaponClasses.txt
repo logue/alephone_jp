@@ -1,5 +1,0 @@
-_melee_class
-_normal_class
-_dual_function_class
-_twofisted_pistol_class
-_multipurpose_class
