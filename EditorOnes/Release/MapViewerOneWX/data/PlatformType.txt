@@ -1,9 +1,0 @@
-spht door
-spht split door
-locked spht door
-spht platform
-noisy spht platform
-heavy spht door
-pfhor door
-heavy spht platform
-pfhor platform
