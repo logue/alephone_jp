@@ -19,5 +19,24 @@
 #include "HPLSurfaceModifier.h"
 #include "HPLError.h"
 
+#ifdef WX
+#include "wx/wx.h"
+
+//wxWidgetsê—pŠÖ”
+//char->wx
+namespace wx{
+	namespace string{
+		wxString getString(const char* format, ...)
+		{
+			char message[BUF_MAX];
+			va_list maker;
+			va_start(maker, format);
+			vsprintf(message, format, maker);
+			wxString str = wxConvertMB2WX(message);
+			return str;
+		}
+	};
+};
+#endif
 
 #endif

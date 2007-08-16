@@ -24,6 +24,20 @@
 #include <wx/listctrl.h>
 #include <wx/image.h>
 #include <wx/notebook.h>
+#include <vector>
+#include <string>
+
+#include "monsters.h"
+#include "effects.h"
+#include "physics_models.h"
+#include "projectiles.h"
+#include "items.h"
+#include "mysound.h"
+#include "weapons.h"
+#include "monster_definitions.h"
+#include "effect_definitions.h"
+#include "projectile_definitions.h"
+#include "weapon_definitions.h"
 
 
 #endif

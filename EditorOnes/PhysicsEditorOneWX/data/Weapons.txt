@@ -1,0 +1,10 @@
+fist
+pistol
+plasma pistol
+assault rifle
+missile launcher
+flamethrower
+alien shotgun
+shotgun
+ball
+smg

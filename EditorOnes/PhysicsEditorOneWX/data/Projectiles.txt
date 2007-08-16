@@ -1,0 +1,39 @@
+rocket
+grenade
+pistol bullet
+rifle bullet
+shotgun bullet
+staff
+staff bolt
+flamethrower burst
+compiler bolt minor
+compiler bolt major
+alien weapon
+fusion bolt minor
+fusion bolt major
+hunter
+fist
+armageddon sphere
+armageddon electricity
+juggernaut rocket
+trooper bullet
+trooper grenade
+minor defender
+major defender
+juggernaut missile
+minor energy drain
+major energy drain
+oxygen drain
+minor hummer
+major hummer
+durandal hummer
+minor cyborg ball
+major cyborg ball
+ball
+minor fusion dispersal
+major fusion dispersal
+overloaded fusion dispersal
+yeti
+sewage yeti
+lava yeti
+smg bullet

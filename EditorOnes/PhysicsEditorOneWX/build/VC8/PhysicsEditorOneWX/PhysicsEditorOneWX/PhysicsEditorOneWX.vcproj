@@ -17,7 +17,7 @@
 	<Configurations>
 		<Configuration
 			Name="Debug|Win32"
-			OutputDirectory="$(SolutionDir)$(ConfigurationName)"
+			OutputDirectory="..\..\..\..\PhysicsEditorOneWX"
 			IntermediateDirectory="$(ConfigurationName)"
 			ConfigurationType="1"
 			CharacterSet="1"
@@ -40,7 +40,8 @@
 			<Tool
 				Name="VCCLCompilerTool"
 				Optimization="0"
-				PreprocessorDefinitions="WIN32;_DEBUG;_WINDOWS"
+				AdditionalIncludeDirectories="..\..\..\..\..\EditorOnes;..\..\..\..\AlephOneSrc"
+				PreprocessorDefinitions="WIN32;_DEBUG;_WINDOWS;SDL;__WIN32__;__WINDOWS__;__WXMSW__;__WXDEBUG__;WXUSINGDLL;WX"
 				MinimalRebuild="true"
 				BasicRuntimeChecks="3"
 				RuntimeLibrary="3"
@@ -174,18 +175,210 @@
 			Filter="cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx"
 			UniqueIdentifier="{4FC737F1-C7A5-4376-A066-2A32D752A2FF}"
 			>
+			<File
+				RelativePath="..\..\..\..\src\MainFrame.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\..\src\PhysicsDefaultValues.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\..\src\PhysicsEditorOneWX.cpp"
+				>
+			</File>
 		</Filter>
 		<Filter
 			Name="ヘッダー ファイル"
 			Filter="h;hpp;hxx;hm;inl;inc;xsd"
 			UniqueIdentifier="{93995380-89BD-4b04-88EB-625FBE52EBFB}"
 			>
+			<File
+				RelativePath="..\..\..\..\src\Common.h"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\..\src\MainFrame.h"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\..\src\PhysicsDefaultValues.h"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\..\src\PhysicsEditorOneWX.h"
+				>
+			</File>
 		</Filter>
 		<Filter
 			Name="リソース ファイル"
 			Filter="rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav"
 			UniqueIdentifier="{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}"
 			>
+		</Filter>
+		<Filter
+			Name="Panel"
+			>
+			<File
+				RelativePath="..\..\..\..\src\panel\MonsterAppearancePanel.h"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\..\src\panel\MonsterAttackPanel.h"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\..\src\panel\MonsterFlagsPanel.h"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\..\src\panel\MonsterPanel.h"
+				>
+			</File>
+		</Filter>
+		<Filter
+			Name="HPLLib"
+			>
+			<File
+				RelativePath="..\..\..\..\..\HPLLib\HPLAlephLib.h"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\..\..\HPLLib\HPLCopyPasteManager.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\..\..\HPLLib\HPLCopyPasteManager.h"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\..\..\HPLLib\HPLDoneHistory.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\..\..\HPLLib\HPLDoneHistory.h"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\..\..\HPLLib\HPLError.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\..\..\HPLLib\HPLError.h"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\..\..\HPLLib\HPLEventManager.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\..\..\HPLLib\HPLEventManager.h"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\..\..\HPLLib\HPLMapTool.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\..\..\HPLLib\HPLMapTool.h"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\..\..\HPLLib\HPLMapToolIndexer.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\..\..\HPLLib\HPLMapToolModifier.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\..\..\HPLLib\HPLMath.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\..\..\HPLLib\HPLMath.h"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\..\..\HPLLib\HPLQuickSort.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\..\..\HPLLib\HPLQuickSort.h"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\..\..\HPLLib\HPLRealMapData.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\..\..\HPLLib\HPLRealMapData.h"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\..\..\HPLLib\HPLSelectData.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\..\..\HPLLib\HPLSelectData.h"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\..\..\HPLLib\HPLShapesManager.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\..\..\HPLLib\HPLShapesManager.h"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\..\..\HPLLib\HPLStockManager.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\..\..\HPLLib\HPLStockManager.h"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\..\..\HPLLib\HPLStringModifier.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\..\..\HPLLib\HPLStringModifier.h"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\..\..\HPLLib\HPLSurfaceModifier.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\..\..\HPLLib\HPLSurfaceModifier.h"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\..\..\HPLLib\HPLViewGridManager.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\..\..\HPLLib\HPLViewGridManager.h"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\..\..\HPLLib\HPLVisualModeManager.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\..\..\HPLLib\HPLVisualModeManager.h"
+				>
+			</File>
+		</Filter>
+		<Filter
+			Name="CommonSrc"
+			>
+			<File
+				RelativePath="..\..\..\..\..\PhysicsEditorCommonSrc\PhysicsEditorCommon.h"
+				>
+			</File>
 		</Filter>
 	</Files>
 	<Globals>

@@ -1,0 +1,5 @@
+assault rifle
+pistol
+pistol left
+pistol right
+smg

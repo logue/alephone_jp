@@ -102,6 +102,17 @@ void hpl::aleph::loadInformation(const char* filePath, int maxLines, hpl::aleph:
 }
 
 /**
+	割り当て情報を設定します
+*/
+void hpl::aleph::setInformationBind(int maxLength, hpl::aleph::InformationBinded binds[],
+	int bindSrc[])
+{
+	for(int i = 0; i < maxLength; i ++){
+		binds[i].bind = bindSrc[i];
+	}
+}
+
+/**
 	指定した値に相当するインデックス値を取得します
 	存在しないなどの理由により失敗した場合は、負数が返されます
 */

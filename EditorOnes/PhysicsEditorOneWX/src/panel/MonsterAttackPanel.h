@@ -1,0 +1,14 @@
+#ifndef _MONSTER_ATTACK_PANEL_
+#define _MONSTER_ATTACK_PANEL_
+
+#include "../Common.h"
+
+/**
+	çUåÇçsìÆÇ…ä÷Ç∑ÇÈê›íË
+*/
+class MonsterAttackPanel: wxPanel{
+public:
+	void Create(wxWindow* parent, wxWindowID id);
+};
+
+#endif

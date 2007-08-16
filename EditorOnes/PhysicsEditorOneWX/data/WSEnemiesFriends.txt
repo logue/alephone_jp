@@ -1,0 +1,16 @@
+Player
+Bob
+MADD
+PossessedDrone
+Kir
+Fighter
+Trooper
+Hunter
+Enforcer
+Juggernaut
+Compiler
+Cyborg
+AssimilatedBob
+Drone
+Tick
+Yeti

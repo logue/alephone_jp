@@ -1,0 +1,16 @@
+player
+human_civilian
+madd
+possessed_hummer
+defender
+fighter
+trooper
+hunter
+enforcer
+juggernaut
+compiler
+cyborg
+assimilated_civilian
+hummer
+tick
+yeti

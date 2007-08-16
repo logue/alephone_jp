@@ -1,0 +1,28 @@
+omniscent
+flys
+alien
+major
+minor
+cannot be dropped
+floats
+cannot attack
+uses sniper ledges
+invisible
+subtly invisible
+kamakazi
+berserker
+enlarged
+has delayed hard death
+fires symmetrically
+has nuclear hard death
+cant fire backwards
+can die in flames
+waits with clear shot
+tiny
+attacks immediately
+not afraid of water
+not afraid of sewage
+not afraid of lava
+not afraid of goo
+can teleport under media
+chooses weapons randomly

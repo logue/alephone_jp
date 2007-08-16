@@ -1,0 +1,73 @@
+rocket explosion
+rocket contrail
+grenade explosion
+grenade contrail
+bullet ricochet
+alien weapon ricochet
+flamethrower burst
+fighter blood splash
+player blood splash
+civilian blood splash
+assimilated civilian blood splash
+enforcer blood splash
+compiler bolt minor detonation
+compiler bolt major detonation
+compiler bolt major contrail
+fighter projectile detonation
+fighter melee detonation
+hunter projectile detonation
+hunter spark
+minor fusion detonation
+major fusion detonation
+major fusion contrail
+fist detonation
+minor defender detonation
+major defender detonation
+defender spark
+trooper blood splash
+water lamp breaking
+lava lamp breaking
+sewage lamp breaking
+alien lamp breaking
+metallic clang
+teleport object in
+teleport object out
+small water splash
+medium water splash
+large water splash
+large water emergence
+small lava splash
+medium lava splash
+large lava splash
+large lava emergence
+small sewage splash
+medium sewage splash
+large sewage splash
+large sewage emergence
+small goo splash
+medium goo splash
+large goo splash
+large goo emergence
+minor hummer projectile detonation
+major hummer projectile detonation
+durandal hummer projectile detonation
+hummer spark
+cyborg projectile detonation
+cyborg blood splash
+minor fusion dispersal
+major fusion dispersal
+overloaded fusion dispersal
+sewage yeti blood splash
+sewage yeti projectile detonation
+water yeti blood splash
+lava yeti blood splash
+lava yeti projectile detonation
+yeti melee detonation
+juggernaut spark
+juggernaut missile contrail
+small jjaro splash
+medium jjaro splash
+large jjaro splash
+large jjaro emergence
+civilian fusion blood splash
+assimilated civilian fusion blood splash

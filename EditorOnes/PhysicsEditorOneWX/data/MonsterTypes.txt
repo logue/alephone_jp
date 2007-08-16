@@ -1,0 +1,47 @@
+marine
+tick energy
+tick oxygen
+tick kamakazi
+compiler minor
+compiler major
+compiler minor invisible
+compiler major invisible
+fighter minor
+fighter major
+fighter minor projectile
+fighter major projectile
+crew
+science
+security
+assimilated
+hummer minor // slow hummer
+hummer major // fast hummer
+hummer big minor // big hummer
+hummer big major // angry hummer
+hummer possessed // hummer from durandal
+cyborg minor
+cyborg major
+cyborg flame minor
+cyborg flame major
+enforcer minor
+enforcer major
+hunter minor
+hunter major
+trooper minor
+trooper major
+mother of all cyborgs
+mother of all hunters
+sewage yeti
+water yeti
+lava yeti
+defender minor
+defender major
+juggernaut minor
+juggernaut major
+tiny fighter
+tiny bob
+tiny yeti
+fusion crew
+fusion science
+fusion security
+fusion assimilated

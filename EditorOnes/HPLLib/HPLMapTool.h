@@ -68,6 +68,12 @@ namespace aleph{
 	*/
 	void loadInformation(const char* filePath, int maxLines, hpl::aleph::InformationBinded infos[]);
 
+	/**
+		割り当て情報を設定します
+	*/
+	void setInformationBind(int maxLength, hpl::aleph::InformationBinded binds[],
+		int bindSrc[]);
+
     /**
         カラーデータをファイルから読み込みます
         @return 失敗時に偽

@@ -1,0 +1,4 @@
+slow
+normal
+fast
+VidMaster
