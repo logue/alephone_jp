@@ -1,10 +1,11 @@
 #include "PhysicsEditorOneWX.h"
 #include "MainFrame.h"
 
+//実体を持たせます
+IMPLEMENT_APP(PhysicsEditorOneWX)
+
 static char* DEFAULT_PHYSICS_FILE_PATH = "Physics.phyA";
 
-//実体を持たせます
-DECLARE_APP(PhysicsEditorOneWX)
 
 bool PhysicsEditorOneWX::OnInit()
 {
@@ -12,6 +13,8 @@ bool PhysicsEditorOneWX::OnInit()
 
 	this->frame = new MainFrame();
 	frame->Create(NULL, wxID_ANY);
+	//各種設定
+	this->setNewAndChanged(true, false);
 
 	//デフォルトデータとしてファイルから読み込んでおく
 	this->loadDefaultPhysicsFile();
@@ -224,9 +227,6 @@ void PhysicsEditorOneWX::init()
 	hpl::aleph::loadInformation("data/ShellCasingTypes.txt", NUMBER_OF_SHELL_CASING_TYPES,
 		weaponShellCasingInfo);
 
-	//各種設定
-	this->setNew(true);
-	this->setChanged(false);
 
 }
 
@@ -242,7 +242,7 @@ void PhysicsEditorOneWX::setNewAndChanged(bool new_, bool changed)
 	this->isChanged_ = changed;
 	this->isNew_ = new_;
 
-	if(!prevChanged && changed){
+	if(changed){
 		//変更していない状態から変更状態へ移った
 		if(this->isNew()){
 			//タイトルバーの文字列を TITLE + " *" にする
@@ -251,7 +251,7 @@ void PhysicsEditorOneWX::setNewAndChanged(bool new_, bool changed)
 			//タイトルバーの文字列を TITLE + " " + saveFilePath + " *" にする
 			frame->SetTitle(wx::string::getString("%s %s *", TITLE, this->getSaveFilePath().c_str()));
 		}
-	}else if(prevChanged && !changed){
+	}else if(!changed){
 		//変更状態から保存状態、新規状態に移った
 		if(this->isNew()){
 			//タイトルバーの文字列を TITLE にする
@@ -282,6 +282,9 @@ PhysicsDefaultValues* PhysicsEditorOneWX::getDefaultValues()
 	return &this->defaultValues;
 }
 
+/**
+	ライブラリに依存しない物理ファイル読み込み処理
+*/
 static void independentLoadPhysicsFile(const char* filePath)
 {
 	//物理ファイル名設定
@@ -297,6 +300,8 @@ static void independentLoadPhysicsFile(const char* filePath)
 void PhysicsEditorOneWX::loadPhysicsFile(const char* filePath)
 {
 	independentLoadPhysicsFile(filePath);
+	//読み込みファイル名設定
+	this->setSaveFilePath(filePath);
 	//状態設定
 	this->setNewAndChanged(false, false);
 

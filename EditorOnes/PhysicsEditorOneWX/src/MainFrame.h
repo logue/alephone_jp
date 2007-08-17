@@ -2,8 +2,25 @@
 #define _MAIN_FRAME_
 
 #include "Common.h"
+#include "panel/MonsterPanel.h"
+#include "panel/EffectPanel.h"
+#include "panel/ProjectilePanel.h"
+#include "panel/PhysicsPanel.h"
+#include "panel/WeaponPanel.h"
 
 class MainFrame: public wxFrame{
+public:
+private:
+	/**タブ*/
+	wxNotebook* notebook;
+
+	/**各パネル*/
+	MonsterPanel* monsterPanel;
+	EffectPanel* effectPanel;
+	ProjectilePanel* projectilePanel;
+	PhysicsPanel* physicsPanel;
+	WeaponPanel* weaponPanel;
+
 public:
 	void Create(wxWindow* parent, wxWindowID id);
 protected:

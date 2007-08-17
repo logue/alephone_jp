@@ -21,6 +21,17 @@
 #include <wx/debug.h>
 #endif
 
+#ifdef WX
+#include "wx/wx.h"
+//wxWidgetsê—pŠÖ”
+//char->wx
+namespace wx{
+	namespace string{
+		wxString getString(const char* format, ...);
+	};
+};
+#endif
+
 namespace hpl{namespace aleph{
 class HPLStockManager;
 }};

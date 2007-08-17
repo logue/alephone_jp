@@ -22,6 +22,19 @@ static char* COLOR_ITEM_SEPARATER = ",";
 //色情報の次元
 const int COL_NUM = 3;
 
+#ifdef WX
+
+wxString wx::string::getString(const char* format, ...)
+{
+	char message[BUF_MAX];
+	va_list maker;
+	va_start(maker, format);
+	vsprintf(message, format, maker);
+	wxString str = wxConvertMB2WX(message);
+	return str;
+}
+#endif
+
 int getKeyByValue(std::map<int, int>& indexMap, int targetValue)
 {
 	for(std::map<int, int>::iterator it = indexMap.begin(); it != indexMap.end(); it ++){

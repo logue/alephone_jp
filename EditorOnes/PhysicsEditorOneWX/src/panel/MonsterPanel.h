@@ -20,7 +20,8 @@ private:
 	MonsterFlagsPanel* flagsPanel;
 	MonsterAttackPanel* attackPanel;
 public:
-	void Create(wxWindow* parent, wxWindowID id);
+	MonsterPanel(wxWindow* parent, wxWindowID id);
+    DECLARE_EVENT_TABLE()
 };
 
 #endif

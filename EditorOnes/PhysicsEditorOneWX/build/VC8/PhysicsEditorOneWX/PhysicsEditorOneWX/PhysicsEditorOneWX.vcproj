@@ -17,7 +17,7 @@
 	<Configurations>
 		<Configuration
 			Name="Debug|Win32"
-			OutputDirectory="..\..\..\..\PhysicsEditorOneWX"
+			OutputDirectory="..\..\..\..\..\PhysicsEditorOneWX"
 			IntermediateDirectory="$(ConfigurationName)"
 			ConfigurationType="1"
 			CharacterSet="1"
@@ -40,7 +40,7 @@
 			<Tool
 				Name="VCCLCompilerTool"
 				Optimization="0"
-				AdditionalIncludeDirectories="..\..\..\..\..\EditorOnes;..\..\..\..\AlephOneSrc"
+				AdditionalIncludeDirectories="..\..\..\..\..\..\EditorOnes;..\..\..\..\..\AlephOneSrc"
 				PreprocessorDefinitions="WIN32;_DEBUG;_WINDOWS;SDL;__WIN32__;__WINDOWS__;__WXMSW__;__WXDEBUG__;WXUSINGDLL;WX"
 				MinimalRebuild="true"
 				BasicRuntimeChecks="3"
@@ -61,6 +61,7 @@
 			/>
 			<Tool
 				Name="VCLinkerTool"
+				AdditionalDependencies="SDL.lib ..\..\..\..\..\AlephOneSrc\lib\AlephOneSrcD.lib wxmsw28ud_core.lib wxbase28ud.lib"
 				LinkIncremental="2"
 				GenerateDebugInformation="true"
 				SubSystem="2"
@@ -220,6 +221,14 @@
 			Name="Panel"
 			>
 			<File
+				RelativePath="..\..\..\..\src\panel\EffectPanel.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\..\src\panel\EffectPanel.h"
+				>
+			</File>
+			<File
 				RelativePath="..\..\..\..\src\panel\MonsterAppearancePanel.h"
 				>
 			</File>
@@ -232,7 +241,35 @@
 				>
 			</File>
 			<File
+				RelativePath="..\..\..\..\src\panel\MonsterPanel.cpp"
+				>
+			</File>
+			<File
 				RelativePath="..\..\..\..\src\panel\MonsterPanel.h"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\..\src\panel\PhysicsPanel.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\..\src\panel\PhysicsPanel.h"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\..\src\panel\ProjectilePanel.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\..\src\panel\ProjectilePanel.h"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\..\src\panel\WeaponPanel.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\..\src\panel\WeaponPanel.h"
 				>
 			</File>
 		</Filter>

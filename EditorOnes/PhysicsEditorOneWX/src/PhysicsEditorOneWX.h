@@ -3,7 +3,7 @@
 
 #include "Common.h"
 #include "PhysicsDefaultValues.h"
-#include "PhysicsEditorCommon.h"
+#include "PhysicsEditorCommonSrc/PhysicsEditorCommon.h"
 
 static char* TITLE = "Physics Editor One wxWidgets version";
 

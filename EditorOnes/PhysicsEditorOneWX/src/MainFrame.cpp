@@ -1,15 +1,23 @@
 #include "MainFrame.h"
+#include "PhysicsEditorOneWX.h"
 
 const int WINDOW_DEFAULT_WIDTH = 800;
 const int WINDOW_DEFAULT_HEIGHT = 600;
 
 
 /**
-	メニューの識別ID(特殊なものに限る)
+	イベント処理用の識別ID(特殊なものに限る)
 */
-namespace MainFrameMenuId{
+namespace MainFrameEventId{
 	enum{
-		
+		//ページ変更時
+		ID_NOTE,
+		//モンスターページ処理用
+		ID_MONSTER_PAGE,
+		ID_EFFECT_PAGE,
+		ID_PROJECTILE_PAGE,
+		ID_PHYSICS_PAGE,
+		ID_WEAPON_PAGE,
 	};
 };
 
@@ -32,8 +40,8 @@ void MainFrame::Create(wxWindow* parent, wxWindowID id)
 	}
 
 	//status bar
-	::CreateStatusBar();
-	::SetStatusText( _T("get ready..."));
+	CreateStatusBar();
+	SetStatusText( _T("get ready..."));
 
 	//メニューの作成
 	//File
@@ -51,7 +59,38 @@ void MainFrame::Create(wxWindow* parent, wxWindowID id)
     SetMenuBar(menuBar);
 
 	//配置
-	
+	this->notebook = new wxNotebook(this, MainFrameEventId::ID_NOTE, wxDefaultPosition, wxDefaultSize,
+		wxNB_LEFT);
+	bool select = true;
+	wxNotebookPage* monsterPage = new wxNotebookPage(notebook, MainFrameEventId::ID_MONSTER_PAGE);
+	this->notebook->AddPage(monsterPage, _T("Monsters"), select);
+	wxNotebookPage* effectPage = new wxNotebookPage(notebook, MainFrameEventId::ID_EFFECT_PAGE);
+	this->notebook->AddPage(effectPage, _T("Effects"));
+	wxNotebookPage* projectilePage = new wxNotebookPage(notebook, MainFrameEventId::ID_PROJECTILE_PAGE);
+	this->notebook->AddPage(projectilePage, _T("Projectiles"));
+	wxNotebookPage* physicsPage = new wxNotebookPage(notebook, MainFrameEventId::ID_PHYSICS_PAGE);
+	this->notebook->AddPage(physicsPage, _T("Physics"));
+	wxNotebookPage* weaponPage = new wxNotebookPage(notebook, MainFrameEventId::ID_WEAPON_PAGE);
+	this->notebook->AddPage(weaponPage, _T("Weapons"));
+
+	//モンスターパネル
+	this->monsterPanel = new MonsterPanel(this, wxID_ANY);
+	this->effectPanel = new EffectPanel(this, wxID_ANY);
+	this->projectilePanel = new ProjectilePanel(this, wxID_ANY);
+	this->physicsPanel = new PhysicsPanel(this, wxID_ANY);
+	this->weaponPanel = new WeaponPanel(this, wxID_ANY);
+
+	this->notebook->SetMinSize(wxSize(WINDOW_DEFAULT_WIDTH, WINDOW_DEFAULT_HEIGHT));
+
+    wxGridSizer* sizer_base = new wxGridSizer(1);
+	sizer_base->Add(this->notebook, 0,wxEXPAND,0);
+	wxGridSizer* monsterSizer = new wxGridSizer(1);
+	monsterSizer->Add(monsterPanel, 0, wxEXPAND, 0);
+	notebook->SetSizer(monsterSizer);
+
+    SetSizer(sizer_base);
+    sizer_base->Fit(this);
+    Layout();
 }
 /**
 	もし編集中であれば内容を破棄するか、その前に保存するか、キャンセルするか
@@ -161,4 +200,5 @@ void MainFrame::OnQuit(wxCommandEvent& ev)
 		//キャンセル
 		return;
 	}
+	Destroy();
 }
