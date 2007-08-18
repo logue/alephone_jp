@@ -237,6 +237,10 @@
 				>
 			</File>
 			<File
+				RelativePath="..\..\..\..\src\panel\MonsterFlagsPanel.cpp"
+				>
+			</File>
+			<File
 				RelativePath="..\..\..\..\src\panel\MonsterFlagsPanel.h"
 				>
 			</File>

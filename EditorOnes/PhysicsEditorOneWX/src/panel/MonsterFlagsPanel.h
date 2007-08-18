@@ -7,8 +7,27 @@
 	敵味方判定や耐性、弱点。そして各種設定を行うパネル
 */
 class MonsterFlagsPanel: wxPanel{
+private:
+	//チェックボックス
+	//	耐性・弱点
+	wxCheckBox* immunities[NUMBER_OF_DAMAGE_TYPES];
+	wxCheckBox* weaknesses[NUMBER_OF_DAMAGE_TYPES];
+	//	味方・敵
+	wxCheckBox* friends[NUMBER_OF_CLASS_INFORMATIONS];
+	wxCheckBox* enemies[NUMBER_OF_CLASS_INFORMATIONS];
+	//	flags
+	wxCheckBox* flags[NUMBER_OF_MONSTER_FLAG_INFORMATIONS];
+
 public:
-	void Create(wxWindow* parent, wxWindowID id);
+	MonsterFlagsPanel(wxWindow* parent, wxWindowID id);
+	virtual ~MonsterFlagsPanel();
+
+    DECLARE_EVENT_TABLE()
+	void OnImmunities(wxCommandEvent& ev);
+	void OnWeaknesses(wxCommandEvent& ev);
+	void OnFriends(wxCommandEvent& ev);
+	void OnEnemies(wxCommandEvent& ev);
+	void OnFlags(wxCommandEvent& ev);
 };
 
 #endif

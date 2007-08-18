@@ -39,5 +39,6 @@
 #include "projectile_definitions.h"
 #include "weapon_definitions.h"
 
+#include "PhysicsEditorCommonSrc/PhysicsEditorCommon.h"
 
 #endif

@@ -22,6 +22,10 @@ private:
 public:
 	MonsterPanel(wxWindow* parent, wxWindowID id);
     DECLARE_EVENT_TABLE()
+	void OnSelType(wxCommandEvent& ev);
+private:
+	void setupMonster(int type);
+public:
 };
 
 #endif

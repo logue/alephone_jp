@@ -18,6 +18,8 @@ private:
     wxBitmapButton* bitmap_button_4;
     wxBitmapButton* bitmap_button_5;
     wxBitmapButton* bitmap_button_6;
+	wxBitmapButton* bitmap_button_stair;
+	
 public:
     void OnPoly3(wxCommandEvent &event); // wxGlade: <event_handler>
     void OnPoly4(wxCommandEvent &event); // wxGlade: <event_handler>
@@ -25,6 +27,7 @@ public:
     void OnPoly6(wxCommandEvent &event); // wxGlade: <event_handler>
     void OnPoly7(wxCommandEvent &event); // wxGlade: <event_handler>
     void OnPoly8(wxCommandEvent &event); // wxGlade: <event_handler>
+    void OnStair(wxCommandEvent &event); // wxGlade: <event_handler>
 
 };
 #endif

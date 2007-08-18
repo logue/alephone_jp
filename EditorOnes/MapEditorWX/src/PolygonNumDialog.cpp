@@ -1,12 +1,13 @@
 #include "PolygonNumDialog.h"
 #include "MapEditorWX.h"
 enum{
-    ID_Poly3,
+    ID_Poly3 = 3,
     ID_Poly4,
     ID_Poly5,
     ID_Poly6,
     ID_Poly7,
     ID_Poly8,
+	ID_Stair,
 };
 
 BEGIN_EVENT_TABLE(PolygonNumDialog, wxDialog)
@@ -39,7 +40,9 @@ bool PolygonNumDialog::Create(wxWindow* parent, wxWindowID id)
     bitmap_button_5 = new wxBitmapButton(this, ID_Poly7, bmp);
     bmp.LoadFile(_T("data/img/poly8.bmp"), wxBITMAP_TYPE_BMP);
     bitmap_button_6 = new wxBitmapButton(this, ID_Poly8, bmp);
-
+    bmp.LoadFile(_T("data/img/stair.bmp"), wxBITMAP_TYPE_BMP);
+    bitmap_button_stair = new wxBitmapButton(this, ID_Stair, bmp);
+	
     //
     bitmap_button_1->SetSize(bitmap_button_1->GetBestSize());
     bitmap_button_2->SetSize(bitmap_button_2->GetBestSize());
@@ -47,14 +50,16 @@ bool PolygonNumDialog::Create(wxWindow* parent, wxWindowID id)
     bitmap_button_4->SetSize(bitmap_button_4->GetBestSize());
     bitmap_button_5->SetSize(bitmap_button_5->GetBestSize());
     bitmap_button_6->SetSize(bitmap_button_6->GetBestSize());
+    bitmap_button_stair->SetSize(bitmap_button_stair->GetBestSize());
 
-    wxFlexGridSizer* grid_sizer_14 = new wxFlexGridSizer(1, 6, 0, 0);
+    wxFlexGridSizer* grid_sizer_14 = new wxFlexGridSizer(1, 7, 0, 0);
     grid_sizer_14->Add(bitmap_button_1, 0, 0, 0);
     grid_sizer_14->Add(bitmap_button_2, 0, 0, 0);
     grid_sizer_14->Add(bitmap_button_3, 0, 0, 0);
     grid_sizer_14->Add(bitmap_button_4, 0, 0, 0);
     grid_sizer_14->Add(bitmap_button_5, 0, 0, 0);
     grid_sizer_14->Add(bitmap_button_6, 0, 0, 0);
+    grid_sizer_14->Add(bitmap_button_stair, 0, 0, 0);
     SetSizer(grid_sizer_14);
     grid_sizer_14->Fit(this);
     Layout();
@@ -63,41 +68,47 @@ bool PolygonNumDialog::Create(wxWindow* parent, wxWindowID id)
 }
 void PolygonNumDialog::OnPoly3(wxCommandEvent &event)
 {
-    SetReturnCode(3);
+	SetReturnCode(ID_Poly3);
     Destroy();
 }
 
 
 void PolygonNumDialog::OnPoly4(wxCommandEvent &event)
 {
-    SetReturnCode(4);
+    SetReturnCode(ID_Poly4);
     Destroy();
 }
 
 
 void PolygonNumDialog::OnPoly5(wxCommandEvent &event)
 {
-    SetReturnCode(5);
+    SetReturnCode(ID_Poly5);
     Destroy();
 }
 
 
 void PolygonNumDialog::OnPoly6(wxCommandEvent &event)
 {
-    SetReturnCode(6);
+    SetReturnCode(ID_Poly6);
     Destroy();
 }
 
 
 void PolygonNumDialog::OnPoly7(wxCommandEvent &event)
 {
-    SetReturnCode(7);
+    SetReturnCode(ID_Poly7);
     Destroy();
 }
 
 
 void PolygonNumDialog::OnPoly8(wxCommandEvent &event)
 {
-    SetReturnCode(8);
+    SetReturnCode(ID_Poly8);
+    Destroy();
+}
+
+void PolygonNumDialog::OnStair(wxCommandEvent &event)
+{
+    SetReturnCode(ID_Stair);
     Destroy();
 }
