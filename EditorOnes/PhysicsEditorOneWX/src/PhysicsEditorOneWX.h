@@ -76,6 +76,13 @@ private:
 
 	/**読み込んだ場合保存先のパス*/
 	std::string saveFilePath;
+
+	/**編集中のモンスターインデックス*/
+	int editingMonsterIndex;
+	int editingEffectIndex;
+	int editingProjectileIndex;
+	int editingPhysicsIndex;
+	int editingWeaponIndex;
 public:
 private:
 	bool OnInit();
@@ -118,6 +125,20 @@ public:
 		Save and/or create PhysicsFile
 	*/
 	void savePhysicsFile(const char* filePath);
+
+	/**
+		現在編集中のモンスターインデックスを取得
+	*/
+	int getEditingMonsterIndex();
+	int getEditingEffectIndex();
+	int getEditingProjectileIndex();
+	int getEditingPhysicsIndex();
+	int getEditingWeaponIndex();
+	void setEditingMonsterIndex(int index);
+	void setEditingEffectIndex(int index);
+	void setEditingProjectileIndex(int index);
+	void setEditingPhysicsIndex(int index);
+	void setEditingWeaponIndex(int index);
 };
 
 DECLARE_APP(PhysicsEditorOneWX)

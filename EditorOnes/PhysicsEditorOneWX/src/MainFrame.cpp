@@ -75,6 +75,11 @@ void MainFrame::Create(wxWindow* parent, wxWindowID id)
 
 	//モンスターパネル
 	this->monsterPanel = new MonsterPanel(this, wxID_ANY);
+	wxGridSizer* sizerMonster = new wxGridSizer(1,1);
+	sizerMonster->Add(monsterPanel);
+	monsterPage->SetSizer(sizerMonster);
+	sizerMonster->Fit(monsterPage);
+
 	this->effectPanel = new EffectPanel(this, wxID_ANY);
 	this->projectilePanel = new ProjectilePanel(this, wxID_ANY);
 	this->physicsPanel = new PhysicsPanel(this, wxID_ANY);

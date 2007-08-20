@@ -227,7 +227,11 @@ void PhysicsEditorOneWX::init()
 	hpl::aleph::loadInformation("data/ShellCasingTypes.txt", NUMBER_OF_SHELL_CASING_TYPES,
 		weaponShellCasingInfo);
 
-
+	this->editingMonsterIndex = 0;
+	this->editingEffectIndex = 0;
+	this->editingProjectileIndex = 0;
+	this->editingPhysicsIndex = 0;
+	this->editingWeaponIndex = 0;
 }
 
 /**
@@ -337,4 +341,48 @@ void PhysicsEditorOneWX::savePhysicsFile(const char* filePath)
 
 	//更新・新規設定
 	this->setNewAndChanged(false, false);
+}
+
+/**
+	現在編集中のモンスターインデックスを取得
+*/
+int PhysicsEditorOneWX::getEditingMonsterIndex()
+{
+	return editingMonsterIndex;
+}
+int PhysicsEditorOneWX::getEditingEffectIndex()
+{
+	return editingEffectIndex;
+}
+int PhysicsEditorOneWX::getEditingProjectileIndex()
+{
+	return editingProjectileIndex;
+}
+int PhysicsEditorOneWX::getEditingPhysicsIndex()
+{
+	return editingPhysicsIndex;
+}
+int PhysicsEditorOneWX::getEditingWeaponIndex()
+{
+	return editingWeaponIndex;
+}
+void PhysicsEditorOneWX::setEditingMonsterIndex(int index)
+{
+	editingMonsterIndex = index;
+}
+void PhysicsEditorOneWX::setEditingEffectIndex(int index)
+{
+	editingEffectIndex = index;
+}
+void PhysicsEditorOneWX::setEditingProjectileIndex(int index)
+{
+	editingProjectileIndex = index;
+}
+void PhysicsEditorOneWX::setEditingPhysicsIndex(int index)
+{
+	editingPhysicsIndex = index;
+}
+void PhysicsEditorOneWX::setEditingWeaponIndex(int index)
+{
+	editingWeaponIndex = index;
 }
