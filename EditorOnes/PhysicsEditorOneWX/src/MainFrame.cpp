@@ -75,10 +75,13 @@ void MainFrame::Create(wxWindow* parent, wxWindowID id)
 
 	//モンスターパネル
 	this->monsterPanel = new MonsterPanel(this, wxID_ANY);
-	wxGridSizer* sizerMonster = new wxGridSizer(1,1);
-	sizerMonster->Add(monsterPanel);
+	//パネル配置用Sizer
+	wxGridSizer* sizerMonster = new wxGridSizer(1);
+	//パネルを配置
+	sizerMonster->Add(monsterPanel, 0, wxEXPAND, 0);
+	//モンスターページのSizerを設定
 	monsterPage->SetSizer(sizerMonster);
-	sizerMonster->Fit(monsterPage);
+	//sizerMonster->Fit(monsterPage);
 
 	this->effectPanel = new EffectPanel(this, wxID_ANY);
 	this->projectilePanel = new ProjectilePanel(this, wxID_ANY);

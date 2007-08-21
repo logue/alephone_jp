@@ -29,9 +29,10 @@ wxPanel(parent, id)
 	//Ý’è
 
 	//”z’u
-	wxFlexGridSizer* sizerBase = new wxFlexGridSizer(1,2);
+	wxFlexGridSizer* sizerBase = new wxFlexGridSizer(2);
+	sizerBase->Add(monsterTypeListBox, 0, wxEXPAND);
 	sizerBase->Add(notebook, 0, wxEXPAND, 0);
-
+	
 	SetSizer(sizerBase);
 	sizerBase->Fit(this);
 	Layout();
