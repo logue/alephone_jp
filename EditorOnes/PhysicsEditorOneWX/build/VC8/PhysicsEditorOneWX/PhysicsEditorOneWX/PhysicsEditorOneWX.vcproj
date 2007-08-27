@@ -229,7 +229,15 @@
 				>
 			</File>
 			<File
+				RelativePath="..\..\..\..\src\panel\MonsterAppearancePanel.cpp"
+				>
+			</File>
+			<File
 				RelativePath="..\..\..\..\src\panel\MonsterAppearancePanel.h"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\..\src\panel\MonsterAttackPanel.cpp"
 				>
 			</File>
 			<File

@@ -19,12 +19,12 @@ wxPanel(parent, id)
 	monsterTypeListBox = new wxListBox(this, ID_TYPE);
 	//notebook
 	notebook = new wxNotebook(this, ID_NOTE);
-	wxNotebookPage* appearancePage = new wxNotebookPage(notebook, ID_APPEARANCE);
-	notebook->AddPage(appearancePage, _T("Appearance"));
-	wxNotebookPage* flagsPage = new wxNotebookPage(notebook, ID_FLAGS);
-	notebook->AddPage(flagsPage, _T("Flags"));
-	wxNotebookPage* attackPage = new wxNotebookPage(notebook, ID_ATTACK);
-	notebook->AddPage(attackPage, _T("Attack"));
+	this->appearancePanel = new MonsterAppearancePanel(notebook, wxID_ANY);
+	this->flagsPanel = new MonsterFlagsPanel(notebook, wxID_ANY);
+	this->attackPanel = new MonsterAttackPanel(notebook, wxID_ANY);
+	notebook->AddPage(appearancePanel, _T("Appearance"));
+	notebook->AddPage(flagsPanel, _T("Flags"));
+	notebook->AddPage(attackPanel, _T("Attack"));
 
 	//İ’è
 

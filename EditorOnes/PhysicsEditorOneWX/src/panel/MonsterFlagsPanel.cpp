@@ -29,27 +29,40 @@ wxPanel(parent, id)
 		this->enemies[i] = new wxCheckBox(this, ID_ENEMIES,
 			wxConvertMB2WX(wxGetApp().monsterInfo[i].jname.c_str()));
 	}
+	wxStaticBox* staticDamage = new wxStaticBox(this, wxID_ANY, _T("Immunities/Weaknesses"));
+	wxStaticBox* staticEnemy = new wxStaticBox(this, wxID_ANY, _T("Enemies/Friends"));
+	wxStaticBox* staticFlags = new wxStaticBox(this, wxID_ANY, _T("Flags"));
+
 	//setting
 	//layout
-	wxGridSizer* sizerBase = new wxGridSizer(1, 3);
-	wxFlexGridSizer* sizerDamage = new wxFlexGridSizer(28, 2);
+	wxBoxSizer* sizerBase = new wxBoxSizer(wxHORIZONTAL);
+
+	//damages
+	wxStaticBoxSizer* staticDamageSizer = new wxStaticBoxSizer(staticDamage, wxHORIZONTAL);
+	wxFlexGridSizer* sizerDamage = new wxFlexGridSizer(NUMBER_OF_DAMAGE_TYPES, 2);
 	for(int i = 0; i < NUMBER_OF_DAMAGE_TYPES; i ++){
-		sizerDamage->Add(this->immunities[i]);
+		sizerDamage->Add(this->immunities[i], 0, 0);
+		sizerDamage->Add(this->weaknesses[i], 0, 0);
 	}
-	wxStaticBoxSizer* staticDamage = new wxStaticBoxSizer(wxHORIZONTAL, this, _T("Immunities/Weaknesses"));
-	staticDamage->Add(sizerDamage);
+	staticDamageSizer->Add(sizerDamage, 0);
 
-	wxFlexGridSizer* sizerEnemy = new wxFlexGridSizer(16,2);
-	wxStaticBoxSizer* staticEnemy = new wxStaticBoxSizer(wxHORIZONTAL, this, _T("Enemies/Friends"));
-	staticEnemy->Add(sizerEnemy);
+	//enemy
+	wxStaticBoxSizer* staticEnemySizer = new wxStaticBoxSizer(staticEnemy, wxHORIZONTAL);
+	wxFlexGridSizer* sizerEnemy = new wxFlexGridSizer(NUMBER_OF_CLASS_INFORMATIONS, 2);
+	for(int i = 0; i < NUMBER_OF_DAMAGE_TYPES; i ++){
+		sizerEnemy->Add(this->friends[i], 0, 0);
+		sizerEnemy->Add(this->enemies[i], 0, 0);
+	}
+	staticEnemySizer->Add(sizerEnemy);
 
-	wxFlexGridSizer* sizerFlags = new wxFlexGridSizer(28);
-	wxStaticBoxSizer* staticFlags = new wxStaticBoxSizer(wxHORIZONTAL, this, _T("Flags"));
-	sizerFlags->Add(sizerFlags);
+	//flags
+	wxStaticBoxSizer* staticFlagsSizer = new wxStaticBoxSizer(staticFlags, wxHORIZONTAL);
+	wxFlexGridSizer* sizerFlags = new wxFlexGridSizer(NUMBER_OF_MONSTER_FLAG_INFORMATIONS,1);
+	staticFlagsSizer->Add(sizerFlags);
 
-	sizerBase->Add(staticDamage);
-	sizerBase->Add(staticEnemy);
-	sizerBase->Add(staticFlags);
+	sizerBase->Add(staticDamageSizer, 0);
+	sizerBase->Add(staticEnemySizer, 1);
+	sizerBase->Add(staticFlagsSizer, 2);
 	this->SetSizer(sizerBase);
 	sizerBase->Fit(this);
 	this->Layout();

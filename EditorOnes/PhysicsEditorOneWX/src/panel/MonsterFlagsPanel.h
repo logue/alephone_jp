@@ -6,7 +6,7 @@
 /**
 	敵味方判定や耐性、弱点。そして各種設定を行うパネル
 */
-class MonsterFlagsPanel: wxPanel{
+class MonsterFlagsPanel: public wxPanel{
 private:
 	//チェックボックス
 	//	耐性・弱点
@@ -17,7 +17,8 @@ private:
 	wxCheckBox* enemies[NUMBER_OF_CLASS_INFORMATIONS];
 	//	flags
 	wxCheckBox* flags[NUMBER_OF_MONSTER_FLAG_INFORMATIONS];
-
+private:
+	MonsterFlagsPanel(){}
 public:
 	MonsterFlagsPanel(wxWindow* parent, wxWindowID id);
 	virtual ~MonsterFlagsPanel();

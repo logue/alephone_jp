@@ -62,31 +62,18 @@ void MainFrame::Create(wxWindow* parent, wxWindowID id)
 	this->notebook = new wxNotebook(this, MainFrameEventId::ID_NOTE, wxDefaultPosition, wxDefaultSize,
 		wxNB_LEFT);
 	bool select = true;
-	wxNotebookPage* monsterPage = new wxNotebookPage(notebook, MainFrameEventId::ID_MONSTER_PAGE);
-	this->notebook->AddPage(monsterPage, _T("Monsters"), select);
-	wxNotebookPage* effectPage = new wxNotebookPage(notebook, MainFrameEventId::ID_EFFECT_PAGE);
-	this->notebook->AddPage(effectPage, _T("Effects"));
-	wxNotebookPage* projectilePage = new wxNotebookPage(notebook, MainFrameEventId::ID_PROJECTILE_PAGE);
-	this->notebook->AddPage(projectilePage, _T("Projectiles"));
-	wxNotebookPage* physicsPage = new wxNotebookPage(notebook, MainFrameEventId::ID_PHYSICS_PAGE);
-	this->notebook->AddPage(physicsPage, _T("Physics"));
-	wxNotebookPage* weaponPage = new wxNotebookPage(notebook, MainFrameEventId::ID_WEAPON_PAGE);
-	this->notebook->AddPage(weaponPage, _T("Weapons"));
-
 	//モンスターパネル
-	this->monsterPanel = new MonsterPanel(this, wxID_ANY);
-	//パネル配置用Sizer
-	wxGridSizer* sizerMonster = new wxGridSizer(1);
-	//パネルを配置
-	sizerMonster->Add(monsterPanel, 0, wxEXPAND, 0);
-	//モンスターページのSizerを設定
-	monsterPage->SetSizer(sizerMonster);
-	//sizerMonster->Fit(monsterPage);
+	this->monsterPanel = new MonsterPanel(notebook, wxID_ANY);
+	this->effectPanel = new EffectPanel(notebook, wxID_ANY);
+	this->projectilePanel = new ProjectilePanel(notebook, wxID_ANY);
+	this->physicsPanel = new PhysicsPanel(notebook, wxID_ANY);
+	this->weaponPanel = new WeaponPanel(notebook, wxID_ANY);
 
-	this->effectPanel = new EffectPanel(this, wxID_ANY);
-	this->projectilePanel = new ProjectilePanel(this, wxID_ANY);
-	this->physicsPanel = new PhysicsPanel(this, wxID_ANY);
-	this->weaponPanel = new WeaponPanel(this, wxID_ANY);
+	this->notebook->AddPage(monsterPanel, _T("Monsters"), select);
+	this->notebook->AddPage(effectPanel, _T("Effects"));
+	this->notebook->AddPage(projectilePanel, _T("Projectiles"));
+	this->notebook->AddPage(physicsPanel, _T("Physics"));
+	this->notebook->AddPage(weaponPanel, _T("Weapons"));
 
 	this->notebook->SetMinSize(wxSize(WINDOW_DEFAULT_WIDTH, WINDOW_DEFAULT_HEIGHT));
 

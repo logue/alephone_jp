@@ -6,9 +6,12 @@
 /**
 	UŒ‚s“®‚ÉŠÖ‚·‚éİ’è
 */
-class MonsterAttackPanel: wxPanel{
+class MonsterAttackPanel: public wxPanel{
+private:
+	MonsterAttackPanel(){}
 public:
-	void Create(wxWindow* parent, wxWindowID id);
+	MonsterAttackPanel(wxWindow* parent, wxWindowID id);
+	virtual ~MonsterAttackPanel();
 };
 
 #endif

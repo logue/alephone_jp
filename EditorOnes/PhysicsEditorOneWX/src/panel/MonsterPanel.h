@@ -19,6 +19,8 @@ private:
 	MonsterAppearancePanel* appearancePanel;
 	MonsterFlagsPanel* flagsPanel;
 	MonsterAttackPanel* attackPanel;
+
+	MonsterPanel(){}
 public:
 	MonsterPanel(wxWindow* parent, wxWindowID id);
     DECLARE_EVENT_TABLE()

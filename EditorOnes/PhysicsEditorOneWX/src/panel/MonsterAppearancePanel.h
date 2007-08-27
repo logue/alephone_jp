@@ -8,8 +8,11 @@
 	に関するデータを操作するパネル
 */
 class MonsterAppearancePanel: public wxPanel{
+private:
+	MonsterAppearancePanel(){}
 public:
-	void Create(wxWindow* parent, wxWindowID id);
+	MonsterAppearancePanel(wxWindow* parent, wxWindowID id);
+	virtual ~MonsterAppearancePanel();
 };
 
 
