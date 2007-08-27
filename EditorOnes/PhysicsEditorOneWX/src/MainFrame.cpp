@@ -39,6 +39,8 @@ void MainFrame::Create(wxWindow* parent, wxWindowID id)
 		hpl::error::halt("Unknown error occured when launch app.");
 	}
 
+	this->SetSize(WINDOW_DEFAULT_WIDTH, WINDOW_DEFAULT_HEIGHT);
+
 	//status bar
 	CreateStatusBar();
 	SetStatusText( _T("get ready..."));

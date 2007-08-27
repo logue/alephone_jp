@@ -136,6 +136,8 @@ void PhysicsEditorOneWX::init()
     };
 	hpl::aleph::setInformationBind(NUMBER_OF_MONSTER_FLAG_INFORMATIONS,
 		monsterFlagsBind, monsterFlagsBinds);
+	hpl::aleph::loadInformation("data/MonsterFlags.txt", NUMBER_OF_MONSTER_FLAG_INFORMATIONS,
+		monsterFlagsBind);
 
 	////////////////
 	//projectiles

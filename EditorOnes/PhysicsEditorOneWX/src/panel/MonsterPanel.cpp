@@ -27,6 +27,7 @@ wxPanel(parent, id)
 	notebook->AddPage(attackPanel, _T("Attack"));
 
 	//Ý’è
+	monsterTypeListBox->SetMinSize(wxSize(-1, 300));
 
 	//”z’u
 	wxFlexGridSizer* sizerBase = new wxFlexGridSizer(2);
