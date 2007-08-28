@@ -14,11 +14,11 @@ crew
 science
 security
 assimilated
-hummer minor // slow hummer
-hummer major // fast hummer
-hummer big minor // big hummer
-hummer big major // angry hummer
-hummer possessed // hummer from durandal
+hummer minor
+hummer major
+hummer big minor
+hummer big major
+hummer possessed
 cyborg minor
 cyborg major
 cyborg flame minor

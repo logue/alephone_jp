@@ -1,4 +1,5 @@
 #include "MonsterPanel.h"
+#include "../PhysicsEditorOneWX.h"
 
 enum{
 	ID_TYPE,
@@ -28,6 +29,10 @@ wxPanel(parent, id)
 
 	//設定
 	monsterTypeListBox->SetMinSize(wxSize(-1, 300));
+	//	モンスターリスト追加
+	for(int i = 0; i < NUMBER_OF_MONSTER_TYPES; i ++){
+		monsterTypeListBox->Insert(wxConvertMB2WX(wxGetApp().monsterInfo[i].jname.c_str()), i);
+	}
 
 	//配置
 	wxFlexGridSizer* sizerBase = new wxFlexGridSizer(2);
