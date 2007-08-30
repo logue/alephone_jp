@@ -56,9 +56,13 @@ void MonsterPanel::setupMonster(int type)
 {
 	wxASSERT(type >= 0 && type < NUMBER_OF_MONSTER_TYPES);
 
+	wxGetApp().setEditingMonsterIndex(type);
+
 	//appearanceの更新
 
 	//flagsの更新
+	this->flagsPanel->setup();
+	
 	//attackの更新
 
 }

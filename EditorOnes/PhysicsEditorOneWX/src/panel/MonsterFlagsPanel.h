@@ -23,12 +23,16 @@ public:
 	MonsterFlagsPanel(wxWindow* parent, wxWindowID id);
 	virtual ~MonsterFlagsPanel();
 
+protected:
     DECLARE_EVENT_TABLE()
 	void OnImmunities(wxCommandEvent& ev);
 	void OnWeaknesses(wxCommandEvent& ev);
 	void OnFriends(wxCommandEvent& ev);
 	void OnEnemies(wxCommandEvent& ev);
 	void OnFlags(wxCommandEvent& ev);
+public:
+
+	void setup();
 };
 
 #endif

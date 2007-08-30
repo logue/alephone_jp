@@ -61,6 +61,7 @@ MonsterAppearancePanel::MonsterAppearancePanel(wxWindow* parent, wxWindowID id)
 :wxPanel(parent, id)
 {
 	//create
+	//	appearance/system
 	this->collectionChoice = new wxChoice(this, ID_COLLECTION);
 	this->paletteText = new wxTextCtrl(this, ID_PALETTE);
 	this->vitalityText = new wxTextCtrl(this, ID_VITALITY);
@@ -79,6 +80,49 @@ MonsterAppearancePanel::MonsterAppearancePanel(wxWindow* parent, wxWindowID id)
 	this->speedChoice = new wxChoice(this, ID_SPEED_CHOICE);
 	this->gravityText = new wxTextCtrl(this, ID_GRAVITY);
 
+	//sequences
+	this->stationalyText = new wxTextCtrl(this, ID_STATIONALY);
+	this->movingText = new wxTextCtrl(this, ID_MOVING);
+	this->hittingText = new wxTextCtrl(this, ID_HITTING);
+	this->softDyingText = new wxTextCtrl(this, ID_SOFT_DYING);
+	this->softDeadText = new wxTextCtrl(this, ID_SOFT_DEAD);
+	this->hardDyingText = new wxTextCtrl(this, ID_HARD_DYING);
+	this->hardDeadText = new wxTextCtrl(this, ID_HARD_DEAD);
+	this->teleportInText = new wxTextCtrl(this, ID_TELEPORT_IN);
+	this->teleportOutText = new wxTextCtrl(this, ID_TELEPORT_OUT);
+
+	//shrapnel damages
+	this->shrapnelRadiusText = new wxTextCtrl(this, ID_SHRAPNEL_RADIUS);
+	this->shrapnelBaseText = new wxTextCtrl(this, ID_SHRAPNEL_BASE);
+	this->shrapnelRndText = new wxTextCtrl(this, ID_SHRAPNEL_RND);
+	this->shrapnelScaleText = new wxTextCtrl(this, ID_SHRAPNEL_SCALE);
+	this->shrapnelTypeChoice = new wxChoice(this, ID_SHRAPNEL_TYPE);
+	this->shrapnelIsAlienCheckbox = new wxCheckBox(this, ID_SHRAPNEL_IS_ALIEN,
+		_T("Shrapnel is alien"));
+
+	copyFromButton = new wxButton(this, ID_COPY_FROM, _T("Copy from ..."));
+
+	//sound
+	soundPitchText = new wxTextCtrl(this, ID_PITCH);
+	soundActivationChoice = new wxChoice(this, ID_ACTIVATION);
+	soundFriendActChoice = new wxChoice(this, ID_FRIEND_ACT);
+	soundClearChoice = new wxChoice(this, ID_CLEAR);
+	soundKillChoice = new wxChoice(this, ID_KILL);
+	soundApologyChoice = new wxChoice(this, ID_APOLYGY);
+	soundFriendFireChoice = new wxChoice(this, ID_FRIEND_FIRE);
+	soundFlamingChoice = new wxChoice(this, ID_FLAMING);
+	soundRandomChoice = new wxChoice(this, ID_RANDOM);
+	soundRandomMask = new wxTextCtrl(this, ID_RANDOM_MASK);
+
+	//effect
+	effectChoice = new wxChoice(this, ID_EFFECT);
+	effectMeleeChoice = new wxChoice(this, ID_EFFECT_MELEE);
+	effectContrailChoice = new wxChoice(this, ID_EFFECT_CONTRAIL);
+
+	//reset
+	resetButton = new wxButton(this, ID_RESET, _T("Reset"));
+
+	//static boxes
 	wxStaticBox* appearanceStaticBox = new wxStaticBox(this, wxID_ANY, _T("Apeearance"));
 	wxStaticBox* shrapnelStaticBox = new wxStaticBox(this, wxID_ANY, _T("Shrapnel damages"));
 	wxStaticBox* soundStaticBox = new wxStaticBox(this, wxID_ANY, _T("Sounds"));
@@ -151,14 +195,27 @@ MonsterAppearancePanel::MonsterAppearancePanel(wxWindow* parent, wxWindowID id)
 
 	//	center column
 	wxFlexGridSizer* appearanceAndShrapnelSizer = new wxFlexGridSizer(3, 1,0,0);
-	wxStaticBoxSizer* appearanceStaticSizer = new wxStaticBoxSizer(appearanceStaticBox, wxVERTICAL);
+	//		appearance
+	wxStaticBoxSizer* appearanceStaticSizer = new wxStaticBoxSizer(appearanceStaticBox,
+		wxVERTICAL);
 	appearanceAndShrapnelSizer->Add(appearanceStaticSizer);
+	//		shrapnel
 	wxStaticBoxSizer* shrapnelStaticSizer = new wxStaticBoxSizer(shrapnelStaticBox, wxVERTICAL);
 	appearanceAndShrapnelSizer->Add(shrapnelStaticSizer);
 	//		button
+	appearanceAndShrapnelSizer->Add(this->copyFromButton,0,wxEXPAND,0,0);
+
+
+	//	right column
+	wxFlexGridSizer* soundAndEffectSizer = new wxFlexGridSizer(3, 1, 0,0);
+	wxStaticBoxSizer* soundStaticSizer = new wxStaticBoxSizer(soundStaticBox, wxVERTICAL);
+	soundAndEffectSizer->Add(soundStaticSizer);
+	wxStaticBoxSizer* effectStaticSizer = new wxStaticBoxSizer(effectStaticBox, wxVERTICAL);
+	soundAndEffectSizer->Add(effectStaticSizer);
 
 	baseSizer->Add(infoSizer);
 	baseSizer->Add(appearanceAndShrapnelSizer);
+	baseSizer->Add(soundAndEffectSizer);
 
 	this->SetSizer(baseSizer);
 	baseSizer->Fit(this);

@@ -69,8 +69,8 @@ wxPanel(parent, id)
 	staticFlagsSizer->Add(sizerFlags);
 
 	sizerBase->Add(staticDamageSizer, 0, wxEXPAND);
-	sizerBase->Add(staticEnemySizer, 1, wxEXPAND);
-	sizerBase->Add(staticFlagsSizer, 2, wxEXPAND);
+	sizerBase->Add(staticEnemySizer, 0, wxEXPAND);
+	sizerBase->Add(staticFlagsSizer, 0, wxEXPAND);
 	this->SetSizer(sizerBase);
 	sizerBase->Fit(this);
 	this->Layout();
@@ -82,20 +82,83 @@ MonsterFlagsPanel::~MonsterFlagsPanel()
 
 void MonsterFlagsPanel::OnImmunities(wxCommandEvent& ev)
 {
-/*	//全フラグチェックボックスの状態をデータにコピー
+	uint32 flags = 0;
+	//全フラグチェックボックスの状態をデータにコピー
 	for(int i = 0; i < NUMBER_OF_DAMAGE_TYPES; i ++){
-		SET_FLAG32(monster_definitions[wxGetApp().frame->get]
-	}*/
+		SET_FLAG32(flags, i, this->immunities[i]->GetValue());
+	}
+	int type = wxGetApp().getEditingMonsterIndex();
+	monster_definitions[type].immunities = flags;
 }
 void MonsterFlagsPanel::OnWeaknesses(wxCommandEvent& ev)
 {
+	uint32 flags = 0;
+	//全フラグチェックボックスの状態をデータにコピー
+	for(int i = 0; i < NUMBER_OF_DAMAGE_TYPES; i ++){
+		SET_FLAG32(flags, i, this->weaknesses[i]->GetValue());
+	}
+	int type = wxGetApp().getEditingMonsterIndex();
+	monster_definitions[type].weaknesses = flags;
 }
+
+//////////////////
 void MonsterFlagsPanel::OnFriends(wxCommandEvent& ev)
 {
+	uint32 flags = 0;
+	//全フラグチェックボックスの状態をデータにコピー
+	for(int i = 0; i < NUMBER_OF_CLASS_INFORMATIONS; i ++){
+		SET_FLAG32(flags, i, this->friends[i]->GetValue());
+	}
+	int type = wxGetApp().getEditingMonsterIndex();
+	monster_definitions[type].friends = flags;
 }
 void MonsterFlagsPanel::OnEnemies(wxCommandEvent& ev)
 {
+	uint32 flags = 0;
+	//全フラグチェックボックスの状態をデータにコピー
+	for(int i = 0; i < NUMBER_OF_CLASS_INFORMATIONS; i ++){
+		SET_FLAG32(flags, i, this->enemies[i]->GetValue());
+	}
+	int type = wxGetApp().getEditingMonsterIndex();
+	monster_definitions[type].enemies = flags;
 }
+
+///////////////////
 void MonsterFlagsPanel::OnFlags(wxCommandEvent& ev)
 {
+	uint32 flags = 0;
+	//全フラグチェックボックスの状態をデータにコピー
+	for(int i = 0; i < NUMBER_OF_MONSTER_FLAG_INFORMATIONS; i ++){
+		SET_FLAG32(flags, i, this->flags[i]->GetValue());
+	}
+	int type = wxGetApp().getEditingMonsterIndex();
+	monster_definitions[type].flags = flags;
+}
+
+/////////////////
+void MonsterFlagsPanel::setup()
+{
+	int type = wxGetApp().getEditingMonsterIndex();
+
+	//immunities/weaknesses
+	for(int i = 0; i < NUMBER_OF_DAMAGE_TYPES; i ++){
+		this->immunities[i]->SetValue(TEST_FLAG32(
+			monster_definitions[type].immunities, i));
+		this->weaknesses[i]->SetValue(TEST_FLAG32(
+			monster_definitions[type].weaknesses, i));
+	}
+
+	//friends/enemies
+	for(int i = 0; i < NUMBER_OF_CLASS_INFORMATIONS; i ++){
+		this->friends[i]->SetValue(TEST_FLAG32(
+			monster_definitions[type].friends, i));
+		this->enemies[i]->SetValue(TEST_FLAG32(
+			monster_definitions[type].enemies, i));
+	}
+
+	//flags
+	for(int i = 0; i < NUMBER_OF_MONSTER_FLAG_INFORMATIONS; i ++){
+		this->flags[i]->SetValue(TEST_FLAG32(
+			monster_definitions[type].flags, i));
+	}
 }
