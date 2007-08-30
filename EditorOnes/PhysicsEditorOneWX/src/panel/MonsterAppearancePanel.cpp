@@ -198,9 +198,44 @@ MonsterAppearancePanel::MonsterAppearancePanel(wxWindow* parent, wxWindowID id)
 	//		appearance
 	wxStaticBoxSizer* appearanceStaticSizer = new wxStaticBoxSizer(appearanceStaticBox,
 		wxVERTICAL);
+	wxFlexGridSizer* appearanceFlexSizer = new wxFlexGridSizer(9,2,0,0);
+	appearanceFlexSizer->Add(new wxStaticText(this, wxID_ANY, _T("Stationaly")), 0, wxEXPAND);
+	appearanceFlexSizer->Add(this->stationalyText, 0, wxEXPAND);
+	appearanceFlexSizer->Add(new wxStaticText(this, wxID_ANY, _T("Moving")), 0, wxEXPAND);
+	appearanceFlexSizer->Add(this->movingText, 0, wxEXPAND);
+	appearanceFlexSizer->Add(new wxStaticText(this, wxID_ANY, _T("Hitting")), 0, wxEXPAND);
+	appearanceFlexSizer->Add(this->hittingText, 0, wxEXPAND);
+	appearanceFlexSizer->Add(new wxStaticText(this, wxID_ANY, _T("Soft Dying")), 0, wxEXPAND);
+	appearanceFlexSizer->Add(this->softDyingText, 0, wxEXPAND);
+	appearanceFlexSizer->Add(new wxStaticText(this, wxID_ANY, _T("Soft Dead")), 0, wxEXPAND);
+	appearanceFlexSizer->Add(this->softDeadText, 0, wxEXPAND);
+	appearanceFlexSizer->Add(new wxStaticText(this, wxID_ANY, _T("Hard Dying")), 0, wxEXPAND);
+	appearanceFlexSizer->Add(this->hardDyingText, 0, wxEXPAND);
+	appearanceFlexSizer->Add(new wxStaticText(this, wxID_ANY, _T("Hard Dead")), 0, wxEXPAND);
+	appearanceFlexSizer->Add(this->hardDeadText, 0, wxEXPAND);
+	appearanceFlexSizer->Add(new wxStaticText(this, wxID_ANY, _T("Teleport In")), 0, wxEXPAND);
+	appearanceFlexSizer->Add(this->teleportInText, 0, wxEXPAND);
+	appearanceFlexSizer->Add(new wxStaticText(this, wxID_ANY, _T("Teleport Out")), 0, wxEXPAND);
+	appearanceFlexSizer->Add(this->teleportOutText, 0, wxEXPAND);
+	appearanceStaticSizer->Add(appearanceFlexSizer);
 	appearanceAndShrapnelSizer->Add(appearanceStaticSizer);
 	//		shrapnel
 	wxStaticBoxSizer* shrapnelStaticSizer = new wxStaticBoxSizer(shrapnelStaticBox, wxVERTICAL);
+		wxFlexGridSizer* shrapnelFlexSizer = new wxFlexGridSizer(2,1,0,0);
+			wxFlexGridSizer* shrapnelDamageFlexSizer = new wxFlexGridSizer(5,2,0,0);
+				shrapnelDamageFlexSizer->Add(new wxStaticText(this, wxID_ANY, _T("Radius")));
+				shrapnelDamageFlexSizer->Add(this->shrapnelRadiusText);
+				shrapnelDamageFlexSizer->Add(new wxStaticText(this, wxID_ANY, _T("Base")));
+				shrapnelDamageFlexSizer->Add(this->shrapnelBaseText);
+				shrapnelDamageFlexSizer->Add(new wxStaticText(this, wxID_ANY, _T("Random")));
+				shrapnelDamageFlexSizer->Add(this->shrapnelRndText);
+				shrapnelDamageFlexSizer->Add(new wxStaticText(this, wxID_ANY, _T("Scale")));
+				shrapnelDamageFlexSizer->Add(this->shrapnelScaleText);
+				shrapnelDamageFlexSizer->Add(new wxStaticText(this, wxID_ANY, _T("Type")));
+				shrapnelDamageFlexSizer->Add(this->shrapnelTypeChoice);
+		shrapnelFlexSizer->Add(shrapnelDamageFlexSizer);
+		shrapnelFlexSizer->Add(this->shrapnelIsAlienCheckbox);
+	shrapnelStaticSizer->Add(shrapnelFlexSizer);
 	appearanceAndShrapnelSizer->Add(shrapnelStaticSizer);
 	//		button
 	appearanceAndShrapnelSizer->Add(this->copyFromButton,0,wxEXPAND,0,0);
@@ -208,10 +243,45 @@ MonsterAppearancePanel::MonsterAppearancePanel(wxWindow* parent, wxWindowID id)
 
 	//	right column
 	wxFlexGridSizer* soundAndEffectSizer = new wxFlexGridSizer(3, 1, 0,0);
-	wxStaticBoxSizer* soundStaticSizer = new wxStaticBoxSizer(soundStaticBox, wxVERTICAL);
+	//	sound
+		wxFlexGridSizer* soundFlexSizer = new wxFlexGridSizer(10,2,0,0);
+			soundFlexSizer->Add(new wxStaticText(this, wxID_ANY, _T("Pitch")));
+			soundFlexSizer->Add(this->soundPitchText);
+			soundFlexSizer->Add(new wxStaticText(this, wxID_ANY, _T("Activation")));
+			soundFlexSizer->Add(this->soundActivationChoice);
+			soundFlexSizer->Add(new wxStaticText(this, wxID_ANY, _T("Friend Activation")));
+			soundFlexSizer->Add(this->soundFriendActChoice);
+			soundFlexSizer->Add(new wxStaticText(this, wxID_ANY, _T("Clear")));
+			soundFlexSizer->Add(this->soundClearChoice);
+			soundFlexSizer->Add(new wxStaticText(this, wxID_ANY, _T("Kill")));
+			soundFlexSizer->Add(this->soundKillChoice);
+			soundFlexSizer->Add(new wxStaticText(this, wxID_ANY, _T("Apology")));
+			soundFlexSizer->Add(this->soundApologyChoice);
+			soundFlexSizer->Add(new wxStaticText(this, wxID_ANY, _T("Friend Fire")));
+			soundFlexSizer->Add(this->soundFriendFireChoice);
+			soundFlexSizer->Add(new wxStaticText(this, wxID_ANY, _T("Flaming")));
+			soundFlexSizer->Add(this->soundFlamingChoice);
+			soundFlexSizer->Add(new wxStaticText(this, wxID_ANY, _T("Random")));
+			soundFlexSizer->Add(this->soundRandomChoice);
+			soundFlexSizer->Add(new wxStaticText(this, wxID_ANY, _T("Random Mask")));
+			soundFlexSizer->Add(this->soundRandomMask);
+		
+		wxStaticBoxSizer* soundStaticSizer = new wxStaticBoxSizer(soundStaticBox, wxVERTICAL);
+		soundStaticSizer->Add(soundFlexSizer);
 	soundAndEffectSizer->Add(soundStaticSizer);
-	wxStaticBoxSizer* effectStaticSizer = new wxStaticBoxSizer(effectStaticBox, wxVERTICAL);
+	//	effect
+		wxFlexGridSizer* effectFlexSizer = new wxFlexGridSizer(3,2,0,0);
+			effectFlexSizer->Add(new wxStaticText(this, wxID_ANY, _T("Effect")));
+			effectFlexSizer->Add(this->effectChoice);
+			effectFlexSizer->Add(new wxStaticText(this, wxID_ANY, _T("Melee Effect")));
+			effectFlexSizer->Add(this->effectMeleeChoice);
+			effectFlexSizer->Add(new wxStaticText(this, wxID_ANY, _T("Contrail Effect")));
+			effectFlexSizer->Add(this->effectContrailChoice);
+			
+		wxStaticBoxSizer* effectStaticSizer = new wxStaticBoxSizer(effectStaticBox, wxVERTICAL);
+		effectStaticSizer->Add(effectFlexSizer);
 	soundAndEffectSizer->Add(effectStaticSizer);
+	soundAndEffectSizer->Add(this->resetButton);
 
 	baseSizer->Add(infoSizer);
 	baseSizer->Add(appearanceAndShrapnelSizer);
@@ -223,5 +293,156 @@ MonsterAppearancePanel::MonsterAppearancePanel(wxWindow* parent, wxWindowID id)
 
 }
 MonsterAppearancePanel::~MonsterAppearancePanel()
+{
+}
+
+void MonsterAppearancePanel::OnCollection(wxCommandEvent& ev)
+{
+}
+void MonsterAppearancePanel::OnPalette(wxCommandEvent& ev)
+{
+}
+void MonsterAppearancePanel::OnVitality(wxCommandEvent& ev)
+{
+}
+void MonsterAppearancePanel::OnClass(wxCommandEvent& ev)
+{
+}
+void MonsterAppearancePanel::OnRadius(wxCommandEvent& ev)
+{
+}
+void MonsterAppearancePanel::OnHeight(wxCommandEvent& ev)
+{
+}
+void MonsterAppearancePanel::OnHover(wxCommandEvent& ev)
+{
+}
+void MonsterAppearancePanel::OnMinLedge(wxCommandEvent& ev)
+{
+}
+void MonsterAppearancePanel::OnMaxLedge(wxCommandEvent& ev)
+{
+}
+void MonsterAppearancePanel::OnExtVelScale(wxCommandEvent& ev)
+{
+}
+void MonsterAppearancePanel::OnCarryItem(wxCommandEvent& ev)
+{
+}
+void MonsterAppearancePanel::OnHalfVisualArc(wxCommandEvent& ev)
+{
+}
+void MonsterAppearancePanel::OnVertVisualArc(wxCommandEvent& ev)
+{
+}
+void MonsterAppearancePanel::OnIntelligence(wxCommandEvent& ev)
+{
+}
+void MonsterAppearancePanel::OnSpeedText(wxCommandEvent& ev)
+{
+}
+void MonsterAppearancePanel::OnSpeedChoice(wxCommandEvent& ev)
+{
+}
+void MonsterAppearancePanel::OnGravity(wxCommandEvent& ev)
+{
+}
+
+void MonsterAppearancePanel::OnStationaly(wxCommandEvent& ev)
+{
+}
+void MonsterAppearancePanel::OnMoving(wxCommandEvent& ev)
+{
+}
+void MonsterAppearancePanel::OnHitting(wxCommandEvent& ev)
+{
+}
+void MonsterAppearancePanel::OnSoftDying(wxCommandEvent& ev)
+{
+}
+void MonsterAppearancePanel::OnSoftDead(wxCommandEvent& ev)
+{
+}
+void MonsterAppearancePanel::OnHardDying(wxCommandEvent& ev)
+{
+}
+void MonsterAppearancePanel::OnHardDead(wxCommandEvent& ev)
+{
+}
+void MonsterAppearancePanel::OnTeleportIn(wxCommandEvent& ev)
+{
+}
+void MonsterAppearancePanel::OnTeleportOut(wxCommandEvent& ev)
+{
+}
+
+void MonsterAppearancePanel::OnShrapnelRadius(wxCommandEvent& ev)
+{
+}
+void MonsterAppearancePanel::OnShrapnelBase(wxCommandEvent& ev)
+{
+}
+void MonsterAppearancePanel::OnShrapnelRnd(wxCommandEvent& ev)
+{
+}
+void MonsterAppearancePanel::OnShrapnelScale(wxCommandEvent& ev)
+{
+}
+void MonsterAppearancePanel::OnShrapnelType(wxCommandEvent& ev)
+{
+}
+void MonsterAppearancePanel::OnShrapnelIsAlien(wxCommandEvent& ev)
+{
+}
+void MonsterAppearancePanel::OnCopyFrom(wxCommandEvent& ev)
+{
+}
+
+void MonsterAppearancePanel::OnSoundPitch(wxCommandEvent& ev)
+{
+}
+void MonsterAppearancePanel::OnSoundActivation(wxCommandEvent& ev)
+{
+}
+void MonsterAppearancePanel::OnSoundFriendAct(wxCommandEvent& ev)
+{
+}
+void MonsterAppearancePanel::OnSoundClear(wxCommandEvent& ev)
+{
+}
+void MonsterAppearancePanel::OnSoundKill(wxCommandEvent& ev)
+{
+}
+void MonsterAppearancePanel::OnSoundApology(wxCommandEvent& ev)
+{
+}
+void MonsterAppearancePanel::OnSoundFriendFire(wxCommandEvent& ev)
+{
+}
+void MonsterAppearancePanel::OnSoundFlaming(wxCommandEvent& ev)
+{
+}
+void MonsterAppearancePanel::OnSoundRandom(wxCommandEvent& ev)
+{
+}
+void MonsterAppearancePanel::OnSoundRandomMask(wxCommandEvent& ev)
+{
+}
+
+void MonsterAppearancePanel::OnEffect(wxCommandEvent& ev)
+{
+}
+void MonsterAppearancePanel::OnEffectMelee(wxCommandEvent& ev)
+{
+}
+void MonsterAppearancePanel::OnEffectContrail(wxCommandEvent& ev)
+{
+}
+
+void MonsterAppearancePanel::OnResetButton(wxCommandEvent& ev)
+{
+}
+
+void MonsterAppearancePanel::setup()
 {
 }

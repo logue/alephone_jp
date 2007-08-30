@@ -45,6 +45,10 @@ void MainFrame::Create(wxWindow* parent, wxWindowID id)
 	CreateStatusBar();
 	SetStatusText( _T("get ready..."));
 
+	wxFont font = GetFont();
+	font.SetPointSize(8);
+	SetFont(font);
+
 	//ƒƒjƒ…[‚Ìì¬
 	//File
 	wxMenu* menuFile = new wxMenu;
