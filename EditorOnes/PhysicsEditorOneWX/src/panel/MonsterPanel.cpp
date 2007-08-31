@@ -59,6 +59,7 @@ void MonsterPanel::setupMonster(int type)
 	wxGetApp().setEditingMonsterIndex(type);
 
 	//appearanceの更新
+	this->appearancePanel->setup();
 
 	//flagsの更新
 	this->flagsPanel->setup();

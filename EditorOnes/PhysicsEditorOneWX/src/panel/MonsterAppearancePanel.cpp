@@ -57,6 +57,80 @@ enum{
 	ID_RESET,
 };
 
+BEGIN_EVENT_TABLE(MonsterAppearancePanel, wxPanel)
+	EVT_CHOICE(ID_COLLECTION, MonsterAppearancePanel::OnCollection)
+	EVT_CHOICE(ID_PALETTE, MonsterAppearancePanel::OnPalette)
+	EVT_TEXT(ID_VITALITY, MonsterAppearancePanel::OnVitality)
+	EVT_CHOICE(ID_CLASS, MonsterAppearancePanel::OnClass)
+	EVT_TEXT(ID_RADIUS, MonsterAppearancePanel::OnRadius)
+	EVT_TEXT(ID_HEIGHT, MonsterAppearancePanel::OnHeight)
+	EVT_TEXT(ID_HOVER, MonsterAppearancePanel::OnHover)
+	EVT_TEXT(ID_MIN_LEDGE, MonsterAppearancePanel::OnMinLedge)
+	EVT_TEXT(ID_MAX_LEDGE, MonsterAppearancePanel::OnMaxLedge)
+	EVT_TEXT(ID_EXT_VEL_SCALE, MonsterAppearancePanel::OnExtVelScale)
+	EVT_CHOICE(ID_CARRY_ITEM, MonsterAppearancePanel::OnCarryItem)
+	EVT_TEXT(ID_HALF_VISUAL_ARC, MonsterAppearancePanel::OnHalfVisualArc)
+	EVT_TEXT(ID_VERT_VISUAL_ARC, MonsterAppearancePanel::OnVertVisualArc)
+	EVT_CHOICE(ID_INTELLIGENCE, MonsterAppearancePanel::OnIntelligence)
+	EVT_TEXT(ID_SPEED_TEXT, MonsterAppearancePanel::OnSpeedText)
+	EVT_CHOICE(ID_SPEED_CHOICE, MonsterAppearancePanel::OnSpeedChoice)
+	EVT_TEXT(ID_GRAVITY, MonsterAppearancePanel::OnGravity)
+
+	EVT_TEXT(ID_STATIONALY, MonsterAppearancePanel::OnStationaly)
+	EVT_TEXT(ID_MOVING, MonsterAppearancePanel::OnMoving)
+	EVT_TEXT(ID_HITTING, MonsterAppearancePanel::OnHitting)
+	EVT_TEXT(ID_SOFT_DYING, MonsterAppearancePanel::OnSoftDying)
+	EVT_TEXT(ID_SOFT_DEAD, MonsterAppearancePanel::OnSoftDead)
+	EVT_TEXT(ID_HARD_DYING, MonsterAppearancePanel::OnHardDying)
+	EVT_TEXT(ID_HARD_DEAD, MonsterAppearancePanel::OnHardDead)
+	EVT_TEXT(ID_TELEPORT_IN, MonsterAppearancePanel::OnTeleportIn)
+	EVT_TEXT(ID_TELEPORT_OUT, MonsterAppearancePanel::OnTeleportOut)
+
+	EVT_TEXT(ID_SHRAPNEL_RADIUS, MonsterAppearancePanel::OnShrapnelRadius)
+	EVT_TEXT(ID_SHRAPNEL_BASE, MonsterAppearancePanel::OnShrapnelBase)
+	EVT_TEXT(ID_SHRAPNEL_RND, MonsterAppearancePanel::OnShrapnelRnd)
+	EVT_TEXT(ID_SHRAPNEL_SCALE, MonsterAppearancePanel::OnShrapnelScale)
+	EVT_CHOICE(ID_SHRAPNEL_TYPE, MonsterAppearancePanel::OnShrapnelType)
+	EVT_CHECKBOX(ID_SHRAPNEL_IS_ALIEN, MonsterAppearancePanel::OnShrapnelIsAlien)
+
+	EVT_BUTTON(ID_COPY_FROM, MonsterAppearancePanel::OnCopyFrom)
+
+	EVT_TEXT(ID_PITCH, MonsterAppearancePanel::OnSoundPitch)
+	EVT_CHOICE(ID_ACTIVATION, MonsterAppearancePanel::OnSoundActivation)
+	EVT_CHOICE(ID_FRIEND_ACT, MonsterAppearancePanel::OnSoundFriendAct)
+	EVT_CHOICE(ID_CLEAR, MonsterAppearancePanel::OnSoundClear)
+	EVT_CHOICE(ID_KILL, MonsterAppearancePanel::OnSoundKill)
+	EVT_CHOICE(ID_APOLYGY, MonsterAppearancePanel::OnSoundApology)
+	EVT_CHOICE(ID_FRIEND_FIRE, MonsterAppearancePanel::OnSoundFriendFire)
+	EVT_CHOICE(ID_FLAMING, MonsterAppearancePanel::OnSoundFlaming)
+	EVT_CHOICE(ID_RANDOM, MonsterAppearancePanel::OnSoundRandom)
+	EVT_TEXT(ID_RANDOM_MASK, MonsterAppearancePanel::OnSoundRandomMask)
+
+	EVT_CHOICE(ID_RANDOM, MonsterAppearancePanel::OnSoundRandom)
+	EVT_CHOICE(ID_RANDOM, MonsterAppearancePanel::OnSoundRandom)
+	EVT_CHOICE(ID_RANDOM, MonsterAppearancePanel::OnSoundRandom)
+
+	EVT_BUTTON(ID_RESET, MonsterAppearancePanel::OnResetButton)
+END_EVENT_TABLE()
+
+static void setChoice(wxChoice* choice, int index, int max)
+{
+	index = index == NONE ? max : index;
+	choice->SetSelection(index);
+}
+static int getChoice(wxChoice* choice, int max)
+{
+	int index = choice->GetSelection();
+	index = index == max ? NONE : index;
+	return index;
+}
+static int getChoice(wxCommandEvent* choice, int max)
+{
+	int index = choice->GetSelection();
+	index = index == max ? NONE : index;
+	return index;
+}
+
 MonsterAppearancePanel::MonsterAppearancePanel(wxWindow* parent, wxWindowID id)
 :wxPanel(parent, id)
 {
@@ -139,19 +213,52 @@ MonsterAppearancePanel::MonsterAppearancePanel(wxWindow* parent, wxWindowID id)
 	}
 	//	item
 	for(int i = 0; i < NUMBER_OF_DEFINED_ITEMS; i ++){
-		classChoice->Insert(wxConvertMB2WX(wxGetApp().itemInfo[i].jname.c_str()), i);
+		carryItemChoice->Insert(wxConvertMB2WX(wxGetApp().itemInfo[i].jname.c_str()), i);
 	}
+	carryItemChoice->Insert(_T("NONE"), NUMBER_OF_DEFINED_ITEMS);
 	//	intelligence
 	for(int i = 0; i < NUMBER_OF_MONSTER_INTELLIGENCE_INFORMATIONS; i ++){
 		intelligenceChoice->Insert(wxConvertMB2WX(wxGetApp().monsterIntelligenceBind[i].jname.c_str()), i);
 	}
 	//	speed
 	for(int i = 0; i < NUMBER_OF_SPEED_INFORMATIONS; i ++){
-		intelligenceChoice->Insert(wxConvertMB2WX(wxGetApp().speedBind[i].jname.c_str()), i);
+		speedChoice->Insert(wxConvertMB2WX(wxGetApp().speedBind[i].jname.c_str()), i);
 	}
+	speedChoice->Insert(_T("Other"), NUMBER_OF_SPEED_INFORMATIONS);
 	//	shrapnel type
+	for(int i = 0; i < NUMBER_OF_DAMAGE_TYPES; i ++){
+		shrapnelTypeChoice->Insert(wxConvertMB2WX(wxGetApp().damageInfo[i].jname.c_str()), i);
+	}
+	shrapnelTypeChoice->Insert(_T("NONE"), NUMBER_OF_DAMAGE_TYPES);
 	//	sounds
+	for(int i = 0; i < NUMBER_OF_SOUND_DEFINITIONS; i ++){
+		soundActivationChoice->Insert(wxConvertMB2WX(wxGetApp().soundInfo[i].jname.c_str()), i);
+		soundFriendActChoice->Insert(wxConvertMB2WX(wxGetApp().soundInfo[i].jname.c_str()), i);
+		soundClearChoice->Insert(wxConvertMB2WX(wxGetApp().soundInfo[i].jname.c_str()), i);
+		soundKillChoice->Insert(wxConvertMB2WX(wxGetApp().soundInfo[i].jname.c_str()), i);
+		soundApologyChoice->Insert(wxConvertMB2WX(wxGetApp().soundInfo[i].jname.c_str()), i);
+		soundFriendFireChoice->Insert(wxConvertMB2WX(wxGetApp().soundInfo[i].jname.c_str()), i);
+		soundFlamingChoice->Insert(wxConvertMB2WX(wxGetApp().soundInfo[i].jname.c_str()), i);
+		soundRandomChoice->Insert(wxConvertMB2WX(wxGetApp().soundInfo[i].jname.c_str()), i);
+	}
+	soundActivationChoice->Insert(_T("NONE"), NUMBER_OF_SOUND_DEFINITIONS);
+	soundFriendActChoice->Insert(_T("NONE"), NUMBER_OF_SOUND_DEFINITIONS);
+	soundClearChoice->Insert(_T("NONE"), NUMBER_OF_SOUND_DEFINITIONS);
+	soundKillChoice->Insert(_T("NONE"), NUMBER_OF_SOUND_DEFINITIONS);
+	soundApologyChoice->Insert(_T("NONE"), NUMBER_OF_SOUND_DEFINITIONS);
+	soundFriendFireChoice->Insert(_T("NONE"), NUMBER_OF_SOUND_DEFINITIONS);
+	soundFlamingChoice->Insert(_T("NONE"), NUMBER_OF_SOUND_DEFINITIONS);
+	soundRandomChoice->Insert(_T("NONE"), NUMBER_OF_SOUND_DEFINITIONS);
+
 	//	effects
+	for(int i = 0; i < NUMBER_OF_EFFECT_TYPES; i ++){
+		effectChoice->Insert(wxConvertMB2WX(wxGetApp().effectInfo[i].jname.c_str()), i);
+		effectMeleeChoice->Insert(wxConvertMB2WX(wxGetApp().effectInfo[i].jname.c_str()), i);
+		effectContrailChoice->Insert(wxConvertMB2WX(wxGetApp().effectInfo[i].jname.c_str()), i);
+	}
+	effectChoice->Insert(_T("NONE"), NUMBER_OF_EFFECT_TYPES);
+	effectMeleeChoice->Insert(_T("NONE"), NUMBER_OF_EFFECT_TYPES);
+	effectContrailChoice->Insert(_T("NONE"), NUMBER_OF_EFFECT_TYPES);
 
 	//layout
 	wxBoxSizer* baseSizer = new wxBoxSizer(wxHORIZONTAL);
@@ -442,7 +549,69 @@ void MonsterAppearancePanel::OnEffectContrail(wxCommandEvent& ev)
 void MonsterAppearancePanel::OnResetButton(wxCommandEvent& ev)
 {
 }
+void MonsterAppearancePanel::OnDoorRetryMask(wxCommandEvent& ev)
+{
+}
+
 
 void MonsterAppearancePanel::setup()
 {
+	int type = wxGetApp().getEditingMonsterIndex();
+
+	int collection = GET_COLLECTION(monster_definitions[type].collection);
+	int clut = GET_COLLECTION_CLUT(monster_definitions[type].collection);
+
+	collectionChoice->SetSelection(collection);
+	paletteText->SetValue(wx::string::getString("%d", clut));
+	vitalityText->SetValue(wx::string::getString("%d", monster_definitions[type].vitality));
+	classChoice->SetSelection(monster_definitions[type]._class);
+	radiusText->SetValue(wx::string::getString("%d", monster_definitions[type].radius));
+	heightText->SetValue(wx::string::getString("%d", monster_definitions[type].height));
+	hoverText->SetValue(wx::string::getString("%d", monster_definitions[type].preferred_hover_height));
+	minLedgeText->SetValue(wx::string::getString("%d", monster_definitions[type].minimum_ledge_delta));
+	maxLedgeText->SetValue(wx::string::getString("%d", monster_definitions[type].maximum_ledge_delta));
+	extVelScaleText->SetValue(wx::string::getString("%d", monster_definitions[type].external_velocity_scale));
+	setChoice(carryItemChoice, monster_definitions[type].carrying_item_type, NUMBER_OF_DEFINED_ITEMS);
+	halfVisualArcText->SetValue(wx::string::getString("%d",
+		monster_definitions[type].half_visual_arc));
+	vertVisualArcText->SetValue(wx::string::getString("%d",
+		monster_definitions[type].half_vertical_visual_arc));
+	intelligenceChoice->SetSelection(hpl::aleph::getIndexFromInformationBinded(monster_definitions[type].intelligence, 
+		wxGetApp().monsterIntelligenceBind, NUMBER_OF_MONSTER_INTELLIGENCE_INFORMATIONS));
+	speedText->SetValue(wx::string::getString("%d", monster_definitions[type].speed));
+	int index = hpl::aleph::getIndexFromInformationBinded(monster_definitions[type].speed, 
+		wxGetApp().speedBind, NUMBER_OF_SPEED_INFORMATIONS);
+	if(index < 0){
+		index = NUMBER_OF_SPEED_INFORMATIONS;
+	}
+	speedChoice->SetSelection(index);
+	gravityText->SetValue(wx::string::getString("%d", monster_definitions[type].gravity));
+
+	//sequences
+	stationalyText->SetValue(wx::string::getString("%d", monster_definitions[type].stationary_shape));
+	movingText->SetValue(wx::string::getString("%d", monster_definitions[type].moving_shape));
+	hittingText->SetValue(wx::string::getString("%d", monster_definitions[type].hit_shapes));
+	softDyingText->SetValue(wx::string::getString("%d", monster_definitions[type].soft_dying_shape));
+	softDeadText->SetValue(wx::string::getString("%d", monster_definitions[type].soft_dead_shapes));
+	hardDyingText->SetValue(wx::string::getString("%d", monster_definitions[type].hard_dying_shape));
+	hardDeadText->SetValue(wx::string::getString("%d", monster_definitions[type].hard_dead_shapes));
+	teleportInText->SetValue(wx::string::getString("%d", monster_definitions[type].teleport_in_shape));
+	teleportOutText->SetValue(wx::string::getString("%d", monster_definitions[type].teleport_out_shape));
+
+	//sound
+	soundPitchText->SetValue(wx::string::getString("%d", monster_definitions[type].teleport_out_shape));
+	setChoice(soundActivationChoice, monster_definitions[type].activation_sound, NUMBER_OF_SOUND_DEFINITIONS);
+	setChoice(soundFriendActChoice, monster_definitions[type].friendly_activation_sound, NUMBER_OF_SOUND_DEFINITIONS);
+	setChoice(soundClearChoice, monster_definitions[type].clear_sound, NUMBER_OF_SOUND_DEFINITIONS);
+	setChoice(soundKillChoice, monster_definitions[type].kill_sound, NUMBER_OF_SOUND_DEFINITIONS);
+	setChoice(soundApologyChoice, monster_definitions[type].apology_sound, NUMBER_OF_SOUND_DEFINITIONS);
+	setChoice(soundFriendFireChoice, monster_definitions[type].friendly_fire_sound, NUMBER_OF_SOUND_DEFINITIONS);
+	setChoice(soundFlamingChoice, monster_definitions[type].flaming_sound, NUMBER_OF_SOUND_DEFINITIONS);
+	setChoice(soundRandomChoice, monster_definitions[type].random_sound, NUMBER_OF_SOUND_DEFINITIONS);
+	soundRandomMask->SetValue(wx::string::getString("%d", monster_definitions[type].random_sound_mask));
+
+	//effect
+	setChoice(effectChoice, monster_definitions[type].impact_effect, NUMBER_OF_EFFECT_TYPES);
+	setChoice(effectMeleeChoice, monster_definitions[type].melee_impact_effect, NUMBER_OF_EFFECT_TYPES);
+	setChoice(effectContrailChoice, monster_definitions[type].contrail_effect, NUMBER_OF_EFFECT_TYPES);
 }

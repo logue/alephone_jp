@@ -66,6 +66,9 @@ private:
 	wxChoice* effectMeleeChoice;
 	wxChoice* effectContrailChoice;
 
+	//TODO  door retry mask
+	wxTextCtrl* doorRetryMask;
+
 	//button
 	wxButton* resetButton;
 
@@ -125,6 +128,8 @@ protected:
 	void OnEffect(wxCommandEvent& ev);
 	void OnEffectMelee(wxCommandEvent& ev);
 	void OnEffectContrail(wxCommandEvent& ev);
+
+	void OnDoorRetryMask(wxCommandEvent& ev);
 
 	void OnResetButton(wxCommandEvent& ev);
 public:
