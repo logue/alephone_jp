@@ -65,5 +65,5 @@ void MonsterPanel::setupMonster(int type)
 	this->flagsPanel->setup();
 	
 	//attack‚ÌXV
-
+	this->attackPanel->setup();
 }

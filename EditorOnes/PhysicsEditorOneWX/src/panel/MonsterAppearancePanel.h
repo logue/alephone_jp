@@ -67,7 +67,7 @@ private:
 	wxChoice* effectContrailChoice;
 
 	//TODO  door retry mask
-	wxTextCtrl* doorRetryMask;
+	wxTextCtrl* doorRetryMaskText;
 
 	//button
 	wxButton* resetButton;
@@ -78,6 +78,7 @@ public:
 	virtual ~MonsterAppearancePanel();
 protected:
     DECLARE_EVENT_TABLE()
+	
 	void OnCollection(wxCommandEvent& ev);
 	void OnPalette(wxCommandEvent& ev);
 	void OnVitality(wxCommandEvent& ev);
@@ -92,8 +93,10 @@ protected:
 	void OnHalfVisualArc(wxCommandEvent& ev);
 	void OnVertVisualArc(wxCommandEvent& ev);
 	void OnIntelligence(wxCommandEvent& ev);
+	
 	void OnSpeedText(wxCommandEvent& ev);
 	void OnSpeedChoice(wxCommandEvent& ev);
+	
 	void OnGravity(wxCommandEvent& ev);
 
 	void OnStationaly(wxCommandEvent& ev);
@@ -112,6 +115,7 @@ protected:
 	void OnShrapnelScale(wxCommandEvent& ev);
 	void OnShrapnelType(wxCommandEvent& ev);
 	void OnShrapnelIsAlien(wxCommandEvent& ev);
+	
 	void OnCopyFrom(wxCommandEvent& ev);
 
 	void OnSoundPitch(wxCommandEvent& ev);

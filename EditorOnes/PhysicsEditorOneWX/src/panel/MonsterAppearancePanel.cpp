@@ -36,8 +36,9 @@ enum{
 	ID_SHRAPNEL_SCALE,
 	ID_SHRAPNEL_TYPE,
 	ID_SHRAPNEL_IS_ALIEN,
-
+	
 	ID_COPY_FROM,
+	
 	
 	ID_PITCH,
 	ID_ACTIVATION,
@@ -54,82 +55,69 @@ enum{
 	ID_EFFECT_MELEE,
 	ID_EFFECT_CONTRAIL,
 
+	ID_DOOR_RETRY_MASK,
+
 	ID_RESET,
 };
 
 BEGIN_EVENT_TABLE(MonsterAppearancePanel, wxPanel)
-	EVT_CHOICE(ID_COLLECTION, MonsterAppearancePanel::OnCollection)
-	EVT_CHOICE(ID_PALETTE, MonsterAppearancePanel::OnPalette)
-	EVT_TEXT(ID_VITALITY, MonsterAppearancePanel::OnVitality)
-	EVT_CHOICE(ID_CLASS, MonsterAppearancePanel::OnClass)
-	EVT_TEXT(ID_RADIUS, MonsterAppearancePanel::OnRadius)
-	EVT_TEXT(ID_HEIGHT, MonsterAppearancePanel::OnHeight)
-	EVT_TEXT(ID_HOVER, MonsterAppearancePanel::OnHover)
-	EVT_TEXT(ID_MIN_LEDGE, MonsterAppearancePanel::OnMinLedge)
-	EVT_TEXT(ID_MAX_LEDGE, MonsterAppearancePanel::OnMaxLedge)
-	EVT_TEXT(ID_EXT_VEL_SCALE, MonsterAppearancePanel::OnExtVelScale)
-	EVT_CHOICE(ID_CARRY_ITEM, MonsterAppearancePanel::OnCarryItem)
-	EVT_TEXT(ID_HALF_VISUAL_ARC, MonsterAppearancePanel::OnHalfVisualArc)
-	EVT_TEXT(ID_VERT_VISUAL_ARC, MonsterAppearancePanel::OnVertVisualArc)
-	EVT_CHOICE(ID_INTELLIGENCE, MonsterAppearancePanel::OnIntelligence)
-	EVT_TEXT(ID_SPEED_TEXT, MonsterAppearancePanel::OnSpeedText)
-	EVT_CHOICE(ID_SPEED_CHOICE, MonsterAppearancePanel::OnSpeedChoice)
-	EVT_TEXT(ID_GRAVITY, MonsterAppearancePanel::OnGravity)
+	EVT_CHOICE(ID_COLLECTION, MonsterAppearancePanel::OnItem)
+	EVT_CHOICE(ID_PALETTE, MonsterAppearancePanel::OnItem)
+	EVT_TEXT(ID_VITALITY, MonsterAppearancePanel::OnItem)
+	EVT_CHOICE(ID_CLASS, MonsterAppearancePanel::OnItem)
+	EVT_TEXT(ID_RADIUS, MonsterAppearancePanel::OnItem)
+	EVT_TEXT(ID_HEIGHT, MonsterAppearancePanel::OnItem)
+	EVT_TEXT(ID_HOVER, MonsterAppearancePanel::OnItem)
+	EVT_TEXT(ID_MIN_LEDGE, MonsterAppearancePanel::OnItem)
+	EVT_TEXT(ID_MAX_LEDGE, MonsterAppearancePanel::OnItem)
+	EVT_TEXT(ID_EXT_VEL_SCALE, MonsterAppearancePanel::OnItem)
+	EVT_CHOICE(ID_CARRY_ITEM, MonsterAppearancePanel::OnItem)
+	EVT_TEXT(ID_HALF_VISUAL_ARC, MonsterAppearancePanel::OnItem)
+	EVT_TEXT(ID_VERT_VISUAL_ARC, MonsterAppearancePanel::OnItem)
+	EVT_CHOICE(ID_INTELLIGENCE, MonsterAppearancePanel::OnItem)
+	EVT_TEXT(ID_SPEED_TEXT, MonsterAppearancePanel::OnItem)
+	EVT_CHOICE(ID_SPEED_CHOICE, MonsterAppearancePanel::OnItem)
+	EVT_TEXT(ID_GRAVITY, MonsterAppearancePanel::OnItem)
 
-	EVT_TEXT(ID_STATIONALY, MonsterAppearancePanel::OnStationaly)
-	EVT_TEXT(ID_MOVING, MonsterAppearancePanel::OnMoving)
-	EVT_TEXT(ID_HITTING, MonsterAppearancePanel::OnHitting)
-	EVT_TEXT(ID_SOFT_DYING, MonsterAppearancePanel::OnSoftDying)
-	EVT_TEXT(ID_SOFT_DEAD, MonsterAppearancePanel::OnSoftDead)
-	EVT_TEXT(ID_HARD_DYING, MonsterAppearancePanel::OnHardDying)
-	EVT_TEXT(ID_HARD_DEAD, MonsterAppearancePanel::OnHardDead)
-	EVT_TEXT(ID_TELEPORT_IN, MonsterAppearancePanel::OnTeleportIn)
-	EVT_TEXT(ID_TELEPORT_OUT, MonsterAppearancePanel::OnTeleportOut)
+	EVT_TEXT(ID_STATIONALY, MonsterAppearancePanel::OnItem)
+	EVT_TEXT(ID_MOVING, MonsterAppearancePanel::OnItem)
+	EVT_TEXT(ID_HITTING, MonsterAppearancePanel::OnItem)
+	EVT_TEXT(ID_SOFT_DYING, MonsterAppearancePanel::OnItem)
+	EVT_TEXT(ID_SOFT_DEAD, MonsterAppearancePanel::OnItem)
+	EVT_TEXT(ID_HARD_DYING, MonsterAppearancePanel::OnItem)
+	EVT_TEXT(ID_HARD_DEAD, MonsterAppearancePanel::OnItem)
+	EVT_TEXT(ID_TELEPORT_IN, MonsterAppearancePanel::OnItem)
+	EVT_TEXT(ID_TELEPORT_OUT, MonsterAppearancePanel::OnItem)
 
-	EVT_TEXT(ID_SHRAPNEL_RADIUS, MonsterAppearancePanel::OnShrapnelRadius)
-	EVT_TEXT(ID_SHRAPNEL_BASE, MonsterAppearancePanel::OnShrapnelBase)
-	EVT_TEXT(ID_SHRAPNEL_RND, MonsterAppearancePanel::OnShrapnelRnd)
-	EVT_TEXT(ID_SHRAPNEL_SCALE, MonsterAppearancePanel::OnShrapnelScale)
-	EVT_CHOICE(ID_SHRAPNEL_TYPE, MonsterAppearancePanel::OnShrapnelType)
-	EVT_CHECKBOX(ID_SHRAPNEL_IS_ALIEN, MonsterAppearancePanel::OnShrapnelIsAlien)
+	EVT_TEXT(ID_SHRAPNEL_RADIUS, MonsterAppearancePanel::OnItem)
+	EVT_TEXT(ID_SHRAPNEL_BASE, MonsterAppearancePanel::OnItem)
+	EVT_TEXT(ID_SHRAPNEL_RND, MonsterAppearancePanel::OnItem)
+	EVT_TEXT(ID_SHRAPNEL_SCALE, MonsterAppearancePanel::OnItem)
+	EVT_CHOICE(ID_SHRAPNEL_TYPE, MonsterAppearancePanel::OnItem)
+	EVT_CHECKBOX(ID_SHRAPNEL_IS_ALIEN, MonsterAppearancePanel::OnItem)
 
 	EVT_BUTTON(ID_COPY_FROM, MonsterAppearancePanel::OnCopyFrom)
 
-	EVT_TEXT(ID_PITCH, MonsterAppearancePanel::OnSoundPitch)
-	EVT_CHOICE(ID_ACTIVATION, MonsterAppearancePanel::OnSoundActivation)
-	EVT_CHOICE(ID_FRIEND_ACT, MonsterAppearancePanel::OnSoundFriendAct)
-	EVT_CHOICE(ID_CLEAR, MonsterAppearancePanel::OnSoundClear)
-	EVT_CHOICE(ID_KILL, MonsterAppearancePanel::OnSoundKill)
-	EVT_CHOICE(ID_APOLYGY, MonsterAppearancePanel::OnSoundApology)
-	EVT_CHOICE(ID_FRIEND_FIRE, MonsterAppearancePanel::OnSoundFriendFire)
-	EVT_CHOICE(ID_FLAMING, MonsterAppearancePanel::OnSoundFlaming)
-	EVT_CHOICE(ID_RANDOM, MonsterAppearancePanel::OnSoundRandom)
-	EVT_TEXT(ID_RANDOM_MASK, MonsterAppearancePanel::OnSoundRandomMask)
+	EVT_TEXT(ID_PITCH, MonsterAppearancePanel::OnItem)
+	EVT_CHOICE(ID_ACTIVATION, MonsterAppearancePanel::OnItem)
+	EVT_CHOICE(ID_FRIEND_ACT, MonsterAppearancePanel::OnItem)
+	EVT_CHOICE(ID_CLEAR, MonsterAppearancePanel::OnItem)
+	EVT_CHOICE(ID_KILL, MonsterAppearancePanel::OnItem)
+	EVT_CHOICE(ID_APOLYGY, MonsterAppearancePanel::OnItem)
+	EVT_CHOICE(ID_FRIEND_FIRE, MonsterAppearancePanel::OnItem)
+	EVT_CHOICE(ID_FLAMING, MonsterAppearancePanel::OnItem)
+	EVT_CHOICE(ID_RANDOM, MonsterAppearancePanel::OnItem)
+	EVT_TEXT(ID_RANDOM_MASK, MonsterAppearancePanel::OnItem)
 
-	EVT_CHOICE(ID_RANDOM, MonsterAppearancePanel::OnSoundRandom)
-	EVT_CHOICE(ID_RANDOM, MonsterAppearancePanel::OnSoundRandom)
-	EVT_CHOICE(ID_RANDOM, MonsterAppearancePanel::OnSoundRandom)
+	EVT_CHOICE(ID_EFFECT, MonsterAppearancePanel::OnItem)
+	EVT_CHOICE(ID_EFFECT_MELEE, MonsterAppearancePanel::OnItem)
+	EVT_CHOICE(ID_EFFECT_CONTRAIL, MonsterAppearancePanel::OnItem)
+
+	EVT_TEXT(ID_DOOR_RETRY_MASK, MonsterAppearancePanel::OnItem)
 
 	EVT_BUTTON(ID_RESET, MonsterAppearancePanel::OnResetButton)
 END_EVENT_TABLE()
 
-static void setChoice(wxChoice* choice, int index, int max)
-{
-	index = index == NONE ? max : index;
-	choice->SetSelection(index);
-}
-static int getChoice(wxChoice* choice, int max)
-{
-	int index = choice->GetSelection();
-	index = index == max ? NONE : index;
-	return index;
-}
-static int getChoice(wxCommandEvent* choice, int max)
-{
-	int index = choice->GetSelection();
-	index = index == max ? NONE : index;
-	return index;
-}
 
 MonsterAppearancePanel::MonsterAppearancePanel(wxWindow* parent, wxWindowID id)
 :wxPanel(parent, id)
@@ -192,6 +180,8 @@ MonsterAppearancePanel::MonsterAppearancePanel(wxWindow* parent, wxWindowID id)
 	effectChoice = new wxChoice(this, ID_EFFECT);
 	effectMeleeChoice = new wxChoice(this, ID_EFFECT_MELEE);
 	effectContrailChoice = new wxChoice(this, ID_EFFECT_CONTRAIL);
+
+	doorRetryMaskText = new wxTextCtrl(this, ID_DOOR_RETRY_MASK);
 
 	//reset
 	resetButton = new wxButton(this, ID_RESET, _T("Reset"));
@@ -349,7 +339,7 @@ MonsterAppearancePanel::MonsterAppearancePanel(wxWindow* parent, wxWindowID id)
 
 
 	//	right column
-	wxFlexGridSizer* soundAndEffectSizer = new wxFlexGridSizer(3, 1, 0,0);
+	wxFlexGridSizer* soundAndEffectSizer = new wxFlexGridSizer(4, 1, 0,0);
 	//	sound
 		wxFlexGridSizer* soundFlexSizer = new wxFlexGridSizer(10,2,0,0);
 			soundFlexSizer->Add(new wxStaticText(this, wxID_ANY, _T("Pitch")));
@@ -388,6 +378,8 @@ MonsterAppearancePanel::MonsterAppearancePanel(wxWindow* parent, wxWindowID id)
 		wxStaticBoxSizer* effectStaticSizer = new wxStaticBoxSizer(effectStaticBox, wxVERTICAL);
 		effectStaticSizer->Add(effectFlexSizer);
 	soundAndEffectSizer->Add(effectStaticSizer);
+	soundAndEffectSizer->Add(new wxStaticText(this, wxID_ANY, _T("Door Retry Mask")));
+	soundAndEffectSizer->Add(doorRetryMaskText);
 	soundAndEffectSizer->Add(this->resetButton);
 
 	baseSizer->Add(infoSizer);
@@ -402,7 +394,72 @@ MonsterAppearancePanel::MonsterAppearancePanel(wxWindow* parent, wxWindowID id)
 MonsterAppearancePanel::~MonsterAppearancePanel()
 {
 }
+void MonsterAppearancePanel::OnItem(wxCommandEvent& ev)
+{
+	int type = wxGetApp().getEditingMonsterIndex();
+	//
+	int col = collectionChoice->GetSelection();
+	int clut = getNumberFromTextCtrl(paletteText);
+	monster_definitions[type].collection = BUILD_COLLECTION(col, clut);
+	monster_definitions[type].vitality = getNumberFromTextCtrl(vitalityText);
+	monster_definitions[type]._class = wxGetApp().monsterClassBind[
+		classChoice->GetSelection()].bind;
+	monster_definitions[type].radius = getNumberFromTextCtrl(radiusText);
+	monster_definitions[type].height = getNumberFromTextCtrl(heightText);
+	monster_definitions[type].preferred_hover_height = getNumberFromTextCtrl(hoverText);
+	monster_definitions[type].minimum_ledge_delta = getNumberFromTextCtrl(minLedgeText);
+	monster_definitions[type].maximum_ledge_delta = getNumberFromTextCtrl(maxLedgeText);
+	monster_definitions[type].external_velocity_scale = getNumberFromTextCtrl(extVelScaleText);
+	monster_definitions[type].carrying_item_type =
+		getChoice(carryItemChoice, NUMBER_OF_DEFINED_ITEMS);
+	monster_definitions[type].half_visual_arc = getNumberFromTextCtrl(halfVisualArcText);
+	monster_definitions[type].half_vertical_visual_arc = getNumberFromTextCtrl(vertVisualArcText);
+	monster_definitions[type].intelligence = 
+		wxGetApp().monsterIntelligenceBind[intelligenceChoice->GetSelection()].bind;
+	monster_definitions[type].speed = getNumberFromTextCtrl(speedText);
+	monster_definitions[type].gravity = getNumberFromTextCtrl(gravityText);
 
+	//sequences
+	monster_definitions[type].stationary_shape = getNumberFromTextCtrl(stationalyText);
+	monster_definitions[type].moving_shape = getNumberFromTextCtrl(movingText);
+	monster_definitions[type].hit_shapes = getNumberFromTextCtrl(hittingText);
+	monster_definitions[type].soft_dying_shape = getNumberFromTextCtrl(softDyingText);
+	monster_definitions[type].soft_dead_shapes = getNumberFromTextCtrl(softDeadText);
+	monster_definitions[type].hard_dying_shape = getNumberFromTextCtrl(hardDyingText);
+	monster_definitions[type].hard_dead_shapes = getNumberFromTextCtrl(hardDeadText);
+	monster_definitions[type].teleport_in_shape = getNumberFromTextCtrl(teleportInText);
+	monster_definitions[type].teleport_out_shape = getNumberFromTextCtrl(teleportOutText);
+
+	//shrapnel
+	monster_definitions[type].shrapnel_damage.base = getNumberFromTextCtrl(shrapnelBaseText);
+	monster_definitions[type].shrapnel_damage.random = getNumberFromTextCtrl(shrapnelRndText);
+	monster_definitions[type].shrapnel_damage.scale = getNumberFromTextCtrl(shrapnelScaleText);
+	monster_definitions[type].shrapnel_radius = getNumberFromTextCtrl(shrapnelRadiusText);
+	monster_definitions[type].shrapnel_damage.flags = 
+		shrapnelIsAlienCheckbox->GetValue() ? 1 : 0;
+	monster_definitions[type].shrapnel_damage.type = 
+		getChoice(shrapnelTypeChoice, NUMBER_OF_DAMAGE_TYPES);
+
+	//sound
+	monster_definitions[type].sound_pitch = getNumberFromTextCtrl(soundPitchText);
+	monster_definitions[type].activation_sound = getChoice(soundActivationChoice, NUMBER_OF_SOUND_DEFINITIONS);
+	monster_definitions[type].friendly_activation_sound = getChoice(soundFriendActChoice, NUMBER_OF_SOUND_DEFINITIONS);
+	monster_definitions[type].clear_sound = getChoice(soundClearChoice, NUMBER_OF_SOUND_DEFINITIONS);
+	monster_definitions[type].kill_sound = getChoice(soundKillChoice, NUMBER_OF_SOUND_DEFINITIONS);
+	monster_definitions[type].apology_sound = getChoice(soundApologyChoice, NUMBER_OF_SOUND_DEFINITIONS);
+	monster_definitions[type].friendly_fire_sound= getChoice(soundFriendFireChoice, NUMBER_OF_SOUND_DEFINITIONS);
+	monster_definitions[type].flaming_sound = getChoice(soundFlamingChoice, NUMBER_OF_SOUND_DEFINITIONS);
+	monster_definitions[type].random_sound = getChoice(soundRandomChoice, NUMBER_OF_SOUND_DEFINITIONS);
+	monster_definitions[type].random_sound_mask = getNumberFromTextCtrl(soundRandomMask);
+
+	//effect
+	monster_definitions[type].impact_effect = getChoice(effectChoice, NUMBER_OF_EFFECT_TYPES);
+	monster_definitions[type].melee_impact_effect = getChoice(effectMeleeChoice, NUMBER_OF_EFFECT_TYPES);
+	monster_definitions[type].contrail_effect = getChoice(effectContrailChoice, NUMBER_OF_EFFECT_TYPES);
+}
+
+
+/*
 void MonsterAppearancePanel::OnCollection(wxCommandEvent& ev)
 {
 }
@@ -445,12 +502,16 @@ void MonsterAppearancePanel::OnVertVisualArc(wxCommandEvent& ev)
 void MonsterAppearancePanel::OnIntelligence(wxCommandEvent& ev)
 {
 }
+
 void MonsterAppearancePanel::OnSpeedText(wxCommandEvent& ev)
 {
+	OnItem(ev);
 }
 void MonsterAppearancePanel::OnSpeedChoice(wxCommandEvent& ev)
 {
+	OnItem(ev);
 }
+
 void MonsterAppearancePanel::OnGravity(wxCommandEvent& ev)
 {
 }
@@ -501,10 +562,12 @@ void MonsterAppearancePanel::OnShrapnelType(wxCommandEvent& ev)
 void MonsterAppearancePanel::OnShrapnelIsAlien(wxCommandEvent& ev)
 {
 }
+*/
 void MonsterAppearancePanel::OnCopyFrom(wxCommandEvent& ev)
 {
 }
 
+/*
 void MonsterAppearancePanel::OnSoundPitch(wxCommandEvent& ev)
 {
 }
@@ -546,13 +609,21 @@ void MonsterAppearancePanel::OnEffectContrail(wxCommandEvent& ev)
 {
 }
 
-void MonsterAppearancePanel::OnResetButton(wxCommandEvent& ev)
-{
-}
 void MonsterAppearancePanel::OnDoorRetryMask(wxCommandEvent& ev)
 {
 }
-
+*/
+void MonsterAppearancePanel::OnResetButton(wxCommandEvent& ev)
+{
+	int reply = wxMessageBox(_T("Are you sure to reset this monster?"),
+		_T(""), wxCENTRE|wxOK|wxCANCEL);
+	if(reply == wxOK){
+		int type = wxGetApp().getEditingMonsterIndex();
+		memcpy(&monster_definitions[type],
+			wxGetApp().getDefaultValues()->getMonsterDefinition(type),
+			sizeof(monster_definition));
+	}
+}
 
 void MonsterAppearancePanel::setup()
 {
@@ -564,7 +635,9 @@ void MonsterAppearancePanel::setup()
 	collectionChoice->SetSelection(collection);
 	paletteText->SetValue(wx::string::getString("%d", clut));
 	vitalityText->SetValue(wx::string::getString("%d", monster_definitions[type].vitality));
-	classChoice->SetSelection(monster_definitions[type]._class);
+	int cls = hpl::aleph::getIndexFromInformationBinded(monster_definitions[type]._class,
+		wxGetApp().monsterClassBind, NUMBER_OF_CLASS_INFORMATIONS);
+	classChoice->SetSelection(cls);
 	radiusText->SetValue(wx::string::getString("%d", monster_definitions[type].radius));
 	heightText->SetValue(wx::string::getString("%d", monster_definitions[type].height));
 	hoverText->SetValue(wx::string::getString("%d", monster_definitions[type].preferred_hover_height));
@@ -598,6 +671,15 @@ void MonsterAppearancePanel::setup()
 	teleportInText->SetValue(wx::string::getString("%d", monster_definitions[type].teleport_in_shape));
 	teleportOutText->SetValue(wx::string::getString("%d", monster_definitions[type].teleport_out_shape));
 
+	//shrapnel
+	setChoice(shrapnelTypeChoice, monster_definitions[type].shrapnel_damage.type,
+		NUMBER_OF_DAMAGE_TYPES);
+	shrapnelBaseText->SetValue(wx::string::getString("%d", monster_definitions[type].shrapnel_damage.base));
+	shrapnelRadiusText->SetValue(wx::string::getString("%d", monster_definitions[type].shrapnel_radius));
+	shrapnelRndText->SetValue(wx::string::getString("%d", monster_definitions[type].shrapnel_damage.random));
+	shrapnelScaleText->SetValue(wx::string::getString("%d", monster_definitions[type].shrapnel_damage.scale));
+	shrapnelIsAlienCheckbox->SetValue(monster_definitions[type].shrapnel_damage.flags != 0);
+
 	//sound
 	soundPitchText->SetValue(wx::string::getString("%d", monster_definitions[type].teleport_out_shape));
 	setChoice(soundActivationChoice, monster_definitions[type].activation_sound, NUMBER_OF_SOUND_DEFINITIONS);
@@ -614,4 +696,6 @@ void MonsterAppearancePanel::setup()
 	setChoice(effectChoice, monster_definitions[type].impact_effect, NUMBER_OF_EFFECT_TYPES);
 	setChoice(effectMeleeChoice, monster_definitions[type].melee_impact_effect, NUMBER_OF_EFFECT_TYPES);
 	setChoice(effectContrailChoice, monster_definitions[type].contrail_effect, NUMBER_OF_EFFECT_TYPES);
+
+	doorRetryMaskText->SetValue(wx::string::getString("%d", monster_definitions[type].door_retry_mask));
 }

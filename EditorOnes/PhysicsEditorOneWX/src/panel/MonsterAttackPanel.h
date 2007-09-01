@@ -36,6 +36,31 @@ private:
 public:
 	MonsterAttackPanel(wxWindow* parent, wxWindowID id);
 	virtual ~MonsterAttackPanel();
+    DECLARE_EVENT_TABLE()
+	void OnFrequency(wxCommandEvent& ev);
+
+	void OnMeleeType(wxCommandEvent& ev);
+	void OnMeleeRep(wxCommandEvent& ev);
+	void OnMeleeError(wxCommandEvent& ev);
+	void OnMeleeRange(wxCommandEvent& ev);
+	void OnMeleeSequence(wxCommandEvent& ev);
+	void OnMeleeDX(wxCommandEvent& ev);
+	void OnMeleeDY(wxCommandEvent& ev);
+	void OnMeleeDZ(wxCommandEvent& ev);
+	void OnMeleeCopyFrom(wxCommandEvent& ev);
+
+	void OnRangedType(wxCommandEvent& ev);
+	void OnRangedRep(wxCommandEvent& ev);
+	void OnRangedError(wxCommandEvent& ev);
+	void OnRangedRange(wxCommandEvent& ev);
+	void OnRangedSequence(wxCommandEvent& ev);
+	void OnRangedDX(wxCommandEvent& ev);
+	void OnRangedDY(wxCommandEvent& ev);
+	void OnRangedDZ(wxCommandEvent& ev);
+	void OnRangedCopyFrom(wxCommandEvent& ev);
+public:
+
+	void setup();
 };
 
 #endif

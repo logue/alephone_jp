@@ -388,3 +388,28 @@ void PhysicsEditorOneWX::setEditingWeaponIndex(int index)
 {
 	editingWeaponIndex = index;
 }
+
+void setChoice(wxChoice* choice, int index, int max)
+{
+	index = index == NONE ? max : index;
+	choice->SetSelection(index);
+}
+int getChoice(wxChoice* choice, int max)
+{
+	int index = choice->GetSelection();
+	index = index == max ? NONE : index;
+	return index;
+}
+int getChoice(wxCommandEvent* choice, int max)
+{
+	int index = choice->GetSelection();
+	index = index == max ? NONE : index;
+	return index;
+}
+
+int getNumberFromTextCtrl(wxTextCtrl* textCtrl)
+{
+	//TODO 正規表現でチェック
+	int num = atoi(wxConvertWX2MB(textCtrl->GetValue()));
+	return num;
+}
