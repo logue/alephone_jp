@@ -413,3 +413,9 @@ int getNumberFromTextCtrl(wxTextCtrl* textCtrl)
 	int num = atoi(wxConvertWX2MB(textCtrl->GetValue()));
 	return num;
 }
+
+int getNumberFromTextCtrl(wxCommandEvent* ev)
+{
+	int num = atoi(wxConvertWX2MB(ev->GetString()));
+	return num;
+}

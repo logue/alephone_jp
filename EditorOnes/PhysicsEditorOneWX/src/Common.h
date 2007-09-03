@@ -45,5 +45,6 @@ void setChoice(wxChoice* choice, int index, int max);
 int getChoice(wxChoice* choice, int max);
 int getChoice(wxCommandEvent* choice, int max);
 int getNumberFromTextCtrl(wxTextCtrl* textCtrl);
+int getNumberFromTextCtrl(wxCommandEvent* ev);
 
 #endif
