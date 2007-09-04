@@ -414,7 +414,7 @@ void MonsterAppearancePanel::OnPalette(wxCommandEvent& ev)
 void MonsterAppearancePanel::OnVitality(wxCommandEvent& ev)
 {
 	int type = wxGetApp().getEditingMonsterIndex();
-	monster_definitions[type].vitality = getNumberFromText(&ev);
+	monster_definitions[type].vitality = getNumberFromTextCtrl(&ev);
 }
 void MonsterAppearancePanel::OnClass(wxCommandEvent& ev)
 {
@@ -425,63 +425,65 @@ void MonsterAppearancePanel::OnClass(wxCommandEvent& ev)
 void MonsterAppearancePanel::OnRadius(wxCommandEvent& ev)
 {
 	int type = wxGetApp().getEditingMonsterIndex();
-	monster_definitions[type].radius = getNumberFromText(&ev);
+	monster_definitions[type].radius = getNumberFromTextCtrl(&ev);
 }
 void MonsterAppearancePanel::OnHeight(wxCommandEvent& ev)
 {
 	int type = wxGetApp().getEditingMonsterIndex();
-	monster_definitions[type].height= getNumberFromText(&ev);
+	monster_definitions[type].height= getNumberFromTextCtrl(&ev);
 }
 void MonsterAppearancePanel::OnHover(wxCommandEvent& ev)
 {
 	int type = wxGetApp().getEditingMonsterIndex();
-	monster_definitions[type].preferred_hover_height = getNumberFromText(&ev);
+	monster_definitions[type].preferred_hover_height = getNumberFromTextCtrl(&ev);
 }
 void MonsterAppearancePanel::OnMinLedge(wxCommandEvent& ev)
 {
 	int type = wxGetApp().getEditingMonsterIndex();
-	monster_definitions[type].minimum_ledge_delta = getNumberFromText(&ev);
+	monster_definitions[type].minimum_ledge_delta = getNumberFromTextCtrl(&ev);
 }
 void MonsterAppearancePanel::OnMaxLedge(wxCommandEvent& ev)
 {
 	int type = wxGetApp().getEditingMonsterIndex();
-	monster_definitions[type].maximum_ledge_delta = getNumberFromText(&ev);
+	monster_definitions[type].maximum_ledge_delta = getNumberFromTextCtrl(&ev);
 }
 void MonsterAppearancePanel::OnExtVelScale(wxCommandEvent& ev)
 {
 	int type = wxGetApp().getEditingMonsterIndex();
-	monster_definitions[type].external_velocity_scale = getNumberFromText(&ev);
+	monster_definitions[type].external_velocity_scale = getNumberFromTextCtrl(&ev);
 }
 void MonsterAppearancePanel::OnCarryItem(wxCommandEvent& ev)
 {
 	int type = wxGetApp().getEditingMonsterIndex();
-	monster_definitions[type].carry_item =
+	monster_definitions[type].carrying_item_type =
 		getChoice(carryItemChoice, NUMBER_OF_DEFINED_ITEMS);
 }
 void MonsterAppearancePanel::OnHalfVisualArc(wxCommandEvent& ev)
 {
 	int type = wxGetApp().getEditingMonsterIndex();
-	monster_definitions[type].half_visual_arc = getNumberFromText(&ev);
+	monster_definitions[type].half_visual_arc = getNumberFromTextCtrl(&ev);
 }
 void MonsterAppearancePanel::OnVertVisualArc(wxCommandEvent& ev)
 {
 	int type = wxGetApp().getEditingMonsterIndex();
-	monster_definitions[type].half_vertical_visual_arc = getNumberFromText(&ev);
+	monster_definitions[type].half_vertical_visual_arc = getNumberFromTextCtrl(&ev);
 }
 void MonsterAppearancePanel::OnIntelligence(wxCommandEvent& ev)
 {
 	int type = wxGetApp().getEditingMonsterIndex();
-	monster_definitions[type].intelligence = wxGetApp().monsterIntelligenceBind[getChoice(&ev)].bind;
+	monster_definitions[type].intelligence = wxGetApp().monsterIntelligenceBind[
+		getChoice(&ev, NUMBER_OF_MONSTER_INTELLIGENCE_INFORMATIONS)].bind;
 }
 
 void MonsterAppearancePanel::OnSpeedText(wxCommandEvent& ev)
 {
 	int type = wxGetApp().getEditingMonsterIndex();
-	monster_definitions[type].speed = getNumberFromText(&ev);
+	monster_definitions[type].speed = getNumberFromTextCtrl(&ev);
 
 	int oldIndex = this->speedChoice->GetSelection();
 	int index = hpl::aleph::getIndexFromInformationBinded(
-		value, wxGetApp().monsterIntelligenceBind, NUMBER_OF_MONSTER_INTELLIGENCE_INFORMATIONS);
+		monster_definitions[type].speed, wxGetApp().speedBind,
+		NUMBER_OF_SPEED_INFORMATIONS);
 	if(index < 0){
 		index = NUMBER_OF_MONSTER_INTELLIGENCE_INFORMATIONS;
 	}else{
@@ -497,7 +499,7 @@ void MonsterAppearancePanel::OnSpeedChoice(wxCommandEvent& ev)
 	int sel = ev.GetSelection();
 	if(sel >= NUMBER_OF_SPEED_INFORMATIONS){
 	}else{
-		//monster_definitions[type].speed = getNumberFromText(&ev);
+		//monster_definitions[type].speed = getNumberFromTextCtrl(&ev);
 		int prefferedNum = wxGetApp().speedBind[sel].bind;
 		if(getNumberFromTextCtrl(this->speedText) != prefferedNum){
 			this->speedText->SetValue(wx::string::getString("%d", prefferedNum));
@@ -508,84 +510,84 @@ void MonsterAppearancePanel::OnSpeedChoice(wxCommandEvent& ev)
 void MonsterAppearancePanel::OnGravity(wxCommandEvent& ev)
 {
 	int type = wxGetApp().getEditingMonsterIndex();
-	monster_definitions[type]. = getNumberFromText(&ev);
+	monster_definitions[type].gravity = getNumberFromTextCtrl(&ev);
 }
 
 void MonsterAppearancePanel::OnStationaly(wxCommandEvent& ev)
 {
 	int type = wxGetApp().getEditingMonsterIndex();
-	monster_definitions[type].stationary_shape = getNumberFromText(&ev);
+	monster_definitions[type].stationary_shape = getNumberFromTextCtrl(&ev);
 }
 void MonsterAppearancePanel::OnMoving(wxCommandEvent& ev)
 {
 	int type = wxGetApp().getEditingMonsterIndex();
-	monster_definitions[type].moving_shape = getNumberFromText(&ev);
+	monster_definitions[type].moving_shape = getNumberFromTextCtrl(&ev);
 }
 void MonsterAppearancePanel::OnHitting(wxCommandEvent& ev)
 {
 	int type = wxGetApp().getEditingMonsterIndex();
-	monster_definitions[type].hit_shapes = getNumberFromText(&ev);
+	monster_definitions[type].hit_shapes = getNumberFromTextCtrl(&ev);
 }
 void MonsterAppearancePanel::OnSoftDying(wxCommandEvent& ev)
 {
 	int type = wxGetApp().getEditingMonsterIndex();
-	monster_definitions[type].soft_dying_shape = getNumberFromText(&ev);
+	monster_definitions[type].soft_dying_shape = getNumberFromTextCtrl(&ev);
 }
 void MonsterAppearancePanel::OnSoftDead(wxCommandEvent& ev)
 {
 	int type = wxGetApp().getEditingMonsterIndex();
-	monster_definitions[type].soft_dead_shapes = getNumberFromText(&ev);
+	monster_definitions[type].soft_dead_shapes = getNumberFromTextCtrl(&ev);
 }
 void MonsterAppearancePanel::OnHardDying(wxCommandEvent& ev)
 {
 	int type = wxGetApp().getEditingMonsterIndex();
-	monster_definitions[type].hard_dying_shape = getNumberFromText(&ev);
+	monster_definitions[type].hard_dying_shape = getNumberFromTextCtrl(&ev);
 }
 void MonsterAppearancePanel::OnHardDead(wxCommandEvent& ev)
 {
 	int type = wxGetApp().getEditingMonsterIndex();
-	monster_definitions[type].hard_dead_shapes = getNumberFromText(&ev);
+	monster_definitions[type].hard_dead_shapes = getNumberFromTextCtrl(&ev);
 }
 void MonsterAppearancePanel::OnTeleportIn(wxCommandEvent& ev)
 {
 	int type = wxGetApp().getEditingMonsterIndex();
-	monster_definitions[type].teleport_in_shape = getNumberFromText(&ev);
+	monster_definitions[type].teleport_in_shape = getNumberFromTextCtrl(&ev);
 }
 void MonsterAppearancePanel::OnTeleportOut(wxCommandEvent& ev)
 {
 	int type = wxGetApp().getEditingMonsterIndex();
-	monster_definitions[type].teleport_out_shape = getNumberFromText(&ev);
+	monster_definitions[type].teleport_out_shape = getNumberFromTextCtrl(&ev);
 }
 
 void MonsterAppearancePanel::OnShrapnelRadius(wxCommandEvent& ev)
 {
 	int type = wxGetApp().getEditingMonsterIndex();
-	monster_definitions[type]. = getNumberFromText(&ev);
+	monster_definitions[type].shrapnel_radius = getNumberFromTextCtrl(&ev);
 }
 void MonsterAppearancePanel::OnShrapnelBase(wxCommandEvent& ev)
 {
 	int type = wxGetApp().getEditingMonsterIndex();
-	monster_definitions[type]. = getNumberFromText(&ev);
+	monster_definitions[type].shrapnel_damage.base = getNumberFromTextCtrl(&ev);
 }
 void MonsterAppearancePanel::OnShrapnelRnd(wxCommandEvent& ev)
 {
 	int type = wxGetApp().getEditingMonsterIndex();
-	monster_definitions[type]. = getNumberFromText(&ev);
+	monster_definitions[type].shrapnel_damage.random = getNumberFromTextCtrl(&ev);
 }
 void MonsterAppearancePanel::OnShrapnelScale(wxCommandEvent& ev)
 {
 	int type = wxGetApp().getEditingMonsterIndex();
-	monster_definitions[type]. = getNumberFromText(&ev);
+	monster_definitions[type].shrapnel_damage.scale = getNumberFromTextCtrl(&ev);
 }
 void MonsterAppearancePanel::OnShrapnelType(wxCommandEvent& ev)
 {
 	int type = wxGetApp().getEditingMonsterIndex();
-	monster_definitions[type]. = getChoice(&ev, NUMBER_OF_DAMAGE_TYPES);
+	monster_definitions[type].shrapnel_damage.type = getChoice(&ev, NUMBER_OF_DAMAGE_TYPES);
 }
 void MonsterAppearancePanel::OnShrapnelIsAlien(wxCommandEvent& ev)
 {
 	int type = wxGetApp().getEditingMonsterIndex();
-	monster_definitions[type]. = ev.IsChecked() ? 1: 0;
+	monster_definitions[type].shrapnel_damage.flags = ev.IsChecked() ? 1: 0;
 }
 
 void MonsterAppearancePanel::OnCopyFrom(wxCommandEvent& ev)
@@ -597,7 +599,7 @@ void MonsterAppearancePanel::OnCopyFrom(wxCommandEvent& ev)
 void MonsterAppearancePanel::OnSoundPitch(wxCommandEvent& ev)
 {
 	int type = wxGetApp().getEditingMonsterIndex();
-	monster_definitions[type].sound_pitch = getNumberFromText(&ev);
+	monster_definitions[type].sound_pitch = getNumberFromTextCtrl(&ev);
 }
 void MonsterAppearancePanel::OnSoundActivation(wxCommandEvent& ev)
 {
@@ -608,74 +610,74 @@ void MonsterAppearancePanel::OnSoundActivation(wxCommandEvent& ev)
 void MonsterAppearancePanel::OnSoundFriendAct(wxCommandEvent& ev)
 {
 	int type = wxGetApp().getEditingMonsterIndex();
-	monster_definitions[type]. = getChoice(&ev,
+	monster_definitions[type].friendly_activation_sound = getChoice(&ev,
 		NUMBER_OF_SOUND_DEFINITIONS);
 }
 void MonsterAppearancePanel::OnSoundClear(wxCommandEvent& ev)
 {
 	int type = wxGetApp().getEditingMonsterIndex();
-	monster_definitions[type]. = getChoice(&ev,
+	monster_definitions[type].clear_sound = getChoice(&ev,
 		NUMBER_OF_SOUND_DEFINITIONS);
 }
 void MonsterAppearancePanel::OnSoundKill(wxCommandEvent& ev)
 {
 	int type = wxGetApp().getEditingMonsterIndex();
-	monster_definitions[type]. = getChoice(&ev,
+	monster_definitions[type].kill_sound = getChoice(&ev,
 		NUMBER_OF_SOUND_DEFINITIONS);
 }
 void MonsterAppearancePanel::OnSoundApology(wxCommandEvent& ev)
 {
 	int type = wxGetApp().getEditingMonsterIndex();
-	monster_definitions[type]. = getChoice(&ev,
+	monster_definitions[type].apology_sound = getChoice(&ev,
 		NUMBER_OF_SOUND_DEFINITIONS);
 }
 void MonsterAppearancePanel::OnSoundFriendFire(wxCommandEvent& ev)
 {
 	int type = wxGetApp().getEditingMonsterIndex();
-	monster_definitions[type]. = getChoice(&ev,
+	monster_definitions[type].friendly_fire_sound = getChoice(&ev,
 		NUMBER_OF_SOUND_DEFINITIONS);
 }
 void MonsterAppearancePanel::OnSoundFlaming(wxCommandEvent& ev)
 {
 	int type = wxGetApp().getEditingMonsterIndex();
-	monster_definitions[type]. = getChoice(&ev,
+	monster_definitions[type].flaming_sound = getChoice(&ev,
 		NUMBER_OF_SOUND_DEFINITIONS);
 }
 void MonsterAppearancePanel::OnSoundRandom(wxCommandEvent& ev)
 {
 	int type = wxGetApp().getEditingMonsterIndex();
-	monster_definitions[type]. = getChoice(&ev,
+	monster_definitions[type].random_sound = getChoice(&ev,
 		NUMBER_OF_SOUND_DEFINITIONS);
 }
 void MonsterAppearancePanel::OnSoundRandomMask(wxCommandEvent& ev)
 {
 	int type = wxGetApp().getEditingMonsterIndex();
-	monster_definitions[type]. = getNumberFromText(&ev);
+	monster_definitions[type].random_sound_mask = getNumberFromTextCtrl(&ev);
 }
 
 void MonsterAppearancePanel::OnEffect(wxCommandEvent& ev)
 {
 	int type = wxGetApp().getEditingMonsterIndex();
-	monster_definitions[type]. = getChoice(&ev,
+	monster_definitions[type].impact_effect = getChoice(&ev,
 		NUMBER_OF_EFFECT_TYPES);
 }
 void MonsterAppearancePanel::OnEffectMelee(wxCommandEvent& ev)
 {
 	int type = wxGetApp().getEditingMonsterIndex();
-	monster_definitions[type]. = getChoice(&ev,
+	monster_definitions[type].melee_impact_effect = getChoice(&ev,
 		NUMBER_OF_EFFECT_TYPES);
 }
 void MonsterAppearancePanel::OnEffectContrail(wxCommandEvent& ev)
 {
 	int type = wxGetApp().getEditingMonsterIndex();
-	monster_definitions[type]. = getChoice(&ev,
+	monster_definitions[type].contrail_effect = getChoice(&ev,
 		NUMBER_OF_EFFECT_TYPES);
 }
 
 void MonsterAppearancePanel::OnDoorRetryMask(wxCommandEvent& ev)
 {
 	int type = wxGetApp().getEditingMonsterIndex();
-	monster_definitions[type]. = getNumberFromText(&ev);
+	monster_definitions[type].door_retry_mask = getNumberFromTextCtrl(&ev);
 }
 
 void MonsterAppearancePanel::OnResetButton(wxCommandEvent& ev)
@@ -687,6 +689,7 @@ void MonsterAppearancePanel::OnResetButton(wxCommandEvent& ev)
 		memcpy(&monster_definitions[type],
 			wxGetApp().getDefaultValues()->getMonsterDefinition(type),
 			sizeof(monster_definition));
+		setup();
 	}
 }
 
