@@ -26,8 +26,8 @@ wxDialog(parent, id, title)
 	wxFlexGridSizer* allSizer = new wxFlexGridSizer(2,1,0,0);
 	wxFlexGridSizer* buttonSizer = new wxFlexGridSizer(1,2,0,0);
 	allSizer->Add(this->typeListBox,wxEXPAND,0,0);
-	buttonSizer->Add(this->typeListBox,wxEXPAND,0,0);
-	buttonSizer->Add(this->typeListBox,wxEXPAND,0,0);
+	buttonSizer->Add(this->okButton,wxEXPAND,0,0);
+	buttonSizer->Add(this->cancelButton,wxEXPAND,0,0);
 	allSizer->Add(buttonSizer);
 
 	boxSizer->Add(allSizer);
