@@ -1,5 +1,6 @@
 #include "MonsterAppearancePanel.h"
 #include "../PhysicsEditorOneWX.h"
+#include "../MonsterTypeSelectDialog.h"
 
 enum{
 	ID_COLLECTION,
@@ -141,7 +142,7 @@ MonsterAppearancePanel::MonsterAppearancePanel(wxWindow* parent, wxWindowID id)
 	this->speedText = new wxTextCtrl(this, ID_SPEED_TEXT);
 	this->speedChoice = new wxChoice(this, ID_SPEED_CHOICE);
 	this->gravityText = new wxTextCtrl(this, ID_GRAVITY);
-
+	this->paletteText->SetSize(wxSize(100,-1));
 	//sequences
 	this->stationalyText = new wxTextCtrl(this, ID_STATIONALY);
 	this->movingText = new wxTextCtrl(this, ID_MOVING);
@@ -258,7 +259,7 @@ MonsterAppearancePanel::MonsterAppearancePanel(wxWindow* parent, wxWindowID id)
 	infoSizer->Add(new wxStaticText(this, wxID_ANY, _T("Collection")));
 	infoSizer->Add(this->collectionChoice);
 	infoSizer->Add(new wxStaticText(this, wxID_ANY, _T("Palette")));
-	infoSizer->Add(this->paletteText);
+	infoSizer->Add(this->paletteText,0,0,0,0);
 	infoSizer->Add(new wxStaticText(this, wxID_ANY, _T("Vitality")));
 	infoSizer->Add(this->vitalityText);
 	infoSizer->Add(new wxStaticText(this, wxID_ANY, _T("Class")));
@@ -593,6 +594,68 @@ void MonsterAppearancePanel::OnShrapnelIsAlien(wxCommandEvent& ev)
 void MonsterAppearancePanel::OnCopyFrom(wxCommandEvent& ev)
 {
 	//TODO
+	MonsterTypeSelectDialog* dlg = new MonsterTypeSelectDialog(this, wxID_ANY);
+	if(dlg->ShowModal() == wxID_OK){
+		int index = dlg->getIndex();
+		//
+		monster_definition* def = wxGetApp().getDefaultValues()->getMonsterDefinition(index);
+		int type = wxGetApp().getEditingMonsterIndex();
+		//アピアランス関連だけコピー
+		monster_definitions[type].collection = def->collection;
+		monster_definitions[type].vitality = def->vitality;
+		monster_definitions[type]._class = def->_class;
+		monster_definitions[type].radius = def->radius;
+		monster_definitions[type].height = def->height;
+		monster_definitions[type].preferred_hover_height = def->preferred_hover_height;
+		monster_definitions[type].minimum_ledge_delta = def->minimum_ledge_delta;
+		monster_definitions[type].maximum_ledge_delta = def->maximum_ledge_delta;
+		monster_definitions[type].external_velocity_scale = def->external_velocity_scale;
+		monster_definitions[type].carrying_item_type = def->carrying_item_type;
+		monster_definitions[type].half_visual_arc = def->half_visual_arc;
+		monster_definitions[type].half_vertical_visual_arc = def->half_vertical_visual_arc;
+		monster_definitions[type].intelligence = def->intelligence;
+		monster_definitions[type].speed = def->speed;
+		monster_definitions[type].gravity = def->gravity;
+
+		monster_definitions[type].stationary_shape = def->stationary_shape;
+		monster_definitions[type].moving_shape = def->moving_shape;
+		monster_definitions[type].hit_shapes = def->hit_shapes;
+		monster_definitions[type].soft_dying_shape = def->soft_dying_shape;
+		monster_definitions[type].soft_dead_shapes = def->soft_dead_shapes;
+		monster_definitions[type].hard_dying_shape = def->hard_dying_shape;
+		monster_definitions[type].hard_dead_shapes = def->hard_dead_shapes;
+		monster_definitions[type].teleport_in_shape = def->teleport_in_shape;
+		monster_definitions[type].teleport_out_shape = def->teleport_out_shape;
+
+		monster_definitions[type].shrapnel_damage.type = def->shrapnel_damage.type;
+		monster_definitions[type].shrapnel_damage.base = def->shrapnel_damage.base;
+		monster_definitions[type].shrapnel_radius = def->shrapnel_radius;
+		monster_definitions[type].shrapnel_damage.random = def->shrapnel_damage.random;
+		monster_definitions[type].shrapnel_damage.scale = def->shrapnel_damage.scale;
+		monster_definitions[type].shrapnel_damage.flags = def->shrapnel_damage.flags;
+
+		monster_definitions[type].sound_pitch = def->sound_pitch;
+		monster_definitions[type].activation_sound = def->activation_sound;
+		monster_definitions[type].friendly_activation_sound = def->friendly_activation_sound;
+		monster_definitions[type].clear_sound = def->clear_sound;
+		monster_definitions[type].kill_sound = def->kill_sound;
+		monster_definitions[type].apology_sound = def->apology_sound;
+		monster_definitions[type].friendly_fire_sound = def->friendly_fire_sound;
+		monster_definitions[type].flaming_sound = def->flaming_sound;
+		monster_definitions[type].random_sound = def->random_sound;
+		monster_definitions[type].random_sound_mask = def->random_sound_mask;
+
+		monster_definitions[type].impact_effect = def->impact_effect;
+		monster_definitions[type].melee_impact_effect = def->melee_impact_effect;
+		monster_definitions[type].contrail_effect = def->contrail_effect;
+
+		monster_definitions[type].door_retry_mask = def->door_retry_mask;
+		/*		memcpy(&monster_definitions[wxGetApp().getEditingMonsterIndex()],
+			wxGetApp().getDefaultValues()->getMonsterDefinition(index),
+			sizeof(monster_definition));
+			*/
+		setup();
+	}
 }
 
 
@@ -749,7 +812,7 @@ void MonsterAppearancePanel::setup()
 	shrapnelIsAlienCheckbox->SetValue(monster_definitions[type].shrapnel_damage.flags != 0);
 
 	//sound
-	soundPitchText->SetValue(wx::string::getString("%d", monster_definitions[type].teleport_out_shape));
+	soundPitchText->SetValue(wx::string::getString("%d", monster_definitions[type].sound_pitch));
 	setChoice(soundActivationChoice, monster_definitions[type].activation_sound, NUMBER_OF_SOUND_DEFINITIONS);
 	setChoice(soundFriendActChoice, monster_definitions[type].friendly_activation_sound, NUMBER_OF_SOUND_DEFINITIONS);
 	setChoice(soundClearChoice, monster_definitions[type].clear_sound, NUMBER_OF_SOUND_DEFINITIONS);

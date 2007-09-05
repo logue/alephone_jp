@@ -1,262 +1,262 @@
 startup
-teleport_in
-teleport_out
-body_being_crunched
+teleport in
+teleport out
+body being crunched
 creak
 absorbed
 
 breathing
-oxygen_warning
+oxygen warning
 suffocation
 
-energy_refuel
-oxygen_refuel
-cant_toggle_switch
-switch_on
-switch_off
-puzzle_switch
-chip_insertion
-pattern_buffer
-destroy_control_panel
+energy refuel
+oxygen refuel
+cant toggle switch
+switch on
+switch off
+puzzle switch
+chip insertion
+pattern buffer
+destroy control panel
 
-adjust_volume
-got_powerup
-got_item
+adjust volume
+got powerup
+got item
 
-bullet_ricochet
-metallic_ricochet
-empty_gun
+bullet ricochet
+metallic ricochet
+empty gun
 
-spht_door_opening
-spht_door_closing
-spht_door_obstructed
+spht door opening
+spht door closing
+spht door obstructed
 
-spht_platform_starting
-spht_platform_stopping
+spht platform starting
+spht platform stopping
 
 owl
-smg_firing
-smg_reloading
+smg firing
+smg reloading
 
-heavy_spht_platform_starting
-heavy_spht_platform_stopping
+heavy spht platform starting
+heavy spht platform stopping
 
-fist_hitting
+fist hitting
 
-magnum_firing
-magnum_reloading
+magnum firing
+magnum reloading
 
-assault_rifle_firing
-grenade_launcher_firing
-grenade_exploding
-grenade_flyby
+assault rifle firing
+grenade launcher firing
+grenade exploding
+grenade flyby
 
-fusion_firing
-fusion_exploding
-fusion_flyby
-fusion_charging
+fusion firing
+fusion exploding
+fusion flyby
+fusion charging
 
-rocket_exploding
-rocket_flyby
-rocket_firing
+rocket exploding
+rocket flyby
+rocket firing
 
 flamethrower
 
-body_falling
-body_exploding
-bullet_hitting_flesh
+body falling
+body exploding
+bullet hitting flesh
 
-fighter_activate
-fighter_wail
-fighter_scream
-fighter_chatter
-fighter_attack
-fighter_projectile_hit
-fighter_projectile_flyby
+fighter activate
+fighter wail
+fighter scream
+fighter chatter
+fighter attack
+fighter projectile hit
+fighter projectile flyby
 
-compiler_attack
-compiler_death
-compiler_hit
-compiler_projectile_flyby
-compiler_projectile_hit
+compiler attack
+compiler death
+compiler hit
+compiler projectile flyby
+compiler projectile hit
 
-cyborg_moving
-cyborg_attack
-cyborg_hit
-cyborg_death
-cyborg_projectile_bounce
-cyborg_projectile_hit
-cyborg_projectile_flyby
+cyborg moving
+cyborg attack
+cyborg hit
+cyborg death
+cyborg projectile bounce
+cyborg projectile hit
+cyborg projectile flyby
 
-hummer_activate
-hummer_start_attack
-hummer_attack
-hummer_dying
-hummer_death
-hummer_projectile_hit
-hummer_projectile_flyby
+hummer activate
+hummer start attack
+hummer attack
+hummer dying
+hummer death
+hummer projectile hit
+hummer projectile flyby
 
-human_wail
-human_scream
-human_hit
-human_chatter
-assimilated_human_chatter
-human_trash_talk
-human_apology
-human_activation
-human_clear
-human_stop_shooting_me_you_bastard
-human_area_secure
-kill_the_player
+human wail
+human scream
+human hit
+human chatter
+assimilated human chatter
+human trash talk
+human apology
+human activation
+human clear
+human stop shooting me
+human area secure
+kill the player
 
 water
 sewage
 lava
 goo
-under_media
+under media
 wind
 waterfall
 siren
 fan
-spht_door
-spht_platform
-alien_harmonics
-heavy_spht_platform
-light_machinery
-heavy_machinery
+spht door
+spht platform
+alien harmonics
+heavy spht platform
+light machinery
+heavy machinery
 transformer
-sparking_transformer
+sparking transformer
 
-water_drip
+water drip
 
-walking_in_water
-exit_water
-enter_water
-small_water_splash
-medium_water_splash
-large_water_splash
+walking in water
+exit water
+enter water
+small water splash
+medium water splash
+large water splash
 
-walking_in_lava
-enter_lava
-exit_lava
-small_lava_splash
-medium_lava_splash
-large_lava_splash
+walking in lava
+enter lava
+exit lava
+small lava splash
+medium lava splash
+large lava splash
 
-walking_in_sewage
-exit_sewage
-enter_sewage
-small_sewage_splash
-medium_sewage_splash
-large_sewage_splash
+walking in sewage
+exit sewage
+enter sewage
+small sewage splash
+medium sewage splash
+large sewage splash
 
-walking_in_goo
-exit_goo
-enter_goo
-small_goo_splash
-medium_goo_splash
-large_goo_splash
+walking in goo
+exit goo
+enter goo
+small goo splash
+medium goo splash
+large goo splash
 
-major_fusion_firing
-major_fusion_charged
+major fusion firing
+major fusion charged
 
-assault_rifle_reloading
-assault_rifle_shell_casings
+assault rifle reloading
+assault rifle shell casings
 
-shotgun_firing
-shotgun_reloading
+shotgun firing
+shotgun reloading
 
-ball_bounce
-you_are_it
-got_ball
+ball bounce
+you are it
+got ball
 
 logon
 logout
 page
 
-heavy_spht_door
+heavy spht door
 HeavySphtDoorOpening
 HeavySphtDoorClosing
 HeavySphtDoorOpen
 HeavySphtDoorClosed
 HeavySphtDoorObstructed
 
-hunter_activate
-hunter_attack
-hunter_dying
-hunter_landing
-hunter_exploding
-hunter_projectile_hit
-hunter_projectile_flyby
+hunter activate
+hunter attack
+hunter dying
+hunter landing
+hunter exploding
+hunter projectile hit
+hunter projectile flyby
 
-enforcer_activate
-enforcer_attack
-enforcer_projectile_hit
-enforcer_projectile_flyby
+enforcer activate
+enforcer attack
+enforcer projectile hit
+enforcer projectile flyby
 
-yeti_melee_attack
-yeti_melee_attack_hit
-yeti_attack
-yeti_sewage_attack_hit
-yeti_sewage_flyby
-yeti_lava_attack_hit
-yeti_lava_flyby
-yeti_dying
+yeti melee attack
+yeti melee attack hit
+yeti attack
+yeti sewage attack hit
+yeti sewage flyby
+yeti lava attack hit
+yeti lava flyby
+yeti dying
 
-machine_binder
-machine_bookpress
-machine_puncher
+machine binder
+machine bookpress
+machine puncher
 electric
 alarm
-night_wind
+night wind
 
-surface_explosion
-underground_explosion
+surface explosion
+underground explosion
 
-defender_attack
-defender_hit
-defender_flyby
-defender_being_hit
-defender_exploding
+defender attack
+defender hit
+defender flyby
+defender being hit
+defender exploding
 
-tick_chatter
-tick_falling
-tick_flapping
-tick_exploding
+tick chatter
+tick falling
+tick flapping
+tick exploding
 
-ceiling_lamp_exploding
+ceiling lamp exploding
 
-pfhor_platform_starting
-pfhor_platform_stopping
-pfhor_platform
+pfhor platform starting
+pfhor platform stopping
+pfhor platform
 
-pfhor_door_opening
-pfhor_door_closing
-pfhor_door_obstructed
-pfhor_door
+pfhor door opening
+pfhor door closing
+pfhor door obstructed
+pfhor door
 
-pfhor_switch_off
-pfhor_switch_on
+pfhor switch off
+pfhor switch on
 
-juggernaut_firing
-juggernaut_warning
-juggernaut_exploding
-juggernaut_preparing_to_fire
+juggernaut firing
+juggernaut warning
+juggernaut exploding
+juggernaut preparing to fire
 
-enforcer_exploding
+enforcer exploding
 
-alien_noise1
-alien_noise2
+alien noise1
+alien noise2
 
-civilian_fusion_wail
-civilian_fusion_scream
-civilian_fusion_hit
-civilian_fusion_chatter
-assimilated_civilian_fusion_chatter
-civilian_fusion_trash_talk
-civilian_fusion_apology
-civilian_fusion_activation
-civilian_fusion_clear
-civilian_fusion_stop_shooting_me_you_bastard
-civilian_fusion_area_secure
-civilian_fusion_kill_the_player
+fusion civ. wail
+fusion civ. scream
+fusion civ. hit
+fusion civ. chatter
+ass' fusion civ. chatter
+fusion civ. trash talk
+fusion civ. apology
+fusion civ. activation
+fusion civ. clear
+fusion civ. stop shooting me
+fusion civ. area secure
+fusion civ. kill the player

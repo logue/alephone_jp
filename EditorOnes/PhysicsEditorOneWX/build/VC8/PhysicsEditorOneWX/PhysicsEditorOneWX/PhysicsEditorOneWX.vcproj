@@ -184,6 +184,10 @@
 				>
 			</File>
 			<File
+				RelativePath="..\..\..\..\src\MonsterTypeSelectDialog.cpp"
+				>
+			</File>
+			<File
 				RelativePath="..\..\..\..\src\PhysicsDefaultValues.cpp"
 				>
 			</File>
@@ -203,6 +207,10 @@
 			</File>
 			<File
 				RelativePath="..\..\..\..\src\MainFrame.h"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\..\src\MonsterTypeSelectDialog.h"
 				>
 			</File>
 			<File

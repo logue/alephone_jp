@@ -1,5 +1,6 @@
 #include "MonsterAttackPanel.h"
 #include "../PhysicsEditorOneWX.h"
+#include "../MonsterTypeSelectDialog.h"
 
 enum{
 	ID_FREQUENCY,
@@ -177,62 +178,120 @@ MonsterAttackPanel::~MonsterAttackPanel()
 }
 void MonsterAttackPanel::OnFrequency(wxCommandEvent& ev)
 {
+	int type = wxGetApp().getEditingMonsterIndex();
+	monster_definitions[type].attack_frequency = getNumberFromTextCtrl(&ev);
 }
 
 void MonsterAttackPanel::OnMeleeType(wxCommandEvent& ev)
 {
+	int type = wxGetApp().getEditingMonsterIndex();
+	monster_definitions[type].melee_attack.type = getChoice(&ev, NUMBER_OF_PROJECTILE_TYPES);
 }
 void MonsterAttackPanel::OnMeleeRep(wxCommandEvent& ev)
 {
+	int type = wxGetApp().getEditingMonsterIndex();
+	monster_definitions[type].melee_attack.repetitions = getNumberFromTextCtrl(&ev);
 }
 void MonsterAttackPanel::OnMeleeError(wxCommandEvent& ev)
 {
+	int type = wxGetApp().getEditingMonsterIndex();
+	monster_definitions[type].melee_attack.error = getNumberFromTextCtrl(&ev);
 }
 void MonsterAttackPanel::OnMeleeRange(wxCommandEvent& ev)
 {
+	int type = wxGetApp().getEditingMonsterIndex();
+	monster_definitions[type].melee_attack.range = getNumberFromTextCtrl(&ev);
 }
 void MonsterAttackPanel::OnMeleeSequence(wxCommandEvent& ev)
 {
+	int type = wxGetApp().getEditingMonsterIndex();
+	monster_definitions[type].melee_attack.attack_shape = getNumberFromTextCtrl(&ev);
 }
 void MonsterAttackPanel::OnMeleeDX(wxCommandEvent& ev)
 {
+	int type = wxGetApp().getEditingMonsterIndex();
+	monster_definitions[type].melee_attack.dx = getNumberFromTextCtrl(&ev);
 }
 void MonsterAttackPanel::OnMeleeDY(wxCommandEvent& ev)
 {
+	int type = wxGetApp().getEditingMonsterIndex();
+	monster_definitions[type].melee_attack.dy = getNumberFromTextCtrl(&ev);
 }
 void MonsterAttackPanel::OnMeleeDZ(wxCommandEvent& ev)
 {
+	int type = wxGetApp().getEditingMonsterIndex();
+	monster_definitions[type].melee_attack.dz = getNumberFromTextCtrl(&ev);
 }
 void MonsterAttackPanel::OnMeleeCopyFrom(wxCommandEvent& ev)
 {
+	//TODO
+	MonsterTypeSelectDialog* dlg = new MonsterTypeSelectDialog(this, wxID_ANY);
+	if(dlg->ShowModal() == wxID_OK){
+		int index = dlg->getIndex();
+		//
+		monster_definition* def = wxGetApp().getDefaultValues()->getMonsterDefinition(index);
+		int type = wxGetApp().getEditingMonsterIndex();
+		//関連だけコピー
+		memcpy(&monster_definitions[type].melee_attack,
+			&def->melee_attack, sizeof(attack_definition));
+		setup();
+	}
 }
 
 void MonsterAttackPanel::OnRangedType(wxCommandEvent& ev)
 {
+	int type = wxGetApp().getEditingMonsterIndex();
+	monster_definitions[type].ranged_attack.type = getChoice(&ev, NUMBER_OF_PROJECTILE_TYPES);
 }
 void MonsterAttackPanel::OnRangedRep(wxCommandEvent& ev)
 {
+	int type = wxGetApp().getEditingMonsterIndex();
+	monster_definitions[type].ranged_attack.repetitions = getNumberFromTextCtrl(&ev);
 }
 void MonsterAttackPanel::OnRangedError(wxCommandEvent& ev)
 {
+	int type = wxGetApp().getEditingMonsterIndex();
+	monster_definitions[type].ranged_attack.error = getNumberFromTextCtrl(&ev);
 }
 void MonsterAttackPanel::OnRangedRange(wxCommandEvent& ev)
 {
+	int type = wxGetApp().getEditingMonsterIndex();
+	monster_definitions[type].ranged_attack.range = getNumberFromTextCtrl(&ev);
 }
 void MonsterAttackPanel::OnRangedSequence(wxCommandEvent& ev)
 {
+	int type = wxGetApp().getEditingMonsterIndex();
+	monster_definitions[type].ranged_attack.attack_shape = getNumberFromTextCtrl(&ev);
 }
 void MonsterAttackPanel::OnRangedDX(wxCommandEvent& ev)
 {
+	int type = wxGetApp().getEditingMonsterIndex();
+	monster_definitions[type].ranged_attack.dx = getNumberFromTextCtrl(&ev);
 }
 void MonsterAttackPanel::OnRangedDY(wxCommandEvent& ev)
 {
+	int type = wxGetApp().getEditingMonsterIndex();
+	monster_definitions[type].ranged_attack.dy = getNumberFromTextCtrl(&ev);
 }
 void MonsterAttackPanel::OnRangedDZ(wxCommandEvent& ev)
 {
+	int type = wxGetApp().getEditingMonsterIndex();
+	monster_definitions[type].ranged_attack.dz = getNumberFromTextCtrl(&ev);
 }
 void MonsterAttackPanel::OnRangedCopyFrom(wxCommandEvent& ev)
 {
+	//TODO
+	MonsterTypeSelectDialog* dlg = new MonsterTypeSelectDialog(this, wxID_ANY);
+	if(dlg->ShowModal() == wxID_OK){
+		int index = dlg->getIndex();
+		//
+		monster_definition* def = wxGetApp().getDefaultValues()->getMonsterDefinition(index);
+		int type = wxGetApp().getEditingMonsterIndex();
+		//関連だけコピー
+		memcpy(&monster_definitions[type].ranged_attack,
+			&def->ranged_attack, sizeof(attack_definition));
+		setup();
+	}
 }
 
 void MonsterAttackPanel::setup()
