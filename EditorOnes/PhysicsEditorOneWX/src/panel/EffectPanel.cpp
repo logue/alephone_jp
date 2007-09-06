@@ -30,9 +30,9 @@ wxPanel(parent, id)
 	this->typeListBox = new wxListBox(this, ID_TYPE);
 	this->collectionChoice = new wxChoice(this, ID_COLLECTION);
 	this->paletteText = new wxTextCtrl(this, ID_PALETTE);
-	this->sequenceText = new wxTextCtrl(this, ID_);
-	this-> = new wxTextCtrl(this, ID_);
-	this-> = new wxTextCtrl(this, ID_);
+	this->sequenceText = new wxTextCtrl(this, ID_SEQUENCE);
+	this->soundPitchText = new wxTextCtrl(this, ID_SOUND_PITCH);
+	this->delayText = new wxTextCtrl(this, ID_DELAY);
 	this->delaySoundChoice = new wxChoice(this, ID_DELAY_SOUND);
 	this->flags[0] = new wxCheckBox(this, ID_FLAGS,
 		_T("End When Animation Loops"));
@@ -45,6 +45,8 @@ wxPanel(parent, id)
 	this->flags[4] = new wxCheckBox(this, ID_FLAGS,
 		_T("Media Effect"));
 	//set
+	this->typeListBox->SetMinSize(wxSize(-1,300));
+
 	for(int i = 0; i < NUMBER_OF_EFFECT_TYPES; i ++){
 		this->typeListBox->Insert(wxConvertMB2WX(
 			wxGetApp().effectInfo[i].jname.c_str()), i);
@@ -142,11 +144,11 @@ void EffectPanel::setup()
 	this->delayText->SetValue(
 		wx::string::getString("%d", 
 		effect_definitions[type].delay));
-	setChoice(effect_definitions[type].delay_sound,
-		this->delaySoundChoice, NUMBER_OF_SOUND_DEFINITIONS);
+	setChoice(this->delaySoundChoice, effect_definitions[type].delay_sound,
+		NUMBER_OF_SOUND_DEFINITIONS);
 	for(int i = 0; i < NUMBER_OF_EFFECT_FLAG_INFORMATIONS; i ++){
 		this->flags[i]->SetValue(TEST_FLAG16(
 			effect_definitions[type].flags,
-			wxGetApp().effect
+			wxGetApp().effectFlagsBind[i].bind));
 	}
 }
