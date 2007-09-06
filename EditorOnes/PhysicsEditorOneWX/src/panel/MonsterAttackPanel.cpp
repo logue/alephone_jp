@@ -180,47 +180,56 @@ void MonsterAttackPanel::OnFrequency(wxCommandEvent& ev)
 {
 	int type = wxGetApp().getEditingMonsterIndex();
 	monster_definitions[type].attack_frequency = getNumberFromTextCtrl(&ev);
+	wxGetApp().setNewAndChanged(false, true);
 }
 
 void MonsterAttackPanel::OnMeleeType(wxCommandEvent& ev)
 {
 	int type = wxGetApp().getEditingMonsterIndex();
 	monster_definitions[type].melee_attack.type = getChoice(&ev, NUMBER_OF_PROJECTILE_TYPES);
+	wxGetApp().setNewAndChanged(false, true);
 }
 void MonsterAttackPanel::OnMeleeRep(wxCommandEvent& ev)
 {
 	int type = wxGetApp().getEditingMonsterIndex();
 	monster_definitions[type].melee_attack.repetitions = getNumberFromTextCtrl(&ev);
+	wxGetApp().setNewAndChanged(false, true);
 }
 void MonsterAttackPanel::OnMeleeError(wxCommandEvent& ev)
 {
 	int type = wxGetApp().getEditingMonsterIndex();
 	monster_definitions[type].melee_attack.error = getNumberFromTextCtrl(&ev);
+	wxGetApp().setNewAndChanged(false, true);
 }
 void MonsterAttackPanel::OnMeleeRange(wxCommandEvent& ev)
 {
 	int type = wxGetApp().getEditingMonsterIndex();
 	monster_definitions[type].melee_attack.range = getNumberFromTextCtrl(&ev);
+	wxGetApp().setNewAndChanged(false, true);
 }
 void MonsterAttackPanel::OnMeleeSequence(wxCommandEvent& ev)
 {
 	int type = wxGetApp().getEditingMonsterIndex();
 	monster_definitions[type].melee_attack.attack_shape = getNumberFromTextCtrl(&ev);
+	wxGetApp().setNewAndChanged(false, true);
 }
 void MonsterAttackPanel::OnMeleeDX(wxCommandEvent& ev)
 {
 	int type = wxGetApp().getEditingMonsterIndex();
 	monster_definitions[type].melee_attack.dx = getNumberFromTextCtrl(&ev);
+	wxGetApp().setNewAndChanged(false, true);
 }
 void MonsterAttackPanel::OnMeleeDY(wxCommandEvent& ev)
 {
 	int type = wxGetApp().getEditingMonsterIndex();
 	monster_definitions[type].melee_attack.dy = getNumberFromTextCtrl(&ev);
+	wxGetApp().setNewAndChanged(false, true);
 }
 void MonsterAttackPanel::OnMeleeDZ(wxCommandEvent& ev)
 {
 	int type = wxGetApp().getEditingMonsterIndex();
 	monster_definitions[type].melee_attack.dz = getNumberFromTextCtrl(&ev);
+	wxGetApp().setNewAndChanged(false, true);
 }
 void MonsterAttackPanel::OnMeleeCopyFrom(wxCommandEvent& ev)
 {
@@ -236,47 +245,56 @@ void MonsterAttackPanel::OnMeleeCopyFrom(wxCommandEvent& ev)
 			&def->melee_attack, sizeof(attack_definition));
 		setup();
 	}
+	wxGetApp().setNewAndChanged(false, true);
 }
 
 void MonsterAttackPanel::OnRangedType(wxCommandEvent& ev)
 {
 	int type = wxGetApp().getEditingMonsterIndex();
 	monster_definitions[type].ranged_attack.type = getChoice(&ev, NUMBER_OF_PROJECTILE_TYPES);
+	wxGetApp().setNewAndChanged(false, true);
 }
 void MonsterAttackPanel::OnRangedRep(wxCommandEvent& ev)
 {
 	int type = wxGetApp().getEditingMonsterIndex();
 	monster_definitions[type].ranged_attack.repetitions = getNumberFromTextCtrl(&ev);
+	wxGetApp().setNewAndChanged(false, true);
 }
 void MonsterAttackPanel::OnRangedError(wxCommandEvent& ev)
 {
 	int type = wxGetApp().getEditingMonsterIndex();
 	monster_definitions[type].ranged_attack.error = getNumberFromTextCtrl(&ev);
+	wxGetApp().setNewAndChanged(false, true);
 }
 void MonsterAttackPanel::OnRangedRange(wxCommandEvent& ev)
 {
 	int type = wxGetApp().getEditingMonsterIndex();
 	monster_definitions[type].ranged_attack.range = getNumberFromTextCtrl(&ev);
+	wxGetApp().setNewAndChanged(false, true);
 }
 void MonsterAttackPanel::OnRangedSequence(wxCommandEvent& ev)
 {
 	int type = wxGetApp().getEditingMonsterIndex();
 	monster_definitions[type].ranged_attack.attack_shape = getNumberFromTextCtrl(&ev);
+	wxGetApp().setNewAndChanged(false, true);
 }
 void MonsterAttackPanel::OnRangedDX(wxCommandEvent& ev)
 {
 	int type = wxGetApp().getEditingMonsterIndex();
+	wxGetApp().setNewAndChanged(false, true);
 	monster_definitions[type].ranged_attack.dx = getNumberFromTextCtrl(&ev);
 }
 void MonsterAttackPanel::OnRangedDY(wxCommandEvent& ev)
 {
 	int type = wxGetApp().getEditingMonsterIndex();
 	monster_definitions[type].ranged_attack.dy = getNumberFromTextCtrl(&ev);
+	wxGetApp().setNewAndChanged(false, true);
 }
 void MonsterAttackPanel::OnRangedDZ(wxCommandEvent& ev)
 {
 	int type = wxGetApp().getEditingMonsterIndex();
 	monster_definitions[type].ranged_attack.dz = getNumberFromTextCtrl(&ev);
+	wxGetApp().setNewAndChanged(false, true);
 }
 void MonsterAttackPanel::OnRangedCopyFrom(wxCommandEvent& ev)
 {
@@ -292,6 +310,7 @@ void MonsterAttackPanel::OnRangedCopyFrom(wxCommandEvent& ev)
 			&def->ranged_attack, sizeof(attack_definition));
 		setup();
 	}
+	wxGetApp().setNewAndChanged(false, true);
 }
 
 void MonsterAttackPanel::setup()

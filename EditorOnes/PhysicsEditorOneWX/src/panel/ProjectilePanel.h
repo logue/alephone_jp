@@ -29,6 +29,13 @@ private:
 	//flags
 	wxCheckBox* flags[NUMBER_OF_PROJECTILE_FLAG_INFORMATIONS];
 
+	//
+	wxTextCtrl* speedText;
+	wxTextCtrl* maxRangeText;
+	wxTextCtrl* soundPitchText;
+	wxChoice* flyBySoundChoice;
+	wxChoice* reboundSoundChoice;
+
 	//reset
 	wxButton* resetButton;
 
@@ -60,9 +67,16 @@ public:
 
 	void OnFlags(wxCommandEvent& ev);
 
+	void OnSpeed(wxCommandEvent& ev);
+	void OnMaxRange(wxCommandEvent& ev);
+	void OnSoundPitch(wxCommandEvent& ev);
+	void OnFlyBySound(wxCommandEvent& ev);
+	void OnReboundSound(wxCommandEvent& ev);
+
 	void OnReset(wxCommandEvent& ev);
 private:
 	void setup();
+	int common();
 };
 
 #endif

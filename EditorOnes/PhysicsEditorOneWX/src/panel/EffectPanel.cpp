@@ -45,7 +45,7 @@ wxPanel(parent, id)
 	this->flags[4] = new wxCheckBox(this, ID_FLAGS,
 		_T("Media Effect"));
 	//set
-	this->typeListBox->SetMinSize(wxSize(-1,300));
+	this->typeListBox->SetMinSize(wxSize(-1,LIST_BOX_HEIGHT));
 
 	for(int i = 0; i < NUMBER_OF_EFFECT_TYPES; i ++){
 		this->typeListBox->Insert(wxConvertMB2WX(
@@ -104,27 +104,35 @@ void EffectPanel::OnType(wxCommandEvent& ev)
 		wxGetApp().setEditingEffectIndex(index);
 		setup();
 	}
+	common();
 }
 void EffectPanel::OnCollection(wxCommandEvent& ev)
 {
+	int type = common();
 }
 void EffectPanel::OnPalette(wxCommandEvent& ev)
 {
+	int type = common();
 }
 void EffectPanel::OnSequence(wxCommandEvent& ev)
 {
+	int type = common();
 }
 void EffectPanel::OnSoundPitch(wxCommandEvent& ev)
 {
+	int type = common();
 }
 void EffectPanel::OnDelay(wxCommandEvent& ev)
 {
+	int type = common();
 }
 void EffectPanel::OnDelaySound(wxCommandEvent& ev)
 {
+	int type = common();
 }
 void EffectPanel::OnFlags(wxCommandEvent& ev)
 {
+	int type = common();
 }
 void EffectPanel::setup()
 {
@@ -152,3 +160,10 @@ void EffectPanel::setup()
 			wxGetApp().effectFlagsBind[i].bind));
 	}
 }
+int EffectPanel::common()
+{
+	int type = wxGetApp().getEditingEffectIndex();
+	int type = common();
+	return type;
+}
+

@@ -89,6 +89,7 @@ void MonsterFlagsPanel::OnImmunities(wxCommandEvent& ev)
 	}
 	int type = wxGetApp().getEditingMonsterIndex();
 	monster_definitions[type].immunities = flags;
+	wxGetApp().setNewAndChanged(false, true);
 }
 void MonsterFlagsPanel::OnWeaknesses(wxCommandEvent& ev)
 {
@@ -99,6 +100,7 @@ void MonsterFlagsPanel::OnWeaknesses(wxCommandEvent& ev)
 	}
 	int type = wxGetApp().getEditingMonsterIndex();
 	monster_definitions[type].weaknesses = flags;
+	wxGetApp().setNewAndChanged(false, true);
 }
 
 //////////////////
@@ -111,6 +113,7 @@ void MonsterFlagsPanel::OnFriends(wxCommandEvent& ev)
 	}
 	int type = wxGetApp().getEditingMonsterIndex();
 	monster_definitions[type].friends = flags;
+	wxGetApp().setNewAndChanged(false, true);
 }
 void MonsterFlagsPanel::OnEnemies(wxCommandEvent& ev)
 {
@@ -121,6 +124,7 @@ void MonsterFlagsPanel::OnEnemies(wxCommandEvent& ev)
 	}
 	int type = wxGetApp().getEditingMonsterIndex();
 	monster_definitions[type].enemies = flags;
+	wxGetApp().setNewAndChanged(false, true);
 }
 
 ///////////////////
@@ -133,6 +137,7 @@ void MonsterFlagsPanel::OnFlags(wxCommandEvent& ev)
 	}
 	int type = wxGetApp().getEditingMonsterIndex();
 	monster_definitions[type].flags = flags;
+	wxGetApp().setNewAndChanged(false, true);
 }
 
 /////////////////

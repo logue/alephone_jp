@@ -28,7 +28,7 @@ wxPanel(parent, id)
 	notebook->AddPage(attackPanel, _T("Attack"));
 
 	//設定
-	monsterTypeListBox->SetMinSize(wxSize(-1, 300));
+	monsterTypeListBox->SetMinSize(wxSize(-1, LIST_BOX_HEIGHT));
 	//	モンスターリスト追加
 	for(int i = 0; i < NUMBER_OF_MONSTER_TYPES; i ++){
 		monsterTypeListBox->Insert(wxConvertMB2WX(wxGetApp().monsterInfo[i].jname.c_str()), i);

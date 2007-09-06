@@ -47,4 +47,6 @@ int getChoice(wxCommandEvent* choice, int max);
 int getNumberFromTextCtrl(wxTextCtrl* textCtrl);
 int getNumberFromTextCtrl(wxCommandEvent* ev);
 
+const int LIST_BOX_HEIGHT = 300;
+
 #endif

@@ -288,11 +288,27 @@
 				>
 			</File>
 			<File
+				RelativePath="..\..\..\..\src\panel\WeaponAppearancePanel.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\..\src\panel\WeaponAppearancePanel.h"
+				>
+			</File>
+			<File
 				RelativePath="..\..\..\..\src\panel\WeaponPanel.cpp"
 				>
 			</File>
 			<File
 				RelativePath="..\..\..\..\src\panel\WeaponPanel.h"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\..\src\panel\WeaponTriggerPanel.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\..\src\panel\WeaponTriggerPanel.h"
 				>
 			</File>
 		</Filter>

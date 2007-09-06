@@ -31,6 +31,7 @@ public:
 	void OnDelaySound(wxCommandEvent& ev);
 	void OnFlags(wxCommandEvent& ev);
 	void setup();
+	int common();
 public:
 };
 
