@@ -9,7 +9,7 @@ class PhysicsPanel: public wxPanel{
 private:
 	wxChoice* typeChoice;
 	wxTextCtrl* datas[NUMBER_OF_PHYSICS_ITEMS];
-	int *nums[NUMBER_OF_PHYSICS_ITEMS];
+	_fixed *nums[NUMBER_OF_PHYSICS_ITEMS];
 private:
 	PhysicsPanel(){}
 public:

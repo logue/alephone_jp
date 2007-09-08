@@ -47,6 +47,16 @@ wxPanel(parent, id)
 	//set
 	this->typeListBox->SetMinSize(wxSize(-1,LIST_BOX_HEIGHT));
 
+	for(int i = 0; i < NUMBER_OF_COLLECTIONS; i ++){
+		this->collectionChoice->Insert(wxConvertMB2WX(
+			wxGetApp().collectionInfo[i].jname.c_str()),i);
+	}
+	for(int i = 0; i < NUMBER_OF_SOUND_DEFINITIONS; i ++){
+		this->delaySoundChoice->Insert(wxConvertMB2WX(
+			wxGetApp().soundInfo[i].jname.c_str()),i);
+	}
+	this->delaySoundChoice->Insert(_T("NONE"),NUMBER_OF_SOUND_DEFINITIONS);
+
 	for(int i = 0; i < NUMBER_OF_EFFECT_TYPES; i ++){
 		this->typeListBox->Insert(wxConvertMB2WX(
 			wxGetApp().effectInfo[i].jname.c_str()), i);
@@ -109,30 +119,46 @@ void EffectPanel::OnType(wxCommandEvent& ev)
 void EffectPanel::OnCollection(wxCommandEvent& ev)
 {
 	int type = common();
+	int col = ev.GetSelection();
+	int clut = getNumberFromTextCtrl(this->paletteText);
+	effect_definitions[type].collection = BUILD_COLLECTION(col, clut);
 }
 void EffectPanel::OnPalette(wxCommandEvent& ev)
 {
 	int type = common();
+	int col = this->collectionChoice->GetSelection();
+	int clut = getNumberFromTextCtrl(&ev);
+	effect_definitions[type].collection = BUILD_COLLECTION(col, clut);
 }
 void EffectPanel::OnSequence(wxCommandEvent& ev)
 {
 	int type = common();
+	effect_definitions[type].shape = getNumberFromTextCtrl(&ev);
 }
 void EffectPanel::OnSoundPitch(wxCommandEvent& ev)
 {
 	int type = common();
+	effect_definitions[type].sound_pitch = getNumberFromTextCtrl(&ev);
 }
 void EffectPanel::OnDelay(wxCommandEvent& ev)
 {
 	int type = common();
+	effect_definitions[type].delay = getNumberFromTextCtrl(&ev);
 }
 void EffectPanel::OnDelaySound(wxCommandEvent& ev)
 {
 	int type = common();
+	effect_definitions[type].delay_sound = 
+		getChoice(&ev, NUMBER_OF_SOUND_DEFINITIONS);
 }
 void EffectPanel::OnFlags(wxCommandEvent& ev)
 {
 	int type = common();
+	int flag = 0;
+	for(int i = 0; i < NUMBER_OF_EFFECT_FLAG_INFORMATIONS; i ++){
+		flag |= this->flags[i]->GetValue() ? wxGetApp().effectFlagsBind[i].bind : 0;
+	}
+	effect_definitions[type].flags = flag;
 }
 void EffectPanel::setup()
 {
@@ -155,15 +181,14 @@ void EffectPanel::setup()
 	setChoice(this->delaySoundChoice, effect_definitions[type].delay_sound,
 		NUMBER_OF_SOUND_DEFINITIONS);
 	for(int i = 0; i < NUMBER_OF_EFFECT_FLAG_INFORMATIONS; i ++){
-		this->flags[i]->SetValue(TEST_FLAG16(
-			effect_definitions[type].flags,
-			wxGetApp().effectFlagsBind[i].bind));
+		this->flags[i]->SetValue(
+			(effect_definitions[type].flags & wxGetApp().effectFlagsBind[i].bind) != 0);
 	}
 }
 int EffectPanel::common()
 {
-	int type = wxGetApp().getEditingEffectIndex();
-	int type = common();
+	int type = wxGetApp().getEditingMonsterIndex();
+	wxGetApp().setChanged(true);
 	return type;
 }
 

@@ -15,14 +15,18 @@ wxPanel(parent, id)
 	//create
 	this->typeListBox = new wxListBox(this, ID_TYPE);
 	
-	appearancePanel = new WeaponAppearancePanel(this, wxID_ANY);
-	triggerPanel = new WeaponTriggerPanel(this, wxID_ANY);
 	this->notebook = new wxNotebook(this, wxID_ANY);
+	appearancePanel = new WeaponAppearancePanel(notebook, wxID_ANY);
+	triggerPanel = new WeaponTriggerPanel(notebook, wxID_ANY);
 	notebook->AddPage(this->appearancePanel, _T("Appearance"), true);
 	notebook->AddPage(this->triggerPanel, _T("Trigger"));
 
 	//set
 	this->typeListBox->SetMinSize(wxSize(-1, LIST_BOX_HEIGHT));
+	for(int i = 0; i < MAXIMUM_NUMBER_OF_WEAPONS; i ++){
+		this->typeListBox->Insert(wxConvertMB2WX(
+			wxGetApp().weaponInfo[i].jname.c_str()),i);
+	}
 
 	//layout
 	wxFlexGridSizer* allSizer = new wxFlexGridSizer(1,2,0,0);

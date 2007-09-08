@@ -87,9 +87,8 @@ void MonsterFlagsPanel::OnImmunities(wxCommandEvent& ev)
 	for(int i = 0; i < NUMBER_OF_DAMAGE_TYPES; i ++){
 		SET_FLAG32(flags, i, this->immunities[i]->GetValue());
 	}
-	int type = wxGetApp().getEditingMonsterIndex();
+	int type = common();
 	monster_definitions[type].immunities = flags;
-	wxGetApp().setNewAndChanged(false, true);
 }
 void MonsterFlagsPanel::OnWeaknesses(wxCommandEvent& ev)
 {
@@ -98,9 +97,8 @@ void MonsterFlagsPanel::OnWeaknesses(wxCommandEvent& ev)
 	for(int i = 0; i < NUMBER_OF_DAMAGE_TYPES; i ++){
 		SET_FLAG32(flags, i, this->weaknesses[i]->GetValue());
 	}
-	int type = wxGetApp().getEditingMonsterIndex();
+	int type = common();
 	monster_definitions[type].weaknesses = flags;
-	wxGetApp().setNewAndChanged(false, true);
 }
 
 //////////////////
@@ -122,9 +120,8 @@ void MonsterFlagsPanel::OnEnemies(wxCommandEvent& ev)
 	for(int i = 0; i < NUMBER_OF_CLASS_INFORMATIONS; i ++){
 		SET_FLAG32(flags, i, this->enemies[i]->GetValue());
 	}
-	int type = wxGetApp().getEditingMonsterIndex();
+	int type = common();
 	monster_definitions[type].enemies = flags;
-	wxGetApp().setNewAndChanged(false, true);
 }
 
 ///////////////////
@@ -135,9 +132,14 @@ void MonsterFlagsPanel::OnFlags(wxCommandEvent& ev)
 	for(int i = 0; i < NUMBER_OF_MONSTER_FLAG_INFORMATIONS; i ++){
 		SET_FLAG32(flags, i, this->flags[i]->GetValue());
 	}
-	int type = wxGetApp().getEditingMonsterIndex();
+	int type = common();
 	monster_definitions[type].flags = flags;
-	wxGetApp().setNewAndChanged(false, true);
+}
+
+int MonsterFlagsPanel::common(){
+	int type = wxGetApp().getEditingMonsterIndex();
+	wxGetApp().setChanged(true);
+	return type;
 }
 
 /////////////////

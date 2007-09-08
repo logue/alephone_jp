@@ -136,6 +136,7 @@ protected:
 	void OnDoorRetryMask(wxCommandEvent& ev);
 
 	void OnResetButton(wxCommandEvent& ev);
+	int common();
 public:
 	void setup();
 };

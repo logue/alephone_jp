@@ -127,9 +127,9 @@ wxPanel(parent, id)
 	//set
 	for(int i = 0; i < NUMBER_OF_DEFINED_ITEMS; i ++){
 		this->primary.ammoItemChoice->Insert(wxConvertMB2WX(
-			wxGetApp().weaponInfo[i].jname.c_str()), i);
+			wxGetApp().itemInfo[i].jname.c_str()), i);
 		this->secondary.ammoItemChoice->Insert(wxConvertMB2WX(
-			wxGetApp().weaponInfo[i].jname.c_str()), i);
+			wxGetApp().itemInfo[i].jname.c_str()), i);
 	}
 	this->primary.ammoItemChoice->Insert(_T("NONE"), NUMBER_OF_DEFINED_ITEMS);
 	this->secondary.ammoItemChoice->Insert(_T("NONE"), NUMBER_OF_DEFINED_ITEMS);
@@ -185,12 +185,24 @@ wxPanel(parent, id)
 	this->primary.projectileChoice->Insert(_T("NONE"), NUMBER_OF_PROJECTILE_TYPES);
 	this->secondary.projectileChoice->Insert(_T("NONE"), NUMBER_OF_PROJECTILE_TYPES);
 
+	//	shell casing
+	for(int i = 0; i < NUMBER_OF_SHELL_CASING_TYPES; i ++){
+		this->primary.shellCasingChoice->Insert(wxConvertMB2WX(
+			wxGetApp().weaponShellCasingInfo[i].jname.c_str()), i);
+	}
+	this->primary.shellCasingChoice->Insert(_T("NONE"),
+		NUMBER_OF_SHELL_CASING_TYPES);
+
 	//layout
 	wxFlexGridSizer* allSizer = new wxFlexGridSizer(1,2,0,0);
 	this->SetSizer(allSizer);
 	//	primary
-	wxStaticBoxSizer* primarySizer = getTriggerSizer(this->primary);
-
+	wxStaticBoxSizer* primarySizer = getTriggerSizer(this->primary,
+		_T("Primary"));
+	wxStaticBoxSizer* secondarySizer = getTriggerSizer(this->secondary,
+		_T("Secondary"));
+	allSizer->Add(primarySizer);
+	allSizer->Add(secondarySizer);
 	allSizer->Fit(this);
 	Layout();
 }
@@ -232,94 +244,203 @@ void WeaponTriggerPanel::OnPrimaryChargingTicks(wxCommandEvent& ev)
 void WeaponTriggerPanel::OnPrimaryRecoil(wxCommandEvent& ev)
 {
 	int type = common();
-	weapon_definitions[type].weapons_by_trigger[0].round_per_magazine =
+	weapon_definitions[type].weapons_by_trigger[0].rounds_per_magazine =
 		getNumberFromTextCtrl(&ev);
 }
 void WeaponTriggerPanel::OnPrimaryFiringSound(wxCommandEvent& ev)
 {
 	int type = common();
-	weapon_definitions[type].weapons_by_trigger[0]. =
-		getNumberFromTextCtrl(&ev);
+	weapon_definitions[type].weapons_by_trigger[0].firing_sound =
+		getChoice(&ev, NUMBER_OF_SOUND_DEFINITIONS);
 }
 void WeaponTriggerPanel::OnPrimaryClickSound(wxCommandEvent& ev)
 {
 	int type = common();
-	weapon_definitions[type].weapons_by_trigger[0].round_per_magazine =
-		getNumberFromTextCtrl(&ev);
+	weapon_definitions[type].weapons_by_trigger[0].click_sound =
+		getChoice(&ev, NUMBER_OF_SOUND_DEFINITIONS);
 }
 void WeaponTriggerPanel::OnPrimaryChargingSound(wxCommandEvent& ev)
 {
 	int type = common();
-	weapon_definitions[type].weapons_by_trigger[0].round_per_magazine =
-		getNumberFromTextCtrl(&ev);
+	weapon_definitions[type].weapons_by_trigger[0].charging_sound =
+		getChoice(&ev, NUMBER_OF_SOUND_DEFINITIONS);
 }
 void WeaponTriggerPanel::OnPrimaryShellCasingSound(wxCommandEvent& ev)
 {
 	int type = common();
-	weapon_definitions[type].weapons_by_trigger[0].round_per_magazine =
-		getNumberFromTextCtrl(&ev);
+	weapon_definitions[type].weapons_by_trigger[0].shell_casing_sound =
+		getChoice(&ev, NUMBER_OF_SOUND_DEFINITIONS);
 }
 void WeaponTriggerPanel::OnPrimaryReloadSound(wxCommandEvent& ev)
 {
 	int type = common();
-	weapon_definitions[type].weapons_by_trigger[0].round_per_magazine =
-		getNumberFromTextCtrl(&ev);
+	weapon_definitions[type].weapons_by_trigger[0].reloading_sound =
+		getChoice(&ev, NUMBER_OF_SOUND_DEFINITIONS);
 }
 void WeaponTriggerPanel::OnPrimaryChargedSound(wxCommandEvent& ev)
 {
 	int type = common();
-	weapon_definitions[type].weapons_by_trigger[0].round_per_magazine =
-		getNumberFromTextCtrl(&ev);
+	weapon_definitions[type].weapons_by_trigger[0].charged_sound =
+		getChoice(&ev, NUMBER_OF_SOUND_DEFINITIONS);
 }
 void WeaponTriggerPanel::OnPrimaryProjectile(wxCommandEvent& ev)
 {
 	int type = common();
-	weapon_definitions[type].weapons_by_trigger[0].round_per_magazine =
-		getNumberFromTextCtrl(&ev);
+	weapon_definitions[type].weapons_by_trigger[0].projectile_type =
+		getChoice(&ev, NUMBER_OF_PROJECTILE_TYPES);
 }
 void WeaponTriggerPanel::OnPrimaryError(wxCommandEvent& ev)
 {
 	int type = common();
-	weapon_definitions[type].weapons_by_trigger[0].round_per_magazine =
+	weapon_definitions[type].weapons_by_trigger[0].theta_error =
 		getNumberFromTextCtrl(&ev);
 }
 void WeaponTriggerPanel::OnPrimaryDX(wxCommandEvent& ev)
 {
 	int type = common();
-	weapon_definitions[type].weapons_by_trigger[0].round_per_magazine =
+	weapon_definitions[type].weapons_by_trigger[0].dx =
 		getNumberFromTextCtrl(&ev);
 }
 void WeaponTriggerPanel::OnPrimaryDZ(wxCommandEvent& ev)
 {
 	int type = common();
-	weapon_definitions[type].weapons_by_trigger[0].round_per_magazine =
+	weapon_definitions[type].weapons_by_trigger[0].dz =
 		getNumberFromTextCtrl(&ev);
 }
 void WeaponTriggerPanel::OnPrimaryShellCasing(wxCommandEvent& ev)
 {
 	int type = common();
-	weapon_definitions[type].weapons_by_trigger[0].round_per_magazine =
-		getNumberFromTextCtrl(&ev);
+	weapon_definitions[type].weapons_by_trigger[0].shell_casing_type =
+		getChoice(&ev, NUMBER_OF_SHELL_CASING_TYPES);
 }
 void WeaponTriggerPanel::OnPrimaryBurstCount(wxCommandEvent& ev)
 {
 	int type = common();
-	weapon_definitions[type].weapons_by_trigger[0].round_per_magazine =
+	weapon_definitions[type].weapons_by_trigger[0].burst_count =
 		getNumberFromTextCtrl(&ev);
 }
 
+/////////////////////////
+void WeaponTriggerPanel::OnSecondaryRoundPerMagazine(wxCommandEvent& ev)
+{
+	int type = common();
+	weapon_definitions[type].weapons_by_trigger[1].rounds_per_magazine =
+		getNumberFromTextCtrl(&ev);
+}
+void WeaponTriggerPanel::OnSecondaryAmmoItem(wxCommandEvent& ev)
+{
+	int type = common();
+	weapon_definitions[type].weapons_by_trigger[1].ammunition_type =
+		getNumberFromTextCtrl(&ev);
+}
+void WeaponTriggerPanel::OnSecondaryTicksPerRound(wxCommandEvent& ev)
+{
+	int type = common();
+	weapon_definitions[type].weapons_by_trigger[1].ticks_per_round =
+		getNumberFromTextCtrl(&ev);
+}
+void WeaponTriggerPanel::OnSecondaryRecoveryTicks(wxCommandEvent& ev)
+{
+	int type = common();
+	weapon_definitions[type].weapons_by_trigger[1].recovery_ticks =
+		getNumberFromTextCtrl(&ev);
+}
+void WeaponTriggerPanel::OnSecondaryChargingTicks(wxCommandEvent& ev)
+{
+	int type = common();
+	weapon_definitions[type].weapons_by_trigger[1].charging_ticks =
+		getNumberFromTextCtrl(&ev);
+}
+void WeaponTriggerPanel::OnSecondaryRecoil(wxCommandEvent& ev)
+{
+	int type = common();
+	weapon_definitions[type].weapons_by_trigger[1].rounds_per_magazine =
+		getNumberFromTextCtrl(&ev);
+}
+void WeaponTriggerPanel::OnSecondaryFiringSound(wxCommandEvent& ev)
+{
+	int type = common();
+	weapon_definitions[type].weapons_by_trigger[1].firing_sound =
+		getChoice(&ev, NUMBER_OF_SOUND_DEFINITIONS);
+}
+void WeaponTriggerPanel::OnSecondaryClickSound(wxCommandEvent& ev)
+{
+	int type = common();
+	weapon_definitions[type].weapons_by_trigger[1].click_sound =
+		getChoice(&ev, NUMBER_OF_SOUND_DEFINITIONS);
+}
+void WeaponTriggerPanel::OnSecondaryChargingSound(wxCommandEvent& ev)
+{
+	int type = common();
+	weapon_definitions[type].weapons_by_trigger[1].charging_sound =
+		getChoice(&ev, NUMBER_OF_SOUND_DEFINITIONS);
+}
+void WeaponTriggerPanel::OnSecondaryShellCasingSound(wxCommandEvent& ev)
+{
+	int type = common();
+	weapon_definitions[type].weapons_by_trigger[1].shell_casing_sound =
+		getChoice(&ev, NUMBER_OF_SOUND_DEFINITIONS);
+}
+void WeaponTriggerPanel::OnSecondaryReloadSound(wxCommandEvent& ev)
+{
+	int type = common();
+	weapon_definitions[type].weapons_by_trigger[1].reloading_sound =
+		getChoice(&ev, NUMBER_OF_SOUND_DEFINITIONS);
+}
+void WeaponTriggerPanel::OnSecondaryChargedSound(wxCommandEvent& ev)
+{
+	int type = common();
+	weapon_definitions[type].weapons_by_trigger[1].charged_sound =
+		getChoice(&ev, NUMBER_OF_SOUND_DEFINITIONS);
+}
+void WeaponTriggerPanel::OnSecondaryProjectile(wxCommandEvent& ev)
+{
+	int type = common();
+	weapon_definitions[type].weapons_by_trigger[1].projectile_type =
+		getChoice(&ev, NUMBER_OF_PROJECTILE_TYPES);
+}
+void WeaponTriggerPanel::OnSecondaryError(wxCommandEvent& ev)
+{
+	int type = common();
+	weapon_definitions[type].weapons_by_trigger[1].theta_error =
+		getNumberFromTextCtrl(&ev);
+}
+void WeaponTriggerPanel::OnSecondaryDX(wxCommandEvent& ev)
+{
+	int type = common();
+	weapon_definitions[type].weapons_by_trigger[1].dx =
+		getNumberFromTextCtrl(&ev);
+}
+void WeaponTriggerPanel::OnSecondaryDZ(wxCommandEvent& ev)
+{
+	int type = common();
+	weapon_definitions[type].weapons_by_trigger[1].dz =
+		getNumberFromTextCtrl(&ev);
+}
+void WeaponTriggerPanel::OnSecondaryShellCasing(wxCommandEvent& ev)
+{
+	int type = common();
+	weapon_definitions[type].weapons_by_trigger[1].shell_casing_type =
+		getChoice(&ev, NUMBER_OF_SHELL_CASING_TYPES);
+}
+void WeaponTriggerPanel::OnSecondaryBurstCount(wxCommandEvent& ev)
+{
+	int type = common();
+	weapon_definitions[type].weapons_by_trigger[1].burst_count =
+		getNumberFromTextCtrl(&ev);
+}
 
 int WeaponTriggerPanel::common()
 {
 	int type = wxGetApp().getEditingWeaponIndex();
-	wxGetApp().setNewAndChanged(false, true);
+	wxGetApp().setChanged(true);
 	return type;
 }
 void WeaponTriggerPanel::setup()
 {
 }
 
-wxStaticBoxSizer* WeaponTriggerPanel::getTriggerSizer(WeaponTrigger& trigger,
+wxStaticBoxSizer* WeaponTriggerPanel::getTriggerSizer(WeaponSet& trigger,
 													  wxString title)
 {
 	wxStaticBox* box = new wxStaticBox(this, wxID_ANY, title);
@@ -336,47 +457,49 @@ wxStaticBoxSizer* WeaponTriggerPanel::getTriggerSizer(WeaponTrigger& trigger,
 	flexSizer->Add(trigger.ticksPerRoundText);
 	flexSizer->Add(new wxStaticText(this, wxID_ANY,
 		_T("Recovery Ticks")));
-	flexSizer->Add(trigger.);
+	flexSizer->Add(trigger.recoveryTicksText);
 	flexSizer->Add(new wxStaticText(this, wxID_ANY,
 		_T("Charging Ticks")));
-	flexSizer->Add(trigger.);
+	flexSizer->Add(trigger.chargingTicksText);
 	flexSizer->Add(new wxStaticText(this, wxID_ANY,
 		_T("Recoil")));
-	flexSizer->Add(trigger.);
+	flexSizer->Add(trigger.recoilText);
 	flexSizer->Add(new wxStaticText(this, wxID_ANY,
 		_T("Firing Sound")));
-	flexSizer->Add(trigger.);
+	flexSizer->Add(trigger.firingSoundChoice);
 	flexSizer->Add(new wxStaticText(this, wxID_ANY,
 		_T("Click Sound")));
-	flexSizer->Add(trigger.);
+	flexSizer->Add(trigger.clickSoundChoice);
 	flexSizer->Add(new wxStaticText(this, wxID_ANY,
 		_T("Charging Sound")));
-	flexSizer->Add(trigger.);
+	flexSizer->Add(trigger.chargingSoundChoice);
 	flexSizer->Add(new wxStaticText(this, wxID_ANY,
 		_T("Shell Casing Sound")));
-	flexSizer->Add(trigger.);
+	flexSizer->Add(trigger.shellSoundChoice);
 	flexSizer->Add(new wxStaticText(this, wxID_ANY,
-		_T("")));
-	flexSizer->Add(trigger.);
+		_T("Reload Sound")));
+	flexSizer->Add(trigger.reloadSoundChoice);
 	flexSizer->Add(new wxStaticText(this, wxID_ANY,
-		_T("")));
-	flexSizer->Add(trigger.);
+		_T("Charged Sound")));
+	flexSizer->Add(trigger.chargedSoundChoice);
 	flexSizer->Add(new wxStaticText(this, wxID_ANY,
-		_T("")));
-	flexSizer->Add(trigger.);
+		_T("Projectile")));
+	flexSizer->Add(trigger.projectileChoice);
 	flexSizer->Add(new wxStaticText(this, wxID_ANY,
-		_T("")));
-	flexSizer->Add(trigger.);
+		_T("Error")));
+	flexSizer->Add(trigger.errorText);
 	flexSizer->Add(new wxStaticText(this, wxID_ANY,
-		_T("")));
-	flexSizer->Add(trigger.);
+		_T("dx")));
+	flexSizer->Add(trigger.dxText);
 	flexSizer->Add(new wxStaticText(this, wxID_ANY,
-		_T("")));
-	flexSizer->Add(trigger.);
+		_T("dz")));
+	flexSizer->Add(trigger.dzText);
 	flexSizer->Add(new wxStaticText(this, wxID_ANY,
-		_T("")));
-	flexSizer->Add(trigger.);
+		_T("Shell Casing")));
+	flexSizer->Add(trigger.shellCasingChoice);
 	flexSizer->Add(new wxStaticText(this, wxID_ANY,
-		_T("")));
-	flexSizer->Add(trigger.);
+		_T("Burst Count")));
+	flexSizer->Add(trigger.burstCountText);
+	sizer->Add(flexSizer);
+	return sizer;
 }

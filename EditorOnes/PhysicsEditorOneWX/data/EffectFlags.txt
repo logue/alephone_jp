@@ -1,0 +1,5 @@
+End when animation
+End when transfer animation
+Sound only
+Make twin visible
+Media effect

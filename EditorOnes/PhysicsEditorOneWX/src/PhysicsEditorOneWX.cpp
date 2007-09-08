@@ -177,6 +177,8 @@ void PhysicsEditorOneWX::init()
 	};
 	hpl::aleph::setInformationBind(NUMBER_OF_PROJECTILE_FLAG_INFORMATIONS,
 		projectileFlagsBind, projectileFlagsBinds);
+	hpl::aleph::loadInformation("data/WSProjectileFlags.txt", NUMBER_OF_PROJECTILE_FLAG_INFORMATIONS,
+		projectileFlagsBind);
 
 	/////////////////////////
 	//effects
@@ -193,12 +195,13 @@ void PhysicsEditorOneWX::init()
 	};
 	hpl::aleph::setInformationBind(NUMBER_OF_EFFECT_FLAG_INFORMATIONS,
 		effectFlagsBind, effectFlagsBinds);
-
+	hpl::aleph::loadInformation("data/EffectFlags.txt", NUMBER_OF_EFFECT_FLAG_INFORMATIONS,
+		effectFlagsBind);
 	////////////////////
 	//physics
 	//	types
 	hpl::aleph::loadInformation("data/PhysicsTypes.txt", NUMBER_OF_EFFECT_TYPES,
-		effectInfo);
+		physicsInfo);
 
 	/////////////////////
 	//weapons
@@ -225,6 +228,8 @@ void PhysicsEditorOneWX::init()
 	};
 	hpl::aleph::setInformationBind(NUMBER_OF_WEAPON_FLAG_INFORMATIONS,
 		weaponFlagsBind, weaponFlagsBinds);
+	hpl::aleph::loadInformation("data/WSWeaponFlags.txt", NUMBER_OF_WEAPON_FLAG_INFORMATIONS,
+		weaponFlagsBind);
 	//	shell casing
 	hpl::aleph::loadInformation("data/ShellCasingTypes.txt", NUMBER_OF_SHELL_CASING_TYPES,
 		weaponShellCasingInfo);
@@ -241,13 +246,16 @@ void PhysicsEditorOneWX::init()
 */
 void PhysicsEditorOneWX::setNewAndChanged(bool new_, bool changed)
 {
-	//前の状態
-	bool prevChanged = this->isChanged();
 
 	//状態更新
-	this->isChanged_ = changed;
+	setChanged(changed);
 	this->isNew_ = new_;
-
+}
+void PhysicsEditorOneWX::setChanged(bool changed)
+{
+	//前の状態
+	bool prevChanged = this->isChanged();
+	this->isChanged_ = changed;
 	if(changed){
 		//変更していない状態から変更状態へ移った
 		if(this->isNew()){

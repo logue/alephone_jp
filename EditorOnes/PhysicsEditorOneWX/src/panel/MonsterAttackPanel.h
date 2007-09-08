@@ -58,6 +58,8 @@ public:
 	void OnRangedDY(wxCommandEvent& ev);
 	void OnRangedDZ(wxCommandEvent& ev);
 	void OnRangedCopyFrom(wxCommandEvent& ev);
+
+	int common();
 public:
 
 	void setup();

@@ -96,6 +96,7 @@ public:
 		更新があったかどうか
 	*/
 	void setNewAndChanged(bool new_, bool changed);
+	void setChanged(bool changed);
 	bool isChanged();
 	/**
 		新規データか

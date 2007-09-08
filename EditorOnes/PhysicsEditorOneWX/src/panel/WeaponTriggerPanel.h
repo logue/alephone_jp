@@ -72,7 +72,7 @@ public:
 	void OnSecondaryShellCasing(wxCommandEvent& ev);
 	void OnSecondaryBurstCount(wxCommandEvent& ev);
 	int common();
-	wxStaticBoxSizer* getTriggerSizer(WeaponTrigger& trigger);
+	wxStaticBoxSizer* getTriggerSizer(WeaponSet& trigger, wxString title);
 
 public:
 	void setup();

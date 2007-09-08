@@ -30,6 +30,7 @@ protected:
 	void OnFriends(wxCommandEvent& ev);
 	void OnEnemies(wxCommandEvent& ev);
 	void OnFlags(wxCommandEvent& ev);
+	int common();
 public:
 
 	void setup();

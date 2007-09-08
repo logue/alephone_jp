@@ -8,36 +8,36 @@ enum{
 
 BEGIN_EVENT_TABLE(PhysicsPanel, wxPanel)
 	EVT_CHOICE(ID_TYPE, PhysicsPanel::OnType)
-	EVT_CHOICE( 0, PhysicsPanel::OnData00)
-	EVT_CHOICE( 1, PhysicsPanel::OnData01)
-	EVT_CHOICE( 2, PhysicsPanel::OnData02)
-	EVT_CHOICE( 3, PhysicsPanel::OnData03)
-	EVT_CHOICE( 4, PhysicsPanel::OnData04)
+	EVT_TEXT( 0, PhysicsPanel::OnData00)
+	EVT_TEXT( 1, PhysicsPanel::OnData01)
+	EVT_TEXT( 2, PhysicsPanel::OnData02)
+	EVT_TEXT( 3, PhysicsPanel::OnData03)
+	EVT_TEXT( 4, PhysicsPanel::OnData04)
 
-	EVT_CHOICE( 5, PhysicsPanel::OnData05)
-	EVT_CHOICE( 6, PhysicsPanel::OnData06)
-	EVT_CHOICE( 7, PhysicsPanel::OnData07)
-	EVT_CHOICE( 8, PhysicsPanel::OnData08)
-	EVT_CHOICE( 9, PhysicsPanel::OnData09)
+	EVT_TEXT( 5, PhysicsPanel::OnData05)
+	EVT_TEXT( 6, PhysicsPanel::OnData06)
+	EVT_TEXT( 7, PhysicsPanel::OnData07)
+	EVT_TEXT( 8, PhysicsPanel::OnData08)
+	EVT_TEXT( 9, PhysicsPanel::OnData09)
 
-	EVT_CHOICE(10, PhysicsPanel::OnData10)
-	EVT_CHOICE(11, PhysicsPanel::OnData11)
-	EVT_CHOICE(12, PhysicsPanel::OnData12)
-	EVT_CHOICE(13, PhysicsPanel::OnData13)
-	EVT_CHOICE(14, PhysicsPanel::OnData14)
+	EVT_TEXT(10, PhysicsPanel::OnData10)
+	EVT_TEXT(11, PhysicsPanel::OnData11)
+	EVT_TEXT(12, PhysicsPanel::OnData12)
+	EVT_TEXT(13, PhysicsPanel::OnData13)
+	EVT_TEXT(14, PhysicsPanel::OnData14)
 
-	EVT_CHOICE(15, PhysicsPanel::OnData15)
-	EVT_CHOICE(16, PhysicsPanel::OnData16)
-	EVT_CHOICE(17, PhysicsPanel::OnData17)
-	EVT_CHOICE(18, PhysicsPanel::OnData18)
-	EVT_CHOICE(19, PhysicsPanel::OnData19)
+	EVT_TEXT(15, PhysicsPanel::OnData15)
+	EVT_TEXT(16, PhysicsPanel::OnData16)
+	EVT_TEXT(17, PhysicsPanel::OnData17)
+	EVT_TEXT(18, PhysicsPanel::OnData18)
+	EVT_TEXT(19, PhysicsPanel::OnData19)
 
-	EVT_CHOICE(20, PhysicsPanel::OnData20)
-	EVT_CHOICE(21, PhysicsPanel::OnData21)
-	EVT_CHOICE(22, PhysicsPanel::OnData22)
-	EVT_CHOICE(23, PhysicsPanel::OnData23)
-	EVT_CHOICE(24, PhysicsPanel::OnData24)
-	EVT_CHOICE(25, PhysicsPanel::OnData25)
+	EVT_TEXT(20, PhysicsPanel::OnData20)
+	EVT_TEXT(21, PhysicsPanel::OnData21)
+	EVT_TEXT(22, PhysicsPanel::OnData22)
+	EVT_TEXT(23, PhysicsPanel::OnData23)
+	EVT_TEXT(24, PhysicsPanel::OnData24)
+	EVT_TEXT(25, PhysicsPanel::OnData25)
 END_EVENT_TABLE()
 
 PhysicsPanel::PhysicsPanel(wxWindow* parent, wxWindowID id):
@@ -57,7 +57,7 @@ wxPanel(parent, id)
 
 	//layout
 	wxFlexGridSizer* leftSizer = new wxFlexGridSizer(21,2,0,0);
-	leftSizer->Add(new wxTextCtrl(this, wxID_ANY,
+	leftSizer->Add(new wxStaticText(this, wxID_ANY,
 		_T("Type")));
 	leftSizer->Add(this->typeChoice);
 	char labels[][100] = {
@@ -100,15 +100,15 @@ wxPanel(parent, id)
 
 	wxFlexGridSizer* rightSizer = new wxFlexGridSizer(6,2,0,0);
 	for(int i = 20; i < NUMBER_OF_PHYSICS_ITEMS; i ++){
-		leftSizer->Add(new wxStaticText(this, wxID_ANY,
+		rightSizer->Add(new wxStaticText(this, wxID_ANY,
 			wxConvertMB2WX(labels[i])));
-		leftSizer->Add(this->datas[i]);
+		rightSizer->Add(this->datas[i]);
 	}
 
 	wxFlexGridSizer* allSizer = new wxFlexGridSizer(1,2,0,0);
-	this->SetSizer(allSizer);
 	allSizer->Add(leftSizer);
 	allSizer->Add(rightSizer);
+	this->SetSizer(allSizer);
 
 	allSizer->Fit(this);
 	Layout();
@@ -307,6 +307,6 @@ void PhysicsPanel::setup()
 int PhysicsPanel::common()
 {
 	int type = wxGetApp().getEditingPhysicsIndex();
-	wxGetApp().setNewAndChanged(false, true);
+	wxGetApp().setChanged(true);
 	return type;
 }
