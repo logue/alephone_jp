@@ -384,3 +384,5 @@ cannot equipped so quickly, but I must remember those. and the functions will be
 -Showing and editing Side properties.
 -Visual mode :(
 -Make drawing more lite (too heavy when texture mode) I'll try to deteriorate images in the memory(wxImage)
+
+•¶šƒR[ƒh–â‘è‚Í‰½‚Æ‚©‚È‚ç‚ñ‚Ì‚©
