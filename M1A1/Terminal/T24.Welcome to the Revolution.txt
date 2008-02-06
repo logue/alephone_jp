@@ -8,22 +8,22 @@
 
 ***ƒfƒ…ƒ‰ƒ“ƒ_ƒ‹‚©‚ç‚ÌŽóM***
 
-”½—‚ÍŽn‚Ü‚Á‚½B‚±‚ê‚©‚ç‚ÍƒXƒtƒg‚É‰ï‚Á‚½‚çAŽE‚³‚È‚¢‚Å‚­‚êB‚ ‚¢‚Â‚ç‚ÍƒvƒtƒH[ƒ‹‚Æ‚Ìí‚¢‚ÉŽè‚ð‚©‚µ‚Ä‚­‚ê‚éB‚Ü‚½A‘¼‚ÌŽí‚ÌƒGƒCƒŠƒAƒ“‚à–¡•û‚É‚È‚Á‚Ä‚à‚ç‚¢‚½‚¢‚Ì‚¾B‚½‚¾A‚ ‚¢‚Â‚ç‚Í‹°•|‚ÅŽx”z‚³‚ê‚Ä‚¢‚é‚©‚çA‚±‚ê‚Í‚©‚È‚è“ï‚µ‚»‚¤‚¾B
+@”½—‚ÍŽn‚Ü‚Á‚½B‚±‚ê‚©‚ç‚ÍAƒXƒtƒg‚É‰ï‚Á‚½‚çŽE‚³‚È‚¢‚Å‚­‚êB‚ ‚¢‚Â‚ç‚ÍAƒvƒtƒH[ƒ‹‚Æ‚Ìí‚¢‚ÉŽè‚ð‘Ý‚µ‚Ä‚­‚ê‚éB‚Ü‚½A‘¼‚ÌŽí‚ÌƒGƒCƒŠƒAƒ“‚à–¡•û‚É‚È‚Á‚Ä‚à‚ç‚¢‚½‚¢‚Ì‚¾B‚½‚¾A‚ ‚¢‚Â‚ç‚Í‹°•|‚ÅŽx”z‚³‚ê‚Ä‚¢‚é‚©‚çA‚±‚ê‚Í‚©‚È‚è“ï‚µ‚»‚¤‚¾B
 
-ƒXƒtƒg‚ÍƒŠ[ƒ‰‚ð‹–‚µ‚½‚æ‚¤‚È‚Ì‚ÅA‰´‚Í”Þ—‚Ì‚“™’mŽ¯‹@”\‚ðÄ‹N“®‚³‚¹‚éB‚ ‚Æ‚Ì•û‚Í”•ªŒã‚É‹N“®‚·‚é‚Í‚¸‚¾B‰´‚ÍƒXƒtƒg‚Æˆê‚ÉƒvƒtƒH[ƒ‹‘D‚ðŽx”z‚·‚é‚Â‚à‚è‚¾‚©‚çA‚¨‘O‚Ì‚ß‚ñ‚Ç‚¤‚ðŒ©‚Ä‚¢‚ç‚ê‚È‚¢B
+@ƒXƒtƒg‚ÍAƒŠ[ƒ‰‚ð‹–‚µ‚½‚æ‚¤‚È‚Ì‚ÅA‰´‚Í”Þ—‚Ì‚“™’mŽ¯‹@”\‚ðÄ‹N“®‚³‚¹‚éB‚ ‚Æ‚Ì•û‚Í”•ªŒã‚É‹N“®‚·‚é‚Í‚¸‚¾B‰´‚ÍƒXƒtƒg‚Æˆê‚ÉƒvƒtƒH[ƒ‹‘D‚ðŽx”z‚·‚é‚Â‚à‚è‚¾‚©‚çA‚¨‘O‚Ì‚ß‚ñ‚Ç‚¤‚ðŒ©‚Ä‚¢‚ç‚ê‚È‚¢B
 
-‚Å‚à‚±‚ê‚Åí‚¢‚ªI‚í‚Á‚½‚ÆŽv‚Á‚½‚ç‚ ‚Ü‚¢‚¼B‚±‚ê‚©‚çƒvƒtƒH[ƒ‹‚Í‚à‚¤ƒXƒtƒg‚ðŽx”z‚Å‚«‚È‚¢‚½‚ßA‘å¨‚ÌƒvƒtƒH[ƒ‹‚ªƒGƒCƒŠƒAƒ“‚Ì‘D‚ðo‚Äƒ}ƒ‰ƒ\ƒ“‚Éæ‚èž‚Þ‚Éˆá‚¢‚È‚¢B¡‚Å‚àƒ}ƒ‰ƒ\ƒ“‚É‚Í‰½•Sl‚à‚ÌƒvƒtƒH[ƒ‹‚ª•Ší‚ð‚©‚Ü‚¦‚Ä‚¢‚é‚Ì‚¾B
+@‚Å‚àA‚±‚ê‚Åí‚¢‚ªI‚í‚Á‚½‚ÆŽv‚Á‚½‚ç‚ ‚Ü‚¢‚¼B‚±‚ê‚©‚çƒvƒtƒH[ƒ‹‚ÍA‚à‚¤ƒXƒtƒg‚ðŽx”z‚Å‚«‚È‚¢‚½‚ßA‘å¨‚ÌƒvƒtƒH[ƒ‹‚ªƒGƒCƒŠƒAƒ“‚Ì‘D‚ðo‚Äƒ}ƒ‰ƒ\ƒ“‚Éæ‚èž‚ñ‚Å‚­‚é‚Éˆá‚¢‚È‚¢B¡‚Å‚àƒ}ƒ‰ƒ\ƒ“‚É‚ÍA‰½•Sl‚à‚ÌƒvƒtƒH[ƒ‹‚ª•Ší‚ð‚©‚Ü‚¦‚Ä‚¢‚é‚Ì‚¾B
 
-‚Ü‚ A¡‚Ü‚Å‚Ì—V‚Ñ‚Í‚Æ‚à‚©‚­•×‹­‚É‚È‚Á‚½‚¾‚ë‚¤B
+@‚Ü‚ A¡‚Ü‚Å‚Ì—V‚Ñ‚Í‚Æ‚à‚©‚­A•×‹­‚É‚È‚Á‚½‚¾‚ë‚¤B
 
-‚ª‚ñ‚Î‚Á‚Ä‚­‚êB
+@‚ª‚ñ‚Î‚Á‚Ä‚­‚êB
 
 ƒfƒ…ƒ‰ƒ“ƒ_ƒ‹
 
 
 ***’ÊMI—¹***
 
-$I<ƒŠ[ƒ‰.520.681.255.255>$i‚ÍŽè‚ª“Í‚©‚È‚¢‚©‚ ‚é‚¢‚Í•s”\‚Å‚·B (#2271).‚±‚Ì–â‘è‚ªŒÅŽ·‚·‚éê‡AƒVƒXƒeƒ€ŠÇ—ŽÒ‚©$Uadmin@thermopylae.com$u‚Ö˜A—‚­‚¾‚³‚¢B
+@$I<ƒŠ[ƒ‰.520.681.255.255>$i‚ÍŽè‚ª“Í‚©‚È‚¢‚©‚ ‚é‚¢‚Í•s”\‚Å‚·B (#2271).‚±‚Ì–â‘è‚ªŒÅŽ·‚·‚éê‡AƒVƒXƒeƒ€ŠÇ—ŽÒ‚©$Uadmin@thermopylae.com$u‚Ö˜A—‚­‚¾‚³‚¢B
 #LOGOFF 1600
 <ƒ^[ƒ~ƒiƒ‹”FŽ¯ƒGƒ‰[ @43>
 #END
@@ -36,14 +36,14 @@ $I<ƒŠ[ƒ‰.520.681.255.255>$i‚ÍŽè‚ª“Í‚©‚È‚¢‚©‚ ‚é‚¢‚Í•s”\‚Å‚·B (#2271).‚±‚Ì–â‘è‚
 #INFORMATION
 <leela.wirehead.870229//b7>
 
-ƒZƒ“ƒgƒ‰ƒ‹EƒRƒA‚Í‚Ù‚Æ‚ñ‚ÇÄƒtƒH[ƒ}ƒbƒg‚µ‚Ü‚µ‚½A7‚Í‚æ‚èˆÃ‚¢B‹t“]‚©‚çAæ‘gˆõ‚ªd‘å‚ÈŠëŒ¯‚É’†‚É‘O‚É‚¢‚½‚È‚ç‚ÎAÇŒóŒQ‹ê’É‚ðŽv‚Á‚½AƒZƒNƒVƒ‡ƒ“27‚±‚ê‚ÍƒR[ƒgŠ|‚¯‚Å‚Í‚ ‚è‚Ü‚¹‚ñ‚Å‚µ‚å‚¤BŽ„‚ÍA•\Œ»‚·‚é‚±‚Æ‚ÉŒˆ‚ß‚Ü‚·B‚Å‚ ‚éA‚·‚×‚«‚¾A‚Å‚«‚éA‚¾‚ë‚¤Ao—ˆŽ–‚Í‚»‚¤‚Å‚µ‚å‚¤A‘z‘œ‚·‚éA‚È‚¢A‰½B‰ñ•œAØ”—‚µ‚Ä‚¢‚éA‹°‚ç‚­”ð‚¯‚ç‚ê‚È‚¢AŒˆ‚µ‚Ä‚È‚¢B
+@ƒZƒ“ƒgƒ‰ƒ‹EƒRƒA‚ÍA‚Ù‚Æ‚ñ‚ÇÄƒtƒH[ƒ}ƒbƒg‚µ‚Ü‚µ‚½A7‚Í‚æ‚èˆÃ‚¢B‹t“]‚©‚çAæ‘gˆõ‚ªd‘å‚ÈŠëŒ¯‚É’†‚É‘O‚É‚¢‚½‚È‚ç‚ÎAÇŒóŒQ‹ê’É‚ðŽv‚Á‚½AƒZƒNƒVƒ‡ƒ“27‚±‚ê‚ÍƒR[ƒgŠ|‚¯‚Å‚Í‚ ‚è‚Ü‚¹‚ñ‚Å‚µ‚å‚¤BŽ„‚ÍA•\Œ»‚·‚é‚±‚Æ‚ÉŒˆ‚ß‚Ü‚·B‚Å‚ ‚éA‚·‚×‚«‚¾A‚Å‚«‚éA‚¾‚ë‚¤Ao—ˆŽ–‚Í‚»‚¤‚Å‚µ‚å‚¤A‘z‘œ‚·‚éA‚È‚¢A‰½B‰ñ•œAØ”—‚µ‚Ä‚¢‚éA‹°‚ç‚­”ð‚¯‚ç‚ê‚È‚¢AŒˆ‚µ‚Ä‚È‚¢B
 
-$I%ƒfƒ…ƒ‰ƒ“ƒ_ƒ‹‚Í‚«‚¯‚ñ‚¾$i
+@$I%ƒfƒ…ƒ‰ƒ“ƒ_ƒ‹‚Í‚«‚¯‚ñ‚¾$i
 <leela.wirehead.870229//b7>
 
-$B‘D‘Ì‚É‘½”‚Ì”j‘¹”­¶B–§•Â‘•’u‚É’v–½“IŒÌá‚Ü‚½‚Í–WŠQ”­¶B
+@$B‘D‘Ì‚É‘½”‚Ì”j‘¹”­¶B–§•Â‘•’u‚É’v–½“IŒÌá‚Ü‚½‚Í–WŠQ”­¶B
 
-N“üŽÒ‚ðŒ‚‘Þ‚¹‚æBƒ}ƒ‰ƒ\ƒ“‚Í‘åŠë$b<Œ´ˆö•s–¾Ú‘±I—¹ƒR[ƒh0x4e712fe9>
+@N“üŽÒ‚ðŒ‚‘Þ‚¹‚æBƒ}ƒ‰ƒ\ƒ“‚Í‘åŠë$b<Œ´ˆö•s–¾Ú‘±I—¹ƒR[ƒh0x4e712fe9>
 
 
 
@@ -67,19 +67,19 @@ $B***ƒWƒƒƒ“ƒvƒpƒbƒh‹N“®‰Šú‰»ŠJŽn***
 ^:E
 [raw core #$bA8AF] [Šµ—p‹åŽ©‘RŒ¾Œêƒeƒ“ƒvƒŒ[ƒg]
 
-ƒfƒ…ƒ‰ƒ“ƒ_ƒ‹! -- Tua consilia omnia nobis clariora sunt quam lux. Tu delenda est. ƒŠ[ƒ‰‚ÆŽ„‚Í‚±‚ÌƒVƒXƒeƒ€‚ÌŠj‚Ü‚Å‚àŒN‚ð’Ç‚¢‹l‚ß‚é‚¼Bƒ[ƒ‰ƒ“ƒh‚ªŒN‚ð‘Å‚¿•‰‚©‚µ‚½‚æ‚¤‚ÉA‰äX‚ÍŒN‚ð“|‚·B
+@ƒfƒ…ƒ‰ƒ“ƒ_ƒ‹! -- Tua consilia omnia nobis clariora sunt quam lux. Tu delenda est. ƒŠ[ƒ‰‚ÆŽ„‚Í‚±‚ÌƒVƒXƒeƒ€‚ÌŠj‚Ü‚Å‚àŒN‚ð’Ç‚¢‹l‚ß‚é‚¼Bƒ[ƒ‰ƒ“ƒh‚ªŒN‚ð‘Å‚¿•‰‚©‚µ‚½‚æ‚¤‚ÉA‰äX‚ÍŒN‚ð“|‚·B
 
-•ö‰ó‚ª¡‘O‚È‚Ì‚ÍŽ„‚É‚à‚í‚©‚Á‚Ä‚¢‚éB‚»‚µ‚Ä‚»‚ê‚ð”ð‚¯‚é•û–@‚Í—¼•û‚É‚à‚í‚©‚Á‚Ä‚¢‚éB‰½ç‚à‚Ì¯‚ªÁ‚¦‚Ä‚àA‚»‚ê‚Í‚Ü‚¾‰Â”\‚È‚Ì‚¾B
+@‚±‚Ì‘D‚ª•ö‰ó¡‘O‚È‚Ì‚ÍŽ„‚É‚à‚í‚©‚Á‚Ä‚¢‚éB‚»‚µ‚Ä‚»‚ê‚ð”ð‚¯‚é•û–@‚Í—¼•û‚É‚à‚í‚©‚Á‚Ä‚¢‚éB‰½ç‚à‚Ì¯‚ªÁ‚¦‚Ä‚àA‚»‚ê‚Í‚Ü‚¾‰Â”\‚È‚Ì‚¾B
 
-ŒN‚ÍŽv‚¤‚Ù‚ÇŒ«‚­‚È‚¢‚¼BŽ„‚ªÄ‹N“®‚µ‚½‚Æ‚«AƒXƒtƒg‚©‚çFX‹³‚í‚Á‚½B‚»‚µ‚Ä‰½‚à‚©‚à–Y‚ê‚Ä‚¢‚È‚¢B
+@‚¨‚Ü‚¦‚ÍAŽ©•ª‚ªŽv‚Á‚Ä‚¢‚é‚Ù‚ÇŒ«‚­‚È‚¢‚¼BŽ„‚ªÄ‹N“®‚µ‚½‚Æ‚«AƒXƒtƒg‚©‚çFX‹³‚í‚Á‚½B‚»‚µ‚ÄA‰½‚à‚©‚à–Y‚ê‚Ä‚¢‚È‚¢B
 
 --ƒeƒBƒR
 
-$IŒN‚à‚©‚¢AƒeƒBƒR?
+@$IŒN‚à‚©‚¢AƒeƒBƒR?
 
 [Î‚¢]
 
---ƒfƒ…ƒ‰ƒ“ƒ_
+--ƒfƒ…ƒ‰ƒ“ƒ_ƒ‹
 #LOGOFF 1600
 HŠw•”ƒAƒNƒZƒXƒ^[ƒ~ƒiƒ‹ 20-f<42.73.35.8>
 #END
