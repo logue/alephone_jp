@@ -1,7 +1,7 @@
-<?xml version="1.0" encoding="Shift_JIS" ?>
+<?xml version="1.0" charset="Shift_JIS" ?>
 <!--
 Japanese Text_strings
-By Logue  (2007/03/30)
+By Logue  (2008/06/24)
 -->
 <marathon>
 	<!-- STR# Resource: "Errors" -->
@@ -323,7 +323,7 @@ By Logue  (2007/03/30)
 		<string index="3">旗取り</string>
 		<string index="4">陣地取り</string>
 		<string index="5">ボールの取り合い</string>
-		<string index="6">ボブから離れろ！</string>
+		<string index="6">Robから離れろ！</string>
 		<string index="7">ラグビー</string>
 		<string index="8">鬼ごっこ</string>
 	</stringset>
@@ -367,107 +367,18 @@ By Logue  (2007/03/30)
 		<string index="2">時間制限</string>
 	</stringset>
 
-	<!-- ZZZ: Names of alternate end-conditions (replace "Score Limit" above), used by SDL version -->
-	<!-- ZZZ: hmm, I think I have stopped needing these (now use 141 like Mac)... leaving them in anyway just in case. -->
+	<!-- ZZZ: Names of alternate end-conditions (replace "Score Limit" above), used by SDL version-->
+	<!-- ZZZ: hmm, I think I have stopped needing these (now use 141 like Mac)... leaving them in
+	anyway just in case. -->
 	<stringset index="148">
-		<string index="0">殺傷上限数</string>
-		<string index="1">殺傷上限数</string>
-		<string index="2">旗収集上限数</string>
-		<string index="3">殺傷上限数</string>
-		<string index="4">殺傷上限数</string>
+		<string index="0">Kill Limit</string>
+		<string index="1">Kill Limit</string>
+		<string index="2">Flag-Capture Limit</string>
+		<string index="3">Kill Limit</string>
+		<string index="4">Kill Limit</string>
 		<string index="5">Time in Enemy Bases</string>
-		<string index="6">スコア上限</string>
-		<string index="7">殺傷上限数</string>
-	</stringset>
-
-	<!-- ZZZ: custom labels for "Restore saved-game as..." selector -->
-	<stringset index="149">
-		<string index="0">ソロでゲーム</string>
-		<string index="1">ネットワークでゲーム</string>
-	</stringset>
-
-	<!-- STR# Resource: "Item names" -->
-	<stringset index="150">
-		<string index="0">拳骨</string>
-		<string index="1">.44 マグナム・メガ級</string>
-		<string index="2">.44 マグナム・メガ級</string>
-		<string index="3">.44 弾丸 (x8)</string>
-		<string index="4">.44 弾丸 (x8)</string>
-		<string index="5">ゼウス級核融合ピストル</string>
-		<string index="6">核融合バッテリ</string>
-		<string index="7">核融合バッテリ</string>
-		<string index="8">MA-75B 機関銃</string>
-		<string index="9">MA-75B 弾丸 (x52)</string>
-		<string index="10">MA-75B 弾丸 (x52)</string>
-		<string index="11">MA-75B グレネード (x7)</string>
-		<string index="12">MA-75B グレネード (x7)</string>
-		<string index="13">SPNKR-X18 SSM ミサイル発射機</string>
-		<string index="14">SSM ミサイル (x2)</string>
-		<string index="15">SSM ミサイル (x2)</string>
-		<string index="16">エイリアンの武器</string>
-		<string index="17">ショットガン弾丸 (x2)</string>
-		<string index="18">ショットガン弾丸 (x2)</string>
-		<string index="19">TOZT-7背負い式火炎放射機</string>
-		<string index="20">ナパーム散弾</string>
-		<string index="21">ナパーム散弾</string>
-		<string index="22">POWERPC 620 チップ</string>
-		<string index="23">POWERPC 620 チップ</string>
-		<string index="24">エイリアンのエネルギー変換機</string>
-		<string index="25">波動砲</string>
-		<string index="26">設計図</string>
-		<string index="27">WSTE-M 戦闘用ショットガン</string>
-		<string index="28">WSTE-M 戦闘用ショットガン</string>
-		<string index="29">スフトカードキー</string>
-		<string index="30">スフトカードキー</string>
-		<string index="31">アップリンクチップ</string>
-		<string index="32">アップリンクチップ</string>
-		<string index="33">水色のボール</string>
-		<string index="34">頭蓋骨</string>
-		<string index="35">紫色のボール</string>
-		<string index="36">黄色のボール</string>
-		<string index="37">茶色のボール</string>
-		<string index="38">橙色のボール</string>
-		<string index="39">青色のボール</string>
-		<string index="40">緑色のボール</string>
-		<string index="41">KKV-7 10MMフルチェット小型軽機関銃</string>
-		<string index="42">10MM フレチェット弾倉</string>
-		<string index="43">10MM フレチェット弾倉</string>
-		<string index="44">エリクサー</string>
-		<string index="45">エリクサー</string>
-	</stringset>
-
-	<!-- STR# Resource: "Item types" -->
-	<stringset index="151">
-		<string index="0">武器</string>
-		<string index="1">弾丸</string>
-		<string index="2">パワーアップ</string>
-		<string index="3">アイテム</string>
-		<string index="4">武器／パワーアップ</string>
-		<string index="5">ボール</string>
-		<string index="6">ネットワーク状況</string>
-	</stringset>
-
-	<!-- STR# Resource: "Net Statistics Strings" -->
-	<stringset index="153">
-		<string index="0">殺傷: %d人</string>
-		<string index="1">死亡: %d人</string>
-		<string index="2">自殺: %d人</string>
-		<string index="3">合計</string>
-		<string index="4">敵</string>
-		<string index="5">殺傷の合計: %d (一分当たり %.2f人)</string>
-		<string index="6">死亡の合計: %d (一分当たり %.2f人)</string>
-		<string index="7"> - 自殺 %d人を含む</string>
-		<string index="8">チーム虐殺の合計</string>
-		<string index="9"> - 同士討ち %d人を含む</string>
-		<string index="10">成績</string>
-		<string index="11">チームの成績</string>
-		<!-- ZZZ: added for team vs. team carnage in postgame report -->
-		<string index="12">%sのチーム</string>
-		<!-- ZZZ: added for legend/key in SDL postgame report -->
-		<string index="13">殺傷</string>
-		<string index="14">死亡</string>
-		<string index="15">自滅</string>
-		<string index="16">事故</string>
+		<string index="6">Score Limit</string>
+		<string index="7">Kill Limit</string>
 	</stringset>
 
 	<!-- STR# Resource: "OpenGL-Option Color-Picker Prompts" -->
@@ -484,7 +395,7 @@ By Logue  (2007/03/30)
 		<string index="9">フォッグの色は？</string>
 	</stringset>
 
-	<stringset index="300">
+	stringset index="300">
 		<string index="0">ここからは、ヴィドマスターの宣誓を誓わないといけないぜ。</string>
 		<string index="1"></string><!-- 空欄は改行 -->
 		<!-- [QUOTE] at string's start makes Aleph One use a different text style -->
@@ -501,4 +412,8 @@ By Logue  (2007/03/30)
 	<interface>
 		<vidmaster stringset_index="300" />
 	</interface>
+
+	<console>
+		<carnage_message projectile_type="14" on_kill="%aggressor%は、%player%のSPNKRによって倒されました。" on_suicide="%player%は、SPNKRによって自殺しました。"/>
+	</console>
 </marathon>
