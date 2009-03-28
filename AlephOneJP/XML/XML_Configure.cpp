@@ -123,7 +123,8 @@ void XML_Configure::CharacterData(const char *String, int Length)
 			CurrentElement->GetName(),XML_GetCurrentLineNumber(Parser),CurrentElement->ErrorString);
 	}
 }
-#include "expatJP.h"
+	
+extern "C" int XML_JapaneseEncodingHandler(void *encodingHandlerData, const XML_Char *name, XML_Encoding *info);
 // Does parsing; indicates whether the parsing was successful or not
 bool XML_Configure::DoParse()
 {
@@ -131,16 +132,14 @@ bool XML_Configure::DoParse()
 	if (!CurrentElement) return false;
 
 	// Create the parser
-	Parser = XML_ParserCreate(NULL);
+	Parser = XML_ParserCreate("iso-8859-1");
+	XML_SetUnknownEncodingHandler(Parser, XML_JapaneseEncodingHandler, NULL);
 	
 	// Set up the callbacks
 	XML_SetUserData(Parser, this);
-	
-	XML_SetUnknownEncodingHandler(Parser, XML_JapaneseEncodingHandler, NULL);	
-	
 	XML_SetElementHandler(Parser, StaticStartElement, StaticEndElement);
 	XML_SetCharacterDataHandler(Parser, StaticCharacterData);
-	
+
 	NumInterpretErrors = 0;
 	LastOne = true;
 	do
@@ -178,7 +177,7 @@ bool XML_Configure::DoParse()
 
 
 // Compose an interpretation error; use <>printf syntax
-void XML_Configure::ComposeInterpretError(char *Format, ...)
+void XML_Configure::ComposeInterpretError(const char *Format, ...)
 {
 	char ErrorString[256];
 

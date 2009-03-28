@@ -31,6 +31,22 @@ char* sjis2utf8(const char* str, size_t len) {
 	iconv_close(j);
 	return text;
 }
+char* utf82sjis(const char* str, size_t len) {
+	static char text[1024];
+	memset(text,0,1024);
+	const char* strp = str;
+	char* retp = text;
+	size_t sz = 1024;
+	iconv_t i = iconv_open("SHIFT-JIS", "UTF-8");
+	if( iconv(i,  &strp, &len, &retp, &sz) == -1 ) {
+		// SHIFT-JISにできないときはそのままコピー
+		strncpy(text, str, len);
+	}
+	if( text[strlen(text)-1] == 13) { text[strlen(text)-1] = 0; }
+	iconv_close(i);
+	return text;
+}
+
 
 uint16* sjis2utf16(const char* str, size_t len) {
 	static uint16 text[1024];

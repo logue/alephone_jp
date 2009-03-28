@@ -254,10 +254,14 @@ bool StringsEqual(const char *String1, const char *String2, int MaxStrLen)
 // needs at least (OutMaxLen) characters preallocated.
 // Will not null-terminate the string or Pascalify it.
 // Returns how many characters resulted.
-#include "expatJP.h"
+#include "converter.h"
 size_t DeUTF8(const char *InString, size_t InLen, char *OutString, size_t OutMaxLen)
 {
-	return UTF8toSJIS(InString,InLen,OutString,OutMaxLen);
+	// back to Shift-JIS in case UTF-8 strings's length > 256
+	char* tp = utf82sjis(InString, InLen);
+	strncpy(OutString, tp, OutMaxLen);
+	OutString[OutMaxLen] = '\0';
+	return strlen(OutString);
 }
 
 // Write output as a Pascal or C string, as the case may be;
@@ -267,7 +271,7 @@ size_t DeUTF8(const char *InString, size_t InLen, char *OutString, size_t OutMax
 size_t DeUTF8_Pas(const char *InString, size_t InLen, unsigned char *OutString, size_t OutMaxLen)
 {
 	size_t Len = DeUTF8(InString,InLen,reinterpret_cast<char*>(OutString+1),OutMaxLen);
-	assert(Len < 256);
+//	assert(Len < 256);
 	OutString[0] = static_cast<char>(Len);
 	return Len;
 }

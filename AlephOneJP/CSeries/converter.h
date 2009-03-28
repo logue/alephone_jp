@@ -11,6 +11,8 @@
 extern "C" {
 #endif
 char* sjis2utf8(const char* str, size_t len);
+char* utf82sjis(const char* str, size_t len);
+
 unsigned short* sjis2utf16(const char* str, size_t len);
 unsigned short* utf82utf16(const char* str, size_t len);
 char* utf162utf8(const unsigned short* str, size_t len);

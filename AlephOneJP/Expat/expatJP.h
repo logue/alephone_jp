@@ -1,12 +1,12 @@
 /*
- * $Id: expatJP.h,v 1.1 2007-01-21 05:01:18 ookawa_mi Exp $
+ * $Id: expatJP.h,v 1.2 2009-03-28 07:16:32 ookawa_mi Exp $
  * expatをShift_JISおよびEUC-JPに対応させる
  * ISO-2022JPにも対応させたいところだがexpatの実装上難しい
  */
 
 #ifndef _YEBISUYA_EXPATJP_H_
 #define _YEBISUYA_EXPATJP_H_
-#include "xmlparse.h"
+#include "expat.h"
 #ifdef __cplusplus
 extern "C" {
 #endif
@@ -91,6 +91,9 @@ void parseString(const char* string) {
 /*
  * Changes:
  * $Log: not supported by cvs2svn $
+ * Revision 1.1  2007/01/21 05:01:18  ookawa_mi
+ * *** empty log message ***
+ *
  * Revision 1.2  2003/11/27 05:54:45  sugoroku
  * CVSキーワードをコメントに挿入
  *
