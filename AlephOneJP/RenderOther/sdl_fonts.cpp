@@ -36,17 +36,31 @@
 #include <vector>
 #include <map>
 
+#include <boost/tokenizer.hpp>
+#include <string>
+
 #ifndef NO_STD_NAMESPACE
 using std::vector;
 using std::pair;
 using std::map;
 #endif
 
+#ifdef HAVE_SDL_TTF
+#include <boost/tuple/tuple_comparison.hpp>
+#include "preferences.h" // smooth_font
+#include "AlephSansMono-Bold.h"
+#endif
 
 // Global variables
 typedef pair<int, int> id_and_size_t;
 typedef map<id_and_size_t, sdl_font_info *> font_list_t;
 static font_list_t font_list;				// List of all loaded fonts
+
+#ifdef HAVE_SDL_TTF
+typedef pair<TTF_Font *, int> ref_counted_ttf_font_t;
+typedef map<ttf_font_key_t, ref_counted_ttf_font_t> ttf_font_list_t;
+static ttf_font_list_t ttf_font_list;
+#endif
 
 // From shell_sdl.cpp
 extern vector<DirectorySpecifier> data_search_path;
@@ -55,7 +69,12 @@ extern vector<DirectorySpecifier> data_search_path;
 /*
  *  Initialize font management
  */
-#if 0
+
+#ifdef HAVE_SDL_TTF
+extern void fix_missing_overhead_map_fonts();
+extern void fix_missing_interface_fonts();
+#endif
+
 void initialize_fonts(void)
 {
         logContext("initializing fonts");
@@ -67,9 +86,21 @@ void initialize_fonts(void)
 
 		if (open_res_file(fonts))
 			found = true;
+
+		if (!found)
+		{
+			fonts = *i + "Fonts.fntA";
+			if (open_res_file(fonts))
+				found = true;
+		}
 		i++;
 	}
 	if (!found) {
+#ifdef HAVE_SDL_TTF
+		// use our own built-in font
+		fix_missing_overhead_map_fonts();
+		fix_missing_interface_fonts();
+#else
 		logFatal("Can't open font resource file");
 /*
                 vector<DirectorySpecifier>::const_iterator i = data_search_path.begin(), end = data_search_path.end();
@@ -80,6 +111,7 @@ void initialize_fonts(void)
                 }
 */                
 		exit(1);
+#endif
 	}
 }
 
@@ -87,8 +119,8 @@ void initialize_fonts(void)
 /*
  *  Load font from resources and allocate sdl_font_info
  */
-
-sdl_font_info *load_font(const TextSpec &spec)
+/*
+sdl_font_info *load_sdl_font(const TextSpec &spec)
 {
 	sdl_font_info *info = NULL;
 
@@ -193,23 +225,109 @@ sdl_font_info *load_font(const TextSpec &spec)
 	SDL_RWclose(p);
 	return info;
 }
+*/
+#ifdef HAVE_SDL_TTF
+static TTF_Font *load_ttf_font(const std::string& path, uint16 style, int16 size)
+{
+	// already loaded? increment reference counter and return pointer
+	ttf_font_key_t search_key(path, style, size);
+	ttf_font_list_t::iterator it = ttf_font_list.find(search_key);
+	if (it != ttf_font_list.end())
+	{
+		TTF_Font *font = it->second.first;
+		it->second.second++;
+
+		return font;
+	}
+
+	TTF_Font *font;
+	if (path == "mono")
+	{
+		font = TTF_OpenFontRW(SDL_RWFromConstMem(aleph_sans_mono_bold, sizeof(aleph_sans_mono_bold)), 0, size);
+	}
+	else
+	{
+		font = TTF_OpenFont(path.c_str(), size);
+	}
+
+	if (font)
+	{
+		int ttf_style = TTF_STYLE_NORMAL;
+		if (style & styleBold)
+			ttf_style |= TTF_STYLE_BOLD;
+		if (style & styleItalic)
+			ttf_style |= TTF_STYLE_ITALIC;
+		
+		TTF_SetFontStyle(font, ttf_style);
+#ifdef TTF_HINTING_LIGHT
+/*		if (environment_preferences->smooth_text)
+			TTF_SetFontHinting(font, TTF_HINTING_LIGHT);
+		else
+			TTF_SetFontHinting(font, TTF_HINTING_MONO);*/
+#endif
+		
+		ttf_font_key_t key(path, style, size);
+		ref_counted_ttf_font_t value(font, 1);
+		
+		ttf_font_list[key] = value;
+	}
+	
+	return font;	
+}
+
+static const char *locate_font(const std::string& path)
+{
+	if (path == "mono" || path == "")
+	{
+		return path.c_str();
+	}
+	else
+	{
+		static FileSpecifier file;
+		if (file.SetNameWithPath(path.c_str()))
+			return file.GetPath();
+		else
+			return "";
+	}
+}
+#endif
+int8 ttf_font_info::char_width(uint16 c, uint16 style) const
+{
+	int advance;
+	TTF_GlyphMetrics(get_ttf(style), c, 0, 0, 0, 0, &advance);
+	
+	return advance;
+}
+uint16 ttf_font_info::_text_width(const char *text, uint16 style, bool utf8) const
+{
+	return _text_width(text, strlen(text), style, utf8);
+}
+font_info *load_font(const TextSpec &spec) {
+	ttf_font_info* info = new ttf_font_info();
+	if(!TTF_WasInit() && TTF_Init()==-1) {
+		printf("TTF_Init: %s\n", TTF_GetError());
+		exit(1);
+	}	
+	info->font = TTF_OpenFont("Fonts.ttf", spec.size);
+	return info;
+}
 
 
 /*
  *  Unload font, free sdl_font_info
  */
 
-void unload_font(sdl_font_info *info)
+void sdl_font_info::_unload()
 {
 	// Look for font in list of loaded fonts
 	font_list_t::const_iterator i = font_list.begin(), end = font_list.end();
 	while (i != end) {
-		if (i->second == info) {
+		if (i->second == this) {
 
 			// Found, decrement reference counter and delete
-			info->ref_count--;
-			if (info->ref_count <= 0) {
-				delete info;
+			ref_count--;
+			if (ref_count <= 0) {
+				delete this; // !
 				font_list.erase(i->first);
 				return;
 			}
@@ -217,146 +335,336 @@ void unload_font(sdl_font_info *info)
 		i++;
 	}
 }
-# else
-void initialize_fonts(void)
+
+#ifdef HAVE_SDL_TTF
+void ttf_font_info::_unload()
 {
-	logContext("initializing fonts");
-}
-
-#define FONTJ12 "shnmk12.bdf"
-#define FONTE12 "shnm6x12a.bdf"
-#define FONTJ10 "knj10.bdf"
-#define FONTE10 "5x10a.bdf"
-// 0001 1100 0000 0000
-uint16 sjis2jis(char** data) {
-	char d1,d2;
-	uint8 c1,c2;
-	uint16 ret;
-	d1 = *((*data)++);
-	if( d1 > 0) { return d1; }
-	c1 = 256 + d1; 
-	d2 = *((*data)++);
-	c2 = d2 < 0 ? 256 + d2 : d2;
-	if( c2 < 0x9f && c2 > 0x3f) {
-		if( c1 < 0xa0 && c1 > 0x80) {
-			c1 = (c1 - 0x70) * 2 - 1;
-		} else if( c1 < 0xf0 && c1 > 0xdf) {
-			c1 = (c1 - 0xb0) * 2 - 1;
-		} else { (*data)--; return c1; }
-		c2 -= c2 > 0x7f ? 0x20 : 0x1f;
-	} else {
-		if( c1 < 0xa0 && c1 > 0x80) {
-			c1 = (c1 - 0x70) * 2;
-		} else if( c1 < 0xf0 && c1 > 0xbf) {
-			c1 = (c1 - 0xb0) * 2;
-		} else { (*data)--; return c1; }
-		c2 -= 0x7e;
-	}
-	ret = ((uint16)c1 << 8) | c2;
-	//	fprintf(stderr,"%04x ",(*(uint16*)(data-2)));
-	return ret;
-}
-// 010000000000 0000
-//            1
-// 0-> 15 1->14
-
-static void ParseChar(uint8* pixs, FILE* fp, int xsize, int ysize) {
-	char buf[256];
-	int x,y;
-	int xs = xsize > 8 ? 15 : 7;
-	for (y = 0; y <= ysize; y++) {
-		fgets(buf, 256, fp);
-		if(strstr(buf,"BITMAP") ) { continue; }
-		if(strstr(buf,"ENDCHAR") ) { return; }
-		int txt = strtol(buf,0,16);
-		for(x = 0; x < xsize;x++) {
-			pixs[(y)*(ysize)+x] = (txt & ( 1 << (xs - x))) ? 1 : 0;
-		}
-	}
-}
-
-sdl_font_info *load_font(const TextSpec &spec)
-{
-	const char* epath, *jpath;
-	FILE* ep, *jp;
-	sdl_font_info *ret = new sdl_font_info;
-	ret->location_table = new uint32 [65536];
-	ret->width_table = new int8 [65536];
-	memset(ret->location_table,0,65536*2);
-	memset(ret->width_table,0,65536);
-	if(spec.size < 10 ) { 
-		epath = FONTE10; 
-		jpath = FONTJ10;
-		ret->ascent = 8;
-		ret->descent = 2;
-		ret->leading = 0;
-		ret->bytes_per_row = 10;
-	} else { 
-		epath = FONTE12; 
-		jpath = FONTJ12;
-		ret->ascent = 10;
-		ret->descent = 2;
-		ret->leading = 0;
-		ret->bytes_per_row = 12;
-	}
-	int ln = ret->bytes_per_row;
-	int dsize = ln * ln;
-	ep = fopen(epath,"r");
-	if( ! ep ) { fprintf(stderr,"Cannot open English Font file \n"); exit(1); }
-	jp = fopen(jpath,"r");
-	if( ! jp ) { fprintf(stderr,"Cannot open Japanese Font file \n"); exit(1); }
-	ret->pixmap = new uint8 [(96*96+256)*dsize];
-	const int BUF = 256;
-	char buf[BUF];
-	int index;
-	while(fgets(buf, BUF, ep)) {
-		if( buf[0] == 'E' && strstr(buf, "ENCODING") != NULL) {
-			char* p = strchr(buf, ' ');
-			index = strtol(p, 0, 10);
-			if( index < 0xa0 && index > 0x80 || index < 0xf0 && index > 0xbf || index < 32) {
-				continue;
-			}
-			do {
-				fgets(buf, BUF, ep);
-			} while (strcmp(buf, "BITMAP\n"));
-			uint8* in = ret->pixmap + (dsize) * index;
-			ret->width_table[index] = ln / 2;
-			ret->location_table[index] = in - ret->pixmap;
-			ParseChar(in,ep,ln/2,ln);
-			
-		}
-	}
-	uint8* in = ret->pixmap + dsize * 256;
-	while(fgets(buf,BUF,jp)) {		
-		if( buf[0] == 'E' && strstr(buf, "ENCODING") != NULL) {
-			char* p = strchr(buf, ' ');
-			index = strtol(p, 0, 10);
-			do {
-				fgets(buf, BUF, jp);
-			} while (strcmp(buf, "BITMAP\n"));
-			ret->width_table[index] = ln;
-			ret->location_table[index] = in - ret->pixmap;
-			ParseChar(in,jp,ln,ln);
-			in += dsize;
-		}
-		
-	}
-	fclose(ep);
-	fclose(jp);
-	return ret;
-}
-
-
-/*
- *  Unload font, free sdl_font_info
- */
-
-void unload_font(sdl_font_info *info)
-{
-	delete [] info->pixmap;
-	info->pixmap = NULL;
-	delete [] info->width_table;
-	delete [] info->location_table;
-	delete info;
+	delete this;
 }
 #endif
+
+void unload_font(font_info *info)
+{
+	info->_unload();
+}
+
+int8 sdl_font_info::char_width(uint8 c, uint16 style) const
+{
+	if (c < first_character || c > last_character)
+		return 0;
+	int8 width = width_table[(c - first_character) * 2 + 1] + ((style & styleBold) ? 1 : 0);
+	if (width == -1)	// non-existant character
+		width = width_table[(last_character - first_character + 1) * 2 + 1] + ((style & styleBold) ? 1 : 0);
+	return width;
+}
+
+uint16 sdl_font_info::_text_width(const char *text, uint16 style, bool) const
+{
+	int width = 0;
+	char c;
+	while ((c = *text++) != 0)
+		width += char_width(c, style);
+	assert(0 <= width);
+	assert(width == static_cast<int>(static_cast<uint16>(width)));
+	return width;
+}
+
+uint16 sdl_font_info::_text_width(const char *text, size_t length, uint16 style, bool) const
+{
+	int width = 0;
+	while (length--)
+		width += char_width(*text++, style); 
+	assert(0 <= width);
+	assert(width == static_cast<int>(static_cast<uint16>(width)));
+	return width;
+}
+
+int sdl_font_info::_trunc_text(const char *text, int max_width, uint16 style) const
+{
+	int width = 0;
+	int num = 0;
+	char c;
+	while ((c = *text++) != 0) {
+		width += char_width(c, style);
+		if (width > max_width)
+			break;
+		num++;
+	}
+	return num;
+}
+
+// sdl_font_info::_draw_text is in screen_drawing.cpp
+
+
+
+uint16 ttf_font_info::_text_width(const char *text, size_t length, uint16 style, bool utf8) const
+{
+	int width = 0;
+	if (utf8)
+	{
+		char *temp = process_printable(text, length);
+		TTF_SizeUTF8(get_ttf(style), temp, &width, 0);
+	}
+	else
+	{
+		uint16 *temp = process_macroman(text, length);
+		TTF_SizeUNICODE(get_ttf(style), temp, &width, 0);
+	}
+	
+	return width;
+}
+
+int ttf_font_info::_trunc_text(const char *text, int max_width, uint16 style) const
+{
+	int width;
+	static uint16 temp[1024];
+	mac_roman_to_unicode(text, temp, 1024);
+	TTF_SizeUNICODE(get_ttf(style), temp, &width, 0);
+	if (width < max_width) return strlen(text);
+
+	int num = strlen(text) - 1;
+
+	while (num > 0 && width > max_width)
+	{
+		num--;
+		temp[num] = 0x0;
+		TTF_SizeUNICODE(get_ttf(style), temp, &width, 0);
+	}
+
+	return num;
+}
+
+// ttf_font_info::_draw_text is in screen_drawing.cpp
+
+char *ttf_font_info::process_printable(const char *src, int len) const 
+{
+	static char dst[1024];
+	if (len > 1023) len = 1023;
+	char *p = dst;
+	while (*src && len-- > 0)
+	{
+		if ((unsigned char) *src >= ' ') *p++ = *src;
+		*src++;
+	}
+
+	*p = '\0';
+	return dst;
+}
+
+uint16 *ttf_font_info::process_macroman(const char *src, int len) const 
+{
+	static uint16 dst[1024];
+	if (len > 1023) len = 1023;
+	uint16 *p = dst;
+	while (*src && len-- > 0)
+	{
+		if ((unsigned char) *src >= ' ') *p++ = mac_roman_to_unicode(*src);
+		else if ((unsigned char) *src == '\t')
+			*p++ = ' ';
+		
+		*src++;
+	}
+
+	*p = 0x0;
+	return dst;
+}
+
+uint16 font_info::text_width(const char *text, uint16 style, bool utf8) const
+{
+	if (style & styleShadow)
+		return _text_width(text, style, utf8) + 1;
+	else
+		return _text_width(text, style, utf8);
+}
+
+uint16 font_info::text_width(const char *text, size_t length, uint16 style, bool utf8) const
+{
+	if (style & styleShadow)
+		return _text_width(text, length, style, utf8) + 1;
+	else
+		return _text_width(text, length, style, utf8);
+}
+
+static 	inline bool style_code(char c)
+{
+	switch(tolower(c)) {
+	case 'p':
+	case 'b':
+	case 'i':
+	case 'l':
+	case 'r':
+	case 'c':
+	case 's':
+		return true;
+		break;
+	default:
+		return false;
+	}
+}
+
+class style_separator
+{
+public:
+	bool operator() (std::string::const_iterator& next, std::string::const_iterator end, std::string& token)
+	{
+		if (next == end) return false;
+
+		token = std::string();
+
+		// if we start with a token, return it
+		if (*next == '|' && next + 1 != end && style_code(*(next + 1)))
+		{
+			token += *next;
+			++next;
+			token += *next;
+			++next;
+			return true;
+		}
+
+		token += *next;
+		++next;
+
+		// add characters until we hit a token
+		for (;next != end && !(*next == '|' && next + 1 != end && style_code(*(next + 1))); ++next)
+		{
+			token += *next;
+		}
+
+		return true;
+	}
+
+	void reset() { }
+
+};
+
+static inline bool is_style_token(const std::string& token)
+{
+	return (token.size() == 2 && token[0] == '|' && style_code(token[1]));
+}
+
+static void update_style(uint16& style, const std::string& token)
+{
+	if (tolower(token[1]) == 'p')
+		style &= ~(styleBold | styleItalic);
+	else if (tolower(token[1]) == 'b')
+	{
+		style |= styleBold;
+		style &= ~styleItalic;
+	}
+	else if (tolower(token[1]) == 'i')
+	{
+		style |= styleItalic;
+		style &= ~styleBold;
+	}
+}
+
+
+int font_info::draw_styled_text(SDL_Surface *s, const std::string& text, size_t length, int x, int y, uint32 pixel, uint16 style, bool utf8) const 
+{
+	int width = 0;
+	boost::tokenizer<style_separator> tok(text.begin(), text.begin() + length);
+	for (boost::tokenizer<style_separator>::iterator it = tok.begin(); it != tok.end(); ++it)
+	{
+		if (is_style_token(*it))
+		{
+			update_style(style, *it);
+		}
+		else
+		{
+			if (style & styleShadow)
+			{
+				_draw_text(s, it->c_str(), it->size(), x + width + 1, y + 1, SDL_MapRGB(s->format, 0x0, 0x0, 0x0), style, utf8);
+			}
+			width += _draw_text(s, it->c_str(), it->size(), x + width, y, pixel, style, utf8);
+		}
+	}
+
+	return width;
+}
+
+int font_info::styled_text_width(const std::string& text, size_t length, uint16 style, bool utf8) const 
+{
+	int width = 0;
+	boost::tokenizer<style_separator> tok(text.begin(), text.begin() + length);
+	for (boost::tokenizer<style_separator>::iterator it = tok.begin(); it != tok.end(); ++it)
+	{
+		if (is_style_token(*it))
+		{
+			update_style(style, *it);
+		}
+		else
+		{
+			width += _text_width(it->c_str(), it->length(), style, utf8);
+		}
+	}
+
+	if (style & styleShadow)
+		return width + 1;
+	else
+		return width;
+}
+
+int font_info::trunc_styled_text(const std::string& text, int max_width, uint16 style) const
+{
+	if (style & styleShadow)
+	{
+		max_width -= 1;
+		style &= (~styleShadow);
+	}
+
+	int length = 0;
+	boost::tokenizer<style_separator> tok(text);
+	for (boost::tokenizer<style_separator>::iterator it = tok.begin(); it != tok.end(); ++it)
+	{
+		if (is_style_token(*it))
+		{
+			update_style(style, *it);
+			length += 2;
+		}
+		else
+		{
+			int additional_length = _trunc_text(it->c_str(), max_width, style);
+			max_width -= _text_width(it->c_str(), additional_length, style);
+			length += additional_length;
+			if (additional_length < it->size())
+				return length;
+		}
+	}
+
+	return length;
+}
+
+std::string font_info::style_at(const std::string& text, std::string::const_iterator pos, uint16 style) const
+{
+	boost::tokenizer<style_separator> tok(text.begin(), pos);
+	for (boost::tokenizer<style_separator>::iterator it = tok.begin(); it != tok.end(); ++it)
+	{
+		if (is_style_token(*it))
+			update_style(style, *it);
+	}
+	
+	if (style & styleBold)
+		return string("|b");
+	else if (style & styleItalic)
+		return string("|i");
+	else
+		return string();
+}
+
+int font_info::draw_text(SDL_Surface *s, const char *text, size_t length, int x, int y, uint32 pixel, uint16 style, bool utf8) const
+{
+	if (style & styleShadow)
+	{
+		_draw_text(s, text, length, x + 1, y + 1, SDL_MapRGB(s->format, 0x0, 0x0, 0x0), style, utf8);
+	}
+
+	_draw_text(s, text, length, x, y, pixel, style, utf8);
+}
+
+int font_info::trunc_text(const char *text, int max_width, uint16 style) const
+{
+	if (style & styleShadow)
+		return _trunc_text(text, max_width - 1, style);
+	else
+		return _trunc_text(text, max_width, style);
+}

@@ -52,8 +52,12 @@ Jan 14, 2001 (Loren Petrich):
 #  include <GL/gl.h>
 # endif
 #endif
-
-
+#include <boost/tr1/unordered_map.hpp>
+struct screen_rectangle;
+struct tex_cache {
+	SDL_Surface* sur;
+	int width;
+};
 struct screen_rectangle;
 
 class FontSpecifier
@@ -72,6 +76,7 @@ public:
 	char NameSet[NameSetLen];
 	short Size;
 	short Style;
+	short AdjustLineHeight;
 	
 	// For SDL font support: a font filename
 	char File[NameSetLen];
@@ -80,16 +85,13 @@ public:
 	short Height;			// How tall is it?
 	short LineSpacing;		// From same positions in each line
 	short Ascent, Descent, Leading;
-#if 0
 	short Widths[256];
-#else
-	short Widths(uint16 t) const { return Info->width_table[t]; }
-#endif
+	
 	// MacOS- and SDL-specific stuff
 #if defined(mac)
 	short ID;
 #elif defined(SDL)
-	sdl_font_info *Info;
+	font_info *Info;
 #endif
 	
 	// Initialize: call this before calling anything else;
@@ -110,11 +112,7 @@ public:
 	int TextWidth(const char *Text);
 
 	// Get width of one character
-#if 0
 	int CharWidth(char c) const { return Widths[static_cast<int>(c)]; }
-#else
-	int CharWidth(uint16 c) const { return Widths(static_cast<const int>(c)); }
-#endif
 	
 #ifdef HAVE_OPENGL	
 	// Reset the OpenGL fonts; its arg indicates whether this is for starting an OpenGL session
@@ -156,15 +154,11 @@ public:
 #ifdef HAVE_OPENGL
 	// Stuff for OpenGL font rendering: the font texture and a display list for font rendering;
 	// if OGL_Texture is NULL, then there is no OpenGL font texture to render.
-	uint8 *OGL_Texture;
+	static boost::unordered_map<std::string, tex_cache> texTable;
 	short TxtrWidth, TxtrHeight;
 	int GetTxtrSize() {return int(TxtrWidth)*int(TxtrHeight);}
 	GLuint TxtrID;
-#if 0
 	uint32 DispList;
-#else
-	void DrawGryphGLJ(const char*);
-#endif
 #endif
 };
 

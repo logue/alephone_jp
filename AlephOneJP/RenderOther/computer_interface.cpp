@@ -288,6 +288,9 @@ struct terminal_text_t {	// Object describing one terminal
 
 static vector<terminal_text_t> map_terminal_text;
 
+// ghs: for Lua
+short number_of_terminal_texts() { return map_terminal_text.size(); }
+
 /* internal global structure */
 static struct player_terminal_data *player_terminals;
 
@@ -298,7 +301,7 @@ extern TextSpec *_get_font_spec(short font_index);
 #if defined(mac)
 extern void UseInterfaceFont(short font_index);
 #elif defined(SDL)
-extern sdl_font_info *GetInterfaceFont(short font_index);
+extern font_info *GetInterfaceFont(short font_index);
 extern uint16 GetInterfaceStyle(short font_index);
 #endif
 
@@ -438,88 +441,41 @@ static void	set_text_face(struct text_face_data *text_face)
 	current_pixel = SDL_MapRGB(/*world_pixels*/draw_surface->format, color.r, color.g, color.b);
 }
 
-#if 0
+
+static int isJChar(unsigned char text) {
+	return ( text >= 0x81 && text <= 0xa0 || text >= 0xe0 );
+}
+
+#include "converter.h"
+extern "C" uint16 sjisChar(char* in, int* step);
 static bool calculate_line(char *base_text, short width, short start_index, short text_end_index, short *end_index)
 {
 	bool done = false;
-
 	if (base_text[start_index]) {
 		int index = start_index, running_width = 0;
 		
 		// terminal_font no longer a global, since it may change
-		sdl_font_info *terminal_font = GetInterfaceFont(_computer_interface_font);
-
-		while (running_width < width && base_text[index] && base_text[index] != MAC_LINE_END) {
-			running_width += char_width(base_text[index], terminal_font, current_style);
-			index++;
+		font_info *terminal_font = GetInterfaceFont(_computer_interface_font);
+		uint16 c;
+		int index_k = start_index;
+		while (running_width < width && (c = sjisChar(&base_text[index],&index_k)) && c != MAC_LINE_END) {
+			char* utf8t = sjis2utf8(base_text + start_index,index_k - start_index);
+			int X;
+			TTF_SizeUTF8(((ttf_font_info*)terminal_font)->font,utf8t,&running_width,&X);
+			index = index_k;
 		}
 		
 		// Now go backwards, looking for whitespace to split on
-		if (base_text[index] == MAC_LINE_END)
-			index++;
-		else if (base_text[index]) {
-			int break_point = index;
-
-			while (break_point>start_index) {
-				if (base_text[break_point] == ' ')
-					break; 	// Non printing
-				break_point--;	// this needs to be in front of the test
-			}
-			
-			if (break_point != start_index)
-				index = break_point+1;	// Space at the end of the line
-		}
-		
-		*end_index= index;
+		if( c == MAC_LINE_END )
+			*end_index= index_k;
+		else
+			*end_index = index;
 	} else
 		done = true;
 	
 	return done;
 }
-# else
-static inline bool IsTwoByte(unsigned char t ) { return (t>0x81 && t<0xa0) || (t>0xe0 && t<0xfd) ; } 
 
-static bool calculate_line(char *base_text, short width, short start_index, short text_end_index, short *end_index)
-{
-	bool done = false;
-	
-	if (base_text[start_index]) {
-		int index = start_index, running_width = 0;
-		
-		// terminal_font no longer a global, since it may change
-		sdl_font_info *terminal_font = GetInterfaceFont(_computer_interface_font);
-		int i = 0;
-		while (running_width + 7< width && base_text[index] && base_text[index] != MAC_LINE_END) {
-			running_width += char_width(base_text[index], terminal_font, current_style);
-			if(IsTwoByte(base_text[++index]))
-				running_width += char_width(base_text[++index],terminal_font, current_style);			
-		}
-		// Now go backwards, looking for whitespace to split on
-		if (base_text[index] == MAC_LINE_END)
-			index++;
-		else if (base_text[index]) {
-			int break_point = index;
-			for (int i = start_index; i < break_point;i++) {
-				if (base_text[i] == ' ')
-					index = i;
-				if (IsTwoByte(base_text[i])) {
-					index= i+2;
-					i++;
-				}
-			}
-			
-			if (index != start_index && base_text[index] == ' ') {
-				index++;	// Space at the end of the line
-			}
-		}
-		
-		*end_index= index;
-	} else
-		done = true;
-	
-	return done;
-}
-#endif
 /* ------------ code begins */
 
 player_terminal_data *get_player_terminal_data(
@@ -698,6 +654,8 @@ void _render_computer_interface(
 	// assert(terminal_data->state != _no_terminal_state);
 	if(TERMINAL_IS_DIRTY(terminal_data))
 	{
+		SET_TERMINAL_IS_DIRTY(terminal_data, false);
+
 		terminal_text_t *terminal_text;
 		struct terminal_groupings *current_group;
 		Rect bounds;
@@ -776,6 +734,7 @@ void _render_computer_interface(
 			
 					case _static_group:
 						fill_terminal_with_static(&bounds);
+						SET_TERMINAL_IS_DIRTY(terminal_data, true);
 						break;
 						
 					case _camera_group:
@@ -802,8 +761,6 @@ void _render_computer_interface(
 		// Disable clipping
 		set_drawing_clip_rectangle(SHRT_MIN, SHRT_MIN, SHRT_MAX, SHRT_MAX);
 #endif
-		
-		SET_TERMINAL_IS_DIRTY(terminal_data, false);
 	}
 }
 
@@ -898,7 +855,7 @@ static void draw_logon_text(
 		SetFont(&old_font);
 	}
 #else
-	sdl_font_info *terminal_font = GetInterfaceFont(_computer_interface_font);
+	font_info *terminal_font = GetInterfaceFont(_computer_interface_font);
 	uint16 terminal_style = GetInterfaceStyle(_computer_interface_font);
 	width = text_width(base_text + current_group->start_index, current_group->length, terminal_font, terminal_style);
 	// width = text_width(base_text + current_group->start_index, current_group->length, terminal_font, _get_font_spec(_computer_interface_font)->style);
@@ -1120,7 +1077,7 @@ static void draw_line(
 #ifdef mac
 	MoveTo(bounds->left, bounds->top+line_height*(line_number+FUDGE_FACTOR));
 #else
-	sdl_font_info *terminal_font = GetInterfaceFont(_computer_interface_font);
+	font_info *terminal_font = GetInterfaceFont(_computer_interface_font);
 	int xpos = bounds->left;
 #endif
 
@@ -1239,6 +1196,7 @@ static void display_picture_with_text(
 
 #ifdef SDL
 extern int get_pict_header_width(LoadedResource &);
+extern int get_pict_header_height(LoadedResource &rsrc);
 #endif
 
 static void display_picture(
@@ -1252,7 +1210,7 @@ static void display_picture(
 #else
 	SDL_Surface *s = NULL;
 #endif
-
+	
 	if (get_picture_resource_from_scenario(picture_id, PictRsrc))
 	{
 #ifdef mac
@@ -1265,35 +1223,38 @@ static void display_picture(
 #endif
 		Rect bounds;
 		Rect screen_bounds;
-
+		
 #if defined(mac)
 		bounds= (*picture)->picFrame;
 #elif defined(SDL)
 		bounds.left = bounds.top = 0;
 		bounds.right = s->w;
 		bounds.bottom = s->h;
-
-		int pict_header_width = get_pict_header_width(PictRsrc);
 		bool cinemascopeHack = false;
+		int pict_header_width = get_pict_header_width(PictRsrc);
 		if (bounds.right != pict_header_width)
 		{
-			cinemascopeHack = true;
 			bounds.right = pict_header_width;
+			bounds.bottom = get_pict_header_height(PictRsrc);
+			if( pict_header_width == 307 ) {
+				cinemascopeHack = true;
+			} 
 		}
+		
 #endif
 		OffsetRect(&bounds, -bounds.left, -bounds.top);
 		calculate_bounds_for_object(frame, flags, &screen_bounds, &bounds);
-
+		
 		if(RECTANGLE_WIDTH(&bounds)<=RECTANGLE_WIDTH(&screen_bounds) && 
-			RECTANGLE_HEIGHT(&bounds)<=RECTANGLE_HEIGHT(&screen_bounds))
+		   RECTANGLE_HEIGHT(&bounds)<=RECTANGLE_HEIGHT(&screen_bounds))
 		{
 			/* It fits-> center it. */
 			OffsetRect(&bounds, screen_bounds.left+(RECTANGLE_WIDTH(&screen_bounds)-RECTANGLE_WIDTH(&bounds))/2,
-				screen_bounds.top+(RECTANGLE_HEIGHT(&screen_bounds)-RECTANGLE_HEIGHT(&bounds))/2);
+					   screen_bounds.top+(RECTANGLE_HEIGHT(&screen_bounds)-RECTANGLE_HEIGHT(&bounds))/2);
 		} else {
 			/* Doesn't fit.  Make it, but preserve the aspect ratio like a good little boy */
 			if(RECTANGLE_HEIGHT(&bounds)-RECTANGLE_HEIGHT(&screen_bounds)>=
-				RECTANGLE_WIDTH(&bounds)-RECTANGLE_WIDTH(&screen_bounds))
+			   RECTANGLE_WIDTH(&bounds)-RECTANGLE_WIDTH(&screen_bounds))
 			{
 				short adjusted_width;
 				
@@ -1308,19 +1269,20 @@ static void display_picture(
 				adjusted_height= RECTANGLE_WIDTH(&screen_bounds)*RECTANGLE_HEIGHT(&bounds)/RECTANGLE_WIDTH(&bounds);
 				bounds= screen_bounds;
 				InsetRect(&bounds, 0, (RECTANGLE_HEIGHT(&screen_bounds)-adjusted_height)/2);
+				
 				// dprintf("Warning: Not large enough for pict: %d (width);g", picture_id);
 			}
 		}
-
-//		warn(HGetState((Handle) picture) & 0x40); // assert it is purgable.
-
+		
+		//		warn(HGetState((Handle) picture) & 0x40); // assert it is purgable.
+		
 #if defined(mac)
 		HLock((Handle) picture);
 		DrawPicture(picture, &bounds);
 		HUnlock((Handle) picture);
 #elif defined(SDL)
 		SDL_Rect r = {bounds.left, bounds.top, bounds.right - bounds.left, bounds.bottom - bounds.top};
-		if ((s->w == r.w && s->h == r.h) || cinemascopeHack)
+		if ((s->w == r.w && s->h == r.h) || (cinemascopeHack ) )
 			SDL_BlitSurface(s, NULL, /*world_pixels*/draw_surface, &r);
 		else {
 			// Rescale picture
@@ -1337,30 +1299,30 @@ static void display_picture(
 	} else {
 		Rect bounds;
 		char format_string[128];
-
+		
 		calculate_bounds_for_object(frame, flags, &bounds, NULL);
-	
+		
 #if defined(mac)
 		EraseRect(&bounds);
 #elif defined(SDL)
 		SDL_Rect r = {bounds.left, bounds.top, bounds.right - bounds.left, bounds.bottom - bounds.top};
 		SDL_FillRect(/*world_pixels*/draw_surface, &r, SDL_MapRGB(/*world_pixels*/draw_surface->format, 0, 0, 0));
 #endif
-
+		
 		getcstr(format_string, strERRORS, pictureNotFound);
 		sprintf(temporary, format_string, picture_id);
-
+		
 #if defined(mac)
 		// LP change: setting the font to the OS font
 		TextFont(systemFont);
 		short width= TextWidth(temporary, 0, strlen(temporary));
-
+		
 		/* Center the error message.. */
 		MoveTo(bounds.left+(RECTANGLE_WIDTH(&bounds)-width)/2, 
-			bounds.top+RECTANGLE_HEIGHT(&bounds)/2);
+			   bounds.top+RECTANGLE_HEIGHT(&bounds)/2);
 		DrawText(temporary, 0, strlen(temporary));
 #elif defined(SDL)
-		const sdl_font_info *font = GetInterfaceFont(_computer_interface_title_font);
+		const font_info *font = GetInterfaceFont(_computer_interface_title_font);
 		int width = text_width(temporary, font, styleNormal);
 		draw_text(/*world_pixels*/draw_surface, temporary,
 		          bounds.left + (RECTANGLE_WIDTH(&bounds) - width) / 2,
@@ -1371,11 +1333,52 @@ static void display_picture(
 	}
 }
 
-/* Not completed. Remember 16/24 bit & valkyrie */
+template <typename T>
+static inline T randomize_pixel(uint16 pixel)
+{
+	return static_cast<T>(pixel);
+}
+
+template <>
+inline uint32 randomize_pixel(uint16 pixel)
+{
+	return (uint32)pixel^(((uint32)pixel)<<8);
+}
+
+template <typename T>
+static inline void randomize_line(T* start, uint32 count)
+{
+	static uint16 random_seed = 6906;
+	for (int i = 0; i < count; ++i)
+	{
+		*start++ = randomize_pixel<T>(random_seed);
+		if (random_seed&1) random_seed = (random_seed>>1)^0xb400;
+		else random_seed = random_seed >> 1;
+	}
+}
+
 static void fill_terminal_with_static(
 	Rect *bounds)
 {
-	(void) (bounds);
+	for (int y = bounds->top; y < bounds->bottom; ++y)
+	{
+		int bpp = draw_surface->format->BytesPerPixel;
+		int width = bounds->right - bounds->left;
+
+		uint8* p = (uint8*)draw_surface->pixels + y * draw_surface->pitch + bounds->left * bpp;
+		if (bpp == 1)
+		{
+			randomize_line<uint8>(p, width);
+		}
+		else if (bpp == 2)
+		{
+			randomize_line<uint16>(reinterpret_cast<uint16*>(p), width);
+		}
+		else if (bpp == 4)
+		{
+			randomize_line<uint32>(reinterpret_cast<uint32*>(p), width);
+		}
+	}
 }
 
 #ifndef PREPROCESSING_CODE
@@ -1892,7 +1895,7 @@ static void present_checkpoint_text(
 			bounds.top+RECTANGLE_HEIGHT(&bounds)/2);
 		DrawText(temporary, 0, strlen(temporary));
 #elif defined(SDL)
-		const sdl_font_info *font = GetInterfaceFont(_computer_interface_title_font);
+		const font_info *font = GetInterfaceFont(_computer_interface_title_font);
 		// const sdl_font_info *font = load_font(*_get_font_spec(_computer_interface_title_font));
 		int width = text_width(temporary, font, styleNormal);
 		draw_text(/*world_pixels*/draw_surface, temporary,
