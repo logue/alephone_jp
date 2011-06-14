@@ -1,3 +1,0 @@
-low
-average
-high

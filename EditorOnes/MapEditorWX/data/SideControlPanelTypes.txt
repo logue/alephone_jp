@@ -1,9 +1,0 @@
-Oxygen refuel
-x1 Shield refuel
-x2 Shield refuel
-x3 Shield refuel
-Light switch
-Platform switch
-Tag switch
-Pattern buffer
-Computer terminal

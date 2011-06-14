@@ -1,4 +1,0 @@
-Player
-NearbyMonster
-Goal
-Random

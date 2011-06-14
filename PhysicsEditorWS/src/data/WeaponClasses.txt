@@ -1,5 +1,0 @@
-melee
-normal
-dual function
-twofisted pistol
-multipurpose

@@ -1,8 +1,0 @@
-arrow.bmp
-fill.bmp
-hand.bmp
-line.bmp
-magnify.BMP
-skull.bmp
-text.bmp
-triangle.bmp
