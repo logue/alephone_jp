@@ -632,6 +632,11 @@ bool FileSpecifier::Delete()
 	return err == 0;
 }
 
+bool FileSpecifier::Rename(const FileSpecifier& Destination)
+{
+	return rename(GetPath(), Destination.GetPath()) == 0;
+}
+
 // Set to local (per-user) data directory
 void FileSpecifier::SetToLocalDataDir()
 {
@@ -654,11 +659,6 @@ void FileSpecifier::SetToSavedGamesDir()
 void FileSpecifier::SetToRecordingsDir()
 {
 	name = recordings_dir.name;
-}
-
-void FileSpecifier::SetToFirstDataDir()
-{
-  name = data_search_path[0].name;
 }
 
 static string local_path_separators(const char *path)
@@ -1147,8 +1147,6 @@ public:
 			dir.SetToRecordingsDir();
 			break;
 		case _typecode_scenario:
-			dir.SetToFirstDataDir();
-			break;
 		case _typecode_netscript:
 		{
 			// Go to most recently-used directory

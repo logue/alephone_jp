@@ -1,5 +1,5 @@
 %define name AlephOne
-%define version 20110417
+%define version 20110626
 %define release 1
 
 Summary: 3D first-person shooter game

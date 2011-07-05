@@ -107,7 +107,7 @@ Feb 13, 2003 (Woody Zenfell):
     and the relevant code uses per-player settings, this won't be necessary.
     Try a mass-search for "player_behavior" to find the areas affected.
 */
-// r4412(2011/06/12)ベース
+// r4428ベース
 #include "cseries.h" // sorry ryan, nov. 4
 #include <string.h>
 #include <stdlib.h>
@@ -2811,7 +2811,7 @@ void show_movie(short index)
 	}
 
 	if (!File) return;
-
+	change_screen_mode(_screentype_chapter);
 	SDL_Surface *s = SDL_GetVideoSurface();
 	
 #if defined(__APPLE__) && defined(__MACH__)

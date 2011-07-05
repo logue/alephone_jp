@@ -50,45 +50,8 @@ public:
 // -----------------------------------------------------------------------------------------
 // <!-- STR# Resource: "Errors" -->
 static const char* sStringSetNumber128[] = {
-/*
-	"Sorry, Aleph One requires a 68040 processor or higher.",
-	"Sorry, Aleph One requires Color QuickDraw.",
-	"Sorry, Aleph One requires System Software 7.0 or higher.",
-	"Sorry, Aleph One requires at least 3000k of free RAM.",
-	"Sorry, Aleph One requires a 13ﾓ monitor (640x480) or larger which can be set to at least 256 colors or grays.",
-	"Please be sure the files 'Map', 'Shapes', 'Images' and 'Sounds' are correctly installed and try again.",
-	"Aleph One couldn't initialize the sound.",
-	"Aleph One has encountered a file system error.  Check to make sure you have enough disk space and that you are not trying to save to a locked volume.",
-	"This copy of Aleph One has been modified, perhaps by a virus.  Please re-install it from the original disks.",
-	"This beta copy of Aleph One has expired and is no longer functional. Call Bungie at (312) 563-6200 ext. 21 for more information.",
-	"Sorry, that key is already used to adjust the sound volume.",
-	"Sorry, that key is already used for zooming in the overhead map view.",
-	"Sorry, that key is already used for scrolling the inventory.",
-	"Sorry, that key is already used for a special game function.",
-	"Aleph One has used up all available RAM and cannot continue.  Trying giving it more memory, switching to a lower bit-depth or turning off sounds and try again.",
-	"Aleph One is about to load an external physics model.  This could result in erratic performance, inexplicable crashes, corrupted saved games, and inconsistent network games (just a warning).",
-	"Aleph One is using maps which were not created with Bungie tools.  This could result in poor performance, inexplicable crashes and corrupted saved games (proceed at your own risk).",
-	"A game related error occurred while attempting to read from your map or saved game file.",
-	"A system error occurred while attempting to read from your map or saved game file.",
-	"An error occurred while saving your game (maybe your hard drive is full, or you tried to save to a locked volume?)",
-	"That serial number is invalid.  Please try again.",
-	"Sorry, you can't start a network game with more than one copy of the same serial number.  Call 1-800-295-0060 to order more network serial numbers by fax.",
-	"Sorry, this copy of Aleph One has been serialized with a network-only serial number.  You cannot play the single-player game with a network-only serial number.",
-	"The map you are trying to load has been corrupted.  Please reinstall from a backup copy.",
-	"Checkpoint %d was not found!",
-	"Picture %d was not found!",
-	"This preview copy of Aleph One does not support networking.  A full demo will be available on-line or from Bungie shortly which includes networking (and a whole lot of other cool features).",
-	"The gathering computer has quit the game, leaving everyone stranded without the next level.  Perhaps you should tar and feather him.",
-	"Sorry, Aleph One was unable to gracefully exit from the network game.  As a result, your romp through the levels has been prematurely halted.",
-	"The scenario file that this saved game was from cannot be found.  When you switch levels you will revert to the default map.",
-	"Aleph One was unable to find the map that this film was recorded on, so the film cannot be replayed.",
-	"Sorry, Aleph One needs 6000k free to play in a networked game.  Give Aleph One more memory and try again.",
-	"There appears to be a script conflict.  Perhaps mml and netscript are having differences over who gets to control lua.  Don't be surprised if you get unexpected script behavior or out of sync.",
-	"This replay was created with a newer version of Aleph One and cannot be played with this version. Upgrade Aleph One and try again.",
-	"Sorry, the scroll wheel can only be used for switching weapons.",
-*/
-	"AlephOneには68040以上のプロセッサが必要です。",	"AlephOneには Color QuickDraw が必要です。",	"AlephOneには 漢字Talk 7.1 以降のシステムが必要です。",	"AlephOneには 3000k 以上の空きRAMが必要です。",	"AlephOneには13インチ以上(640x480)そして256色(またはグレー)が表示できるモニタが必要です。",	"Map, Shapes, Images, Sounds のファイルが Marathon アプリケーションと同じフォルダに入っているか確認してください。",	"システムメモリが少ないためサウンド用のメモリが割り当てられません(Marathonの割り当てメモリを減らしてください)。",	"AlephOneの実行中にファイルシステムエラーが発生しました。ディスク上の空要領とロックされていないか確認してください。",	"このAlephOneのコピーはウイルスなどによって変更されています。オリジナルのディスクから再度インストールしてください。",	"This beta copy of Marathon has expired and is no longer functional. Call Bungie at (312) 563-6200 ext. 21 for more information.",	"そのキーは既にボリューム調整に使われています。",	"そのキーは既に地図のズームに使われています。",	"そのキーは既にアイテムのスクロールに使われています。",	"そのキーは既にゲームの機能\に使われています。",	"AlephOneはこのマップをロードするためのメモリが足りません。メモリ量を増やしてもう一度実行してください。",	"AlephOneはこれから別の物理設定ファイルをロードします。そのため性能\が落ちたり、クラッシュしたり、保存ゲームファイルが悪化したり、ネットワークゲームが不安定になるおそれがあります。ご注意ください!",	"AlephOneは Bungie製以外の地図を使っています。そのため性能\が落ちたり、クラッシュしたり、保存ゲームファイルが悪化するおそれがあります。ご注意ください!",	"地図または保存ゲームファイルを読み込む際に致命的エラーが発生しました。",	"地図または保存ゲームファイルの読み込む際に致命的エラーが発生しました。",	"保存ゲームファイルの保存中にエラーが発生しました。ハードディスクが一杯か、ロックされているかもしれません。",	"シリアル番号が無効です。もう一度入力してください。",	"ネットワークゲームの際に同じシリアル番号を複数のマシンでご使用いただくことはできません。新たに製品をご購入いただく必要があります。詳しくは日本国内の販売代理店まで連絡してください。",	"このAlephOneのコピーはネットワーク専用のシリアル番号で登録されています。ネットワーク専用のシリアル番号では一人用のプレーはできません。",	"読み込もうとしている地図がこわれているぞ。バックアップコピーから再度インストールしよう。",	"チェックポイント %d は見つかりませんでした!",	"ピクチャー %d は見つかりませんでした!",	"このバージョンのAleph Oneはプレビュー版につき、ネットワークゲームをサポートしていません。Bungie社からは、まもなくネットワーク対応版が出ます。（この他多くのクールな特徴を持った）",	"プレーヤーを集めたプレーヤーが勝手にみんなをおいてゲームを終了してしまった。張本人を処罰した方がよいかも...。",	"すまん。AlephOneはネットワークゲームからの終了に失敗してしまった。その結果、このレベルでの君の努力は水の泡となってしまった。",	"この保存されたゲームのシナリオファイルが見つかりません。レベルを替えるとき、デフォルトの地図に戻ります。",	"この映画を記録した地図が見つかりません。映画は再生できません。",	"AlephOneをネットワーク上で遊ぶには 6000k 以上の空きRAMが必要です。メモリ量を増やしてもう一度実行してください。",	"スクリプト同士が競合を起こしているようです。MMLとネットスクリプトで誰をLuaでコントロールするか異なっていると思われます。予期しない動きや動機乱れが起こるかもしれません。",
-	"この通知は、新しいバージョンのAlephOne向けに作られており、プレイできない場合に表示されます。AlephOneをアップグレードしてください。",
+	"AlephOneには68040以上のプロセッサが必要です。",	"AlephOneには Color QuickDraw が必要です。",	"AlephOneには 漢字Talk 7.1 以降のシステムが必要です。",	"AlephOneには 3000k 以上の空きRAMが必要です。",	"AlephOneには13インチ以上(640x480)そして256色(またはグレー)が表\示できるモニタが必要です。",	"Map, Shapes, Images, Sounds のファイルが Marathon アプリケーションと同じフォルダに入っているか確認してください。",	"システムメモリが少ないためサウンド用のメモリが割り当てられません(Marathonの割り当てメモリを減らしてください)。",	"AlephOneの実行中にファイルシステムエラーが発生しました。ディスク上の空要領とロックされていないか確認してください。",	"このAlephOneのコピーはウイルスなどによって変更されています。オリジナルのディスクから再度インストールしてください。",	"This beta copy of Marathon has expired and is no longer functional. Call Bungie at (312) 563-6200 ext. 21 for more information.",	"そのキーは既にボリューム調整に使われています。",	"そのキーは既に地図のズームに使われています。",	"そのキーは既にアイテムのスクロールに使われています。",	"そのキーは既にゲームの機能\に使われています。",	"AlephOneはこのマップをロードするためのメモリが足りません。メモリ量を増やしてもう一度実行してください。",	"AlephOneはこれから別の物理設定ファイルをロードします。そのため性能\が落ちたり、クラッシュしたり、保存ゲームファイルが悪化したり、ネットワークゲームが不安定になるおそれがあります。ご注意ください!",	"AlephOneは Bungie製以外の地図を使っています。そのため性能\が落ちたり、クラッシュしたり、保存ゲームファイルが悪化するおそれがあります。ご注意ください!",	"地図または保存ゲームファイルを読み込む際に致命的エラーが発生しました。",	"セーブファイルからマップを読み込むときにシステムエラーが発生しました。",	"保存ゲームファイルの保存中にエラーが発生しました。ハードディスクが一杯か、ロックされているかもしれません。",	"シリアル番号が無効です。もう一度入力してください。",	"ネットワークゲームの際に同じシリアル番号を複数のマシンでご使用いただくことはできません。新たに製品をご購入いただく必要があります。詳しくは日本国内の販売代理店まで連絡してください。",	"このAlephOneのコピーはネットワーク専用のシリアル番号で登録されています。ネットワーク専用のシリアル番号では一人用のプレーはできません。",	"読み込もうとしている地図がこわれているぞ。バックアップコピーから再度インストールしよう。",	"チェックポイント %d は見つかりませんでした!",	"ピクチャー %d は見つかりませんでした!",	"このバージョンのAleph Oneはプレビュー版につき、ネットワークゲームをサポートしていません。Bungie社からは、まもなくネットワーク対応版が出ます。（この他多くのクールな特徴を持った）",	"プレーヤーを集めたプレーヤーが勝手にみんなをおいてゲームを終了してしまった。張本人を処罰した方がよいかも...。",	"すまん。AlephOneはネットワークゲームからの終了に失敗してしまった。その結果、このレベルでの君の努力は水の泡となってしまった。",	"この保存されたゲームのシナリオファイルが見つかりません。レベルを替えるとき、デフォルトの地図に戻ります。",	"この映画を記録した地図が見つかりません。映画は再生できません。",	"AlephOneをネットワーク上で遊ぶには 6000k 以上の空きRAMが必要です。メモリ量を増やしてもう一度実行してください。",	"スクリプト同士が競合を起こしているようです。MMLとネットスクリプトで誰をLuaでコントロールするかが異なっていると思われます。予\期しない動きや同期乱れが起こるかもしれません。",
+	"この通知は、新しいバージョンのAlephOne向けに作られており、プレイできない場合に表\示されます。AlephOneをアップグレードしてください。",
 	"スクロールホイールは、武器の切り替えで使用されています。",
 };
 
@@ -112,27 +75,12 @@ static const char* sStringSetNumber129[] = {
 
 // STR# Resource: "Top-Level Interface Items"
 static const char* sStringSetNumber130[] = {
-/*
-	"BEGIN GAME",
-    "OPEN SAVED GAME",
-    "",
-    "REPLAY LAST GAME",
-    "REPLAY SAVED RECORDING",
-    "SAVE LAST RECORDING",
-    "",
-    "GATHER NETWORK GAME",
-    "JOIN NETWORK GAME",
-    "",
-    "PREFERENCES",
-    "START DEMO",
-    "QUIT",
-*/
 	"新規ゲーム",
 	"既存のゲームを開く",
 	"",
 	"最後のゲームを再生",
-	"映画を開く",
-	"映画の保存",
+	"フィルムを開く",
+	"フィルムの保存",
 	"",
 	"ネットゲーム集合",
 	"ネットゲーム参加",
@@ -152,35 +100,33 @@ static const char* sStringSetNumber131[] = {
 
 // STR# Resource: "Network Errors"
 static const char* sStringSetNumber132[] = {
-//	"Sorry, that player could not be found on the network.  He may have cancelled his Join Game dialog.",
 	"そのプレーヤーはネットワーク上で見つかりません。ゲーム参加のダイアログからキャンセルしたかもしれません。",
 
-//	"One or more of the players in the game could not be found to receive the "
-//	"map.  The game has been canceled.",
-	"いくつかのプレーヤーがネットワーク上で見つからないため、ゲームが中断されました。",
+	"いくつかのプレーヤーがネットワーク上で見つからないため、"
+	"ゲームが中断されました。",
 
-	"The gatherering computer is not responding."
-	" It may be behind a firewall, or you may have mistyped the address.",
+	"ホストをしているコンピュータからの応答がありません。"
+	"ファイヤーウォールが適切に設定されているか、アドレスが間違っていないかを確認して下さい。",
 
 	"Sorry, the gathering computer has cancelled the game (you should all gang up on him next game).",
 
 	"The map was not received in its entirety, so the game has been canceled.",
 
-	"The gathering computer never sent the map, so the game has been cancelled.  Maybe one of the other machines in the game went down.",
-	"Aleph One was unable to start the game.  Maybe one of the other machines in the game went down.",
-	"An error ocurred while trying to join a game (an incompatible version of Aleph One may have tried to gather you).  Try again.",
-	"Sorry, a network error ocurred and Aleph One is unable to continue.",
+	"呼び出し側のコンピュータが地図を送らなかったため、ゲームがキャンセルされました。他のコンピュータの接続が切れたかもしれません。",
+	"AlephOneは、ゲームを開始できません。他のコンピュータの接続が切れたかもしれません。",
+	"ゲームの参加中にエラーが発生しました(アプリケーションのバージョンが違うかもしれません)。もう一度試してみてください。",
+	"ネットワークエラーのためAlephOneは続行できません。",
 
-	"An error occurred while trying to join a game (the gatherer is using an incompatible version).",
+	"バージョンが異なるためそのプレーヤーはゲームに参加できませんでした。",
 
-	"The player you just added is using an older version of Aleph One that does not support some advanced features required by the game you're trying to gather.  You will not be allowed to start the game.",
-	"The player you just attempted to add is using a version of Aleph One that does not support some advanced features required by the game you're trying to gather.",
-	"Aleph One was unable to locate the Map file this level came from.  Some terminals may not display properly, and saving this game on this computer is not recommended.",
-	"The connection to the gatherer was lost.",
+	"このプレイヤーは、現在募集をかけているゲームのいくつかの拡張機能\が使用できない古いバージョンのAlephOneを使用しているようです。このため、このゲームを開始することができません。",
+	"現在募集をかけているゲームに、拡張機能\に対応していないAlephOneを使っているプレイヤーが参加しようとしました。",
+	"AlephOneは、このレベルのマップファイルを見つけることができませんでした。いくつかのターミナルが正常に表\示されないかもしれません。また、このコンピューター上でゲームを保存することは推奨できません。",
+	"募集をかけていた人がいなくなりました。",
 
-	"Unable to look up the gatherer. Maybe you typed the address in wrong.",
+	"募集をかけている人を見つけることができません。アドレスが正しく入力されているかを確認ください。",
 
-	"An error occurred receiving the map from the server. Game over.",
+	"サーバーからマップを送るときにエラーが発生しました。ゲーム終了します。",
 
 	"The gatherer is using the star protocol, but your configuration is set to ring. You will not appear in the list of available players.",
 
@@ -192,7 +138,7 @@ static const char* sStringSetNumber132[] = {
 
 	"Your game could not be advertised on the Internet.  Please distribute your public IP address by other means or try again later.",
 
-	"Aleph One failed to configure the firewall/router. You may be unable to gather."
+	"Aleph Oneは、ファイヤーウォールやルーターの設定を変更することができませんでした。プレイヤーを募集することができません。"
 	
 };
 
@@ -330,9 +276,6 @@ static const char* sStringSetNumber133[] = {
 
 // STR# Resource: "Preferences Advice"
 static const char* sStringSetNumber134[] = {
-//    "Be sure your external speakers or headphones are connected properly, and that you have enabled stereo output from the Sound Control Panel.",
-//    "Be sure that your Cybermaxx helmet is properly hooked up to the serial port and turned on.",
-//    "Please check to be sure you have the file ﾒQuickTime[TM] Musical Instrumentsﾓ in your ﾒExtensionsﾓ folder, because Aleph One's background music will sound really, really stupid without it.",
 	"外部スピーカー又はヘッドフォンが接続され、サウンドのコントロールパネルでステレオ出力がオンになっていることを確認してください。",	"Cybermaxx ヘルメットがシリアルポートに接続され、オンになっていることを確認してください。",	"機能\拡張フォルダに QuickTime Musical Instruments ファイルが入っていることを確認してくさい。入っていないとBGMはすごくバカらしく聞こえるぞ..."
 };
 
@@ -358,9 +301,6 @@ static const char* sStringSetNumber135[] = {
 
 // STR# Resource: "Join Dialog Messages"
 static const char* sStringSetNumber136[] = {
-//    "Click 'Join' to wait for an invitation into a network game of Aleph One.",
-//    "Now waiting to be gathered into a network game by a server.  Click 'Cancel' to give up.",
-//    "You have been accepted into a game.  Now waiting for the server to add the remaining playersﾉ ",
 	"「参加」をクリックするとネットワークゲームに参加できます。",
 	"サーバーからネットワークゲームに呼び出されるのを待っています。「キャンセル」をクリックすると中断します。",
 	"ネットワークゲームに参加しました。サーバーは他のプレーヤーを集めています..."
@@ -368,18 +308,6 @@ static const char* sStringSetNumber136[] = {
 
 // STR# Resource: "Weapon Names"
 static const char* sStringSetNumber137[] = {
-/*
-	"FISTS",
-    ".44 MAGNUM MEGA CLASS A1",
-    "ZEUS-CLASS FUSION PISTOL",
-    "MA-75B ASSAULT RIFLE/ GRENADE LAUNCHER",
-    "SPNKR-X18 SSM LAUNCHER",
-    "TOZT-7 BACKPACK NAPALM UNIT",
-    "UNKNOWN WEAPON CLASS system error 0xfded",
-    "WSTE-M COMBAT SHOTGUN",
-    "(somehow related to time of applicability)",
-    "KKV-7 10MM FLECHETTE SMG",
-*/
 	"拳骨",
 	".44 マグナム・メガ級 A1",
 	"ゼウス級核融合ピストル",
@@ -394,18 +322,11 @@ static const char* sStringSetNumber137[] = {
 
 // STR# Resource: "file search path"
 static const char* sStringSetNumber138[] = {
-    "Marathon Trilogy:Marathon Infinity ﾄ:Marathon Infinity:",
+    "Marathon Trilogy:Marathon Infinity:Marathon Infinity:",
 };
 
 // STR# Resource: "Preferences Groupings"
 static const char* sStringSetNumber139[] = {
-/*
-	"Graphics",
-    "Player",
-    "Sound",
-    "Controls",
-    "Environment",
-*/
 	"グラフィック",
 	"プレイヤー",
 	"サウンド",
@@ -415,20 +336,6 @@ static const char* sStringSetNumber139[] = {
 
 // STR# Resource: "Postgame network game stats"
 static const char* sStringSetNumber140[] = {
-/*
-	"%d flags",
-    "%d:%02d",
-    "%d points",
-    "Team",
-    "Time With Ball",
-    "Flags Captured",
-    "Time 'It'",
-    "Goals",
-    "Time On Hill",
-    "Time On Hill",
-    "Points",
-    "Time",
-*/
 	"%d 旗",
 	"%d:%02d",
 	"%d 点",
@@ -445,18 +352,6 @@ static const char* sStringSetNumber140[] = {
 
 // STR# Resource: "Net Game Setup"
 static const char* sStringSetNumber141[] = {
-/*
-	"Kill Limit",
-    "kills",
-    "Capture Limit",
-    "flags",
-    "Point Limit",
-    "points",
-    "Time On Hill:",
-    "minutes",
-    "Points",
-    "Time",
-*/
 	"殺傷制限",
 	"殺傷",
 	"捕獲制限",
@@ -471,18 +366,6 @@ static const char* sStringSetNumber141[] = {
 
 // STR# Resource: "New Join Dialog Messages"
 static const char* sStringSetNumber142[] = {
-/*
-	"You have been accepted into a game of '%s'.  Now waiting for the server to add the remaining players...",
-    "Every Man For Himself",
-    "You have been accepted into a cooperative game.  Now waiting for the server to add the remaining players...",
-    "Capture the Flag",
-    "King of the Hill",
-    "Kill the Man With the Ball",
-    "Defense",
-    "Rugby",
-    "Tag",
-    "You have been accepted into a custom game. Now waiting for the server to add the remaining players...",
-*/
 	"君は「%s」ゲームに受け入れられました。サーバーが残りのプレーヤーを追加するまで少々おまちください…",
 	"個人対戦"
 	"君は「共同対戦」ゲームに受け入れられました。サーバーが残りのプレーヤーを追加するまで少々おまちください…",
@@ -497,19 +380,6 @@ static const char* sStringSetNumber142[] = {
 
 // STR# Resource: "Progress strings for networking"
 static const char* sStringSetNumber143[] = {
-/*
-	"Sending map to remote player.",
-    "Sending map to remote players.",
-    "Receiving map from server.",
-    "Waiting for server to send map.",
-    "Sending environment information to the other player.",
-    "Sending environment information to the other players.",
-    "Receiving environment information from server.",
-    "Loading...",
-    "Attempting to open router ports...",
-    "Closing router ports...",
-    "Checking for updates..."
-*/
 	"プレイヤーへ地図を転送中です。",
 	"プレイヤーへ地図を転送中です。",
 	"サーバーから地図を転送しています。",
@@ -547,13 +417,6 @@ BUILD_STRINGSET(143, sStringSetNumber143);
 #include    "network_dialogs.h"  // for stringset ID's
 
 static const char*    sDifficultyLevelsStrings[] = {
-/*
-	"Kindergarten",
-    "Easy",
-    "Normal",
-    "Major Damage",
-    "Total Carnage"
-*/
 	"ちびっ子",
 	"簡単",
 	"普通",
@@ -562,16 +425,6 @@ static const char*    sDifficultyLevelsStrings[] = {
 };
 
 static const char*    sNetworkGameTypesStrings[] = {
-/*
-	"Every Man for Himself",
-    "Cooperative Play",
-    "Capture the Flag",
-    "King of the Hill",
-    "Kill the Man With the Ball",
-    "Rugby",
-    "Tag",
-    "Netscript",
-*/
 	"個人対戦",
 	"チームプレイ",
 	"旗取り",
@@ -584,21 +437,12 @@ static const char*    sNetworkGameTypesStrings[] = {
 
 static const char*    sEndConditionTypeStrings[] = {
 //    "No Limit (Alt+Q to quit)",
-/*
-	"Unlimited",
-    "Time Limit",
-    "Score Limit",
-*/
 	"無制限",
 	"時間制限",
 	"スコア上限"
 };
 
 static const char*	sSingleOrNetworkStrings[] = {
-/*
-	"Single-player game",
-    "Network game"
-*/
 	"ソ\ロでゲーム",
 	"ネットワークでゲーム"
 };
@@ -614,98 +458,98 @@ BUILD_STRINGSET(kSingleOrNetworkStringSetID,	sSingleOrNetworkStrings);
 // -----------------------------------------------------------------------------------------
 // STR# Resource: "Item names"
 static const char* sStringSetNumber150[] = {
-    "FISTS",
-    ".44 MAGNUM MEGA CLASS",
-    ".44 MAGNUM MEGA CLASS",
-    ".44 CLIP (x8)",
-    ".44 CLIPS (x8)",
-    "ZEUS-CLASS FUSION PISTOL",
-    "FUSION BATTERY",
-    "FUSION BATTERIES",
-    "MA-75B ASSAULT RIFLE",
-    "MA-75B CLIP (x52)",
-    "MA-75B CLIPS (x52)",
-    "MA-75B GRENADES (x7)",
-    "MA-75B GRENADES (x7)",
-    "SPNKR-X18 SSM LAUNCHER",
-    "SSM MISSILE (x2)",
-    "SSM MISSILES (x2)",
-    "ALIEN WEAPON",
-    "SHOTGUN SHELL (x2)",
-    "SHOTGUN SHELLS (x2)",
-    "TOZT-7 NAPALM UNIT",
-    "NAPALM CANISTER",
-    "NAPALM CANISTERS",
-    "POWERPC 620 CHIP",
-    "POWERPC 620 CHIPS",
-    "ALIEN ENERGY CONVERTER",
-    "WAVE MOTION CANNON",
-    "THE PLANS",
-    "WSTE-M COMBAT SHOTGUN",
-    "WSTE-M COMBAT SHOTGUNS",
-    "SﾕPHT CARD KEY",
-    "SﾕPHT CARD KEYS",
-    "UPLINK CHIP",
-    "UPLINK CHIPS",
-    "Ryanﾕs Light Blue Ball",
-    "SKULL",
-    "Violet Ball",
-    "Yellow Ball",
-    "Brown Ball",
-    "Orange Ball",
-    "Blue Ball",
-    "Green Ball",
-    "KKV-7 10MM FLECHETTE SMG",
-    "10MM FLECHETTE MAGAZINE",
-    "10MM FLECHETTE MAGAZINES",
+    "拳骨",
+    ".44 マグナム・メガ級",
+    ".44 マグナム・メガ級",
+    ".44 弾丸 (x8)",
+    ".44 弾丸 (x8)",
+    "ゼウス級核融合ピストル",
+    "核融合バッテリ",
+    "核融合バッテリ",
+    "MA-75B 機関銃",
+    "MA-75B 弾丸 (x52)",
+    "MA-75B 弾丸 (x52)",
+    "MA-75B グレネード (x7)",
+    "MA-75B グレネード (x7)",
+    "SPNKR-X18 SSM ミサイル発射機",
+    "SSM ミサイル (x2)",
+    "SSM ミサイル (x2)",
+    "エイリアンの武器",
+    "ショットガン弾丸 (x2)",
+    "ショットガン弾丸 (x2)",
+    "TOZT-7 背負い式火炎放射機",
+    "ナパーム散弾",
+    "ナパーム散弾",
+    "POWERPC 620 チップ",
+    "POWERPC 620 チップ",
+    "エイリアンのエネルギー変換機",
+    "波動砲",
+    "設計図",
+    "WSTE-M 戦闘用ショットガン",
+    "WSTE-M 戦闘用ショットガン",
+    "スフトカードキー",
+    "スフトカードキー",
+    "アップリンクチップ",
+    "アップリンクチップ",
+    "水色のボール",
+    "頭蓋骨",
+    "紫色のボール",
+    "黄色のボール",
+    "茶色のボール",
+    "橙色のボール",
+    "青色のボール",
+    "緑色のボール",
+    "KKV-7 10MM フルチェット小型軽機関銃",
+    "10MM フレチェット弾倉",
+    "10MM フレチェット弾倉",
 };
 
 // STR# Resource: "Item types"
 static const char* sStringSetNumber151[] = {
-    "WEAPONS",
-    "AMMUNITION",
-    "POWERUPS",
-    "ITEMS",
-    "WEAPON POWERUPS",
-    "BALLS",
-    "NETWORK STATISTICS",
+    "武器",
+    "弾丸",
+    "パワーアップ",
+    "道具",
+    "武器／パワーアップ",
+    "ボール",
+    "ネットワーク状況",
 };
 
 // STR# Resource: "Net Statistics Strings"
 static const char* sStringSetNumber153[] = {
-    "%d kills",
-    "%d deaths",
-    "%d suicides",
-    "Total Carnage",
-    "Monsters",
-    "Total Kills: %d (%.2f kpm)",
-    "Total Deaths: %d (%.2f dpm)",
-    " including %d suicides",
-    "Total Team Carnage",
-    " including %d friendly-fire kills",
-    "Total Scores",
-    "Total Team Scores",
+    "殺傷: %d人",
+    "死亡: %d人",
+    "自殺: %d人",
+    "合計",
+    "敵",
+    "殺傷の合計: %d (一分当たり %.2f人)",
+    "死亡の合計: %d (一分当たり %.2f人)",
+    " - 自殺 %d人を含む",
+    "チーム虐殺の合計",
+    " - 同士討ち %d人を含む",
+    "成績",
+    "チームの成績",
     // ZZZ: added for team vs. team carnage in postgame report
-    "%s's team",
+    "%sのチーム",
     // ZZZ: added for legend/key in SDL postgame report
-    "kills",
-    "deaths",
-    "suicides",
-    "friendly-fire kills",
+    "殺傷",
+    "死亡",
+    "自滅",
+    "事故",
 };
 
 // STR# Resource: "OpenGL-Option Color-Picker Prompts"
 static const char* sStringSetNumber200[] = {
-    "What color for the Void?",
-    "What day ground color?",
-    "What day sky color?",
-    "What night ground color?",
-    "What night sky color?",
-    "What moon ground color?",
-    "What moon sky color?",
-    "What space ground color?",
-    "What space sky color?",
-    "What fog color?",
+    "何もない空間の色は？",
+    "日中の地面の色は？",
+    "日中の空の色は？",
+    "夜間の地面の色は？",
+    "夜間の空の色は？",
+    "月の地面の色は？",
+    "月の空の色は？",
+    "宇宙空間の地面の色は？",
+    "宇宙空間の空の色は？",
+    "フォッグの色は？",
 };
 
 BUILD_STRINGSET(150, sStringSetNumber150);
@@ -717,14 +561,14 @@ BUILD_STRINGSET(200, sStringSetNumber200);
 #include "player.h" // for kTeamColorsStringSetID
 
 static const char* sTeamColorNamesStrings[] = {
-    "Slate",
-    "Red",
-    "Violet",
-    "Yellow",
-    "White",
-    "Orange",
-    "Blue",
-    "Green",
+    "灰",
+    "赤",
+    "紫",
+    "黄",
+    "白",
+    "橙",
+    "青",
+    "緑",
 };
 
 BUILD_STRINGSET(kTeamColorsStringSetID, sTeamColorNamesStrings);

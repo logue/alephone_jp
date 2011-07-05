@@ -459,7 +459,7 @@ static int Lua_Overlay_Set_Icon(lua_State *L)
 
 	return 0;
 }
-#include "converter.h"
+
 static int Lua_Overlay_Set_Text(lua_State *L)
 {
 	if (Lua_Overlay::PlayerIndex(L, 1) == local_player_index)
@@ -467,7 +467,7 @@ static int Lua_Overlay_Set_Text(lua_State *L)
 		const char *text = 0;
 		if (lua_isstring(L, 2)) 
 			text = lua_tostring(L, 2);
-		const char* cv=sjis2utf8(text, strlen(text));
+		
 		SetScriptHUDText(Lua_Overlay::Index(L, 1), text);
 	}
 
@@ -1571,9 +1571,7 @@ int Lua_Player_Print(lua_State *L)
 		lua_pcall(L, 1, 1, 0);
 		if (lua_tostring(L, -1))
 		{
-//			screen_printf("%s", lua_tostring(L, -1));
-			const char* s = lua_tostring(L, -1);
-			screen_printf("%s", sjis2utf8(s, strlen(s)));
+			screen_printf("%s", lua_tostring(L, -1));
 		}
 		lua_pop(L, 1);
 	}

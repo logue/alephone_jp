@@ -18,7 +18,7 @@
 	http://www.gnu.org/licenses/gpl.html
 	
 */
-
+// リビジョン4419ベース
 #include "preference_dialogs.h"
 #include "preferences.h"
 #include "binders.h"
@@ -403,8 +403,8 @@ public:
 
 		w_toggle *srgb_w = new w_toggle(false);
 //		general_table->dual_add(srgb_w->label("Gamma-corrected Blending"), m_dialog);
-		general_table->dual_add(srgb_w->label("ガンマ補正ブレンディング"), m_dialog);
-		general_table->dual_add(srgb_w, m_dialog);
+//		general_table->dual_add(srgb_w->label("ガンマ補正ブレンディング"), m_dialog);
+//		general_table->dual_add(srgb_w, m_dialog);
 
 
 		general_table->add_row(new w_spacer(), true);

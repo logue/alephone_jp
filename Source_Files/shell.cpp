@@ -113,6 +113,7 @@
 
 #ifdef __WIN32__
 #include <windows.h>
+#include <shlobj.h>
 #endif
 
 #include "alephversion.h"
@@ -120,6 +121,8 @@
 #include "Logging.h"
 #include "network.h"
 #include "Console.h"
+
+extern void initSJIS2UTF16();
 
 // LP addition: whether or not the cheats are active
 // Defined in shell_misc.cpp
@@ -132,6 +135,7 @@ DirectorySpecifier preferences_dir;   // Directory for preferences
 DirectorySpecifier saved_games_dir;   // Directory for saved games
 DirectorySpecifier recordings_dir;    // Directory for recordings (except film buffer, which is stored in local_data_dir)
 DirectorySpecifier screenshots_dir;   // Directory for screenshots
+DirectorySpecifier log_dir;           // Directory for Aleph One Log.txt
 std::string arg_directory;
 std::vector<std::string> arg_files;
 
@@ -176,30 +180,31 @@ short vidmasterStringSetID = -1; // can be set with MML
 static void usage(const char *prg_name)
 {
 #ifdef __WIN32__
-	MessageBox(NULL, "Command line switches:\n\n"
+	MessageBox(NULL, "コマンドラインスイッチ：\n\n"
 #else
-	printf("\nUsage: %s [options] [directory] [file]\n"
+	printf("\n使用方法：%s [オプション] [ディレクトリ] [ファイル]\n"
 #endif
-	  "\t[-h | --help]          Display this help message\n"
-	  "\t[-v | --version]       Display the game version\n"
-	  "\t[-d | --debug]         Allow saving of core files\n"
-	  "\t                       (by disabling SDL parachute)\n"
-	  "\t[-f | --fullscreen]    Run the game fullscreen\n"
-	  "\t[-w | --windowed]      Run the game in a window\n"
+	"\t[-h | --help]		このヘルプメッセージを表\示します。\n"
+	"\t[-v | --version]		ゲームのバージョンを表\示します。\n"
+	"\t[-d | --debug]		コアダンプを出力するようにします。\n"
+	"\t						（SDL parachuteを無効化します）\n"
+	"\t[-f | --fullscreen]	ゲームをフルスクリーンで起動します。\n"
+	"\t[-w | --windowed]	ゲームをウィンドウモードで起動します。\n"
 #ifdef HAVE_OPENGL
-	  "\t[-g | --nogl]          Do not use OpenGL\n"
+	"\t[-g | --nogl]		OpenGLを使用せずに起動します。\n"
 #endif
-	  "\t[-s | --nosound]       Do not access the sound card\n"
-	  "\t[-m | --nogamma]       Disable gamma table effects (menu fades)\n"
-          "\t[-j | --nojoystick]    Do not initialize joysticks\n"
-	  // Documenting this might be a bad idea?
-	  // "\t[-i | --insecure_lua]  Allow Lua netscripts to take over your computer\n"
-	  "\tdirectory              Directory containing scenario data files\n"
-          "\tfile                   Saved game to load or film to play\n"
-	  "\nYou can also use the ALEPHONE_DATA environment variable to specify\n"
-	  "the data directory.\n"
+	"\t[-s | --nosound]		サウンドを無効化します。\n"
+	"\t[-m | --nogamma]		ガンマエフェクトを無効化します。\n"
+	"\t						（メニューのフェードなど）\n"
+	"\t[-j | --nojoystick]	ジョイスティックの初期化を行いません。\n"
+	// Documenting this might be a bad idea?
+	// "\t[-i | --insecure_lua]  Allow Lua netscripts to take over your computer\n"
+	"\tディレクトリ			シナリオのデーターが含まれているディレクトリ\n"
+	"\tファイル				保存されたゲームやフィルムを再生します。\n"
+	"\nこの他にも、環境変数「ALEPHONE_DATA」の値を変更することで、\n"
+	"データディレクトリを指定することができます。\n"
 #ifdef __WIN32__
-	  , "Usage", MB_OK | MB_ICONINFORMATION
+	  , "使用方法", MB_OK | MB_ICONINFORMATION
 #else
 	  , prg_name
 #endif
@@ -250,30 +255,31 @@ bool handle_open_document(const std::string& filename)
 int main(int argc, char **argv)
 {
 	// Print banner (don't bother if this doesn't appear when started from a GUI)
-	printf ("Aleph One " A1_VERSION_STRING "\n"
-	  "http://marathon.sourceforge.net/\n\n"
-	  "Original code by Bungie Software <http://www.bungie.com/>\n"
-	  "Additional work by Loren Petrich, Chris Pruett, Rhys Hill et al.\n"
-	  "TCP/IP networking by Woody Zenfell\n"
-	  "Expat XML library by James Clark\n"
-	  "SDL port by Christian Bauer <Christian.Bauer@uni-mainz.de>\n"
+	printf ("Aleph One JP" A1_VERSION_STRING "\n"
+	  "http://marathon.sourceforge.jp/\n\n"
+	  "オリジナルのコードは、Bungie Software <http://www.bungie.com/>によるものです。\n"
+	  "この他にLoren Petrich, Chris Pruett, Rhys Hill氏らによって書かれています。\n"
+	  "TCP/IP ネットワーク by Woody Zenfell\n"
+	  "Expat XMLライブラリ by James Clark\n"
+	  "SDLポート by Christian Bauer <Christian.Bauer@uni-mainz.de>\n"
+	  "日本語化 by saiten <http://www.isidesystem.net/>, ookawa_mi, Logue <http://logue.be/>\n" 
 #if defined(__MACH__) && defined(__APPLE__)
-	  "Mac OS X/SDL version by Chris Lovell, Alexander Strange, and Woody Zenfell\n"
+	  "Mac OS X/SDLバージョンは、Chris Lovell, Alexander Strange, and Woody Zenfell氏らによって作られました。\n"
 #endif
-	  "\nThis is free software with ABSOLUTELY NO WARRANTY.\n"
-	  "You are welcome to redistribute it under certain conditions.\n"
-	  "For details, see the file COPYING.\n"
+	  "\nこのプログラムは有用であることを願って頒布されますが、*全くの無保証 *です。\n"
+	  "商業可能\性の保証や特定目的への適合性は、言外に示されたものも 含め、全く存在しません。\n"
+	  "詳しくはGNU 一般公衆利用許諾書をご覧ください。\n"
 #if defined(__BEOS__) || defined(__WIN32__) 
 	  // BeOS and Windows are statically linked against SDL, so we have to include this:
-	  "\nSimple DirectMedia Layer (SDL) Library included under the terms of the\n"
-	  "GNU Library General Public License.\n"
-	  "For details, see the file COPYING.SDL.\n"
+	  "\nSimple DirectMedia Layer (SDL) ライブラリは、\n"
+	  "GNU 一般公衆利用許諾書によってライセンスされています。\n"
+	  "詳細については、COPYING.SDLを参考にしてください。\n"
 #endif
 #ifdef HAVE_SDL_NET
-	  "\nBuilt with network play enabled.\n"
+	  "\nこのビルドは、ネットワークプレイが有効です。\n"
 #endif
 #ifdef HAVE_LUA
-	  "\nBuilt with Lua scripting enabled.\n"
+	  "\nこのビルドは、Luaスクリプトが有効です。\n"
 #endif
     );
 
@@ -316,7 +322,7 @@ int main(int argc, char **argv)
 				arg_files.push_back(*argv);
 			}
 		} else {
-			printf("Unrecognized argument '%s'.\n", *argv);
+			printf("不明なスイッチ指定です：'%s'.\n", *argv);
 			usage(prg_name);
 		}
 		argc--;
@@ -340,10 +346,22 @@ int main(int argc, char **argv)
 		main_event_loop();
 
 	} catch (exception &e) {
-		fprintf(stderr, "Unhandled exception: %s\n", e.what());
+		try 
+		{
+			logFatal("捕捉されなかった例外が発生しました：%s", e.what());
+		}
+		catch (...) 
+		{
+		}
 		exit(1);
 	} catch (...) {
-		fprintf (stderr, "Unknown exception\n");
+		try
+		{
+			logFatal("例外が発生しました。");
+		}
+		catch (...)
+		{
+		}
 		exit(1);
 	}
 
@@ -366,19 +384,38 @@ static void initialize_application(void)
 	if (home)
 		local_data_dir = home;
 	local_data_dir += ".alephone";
+	log_dir = local_data_dir;
 
 #elif defined(__APPLE__) && defined(__MACH__)
 	extern char *bundle_name; // SDLMain.m
 	DirectorySpecifier bundle_data_dir = bundle_name;
 	bundle_data_dir += "Contents/Resources/DataFiles";
 
-	default_data_dir = bundle_data_dir;
+	data_search_path.push_back(bundle_data_dir);
+
+	{
+		char* buf = getcwd(0, 0);
+		default_data_dir = buf;
+		free(buf);
+	}
+	
 	const char *home = getenv("HOME");
 	if (home)
+	{
 	    local_data_dir = home;
+	    preferences_dir = home;
+	    log_dir = home;
+	    log_dir += "Library";
+	    log_dir += "Logs";
+	}
+
 	local_data_dir += "Library";
 	local_data_dir += "Application Support";
 	local_data_dir += "AlephOne";
+
+	preferences_dir += "Library";
+	preferences_dir += "Preferences";
+	preferences_dir += "org.bungie.source.AlephOne";
 
 #elif defined(__BEOS__)
 
@@ -401,10 +438,19 @@ static void initialize_application(void)
 	if (!hasName || strpbrk(login, "\\/:*?\"<>|") != NULL)
 		strcpy(login, "Bob User");
 
+	DirectorySpecifier legacy_data_dir = file_name;
+	legacy_data_dir += "Prefs";
+	legacy_data_dir += login;
+	
+	SHGetFolderPath(NULL,
+			CSIDL_PERSONAL | CSIDL_FLAG_CREATE,
+			NULL,
+			0,
+			file_name);
 	local_data_dir = file_name;
-	local_data_dir += "Prefs";
-	local_data_dir.CreateDirectory();
-	local_data_dir += login;
+	local_data_dir += "AlephOne";
+
+	log_dir = local_data_dir;
 
 #else
 	default_data_dir = "";
@@ -418,10 +464,15 @@ static void initialize_application(void)
 #define LIST_SEP ':'
 #endif
 	
-#if !(defined(__APPLE__) && defined(__MACH__))
-	if (arg_directory != "") 
-		default_data_dir = arg_directory;
-#endif
+	// in case we need to redo search path later:
+	size_t dsp_insert_pos = data_search_path.size();
+	size_t dsp_delete_pos = (size_t)-1;
+	
+	if (arg_directory != "")
+	{
+		dsp_delete_pos = data_search_path.size();
+		data_search_path.push_back(arg_directory);
+	}
 
 	const char *data_env = getenv("ALEPHONE_DATA");
 	if (data_env) {
@@ -438,45 +489,42 @@ static void initialize_application(void)
 		if (!path.empty())
 			data_search_path.push_back(path);
 	} else {
-#if defined(__APPLE__) && defined(__MACH__)
-		if (arg_directory != "") 
-			data_search_path.push_back(arg_directory);
-		else 
+		if (arg_directory == "")
 		{
-			char* buf = getcwd (0, 0);
-			data_search_path.push_back(buf);
-			free (buf);
+			dsp_delete_pos = data_search_path.size();
+			data_search_path.push_back(default_data_dir);
 		}
+#if defined(__WIN32__)
+		data_search_path.push_back(legacy_data_dir);
 #endif
 #ifndef __MACOS__
-		data_search_path.push_back(default_data_dir);
-#endif
 		data_search_path.push_back(local_data_dir);
+#endif
 	}
 
 	// Subdirectories
+#if defined(__MACH__) && defined(__APPLE__)
+	DirectorySpecifier legacy_preferences_dir = local_data_dir;
+#elif defined(__WIN32__)
+	DirectorySpecifier legacy_preferences_dir = legacy_data_dir;
+	SHGetFolderPath(NULL, 
+			CSIDL_LOCAL_APPDATA | CSIDL_FLAG_CREATE, 
+			NULL,
+			0,
+			file_name);
+	preferences_dir = file_name;
+	preferences_dir += "AlephOne";
+#else
 	preferences_dir = local_data_dir;
+#endif	
 	saved_games_dir = local_data_dir + "Saved Games";
 	recordings_dir = local_data_dir + "Recordings";
 	screenshots_dir = local_data_dir + "Screenshots";
 
-	// Create local directories
-	local_data_dir.CreateDirectory();
-	saved_games_dir.CreateDirectory();
-	recordings_dir.CreateDirectory();
-	screenshots_dir.CreateDirectory();
-#if defined(HAVE_BUNDLE_NAME)
-	DirectorySpecifier local_mml_dir = bundle_data_dir + "MML";
-#else
+
 	DirectorySpecifier local_mml_dir = local_data_dir + "MML";
-#endif
-	local_mml_dir.CreateDirectory();
-#if defined(HAVE_BUNDLE_NAME)
-	DirectorySpecifier local_themes_dir = bundle_data_dir + "Themes";
-#else
 	DirectorySpecifier local_themes_dir = local_data_dir + "Themes";
-#endif
-	local_themes_dir.CreateDirectory();
+
 	// Setup resource manager
 	initialize_resources();
 
@@ -490,7 +538,7 @@ static void initialize_application(void)
 
 	// Check for presence of strings
 	if (!TS_IsPresent(strERRORS) || !TS_IsPresent(strFILENAMES)) {
-		fprintf(stderr, "Can't find required text strings (missing MML?).\n");
+		fprintf(stderr, "起動に必要なテキストが見つかりませんでした。（MMLが存在しない？）\n");
 		exit(1);
 	}
 	
@@ -498,7 +546,11 @@ static void initialize_application(void)
 	if (!have_default_files()) {
 		char chosen_dir[256];
 		if (alert_choose_scenario(chosen_dir)) {
-			data_search_path.insert(data_search_path.begin(), DirectorySpecifier(chosen_dir));
+			// remove original argument (or fallback) from search path
+			if (dsp_delete_pos < data_search_path.size())
+				data_search_path.erase(data_search_path.begin() + dsp_delete_pos);
+			// add selected directory where command-line argument would go
+			data_search_path.insert(data_search_path.begin() + dsp_insert_pos, chosen_dir);
 			
 			// Parse MML files again, now that we have a new dir to search
 			SetupParseTree();
@@ -509,8 +561,21 @@ static void initialize_application(void)
 	initialize_fonts();
 	Plugins::instance()->enumerate();			
 	
+#if defined(__WIN32__) || (defined(__MACH__) && defined(__APPLE__))
+	preferences_dir.CreateDirectory();
+	transition_preferences(legacy_preferences_dir);
+#endif
+
 	// Load preferences
 	initialize_preferences();
+
+	local_data_dir.CreateDirectory();
+	saved_games_dir.CreateDirectory();
+	recordings_dir.CreateDirectory();
+	screenshots_dir.CreateDirectory();
+	local_mml_dir.CreateDirectory();
+	local_themes_dir.CreateDirectory();
+
 #ifndef HAVE_OPENGL
 	graphics_preferences->screen_mode.acceleration = _no_acceleration;
 #endif
@@ -531,7 +596,7 @@ static void initialize_application(void)
 			      (option_debug ? SDL_INIT_NOPARACHUTE : 0));
 	if (retval < 0)
 	{
-		fprintf(stderr, "Couldn't initialize SDL (%s)\n", SDL_GetError());
+		fprintf(stderr, "SDLの初期化に失敗しました。（%s）\n", SDL_GetError());
 		exit(1);
 	}
 	SDL_WM_SetCaption("Aleph One", "Aleph One");
@@ -548,14 +613,14 @@ static void initialize_application(void)
 #ifdef HAVE_SDL_NET
 	// Initialize SDL_net
 	if (SDLNet_Init () < 0) {
-		fprintf (stderr, "Couldn't initialize SDL_net (%s)\n", SDLNet_GetError());
+		fprintf (stderr, "SDL_netの初期化に失敗しました。（%s）\n", SDLNet_GetError());
 		exit(1);
 	}
 #endif
 
 #ifdef HAVE_SDL_TTF
 	if (TTF_Init() < 0) {
-		fprintf (stderr, "Couldn't initialize SDL_ttf (%s)\n", TTF_GetError());
+		fprintf (stderr, "SDL_ttfの初期化に失敗しました。（%s）\n", TTF_GetError());
 		exit(1);
 	}
 #endif
@@ -627,16 +692,13 @@ bool quit_without_saving(void)
 {
 	dialog d;
 	vertical_placer *placer = new vertical_placer;
-//	placer->dual_add (new w_static_text("Are you sure you wish to"), d);
-//	placer->dual_add (new w_static_text("cancel the game in progress?"), d);
-	placer->dual_add (new w_static_text("ゲームを中断してもよろしいですか？"), d);
+	placer->dual_add (new w_static_text("本当にゲームを中断しても"), d);
+	placer->dual_add (new w_static_text("よろしいですか？"), d);
 	placer->add (new w_spacer(), true);
 	
 	horizontal_placer *button_placer = new horizontal_placer;
-//	w_button *default_button = new w_button("YES", dialog_ok, &d);
 	w_button *default_button = new w_button("はい", dialog_ok, &d);
 	button_placer->dual_add (default_button, d);
-//	button_placer->dual_add (new w_button("NO", dialog_cancel, &d), d);
 	button_placer->dual_add (new w_button("いいえ", dialog_cancel, &d), d);
 	d.activate_widget(default_button);
 	placer->add(button_placer, true);
@@ -683,36 +745,25 @@ short get_level_number_from_user(void)
 
 	} else {
 		// no stringset or no strings in stringset - use default message
-/*
-		placer->dual_add(new w_static_text("Before proceeding any further, you"), d);
-		placer->dual_add(new w_static_text ("must take the oath of the vidmaster:"), d);
-		placer->add(new w_spacer(), true);
-		placer->dual_add(new w_static_text("\xd2I pledge to punch all switches,"), d);
-		placer->dual_add(new w_static_text("to never shoot where I could use grenades,"), d);
-		placer->dual_add(new w_static_text("to admit the existence of no level"), d);
-		placer->dual_add(new w_static_text("except Total Carnage,"), d);
-		placer->dual_add(new w_static_text("to never use Caps Lock as my \xd4run\xd5 key,"), d);
-		placer->dual_add(new w_static_text("and to never, ever, leave a single Bob alive.\xd3"), d);
-*/
 		placer->dual_add(new w_static_text("ここからは、ヴィドマスターの宣誓を誓わないといけないぜ。"), d);
+
 		placer->add(new w_spacer(), true);
 		placer->dual_add(new w_static_text("『宣誓、"), d);
 		placer->dual_add(new w_static_text("全てのスイッチをこぶしで殴ってオンにし、"), d);
 		placer->dual_add(new w_static_text("グレネードを使える場所でも決して発射せず、"), d);
 		placer->dual_add(new w_static_text("最高難易度「虐殺」以外で遊ばず、"), d);
 		placer->dual_add(new w_static_text("Caps Loockを「走る」キーとしては決して使わず、"), d);
-		placer->dual_add(new w_static_text("そして、一人残らずボブ市民を皆殺しにしま～す。"), d);
+		placer->dual_add(new w_static_text("そして、一人残らずボブ市民を皆殺しにしま～す。』"), d);
 	}
 
 	placer->add(new w_spacer(), true);
-//	placer->dual_add(new w_static_text("Start at level:"), d);
 	placer->dual_add(new w_static_text("開始レベル："), d);
 
 	w_levels *level_w = new w_levels(levels, &d);
 	placer->dual_add(level_w, d);
 	placer->add(new w_spacer(), true);
-//	placer->dual_add(new w_button("CANCEL", dialog_cancel, &d), d);
 	placer->dual_add(new w_button("キャンセル", dialog_cancel, &d), d);
+
 	d.activate_widget(level_w);
 	d.set_widget_placer(placer);
 
@@ -880,9 +931,9 @@ static void handle_game_key(const SDL_Event &event)
 					}
 					else {
 #if defined(__APPLE__) && defined(__MACH__)
-						screen_printf("If you wish to quit, press Command-Q");
+						screen_printf("終了したい場合は、コマンドキーを押しながらQを押してください。");
 #else
-						screen_printf("If you wish to quit, press Alt+Q.");
+						screen_printf("終了したい場合は、Altキーを押しながらQを押してください。");
 #endif
 					}
 				}

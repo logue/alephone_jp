@@ -11,7 +11,7 @@
 typedef unsigned short uint16;
 #include <string.h>
 #include <iconv.h>
-extern "C" {
+
 char* sjis2utf8(const char* str, size_t len) {
 	static char text[1024];
 	memset(text,0,1024);
@@ -98,7 +98,7 @@ uint16 sjisChar(char* in, int* step) {
 	size_t len;
 	if( *in == 13 ) { if( step ) *step += 1; return 13; }
 	if( step ) {
-		if(  (unsigned char)*in >= 0x81 && (unsigned char)*in <= 0xa0 || (unsigned char)*in >= 0xe0  ) {
+		if ( isJChar((unsigned char)*in) ) {
 			*step += 2;
 			len = 2;
 		} else {
@@ -123,9 +123,12 @@ uint16 sjisChar(char* in, int* step) {
 	iconv_close(j);
 	return text[0];
 }
-	
-static int isJChar(unsigned char text) {
-	return (((text >= 0x81) && (text <= 0x9f)) || ((text >= 0xe0) && (text <= 0xfc)));
-}
-};
 
+// 2バイト文字か？
+bool isJChar(unsigned char text) {
+	return (((text >= 0x81) && (text <= 0x9f)) || ((text >= 0xe0) && (text <= 0xfc))) ? true : false;
+}
+// 2バイト文字の２文字目か？
+bool is2ndJChar(unsigned char text) {
+	return (((0x7F != text) && (0x40 <= text)) || ((text >= 0xe0) && (text <= 0xfc))) ? true : false;
+}

@@ -262,7 +262,7 @@ EXTRA_DIST = COPYING.SDL INSTALL.BeOS INSTALL.Unix INSTALL.Windows	\
   PBProjects/precompiled_headers.h PBProjects/SDLMain.h			\
   PBProjects/SDLMain.m PBProjects/AlephOne.icns Expat/xmltok/nametab.h	\
   PBProjects/config.h PBProjects/confpaths.h				\
-  data/AlephJPSunsMono-Bold.ttf data/AlephJPSansMonoLicense.txt		\
+  data/AlephJPSansMono-Bold.ttf data/AlephJPSansMonoLicense.txt		\
   docs/alephone.6 examples/lua/Cheats.lua
 
 man_MANS = docs/alephone.6

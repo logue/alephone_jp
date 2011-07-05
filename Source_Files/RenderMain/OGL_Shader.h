@@ -52,6 +52,8 @@ public:
 		U_StrictDepthMode,
 		U_Glow,
 		U_LandscapeInverseMatrix,
+		U_ScaleX,
+		U_ScaleY,
 		NUMBER_OF_UNIFORM_LOCATIONS
 	};
 
@@ -70,8 +72,6 @@ public:
 		S_WallBloom,
 		S_Bump,
 		S_BumpBloom,
-		S_Specular,
-		S_SpecularBloom,
 		NUMBER_OF_SHADER_TYPES
 	};
 private:
