@@ -15,7 +15,7 @@
   <color index="0" red="0.875" green="0.875" blue="0.75"/>
   <color index="1" red="0.145" green="0.145" blue="0.145"/>
   <color index="2" red="0.5" green="0.5" blue="0.5"/>
-  <font file="AlephJPSunsMono-Bold.ttf" size="12"/>
+  <font file="AlephJPSansMono-Bold.ttf" size="12"/>
 </default>
 
 <!-- Dialog frame -->
@@ -33,7 +33,7 @@
 
 <!-- Dialog title -->
 <title>
-<font file="AlephJPSunsMono-Bold.ttf" size="24"/>
+<font file="AlephJPSansMono-Bold.ttf" size="24"/>
   <color red="0.85" green="0.85" blue="0.80"/>
 </title>
 
@@ -173,7 +173,7 @@
 
 <metaserver>
 <games spacing="7">
-  <font file="AlephJPSunsMono-Bold.ttf" size="11"/>
+  <font file="AlephJPSansMono-Bold.ttf" size="11"/>
   <color index="0" red="1" green="1" blue="1"/>
   <selected>
     <color index="0" red="0" green="0" blue="0"/>

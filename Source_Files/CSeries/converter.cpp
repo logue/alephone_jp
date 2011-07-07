@@ -5,6 +5,7 @@
  *  Created by みちあき on 08/06/24.
  *  Copyright 2008 __MyCompanyName__. All rights reserved.
  *
+ *  Modified by Logue
  */
 
 #include "converter.h"
@@ -12,6 +13,7 @@ typedef unsigned short uint16;
 #include <string.h>
 #include <iconv.h>
 
+// Convert from Shift_JIS to UTF8
 char* sjis2utf8(const char* str, size_t len) {
 	static char text[1024];
 	memset(text,0,1024);
@@ -31,6 +33,7 @@ char* sjis2utf8(const char* str, size_t len) {
 	iconv_close(j);
 	return text;
 }
+// Convert from UTF8 to Shift_JIS
 char* utf82sjis(const char* str, size_t len) {
 	static char text[1024];
 	memset(text,0,1024);
@@ -47,7 +50,8 @@ char* utf82sjis(const char* str, size_t len) {
 	return text;
 }
 
-
+// Convert from Shift_JIS to Unidode
+// AlephOneJP overrides to process_macroman().
 uint16* sjis2utf16(const char* str, size_t len) {
 	static uint16 text[1024];
 	memset(text,0,2048);
@@ -67,6 +71,7 @@ uint16* sjis2utf16(const char* str, size_t len) {
 	return text;
 }
 
+// Convert from UTF8 to Unidode
 uint16* utf82utf16(const char* str, size_t len) {
 	static uint16 text[1024];
 	memset(text,0,2048);
@@ -80,6 +85,7 @@ uint16* utf82utf16(const char* str, size_t len) {
 	return text;
 }
 
+// Convert from Unicode to UTF8
 char* utf162utf8(const uint16* str, size_t len) {
 	static char text[1024];
 	memset(text,0,1024);
@@ -124,11 +130,41 @@ uint16 sjisChar(char* in, int* step) {
 	return text[0];
 }
 
-// 2バイト文字か？
+int unicodeChar( const char* input, uint16* ret) {
+	uint16 text[2];
+	memset(text,0,4);
+	const char* strp = input;
+	char* retp = (char*)text;
+	size_t len = strlen(input), sz = 6;
+
+	iconv_t i = iconv_open("UCS-2-INTERNAL", "SHIFT-JIS");
+	iconv_t j = iconv_open("UCS-2-INTERNAL", "MACROMAN");
+
+	if( iconv(i,  &strp, &len, &retp, &sz) == -1 ) {
+		strp = input;
+		retp = (char*)text;
+		sz = 4;
+		iconv(j,  &strp, &len, &retp, &sz);
+	}
+	iconv_close(i);
+	iconv_close(j);
+	*ret = text[0];
+	
+	unsigned char first = *input;
+	if( first < 0x80 || ( first > 0xa0 && first < 0xe0 ) ) {
+		return 1;
+	} else if( first < 0xeb ) {
+		return 2;
+	} else {
+		return 1;
+	}
+}
+
+// Detect 2-byte char. (for Shift_JIS)
 bool isJChar(unsigned char text) {
 	return (((text >= 0x81) && (text <= 0x9f)) || ((text >= 0xe0) && (text <= 0xfc))) ? true : false;
 }
-// 2バイト文字の２文字目か？
+// Detect 2nd charactor of 2-byte char. (for Shift_JIS)
 bool is2ndJChar(unsigned char text) {
 	return (((0x7F != text) && (0x40 <= text)) || ((text >= 0xe0) && (text <= 0xfc))) ? true : false;
 }

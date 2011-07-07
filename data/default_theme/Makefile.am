@@ -9,7 +9,6 @@ theme_DATA = theme2.mml resources frame_tl.bmp frame_t.bmp		\
   slider_c.bmp slider_r.bmp slider.bmp button_c.bmp button_l.bmp	\
   button_r.bmp button_c_p.bmp button_l_p.bmp button_r_p.bmp		\
   tiny_button_c.bmp tiny_button_l.bmp tiny_button_r.bmp			\
-  Squarish_Sans_CT_Medium.ttf DejaVuLGCSansCondensed-BoldOblique.ttf	\
-  DejaVuLGCSansCondensed-Bold.ttf DejaVuLGCSansCondensed-BoldBold.ttf
+  AlephJPSansMono-Bold.ttf umeplus-gothic.ttf
 
 EXTRA_DIST = $(theme_DATA)

@@ -122,6 +122,9 @@
 #include "network.h"
 #include "Console.h"
 
+// JP fix
+#include <locale.h>
+
 extern void initSJIS2UTF16();
 
 // LP addition: whether or not the cheats are active
@@ -199,8 +202,8 @@ static void usage(const char *prg_name)
 	"\t[-j | --nojoystick]	ジョイスティックの初期化を行いません。\n"
 	// Documenting this might be a bad idea?
 	// "\t[-i | --insecure_lua]  Allow Lua netscripts to take over your computer\n"
-	"\tディレクトリ			シナリオのデーターが含まれているディレクトリ\n"
-	"\tファイル				保存されたゲームやフィルムを再生します。\n"
+	"\tディレクトリ			データーが含まれているディレクトリ\n"
+	"\tファイル				保存されたゲームやフィルムの再生\n"
 	"\nこの他にも、環境変数「ALEPHONE_DATA」の値を変更することで、\n"
 	"データディレクトリを指定することができます。\n"
 #ifdef __WIN32__
@@ -370,6 +373,7 @@ int main(int argc, char **argv)
 
 static void initialize_application(void)
 {
+	setlocale( LC_ALL, "JPN");	// for wchar_t type.
 #if defined(__WIN32__) && defined(__MINGW32__)
 	if (LoadLibrary("exchndl.dll")) option_debug = true;
 #endif

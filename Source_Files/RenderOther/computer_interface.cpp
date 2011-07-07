@@ -451,7 +451,11 @@ static bool calculate_line(char *base_text, short width, short start_index, shor
 		// terminal_font no longer a global, since it may change
 		font_info *terminal_font = GetInterfaceFont(_computer_interface_font);
 		TTF_Font* font = ((ttf_font_info*)terminal_font)->font;
+		
 		while (running_width < width && base_text[index] && base_text[index] != MAC_LINE_END) {
+//		uint16 c;
+//		int index_k = start_index;
+//		while (running_width < width && (c = sjisChar(&base_text[index],&index_k)) && c != MAC_LINE_END) {
 			if (isJChar(base_text[index])){
 				running_width += char_width(base_text[index], terminal_font, current_style)+char_width(base_text[index+1], terminal_font, current_style);
 				index ++;
@@ -460,7 +464,6 @@ static bool calculate_line(char *base_text, short width, short start_index, shor
 			}
 			index ++;
 		}
-		
 		// Now go backwards, looking for whitespace to split on
 		if (base_text[index] == MAC_LINE_END)
 			index++;

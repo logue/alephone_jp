@@ -86,13 +86,13 @@ setupAndConnectClient(MetaserverClient& client)
 			dialog d;
 			vertical_placer *placer = new vertical_placer;
 
-			placer->dual_add(new w_title("UPDATE AVAILABLE"), d);
+			placer->dual_add(new w_title("アップデート可能です"), d);
 			placer->add(new w_spacer(), true);
 
-			placer->dual_add(new w_static_text("An update for Aleph One is available."), d);
-			placer->dual_add(new w_static_text("Please download it from"), d);
-			placer->dual_add(new w_static_text("http://marathon.sourceforge.net/"), d);
-			placer->dual_add(new w_static_text("before playing games online."), d);
+			placer->dual_add(new w_static_text("新しいバージョンのAleph Oneがあります。"), d);
+			placer->dual_add(new w_static_text("オンラインでプレイする前に"), d);
+			placer->dual_add(new w_static_text("http://mjolnir.logue.be/"), d);
+			placer->dual_add(new w_static_text("から最新版を確認して下さい。"), d);
 			
 			placer->add(new w_spacer(), true);
 			placer->dual_add(new w_button("OK", dialog_ok, &d), d);
@@ -119,7 +119,7 @@ GameAvailableMetaserverAnnouncer::GameAvailableMetaserverAnnouncer(const game_in
 	description.m_timeLimit = (info.time_limit > 7 * 24 * 3600 * TICKS_PER_SECOND) ? -1 : info.time_limit;
 	description.m_difficulty = info.difficulty_level;
 	description.m_mapName = string(info.level_name);
-	description.m_name = gMetaserverClient->playerName() + "'s Game";
+	description.m_name = gMetaserverClient->playerName() + "'のゲーム";
 	description.m_teamsAllowed = !(info.game_options & _force_unique_teams);
 	
 	// description's constructor gets scenario info, aleph one's protocol ID for us
@@ -144,7 +144,7 @@ GameAvailableMetaserverAnnouncer::GameAvailableMetaserverAnnouncer(const game_in
 	}
 	else if (HasLua)
 	{
-		description.m_netScript = "Embedded";
+		description.m_netScript = "組み込み";
 	} // else constructor's blank string is desirable
 
 	description.m_hasGameOptions = true;
@@ -154,7 +154,7 @@ GameAvailableMetaserverAnnouncer::GameAvailableMetaserverAnnouncer(const game_in
 
 	if (HasPhysics)
 	{
-		description.m_physicsName = "Embedded";
+		description.m_physicsName = "組み込み";
 	}
 	else
 	{
@@ -189,11 +189,11 @@ void GlobalMetaserverChatNotificationAdapter::playersInRoomChanged(const std::ve
 	{
 		if (playerChanges[i].verb() == MetaserverClient::PlayersInRoom::kAdd)
 		{
-			receivedLocalMessage(playerChanges[i].name() + "|p has joined the room");
+			receivedLocalMessage(playerChanges[i].name() + "|p がルームに参加しました。");
 		}
 		else if (playerChanges[i].verb() == MetaserverClient::PlayersInRoom::kDelete)
 		{
-			receivedLocalMessage(playerChanges[i].name() + "|p has left the room");
+			receivedLocalMessage(playerChanges[i].name() + "|p がルームから退出しました。");
 		}
 	}
 }
@@ -276,7 +276,7 @@ void GlobalMetaserverChatNotificationAdapter::roomDisconnected()
 {
 	ColoredChatEntry e;
 	e.type = ColoredChatEntry::LocalMessage;
-	e.message = "|iConnection to room lost.";
+	e.message = "|iルームとの接続が切れました。";
 	
 	gMetaserverChatHistory.append(e);
 }

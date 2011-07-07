@@ -1041,8 +1041,8 @@ private:
 };
 
 const char* sort_by_labels[] = {
-	"name",
-	"date",
+	"ファイル名",
+	"最終更新日時",
 	0
 };
 
@@ -1069,7 +1069,7 @@ protected:
 	void Init(const FileSpecifier& dir, w_directory_browsing_list::SortOrder default_order, std::string filename) {
 		m_sort_by_w = new w_select(static_cast<size_t>(default_order), sort_by_labels);
 		m_sort_by_w->set_selection_changed_callback(boost::bind(&FileDialog::on_change_sort_order, this));
-		m_up_button_w = new w_button("UP", boost::bind(&FileDialog::on_up, this));
+		m_up_button_w = new w_button("上の階層へ", boost::bind(&FileDialog::on_up, this));
 		if (filename.empty()) 
 		{
 			m_list_w = new w_directory_browsing_list(dir, &m_dialog);
@@ -1125,13 +1125,13 @@ public:
 			switch(type) 
 			{
 			case _typecode_savegame:
-				m_prompt = "CONTINUE SAVED GAME";
+				m_prompt = "ゲームを再開";
 				break;
 			case _typecode_film:
-				m_prompt = "REPLAY SAVED FILM";
+				m_prompt = "フィルムを再生";
 				break;
 			default:
-				m_prompt = "OPEN FILE";
+				m_prompt = "ファイルを開く";
 				break;
 			}
 		}
@@ -1178,7 +1178,7 @@ public:
 
 		horizontal_placer* top_row_placer = new horizontal_placer;
 
-		top_row_placer->dual_add(m_sort_by_w->label("Sorted by: "), m_dialog);
+		top_row_placer->dual_add(m_sort_by_w->label("ソ\ート順："), m_dialog);
 		top_row_placer->dual_add(m_sort_by_w, m_dialog);
 		top_row_placer->add_flags(placeable::kFill);
 		top_row_placer->add(new w_spacer, true);
@@ -1193,7 +1193,7 @@ public:
 		placer->add(new w_spacer, true);
 
 		horizontal_placer* button_placer = new horizontal_placer;
-		button_placer->dual_add(new w_button("CANCEL", dialog_cancel, &m_dialog), m_dialog);
+		button_placer->dual_add(new w_button("キャンセル", dialog_cancel, &m_dialog), m_dialog);
 		
 		placer->add(button_placer, true);
 		
@@ -1254,13 +1254,13 @@ public:
 			switch (type)
 			{
 			case _typecode_savegame:
-				prompt = "SAVE GAME";
+				prompt = "ゲームの保存";
 				break;
 			case _typecode_film:
-				prompt = "SAVE FILM";
+				prompt = "フィルムの保存";
 				break;
 			default:
-				prompt = "SAVE FILE";
+				prompt = "ファイルを保存";
 				break;
 			}
 		}
@@ -1320,7 +1320,7 @@ public:
 
 		horizontal_placer* top_row_placer = new horizontal_placer;
 
-		top_row_placer->dual_add(m_sort_by_w->label("Sorted by: "), m_dialog);
+		top_row_placer->dual_add(m_sort_by_w->label("ソ\ート順："), m_dialog);
 		top_row_placer->dual_add(m_sort_by_w, m_dialog);
 		top_row_placer->add_flags(placeable::kFill);
 		top_row_placer->add(new w_spacer, true);
@@ -1338,7 +1338,7 @@ public:
 		
 		horizontal_placer* file_name_placer = new horizontal_placer;
 		m_name_w = new w_file_name(&m_dialog, m_default_name.c_str());
-		file_name_placer->dual_add(m_name_w->label("File Name:"), m_dialog);
+		file_name_placer->dual_add(m_name_w->label("ファイル名："), m_dialog);
 		file_name_placer->add_flags(placeable::kFill);
 		file_name_placer->dual_add(m_name_w, m_dialog);
 
@@ -1349,7 +1349,7 @@ public:
 
 		horizontal_placer* button_placer = new horizontal_placer;
 		button_placer->dual_add(new w_button("OK", dialog_ok, &m_dialog), m_dialog);
-		button_placer->dual_add(new w_button("CANCEL", dialog_cancel, &m_dialog), m_dialog);
+		button_placer->dual_add(new w_button("キャンセル", dialog_cancel, &m_dialog), m_dialog);
 		
 		placer->add(button_placer, true);
 		
@@ -1437,19 +1437,19 @@ static bool confirm_save_choice(FileSpecifier & file)
 	char name[256];
 	file.GetName(name);
 	char message[512];
-	sprintf(message, "'%s' already exists.", name);
+	sprintf(message, "'%s'はすでに存在しています。", name);
 
 	// Create dialog
 	dialog d;
 	vertical_placer *placer = new vertical_placer;
 	placer->dual_add(new w_static_text(message), d);
-	placer->dual_add(new w_static_text("Ok to overwrite?"), d);
+	placer->dual_add(new w_static_text("上書きしてもよろしいですか？"), d);
 	placer->add(new w_spacer(), true);
 
 	horizontal_placer *button_placer = new horizontal_placer;
-	w_button *default_button = new w_button("YES", dialog_ok, &d);
+	w_button *default_button = new w_button("はい", dialog_ok, &d);
 	button_placer->dual_add(default_button, d);
-	button_placer->dual_add(new w_button("NO", dialog_cancel, &d), d);
+	button_placer->dual_add(new w_button("いいえ", dialog_cancel, &d), d);
 
 	placer->add(button_placer, true);
 

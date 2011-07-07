@@ -999,15 +999,15 @@ void w_color_picker::click(int, int)
 	table->col_flags(0, placeable::kAlignRight);
 
 	w_slider *red_w = new w_slider(16, m_color.red >> 12);
-	table->dual_add(red_w->label("Red"), d);
+	table->dual_add(red_w->label("Ô"), d);
 	table->dual_add(red_w, d);
 
 	w_slider *green_w = new w_slider(16, m_color.green >> 12);
-	table->dual_add(green_w->label("Green"), d);
+	table->dual_add(green_w->label("—Î"), d);
 	table->dual_add(green_w, d);
 
 	w_slider *blue_w = new w_slider(16, m_color.blue >> 12);
-	table->dual_add(blue_w->label("Blue"), d);
+	table->dual_add(blue_w->label("Â"), d);
 	table->dual_add(blue_w, d);
 
 	placer->add(table, true);

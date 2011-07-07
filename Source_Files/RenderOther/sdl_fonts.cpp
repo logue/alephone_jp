@@ -248,6 +248,8 @@ static TTF_Font *load_ttf_font(const std::string& path, uint16 style, int16 size
 	TTF_Font *font = 0;
 	if (path == "mono")
 	{
+		// Japanese Font cannot render as embeded font.
+		// then, if Fonts.ttf exsists, read external font forcely.
 		FILE* fp = fopen( FONT_PATH, "r" );
 		if( !fp ){
 //			fprintf(stderr, "TTF Font %s is not found. Load internal font.\n", FONT_PATH);

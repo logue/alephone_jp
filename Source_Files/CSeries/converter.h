@@ -18,6 +18,7 @@ char* utf162utf8(const unsigned short* str, size_t len);
 
 typedef unsigned short uint16;
 uint16 sjisChar(char* in, int* step);
+int unicodeChar( const char* input, uint16* ret);
 
 bool isJChar(unsigned char text);
 bool is2ndJChar(unsigned char text);
