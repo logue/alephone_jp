@@ -7,7 +7,7 @@
  
 	This program is free software; you can redistribute it and/or modify
 	it under the terms of the GNU General Public License as published by
-	the Free Software Foundation; either version 2 of the License, or
+	the Free Software Foundation; either version 3 of the License, or
 	(at your option) any later version.
 
 	This program is distributed in the hope that it will be useful,
@@ -52,6 +52,26 @@ struct FilmProfile
 
 	// LP increased the dynamic limits
 	bool increased_dynamic_limits;
+
+	// Infinity has an improved line_is_obstructed
+	bool line_is_obstructed_fix;
+
+	// Aleph One implements pass_media_boundary one way
+	bool a1_smg;
+
+	// Marathon Infinity implements pass_media_boundary a different way
+	bool infinity_smg;
+
+	// Marathon 2 and Infinity give fusion damage a vertical
+	// component when delta_vitality is greater than 100
+	bool use_vertical_kick_threshold;
+
+	// Marathon Infinity fixes tag suicides in a different way
+	bool infinity_tag_fix;
+
+	// Marathon Infinity always adds adjacent polygons to the
+	// intersecting indexes (unmerged maps only)
+	bool adjacent_polygons_always_intersect;
 };
 
 extern FilmProfile film_profile;
@@ -59,6 +79,7 @@ extern FilmProfile film_profile;
 enum FilmProfileType {
 	FILM_PROFILE_DEFAULT,
 	FILM_PROFILE_MARATHON_2,
+	FILM_PROFILE_MARATHON_INFINITY
 };
 
 void load_film_profile(FilmProfileType type, bool reload_mml = true);

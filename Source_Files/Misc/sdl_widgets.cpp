@@ -5,7 +5,7 @@
  
 	This program is free software; you can redistribute it and/or modify
 	it under the terms of the GNU General Public License as published by
-	the Free Software Foundation; either version 2 of the License, or
+	the Free Software Foundation; either version 3 of the License, or
 	(at your option) any later version.
 
 	This program is distributed in the hope that it will be useful,
@@ -38,7 +38,7 @@
  *	new w_enabling_toggle can enable/disable a bank of other widgets according to its state
  *	new w_file_chooser displays filename; allows selection of file (via FileSpecifier::ReadDialog())
  */
-// r4384(2011/04/06)ベース
+
 #include "cseries.h"
 #include "sdl_dialogs.h"
 #include "network_dialog_widgets_sdl.h"
@@ -989,7 +989,7 @@ void w_color_picker::click(int, int)
 	dialog d;
 	
 	vertical_placer *placer = new vertical_placer;
-	placer->dual_add(new w_title("色を選択"), d);
+	placer->dual_add(new w_title("CHOOSE A COLOR"), d);
 	placer->add(new w_spacer(), true);
 
 	w_color_block *color_block = new w_color_block(&m_color);
@@ -999,22 +999,22 @@ void w_color_picker::click(int, int)
 	table->col_flags(0, placeable::kAlignRight);
 
 	w_slider *red_w = new w_slider(16, m_color.red >> 12);
-	table->dual_add(red_w->label("赤"), d);
+	table->dual_add(red_w->label("Red"), d);
 	table->dual_add(red_w, d);
 
 	w_slider *green_w = new w_slider(16, m_color.green >> 12);
-	table->dual_add(green_w->label("緑"), d);
+	table->dual_add(green_w->label("Green"), d);
 	table->dual_add(green_w, d);
 
 	w_slider *blue_w = new w_slider(16, m_color.blue >> 12);
-	table->dual_add(blue_w->label("青"), d);
+	table->dual_add(blue_w->label("Blue"), d);
 	table->dual_add(blue_w, d);
 
 	placer->add(table, true);
 	placer->add(new w_spacer(), true);
 	
 	horizontal_placer *button_placer = new horizontal_placer;
-	button_placer->dual_add(new w_button("キャンセル", dialog_cancel, &d), d);
+	button_placer->dual_add(new w_button("CANCEL", dialog_cancel, &d), d);
 	button_placer->dual_add(new w_button("OK", dialog_ok, &d), d);
 	
 	placer->add(button_placer, true);
@@ -1250,7 +1250,7 @@ void w_password_entry::draw(SDL_Surface *s) const
  *  Key name widget
  */
 
-static const char *WAITING_TEXT = "キー入力受付中";
+static const char *WAITING_TEXT = "waiting for new key";
 
 w_key::w_key(SDLKey key) : widget(LABEL_WIDGET), binding(false)
 {
@@ -1272,35 +1272,35 @@ void w_key::place(const SDL_Rect& r, placement_flags flags)
 		
 // ZZZ: we provide phony key names for the phony keys used for mouse buttons.
 static const char* sMouseButtonKeyName[NUM_SDL_MOUSE_BUTTONS] = {
-        "マウス 1",   // things like "Middle Mouse Button" are too long to draw properly
-        "マウス 3",
-        "マウス 2",
-        "マウス 4",
-        "マウス 5",
-        "マウス 6",
-        "マウス 7",
-        "マウス 8"
+        "mouse 1",   // things like "Middle Mouse Button" are too long to draw properly
+        "mouse 3",
+        "mouse 2",
+        "mouse 4",
+        "mouse 5",
+        "mouse 6",
+        "mouse 7",
+        "mouse 8"
 };
 
 static const char* sJoystickButtonKeyName[NUM_SDL_JOYSTICK_BUTTONS] = {
-	"ジョイスティック 1",
-	"ジョイスティック 2",
-	"ジョイスティック 3",
-	"ジョイスティック 4",
-	"ジョイスティック 5",
-	"ジョイスティック 6",
-	"ジョイスティック 7",
-	"ジョイスティック 8",
-	"ジョイスティック 9",
-	"ジョイスティック 10",
-	"ジョイスティック 11",
-	"ジョイスティック 12",
-	"ジョイスティック 13",
-	"ジョイスティック 14",
-	"ジョイスティック 15",
-	"ジョイスティック 16",
-	"ジョイスティック 17",
-	"ジョイスティック 18"
+	"joystick 1",
+	"joystick 2",
+	"joystick 3",
+	"joystick 4",
+	"joystick 5",
+	"joystick 6",
+	"joystick 7",
+	"joystick 8",
+	"joystick 9",
+	"joystick 10",
+	"joystick 11",
+	"joystick 12",
+	"joystick 13",
+	"joystick 14",
+	"joystick 15",
+	"joystick 16",
+	"joystick 17",
+	"joystick 18"
 };
 
 // ZZZ: this injects our phony key names but passes along the rest.
@@ -1989,7 +1989,7 @@ void w_select_popup::gotSelected ()
 }
 
 
-static const char* const sFileChooserInvalidFileString = "（無効な選択です）";
+static const char* const sFileChooserInvalidFileString = "(no valid selection)";
 
 w_file_chooser::w_file_chooser(const char* inDialogPrompt, Typecode inTypecode)
 	: w_select_button("", NULL, NULL, true), typecode(inTypecode)
@@ -2108,16 +2108,16 @@ void w_games_in_room::draw_item(const GameListMessage::GameListEntry& item, SDL_
 		{
 			if (item.minutes_remaining() == 1)
 			{
-				time_or_ping << "1分未満";
+				time_or_ping << "~1 Minute";
 			}
 			else
 			{
-				time_or_ping << item.minutes_remaining() << " 分";
+				time_or_ping << item.minutes_remaining() << " Minutes";
 			}
 		}
 		else
 		{
-			time_or_ping << "無制限";
+			time_or_ping << "Untimed";
 		}
 	}
 	else
@@ -2144,7 +2144,7 @@ void w_games_in_room::draw_item(const GameListMessage::GameListEntry& item, SDL_
 		game_and_map << "|i" << item.m_description.m_scenarioName;
 		if (item.m_description.m_scenarioVersion != "")
 		{
-			game_and_map << ", バージョン " << item.m_description.m_scenarioVersion;
+			game_and_map << ", Version " << item.m_description.m_scenarioVersion;
 		}
 	} 
 	else
@@ -2166,11 +2166,11 @@ void w_games_in_room::draw_item(const GameListMessage::GameListEntry& item, SDL_
 	{
 		if (item.m_description.m_numPlayers == 1)
 		{
-			game_settings << "1プレイヤー";
+			game_settings << "1 Player";
 		}
 		else
 		{
-			game_settings << static_cast<uint16>(item.m_description.m_numPlayers) << " プレイヤー";
+			game_settings << static_cast<uint16>(item.m_description.m_numPlayers) << " Players";
 		}
 	}
 	else
@@ -2178,19 +2178,19 @@ void w_games_in_room::draw_item(const GameListMessage::GameListEntry& item, SDL_
 		game_settings << static_cast<uint16>(item.m_description.m_numPlayers)
 			      << "/"
 			      << item.m_description.m_maxPlayers
-			      << " プレイヤー";
+			      << " Players";
 	}
 
 	if (item.m_description.m_timeLimit && !(item.m_description.m_timeLimit == INT32_MAX || item.m_description.m_timeLimit == -1))
 	{
 		game_settings << ", " 
 			      << item.m_description.m_timeLimit / 60 / TICKS_PER_SECOND 
-			      << " 分";
+			      << " Minutes";
 	}
 
 	if (item.m_description.m_teamsAllowed)
 	{
-		game_settings << ", チーム";
+		game_settings << ", Teams";
 	}
 
 	draw_text(s, game_settings.str().c_str(), x, y, fg, font, game_style);

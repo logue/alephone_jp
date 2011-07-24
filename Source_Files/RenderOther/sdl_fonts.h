@@ -5,7 +5,7 @@
  
 	This program is free software; you can redistribute it and/or modify
 	it under the terms of the GNU General Public License as published by
-	the Free Software Foundation; either version 2 of the License, or
+	the Free Software Foundation; either version 3 of the License, or
 	(at your option) any later version.
 
 	This program is distributed in the hope that it will be useful,
@@ -123,7 +123,6 @@ public:
 	uint16 get_descent() const { return -TTF_FontDescent(m_styles[styleNormal]); }
 	int16 get_leading() const { return get_line_height() - get_ascent() - get_descent(); }
 
-	TTF_Font* font;	// computer_intaface.cppで使用
 	TTF_Font* m_styles[styleUnderline];
 	ttf_font_key_t m_keys[styleUnderline];
 	int m_adjust_height;

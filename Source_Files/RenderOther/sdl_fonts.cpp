@@ -5,7 +5,7 @@
  
 	This program is free software; you can redistribute it and/or modify
 	it under the terms of the GNU General Public License as published by
-	the Free Software Foundation; either version 2 of the License, or
+	the Free Software Foundation; either version 3 of the License, or
 	(at your option) any later version.
 
 	This program is distributed in the hope that it will be useful,
@@ -50,11 +50,7 @@ using std::map;
 #include <boost/tuple/tuple_comparison.hpp>
 #include "preferences.h" // smooth_font
 #include "AlephSansMono-Bold.h"
-
-#define FONT_PATH "./Fonts.ttf"
 #endif
-
-#include "converter.h"
 
 // Global variables
 typedef pair<int, int> id_and_size_t;
@@ -65,7 +61,11 @@ static font_list_t font_list;				// List of all loaded fonts
 typedef pair<TTF_Font *, int> ref_counted_ttf_font_t;
 typedef map<ttf_font_key_t, ref_counted_ttf_font_t> ttf_font_list_t;
 static ttf_font_list_t ttf_font_list;
+
+#define FONT_PATH "./Fonts.ttf"
 #endif
+
+#include "converter.h"
 
 // From shell_sdl.cpp
 extern vector<DirectorySpecifier> data_search_path;
@@ -528,6 +528,7 @@ int8 ttf_font_info::char_width(uint8 c, uint16 style) const
 {
 	int advance;
 	TTF_GlyphMetrics(get_ttf(style), mac_roman_to_unicode(static_cast<char>(c)), 0, 0, 0, 0, &advance);
+
 	return advance;
 }
 uint16 ttf_font_info::_text_width(const char *text, uint16 style, bool utf8) const
@@ -558,7 +559,6 @@ int ttf_font_info::_trunc_text(const char *text, int max_width, uint16 style) co
 //	static uint16 temp[1024];
 //	mac_roman_to_unicode(text, temp, 1024);
 	uint16 *temp = sjis2utf16(text, 1024);
-
 	TTF_SizeUNICODE(get_ttf(style), temp, &width, 0);
 	if (width < max_width) return strlen(text);
 
@@ -575,6 +575,7 @@ int ttf_font_info::_trunc_text(const char *text, int max_width, uint16 style) co
 }
 
 // ttf_font_info::_draw_text is in screen_drawing.cpp
+
 char *ttf_font_info::process_printable(const char *src, int len) const 
 {
 	static char dst[1024];
@@ -588,7 +589,6 @@ char *ttf_font_info::process_printable(const char *src, int len) const
 
 	*p = '\0';
 	return dst;
-
 }
 
 uint16 *ttf_font_info::process_macroman(const char *src, int len) const 
@@ -602,6 +602,7 @@ uint16 *ttf_font_info::process_macroman(const char *src, int len) const
 		if ((unsigned char) *src >= ' ') *p++ = mac_roman_to_unicode(*src);
 		else if ((unsigned char) *src == '\t')
 			*p++ = ' ';
+		
 		*src++;
 	}
 

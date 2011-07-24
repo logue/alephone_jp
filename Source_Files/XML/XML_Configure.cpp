@@ -5,7 +5,7 @@
  
 	This program is free software; you can redistribute it and/or modify
 	it under the terms of the GNU General Public License as published by
-	the Free Software Foundation; either version 2 of the License, or
+	the Free Software Foundation; either version 3 of the License, or
 	(at your option) any later version.
 
 	This program is distributed in the hope that it will be useful,
@@ -125,7 +125,7 @@ void XML_Configure::CharacterData(const char *String, int Length)
 	}
 }
 	
-extern "C" int XML_JapaneseEncodingHandler(void *encodingHandlerData, const XML_Char *name, XML_Encoding *info);
+
 // Does parsing; indicates whether the parsing was successful or not
 bool XML_Configure::DoParse()
 {
@@ -134,7 +134,6 @@ bool XML_Configure::DoParse()
 
 	// Create the parser
 	Parser = XML_ParserCreate("iso-8859-1");
-	XML_SetUnknownEncodingHandler(Parser, XML_JapaneseEncodingHandler, NULL);
 	
 	// Set up the callbacks
 	XML_SetUserData(Parser, this);

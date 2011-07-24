@@ -6,7 +6,7 @@ ITEMS.C
  
 	This program is free software; you can redistribute it and/or modify
 	it under the terms of the GNU General Public License as published by
-	the Free Software Foundation; either version 2 of the License, or
+	the Free Software Foundation; either version 3 of the License, or
 	(at your option) any later version.
 
 	This program is distributed in the hope that it will be useful,
@@ -175,6 +175,11 @@ short new_item(
 //				dprintf("killed #%d;g;", type);
 				SET_OBJECT_INVISIBILITY(object, true);
 				object->permutation= NONE;
+			}
+			else if ((get_item_kind(type) == _ball) && !static_world->ball_in_play)
+			{
+				static_world->ball_in_play = true;
+				SoundManager::instance()->PlayLocalSound(_snd_got_ball);
 			}
 			
 			/* let PLACEMENT.C keep track of how many there are */

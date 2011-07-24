@@ -6,7 +6,7 @@
  
 	This program is free software; you can redistribute it and/or modify
 	it under the terms of the GNU General Public License as published by
-	the Free Software Foundation; either version 2 of the License, or
+	the Free Software Foundation; either version 3 of the License, or
 	(at your option) any later version.
 
 	This program is distributed in the hope that it will be useful,
@@ -440,6 +440,7 @@ static void	set_text_face(struct text_face_data *text_face)
 	_get_interface_color(text_face->color + _computer_interface_text_color, &color);
 	current_pixel = SDL_MapRGB(/*world_pixels*/draw_surface->format, color.r, color.g, color.b);
 }
+
 #include "converter.h"
 static bool calculate_line(char *base_text, short width, short start_index, short text_end_index, short *end_index)
 {
@@ -450,20 +451,18 @@ static bool calculate_line(char *base_text, short width, short start_index, shor
 		
 		// terminal_font no longer a global, since it may change
 		font_info *terminal_font = GetInterfaceFont(_computer_interface_font);
-		TTF_Font* font = ((ttf_font_info*)terminal_font)->font;
-		
+
 		while (running_width < width && base_text[index] && base_text[index] != MAC_LINE_END) {
-//		uint16 c;
-//		int index_k = start_index;
-//		while (running_width < width && (c = sjisChar(&base_text[index],&index_k)) && c != MAC_LINE_END) {
+			running_width += char_width(base_text[index], terminal_font, current_style);
+			
 			if (isJChar(base_text[index])){
-				running_width += char_width(base_text[index], terminal_font, current_style)+char_width(base_text[index+1], terminal_font, current_style);
-				index ++;
-			}else{
-				running_width += char_width(base_text[index], terminal_font, current_style);
+				// If Sjis char, add 2nd byte of char.
+				running_width += char_width(base_text[index+1], terminal_font, current_style);
+				index++;
 			}
-			index ++;
+			index++;
 		}
+		
 		// Now go backwards, looking for whitespace to split on
 		if (base_text[index] == MAC_LINE_END)
 			index++;
@@ -471,12 +470,12 @@ static bool calculate_line(char *base_text, short width, short start_index, shor
 			int break_point = index;
 
 			while (break_point>start_index) {
-				// ––”ö‚ª2ƒoƒCƒg•¶š‚¾‚Á‚½ê‡
-				if (is2ndJChar(base_text[break_point-1])){
-					break_point--;
-				}
-				if (base_text[break_point] == ' '){
+				if (base_text[break_point] == ' ')
 					break; 	// Non printing
+				
+				// If last char is Sjis char, rewind break point.
+				if (isJChar(base_text[break_point-2])){
+					break_point--;
 				}
 				break_point--;	// this needs to be in front of the test
 			}

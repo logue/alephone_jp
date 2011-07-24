@@ -9,7 +9,7 @@ MAP.H
  
 	This program is free software; you can redistribute it and/or modify
 	it under the terms of the GNU General Public License as published by
-	the Free Software Foundation; either version 2 of the License, or
+	the Free Software Foundation; either version 3 of the License, or
 	(at your option) any later version.
 
 	This program is distributed in the hope that it will be useful,
@@ -836,7 +836,9 @@ struct static_data
 	int16 mission_flags;
 	int16 environment_flags;
 	
-	int16 unused[4];
+	bool ball_in_play; // true if there's a ball in play
+	bool unused1;
+	int16 unused[3];
 
 	char level_name[LEVEL_NAME_LENGTH];
 	uint32 entry_point_flags;

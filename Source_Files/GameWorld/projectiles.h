@@ -9,7 +9,7 @@ PROJECTILES.H
  
 	This program is free software; you can redistribute it and/or modify
 	it under the terms of the GNU General Public License as published by
-	the Free Software Foundation; either version 2 of the License, or
+	the Free Software Foundation; either version 3 of the License, or
 	(at your option) any later version.
 
 	This program is distributed in the hope that it will be useful,
@@ -99,6 +99,9 @@ enum /* projectile types */
 /* only used for persistent projectiles */
 #define PROJECTILE_HAS_CAUSED_DAMAGE(p) ((p)->flags&(uint16)0x2000)
 #define SET_PROJECTILE_DAMAGE_STATUS(p,v) ((void)((v)?((p)->flags|=(uint16)0x2000):((p)->flags&=(uint16)~0x2000)))
+
+#define PROJECTILE_HAS_CROSSED_MEDIA_BOUNDARY(p) ((p)->flags&(uint16)0x1000)
+#define SET_PROJECTILE_CROSSED_MEDIA_BOUNDARY_STATUS(p,v) ((v)?((p)->flags|=(uint16)0x1000):((p)->flags&=(uint16)~0x1000))
 
 /* uses SLOT_IS_USED(), SLOT_IS_FREE(), MARK_SLOT_AS_FREE(), MARK_SLOT_AS_USED() macros (0x8000 bit) */
 

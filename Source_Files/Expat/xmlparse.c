@@ -6310,11 +6310,11 @@ static int JIS201KANAtoUTF16(int ch) {
 
 
 /**
-* EUC-JPの文字列から1文字取りだしUNICODEに変換する。
+ * EUC-JPの文字列から1文字取りだしUNICODEに変換する。
  * @param data ユーザ定義データ(未使用)
-						* @param s    EUC-JPの文字列。
-						* @return 対応するUNICODEの文字コード。対応するものがなければ0。
-						*/
+ * @param s    EUC-JPの文字列。
+ * @return 対応するUNICODEの文字コード。対応するものがなければ0。
+ */
 static int convertEUCJPtoUTF16(void *data, const char *s) {
 	iconv_t i = iconv_open("UCS-2-INTERNAL", "EUC-JP");
 	unsigned short v[3];
@@ -6325,11 +6325,11 @@ static int convertEUCJPtoUTF16(void *data, const char *s) {
 }
 
 /**
-* SHIFT_JISの文字列から1文字取りだしUNICODEに変換する。
+ * SHIFT_JISの文字列から1文字取りだしUNICODEに変換する。
  * @param data ユーザ定義データ(未使用)
-						* @param s    SHIFT_JISの文字列。
-						* @return 対応するUNICODEの文字コード。対応するものがなければ0。
-						*/
+ * @param s    SHIFT_JISの文字列。
+ * @return 対応するUNICODEの文字コード。対応するものがなければ0。
+ */
 static int convertSHIFTJIStoUTF16(void *data, const char *s) {
 	iconv_t i = iconv_open("UCS-2-INTERNAL", "SHIFT_JIS");
 	unsigned short v[3];
@@ -6340,7 +6340,7 @@ static int convertSHIFTJIStoUTF16(void *data, const char *s) {
 }
 
 /**
-* 変換テーブルのASCII部分を設定する。
+ * 変換テーブルのASCII部分を設定する。
  * @param map 変換テーブル
  */
 static void setAsciiMap(int map[]) {
@@ -6353,12 +6353,12 @@ static void setAsciiMap(int map[]) {
 }
 
 /**
-* 日本語文字コードを処理するためのハンドラ
+ * 日本語文字コードを処理するためのハンドラ
  * @param encodingHandlerData このハンドラのためのユーザ定義データ(未使用)
-												 * @param name 文字コード名(このハンドラではSHIFT_JISとEUC-JPのみ対応)
-												 * @param info 文字コード変換のための情報
-												 * @return このハンドラで処理を行うのであれば非0。
-												 */
+ * @param name 文字コード名(このハンドラではSHIFT_JISとEUC-JPのみ対応)
+ * @param info 文字コード変換のための情報
+ * @return このハンドラで処理を行うのであれば非0。
+ */
 int XML_JapaneseEncodingHandler(void *encodingHandlerData, const XML_Char *name, XML_Encoding *info) {
 	if (strcasecmp(name, "euc-jp") == 0) {
 		int i;

@@ -6,7 +6,7 @@
 
 	This program is free software; you can redistribute it and/or modify
 	it under the terms of the GNU General Public License as published by
-	the Free Software Foundation; either version 2 of the License, or
+	the Free Software Foundation; either version 3 of the License, or
 	(at your option) any later version.
 
 	This program is distributed in the hope that it will be useful,
@@ -86,7 +86,7 @@ setupAndConnectClient(MetaserverClient& client)
 			dialog d;
 			vertical_placer *placer = new vertical_placer;
 
-			placer->dual_add(new w_title("アップデート可能です"), d);
+			placer->dual_add(new w_title("アップデート可\能です"), d);
 			placer->add(new w_spacer(), true);
 
 			placer->dual_add(new w_static_text("新しいバージョンのAleph Oneがあります。"), d);

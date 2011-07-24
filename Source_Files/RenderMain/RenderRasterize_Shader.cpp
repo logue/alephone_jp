@@ -388,6 +388,9 @@ void RenderRasterize_Shader::setupGL() {
  *
  * with multiple rendering passes for glow effect
  */
+const double TWO_PI = 8*atan(1.0);
+const float AngleConvert = TWO_PI/float(FULL_CIRCLE);
+
 void RenderRasterize_Shader::render_tree() {
 
 	weaponFlare = PIN(view->maximum_depth_intensity - NATURAL_LIGHT_INTENSITY, 0, FIXED_ONE)/float(FIXED_ONE);
@@ -401,6 +404,12 @@ void RenderRasterize_Shader::render_tree() {
 	s->setFloat(Shader::U_Time, view->tick_count);
 	s->setFloat(Shader::U_UseStatic, TEST_FLAG(Get_OGL_ConfigureData().Flags,OGL_Flag_FlatStatic) ? 0.0 : 1.0);
 
+	cam_pos = current_player->camera_location;
+	short cam_poly;
+	cam_yaw = FIXED_INTEGERAL_PART(current_player->variables.direction + current_player->variables.head_direction);
+	cam_pitch = FIXED_INTEGERAL_PART(current_player->variables.elevation);
+	ChaseCam_GetPosition(cam_pos, cam_poly, cam_yaw, cam_pitch);
+	
 	bool usefog = false;
 	int fogtype;
 	OGL_FogData *fogdata;
@@ -416,9 +425,13 @@ void RenderRasterize_Shader::render_tree() {
 	s = Shader::get(Shader::S_Landscape);
 	s->enable();
 	s->setFloat(Shader::U_UseFog, usefog ? 1.0 : 0.0);
+	s->setFloat(Shader::U_Yaw, cam_yaw * AngleConvert);
+	s->setFloat(Shader::U_Pitch, cam_pitch * AngleConvert);
 	s = Shader::get(Shader::S_LandscapeBloom);
 	s->enable();
 	s->setFloat(Shader::U_UseFog, usefog ? 1.0 : 0.0);
+	s->setFloat(Shader::U_Yaw, cam_yaw * AngleConvert);
+	s->setFloat(Shader::U_Pitch, cam_pitch * AngleConvert);
 	Shader::disable();
 
 	bool bloom = (TEST_FLAG(Get_OGL_ConfigureData().Flags, OGL_Flag_Blur) && blur.get());
@@ -445,12 +458,6 @@ void RenderRasterize_Shader::render_node(sorted_node_data *node, bool SeeThruLiq
 {
 	if (!node->clipping_windows)
 		return;
-
-	world_point3d cam_pos = current_player->camera_location;
-	short cam_poly;
-	angle cam_yaw = FIXED_INTEGERAL_PART(current_player->variables.direction + current_player->variables.head_direction);
-	angle cam_pitch;
-	ChaseCam_GetPosition(cam_pos, cam_poly, cam_yaw, cam_pitch);
 
 	for (clipping_window_data *win = node->clipping_windows; win; win = win->next_window)
 	{
@@ -577,7 +584,6 @@ TextureManager RenderRasterize_Shader::setupSpriteTexture(const rectangle_defini
 }
 
 // Circle constants
-const double TWO_PI = 8*atan(1.0);
 const double Radian2Circle = 1/TWO_PI;			// A circle is 2*pi radians
 const double FullCircleReciprocal = 1/double(FULL_CIRCLE);
 

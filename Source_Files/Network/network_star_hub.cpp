@@ -6,7 +6,7 @@
 
 	This program is free software; you can redistribute it and/or modify
 	it under the terms of the GNU General Public License as published by
-	the Free Software Foundation; either version 2 of the License, or
+	the Free Software Foundation; either version 3 of the License, or
 	(at your option) any later version.
 
 	This program is distributed in the hope that it will be useful,
@@ -515,7 +515,7 @@ hub_initialize(int32 inStartingTick, size_t inNumPlayers, const NetAddrBlock* co
                 }
 
                 thePlayer.mLastNetworkTickHeard = 0;
-		thePlayer.mLastRecoverySend = theFirstTick;
+		thePlayer.mLastRecoverySend = 0;
                 thePlayer.mSmallestUnacknowledgedTick = theFirstTick;
 		thePlayer.mSmallestUnheardTick = theFirstTick;
 		thePlayer.mNthElementFinder.reset(sHubPreferences.mPregameWindowSize);
@@ -1364,7 +1364,12 @@ hub_tick()
         return true;
 }
 
-
+#ifndef INT8_MAX
+#define INT8_MAX 127
+#endif
+#ifndef INT8_MIN
+#define INT8_MIN -128
+#endif
 
 static void
 send_packets()
@@ -1406,8 +1411,9 @@ send_packets()
                                 // Timing adjustment?
                                 if(thePlayer.mOutstandingTimingAdjustment != 0)
                                 {
+					int8 adjustment = PIN(thePlayer.mOutstandingTimingAdjustment, INT8_MIN, INT8_MAX);
                                         ps << (uint16)kTimingAdjustmentMessageType
-                                                << (int8)(thePlayer.mOutstandingTimingAdjustment);
+					   << adjustment;
                                 }
         
                                 // Netdead players?

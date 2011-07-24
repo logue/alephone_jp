@@ -131,7 +131,7 @@ uint16 sjisChar(char* in, int* step) {
 }
 
 int unicodeChar( const char* input, uint16* ret) {
-	uint16 text[2];
+	uint16 text[3];
 	memset(text,0,4);
 	const char* strp = input;
 	char* retp = (char*)text;

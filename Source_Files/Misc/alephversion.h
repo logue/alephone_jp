@@ -8,7 +8,7 @@ ALEPHVERSION.H
  
 	This program is free software; you can redistribute it and/or modify
 	it under the terms of the GNU General Public License as published by
-	the Free Software Foundation; either version 2 of the License, or
+	the Free Software Foundation; either version 3 of the License, or
 	(at your option) any later version.
 
 	This program is distributed in the hope that it will be useful,
@@ -23,9 +23,9 @@ ALEPHVERSION.H
 */
 
 
-#define A1_DISPLAY_VERSION "1.0b3 JP"
-#define A1_DISPLAY_DATE_VERSION "2011-07-07"
-#define A1_DATE_VERSION "20110707"
+#define A1_DISPLAY_VERSION "1.0b4 JP"
+#define A1_DISPLAY_DATE_VERSION "2011-07-24"
+#define A1_DATE_VERSION "20110724"
 
 #ifdef WIN32
 #define A1_DISPLAY_PLATFORM "Windows"

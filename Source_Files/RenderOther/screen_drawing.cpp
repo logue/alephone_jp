@@ -6,7 +6,7 @@
  
 	This program is free software; you can redistribute it and/or modify
 	it under the terms of the GNU General Public License as published by
-	the Free Software Foundation; either version 2 of the License, or
+	the Free Software Foundation; either version 3 of the License, or
 	(at your option) any later version.
 
 	This program is distributed in the hope that it will be useful,
@@ -515,7 +515,6 @@ int sdl_font_info::_draw_text(SDL_Surface *s, const char *text, size_t length, i
 }
 
 #ifdef HAVE_SDL_TTF
-#include <iostream>
 int ttf_font_info::_draw_text(SDL_Surface *s, const char *text, size_t length, int x, int y, uint32 pixel, uint16 style, bool utf8) const
 {
 	int clip_top, clip_bottom, clip_left, clip_right;
@@ -592,7 +591,7 @@ static void draw_text(const char *text, int x, int y, uint32 pixel, const font_i
 {
 	draw_text(draw_surface, text, strlen(text), x, y, pixel, font, style);
 }	
-#include "converter.h"
+
 void _draw_screen_text(const char *text, screen_rectangle *destination, short flags, short font_id, short text_color)
 {
 	int x, y;
@@ -618,13 +617,7 @@ void _draw_screen_text(const char *text, screen_rectangle *destination, short fl
 		int last_non_printing_character = 0, text_width = 0;
 		unsigned count = 0;
 		while (count < strlen(text_to_draw) && text_width < RECTANGLE_WIDTH(destination)) {
-			// computer_interface.cpp‚Æ“¯‚¶ˆ’u
-			if (isJChar(text_to_draw[count])){
-				text_width += char_width(text_to_draw[count], font, style)+char_width(text_to_draw[count+1], font, style);
-				count++;
-			}else{
-				text_width += char_width(text_to_draw[count], font, style);
-			}
+			text_width += char_width(text_to_draw[count], font, style);
 			if (text_to_draw[count] == ' ')
 				last_non_printing_character = count;
 			count++;
