@@ -848,7 +848,8 @@ uint16 w_select::get_largest_label_width() {
  */
 
 #ifdef HAVE_SDL_TTF
-const char *w_toggle::onoff_labels[] = {"\342\230\220", "\342\230\221", NULL };
+//const char *w_toggle::onoff_labels[] = {"\342\230\220", "\342\230\221", NULL };
+const char *w_toggle::onoff_labels[] = {"-", "X", NULL };
 #else
 const char *w_toggle::onoff_labels[] = {"Off", "On", NULL};
 #endif

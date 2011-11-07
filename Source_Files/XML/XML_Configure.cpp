@@ -125,7 +125,7 @@ void XML_Configure::CharacterData(const char *String, int Length)
 	}
 }
 	
-
+extern "C" int XML_JapaneseEncodingHandler(void *encodingHandlerData, const XML_Char *name, XML_Encoding *info);
 // Does parsing; indicates whether the parsing was successful or not
 bool XML_Configure::DoParse()
 {
@@ -134,7 +134,8 @@ bool XML_Configure::DoParse()
 
 	// Create the parser
 	Parser = XML_ParserCreate("iso-8859-1");
-	
+        XML_SetUnknownEncodingHandler(Parser, XML_JapaneseEncodingHandler, NULL);
+
 	// Set up the callbacks
 	XML_SetUserData(Parser, this);
 	XML_SetElementHandler(Parser, StaticStartElement, StaticEndElement);

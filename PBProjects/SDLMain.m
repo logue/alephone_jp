@@ -336,7 +336,7 @@ static void CustomApplicationMain (int argc, char **argv)
     char **newargv;
 
     if (!gFinderLaunch)  /* MacOS is passing command line args. */
-        return TRUE;     /* We'll handle this in usage() instead. */
+        return FALSE;
 
     if (gCalledAppMainline)  /* app has started, ignore this document. */
         return FALSE;

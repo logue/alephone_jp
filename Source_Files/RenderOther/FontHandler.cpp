@@ -211,6 +211,7 @@ void FontSpecifier::Update()
 	Spec.size = Size;
 	Spec.style = Style;
 	Spec.adjust_height = AdjustLineHeight;
+//        Spec.normal = "mono";
 	Info = load_font(Spec);
 	
 	if (Info) {
@@ -230,11 +231,16 @@ extern int8 char_width(uint8 c, const sdl_font_info *font, uint16 style);
 
 int FontSpecifier::TextWidth(const char *text)
 {
+#if 0
 	int width = 0;
 	char c;
 	while ((c = *text++) != 0)
 		width += Widths[c];
 	return width;
+#else
+        // Japaneese font(assume text is shiftjis)
+        return Info->text_width(text, 0,false);
+#endif
 }
 
 #endif
@@ -244,6 +250,7 @@ int FontSpecifier::TextWidth(const char *text)
 // (this is to avoid texture and display-list memory leaks and other such things)
 void FontSpecifier::OGL_Reset(bool IsStarting)
 {
+#if 0
 	// Don't delete these if there is no valid texture;
 	// that indicates that there are no valid texture and display-list ID's.
 	if (!IsStarting && OGL_Texture)
@@ -478,6 +485,15 @@ void FontSpecifier::OGL_Reset(bool IsStarting)
  			Which++;
  		}
  	}
+#else
+        // Don't delete these if there is no valid texture;
+	// that indicates that there are no valid texture and display-list ID's.
+	if (!IsStarting)
+	{
+          glDeleteTextures(1,&TxtrID);
+	}
+	glGenTextures(1,&TxtrID);
+#endif
 }
 
 
@@ -487,6 +503,7 @@ void FontSpecifier::OGL_Reset(bool IsStarting)
 // One can surround it with glPushMatrix() and glPopMatrix() to remember the original.
 void FontSpecifier::OGL_Render(const char *Text)
 {
+#if 0
 	// Bug out if no texture to render
 	if (!OGL_Texture)
 	{
@@ -512,6 +529,82 @@ void FontSpecifier::OGL_Render(const char *Text)
 	}
 	
 	glPopAttrib();
+#else
+        SDL_Surface *FontSurface;
+	const int Pad = 0;
+	int ascent_p = Ascent + Pad, descent_p = Descent + Pad;	
+	int GlyphHeight = ascent_p + descent_p;
+        
+        size_t Len = MIN(strlen(Text),255);
+        // Put some padding around each glyph so as to avoid clipping it
+        
+        TxtrWidth = NextPowerOfTwo(TextWidth(Text));
+        TxtrHeight = NextPowerOfTwo(GlyphHeight);
+        
+        // Render the font glyphs into the SDL surface
+        FontSurface = SDL_CreateRGBSurface(0, TxtrWidth, TxtrHeight, 32, 0xff0000, 0x00ff00, 0x0000ff, 0xff000000);
+        if (FontSurface == NULL)
+          return;
+        // Set background to black
+        Uint32 White = SDL_MapRGB(FontSurface->format, 0xFF, 0xFF, 0xFF);
+        ::draw_text(FontSurface, Text, strlen(Text), 0, ascent_p, White, Info, Style);
+        
+	glPushAttrib(GL_ALL_ATTRIB_BITS);
+	
+	glEnable(GL_TEXTURE_2D);
+	glDisable(GL_CULL_FACE);
+	glEnable(GL_BLEND);
+	glDisable(GL_ALPHA_TEST);
+	
+	// OpenGL stuff starts here 	
+	// Load texture
+	
+	glBindTexture(GL_TEXTURE_2D,TxtrID);
+	
+	glTexEnvi(GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_MODULATE);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
+	
+	glTexImage2D(GL_TEXTURE_2D, 0, GL_LUMINANCE_ALPHA, TxtrWidth, TxtrHeight,
+                     0, GL_BGRA, GL_UNSIGNED_BYTE, (uint8 *)FontSurface->pixels);
+	
+	// Allocate and create display lists of rendering commands
+	GLfloat TWidNorm = GLfloat(1)/TxtrWidth;
+	GLfloat THtNorm = GLfloat(1)/TxtrHeight;
+	GLfloat Top = 0;
+	GLfloat Bottom = (THtNorm*GlyphHeight);
+	int Pos = 0;
+	short Width = TxtrWidth;
+	int NewPos = Width;
+	GLfloat Left = 0;
+	GLfloat Right = TWidNorm*NewPos;
+	
+	// Move to the current glyph's (padded) position
+	glTranslatef(-Pad,0,0);
+	
+	// Draw the glyph rectangle
+	// Due to a bug in MacOS X Classic OpenGL, glVertex2s() was changed to glVertex2f()
+	glBegin(GL_POLYGON);
+	
+	glTexCoord2f(Left,Top);
+	glVertex2d(0,-ascent_p);
+	
+	glTexCoord2f(Right,Top);
+	glVertex2d(Width,-ascent_p);
+	
+	glTexCoord2f(Right,Bottom);
+	glVertex2d(Width,descent_p);
+	
+	glTexCoord2f(Left,Bottom);
+	glVertex2d(0,descent_p);
+	
+	glEnd();
+	
+	// Move to the next glyph's position
+	glTranslated(Width-Pad,0,0);
+	
+	glPopAttrib();
+#endif
 }
 
 

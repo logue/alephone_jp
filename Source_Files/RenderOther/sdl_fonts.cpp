@@ -246,7 +246,7 @@ static TTF_Font *load_ttf_font(const std::string& path, uint16 style, int16 size
 	}
 
 	TTF_Font *font = 0;
-	if (path == "mono")
+	if (path == "mono" || path == "")
 	{
 		// Japanese Font cannot render as embeded font.
 		// then, if Fonts.ttf exsists, read external font forcely.
@@ -319,7 +319,7 @@ font_info *load_font(const TextSpec &spec) {
 //	return static_cast<font_info*>(load_font(spec));
 
 #ifdef HAVE_SDL_TTF
-	if (spec.normal != "")
+//	if (spec.normal != "")
 	{
 		std::string file;
 		file = locate_font(spec.normal);
@@ -407,21 +407,21 @@ font_info *load_font(const TextSpec &spec) {
 				
 			return info;
 		}
-		else if (spec.font != -1)
-		{
-			return static_cast<font_info *>(load_sdl_font(spec));
-		}
-		else
+		//else if (spec.font != -1)
+		//{
+		//	return static_cast<font_info *>(load_sdl_font(spec));
+		//}
+		//else
 			return 0;
 	}
-	else
+//	else
 #endif
-        if (spec.font != -1)
-	{
-		return static_cast<font_info *>(load_sdl_font(spec));
-	}
-	else
-		return 0;
+  //      if (spec.font != -1)
+//	{
+//		return static_cast<font_info *>(load_sdl_font(spec));
+//	}
+//	else
+//		return 0;
 }
 
 
