@@ -92,8 +92,8 @@ static const char* sStringSetNumber130[] = {
 
 // STR# Resource: "Prompts"
 static const char* sStringSetNumber131[] = {
-    "ゲーム保存：",
-    "映画の保存：",
+    "ゲーム保存",
+    "映画の保存",
     "映画の選択：",
     "デフォルト",
 };

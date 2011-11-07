@@ -107,12 +107,13 @@ Feb 13, 2003 (Woody Zenfell):
     and the relevant code uses per-player settings, this won't be necessary.
     Try a mass-search for "player_behavior" to find the areas affected.
 */
-// r4428ベース
+
 #include "cseries.h" // sorry ryan, nov. 4
 #include <string.h>
 #include <stdlib.h>
 #include <limits.h>
 #include <algorithm>
+#include <sstream>
 
 #ifdef PERFORMANCE
 #include <perf.h>
@@ -308,6 +309,7 @@ extern bool choose_saved_game_to_load(FileSpecifier& File);
 /* ---------------------- prototypes */
 static void display_credits(void);
 static void draw_button(short index, bool pressed);
+static void draw_powered_by_aleph_one();
 static void handle_replay(bool last_replay);
 static bool begin_game(short user, bool cheat);
 static void start_game(short user, bool changing_level);
@@ -326,6 +328,7 @@ static void display_quit_screens(void);
 static void	display_screen(short base_pict_id);
 static void display_introduction_screen_for_demo(void);
 static void display_epilogue(void);
+static void display_about_dialog();
 
 static void force_system_colors(void);
 static bool point_in_rectangle(short x, short y, screen_rectangle *rect);
@@ -362,7 +365,7 @@ void initialize_game_state(
 	toggle_menus(false);
 
 	if(insecure_lua) {
-	  alert_user("Insecure Lua has been manually enabled. Malicious Lua scripts can use Insecure Lua to take over your computer. Unless you specifically trust every single Lua script that will be running, you should quit Aleph One IMMEDIATELY.");
+	  alert_user(expand_app_variables("Insecure Lua has been manually enabled. Malicious Lua scripts can use Insecure Lua to take over your computer. Unless you specifically trust every single Lua script that will be running, you should quit $appName$ IMMEDIATELY.").c_str());
 	}
 
 	display_introduction();
@@ -790,6 +793,7 @@ bool join_networked_resume_game()
                 
                 if(success)
                 {
+                        Crosshairs_SetActive(player_preferences->crosshairs_active);
                         LoadHUDLua();
                         RunLuaHUDScript();
 
@@ -858,6 +862,7 @@ bool load_and_start_game(FileSpecifier& File)
 		interface_fade_out(MAIN_MENU_BASE, true);
 	}
 
+	Crosshairs_SetActive(player_preferences->crosshairs_active);
 	LoadHUDLua();
 	RunLuaHUDScript();
 
@@ -1052,6 +1057,11 @@ void update_interface_display(
 	
 	/* Use this to avoid the fade.. */
 	draw_full_screen_pict_resource_from_images(data->screen_base+game_state.current_screen);
+
+	if (game_state.state == _display_main_menu)
+	{
+		draw_powered_by_aleph_one();
+	}
 }
 
 bool idle_game_state(uint32 time)
@@ -1188,6 +1198,36 @@ bool idle_game_state(uint32 time)
 extern SDL_Surface *draw_surface;	// from screen_drawing.cpp
 //void draw_intro_screen(void);		// from screen.cpp
 
+static SDL_Surface *powered_by_alephone_surface = 0;
+#include "powered_by_alephone.h"
+
+extern void set_about_alephone_rect(int width, int height);
+
+static void draw_powered_by_aleph_one()
+{
+	if (!powered_by_alephone_surface)
+	{
+		SDL_RWops *rw = SDL_RWFromConstMem(powered_by_alephone_bmp, sizeof(powered_by_alephone_bmp));
+		powered_by_alephone_surface = SDL_LoadBMP_RW(rw, 0);
+		SDL_FreeRW(rw);
+
+		set_about_alephone_rect(powered_by_alephone_surface->w, powered_by_alephone_surface->h);
+	}
+
+	SDL_Rect rect;
+	rect.x = 640 - powered_by_alephone_surface->w;
+	rect.y = 480 - powered_by_alephone_surface->h;
+	rect.w = powered_by_alephone_surface->w;
+	rect.h = powered_by_alephone_surface->h;
+	
+	_set_port_to_intro();
+	SDL_BlitSurface(powered_by_alephone_surface, NULL, draw_surface, &rect);
+	_restore_port();
+
+	// have to reblit :(
+	draw_intro_screen();
+}
+
 void display_main_menu(
 	void)
 {
@@ -1207,21 +1247,8 @@ void display_main_menu(
 		Music::instance()->RestartIntroMusic();
 	}
 
-	// Draw AlephOne Version to screen
-	FontSpecifier& Font = GetOnScreenFont();
+	draw_powered_by_aleph_one();
 
-	// The line spacing is a generalization of "5" for larger fonts
-	short Offset = Font.Descent + Font.LineSpacing + 1;
-	short RightJustOffset = Font.TextWidth(A1_VERSION_STRING);
-	short X = 640 - RightJustOffset - 1;
-	short Y = 480 - Offset;
-
-	_set_port_to_intro();
-	Font.DrawText(draw_surface, "Aleph One", 640 - Font.TextWidth("Aleph One") - 1, Y, SDL_MapRGB(draw_surface->format, 0x40, 0x40, 0x40));
-	Font.DrawText(draw_surface, A1_VERSION_STRING, X, Y + Font.LineSpacing, SDL_MapRGB(draw_surface->format, 0x40, 0x40,
-															 0x40));
-	_restore_port();
-	draw_intro_screen();
 	game_state.main_menu_display_count++;
 }
 
@@ -1436,6 +1463,11 @@ void do_menu_item_command(
 				case iQuit:
 					display_quit_screens();
 					break;
+				case iAbout:
+					display_about_dialog();
+					game_state.phase= TICKS_UNTIL_DEMO_STARTS;
+					game_state.last_ticks_on_idle= machine_tick_count();
+					break;
 		
 				default:
 					assert(false);
@@ -1505,6 +1537,7 @@ bool enabled_item(
 		case iReplaySavedFilm:
 		case iCredits:
 		case iQuit:
+	        case iAbout:
 			break;
 
 		case iCenterButton:
@@ -1610,6 +1643,121 @@ static void display_epilogue(
 	for (int i=0; i<NumEndScreens; i++)
 		try_and_display_chapter_screen(CHAPTER_SCREEN_BASE+EndScreenIndex+i, true, true);
 	show_cursor();
+}
+
+class w_authors_list : public w_string_list
+{
+public:
+	w_authors_list(const vector<string>& items, dialog* d) :
+		w_string_list(items, d, 0) {}
+
+	void item_selected(void) { }
+};
+
+static void display_about_dialog()
+{
+	force_system_colors();
+
+	dialog d;
+
+	tab_placer* tabs = new tab_placer();
+
+	vertical_placer* placer = new vertical_placer;
+	std::vector<std::string> labels;
+	labels.push_back("ABOUT");
+	labels.push_back("AUTHORS");
+	w_tab *tab_w = new w_tab(labels, tabs);
+	
+	placer->dual_add(new w_title("ALEPH ONE"), d);
+	placer->add(new w_spacer, true);
+
+	placer->dual_add(tab_w, d);
+	placer->add(new w_spacer, true);
+
+	vertical_placer* about_placer = new vertical_placer;
+	
+	if (strcmp(get_application_name(), "Aleph One") != 0)
+	{
+		about_placer->dual_add(new w_static_text(expand_app_variables("$appName$ is powered by").c_str()), d);
+	}
+	about_placer->dual_add(new w_static_text(expand_app_variables("Aleph One $appVersion$ ($appDate$)").c_str()), d);
+
+	about_placer->add(new w_spacer, true);
+
+	about_placer->dual_add(new w_hyperlink(A1_HOMEPAGE_URL), d);
+
+	about_placer->add(new w_spacer(2 * get_theme_space(SPACER_WIDGET)), true);
+	
+	about_placer->dual_add(new w_static_text(expand_app_variables("Aleph One is free software with ABSOLUTELY NO WARRANTY.").c_str()), d);
+	about_placer->dual_add(new w_static_text("You are welcome to redistribute it under certain conditions."), d);
+	about_placer->dual_add(new w_hyperlink("http://www.gnu.org/licenses/gpl-3.0.html"), d);
+
+	about_placer->add(new w_spacer, true);
+
+	about_placer->dual_add(new w_static_text("This license does not apply to game content."), d);
+
+	about_placer->add(new w_spacer, true);
+
+	about_placer->dual_add(new w_static_text(expand_app_variables("Scenario loaded: $scenarioName$ $scenarioVersion$").c_str()), d);
+
+	vertical_placer *authors_placer = new vertical_placer();
+	
+	authors_placer->dual_add(new w_static_text("Aleph One is based on the source code for Marathon 2 and"), d);
+	authors_placer->dual_add(new w_static_text("Marathon Infinity, which was developed by Bungie software."), d);
+	authors_placer->add(new w_spacer, true);
+	
+	authors_placer->dual_add(new w_static_text("The enhancements and extensions to Marathon 2 and Marathon"), d);
+	authors_placer->dual_add(new w_static_text("Infinity that constitute Aleph One have been made by:"), d);
+
+	authors_placer->add(new w_spacer, true);
+
+	std::vector<std::string> authors;
+	authors.push_back("Bo Lindbergh");
+	authors.push_back("Chris Lovell");
+	authors.push_back("Jesse Luehrs");
+	authors.push_back("Derek Moeller");
+	authors.push_back("Jeremiah Morris");
+	authors.push_back("Sam Morris");
+	authors.push_back("Benoit Nadeau (Benad)");
+	authors.push_back("Mihai Parparita");
+	authors.push_back("Jeremy Parsons (brefin)");
+	authors.push_back("Eric Peterson");
+	authors.push_back("Loren Petrich");
+	authors.push_back("Ian Pitcher");
+	authors.push_back("Chris Pruett");
+	authors.push_back("Matthew Reda");
+	authors.push_back("Ian Rickard");
+	authors.push_back("Etienne Samson (tiennou)");
+	authors.push_back("Gregory Smith (treellama)");
+	authors.push_back("Scott Smith (pickle136)");
+	authors.push_back("Wolfgang Sourdeau");
+	authors.push_back("Peter Stirling");
+	authors.push_back("Alexander Strange (mrvacbob)");
+	authors.push_back("Alexei Svitkine");
+	authors.push_back("Ben Thompson");
+	authors.push_back("Clemens Unterkofler (hogdotmac)");
+	authors.push_back("James Willson");
+	authors.push_back("Woody Zenfell III");
+
+	w_authors_list *authors_w = new w_authors_list(authors, &d);
+	authors_placer->dual_add(authors_w, d);
+
+	tabs->add(about_placer, true);
+	tabs->add(authors_placer, true);
+
+	placer->add(tabs, true);
+	
+	placer->add(new w_spacer, true);
+
+	placer->dual_add(new w_button("OK", dialog_ok, &d), d);
+	
+	d.set_widget_placer(placer);
+
+	clear_screen();
+
+	d.run();
+
+	display_main_menu();
 }
 
 static void display_credits(
@@ -1720,6 +1868,8 @@ static void draw_button(
 	short index, 
 	bool pressed)
 {
+	if (index == _about_alephone_rect) return;
+
 	screen_rectangle *screen_rect= get_interface_rectangle(index);
 	short pict_resource_number= MAIN_MENU_BASE + pressed;
 
@@ -1956,6 +2106,7 @@ static bool begin_game(
 			try_and_display_chapter_screen(CHAPTER_SCREEN_BASE + entry.level_number, false, false);
 		}
 
+		Crosshairs_SetActive(player_preferences->crosshairs_active);
 		LoadHUDLua();
 		RunLuaHUDScript();
 		
@@ -2811,6 +2962,7 @@ void show_movie(short index)
 	}
 
 	if (!File) return;
+
 	change_screen_mode(_screentype_chapter);
 	SDL_Surface *s = SDL_GetVideoSurface();
 	
@@ -2905,7 +3057,7 @@ size_t should_restore_game_networked()
         dialog d;
 
 	vertical_placer *placer = new vertical_placer;
-	placer->dual_add(new w_title("ゲーム再開"), d);
+		placer->dual_add(new w_title("ゲーム再開"), d);
 	placer->add(new w_spacer, true);
 
 	horizontal_placer *resume_as_placer = new horizontal_placer;

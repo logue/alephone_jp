@@ -91,7 +91,7 @@ setupAndConnectClient(MetaserverClient& client)
 
 			placer->dual_add(new w_static_text("新しいバージョンのAleph Oneがあります。"), d);
 			placer->dual_add(new w_static_text("オンラインでプレイする前に"), d);
-			placer->dual_add(new w_static_text("http://mjolnir.logue.be/"), d);
+			placer->dual_add(new w_hyperlink(A1_HOMEPAGE_URL), d);
 			placer->dual_add(new w_static_text("から最新版を確認して下さい。"), d);
 			
 			placer->add(new w_spacer(), true);
@@ -104,7 +104,7 @@ setupAndConnectClient(MetaserverClient& client)
 	}
 
 	client.setPlayerTeamName("");
-	client.connect("metaserver.lhowon.org", 6321, network_preferences->metaserver_login, network_preferences->metaserver_password);
+	client.connect(A1_METASERVER_HOST, 6321, network_preferences->metaserver_login, network_preferences->metaserver_password);
 }
 
 

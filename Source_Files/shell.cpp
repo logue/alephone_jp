@@ -122,14 +122,23 @@
 #include "network.h"
 #include "Console.h"
 
-// JP fix
-#include <locale.h>
-
-extern void initSJIS2UTF16();
-
 // LP addition: whether or not the cheats are active
 // Defined in shell_misc.cpp
 extern bool CheatsActive;
+
+// Application names
+#if defined(__MACH__) && defined(__APPLE__)
+// These are defined and initialized in SDLMain.m
+extern char *application_name;
+extern char *application_identifier;
+extern char *bundle_resource_path;
+extern char *app_log_directory;
+extern char *app_preferences_directory;
+extern char *app_support_directory;
+#else
+char application_name[] = A1_DISPLAY_NAME;
+char application_identifier[] = "org.bungie.source.AlephOne";
+#endif
 
 // Data directories
 vector <DirectorySpecifier> data_search_path; // List of directories in which data files are searched for
@@ -258,14 +267,15 @@ bool handle_open_document(const std::string& filename)
 int main(int argc, char **argv)
 {
 	// Print banner (don't bother if this doesn't appear when started from a GUI)
-	printf ("Aleph One JP" A1_VERSION_STRING "\n"
-	  "http://marathon.sourceforge.jp/\n\n"
+	char app_name_version[256];
+	expand_app_variables(app_name_version, "Aleph One JP $appLongVersion$");
+	printf ("%s\n%s\n\n"
 	  "オリジナルのコードは、Bungie Software <http://www.bungie.com/>によるものです。\n"
 	  "この他にLoren Petrich, Chris Pruett, Rhys Hill氏らによって書かれています。\n"
 	  "TCP/IP ネットワーク by Woody Zenfell\n"
 	  "Expat XMLライブラリ by James Clark\n"
 	  "SDLポート by Christian Bauer <Christian.Bauer@uni-mainz.de>\n"
-	  "日本語化 by saiten <http://www.isidesystem.net/>, ookawa_mi, Logue <http://logue.be/>\n" 
+	  "日本語化 by saiten <http://www.isidesystem.net/>, ookawa_mi, Logue <http://logue.be/>, marathon.\n" 
 #if defined(__MACH__) && defined(__APPLE__)
 	  "Mac OS X/SDLバージョンは、Chris Lovell, Alexander Strange, and Woody Zenfell氏らによって作られました。\n"
 #endif
@@ -284,6 +294,7 @@ int main(int argc, char **argv)
 #ifdef HAVE_LUA
 	  "\nこのビルドは、Luaスクリプトが有効です。\n"
 #endif
+	  , app_name_version, A1_HOMEPAGE_URL
     );
 
 	// Parse arguments
@@ -294,7 +305,7 @@ int main(int argc, char **argv)
 		if (strcmp(*argv, "-h") == 0 || strcmp(*argv, "--help") == 0) {
 			usage(prg_name);
 		} else if (strcmp(*argv, "-v") == 0 || strcmp(*argv, "--version") == 0) {
-			printf("Aleph One " A1_VERSION_STRING "\n");
+			printf("%s\n", app_name_version);
 			exit(0);
 		} else if (strcmp(*argv, "-f") == 0 || strcmp(*argv, "--fullscreen") == 0) {
 			force_fullscreen = true;
@@ -373,7 +384,6 @@ int main(int argc, char **argv)
 
 static void initialize_application(void)
 {
-	setlocale( LC_ALL, "JPN");	// for wchar_t type.
 #if defined(__WIN32__) && defined(__MINGW32__)
 	if (LoadLibrary("exchndl.dll")) option_debug = true;
 #endif
@@ -391,9 +401,8 @@ static void initialize_application(void)
 	log_dir = local_data_dir;
 
 #elif defined(__APPLE__) && defined(__MACH__)
-	extern char *bundle_name; // SDLMain.m
-	DirectorySpecifier bundle_data_dir = bundle_name;
-	bundle_data_dir += "Contents/Resources/DataFiles";
+	DirectorySpecifier bundle_data_dir = bundle_resource_path;
+	bundle_data_dir += "DataFiles";
 
 	data_search_path.push_back(bundle_data_dir);
 
@@ -403,23 +412,9 @@ static void initialize_application(void)
 		free(buf);
 	}
 	
-	const char *home = getenv("HOME");
-	if (home)
-	{
-	    local_data_dir = home;
-	    preferences_dir = home;
-	    log_dir = home;
-	    log_dir += "Library";
-	    log_dir += "Logs";
-	}
-
-	local_data_dir += "Library";
-	local_data_dir += "Application Support";
-	local_data_dir += "AlephOne";
-
-	preferences_dir += "Library";
-	preferences_dir += "Preferences";
-	preferences_dir += "org.bungie.source.AlephOne";
+	log_dir = app_log_directory;
+	preferences_dir = app_preferences_directory;
+	local_data_dir = app_support_directory;
 
 #elif defined(__BEOS__)
 
@@ -603,7 +598,7 @@ static void initialize_application(void)
 		fprintf(stderr, "SDLの初期化に失敗しました。（%s）\n", SDL_GetError());
 		exit(1);
 	}
-	SDL_WM_SetCaption("Aleph One", "Aleph One");
+	SDL_WM_SetCaption(application_name, application_name);
 
 #if defined(HAVE_SDL_IMAGE) && (SDL_IMAGE_PATCHLEVEL >= 8)
 	IMG_Init(IMG_INIT_JPG | IMG_INIT_PNG);
@@ -1028,12 +1023,13 @@ static void handle_game_key(const SDL_Event &event)
 			}
 			else
 			{
-				int mode = alephone::Screen::instance()->FindMode(graphics_preferences->screen_mode.width, graphics_preferences->screen_mode.height);
+				int mode = alephone::Screen::instance()->FindMode(get_screen_mode()->width, get_screen_mode()->height);
 				if (mode < alephone::Screen::instance()->GetModes().size() - 1)
 				{
 					PlayInterfaceButtonSound(Sound_ButtonSuccess());
 					graphics_preferences->screen_mode.width = alephone::Screen::instance()->ModeWidth(mode + 1);
 					graphics_preferences->screen_mode.height = alephone::Screen::instance()->ModeHeight(mode + 1);
+					graphics_preferences->screen_mode.auto_resolution = false;
 					graphics_preferences->screen_mode.hud = false;
 					changed_screen_mode = changed_prefs = true;
 				} else
@@ -1050,12 +1046,15 @@ static void handle_game_key(const SDL_Event &event)
 			}
 			else
 			{
-				int mode = alephone::Screen::instance()->FindMode(graphics_preferences->screen_mode.width, graphics_preferences->screen_mode.height);
-				if (mode > 0)
+				int mode = alephone::Screen::instance()->FindMode(get_screen_mode()->width, get_screen_mode()->height);
+				int automode = get_screen_mode()->fullscreen ? 0 : 1;
+				if (mode > automode)
 				{
 					PlayInterfaceButtonSound(Sound_ButtonSuccess());
 					graphics_preferences->screen_mode.width = alephone::Screen::instance()->ModeWidth(mode - 1);
 					graphics_preferences->screen_mode.height = alephone::Screen::instance()->ModeHeight(mode - 1);
+					if ((mode - 1) == automode)
+						graphics_preferences->screen_mode.auto_resolution = true;
 					graphics_preferences->screen_mode.hud = true;
 					changed_screen_mode = changed_prefs = true;
 				} else
@@ -1103,7 +1102,9 @@ static void handle_game_key(const SDL_Event &event)
 		else if (key == SDLK_F8) // Toggle the crosshairs
 		{
 			PlayInterfaceButtonSound(Sound_ButtonSuccess());
-			Crosshairs_SetActive(!Crosshairs_IsActive());
+			player_preferences->crosshairs_active = !player_preferences->crosshairs_active;
+			Crosshairs_SetActive(player_preferences->crosshairs_active);
+			changed_prefs = true;
 		}
 		else if (key == SDLK_F9) // Screen dump
 		{
@@ -1270,6 +1271,9 @@ static void process_game_key(const SDL_Event &event)
 				toggle_fullscreen();
 			}
 			break;
+		case SDLK_a:
+			item = iAbout;
+			break;
 		default:
 			break;
 		}
@@ -1385,7 +1389,7 @@ void dump_screen(void)
 	std::vector<IMG_PNG_text> texts;
 	std::map<std::string, std::string> metadata;
 
-	metadata["Source"] = string("Aleph One ") + A1_DISPLAY_VERSION + " (" + A1_DISPLAY_PLATFORM + ")";
+	metadata["Source"] = expand_app_variables("$appName$ $appVersion$ ($appPlatform$)");
 
 	time_t rawtime;
 	time(&rawtime);
@@ -1495,6 +1499,11 @@ void LoadBaseMMLScripts()
 			i++;
 		}
 	}
+}
+			   
+const char *get_application_name(void)
+{
+   return application_name;
 }
 
 // LP: the rest of the code has been moved to Jeremy's shell_misc.file.

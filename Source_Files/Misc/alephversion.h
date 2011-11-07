@@ -23,9 +23,10 @@ ALEPHVERSION.H
 */
 
 
-#define A1_DISPLAY_VERSION "1.0b4 JP"
-#define A1_DISPLAY_DATE_VERSION "2011-07-24"
-#define A1_DATE_VERSION "20110724"
+#define A1_DISPLAY_NAME "Aleph One"
+#define A1_DISPLAY_VERSION "1.0b4"
+#define A1_DISPLAY_DATE_VERSION "2011-07-17"
+#define A1_DATE_VERSION "20110717"
 
 #ifdef WIN32
 #define A1_DISPLAY_PLATFORM "Windows"
@@ -57,5 +58,8 @@ ALEPHVERSION.H
 #define A1_VERSION_STRING A1_DISPLAY_PLATFORM " " A1_DISPLAY_DATE_VERSION " " A1_DISPLAY_VERSION
 #endif
 
+#define A1_HOMEPAGE_URL "http://marathon.sourceforge.net/"
+#define A1_UPDATE_HOST "marathon.sourceforge.net"
+#define A1_METASERVER_HOST "metaserver.lhowon.org"
 
 #endif // ALEPHVERSION_H

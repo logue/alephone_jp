@@ -1446,7 +1446,7 @@ int Lua_Player_Find_Target(lua_State *L)
 		definition->flags |= _usually_pass_transparent_side;
 
 	// preflight a projectile, 1 WU at a time (because of projectile speed bug)
-	uint16 flags = translate_projectile(0, &origin, old_polygon, &destination, &new_polygon, player->monster_index, &obstruction_index, &line_index, true);
+	uint16 flags = translate_projectile(0, &origin, old_polygon, &destination, &new_polygon, player->monster_index, &obstruction_index, &line_index, true, NONE);
 
 	while (!(flags & _projectile_hit))
 	{
@@ -1454,7 +1454,7 @@ int Lua_Player_Find_Target(lua_State *L)
 		old_polygon = new_polygon;
 
 		translate_point3d(&destination, WORLD_ONE, player->facing, player->elevation);
-		flags = translate_projectile(0, &origin, old_polygon, &destination, &new_polygon, player->monster_index, &obstruction_index, &line_index, true);
+		flags = translate_projectile(0, &origin, old_polygon, &destination, &new_polygon, player->monster_index, &obstruction_index, &line_index, true, NONE);
 	}
 
 	if (!was_pass_transparent) 
@@ -2642,7 +2642,7 @@ static const char *compatibility_script = ""
 	"function clear_music() Music.clear() end\n"
 	"function count_item(player, item_type) return Players[player].items[item_type] end\n"
 	"function create_camera() return Cameras.new().index end\n"
-"function crosshairs_active(player)  return 0 end\n" // Players[player].crosshairs.active end\n"
+	"function crosshairs_active(player) return Players[player].crosshairs.active end\n"
 	"function deactivate_camera(camera) Cameras[camera]:deactivate() end\n"
 	"function destroy_ball(player) for i in ItemTypes() do if i.ball then Players[player].items[i] = 0 end end end\n"
 	"function fade_music(duration) if duration then Music.fade(duration * 60 / 1000) else Music.fade(60 / 1000) end end\n"

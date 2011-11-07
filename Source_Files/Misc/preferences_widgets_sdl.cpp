@@ -31,6 +31,8 @@
 #include    "preferences_widgets_sdl.h"
 #include "Crosshairs.h"
 
+extern bool use_lua_hud_crosshairs;
+
 /*
  *  Environment dialog
  */
@@ -112,7 +114,6 @@ void w_env_select::select_item(dialog *parent)
 	w_env_list *list_w = new w_env_list(items, item.GetPath(), &d);
 	placer->dual_add(list_w, d);
 	placer->add(new w_spacer(), true);
-//	placer->dual_add(new w_button("CANCEL", dialog_cancel, &d), d);
 	placer->dual_add(new w_button("キャンセル", dialog_cancel, &d), d);
 
 	d.activate_widget(list_w);
@@ -155,10 +156,13 @@ void w_crosshair_display::draw(SDL_Surface *s) const
 	SDL_Rect r = { 0, 0, surface->w, surface->h };
 	draw_rectangle(surface, &r, get_theme_color(DIALOG_FRAME, FRAME_COLOR));
 	
+	bool old_use_lua_hud_crosshairs = use_lua_hud_crosshairs;
+	use_lua_hud_crosshairs = false;
 	bool Old_Crosshairs_IsActive = Crosshairs_IsActive();
 	Crosshairs_SetActive(true);
 	Crosshairs_Render(surface);
 	Crosshairs_SetActive(Old_Crosshairs_IsActive);
+	use_lua_hud_crosshairs = old_use_lua_hud_crosshairs;
 	
 	SDL_BlitSurface(surface, 0, s, const_cast<SDL_Rect *>(&rect));
 }
@@ -208,17 +212,14 @@ void w_plugins::draw_item(Plugins::iterator it, SDL_Surface* s, int16 x, int16 y
 	std::string enabled;
 	if (!it->compatible()) 
 	{
-//		enabled = " Incompatible";
 		enabled = " 使用不可";
 	} 
 	else if (it->enabled) 
 	{
-//		enabled = " Enabled";
 		enabled = " 有効";
 	}
 	else 
 	{
-//		enabled = " Disabled";
 		enabled = " 無効";
 	}
 
@@ -237,7 +238,6 @@ void w_plugins::draw_item(Plugins::iterator it, SDL_Surface* s, int16 x, int16 y
 	if (it->description.size()) {
 		draw_text(s, it->description.c_str(), x, y, color, font, style);
 	} else {
-//		draw_text(s, "No description", x, y, color, font, style);
 		draw_text(s, "説明なし", x, y, color, font, style);
 	}
 }

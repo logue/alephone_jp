@@ -70,6 +70,7 @@ struct screen_mode_data
 
 	short width;
 	short height;
+	bool auto_resolution;
 	bool hud;
 	short hud_scale_level;
 	short term_scale_level;
@@ -101,6 +102,9 @@ XML_ElementParser *Cheats_GetParser();
 
 // Load the base MML scripts:
 void LoadBaseMMLScripts();
+
+// Application info:
+const char *get_application_name(void);
 
 /* ---------- prototypes/SHAPES.C */
 

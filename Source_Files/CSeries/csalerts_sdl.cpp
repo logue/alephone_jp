@@ -40,6 +40,8 @@ April 22, 2003 (Woody Zenfell):
 #include <windows.h>
 #include <tchar.h>
 #include <shlobj.h>
+#else
+#include <sys/wait.h>
 #endif
 
 /*
@@ -94,7 +96,7 @@ bool system_alert_choose_scenario(char *chosen_dir)
 #if defined(__WIN32__)
 	BROWSEINFO bi = { 0 };
 	TCHAR path[MAX_PATH];
-	bi.lpszTitle = _T("Select an Aleph One scenario:");
+	bi.lpszTitle = _T("Select a scenario to play:");
 	bi.pszDisplayName = path;
 	bi.lpfn = browse_callback_proc;
 	bi.ulFlags = BIF_RETURNONLYFSDIRS | BIF_NEWDIALOGSTYLE | 0x00000200; // no "New Folder" button
@@ -115,6 +117,29 @@ bool system_alert_choose_scenario(char *chosen_dir)
 	}
 #endif
 	return false;
+}
+#endif
+
+#ifdef __MACOSX__
+extern void system_launch_url_in_browser(const char *url);
+#else
+void system_launch_url_in_browser(const char *url)
+{
+#if defined(__WIN32__)
+	ShellExecute(NULL, "open", url, NULL, NULL, SW_SHOWNORMAL);
+#else
+	pid_t pid = fork();
+	if (pid == 0)
+	{
+		execlp("sensible-browser", "sensible-browser", url, NULL);
+		exit(0);  // in case exec fails
+	}
+	else if (pid > 0)
+	{
+		int childstatus;
+		wait(&childstatus);
+	}
+#endif
 }
 #endif
 
@@ -187,6 +212,12 @@ void alert_user(short severity, short resid, short item, OSErr error)
 bool alert_choose_scenario(char *chosen_dir)
 {
 	return system_alert_choose_scenario(chosen_dir);
+}
+
+void launch_url_in_browser(const char *url)
+{
+	fprintf(stderr, "System launch url: %s\n", url);
+	system_launch_url_in_browser(url);
 }
 
 

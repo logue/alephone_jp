@@ -47,8 +47,8 @@ bool system_alert_choose_scenario(char *chosen_dir)
 	[panel setCanChooseFiles:NO];
 	[panel setCanChooseDirectories:YES];
 	[panel setAllowsMultipleSelection:NO];
-	[panel setTitle:@"Choose Aleph One Scenario"];
-	[panel setMessage:@"Select an Aleph One scenario:"];
+	[panel setTitle:@"Choose Scenario"];
+	[panel setMessage:@"Select a scenario to play:"];
 	[panel setPrompt:@"Choose"];
 	
 	if (!chosen_dir)
@@ -58,4 +58,10 @@ bool system_alert_choose_scenario(char *chosen_dir)
 		return false;
 	
 	return [[[panel URL] path] getCString:chosen_dir maxLength:256 encoding:NSUTF8StringEncoding];
+}
+
+void system_launch_url_in_browser(const char *url)
+{
+	NSURL *urlref = [NSURL URLWithString:[NSString stringWithUTF8String:url]];
+	[[NSWorkspace sharedWorkspace] openURL:urlref];
 }

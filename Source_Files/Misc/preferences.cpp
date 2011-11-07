@@ -5,7 +5,7 @@
  
 	This program is free software; you can redistribute it and/or modify
 	it under the terms of the GNU General Public License as published by
-	the Free Software Foundation; either version 2 of the License, or
+	the Free Software Foundation; either version 3 of the License, or
 	(at your option) any later version.
 
 	This program is distributed in the hope that it will be useful,
@@ -123,6 +123,10 @@ static const char* sNetworkGameProtocolNames[] =
 };
 
 static const size_t NUMBER_OF_NETWORK_GAME_PROTOCOL_NAMES = sizeof(sNetworkGameProtocolNames) / sizeof(sNetworkGameProtocolNames[0]);
+
+#if defined(HAVE_BUNDLE_NAME)
+static const char sBundlePlaceholder[] = "AlephOneSDL.app";
+#endif
 
 
 // MML-like Preferences Stuff; it makes obsolete
@@ -346,7 +350,7 @@ protected:
 };
 
 static const char *shape_labels[3] = {
-	"十\字","八角形", NULL
+	"Cross", "Octagon", NULL
 };
 
 enum { kCrosshairWidget };
@@ -381,6 +385,10 @@ static void crosshair_dialog(void *arg)
 	table_placer *table = new table_placer(2, get_theme_space(ITEM_WIDGET));
 	table->col_flags(0, placeable::kAlignRight);
 
+	w_toggle *crosshairs_active_w = new w_toggle(player_preferences->crosshairs_active);
+	table->dual_add(crosshairs_active_w->label("クロスヘアーを表\示"), d);
+	table->dual_add(crosshairs_active_w, d);	
+	
 	// Shape
 	w_select *shape_w = new w_select(0, shape_labels);
 	SelectSelectorWidget shapeWidget(shape_w);
@@ -471,6 +479,7 @@ static void crosshair_dialog(void *arg)
 	{
 		crosshair_binders->migrate_all_first_to_second();
 		player_preferences->Crosshairs.PreCalced = false;
+		player_preferences->crosshairs_active = crosshairs_active_w->get_selection();
 		write_preferences();
 	}
 	else
@@ -800,29 +809,10 @@ static void software_rendering_options_dialog(void* arg)
 	}
 }
 
-#if defined(__APPLE__) && defined(__MACH__)
-#include <sys/utsname.h>
-#include <boost/algorithm/string/predicate.hpp>
-
-// On Lion, uname -r starts with "11."
-inline bool IsLion() 
-{
-	struct utsname uinfo;
-	uname(&uinfo);
-	return boost::algorithm::starts_with(uinfo.release, "11.");
-}
-#else
-inline bool IsLion() { return false; }
-#endif
-
 // ZZZ addition: bounce to correct renderer-config box based on selected rendering system.
 static void rendering_options_dialog_demux(void* arg)
 {
 	int theSelectedRenderer = get_selection_control_value((dialog*) arg, iRENDERING_SYSTEM) - 1;
-	if (IsLion())
-	{
-		theSelectedRenderer += 1;
-	}
 
 	switch(theSelectedRenderer) {
 		case _no_acceleration:
@@ -843,10 +833,16 @@ static void rendering_options_dialog_demux(void* arg)
 std::vector<std::string> build_resolution_labels()
 {
 	std::vector<std::string> result;
+	bool first_mode = true;
 	for (std::vector<std::pair<int, int> >::const_iterator it = Screen::instance()->GetModes().begin(); it != Screen::instance()->GetModes().end(); ++it)
 	{
 		ostringstream os;
 		os << it->first << "x" << it->second;
+		if (first_mode)
+		{
+			result.push_back("Automatic");
+			first_mode = false;
+		}
 		result.push_back(os.str());
 	}
 
@@ -867,15 +863,7 @@ static void graphics_dialog(void *arg)
 	table_placer *table = new table_placer(2, get_theme_space(ITEM_WIDGET), true);
 	table->col_flags(0, placeable::kAlignRight);
 	
-	w_select* renderer_w;
-	if (IsLion())
-	{
-		renderer_w = new w_select(graphics_preferences->screen_mode.acceleration - 1, renderer_labels + 1);
-	}
-	else
-	{
-		renderer_w = new w_select(graphics_preferences->screen_mode.acceleration, renderer_labels);
-	}
+	w_select* renderer_w = new w_select(graphics_preferences->screen_mode.acceleration, renderer_labels);
 	renderer_w->set_identifier(iRENDERING_SYSTEM);
 #ifndef HAVE_OPENGL
 	renderer_w->set_selection(_no_acceleration);
@@ -886,7 +874,10 @@ static void graphics_dialog(void *arg)
 
 	w_select_popup *size_w = new w_select_popup();
 	size_w->set_labels(build_resolution_labels());
-	size_w->set_selection(Screen::instance()->FindMode(graphics_preferences->screen_mode.width, graphics_preferences->screen_mode.height));
+	if (graphics_preferences->screen_mode.auto_resolution)
+		size_w->set_selection(0);
+	else
+		size_w->set_selection(Screen::instance()->FindMode(graphics_preferences->screen_mode.width, graphics_preferences->screen_mode.height) + 1);
 	table->dual_add(size_w->label("画面の大きさ"), d);
 	table->dual_add(size_w, d);
 
@@ -945,7 +936,8 @@ static void graphics_dialog(void *arg)
 	placer->add(new w_spacer(), true);
 
 #ifndef HAVE_OPENGL
-	placer->dual_add(new w_static_text("このAleph Oneのコピーは、OpenGLをサポートしないビルドです。"), d);
+	
+	placer->dual_add(new w_static_text("このAleph Oneのコピーは、OpenGLをサポートしないビルドです。"), d);#endif
 #endif
 	placer->add(new w_spacer(), true);
 
@@ -971,10 +963,6 @@ static void graphics_dialog(void *arg)
 	    }
 
 	    short renderer = static_cast<short>(renderer_w->get_selection());
-    	if (IsLion())
-	    {
-		    renderer += 1;
-	    }
 	    assert(renderer >= 0);
 	    if(renderer != graphics_preferences->screen_mode.acceleration) {
 		    graphics_preferences->screen_mode.acceleration = renderer;
@@ -983,12 +971,19 @@ static void graphics_dialog(void *arg)
 	    }
 	    
 	    short resolution = static_cast<short>(size_w->get_selection());
-	    if (Screen::instance()->ModeWidth(resolution) != graphics_preferences->screen_mode.width || Screen::instance()->ModeHeight(resolution) != graphics_preferences->screen_mode.height)
+		if (resolution == 0)
+		{
+			if (!graphics_preferences->screen_mode.auto_resolution) {
+				graphics_preferences->screen_mode.auto_resolution = true;
+				changed = true;
+			}
+		}
+	    else if (Screen::instance()->ModeWidth(resolution - 1) != graphics_preferences->screen_mode.width || Screen::instance()->ModeHeight(resolution - 1) != graphics_preferences->screen_mode.height || graphics_preferences->screen_mode.auto_resolution)
 	    {
-		    graphics_preferences->screen_mode.width = Screen::instance()->ModeWidth(resolution);
-		    graphics_preferences->screen_mode.height = Screen::instance()->ModeHeight(resolution);
+		    graphics_preferences->screen_mode.width = Screen::instance()->ModeWidth(resolution - 1);
+		    graphics_preferences->screen_mode.height = Screen::instance()->ModeHeight(resolution - 1);
+			graphics_preferences->screen_mode.auto_resolution = false;
 		    changed = true;
-		    // don't change mode now; it will be changed when the game starts
 	    }
 	    
 	    short gamma = static_cast<short>(gamma_w->get_selection());
@@ -2167,9 +2162,9 @@ void read_preferences ()
 				OFile.Close();
 				if (!XML_DataBlockLoader.ParseData(&FileContents[0], Len)) {
 					if (defaults)
-						alert_user("There were default preferences-file parsing errors (see Aleph One Log.txt for details)", infoError);
+						alert_user(expand_app_variables("There were default preferences-file parsing errors (see $appLogFile$ for details)").c_str(), infoError);
 					else
-						alert_user("There were preferences-file parsing errors (see Aleph One Log.txt for details)", infoError);
+						alert_user(expand_app_variables("There were preferences-file parsing errors (see $appLogFile$ for details)").c_str(), infoError);
 				}
 			}
 		}
@@ -2225,6 +2220,7 @@ void write_preferences(
 	fprintf(F,"<graphics\n");
 	fprintf(F,"  scmode_width=\"%hd\"\n", graphics_preferences->screen_mode.width);
 	fprintf(F,"  scmode_height=\"%hd\"\n", graphics_preferences->screen_mode.height);
+	fprintf(F,"  scmode_auto_resolution=\"%s\"\n", BoolString(graphics_preferences->screen_mode.auto_resolution));
 	fprintf(F,"  scmode_hud=\"%s\"\n", BoolString(graphics_preferences->screen_mode.hud));
 	fprintf(F,"  scmode_hud_scale=\"%hd\"\n", graphics_preferences->screen_mode.hud_scale_level);
 	fprintf(F,"  scmode_term_scale=\"%hd\"\n", graphics_preferences->screen_mode.term_scale_level);
@@ -2274,6 +2270,7 @@ void write_preferences(
 	fprintf(F,"  last_time_ran=\"%u\"\n",player_preferences->last_time_ran);
 	fprintf(F,"  difficulty=\"%hd\"\n",player_preferences->difficulty_level);
 	fprintf(F,"  bkgd_music=\"%s\"\n",BoolString(player_preferences->background_music_on));
+	fprintf(F,"  crosshairs_active=\"%s\"\n",BoolString(player_preferences->crosshairs_active));
 	fprintf(F,">\n");
 	ChaseCamData& ChaseCam = player_preferences->ChaseCam;
 	fprintf(F,"  <chase_cam behind=\"%hd\" upward=\"%hd\" rightward=\"%hd\" flags=\"%hd\"\n",
@@ -2380,7 +2377,7 @@ void write_preferences(
 	extern char *bundle_name; // SDLMain.m
 	// replace our leading bundle name with generic "AlephOneSDL.app" (we do reverse when loading)
 	if (!strncmp(environment_preferences->theme_dir, bundle_name, strlen(bundle_name))) {
-		strlcpy(temporary, "AlephOneSDL.app", sizeof(temporary));
+		strlcpy(temporary, sBundlePlaceholder, sizeof(temporary));
 		strlcat(temporary, environment_preferences->theme_dir + strlen(bundle_name), sizeof(temporary));
 		WriteXML_CString(F,"  theme_dir=\"",temporary,256,"\"\n");
 	} else
@@ -2436,6 +2433,7 @@ static void default_graphics_preferences(graphics_preferences_data *preferences)
 
 	preferences->screen_mode.width = 640;
 	preferences->screen_mode.height = 480;
+	preferences->screen_mode.auto_resolution = true;
 	preferences->screen_mode.hud = true;
 	preferences->screen_mode.hud_scale_level = 0;
 	preferences->screen_mode.term_scale_level = 0;
@@ -2637,12 +2635,6 @@ static void default_environment_preferences(environment_preferences_data *prefer
 static bool validate_graphics_preferences(graphics_preferences_data *preferences)
 {
 	bool changed= false;
-
-	if (IsLion() && preferences->screen_mode.acceleration == _no_acceleration)
-	{
-		changed = true;
-		preferences->screen_mode.acceleration = _opengl_acceleration;
-	}
 
 	// Fix bool options
 	preferences->screen_mode.high_resolution = !!preferences->screen_mode.high_resolution;
@@ -3206,6 +3198,10 @@ bool XML_GraphicsPrefsParser::HandleAttribute(const char *Tag, const char *Value
 	{
 		return ReadInt16Value(Value, graphics_preferences->screen_mode.width);
 	}
+	else if (StringsEqual(Tag,"scmode_auto_resolution"))
+	{
+		return ReadBooleanValue(Value, graphics_preferences->screen_mode.auto_resolution);
+	}
 	else if (StringsEqual(Tag,"scmode_hud"))
 	{
 		return ReadBooleanValue(Value, graphics_preferences->screen_mode.hud);
@@ -3447,6 +3443,10 @@ bool XML_PlayerPrefsParser::HandleAttribute(const char *Tag, const char *Value)
 	else if (StringsEqual(Tag,"bkgd_music"))
 	{
 		return ReadBooleanValue(Value,player_preferences->background_music_on);
+	}
+	else if (StringsEqual(Tag,"crosshairs_active"))
+	{
+		return ReadBooleanValue(Value,player_preferences->crosshairs_active);
 	}
 	return true;
 }
@@ -4003,9 +4003,9 @@ bool XML_EnvironmentPrefsParser::HandleAttribute(const char *Tag, const char *Va
 #if defined(HAVE_BUNDLE_NAME)
 		extern char *bundle_name; // SDLMain.m
 		// replace leading "AlephOneSDL.app" with our actual bundle name (we do reverse when saving)
-		if (!strncmp(environment_preferences->theme_dir, "AlephOneSDL.app", 15)) {
+		if (!strncmp(environment_preferences->theme_dir, sBundlePlaceholder, strlen(sBundlePlaceholder))) {
 			strlcpy(temporary, bundle_name, sizeof(temporary));
-			strlcat(temporary, environment_preferences->theme_dir + 15, sizeof(temporary));
+			strlcat(temporary, environment_preferences->theme_dir + strlen(sBundlePlaceholder), sizeof(temporary));
 			strlcpy(environment_preferences->theme_dir, temporary, 255);			
 		}
 #endif
