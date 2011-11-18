@@ -1574,6 +1574,8 @@ void paint_window_black(
 	_restore_port();
 }
 
+static LoadedResource SoundRsrc;
+
 /* --------------------- static code */
 
 static void display_introduction(
@@ -1594,6 +1596,13 @@ static void display_introduction(
 		game_state.phase= screen_data->duration;
 		game_state.last_ticks_on_idle= machine_tick_count();
 		display_screen(screen_data->screen_base);
+
+		Mixer::instance()->StopSoundResource();
+		SoundRsrc.Unload();
+		if (get_sound_resource_from_images(screen_data->screen_base, SoundRsrc))
+		{
+			Mixer::instance()->PlaySoundResource(SoundRsrc);
+		}
 	}
 	else
 	{
@@ -1664,8 +1673,8 @@ static void display_about_dialog()
 
 	vertical_placer* placer = new vertical_placer;
 	std::vector<std::string> labels;
-	labels.push_back("ABOUT");
-	labels.push_back("AUTHORS");
+	labels.push_back("このアプリについて");
+	labels.push_back("作者");
 	w_tab *tab_w = new w_tab(labels, tabs);
 	
 	placer->dual_add(new w_title("ALEPH ONE"), d);
@@ -1688,22 +1697,22 @@ static void display_about_dialog()
 
 	about_placer->add(new w_spacer(2 * get_theme_space(SPACER_WIDGET)), true);
 	
-	about_placer->dual_add(new w_static_text(expand_app_variables("Aleph One is free software with ABSOLUTELY NO WARRANTY.").c_str()), d);
-	about_placer->dual_add(new w_static_text("You are welcome to redistribute it under certain conditions."), d);
+	about_placer->dual_add(new w_static_text(expand_app_variables("Aleph Oneは、無料ですが全く無保障です。").c_str()), d);
+	about_placer->dual_add(new w_static_text("以下の条件に従う限り、自由に再配布可能\です。"), d);
 	about_placer->dual_add(new w_hyperlink("http://www.gnu.org/licenses/gpl-3.0.html"), d);
 
 	about_placer->add(new w_spacer, true);
 
-	about_placer->dual_add(new w_static_text("This license does not apply to game content."), d);
+	about_placer->dual_add(new w_static_text("このライセンスは、ゲームのコンテンツには適用されません。"), d);
 
 	about_placer->add(new w_spacer, true);
 
-	about_placer->dual_add(new w_static_text(expand_app_variables("Scenario loaded: $scenarioName$ $scenarioVersion$").c_str()), d);
+	about_placer->dual_add(new w_static_text(expand_app_variables("読み込まれたシナリオ：$scenarioName$ $scenarioVersion$").c_str()), d);
 
 	vertical_placer *authors_placer = new vertical_placer();
 	
-	authors_placer->dual_add(new w_static_text("Aleph One is based on the source code for Marathon 2 and"), d);
-	authors_placer->dual_add(new w_static_text("Marathon Infinity, which was developed by Bungie software."), d);
+	authors_placer->dual_add(new w_static_text("Aleph Oneは、Marathon 2とMarathon Infinityのソ\ースコードを"), d);
+	authors_placer->dual_add(new w_static_text("ベースにしています。これらは、Bungie softwareによって作られました。"), d);
 	authors_placer->add(new w_spacer, true);
 	
 	authors_placer->dual_add(new w_static_text("The enhancements and extensions to Marathon 2 and Marathon"), d);
@@ -1712,6 +1721,23 @@ static void display_about_dialog()
 	authors_placer->add(new w_spacer, true);
 
 	std::vector<std::string> authors;
+	authors.push_back("Joey Adams");
+	authors.push_back("Michael Adams (mdmkolbe)");
+	authors.push_back("Falko Axmann");
+	authors.push_back("Christian Bauer");
+	authors.push_back("Mike Benonis");
+	authors.push_back("Steven Bytnar");
+	authors.push_back("Glen Ditchfield");
+	authors.push_back("Will Dyson");
+	authors.push_back("Carl Gherardi");
+	authors.push_back("Thomas Herzog");
+	authors.push_back("Peter Hessler");
+	authors.push_back("Matthew Hielscher");
+	authors.push_back("Rhys Hill");
+	authors.push_back("Alan Jenkins");
+	authors.push_back("Richard Jenkins (Solra Bizna)");
+	authors.push_back("Jeremy, the MSVC guy");
+	authors.push_back("Mark Levin");
 	authors.push_back("Bo Lindbergh");
 	authors.push_back("Chris Lovell");
 	authors.push_back("Jesse Luehrs");
@@ -2417,6 +2443,15 @@ static void next_game_screen(
 			game_state.phase= data->duration;
 			game_state.last_ticks_on_idle= machine_tick_count();
 			display_screen(data->screen_base);
+			if (game_state.state == _display_intro_screens)
+			{
+				Mixer::instance()->StopSoundResource();
+				SoundRsrc.Unload();
+				if (get_sound_resource_from_images(pict_resource_number, SoundRsrc))
+				{
+					Mixer::instance()->PlaySoundResource(SoundRsrc);
+				}
+			}
 		}
 		else
 		{
@@ -2822,6 +2857,7 @@ void interface_fade_out(
 		
 		if(fade_music) 
 		{
+			Mixer::instance()->StopSoundResource();
 			while(Music::instance()->Playing()) 
 				Music::instance()->Idle();
 
@@ -3057,7 +3093,7 @@ size_t should_restore_game_networked()
         dialog d;
 
 	vertical_placer *placer = new vertical_placer;
-		placer->dual_add(new w_title("ゲーム再開"), d);
+	placer->dual_add(new w_title("ゲーム再開"), d);
 	placer->add(new w_spacer, true);
 
 	horizontal_placer *resume_as_placer = new horizontal_placer;

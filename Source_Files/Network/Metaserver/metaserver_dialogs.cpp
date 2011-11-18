@@ -91,7 +91,11 @@ setupAndConnectClient(MetaserverClient& client)
 
 			placer->dual_add(new w_static_text("新しいバージョンのAleph Oneがあります。"), d);
 			placer->dual_add(new w_static_text("オンラインでプレイする前に"), d);
+#ifdef MAC_APP_STORE
+			placer->dual_add(new w_static_text("App Store"), d);
+#else
 			placer->dual_add(new w_hyperlink(A1_HOMEPAGE_URL), d);
+#endif
 			placer->dual_add(new w_static_text("から最新版を確認して下さい。"), d);
 			
 			placer->add(new w_spacer(), true);

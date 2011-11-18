@@ -438,10 +438,9 @@ SDL_Surface *picture_to_surface(LoadedResource &rsrc)
 	SDL_RWops *p = SDL_RWFromMem(rsrc.GetPointer(), (int)rsrc.GetLength());
 	if (p == NULL)
 		return NULL;
-	SDL_RWseek(p, 2 /* 6 */, SEEK_CUR);		// picSize/top/left
-	int top = SDL_ReadBE16(p), left = SDL_ReadBE16(p), bottom = SDL_ReadBE16(p), right = SDL_ReadBE16(p);
-	int pic_height = /* SDL_ReadBE16(p) */ bottom - top;
-	int pic_width = /* SDL_ReadBE16(p) */ right - left;
+	SDL_RWseek(p, 6, SEEK_CUR);		// picSize/top/left
+	int pic_height = SDL_ReadBE16(p);
+	int pic_width = SDL_ReadBE16(p);
 	//printf("pic_width %d, pic_height %d\n", pic_width, pic_height);
 
 	// Read and parse picture opcodes
@@ -535,124 +534,111 @@ SDL_Surface *picture_to_surface(LoadedResource &rsrc)
 			case 0x0099:	// Packed CopyBits with clipping region
 			case 0x009a:	// Direct CopyBits
 			case 0x009b: {	// Direct CopyBits with clipping region
-                                        // 1. PixMap
-                          if (opcode == 0x009a || opcode == 0x009b)
-                            SDL_RWseek(p, 4, SEEK_CUR);		// pmBaseAddr
-                          uint16 row_bytes = SDL_ReadBE16(p);	// the upper 2 bits are flags
-                                                                //printf(" row_bytes %04x\n", row_bytes);
-                          bool is_pixmap = ((row_bytes & 0x8000) != 0);
-                          row_bytes &= 0x3fff;
-                          uint16 top = SDL_ReadBE16(p);
-                          uint16 left = SDL_ReadBE16(p);
-                          uint16 height = SDL_ReadBE16(p) - top;
-                          uint16 width = SDL_ReadBE16(p) - left;
-                          uint16 pack_type, pixel_size;
-                          if (is_pixmap) {
-                            SDL_RWseek(p, 2, SEEK_CUR);			// pmVersion
-                            pack_type = SDL_ReadBE16(p);
-                            SDL_RWseek(p, 14, SEEK_CUR);		// packSize/hRes/vRes/pixelType
-                            pixel_size = SDL_ReadBE16(p);
-                            SDL_RWseek(p, 16, SEEK_CUR);		// cmpCount/cmpSize/planeBytes/pmTable/pmReserved
-                          } else {
-                            pack_type = 0;
-                            pixel_size = 1;
-                          }
-                          //printf(" width %d, height %d, row_bytes %d, depth %d, pack_type %d\n", width, height, row_bytes, pixel_size, pack_type);
-                          
-                          // Allocate surface for picture
-                          uint32 Rmask = 0, Gmask = 0, Bmask = 0;
-                          int surface_depth = 8;
-                          switch (pixel_size) {
-                            case 1:
-                            case 2:
-                            case 4:
-                            case 8:
-                              Rmask = Gmask = Bmask = 0xff;
-                              surface_depth = 8;	// SDL surfaces must be at least 8 bits depth, so we expand 1/2/4-bit pictures to 8-bit
-                              break;
-                            case 16:
-                              Rmask = 0x7c00;
-                              Gmask = 0x03e0;
-                              Bmask = 0x001f;
-                              surface_depth = 16;
-                              break;
-                            case 32:
-                              Rmask = 0x00ff0000;
-                              Gmask = 0x0000ff00;
-                              Bmask = 0x000000ff;
-                              surface_depth = 32;
-                              break;
-                            default:
-                              fprintf(stderr, "Unsupported PICT depth %d\n", pixel_size);
-                              done = true;
-                              break;
-                          }
-                          if (done)
-                            break;
-                          SDL_Surface *bm = SDL_CreateRGBSurface(SDL_SWSURFACE, width, height, surface_depth, Rmask, Gmask, Bmask, 0);
-                          if (bm == NULL) {
-                            done = true;
-                            break;
-                          }
-                          
-                          // 2. ColorTable
-                          if (is_pixmap && (opcode == 0x0098 || opcode == 0x0099)) {
-                            SDL_Color colors[256];
-                            SDL_RWseek(p, 4, SEEK_CUR);			// ctSeed
-                            uint16 flags = SDL_ReadBE16(p);
-                            int num_colors = SDL_ReadBE16(p) + 1;
-                            for (int i=0; i<num_colors; i++) {
-                              uint8 value = SDL_ReadBE16(p) & 0xff;
-                              if (flags & 0x8000)
-                                value = i;
-                              colors[value].r = SDL_ReadBE16(p) >> 8;
-                              colors[value].g = SDL_ReadBE16(p) >> 8;
-                              colors[value].b = SDL_ReadBE16(p) >> 8;
-                            }
-                            SDL_SetColors(bm, colors, 0, 256);
-                          }
-                          
-                          // 3. source/destination Rect and transfer mode
-                          SDL_RWseek(p, 18, SEEK_CUR);
-                          
-                          // 4. clipping region
-                          if (opcode == 0x0099 || opcode == 0x009b) {
-                            uint16 rgn_size = SDL_ReadBE16(p);
-                            SDL_RWseek(p, rgn_size - 2, SEEK_CUR);
-                          }
-                          
-                          // 5. graphics data
-                          int data_size = uncompress_picture((uint8 *)rsrc.GetPointer() + SDL_RWtell(p), row_bytes, (uint8 *)bm->pixels, bm->pitch, pixel_size, height, pack_type);
-                          if (data_size < 0) {
-                            done = true;
-                            break;
-                          }
-                          if (data_size & 1)
-                            data_size++;
-                          SDL_RWseek(p, data_size, SEEK_CUR);
-                          
-                          // If there's already a surface, throw away the decoded image
-                          // (actually, we could have skipped this entire opcode, but the
-                          // only way to do this is to decode the image data).
-                          // So we only draw the first image we encounter.
-                          if( ! s ) {
-                            int real = width > pic_width ? width : pic_width;
-                            s = SDL_CreateRGBSurface(SDL_SWSURFACE, real, pic_height, 32,
-#ifdef ALEPHONE_LITTLE_ENDIAN
-                                                     0x000000ff, 0x0000ff00, 0x00ff0000, 0xff000000
-#else
-                                                     0xff000000, 0x00ff0000, 0x0000ff00, 0x000000ff
-#endif
-                                                     );
-                          }
-                          SDL_Rect R = {left,  top,  width, height  };
-                          SDL_BlitSurface(bm, NULL, s, &R);
-                          SDL_FreeSurface(bm);
-                          //				if (s)
-                          //					SDL_FreeSurface(bm);
-                          //				else
-                          //					s = bm;
-                          break;
+				// 1. PixMap
+				if (opcode == 0x009a || opcode == 0x009b)
+					SDL_RWseek(p, 4, SEEK_CUR);		// pmBaseAddr
+				uint16 row_bytes = SDL_ReadBE16(p);	// the upper 2 bits are flags
+				//printf(" row_bytes %04x\n", row_bytes);
+				bool is_pixmap = ((row_bytes & 0x8000) != 0);
+				row_bytes &= 0x3fff;
+				uint16 top = SDL_ReadBE16(p);
+				uint16 left = SDL_ReadBE16(p);
+				uint16 height = SDL_ReadBE16(p) - top;
+				uint16 width = SDL_ReadBE16(p) - left;
+				uint16 pack_type, pixel_size;
+				if (is_pixmap) {
+					SDL_RWseek(p, 2, SEEK_CUR);			// pmVersion
+					pack_type = SDL_ReadBE16(p);
+					SDL_RWseek(p, 14, SEEK_CUR);		// packSize/hRes/vRes/pixelType
+					pixel_size = SDL_ReadBE16(p);
+					SDL_RWseek(p, 16, SEEK_CUR);		// cmpCount/cmpSize/planeBytes/pmTable/pmReserved
+				} else {
+					pack_type = 0;
+					pixel_size = 1;
+				}
+				//printf(" width %d, height %d, row_bytes %d, depth %d, pack_type %d\n", width, height, row_bytes, pixel_size, pack_type);
+
+				// Allocate surface for picture
+				uint32 Rmask = 0, Gmask = 0, Bmask = 0;
+				int surface_depth = 8;
+				switch (pixel_size) {
+					case 1:
+					case 2:
+					case 4:
+					case 8:
+						Rmask = Gmask = Bmask = 0xff;
+						surface_depth = 8;	// SDL surfaces must be at least 8 bits depth, so we expand 1/2/4-bit pictures to 8-bit
+						break;
+					case 16:
+						Rmask = 0x7c00;
+						Gmask = 0x03e0;
+						Bmask = 0x001f;
+						surface_depth = 16;
+						break;
+					case 32:
+						Rmask = 0x00ff0000;
+						Gmask = 0x0000ff00;
+						Bmask = 0x000000ff;
+						surface_depth = 32;
+						break;
+					default:
+						fprintf(stderr, "Unsupported PICT depth %d\n", pixel_size);
+						done = true;
+						break;
+				}
+				if (done)
+					break;
+				SDL_Surface *bm = SDL_CreateRGBSurface(SDL_SWSURFACE, width, height, surface_depth, Rmask, Gmask, Bmask, 0);
+				if (bm == NULL) {
+					done = true;
+					break;
+				}
+
+				// 2. ColorTable
+				if (is_pixmap && (opcode == 0x0098 || opcode == 0x0099)) {
+					SDL_Color colors[256];
+					SDL_RWseek(p, 4, SEEK_CUR);			// ctSeed
+					uint16 flags = SDL_ReadBE16(p);
+					int num_colors = SDL_ReadBE16(p) + 1;
+					for (int i=0; i<num_colors; i++) {
+						uint8 value = SDL_ReadBE16(p) & 0xff;
+						if (flags & 0x8000)
+							value = i;
+						colors[value].r = SDL_ReadBE16(p) >> 8;
+						colors[value].g = SDL_ReadBE16(p) >> 8;
+						colors[value].b = SDL_ReadBE16(p) >> 8;
+					}
+					SDL_SetColors(bm, colors, 0, 256);
+				}
+
+				// 3. source/destination Rect and transfer mode
+				SDL_RWseek(p, 18, SEEK_CUR);
+
+				// 4. clipping region
+				if (opcode == 0x0099 || opcode == 0x009b) {
+					uint16 rgn_size = SDL_ReadBE16(p);
+					SDL_RWseek(p, rgn_size - 2, SEEK_CUR);
+				}
+
+				// 5. graphics data
+				int data_size = uncompress_picture((uint8 *)rsrc.GetPointer() + SDL_RWtell(p), row_bytes, (uint8 *)bm->pixels, bm->pitch, pixel_size, height, pack_type);
+				if (data_size < 0) {
+					done = true;
+					break;
+				}
+				if (data_size & 1)
+					data_size++;
+				SDL_RWseek(p, data_size, SEEK_CUR);
+
+				// If there's already a surface, throw away the decoded image
+				// (actually, we could have skipped this entire opcode, but the
+				// only way to do this is to decode the image data).
+				// So we only draw the first image we encounter.
+				if (s)
+					SDL_FreeSurface(bm);
+				else
+					s = bm;
+				break;
 			}
 
 #ifdef HAVE_SDL_IMAGE
@@ -1228,6 +1214,15 @@ bool get_picture_resource_from_images(int base_resource, LoadedResource &PictRsr
 		base_resource, _images_file_delta16, _images_file_delta32);
 	return ImagesFile.get_pict(RsrcID, PictRsrc);
 }
+
+bool get_sound_resource_from_images(int resource_number, LoadedResource &SoundRsrc)
+{
+	if (!ImagesFile.is_open())
+		return false;
+
+	return ImagesFile.get_snd(resource_number, SoundRsrc);
+}
+
 
 bool images_picture_exists(int base_resource)
 {

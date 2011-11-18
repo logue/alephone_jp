@@ -238,8 +238,8 @@ int FontSpecifier::TextWidth(const char *text)
 		width += Widths[c];
 	return width;
 #else
-        // Japaneese font(assume text is shiftjis)
-        return Info->text_width(text, 0,false);
+	// Japaneese font(assume text is shiftjis)
+	return Info->text_width(text, 0,false);
 #endif
 }
 
@@ -616,12 +616,13 @@ void FontSpecifier::OGL_DrawText(const char *text, const screen_rectangle &r, sh
 	char text_to_draw[256];
 	strncpy(text_to_draw, text, 256);
 	text_to_draw[255] = 0;
-
+#if 0
 	// Check for wrapping, and if it occurs, be recursive
 	if (flags & _wrap_text) {
 		int last_non_printing_character = 0, text_width = 0;
 		unsigned count = 0;
 		while (count < strlen(text_to_draw) && text_width < RECTANGLE_WIDTH(&r)) {
+			
 			text_width += CharWidth(text_to_draw[count]);
 			if (text_to_draw[count] == ' ')
 				last_non_printing_character = count;
@@ -662,7 +663,9 @@ void FontSpecifier::OGL_DrawText(const char *text, const screen_rectangle &r, sh
 		text_to_draw[num] = 0;
 		t_width = TextWidth(text_to_draw);
 	}
-
+#else
+	int t_width = TextWidth(text_to_draw);
+#endif
 
 	// Horizontal positioning
 	int x, y;

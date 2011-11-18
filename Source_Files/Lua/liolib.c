@@ -1,5 +1,5 @@
 /*
-** $Id: liolib.c 3049 2007-05-15 01:58:42Z ghs $
+** $Id$
 ** Standard I/O (and system) library
 ** See Copyright Notice in lua.h
 */
