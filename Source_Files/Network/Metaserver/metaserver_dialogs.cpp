@@ -86,7 +86,7 @@ setupAndConnectClient(MetaserverClient& client)
 			dialog d;
 			vertical_placer *placer = new vertical_placer;
 
-			placer->dual_add(new w_title("アップデート可\能です"), d);
+			placer->dual_add(new w_title("アップデート可能\です"), d);
 			placer->add(new w_spacer(), true);
 
 			placer->dual_add(new w_static_text("新しいバージョンのAleph Oneがあります。"), d);

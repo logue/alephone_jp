@@ -1,0 +1,36 @@
+1 VERSIONINFO
+FILEVERSION WIN_VERSION_STRING 
+PRODUCTVERSION WIN_VERSION_STRING
+FILEFLAGSMASK 0
+FILEOS 0x40000
+FILETYPE 1
+{
+ BLOCK "StringFileInfo"
+ {
+  BLOCK "040904E4"
+  {
+   VALUE "FileDescription", "Marathon (A1)"
+   VALUE "FileVersion", "WIN_VERSION_STRING"
+   VALUE "LegalCopyright", "GNU General Public License Version 3"
+   VALUE "OriginalFilename", "Marathon.exe"
+   VALUE "ProductName", "Aleph One"
+   VALUE "ProductVersion", "A1_DISPLAY_VERSION"
+   VALUE "URL", "http://marathon.sourceforge.net"
+  }
+ }
+ BLOCK "VarFileInfo"
+ {
+  VALUE "Translation", 0x0409, 1252
+ }
+}
+
+AppIcon ICON "marathon.ico"
+FilmIcon ICON "FilmIcon.ico"
+ImagesIcon ICON "ImagesIcon.ico"
+MMLIcon ICON "MMLIcon.ico"
+MapIcon ICON "MapIcon.ico"
+MusakIcon ICON "MusakIcon.ico"
+PhysIcon ICON "PhysIcon.ico"
+SaveIcon ICON "SaveIcon.ico"
+ShapesIcon ICON "ShapesIcon.ico"
+SoundsIcon ICON "SoundsIcon.ico"
