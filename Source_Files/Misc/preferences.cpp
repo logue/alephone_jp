@@ -1102,7 +1102,7 @@ static void sound_dialog(void *arg)
 	table->dual_add(quality_w, d);
 
 	stereo_w = new w_stereo_toggle(sound_preferences->flags & _stereo_flag);
-	table->dual_add(quality_w->label("ステレオ"), d);
+	table->dual_add(stereo_w->label("ステレオ"), d);
 	table->dual_add(stereo_w, d);
 
 	dynamic_w = new w_dynamic_toggle(TEST_FLAG(sound_preferences->flags, _dynamic_tracking_flag));
@@ -1286,6 +1286,7 @@ static void controls_dialog(void *arg)
 
 	mouse_w->add_dependent_widget(mouse_acceleration_w);
 
+      
 	w_toggle *invert_mouse_w = new w_toggle(TEST_FLAG(input_preferences->modifiers, _inputmod_invert_mouse));
 	mouse->dual_add(invert_mouse_w->label("マウスを反転"), d);
 	mouse->dual_add(invert_mouse_w, d);
@@ -1318,7 +1319,7 @@ static void controls_dialog(void *arg)
 		(int) ((theSensitivityLog - kMinSensitivityLog) * (1000.0f / kSensitivityLogRange));
 
 	w_slider* sens_horizontal_w = new w_slider(1000, theHorizontalSliderPosition);
-	mouse->dual_add(sens_vertical_w->label("マウスの垂平感度"), d);
+	mouse->dual_add(sens_horizontal_w->label("マウスの垂平感度"), d);
 	mouse->dual_add(sens_horizontal_w, d);
 
 	mouse_w->add_dependent_widget(sens_horizontal_w);
@@ -1393,28 +1394,23 @@ static void controls_dialog(void *arg)
 	w_toggle *always_run_w = new w_toggle(input_preferences->modifiers & _inputmod_interchange_run_walk);
 	general_table->dual_add(always_run_w->label("常時走行"), d);
 	general_table->dual_add(always_run_w, d);
-
 	w_toggle *always_swim_w = new w_toggle(TEST_FLAG(input_preferences->modifiers, _inputmod_interchange_swim_sink));
 	general_table->dual_add(always_swim_w->label("常時泳ぐ"), d);
 	general_table->dual_add(always_swim_w, d);
-
 	general_table->add_row(new w_spacer(), true);
 
 	w_toggle *weapon_w = new w_toggle(!(input_preferences->modifiers & _inputmod_dont_switch_to_new_weapon));
 	general_table->dual_add(weapon_w->label("武器の自動切換え"), d);
 	general_table->dual_add(weapon_w, d);
-
 	w_toggle* auto_recenter_w = new w_toggle(!(input_preferences->modifiers & _inputmod_dont_auto_recenter));
 	general_table->dual_add(auto_recenter_w->label("視点の自動リセンター"), d);
 	general_table->dual_add(auto_recenter_w, d);
-
 	general->add(general_table, true);
 
 	general->add(new w_spacer(), true);
 	general->dual_add(new w_static_text("注意：武器の自動切換えと、視点の自動リセンターは、ネットワークプレイで"), d);
 	general->dual_add(new w_static_text("自動的にオンになります。シングルプレイヤーモードでも、映画を録画する際"), d);
 	general->dual_add(new w_static_text("どちらかをオフにしても、自動的に無効化されます。"), d);
-		
 	tabs->add(general, true);
 	tabs->add(mouse, true);
 	tabs->add(joystick, true);
@@ -1441,7 +1437,7 @@ static void controls_dialog(void *arg)
 	if (d.run() == 0) {	// Accepted
 		bool changed = false;
 
-		int16 device = static_cast<int16>(mouse_w->get_selection());
+                int16 device = static_cast<int16>(mouse_w->get_selection());
 		if (device != input_preferences->input_device) {
 			input_preferences->input_device = device;
 			changed = true;
@@ -1512,7 +1508,6 @@ static void controls_dialog(void *arg)
 				changed = true;
 			}
 		}
-
 		if (changed)
 			write_preferences();
 	}

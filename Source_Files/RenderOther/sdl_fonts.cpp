@@ -82,7 +82,10 @@ extern void fix_missing_interface_fonts();
 
 void initialize_fonts(void)
 {
-        logContext("initializing fonts");
+	logContext("initializing fonts");
+	// Font resource file does not contains Japanese font.
+	// Then, Japanese text render as SDL_ttf and comment out to loading Font file code.
+/*
 	// Open font resource files
 	bool found = false;
 	vector<DirectorySpecifier>::const_iterator i = data_search_path.begin(), end = data_search_path.end();
@@ -100,31 +103,34 @@ void initialize_fonts(void)
 		}
 		i++;
 	}
+
 	if (!found) {
+*/
 #ifdef HAVE_SDL_TTF
 		// use our own built-in font
 		fix_missing_overhead_map_fonts();
 		fix_missing_interface_fonts();
 #else
-		logFatal("Can't open font resource file");
+		//logFatal("Can't open font resource file");
+		logFatal("AlephOne JP requires SDL_ttf!");
 /*
-                vector<DirectorySpecifier>::const_iterator i = data_search_path.begin(), end = data_search_path.end();
-                while (i != end) {
-                        FileSpecifier fonts = *i + "Fonts";
-                        fdprintf(fonts.GetPath());
-                        i++;
-                }
-*/                
+				vector<DirectorySpecifier>::const_iterator i = data_search_path.begin(), end = data_search_path.end();
+				while (i != end) {
+						FileSpecifier fonts = *i + "Fonts";
+						fdprintf(fonts.GetPath());
+						i++;
+				}
+*/
 		exit(1);
 #endif
-	}
+//	}
 }
 
 
 /*
  *  Load font from resources and allocate sdl_font_info
  */
-
+/*
 sdl_font_info *load_sdl_font(const TextSpec &spec)
 {
 	sdl_font_info *info = NULL;
@@ -230,7 +236,7 @@ sdl_font_info *load_sdl_font(const TextSpec &spec)
 	SDL_RWclose(p);
 	return info;
 }
-
+*/
 #ifdef HAVE_SDL_TTF
 static TTF_Font *load_ttf_font(const std::string& path, uint16 style, int16 size)
 {
@@ -246,31 +252,16 @@ static TTF_Font *load_ttf_font(const std::string& path, uint16 style, int16 size
 	}
 
 	TTF_Font *font = 0;
-	if (path == "mono" || path == "")
-	{
-		// Japanese Font cannot render as embeded font.
-		// then, if Fonts.ttf exsists, read external font forcely.
-		FILE* fp = fopen( FONT_PATH, "r" );
-		if( !fp ){
-//			fprintf(stderr, "TTF Font %s is not found. Load internal font.\n", FONT_PATH);
-			font = TTF_OpenFontRW(SDL_RWFromConstMem(aleph_sans_mono_bold, sizeof(aleph_sans_mono_bold)), 0, size);
-		}else{
-			font = TTF_OpenFont(FONT_PATH, size);
-			fclose( fp );
-		}
-	}
-	else
-	{
-		short SavedType, SavedError = get_game_error(&SavedType);
 
-		FileSpecifier fileSpec(path);
-		OpenedFile file;
-		if (fileSpec.Open(file))
-		{
-			font = TTF_OpenFontRW(file.TakeRWops(), 1, size);
-		}
-
-		set_game_error(SavedType, SavedError);
+	// Japanese Font cannot render as embeded font.
+	// then, if Fonts.ttf exsists, read external font forcely.
+	FILE* fp = fopen( FONT_PATH, "r" );
+	if( !fp ){
+		fprintf(stderr, "TTF Font %s is not found. Load internal font. Japanese strings will be garbled.\n", FONT_PATH);
+		font = TTF_OpenFontRW(SDL_RWFromConstMem(aleph_sans_mono_bold, sizeof(aleph_sans_mono_bold)), 0, size);
+	}else{
+		font = TTF_OpenFont(FONT_PATH, size);
+		fclose( fp );
 	}
 
 	if (font)
@@ -316,10 +307,7 @@ static const char *locate_font(const std::string& path)
 #endif
 
 font_info *load_font(const TextSpec &spec) {
-//	return static_cast<font_info*>(load_font(spec));
-
 #ifdef HAVE_SDL_TTF
-//	if (spec.normal != "")
 	{
 		std::string file;
 		file = locate_font(spec.normal);
@@ -403,27 +391,12 @@ font_info *load_font(const TextSpec &spec) {
 					}
 				}
 			}
-			
-				
 			return info;
 		}
-		//else if (spec.font != -1)
-		//{
-		//	return static_cast<font_info *>(load_sdl_font(spec));
-		//}
-		//else
-			return 0;
+		return 0;
 	}
-//	else
 #endif
-  //      if (spec.font != -1)
-//	{
-//		return static_cast<font_info *>(load_sdl_font(spec));
-//	}
-//	else
-//		return 0;
 }
-
 
 /*
  *  Unload font, free sdl_font_info

@@ -697,7 +697,7 @@ void w_select_button::place(const SDL_Rect &r, placement_flags flags)
 // if no valid labels, returns -1 when asked for selection
 // draw(), get_selection() check num_labels directly instead of trying to keep selection set at -1
 
-static const char* sNoValidOptionsString = "(no valid options)"; // XXX should be moved outside compiled code e.g. to MML
+static const char* sNoValidOptionsString = "Åiñ≥å¯Ç»éwíËÅj"; // XXX should be moved outside compiled code e.g. to MML
 
 w_select::w_select(size_t s, const char **l) : widget(LABEL_WIDGET), labels(l), we_own_labels(false), selection(s), selection_changed_callback(NULL), utf8(false)
 {
@@ -890,8 +890,7 @@ uint16 w_select::get_largest_label_width() {
  */
 
 #ifdef HAVE_SDL_TTF
-//const char *w_toggle::onoff_labels[] = {"\342\230\220", "\342\230\221", NULL };
-const char *w_toggle::onoff_labels[] = {"‚òê", "‚òë", NULL };
+const char *w_toggle::onoff_labels[] = {"\342\230\220", "\342\230\221", NULL };
 #else
 const char *w_toggle::onoff_labels[] = {"Off", "On", NULL};
 #endif
@@ -1032,7 +1031,7 @@ void w_color_picker::click(int, int)
 	dialog d;
 	
 	vertical_placer *placer = new vertical_placer;
-	placer->dual_add(new w_title("CHOOSE A COLOR"), d);
+	placer->dual_add(new w_title("êFÇëIë"), d);
 	placer->add(new w_spacer(), true);
 
 	w_color_block *color_block = new w_color_block(&m_color);
@@ -1042,22 +1041,22 @@ void w_color_picker::click(int, int)
 	table->col_flags(0, placeable::kAlignRight);
 
 	w_slider *red_w = new w_slider(16, m_color.red >> 12);
-	table->dual_add(red_w->label("Red"), d);
+	table->dual_add(red_w->label("ê‘"), d);
 	table->dual_add(red_w, d);
 
 	w_slider *green_w = new w_slider(16, m_color.green >> 12);
-	table->dual_add(green_w->label("Green"), d);
+	table->dual_add(green_w->label("óŒ"), d);
 	table->dual_add(green_w, d);
 
 	w_slider *blue_w = new w_slider(16, m_color.blue >> 12);
-	table->dual_add(blue_w->label("Blue"), d);
+	table->dual_add(blue_w->label("ê¬"), d);
 	table->dual_add(blue_w, d);
 
 	placer->add(table, true);
 	placer->add(new w_spacer(), true);
 	
 	horizontal_placer *button_placer = new horizontal_placer;
-	button_placer->dual_add(new w_button("CANCEL", dialog_cancel, &d), d);
+	button_placer->dual_add(new w_button("ÉLÉÉÉìÉZÉã", dialog_cancel, &d), d);
 	button_placer->dual_add(new w_button("OK", dialog_ok, &d), d);
 	
 	placer->add(button_placer, true);
@@ -1293,7 +1292,7 @@ void w_password_entry::draw(SDL_Surface *s) const
  *  Key name widget
  */
 
-static const char *WAITING_TEXT = "waiting for new key";
+static const char *WAITING_TEXT = "ÉLÅ[ì¸óÕë“Çø";
 
 w_key::w_key(SDLKey key) : widget(LABEL_WIDGET), binding(false)
 {

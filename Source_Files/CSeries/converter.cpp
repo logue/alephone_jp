@@ -53,12 +53,13 @@ char* utf82sjis(const char* str, size_t len) {
 // Convert from Shift_JIS to Unidode
 // AlephOneJP overrides to process_macroman().
 uint16* sjis2utf16(const char* str, size_t len) {
-  static char base[1024]; // in case lastn letter is MAC_LINE_END
-  strncpy(base, str, len);
-  if( base[len-1] == MAC_LINE_END ) {
-    base[len-1] = '\0';
-  --len;
-}
+	static char base[1024]; // in case lastn letter is MAC_LINE_END
+	memset(base, 0, 1024);
+	strncpy(base, str, len);
+	if( base[len-1] == MAC_LINE_END ) {
+		base[len-1] = '\0';
+		--len;
+	}
 	static uint16 text[1024];
 	memset(text,0,2048);
 	const char* strp = base;
