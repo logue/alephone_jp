@@ -237,6 +237,8 @@ sdl_font_info *load_sdl_font(const TextSpec &spec)
 	return info;
 }
 */
+#include <iostream>         // std::cout を使うのに必要
+#include <boost/format.hpp> // boost::format を使うのに必要
 #ifdef HAVE_SDL_TTF
 static TTF_Font *load_ttf_font(const std::string& path, uint16 style, int16 size)
 {
@@ -253,15 +255,75 @@ static TTF_Font *load_ttf_font(const std::string& path, uint16 style, int16 size
 
 	TTF_Font *font = 0;
 
-	// Japanese Font cannot render as embeded font.
-	// then, if Fonts.ttf exsists, read external font forcely.
-	FILE* fp = fopen( FONT_PATH, "r" );
-	if( !fp ){
-		fprintf(stderr, "TTF Font %s is not found. Load internal font. Japanese strings will be garbled.\n", FONT_PATH);
-		font = TTF_OpenFontRW(SDL_RWFromConstMem(aleph_sans_mono_bold, sizeof(aleph_sans_mono_bold)), 0, size);
-	}else{
-		font = TTF_OpenFont(FONT_PATH, size);
-		fclose( fp );
+	// Load AlephOne Default Font. path is "mono"
+	if (path == "mono")
+	{
+		// Japanese Font cannot render as embeded font.
+		FILE* fp = fopen( FONT_PATH, "r" );
+		if( fp ){
+			// Fonts.ttf is exists, Load this Font.
+			font = TTF_OpenFont(FONT_PATH, size);
+			fclose( fp );
+		}else{
+			// If Fonts.ttf is missing, Load from System Font
+			const string fontPath[] = {
+#if defined(__WIN32__)
+				// for Windows 7 (Meiryo Bold)
+				"c:/Windows/winsxs/x86_microsoft-windows-f..truetype-meiryobold_31bf3856ad364e35_6.1.7600.16385_none_cd23f5e0d8f9c6fa/meiryob.ttc",
+				"c:/Windows/winsxs/amd64_microsoft-windows-f..truetype-meiryobold_31bf3856ad364e35_6.1.7600.16385_none_2942916491573830/meiryob.ttc",
+				// for Windows Vista
+				"c:/Windows/Fonts/meiryob.ttc",
+				// for less than Windows XP (MS Gothic)
+				"c:/windows/fonts/msgothic.ttc",
+				"c:/winnt/fonts/msgothic.ttc",
+#elif defined(__MACOS__)
+				// for MacOS (Hiragino Kaku Gothic Pro W6)
+				"/System/Library/Fonts/Hiragino Kaku Gothic Pro W6.otf",
+				"/System/Library/Fonts/Cache/HiraginoKakuGothicProNW6.otf"
+#else
+				// for Linux
+				"/usr/share/fonts/truetype/vlgothic/VL-Gothic-Regular.ttf",
+				"/usr/X11R6/lib/X11/fonts/TrueType/VL-Gothic-Regular.ttf",
+				"/usr/X11/lib/X11/fonts/truetype/VL-Gothic-Regular.ttf",
+				"/usr/share/fonts/ja-ipafonts/ipag.ttc",
+				
+				"/usr/share/fonts/TrueType/mika.ttf",
+				"/usr/X11R6/lib/X11/fonts/TrueType/mika.ttf",
+				"/usr/X11R6/lib/X11/fonts/truetype/sazanami-gothic.ttf",
+				"/usr/X11/lib/X11/fonts/truetype/sazanami-gothic.ttf",
+				"/usr/share/fonts/TrueType/sazanami-gothic.ttf",
+				"/usr/X11R6/lib/X11/fonts/TrueType/sazanami-gothic.ttf",
+				"/usr/share/fonts/truetype/sazanami-gothic.ttf",
+				"/usr/share/fonts/TrueType/FS-Gothic-gs.ttf",
+				"/usr/X11R6/lib/X11/fonts/TrueType/FS-Gothic.ttf",
+				"/usr/share/fonts/TrueType/gt200001.ttf",
+				"/usr/X11R6/lib/X11/fonts/TrueType/gt200001.ttf",
+#endif
+			};
+
+			for ( int i=0; !fontPath[i].empty(); i++ ) {
+				font = TTF_OpenFont(fontPath[i].c_str(), size);
+				if ( !font ) { continue; }
+				else { break; }
+			}
+		}
+		if( !font ){
+			font = TTF_OpenFontRW(SDL_RWFromConstMem(aleph_sans_mono_bold, sizeof(aleph_sans_mono_bold)), 0, size);
+		}
+	}
+	else
+	{
+		// Load from Font specified in MML.
+		short SavedType, SavedError = get_game_error(&SavedType);
+
+		FileSpecifier fileSpec(path);
+		OpenedFile file;
+		if (fileSpec.Open(file))
+		{
+			font = TTF_OpenFontRW(file.TakeRWops(), 1, size);
+		}
+
+		set_game_error(SavedType, SavedError);
 	}
 
 	if (font)
@@ -307,7 +369,10 @@ static const char *locate_font(const std::string& path)
 #endif
 
 font_info *load_font(const TextSpec &spec) {
+//	return static_cast<font_info*>(load_font(spec));
+
 #ifdef HAVE_SDL_TTF
+	if (spec.normal != "")
 	{
 		std::string file;
 		file = locate_font(spec.normal);
@@ -391,11 +456,27 @@ font_info *load_font(const TextSpec &spec) {
 					}
 				}
 			}
+			
+				
 			return info;
 		}
-		return 0;
+/*		else if (spec.font != -1)
+		{
+			return static_cast<font_info *>(load_sdl_font(spec));
+		}
+*/
+		else
+			return 0;
 	}
+	else
 #endif
+/*	if (spec.font != -1)
+	{
+		return static_cast<font_info *>(load_sdl_font(spec));
+	}
+	else
+*/
+	return 0;
 }
 
 /*
