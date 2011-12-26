@@ -1715,8 +1715,8 @@ static void display_about_dialog()
 	authors_placer->dual_add(new w_static_text("ベースにしています。これらは、Bungie softwareによって作られました。"), d);
 	authors_placer->add(new w_spacer, true);
 	
-	authors_placer->dual_add(new w_static_text("The enhancements and extensions to Marathon 2 and Marathon"), d);
-	authors_placer->dual_add(new w_static_text("Infinity that constitute Aleph One have been made by:"), d);
+	authors_placer->dual_add(new w_static_text("AlephOneを構\成しているMarathon2と、Marathon Infinityの機能\を"), d);
+	authors_placer->dual_add(new w_static_text("強化するにあたって、以下のメンバーの協力をいただきました："), d);
 
 	authors_placer->add(new w_spacer, true);
 

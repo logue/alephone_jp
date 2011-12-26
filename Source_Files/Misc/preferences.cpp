@@ -345,7 +345,7 @@ protected:
 };
 
 static const char *shape_labels[3] = {
-	"Cross", "Octagon", NULL
+	"十\字", "多角形", NULL
 };
 
 enum { kCrosshairWidget };
@@ -835,7 +835,7 @@ std::vector<std::string> build_resolution_labels()
 		os << it->first << "x" << it->second;
 		if (first_mode)
 		{
-			result.push_back("Automatic");
+			result.push_back("自動");
 			first_mode = false;
 		}
 		result.push_back(os.str());
@@ -1138,7 +1138,7 @@ static void sound_dialog(void *arg)
 	table->dual_add_row(new w_static_text("ネットワークマイク"), d);
 
 	w_toggle* mute_while_transmitting_w = new w_toggle(!sound_preferences->mute_while_transmitting);
-	table->dual_add(mute_while_transmitting_w->label("Headset Mic Mode"), d);
+	table->dual_add(mute_while_transmitting_w->label("ヘッドセットマイクモード"), d);
 	table->dual_add(mute_while_transmitting_w, d);
 
 	table->add_row(new w_spacer(), true);
@@ -1522,14 +1522,14 @@ const int NUM_KEYS = 21;
 
 static const char *action_name[NUM_KEYS] = {
 	"前進", "後退", "左に向く", "右に向く", "左にサイドステップ", "右にサイドステップ",
-	"左を一瞥", "右を一瞥", "上を見る", "下を見る", "Look Ahead",
+	"左を見る", "右を見る", "上を見る", "下を見る", "前を見る",
 	"前の武器", "次の武器", "主砲", "副砲",
 	"サイドステップ", "走る／泳ぐ", "見る",
 	"アクション", "地図", "マイク"
 };
 
 static const char *shell_action_name[NUMBER_OF_SHELL_KEYS] = {
-	"道具左", "道具右", "プレイヤービューを切り替え", "ボリュームを上げる", "ボリュームを下げる", "マップを拡大", "マップを縮小", "FPSを表\示", "チャット／コンソ\ール", "ネットワーク状況"
+	"前の道具", "次の道具", "主観／客観切り替え", "ボリュームを上げる", "ボリュームを下げる", "マップを拡大", "マップを縮小", "FPSを表\示", "チャット／コンソ\ール", "ネットワーク状況"
 };
 
 static SDLKey default_keys[NUM_KEYS] = {

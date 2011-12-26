@@ -1314,35 +1314,35 @@ void w_key::place(const SDL_Rect& r, placement_flags flags)
 		
 // ZZZ: we provide phony key names for the phony keys used for mouse buttons.
 static const char* sMouseButtonKeyName[NUM_SDL_MOUSE_BUTTONS] = {
-        "mouse 1",   // things like "Middle Mouse Button" are too long to draw properly
-        "mouse 3",
-        "mouse 2",
-        "mouse 4",
-        "mouse 5",
-        "mouse 6",
-        "mouse 7",
-        "mouse 8"
+        "マウス1",   // things like "Middle マウスButton" are too long to draw properly
+        "マウス3",
+        "マウス2",
+        "マウス4",
+        "マウス5",
+        "マウス6",
+        "マウス7",
+        "マウス8"
 };
 
 static const char* sJoystickButtonKeyName[NUM_SDL_JOYSTICK_BUTTONS] = {
-	"joystick 1",
-	"joystick 2",
-	"joystick 3",
-	"joystick 4",
-	"joystick 5",
-	"joystick 6",
-	"joystick 7",
-	"joystick 8",
-	"joystick 9",
-	"joystick 10",
-	"joystick 11",
-	"joystick 12",
-	"joystick 13",
-	"joystick 14",
-	"joystick 15",
-	"joystick 16",
-	"joystick 17",
-	"joystick 18"
+	"ジョイスティック1",
+	"ジョイスティック2",
+	"ジョイスティック3",
+	"ジョイスティック4",
+	"ジョイスティック5",
+	"ジョイスティック6",
+	"ジョイスティック7",
+	"ジョイスティック8",
+	"ジョイスティック9",
+	"ジョイスティック10",
+	"ジョイスティック11",
+	"ジョイスティック12",
+	"ジョイスティック13",
+	"ジョイスティック14",
+	"ジョイスティック15",
+	"ジョイスティック16",
+	"ジョイスティック17",
+	"ジョイスティック18"
 };
 
 // ZZZ: this injects our phony key names but passes along the rest.
@@ -2150,16 +2150,16 @@ void w_games_in_room::draw_item(const GameListMessage::GameListEntry& item, SDL_
 		{
 			if (item.minutes_remaining() == 1)
 			{
-				time_or_ping << "~1 Minute";
+				time_or_ping << "1分未満";
 			}
 			else
 			{
-				time_or_ping << item.minutes_remaining() << " Minutes";
+				time_or_ping << item.minutes_remaining() << "分";
 			}
 		}
 		else
 		{
-			time_or_ping << "Untimed";
+			time_or_ping << "無制限";
 		}
 	}
 	else
@@ -2186,7 +2186,7 @@ void w_games_in_room::draw_item(const GameListMessage::GameListEntry& item, SDL_
 		game_and_map << "|i" << item.m_description.m_scenarioName;
 		if (item.m_description.m_scenarioVersion != "")
 		{
-			game_and_map << ", Version " << item.m_description.m_scenarioVersion;
+			game_and_map << ", バージョン " << item.m_description.m_scenarioVersion;
 		}
 	} 
 	else
@@ -2208,11 +2208,11 @@ void w_games_in_room::draw_item(const GameListMessage::GameListEntry& item, SDL_
 	{
 		if (item.m_description.m_numPlayers == 1)
 		{
-			game_settings << "1 Player";
+			game_settings << "1人のプレイヤー";
 		}
 		else
 		{
-			game_settings << static_cast<uint16>(item.m_description.m_numPlayers) << " Players";
+			game_settings << static_cast<uint16>(item.m_description.m_numPlayers) << "人のプレイヤー";
 		}
 	}
 	else
@@ -2220,19 +2220,19 @@ void w_games_in_room::draw_item(const GameListMessage::GameListEntry& item, SDL_
 		game_settings << static_cast<uint16>(item.m_description.m_numPlayers)
 			      << "/"
 			      << item.m_description.m_maxPlayers
-			      << " Players";
+			      << "人のプレイヤー";
 	}
 
 	if (item.m_description.m_timeLimit && !(item.m_description.m_timeLimit == INT32_MAX || item.m_description.m_timeLimit == -1))
 	{
 		game_settings << ", " 
 			      << item.m_description.m_timeLimit / 60 / TICKS_PER_SECOND 
-			      << " Minutes";
+			      << "分";
 	}
 
 	if (item.m_description.m_teamsAllowed)
 	{
-		game_settings << ", Teams";
+		game_settings << ", チーム";
 	}
 
 	draw_text(s, game_settings.str().c_str(), x, y, fg, font, game_style);

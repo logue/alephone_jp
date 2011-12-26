@@ -237,8 +237,6 @@ sdl_font_info *load_sdl_font(const TextSpec &spec)
 	return info;
 }
 */
-#include <iostream>         // std::cout を使うのに必要
-#include <boost/format.hpp> // boost::format を使うのに必要
 #ifdef HAVE_SDL_TTF
 static TTF_Font *load_ttf_font(const std::string& path, uint16 style, int16 size)
 {
@@ -259,53 +257,50 @@ static TTF_Font *load_ttf_font(const std::string& path, uint16 style, int16 size
 	if (path == "mono")
 	{
 		// Japanese Font cannot render as embeded font.
-		FILE* fp = fopen( FONT_PATH, "r" );
-		if( fp ){
-			// Fonts.ttf is exists, Load this Font.
-			font = TTF_OpenFont(FONT_PATH, size);
-			fclose( fp );
-		}else{
-			// If Fonts.ttf is missing, Load from System Font
-			const string fontPath[] = {
+		// If Fonts.ttf is missing, Load from System Font
+		const string fontPath[] = {
+			FONT_PATH,
 #if defined(__WIN32__)
-				// for Windows 7 (Meiryo Bold)
-				"c:/Windows/winsxs/x86_microsoft-windows-f..truetype-meiryobold_31bf3856ad364e35_6.1.7600.16385_none_cd23f5e0d8f9c6fa/meiryob.ttc",
-				"c:/Windows/winsxs/amd64_microsoft-windows-f..truetype-meiryobold_31bf3856ad364e35_6.1.7600.16385_none_2942916491573830/meiryob.ttc",
-				// for Windows Vista
-				"c:/Windows/Fonts/meiryob.ttc",
-				// for less than Windows XP (MS Gothic)
-				"c:/windows/fonts/msgothic.ttc",
-				"c:/winnt/fonts/msgothic.ttc",
+			// Path to the below Windows directory
+			// for Windows 7 (Meiryo Bold)
+			"C:/Windows/winsxs/x86_microsoft-windows-f..truetype-meiryobold_31bf3856ad364e35_6.1.7600.16385_none_cd23f5e0d8f9c6fa/meiryob.ttc",
+			"C:/Windows/winsxs/amd64_microsoft-windows-f..truetype-meiryobold_31bf3856ad364e35_6.1.7600.16385_none_2942916491573830/meiryob.ttc",
+			// for Windows Vista
+			"C:/Windows/Fonts/meiryob.ttc",
+			// for less than Windows XP (MS Gothic)
+			"C:/Windows/fonts/msgothic.ttc",
 #elif defined(__MACOS__)
-				// for MacOS (Hiragino Kaku Gothic Pro W6)
-				"/System/Library/Fonts/Hiragino Kaku Gothic Pro W6.otf",
-				"/System/Library/Fonts/Cache/HiraginoKakuGothicProNW6.otf"
+			// for MacOS (Hiragino Kaku Gothic Pro W6)
+			"/System/Library/Fonts/Hiragino Kaku Gothic Pro W6.otf",
+			"/System/Library/Fonts/Cache/HiraginoKakuGothicProNW6.otf"	// for iOS
 #else
-				// for Linux
-				"/usr/share/fonts/truetype/vlgothic/VL-Gothic-Regular.ttf",
-				"/usr/X11R6/lib/X11/fonts/TrueType/VL-Gothic-Regular.ttf",
-				"/usr/X11/lib/X11/fonts/truetype/VL-Gothic-Regular.ttf",
-				"/usr/share/fonts/ja-ipafonts/ipag.ttc",
-				
-				"/usr/share/fonts/TrueType/mika.ttf",
-				"/usr/X11R6/lib/X11/fonts/TrueType/mika.ttf",
-				"/usr/X11R6/lib/X11/fonts/truetype/sazanami-gothic.ttf",
-				"/usr/X11/lib/X11/fonts/truetype/sazanami-gothic.ttf",
-				"/usr/share/fonts/TrueType/sazanami-gothic.ttf",
-				"/usr/X11R6/lib/X11/fonts/TrueType/sazanami-gothic.ttf",
-				"/usr/share/fonts/truetype/sazanami-gothic.ttf",
-				"/usr/share/fonts/TrueType/FS-Gothic-gs.ttf",
-				"/usr/X11R6/lib/X11/fonts/TrueType/FS-Gothic.ttf",
-				"/usr/share/fonts/TrueType/gt200001.ttf",
-				"/usr/X11R6/lib/X11/fonts/TrueType/gt200001.ttf",
-#endif
-			};
+			// for Linux
+			"/usr/share/fonts/truetype/vlgothic/VL-Gothic-Regular.ttf",
+			"/usr/X11R6/lib/X11/fonts/TrueType/VL-Gothic-Regular.ttf",
+			"/usr/X11/lib/X11/fonts/truetype/VL-Gothic-Regular.ttf",
+			
+			"/usr/share/fonts/truetype/takao/TakaoExGothic.ttf"
+			"/usr/share/fonts/ja-ipafonts/ipag.ttc",
 
-			for ( int i=0; !fontPath[i].empty(); i++ ) {
-				font = TTF_OpenFont(fontPath[i].c_str(), size);
-				if ( !font ) { continue; }
-				else { break; }
-			}
+			"/usr/share/fonts/TrueType/mika.ttf",
+			"/usr/X11R6/lib/X11/fonts/TrueType/mika.ttf",
+			"/usr/X11R6/lib/X11/fonts/truetype/sazanami-gothic.ttf",
+			"/usr/X11/lib/X11/fonts/truetype/sazanami-gothic.ttf",
+			"/usr/share/fonts/TrueType/sazanami-gothic.ttf",
+			"/usr/X11R6/lib/X11/fonts/TrueType/sazanami-gothic.ttf",
+			"/usr/share/fonts/truetype/sazanami-gothic.ttf",
+			"/usr/share/fonts/TrueType/FS-Gothic-gs.ttf",
+			"/usr/X11R6/lib/X11/fonts/TrueType/FS-Gothic.ttf",
+			"/usr/share/fonts/TrueType/gt200001.ttf",
+			"/usr/X11R6/lib/X11/fonts/TrueType/gt200001.ttf",
+#endif
+		};
+
+		for ( int i=0; !fontPath[i].empty(); i++ ) {
+			const char* file = fontPath[i].c_str();
+			font = TTF_OpenFont(file , size);
+			if ( !font ) { continue; }
+			else { break; }
 		}
 		if( !font ){
 			font = TTF_OpenFontRW(SDL_RWFromConstMem(aleph_sans_mono_bold, sizeof(aleph_sans_mono_bold)), 0, size);
