@@ -2704,7 +2704,7 @@ public:
 		horizontal_placer *chat_choice_placer = new horizontal_placer;
 
 		w_select_popup* chat_choice_w = new w_select_popup();
-		chat_choice_placer->dual_add(chat_choice_w->label("chat:"), m_dialog);
+		chat_choice_placer->dual_add(chat_choice_w->label("チャット："), m_dialog);
 		chat_choice_placer->dual_add(chat_choice_w, m_dialog);
 
 		postjoin_placer->add(chat_choice_placer, true);
