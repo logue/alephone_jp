@@ -36,11 +36,14 @@ build_triplet = @build@
 host_triplet = @host@
 target_triplet = @target@
 @MAKE_WINDOWS_FALSE@bin_PROGRAMS = alephone$(EXEEXT)
-@MAKE_WINDOWS_TRUE@bin_PROGRAMS = AlephOne$(EXEEXT)
+@MAKE_WINDOWS_TRUE@bin_PROGRAMS = AlephOne$(EXEEXT) Marathon$(EXEEXT) \
+@MAKE_WINDOWS_TRUE@	Marathon2$(EXEEXT) \
+@MAKE_WINDOWS_TRUE@	MarathonInfinity$(EXEEXT)
 subdir = Source_Files
 DIST_COMMON = $(srcdir)/Makefile.am $(srcdir)/Makefile.in
 ACLOCAL_M4 = $(top_srcdir)/aclocal.m4
-am__aclocal_m4_deps = $(top_srcdir)/configure.ac
+am__aclocal_m4_deps = $(top_srcdir)/m4/sdl.m4 $(top_srcdir)/m4/pkg.m4 \
+	$(top_srcdir)/configure.ac
 am__configure_deps = $(am__aclocal_m4_deps) $(CONFIGURE_DEPENDENCIES) \
 	$(ACLOCAL_M4)
 mkinstalldirs = $(install_sh) -d
@@ -54,6 +57,16 @@ am__objects_1 = shell.$(OBJEXT) shell_misc.$(OBJEXT) \
 am_AlephOne_OBJECTS = $(am__objects_1)
 AlephOne_OBJECTS = $(am_AlephOne_OBJECTS)
 AlephOne_DEPENDENCIES = $(alephone_LDADD) alephone-resources.o
+am_Marathon_OBJECTS = $(am__objects_1)
+Marathon_OBJECTS = $(am_Marathon_OBJECTS)
+Marathon_DEPENDENCIES = $(alephone_LDADD) marathon-resources.o
+am_Marathon2_OBJECTS = $(am__objects_1)
+Marathon2_OBJECTS = $(am_Marathon2_OBJECTS)
+Marathon2_DEPENDENCIES = $(alephone_LDADD) marathon2-resources.o
+am_MarathonInfinity_OBJECTS = $(am__objects_1)
+MarathonInfinity_OBJECTS = $(am_MarathonInfinity_OBJECTS)
+MarathonInfinity_DEPENDENCIES = $(alephone_LDADD) \
+	marathon-infinity-resources.o
 am_alephone_OBJECTS = shell.$(OBJEXT) shell_misc.$(OBJEXT) \
 	DefaultStringSets.$(OBJEXT)
 alephone_OBJECTS = $(am_alephone_OBJECTS)
@@ -82,8 +95,11 @@ COMPILE = $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) \
 	$(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS)
 CCLD = $(CC)
 LINK = $(CCLD) $(AM_CFLAGS) $(CFLAGS) $(AM_LDFLAGS) $(LDFLAGS) -o $@
-SOURCES = $(AlephOne_SOURCES) $(alephone_SOURCES)
-DIST_SOURCES = $(AlephOne_SOURCES) $(alephone_SOURCES)
+SOURCES = $(AlephOne_SOURCES) $(Marathon_SOURCES) $(Marathon2_SOURCES) \
+	$(MarathonInfinity_SOURCES) $(alephone_SOURCES)
+DIST_SOURCES = $(AlephOne_SOURCES) $(Marathon_SOURCES) \
+	$(Marathon2_SOURCES) $(MarathonInfinity_SOURCES) \
+	$(alephone_SOURCES)
 RECURSIVE_TARGETS = all-recursive check-recursive dvi-recursive \
 	html-recursive info-recursive install-data-recursive \
 	install-dvi-recursive install-exec-recursive \
@@ -170,8 +186,6 @@ PACKAGE_URL = @PACKAGE_URL@
 PACKAGE_VERSION = @PACKAGE_VERSION@
 PATH_SEPARATOR = @PATH_SEPARATOR@
 PKG_CONFIG = @PKG_CONFIG@
-PKG_CONFIG_LIBDIR = @PKG_CONFIG_LIBDIR@
-PKG_CONFIG_PATH = @PKG_CONFIG_PATH@
 PNG_CFLAGS = @PNG_CFLAGS@
 PNG_LIBS = @PNG_LIBS@
 RANLIB = @RANLIB@
@@ -274,6 +288,12 @@ INCLUDES = -I$(top_srcdir)/Source_Files/CSeries -I$(top_srcdir)/Source_Files/Fil
 
 AlephOne_LDADD = $(alephone_LDADD) alephone-resources.o
 AlephOne_SOURCES = $(alephone_SOURCES)
+Marathon_LDADD = $(alephone_LDADD) marathon-resources.o
+Marathon_SOURCES = $(alephone_SOURCES)
+Marathon2_LDADD = $(alephone_LDADD) marathon2-resources.o
+Marathon2_SOURCES = $(alephone_SOURCES)
+MarathonInfinity_LDADD = $(alephone_LDADD) marathon-infinity-resources.o
+MarathonInfinity_SOURCES = $(alephone_SOURCES)
 DISTCLEANFILES = confpaths.h
 @MAKE_WINDOWS_TRUE@BUILD_YEAR = `echo $(VERSION) | cut -c 1-4`
 @MAKE_WINDOWS_TRUE@BUILD_MONTH = `echo $(VERSION) | cut -c 5-6 | sed -e s/^0//`
@@ -354,6 +374,15 @@ clean-binPROGRAMS:
 AlephOne$(EXEEXT): $(AlephOne_OBJECTS) $(AlephOne_DEPENDENCIES) 
 	@rm -f AlephOne$(EXEEXT)
 	$(CXXLINK) $(AlephOne_OBJECTS) $(AlephOne_LDADD) $(LIBS)
+Marathon$(EXEEXT): $(Marathon_OBJECTS) $(Marathon_DEPENDENCIES) 
+	@rm -f Marathon$(EXEEXT)
+	$(CXXLINK) $(Marathon_OBJECTS) $(Marathon_LDADD) $(LIBS)
+Marathon2$(EXEEXT): $(Marathon2_OBJECTS) $(Marathon2_DEPENDENCIES) 
+	@rm -f Marathon2$(EXEEXT)
+	$(CXXLINK) $(Marathon2_OBJECTS) $(Marathon2_LDADD) $(LIBS)
+MarathonInfinity$(EXEEXT): $(MarathonInfinity_OBJECTS) $(MarathonInfinity_DEPENDENCIES) 
+	@rm -f MarathonInfinity$(EXEEXT)
+	$(CXXLINK) $(MarathonInfinity_OBJECTS) $(MarathonInfinity_LDADD) $(LIBS)
 alephone$(EXEEXT): $(alephone_OBJECTS) $(alephone_DEPENDENCIES) 
 	@rm -f alephone$(EXEEXT)
 	$(CXXLINK) $(alephone_OBJECTS) $(alephone_LDADD) $(LIBS)
@@ -715,10 +744,17 @@ uninstall-am: uninstall-binPROGRAMS
 confpaths.h: Makefile
 	echo "#define PKGDATADIR \"$(pkgdatadir)\"" > $@
 
-alephone-resources.o: FORCE
-	sed -e s/BUILDDATE/`date +%Y-%m-%d`/g -e "s/WIN_VERSION_STRING/$(WIN_VERSION_STRING)/g" -e "s/A1_DISPLAY_VERSION/$(A1_DISPLAY_VERSION)/g" $(top_srcdir)/Resources/Windows/alephone.rc | @WINDRES@ -I$(top_srcdir)/Resources/Windows -o alephone-resources.o
+alephone-resources.o: $(top_srcdir)/Resources/Windows/alephone.rc Misc/alephversion.h
+	sed -e "s/WIN_VERSION_STRING/$(WIN_VERSION_STRING)/g" -e "s/A1_DISPLAY_VERSION/$(A1_DISPLAY_VERSION)/g" $(top_srcdir)/Resources/Windows/alephone.rc | @WINDRES@ -I$(top_srcdir)/Resources/Windows -o alephone-resources.o
 
-FORCE:
+marathon-resources.o: $(top_srcdir)/Resources/Windows/marathon.rc Misc/alephversion.h $(top_srcdir)/Resources/Windows/marathon.ico
+	sed -e "s/WIN_VERSION_STRING/$(WIN_VERSION_STRING)/g" -e "s/A1_DISPLAY_VERSION/$(A1_DISPLAY_VERSION)/g" $(top_srcdir)/Resources/Windows/marathon.rc | @WINDRES@ -I$(top_srcdir)/Resources/Windows -o marathon-resources.o
+
+marathon2-resources.o: $(top_srcdir)/Resources/Windows/marathon2.rc Misc/alephversion.h $(top_srcdir)/Resources/Windows/marathon2.ico
+	sed -e "s/WIN_VERSION_STRING/$(WIN_VERSION_STRING)/g" -e "s/A1_DISPLAY_VERSION/$(A1_DISPLAY_VERSION)/g" $(top_srcdir)/Resources/Windows/marathon2.rc | @WINDRES@ -I$(top_srcdir)/Resources/Windows -o marathon2-resources.o
+
+marathon-infinity-resources.o: $(top_srcdir)/Resources/Windows/marathon-infinity.rc Misc/alephversion.h $(top_srcdir)/Resources/Windows/marathon-infinity.ico
+	sed -e "s/WIN_VERSION_STRING/$(WIN_VERSION_STRING)/g" -e "s/A1_DISPLAY_VERSION/$(A1_DISPLAY_VERSION)/g" $(top_srcdir)/Resources/Windows/marathon-infinity.rc | @WINDRES@ -I$(top_srcdir)/Resources/Windows -o marathon-infinity-resources.o
 
 shell.o: confpaths.h
 

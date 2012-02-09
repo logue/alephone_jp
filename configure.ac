@@ -1,13 +1,16 @@
 dnl Process this file with autoconf to produce a configure script.
 dnl Written in 2000 by Christian Bauer <Christian.Bauer@uni-mainz.de>
 
-AC_INIT([Aleph One/SDL], m4_esyscmd([ grep '^#define A1_DATE_VERSION' Source_Files/Misc/alephversion.h | sed -e 's/\(.*\"\)\(.*\)\(\"\)/\2/g' | tr -d '\n']), [http://sourceforge.net/bugs/?group_id=1997], [AlephOne])
+AC_INIT([Aleph One JP/SDL], m4_esyscmd([ grep '^#define A1_DATE_VERSION' Source_Files/Misc/alephversion.h | sed -e 's/\(.*\"\)\(.*\)\(\"\)/\2/g' | tr -d '\n']), [http://forum.logue.be/index.php?board=8.0], [AlephOneJP], [http://sourceforge.jp/projects/marathon/] )
 AC_CONFIG_SRCDIR([Source_Files/shell.cpp])
 AC_PREREQ(2.52)
 
 dnl Detect the canonical host and target build environment.
 AC_CANONICAL_HOST
 AC_CANONICAL_TARGET
+
+m4_include([m4/sdl.m4])
+m4_include([m4/pkg.m4])
 
 dnl Init automake.
 AM_INIT_AUTOMAKE
@@ -72,6 +75,13 @@ AC_CHECK_FUNC(vsnprintf, [
 AC_CHECK_FUNC(mkstemp, [
   AC_DEFINE(LUA_USE_MKSTEMP, 1, [mkstemp() is available])
 ])
+
+dnl On some systems iconv is in a separate library, and may actually be named
+dnl libiconv.
+AC_CHECK_LIB(iconv, libiconv)
+if test $ac_cv_lib_iconv_libiconv = no; then
+  AC_CHECK_LIB(iconv, iconv , AC_MSG_ERROR([You need iconv to run Aleph One JP.]))
+fi
 
 dnl Check for SDL.
 AM_PATH_SDL(1.2.0, , AC_MSG_ERROR([You need SDL 1.2 to run Aleph One.]))
@@ -218,7 +228,7 @@ fi
 dnl Figure out which OpenGL library to use
 case "$target" in
   *-*-cygwin* | *-*-mingw32*)
-    SYS_GL_LIBS="-lGLEW -lopengl32 -lglu32"
+    SYS_GL_LIBS="$SYS_GL_LIBS -lGLEW -lopengl32 -lglu32 -lpthread"
     LIBS="$LIBS -lstdc++"
     ;;
   *-*-darwin*)

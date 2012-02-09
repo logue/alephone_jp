@@ -932,7 +932,7 @@ static void graphics_dialog(void *arg)
 
 #ifndef HAVE_OPENGL
 	
-	placer->dual_add(new w_static_text("このAleph Oneのコピーは、OpenGLをサポートしないビルドです。"), d);#endif
+	placer->dual_add(new w_static_text("このAleph Oneのコピーは、OpenGLをサポートしないビルドです。"), d);
 #endif
 	placer->add(new w_spacer(), true);
 
@@ -1842,7 +1842,7 @@ static void environment_dialog(void *arg)
 	
 	w_file_chooser *hud_lua_w = new w_file_chooser("スクリプトを選ぶ", _typecode_netscript);
 	hud_lua_w->set_file(environment_preferences->hud_lua_file);
-	table->dual_add(hud_lua_w->label("Script File"), d);
+	table->dual_add(hud_lua_w->label("スクリプトファイル"), d);
 	table->dual_add(hud_lua_w, d);
 	use_hud_lua_w->add_dependent_widget(hud_lua_w);
 	
