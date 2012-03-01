@@ -9,9 +9,6 @@ dnl Detect the canonical host and target build environment.
 AC_CANONICAL_HOST
 AC_CANONICAL_TARGET
 
-m4_include([m4/sdl.m4])
-m4_include([m4/pkg.m4])
-
 dnl Init automake.
 AM_INIT_AUTOMAKE
 AM_CONFIG_HEADER(config.h)
@@ -82,7 +79,6 @@ AC_CHECK_LIB(iconv, libiconv)
 if test $ac_cv_lib_iconv_libiconv = no; then
   AC_CHECK_LIB(iconv, iconv , AC_MSG_ERROR([You need iconv to run Aleph One JP.]))
 fi
-
 dnl Check for SDL.
 AM_PATH_SDL(1.2.0, , AC_MSG_ERROR([You need SDL 1.2 to run Aleph One.]))
 CPPFLAGS="$CPPFLAGS $SDL_CFLAGS -DSDL"
@@ -228,7 +224,7 @@ fi
 dnl Figure out which OpenGL library to use
 case "$target" in
   *-*-cygwin* | *-*-mingw32*)
-    SYS_GL_LIBS="$SYS_GL_LIBS -lGLEW -lopengl32 -lglu32 -lpthread"
+    SYS_GL_LIBS="-lGLEW -lopengl32 -lglu32"
     LIBS="$LIBS -lstdc++"
     ;;
   *-*-darwin*)
