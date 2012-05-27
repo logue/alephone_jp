@@ -30,9 +30,6 @@
 /* OpenGL support is enabled */
 #undef HAVE_OPENGL
 
-/* PNG support enabled */
-#undef HAVE_PNG
-
 /* Define to 1 if you have the <pwd.h> header file. */
 #undef HAVE_PWD_H
 
@@ -93,14 +90,8 @@
 /* Define to 1 if you have the <unistd.h> header file. */
 #undef HAVE_UNISTD_H
 
-/* vorbis support enabled */
-#undef HAVE_VORBISFILE
-
 /* vsnprintf() is available */
 #undef HAVE_VSNPRINTF
-
-/* ZZIP support enabled */
-#undef HAVE_ZZIP
 
 /* mkstemp() is available */
 #undef LUA_USE_MKSTEMP

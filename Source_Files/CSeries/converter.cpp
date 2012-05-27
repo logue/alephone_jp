@@ -16,14 +16,16 @@ typedef unsigned short uint16;
 // Convert from Shift_JIS to UTF8
 char* sjis2utf8(const char* str, size_t len) {
 	static char text[1024];
+	static char src[1024];
+	strcpy(src, str);
 	memset(text,0,1024);
-	const char* strp = str;
+	char* strp = src;
 	char* retp = text;
 	size_t sz = 1024;
 	iconv_t i = iconv_open("UTF-8", "SHIFT-JIS");
 	iconv_t j = iconv_open("UTF-8", "MACROMAN");
 	if( iconv(i,  &strp, &len, &retp, &sz) == -1 ) {
-		strp = str;
+		strp = src;
 		retp = text;
 		sz = 1024;
 		iconv(j,  &strp, &len, &retp, &sz);
@@ -36,13 +38,15 @@ char* sjis2utf8(const char* str, size_t len) {
 // Convert from UTF8 to Shift_JIS
 char* utf82sjis(const char* str, size_t len) {
 	static char text[1024];
+	static char src[1024];
+	strcpy(src, str);
 	memset(text,0,1024);
-	const char* strp = str;
+	char* strp = src;
 	char* retp = text;
 	size_t sz = 1024;
 	iconv_t i = iconv_open("SHIFT-JIS", "UTF-8");
 	if( iconv(i,  &strp, &len, &retp, &sz) == -1 ) {
-		// SHIFT-JISにできないときはそのままコピー
+		// SHIFT-JISにできなぁE��き�Eそ�Eままコピ�E
 		strncpy(text, str, len);
 	}
 	if( text[strlen(text)-1] == 13) { text[strlen(text)-1] = 0; }
@@ -54,6 +58,7 @@ char* utf82sjis(const char* str, size_t len) {
 // AlephOneJP overrides to process_macroman().
 uint16* sjis2utf16(const char* str, size_t len) {
 	static char base[1024]; // in case lastn letter is MAC_LINE_END
+
 	memset(base, 0, 1024);
 	strncpy(base, str, len);
 	if( base[len-1] == MAC_LINE_END ) {
@@ -62,13 +67,13 @@ uint16* sjis2utf16(const char* str, size_t len) {
 	}
 	static uint16 text[1024];
 	memset(text,0,2048);
-	const char* strp = base;
+	char* strp = base;
 	char* retp = (char*)text;
 	size_t sz = 1024;
 	iconv_t i = iconv_open("UCS-2-INTERNAL", "SHIFT-JIS");
 	iconv_t j = iconv_open("UCS-2-INTERNAL", "MACROMAN");
 	if( iconv(i,  &strp, &len, &retp, &sz) == -1 ) {
-		strp = str;
+		strp = base;
 		retp = (char*)text;
 		sz = 1024;
 		iconv(j,  &strp, &len, &retp, &sz);
@@ -81,8 +86,10 @@ uint16* sjis2utf16(const char* str, size_t len) {
 // Convert from UTF8 to Unidode
 uint16* utf82utf16(const char* str, size_t len) {
 	static uint16 text[1024];
+	static char src[1024];
+	strcpy(src,str);
 	memset(text,0,2048);
-	const char* strp = str;
+	char* strp = src;
 	char* retp = (char*)text;
 	size_t sz = 1024;
 	iconv_t i = iconv_open("UCS-2-INTERNAL", "UTF-8");
@@ -95,9 +102,12 @@ uint16* utf82utf16(const char* str, size_t len) {
 // Convert from Unicode to UTF8
 char* utf162utf8(const uint16* str, size_t len) {
 	static char text[1024];
+	static char src[1024];
+	memset(src, 0, 1024*sizeof(uint16));
+	memcpy(src, str, len*sizeof(uint16));
 	memset(text,0,1024);
 	len *= 2;
-	const char* strp = (const char*)str;
+	char* strp = src;
 	char* retp = text;
 	size_t sz = 1024;
 	iconv_t i = iconv_open("UTF-8", "UCS-2-INTERNAL");
@@ -121,7 +131,7 @@ uint16 sjisChar(char* in, int* step) {
 	}
 	uint16 text[2];
 	memset(text,0,4);
-	const char* strp = in;
+	char* strp = in;
 	char* retp = (char*)text;
 	size_t sz = 4;
 	iconv_t i = iconv_open("UCS-2-INTERNAL", "SHIFT-JIS");
@@ -139,8 +149,10 @@ uint16 sjisChar(char* in, int* step) {
 
 int unicodeChar( const char* input, uint16* ret) {
 	uint16 text[3];
+	static char src[1024];
+	strcpy(src,input);
 	memset(text,0,4);
-	const char* strp = input;
+	char* strp = src;
 	char* retp = (char*)text;
 	size_t len = strlen(input), sz = 6;
 
@@ -148,7 +160,7 @@ int unicodeChar( const char* input, uint16* ret) {
 	iconv_t j = iconv_open("UCS-2-INTERNAL", "MACROMAN");
 
 	if( iconv(i,  &strp, &len, &retp, &sz) == -1 ) {
-		strp = input;
+		strp = src;
 		retp = (char*)text;
 		sz = 4;
 		iconv(j,  &strp, &len, &retp, &sz);
