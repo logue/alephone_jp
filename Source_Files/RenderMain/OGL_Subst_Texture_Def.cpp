@@ -256,35 +256,21 @@ bool XML_TextureOptionsParser::_HandleAttribute(const char *Tag, const char *Val
 		logWarning("Ignoring deprecated image_scale tag");
 		return true;
 	}
-	else if (StringsEqual(Tag, "x_offset"))
-	{
-		logWarning("Ignoring deprecated x_offset tag");
-		return true;
-	}
-	else if (StringsEqual(Tag, "y_offset"))
-	{
-		logWarning("Ignoring deprecated y_offset tag");
-		return true;
-	}
 	else if (StringsEqual(Tag,"shape_width"))
 	{
-		logWarning("Ignoring deprecated shape_width tag");
-		return true;
+		return ReadInt16Value(Value,Data.shape_width);
 	}
 	else if (StringsEqual(Tag,"shape_height"))
 	{
-		logWarning("Ignoring deprecated shape_height tag");
-		return true;
+		return ReadInt16Value(Value,Data.shape_height);
 	}
 	else if (StringsEqual(Tag,"offset_x"))
 	{
-		logWarning("Ignoring deprecated offset_x tag");
-		return true;
+		return ReadInt16Value(Value,Data.offset_x);
 	}
 	else if (StringsEqual(Tag,"offset_y"))
 	{
-		logWarning("Ignoring deprecated offset_y tag");
-		return true;
+		return ReadInt16Value(Value,Data.offset_y);
 	}
 	else if (StringsEqual(Tag,"actual_height"))
 	{
@@ -413,6 +399,26 @@ bool XML_TextureOptionsParser::AttributesDone()
 	if (Attributes.count("glow_blend"))
 	{
 		it->second.GlowBlend = Data.GlowBlend;
+	}
+
+	if (Attributes.count("shape_width"))
+	{
+		it->second.shape_width = Data.shape_width;
+	}
+
+	if (Attributes.count("shape_height"))
+	{
+		it->second.shape_height = Data.shape_height;
+	}
+	
+	if (Attributes.count("offset_x"))
+	{
+		it->second.offset_x = Data.offset_x;
+	}
+
+	if (Attributes.count("offset_y"))
+	{
+		it->second.offset_y = Data.offset_y;
 	}
 
 	if (Attributes.count("actual_height"))
