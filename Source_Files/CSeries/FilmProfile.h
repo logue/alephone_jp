@@ -75,9 +75,12 @@ struct FilmProfile
 
 	// Aleph One moved object initialization to improve Lua access
 	bool early_object_initialization;
-	
-	// multi-level films need to preserve action queues between levels
-	bool reset_action_queues;
+
+	// Aleph One 1.1 fixes
+	bool fix_sliding_on_platforms;
+	bool prevent_dead_projectile_owners;
+	bool validate_random_ranged_attack;
+	bool allow_short_kamikaze;
 };
 
 extern FilmProfile film_profile;
@@ -85,7 +88,8 @@ extern FilmProfile film_profile;
 enum FilmProfileType {
 	FILM_PROFILE_DEFAULT,
 	FILM_PROFILE_MARATHON_2,
-	FILM_PROFILE_MARATHON_INFINITY
+	FILM_PROFILE_MARATHON_INFINITY,
+	FILM_PROFILE_ALEPH_ONE_1_0
 };
 
 void load_film_profile(FilmProfileType type, bool reload_mml = true);

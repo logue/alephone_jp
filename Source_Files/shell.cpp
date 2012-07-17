@@ -135,6 +135,7 @@ extern char *bundle_resource_path;
 extern char *app_log_directory;
 extern char *app_preferences_directory;
 extern char *app_support_directory;
+extern char *app_screenshots_directory;
 #else
 char application_name[] = A1_DISPLAY_NAME;
 char application_identifier[] = "org.bungie.source.AlephOne";
@@ -201,27 +202,27 @@ short vidmasterStringSetID = -1; // can be set with MML
 static void usage(const char *prg_name)
 {
 #ifdef __WIN32__
-	MessageBox(NULL, "コマンドラインスイッチ：\n\n"
+MessageBox(NULL, "コマンドラインスイッチ：\n\n"
 #else
 	printf("\n使用方法：%s [オプション] [ディレクトリ] [ファイル]\n"
 #endif
-	"\t[-h | --help]		このヘルプメッセージを表\示します。\n"
-	"\t[-v | --version]		ゲームのバージョンを表\示します。\n"
-	"\t[-d | --debug]		コアダンプを出力するようにします。\n"
-	"\t						（SDL parachuteを無効化します）\n"
-	"\t[-f | --fullscreen]	ゲームをフルスクリーンで起動します。\n"
-	"\t[-w | --windowed]	ゲームをウィンドウモードで起動します。\n"
+	" [-h | --help]		このヘルプメッセージを表\示します。\n"
+	" [-v | --version]		ゲームのバージョンを表\示します。\n"
+	" [-d | --debug]		コアダンプを出力するようにします。\n"
+	" 						（SDL parachuteを無効化します）\n"
+	" [-f | --fullscreen]	ゲームをフルスクリーンで起動します。\n"
+	" [-w | --windowed]	ゲームをウィンドウモードで起動します。\n"
 #ifdef HAVE_OPENGL
-	"\t[-g | --nogl]		OpenGLを使用せずに起動します。\n"
+	" [-g | --nogl]		OpenGLを使用せずに起動します。\n"
 #endif
-	"\t[-s | --nosound]		サウンドを無効化します。\n"
-	"\t[-m | --nogamma]		ガンマエフェクトを無効化します。\n"
-	"\t						（メニューのフェードなど）\n"
-	"\t[-j | --nojoystick]	ジョイスティックの初期化を行いません。\n"
+	" [-s | --nosound]		サウンドを無効化します。\n"
+	" [-m | --nogamma]		ガンマエフェクトを無効化します。\n"
+	"						（メニューのフェードなど）\n"
+	" [-j | --nojoystick]	ジョイスティックの初期化を行いません。\n"
 	// Documenting this might be a bad idea?
 	// "\t[-i | --insecure_lua]  Allow Lua netscripts to take over your computer\n"
-	"\tディレクトリ			データーが含まれているディレクトリ\n"
-	"\tファイル				保存されたゲームやフィルムの再生\n"
+	" ディレクトリ			データーが含まれているディレクトリ\n"
+	" ファイル				保存されたゲームやフィルムの再生\n"
 	"\nこの他にも、環境変数「ALEPHONE_DATA」の値を変更することで、\n"
 	"データディレクトリを指定することができます。\n"
 #ifdef __WIN32__
@@ -277,7 +278,7 @@ int main(int argc, char **argv)
 {
 	// Print banner (don't bother if this doesn't appear when started from a GUI)
 	char app_name_version[256];
-	expand_app_variables(app_name_version, "Aleph One JP $appLongVersion$");
+	expand_app_variables(app_name_version, "Aleph One $appLongVersion$ 日本語版");
 	printf ("%s\n%s\n\n"
 	  "オリジナルのコードは、Bungie Software <http://www.bungie.com/>によるものです。\n"
 	  "この他にLoren Petrich, Chris Pruett, Rhys Hill氏らによって書かれています。\n"
@@ -286,7 +287,7 @@ int main(int argc, char **argv)
 	  "SDLポート by Christian Bauer <Christian.Bauer@uni-mainz.de>\n"
 	  "日本語化 by saiten <http://www.isidesystem.net/>, ookawa_mi, Logue <http://logue.be/>, marathon.\n" 
 #if defined(__MACH__) && defined(__APPLE__)
-	  "Mac OS X/SDLバージョンは、Chris Lovell, Alexander Strange, and Woody Zenfell氏らによって作られました。\n"
+	   "Mac OS X/SDLバージョンは、Chris Lovell, Alexander Strange, and Woody Zenfell氏らによって作られました。\n"
 #endif
 	  "\nこのプログラムは有用であることを願って頒布されますが、*全くの無保証 *です。\n"
 	  "商業可能\性の保証や特定目的への適合性は、言外に示されたものも 含め、全く存在しません。\n"
@@ -413,6 +414,7 @@ static void initialize_application(void)
 	bundle_data_dir += "DataFiles";
 
 	data_search_path.push_back(bundle_data_dir);
+
 #ifndef SCENARIO_IS_BUNDLED
 	{
 		char* buf = getcwd(0, 0);
@@ -420,6 +422,7 @@ static void initialize_application(void)
 		free(buf);
 	}
 #endif
+	
 	log_dir = app_log_directory;
 	preferences_dir = app_preferences_directory;
 	local_data_dir = app_support_directory;
@@ -527,6 +530,10 @@ static void initialize_application(void)
 	saved_games_dir = local_data_dir + "Saved Games";
 	recordings_dir = local_data_dir + "Recordings";
 	screenshots_dir = local_data_dir + "Screenshots";
+#if defined(__APPLE__) && defined(__MACH__)
+    if (app_screenshots_directory)
+        screenshots_dir = app_screenshots_directory;
+#endif
 
 
 	DirectorySpecifier local_mml_dir = local_data_dir + "MML";
@@ -1508,7 +1515,12 @@ void LoadBaseMMLScripts()
 		}
 	}
 }
-
+			   
+const char *get_application_name(void)
+{
+   return application_name;
+}
+			   
 bool expand_symbolic_paths_helper(char *dest, const char *src, int maxlen, const char *symbol, DirectorySpecifier& dir)
 {
    int symlen = strlen(symbol);
@@ -1538,7 +1550,7 @@ char *expand_symbolic_paths(char *dest, const char *src, int maxlen)
 	}
 	return dest;
 }
-
+			   
 bool contract_symbolic_paths_helper(char *dest, const char *src, int maxlen, const char *symbol, DirectorySpecifier &dir)
 {
    const char *dpath = dir.GetPath();
@@ -1567,10 +1579,6 @@ char *contract_symbolic_paths(char *dest, const char *src, int maxlen)
 		dest[maxlen] = '\0';
 	}
 	return dest;
-}
-const char *get_application_name(void)
-{
-   return application_name;
 }
 
 // LP: the rest of the code has been moved to Jeremy's shell_misc.file.

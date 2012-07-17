@@ -13,11 +13,11 @@ FILETYPE 1
    VALUE "AppVersion", "A1_DISPLAY_VERSION"
    VALUE "BuildDate", "BUILDDATE"
    VALUE "FileVersion", "A1_DISPLAY_VERSION"
-   VALUE "FileDescription", "Aleph One/SDL for Win32"
+   VALUE "FileDescription", "Aleph One JP/SDL for Win32"
    VALUE "LegalCopyright", "GNU General Public License"
    VALUE "License", "GNU General Public License (For details, see the file COPYING)"
    VALUE "OriginalFilename", "AlephOne.exe"
-   VALUE "URL", "http://marathon.sourceforge.net"
+   VALUE "URL", "http://mjolnir.logue.be/"
   }
  }
 }

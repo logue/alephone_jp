@@ -10,8 +10,6 @@
 
 #include "converter.h"
 typedef unsigned short uint16;
-#include <string.h>
-#include <iconv.h>
 
 // Convert from Shift_JIS to UTF8
 char* sjis2utf8(const char* str, size_t len) {

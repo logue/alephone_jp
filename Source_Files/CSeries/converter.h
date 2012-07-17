@@ -5,9 +5,12 @@
  *  Created by みちあき on 08/06/24.
  *  Copyright 2008 __MyCompanyName__. All rights reserved.
  *
- *  Modified by Logue on 11/07/04
+ *  Modified by Logue on 12/05/23
  */
 #include <stdlib.h>
+#include <string.h>
+#include <iconv.h>
+
 
 char* sjis2utf8(const char* str, size_t len);
 char* utf82sjis(const char* str, size_t len);

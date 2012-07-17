@@ -506,6 +506,10 @@ static extension_mapping extensions[] =
 	{ "shpA", false, _typecode_shapes },
 	{ "sndA", false, _typecode_sounds },
 
+	{ "scen", false, _typecode_scenario },
+	{ "shps", false, _typecode_shapes },
+	{ "phys", false, _typecode_physics },
+
 	{0, false, _typecode_unknown}
 };
 
@@ -1128,7 +1132,7 @@ public:
 			switch(type) 
 			{
 			case _typecode_savegame:
-				m_prompt = "ゲーム再開";
+				m_prompt = "ゲームを再開";
 				break;
 			case _typecode_film:
 				m_prompt = "フィルムを再生";
@@ -1257,13 +1261,13 @@ public:
 			switch (type)
 			{
 			case _typecode_savegame:
-				prompt = "ゲーム保存";
+				prompt = "ゲームを保存";
 				break;
 			case _typecode_film:
-				prompt = "フィルム保存";
+				prompt = "フィルムを保存";
 				break;
 			default:
-				prompt = "ファイル保存";
+				prompt = "ファイルを保存";
 				break;
 			}
 		}
@@ -1440,7 +1444,7 @@ static bool confirm_save_choice(FileSpecifier & file)
 	char name[256];
 	file.GetName(name);
 	char message[512];
-	sprintf(message, "'%sは、すでに存在しています。", name);
+	sprintf(message, "『%s』はすでに存在します。", name);
 
 	// Create dialog
 	dialog d;

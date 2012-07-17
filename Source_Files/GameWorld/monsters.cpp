@@ -112,6 +112,7 @@ Jan 12, 2003 (Loren Petrich)
 #include "media.h"
 #include "Packing.h"
 #include "lua_script.h"
+#include "Logging.h"
 
 
 #ifdef env68k
@@ -1512,7 +1513,6 @@ void damage_monster(
 			}
 			else
 			{
-				monster->unused[0]=-1;			//steal an unused for monster death
 				if (!MONSTER_IS_DYING(monster))
 				{
 					short action;
@@ -2811,10 +2811,19 @@ static bool translate_monster(
 				
 				/* if weÕre a kamakazi and weÕre within range, pop */
 				if ((definition->flags&_monster_is_kamakazi) &&
-					object->location.z+definition->height>key_height && object->location.z<key_height)
+					object->location.z<key_height)
 				{
-					set_monster_action(monster_index, _monster_is_dying_hard);
-					monster_died(monster_index);
+					bool in_range = object->location.z+definition->height>key_height;
+					
+					/* if we're short and can't float, take out their knees! */
+					if (!in_range && film_profile.allow_short_kamikaze && !(definition->flags&_monster_floats))
+						in_range = object->location.z>=obstacle_object->location.z;
+					
+					if (in_range)
+					{
+						set_monster_action(monster_index, _monster_is_dying_hard);
+						monster_died(monster_index);
+					}
 				}
 				
 				/* if we float and this is our target, go up */
@@ -2977,7 +2986,20 @@ static bool try_monster_attack(
 		
 						if (definition->flags&_monster_chooses_weapons_randomly)
 						{
-							if (global_random()&1) new_action= _monster_is_attacking_far;
+							bool switch_to_ranged = true;
+							if (film_profile.validate_random_ranged_attack)
+							{
+								if (definition->ranged_attack.type == NONE)
+								{
+									logWarning("Monster chooses weapons randomly, but has no ranged attack");
+									definition->flags &= ~_monster_chooses_weapons_randomly;
+									switch_to_ranged = false;
+								}
+								else
+									switch_to_ranged = (range<definition->ranged_attack.range);
+							}
+							if (switch_to_ranged && global_random()&1)
+								new_action= _monster_is_attacking_far;
 						}
 					}
 					break;
@@ -3644,6 +3666,83 @@ uint8 *unpack_monster_definition(uint8 *Stream, monster_definition* Objects, siz
 	return S;
 }
 
+uint8* unpack_m1_monster_definition(uint8 *Stream, size_t Count)
+{
+	uint8* S = Stream;
+	monster_definition* ObjPtr = monster_definitions;
+
+	for (size_t k = 0; k < Count; k++, ObjPtr++)
+	{
+		StreamToValue(S, ObjPtr->collection);
+
+		StreamToValue(S, ObjPtr->vitality);
+		StreamToValue(S, ObjPtr->immunities);
+		StreamToValue(S, ObjPtr->weaknesses);
+		StreamToValue(S, ObjPtr->flags);
+
+		StreamToValue(S, ObjPtr->_class);
+		StreamToValue(S, ObjPtr->friends);
+		StreamToValue(S, ObjPtr->enemies);
+		
+		ObjPtr->sound_pitch = FIXED_ONE;
+		StreamToValue(S, ObjPtr->activation_sound);
+		S += 2; // ignore conversation sound
+
+		// Marathon doesn't have these
+		ObjPtr->friendly_activation_sound = NONE;
+		ObjPtr->clear_sound = NONE;
+		ObjPtr->kill_sound = NONE;
+		ObjPtr->apology_sound = NONE;
+		ObjPtr->friendly_fire_sound = NONE;
+		
+		StreamToValue(S, ObjPtr->flaming_sound);
+		StreamToValue(S, ObjPtr->random_sound);
+		StreamToValue(S, ObjPtr->random_sound_mask);
+
+		StreamToValue(S, ObjPtr->carrying_item_type);
+
+		StreamToValue(S, ObjPtr->radius);
+		StreamToValue(S, ObjPtr->height);
+		StreamToValue(S, ObjPtr->preferred_hover_height);
+		StreamToValue(S, ObjPtr->minimum_ledge_delta);
+		StreamToValue(S, ObjPtr->maximum_ledge_delta);
+		StreamToValue(S, ObjPtr->external_velocity_scale);
+
+		StreamToValue(S, ObjPtr->impact_effect);
+		StreamToValue(S, ObjPtr->melee_impact_effect);
+		ObjPtr->contrail_effect = NONE;
+		
+		StreamToValue(S,ObjPtr->half_visual_arc);
+		StreamToValue(S,ObjPtr->half_vertical_visual_arc);
+		StreamToValue(S,ObjPtr->visual_range);	
+		StreamToValue(S,ObjPtr->dark_visual_range);
+		StreamToValue(S,ObjPtr->intelligence);
+		StreamToValue(S,ObjPtr->speed);
+		StreamToValue(S,ObjPtr->gravity);
+		StreamToValue(S,ObjPtr->terminal_velocity);
+		StreamToValue(S,ObjPtr->door_retry_mask);
+		StreamToValue(S,ObjPtr->shrapnel_radius);
+
+		S = unpack_damage_definition(S, &ObjPtr->shrapnel_damage, 1);
+
+		StreamToValue(S,ObjPtr->hit_shapes);
+		StreamToValue(S,ObjPtr->hard_dying_shape);
+		StreamToValue(S,ObjPtr->soft_dying_shape);
+		StreamToValue(S,ObjPtr->hard_dead_shapes);
+		StreamToValue(S,ObjPtr->soft_dead_shapes);
+		StreamToValue(S,ObjPtr->stationary_shape);
+		StreamToValue(S,ObjPtr->moving_shape);
+
+		ObjPtr->teleport_in_shape = ObjPtr->stationary_shape;
+		ObjPtr->teleport_out_shape = ObjPtr->teleport_out_shape;
+
+		StreamToValue(S, ObjPtr->attack_frequency);
+		StreamToAttackDef(S, ObjPtr->melee_attack);
+		StreamToAttackDef(S, ObjPtr->ranged_attack);
+	}
+
+	return S;
+}
 
 uint8 *pack_monster_definition(uint8 *Stream, size_t Count)
 {

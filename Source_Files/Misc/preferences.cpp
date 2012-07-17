@@ -1286,9 +1286,8 @@ static void controls_dialog(void *arg)
 
 	mouse_w->add_dependent_widget(mouse_acceleration_w);
 
-      
 	w_toggle *invert_mouse_w = new w_toggle(TEST_FLAG(input_preferences->modifiers, _inputmod_invert_mouse));
-	mouse->dual_add(invert_mouse_w->label("マウスを反転"), d);
+	mouse->dual_add(invert_mouse_w->label("マウスの動きを反転"), d);
 	mouse->dual_add(invert_mouse_w, d);
 	
 	mouse_w->add_dependent_widget(invert_mouse_w);
@@ -1405,12 +1404,14 @@ static void controls_dialog(void *arg)
 	w_toggle* auto_recenter_w = new w_toggle(!(input_preferences->modifiers & _inputmod_dont_auto_recenter));
 	general_table->dual_add(auto_recenter_w->label("視点の自動リセンター"), d);
 	general_table->dual_add(auto_recenter_w, d);
+
 	general->add(general_table, true);
 
 	general->add(new w_spacer(), true);
 	general->dual_add(new w_static_text("注意：武器の自動切換えと、視点の自動リセンターは、ネットワークプレイで"), d);
 	general->dual_add(new w_static_text("自動的にオンになります。シングルプレイヤーモードでも、映画を録画する際"), d);
 	general->dual_add(new w_static_text("どちらかをオフにしても、自動的に無効化されます。"), d);
+
 	tabs->add(general, true);
 	tabs->add(mouse, true);
 	tabs->add(joystick, true);
@@ -1422,7 +1423,7 @@ static void controls_dialog(void *arg)
 	placer->dual_add(new w_button("キー設定／ボタン", keyboard_dialog, &d), d);
 
 	placer->add(new w_spacer(), true);
-	
+
 	horizontal_placer *button_placer = new horizontal_placer;
 	button_placer->dual_add(new w_button("了承", dialog_ok, &d), d);
 	button_placer->dual_add(new w_button("キャンセル", dialog_cancel, &d), d);
@@ -1437,7 +1438,7 @@ static void controls_dialog(void *arg)
 	if (d.run() == 0) {	// Accepted
 		bool changed = false;
 
-                int16 device = static_cast<int16>(mouse_w->get_selection());
+		int16 device = static_cast<int16>(mouse_w->get_selection());
 		if (device != input_preferences->input_device) {
 			input_preferences->input_device = device;
 			changed = true;
@@ -1508,6 +1509,7 @@ static void controls_dialog(void *arg)
 				changed = true;
 			}
 		}
+
 		if (changed)
 			write_preferences();
 	}
@@ -1783,9 +1785,10 @@ static void plugins_dialog(void *)
  */
 
 static const char* film_profile_labels[] = {
-	"Aleph One",
+	"Aleph One 1.1",
 	"Marathon 2",
 	"Marathon Infinity",
+	"Aleph One 1.0",
 	0
 };
 
@@ -2360,7 +2363,7 @@ void write_preferences(
 #endif // !defined(DISABLE_NETWORKING)
 
 	fprintf(F,"<environment\n");
-		WriteXML_Pathname(F,"  map_file=\"",environment_preferences->map_file,"\"\n");
+	WriteXML_Pathname(F,"  map_file=\"",environment_preferences->map_file,"\"\n");
 	WriteXML_Pathname(F,"  physics_file=\"",environment_preferences->physics_file,"\"\n");
 	WriteXML_Pathname(F,"  shapes_file=\"",environment_preferences->shapes_file,"\"\n");
 	WriteXML_Pathname(F,"  sounds_file=\"",environment_preferences->sounds_file,"\"\n");

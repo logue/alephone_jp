@@ -13,9 +13,9 @@ FILETYPE 1
    VALUE "FileVersion", "WIN_VERSION_STRING"
    VALUE "LegalCopyright", "GNU General Public License Version 3"
    VALUE "OriginalFilename", "Marathon2.exe"
-   VALUE "ProductName", "Aleph One"
+   VALUE "ProductName", "Aleph One JP"
    VALUE "ProductVersion", "A1_DISPLAY_VERSION"
-   VALUE "URL", "http://marathon.sourceforge.net"
+   VALUE "URL", "http://mjolnir.logue.be"
   }
  }
  BLOCK "VarFileInfo"
