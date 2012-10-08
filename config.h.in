@@ -6,6 +6,9 @@
 /* Define to 1 if you have the <alsa/asoundlib.h> header file. */
 #undef HAVE_ALSA_ASOUNDLIB_H
 
+/* ffmpeg support enabled */
+#undef HAVE_FFMPEG
+
 /* Define to 1 if you have the <GL/glext.h> header file. */
 #undef HAVE_GL_GLEXT_H
 

@@ -121,6 +121,7 @@
 #include "Logging.h"
 #include "network.h"
 #include "Console.h"
+#include "Movie.h"
 
 // LP addition: whether or not the cheats are active
 // Defined in shell_misc.cpp

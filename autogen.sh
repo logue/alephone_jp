@@ -66,5 +66,5 @@ if [ x"$NO_CONFIGURE" = "x" ]; then
 	echo "   ** If you wish to pass arguments to ./configure, please"
         echo "   ** specify them on the command line."
     fi
-    ./configure "$@"
+#    ./configure "$@"
 fi

@@ -2967,7 +2967,10 @@ void exit_networking(void)
  */
 
 #ifdef HAVE_OPENGL
+#if defined(HAVE_FFMPEG) || defined(HAVE_SMPEG)
 static OGL_Blitter show_movie_blitter;
+#endif
+#ifdef HAVE_SMPEG
 static SDL_mutex *show_movie_mutex = NULL;
 
 // SMPEG callback for use under OpenGL

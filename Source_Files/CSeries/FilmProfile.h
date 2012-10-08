@@ -81,6 +81,8 @@ struct FilmProfile
 	bool prevent_dead_projectile_owners;
 	bool validate_random_ranged_attack;
 	bool allow_short_kamikaze;
+	bool ketchup_fix;
+	bool lua_increments_rng;
 };
 
 extern FilmProfile film_profile;
