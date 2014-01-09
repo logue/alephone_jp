@@ -6294,6 +6294,9 @@ getElementType(XML_Parser parser,
 
 
 #include <string.h>
+
+#define LIBICONV_PLUG
+
 #include <iconv.h>
 
 

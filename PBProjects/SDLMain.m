@@ -48,7 +48,6 @@ char *bundle_resource_path = NULL;
 char *app_log_directory = NULL;
 char *app_preferences_directory = NULL;
 char *app_support_directory = NULL;
-char *app_screenshots_directory = NULL;
 
 static int    gArgc;
 static char  **gArgv;
@@ -63,17 +62,6 @@ static NSString *getApplicationName(void)
         appName = [[NSProcessInfo processInfo] processName];
 
     return appName;
-}
-
-/* Helper for directory creation */
-static void createDirectory(NSString *path)
-{
-    NSFileManager *fileManager = [NSFileManager defaultManager];
-#if MAC_OS_X_VERSION_MIN_REQUIRED >= MAC_OS_X_VERSION_10_5
-    [fileManager createDirectoryAtPath:path withIntermediateDirectories:YES attributes:nil error:nil];
-#else
-    [fileManager createDirectoryAtPath:path attributes:nil];
-#endif
 }
 
 #if SDL_USE_NIB_FILE
@@ -99,6 +87,58 @@ static void createDirectory(NSString *path)
 
 /* The main class of the application, the application's delegate */
 @implementation SDLMain
+
+- (IBAction)prefsMenu:(id)sender
+{
+    printf ("prefs menu\n");
+}
+
+- (IBAction)newGame:(id)sender
+{
+    printf ("new game\n");
+    
+    NSRunAlertPanel (@"Get ready to blow up some... stuff!", 
+        @"Click OK to begin total carnage. Click Cancel to prevent total carnage.", 	        		@"OK", @"Cancel", nil);
+}
+
+- (IBAction)openGame:(id)sender
+{
+    NSString *path = nil;
+    NSOpenPanel *openPanel = [ NSOpenPanel openPanel ];
+    
+    if ( [ openPanel runModalForDirectory:nil
+             file:@"SavedGame" types:nil ] ) {
+             
+        path = [ [ openPanel filenames ] objectAtIndex:0 ];
+    }
+    
+    printf ("open game: %s\n", [ path UTF8String ]);
+}
+
+- (IBAction)saveGame:(id)sender
+{
+    NSString *path = nil;
+    NSSavePanel *savePanel = [ NSSavePanel savePanel ];
+    
+    if ( [ savePanel runModalForDirectory:nil
+           file:@"SaveGameFile" ] ) {
+            
+        path = [ savePanel filename ];
+    }
+    
+    printf ("save game: %s\n", [ path UTF8String ]);
+}
+
+- (IBAction)saveGameAs:(id)sender
+{
+    printf ("save game as\n");
+}
+
+- (IBAction)help:(id)sender
+{
+    NSRunAlertPanel (@"Oh help, where have ye gone?", 
+        @"Sorry, there is no help available.\n\nThis message brought to you by We Don't Document, Inc.\n\n", @"Rats", @"Good, I never read it anyway", nil);
+}
 
 /* Find the name of our bundle, as we'll need this later for finding files. */
 /* We also find other application identifiers here. */
@@ -127,7 +167,7 @@ static void createDirectory(NSString *path)
 	if (libraryPath != nil)
 	{
 		NSString *logPath = [libraryPath stringByAppendingPathComponent:@"Logs"];
-		createDirectory(logPath);
+		[fileManager createDirectoryAtPath:logPath attributes:nil];
 		app_log_directory = strdup([logPath UTF8String]);
 		
 #ifdef PREFER_APP_NAME_TO_BUNDLE_ID
@@ -135,7 +175,7 @@ static void createDirectory(NSString *path)
 #else
 		NSString *prefsPath = [[libraryPath stringByAppendingPathComponent:@"Preferences"] stringByAppendingPathComponent:bundleID];
 #endif
-		createDirectory(prefsPath);
+		[fileManager createDirectoryAtPath:prefsPath attributes:nil];
 		app_preferences_directory = strdup([prefsPath UTF8String]);
 	}
 	
@@ -148,24 +188,9 @@ static void createDirectory(NSString *path)
 #else
 		NSString *appSupportPath = [supportPath stringByAppendingPathComponent:@"AlephOne"];
 #endif
-		createDirectory(appSupportPath);
+		[fileManager createDirectoryAtPath:appSupportPath attributes:nil];
 		app_support_directory = strdup([appSupportPath UTF8String]);
 	}
-    
-#ifdef MAC_APP_STORE
-    arr = NSSearchPathForDirectoriesInDomains(NSPicturesDirectory, NSUserDomainMask, YES);
-    NSString *picturesPath = [arr objectAtIndex:0];
-    if (picturesPath != nil)
-    {
-#ifdef PREFER_APP_NAME_TO_BUNDLE_ID
-		NSString *screenshotsPath = [picturesPath stringByAppendingPathComponent:[appName stringByAppendingString:@" Screenshots"]];
-#else
-		NSString *screenshotsPath = [picturesPath stringByAppendingPathComponent:@"AlephOne Screenshots"];
-#endif
-        createDirectory(screenshotsPath);
-        app_screenshots_directory = strdup([screenshotsPath UTF8String]);
-    }
-#endif
 }		
 		
 
@@ -445,6 +470,18 @@ static void CustomApplicationMain (int argc, char **argv)
 @end
 
 
+static
+void checkCWD() {
+	char * tmp = getcwd(NULL, 0);
+	if (!tmp || strcmp(tmp, "/") == 0) {
+		NSAutoreleasePool * pool = [[NSAutoreleasePool alloc] init];
+		NSString * path = [[[[NSBundle mainBundle] bundleURL] URLByDeletingLastPathComponent] path];
+		const char * cPath = [path UTF8String];
+		assert(cPath);
+		chdir(cPath);
+		[pool release];
+	}
+}
 
 #ifdef main
 #  undef main
@@ -470,6 +507,7 @@ int main (int argc, char **argv)
             gArgv[i] = argv[i];
         gFinderLaunch = NO;
     }
+	checkCWD();
 
 #if SDL_USE_NIB_FILE
     [SDLApplication poseAsClass:[NSApplication class]];

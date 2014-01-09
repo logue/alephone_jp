@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>SchemeUserState</key>
+	<dict>
+		<key>AlephOne.dmg.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>1</integer>
+		</dict>
+		<key>AlephOne.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>0</integer>
+		</dict>
+		<key>Marathon 2.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>3</integer>
+		</dict>
+		<key>Marathon Infinity.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>4</integer>
+		</dict>
+		<key>Marathon.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>2</integer>
+		</dict>
+	</dict>
+	<key>SuppressBuildableAutocreation</key>
+	<dict>
+		<key>AE3B83970E04C87E00FD963D</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>AE505B3A141D45E600915344</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>AEB4A0DA14296CAE00537AE7</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>AEC3C6FE09AD68AC003258E4</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>AEFD85E813EB84CF00C1E687</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+	</dict>
+</dict>
+</plist>

@@ -269,11 +269,13 @@ static TTF_Font *load_ttf_font(const std::string& path, uint16 style, int16 size
 			"C:/Windows/Fonts/meiryob.ttc",
 			// for less than Windows XP (MS Gothic)
 			"C:/Windows/fonts/msgothic.ttc",
-#elif defined(__MACOS__)
+//#elif defined(__MACOS__)
+#else
 			// for MacOS (Hiragino Kaku Gothic Pro W6)
+			"/System/Library/Fonts/ヒラギノ角ゴ ProN W6.otf",
 			"/System/Library/Fonts/Hiragino Kaku Gothic Pro W6.otf",
 			"/System/Library/Fonts/Cache/HiraginoKakuGothicProNW6.otf"	// for iOS
-#else
+//#else
 			// for Linux
 			"/usr/share/fonts/truetype/vlgothic/VL-Gothic-Regular.ttf",
 			"/usr/X11R6/lib/X11/fonts/TrueType/VL-Gothic-Regular.ttf",
@@ -295,8 +297,8 @@ static TTF_Font *load_ttf_font(const std::string& path, uint16 style, int16 size
 			"/usr/X11R6/lib/X11/fonts/TrueType/gt200001.ttf",
 #endif
 		};
-
-		for ( int i=0; !fontPath[i].empty(); i++ ) {
+		
+		for ( int i=0; i < sizeof(fontPath)/sizeof(fontPath[0]); i++ ) {
 			const char* file = fontPath[i].c_str();
 			font = TTF_OpenFont(file , size);
 			if ( !font ) { continue; }
