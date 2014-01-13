@@ -67,7 +67,6 @@ dnl Checks for library functions.
 AC_CHECK_FUNC(snprintf, [
 	AC_DEFINE(HAVE_SNPRINTF, 1, [snprintf() is available])
 ])
-
 AC_CHECK_FUNC(vsnprintf, [
 	AC_DEFINE(HAVE_VSNPRINTF, 1, [vsnprintf() is available])
 ])
@@ -75,6 +74,25 @@ AC_CHECK_FUNC(vsnprintf, [
 AC_CHECK_FUNC(mkstemp, [
 	AC_DEFINE(LUA_USE_MKSTEMP, 1, [mkstemp() is available])
 ])
+AC_CHECK_FUNC(sysconf, [
+	AC_DEFINE(HAVE_SYSCONF, 1, [sysconf() is available])
+])
+AC_CHECK_FUNC(sysctlbyname, [
+	AC_DEFINE(HAVE_SYSCTLBYNAME, 1, [sysctlbyname() is available])
+])
+
+dnl Check for boost/bind
+AC_LANG_PUSH(C++)
+AC_CHECK_HEADER([boost/bind.hpp], , [AC_MSG_ERROR([You need boost/bind.hpp from the boost library to run Aleph One])])
+AC_LANG_POP(C++)
+
+dnl Check for boost/function
+AC_LANG_PUSH(C++)
+AC_CHECK_HEADER([boost/function.hpp], , [AC_MSG_ERROR([You need boost/function.hpp from the boost library to run Aleph One])])
+AC_LANG_POP(C++)
+
+AC_SEARCH_LIBS(gethostbyname, nsl)
+AC_SEARCH_LIBS(socket, socket, , [AC_CHECK_LIB(nsl, socket, LIBS="$LIBS -lsocket -lnsl", , -lsocket)])
 
 dnl On some systems iconv is in a separate library, and may actually be named
 dnl libiconv.
@@ -82,6 +100,7 @@ AC_CHECK_LIB(iconv, libiconv)
 if test $ac_cv_lib_iconv_libiconv = no; then
 	AC_CHECK_LIB(iconv, iconv , AC_MSG_ERROR([You need iconv to run Aleph One JP.]))
 fi
+
 dnl Check for SDL.
 AM_PATH_SDL(1.2.0, , AC_MSG_ERROR([You need SDL 1.2 to run Aleph One.]))
 CPPFLAGS="$CPPFLAGS $SDL_CFLAGS -DSDL"
@@ -95,14 +114,13 @@ AC_CHECK_HEADERS(SDL_image.h, [
 	])
 ])
 
-if [[ "x$enable_ttf" = "xyes" ]]; then
-	AC_CHECK_HEADERS(SDL_ttf.h, [
-		AC_CHECK_LIB(SDL_ttf, TTF_Init, [
-			LIBS="-lSDL_ttf $LIBS"
-			AC_DEFINE(HAVE_SDL_TTF, 1, [SDL_TTF support is enabled])
-		])
-	])
-fi
+AC_CHECK_HEADERS(SDL_ttf.h, [
+	AC_CHECK_LIB(SDL_ttf, TTF_Init, [
+		LIBS="-lSDL_ttf $LIBS"
+		AC_DEFINE(HAVE_SDL_TTF, 1, [SDL_TTF support is enabled])
+	])],
+	AC_MSG_ERROR([You need SDL_ttf to run Aleph One.])
+)
 
 dnl Check for SDL_net.
 AC_CHECK_HEADERS(SDL_net.h, [
@@ -111,14 +129,21 @@ AC_CHECK_HEADERS(SDL_net.h, [
 		AC_DEFINE(HAVE_SDL_NET, 1, [SDL_net support is enabled])
 	])
 ])
+
 if [[ "x$ac_cv_lib_SDL_net_SDLNet_Init" != xyes ]]; then
 	AC_MSG_ERROR([You need SDL_net to run Aleph One.])
 fi
 AM_CONDITIONAL(HAVE_SDL_NET, test x$ac_cv_lib_SDL_net_SDLNet_Init = xyes)
 
-AC_SEARCH_LIBS(gethostbyname, nsl)
-AC_SEARCH_LIBS(socket, socket, , [AC_CHECK_LIB(nsl, socket, LIBS="$LIBS -lsocket -lnsl", , -lsocket)])
-
+if [[ "x$enable_smpeg" = "xyes" ]]; then
+	dnl Check for SMPEG
+	AC_CHECK_HEADERS([smpeg/smpeg.h], [
+		AC_CHECK_LIB(smpeg, SMPEG_new, [
+			LIBS="-lsmpeg $LIBS"
+			AC_DEFINE(HAVE_SMPEG, 1, [SMPEG movie playback is enabled])
+		])
+	])
+fi
 
 dnl Check for zlib
 AC_CHECK_HEADER(zlib.h, , AC_ERROR([Aleph One requires zlib]))
@@ -146,26 +171,6 @@ if [[ "x$enable_png" = "xyes" ]]; then
 	])
 fi
 AM_CONDITIONAL(HAVE_PNG, test x$have_png = xtrue)
-
-dnl Check for boost/bind
-AC_LANG_PUSH(C++)
-AC_CHECK_HEADER([boost/bind.hpp], , [AC_MSG_ERROR([You need boost/bind.hpp from the boost library to run Aleph One])])
-AC_LANG_POP(C++)
-
-dnl Check for boost/function
-AC_LANG_PUSH(C++)
-AC_CHECK_HEADER([boost/function.hpp], , [AC_MSG_ERROR([You need boost/function.hpp from the boost library to run Aleph One])])
-AC_LANG_POP(C++)
-
-if [[ "x$enable_smpeg" = "xyes" ]]; then
-	dnl Check for SMPEG
-	AC_CHECK_HEADERS([smpeg/smpeg.h], [
-		AC_CHECK_LIB(smpeg, SMPEG_new, [
-			LIBS="-lsmpeg $LIBS"
-			AC_DEFINE(HAVE_SMPEG, 1, [SMPEG movie playback is enabled])
-		])
-	])
-fi
 
 if [[ "x$enable_mad" = "xyes" ]]; then
 	dnl Check for libmad
@@ -198,7 +203,7 @@ fi
 
 if [[ "x$enable_ffmpeg" = "xyes" ]]; then
 	dnl Check for libavcodec
-	PKG_CHECK_MODULES([FFMPEG], [libavcodec libavformat libswscale], [
+	PKG_CHECK_MODULES([FFMPEG], [libavcodec >= 53.35.0 libavformat >= 53.21.0 libavutil >= 51.22.0 libswscale >= 2.1.0], [
 		CPPFLAGS="$FFMPEG_CFLAGS $CPPFLAGS"
 		LIBS="$FFMPEG_LIBS $LIBS"
 		AC_DEFINE(HAVE_FFMPEG, 1, [ffmpeg support enabled])
@@ -245,8 +250,8 @@ case "$target" in
     CPPFLAGS="$CPPFLAGS -D__DARWIN__ -F/System/Library/Frameworks  -I/System/Library/Frameworks/OpenGL.framework/Headers"
     ;;
   *-*-linux*)
-    SYS_GL_LIBS="-lGL -lpthread"
-    ;;
+    SYS_GL_LIBS="-lGL -lpthread"	
+    ;;	
   *)
     SYS_GL_LIBS="-lGL"
     ;;

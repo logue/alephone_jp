@@ -10,7 +10,7 @@
 
 	This program is distributed in the hope that it will be useful,
 	but WITHOUT ANY WARRANTY; without even the implied warranty of
-	MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.	See the
+	MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 	GNU General Public License for more details.
 
 	This license is contained in the file "COPYING",
@@ -35,7 +35,7 @@ Jan 12, 2001 (Loren Petrich):
 */
 
 #include "cseries.h"
-#include <stdio.h>
+
 #ifdef __MVCPP__
 #include <windows.h>
 #endif
@@ -63,19 +63,17 @@ set<FontSpecifier*> *FontSpecifier::m_font_registry = NULL;
 
 bool FontSpecifier::operator==(FontSpecifier& F)
 {
-	if (strncmp(NameSet,F.NameSet,NameSetLen) != 0) return false;
 	if (Size != F.Size) return false;
 	if (Style != F.Style) return false;
-	if (strncmp(File,F.File,NameSetLen) != 0) return false;
+	if (File != F.File) return false;
 	return true;
 }
 
 FontSpecifier& FontSpecifier::operator=(FontSpecifier& F)
 {
-	memcpy(NameSet,F.NameSet,NameSetLen);
 	Size = F.Size;
 	Style = F.Style;
-	memcpy(File,F.File,NameSetLen);
+	File = F.File;
 	return *this;
 }
 
@@ -90,102 +88,15 @@ FontSpecifier::~FontSpecifier()
 
 void FontSpecifier::Init()
 {
-#ifdef SDL
 	Info = NULL;
-#endif
 	Update();
 #ifdef HAVE_OPENGL
-				for(int n = 0; n < 256; ++n ) {
-					OGL_Texture[n] = NULL;
-				}
+	//OGL_Texture = NULL;
+	for(int n = 0; n < 256; ++n ) {
+		OGL_Texture[n] = NULL;
+	}
 #endif
 }
-
-
-// MacOS- and SDL-specific stuff
-#if defined(mac)
-
-// Cribbed from _get_font_line_spacing() and similar functions in screen_drawing.cpp
-
-void FontSpecifier::Update()
-{
-	// csfonts -- push old font
-	TextSpec OldFont;
-	GetFont(&OldFont);
-	
-	// Parse the font spec to find the font ID;
-	// if it is not set, then it is assumed to be the system font
-	ID = 0;
-	
-	Str255 Name;
-	
-	char *NamePtr = FindNextName(NameSet);
-	
-	while(NamePtr)
-	{
-		char *NameEndPtr = FindNameEnd(NamePtr);
-		
-		// Make a Pascal string out of the name
-		int NameLen = MIN(NameEndPtr - NamePtr, 255);
-		Name[0] = NameLen;
-		memcpy(Name+1,NamePtr,NameLen);
-		Name[NameLen+1] = 0;
-		// dprintf("Name, Len: <%s>, %d",Name+1,NameLen);
-		
-		// MacOS ID->name translation
-		GetFNum(Name,&ID);
-		// dprintf("ID = %d",ID);
-		if (ID != 0) break;
-		
-		NamePtr = FindNextName(NameEndPtr);
-	}
-	
-	// Get the other font features
-	Use();
-	FontInfo Info;
-	GetFontInfo(&Info);
-	
-	Ascent = Info.ascent;
-	Descent = Info.descent;
-	Leading = Info.leading;
-	Height = Ascent + Leading;
-	LineSpacing = Ascent + Descent + Leading;
-
-	for (int k=0; k<256; k++)
-		Widths[k] = ::CharWidth(k);
-	
-	// pop old font
-	SetFont(&OldFont);
-}
-
-
-void FontSpecifier::Use()
-{
-	// MacOS-specific:
-	TextFont(ID);
-	TextFace(Style);
-	TextSize(Size);
-}
-
-
-int FontSpecifier::TextWidth(const char *Text)
-{
-	// csfonts -- push old font
-	TextSpec OldFont;
-	GetFont(&OldFont);
-	
-	// Set to use current font
-	Use();
-	
-	int Len = MIN(strlen(Text),255);
-	// MacOS-specific; note the :: for getting the top-level function instead of a member one
-	return int(::TextWidth(Text,0,Len));
-	
-	// pop old font
-	SetFont(&OldFont);
-}
-
-#elif defined(SDL)
 
 void FontSpecifier::Update()
 {
@@ -196,13 +107,32 @@ void FontSpecifier::Update()
 	}
 		
 	TextSpec Spec;
+	Spec.size = Size;
+	Spec.style = Style;
+	Spec.adjust_height = AdjustLineHeight;
+    
 	// Simply implements format "#<value>"; may want to generalize this
 	if (File[0] == '#') 
 	{
 		short ID;
-		sscanf(File+1, "%hd", &ID);
+		sscanf(File.c_str() +1, "%hd", &ID);
 		
 		Spec.font = ID;
+		if (ID == 4)
+		{
+			Spec.font = -1;
+			Spec.normal = "Monaco";
+			Spec.size = Size * 1.34f;
+		}
+		else if (ID == 22) 
+		{
+			Spec.font = -1;
+			Spec.normal = "Courier Prime";
+			Spec.bold = "Courier Prime Bold";
+			Spec.oblique = "Courier Prime Italic";
+			Spec.bold_oblique = "Courier Prime Bold Italic";
+			Spec.adjust_height -= Size * 0.084f;
+		}
 	}
 	else
 	{
@@ -210,10 +140,6 @@ void FontSpecifier::Update()
 		Spec.normal = File;
 	}
 
-	Spec.size = Size;
-	Spec.style = Style;
-	Spec.adjust_height = AdjustLineHeight;
-//				Spec.normal = "mono";
 	Info = load_font(Spec);
 	
 	if (Info) {
@@ -233,13 +159,54 @@ extern int8 char_width(uint8 c, const sdl_font_info *font, uint16 style);
 
 int FontSpecifier::TextWidth(const char *text)
 {
+/*
+	int width = 0;
+	char c;
+	if (!text)
+		return width;
+	while ((c = *text++) != 0)
+		width += Widths[static_cast<unsigned char>(c)];
+	return width;
+*/
 	// Japaneese font(assume text is shiftjis)
 	return Info->text_width(text, 0,false);
 }
 
-#endif
-
 #ifdef HAVE_OPENGL
+// Reset the OpenGL fonts; its arg indicates whether this is for starting an OpenGL session
+// (this is to avoid texture and display-list memory leaks and other such things)
+void FontSpecifier::OGL_Reset(bool IsStarting)
+{
+	// Don't delete these if there is no valid texture;
+	// that indicates that there are no valid texture and display-list ID's.
+	if (!IsStarting && OGL_Texture[1] )	
+	{
+		glDeleteTextures(256,TxtrID);
+		glDeleteLists(DispList,256);
+		OGL_Deregister(this);
+		for(int n = 0; n < 256; ++n ) {
+			// Invalidates whatever texture had been present
+			if (OGL_Texture[n])
+			{
+				delete [] OGL_Texture[n];
+				OGL_Texture[n] = NULL;
+			}
+		}
+	}
+	textMap.clear();
+			
+	if (!IsStarting)
+		return;
+	glGenTextures(256,TxtrID);
+	DispList = glGenLists(256);
+	OGL_Register(this);
+	// Put some padding around each glyph so as to avoid clipping i
+	for(int n = 1; n < 128; ++n ) {
+		char str[] = { n, 0 };
+		render_text_(n, str);
+	}
+}
+
 void FontSpecifier::render_text_(int n, const char* str) {
 	if( OGL_Texture[n] )
 		return;
@@ -327,39 +294,6 @@ void FontSpecifier::render_text_(int n, const char* str) {
 		glEndList();
 		
 }
-// Reset the OpenGL fonts; its arg indicates whether this is for starting an OpenGL session
-// (this is to avoid texture and display-list memory leaks and other such things)
-void FontSpecifier::OGL_Reset(bool IsStarting)
-{
-	// Don't delete these if there is no valid texture;
-	// that indicates that there are no valid texture and display-list ID's.
-	if (!IsStarting && OGL_Texture[1] )	
-	{
-		glDeleteTextures(256,TxtrID);
-		glDeleteLists(DispList,256);
-		OGL_Deregister(this);
-		for(int n = 0; n < 256; ++n ) {
-			// Invalidates whatever texture had been present
-			if (OGL_Texture[n])
-			{
-				delete [] OGL_Texture[n];
-				OGL_Texture[n] = NULL;
-			}
-		}
-	}
-	textMap.clear();
-			
-	if (!IsStarting)
-			return;
-	glGenTextures(256,TxtrID);
-	DispList = glGenLists(256);
-	OGL_Register(this);
-	// Put some padding around each glyph so as to avoid clipping i
-	for(int n = 1; n < 128; ++n ) {
-		char str[] = { n, 0 };
-		render_text_(n, str);
-	}
-}
 
 #include "converter.h"
 // Renders a C-style string in OpenGL.
@@ -368,21 +302,33 @@ void FontSpecifier::OGL_Reset(bool IsStarting)
 // One can surround it with glPushMatrix() and glPopMatrix() to remember the original.
 void FontSpecifier::OGL_Render(const char *Text)
 {
-	const char* tp = Text;
-
 	// Bug out if no texture to render
-	if (!OGL_Texture[33])
+	if (!OGL_Texture)
 	{
-		OGL_Reset(true);
-		if (!OGL_Texture[33]) return;
+        OGL_Reset(true);
+        if (!OGL_Texture) return;
 	}
+	
 	glPushAttrib(GL_ENABLE_BIT);
-			
+	
 	glEnable(GL_TEXTURE_2D);
 	glDisable(GL_CULL_FACE);
 	glEnable(GL_BLEND);
 	glDisable(GL_ALPHA_TEST);
 	glBlendFunc(GL_SRC_ALPHA,GL_ONE_MINUS_SRC_ALPHA);
+
+/*
+	glBindTexture(GL_TEXTURE_2D,TxtrID);
+
+	size_t Len = MIN(strlen(Text),255);
+	for (size_t k=0; k<Len; k++)
+	{
+		unsigned char c = Text[k];
+		glCallList(DispList+c);
+	}
+*/
+	// Calculate 2 byte-Text char width
+	const char* tp = Text;
 	while(*tp) {
 		if( (unsigned char)*tp < 128 ) {
 			glBindTexture(GL_TEXTURE_2D,TxtrID[*tp]);
@@ -403,7 +349,7 @@ void FontSpecifier::OGL_Render(const char *Text)
 			} while( *tp && tc > 127 ) ;
 
 			if( int re = textMap[buffer] ) {
-				// Already rendered				
+				// Already rendered
 				glBindTexture(GL_TEXTURE_2D,TxtrID[re]);
 				glCallList(DispList+re);
 			} else {
@@ -436,7 +382,52 @@ void FontSpecifier::OGL_DrawText(const char *text, const screen_rectangle &r, sh
 	strncpy(text_to_draw, text, 256);
 	text_to_draw[255] = 0;
 
+	// Check for wrapping, and if it occurs, be recursive
+	if (flags & _wrap_text) {
+		int last_non_printing_character = 0, text_width = 0;
+		unsigned count = 0;
+		while (count < strlen(text_to_draw) && text_width < RECTANGLE_WIDTH(&r)) {
+			text_width += CharWidth(text_to_draw[count]);
+			if (text_to_draw[count] == ' ')
+				last_non_printing_character = count;
+			count++;
+		}
+		
+		if( count != strlen(text_to_draw)) {
+			char remaining_text_to_draw[256];
+			
+			// If we ever have to wrap text, we can't also center vertically. Sorry.
+			flags &= ~_center_vertical;
+			flags |= _top_justified;
+			
+			// Pass the rest of it back in, recursively, on the next line
+			memcpy(remaining_text_to_draw, text_to_draw + last_non_printing_character + 1, strlen(text_to_draw + last_non_printing_character + 1) + 1);
+	
+			screen_rectangle new_destination = r;
+			new_destination.top += LineSpacing;
+			OGL_DrawText(remaining_text_to_draw, new_destination, flags);
+	
+			// Now truncate our text to draw
+			text_to_draw[last_non_printing_character] = 0;
+		}
+	}
+
+	// Truncate text if necessary
 	int t_width = TextWidth(text_to_draw);
+	if (t_width > RECTANGLE_WIDTH(&r)) {
+		int width = 0;
+		int num = 0;
+		char c, *p = text_to_draw;
+		while ((c = *p++) != 0) {
+			width += CharWidth(c);
+			if (width > RECTANGLE_WIDTH(&r))
+				break;
+			num++;
+		}
+		text_to_draw[num] = 0;
+		t_width = TextWidth(text_to_draw);
+	}
+
 
 	// Horizontal positioning
 	int x, y;
@@ -475,8 +466,8 @@ void FontSpecifier::OGL_DrawText(const char *text, const screen_rectangle &r, sh
 void FontSpecifier::OGL_ResetFonts(bool IsStarting)
 {
 	if (!m_font_registry)
-			return;
-		
+		return;
+
 	set<FontSpecifier*>::iterator it;
 	if (IsStarting)
 	{
@@ -541,47 +532,6 @@ int FontSpecifier::DrawText(SDL_Surface *s, const char *text, int x, int y, uint
 #endif
 }
 	
-// Given a pointer to somewhere in a name set, returns the pointer
-// to the start of the next name, or NULL if it did not find any
-char *FontSpecifier::FindNextName(char *NamePtr)
-{
-	char *NextNamePtr = NamePtr;
-	char c;
-	
-	// Continue as long as one's in the string
-	while((c = *NextNamePtr) != 0)
-	{
-		// dprintf("Nxt %c",c);
-		// Check for whitespace and commas and semicolons
-		if (c == ' ' || c == '\t' || c == '\r' || c == '\n' || c == ',' || c == ';')
-		{
-			NextNamePtr++;
-			continue;
-		}
-		return NextNamePtr;
-	}
-	return NULL;
-}
-
-// Given a pointer to the beginning of a name, finds the pointer to the character
-// just after the end of that name
-char *FontSpecifier::FindNameEnd(char *NamePtr)
-{
-	char *NameEndPtr = NamePtr;
-	char c;
-	
-	// Continue as long as one's in the string
-	while((c = *NameEndPtr) != 0)
-	{
-		// dprintf("End %c",c);
-		// Delimiter: comma or semicolon
-		if (c == ',' || c == ';') break;
-		NameEndPtr++;
-	}
-	return NameEndPtr;
-}
-
-
 // Font-parser object:
 class XML_FontParser: public XML_ElementParser
 {
@@ -623,9 +573,6 @@ bool XML_FontParser::HandleAttribute(const char *Tag, const char *Value)
 	}
 	if (StringsEqual(Tag,"name"))
 	{
-		IsPresent[0] = true;
-		strncpy(TempFont.NameSet,Value,FontSpecifier::NameSetLen);
-		TempFont.NameSet[FontSpecifier::NameSetLen-1] = 0;	// For making the set always a C string
 		return true;
 	}
 	else if (StringsEqual(Tag,"size"))
@@ -649,8 +596,7 @@ bool XML_FontParser::HandleAttribute(const char *Tag, const char *Value)
 	else if (StringsEqual(Tag,"file"))
 	{
 		IsPresent[4] = true;
-		strncpy(TempFont.File,Value,FontSpecifier::NameSetLen);
-		TempFont.File[FontSpecifier::NameSetLen-1] = 0;	// For making the set always a C string
+		TempFont.File = Value;
 		return true;
 	}
 	UnrecognizedTag();
@@ -675,11 +621,6 @@ bool XML_FontParser::AttributesDone()
 	// Put into place and update if necessary
 	assert(FontList);
 	bool DoUpdate = false;
-	if (IsPresent[0])
-	{
-		strncpy(FontList[Index].NameSet,TempFont.NameSet,FontSpecifier::NameSetLen);
-		DoUpdate = true;
-	}
 	if (IsPresent[1])
 	{
 		FontList[Index].Size = TempFont.Size;
@@ -692,7 +633,7 @@ bool XML_FontParser::AttributesDone()
 	}
 	if (IsPresent[4])
 	{
-		strncpy(FontList[Index].File,TempFont.File,FontSpecifier::NameSetLen);
+		FontList[Index].File = TempFont.File;
 		DoUpdate = true;
 	}
 	if (DoUpdate) FontList[Index].Update();

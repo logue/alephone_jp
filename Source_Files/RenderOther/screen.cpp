@@ -102,6 +102,7 @@ uint16 default_gamma_g[256];
 uint16 default_gamma_b[256];
 bool software_gamma = false;
 bool software_gamma_tested = false;
+bool force_software_gamma = false;
 uint16 current_gamma_r[256];
 uint16 current_gamma_g[256];
 uint16 current_gamma_b[256];
@@ -112,6 +113,7 @@ static bool in_game = false;	// Flag: menu (fixed 640x480) or in-game (variable 
 
 static int desktop_width;
 static int desktop_height;
+static bool awful_retina_hack = false;
 
 static int prev_width;
 static int prev_height;
@@ -216,6 +218,11 @@ void Screen::Initialize(screen_mode_data* mode)
 		{
 			for (int i = 0; modes[i]; ++i)
 			{
+#if defined(__APPLE__) && defined(__MACH__)
+				if (modes[i]->w > desktop_width || modes[i]->h > desktop_height) {
+					awful_retina_hack = true;
+				} else
+#endif
 				if (modes[i]->w >= 640 && modes[i]->h >= 480)
 				{
 					m_modes.push_back(std::pair<int, int>(modes[i]->w, modes[i]->h));
@@ -453,18 +460,21 @@ SDL_Rect Screen::term_rect()
 	if (hud() && !lua_hud())
 		available_height -= hud_rect().h;
 	
-	r.w = 640;
+	screen_rectangle *term_rect = get_interface_rectangle(_terminal_screen_rect);
+	r.w = RECTANGLE_WIDTH(term_rect);
+	r.h = RECTANGLE_HEIGHT(term_rect);
+	float aspect = r.w / static_cast<float>(r.h);
 	switch (screen_mode.term_scale_level)
 	{
 		case 1:
-			if (available_height >= 640 && ww >= 1280)
+			if (available_height >= (r.h * 2) && ww >= (r.w * 2))
 				r.w *= 2;
 			break;
 		case 2:
-			r.w = std::min(ww, std::max(640, 2 * available_height));
+			r.w = std::min(ww, std::max(static_cast<int>(r.w), static_cast<int>(aspect * available_height)));
 			break;
 	}
-	r.h = r.w / 2;
+	r.h = r.w / aspect;
 	r.x = wx + (ww - r.w) / 2;
 	r.y = wy + (available_height - r.h) / 2;
 
@@ -615,10 +625,11 @@ void enter_screen(void)
 	scr->lua_view_rect.w = scr->lua_map_rect.w = ww;
 	scr->lua_view_rect.h = scr->lua_map_rect.h = wh;
 	
-	scr->lua_term_rect.x = (w - 640) / 2;
-	scr->lua_term_rect.y = (h - 320) / 2;
-	scr->lua_term_rect.w = 640;
-	scr->lua_term_rect.h = 320;
+    screen_rectangle *term_rect = get_interface_rectangle(_terminal_screen_rect);
+	scr->lua_term_rect.x = (w - RECTANGLE_WIDTH(term_rect)) / 2;
+	scr->lua_term_rect.y = (h - RECTANGLE_HEIGHT(term_rect)) / 2;
+	scr->lua_term_rect.w = RECTANGLE_WIDTH(term_rect);
+	scr->lua_term_rect.h = RECTANGLE_HEIGHT(term_rect);
 
 	L_Call_HUDResize();
 }
@@ -732,7 +743,12 @@ static void change_screen_mode(int width, int height, int depth, bool nogl)
 #endif 
 
 		flags |= SDL_SWSURFACE;
-	
+
+	if (awful_retina_hack) 
+	{
+		SDL_SetVideoMode(desktop_width, desktop_height, depth, flags);
+		awful_retina_hack = false;
+	}
 	main_surface = SDL_SetVideoMode(vmode_width, vmode_height, depth, flags);
 #ifdef HAVE_OPENGL
 #if SDL_VERSION_ATLEAST(1,2,6)
@@ -823,7 +839,8 @@ static void change_screen_mode(int width, int height, int depth, bool nogl)
 		Intro_Buffer_corrected = NULL;
 	}
 
-	Term_Buffer = SDL_CreateRGBSurface(SDL_SWSURFACE, 640, 320, 32, pixel_format_32.Rmask, pixel_format_32.Gmask, pixel_format_32.Bmask, pixel_format_32.Amask);
+    screen_rectangle *term_rect = get_interface_rectangle(_terminal_screen_rect);
+	Term_Buffer = SDL_CreateRGBSurface(SDL_SWSURFACE, RECTANGLE_WIDTH(term_rect), RECTANGLE_HEIGHT(term_rect), 32, pixel_format_32.Rmask, pixel_format_32.Gmask, pixel_format_32.Bmask, pixel_format_32.Amask);
 
 	Intro_Buffer = SDL_CreateRGBSurface(SDL_SWSURFACE, 640, 480, 32, pixel_format_32.Rmask, pixel_format_32.Gmask, pixel_format_32.Bmask, 0);
 	Intro_Buffer_corrected = SDL_CreateRGBSurface(SDL_SWSURFACE, 640, 480, 32, pixel_format_32.Rmask, pixel_format_32.Gmask, pixel_format_32.Bmask, 0);
@@ -1257,7 +1274,7 @@ void render_screen(short ticks_elapsed)
 		// Update terminal
 		if (world_view->terminal_mode_active) {
 			if (Term_RenderRequest || Screen::instance()->lua_hud()) {
-				SDL_Rect src_rect = { 0, 0, 640, 320 };
+				SDL_Rect src_rect = { 0, 0, Term_Buffer->w, Term_Buffer->h };
 				DrawSurface(Term_Buffer, TermRect, src_rect);
 				Term_RenderRequest = false;
 			}
@@ -1280,7 +1297,7 @@ void render_screen(short ticks_elapsed)
 	if (screen_mode.acceleration != _no_acceleration)
 		OGL_SwapBuffers();
 #endif
-
+	
 	Movie::instance()->AddFrame(Movie::FRAME_NORMAL);
 }
 
@@ -1377,7 +1394,7 @@ static inline bool pixel_formats_equal(SDL_PixelFormat* a, SDL_PixelFormat* b)
 static void update_screen(SDL_Rect &source, SDL_Rect &destination, bool hi_rez)
 {
 	SDL_Surface *s = world_pixels;
-	if (software_gamma && !using_default_gamma && bit_depth > 8) {
+	if ((software_gamma || Movie::instance()->IsRecording()) && !using_default_gamma && bit_depth > 8) {
 		apply_gamma(world_pixels, world_pixels_corrected);
 		s = world_pixels_corrected;
 	}
@@ -1457,7 +1474,7 @@ void initialize_gamma(void)
 {
 	if (!default_gamma_inited) {
 		default_gamma_inited = true;
-		if (SDL_GetGammaRamp(default_gamma_r, default_gamma_g, default_gamma_b))
+		if (force_software_gamma || SDL_GetGammaRamp(default_gamma_r, default_gamma_g, default_gamma_b))
 		{
 			software_gamma = true;
 			software_gamma_tested = true;
@@ -1473,7 +1490,7 @@ void initialize_gamma(void)
 
 void restore_gamma(void)
 {
-    if (!option_nogamma && bit_depth > 8 && default_gamma_inited && !software_gamma)
+    if (!option_nogamma && bit_depth > 8 && default_gamma_inited && !software_gamma && !force_software_gamma)
         SDL_SetGammaRamp(default_gamma_r, default_gamma_g, default_gamma_b);
 }
 
@@ -1481,7 +1498,7 @@ void build_direct_color_table(struct color_table *color_table, short bit_depth)
 {
 	if (!option_nogamma && !software_gamma_tested)
 	{
-		if (SDL_SetGammaRamp(default_gamma_r, default_gamma_g, default_gamma_b)) {
+		if (force_software_gamma || SDL_SetGammaRamp(default_gamma_r, default_gamma_g, default_gamma_b)) {
 			software_gamma = true;
 			software_gamma_tested = true;
 			for (int i = 0; i < 256; ++i) {
@@ -1490,6 +1507,7 @@ void build_direct_color_table(struct color_table *color_table, short bit_depth)
 		}
 	}
 	color_table->color_count = 256;
+	rgb_color *color = color_table->colors;
 	bool force_software = Movie::instance()->IsRecording();
 	for (int i=0; i<256; i++, color++)
 	{
@@ -1544,7 +1562,7 @@ void animate_screen_clut(struct color_table *color_table, bool full_screen)
 			current_gamma_g[i] = color_table->colors[i].green;
 			current_gamma_b[i] = color_table->colors[i].blue;
 		}
-		bool sw_gamma = software_gamma || Movie::instance()->IsRecording();
+		bool sw_gamma = software_gamma || force_software_gamma || Movie::instance()->IsRecording();
 		if (!option_nogamma && !sw_gamma)
 			SDL_SetGammaRamp(current_gamma_r, current_gamma_g, current_gamma_b);
 		else if (sw_gamma)
@@ -1572,16 +1590,8 @@ void assert_world_color_table(struct color_table *interface_color_table, struct 
 
 void render_computer_interface(struct view_data *view)
 {
-	
-	struct view_terminal_data data;
-
-	data.left = data.top = 0;
-	data.right = 640;
-	data.bottom = 320;
-	data.vertical_offset = 0;
-
 	_set_port_to_term();
-	_render_computer_interface(&data);
+	_render_computer_interface();
 	_restore_port();
 }
 

@@ -187,6 +187,7 @@ extern string get_preferences_directory(void);
 
 // From preprocess_map_sdl.cpp
 extern bool get_default_music_spec(FileSpecifier &file);
+extern bool get_default_theme_spec(FileSpecifier& file);
 
 // From vbl_sdl.cpp
 void execute_timer_tasks(uint32 time);
@@ -415,6 +416,7 @@ static void initialize_application(void)
 	bundle_data_dir += "DataFiles";
 
 	data_search_path.push_back(bundle_data_dir);
+
 #ifndef SCENARIO_IS_BUNDLED
 	{
 		char* buf = getcwd(0, 0);
@@ -422,6 +424,7 @@ static void initialize_application(void)
 		free(buf);
 	}
 #endif
+	
 	log_dir = app_log_directory;
 	preferences_dir = app_preferences_directory;
 	local_data_dir = app_support_directory;
@@ -534,6 +537,7 @@ static void initialize_application(void)
         screenshots_dir = app_screenshots_directory;
 #endif
 
+
 	DirectorySpecifier local_mml_dir = local_data_dir + "MML";
 	DirectorySpecifier local_themes_dir = local_data_dir + "Themes";
 
@@ -541,6 +545,7 @@ static void initialize_application(void)
 	initialize_resources();
 
 	init_physics_wad_data();
+	initialize_fonts(false);
 
 	load_film_profile(FILM_PROFILE_DEFAULT, false);
 
@@ -565,13 +570,14 @@ static void initialize_application(void)
 			data_search_path.insert(data_search_path.begin() + dsp_insert_pos, chosen_dir);
 			
 			// Parse MML files again, now that we have a new dir to search
+			initialize_fonts(false);
 			SetupParseTree();
 			LoadBaseMMLScripts();
 		}
 	}
 
-	initialize_fonts();
-	Plugins::instance()->enumerate();			
+	initialize_fonts(true);
+	Plugins::instance()->enumerate();
 	
 #if defined(__WIN32__) || (defined(__MACH__) && defined(__APPLE__))
 	preferences_dir.CreateDirectory();
@@ -647,11 +653,15 @@ static void initialize_application(void)
 	alephone::Screen::instance()->Initialize(&graphics_preferences->screen_mode);
 	initialize_marathon();
 	initialize_screen_drawing();
-	FileSpecifier theme = environment_preferences->theme_dir;
+	FileSpecifier theme;
 	const Plugin* theme_plugin = Plugins::instance()->find_theme();
 	if (theme_plugin)
 	{
 		theme = theme_plugin->directory + theme_plugin->theme;
+	}
+	else
+	{
+		get_default_theme_spec(theme);
 	}
 	initialize_dialogs(theme);
 	initialize_terminal_manager();
@@ -668,8 +678,10 @@ void shutdown_application(void)
         static bool already_shutting_down = false;
         if(already_shutting_down)
                 return;
-        
+
         already_shutting_down = true;
+        
+	close_external_resources();
         
 	restore_gamma();
 #if defined(HAVE_SDL_IMAGE) && (SDL_IMAGE_PATCHLEVEL >= 8)
@@ -953,11 +965,11 @@ static void handle_game_key(const SDL_Event &event)
 		}
 		else if (key == input_preferences->shell_keycodes[_key_volume_up])
 		{
-			changed_prefs = SoundManager::instance()->AdjustVolumeUp(_snd_adjust_volume);
+			changed_prefs = SoundManager::instance()->AdjustVolumeUp(Sound_AdjustVolume());
 		}
 		else if (key == input_preferences->shell_keycodes[_key_volume_down])
 		{
-			changed_prefs = SoundManager::instance()->AdjustVolumeDown(_snd_adjust_volume);
+			changed_prefs = SoundManager::instance()->AdjustVolumeDown(Sound_AdjustVolume());
 		}
 		else if (key == input_preferences->shell_keycodes[_key_switch_view])
 		{
@@ -1331,7 +1343,7 @@ static void process_event(const SDL_Event &event)
 	case SDL_ACTIVEEVENT:
 		if (event.active.state & SDL_APPINPUTFOCUS) {
 			if (!event.active.gain && !(SDL_GetAppState() & SDL_APPINPUTFOCUS)) {
-				if (get_game_state() == _game_in_progress && get_keyboard_controller_status()) {
+				if (get_game_state() == _game_in_progress && get_keyboard_controller_status() && !Movie::instance()->IsRecording()) {
 					darken_world_window();
 					set_keyboard_controller_status(false);
 					show_cursor();
@@ -1481,7 +1493,9 @@ void dump_screen(void)
 	}
 
 	// Read OpenGL frame buffer
+	glPixelStorei(GL_PACK_ALIGNMENT, 1);
 	glReadPixels(0, 0, video->w, video->h, GL_RGB, GL_UNSIGNED_BYTE, pixels);
+	glPixelStorei(GL_PACK_ALIGNMENT, 4);  // return to default
 
 	// Copy pixel buffer (which is upside-down) to surface
 	for (int y = 0; y < video->h; y++)
@@ -1513,12 +1527,12 @@ void LoadBaseMMLScripts()
 		}
 	}
 }
-
+			   
 const char *get_application_name(void)
 {
    return application_name;
 }
-
+			   
 bool expand_symbolic_paths_helper(char *dest, const char *src, int maxlen, const char *symbol, DirectorySpecifier& dir)
 {
    int symlen = strlen(symbol);
@@ -1548,7 +1562,7 @@ char *expand_symbolic_paths(char *dest, const char *src, int maxlen)
 	}
 	return dest;
 }
-
+			   
 bool contract_symbolic_paths_helper(char *dest, const char *src, int maxlen, const char *symbol, DirectorySpecifier &dir)
 {
    const char *dpath = dir.GetPath();
@@ -1577,10 +1591,6 @@ char *contract_symbolic_paths(char *dest, const char *src, int maxlen)
 		dest[maxlen] = '\0';
 	}
 	return dest;
-}
-const char *get_application_name(void)
-{
-   return application_name;
 }
 
 // LP: the rest of the code has been moved to Jeremy's shell_misc.file.

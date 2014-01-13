@@ -10,7 +10,8 @@ static FilmProfile alephone1_1 = {
 	true, // long_distance_physics
 	true, // animate_items
 	true, // inexplicable_pin_change
-	true, // increased_dynamic_limits
+	false, // increased_dynamic_limits_1_0
+	true, // increased_dynamic_limits_1_1
 	true, // line_is_obstructed_fix
 	false, // a1_smg
 	true, // infinity_smg
@@ -24,6 +25,10 @@ static FilmProfile alephone1_1 = {
 	true, // allow_short_kamikaze
 	true, // ketchup_fix
 	false, // lua_increments_rng
+	true, // destroy_players_ball_fix
+	true, // calculate_terminal_lines_correctly
+	true, // key_frame_zero_shrapnel_fix
+	true, // count_dead_dropped_items_correctly
 };
 
 static FilmProfile alephone1_0 = {
@@ -34,7 +39,8 @@ static FilmProfile alephone1_0 = {
 	true, // long_distance_physics
 	true, // animate_items
 	true, // inexplicable_pin_change
-	true, // increased_dynamic_limits
+	true, // increased_dynamic_limits_1_0
+	false, // increased_dynamic_limits_1_1
 	false, // line_is_obstructed_fix
 	true, // a1_smg
 	false, // infinity_smg
@@ -48,6 +54,10 @@ static FilmProfile alephone1_0 = {
 	false, // allow_short_kamikaze
 	false, // ketchup_fix
 	true, // lua_increments_rng
+	false, // destroy_players_ball_fix
+	false, // calculate_terminal_lines_correctly
+	false, // key_frame_zero_shrapnel_fix
+	false, // count_dead_dropped_items_correctly
 };
 
 static FilmProfile marathon2 = {
@@ -58,7 +68,8 @@ static FilmProfile marathon2 = {
 	false, // long_distance_physics
 	false, // animate_items
 	false, // inexplicable_pin_change
-	false, // increased_dynamic_limits
+	false, // increased_dynamic_limits_1_0
+	false, // increased_dynamic_limits_1_1
 	false, // line_is_obstructed
 	false, // a1_smg
 	false, // infinity_smg
@@ -72,6 +83,10 @@ static FilmProfile marathon2 = {
 	false, // allow_short_kamikaze
 	false, // ketchup_fix
 	false, // lua_increments_rng
+	false, // destroy_players_ball_fix
+	false, // calculate_terminal_lines_correctly
+	false, // key_frame_zero_shrapnel_fix
+	false, // count_dead_dropped_items_correctly
 };
 
 static FilmProfile marathon_infinity = {
@@ -82,7 +97,8 @@ static FilmProfile marathon_infinity = {
 	false, // long_distance_physics
 	false, // animate_items
 	false, // inexplicable_pin_change
-	false, // increased_dynamic_limits
+	false, // increased_dynamic_limits_1_0
+	false, // increased_dynamic_limits_1_1
 	true, // line_is_obstructed_fix
 	false, // a1_smg
 	true, // infinity_smg
@@ -96,6 +112,10 @@ static FilmProfile marathon_infinity = {
 	false, // allow_short_kamikaze
 	false, // ketchup_fix
 	false, // lua_increments_rng
+	false, // destroy_players_ball_fix
+	false, // calculate_terminal_lines_correctly
+	false, // key_frame_zero_shrapnel_fix
+	false, // count_dead_dropped_items_correctly
 };
 
 FilmProfile film_profile = alephone1_1;

@@ -408,6 +408,12 @@ void complete_loading_level(
 		for(loop= 0; loop<dynamic_world->side_count; ++loop)
 		{
 			guess_side_lightsource_indexes(loop);
+			if (static_world->environment_flags&_environment_vacuum)
+			{
+				side_data *side= get_side_data(loop);
+				if (side->flags&_side_is_control_panel)
+					side->flags |= _side_is_lighted_switch;
+			}
 		}
 	}
 }
@@ -608,6 +614,12 @@ bool get_indexed_entry_point(
 		close_wad_file(MapFile);
 		return false;
 	}
+    
+    // We only support Marathon 1 exploration missions in single player,
+    // so disable cooperative play for Marathon maps.
+    if (header.data_version == MARATHON_ONE_DATA_VERSION &&
+        type == _multiplayer_cooperative_entry_point)
+        return false;
 
 	bool success = false;
 	if (header.application_specific_directory_data_size == SIZEOF_directory_data)
@@ -654,6 +666,11 @@ bool get_indexed_entry_point(
 				assert(length == SIZEOF_static_data);
 				static_data map_info;
 				unpack_static_data(p, &map_info, 1);
+
+				// single-player Marathon 1 levels aren't always marked
+				if (header.data_version == MARATHON_ONE_DATA_VERSION &&
+				    map_info.entry_point_flags == 0)
+					map_info.entry_point_flags = _single_player_entry_point;
 
 				if(map_info.entry_point_flags & type)
 				{
@@ -732,6 +749,11 @@ bool get_entry_points(vector<entry_point> &vec, int32 type)
 			assert(length == SIZEOF_static_data);
 			static_data map_info;
 			unpack_static_data(p, &map_info, 1);
+
+			// single-player Marathon 1 levels aren't always marked
+			if (header.data_version == MARATHON_ONE_DATA_VERSION &&
+			    map_info.entry_point_flags == 0)
+				map_info.entry_point_flags = _single_player_entry_point;
 
 			if (map_info.entry_point_flags & type) {
 
@@ -966,6 +988,7 @@ void load_sides(
 		{
 			map_sides[loop].transparent_texture.texture= UNONE;
 			map_sides[loop].ambient_delta= 0;
+			map_sides[loop].flags |= _side_item_is_optional;
 		}
 		++sides;
 	}
@@ -998,6 +1021,31 @@ void load_polygons(
 				map_polygons[loop].media_index= NONE;
 				map_polygons[loop].floor_origin.x= map_polygons[loop].floor_origin.y= 0;
 				map_polygons[loop].ceiling_origin.x= map_polygons[loop].ceiling_origin.y= 0;
+                
+                switch (map_polygons[loop].type)
+                {
+                    case _polygon_is_hill:
+                        map_polygons[loop].type = _polygon_is_minor_ouch;
+                        break;
+                    case _polygon_is_base:
+                        map_polygons[loop].type = _polygon_is_major_ouch;
+                        break;
+                    case _polygon_is_zone_border:
+                        map_polygons[loop].type = _polygon_is_glue;
+                        break;
+                    case _polygon_is_goal:
+                        map_polygons[loop].type = _polygon_is_glue_trigger;
+                        break;
+                    case _polygon_is_visible_monster_trigger:
+                        map_polygons[loop].type = _polygon_is_superglue;
+                        break;
+                    case _polygon_is_invisible_monster_trigger:
+                        map_polygons[loop].type = _polygon_must_be_explored;
+                        break;
+                    case _polygon_is_dual_monster_trigger:
+                        map_polygons[loop].type = _polygon_is_automatic_exit;
+                        break;
+                }
 			}
 			break;
 			
@@ -1612,6 +1660,30 @@ bool process_map_wad(
 	assert(static_cast<size_t>(SIZEOF_static_data)==data_length 
 		|| static_cast<size_t>(SIZEOF_static_data-2)==data_length);
 	load_map_info(data);
+    if (version == MARATHON_ONE_DATA_VERSION)
+    {
+        if (static_world->mission_flags & _mission_exploration)
+        {
+            static_world->mission_flags &= ~_mission_exploration;
+            static_world->mission_flags |= _mission_exploration_m1;
+        }
+        if (static_world->mission_flags & _mission_rescue)
+        {
+            static_world->mission_flags &= ~_mission_rescue;
+            static_world->mission_flags |= _mission_rescue_m1;
+        }
+        if (static_world->environment_flags & _environment_rebellion)
+        {
+            static_world->environment_flags &= ~_environment_rebellion;
+            static_world->environment_flags |= _environment_rebellion_m1;
+        }
+        static_world->environment_flags |= _environment_glue_m1|_environment_ouch_m1|_environment_song_index_m1|_environment_terminals_stop_time|_environment_activation_ranges|_environment_m1_weapon_pickups;
+        
+    }
+
+    if (static_world->environment_flags & _environment_song_index_m1) {
+	    Music::instance()->SetClassicLevelMusic(static_world->song_index);
+    }
 
 	/* Extract the game difficulty info.. */
 	data= (uint8 *)extract_type_from_wad(wad, ITEM_PLACEMENT_STRUCTURE_TAG, &data_length);

@@ -50,6 +50,12 @@ using std::map;
 #include <boost/tuple/tuple_comparison.hpp>
 #include "preferences.h" // smooth_font
 #include "AlephSansMono-Bold.h"
+#include "ProFontAO.h"
+
+#include "CourierPrime.h"
+#include "CourierPrimeBold.h"
+#include "CourierPrimeItalic.h"
+#include "CourierPrimeBoldItalic.h"
 #endif
 
 // Global variables
@@ -61,11 +67,7 @@ static font_list_t font_list;				// List of all loaded fonts
 typedef pair<TTF_Font *, int> ref_counted_ttf_font_t;
 typedef map<ttf_font_key_t, ref_counted_ttf_font_t> ttf_font_list_t;
 static ttf_font_list_t ttf_font_list;
-
-#define FONT_PATH "./Fonts.ttf"
 #endif
-
-#include "converter.h"
 
 // From shell_sdl.cpp
 extern vector<DirectorySpecifier> data_search_path;
@@ -76,16 +78,40 @@ extern vector<DirectorySpecifier> data_search_path;
  */
 
 #ifdef HAVE_SDL_TTF
-extern void fix_missing_overhead_map_fonts();
-extern void fix_missing_interface_fonts();
+typedef struct builtin_font
+{
+	std::string name;
+	unsigned char *data;
+	unsigned int size;
+} builtin_font_t;
+
+static builtin_font_t builtin_fontspecs[] = {
+	{ "mono", aleph_sans_mono_bold, sizeof(aleph_sans_mono_bold) },
+	{ "Monaco", pro_font_ao, sizeof(pro_font_ao) },
+	{ "Courier Prime", courier_prime, sizeof(courier_prime) },
+	{ "Courier Prime Bold", courier_prime_bold, sizeof(courier_prime_bold) },
+	{ "Courier Prime Italic", courier_prime_italic, sizeof(courier_prime_italic) },
+	{" Courier Prime Bold Italic", courier_prime_bold_italic, sizeof(courier_prime_bold_italic) }
+};
+
+#define NUMBER_OF_BUILTIN_FONTS sizeof(builtin_fontspecs) / sizeof(builtin_font)
+
+typedef std::map<std::string, builtin_font_t> builtin_fonts_t;
+builtin_fonts_t builtin_fonts;
+
+#define FONT_PATH "./Fonts.ttf"
 #endif
 
-void initialize_fonts(void)
+#include "converter.h"
+
+void initialize_fonts(bool last_chance)
 {
-	logContext("initializing fonts");
-	// Font resource file does not contains Japanese font.
-	// Then, Japanese text render as SDL_ttf and comment out to loading Font file code.
-/*
+        logContext("initializing fonts");
+    
+	// Initialize builtin TTF fonts
+	for (int j = 0; j < NUMBER_OF_BUILTIN_FONTS; ++j)
+		builtin_fonts[builtin_fontspecs[j].name] = builtin_fontspecs[j];
+/*    
 	// Open font resource files
 	bool found = false;
 	vector<DirectorySpecifier>::const_iterator i = data_search_path.begin(), end = data_search_path.end();
@@ -103,27 +129,7 @@ void initialize_fonts(void)
 		}
 		i++;
 	}
-
-	if (!found) {
 */
-#ifdef HAVE_SDL_TTF
-		// use our own built-in font
-		fix_missing_overhead_map_fonts();
-		fix_missing_interface_fonts();
-#else
-		//logFatal("Can't open font resource file");
-		logFatal("AlephOne JP requires SDL_ttf!");
-/*
-				vector<DirectorySpecifier>::const_iterator i = data_search_path.begin(), end = data_search_path.end();
-				while (i != end) {
-						FileSpecifier fonts = *i + "Fonts";
-						fdprintf(fonts.GetPath());
-						i++;
-				}
-*/
-		exit(1);
-#endif
-//	}
 }
 
 
@@ -252,10 +258,11 @@ static TTF_Font *load_ttf_font(const std::string& path, uint16 style, int16 size
 	}
 
 	TTF_Font *font = 0;
-
-	// Load AlephOne Default Font. path is "mono"
-	if (path == "mono")
+	builtin_fonts_t::iterator j = builtin_fonts.find(path);
+	if (j != builtin_fonts.end())
 	{
+		//font = TTF_OpenFontRW(SDL_RWFromConstMem(j->second.data, j->second.size), 0, size);
+
 		// Japanese Font cannot render as embeded font.
 		// If Fonts.ttf is missing, Load from System Font
 		const string fontPath[] = {
@@ -310,7 +317,6 @@ static TTF_Font *load_ttf_font(const std::string& path, uint16 style, int16 size
 	}
 	else
 	{
-		// Load from Font specified in MML.
 		short SavedType, SavedError = get_game_error(&SavedType);
 
 		FileSpecifier fileSpec(path);
@@ -350,7 +356,8 @@ static TTF_Font *load_ttf_font(const std::string& path, uint16 style, int16 size
 
 static const char *locate_font(const std::string& path)
 {
-	if (path == "mono" || path == "")
+	builtin_fonts_t::iterator j = builtin_fonts.find(path);
+	if (j != builtin_fonts.end() || path == "")
 	{
 		return path.c_str();
 	}
@@ -473,8 +480,9 @@ font_info *load_font(const TextSpec &spec) {
 	}
 	else
 */
-	return 0;
+		return 0;
 }
+
 
 /*
  *  Unload font, free sdl_font_info
@@ -644,7 +652,7 @@ char *ttf_font_info::process_printable(const char *src, int len) const
 
 uint16 *ttf_font_info::process_macroman(const char *src, int len) const 
 {
-/*
+	/*
 	static uint16 dst[1024];
 	if (len > 1023) len = 1023;
 	uint16 *p = dst;

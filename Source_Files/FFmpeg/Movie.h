@@ -20,7 +20,7 @@
   which is included with this source code; it is available online at
   http://www.gnu.org/licenses/gpl.html
   
-  Movie export using SDL_ffmpeg
+  Movie export using libav/ffmpeg
   
  */
 
@@ -28,10 +28,6 @@
 #include <string.h>
 #include <vector>
 #include <SDL_thread.h>
-
-#ifdef HAVE_FFMPEG
-#include "SDL_ffmpeg.h"
-#endif
 
 class Movie
 {
@@ -60,10 +56,7 @@ private:
   std::vector<uint8> videobuf;
   std::vector<uint8> audiobuf;
   
-#ifdef HAVE_FFMPEG
-  SDL_ffmpegFile *sffile;
-  SDL_ffmpegAudioFrame *aframe;
-#endif
+  struct libav_vars *av;
   
   SDL_Thread *encodeThread;
   SDL_sem *encodeReady;
@@ -74,6 +67,8 @@ private:
   bool Setup();
   static int Movie_EncodeThread(void *arg);
   void EncodeThread();
+  void EncodeVideo(bool last);
+  void EncodeAudio(bool last);
 };
 	
 #endif

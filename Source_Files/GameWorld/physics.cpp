@@ -79,6 +79,9 @@ running backwards shouldnÕt mean doom in a fistfight
 #include "interface.h"
 #include "monsters.h"
 
+#define DONT_REPEAT_DEFINITIONS
+#include "monster_definitions.h"
+
 #include "media.h"
 
 // LP addition:
@@ -262,8 +265,14 @@ void accelerate_player(
 	variables->external_velocity.k+= WORLD_TO_FIXED(vertical_velocity);
 	variables->external_velocity.k= PIN(variables->external_velocity.k, -constants->terminal_velocity, constants->terminal_velocity);
 	
-	variables->external_velocity.i+= (cosine_table[direction]*velocity)>>(TRIG_SHIFT+WORLD_FRACTIONAL_BITS-FIXED_FRACTIONAL_BITS);
-	variables->external_velocity.j+= (sine_table[direction]*velocity)>>(TRIG_SHIFT+WORLD_FRACTIONAL_BITS-FIXED_FRACTIONAL_BITS);
+	if (get_monster_definition_external(_monster_marine)->flags & _monster_can_grenade_climb)
+	{
+		variables->external_velocity.i= (cosine_table[direction]*velocity)>>(TRIG_SHIFT+WORLD_FRACTIONAL_BITS-FIXED_FRACTIONAL_BITS);
+		variables->external_velocity.j= (sine_table[direction]*velocity)>>(TRIG_SHIFT+WORLD_FRACTIONAL_BITS-FIXED_FRACTIONAL_BITS);
+	} else {
+		variables->external_velocity.i+= (cosine_table[direction]*velocity)>>(TRIG_SHIFT+WORLD_FRACTIONAL_BITS-FIXED_FRACTIONAL_BITS);
+		variables->external_velocity.j+= (sine_table[direction]*velocity)>>(TRIG_SHIFT+WORLD_FRACTIONAL_BITS-FIXED_FRACTIONAL_BITS);
+	}	
 }
 
 void get_absolute_pitch_range(
@@ -831,7 +840,20 @@ static void physics_update(
 	{
 		variables->external_velocity.k/= -COEFFICIENT_OF_ABSORBTION;
 	}
-	if (ABS(variables->external_velocity.k)<SMALL_ENOUGH_VELOCITY &&
+
+	_fixed small_enough_velocity;
+	if (get_monster_definition_external(_monster_marine)->flags & _monster_can_grenade_climb) {
+		_fixed gravity= constants->gravitational_acceleration;		
+		if (static_world->environment_flags&_environment_low_gravity) gravity>>= 1;
+		if (variables->flags&_FEET_BELOW_MEDIA_BIT) gravity>>= 1;
+
+		small_enough_velocity = gravity;
+	} 
+	else 
+	{
+		small_enough_velocity = SMALL_ENOUGH_VELOCITY;
+	}
+	if (ABS(variables->external_velocity.k)<small_enough_velocity &&
 		ABS(variables->floor_height-new_position.z)<CLOSE_ENOUGH_TO_FLOOR)
 	{
 		variables->external_velocity.k= 0, new_position.z= variables->floor_height;
