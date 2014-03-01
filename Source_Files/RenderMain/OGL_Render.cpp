@@ -3279,11 +3279,6 @@ bool OGL_RenderText(short BaseX, short BaseY, const char *Text, unsigned char r,
 	
 	// Create display list for the current text string;
 	// use the "standard" text-font display list (display lists can be nested)
-	GLuint TextDisplayList;
-	TextDisplayList = glGenLists(1);
-	glNewList(TextDisplayList,GL_COMPILE);
-	GetOnScreenFont().OGL_Render(Text);
-	glEndList();
 	
 	// Place the text in the foreground of the display
 	SetProjectionType(Projection_Screen);
@@ -3296,50 +3291,20 @@ bool OGL_RenderText(short BaseX, short BaseY, const char *Text, unsigned char r,
 	// Background
 	glColor3f(0,0,0);
 	
-	// Changed to drop shadow only for performance reasons
-	/*
-	glLoadIdentity();
-	glTranslatef(BaseX-1,BaseY-1,Depth);
-	glCallList(TextDisplayList);
 	
-	glLoadIdentity();
-	glTranslatef(BaseX,BaseY-1,Depth);
-	glCallList(TextDisplayList);
-	
-	glLoadIdentity();
-	glTranslatef(BaseX+1,BaseY-1,Depth);
-	glCallList(TextDisplayList);
-	
-	glLoadIdentity();
-	glTranslatef(BaseX-1,BaseY,Depth);
-	glCallList(TextDisplayList);
-	
-	glLoadIdentity();
-	glTranslatef(BaseX+1,BaseY,Depth);
-	glCallList(TextDisplayList);
-	
-	glLoadIdentity();
-	glTranslatef(BaseX-1,BaseY+1,Depth);
-	glCallList(TextDisplayList);
-	
-	glLoadIdentity();
-	glTranslatef(BaseX,BaseY+1,Depth);
-	glCallList(TextDisplayList);
-	*/
 	
 	glLoadIdentity();
 	glTranslatef(BaseX+1.0F,BaseY+1.0F,Depth);
-	glCallList(TextDisplayList);
+  GetOnScreenFont().OGL_Render(Text);
 	
 	// Foreground
 	SglColor3f(r/255.0f,g/255.0f,b/255.0f);
 
 	glLoadIdentity();
 	glTranslatef(BaseX,BaseY,Depth);
-	glCallList(TextDisplayList);
+  GetOnScreenFont().OGL_Render(Text);
 		
 	// Clean up
-	glDeleteLists(TextDisplayList,1);
 	glPopMatrix();
 	
 	return true;

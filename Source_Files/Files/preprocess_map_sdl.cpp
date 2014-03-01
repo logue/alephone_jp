@@ -113,6 +113,8 @@ bool get_default_theme_spec(FileSpecifier &file)
 	return get_default_spec(file, theme.GetPath());
 }
 
+
+
 /*
  *  Choose saved game for loading
  */

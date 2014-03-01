@@ -221,8 +221,8 @@ static void usage(const char *prg_name)
 	"\t[-m | --nogamma]		ガンマエフェクトを無効化します。\n"
 	"\t						（メニューのフェードなど）\n"
 	"\t[-j | --nojoystick]	ジョイスティックの初期化を行いません。\n"
-	// Documenting this might be a bad idea?
-	// "\t[-i | --insecure_lua]  Allow Lua netscripts to take over your computer\n"
+	  // Documenting this might be a bad idea?
+	  // "\t[-i | --insecure_lua]  Allow Lua netscripts to take over your computer\n"
 	"\tディレクトリ			データーが含まれているディレクトリ\n"
 	"\tファイル				保存されたゲームやフィルムの再生\n"
 	"\nこの他にも、環境変数「ALEPHONE_DATA」の値を変更することで、\n"
@@ -278,6 +278,10 @@ bool handle_open_document(const std::string& filename)
 
 int main(int argc, char **argv)
 {
+#if defined(__WIN32__)
+	freopen("stdout.txt","a", stdout);
+	freopen("stderr.txt", "a", stderr);
+#endif
 	// Print banner (don't bother if this doesn't appear when started from a GUI)
 	char app_name_version[256];
 	expand_app_variables(app_name_version, "Aleph One JP $appLongVersion$");
@@ -416,7 +420,6 @@ static void initialize_application(void)
 	bundle_data_dir += "DataFiles";
 
 	data_search_path.push_back(bundle_data_dir);
-
 #ifndef SCENARIO_IS_BUNDLED
 	{
 		char* buf = getcwd(0, 0);
@@ -424,7 +427,6 @@ static void initialize_application(void)
 		free(buf);
 	}
 #endif
-	
 	log_dir = app_log_directory;
 	preferences_dir = app_preferences_directory;
 	local_data_dir = app_support_directory;
@@ -537,7 +539,6 @@ static void initialize_application(void)
         screenshots_dir = app_screenshots_directory;
 #endif
 
-
 	DirectorySpecifier local_mml_dir = local_data_dir + "MML";
 	DirectorySpecifier local_themes_dir = local_data_dir + "Themes";
 
@@ -577,7 +578,7 @@ static void initialize_application(void)
 	}
 
 	initialize_fonts(true);
-	Plugins::instance()->enumerate();
+	Plugins::instance()->enumerate();			
 	
 #if defined(__WIN32__) || (defined(__MACH__) && defined(__APPLE__))
 	preferences_dir.CreateDirectory();

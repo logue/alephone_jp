@@ -29,7 +29,7 @@
     Even the beginning programmer should be able to use this library
     so he or she can use multimedia in his/her program.
 **/
-
+#define AVCODEC_MAX_AUDIO_FRAME_SIZE 192000
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>

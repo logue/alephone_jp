@@ -28,7 +28,7 @@
 
 #include "error.h"
 #include "os_common.h"
-
+#include "winsock2.h"
 
 /* Helper Function Prototypes */
 static int Initialize_Winsock_Library();

@@ -25,6 +25,10 @@ char* sjis2utf8(const char* str, size_t len) {
 	char* retp = text;
 	size_t sz = 1024;
 	iconv_t i = iconv_open("UTF-8", "SHIFT-JIS");
+	if( i == iconv_t(-1) ) {
+	  fprintf(stderr, "cannot initialize sjis2utf8 converter!");
+	  exit(1);
+	}
 	iconv_t j = iconv_open("UTF-8", "MACROMAN");
 	if( iconv(i,  &strp, &len, &retp, &sz) == -1 ) {
 		strp = (char*)str;
@@ -69,8 +73,12 @@ uint16* sjis2utf16(const char* str, size_t len) {
 	char* strp = base;
 	char* retp = (char*)text;
 	size_t sz = 1024;
-	iconv_t i = iconv_open("UCS-2-INTERNAL", "SHIFT-JIS");
-	iconv_t j = iconv_open("UCS-2-INTERNAL", "MACROMAN");
+	iconv_t i = iconv_open("UCS-2LE", "SHIFT-JIS");
+	if( i == iconv_t(-1) ) {
+	  fprintf(stderr, "cannot initialize sjis2utf16 converter!");
+	  exit(1);
+	}
+	iconv_t j = iconv_open("UCS-2LE", "MACROMAN");
 	if( iconv(i,  &strp, &len, &retp, &sz) == -1 ) {
 		strp = (char*)str;
 		retp = (char*)text;
@@ -89,7 +97,7 @@ uint16* utf82utf16(char* str, size_t len) {
 	char* strp = str;
 	char* retp = (char*)text;
 	size_t sz = 1024;
-	iconv_t i = iconv_open("UCS-2-INTERNAL", "UTF-8");
+	iconv_t i = iconv_open("UCS-2LE", "UTF-8");
 	if( iconv(i,  &strp, &len, &retp, &sz) == -1 ) {
 	}
 	iconv_close(i);
@@ -104,7 +112,7 @@ char* utf162utf8(uint16* str, size_t len) {
 	char* strp = (char*)str;
 	char* retp = text;
 	size_t sz = 1024;
-	iconv_t i = iconv_open("UTF-8", "UCS-2-INTERNAL");
+	iconv_t i = iconv_open("UTF-8", "UCS-2LE");
 	if( iconv(i,  &strp, &len, &retp, &sz) == -1 ) {
 	}
 	iconv_close(i);
@@ -128,8 +136,8 @@ uint16 sjisChar(char* in, int* step) {
 	char* strp = in;
 	char* retp = (char*)text;
 	size_t sz = 4;
-	iconv_t i = iconv_open("UCS-2-INTERNAL", "SHIFT-JIS");
-	iconv_t j = iconv_open("UCS-2-INTERNAL", "MACROMAN");
+	iconv_t i = iconv_open("UCS-2LE", "SHIFT-JIS");
+	iconv_t j = iconv_open("UCS-2LE", "MACROMAN");
 	if( iconv(i,  &strp, &len, &retp, &sz) == -1 ) {
 		strp = in;
 		retp = (char*)text;
@@ -148,8 +156,8 @@ int unicodeChar( const char* input, uint16* ret) {
 	char* retp = (char*)text;
 	size_t len = strlen(input), sz = 6;
 
-	iconv_t i = iconv_open("UCS-2-INTERNAL", "SHIFT-JIS");
-	iconv_t j = iconv_open("UCS-2-INTERNAL", "MACROMAN");
+	iconv_t i = iconv_open("UCS-2LE", "SHIFT-JIS");
+	iconv_t j = iconv_open("UCS-2LE", "MACROMAN");
 
 	if( iconv(i,  &strp, &len, &retp, &sz) == -1 ) {
 		strp = (char*)input;

@@ -1071,7 +1071,7 @@ static void set_theme_defaults(void)
 	dialog_theme[HYPERLINK_WIDGET].states[PRESSED_STATE].colors[FOREGROUND_COLOR] = make_color(0xff, 0xff, 0xff);
 
 	dialog_theme[CHECKBOX].font_spec = dialog_theme[DEFAULT_WIDGET].font_spec;
-	dialog_theme[CHECKBOX].font_spec.size = 22;
+	dialog_theme[CHECKBOX].font_spec.size = 16;/* 22 */ 
 	dialog_theme[CHECKBOX].font_set = true;
 	dialog_theme[CHECKBOX].spaces[BUTTON_T_SPACE] = 13;
 	dialog_theme[CHECKBOX].spaces[BUTTON_HEIGHT] = 15;

@@ -448,47 +448,45 @@ static void	set_text_face(struct text_face_data *text_face)
 static bool calculate_line(char *base_text, short width, short start_index, short text_end_index, short *end_index)
 {
 	bool done = false;
-
 	if (base_text[start_index]) {
 		int index = start_index, running_width = 0;
-
+		
 		// terminal_font no longer a global, since it may change
 		font_info *terminal_font = GetInterfaceFont(_computer_interface_font);
-		TTF_Font* font = ((ttf_font_info*)terminal_font)->m_styles[styleNormal];
+    TTF_Font* font = ((ttf_font_info*)terminal_font)->m_styles[styleNormal];
 		while (running_width < width && base_text[index] && base_text[index] != MAC_LINE_END) {
-			int advance;
-			uint16 c = sjisChar(base_text + index, &index);
-			TTF_GlyphMetrics(font, c, NULL, NULL, NULL, NULL, &advance );
-			running_width += advance;
+      int advance;
+      uint16 c = sjisChar(base_text + index, &index);
+      TTF_GlyphMetrics(font, c, NULL, NULL, NULL, NULL, &advance );
+      running_width += advance;
 		}
-
+		
 		// Now go backwards, looking for whitespace to split on
 		if (base_text[index] == MAC_LINE_END)
 			index++;
 		else if (base_text[index]) {
 			int break_point = index;
 
-		while (break_point>start_index) {
-			if (base_text[break_point] == ' ' )
-				break; 	// Non printing
-			if( isJChar(base_text[break_point-2]) ) {
-				break_point--;
-				break;
+			while (break_point>start_index) {
+        if (base_text[break_point] == ' ' )
+					break; 	// Non printing
+        if( isJChar(base_text[break_point-2]) ) {
+          break_point--;
+          break;
+        }
+				break_point--;	// this needs to be in front of the test
 			}
-			break_point--;	// this needs to be in front of the test
+			
+			if (break_point != start_index)
+				index = break_point+1;	// Space at the end of the line
 		}
-
-		if (break_point != start_index)
-			index = break_point+1;	// Space at the end of the line
-		}
-
+		
 		*end_index= index;
 	} else
 		done = true;
 	
 	return done;
 }
-
 /* ------------ code begins */
 
 player_terminal_data *get_player_terminal_data(

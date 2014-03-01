@@ -32,8 +32,6 @@ AC_ARG_ENABLE(speex,
 [  --enable-speex          enable Speex net mic playback [default=yes]], , enable_speex=yes)
 AC_ARG_ENABLE(alsa,
 [  --enable-alsa           enable ALSA net mic transmission [default=yes]], , enable_alsa=yes)
-AC_ARG_ENABLE(ttf,
-[  --enable-ttf            enable SDL_ttf font rendering [default=yes]], , enable_ttf=yes)
 AC_ARG_ENABLE(zzip,
 [  --enable-zzip           enable zziplib support [default=yes]], , enable_zzip=yes)
 AC_ARG_ENABLE(png,
@@ -65,34 +63,21 @@ AC_CHECK_HEADERS(pwd.h)
 
 dnl Checks for library functions.
 AC_CHECK_FUNC(snprintf, [
-	AC_DEFINE(HAVE_SNPRINTF, 1, [snprintf() is available])
+  AC_DEFINE(HAVE_SNPRINTF, 1, [snprintf() is available])
 ])
 AC_CHECK_FUNC(vsnprintf, [
-	AC_DEFINE(HAVE_VSNPRINTF, 1, [vsnprintf() is available])
+  AC_DEFINE(HAVE_VSNPRINTF, 1, [vsnprintf() is available])
 ])
 
 AC_CHECK_FUNC(mkstemp, [
-	AC_DEFINE(LUA_USE_MKSTEMP, 1, [mkstemp() is available])
+  AC_DEFINE(LUA_USE_MKSTEMP, 1, [mkstemp() is available])
 ])
 AC_CHECK_FUNC(sysconf, [
-	AC_DEFINE(HAVE_SYSCONF, 1, [sysconf() is available])
+  AC_DEFINE(HAVE_SYSCONF, 1, [sysconf() is available])
 ])
 AC_CHECK_FUNC(sysctlbyname, [
-	AC_DEFINE(HAVE_SYSCTLBYNAME, 1, [sysctlbyname() is available])
+  AC_DEFINE(HAVE_SYSCTLBYNAME, 1, [sysctlbyname() is available])
 ])
-
-dnl Check for boost/bind
-AC_LANG_PUSH(C++)
-AC_CHECK_HEADER([boost/bind.hpp], , [AC_MSG_ERROR([You need boost/bind.hpp from the boost library to run Aleph One])])
-AC_LANG_POP(C++)
-
-dnl Check for boost/function
-AC_LANG_PUSH(C++)
-AC_CHECK_HEADER([boost/function.hpp], , [AC_MSG_ERROR([You need boost/function.hpp from the boost library to run Aleph One])])
-AC_LANG_POP(C++)
-
-AC_SEARCH_LIBS(gethostbyname, nsl)
-AC_SEARCH_LIBS(socket, socket, , [AC_CHECK_LIB(nsl, socket, LIBS="$LIBS -lsocket -lnsl", , -lsocket)])
 
 dnl On some systems iconv is in a separate library, and may actually be named
 dnl libiconv.
@@ -108,42 +93,36 @@ LIBS="$LIBS $SDL_LIBS"
 
 dnl Check for SDL_image.
 AC_CHECK_HEADERS(SDL_image.h, [
-	AC_CHECK_LIB(SDL_image, IMG_Load, [
-		LIBS="-lSDL_image $LIBS"
-		AC_DEFINE(HAVE_SDL_IMAGE, 1, [SDL_image support is enabled])
-	])
+  AC_CHECK_LIB(SDL_image, IMG_Load, [
+    LIBS="-lSDL_image $LIBS"
+    AC_DEFINE(HAVE_SDL_IMAGE, 1, [SDL_image support is enabled])
+  ])
 ])
 
 AC_CHECK_HEADERS(SDL_ttf.h, [
-	AC_CHECK_LIB(SDL_ttf, TTF_Init, [
-		LIBS="-lSDL_ttf $LIBS"
-		AC_DEFINE(HAVE_SDL_TTF, 1, [SDL_TTF support is enabled])
-	])],
-	AC_MSG_ERROR([You need SDL_ttf to run Aleph One.])
+ AC_CHECK_LIB(SDL_ttf, TTF_Init, [
+   LIBS="-lSDL_ttf $LIBS"
+   AC_DEFINE(HAVE_SDL_TTF, 1, [SDL_TTF support is enabled])
+ ])],
+ AC_MSG_ERROR([You need SDL_ttf to run Aleph One.])
 )
 
 dnl Check for SDL_net.
 AC_CHECK_HEADERS(SDL_net.h, [
-	AC_CHECK_LIB(SDL_net, SDLNet_Init, [
-		LIBS="-lSDL_net $LIBS"
-		AC_DEFINE(HAVE_SDL_NET, 1, [SDL_net support is enabled])
-	])
+  AC_CHECK_LIB(SDL_net, SDLNet_Init, [
+    LIBS="-lSDL_net $LIBS"
+    AC_DEFINE(HAVE_SDL_NET, 1, [SDL_net support is enabled])
+  ])
 ])
-
 if [[ "x$ac_cv_lib_SDL_net_SDLNet_Init" != xyes ]]; then
-	AC_MSG_ERROR([You need SDL_net to run Aleph One.])
+  AC_MSG_ERROR([You need SDL_net to run Aleph One.])
 fi
 AM_CONDITIONAL(HAVE_SDL_NET, test x$ac_cv_lib_SDL_net_SDLNet_Init = xyes)
 
-if [[ "x$enable_smpeg" = "xyes" ]]; then
-	dnl Check for SMPEG
-	AC_CHECK_HEADERS([smpeg/smpeg.h], [
-		AC_CHECK_LIB(smpeg, SMPEG_new, [
-			LIBS="-lsmpeg $LIBS"
-			AC_DEFINE(HAVE_SMPEG, 1, [SMPEG movie playback is enabled])
-		])
-	])
-fi
+AC_SEARCH_LIBS(gethostbyname, nsl)
+AC_SEARCH_LIBS(socket, socket, ,
+    [AC_CHECK_LIB(nsl, socket, LIBS="$LIBS -lsocket -lnsl", , -lsocket)])
+
 
 dnl Check for zlib
 AC_CHECK_HEADER(zlib.h, , AC_ERROR([Aleph One requires zlib]))
@@ -152,91 +131,111 @@ AC_CHECK_LIB(z, zlibVersion, LIBS="-lz $LIBS", AC_ERROR([Aleph One requires zlib
 dnl Check for zziplib
 have_zzip=false
 if [[ "x$enable_zzip" = "xyes" ]]; then
-	PKG_CHECK_ZZIPLIB([ZZIP],[0.10.75], [
-		CPPFLAGS="$ZZIP_CFLAGS $CPPFLAGS"
-		LIBS="$ZZIP_LIBS $LIBS"
-		have_zzip=true
-		AC_DEFINE(HAVE_ZZIP, 1, [ZZIP support enabled])
-	])
+PKG_CHECK_MODULES([ZZIP], [zziplib >= 0.10.75], [
+			  CPPFLAGS="$ZZIP_CFLAGS $CPPFLAGS"
+			  LIBS="$ZZIP_LIBS $LIBS"
+			  have_zzip=true
+			  AC_DEFINE(HAVE_ZZIP, 1, [ZZIP support enabled])
+])
 fi
 AM_CONDITIONAL(BUILD_ZZIP_RWOPS, test x$have_zzip = xtrue)
 
 have_png=false
 if [[ "x$enable_png" = "xyes" ]]; then
-	PKG_CHECK_MODULES([PNG], [libpng], [
-		CPPFLAGS="$PNG_CFLAGS $CPPFLAGS"
-		LIBS="$PNG_LIBS $LIBS"
-		have_png=true
-		AC_DEFINE(HAVE_PNG, 1, [PNG support enabled])
-	])
+PKG_CHECK_MODULES([PNG], [libpng], [
+		  CPPFLAGS="$PNG_CFLAGS $CPPFLAGS"
+		  LIBS="$PNG_LIBS $LIBS"
+		  have_png=true
+		  AC_DEFINE(HAVE_PNG, 1, [PNG support enabled])]
+)
 fi
 AM_CONDITIONAL(HAVE_PNG, test x$have_png = xtrue)
 
+dnl Check for boost/bind
+AC_LANG_PUSH(C++)
+AC_CHECK_HEADER([boost/bind.hpp], , [AC_MSG_ERROR([You need boost/bind.hpp from the boost library to run Aleph One])])
+AC_LANG_POP(C++)
+
+dnl Check for boost/function
+AC_LANG_PUSH(C++)
+AC_CHECK_HEADER([boost/function.hpp], , [AC_MSG_ERROR([You need boost/function.hpp from the boost library to run Aleph One])])
+AC_LANG_POP(C++)
+
+if [[ "x$enable_smpeg" = "xyes" ]]; then
+dnl Check for SMPEG
+AC_CHECK_HEADERS([smpeg/smpeg.h], [
+  AC_CHECK_LIB(smpeg, SMPEG_new, [
+    LIBS="-lsmpeg $LIBS"
+    AC_DEFINE(HAVE_SMPEG, 1, [SMPEG movie playback is enabled])
+  ])
+])
+fi	    
+
 if [[ "x$enable_mad" = "xyes" ]]; then
-	dnl Check for libmad
-	AC_CHECK_HEADERS([mad.h], [
-		AC_CHECK_LIB(mad, mad_stream_init, [
-			LIBS="-lmad $LIBS"
-			AC_DEFINE(HAVE_MAD, 1, [MAD mp3 playback is enabled])
-		])
-	])
+dnl Check for libmad
+AC_CHECK_HEADERS([mad.h], [
+			  AC_CHECK_LIB(mad, mad_stream_init, [
+			  LIBS="-lmad $LIBS"
+			  AC_DEFINE(HAVE_MAD, 1, [MAD mp3 playback is enabled])
+])
+])
 fi
 
 if [[ "x$enable_sndfile" = "xyes" ]]; then
-	dnl Check for libsndfile
-	AC_CHECK_HEADERS([sndfile.h], [
-		AC_CHECK_LIB(sndfile, sf_open, [
-			LIBS="-lsndfile $LIBS"
-			AC_DEFINE(HAVE_SNDFILE, 1, [libsndfile support is enabled])
-		])
-	])
+dnl Check for libsndfile
+AC_CHECK_HEADERS([sndfile.h], [
+			      AC_CHECK_LIB(sndfile, sf_open, [
+			      LIBS="-lsndfile $LIBS"
+			      AC_DEFINE(HAVE_SNDFILE, 1, [libsndfile support is enabled])
+])
+])
 fi
 
 if [[ "x$enable_vorbis" = "xyes" ]]; then
-	dnl Check for vorbisfile
-	PKG_CHECK_MODULES([VORBISFILE], [vorbisfile], [
-		CPPFLAGS="$VORBISFILE_CFLAGS $CPPFLAGS"
-		LIBS="$VORBISFILE_LIBS $LIBS"
-		AC_DEFINE(HAVE_VORBISFILE, 1, [vorbis support enabled])
-	])
+dnl Check for vorbisfile
+PKG_CHECK_MODULES([VORBISFILE], [vorbisfile], [
+			  CPPFLAGS="$VORBISFILE_CFLAGS $CPPFLAGS"
+			  LIBS="$VORBISFILE_LIBS $LIBS"
+			  AC_DEFINE(HAVE_VORBISFILE, 1, [vorbis support enabled])
+])
 fi
 
 if [[ "x$enable_ffmpeg" = "xyes" ]]; then
-	dnl Check for libavcodec
-	PKG_CHECK_MODULES([FFMPEG], [libavcodec >= 53.35.0 libavformat >= 53.21.0 libavutil >= 51.22.0 libswscale >= 2.1.0], [
-		CPPFLAGS="$FFMPEG_CFLAGS $CPPFLAGS"
-		LIBS="$FFMPEG_LIBS $LIBS"
-		AC_DEFINE(HAVE_FFMPEG, 1, [ffmpeg support enabled])
-		have_ffmpeg=true
-	])
+dnl Check for libavcodec
+PKG_CHECK_MODULES([FFMPEG], [libavcodec >= 53.35.0 libavformat >= 53.21.0 libavutil >= 51.22.0 libswscale >= 2.1.0], [
+			    CPPFLAGS="$FFMPEG_CFLAGS $CPPFLAGS"
+			    LIBS="$FFMPEG_LIBS $LIBS"
+			    AC_DEFINE(HAVE_FFMPEG, 1, [ffmpeg support enabled])
+			    have_ffmpeg=true
+])
 fi
 AM_CONDITIONAL(HAVE_FFMPEG, test x$have_ffmpeg = xtrue)
 
 if [[ "x$enable_lua" = "xyes" ]]; then
-	AC_DEFINE(HAVE_LUA, 1, [Lua support is enabled])
+AC_DEFINE(HAVE_LUA, 1, [Lua support is enabled])
 fi
 
 if [[ "x$enable_speex" = "xyes" ]]; then
-	dnl Check for Speex
-	AC_CHECK_HEADERS(speex/speex.h, [
-		AC_CHECK_LIB(speex, speex_decoder_init, [
-			LIBS="-lspeex $LIBS"
-			AC_DEFINE(SPEEX, 1, [Speex support is enabled])
-		])
-		AC_CHECK_LIB(speexdsp, speex_preprocess_state_init, [
-			LIBS="-lspeexdsp $LIBS"
-		])
-	])
+dnl Check for Speex
+AC_CHECK_HEADERS(speex/speex.h, [
+  AC_CHECK_LIB(speex, speex_decoder_init, [
+    LIBS="-lspeex $LIBS"
+    AC_DEFINE(SPEEX, 1, [Speex support is enabled])
+  ])
+  AC_CHECK_LIB(speexdsp, speex_preprocess_state_init, [
+  LIBS="-lspeexdsp $LIBS"
+])
+])
 fi
 
 if [[ "x$enable_alsa" = "xyes" ]]; then
-	dnl Check for ALSA
-	AC_CHECK_HEADERS([alsa/asoundlib.h], [
-		AC_CHECK_LIB(asound, snd_pcm_open, [
-			LIBS="-lasound $LIBS"
-			AC_DEFINE(HAVE_ALSA, 1, [ALSA netmic is enabled])
-		])
-	])
+dnl Check for ALSA
+AC_CHECK_HEADERS([alsa/asoundlib.h], [
+  AC_CHECK_LIB(asound, snd_pcm_open, [
+    LIBS="-lasound $LIBS"
+    AC_DEFINE(HAVE_ALSA, 1, [ALSA netmic is enabled])
+  ])
+])
 fi
 
 dnl Figure out which OpenGL library to use

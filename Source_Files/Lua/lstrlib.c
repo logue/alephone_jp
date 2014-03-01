@@ -675,6 +675,12 @@ static int gmatch (lua_State *L) {
 }
 
 
+static int gfind_nodef (lua_State *L) {
+  return luaL_error(L, LUA_QL("string.gfind") " was renamed to "
+                       LUA_QL("string.gmatch"));
+}
+
+
 static void add_s (MatchState *ms, luaL_Buffer *b, const char *s,
                                                    const char *e) {
   size_t l, i;

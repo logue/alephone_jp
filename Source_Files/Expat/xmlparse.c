@@ -6298,7 +6298,10 @@ getElementType(XML_Parser parser,
 #define LIBICONV_PLUG
 
 #include <iconv.h>
-
+#ifdef __WIN32__
+#define iconv libiconv
+#define iconv_open libiconv_open
+#endif
 
 /**
 * JIS201カナをUNICODEに変換する。

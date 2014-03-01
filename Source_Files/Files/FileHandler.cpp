@@ -547,6 +547,12 @@ static extension_mapping extensions[] =
 
 	{ "mpg", false, _typecode_movie },
 
+	{ "scen", false, _typecode_scenario },
+	{ "shps", false, _typecode_shapes },
+	{ "phys", false, _typecode_physics },
+
+	{ "mpg", false, _typecode_movie },
+
 	{0, false, _typecode_unknown}
 };
 

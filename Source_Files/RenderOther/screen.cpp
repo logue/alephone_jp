@@ -1529,6 +1529,8 @@ void bound_screen()
 #ifdef HAVE_OPENGL
 	OGL_SetWindow(sr, vr, true);
 #endif
+
+	Movie::instance()->AddFrame(Movie::FRAME_NORMAL);
 }
 
 void change_interface_clut(struct color_table *color_table)

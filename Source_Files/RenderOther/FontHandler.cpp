@@ -35,7 +35,7 @@ Jan 12, 2001 (Loren Petrich):
 */
 
 #include "cseries.h"
-
+#include <stdio.h>
 #ifdef __MVCPP__
 #include <windows.h>
 #endif
@@ -91,10 +91,9 @@ void FontSpecifier::Init()
 	Info = NULL;
 	Update();
 #ifdef HAVE_OPENGL
-	//OGL_Texture = NULL;
-	for(int n = 0; n < 256; ++n ) {
-		OGL_Texture[n] = NULL;
-	}
+				for(int n = 0; n < 256; ++n ) {
+					OGL_Texture[n] = NULL;
+				}
 #endif
 }
 
@@ -159,54 +158,10 @@ extern int8 char_width(uint8 c, const sdl_font_info *font, uint16 style);
 
 int FontSpecifier::TextWidth(const char *text)
 {
-/*
-	int width = 0;
-	char c;
-	if (!text)
-		return width;
-	while ((c = *text++) != 0)
-		width += Widths[static_cast<unsigned char>(c)];
-	return width;
-*/
-	// Japaneese font(assume text is shiftjis)
-	return Info->text_width(text, 0,false);
+  // Japaneese font(assume text is shiftjis)
+  return Info->text_width(text, 0,false);
 }
-
 #ifdef HAVE_OPENGL
-// Reset the OpenGL fonts; its arg indicates whether this is for starting an OpenGL session
-// (this is to avoid texture and display-list memory leaks and other such things)
-void FontSpecifier::OGL_Reset(bool IsStarting)
-{
-	// Don't delete these if there is no valid texture;
-	// that indicates that there are no valid texture and display-list ID's.
-	if (!IsStarting && OGL_Texture[1] )	
-	{
-		glDeleteTextures(256,TxtrID);
-		glDeleteLists(DispList,256);
-		OGL_Deregister(this);
-		for(int n = 0; n < 256; ++n ) {
-			// Invalidates whatever texture had been present
-			if (OGL_Texture[n])
-			{
-				delete [] OGL_Texture[n];
-				OGL_Texture[n] = NULL;
-			}
-		}
-	}
-	textMap.clear();
-			
-	if (!IsStarting)
-		return;
-	glGenTextures(256,TxtrID);
-	DispList = glGenLists(256);
-	OGL_Register(this);
-	// Put some padding around each glyph so as to avoid clipping i
-	for(int n = 1; n < 128; ++n ) {
-		char str[] = { n, 0 };
-		render_text_(n, str);
-	}
-}
-
 void FontSpecifier::render_text_(int n, const char* str) {
 	if( OGL_Texture[n] )
 		return;
@@ -294,6 +249,39 @@ void FontSpecifier::render_text_(int n, const char* str) {
 		glEndList();
 		
 }
+// Reset the OpenGL fonts; its arg indicates whether this is for starting an OpenGL session
+// (this is to avoid texture and display-list memory leaks and other such things)
+void FontSpecifier::OGL_Reset(bool IsStarting)
+{
+	// Don't delete these if there is no valid texture;
+	// that indicates that there are no valid texture and display-list ID's.
+	if (!IsStarting && OGL_Texture[1] )	
+	{
+		glDeleteTextures(256,TxtrID);
+		glDeleteLists(DispList,256);
+		OGL_Deregister(this);
+		for(int n = 0; n < 256; ++n ) {
+			// Invalidates whatever texture had been present
+			if (OGL_Texture[n])
+			{
+				delete [] OGL_Texture[n];
+				OGL_Texture[n] = NULL;
+			}
+		}
+	}
+	textMap.clear();
+			
+	if (!IsStarting)
+			return;
+	glGenTextures(256,TxtrID);
+	DispList = glGenLists(256);
+	OGL_Register(this);
+	// Put some padding around each glyph so as to avoid clipping i
+	for(int n = 1; n < 128; ++n ) {
+		char str[] = { n, 0 };
+		render_text_(n, str);
+	}
+}
 
 #include "converter.h"
 // Renders a C-style string in OpenGL.
@@ -302,33 +290,21 @@ void FontSpecifier::render_text_(int n, const char* str) {
 // One can surround it with glPushMatrix() and glPopMatrix() to remember the original.
 void FontSpecifier::OGL_Render(const char *Text)
 {
+	const char* tp = Text;
+
 	// Bug out if no texture to render
-	if (!OGL_Texture)
+	if (!OGL_Texture[33])
 	{
-        OGL_Reset(true);
-        if (!OGL_Texture) return;
+		OGL_Reset(true);
+		if (!OGL_Texture[33]) return;
 	}
-	
 	glPushAttrib(GL_ENABLE_BIT);
-	
+			
 	glEnable(GL_TEXTURE_2D);
 	glDisable(GL_CULL_FACE);
 	glEnable(GL_BLEND);
 	glDisable(GL_ALPHA_TEST);
 	glBlendFunc(GL_SRC_ALPHA,GL_ONE_MINUS_SRC_ALPHA);
-
-/*
-	glBindTexture(GL_TEXTURE_2D,TxtrID);
-
-	size_t Len = MIN(strlen(Text),255);
-	for (size_t k=0; k<Len; k++)
-	{
-		unsigned char c = Text[k];
-		glCallList(DispList+c);
-	}
-*/
-	// Calculate 2 byte-Text char width
-	const char* tp = Text;
 	while(*tp) {
 		if( (unsigned char)*tp < 128 ) {
 			glBindTexture(GL_TEXTURE_2D,TxtrID[*tp]);
@@ -349,7 +325,7 @@ void FontSpecifier::OGL_Render(const char *Text)
 			} while( *tp && tc > 127 ) ;
 
 			if( int re = textMap[buffer] ) {
-				// Already rendered
+				// Already rendered				
 				glBindTexture(GL_TEXTURE_2D,TxtrID[re]);
 				glCallList(DispList+re);
 			} else {
@@ -382,52 +358,7 @@ void FontSpecifier::OGL_DrawText(const char *text, const screen_rectangle &r, sh
 	strncpy(text_to_draw, text, 256);
 	text_to_draw[255] = 0;
 
-	// Check for wrapping, and if it occurs, be recursive
-	if (flags & _wrap_text) {
-		int last_non_printing_character = 0, text_width = 0;
-		unsigned count = 0;
-		while (count < strlen(text_to_draw) && text_width < RECTANGLE_WIDTH(&r)) {
-			text_width += CharWidth(text_to_draw[count]);
-			if (text_to_draw[count] == ' ')
-				last_non_printing_character = count;
-			count++;
-		}
-		
-		if( count != strlen(text_to_draw)) {
-			char remaining_text_to_draw[256];
-			
-			// If we ever have to wrap text, we can't also center vertically. Sorry.
-			flags &= ~_center_vertical;
-			flags |= _top_justified;
-			
-			// Pass the rest of it back in, recursively, on the next line
-			memcpy(remaining_text_to_draw, text_to_draw + last_non_printing_character + 1, strlen(text_to_draw + last_non_printing_character + 1) + 1);
-	
-			screen_rectangle new_destination = r;
-			new_destination.top += LineSpacing;
-			OGL_DrawText(remaining_text_to_draw, new_destination, flags);
-	
-			// Now truncate our text to draw
-			text_to_draw[last_non_printing_character] = 0;
-		}
-	}
-
-	// Truncate text if necessary
 	int t_width = TextWidth(text_to_draw);
-	if (t_width > RECTANGLE_WIDTH(&r)) {
-		int width = 0;
-		int num = 0;
-		char c, *p = text_to_draw;
-		while ((c = *p++) != 0) {
-			width += CharWidth(c);
-			if (width > RECTANGLE_WIDTH(&r))
-				break;
-			num++;
-		}
-		text_to_draw[num] = 0;
-		t_width = TextWidth(text_to_draw);
-	}
-
 
 	// Horizontal positioning
 	int x, y;
@@ -466,8 +397,8 @@ void FontSpecifier::OGL_DrawText(const char *text, const screen_rectangle &r, sh
 void FontSpecifier::OGL_ResetFonts(bool IsStarting)
 {
 	if (!m_font_registry)
-		return;
-
+			return;
+		
 	set<FontSpecifier*>::iterator it;
 	if (IsStarting)
 	{
@@ -500,7 +431,6 @@ void FontSpecifier::OGL_Deregister(FontSpecifier *F)
 }
 
 #endif // def HAVE_OPENGL
-
 
 // Draw text without worrying about OpenGL vs. SDL mode.
 int FontSpecifier::DrawText(SDL_Surface *s, const char *text, int x, int y, uint32 pixel, bool utf8)

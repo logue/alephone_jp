@@ -67,7 +67,11 @@ static font_list_t font_list;				// List of all loaded fonts
 typedef pair<TTF_Font *, int> ref_counted_ttf_font_t;
 typedef map<ttf_font_key_t, ref_counted_ttf_font_t> ttf_font_list_t;
 static ttf_font_list_t ttf_font_list;
+
+#define FONT_PATH "./Fonts.ttf"
 #endif
+
+#include "converter.h"
 
 // From shell_sdl.cpp
 extern vector<DirectorySpecifier> data_search_path;
@@ -99,10 +103,7 @@ static builtin_font_t builtin_fontspecs[] = {
 typedef std::map<std::string, builtin_font_t> builtin_fonts_t;
 builtin_fonts_t builtin_fonts;
 
-#define FONT_PATH "./Fonts.ttf"
 #endif
-
-#include "converter.h"
 
 void initialize_fonts(bool last_chance)
 {
@@ -111,7 +112,7 @@ void initialize_fonts(bool last_chance)
 	// Initialize builtin TTF fonts
 	for (int j = 0; j < NUMBER_OF_BUILTIN_FONTS; ++j)
 		builtin_fonts[builtin_fontspecs[j].name] = builtin_fontspecs[j];
-/*    
+    
 	// Open font resource files
 	bool found = false;
 	vector<DirectorySpecifier>::const_iterator i = data_search_path.begin(), end = data_search_path.end();
@@ -129,14 +130,13 @@ void initialize_fonts(bool last_chance)
 		}
 		i++;
 	}
-*/
 }
 
 
 /*
  *  Load font from resources and allocate sdl_font_info
  */
-/*
+
 sdl_font_info *load_sdl_font(const TextSpec &spec)
 {
 	sdl_font_info *info = NULL;
@@ -242,7 +242,6 @@ sdl_font_info *load_sdl_font(const TextSpec &spec)
 	SDL_RWclose(p);
 	return info;
 }
-*/
 #ifdef HAVE_SDL_TTF
 static TTF_Font *load_ttf_font(const std::string& path, uint16 style, int16 size)
 {
@@ -258,50 +257,47 @@ static TTF_Font *load_ttf_font(const std::string& path, uint16 style, int16 size
 	}
 
 	TTF_Font *font = 0;
-	builtin_fonts_t::iterator j = builtin_fonts.find(path);
-	if (j != builtin_fonts.end())
-	{
-		//font = TTF_OpenFontRW(SDL_RWFromConstMem(j->second.data, j->second.size), 0, size);
-
-		// Japanese Font cannot render as embeded font.
-		// If Fonts.ttf is missing, Load from System Font
-		const string fontPath[] = {
-			FONT_PATH,
+	TTF_Init();
+	// Load AlephOne Default Font. path is "mono"
+	// Japanese Font cannot render as embeded font.
+	// If Fonts.ttf is missing, Load from System Font
+	const string fontPath[] = {
+	  FONT_PATH,
 #if defined(__WIN32__)
-			// Path to the below Windows directory
-			// for Windows 7 (Meiryo Bold)
-			"C:/Windows/winsxs/x86_microsoft-windows-f..truetype-meiryobold_31bf3856ad364e35_6.1.7600.16385_none_cd23f5e0d8f9c6fa/meiryob.ttc",
-			"C:/Windows/winsxs/amd64_microsoft-windows-f..truetype-meiryobold_31bf3856ad364e35_6.1.7600.16385_none_2942916491573830/meiryob.ttc",
-			// for Windows Vista
-			"C:/Windows/Fonts/meiryob.ttc",
-			// for less than Windows XP (MS Gothic)
-			"C:/Windows/fonts/msgothic.ttc",
-//#elif defined(__MACOS__)
+	  // Path to the below Windows directory
+	  // for Windows 7 (Meiryo Bold)
+	  "C:/Windows/winsxs/x86_microsoft-windows-f..truetype-meiryobold_31bf3856ad364e35_6.1.7600.16385_none_cd23f5e0d8f9c6fa/meiryob.ttc",
+	  "C:/Windows/winsxs/amd64_microsoft-windows-f..truetype-meiryobold_31bf3856ad364e35_6.1.7600.16385_none_2942916491573830/meiryob.ttc",
+	  // for Windows Vista
+	  "C:/Windows/Fonts/meiryob.ttc",
+	  // for less than Windows XP (MS Gothic)
+	  "C:/Windows/fonts/msgothic.ttc",
+	  //#elif defined(__MACOS__)
 #else
-			// for MacOS (Hiragino Kaku Gothic Pro W6)
-			"/System/Library/Fonts/ヒラギノ角ゴ ProN W6.otf",
-			"/System/Library/Fonts/Hiragino Kaku Gothic Pro W6.otf",
-			"/System/Library/Fonts/Cache/HiraginoKakuGothicProNW6.otf"	// for iOS
-//#else
-			// for Linux
-			"/usr/share/fonts/truetype/vlgothic/VL-Gothic-Regular.ttf",
-			"/usr/X11R6/lib/X11/fonts/TrueType/VL-Gothic-Regular.ttf",
-			"/usr/X11/lib/X11/fonts/truetype/VL-Gothic-Regular.ttf",
-			
-			"/usr/share/fonts/truetype/takao/TakaoExGothic.ttf"
-			"/usr/share/fonts/ja-ipafonts/ipag.ttc",
-
-			"/usr/share/fonts/TrueType/mika.ttf",
-			"/usr/X11R6/lib/X11/fonts/TrueType/mika.ttf",
-			"/usr/X11R6/lib/X11/fonts/truetype/sazanami-gothic.ttf",
-			"/usr/X11/lib/X11/fonts/truetype/sazanami-gothic.ttf",
-			"/usr/share/fonts/TrueType/sazanami-gothic.ttf",
-			"/usr/X11R6/lib/X11/fonts/TrueType/sazanami-gothic.ttf",
-			"/usr/share/fonts/truetype/sazanami-gothic.ttf",
-			"/usr/share/fonts/TrueType/FS-Gothic-gs.ttf",
-			"/usr/X11R6/lib/X11/fonts/TrueType/FS-Gothic.ttf",
-			"/usr/share/fonts/TrueType/gt200001.ttf",
-			"/usr/X11R6/lib/X11/fonts/TrueType/gt200001.ttf",
+	  // for MacOS (Hiragino Kaku Gothic Pro W6)
+	  "/System/Library/Fonts/ヒラギノ角ゴ ProN W6.otf",
+	  "/System/Library/Fonts/Hiragino Kaku Gothic Pro W6.otf",
+	  "/System/Library/Fonts/Cache/HiraginoKakuGothicProNW6.otf"	// for iOS
+	  //#else
+	  // for Linux
+	  "/usr/share/fonts/truetype/vlgothic/VL-Gothic-Regular.ttf",
+	  "/usr/X11R6/lib/X11/fonts/TrueType/VL-Gothic-Regular.ttf",
+	  "/usr/X11/lib/X11/fonts/truetype/VL-Gothic-Regular.ttf",
+	  
+	  "/usr/share/fonts/truetype/takao/TakaoExGothic.ttf"
+	  "/usr/share/fonts/ja-ipafonts/ipag.ttc",
+	  
+	  "/usr/share/fonts/TrueType/mika.ttf",
+	  "/usr/X11R6/lib/X11/fonts/TrueType/mika.ttf",
+	  "/usr/X11R6/lib/X11/fonts/truetype/sazanami-gothic.ttf",
+	  "/usr/X11/lib/X11/fonts/truetype/sazanami-gothic.ttf",
+	  "/usr/share/fonts/TrueType/sazanami-gothic.ttf",
+	  "/usr/X11R6/lib/X11/fonts/TrueType/sazanami-gothic.ttf",
+	  "/usr/share/fonts/truetype/sazanami-gothic.ttf",
+	  "/usr/share/fonts/TrueType/FS-Gothic-gs.ttf",
+	  "/usr/X11R6/lib/X11/fonts/TrueType/FS-Gothic.ttf",
+	  "/usr/share/fonts/TrueType/gt200001.ttf",
+	  "/usr/X11R6/lib/X11/fonts/TrueType/gt200001.ttf",
 #endif
 		};
 		
@@ -312,22 +308,9 @@ static TTF_Font *load_ttf_font(const std::string& path, uint16 style, int16 size
 			else { break; }
 		}
 		if( !font ){
-			font = TTF_OpenFontRW(SDL_RWFromConstMem(aleph_sans_mono_bold, sizeof(aleph_sans_mono_bold)), 0, size);
+		  fprintf(stderr, "cannot open font! died\n");
+		  exit(1);
 		}
-	}
-	else
-	{
-		short SavedType, SavedError = get_game_error(&SavedType);
-
-		FileSpecifier fileSpec(path);
-		OpenedFile file;
-		if (fileSpec.Open(file))
-		{
-			font = TTF_OpenFontRW(file.TakeRWops(), 1, size);
-		}
-
-		set_game_error(SavedType, SavedError);
-	}
 
 	if (font)
 	{
@@ -464,25 +447,13 @@ font_info *load_font(const TextSpec &spec) {
 				
 			return info;
 		}
-/*		else if (spec.font != -1)
-		{
-			return static_cast<font_info *>(load_sdl_font(spec));
-		}
-*/
 		else
 			return 0;
 	}
 	else
 #endif
-/*	if (spec.font != -1)
-	{
-		return static_cast<font_info *>(load_sdl_font(spec));
-	}
-	else
-*/
 		return 0;
 }
-
 
 /*
  *  Unload font, free sdl_font_info
@@ -505,6 +476,24 @@ void sdl_font_info::_unload()
 		}
 		i++;
 	}
+	//	if (!found) {
+#ifdef HAVE_SDL_TTF
+		// use our own built-in font
+	  //		fix_missing_overhead_map_fonts();
+	  //		fix_missing_interface_fonts();
+#else
+		logFatal("Can't open font resource file");
+/*
+                vector<DirectorySpecifier>::const_iterator i = data_search_path.begin(), end = data_search_path.end();
+                while (i != end) {
+                        FileSpecifier fonts = *i + "Fonts";
+                        fdprintf(fonts.GetPath());
+                        i++;
+                }
+*/                
+		exit(1);
+#endif
+		//	}
 }
 
 #ifdef HAVE_SDL_TTF
@@ -594,19 +583,19 @@ uint16 ttf_font_info::_text_width(const char *text, uint16 style, bool utf8) con
 {
 	return _text_width(text, strlen(text), style, utf8);
 }
-
+#include "converter.h"
 uint16 ttf_font_info::_text_width(const char *text, size_t length, uint16 style, bool utf8) const
 {
 	int width = 0;
 	if (utf8)
 	{
-		char *temp = process_printable(text, length);
-		TTF_SizeUTF8(get_ttf(style), temp, &width, 0);
+	  char *temp = sjis2utf8(text, length);
+	  TTF_SizeUTF8(get_ttf(style), temp, &width, 0);
 	}
 	else
 	{
-		uint16 *temp = process_macroman(text, length);
-		TTF_SizeUNICODE(get_ttf(style), temp, &width, 0);
+	  uint16 *temp = sjis2utf16(text, length);
+	  TTF_SizeUNICODE(get_ttf(style), temp, &width, 0);
 	}
 	
 	return width;
@@ -637,38 +626,24 @@ int ttf_font_info::_trunc_text(const char *text, int max_width, uint16 style) co
 
 char *ttf_font_info::process_printable(const char *src, int len) const 
 {
-	static char dst[1024];
-	if (len > 1023) len = 1023;
-	char *p = dst;
-	while (*src && len-- > 0)
-	{
-		if ((unsigned char) *src >= ' ') *p++ = *src;
-		*src++;
-	}
+  static char dst[1024];
+  if (len > 1023) len = 1023;
+  char *p = dst;
+  while (*src && len-- > 0)
+  {
+    if ((unsigned char) *src >= ' ') *p++ = *src;
+    *src++;
+  }
 
-	*p = '\0';
-	return dst;
+  *p = '\0';
+  return dst;
 }
 
 uint16 *ttf_font_info::process_macroman(const char *src, int len) const 
 {
-	/*
-	static uint16 dst[1024];
-	if (len > 1023) len = 1023;
-	uint16 *p = dst;
-	while (*src && len-- > 0)
-	{
-		if ((unsigned char) *src >= ' ') *p++ = mac_roman_to_unicode(*src);
-		else if ((unsigned char) *src == '\t')
-			*p++ = ' ';
-		
-		*src++;
-	}
-
-	*p = 0x0;
-	return dst;
-*/
-	return sjis2utf16(src, len);
+  printf("THIS CANNOT HAPPEN\n");
+  exit(1);
+  return sjis2utf16(src, len);
 }
 #endif
 

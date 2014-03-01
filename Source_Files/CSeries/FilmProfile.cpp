@@ -31,6 +31,7 @@ static FilmProfile alephone1_1 = {
 	true, // count_dead_dropped_items_correctly
 };
 
+
 static FilmProfile alephone1_0 = {
 	true, // keyframe_fix
 	true, // damage_aggressor_last_in_tag

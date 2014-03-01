@@ -929,17 +929,14 @@ int Lua_Fonts_New(lua_State *L)
 	lua_pushstring(L, "interface");
 	lua_gettable(L, 1);
 	if (!lua_isnil(L, -1))
-	//	f = get_interface_font(Lua_InterfaceFont::ToIndex(L, -1));
-		snprintf(f.File, FontSpecifier::NameSetLen, "#%d", static_cast<int>(lua_tointeger(L, -1)));
+		f = get_interface_font(Lua_InterfaceFont::ToIndex(L, -1));
 	lua_pop(L, 1);
 
 	lua_pushstring(L, "file");
 	lua_gettable(L, 1);
 	if (lua_isstring(L, -1))
 	{
-		//f.File = lua_tostring(L, -1);
-		strncpy(f.File, lua_tostring(L, -1), FontSpecifier::NameSetLen);
-		f.File[FontSpecifier::NameSetLen-1] = 0;
+		f.File = lua_tostring(L, -1);
 	}
 	lua_pop(L, 1);
 	
