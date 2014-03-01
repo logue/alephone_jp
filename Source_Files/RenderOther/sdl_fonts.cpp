@@ -589,7 +589,8 @@ uint16 ttf_font_info::_text_width(const char *text, size_t length, uint16 style,
 	int width = 0;
 	if (utf8)
 	{
-	  char *temp = sjis2utf8(text, length);
+	  // for Checkbox use only!
+		char *temp = process_printable(text, length);
 	  TTF_SizeUTF8(get_ttf(style), temp, &width, 0);
 	}
 	else

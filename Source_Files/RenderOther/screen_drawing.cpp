@@ -541,7 +541,7 @@ int ttf_font_info::_draw_text(SDL_Surface *s, const char *text, size_t length, i
 	SDL_Surface *text_surface = 0;
 	if (utf8) 
 	{
-		char *temp = sjis2utf8(text, length);
+		char *temp = process_printable(text, length);
 		if (environment_preferences->smooth_text)
 			text_surface = TTF_RenderUTF8_Blended(get_ttf(style), temp, c);	
 		else
