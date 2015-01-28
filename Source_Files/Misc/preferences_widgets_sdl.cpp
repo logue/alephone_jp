@@ -114,7 +114,7 @@ void w_env_select::select_item(dialog *parent)
 	w_env_list *list_w = new w_env_list(items, item.GetPath(), &d);
 	placer->dual_add(list_w, d);
 	placer->add(new w_spacer(), true);
-	placer->dual_add(new w_button("キャンセル", dialog_cancel, &d), d);
+	placer->dual_add(new w_button("CANCEL", dialog_cancel, &d), d);
 
 	d.activate_widget(list_w);
 	d.set_widget_placer(placer);
@@ -231,13 +231,35 @@ void w_plugins::draw_item(Plugins::iterator it, SDL_Surface* s, int16 x, int16 y
 
 	set_drawing_clip_rectangle(0, x, static_cast<short>(s->h), x + width);
 	draw_text(s, enabled.c_str(), x + width - right_text_width, y, color, font, style);
-	
-	set_drawing_clip_rectangle(SHRT_MIN, SHRT_MIN, SHRT_MAX, SHRT_MAX);
 
 	y += font->get_ascent() + 1;
+	std::string types;
+	if (it->solo_lua.size()) {
+		types += ", ソロLua";
+	}
+	if (it->hud_lua.size()) {
+		types += ", HUD";
+	}
+	if (it->theme.size()) {
+		types += ", テーマ";
+	}
+	if (it->shapes_patches.size()) {
+		types += ", 形態パッチ";
+	}
+	if (it->mmls.size()) {
+		types += ", MML";
+	}
+	types.erase(0, 2);
+	right_text_width = text_width(types.c_str(), font, style | styleItalic);
+	set_drawing_clip_rectangle(0, x, static_cast<short>(s->h), x + width);
+	draw_text(s, types.c_str(), x + width - right_text_width, y, color, font, style | styleItalic);
+	
+	set_drawing_clip_rectangle(0, x, static_cast<short>(s->h), x + width - right_text_width);
 	if (it->description.size()) {
 		draw_text(s, it->description.c_str(), x, y, color, font, style);
 	} else {
 		draw_text(s, "説明なし", x, y, color, font, style);
 	}
+	
+	set_drawing_clip_rectangle(SHRT_MIN, SHRT_MIN, SHRT_MAX, SHRT_MAX);
 }

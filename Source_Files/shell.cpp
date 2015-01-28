@@ -122,6 +122,7 @@
 #include "network.h"
 #include "Console.h"
 #include "Movie.h"
+#include "HTTP.h"
 
 // LP addition: whether or not the cheats are active
 // Defined in shell_misc.cpp
@@ -156,6 +157,7 @@ DirectorySpecifier bundle_data_dir;	  // Data inside Mac OS X app bundle
 #endif
 DirectorySpecifier preferences_dir;   // Directory for preferences
 DirectorySpecifier saved_games_dir;   // Directory for saved games
+DirectorySpecifier quick_saves_dir;   // Directory for auto-named saved games
 DirectorySpecifier recordings_dir;    // Directory for recordings (except film buffer, which is stored in local_data_dir)
 DirectorySpecifier screenshots_dir;   // Directory for screenshots
 DirectorySpecifier log_dir;           // Directory for Aleph One Log.txt
@@ -203,10 +205,11 @@ short vidmasterStringSetID = -1; // can be set with MML
 
 static void usage(const char *prg_name)
 {
+	char msg[] =
 #ifdef __WIN32__
-	MessageBox(NULL, "コマンドラインスイッチ：\n\n"
+	"コマンドラインスイッチ：\n\n"
 #else
-	printf("\n使用方法：%s [オプション] [ディレクトリ] [ファイル]\n"
+	"\n使用方法：%s [オプション] [ディレクトリ] [ファイル]\n"
 #endif
 	"\t[-h | --help]		このヘルプメッセージを表\示します。\n"
 	"\t[-v | --version]		ゲームのバージョンを表\示します。\n"
@@ -226,13 +229,13 @@ static void usage(const char *prg_name)
 	"\tディレクトリ			データーが含まれているディレクトリ\n"
 	"\tファイル				保存されたゲームやフィルムの再生\n"
 	"\nこの他にも、環境変数「ALEPHONE_DATA」の値を変更することで、\n"
-	"データディレクトリを指定することができます。\n"
+	"データディレクトリを指定することができます。\n";
+
 #ifdef __WIN32__
-	  , "使用方法", MB_OK | MB_ICONINFORMATION
+	MessageBox(NULL, msg, "使用方法", MB_OK | MB_ICONINFORMATION);
 #else
-	  , prg_name
+	printf(msg, prg_name);
 #endif
-	);
 	exit(0);
 }
 
@@ -278,13 +281,9 @@ bool handle_open_document(const std::string& filename)
 
 int main(int argc, char **argv)
 {
-#if defined(__WIN32__)
-	freopen("stdout.txt","a", stdout);
-	freopen("stderr.txt", "a", stderr);
-#endif
 	// Print banner (don't bother if this doesn't appear when started from a GUI)
 	char app_name_version[256];
-	expand_app_variables(app_name_version, "Aleph One JP $appLongVersion$");
+	expand_app_variables(app_name_version, "Aleph One $appLongVersion$");
 	printf ("%s\n%s\n\n"
 	  "オリジナルのコードは、Bungie Software <http://www.bungie.com/>によるものです。\n"
 	  "この他にLoren Petrich, Chris Pruett, Rhys Hill氏らによって書かれています。\n"
@@ -397,6 +396,11 @@ int main(int argc, char **argv)
 
 	return 0;
 }
+               
+static int char_is_not_filesafe(int c)
+{
+    return (c != ' ' && !std::isalnum(c));
+}
 
 static void initialize_application(void)
 {
@@ -420,6 +424,7 @@ static void initialize_application(void)
 	bundle_data_dir += "DataFiles";
 
 	data_search_path.push_back(bundle_data_dir);
+
 #ifndef SCENARIO_IS_BUNDLED
 	{
 		char* buf = getcwd(0, 0);
@@ -427,6 +432,7 @@ static void initialize_application(void)
 		free(buf);
 	}
 #endif
+	
 	log_dir = app_log_directory;
 	preferences_dir = app_preferences_directory;
 	local_data_dir = app_support_directory;
@@ -533,12 +539,14 @@ static void initialize_application(void)
 	preferences_dir = local_data_dir;
 #endif	
 	saved_games_dir = local_data_dir + "Saved Games";
+	quick_saves_dir = local_data_dir + "Quick Saves";
 	recordings_dir = local_data_dir + "Recordings";
 	screenshots_dir = local_data_dir + "Screenshots";
 #if defined(__APPLE__) && defined(__MACH__)
     if (app_screenshots_directory)
         screenshots_dir = app_screenshots_directory;
 #endif
+
 
 	DirectorySpecifier local_mml_dir = local_data_dir + "MML";
 	DirectorySpecifier local_themes_dir = local_data_dir + "Themes";
@@ -570,9 +578,9 @@ static void initialize_application(void)
 				data_search_path.erase(data_search_path.begin() + dsp_delete_pos);
 			// add selected directory where command-line argument would go
 			data_search_path.insert(data_search_path.begin() + dsp_insert_pos, chosen_dir);
-
+			
 			default_data_dir = chosen_dir;
-
+			
 			// Parse MML files again, now that we have a new dir to search
 			initialize_fonts(false);
 			SetupParseTree();
@@ -593,6 +601,16 @@ static void initialize_application(void)
 
 	local_data_dir.CreateDirectory();
 	saved_games_dir.CreateDirectory();
+	quick_saves_dir.CreateDirectory();
+	{
+		std::string scen = Scenario::instance()->GetName();
+		if (scen.length())
+			scen.erase(std::remove_if(scen.begin(), scen.end(), char_is_not_filesafe), scen.end());
+		if (!scen.length())
+			scen = "Unknown";
+		quick_saves_dir += scen;
+		quick_saves_dir.CreateDirectory();
+	}
 	recordings_dir.CreateDirectory();
 	screenshots_dir.CreateDirectory();
 	local_mml_dir.CreateDirectory();
@@ -646,6 +664,7 @@ static void initialize_application(void)
 		exit(1);
 	}
 #endif
+	HTTPClient::Init();
 
 	// Initialize everything
 	mytm_initialize();
@@ -657,17 +676,7 @@ static void initialize_application(void)
 	alephone::Screen::instance()->Initialize(&graphics_preferences->screen_mode);
 	initialize_marathon();
 	initialize_screen_drawing();
-	FileSpecifier theme;
-	const Plugin* theme_plugin = Plugins::instance()->find_theme();
-	if (theme_plugin)
-	{
-		theme = theme_plugin->directory + theme_plugin->theme;
-	}
-	else
-	{
-		get_default_theme_spec(theme);
-	}
-	initialize_dialogs(theme);
+	initialize_dialogs();
 	initialize_terminal_manager();
 	initialize_shape_handler();
 	initialize_fades();
@@ -929,11 +938,29 @@ static void handle_game_key(const SDL_Event &event)
 			Console::instance()->abort();
 			break;
 		case SDLK_BACKSPACE:
-		case SDLK_DELETE:
 			Console::instance()->backspace();
 			break;
+		case SDLK_DELETE:
+                        Console::instance()->del();
+                        break;
+		case SDLK_UP:
+			Console::instance()->up_arrow();
+			break;
+		case SDLK_DOWN:
+			Console::instance()->down_arrow();
+			break;
+		case SDLK_LEFT:
+			Console::instance()->left_arrow();
+			break;
+		case SDLK_RIGHT:
+			Console::instance()->right_arrow();
+			break;
 		default:
-			if (event.key.keysym.unicode == 8) // Crtl-H
+                        if (event.key.keysym.unicode == 4) // Ctrl-D
+                        {
+                            Console::instance()->del();
+                        }
+                        else if (event.key.keysym.unicode == 8) // Crtl-H
 			{
 				Console::instance()->backspace();
 			}

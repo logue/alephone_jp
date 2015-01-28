@@ -394,6 +394,7 @@ const float AngleConvert = TWO_PI/float(FULL_CIRCLE);
 void RenderRasterize_Shader::render_tree() {
 
 	weaponFlare = PIN(view->maximum_depth_intensity - NATURAL_LIGHT_INTENSITY, 0, FIXED_ONE)/float(FIXED_ONE);
+	selfLuminosity = PIN(NATURAL_LIGHT_INTENSITY, 0, FIXED_ONE)/float(FIXED_ONE);
 
 	Shader* s = Shader::get(Shader::S_Invincible);
 	s->enable();
@@ -409,6 +410,20 @@ void RenderRasterize_Shader::render_tree() {
 	cam_yaw = FIXED_INTEGERAL_PART(current_player->variables.direction + current_player->variables.head_direction);
 	cam_pitch = FIXED_INTEGERAL_PART(current_player->variables.elevation);
 	ChaseCam_GetPosition(cam_pos, cam_poly, cam_yaw, cam_pitch);
+	
+	short leftmost = INT16_MAX;
+	short rightmost = INT16_MIN;
+	vector<clipping_window_data>& windows = RSPtr->RVPtr->ClippingWindows;
+	for (vector<clipping_window_data>::const_iterator it = windows.begin(); it != windows.end(); ++it) {
+		if (it->x0 < leftmost) {
+			leftmost = it->x0;
+			leftmost_clip = it->left;
+		}
+		if (it->x1 > rightmost) {
+			rightmost = it->x1;
+			rightmost_clip = it->right;
+		}
+	}
 	
 	bool usefog = false;
 	int fogtype;
@@ -477,16 +492,24 @@ void RenderRasterize_Shader::clip_to_window(clipping_window_data *win)
     glRotatef(cam_yaw * (360/float(FULL_CIRCLE)) + 90., 0., 0., 1.);
     
     glRotatef(-0.1, 0., 0., 1.); // leave some excess to avoid artifacts at edges
-    clip[0] = win->left.i;
-    clip[1] = win->left.j;
-    glEnable(GL_CLIP_PLANE0);
-    glClipPlane(GL_CLIP_PLANE0, clip);
-    
+	if (win->left.i != leftmost_clip.i || win->left.j != leftmost_clip.j) {
+		clip[0] = win->left.i;
+		clip[1] = win->left.j;
+		glEnable(GL_CLIP_PLANE0);
+		glClipPlane(GL_CLIP_PLANE0, clip);
+	} else {
+		glDisable(GL_CLIP_PLANE0);
+	}
+	
     glRotatef(0.2, 0., 0., 1.); // breathing room for right-hand clip
-    clip[0] = win->right.i;
-    clip[1] = win->right.j;
-    glEnable(GL_CLIP_PLANE1);
-    glClipPlane(GL_CLIP_PLANE1, clip);
+	if (win->right.i != rightmost_clip.i || win->right.j != rightmost_clip.j) {
+		clip[0] = win->right.i;
+		clip[1] = win->right.j;
+		glEnable(GL_CLIP_PLANE1);
+		glClipPlane(GL_CLIP_PLANE1, clip);
+	} else {
+		glDisable(GL_CLIP_PLANE1);
+	}
     
     glPopMatrix();
 }
@@ -572,6 +595,8 @@ TextureManager RenderRasterize_Shader::setupSpriteTexture(const rectangle_defini
 		s->setFloat(Shader::U_BloomShift, TMgr.BloomShift());
 	}
 	s->setFloat(Shader::U_Flare, flare);
+	s->setFloat(Shader::U_SelfLuminosity, selfLuminosity);
+	s->setFloat(Shader::U_Pulsate, 0);
 	s->setFloat(Shader::U_Wobble, 0);
 	s->setFloat(Shader::U_Depth, offset);
 	s->setFloat(Shader::U_StrictDepthMode, OGL_ForceSpriteDepth() ? 1 : 0);
@@ -583,7 +608,7 @@ TextureManager RenderRasterize_Shader::setupSpriteTexture(const rectangle_defini
 const double Radian2Circle = 1/TWO_PI;			// A circle is 2*pi radians
 const double FullCircleReciprocal = 1/double(FULL_CIRCLE);
 
-TextureManager RenderRasterize_Shader::setupWallTexture(const shape_descriptor& Texture, short transferMode, float wobble, float intensity, float offset, RenderStep renderStep) {
+TextureManager RenderRasterize_Shader::setupWallTexture(const shape_descriptor& Texture, short transferMode, float pulsate, float wobble, float intensity, float offset, RenderStep renderStep) {
 
 	Shader *s = NULL;
 
@@ -606,6 +631,7 @@ TextureManager RenderRasterize_Shader::setupWallTexture(const shape_descriptor& 
 	switch(transferMode) {
 		case _xfer_static:
 			TMgr.TextureType = OGL_Txtr_Wall;
+			TMgr.TransferMode = _static_transfer;
 			TMgr.IsShadeless = 1;
 			flare = -1;
 			s = Shader::get(renderStep == kGlow ? Shader::S_InvincibleBloom : Shader::S_Invincible);
@@ -680,6 +706,8 @@ TextureManager RenderRasterize_Shader::setupWallTexture(const shape_descriptor& 
 		}
 	}
 	s->setFloat(Shader::U_Flare, flare);
+	s->setFloat(Shader::U_SelfLuminosity, selfLuminosity);
+	s->setFloat(Shader::U_Pulsate, pulsate);
 	s->setFloat(Shader::U_Wobble, wobble);
 	s->setFloat(Shader::U_Depth, offset);
 	s->setFloat(Shader::U_Glow, 0);
@@ -734,7 +762,7 @@ float calcWobble(short transferMode, short transfer_phase) {
 		case _xfer_wobble:
 			transfer_phase&= WORLD_ONE/16-1;
 			transfer_phase= (transfer_phase>=WORLD_ONE/32) ? (WORLD_ONE/32+WORLD_ONE/64 - transfer_phase) : (transfer_phase - WORLD_ONE/64);
-			wobble = transfer_phase / 255.0;
+			wobble = transfer_phase / 1024.0;
 			break;
 	}
 	return wobble;
@@ -758,7 +786,7 @@ void setupBlendFunc(short blendType) {
 	}
 }
 
-bool setupGlow(struct view_data *view, TextureManager &TMgr, float wobble, float intensity, float flare, float offset, RenderStep renderStep) {
+bool setupGlow(struct view_data *view, TextureManager &TMgr, float wobble, float intensity, float flare, float selfLuminosity, float offset, RenderStep renderStep) {
 	if (TMgr.TransferMode == _textured_transfer && TMgr.IsGlowMapped()) {
 		Shader *s = NULL;
 		if (TMgr.TextureType == OGL_Txtr_Wall) {
@@ -784,6 +812,7 @@ bool setupGlow(struct view_data *view, TextureManager &TMgr, float wobble, float
 			s->setFloat(Shader::U_BloomShift, TMgr.GlowBloomShift());
 		}
 		s->setFloat(Shader::U_Flare, flare);
+		s->setFloat(Shader::U_SelfLuminosity, selfLuminosity);
 		s->setFloat(Shader::U_Wobble, wobble);
 		s->setFloat(Shader::U_Depth, offset - 1.0);
 		s->setFloat(Shader::U_Glow, TMgr.MinGlowIntensity());
@@ -798,9 +827,11 @@ void RenderRasterize_Shader::render_node_floor_or_ceiling(clipping_window_data *
 	float offset = 0;
 
 	const shape_descriptor& texture = AnimTxtr_Translate(surface->texture);
-	float intensity = get_light_data(surface->lightsource_index)->intensity / float(FIXED_ONE - 1);
+	float intensity = get_light_intensity(surface->lightsource_index) / float(FIXED_ONE - 1);
 	float wobble = calcWobble(surface->transfer_mode, view->tick_count);
-	TextureManager TMgr = setupWallTexture(texture, surface->transfer_mode, wobble, intensity, offset, renderStep);
+	// note: wobble and pulsate behave the same way on floors and ceilings
+	// note 2: stronger wobble looks more like classic with default shaders
+	TextureManager TMgr = setupWallTexture(texture, surface->transfer_mode, wobble * 4.0, 0, intensity, offset, renderStep);
 	if(TMgr.ShapeDesc == UNONE) { return; }
 
 	if (TMgr.IsBlended()) {
@@ -874,7 +905,7 @@ void RenderRasterize_Shader::render_node_floor_or_ceiling(clipping_window_data *
 
 		glDrawArrays(GL_POLYGON, 0, vertex_count);
 
-		if (setupGlow(view, TMgr, wobble, intensity, weaponFlare, offset, renderStep)) {
+		if (setupGlow(view, TMgr, wobble, intensity, weaponFlare, selfLuminosity, offset, renderStep)) {
 			glDrawArrays(GL_POLYGON, 0, vertex_count);
 		}
 
@@ -935,9 +966,14 @@ void RenderRasterize_Shader::render_node_side(clipping_window_data *window, vert
 	}
 
 	const shape_descriptor& texture = AnimTxtr_Translate(surface->texture_definition->texture);
-	float intensity = (get_light_data(surface->lightsource_index)->intensity + surface->ambient_delta) / float(FIXED_ONE - 1);
+	float intensity = (get_light_intensity(surface->lightsource_index) + surface->ambient_delta) / float(FIXED_ONE - 1);
 	float wobble = calcWobble(surface->transfer_mode, view->tick_count);
-	TextureManager TMgr = setupWallTexture(texture, surface->transfer_mode, wobble, intensity, offset, renderStep);
+	float pulsate = 0;
+	if (surface->transfer_mode == _xfer_pulsate) {
+		pulsate = wobble;
+		wobble = 0;
+	}
+	TextureManager TMgr = setupWallTexture(texture, surface->transfer_mode, pulsate, wobble, intensity, offset, renderStep);
 	if(TMgr.ShapeDesc == UNONE) { return; }
 
 	if (TMgr.IsBlended()) {
@@ -1023,7 +1059,7 @@ void RenderRasterize_Shader::render_node_side(clipping_window_data *window, vert
 			
 			glDrawArrays(GL_QUADS, 0, vertex_count);
 
-			if (setupGlow(view, TMgr, wobble, intensity, weaponFlare, offset, renderStep)) {
+			if (setupGlow(view, TMgr, wobble, intensity, weaponFlare, selfLuminosity, offset, renderStep)) {
 				glDrawArrays(GL_QUADS, 0, vertex_count);
 			}
 
@@ -1080,7 +1116,7 @@ void RenderRasterize_Shader::render_node_side(clipping_window_data *window, vert
 
 extern void FlatBumpTexture(); // from OGL_Textures.cpp
 
-bool RenderModel(rectangle_definition& RenderRectangle, short Collection, short CLUT, float flare, RenderStep renderStep) {
+bool RenderModel(rectangle_definition& RenderRectangle, short Collection, short CLUT, float flare, float selfLuminosity, RenderStep renderStep) {
 
 	OGL_ModelData *ModelPtr = RenderRectangle.ModelPtr;
 	OGL_SkinData *SkinPtr = ModelPtr->GetSkin(CLUT);
@@ -1159,13 +1195,18 @@ bool RenderModel(rectangle_definition& RenderRectangle, short Collection, short 
 		s->setFloat(Shader::U_BloomShift, SkinPtr->BloomShift);
 	}
 	s->setFloat(Shader::U_Flare, flare);
+	s->setFloat(Shader::U_SelfLuminosity, selfLuminosity);
 	s->setFloat(Shader::U_Wobble, 0);
 	s->setFloat(Shader::U_Depth, 0);
 	s->setFloat(Shader::U_Glow, 0);
 
 	glVertexPointer(3,GL_FLOAT,0,ModelPtr->Model.PosBase());
 	glClientActiveTextureARB(GL_TEXTURE0_ARB);
-	glTexCoordPointer(2,GL_FLOAT,0,ModelPtr->Model.TCBase());
+	if (ModelPtr->Model.TxtrCoords.empty()) {
+		glDisableClientState(GL_TEXTURE_COORD_ARRAY);
+	} else {
+		glTexCoordPointer(2,GL_FLOAT,0,ModelPtr->Model.TCBase());
+	}
 
 	glEnableClientState(GL_NORMAL_ARRAY);
 	glNormalPointer(GL_FLOAT,0,ModelPtr->Model.NormBase());
@@ -1213,6 +1254,9 @@ bool RenderModel(rectangle_definition& RenderRectangle, short Collection, short 
 	glDisableClientState(GL_NORMAL_ARRAY);
 	glDisableClientState(GL_TEXTURE_COORD_ARRAY);
 	glClientActiveTextureARB(GL_TEXTURE0_ARB);
+	if (ModelPtr->Model.TxtrCoords.empty()) {
+		glEnableClientState(GL_TEXTURE_COORD_ARRAY);
+	}
 
 	// Restore the default render sidedness
 	glEnable(GL_CULL_FACE);
@@ -1327,7 +1371,7 @@ void RenderRasterize_Shader::_render_node_object_helper(render_object_data *obje
 		short collection = GET_COLLECTION(descriptor);
 		short clut = ModifyCLUT(rect.transfer_mode,GET_COLLECTION_CLUT(descriptor));
 
-		RenderModel(rect, collection, clut, weaponFlare, renderStep);
+		RenderModel(rect, collection, clut, weaponFlare, selfLuminosity, renderStep);
 		glPopMatrix();
 		return;
 	}
@@ -1416,7 +1460,7 @@ void RenderRasterize_Shader::_render_node_object_helper(render_object_data *obje
 
 	glDrawArrays(GL_QUADS, 0, 4);
 
-	if (setupGlow(view, TMgr, 0, 1, weaponFlare, offset, renderStep)) {
+	if (setupGlow(view, TMgr, 0, 1, weaponFlare, selfLuminosity, offset, renderStep)) {
 		glDrawArrays(GL_QUADS, 0, 4);
 	}
 

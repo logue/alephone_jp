@@ -414,6 +414,10 @@ void Client::drop()
 	} 
 }
 
+// This serves as a generic M1 check. It doesn't guarantee
+// map or physics are M1, but for now it suffices.
+extern bool shapes_file_is_m1();
+
 bool Client::capabilities_indicate_player_is_gatherable(bool warn_joiner)
 {
 	// ghs: perhaps someday there will be an elegant, extensible way to do this
@@ -439,7 +443,7 @@ bool Client::capabilities_indicate_player_is_gatherable(bool warn_joiner)
 		return false;
 	}
 
-	if (capabilities[Capabilities::kGameworld] < Capabilities::kGameworldVersion)
+	if (capabilities[Capabilities::kGameworld] < Capabilities::kGameworldVersion || (shapes_file_is_m1() && capabilities[Capabilities::kGameworldM1] < Capabilities::kGameworldM1Version))
 	{
 		if (warn_joiner)
 		{
@@ -767,7 +771,7 @@ static void handleCapabilitiesMessage(CapabilitiesMessage* capabilitiesMessage,
 {
 	if (handlerState == netJoining) {
 		Capabilities capabilities = *capabilitiesMessage->capabilities();
-		if (capabilities[Capabilities::kGameworld] < Capabilities::kGameworldVersion || (network_preferences->game_protocol == _network_game_protocol_star && capabilities[Capabilities::kStar] < Capabilities::kStarVersion))
+		if (capabilities[Capabilities::kGameworld] < Capabilities::kGameworldVersion || (shapes_file_is_m1() && capabilities[Capabilities::kGameworldM1] < Capabilities::kGameworldM1Version) || (network_preferences->game_protocol == _network_game_protocol_star && capabilities[Capabilities::kStar] < Capabilities::kStarVersion))
 		{
 			// I'm not gatherable
 			my_capabilities[Capabilities::kGatherable] = 0;
@@ -1216,6 +1220,7 @@ bool NetEnter(void)
 
 	my_capabilities.clear();
 	my_capabilities[Capabilities::kGameworld] = Capabilities::kGameworldVersion;
+	my_capabilities[Capabilities::kGameworldM1] = Capabilities::kGameworldM1Version;
 	my_capabilities[Capabilities::kSpeex] = Capabilities::kSpeexVersion;
 	if (network_preferences->game_protocol == _network_game_protocol_star) {
 		my_capabilities[Capabilities::kStar] = Capabilities::kStarVersion;
@@ -1328,8 +1333,8 @@ void NetExit(
 	if (controller)
 	{
 		open_progress_dialog(_closing_router_ports);
-		LNat_Upnp_Remove_Port_Mapping(controller, 4226, "TCP");
-		LNat_Upnp_Remove_Port_Mapping(controller, 4226, "UDP");
+		LNat_Upnp_Remove_Port_Mapping(controller, GAME_PORT, "TCP");
+		LNat_Upnp_Remove_Port_Mapping(controller, GAME_PORT, "UDP");
 		LNat_Upnp_Controller_Free(&controller);
 		controller = NULL;
 		close_progress_dialog();
@@ -1481,11 +1486,11 @@ bool NetGather(
 			if ((ret = LNat_Upnp_Get_Public_Ip(controller, public_ip, 32)) != 0)
 				logWarning("LibNAT: Failed to acquire public IP");
 		if (ret == 0)
-			if ((ret = LNat_Upnp_Set_Port_Mapping(controller, NULL, 4226, "TCP")) != 0)
-				logWarning("LibNAT: Failed to map port 4226 (TCP)");
+			if ((ret = LNat_Upnp_Set_Port_Mapping(controller, NULL, GAME_PORT, "TCP")) != 0)
+				logWarning("LibNAT: Failed to map port %d (TCP)", GAME_PORT);
 		if (ret == 0)
-			if ((ret = LNat_Upnp_Set_Port_Mapping(controller, NULL, 4226, "UDP")) != 0)
-				logWarning("LibNAT: Failed to map port 4226 (UDP)");
+			if ((ret = LNat_Upnp_Set_Port_Mapping(controller, NULL, GAME_PORT, "UDP")) != 0)
+				logWarning("LibNAT: Failed to map port %d (UDP)", GAME_PORT);
 		close_progress_dialog();
 		
 		if (ret != 0)
@@ -1605,8 +1610,17 @@ bool NetGameJoin(
   host_address_specified = (host_addr_string != NULL);
   if (host_address_specified)
     {
+	    uint16 port = DEFAULT_GAME_PORT;
+	    std::string host_str = host_addr_string;
+	    std::string::size_type pos = host_str.rfind(':');
+	    if (pos != std::string::npos)
+	    {
+			port = atoi(host_str.substr(pos + 1).c_str());
+			host_str = host_str.substr(0, pos);
+	    }
+
 	    nbc_is_resolving = true;
-	    server_nbc = ConnectPool::instance()->connect(host_addr_string, GAME_PORT);
+	    server_nbc = ConnectPool::instance()->connect(host_str.c_str(), port);
     }
   
     netState = netConnecting;
@@ -1621,7 +1635,11 @@ void NetRetargetJoinAttempts(const IPaddress* inAddress)
 	if(host_address_specified)
 	{
 		host_address = *inAddress;
-		host_address.port = SDL_SwapBE16(GAME_PORT);
+		// Aleph One 1.1 and earlier didn't send the gather port
+		if(host_address.port == 0)
+		{
+			host_address.port = SDL_SwapBE16(DEFAULT_GAME_PORT);
+		}
 	}
 }
 

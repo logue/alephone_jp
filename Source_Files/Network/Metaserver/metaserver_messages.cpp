@@ -98,7 +98,9 @@ enum
 {
 	kCRYPT_PLAINTEXT = 0,
 	kCRYPT_SIMPLE = 1,
+	kCRYPT_MD5 = 2,	// implemented by Mariusnet
 	kCRYPT_ROOMSERVER = 3,	// another mystery
+	kCRYPT_HTTPS = 4,
 
 	kSTATE_AWAKE = 0,
 	kSTATE_AWAY = 1,
@@ -255,6 +257,9 @@ LoginAndPlayerInfoMessage::reallyDeflateTo(AOStream& thePacket) const
 	uint32 flags = kResetPlayerData;
 	uint32 user_id = 0;
 	uint16 max_authentication = kCRYPT_SIMPLE;
+#ifdef HAVE_CURL
+	max_authentication = kCRYPT_HTTPS;
+#endif
 
 	thePacket << platform_type
 		  << metaserver_version

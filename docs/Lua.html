@@ -81,9 +81,9 @@
       }
       
       span.pre {
-          display: block;
-          margin: 4px 0;
-          white-space: pre-wrap;
+	  display: block;
+	  margin: 4px 0;
+	  white-space: pre-wrap;
       }
 
       div.end-mnemonics {
@@ -121,6 +121,7 @@
 <a href="#using_tables">Using Tables</a><ol>
 <li><a href="#custom">Custom Fields</a></li>
 <li><a href="#table_indices">Index</a></li>
+<li><a href="#table_is">is_ Functions</a></li>
 </ol>
 </li>
 <li>
@@ -358,6 +359,9 @@ Calling Triggers = {} at the beginning of the script removes the compatibility t
 <p class="description">whenever an item is created and placed on the ground (or floating) somewhere</p>
 <p class="note">does not trigger on initial item placement because the initial item placement is done before Lua becomes initialised. </p>
 </dd>
+<dt>.projectile_created(projectile) <span class="version">SVN</span>
+</dt>
+<dd><p class="description">whenever a projectile is created</p></dd>
 <dt>.projectile_detonated(type, owner, polygon, x, y, z)</dt>
 <dd><p class="description">whenever a projectile detonates, after it has done any area of effect damage</p></dd>
 </dl></dd>
@@ -375,6 +379,9 @@ Calling Triggers = {} at the beginning of the script removes the compatibility t
 <a name="table_indices"></a>Index</h2>
 <p>Each table has a read-only .index variable, that corresponds to the engine's internal index.</p>
 <pre>=Players[0].index<br>0</pre>
+<h2>
+<a name="table_is"></a>is_ Functions</h2>
+<p>Aleph One installs a set of boolean functions that can be used to recognize each of the userdata table types. For example, <code>is_monster(Monsters[1])</code> returns true. Each of these functions begins with the "is_" prefix.</p>
 <h1><a name="tables">Tables</a></h1>
 <div class="tables">
 <h3>
@@ -509,6 +516,10 @@ Calling Triggers = {} at the beginning of the script removes the compatibility t
 <dl>
 <dt>Game</dt>
 <dd><dl>
+<dt>
+    .dead_players_drop_items <span class="version">SVN</span>
+</dt>
+<dd><p class="description">whether dead players drop items</p></dd>
 <dt>
     .difficulty<span class="access"> (read-only)</span>
 </dt>
@@ -763,6 +774,14 @@ Calling Triggers = {} at the beginning of the script removes the compatibility t
 </dt>
 <dd><p class="description">level name</p></dd>
 <dt>
+    .index<span class="access"> (read-only)</span> <span class="version">SVN</span>
+</dt>
+<dd><p class="description">level index in the map file (starting from 0)</p></dd>
+<dt>
+    .map_checksum<span class="access"> (read-only)</span> <span class="version">SVN</span>
+</dt>
+<dd><p class="description">checksum of map file</p></dd>
+<dt>
     .rebellion<span class="access"> (read-only)</span>
 </dt>
 <dd><p class="description">whether level is rebellion</p></dd>
@@ -893,6 +912,10 @@ Calling Triggers = {} at the beginning of the script removes the compatibility t
     .solid<span class="access"> (read-only)</span> <span class="version">20080707</span>
 </dt>
 <dd><p class="description">whether line is solid</p></dd>
+      <dt>
+    .visible_on_automap <span class="version">SVN</span>
+</dt>
+<dd><p class="description">whether line is revealed on local player's automap</p></dd>
     </dl></dd>
 </dl>
 <h3>
@@ -1665,6 +1688,10 @@ Calling Triggers = {} at the beginning of the script removes the compatibility t
     .type</dt>
 <dd><p class="description">polygon type</p></dd>
       <dt>
+    .visible_on_automap <span class="version">SVN</span>
+</dt>
+<dd><p class="description">whether polygon is revealed on local player's automap</p></dd>
+      <dt>
     .x<span class="access"> (read-only)</span>
 </dt>
 <dd><p class="description">center of polygon</p></dd>
@@ -1830,6 +1857,10 @@ Calling Triggers = {} at the beginning of the script removes the compatibility t
     .repair <span class="version">20080707</span>
 </dt>
 <dd><p class="description">switch is a repair switch</p></dd>
+<dt>
+    .status <span class="version">20080707</span>
+</dt>
+<dd><p class="description">switch is active</p></dd>
 <dt>
     .type <span class="version">20080707</span>
 </dt>

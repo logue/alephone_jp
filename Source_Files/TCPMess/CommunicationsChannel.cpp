@@ -26,8 +26,6 @@
 */
 
 #if !defined(DISABLE_NETWORKING)
-#define SDL_reinterpret_cast(type, expression) reinterpret_cast<type>(expression)
-#define SDL_static_cast(type, expression) static_cast<type>(expression)
 
 #include "CommunicationsChannel.h"
 

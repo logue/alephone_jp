@@ -33,6 +33,7 @@
 #include "XML_Configure.h"
 #include "XML_Loader_SDL.h"
 #include "XML_ParseTreeRoot.h"
+#include "Scenario.h"
 
 #ifdef HAVE_ZZIP
 #include <zzip/lib.h>
@@ -63,7 +64,32 @@ private:
 };
 
 bool Plugin::compatible() const {
-	return (required_version.size() == 0 || A1_DATE_VERSION >= required_version);
+	if (required_version.size() > 0 && A1_DATE_VERSION < required_version)
+		return false;
+
+	if (required_scenarios.size() == 0)
+		return true;
+	std::string scenName = Scenario::instance()->GetName();
+	std::string scenID = Scenario::instance()->GetID();
+	std::string scenVers = Scenario::instance()->GetVersion();
+	for (std::vector<ScenarioInfo>::const_iterator it = required_scenarios.begin(); it != required_scenarios.end(); ++it)
+	{
+		if ((it->name.empty() || it->name == scenName) &&
+		    (it->scenario_id.empty() || it->scenario_id == scenID) &&
+		    (it->version.empty() || it->version == scenVers))
+			return true;
+	}
+	return false;
+}
+bool Plugin::valid() const {
+	if (!enabled)
+		return false;
+	
+	if (!environment_preferences->use_solo_lua &&
+		Plugins::instance()->mode() == Plugins::kMode_Solo)
+		return !overridden_solo;
+	
+	return !overridden;
 }
 
 Plugins* Plugins::m_instance = 0;
@@ -79,6 +105,7 @@ void Plugins::disable(const std::string& path) {
 	for (std::vector<Plugin>::iterator it = m_plugins.begin(); it != m_plugins.end(); ++it) {
 		if (it->directory == path) {
 			it->enabled = false;
+			m_validated = false;
 			return;
 		}
 	}
@@ -102,44 +129,15 @@ static void load_mmls(const Plugin& plugin, XML_Loader_SDL& loader)
 }
 
 void Plugins::load_mml() {
+	validate();
 	XML_Loader_SDL loader;
 	loader.CurrentElement = &RootParser;
 
 	for (std::vector<Plugin>::iterator it = m_plugins.begin(); it != m_plugins.end(); ++it) 
 	{
-		if (it->enabled && !it->hud_lua.size() && !it->solo_lua.size() && !it->theme.size() && it->compatible()) 
+		if (it->valid())
 		{
 			load_mmls(*it, loader);
-		}
-	}
-
-	if (!environment_preferences->use_hud_lua) 
-	{
-		const Plugin* hud_lua = find_hud_lua();
-		if (hud_lua) 
-		{
-			load_mmls(*hud_lua, loader);
-		}
-	}
-	
-	const Plugin* theme = find_theme();
-	if (theme)
-	{
-		load_mmls(*theme, loader);
-	}
-}
-
-void Plugins::load_solo_mml() 
-{
-	if (!environment_preferences->use_solo_lua)
-	{
-		XML_Loader_SDL loader;
-		loader.CurrentElement = &RootParser;
-
-		const Plugin* solo_lua = find_solo_lua();
-		if (solo_lua)
-		{
-			load_mmls(*solo_lua, loader);
 		}
 	}
 }
@@ -148,13 +146,10 @@ void load_shapes_patch(SDL_RWops* p, bool override_replacements);
 
 void Plugins::load_shapes_patches(bool is_opengl)
 {
+	validate();
 	for (std::vector<Plugin>::iterator it = m_plugins.begin(); it != m_plugins.end(); ++it)
 	{
-		if (it->enabled &&
-		    it->compatible() &&
-		    !it->hud_lua.size() &&
-		    !it->solo_lua.size() &&
-		    !it->theme.size())
+		if (it->valid())
 		{
 			ScopedSearchPath ssp(it->directory);
 
@@ -182,12 +177,12 @@ void Plugins::load_shapes_patches(bool is_opengl)
 	}
 }
 
-const Plugin* Plugins::find_hud_lua() const
+const Plugin* Plugins::find_hud_lua()
 {
-
-	for (std::vector<Plugin>::const_reverse_iterator rit = m_plugins.rbegin(); rit != m_plugins.rend(); ++rit) 
+	validate();
+	for (std::vector<Plugin>::const_reverse_iterator rit = m_plugins.rbegin(); rit != m_plugins.rend(); ++rit)
 	{
-		if (rit->enabled && rit->hud_lua.size() && rit->compatible())
+		if (rit->hud_lua.size() && rit->valid())
 		{
 			return &(*rit);
 		}
@@ -196,11 +191,12 @@ const Plugin* Plugins::find_hud_lua() const
 	return 0;
 }
 
-const Plugin* Plugins::find_solo_lua() const
+const Plugin* Plugins::find_solo_lua()
 {
+	validate();
 	for (std::vector<Plugin>::const_reverse_iterator rit = m_plugins.rbegin(); rit != m_plugins.rend(); ++rit)
 	{
-		if (rit->enabled && rit->solo_lua.size() && rit->compatible())
+		if (rit->solo_lua.size() && rit->valid())
 		{
 			return &(*rit);
 		}
@@ -209,11 +205,12 @@ const Plugin* Plugins::find_solo_lua() const
 	return 0;
 }
 
-const Plugin* Plugins::find_theme() const
+const Plugin* Plugins::find_theme()
 {
+	validate();
 	for (std::vector<Plugin>::const_reverse_iterator rit = m_plugins.rbegin(); rit != m_plugins.rend(); ++rit)
 	{
-		if (rit->enabled && rit->theme.size() && rit->compatible())
+		if (rit->theme.size() && rit->valid())
 		{
 			return &(*rit);
 		}
@@ -223,6 +220,12 @@ const Plugin* Plugins::find_theme() const
 }
 
 static Plugin Data;
+
+static bool plugin_file_exists(const char* Path)
+{
+	FileSpecifier f = Data.directory + Path;
+	return f.Exists();
+}
 
 class XML_PluginMMLParser : public XML_ElementParser 
 {
@@ -235,7 +238,9 @@ public:
 bool XML_PluginMMLParser::HandleAttribute(const char* Tag, const char* Value)
 {
 	if (StringsEqual(Tag, "file")) {
-		Data.mmls.push_back(Value);
+		if (plugin_file_exists(Value)) {
+			Data.mmls.push_back(Value);
+		}
 		return true;
 	}
 
@@ -289,15 +294,78 @@ bool XML_PluginShapesPatchParser::AttributesDone()
 
 bool XML_PluginShapesPatchParser::End()
 {
-	ShapesPatch patch;
-	patch.requires_opengl = RequiresOpenGL;
-	patch.path = Path;
+	if (plugin_file_exists(Path.c_str())) {
+		ShapesPatch patch;
+		patch.requires_opengl = RequiresOpenGL;
+		patch.path = Path;
 	
-	Data.shapes_patches.push_back(patch);
+		Data.shapes_patches.push_back(patch);
+	}
 	return true;
 }
 
 XML_PluginShapesPatchParser PluginShapesPatchParser;
+
+class XML_PluginScenarioInfoParser : public XML_ElementParser
+{
+public:
+    bool HandleAttribute(const char* Tag, const char* Value);
+    bool AttributesDone();
+    bool End();
+    
+    XML_PluginScenarioInfoParser() : XML_ElementParser("scenario") {}
+    
+private:
+    std::string Name;
+    std::string ID;
+    std::string Version;
+};
+
+bool XML_PluginScenarioInfoParser::HandleAttribute(const char* Tag, const char* Value)
+{
+    if (StringsEqual(Tag, "name"))
+    {
+        Name = std::string(Value, 0, 31);
+        return true;
+    }
+    if (StringsEqual(Tag, "id"))
+    {
+        ID = std::string(Value, 0, 23);
+        return true;
+    }
+    else if (StringsEqual(Tag, "version"))
+    {
+        Version = std::string(Value, 0, 7);
+        return true;
+    }
+    
+    UnrecognizedTag();
+    return false;
+}
+
+bool XML_PluginScenarioInfoParser::AttributesDone()
+{
+    if (Name.empty() && ID.empty())
+    {
+        AttribsMissing();
+        return false;
+    }
+    
+    return true;
+}
+
+bool XML_PluginScenarioInfoParser::End()
+{
+    ScenarioInfo info;
+    info.name = Name;
+    info.scenario_id = ID;
+    info.version = Version;
+    
+    Data.required_scenarios .push_back(info);
+    return true;
+}
+
+XML_PluginScenarioInfoParser PluginScenarioInfoParser;
 
 static DirectorySpecifier current_plugin_directory;
 
@@ -335,13 +403,21 @@ bool XML_PluginParser::HandleAttribute(const char* Tag, const char* Value)
 		Data.required_version = Value;
 		return true;
 	} else if (StringsEqual(Tag, "hud_lua")) {
-		Data.hud_lua = Value;
+		if (plugin_file_exists(Value)) {
+			Data.hud_lua = Value;
+		}
 		return true;
 	} else if (StringsEqual(Tag, "solo_lua")) {
-		Data.solo_lua = Value;
+		if (plugin_file_exists(Value)) {
+			Data.solo_lua = Value;
+		}
 		return true;
 	} else if (StringsEqual(Tag, "theme_dir")) {
-		Data.theme = Value;
+		std::string theme_mml = Value;
+		theme_mml += "/theme2.mml";
+		if (plugin_file_exists(theme_mml.c_str())) {
+			Data.theme = Value;
+		}
 		return true;
 	}
 
@@ -361,6 +437,11 @@ bool XML_PluginParser::AttributesDone()
 
 bool XML_PluginParser::End() {
 	std::sort(Data.mmls.begin(), Data.mmls.end());
+	if (Data.theme.size()) {
+		Data.hud_lua = "";
+		Data.solo_lua = "";
+		Data.shapes_patches.clear();
+	}
 	Plugins::instance()->add(Data);
 	return true;
 }
@@ -461,7 +542,7 @@ bool PluginLoader::ParseDirectory(FileSpecifier& dir)
 				ZZIP_DIRENT dirent;
 				while (zzip_dir_read(zzipdir, &dirent))
 				{
-					if (algo::ends_with(dirent.d_name, "Plugin.xml"))
+					if (strcmp(dirent.d_name, "Plugin.xml") == 0 || algo::ends_with(dirent.d_name, "/Plugin.xml"))
 					{
 						std::string archive = file.GetPath();
 						FileSpecifier file_name = FileSpecifier(archive.substr(0, archive.find_last_of('.'))) + dirent.d_name;
@@ -482,6 +563,7 @@ extern std::vector<DirectorySpecifier> data_search_path;
 void Plugins::enumerate() {
 	PluginParser.AddChild(&PluginMMLParser);
 	PluginParser.AddChild(&PluginShapesPatchParser);
+	PluginParser.AddChild(&PluginScenarioInfoParser);
 	PluginRootParser.AddChild(&PluginParser);
 
 	logContext("parsing plugins");
@@ -494,4 +576,59 @@ void Plugins::enumerate() {
 	}
 	std::sort(m_plugins.begin(), m_plugins.end());
 	clear_game_error();
+	m_validated = false;
+}
+
+// enforce all-or-nothing loading of plugins which contain
+// an "only one-at-a-time" item, like a Lua script or theme
+void Plugins::validate()
+{
+	if (m_validated)
+		return;
+	m_validated = true;
+	
+	// determine active plugins including solo Lua
+	bool found_solo_lua = false;
+	bool found_hud_lua = false;
+	bool found_theme = false;
+	for (std::vector<Plugin>::reverse_iterator rit = m_plugins.rbegin(); rit != m_plugins.rend(); ++rit)
+	{
+		rit->overridden_solo = false;
+		if (!rit->enabled || !rit->compatible() ||
+			(found_solo_lua && rit->solo_lua.size()) ||
+			(found_hud_lua && rit->hud_lua.size()) ||
+			(found_theme && rit->theme.size()))
+		{
+			rit->overridden_solo = true;
+			continue;
+		}
+
+		if (rit->solo_lua.size())
+			found_solo_lua = true;
+		if (rit->hud_lua.size())
+			found_hud_lua = true;
+		if (rit->theme.size())
+			found_theme = true;
+	}
+	
+	// determine active plugins excluding solo Lua
+	found_hud_lua = false;
+	found_theme = false;
+	for (std::vector<Plugin>::reverse_iterator rit = m_plugins.rbegin(); rit != m_plugins.rend(); ++rit)
+	{
+		rit->overridden = false;
+		if (!rit->enabled || !rit->compatible() ||
+			(rit->solo_lua.size()) ||
+			(found_hud_lua && rit->hud_lua.size()) ||
+			(found_theme && rit->theme.size()))
+		{
+			rit->overridden = true;
+			continue;
+		}
+		
+		if (rit->hud_lua.size())
+			found_hud_lua = true;
+		if (rit->theme.size())
+			found_theme = true;
+	}
 }

@@ -59,7 +59,7 @@ public:
 	{
 		const int kSpace = 4;
 		vertical_placer *placer = new vertical_placer(kSpace);
-		placer->dual_add(new w_title("LOCATE NETWORK GAMES"), d);
+		placer->dual_add(new w_title("ネットワークゲームを取得"), d);
 
 		placer->add(new w_spacer(), true);
 
@@ -80,7 +80,7 @@ public:
 		players_games_placer->add_row(new w_spacer(kSpace), true);
 
 		horizontal_placer *player_button_placer = new horizontal_placer;
-		w_tiny_button *mute_w = new w_tiny_button("IGNORE");
+		w_tiny_button *mute_w = new w_tiny_button("無視");
 		mute_w->set_enabled(false);
 		player_button_placer->dual_add(mute_w, d);
 		players_games_placer->add(player_button_placer, true);
@@ -89,13 +89,13 @@ public:
 		game_button_placer->add_flags(placeable::kFill);
 		game_button_placer->add(new w_spacer, true);
 		game_button_placer->add_flags(placeable::kDefault);
-		w_tiny_button *w_game_info = new w_tiny_button("INFO");
+		w_tiny_button *w_game_info = new w_tiny_button("情報");
 		w_game_info->set_enabled(false);
 		game_button_placer->dual_add(w_game_info, d);
 
 		game_button_placer->add(new w_spacer(kSpace), true);
 
-		w_tiny_button *w_join_game = new w_tiny_button("JOIN");
+		w_tiny_button *w_join_game = new w_tiny_button("参加");
 		w_join_game->set_enabled(false);
 		game_button_placer->dual_add(w_join_game, d);
 
@@ -113,13 +113,13 @@ public:
 		w_chat_entry* chatentry_w = new w_chat_entry(240);
 		chatentry_w->enable_mac_roman_input();
 
-		entry_cancel_placer->dual_add(chatentry_w->label("Say:"), d);
+		entry_cancel_placer->dual_add(chatentry_w->label("発言："), d);
 
 		entry_cancel_placer->add_flags(placeable::kFill);
 		entry_cancel_placer->dual_add(chatentry_w, d);
 		entry_cancel_placer->add_flags();
 		
-		w_tiny_button* cancel_w = new w_tiny_button("CANCEL", NULL, &d);
+		w_tiny_button* cancel_w = new w_tiny_button("キャンセル", NULL, &d);
 		entry_cancel_placer->dual_add(cancel_w, d);
 
 		placer->add_flags(placeable::kFill);
@@ -169,43 +169,43 @@ public:
 
 			dialog info_dialog;
 			vertical_placer *placer = new vertical_placer;
-			placer->dual_add(new w_title("GAME INFO"), info_dialog);
+			placer->dual_add(new w_title("ゲーム情報"), info_dialog);
 			placer->add(new w_spacer(), true);
 			table_placer *table = new table_placer(2, get_theme_space(ITEM_WIDGET), true);
 			table->col_flags(0, placeable::kAlignRight);
 			table->col_flags(1, placeable::kAlignLeft);
 
-			table->dual_add_row(new w_static_text("Gatherer"), info_dialog);
+			table->dual_add_row(new w_static_text("ギャザラー"), info_dialog);
 			table->dual_add(new w_label("Name"), info_dialog);
 			const MetaserverPlayerInfo *player = gMetaserverClient->find_player(game->m_hostPlayerID);
 			if (player)
 			{
-				table->dual_add(new w_static_text(player->name().c_str()), info_dialog);
+				table->dual_add(new w_styled_text(player->name().c_str()), info_dialog);
 			}
 			else
 			{
 				table->add(new w_spacer(), true);
 			}
-			table->dual_add(new w_label("Version"), info_dialog);
+			table->dual_add(new w_label("バージョン"), info_dialog);
 			table->dual_add(new w_static_text(game->m_description.m_alephoneBuildString.c_str()), info_dialog);
 
 			table->add_row(new w_spacer(), true);
-			table->dual_add_row(new w_static_text("Scenario"), info_dialog);
-			table->dual_add(new w_label("Name"), info_dialog);
+			table->dual_add_row(new w_static_text("シナリオ"), info_dialog);
+			table->dual_add(new w_label("名前"), info_dialog);
 			table->dual_add(new w_static_text(game->m_description.m_scenarioName.c_str()), info_dialog);
-			table->dual_add(new w_label("Version"), info_dialog);
+			table->dual_add(new w_label("バージョン"), info_dialog);
 			table->dual_add(new w_static_text(game->m_description.m_scenarioVersion.c_str()), info_dialog);
 
 
 			table->add_row(new w_spacer(), true);
-			table->dual_add_row(new w_static_text("Game"), info_dialog);
-			table->dual_add(new w_label("Name"), info_dialog);
-			table->dual_add(new w_static_text(game->name().c_str()), info_dialog);
-			table->dual_add(new w_label("Level"), info_dialog);
+			table->dual_add_row(new w_static_text("ゲーム"), info_dialog);
+			table->dual_add(new w_label("名前"), info_dialog);
+			table->dual_add(new w_styled_text(game->name().c_str()), info_dialog);
+			table->dual_add(new w_label("レベル"), info_dialog);
 			table->dual_add(new w_static_text(game->m_description.m_mapName.c_str()), info_dialog);
-			table->dual_add(new w_label("Pack"), info_dialog);
+			table->dual_add(new w_label("パック"), info_dialog);
 			table->dual_add(new w_static_text(game->m_description.m_mapFileName.c_str()), info_dialog);
-			table->dual_add(new w_label("Difficulty"), info_dialog);
+			table->dual_add(new w_label("難易度"), info_dialog);
 			if (TS_GetCString(kDifficultyLevelsStringSetID, game->m_description.m_difficulty))
 			{
 				table->dual_add(new w_static_text(TS_GetCString(kDifficultyLevelsStringSetID, game->m_description.m_difficulty)), info_dialog);
@@ -215,7 +215,7 @@ public:
 				table->add(new w_spacer(), true);
 			}
 			table->add_row(new w_spacer(), true);
-			table->dual_add(new w_label("Type"), info_dialog);
+			table->dual_add(new w_label("種類"), info_dialog);
 			int type = game->m_description.m_type - (game->m_description.m_type > 5 ? 1 : 0);
 			if (TS_GetCString(kNetworkGameTypesStringSetID, type))
 			{
@@ -225,12 +225,12 @@ public:
 			{
 				table->add(new w_spacer(), true);
 			}
-			table->dual_add(new w_label("Netscript"), info_dialog);
+			table->dual_add(new w_label("ネットスクリプト"), info_dialog);
 			table->dual_add(new w_static_text(game->m_description.m_netScript.c_str()), info_dialog);
-			table->dual_add(new w_label("Physics"), info_dialog);
+			table->dual_add(new w_label("物理モデル"), info_dialog);
 			table->dual_add(new w_static_text(game->m_description.m_physicsName.c_str()), info_dialog);
 			table->add_row(new w_spacer(), true);
-			table->dual_add_row(new w_static_text("Options"), info_dialog);
+			table->dual_add_row(new w_static_text("オプション"), info_dialog);
 			if (game->m_description.m_hasGameOptions && (game->m_description.m_gameOptions & _game_has_kill_limit))
 			{
 				const char *s;
@@ -254,11 +254,11 @@ public:
 			}
 			else
 			{
-				table->dual_add(new w_label("Time Limit"), info_dialog);
+				table->dual_add(new w_label("制限時間"), info_dialog);
 				if (game->m_description.m_timeLimit && !(game->m_description.m_timeLimit == INT32_MAX || game->m_description.m_timeLimit == -1))
 				{
 					char minutes[32];
-					snprintf(minutes, 32, "%i minutes", game->m_description.m_timeLimit / 60 / TICKS_PER_SECOND);
+					snprintf(minutes, 32, "%i 分", game->m_description.m_timeLimit / 60 / TICKS_PER_SECOND);
 					minutes[31] = '\0';
 					table->dual_add(new w_static_text(minutes), info_dialog);
 				}
@@ -270,32 +270,32 @@ public:
 			}
 			if (game->m_description.m_hasGameOptions)
 			{
-				table->dual_add(new w_label("Aliens"), info_dialog);
+				table->dual_add(new w_label("エイリアン"), info_dialog);
 				w_toggle *aliens_w = new w_toggle(game->m_description.m_gameOptions & _monsters_replenish);
 				aliens_w->set_enabled(false);
 				table->dual_add(aliens_w, info_dialog);
 
-				table->dual_add(new w_label("Teams"), info_dialog);
+				table->dual_add(new w_label("チーム"), info_dialog);
 				w_toggle *teams_w = new w_toggle(game->m_description.m_teamsAllowed);
 				teams_w->set_enabled(false);
 				table->dual_add(teams_w, info_dialog);
 				
-				table->dual_add(new w_label("Dead Players Drop Items"), info_dialog);
+				table->dual_add(new w_label("死んだプレイヤーはアイテムを落とす"), info_dialog);
 				w_toggle *dpdi_w = new w_toggle(!(game->m_description.m_gameOptions & _burn_items_on_death));
 				dpdi_w->set_enabled(false);
 				table->dual_add(dpdi_w, info_dialog);
 
-				table->dual_add(new w_label("Disable Motion Sensor"), info_dialog);
+				table->dual_add(new w_label("モーションセンサー無効"), info_dialog);
 				w_toggle *motion_w = new w_toggle(game->m_description.m_gameOptions & _motion_sensor_does_not_work);
 				motion_w->set_enabled(false);
 				table->dual_add(motion_w, info_dialog);
 
-				table->dual_add(new w_label("Death Penalty"), info_dialog);
+				table->dual_add(new w_label("デスペナ"), info_dialog);
 				w_toggle *death_penalty_w = new w_toggle(game->m_description.m_gameOptions & _dying_is_penalized);
 				death_penalty_w->set_enabled(false);
 				table->dual_add(death_penalty_w, info_dialog);
 
-				table->dual_add(new w_label("Suicide Penalty"), info_dialog);
+				table->dual_add(new w_label("自殺ペナ"), info_dialog);
 				w_toggle *suicide_penalty_w = new w_toggle(game->m_description.m_gameOptions & _suicide_is_penalized);
 				suicide_penalty_w->set_enabled(false);
 				table->dual_add(suicide_penalty_w, info_dialog);
@@ -303,7 +303,7 @@ public:
 			}
 			else
 			{
-				table->dual_add(new w_label("Teams"), info_dialog);
+				table->dual_add(new w_label("チーム"), info_dialog);
 				w_toggle *teams_w = new w_toggle(game->m_description.m_teamsAllowed);
 				teams_w->set_enabled(false);
 				table->dual_add(teams_w, info_dialog);	
@@ -312,13 +312,13 @@ public:
 			placer->add(table, true);
 			placer->add(new w_spacer(), true);
 			horizontal_placer *button_placer = new horizontal_placer;
-			w_button *join_w = new w_button("JOIN", dialog_ok, &info_dialog);
+			w_button *join_w = new w_button("参加", dialog_ok, &info_dialog);
 			button_placer->dual_add(join_w, info_dialog);
 			if (game->running() || !Scenario::instance()->IsCompatible(game->m_description.m_scenarioID))
 			{
 				join_w->set_enabled(false);
 			}
-			button_placer->dual_add(new w_button("CANCEL", dialog_cancel, &info_dialog), info_dialog);
+			button_placer->dual_add(new w_button("キャンセル", dialog_cancel, &info_dialog), info_dialog);
 			placer->add(button_placer, true);
 			
 			info_dialog.set_widget_placer(placer);
@@ -354,7 +354,7 @@ private:
 			MetaserverClient::pumpAll();
 		else if (!m_disconnected)
 		{ 
-			alert_user("Connection to room lost.", 0);
+			alert_user("ルームとの接続が切れました。", 0);
 			m_disconnected = true;
 			Stop();
 		}

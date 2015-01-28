@@ -1,11 +1,11 @@
--- Enhanced HUD version 1.0
+-- Enhanced HUD version 1.1
 -- by Hopper
 -- with thanks to Bungie and Freeverse
 
 
 Triggers = {}
 function Triggers.init()
-
+  
   -- align weapon and item mnemonics
   ItemTypes["knife"].mnemonic = "fist"
 
@@ -13,14 +13,14 @@ function Triggers.init()
   if Screen.renderer == "software" then
     opengl = false
   end
-
+  
   Screen.crosshairs.lua_hud = true
-
+  
   alienWeaponFlickerMask = 0x1F0
   alienWeaponShowText = true
   alienWeaponSlant = 1
   firstBackRender = false
-
+  
   img = {}
   img.motionSensorDisabledHUD = Images.new{path = "720p/health_noradar.png"}
   img.motionSensorHUD = Images.new{path = "720p/health_radar.png"}
@@ -67,7 +67,7 @@ function Triggers.init()
   img.dualPistolIdle = Images.new{path = "720p/pistolx2_idle.png"}
   img.objectiveFull = Images.new{path = "720p/objective-indicator-full.png"}
   img.scorePanel = Images.new{path = "720p/score-panel.png"}
-
+  
   img.scorePanelColor = {}
   img.scorePanelColor[0] = Images.new{path = "720p/score-panel_slate.png"}
   img.scorePanelColor[1] = Images.new{path = "720p/score-panel_red.png"}
@@ -77,15 +77,15 @@ function Triggers.init()
   img.scorePanelColor[5] = Images.new{path = "720p/score-panel_orange.png"}
   img.scorePanelColor[6] = Images.new{path = "720p/score-panel_blue.png"}
   img.scorePanelColor[7] = Images.new{path = "720p/score-panel_green.png"}
-
+  
   img.scorePanelIcon = Images.new{path = "720p/score-panel-icon.png"}
   img.ball = Images.new{path = "720p/skull.png"}
-
+  
   img.smg = Images.new{path = "720p/w_smg.png"}
   img.smgAmmoFull = Images.new{path = "720p/flechette_on.png"}
   img.smgAmmoEmpty = Images.new{path = "720p/flechette_off.png"}
   img.smgCrosshair = Images.new{path = "720p/ret_smg.png"}
-
+  
   img.objectiveFull.tint_color = { 1, 1, 1, 0.75 }
   img.scorePanel.tint_color = { 1, 1, 1, 0.7 }
   for k in pairs(img.scorePanelColor) do
@@ -102,62 +102,62 @@ function Triggers.init()
   rawpos.oxygenOffset = { x = 160, y = 4 }
   rawpos.oxygenLength = 197
   rawpos.rightHUDPosition = { x = 0, y = 0 }
-
+  
   rawpos.pistolOffset = { x = 56, y = 20 }
   rawpos.pistolClipOffset = { x = 160, y = 18 }
   rawpos.pistolClipReadoutOffset = { x = 41, y = 14 }
-
+  
   rawpos.dualPistolsOffset = { x = 56, y = 20 }
   rawpos.dualPistolsClipOffset = { x = 264, y = 18 }
   rawpos.dualPistolsSpacer = 43
   rawpos.dualPistolsClipReadoutOffset = { x = 182, y = 41 }
-
+  
   rawpos.shotgunOffset = { x = 57, y = 16 }
   rawpos.shotgunShellsOffset = { x = 162, y = 14 }
   rawpos.shotgunShellReadoutOffset = { x = 41, y = 14 }
-
+  
   rawpos.dualShotgunsOffset = { x = 40, y = 16 }
   rawpos.dualShotgunShellsOffset = { x = 206, y = 14 }
   rawpos.dualShotgunsSpacer = 20
   rawpos.dualShotgunShellReadoutOffset = { x = 41, y = 14 }
-
+  
   rawpos.fusionPistolOffset = { x = 92, y = 18 }
   rawpos.fusionPistolCellOffset = { x = 257, y = 12 }
   rawpos.fusionPistolCellReadoutOffset = { x = 41, y = 14 }
-
+  
   rawpos.flamethrowerOffset = { x = 111, y = 18 }
   rawpos.flamethrowerCellOffset = { x = 257, y = 12 }
   rawpos.flamethrowerCellReadoutOffset = { x = 41, y = 14 }
-
+  
   rawpos.rocketLauncherOffset = { x = 45, y = 18 }
   rawpos.rocketLauncherRocketOffset = { x = 315, y = 13 }
   rawpos.rocketLauncherRocketReadoutOffset = { x = 97, y = 14 }
-
+  
   rawpos.assaultRifleOffset = { x = 53, y = 10 }
   rawpos.assaultRifleRackOffset = { x = 320, y = 12 }
   rawpos.assaultRifleGrenadeSpacer = 10
   rawpos.assaultRifleClipReadoutOffset = { x = 108, y = 25 }
-
+  
   rawpos.alienWeaponOffset = { x = 40, y = 7 }
   rawpos.alienWeaponTextOffset = { x = 200, y = 15 }
-
+  
 --  rawpos.ballOffset = { x = 55, y = 40 }
   rawpos.ballOffset = { x = 65, y = 15 }
   rawpos.chipOffset = { x = -48, y = 12 }
-
+  
   rawpos.smgOffset = { x = 28, y = 8 }
   rawpos.smgClipOffset = { x = 257, y = 24 }
   rawpos.smgClipReadoutOffset = { x = 41, y = 14 }
-
+  
   rawpos.scorePanelSpacer = 2
   rawpos.scorePanelOffset = { x = 0, y = 0 }
   rawpos.scorePanelScoreOffset = { x = 20, y = 24 }
   rawpos.scorePanelNameOffset = { x = 100, y = 24 }
   rawpos.scorePanelRankOffset = { x = 330, y = 24 }
-
+  
   rawpos.crosshairRocket = { x = -32, y = 0 }
   rawpos.crosshairAlien = { x = 0, y = -24 }
-
+  
   Triggers.resize()
 end
 
@@ -166,6 +166,7 @@ function scaled(number)
 end
 
 function Triggers.resize()
+  if TexturePalette.resize() then return end
 
   Screen.clip_rect.width = Screen.width
   Screen.clip_rect.x = 0
@@ -176,7 +177,7 @@ function Triggers.resize()
   Screen.map_rect.x = 0
   Screen.map_rect.height = Screen.height
   Screen.map_rect.y = 0
-
+  
   local min_aspect_ratio = 1.6
   local max_aspect_ratio = 2.0
   local h = math.min(Screen.height, Screen.width / min_aspect_ratio)
@@ -185,7 +186,7 @@ function Triggers.resize()
   Screen.world_rect.x = (Screen.width - w)/2
   Screen.world_rect.height = h
   Screen.world_rect.y = (Screen.height - h)/2
-
+    
   if Screen.map_overlay_active then
     Screen.map_rect.x = Screen.world_rect.x
     Screen.map_rect.y = Screen.world_rect.y
@@ -197,17 +198,17 @@ function Triggers.resize()
   sy = Screen.world_rect.y
   sw = Screen.world_rect.width
   sh = Screen.world_rect.height
-
+  
   crossX = sx + math.floor(sw / 2)
   crossY = sy + math.floor(sh / 2)
-
+    
   safeZoneWidthSize = math.floor(sw * 0.06)
   safeZoneHeightSize = math.floor(sh * 0.06)
   hudL = sx + safeZoneWidthSize
   hudR = sx + sw - safeZoneWidthSize
   hudT = sy + safeZoneHeightSize
   hudB = sy + sh - safeZoneHeightSize
-
+  
   local scaleX = sw / 1280
   local scaleY = sh / 720
   local max_scale_factor = 4.0
@@ -223,7 +224,7 @@ function Triggers.resize()
       img[k]:rescale(scaled(img[k].unscaled_width), scaled(img[k].unscaled_height))
     end
   end
-
+  
   pos = {}
   for k in pairs(rawpos) do
     local p = rawpos[k]
@@ -236,23 +237,23 @@ function Triggers.resize()
       pos[k] = scaled(p)
     end
   end
-
+  
   bgf = Fonts.new{file = "squarishsans/Squarish Sans CT Regular SC.ttf", size = (17*scale), style = 0}
   bgfAdjust = math.floor(20*scale)
-
+  
   ngf = Fonts.new{file = "squarishsans/Squarish Sans CT Regular SC.ttf", size = (17*scale), style = 0}
   ngfAdjust = math.floor(20*scale)
-
+  
   local th = math.max(320, math.floor(sh - 260*scale))
   local tw = math.max(640, math.floor(sw - 400*scale))
   h = math.min(tw / 2, th)
   w = h*2
-
+  
   Screen.term_rect.width = w
   Screen.term_rect.height = h
   Screen.term_rect.x = sx + (sw - w)/2
   Screen.term_rect.y = sy + 0.23*(sh - h)
-
+  
   shortened_player_names = {}
 
   local max_name_len = pos.scorePanelRankOffset.x - pos.scorePanelNameOffset.x
@@ -287,7 +288,7 @@ end
 function drawCrosshair(image, offset)
   if Screen.term_active or Screen.map_active then return end
   if not Screen.crosshairs.active then return end
-
+  
   local nudgex = 0
   local nudgey = 0
   if offset ~= nil then
@@ -298,10 +299,11 @@ function drawCrosshair(image, offset)
 end
 
 function Triggers.draw()
+  if TexturePalette.draw() then return end
 
   -- net stats
   if #Game.players > 1 then drawNetPlayers() end
-
+  
   -- left area
   if Player.motion_sensor.active then
     -- radar
@@ -312,7 +314,7 @@ function Triggers.draw()
 
     local compass_diff = (img.radarBackground.width - img.objectiveFull.width) / 2
     drawCompass(img.objectiveFull, { x = pos.radarPosition.x + compass_diff, y = pos.radarPosition.y + compass_diff })
-
+    
     -- blips
     for i = 1,#Player.motion_sensor.blips do
       local blip = Player.motion_sensor.blips[i - 1]
@@ -320,7 +322,7 @@ function Triggers.draw()
       local rad = math.rad(blip.direction)
       local xoff = sens_xcen + math.cos(rad) * mult
       local yoff = sens_ycen - math.sin(rad) * mult
-
+      
       local image = img.friendly
       if blip.type == "alien" then
         image = img.alien
@@ -336,10 +338,10 @@ function Triggers.draw()
   else
     drawBL(img.motionSensorDisabledHUD, pos.leftHUDPosition.x, pos.leftHUDPosition.y)
   end
-
+  
   -- oxygen bar
   drawBar(pos.oxygenOffset, pos.oxygenLength, Player.oxygen, 10800, { 0, 0.690, 0.788, 1 })
-
+  
   -- health bar
   do
     local health = Player.energy
@@ -353,15 +355,15 @@ function Triggers.draw()
       drawBar(pos.shieldOffset, pos.shieldLength, health - 300, 150, { 1, 0, 1, 1 })
     end
   end
-
+  
   -- right area
   drawBR(img.weaponAreaHUD, pos.rightHUDPosition.x, pos.rightHUDPosition.y)
-
+  
   -- weapons
   if Player.weapons.desired then
     local weapon = Player.weapons.desired
     local wt = weapon.type.mnemonic
-
+    
     if wt == "pistol" then
       drawCrosshair(img.pistolCrosshair)
       if Player.items[wt].count > 1 then
@@ -386,26 +388,26 @@ function Triggers.draw()
     elseif wt == "assault rifle" then
       drawCrosshair(img.assaultRifleCrosshair)
       drawBR(img.ar, pos.assaultRifleOffset.x, pos.assaultRifleOffset.y)
-
+      
       local bullets = img.arAmmoFull
       local grenades = img.arGrenadeFull
-
+      
       local ammoB = pos.assaultRifleRackOffset.y
       local ammoL = pos.assaultRifleRackOffset.x
       local ammoG = ammoL - (bullets.width - grenades.width)/2
-
+      
       drawAmmo({ x = ammoG, y = ammoB }, img.arGrenadeEmpty, img.arGrenadeFull, weapon.secondary.rounds, weapon.secondary.total_rounds)
-
+      
       ammoB = ammoB + grenades.height + pos.assaultRifleGrenadeSpacer
       local extra = 39
       while extra >= 0 do
         drawAmmo({ x = ammoL, y = ammoB }, img.arAmmoEmpty, img.arAmmoFull, weapon.primary.rounds - extra, 13)
         extra = extra - 13
         ammoB = ammoB + bullets.height
-      end
+      end      
 
       drawReserve("x" .. Player.items[weapon.primary.ammo_type].count, pos.assaultRifleClipReadoutOffset)
-
+      
       local fw, fh = bgf:measure_text("x")
       drawReserve("x" .. Player.items[weapon.secondary.ammo_type].count, { x = pos.assaultRifleClipReadoutOffset.x, y = pos.assaultRifleClipReadoutOffset.y - (14*scale) })
     elseif wt == "missile launcher" then
@@ -443,28 +445,28 @@ function Triggers.draw()
     elseif wt == "smg" then
       drawCrosshair(img.smgCrosshair)
       drawBR(img.smg, pos.smgOffset.x, pos.smgOffset.y)
-
+      
       local bullets = img.smgAmmoFull
-
+      
       local ammoB = pos.smgClipOffset.y
       local ammoL = pos.smgClipOffset.x
-
+      
       local extra = 24
       while extra >= 0 do
         drawAmmo({ x = ammoL, y = ammoB }, img.smgAmmoEmpty, img.smgAmmoFull, weapon.primary.rounds - extra, 8)
         extra = extra - 8
         ammoB = ammoB + bullets.height
-      end
+      end      
 
       drawReserve(Player.items[weapon.primary.ammo_type].count .. "x", pos.smgClipReadoutOffset)
     end
   end
-
+  
   -- chip
   if Player.items["uplink chip"].count > 0 then
     drawBR(img.chipIndicator, -(img.chipIndicator.width / 2) - pos.chipOffset.x, pos.chipOffset.y - (img.chipIndicator.height / 2))
   end
-
+  
 end
 
 function drawReserve(text, offset)
@@ -483,14 +485,14 @@ function drawAmmo(offset, empty, full, cur, max)
   full.crop_rect.x = 0
   drawBRL(full, offset.x, offset.y)
 end
-
+ 
 function drawAmmoR(offset, empty, full, cur, max)
   drawBRL(empty, offset.x, offset.y)
   full.crop_rect.width = full.width * math.max(0, math.min(cur, max)) / max
   full.crop_rect.x = full.width - full.crop_rect.width
   drawBRL(full, offset.x - full.crop_rect.x, offset.y)
 end
-
+ 
 function drawBar(offset, width, cur, max, clr)
   local li = img.barLeftEnd
   li.tint_color = clr
@@ -498,10 +500,10 @@ function drawBar(offset, width, cur, max, clr)
   mi.tint_color = clr
   local ri = img.barRightEnd
   ri.tint_color = clr
-
+  
   local total_width = math.floor(width * math.max(0, math.min(cur, max)) / max)
   local cap_width = li.width + ri.width
-
+  
   if total_width > cap_width then
     mi.crop_rect.width = mi.width
     local midoff = offset.x + li.width
@@ -515,22 +517,22 @@ function drawBar(offset, width, cur, max, clr)
       mi.crop_rect.width = midwidth
       drawBL(mi, midoff, offset.y)
     end
-
+    
     li.crop_rect.x = 0
     li.crop_rect.width = li.width
     drawBL(li, offset.x, offset.y)
-
+    
     ri.crop_rect.x = 0
     ri.crop_rect.width = ri.width
     drawBL(ri, offset.x + total_width - ri.width, offset.y)
   else
     local lwidth = math.floor(total_width / 2)
     local rwidth = total_width - lwidth
-
+    
     li.crop_rect.x = 0
     li.crop_rect.width = lwidth
     drawBL(li, offset.x, offset.y)
-
+    
     ri.crop_rect.x = ri.width - rwidth
     ri.crop_rect.width = rwidth
     drawBL(ri, offset.x + lwidth, offset.y)
@@ -539,7 +541,7 @@ end
 
 function drawCell(offset, cur, max)
   drawBRL(img.fillEmpty, offset.x, offset.y)
-
+  
   local full = img.fillFull
   local h = full.height * cur / max
   full.crop_rect.height = h
@@ -583,7 +585,7 @@ function drawCompass(image, offset)
 end
 
 function hasbit(x, p)
-  return x % (p + p) >= p
+  return x % (p + p) >= p       
 end
 
 function bitand(x, y)
@@ -604,15 +606,15 @@ function drawAlienText()
     if alienWeaponShowText then
       local text = "0xfded"
       local rw, rh = bgf:measure_text(text)
-
+      
       Screen.clip_rect.x = hudR - pos.alienWeaponOffset.x - img.alienWeapon.width
       Screen.clip_rect.width = img.alienWeapon.width
-
+      
       local clipB = hudB - pos.alienWeaponTextOffset.y
       local fontL = hudR - img.weaponAreaHUD.width + pos.alienWeaponTextOffset.x - rw
       local fontT = clipB - bgfAdjust
       local clipLast = clipB
-
+      
       -- fake slant by drawing text with clipping and offset
       local i = 0
       local steps = 8
@@ -621,12 +623,12 @@ function drawAlienText()
         Screen.clip_rect.y = clipT
         Screen.clip_rect.height = clipLast - clipT
         clipLast = clipT
-
+        
         local txtL = fontL + math.floor(alienWeaponSlant * scale * i / steps)
         bgf:draw_text(text, txtL, fontT, { 0, 1, 0, 1 })
         i = i + 1
       end
-
+      
       Screen.clip_rect.width = Screen.width
       Screen.clip_rect.x = 0
       Screen.clip_rect.height = Screen.height
@@ -652,7 +654,7 @@ function drawAlienText()
     firstBackRender = false
   end
 end
-
+    
 
 function comp_player(a, b)
   if a.ranking > b.ranking then
@@ -693,13 +695,13 @@ function best_four()
   local tbl = sorted_players()
   local total = #tbl
   if total < 5 then return tbl end
-
+  
   local lrank = total
   for i, v in ipairs(tbl) do
     if v.player.active then lrank = i end
   end
   if lrank < 4 then return { tbl[1], tbl[2], tbl[3], tbl[4] } end
-
+  
   local lstart = math.min(lrank - 1, total - 2)
   return { tbl[1], tbl[lstart], tbl[lstart + 1], tbl[lstart + 2] }
 end
@@ -722,7 +724,7 @@ function net_gamelimit()
   end
   return nil, nil
 end
-
+  
 function ranking_text(gametype, ranking)
   if (gametype == "kill monsters") or
      (gametype == "capture the flag") or
@@ -744,6 +746,7 @@ function ranking_text(gametype, ranking)
      (gametype == "tag") then
     return format_time(math.abs(ranking))
   end
+  
   -- unknown
   return nil
 end
@@ -759,7 +762,7 @@ function drawNetPlayers()
   if gametype == "netscript" then
     gametype = Game.scoring_mode
   end
-
+  
   local lbl, value = net_gamelimit()
   if lbl ~= nil then
     drawNetText(lbl, { x = tr.x + pos.scorePanelNameOffset.x, y = tr.y - img.scorePanel.height + pos.scorePanelNameOffset.y })
@@ -774,7 +777,171 @@ function drawNetPlayers()
     drawNetText(ranking_text(gametype, v.player.ranking), { x = tr.x + pos.scorePanelScoreOffset.x, y = tr.y + pos.scorePanelScoreOffset.y })
     drawNetText(shortened_player_names[v.player.index], { x = tr.x + pos.scorePanelNameOffset.x, y = tr.y + pos.scorePanelNameOffset.y })
     drawNetText(v.rank, { x = tr.x + pos.scorePanelRankOffset.x, y = tr.y + pos.scorePanelRankOffset.y })
-
+    
     tr.y = tr.y + img.scorePanel.height + pos.scorePanelSpacer
   end
 end
+  
+  
+  
+-- BEGIN texture palette utility
+--
+-- Use: in Triggers.draw: "if TexturePalette.draw() then return end"
+--    in Triggers.resize: "if TexturePalette.resize() then return end"
+
+TexturePalette = {}
+TexturePalette.active = false
+
+function TexturePalette.check_active()
+  local old_active = TexturePalette.active
+  local new_active = false
+  if Player.texture_palette.size > 0 then new_active = true end
+  TexturePalette.active = new_active
+  
+  if old_active and not new_active then
+    Screen.crosshairs.lua_hud = TexturePalette.saved_crosshairs_lua_hud
+    Triggers.resize()
+  elseif new_active and not old_active then
+    TexturePalette.palette_cache = {}
+    TexturePalette.saved_crosshairs_lua_hud = Screen.crosshairs.lua_hud
+    Screen.crosshairs.lua_hud = false
+    TexturePalette.resize()
+  end
+  return TexturePalette.active
+end
+
+function TexturePalette.get_shape(slot)
+  local key = string.format("%d %d", slot.collection, slot.texture_index)
+  local shp = TexturePalette.palette_cache[key]
+  if not shp then
+    shp = Shapes.new{collection = slot.collection, texture_index = slot.texture_index, type = slot.type}
+    TexturePalette.palette_cache[key] = shp
+  end
+  return shp
+end
+
+function TexturePalette.draw_shape(slot, x, y, size)
+  local shp = TexturePalette.get_shape(slot)
+  if not shp then return end
+  if shp.width > shp.height then
+    shp:rescale(size, shp.unscaled_height * size / shp.unscaled_width)
+    shp:draw(x, y + (size - shp.height)/2)
+  else
+    shp:rescale(shp.unscaled_width * size / shp.unscaled_height, size)
+    shp:draw(x + (size - shp.width)/2, y)
+  end
+end
+
+function TexturePalette.draw(hr)
+  if not TexturePalette.check_active() then return false end
+  
+  local hr = TexturePalette.hud_rect
+  local tcount = Player.texture_palette.size
+  local size
+  if     tcount <=   5 then size = 128
+  elseif tcount <=  16 then size =  80
+  elseif tcount <=  36 then size =  53
+  elseif tcount <=  64 then size =  40
+  elseif tcount <= 100 then size =  32
+  elseif tcount <= 144 then size =  26
+  else                      size =  20
+  end
+  size = size * hr.scale
+  
+  local rows = math.floor(hr.height/size)
+  local cols = math.floor(hr.width/size)
+  local x_offset = hr.x + (hr.width - cols * size)/2
+  local y_offset = hr.y + (hr.height - rows * size)/2
+  
+  for i = 0,tcount - 1 do
+    TexturePalette.draw_shape(
+      Player.texture_palette.slots[i],
+      (i % cols) * size + x_offset + hr.scale/2,
+      math.floor(i / cols) * size + y_offset + hr.scale/2,
+      size - hr.scale)
+  end
+  
+  if Player.texture_palette.highlight then
+    local i = Player.texture_palette.highlight
+    Screen.frame_rect(
+      (i % cols) * size + x_offset,
+      math.floor(i / cols) * size + y_offset,
+      size, size,
+      InterfaceColors["inventory text"],
+      hr.scale)
+  end
+  
+  return true
+end
+
+function TexturePalette.resize()
+  if not TexturePalette.check_active() then return false end
+  
+  local ww = Screen.width
+  local wh = Screen.height
+  
+  -- calculate HUD area
+  TexturePalette.hud_rect = {}
+  local hudsize = Screen.hud_size_preference
+  TexturePalette.hud_rect.width = 640
+  if hudsize == SizePreferences["double"] then
+    if wh >= 960 and ww >= 1280 then
+      TexturePalette.hud_rect.width = 1280
+    end
+  elseif hudsize == SizePreferences["largest"] then
+    TexturePalette.hud_rect.width = math.min(ww, math.max(640, (4 * wh) / 3));
+  end
+  
+  TexturePalette.hud_rect.height = TexturePalette.hud_rect.width / 4
+  TexturePalette.hud_rect.x = math.floor((ww - TexturePalette.hud_rect.width) / 2)
+  TexturePalette.hud_rect.y = math.floor(wh - TexturePalette.hud_rect.height)
+  
+  TexturePalette.hud_rect.scale = TexturePalette.hud_rect.width / 640
+
+  -- remove HUD height from rest of calculations
+  wh = TexturePalette.hud_rect.y
+  
+  -- calculate terminal area
+  local termsize = Screen.term_size_preference
+  Screen.term_rect.width = 640
+  if termsize == SizePreferences["double"] then
+    if wh >= 640 and ww >= 1280 then
+      Screen.term_rect.width = 1280
+    end
+  elseif termsize == SizePreferences["largest"] then
+    Screen.term_rect.width = math.min(ww, math.max(640, 2 * wh))
+  end
+  
+  Screen.term_rect.height = Screen.term_rect.width / 2
+  Screen.term_rect.x = math.floor((ww - Screen.term_rect.width) / 2)
+  Screen.term_rect.y = math.floor((wh - Screen.term_rect.height) / 2)
+  
+  -- calculate world-view area
+  Screen.world_rect.width = math.min(ww, math.max(640, 2 * wh))
+  Screen.world_rect.height = Screen.world_rect.width / 2
+  Screen.world_rect.x = math.floor((ww - Screen.world_rect.width) / 2)
+  Screen.world_rect.y = math.floor((wh - Screen.world_rect.height) / 2)
+  
+  -- calculate map area
+  if Screen.map_overlay_active then
+    -- overlay just matches world-view
+    Screen.map_rect.width = Screen.world_rect.width
+    Screen.map_rect.height = Screen.world_rect.height
+    Screen.map_rect.x = Screen.world_rect.x
+    Screen.map_rect.y = Screen.world_rect.y
+  else
+    Screen.map_rect.width = ww
+    Screen.map_rect.height = wh
+    Screen.map_rect.x = 0
+    Screen.map_rect.y = 0
+  end
+  
+  Screen.clip_rect.width = Screen.width
+  Screen.clip_rect.height = Screen.height
+  Screen.clip_rect.x = 0
+  Screen.clip_rect.y = 0
+
+  return true
+end
+
+-- END texture palette utility

@@ -1,12 +1,15 @@
 /* config.h.in.  Generated from configure.ac by autoheader.  */
 
-/* ALSA netmic is enabled */
+/* ${desc_alsa} enabled */
 #undef HAVE_ALSA
 
 /* Define to 1 if you have the <alsa/asoundlib.h> header file. */
 #undef HAVE_ALSA_ASOUNDLIB_H
 
-/* ffmpeg support enabled */
+/* ${desc_curl} enabled */
+#undef HAVE_CURL
+
+/* ${desc_ffmpeg} enabled */
 #undef HAVE_FFMPEG
 
 /* Define to 1 if you have the <GL/glext.h> header file. */
@@ -15,13 +18,43 @@
 /* Define to 1 if you have the <inttypes.h> header file. */
 #undef HAVE_INTTYPES_H
 
+/* Define to 1 if you have the `asound' library (-lasound). */
+#undef HAVE_LIBASOUND
+
 /* Define to 1 if you have the `iconv' library (-liconv). */
 #undef HAVE_LIBICONV
 
-/* Lua support is enabled */
+/* Define to 1 if you have the `mad' library (-lmad). */
+#undef HAVE_LIBMAD
+
+/* Define to 1 if you have the `SDL_image' library (-lSDL_image). */
+#undef HAVE_LIBSDL_IMAGE
+
+/* Define to 1 if you have the `SDL_net' library (-lSDL_net). */
+#undef HAVE_LIBSDL_NET
+
+/* Define to 1 if you have the `SDL_ttf' library (-lSDL_ttf). */
+#undef HAVE_LIBSDL_TTF
+
+/* Define to 1 if you have the `smpeg' library (-lsmpeg). */
+#undef HAVE_LIBSMPEG
+
+/* Define to 1 if you have the `sndfile' library (-lsndfile). */
+#undef HAVE_LIBSNDFILE
+
+/* Define to 1 if you have the `speex' library (-lspeex). */
+#undef HAVE_LIBSPEEX
+
+/* Define to 1 if you have the `speexdsp' library (-lspeexdsp). */
+#undef HAVE_LIBSPEEXDSP
+
+/* Define to 1 if you have the `z' library (-lz). */
+#undef HAVE_LIBZ
+
+/* Lua support enabled */
 #undef HAVE_LUA
 
-/* MAD mp3 playback is enabled */
+/* ${desc_mad} enabled */
 #undef HAVE_MAD
 
 /* Define to 1 if you have the <mad.h> header file. */
@@ -30,47 +63,50 @@
 /* Define to 1 if you have the <memory.h> header file. */
 #undef HAVE_MEMORY_H
 
-/* OpenGL support is enabled */
+/* OpenGL support enabled */
 #undef HAVE_OPENGL
 
-/* PNG support enabled */
+/* ${desc_png} enabled */
 #undef HAVE_PNG
 
 /* Define to 1 if you have the <pwd.h> header file. */
 #undef HAVE_PWD_H
 
-/* SDL_image support is enabled */
+/* ${desc_sdl_image} enabled */
 #undef HAVE_SDL_IMAGE
 
 /* Define to 1 if you have the <SDL_image.h> header file. */
 #undef HAVE_SDL_IMAGE_H
 
-/* SDL_net support is enabled */
+/* SDL_net support enabled */
 #undef HAVE_SDL_NET
 
 /* Define to 1 if you have the <SDL_net.h> header file. */
 #undef HAVE_SDL_NET_H
 
-/* SDL_TTF support is enabled */
+/* SDL_ttf support enabled */
 #undef HAVE_SDL_TTF
 
 /* Define to 1 if you have the <SDL_ttf.h> header file. */
 #undef HAVE_SDL_TTF_H
 
-/* SMPEG movie playback is enabled */
+/* ${desc_smpeg} enabled */
 #undef HAVE_SMPEG
 
 /* Define to 1 if you have the <smpeg/smpeg.h> header file. */
 #undef HAVE_SMPEG_SMPEG_H
 
-/* libsndfile support is enabled */
+/* ${desc_sndfile} enabled */
 #undef HAVE_SNDFILE
 
 /* Define to 1 if you have the <sndfile.h> header file. */
 #undef HAVE_SNDFILE_H
 
-/* snprintf() is available */
+/* Define to 1 if you have the `snprintf' function. */
 #undef HAVE_SNPRINTF
+
+/* ${desc_speex} enabled */
+#undef HAVE_SPEEX
 
 /* Define to 1 if you have the <speex/speex.h> header file. */
 #undef HAVE_SPEEX_SPEEX_H
@@ -87,10 +123,10 @@
 /* Define to 1 if you have the <string.h> header file. */
 #undef HAVE_STRING_H
 
-/* sysconf() is available */
+/* Define to 1 if you have the `sysconf' function. */
 #undef HAVE_SYSCONF
 
-/* sysctlbyname() is available */
+/* Define to 1 if you have the `sysctlbyname' function. */
 #undef HAVE_SYSCTLBYNAME
 
 /* Define to 1 if you have the <sys/stat.h> header file. */
@@ -102,16 +138,22 @@
 /* Define to 1 if you have the <unistd.h> header file. */
 #undef HAVE_UNISTD_H
 
-/* vorbis support enabled */
+/* ${desc_vorbis} enabled */
 #undef HAVE_VORBISFILE
 
-/* vsnprintf() is available */
+/* Define to 1 if you have the `vsnprintf' function. */
 #undef HAVE_VSNPRINTF
 
-/* ZZIP support enabled */
+/* zlib support enabled */
+#undef HAVE_ZLIB
+
+/* Define to 1 if you have the <zlib.h> header file. */
+#undef HAVE_ZLIB_H
+
+/* ${desc_zzip} enabled */
 #undef HAVE_ZZIP
 
-/* mkstemp() is available */
+/* mkstemp() available */
 #undef LUA_USE_MKSTEMP
 
 /* Name of package */
@@ -135,9 +177,6 @@
 /* Define to the version of this package. */
 #undef PACKAGE_VERSION
 
-/* Speex support is enabled */
-#undef SPEEX
-
 /* Define to 1 if you have the ANSI C header files. */
 #undef STDC_HEADERS
 
@@ -147,5 +186,5 @@
 /* Version number of package */
 #undef VERSION
 
-/* Win32 music is disabled */
+/* Win32 music disabled */
 #undef WIN32_DISABLE_MUSIC

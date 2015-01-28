@@ -540,7 +540,7 @@ bool new_game(
 
 	/* Load the level */	
 	assert(file_is_set);
-	success= goto_level(entry_point, true);
+	success= goto_level(entry_point, true, number_of_players);
 	/* If we were able to load the map... */
 	if(success)
 	{
@@ -615,12 +615,6 @@ bool get_indexed_entry_point(
 		return false;
 	}
     
-    // We only support Marathon 1 exploration missions in single player,
-    // so disable cooperative play for Marathon maps.
-    if (header.data_version == MARATHON_ONE_DATA_VERSION &&
-        type == _multiplayer_cooperative_entry_point)
-        return false;
-
 	bool success = false;
 	if (header.application_specific_directory_data_size == SIZEOF_directory_data)
 	{
@@ -671,6 +665,15 @@ bool get_indexed_entry_point(
 				if (header.data_version == MARATHON_ONE_DATA_VERSION &&
 				    map_info.entry_point_flags == 0)
 					map_info.entry_point_flags = _single_player_entry_point;
+
+				// Marathon 1 handled (then-unused) coop flag differently
+				if (header.data_version == MARATHON_ONE_DATA_VERSION)
+				{
+					if (map_info.entry_point_flags & _single_player_entry_point)
+						map_info.entry_point_flags |= _multiplayer_cooperative_entry_point;
+					if (map_info.entry_point_flags & _multiplayer_carnage_entry_point)
+						map_info.entry_point_flags &= ~_multiplayer_cooperative_entry_point;
+				}
 
 				if(map_info.entry_point_flags & type)
 				{
@@ -755,6 +758,15 @@ bool get_entry_points(vector<entry_point> &vec, int32 type)
 			    map_info.entry_point_flags == 0)
 				map_info.entry_point_flags = _single_player_entry_point;
 
+			// Marathon 1 handled (then-unused) coop flag differently
+			if (header.data_version == MARATHON_ONE_DATA_VERSION)
+			{
+				if (map_info.entry_point_flags & _single_player_entry_point)
+					map_info.entry_point_flags |= _multiplayer_cooperative_entry_point;
+				if (map_info.entry_point_flags & _multiplayer_carnage_entry_point)
+					map_info.entry_point_flags &= ~_multiplayer_cooperative_entry_point;
+			}
+
 			if (map_info.entry_point_flags & type) {
 
 				// This one is valid
@@ -774,6 +786,7 @@ bool get_entry_points(vector<entry_point> &vec, int32 type)
 }
 
 extern void LoadSoloLua();
+extern void LoadReplayNetLua();
 extern void RunLuaScript();
 
 /* This is called when the game level is changed somehow */
@@ -782,7 +795,8 @@ extern void RunLuaScript();
 /* Returns a short that is an OSErr... */
 bool goto_level(
 	struct entry_point *entry, 
-	bool new_game)
+	bool new_game,
+	short number_of_players)
 {
 	bool success= true;
 
@@ -828,10 +842,13 @@ bool goto_level(
 			ResetLevelScript();
 		}
 		RunScriptChunks();
-		if (!game_is_networked) 
+		if (!game_is_networked && number_of_players == 1)
 		{
-			Plugins::instance()->load_solo_mml();
 			LoadSoloLua();
+		}
+		else if (!game_is_networked)
+		{
+			LoadReplayNetLua();
 		}
 		Music::instance()->PreloadLevelMusic();
 		set_game_error(SavedType,SavedError);
@@ -1199,9 +1216,7 @@ void recalculate_redundant_map(
 	for(loop=0;loop<dynamic_world->endpoint_count;++loop) recalculate_redundant_endpoint_data(loop);
 }
 
-extern bool load_game_from_file(FileSpecifier& File);
-
-bool load_game_from_file(FileSpecifier& File)
+bool load_game_from_file(FileSpecifier& File, bool run_scripts, bool *was_map_found)
 {
 	bool success= false;
 
@@ -1222,21 +1237,12 @@ bool load_game_from_file(FileSpecifier& File)
 	
 		/* Find the original scenario this saved game was a part of.. */
 		parent_checksum= read_wad_file_parent_checksum(File);
-		if(use_map_file(parent_checksum))
+		bool found_map = use_map_file(parent_checksum);
+		if (was_map_found)
 		{
-			// LP: getting the level scripting off of the map file
-			// Being careful to carry over errors so that Pfhortran errors can be ignored
-			short SavedType, SavedError = get_game_error(&SavedType);
-			RunLevelScript(dynamic_world->current_level_number);
-			RunScriptChunks();
-			if (!game_is_networked) 
-			{
-				Plugins::instance()->load_solo_mml();
-				LoadSoloLua();
-			}
-			set_game_error(SavedType,SavedError);
+			*was_map_found = found_map;
 		}
-		else
+		if (!found_map)
 		{
 			/* Tell the user theyÕre screwed when they try to leave this level. */
 			alert_user(infoError, strERRORS, cantFindMap, 0);
@@ -1246,11 +1252,29 @@ bool load_game_from_file(FileSpecifier& File)
 		
 			/* Set to the default map. */
 			set_to_default_map();
-
-			ResetLevelScript();
-			RunScriptChunks();
 		}
-	} 
+		
+		if (run_scripts)
+		{
+			// LP: getting the level scripting off of the map file
+			// Being careful to carry over errors so that Pfhortran errors can be ignored
+			short SavedType, SavedError = get_game_error(&SavedType);
+			if (found_map)
+			{
+				RunLevelScript(dynamic_world->current_level_number);
+			}
+			else
+			{
+				ResetLevelScript();
+			}
+			RunScriptChunks();
+			if (!game_is_networked)
+			{
+				LoadSoloLua();
+			}
+			set_game_error(SavedType,SavedError);
+		}
+	}
 
 	return success;
 }
@@ -1280,7 +1304,7 @@ bool revert_game(
 	if (revert_game_data.game_is_from_disk)
 	{
 		/* Reload their last saved game.. */
-		successful= load_game_from_file(revert_game_data.SavedGame);
+		successful= load_game_from_file(revert_game_data.SavedGame, true, NULL);
 		if (successful) 
 		{
 			Music::instance()->PreloadLevelMusic();
@@ -1672,12 +1696,17 @@ bool process_map_wad(
             static_world->mission_flags &= ~_mission_rescue;
             static_world->mission_flags |= _mission_rescue_m1;
         }
+        if (static_world->mission_flags & _mission_repair)
+        {
+            static_world->mission_flags &= ~_mission_repair;
+            static_world->mission_flags |= _mission_repair_m1;
+        }
         if (static_world->environment_flags & _environment_rebellion)
         {
             static_world->environment_flags &= ~_environment_rebellion;
             static_world->environment_flags |= _environment_rebellion_m1;
         }
-        static_world->environment_flags |= _environment_glue_m1|_environment_ouch_m1|_environment_song_index_m1|_environment_terminals_stop_time|_environment_activation_ranges|_environment_m1_weapon_pickups;
+        static_world->environment_flags |= _environment_glue_m1|_environment_ouch_m1|_environment_song_index_m1|_environment_terminals_stop_time|_environment_activation_ranges|_environment_m1_weapons;
         
     }
 

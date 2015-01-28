@@ -171,6 +171,7 @@ void L_Call_Monster_Damaged(short monster_index, short aggressor_monster_index, 
 void L_Call_Player_Damaged(short player_index, short aggressor_player_index, short aggressor_monster_index, int16 damage_type, short damage_amount, short projectile_index) {}
 void L_Call_Projectile_Detonated(short type, short owner_index, short polygon, world_point3d location) {}
 void L_Call_Projectile_Switch(short, short) {}
+void L_Call_Projectile_Created(short projectile_index) {}
 void L_Call_Item_Created(short item_index) {}
 
 void L_Invalidate_Effect(short) { }
@@ -178,7 +179,7 @@ void L_Invalidate_Monster(short) { }
 void L_Invalidate_Projectile(short) { }
 void L_Invalidate_Object(short) { }
 
-bool LoadLuaScript(const char *buffer, size_t len) { /* Should never get here! */ return false; }
+bool LoadLuaScript(const char *buffer, size_t len, const char *desc) { /* Should never get here! */ return false; }
 bool RunLuaScript() {
 	for (int i = 0; i < MAXIMUM_NUMBER_OF_NETWORK_PLAYERS; i++)
 		use_lua_compass [i] = false;
@@ -253,7 +254,7 @@ public:
 
 public:
 
-	bool Load(const char *buffer, size_t len);
+	bool Load(const char *buffer, size_t len, const char *desc);
 	bool Loaded() { return num_scripts_ > 0; }
 	bool Running() { return running_; }
 	bool Run();
@@ -329,6 +330,7 @@ public:
 	void MonsterDamaged(short monster_index, short aggressor_monster_index, int16 damage_type, short damage_amount, short projectile_index);
 	void PlayerDamaged(short player_index, short aggressor_player_index, short aggressor_monster_index, int16 damage_type, short damage_amount, short projectile_index);
 	void ProjectileDetonated(short type, short owner_index, short polygon, world_point3d location);
+	void ProjectileCreated(short projectile_index);
 	void ItemCreated(short item_index);
 
 	void InvalidateEffect(short effect_index);
@@ -657,6 +659,15 @@ void LuaState::ProjectileDetonated(short type, short owner_index, short polygon,
 	}
 }
 
+void LuaState::ProjectileCreated (short projectile_index)
+{
+	if (GetTrigger("projectile_created"))
+	{
+		Lua_Projectile::Push(State(), projectile_index);
+		CallTrigger(1);
+	}
+}
+
 void LuaState::ItemCreated (short item_index)
 {
 	if (GetTrigger("item_created"))
@@ -831,9 +842,9 @@ void LuaState::LoadCompatibility()
 	lua_setglobal(State(), "MAXIMUM_OBJECTS_PER_MAP");
 }
 
-bool LuaState::Load(const char *buffer, size_t len)
+bool LuaState::Load(const char *buffer, size_t len, const char *desc)
 {
-	int status = luaL_loadbufferx(State(), buffer, len, "level_script", "t");
+	int status = luaL_loadbufferx(State(), buffer, len, desc, "t");
 	if (status == LUA_ERRRUN)
 		logWarning("Lua loading failed: error running script.");
 	if (status == LUA_ERRFILE)
@@ -1272,6 +1283,11 @@ void L_Call_Player_Damaged (short player_index, short aggressor_player_index, sh
 void L_Call_Projectile_Detonated(short type, short owner_index, short polygon, world_point3d location) 
 {
 	L_Dispatch(boost::bind(&LuaState::ProjectileDetonated, _1, type, owner_index, polygon, location));
+}
+
+void L_Call_Projectile_Created (short projectile_index)
+{
+	L_Dispatch(boost::bind(&LuaState::ProjectileCreated, _1, projectile_index));
 }
 
 void L_Call_Item_Created (short item_index)
@@ -1738,7 +1754,19 @@ bool LoadLuaScript(const char *buffer, size_t len, ScriptType script_type)
 		states.insert(type, LuaStateFactory(script_type));
 		states[script_type].Initialize();
 	}
-	return states[script_type].Load(buffer, len);
+	const char *desc = "level_script";
+	switch (script_type) {
+		case _embedded_lua_script:
+			desc = "Map Lua";
+			break;
+		case _lua_netscript:
+			desc = "Netscript";
+			break;
+		case _solo_lua_script:
+			desc = "Solo Lua";
+			break;
+	}
+	return states[script_type].Load(buffer, len, desc);
 }
 
 #ifdef HAVE_OPENGL
@@ -1846,6 +1874,43 @@ void LoadSoloLua()
 				if (directory.size())
 				{
 					states[_solo_lua_script].SetSearchPath(directory);
+				}
+			}
+		}
+	}
+}
+
+void LoadReplayNetLua()
+{
+	std::string file;
+	std::string directory;
+	
+	if (environment_preferences->use_replay_net_lua)
+	{
+		file = network_preferences->netscript_file;
+	}
+	
+	if (file.size())
+	{
+		FileSpecifier fs (file.c_str());
+		if (directory.size())
+		{
+			fs.SetNameWithPath(file.c_str(), directory);
+		}
+		
+		OpenedFile script_file;
+		if (fs.Open(script_file))
+		{
+			int32 script_length;
+			script_file.GetLength(script_length);
+			
+			std::vector<char> script_buffer(script_length);
+			if (script_file.Read(script_length, &script_buffer[0]))
+			{
+				LoadLuaScript(&script_buffer[0], script_length, _lua_netscript);
+				if (directory.size())
+				{
+					states[_lua_netscript].SetSearchPath(directory);
 				}
 			}
 		}

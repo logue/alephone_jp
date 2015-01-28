@@ -37,6 +37,7 @@ public:
 		U_Texture2,
 		U_Texture3,
 		U_Time,
+		U_Pulsate,
 		U_Wobble,
 		U_Flare,
 		U_BloomScale,
@@ -56,6 +57,7 @@ public:
 		U_ScaleY,
 		U_Yaw,
 		U_Pitch,
+		U_SelfLuminosity,
 		NUMBER_OF_UNIFORM_LOCATIONS
 	};
 

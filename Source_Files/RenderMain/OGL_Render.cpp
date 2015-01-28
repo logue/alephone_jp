@@ -3279,6 +3279,11 @@ bool OGL_RenderText(short BaseX, short BaseY, const char *Text, unsigned char r,
 	
 	// Create display list for the current text string;
 	// use the "standard" text-font display list (display lists can be nested)
+	GLuint TextDisplayList;
+	TextDisplayList = glGenLists(1);
+	glNewList(TextDisplayList,GL_COMPILE);
+	GetOnScreenFont().OGL_Render(Text);
+	glEndList();
 	
 	// Place the text in the foreground of the display
 	SetProjectionType(Projection_Screen);
@@ -3291,19 +3296,86 @@ bool OGL_RenderText(short BaseX, short BaseY, const char *Text, unsigned char r,
 	// Background
 	glColor3f(0,0,0);
 	
+	// Changed to drop shadow only for performance reasons
+	/*
+	glLoadIdentity();
+	glTranslatef(BaseX-1,BaseY-1,Depth);
+	glCallList(TextDisplayList);
 	
+	glLoadIdentity();
+	glTranslatef(BaseX,BaseY-1,Depth);
+	glCallList(TextDisplayList);
+	
+	glLoadIdentity();
+	glTranslatef(BaseX+1,BaseY-1,Depth);
+	glCallList(TextDisplayList);
+	
+	glLoadIdentity();
+	glTranslatef(BaseX-1,BaseY,Depth);
+	glCallList(TextDisplayList);
+	
+	glLoadIdentity();
+	glTranslatef(BaseX+1,BaseY,Depth);
+	glCallList(TextDisplayList);
+	
+	glLoadIdentity();
+	glTranslatef(BaseX-1,BaseY+1,Depth);
+	glCallList(TextDisplayList);
+	
+	glLoadIdentity();
+	glTranslatef(BaseX,BaseY+1,Depth);
+	glCallList(TextDisplayList);
+	*/
 	
 	glLoadIdentity();
 	glTranslatef(BaseX+1.0F,BaseY+1.0F,Depth);
-  GetOnScreenFont().OGL_Render(Text);
+	glCallList(TextDisplayList);
 	
 	// Foreground
 	SglColor3f(r/255.0f,g/255.0f,b/255.0f);
 
 	glLoadIdentity();
 	glTranslatef(BaseX,BaseY,Depth);
-  GetOnScreenFont().OGL_Render(Text);
+	glCallList(TextDisplayList);
 		
+	// Clean up
+	glDeleteLists(TextDisplayList,1);
+	glPopMatrix();
+	
+	return true;
+}
+
+
+// Render the console cursor, with a shadow like RenderText
+bool OGL_RenderTextCursor(const SDL_Rect& rect, unsigned char r, unsigned char g, unsigned char b)
+{
+	if (!OGL_IsActive()) return false;
+	
+	// Place the cursor in the foreground of the display
+	SetProjectionType(Projection_Screen);
+	
+	// Using a modelview matrix, of course
+	glMatrixMode(GL_MODELVIEW);
+	glPushMatrix();
+	
+	// Background
+	glColor3f(0, 0, 0);
+	glBegin(GL_QUADS);
+	glVertex2i(rect.x, rect.y);
+	glVertex2i(rect.x + rect.w, rect.y);
+	glVertex2i(rect.x + rect.w, rect.y + rect.h);
+	glVertex2i(rect.x, rect.y + rect.h);
+	glEnd();
+	
+	// Foreground
+	SglColor3f(r/255.0f, g/255.0f, b/255.0f);
+	glBegin(GL_QUADS);
+	glVertex2i(rect.x, rect.y);
+	glVertex2i(rect.x + rect.w, rect.y);
+	glVertex2i(rect.x + rect.w, rect.y + rect.h);
+	glVertex2i(rect.x, rect.y + rect.h);
+	glEnd();
+
 	// Clean up
 	glPopMatrix();
 	

@@ -300,6 +300,13 @@ void _set_port_to_map(void)
 	draw_surface = Map_Buffer;
 }
 
+void _set_port_to_custom(SDL_Surface *surface)
+{
+	assert(old_draw_surface == NULL);
+	old_draw_surface = draw_surface;
+	draw_surface = surface;
+}
+
 /*
  *  Set clipping rectangle
  */
@@ -455,7 +462,7 @@ inline static int draw_glyph(uint8 c, int x, int y, T *p, int pitch, int clip_le
 template <class T>
 inline static int draw_text(const uint8 *text, size_t length, int x, int y, T *p, int pitch, int clip_left, int clip_top, int clip_right, int clip_bottom, uint32 pixel, const sdl_font_info *font, uint16 style)
 {
- 	bool oblique = ((style & styleItalic) != 0);
+	bool oblique = ((style & styleItalic) != 0);
 	int total_width = 0;
 
 	uint8 c;
@@ -520,8 +527,9 @@ int sdl_font_info::_draw_text(SDL_Surface *s, const char *text, size_t length, i
 		SDL_UpdateRect(s, x, y - ascent, text_width(text, style, false), rect_height);
 	return width;
 }
-#include "converter.h"
+
 #ifdef HAVE_SDL_TTF
+#include "converter.h"
 int ttf_font_info::_draw_text(SDL_Surface *s, const char *text, size_t length, int x, int y, uint32 pixel, uint16 style, bool utf8) const
 {
 	int clip_top, clip_bottom, clip_left, clip_right;
@@ -549,6 +557,7 @@ int ttf_font_info::_draw_text(SDL_Surface *s, const char *text, size_t length, i
 	}
 	else
 	{
+		//uint16 *temp = process_macroman(text, length);
 		uint16 *temp = sjis2utf16(text, length);
 		if (environment_preferences->smooth_text)
 			text_surface = TTF_RenderUNICODE_Blended(get_ttf(style), temp, c);
@@ -596,7 +605,7 @@ int ttf_font_info::_draw_text(SDL_Surface *s, const char *text, size_t length, i
 
 static void draw_text(const char *text, int x, int y, uint32 pixel, const font_info *font, uint16 style)
 {
-  font->draw_text(draw_surface, text, strlen(text), x, y, pixel, style, true);
+	draw_text(draw_surface, text, strlen(text), x, y, pixel, font, style);
 }	
 
 void _draw_screen_text(const char *text, screen_rectangle *destination, short flags, short font_id, short text_color)

@@ -389,7 +389,7 @@ static void crosshair_dialog(void *arg)
 	SelectSelectorWidget shapeWidget(shape_w);
 	Int16Pref shapePref(player_preferences->Crosshairs.Shape);
 	crosshair_binders->insert<int> (&shapeWidget, &shapePref);
-	table->dual_add(shape_w->label("形"), d);
+	table->dual_add(shape_w->label("形状"), d);
 	table->dual_add(shape_w, d);
 
 	table->add_row(new w_spacer(), true);
@@ -716,6 +716,13 @@ static const char* term_scale_labels[] = {
 	"通常", "２倍", "最大", NULL
 };
 
+static const char* max_saves_labels[] = {
+	"20", "100", "500", "無制限", NULL
+};
+static const uint32 max_saves_values[] = {
+	20, 100, 500, 0
+};
+
 
 enum {
     iRENDERING_SYSTEM = 1000
@@ -757,7 +764,7 @@ static void software_rendering_options_dialog(void* arg)
 	table->add_row(new w_spacer(), true);
 
 	w_select *sw_alpha_blending_w = new w_select(graphics_preferences->software_alpha_blending, sw_alpha_blending_labels);
-	table->dual_add(sw_alpha_blending_w->label("液体を半透明化"), d);
+	table->dual_add(sw_alpha_blending_w->label("液面を半透明化"), d);
 	table->dual_add(sw_alpha_blending_w, d);
 
 	placer->add(table, true);
@@ -864,7 +871,7 @@ static void graphics_dialog(void *arg)
 	renderer_w->set_selection(_no_acceleration);
 	renderer_w->set_enabled(false);
 #endif
-	table->dual_add(renderer_w->label("レンダリングシステム"), d);
+	table->dual_add(renderer_w->label("描画システム"), d);
 	table->dual_add(renderer_w, d);
 
 	w_select_popup *size_w = new w_select_popup();
@@ -921,7 +928,7 @@ static void graphics_dialog(void *arg)
 	table->dual_add(term_scale_w, d);
 	
 	w_toggle *map_w = new w_toggle(graphics_preferences->screen_mode.translucent_map);
-	table->dual_add(map_w->label("オーバーヘッドマップ"), d);
+	table->dual_add(map_w->label("オーバーレイマップ"), d);
 	table->dual_add(map_w, d);
 
 	placer->add(table, true);
@@ -1325,7 +1332,7 @@ static void controls_dialog(void *arg)
 
 	joystick_w = new w_enabling_toggle(input_preferences->input_device == 0 && SDL_NumJoysticks() > 0 && input_preferences->joystick_id >= 0, true);
 	joystick_w->set_selection_changed_callback(input_selected);
-	joystick->dual_add(joystick_w->label("ジョイスティク／ゲームパッドを使用"), d);
+	joystick->dual_add(joystick_w->label("ジョイスティック／ゲームパッドを使用"), d);
 	joystick->dual_add(joystick_w, d);
 
 	joystick->add_row(new w_spacer(), true);
@@ -1393,14 +1400,17 @@ static void controls_dialog(void *arg)
 	w_toggle *always_run_w = new w_toggle(input_preferences->modifiers & _inputmod_interchange_run_walk);
 	general_table->dual_add(always_run_w->label("常時走行"), d);
 	general_table->dual_add(always_run_w, d);
+
 	w_toggle *always_swim_w = new w_toggle(TEST_FLAG(input_preferences->modifiers, _inputmod_interchange_swim_sink));
 	general_table->dual_add(always_swim_w->label("常時泳ぐ"), d);
 	general_table->dual_add(always_swim_w, d);
+
 	general_table->add_row(new w_spacer(), true);
 
 	w_toggle *weapon_w = new w_toggle(!(input_preferences->modifiers & _inputmod_dont_switch_to_new_weapon));
 	general_table->dual_add(weapon_w->label("武器の自動切換え"), d);
 	general_table->dual_add(weapon_w, d);
+
 	w_toggle* auto_recenter_w = new w_toggle(!(input_preferences->modifiers & _inputmod_dont_auto_recenter));
 	general_table->dual_add(auto_recenter_w->label("視点の自動リセンター"), d);
 	general_table->dual_add(auto_recenter_w, d);
@@ -1770,6 +1780,7 @@ static void plugins_dialog(void *)
 		}
 
 		if (changed) {
+			Plugins::instance()->invalidate();
 			write_preferences();
 
 			ResetAllMMLValues();
@@ -1785,10 +1796,9 @@ static void plugins_dialog(void *)
  */
 
 static const char* film_profile_labels[] = {
-	"Aleph One 1.1",
+	"Aleph One",
 	"Marathon 2",
 	"Marathon Infinity",
-	"Aleph One 1.0",
 	0
 };
 
@@ -1842,16 +1852,21 @@ static void environment_dialog(void *arg)
 	use_solo_lua_w->add_dependent_widget(solo_lua_w);
 
 	table->add_row(new w_spacer, true);
-	table->dual_add_row(new w_static_text("HUDスクリプト"), d);
-	w_enabling_toggle* use_hud_lua_w = new w_enabling_toggle(environment_preferences->use_hud_lua);
-	table->dual_add(use_hud_lua_w->label("HUDスクリプトを使用"), d);
-	table->dual_add(use_hud_lua_w, d);
+	table->dual_add_row(new w_static_text("Film Playback"), d);
 	
-	w_file_chooser *hud_lua_w = new w_file_chooser("スクリプトを選択", _typecode_netscript);
-	hud_lua_w->set_file(environment_preferences->hud_lua_file);
-	table->dual_add(hud_lua_w->label("スクリプトファイル"), d);
-	table->dual_add(hud_lua_w, d);
-	use_hud_lua_w->add_dependent_widget(hud_lua_w);
+	w_select* film_profile_w = new w_select(environment_preferences->film_profile, film_profile_labels);
+	table->dual_add(film_profile_w->label("Default Playback Profile"), d);
+	table->dual_add(film_profile_w, d);
+	
+	w_enabling_toggle* use_replay_net_lua_w = new w_enabling_toggle(environment_preferences->use_replay_net_lua);
+	table->dual_add(use_replay_net_lua_w->label("Use Netscript in Films"), d);
+	table->dual_add(use_replay_net_lua_w, d);
+	
+	w_file_chooser *replay_net_lua_w = new w_file_chooser("Choose Script", _typecode_netscript);
+	replay_net_lua_w->set_file(network_preferences->netscript_file);
+	table->dual_add(replay_net_lua_w->label("Netscript File"), d);
+	table->dual_add(replay_net_lua_w, d);
+	use_replay_net_lua_w->add_dependent_widget(replay_net_lua_w);
 	
 	table->add_row(new w_spacer, true);
 	table->dual_add_row(new w_static_text("オプション"), d);
@@ -1860,9 +1875,13 @@ static void environment_dialog(void *arg)
 	table->dual_add(hide_extensions_w->label("拡張子を隠す"), d);
 	table->dual_add(hide_extensions_w, d);
 
-	w_select* film_profile_w = new w_select(environment_preferences->film_profile, film_profile_labels);
-	table->dual_add(film_profile_w->label("フィルムのプレイバック"), d);
-	table->dual_add(film_profile_w, d);
+	w_select *max_saves_w = new w_select(0, max_saves_labels);
+	for (int i = 0; max_saves_labels[i] != NULL; ++i) {
+		if (max_saves_values[i] == environment_preferences->maximum_quick_saves)
+			max_saves_w->set_selection(i);
+	}
+	table->dual_add(max_saves_w->label("Unnamed Saves to Keep"), d);
+	table->dual_add(max_saves_w, d);
 
 	placer->add(table, true);
 
@@ -1940,16 +1959,16 @@ static void environment_dialog(void *arg)
 			changed = true;
 		}
 
-		bool use_hud_lua = use_hud_lua_w->get_selection() != 0;
-		if (use_hud_lua != environment_preferences->use_hud_lua)
+		bool use_replay_net_lua = use_replay_net_lua_w->get_selection() != 0;
+		if (use_replay_net_lua != environment_preferences->use_replay_net_lua)
 		{
-			environment_preferences->use_hud_lua = use_hud_lua;
+			environment_preferences->use_replay_net_lua = use_replay_net_lua;
 			changed = true;
 		}
 		
-		path = hud_lua_w->get_file().GetPath();
-		if (strcmp(path, environment_preferences->hud_lua_file)) {
-			strcpy(environment_preferences->hud_lua_file, path);
+		path = replay_net_lua_w->get_file().GetPath();
+		if (strcmp(path, network_preferences->netscript_file)) {
+			strcpy(network_preferences->netscript_file, path);
 			changed = true;
 		}
 		
@@ -1979,14 +1998,21 @@ static void environment_dialog(void *arg)
 			changed = true;
 		}
 
+		bool saves_changed = false;
+		int saves = max_saves_values[max_saves_w->get_selection()];
+		if (saves != environment_preferences->maximum_quick_saves) {
+			environment_preferences->maximum_quick_saves = saves;
+			saves_changed = true;
+		}
+
 		if (changed)
 			load_environment_from_preferences();
 
 		if (theme_changed) {
-			load_theme(new_theme);
+			load_dialog_theme();
 		}
 
-		if (changed || theme_changed)
+		if (changed || theme_changed || saves_changed)
 			write_preferences();
 	}
 
@@ -2326,6 +2352,7 @@ void write_preferences(
 	fprintf(F,"  advertise_on_metaserver=\"%s\"\n",BoolString(network_preferences->advertise_on_metaserver));
 	fprintf(F,"  attempt_upnp=\"%s\"\n", BoolString(network_preferences->attempt_upnp));
 	fprintf(F,"  check_for_updates=\"%s\"\n", BoolString(network_preferences->check_for_updates));
+	fprintf(F,"  verify_https=\"%s\"\n",BoolString(network_preferences->verify_https));
 	fprintf(F,"  metaserver_login=\"%.16s\"\n", network_preferences->metaserver_login);
 	
 	fprintf(F,"  metaserver_password=\"");
@@ -2364,10 +2391,10 @@ void write_preferences(
 	fprintf(F,"  smooth_text=\"%s\"\n", BoolString(environment_preferences->smooth_text));
 	WriteXML_Pathname(F,"  solo_lua_file=\"", environment_preferences->solo_lua_file, "\"\n");
 	fprintf(F,"  use_solo_lua=\"%s\"\n", BoolString(environment_preferences->use_solo_lua));
-	WriteXML_Pathname(F,"  hud_lua_file=\"", environment_preferences->hud_lua_file, "\"\n");
-	fprintf(F,"  use_hud_lua=\"%s\"\n", BoolString(environment_preferences->use_hud_lua));
+	fprintf(F,"  use_replay_net_lua=\"%s\"\n", BoolString(environment_preferences->use_replay_net_lua));
 	fprintf(F,"  hide_alephone_extensions=\"%s\"\n", BoolString(environment_preferences->hide_extensions));
 	fprintf(F,"  film_profile=\"%u\"\n", static_cast<uint32>(environment_preferences->film_profile));
+	fprintf(F,"  maximum_quick_saves=\"%u\"\n",environment_preferences->maximum_quick_saves);
 	fprintf(F,">\n");
 	for (Plugins::iterator it = Plugins::instance()->begin(); it != Plugins::instance()->end(); ++it) {
 		if (it->compatible() && !it->enabled) {
@@ -2465,8 +2492,7 @@ static void default_network_preferences(network_preferences_data *preferences)
 	preferences->autogather= false;
 	preferences->join_by_address= false;
 	obj_clear(preferences->join_address);
-	preferences->game_port= 4226;	// Magic number I guess, but this is the only place it's used
-                                // (everyone else uses preferences->game_port)
+	preferences->game_port= DEFAULT_GAME_PORT;
 	preferences->game_protocol= _network_game_protocol_default;
 #if !defined(DISABLE_NETWORKING)
 	DefaultStarPreferences();
@@ -2479,6 +2505,7 @@ static void default_network_preferences(network_preferences_data *preferences)
 	preferences->advertise_on_metaserver = false;
 	preferences->attempt_upnp = false;
 	preferences->check_for_updates = true;
+	preferences->verify_https = true;
 	strcpy(preferences->metaserver_login, "guest");
 	memset(preferences->metaserver_password, 0, 16);
 	preferences->mute_metaserver_guests = false;
@@ -2596,10 +2623,10 @@ static void default_environment_preferences(environment_preferences_data *prefer
 
 	preferences->solo_lua_file[0] = 0;
 	preferences->use_solo_lua = false;
-	preferences->hud_lua_file[0] = 0;
-	preferences->use_hud_lua = false;
+	preferences->use_replay_net_lua = false;
 	preferences->hide_extensions = true;
 	preferences->film_profile = FILM_PROFILE_DEFAULT;
+	preferences->maximum_quick_saves = 0;
 }
 
 
@@ -3913,6 +3940,10 @@ bool XML_NetworkPrefsParser::HandleAttribute(const char *Tag, const char *Value)
 	{
 		return ReadBooleanValue(Value, network_preferences->check_for_updates);
 	}
+	else if (StringsEqual(Tag,"verify_https"))
+	{
+		return ReadBooleanValue(Value, network_preferences->verify_https);
+	}
 	else if (StringsEqual(Tag,"use_custom_metaserver_colors"))
 	{
 		return ReadBooleanValue(Value, network_preferences->use_custom_metaserver_colors);
@@ -4065,14 +4096,17 @@ bool XML_EnvironmentPrefsParser::HandleAttribute(const char *Tag, const char *Va
 	{
 		return ReadBooleanValue(Value, environment_preferences->use_solo_lua);
 	}
+	else if (StringsEqual(Tag,"use_replay_net_lua"))
+	{
+		return ReadBooleanValue(Value, environment_preferences->use_replay_net_lua);
+	}
 	else if (StringsEqual(Tag,"hud_lua_file"))
 	{
-		expand_symbolic_paths(environment_preferences->hud_lua_file, Value, 255);
 		return true;
 	}
 	else if (StringsEqual(Tag,"use_hud_lua"))
 	{
-		return ReadBooleanValue(Value, environment_preferences->use_hud_lua);
+		return true;
 	}
 	else if (StringsEqual(Tag, "hide_alephone_extensions"))
 	{
@@ -4087,6 +4121,10 @@ bool XML_EnvironmentPrefsParser::HandleAttribute(const char *Tag, const char *Va
 			return true;
 		} 
 		return false;
+	}
+	else if (StringsEqual(Tag,"maximum_quick_saves"))
+	{
+		return ReadUInt32Value(Value,environment_preferences->maximum_quick_saves);
 	}
 	return true;
 }

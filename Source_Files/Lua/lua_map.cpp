@@ -21,6 +21,7 @@ LUA_MAP.CPP
 */
 
 #include "interface.h" // get_game_state
+#include "network.h"   // game_info
 #include "lua_map.h"
 #include "lua_monsters.h"
 #include "lua_objects.h"
@@ -263,6 +264,25 @@ static int Lua_Line_Get_Solid(lua_State *L)
 	return 1;
 }
 
+static int Lua_Line_Get_Visible_On_Automap(lua_State *L)
+{
+	lua_pushboolean(L, LINE_IS_IN_AUTOMAP(Lua_Line::Index(L, 1)));
+	return 1;
+}
+
+static int Lua_Line_Set_Visible_On_Automap(lua_State *L)
+{
+	if (!lua_isboolean(L, 2))
+		return luaL_error(L, ("visible_on_automap: incorrect argument type"));
+	
+	if (lua_toboolean(L, 2))
+		ADD_LINE_TO_AUTOMAP(Lua_Line::Index(L, 1));
+	else
+		CLEAR_LINE_FROM_AUTOMAP(Lua_Line::Index(L, 1));
+	return 0;
+}
+
+
 const luaL_Reg Lua_Line_Get[] = {
 	{"cw_polygon", Lua_Line_Get_Clockwise_Polygon},
 	{"ccw_polygon", Lua_Line_Get_Counterclockwise_Polygon},
@@ -278,6 +298,12 @@ const luaL_Reg Lua_Line_Get[] = {
 	{"length", Lua_Line_Get_Length},
 	{"lowest_adjacent_ceiling", Lua_Line_Get_Lowest_Adjacent_Ceiling},
 	{"solid", Lua_Line_Get_Solid},
+	{"visible_on_automap", Lua_Line_Get_Visible_On_Automap},
+	{0, 0}
+};
+
+const luaL_Reg Lua_Line_Set[] = {
+	{"visible_on_automap", Lua_Line_Set_Visible_On_Automap},
 	{0, 0}
 };
 
@@ -1331,6 +1357,12 @@ static int Lua_Polygon_Get_Z(lua_State *L)
 	return 1;
 }
 
+static int Lua_Polygon_Get_Visible_On_Automap(lua_State *L)
+{
+	lua_pushboolean(L, POLYGON_IS_IN_AUTOMAP(Lua_Polygon::Index(L, 1)));
+	return 1;
+}
+
 static int Lua_Polygon_Set_Media(lua_State *L)
 {
 	polygon_data *polygon = get_polygon_data(Lua_Polygon::Index(L, 1));
@@ -1387,6 +1419,18 @@ static int Lua_Polygon_Set_Type(lua_State *L)
 	return 0;
 }
 
+static int Lua_Polygon_Set_Visible_On_Automap(lua_State *L)
+{
+	if (!lua_isboolean(L, 2))
+		return luaL_error(L, ("visible_on_automap: incorrect argument type"));
+	
+	if (lua_toboolean(L, 2))
+		ADD_POLYGON_TO_AUTOMAP(Lua_Polygon::Index(L, 1));
+	else
+		CLEAR_POLYGON_FROM_AUTOMAP(Lua_Polygon::Index(L, 1));
+	return 0;
+}
+
 static bool Lua_Polygon_Valid(int16 index)
 {
 	return index >= 0 && index < dynamic_world->polygon_count;
@@ -1408,6 +1452,7 @@ const luaL_Reg Lua_Polygon_Get[] = {
 	{"play_sound", L_TableFunction<Lua_Polygon_Play_Sound>},
 	{"sides", Lua_Polygon_Get_Sides},
 	{"type", Lua_Polygon_Get_Type},
+	{"visible_on_automap", Lua_Polygon_Get_Visible_On_Automap},
 	{"x", Lua_Polygon_Get_X},
 	{"y", Lua_Polygon_Get_Y},
 	{"z", Lua_Polygon_Get_Z},
@@ -1418,6 +1463,7 @@ const luaL_Reg Lua_Polygon_Set[] = {
 	{"media", Lua_Polygon_Set_Media},
 	{"permutation", Lua_Polygon_Set_Permutation},
 	{"type", Lua_Polygon_Set_Type},
+	{"visible_on_automap", Lua_Polygon_Set_Visible_On_Automap},
 	{0, 0}
 };
 
@@ -3082,6 +3128,23 @@ static int Lua_Level_Get_Name(lua_State *L)
 	return 1;
 }
 
+static int Lua_Level_Get_Index(lua_State *L)
+{
+	lua_pushinteger(L, dynamic_world->current_level_number);
+	return 1;
+}
+
+static int Lua_Level_Get_Map_Checksum(lua_State *L)
+{
+#if !defined(DISABLE_NETWORKING)
+	if (game_is_networked)
+		lua_pushinteger(L, ((game_info *) NetGetGameData())->parent_checksum);
+	else
+#endif
+		lua_pushinteger(L, get_current_map_checksum());
+	return 1;
+}
+
 static int Lua_Level_Get_Underwater_Fog(lua_State *L)
 {
 	Lua_Fog::Push(L, OGL_Fog_BelowLiquid);
@@ -3097,6 +3160,8 @@ const luaL_Reg Lua_Level_Get[] = {
 	{"low_gravity", Lua_Level_Get_Environment_Flag<_environment_low_gravity>},
 	{"magnetic", Lua_Level_Get_Environment_Flag<_environment_magnetic>},
 	{"name", Lua_Level_Get_Name},
+	{"index", Lua_Level_Get_Index},
+	{"map_checksum", Lua_Level_Get_Map_Checksum},
 	{"rebellion", Lua_Level_Get_Environment_Flag<_environment_rebellion>},
 	{"retrieval", Lua_Level_Get_Mission_Flag<_mission_retrieval>},
 	{"repair", Lua_Level_Get_Mission_Flag<_mission_repair>},
@@ -3158,7 +3223,7 @@ int Lua_Map_register(lua_State *L)
 
 	Lua_Line_Endpoints::Register(L, 0, 0, Lua_Line_Endpoints_Metatable);
 	
-	Lua_Line::Register(L, Lua_Line_Get);
+	Lua_Line::Register(L, Lua_Line_Get, Lua_Line_Set);
 	Lua_Line::Valid = Lua_Line_Valid;
 
 	Lua_Lines::Register(L);

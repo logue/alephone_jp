@@ -52,9 +52,14 @@ public:
 	// called by key handlers
 	void enter();
 	void abort(); // callback is called with empty string
+	void del();
 	void backspace();
 	void clear();
 	void key(const char);
+	void up_arrow();
+	void down_arrow();
+	void left_arrow();
+	void right_arrow();
 	const std::string &displayBuffer() { return m_displayBuffer; }
 
 	void activate_input(boost::function<void (const std::string&)> callback,
@@ -62,13 +67,16 @@ public:
 	void deactivate_input(); // like abort, but no callback
 
 	bool input_active() { return m_active; }
+	int cursor_position();
 
 	void register_macro(std::string macro, std::string replacement);
 	void unregister_macro(std::string macro);
+	void clear_macros();
 
 	// carnage reporting
 	void set_carnage_message(int16 projectile_type, const std::string& on_kill, const std::string& on_suicide = "");
 	void report_kill(int16 player_index, int16 aggressor_player_index, int16 projectile_index);
+	void clear_carnage_messages();
 
 	bool use_lua_console() { return m_use_lua_console || environment_preferences->use_solo_lua; };
 	void use_lua_console(bool f_use) { m_use_lua_console = f_use; }
@@ -85,6 +93,12 @@ private:
 	std::string m_displayBuffer;
 	std::string m_prompt;
 	bool m_active;
+	
+	std::vector<std::string> m_prev_commands;
+	std::vector<std::string>::iterator m_command_iter;
+	void set_command(std::string command);
+	
+	int m_cursor_position;
 
 	std::map<std::string, std::string> m_macros;
 

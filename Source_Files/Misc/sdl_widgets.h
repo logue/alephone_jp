@@ -135,6 +135,7 @@ protected:
 
 	SDL_Rect rect;	// Position relative to dialog surface, and dimensions
 
+	virtual void set_active(bool new_active) { active = new_active; }
 	bool active;	// Flag: widget active (ZZZ note: this means it has the focus)
 	bool dirty;		// Flag: widget needs redraw
     bool    enabled; // ZZZ Flag: roughly, should the user be allowed to interact with the widget?
@@ -190,7 +191,6 @@ public:
 
 protected:
 	char *text;
-private:
 	int theme_type;
 };
 
@@ -210,6 +210,16 @@ private:
 class w_title : public w_static_text {
 public:
 	w_title(const char *text) : w_static_text(text, TITLE_WIDGET) {}
+};
+
+class w_styled_text : public w_static_text {
+public:
+	w_styled_text(const char *text, int theme_type = MESSAGE_WIDGET);
+
+	void set_text(const char* t);
+	void draw(SDL_Surface *s) const;
+private:
+	std::string text_string;
 };
 
 /*
@@ -467,7 +477,7 @@ public:
 
 	void draw(SDL_Surface *s) const;
 	void event(SDL_Event &e);
-	void click(int, int) { get_owning_dialog()->activate_widget(this, true); }
+	void click(int, int);
 
 	void set_text(const char *text);
 	const char *get_text(void) {return buf;}
@@ -485,6 +495,7 @@ public:
        
 protected:
 	char *buf;		// Text entry buffer
+	void set_active(bool new_active);
 
         Callback	enter_pressed_callback;
         Callback	value_changed_callback;
@@ -496,6 +507,7 @@ private:
 	size_t max_chars;		// Maximum number of chars in buffer
 	int16 text_x;			// X offset of text display
 	uint16 max_text_width;	// Maximum width of text display
+	size_t cursor_position;	// cursor position within buffer
 
 	bool enable_mac_roman; // enable MacRoman input
 };

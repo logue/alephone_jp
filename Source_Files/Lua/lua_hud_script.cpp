@@ -216,7 +216,7 @@ void LuaHUDState::RegisterFunctions()
 
 bool LuaHUDState::Load(const char *buffer, size_t len)
 {
-	int status = luaL_loadbufferx(State(), buffer, len, "hud_script", "t");
+	int status = luaL_loadbufferx(State(), buffer, len, "HUD Lua", "t");
 	if (status == LUA_ERRRUN)
 		logWarning("Lua loading failed: error running script.");
 	if (status == LUA_ERRFILE)
@@ -353,18 +353,11 @@ void LoadHUDLua()
 	std::string file;
 	std::string directory;
 
-	if (environment_preferences->use_hud_lua)
+	const Plugin* hud_lua_plugin = Plugins::instance()->find_hud_lua();
+	if (hud_lua_plugin)
 	{
-		file = environment_preferences->hud_lua_file;
-	}
-	else 
-	{
-		const Plugin* hud_lua_plugin = Plugins::instance()->find_hud_lua();
-		if (hud_lua_plugin) 
-		{
-			file = hud_lua_plugin->hud_lua;
-			directory = hud_lua_plugin->directory.GetPath();
-		}
+		file = hud_lua_plugin->hud_lua;
+		directory = hud_lua_plugin->directory.GetPath();
 	}
 
 	if (file.size())

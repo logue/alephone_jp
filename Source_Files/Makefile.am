@@ -10,16 +10,23 @@ bin_PROGRAMS = alephone
 endif
 
 alephone_SOURCES = shell.h \
+  \
   shell.cpp shell_misc.cpp Misc/DefaultStringSets.cpp
 
 alephone_LDADD = \
-  GameWorld/libgameworld.a  Lua/liba1lua.a \
-   Network/libnetwork.a Network/Metaserver/libmetaserver.a  LibNAT/libnat.a \
-  RenderMain/librendermain.a ModelView/libmodelview.a  RenderOther/librenderother.a Sound/libsound.a \
-  TCPMess/libtcpmess.a Files/libfiles.a XML/libxml.a Misc/libmisc.a FFmpeg/libffmpeg.a  \
-   Input/libinput.a    CSeries/libcseries.a Expat/libexpat.a 
+  CSeries/libcseries.a Expat/libexpat.a Files/libfiles.a FFmpeg/libffmpeg.a \
+  GameWorld/libgameworld.a Input/libinput.a Lua/liba1lua.a Misc/libmisc.a \
+  ModelView/libmodelview.a Network/libnetwork.a Network/Metaserver/libmetaserver.a \
+  RenderMain/librendermain.a RenderOther/librenderother.a Sound/libsound.a \
+  XML/libxml.a \
+  \
+  CSeries/libcseries.a Expat/libexpat.a Files/libfiles.a FFmpeg/libffmpeg.a \
+  GameWorld/libgameworld.a LibNAT/libnat.a Input/libinput.a Lua/liba1lua.a Misc/libmisc.a \
+  ModelView/libmodelview.a Network/libnetwork.a Network/Metaserver/libmetaserver.a \
+  RenderMain/librendermain.a RenderOther/librenderother.a Sound/libsound.a \
+  TCPMess/libtcpmess.a XML/libxml.a
 
-INCLUDES = -I$(top_srcdir)/Source_Files/CSeries -I$(top_srcdir)/Source_Files/Files \
+AM_CPPFLAGS = -I$(top_srcdir)/Source_Files/CSeries -I$(top_srcdir)/Source_Files/Files \
   -I$(top_srcdir)/Source_Files/GameWorld -I$(top_srcdir)/Source_Files/Input \
   -I$(top_srcdir)/Source_Files/Lua -I$(top_srcdir)/Source_Files/Misc \
   -I$(top_srcdir)/Source_Files/ModelView -I$(top_srcdir)/Source_Files/Network \

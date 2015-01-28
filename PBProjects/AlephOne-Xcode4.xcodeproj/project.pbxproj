@@ -55,7 +55,16 @@
 		2759FB2A10D71160000204DD /* jpeg.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 2759FB1E10D7114D000204DD /* jpeg.framework */; };
 		2759FB3210D71184000204DD /* freetype.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2759FB3110D71184000204DD /* freetype.framework */; };
 		2759FB3510D7118B000204DD /* freetype.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 2759FB3110D71184000204DD /* freetype.framework */; };
+		275A7BD31A60DE77002EE952 /* libcurl.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 275A7BD21A60DE77002EE952 /* libcurl.dylib */; };
+		275A7BD41A60DE8C002EE952 /* libcurl.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 275A7BD21A60DE77002EE952 /* libcurl.dylib */; };
+		275A7BD51A60DE9B002EE952 /* libcurl.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 275A7BD21A60DE77002EE952 /* libcurl.dylib */; };
+		275A7BD61A60DEA3002EE952 /* libcurl.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 275A7BD21A60DE77002EE952 /* libcurl.dylib */; };
+		275A7BD81A60E9B9002EE952 /* HTTP.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 275A7BD71A60E9B9002EE952 /* HTTP.cpp */; };
+		275A7BD91A60E9C1002EE952 /* HTTP.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 275A7BD71A60E9B9002EE952 /* HTTP.cpp */; };
+		275A7BDA1A60E9C2002EE952 /* HTTP.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 275A7BD71A60E9B9002EE952 /* HTTP.cpp */; };
+		275A7BDB1A60E9C2002EE952 /* HTTP.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 275A7BD71A60E9B9002EE952 /* HTTP.cpp */; };
 		276589F8119DF1DD0096F75B /* lua_saved_objects.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 276589F6119DF1DD0096F75B /* lua_saved_objects.cpp */; };
+		276D4E771A2E734E00C16CF5 /* QuickSave.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 276D4E761A2E734E00C16CF5 /* QuickSave.cpp */; };
 		277AB6C0109CE2570003402A /* Rasterizer_Shader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 277AB6BC109CE2570003402A /* Rasterizer_Shader.cpp */; };
 		277AB6C1109CE2570003402A /* Rasterizer_Shader.h in Headers */ = {isa = PBXBuildFile; fileRef = 277AB6BD109CE2570003402A /* Rasterizer_Shader.h */; };
 		277AB6C2109CE2570003402A /* RenderRasterize_Shader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 277AB6BE109CE2570003402A /* RenderRasterize_Shader.cpp */; };
@@ -64,6 +73,10 @@
 		277AB98110A26B020003402A /* Plugins.h in Headers */ = {isa = PBXBuildFile; fileRef = 277AB98010A26B020003402A /* Plugins.h */; };
 		278497A00FF5C308008DECC8 /* lua_hud_objects.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2784979B0FF5C308008DECC8 /* lua_hud_objects.cpp */; };
 		278497A20FF5C308008DECC8 /* lua_hud_script.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2784979D0FF5C308008DECC8 /* lua_hud_script.cpp */; };
+		278BCAEF1A51C53C006F9756 /* speexdsp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 278BCAEE1A51C53C006F9756 /* speexdsp.framework */; };
+		278BCAF01A51C53C006F9756 /* speexdsp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 278BCAEE1A51C53C006F9756 /* speexdsp.framework */; };
+		278BCAF11A51C53C006F9756 /* speexdsp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 278BCAEE1A51C53C006F9756 /* speexdsp.framework */; };
+		278BCAF21A51C53C006F9756 /* speexdsp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 278BCAEE1A51C53C006F9756 /* speexdsp.framework */; };
 		27911B24100073460063ACB6 /* HUDRenderer_Lua.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 27911B22100073460063ACB6 /* HUDRenderer_Lua.cpp */; };
 		27911B25100073460063ACB6 /* HUDRenderer_Lua.h in Headers */ = {isa = PBXBuildFile; fileRef = 27911B23100073460063ACB6 /* HUDRenderer_Lua.h */; };
 		27928612170F92D20005CD56 /* lbitlib.c in Sources */ = {isa = PBXBuildFile; fileRef = 27928610170F92D20005CD56 /* lbitlib.c */; };
@@ -1919,8 +1932,12 @@
 		2759FB1E10D7114D000204DD /* jpeg.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = jpeg.framework; sourceTree = "<group>"; };
 		2759FB2010D7114D000204DD /* png.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = png.framework; sourceTree = "<group>"; };
 		2759FB3110D71184000204DD /* freetype.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = freetype.framework; sourceTree = "<group>"; };
+		275A7BD21A60DE77002EE952 /* libcurl.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libcurl.dylib; path = usr/lib/libcurl.dylib; sourceTree = SDKROOT; };
+		275A7BD71A60E9B9002EE952 /* HTTP.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = HTTP.cpp; path = ../Source_Files/Network/HTTP.cpp; sourceTree = "<group>"; };
 		276589F6119DF1DD0096F75B /* lua_saved_objects.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = lua_saved_objects.cpp; sourceTree = "<group>"; };
 		276589F7119DF1DD0096F75B /* lua_saved_objects.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = lua_saved_objects.h; sourceTree = "<group>"; };
+		276D4E751A2E710F00C16CF5 /* QuickSave.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QuickSave.h; sourceTree = "<group>"; };
+		276D4E761A2E734E00C16CF5 /* QuickSave.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = QuickSave.cpp; sourceTree = "<group>"; };
 		277AB6BC109CE2570003402A /* Rasterizer_Shader.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Rasterizer_Shader.cpp; sourceTree = "<group>"; };
 		277AB6BD109CE2570003402A /* Rasterizer_Shader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Rasterizer_Shader.h; sourceTree = "<group>"; };
 		277AB6BE109CE2570003402A /* RenderRasterize_Shader.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = RenderRasterize_Shader.cpp; sourceTree = "<group>"; };
@@ -1932,6 +1949,7 @@
 		2784979D0FF5C308008DECC8 /* lua_hud_script.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = lua_hud_script.cpp; sourceTree = "<group>"; };
 		2784979E0FF5C308008DECC8 /* lua_hud_script.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = lua_hud_script.h; sourceTree = "<group>"; };
 		2784979F0FF5C308008DECC8 /* lua_mnemonics.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = lua_mnemonics.h; sourceTree = "<group>"; };
+		278BCAEE1A51C53C006F9756 /* speexdsp.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = speexdsp.framework; sourceTree = "<group>"; };
 		27911B22100073460063ACB6 /* HUDRenderer_Lua.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = HUDRenderer_Lua.cpp; sourceTree = "<group>"; };
 		27911B23100073460063ACB6 /* HUDRenderer_Lua.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HUDRenderer_Lua.h; sourceTree = "<group>"; };
 		27928610170F92D20005CD56 /* lbitlib.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = lbitlib.c; sourceTree = "<group>"; };
@@ -2445,6 +2463,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				275A7BD51A60DE9B002EE952 /* libcurl.dylib in Frameworks */,
 				AE505CEF141D45E600915344 /* OpenGL.framework in Frameworks */,
 				AE505CF0141D45E600915344 /* Cocoa.framework in Frameworks */,
 				AE505CF1141D45E600915344 /* SDL.framework in Frameworks */,
@@ -2460,6 +2479,7 @@
 				AE505D00141D45E600915344 /* png.framework in Frameworks */,
 				AE505D01141D45E600915344 /* freetype.framework in Frameworks */,
 				270F9FD2177687B7009AAE10 /* avcodec.framework in Frameworks */,
+				278BCAF11A51C53C006F9756 /* speexdsp.framework in Frameworks */,
 				270F9FD6177687B7009AAE10 /* avformat.framework in Frameworks */,
 				270F9FDA177687B7009AAE10 /* avutil.framework in Frameworks */,
 				270F9FDE177687B7009AAE10 /* swscale.framework in Frameworks */,
@@ -2470,6 +2490,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				275A7BD61A60DEA3002EE952 /* libcurl.dylib in Frameworks */,
 				AEB4A29114296CAE00537AE7 /* OpenGL.framework in Frameworks */,
 				AEB4A29214296CAE00537AE7 /* Cocoa.framework in Frameworks */,
 				AEB4A29314296CAE00537AE7 /* SDL.framework in Frameworks */,
@@ -2485,6 +2506,7 @@
 				AEB4A2A214296CAE00537AE7 /* png.framework in Frameworks */,
 				AEB4A2A314296CAE00537AE7 /* freetype.framework in Frameworks */,
 				270F9FD3177687B7009AAE10 /* avcodec.framework in Frameworks */,
+				278BCAF21A51C53C006F9756 /* speexdsp.framework in Frameworks */,
 				270F9FD7177687B7009AAE10 /* avformat.framework in Frameworks */,
 				270F9FDB177687B7009AAE10 /* avutil.framework in Frameworks */,
 				270F9FDF177687B7009AAE10 /* swscale.framework in Frameworks */,
@@ -2495,6 +2517,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				275A7BD31A60DE77002EE952 /* libcurl.dylib in Frameworks */,
 				AEC3C87009AD68AC003258E4 /* OpenGL.framework in Frameworks */,
 				AEC3C87109AD68AC003258E4 /* Cocoa.framework in Frameworks */,
 				AEC3C87209AD68AC003258E4 /* SDL.framework in Frameworks */,
@@ -2510,6 +2533,7 @@
 				2759FB2110D7114D000204DD /* png.framework in Frameworks */,
 				2759FB3210D71184000204DD /* freetype.framework in Frameworks */,
 				270F9FD0177687B7009AAE10 /* avcodec.framework in Frameworks */,
+				278BCAEF1A51C53C006F9756 /* speexdsp.framework in Frameworks */,
 				270F9FD4177687B7009AAE10 /* avformat.framework in Frameworks */,
 				270F9FD8177687B7009AAE10 /* avutil.framework in Frameworks */,
 				270F9FDC177687B7009AAE10 /* swscale.framework in Frameworks */,
@@ -2520,6 +2544,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				275A7BD41A60DE8C002EE952 /* libcurl.dylib in Frameworks */,
 				AEFD879B13EB84CF00C1E687 /* OpenGL.framework in Frameworks */,
 				AEFD879C13EB84CF00C1E687 /* Cocoa.framework in Frameworks */,
 				AEFD879D13EB84CF00C1E687 /* SDL.framework in Frameworks */,
@@ -2535,6 +2560,7 @@
 				AEFD87AC13EB84CF00C1E687 /* png.framework in Frameworks */,
 				AEFD87AD13EB84CF00C1E687 /* freetype.framework in Frameworks */,
 				270F9FD1177687B7009AAE10 /* avcodec.framework in Frameworks */,
+				278BCAF01A51C53C006F9756 /* speexdsp.framework in Frameworks */,
 				270F9FD5177687B7009AAE10 /* avformat.framework in Frameworks */,
 				270F9FD9177687B7009AAE10 /* avutil.framework in Frameworks */,
 				270F9FDD177687B7009AAE10 /* swscale.framework in Frameworks */,
@@ -2616,6 +2642,7 @@
 				3D22CF880FD86EAE00B17822 /* AudioUnit.framework */,
 				F5830B4001E776DE01BA387C /* OpenGL.framework */,
 				F59FB19D01E780DF01BBE912 /* Cocoa.framework */,
+				275A7BD21A60DE77002EE952 /* libcurl.dylib */,
 				3D22CF8C0FD86EBD00B17822 /* libz.dylib */,
 			);
 			name = "System Frameworks";
@@ -2798,6 +2825,7 @@
 				270F9FCE177687B7009AAE10 /* avutil.framework */,
 				270F9FCF177687B7009AAE10 /* swscale.framework */,
 				AE23F5630BDAC0E700C11385 /* speex.framework */,
+				278BCAEE1A51C53C006F9756 /* speexdsp.framework */,
 				F5281C0701F8CA2101E83A66 /* SDL_image.framework */,
 				F5281C0501F8C94101E83A66 /* SDL.framework */,
 				F5281C0801F8CA2101E83A66 /* SDL_net.framework */,
@@ -3013,6 +3041,7 @@
 				3D87957B07D11E120078D26B /* Metaserver */,
 				F52214520136C0C401000001 /* Headers */,
 				AE9A39F60CCADFA7004717E3 /* ConnectPool.cpp */,
+				275A7BD71A60E9B9002EE952 /* HTTP.cpp */,
 				EF2EF5CB04819BD700A8000D /* NetworkGameProtocol.cpp */,
 				EF2EF5CD04819BD700A8000D /* RingGameProtocol.cpp */,
 				F5574EFC01F4ED4801FEABBD /* SDL_netx.cpp */,
@@ -3454,6 +3483,7 @@
 				F5CC94370240DE0E01A80001 /* SDL */,
 				F5CC943A0240DE0E01A80001 /* ColorParser.cpp */,
 				F5CC943B0240DE0E01A80001 /* DamageParser.cpp */,
+				276D4E761A2E734E00C16CF5 /* QuickSave.cpp */,
 				277AB97E10A26AF40003402A /* Plugins.cpp */,
 				F5CC943C0240DE0E01A80001 /* ShapesParser.cpp */,
 				F5CC943D0240DE0E01A80001 /* XML_Configure.cpp */,
@@ -3470,6 +3500,7 @@
 			isa = PBXGroup;
 			children = (
 				277AB98010A26B020003402A /* Plugins.h */,
+				276D4E751A2E710F00C16CF5 /* QuickSave.h */,
 				F5CC942C0240DE0E01A80001 /* ColorParser.h */,
 				F5CC942D0240DE0E01A80001 /* DamageParser.h */,
 				F5CC942E0240DE0E01A80001 /* ShapesParser.h */,
@@ -4961,6 +4992,7 @@
 				AE505CD4141D45E600915344 /* Update.cpp in Sources */,
 				AE505CD5141D45E600915344 /* ConnectPool.cpp in Sources */,
 				AE505CD6141D45E600915344 /* lua_player.cpp in Sources */,
+				275A7BDA1A60E9C2002EE952 /* HTTP.cpp in Sources */,
 				AE505CD7141D45E600915344 /* lua_map.cpp in Sources */,
 				AE505CD8141D45E600915344 /* lua_monsters.cpp in Sources */,
 				AE505CD9141D45E600915344 /* lua_projectiles.cpp in Sources */,
@@ -5195,6 +5227,7 @@
 				AEB4A27514296CAE00537AE7 /* Update.cpp in Sources */,
 				AEB4A27614296CAE00537AE7 /* ConnectPool.cpp in Sources */,
 				AEB4A27714296CAE00537AE7 /* lua_player.cpp in Sources */,
+				275A7BDB1A60E9C2002EE952 /* HTTP.cpp in Sources */,
 				AEB4A27814296CAE00537AE7 /* lua_map.cpp in Sources */,
 				AEB4A27914296CAE00537AE7 /* lua_monsters.cpp in Sources */,
 				AEB4A27A14296CAE00537AE7 /* lua_projectiles.cpp in Sources */,
@@ -5258,6 +5291,7 @@
 				AEC3C7F109AD68AC003258E4 /* PlayerImage_sdl.cpp in Sources */,
 				AEC3C7F209AD68AC003258E4 /* thread_priority_sdl_macosx.cpp in Sources */,
 				AEC3C7F309AD68AC003258E4 /* network_data_formats.cpp in Sources */,
+				276D4E771A2E734E00C16CF5 /* QuickSave.cpp in Sources */,
 				AEC3C7F409AD68AC003258E4 /* network_dialog_widgets_sdl.cpp in Sources */,
 				AEC3C7F509AD68AC003258E4 /* SDL_netx.cpp in Sources */,
 				AEC3C7F609AD68AC003258E4 /* SSLP_limited.cpp in Sources */,
@@ -5309,6 +5343,7 @@
 				AEC3C82709AD68AC003258E4 /* RenderPlaceObjs.cpp in Sources */,
 				AEC3C82809AD68AC003258E4 /* RenderRasterize.cpp in Sources */,
 				AEC3C82909AD68AC003258E4 /* RenderSortPoly.cpp in Sources */,
+				275A7BD81A60E9B9002EE952 /* HTTP.cpp in Sources */,
 				AEC3C82A09AD68AC003258E4 /* RenderVisTree.cpp in Sources */,
 				AEC3C82B09AD68AC003258E4 /* scottish_textures.cpp in Sources */,
 				AEC3C82C09AD68AC003258E4 /* shapes.cpp in Sources */,
@@ -5663,6 +5698,7 @@
 				AEFD878113EB84CF00C1E687 /* Update.cpp in Sources */,
 				AEFD878213EB84CF00C1E687 /* ConnectPool.cpp in Sources */,
 				AEFD878313EB84CF00C1E687 /* lua_player.cpp in Sources */,
+				275A7BD91A60E9C1002EE952 /* HTTP.cpp in Sources */,
 				AEFD878413EB84CF00C1E687 /* lua_map.cpp in Sources */,
 				AEFD878513EB84CF00C1E687 /* lua_monsters.cpp in Sources */,
 				AEFD878613EB84CF00C1E687 /* lua_projectiles.cpp in Sources */,
@@ -5748,6 +5784,7 @@
 					"$(HOME)/Library/Frameworks",
 					/System/Library/Frameworks,
 					/Library/Frameworks,
+					"$(LOCAL_LIBRARY_DIR)/Frameworks",
 				);
 				GCC_DYNAMIC_NO_PIC = YES;
 				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
@@ -5832,6 +5869,7 @@
 					"$(HOME)/Library/Frameworks",
 					/System/Library/Frameworks,
 					/Library/Frameworks,
+					"$(LOCAL_LIBRARY_DIR)/Frameworks",
 				);
 				GCC_DYNAMIC_NO_PIC = YES;
 				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
@@ -5942,6 +5980,7 @@
 					"$(HOME)/Library/Frameworks",
 					/System/Library/Frameworks,
 					/Library/Frameworks,
+					"$(LOCAL_LIBRARY_DIR)/Frameworks",
 				);
 				GCC_DYNAMIC_NO_PIC = YES;
 				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
@@ -6015,6 +6054,7 @@
 					"$(HOME)/Library/Frameworks",
 					/System/Library/Frameworks,
 					/Library/Frameworks,
+					"$(LOCAL_LIBRARY_DIR)/Frameworks",
 				);
 				GCC_DYNAMIC_NO_PIC = YES;
 				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
@@ -6086,6 +6126,7 @@
 					"$(HOME)/Library/Frameworks",
 					/System/Library/Frameworks,
 					/Library/Frameworks,
+					"$(LOCAL_LIBRARY_DIR)/Frameworks",
 				);
 				GCC_DYNAMIC_NO_PIC = YES;
 				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
@@ -6158,6 +6199,7 @@
 					"$(HOME)/Library/Frameworks",
 					/System/Library/Frameworks,
 					/Library/Frameworks,
+					"$(LOCAL_LIBRARY_DIR)/Frameworks",
 				);
 				GCC_DYNAMIC_NO_PIC = YES;
 				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
@@ -6242,6 +6284,7 @@
 					"$(HOME)/Library/Frameworks",
 					/System/Library/Frameworks,
 					/Library/Frameworks,
+					"$(LOCAL_LIBRARY_DIR)/Frameworks",
 				);
 				GCC_DYNAMIC_NO_PIC = YES;
 				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
@@ -6319,6 +6362,7 @@
 					"$(HOME)/Library/Frameworks",
 					/System/Library/Frameworks,
 					/Library/Frameworks,
+					"$(LOCAL_LIBRARY_DIR)/Frameworks",
 				);
 				GCC_DYNAMIC_NO_PIC = YES;
 				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
@@ -6394,6 +6438,7 @@
 					"$(HOME)/Library/Frameworks",
 					/System/Library/Frameworks,
 					/Library/Frameworks,
+					"$(LOCAL_LIBRARY_DIR)/Frameworks",
 				);
 				GCC_DYNAMIC_NO_PIC = YES;
 				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
@@ -6470,6 +6515,7 @@
 					"$(HOME)/Library/Frameworks",
 					/System/Library/Frameworks,
 					/Library/Frameworks,
+					"$(LOCAL_LIBRARY_DIR)/Frameworks",
 				);
 				GCC_DYNAMIC_NO_PIC = YES;
 				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
@@ -6546,6 +6592,7 @@
 					"$(HOME)/Library/Frameworks",
 					/System/Library/Frameworks,
 					/Library/Frameworks,
+					"$(LOCAL_LIBRARY_DIR)/Frameworks",
 				);
 				GCC_DYNAMIC_NO_PIC = YES;
 				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
@@ -6620,6 +6667,7 @@
 					"$(HOME)/Library/Frameworks",
 					/System/Library/Frameworks,
 					/Library/Frameworks,
+					"$(LOCAL_LIBRARY_DIR)/Frameworks",
 				);
 				GCC_DYNAMIC_NO_PIC = YES;
 				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;

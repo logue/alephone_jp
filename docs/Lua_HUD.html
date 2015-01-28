@@ -114,7 +114,10 @@
 </li>
 <li><a href="#triggers">Triggers</a></li>
 <li>
-<a href="#using_tables">Using Tables</a><ol><li><a href="#custom">Custom Fields</a></li></ol>
+<a href="#using_tables">Using Tables</a><ol>
+<li><a href="#custom">Custom Fields</a></li>
+<li><a href="#table_is">is_ Functions</a></li>
+</ol>
 </li>
 <li>
 <a href="#tables">Tables</a><ol>
@@ -122,6 +125,7 @@
 <li><a href="#Fonts">Fonts</a></li>
 <li><a href="#Game">Game</a></li>
 <li><a href="#Images">Images</a></li>
+<li><a href="#Level">Level</a></li>
 <li><a href="#Lighting">Lighting</a></li>
 <li><a href="#Player">Player</a></li>
 <li><a href="#Screen">Screen</a></li>
@@ -134,6 +138,9 @@
 <li><a href="#DifficultyTypes">Difficulty</a></li>
 <li><a href="#FadeEffectTypes">Fade Effect Types</a></li>
 <li><a href="#GameTypes">Game Types</a></li>
+<li><a href="#InterfaceColors">Interface Colors</a></li>
+<li><a href="#InterfaceFonts">Interface Fonts</a></li>
+<li><a href="#InterfaceRects">Interface Rectangles</a></li>
 <li><a href="#InventorySections">Inventory Sections</a></li>
 <li><a href="#ItemTypes">Items</a></li>
 <li><a href="#MaskingModes">Masking Modes</a></li>
@@ -155,7 +162,7 @@
         <p>This is not a reference for Lua itself - see lua.org for that.</p>
       <h2>
 <a name="loading_collections"></a>Loading Collections</h2>
-        <p>A Lua script can ask for the engine to load collections it might otherwise not load; for instance, in order to be able to spawn defenders and compilers on a map that might not have them otherwise, add the indices for those collections to the global table CollectionsUsed:
+        <p>A Lua script can ask for the engine to load collections it might otherwise not load; for instance, in order to be able to draw defender and compiler shapes during a level that might not have them otherwise, add the indices for those collections to the global table CollectionsUsed:
         </p>
         <pre>CollectionsUsed = { 10, 16 }</pre>
       <h1>
@@ -196,6 +203,9 @@ end
 <a name="custom"></a>Custom Fields</h2>
 <p>In a real Lua table, you can set any field you want. In order to help troubleshooting, Aleph One's userdata tables will only accept the fields listed in the documentation below. However, by prepending an underscore, custom fields can be indexed. These custom fields will be associated with the object until it is destroyed.</p>
 <pre>Players[0]._favorite_flavor = "chocolate"</pre>
+<h2>
+<a name="table_is"></a>is_ Functions</h2>
+<p>Aleph One installs a set of boolean functions that can be used to recognize each of the userdata table types. For example, <code>is_font(Fonts[1])</code> returns true. Each of these functions begins with the "is_" prefix.</p>
 <h1><a name="tables">Tables</a></h1>
 <div class="tables">
 <h3>
@@ -223,15 +233,29 @@ end
 <h3>
 <a name="Fonts"></a>Fonts</h3>
 <dl>
-<dt>Fonts.new{id=, file=, size=, style=}</dt>
+<dt>Fonts.new{ [file=] [, size=] [, style=]}</dt>
 <dd>
-<p class="description">all arguments are optional and passed by name; "id" and "file" are mutually exclusive; returns font or nil</p>
+<p class="description"></p>
 <ul class="args">
-<li>id: a resource ID from the Fonts file (for the default Fonts file, valid values are 4 for Monaco and 22 for Courier) [default: nil]</li>
 <li>file: the path to a TTF file, for the standard variant of the font (the special path "mono" indicates the default Mono Sans font) [default: "mono"]</li>
 <li>size: the font size to use [default: 12]</li>
 <li>style: a number indicating the sum of any font styles to use (1 - bold; 2 - italic; 4 - underline) [default: 0]</li>
 </ul>
+</dd>
+<dt>Fonts.new{id= [, size=] [, style=]}</dt>
+<dd>
+<p class="description"></p>
+<ul class="args">
+<li>id: a resource ID from the Fonts file (for the default Fonts file, valid values are 4 for Monaco and 22 for Courier)</li>
+<li>size: the font size to use [default: 12]</li>
+<li>style: a number indicating the sum of any font styles to use (1 - bold; 2 - italic; 4 - underline) [default: 0]</li>
+</ul>
+</dd>
+<dt>Fonts.new{interface=} <span class="version">20140104</span>
+</dt>
+<dd>
+<p class="description"></p>
+<ul class="args"><li>interface: see InterfaceFonts for mnemonics</li></ul>
 </dd>
 <dt>Fonts[index]</dt>
 <dd><dl>
@@ -257,6 +281,17 @@ end
     .style<span class="access"> (read-only)</span>
 </dt>
 <dd><p class="description"></p></dd>
+      <dt>
+    .line_height<span class="access"> (read-only)</span>
+</dt>
+<dd><p class="description"></p></dd>
+      <dt>
+    .scale <span class="version">20140104</span>
+</dt>
+<dd>
+<p class="description">scale factor, for resizing specific bitmap font sizes</p>
+<p class="note">it's usually better to create a new font at the correct size instead </p>
+</dd>
       <dt>:measure_text(string)</dt>
 <dd><p class="description">returns the width and height of a string when drawn in this font</p></dd>
       <dt>:draw_text(string, x, y, color)</dt>
@@ -328,12 +363,16 @@ end
 <h3>
 <a name="Images"></a>Images</h3>
 <dl>
-<dt>Images.new{ [resource=] [, path=] [, mask=]}</dt>
+<dt>Images.new{resource=}</dt>
 <dd>
-<p class="description">all arguments are passed by name; returns image or nil</p>
+<p class="description"></p>
+<ul class="args"><li>resource: a resource ID from the Images file</li></ul>
+</dd>
+<dt>Images.new{path= [, mask=]}</dt>
+<dd>
+<p class="description"></p>
 <ul class="args">
-<li>resource: a resource ID from the Images file (if given, other arguments are ignored)</li>
-<li>path: the path to the image file to use (required if resource is not given)</li>
+<li>path: the path to the image file to use</li>
 <li>mask: the path to an image file to use as an opacity mask</li>
 </ul>
 </dd>
@@ -392,6 +431,28 @@ end
       <dt>:draw(x, y)</dt>
 <dd><p class="description">draw image (or cropped portion) to screen, with top left corner at specified position</p></dd>
     </dl></dd>
+</dl>
+<h3>
+<a name="Level"></a>Level</h3>
+<dl>
+<dt>Level</dt>
+<dd>
+<p class="note">all items in Level are read-only </p>
+<dl>
+<dt>
+    .name <span class="version">SVN</span>
+</dt>
+<dd><p class="description">level name</p></dd>
+<dt>
+    .index <span class="version">SVN</span>
+</dt>
+<dd><p class="description">level index in the map file (starting from 0)</p></dd>
+<dt>
+    .map_checksum <span class="version">SVN</span>
+</dt>
+<dd><p class="description">checksum of map file</p></dd>
+</dl>
+</dd>
 </dl>
 <h3>
 <a name="Lighting"></a>Lighting</h3>
@@ -521,6 +582,10 @@ end
 <dt>
     .type</dt>
 <dd><p class="description"></p></dd>
+<dt>
+    .valid <span class="version">20140104</span>
+</dt>
+<dd><p class="description">whether item is valid in the current environment (i.e. vacuum)</p></dd>
 </dl></dd>
 <dt>.compass</dt>
 <dd><dl>
@@ -573,6 +638,13 @@ end
 <dt>
     .oxygen</dt>
 <dd><p class="description">amount of oxygen player has (max is 10800)</p></dd>
+<dt>
+    .respawn_duration <span class="version">20140104</span>
+</dt>
+<dd>
+<p class="description">ticks remaining before dead player can revive</p>
+<p class="note">nil until player is completely dead </p>
+</dd>
 <dt>
     .team</dt>
 <dd><p class="description">player's team (pants color)</p></dd>
@@ -629,11 +701,95 @@ end
 <p class="description">label shown in classic HUD</p>
 <p class="note">from stringset 137; may differ from label in Player.items </p>
 </dd>
+<dt>.name_rect <span class="version">20140104</span>
+</dt>
+<dd>
+<p class="description">position of label in classic HUD</p>
+<dl>
+<dt>
+    .height</dt>
+<dd><p class="description"></p></dd>
+<dt>
+    .width</dt>
+<dd><p class="description"></p></dd>
+<dt>
+    .x</dt>
+<dd><p class="description"></p></dd>
+<dt>
+    .y</dt>
+<dd><p class="description"></p></dd>
+</dl>
+</dd>
 <dt>.primary<br>.secondary</dt>
 <dd><dl>
 <dt>
     .ammo_type</dt>
 <dd><p class="description"></p></dd>
+<dt>.bullet_display <span class="version">20140104</span>
+</dt>
+<dd>
+<p class="note">can be nil </p>
+<dl>
+<dt>
+    .across</dt>
+<dd><p class="description">number of bullets in a single row</p></dd>
+<dt>
+    .down</dt>
+<dd><p class="description">number of bullet rows</p></dd>
+<dt>
+    .empty_texture_index</dt>
+<dd><p class="description"></p></dd>
+<dt>
+    .height</dt>
+<dd><p class="description">height of a single bullet in classic HUD</p></dd>
+<dt>
+    .right_to_left</dt>
+<dd><p class="description"></p></dd>
+<dt>
+    .texture_index</dt>
+<dd><p class="description"></p></dd>
+<dt>
+    .width</dt>
+<dd><p class="description">width of a single bullet in classic HUD</p></dd>
+<dt>
+    .x</dt>
+<dd><p class="description"></p></dd>
+<dt>
+    .y</dt>
+<dd><p class="description"></p></dd>
+</dl>
+</dd>
+<dt>.energy_display <span class="version">20140104</span>
+</dt>
+<dd>
+<p class="note">can be nil </p>
+<dl>
+<dt>
+    .color</dt>
+<dd><p class="description">the interface color for drawing the full region and border</p></dd>
+<dt>
+    .empty_color</dt>
+<dd><p class="description">the interface color for drawing the empty region</p></dd>
+<dt>
+    .height</dt>
+<dd><p class="description"></p></dd>
+<dt>
+    .maximum</dt>
+<dd>
+<p class="description"></p>
+<p class="note">should usually match total_rounds </p>
+</dd>
+<dt>
+    .width</dt>
+<dd><p class="description"></p></dd>
+<dt>
+    .x</dt>
+<dd><p class="description"></p></dd>
+<dt>
+    .y</dt>
+<dd><p class="description"></p></dd>
+</dl>
+</dd>
 <dt>
     .rounds</dt>
 <dd><p class="description">how many rounds are currently loaded into the weapon</p></dd>
@@ -644,6 +800,21 @@ end
     .weapon_drawn</dt>
 <dd><p class="description"></p></dd>
 </dl></dd>
+<dt>.shape <span class="version">20140104</span><br>.multiple_shape<br>.multiple_unused_shape</dt>
+<dd>
+<p class="note">can be nil </p>
+<dl>
+<dt>
+    .texture_index</dt>
+<dd><p class="description">frame in Interface collection</p></dd>
+<dt>
+    .x</dt>
+<dd><p class="description"></p></dd>
+<dt>
+    .y</dt>
+<dd><p class="description"></p></dd>
+</dl>
+</dd>
 <dt>
     .type</dt>
 <dd><p class="description"></p></dd>
@@ -1013,6 +1184,212 @@ end
 <li>"rugby"</li>
 <li>"tag"</li>
 <li>"netscript"</li>
+</ul></div>
+<div class="end-mnemonics"></div>
+<h3>
+<a name="InterfaceColors"></a>Interface Colors <span class="version">20140104</span>
+</h3>
+<dl>
+<dt># InterfaceColors</dt>
+<dt>InterfaceColors()</dt>
+<dt>InterfaceColors[interface_color]</dt>
+<dd><dl>
+      <dt>
+    .r<span class="access"> (read-only)</span><br>.red<span class="access"> (read-only)</span>
+</dt>
+<dd><p class="description"></p></dd>
+      <dt>
+    .g<span class="access"> (read-only)</span><br>.green<span class="access"> (read-only)</span>
+</dt>
+<dd><p class="description"></p></dd>
+      <dt>
+    .b<span class="access"> (read-only)</span><br>.blue<span class="access"> (read-only)</span>
+</dt>
+<dd><p class="description"></p></dd>
+      <dt>
+    .a<span class="access"> (read-only)</span><br>.alpha<span class="access"> (read-only)</span>
+</dt>
+<dd>
+<p class="description"></p>
+<p class="note">alpha is always 1 </p>
+</dd>
+      
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+      
+    </dl></dd>
+</dl>
+<h4>Mnemonics</h4>
+<div class="mnemonics-column"><ul class="mnemonics">
+<li>"ammo box full"</li>
+<li>"ammo box empty"</li>
+<li>"black"</li>
+<li>"inventory text"</li>
+<li>"inventory header background"</li>
+<li>"inventory background"</li>
+<li>"slate player"</li>
+<li>"red player"</li>
+<li>"violet player"</li>
+</ul></div>
+<div class="mnemonics-column"><ul class="mnemonics">
+<li>"yellow player"</li>
+<li>"white player"</li>
+<li>"orange player"</li>
+<li>"blue player"</li>
+<li>"green player"</li>
+<li>"white"</li>
+<li>"invalid weapon"</li>
+<li>"computer border text background"</li>
+<li>"computer border text"</li>
+</ul></div>
+<div class="mnemonics-column"><ul class="mnemonics">
+<li>"computer text"</li>
+<li>"computer white text"</li>
+<li>"computer red text"</li>
+<li>"computer dark green text"</li>
+<li>"computer cyan text"</li>
+<li>"computer yellow text"</li>
+<li>"computer dark red text"</li>
+<li>"computer blue text"</li>
+</ul></div>
+<div class="end-mnemonics"></div>
+<h3>
+<a name="InterfaceFonts"></a>Interface Fonts <span class="version">20140104</span>
+</h3>
+<dl>
+<dt># InterfaceFonts</dt>
+<dt>InterfaceFonts()</dt>
+</dl>
+<h4>Mnemonics</h4>
+<ul class="mnemonics">
+<li>"interface"</li>
+<li>"weapon name"</li>
+<li>"player name"</li>
+<li>"interface item count"</li>
+<li>"terminal"</li>
+<li>"terminal title"</li>
+<li>"network statistics"</li>
+</ul>
+<h3>
+<a name="InterfaceRects"></a>Interface Rectangles <span class="version">20140104</span>
+</h3>
+<dl>
+<dt># InterfaceRects</dt>
+<dt>InterfaceRects()</dt>
+<dt>InterfaceRects[interface_rect]</dt>
+<dd><dl>
+      <dt>
+    .x<span class="access"> (read-only)</span>
+</dt>
+<dd><p class="description"></p></dd>
+      <dt>
+    .y<span class="access"> (read-only)</span>
+</dt>
+<dd><p class="description"></p></dd>
+      <dt>
+    .width<span class="access"> (read-only)</span>
+</dt>
+<dd><p class="description"></p></dd>
+      <dt>
+    .height<span class="access"> (read-only)</span>
+</dt>
+<dd><p class="description"></p></dd>
+      
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+      
+    </dl></dd>
+</dl>
+<h4>Mnemonics</h4>
+<div class="mnemonics-column"><ul class="mnemonics">
+<li>"player name"</li>
+<li>"oxygen"</li>
+<li>"shield"</li>
+<li>"motion sensor"</li>
+<li>"microphone"</li>
+<li>"inventory"</li>
+<li>"weapon display"</li>
+<li>"new-game button"</li>
+<li>"load-game button"</li>
+<li>"gather button"</li>
+<li>"join button"</li>
+</ul></div>
+<div class="mnemonics-column"><ul class="mnemonics">
+<li>"preferences button"</li>
+<li>"replay button"</li>
+<li>"save-last button"</li>
+<li>"replace-saved button"</li>
+<li>"credits button"</li>
+<li>"quit button"</li>
+<li>"center button"</li>
+<li>"unused 18"</li>
+<li>"unused 19"</li>
+<li>"terminal screen"</li>
+<li>"terminal header"</li>
+</ul></div>
+<div class="mnemonics-column"><ul class="mnemonics">
+<li>"terminal footer"</li>
+<li>"terminal full text"</li>
+<li>"terminal left"</li>
+<li>"terminal right"</li>
+<li>"terminal logon graphic"</li>
+<li>"terminal logon title"</li>
+<li>"terminal logon location"</li>
+<li>"respawn indicator"</li>
+<li>"blinker"</li>
 </ul></div>
 <div class="end-mnemonics"></div>
 <h3>

@@ -177,7 +177,7 @@ void w_static_text::draw(SDL_Surface *s) const
 void w_label::click(int x, int y)
 {
 	if (associated_widget)
-		associated_widget->click(x, y);
+		associated_widget->click(0, 0);
 
 }
 
@@ -199,6 +199,26 @@ w_static_text::set_text(const char* t) {
 // ZZZ addition: free text buffer.
 w_static_text::~w_static_text() {
     free(text);
+}
+
+w_styled_text::w_styled_text(const char *t, int _theme_type) : w_static_text(t, _theme_type), text_string(t) {
+	rect.w = font->styled_text_width(text_string, text_string.size(), style);
+	saved_min_width = rect.w;
+}
+
+void w_styled_text::set_text(const char* t)
+{
+	w_static_text::set_text(t);
+	text_string = t;
+	// maybe reset rect.width here, but parent w_static_text doesn't, so we won't either
+}
+
+void w_styled_text::draw(SDL_Surface *s) const
+{
+	uint32 pixel;
+	pixel = get_theme_color(theme_type, DEFAULT_STATE, 0);
+
+	font->draw_styled_text(s, text_string, text_string.size(), rect.x, rect.y + font->get_ascent(), pixel, style);
 }
 
 /*
@@ -1143,17 +1163,34 @@ void w_text_entry::draw(SDL_Surface *s) const
   
   // Cursor
   if (active) {
+	  width = text_width(buf, cursor_position, font, style);
 	  SDL_Rect r = {x + width - (width ? 1 : 0), rect.y, 1, rect.h};
 	  SDL_FillRect(s, &r, get_theme_color(TEXT_ENTRY_WIDGET, CURSOR_STATE));
   }
+}
+
+void w_text_entry::set_active(bool new_active) {
+	if (new_active && !active)
+		cursor_position = num_chars;
+	widget::set_active(new_active);
 }
 
 void w_text_entry::event(SDL_Event &e)
 {
 	if (e.type == SDL_KEYDOWN) {
 		switch (e.key.keysym.sym) {
-			case SDLK_LEFT:			// Left/right does nothing (for now)
+			case SDLK_LEFT:
+				if (cursor_position > 0) {
+					cursor_position--;
+					dirty = true;
+				}
+				e.type = SDL_NOEVENT;
+				break;
 			case SDLK_RIGHT:
+				if (cursor_position < num_chars) {
+					cursor_position++;
+					dirty = true;
+				}
 				e.type = SDL_NOEVENT;	// Swallow event
 				break;
                                 
@@ -1165,13 +1202,23 @@ void w_text_entry::event(SDL_Event &e)
                                 e.type = SDL_NOEVENT;	// Swallow event (shouldn't typing do this also??)
                                 break;
 
-			case SDLK_BACKSPACE:	// Backspace deletes last character
-backspace:		if (num_chars) {
+			case SDLK_BACKSPACE:	// Backspace deletes character at cursor
+backspace:		if (num_chars && cursor_position) {
+					memmove(&buf[cursor_position - 1], &buf[cursor_position], num_chars - cursor_position);
 					buf[--num_chars] = 0;
+					--cursor_position;
 					modified_text();
 					play_dialog_sound(DIALOG_DELETE_SOUND);
 				}
 				break;
+		case SDLK_DELETE:
+del:			if (cursor_position < num_chars) {
+				memmove(&buf[cursor_position], &buf[cursor_position + 1], num_chars - cursor_position - 1);
+				buf[--num_chars] = 0;
+				modified_text();
+				play_dialog_sound(DIALOG_DELETE_SOUND);
+			}
+			break;
 		case SDLK_UP:
 		case SDLK_DOWN:
 			break;
@@ -1189,21 +1236,54 @@ backspace:		if (num_chars) {
 					{
 						c = unicode_to_mac_roman(uc);
 					}
-					buf[num_chars++] = c;
-					buf[num_chars] = 0;
+					memmove(&buf[cursor_position + 1], &buf[cursor_position], num_chars - cursor_position);
+					buf[cursor_position++] = c;
+					buf[++num_chars] = 0;
 					modified_text();
 					play_dialog_sound(DIALOG_TYPE_SOUND);
 				} else if (uc == 21) {			// Ctrl-U: erase text
 					buf[0] = 0;
 					num_chars = 0;
+					cursor_position = 0;
 					modified_text();
 					play_dialog_sound(DIALOG_ERASE_SOUND);
-				} else if (uc == 4 || uc == 8)	// Ctrl-D/H: backspace
+				} else if (uc == 4)	// Ctrl-D: delete
+					goto del;
+				else if (uc == 8) // Ctrl-H: backspace
 					goto backspace;
 				break;
 			}
 		}
 	}
+}
+
+void w_text_entry::click(int x, int y)
+{
+	bool was_active = active;
+	get_owning_dialog()->activate_widget(this, true);
+	
+	// Don't reposition cursor if:
+	// - we were inactive before this click
+	// - our text field is empty
+	// - the click was simulated (0, 0) or out of bounds
+	if (!was_active || !num_chars ||
+		(x == 0 && y == 0) ||
+	    x < 0 || y < 0 || x >= rect.w || y >= rect.h) {
+		return;
+	}
+	
+	// Find closest character boundary to click
+	int width_remaining = x - text_x;
+	size_t pos = 0;
+	while (pos < num_chars && width_remaining > 0) {
+		int cw = char_width(buf[pos], font, style);
+		if (width_remaining > cw/2) {
+			pos++; // right side is closer to target than left
+		}
+		width_remaining -= cw;
+	}
+	cursor_position = pos;
+	dirty = true;
 }
 
 void w_text_entry::set_text(const char *text)
@@ -1212,6 +1292,7 @@ void w_text_entry::set_text(const char *text)
 	if (text)
 		strncpy(buf, text, max_chars);
 	num_chars = strlen(buf);
+	cursor_position = num_chars;
 	modified_text();
 }
 
@@ -2212,7 +2293,7 @@ void w_games_in_room::draw_item(const GameListMessage::GameListEntry& item, SDL_
 		}
 		else
 		{
-			game_settings << static_cast<uint16>(item.m_description.m_numPlayers) << "人のプレイヤー";
+			game_settings << static_cast<uint16>(item.m_description.m_numPlayers) << " Players";
 		}
 	}
 	else

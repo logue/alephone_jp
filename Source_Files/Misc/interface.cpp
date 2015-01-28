@@ -145,6 +145,8 @@ extern TP2PerfGlobals perf_globals;
 #include "XML_LevelScript.h"
 #include "Music.h"
 #include "Movie.h"
+#include "QuickSave.h"
+#include "Plugins.h"
 
 #ifdef HAVE_SMPEG
 #include <smpeg/smpeg.h>
@@ -167,10 +169,11 @@ enum recording_version {
 	RECORDING_VERSION_ALEPH_ONE_PRE_NET = 5,
 	RECORDING_VERSION_ALEPH_ONE_PRE_PIN = 6,
 	RECORDING_VERSION_ALEPH_ONE_1_0 = 7,
-	RECORDING_VERSION_ALEPH_ONE_1_1 = 8
+	RECORDING_VERSION_ALEPH_ONE_1_1 = 8,
+	RECORDING_VERSION_ALEPH_ONE_1_2 = 9
 };
-const short default_recording_version = RECORDING_VERSION_ALEPH_ONE_1_1;
-const short max_handled_recording= RECORDING_VERSION_ALEPH_ONE_1_1;
+const short default_recording_version = RECORDING_VERSION_ALEPH_ONE_1_2;
+const short max_handled_recording= RECORDING_VERSION_ALEPH_ONE_1_2;
 
 #include "screen_definitions.h"
 #include "interface_menus.h"
@@ -322,7 +325,7 @@ extern bool insecure_lua;
 extern bool shapes_file_is_m1();
 
 /* ----------- prototypes/PREPROCESS_MAP_MAC.C */
-extern bool load_game_from_file(FileSpecifier& File);
+extern bool load_game_from_file(FileSpecifier& File, bool run_scripts, bool *was_map_found);
 extern bool choose_saved_game_to_load(FileSpecifier& File);
 
 /* ---------------------- prototypes */
@@ -814,6 +817,7 @@ bool join_networked_resume_game()
                 
                 if(success)
                 {
+                        Plugins::instance()->set_mode(Plugins::kMode_Net);
                         Crosshairs_SetActive(player_preferences->crosshairs_active);
                         LoadHUDLua();
                         RunLuaHUDScript();
@@ -883,11 +887,9 @@ bool load_and_start_game(FileSpecifier& File)
 		interface_fade_out(MAIN_MENU_BASE, true);
 	}
 
-	Crosshairs_SetActive(player_preferences->crosshairs_active);
-	LoadHUDLua();
-	RunLuaHUDScript();
-
-	success= load_game_from_file(File);
+	// run scripts after we decide single vs. multiplayer
+	bool found_map;
+	success= load_game_from_file(File, false, &found_map);
 
 	if (!success)
 	{
@@ -905,7 +907,7 @@ bool load_and_start_game(FileSpecifier& File)
 #ifdef __MACOS__
 		theResult = 0;
 #else
-		theResult = should_restore_game_networked();
+		theResult = should_restore_game_networked(File);
 #endif
 	}
 
@@ -931,6 +933,28 @@ bool load_and_start_game(FileSpecifier& File)
                 
 		if (success)
 		{
+			Plugins::instance()->set_mode(userWantsMultiplayer ? Plugins::kMode_Net : Plugins::kMode_Solo);
+			Crosshairs_SetActive(player_preferences->crosshairs_active);
+			LoadHUDLua();
+			RunLuaHUDScript();
+			
+			// load the scripts we put off before
+			short SavedType, SavedError = get_game_error(&SavedType);
+			if (found_map)
+			{
+				RunLevelScript(dynamic_world->current_level_number);
+			}
+			else
+			{
+				ResetLevelScript();
+			}
+			RunScriptChunks();
+			if (!userWantsMultiplayer)
+			{
+				LoadSoloLua();
+			}
+			set_game_error(SavedType,SavedError);
+			
 			player_start_data theStarts[MAXIMUM_NUMBER_OF_PLAYERS];
 			short theNumberOfStarts;
         
@@ -1261,6 +1285,7 @@ void display_main_menu(
 	game_state.user= _single_player;
 	game_state.flags= 0;
 	
+	Plugins::instance()->set_mode(Plugins::kMode_Menu);
 	change_screen_mode(_screentype_menu);
 	display_screen(MAIN_MENU_BASE);
 	
@@ -1726,7 +1751,7 @@ static void display_about_dialog()
 
 	about_placer->add(new w_spacer(2 * get_theme_space(SPACER_WIDGET)), true);
 	
-	about_placer->dual_add(new w_static_text(expand_app_variables("Aleph Oneは、無料ですが全く無保障です。").c_str()), d);
+	about_placer->dual_add(new w_static_text(expand_app_variables("Aleph One は、無料ですが全く無保障です。").c_str()), d);
 	about_placer->dual_add(new w_static_text("以下の条件に従う限り、自由に再配布可能\です。"), d);
 	about_placer->dual_add(new w_hyperlink("http://www.gnu.org/licenses/gpl-3.0.html"), d);
 
@@ -1736,7 +1761,7 @@ static void display_about_dialog()
 
 	about_placer->add(new w_spacer, true);
 
-	about_placer->dual_add(new w_static_text(expand_app_variables("読み込まれたシナリオ：$scenarioName$ $scenarioVersion$").c_str()), d);
+	about_placer->dual_add(new w_static_text(expand_app_variables("読み込まれたシナリオ： $scenarioName$ $scenarioVersion$").c_str()), d);
 
 	vertical_placer *authors_placer = new vertical_placer();
 	
@@ -1905,7 +1930,7 @@ static void transfer_to_new_level(
 		}
 
 		if (!game_is_networked) try_and_display_chapter_screen(level_number, true, false);
-		success= goto_level(&entry, false);
+		success= goto_level(&entry, false, dynamic_world->player_count);
 		set_keyboard_controller_status(true);
 	}
 	
@@ -2081,6 +2106,9 @@ static bool begin_game(
 						load_film_profile(FILM_PROFILE_ALEPH_ONE_1_0);
 						break;
 					case RECORDING_VERSION_ALEPH_ONE_1_1:
+						load_film_profile(FILM_PROFILE_ALEPH_ONE_1_1);
+						break;
+					case RECORDING_VERSION_ALEPH_ONE_1_2:
 						load_film_profile(FILM_PROFILE_DEFAULT);
 						break;
 					default:
@@ -2171,6 +2199,7 @@ static bool begin_game(
 			try_and_display_chapter_screen(entry.level_number, false, false);
 		}
 
+		Plugins::instance()->set_mode(number_of_players > 1 ? Plugins::kMode_Net : Plugins::kMode_Solo);
 		Crosshairs_SetActive(player_preferences->crosshairs_active);
 		LoadHUDLua();
 		RunLuaHUDScript();
@@ -2354,6 +2383,7 @@ static void finish_game(
 	load_environment_from_preferences();
 	if (game_state.user == _replay || game_state.user == _demo)
 	{
+		Plugins::instance()->set_mode(Plugins::kMode_Menu);
 		load_film_profile(FILM_PROFILE_DEFAULT);
 	}
 	if(return_to_main_menu) display_main_menu();
@@ -3277,8 +3307,13 @@ void show_movie(short index)
 }
 
 
-size_t should_restore_game_networked()
+size_t should_restore_game_networked(FileSpecifier& file)
 {
+	// We return -1 (NONE) for "cancel", 0 for "not networked", and 1 for "networked".
+	size_t theResult = saved_game_was_networked(file);
+	if (theResult != UNONE)
+		return theResult;
+	
         dialog d;
 
 	vertical_placer *placer = new vertical_placer;
@@ -3302,8 +3337,6 @@ size_t should_restore_game_networked()
 
 	placer->add(button_placer, true);
 
-        // We return -1 (NONE) for "cancel", 0 for "not networked", and 1 for "networked".
-        size_t theResult;
 
 	d.set_widget_placer(placer);
 

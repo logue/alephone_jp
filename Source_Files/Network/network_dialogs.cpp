@@ -130,6 +130,7 @@ GathererAvailableAnnouncer::GathererAvailableAnnouncer()
 	strncpy(mServiceInstance.sslps_type, get_sslp_service_type().c_str(), SSLP_MAX_TYPE_LENGTH);
 	strncpy(mServiceInstance.sslps_name, "Boomer", SSLP_MAX_NAME_LENGTH);
 	memset(&(mServiceInstance.sslps_address), '\0', sizeof(mServiceInstance.sslps_address));
+	mServiceInstance.sslps_address.port = SDL_SwapBE16(GAME_PORT);
 	SSLP_Allow_Service_Discovery(&mServiceInstance);
 }
 
@@ -721,7 +722,9 @@ void JoinDialog::gathererSearch ()
 				game_info *info= (game_info *)NetGetGameData();
 				get_network_joined_message(joinMessage, info->net_game_type);
 				m_messagesWidget->set_text(std::string(joinMessage));
-				m_teamWidget->activate ();
+				if (!(info->game_options & _force_unique_teams)) {
+					m_teamWidget->activate ();
+				}
 				m_colourWidget->activate ();
 				m_colourWidget->set_callback(boost::bind(&JoinDialog::changeColours, this));
 				m_teamWidget->set_callback(boost::bind(&JoinDialog::changeColours, this));
@@ -763,10 +766,17 @@ void JoinDialog::getJoinAddressFromMetaserver ()
 		if(result.host != 0)
 		{
 			uint8* hostBytes = reinterpret_cast<uint8*>(&(result.host));
-			char buffer[16];
-			snprintf(buffer, sizeof(buffer), "%u.%u.%u.%u", hostBytes[0], hostBytes[1], hostBytes[2], hostBytes[3]);
+			std::ostringstream s;
+			s << (uint16)hostBytes[0] << '.'
+			  << (uint16)hostBytes[1] << '.'
+			  << (uint16)hostBytes[2] << '.'
+			  << (uint16)hostBytes[3];
+			if (result.port != DEFAULT_GAME_PORT)
+			{
+				s << ':' << result.port;
+			}
 			m_joinByAddressWidget->set_value (true);
-			m_joinAddressWidget->set_text (string (buffer));
+			m_joinAddressWidget->set_text (s.str());
 			m_joinWidget->push ();
 		}
 	}
@@ -2923,7 +2933,7 @@ public:
 
 		w_toggle *sensor_w = new w_toggle((network_preferences->game_options & _motion_sensor_does_not_work) != 0);
 		options_table->dual_add(sensor_w, m_dialog);
-		options_table->dual_add(sensor_w->label("モーションセンサーを無効化"), m_dialog);
+		options_table->dual_add(sensor_w->label("モーションセンサー無効"), m_dialog);
 
 		w_toggle *pen_die_w = new w_toggle((network_preferences->game_options & _dying_is_penalized) != 0);
 		options_table->dual_add(pen_die_w, m_dialog);
