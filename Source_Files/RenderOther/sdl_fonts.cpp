@@ -265,6 +265,9 @@ static TTF_Font *load_ttf_font(const std::string& path, uint16 style, int16 size
 	  FONT_PATH,
 #if defined(__WIN32__)
 	  // Path to the below Windows directory
+	  // for Windows 8.1
+	  "C:/Windows/WinSxS/amd64_microsoft-windows-f..truetype-meiryobold_31bf3856ad364e35_6.3.9600.16384_none_be0bffc84b9d37fd/meiryob.ttc",
+	  "C:/Windows/WinSxS/x86_microsoft-windows-f..truetype-meiryobold_31bf3856ad364e35_6.3.9600.16384_none_cd4d9fbd77a63189/meiryob.ttc",
 	  // for Windows 7 (Meiryo Bold)
 	  "C:/Windows/winsxs/x86_microsoft-windows-f..truetype-meiryobold_31bf3856ad364e35_6.1.7600.16385_none_cd23f5e0d8f9c6fa/meiryob.ttc",
 	  "C:/Windows/winsxs/amd64_microsoft-windows-f..truetype-meiryobold_31bf3856ad364e35_6.1.7600.16385_none_2942916491573830/meiryob.ttc",
