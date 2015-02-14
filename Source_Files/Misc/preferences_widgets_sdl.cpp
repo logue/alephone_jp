@@ -114,7 +114,7 @@ void w_env_select::select_item(dialog *parent)
 	w_env_list *list_w = new w_env_list(items, item.GetPath(), &d);
 	placer->dual_add(list_w, d);
 	placer->add(new w_spacer(), true);
-	placer->dual_add(new w_button("CANCEL", dialog_cancel, &d), d);
+	placer->dual_add(new w_button("キャンセル", dialog_cancel, &d), d);
 
 	d.activate_widget(list_w);
 	d.set_widget_placer(placer);
@@ -235,7 +235,7 @@ void w_plugins::draw_item(Plugins::iterator it, SDL_Surface* s, int16 x, int16 y
 	y += font->get_ascent() + 1;
 	std::string types;
 	if (it->solo_lua.size()) {
-		types += ", ソロLua";
+		types += ", ソ\ロLua";
 	}
 	if (it->hud_lua.size()) {
 		types += ", HUD";
@@ -248,6 +248,9 @@ void w_plugins::draw_item(Plugins::iterator it, SDL_Surface* s, int16 x, int16 y
 	}
 	if (it->mmls.size()) {
 		types += ", MML";
+	}
+	if (it->stats_lua.size()) {
+		types += ", 状況";
 	}
 	types.erase(0, 2);
 	right_text_width = text_width(types.c_str(), font, style | styleItalic);

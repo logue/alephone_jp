@@ -266,7 +266,7 @@ bool network_gather(bool inResumingGame)
 				if (advertiseOnMetaserver) 
 				{
 					metaserverAnnouncer->Start(myGameInfo.time_limit);
-					gMetaserverClient->setMode(1);
+					gMetaserverClient->setMode(1, NetSessionIdentifier());
 					gMetaserverClient->pump();
 				}
 				successful= true;
@@ -307,8 +307,8 @@ GatherDialog::~GatherDialog()
 bool GatherDialog::GatherNetworkGameByRunning ()
 {
 	vector<string> chat_choice_labels;
-	chat_choice_labels.push_back ("参加者と");
-	chat_choice_labels.push_back ("インターネットのプレイヤーと");
+	chat_choice_labels.push_back ("with joiners");
+	chat_choice_labels.push_back ("with Internet players");
 	m_chatChoiceWidget->set_labels (chat_choice_labels);
 
 	m_cancelWidget->set_callback(boost::bind(&GatherDialog::Stop, this, false));
@@ -522,7 +522,7 @@ int network_join(void)
 			NetSetInitialParameters(myGameInfo->initial_updates_per_packet, myGameInfo->initial_update_latency);
 			if (gMetaserverClient && gMetaserverClient->isConnected())
 			{
-				gMetaserverClient->setMode(1);
+				gMetaserverClient->setMode(1, NetSessionIdentifier());
 				gMetaserverClient->pump();
 			}
 		}
@@ -785,27 +785,27 @@ void JoinDialog::getJoinAddressFromMetaserver ()
 		char message[1024];
 		if (e.code() == MetaserverClient::LoginDeniedException::BadUserOrPassword)
 		{
-			strcpy(message, "ログイン拒否：不正なユーザ名もしくは、パスワードです。");
+			strcpy(message, "Login denied: bad username or password.");
 		}
 		else if (e.code() == MetaserverClient::LoginDeniedException::UserAlreadyLoggedIn)
 		{
-			strcpy(message, "ログイン拒否：そのユーザは、すでにログインしています。");
+			strcpy(message, "Login denied: that user is already logged in.");
 		}
 		else if (e.code() == MetaserverClient::LoginDeniedException::AccountAlreadyLoggedIn)
 		{
-			strcpy(message, "ログイン拒否：そのアカウントは、すでにログインしています。");
+			strcpy(message, "Login denied: that account is already logged in.");
 		}
 		else if (e.code() == MetaserverClient::LoginDeniedException::RoomFull)
 		{
-			strcpy(message, "ログイン拒否：ルームが満席！？");
+			strcpy(message, "Login denied: room is full!?");
 		}
 		else if (e.code() == MetaserverClient::LoginDeniedException::AccountLocked)
 		{
-			strcpy(message, "ログイン拒否：あなたのアカウントはロックされています。");
+			strcpy(message, "Login denied: your account is locked.");
 		}
 		else
 		{
-			sprintf(message, "インターネット上のサーバーへの接続時に問題が発生しました：%s　お手数ですが、しばらくたってからもう一度やり直してください。", e.what());
+			sprintf(message, "There was a problem connecting to the server that tracks Internet games (%s). Please try again later.", e.what());
 		}
 
 		alert_user(message, 0);
@@ -1200,7 +1200,7 @@ bool SetupNetgameDialog::SetupNetworkGameByRunning (
 	binders.insert<int> (m_latencyToleranceWidget, &latencyTolerancePref);
 
 	binders.migrate_all_second_to_first ();
-
+	
 	m_cancelWidget->set_callback (boost::bind (&SetupNetgameDialog::Stop, this, false));
 	m_okWidget->set_callback (boost::bind (&SetupNetgameDialog::okHit, this));
 	m_limitTypeWidget->set_callback (boost::bind (&SetupNetgameDialog::limitTypeHit, this));
@@ -2470,7 +2470,7 @@ void display_net_game_stats(void)
     dialog d;
     
     vertical_placer *placer = new vertical_placer;
-    placer->dual_add(new w_title("殺傷レポート"), d);
+    placer->dual_add(new w_title("POSTGAME CARNAGE REPORT"), d);
     
     horizontal_placer *graph_type_placer = new horizontal_placer;
     w_select* graph_type_w = new w_select(0, NULL);
@@ -2516,11 +2516,11 @@ void display_net_game_stats(void)
 
     carnage_placer->add_flags((placeable::placement_flags) ((int) placeable::kAlignLeft | (int) placeable::kFill));
     // (total kills) and (total deaths) will be replaced by update_carnage_summary() or set to "".
-    w_static_text*  total_kills_w = new w_static_text("（全殺傷数）");
+    w_static_text*  total_kills_w = new w_static_text("(total kills)");
     total_kills_w->set_identifier(iTOTAL_KILLS);
     carnage_placer->dual_add(total_kills_w, d);
 
-    w_static_text*  total_deaths_w = new w_static_text("（全死亡数）");
+    w_static_text*  total_deaths_w = new w_static_text("(total deaths)");
     total_deaths_w->set_identifier(iTOTAL_DEATHS);
     carnage_placer->dual_add(total_deaths_w, d);
     
@@ -2882,8 +2882,10 @@ public:
 		// Could eventually store this path in network_preferences somewhere, so to have separate map file
 		// prefs for single- and multi-player.
 		w_file_chooser* map_w = new w_file_chooser ("マップ選択", _typecode_scenario);
+#ifndef MAC_APP_STORE
 		player_table->dual_add(map_w->label("マップ"), m_dialog);
 		player_table->dual_add(map_w, m_dialog);
+#endif
 
 		w_select_popup* entry_point_w = new w_select_popup ();
 		player_table->dual_add(entry_point_w->label("レベル"), m_dialog);
@@ -2899,15 +2901,21 @@ public:
 
 		left_placer->add(player_table, true);
 
+#ifndef MAC_APP_STORE
 		network_table->add_row(new w_spacer(), true);
 		network_table->dual_add_row(new w_static_text("ネットスクリプト"), m_dialog);
+#endif
 		w_enabling_toggle* use_netscript_w = new w_enabling_toggle (network_preferences->use_netscript);
+#ifndef MAC_APP_STORE
 		network_table->dual_add(use_netscript_w, m_dialog);
 		network_table->dual_add(use_netscript_w->label("ネットスクリプトを使用"), m_dialog);
+#endif
 
 		w_file_chooser* choose_script_w = new w_file_chooser ("スクリプトを選択", _typecode_netscript);
+#ifndef MAC_APP_STORE
 		network_table->add(new w_spacer(), true);
 		network_table->dual_add(choose_script_w, m_dialog);
+#endif
 		use_netscript_w->add_dependent_widget(choose_script_w);
 
 		left_placer->add(new w_spacer(), true);
@@ -2968,8 +2976,10 @@ public:
 		network_table->dual_add(carnage_messages_w->label("殺傷メッセージを許可"), m_dialog);
 
 		w_toggle *saving_level_w = new w_toggle(true);
+#ifndef MAC_APP_STORE
 		network_table->dual_add(saving_level_w, m_dialog);
 		network_table->dual_add(saving_level_w->label("レベル保存を許可"), m_dialog);
+#endif
 
 		right_placer->add(new w_spacer(), true);
 		right_placer->dual_add(new w_static_text("期間"), m_dialog);

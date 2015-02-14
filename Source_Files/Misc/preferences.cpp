@@ -95,9 +95,12 @@ May 22, 2003 (Woody Zenfell):
 #include "mouse.h"
 
 #include "Music.h"
+#include "HTTP.h"
+#include "alephversion.h"
 
 #include <cmath>
 #include <sstream>
+#include <boost/algorithm/hex.hpp>
 
 #ifdef HAVE_UNISTD_H
 #include <unistd.h>
@@ -184,10 +187,12 @@ static bool validate_environment_preferences(environment_preferences_data *prefe
 
 // Prototypes
 static void player_dialog(void *arg);
+static void online_dialog(void *arg);
 static void graphics_dialog(void *arg);
 static void sound_dialog(void *arg);
 static void controls_dialog(void *arg);
 static void environment_dialog(void *arg);
+static void plugins_dialog(void *arg);
 static void keyboard_dialog(void *arg);
 //static void texture_options_dialog(void *arg);
 
@@ -259,7 +264,8 @@ void handle_preferences(void)
 	d.add(w_header);
 	w_button *w_player = new w_button("プレイヤー", player_dialog, &d);
 	d.add(w_player);
-
+	w_button *w_online = new w_button("LHOWON.ORG", online_dialog, &d);
+	d.add(w_online);
 	w_button *w_graphics = new w_button("グラフィック", graphics_dialog, &d);
 	d.add(w_graphics);
 	w_button *w_sound = new w_button("サウンド", sound_dialog, &d);
@@ -275,6 +281,7 @@ void handle_preferences(void)
 	placer->add(w_header);
 	placer->add(new w_spacer, true);
 	placer->add(w_player);
+	placer->add(w_online);
 	placer->add(w_graphics);
 	placer->add(w_sound);
 	placer->add(w_controls);
@@ -372,6 +379,9 @@ static void crosshair_dialog(void *arg)
 	placer->dual_add(w_header, d);
 	placer->add(new w_spacer, true);
 
+	placer->dual_add(new w_static_text("HUDプラグインでこれらの設定を上書きする。"), d);
+	placer->add(new w_spacer, true);
+
 	w_crosshair_display *crosshair_w = new w_crosshair_display();
 	placer->dual_add(crosshair_w, d);
 
@@ -380,10 +390,6 @@ static void crosshair_dialog(void *arg)
 	table_placer *table = new table_placer(2, get_theme_space(ITEM_WIDGET));
 	table->col_flags(0, placeable::kAlignRight);
 
-	w_toggle *crosshairs_active_w = new w_toggle(player_preferences->crosshairs_active);
-	table->dual_add(crosshairs_active_w->label("クロスヘアーを表\示"), d);
-	table->dual_add(crosshairs_active_w, d);	
-	
 	// Shape
 	w_select *shape_w = new w_select(0, shape_labels);
 	SelectSelectorWidget shapeWidget(shape_w);
@@ -474,7 +480,6 @@ static void crosshair_dialog(void *arg)
 	{
 		crosshair_binders->migrate_all_first_to_second();
 		player_preferences->Crosshairs.PreCalced = false;
-		player_preferences->crosshairs_active = crosshairs_active_w->get_selection();
 		write_preferences();
 	}
 	else
@@ -531,49 +536,16 @@ static void player_dialog(void *arg)
 	table->dual_add(tcolor_w, d);
 
 	table->add_row(new w_spacer(), true);
-	table->dual_add_row(new w_static_text("インターネットのゲームサーバーを探す"), d);
 
-	w_enabling_toggle *login_as_guest_w = new w_enabling_toggle(strcmp(network_preferences->metaserver_login, "guest") == 0, false);
-	table->dual_add(login_as_guest_w->label("ゲスト"), d);
-	table->dual_add(login_as_guest_w, d);
-
-	w_text_entry *login_w = new w_text_entry(network_preferences_data::kMetaserverLoginLength, network_preferences->metaserver_login);
-	table->dual_add(login_w->label("ログイン"), d);
-	table->dual_add(login_w, d);
-
-	w_password_entry *password_w = new w_password_entry(network_preferences_data::kMetaserverLoginLength, network_preferences->metaserver_password);
-	table->dual_add(password_w->label("パスワード"), d);
-	table->dual_add(password_w, d);
-	w_toggle *mute_guests_w = new w_toggle(network_preferences->mute_metaserver_guests);
-	table->dual_add(mute_guests_w->label("すべてのゲストのチャットをミュートする"), d);
-	table->dual_add(mute_guests_w, d);
-
-	table->add_row(new w_spacer(), true);
-	table->dual_add_row(new w_static_text("インターネットチャットの色"), d);
-	w_enabling_toggle *custom_colors_w = new w_enabling_toggle(network_preferences->use_custom_metaserver_colors);
-	table->dual_add(custom_colors_w->label("カスタムカラーを使用"), d);
-	table->dual_add(custom_colors_w, d);
-	
-	w_color_picker *primary_w = new w_color_picker(network_preferences->metaserver_colors[0]);
-	table->dual_add(primary_w->label("プライマリ"), d);
-	table->dual_add(primary_w, d);
-	
-	w_color_picker *secondary_w = new w_color_picker(network_preferences->metaserver_colors[1]);
-	table->dual_add(secondary_w->label("セカンダリ"), d);
-	table->dual_add(secondary_w, d);
-
-	custom_colors_w->add_dependent_widget(primary_w);
-	custom_colors_w->add_dependent_widget(secondary_w);
-
-	login_as_guest_w->add_dependent_widget(login_w);
-	login_as_guest_w->add_dependent_widget(password_w);
-	login_as_guest_w->add_dependent_widget(mute_guests_w);
+	w_toggle *crosshairs_active_w = new w_toggle(player_preferences->crosshairs_active);
+	table->dual_add(crosshairs_active_w->label("クロスヘアーの表\示"), d);
+	table->dual_add(crosshairs_active_w, d);
 
 	placer->add(table, true);
 
 	placer->add(new w_spacer(), true);
 
-	w_button *crosshair_button = new w_button("クロスヘアー", crosshair_dialog, &d);
+	w_button *crosshair_button = new w_button("クロスヘアー設定", crosshair_dialog, &d);
 	placer->dual_add(crosshair_button, d);
 
 	placer->add(new w_spacer(), true);
@@ -608,49 +580,6 @@ static void player_dialog(void *arg)
 			changed = true;
 		}
 
-		const char *metaserver_login = (login_as_guest_w->get_selection() != 0) ? "guest" : login_w->get_text();
-		if (strcmp(metaserver_login, network_preferences->metaserver_login)) {
-			strncpy(network_preferences->metaserver_login, metaserver_login, network_preferences_data::kMetaserverLoginLength);
-			changed = true;
-		}
-
-		const char *metaserver_password = (login_as_guest_w->get_selection() != 0) ? "" : password_w->get_text();
-		if (strcmp(metaserver_password, network_preferences->metaserver_password)) {
-			strncpy(network_preferences->metaserver_password, metaserver_password, network_preferences_data::kMetaserverLoginLength);
-			changed = true;
-		}
-
-		bool mute_metaserver_guests = (login_as_guest_w->get_selection() != 0) ? false : mute_guests_w->get_selection() == 1;
-		if (mute_metaserver_guests != network_preferences->mute_metaserver_guests)
-		{
-			network_preferences->mute_metaserver_guests = mute_metaserver_guests;
-			changed = true;
-		}
-
-		bool use_custom_metaserver_colors = custom_colors_w->get_selection();
-		if (use_custom_metaserver_colors != network_preferences->use_custom_metaserver_colors)
-		{
-			network_preferences->use_custom_metaserver_colors = use_custom_metaserver_colors;
-			changed = true;
-		}
-
-		if (use_custom_metaserver_colors)
-		{
-			rgb_color primary_color = primary_w->get_selection();
-			if (primary_color.red != network_preferences->metaserver_colors[0].red || primary_color.green != network_preferences->metaserver_colors[0].green || primary_color.blue != network_preferences->metaserver_colors[0].blue)
-			{
-				network_preferences->metaserver_colors[0] = primary_color;
-				changed = true;
-			}
-
-			rgb_color secondary_color = secondary_w->get_selection();
-			if (secondary_color.red != network_preferences->metaserver_colors[1].red || secondary_color.green != network_preferences->metaserver_colors[1].green || secondary_color.blue != network_preferences->metaserver_colors[1].blue)			{
-				network_preferences->metaserver_colors[1] = secondary_color;
-				changed = true;
-			}
-
-		}
-					
 		int16 level = static_cast<int16>(level_w->get_selection());
 		assert(level >= 0);
 		if (level != player_preferences->difficulty_level) {
@@ -671,12 +600,330 @@ static void player_dialog(void *arg)
 			player_preferences->team = team;
 			changed = true;
 		}
+		
+		bool crosshair = crosshairs_active_w->get_selection();
+		if (crosshair != player_preferences->crosshairs_active) {
+			player_preferences->crosshairs_active = crosshair;
+			changed = true;
+		}
 
 		if (changed)
 			write_preferences();
 	}
 }
 
+/*
+ *  Online (lhowon.org) dialog
+ */
+
+const int iONLINE_USERNAME_W = 10;
+const int iONLINE_PASSWORD_W = 11;
+const int iSIGNUP_EMAIL_W = 20;
+const int iSIGNUP_USERNAME_W = 21;
+const int iSIGNUP_PASSWORD_W = 22;
+
+static void proc_account_link(void *arg)
+{
+	dialog *d = static_cast<dialog *>(arg);
+	
+	HTTPClient conn;
+	HTTPClient::parameter_map params;
+	params["username"] = network_preferences->metaserver_login;
+	params["password"] = network_preferences->metaserver_password;
+	params["salt"] = "";
+	
+	std::string url = A1_METASERVER_SETTINGS_URL;
+	if (conn.Post(A1_METASERVER_LOGIN_URL, params))
+	{
+		std::string token = boost::algorithm::hex(conn.Response());
+		url += "?token=" + token;
+	}
+	
+	toggle_fullscreen(false);
+	launch_url_in_browser(url.c_str());
+	d->draw();
+}
+
+static void signup_dialog_ok(void *arg)
+{
+	dialog *d = static_cast<dialog *>(arg);
+	w_text_entry *email_w = static_cast<w_text_entry *>(d->get_widget_by_id(iSIGNUP_EMAIL_W));
+	w_text_entry *login_w = static_cast<w_text_entry *>(d->get_widget_by_id(iSIGNUP_USERNAME_W));
+	w_password_entry *password_w = static_cast<w_password_entry *>(d->get_widget_by_id(iSIGNUP_PASSWORD_W));
+	
+	// check that fields are filled out
+	if (strlen(email_w->get_text()) == 0)
+	{
+		alert_user("有効なメールアドレスを入力してください。", infoError);
+	}
+	else if (strlen(login_w->get_text()) == 0)
+	{
+		alert_user("有効なユーザ名を入力してください。", infoError);
+	}
+	else if (strlen(password_w->get_text()) == 0)
+	{
+		alert_user("有効なパスワードを入力してください。", infoError);
+	}
+	else
+	{
+		// send parameters to server
+		HTTPClient conn;
+		HTTPClient::parameter_map params;
+		params["email"] = email_w->get_text();
+		params["username"] = login_w->get_text();
+		params["password"] = password_w->get_text();
+		
+		if (conn.Post(A1_METASERVER_SIGNUP_URL, params))
+		{
+			if (conn.Response() == "OK")
+			{
+				// account was created successfully, save username and password
+				strncpy(network_preferences->metaserver_login, login_w->get_text(), network_preferences_data::kMetaserverLoginLength);
+				strncpy(network_preferences->metaserver_password, password_w->get_text(), network_preferences_data::kMetaserverLoginLength);
+				write_preferences();
+				d->quit(0);
+			}
+			else
+			{
+				alert_user(conn.Response().c_str(), infoError);
+			}
+		}
+		else
+		{
+			alert_user("サーバー接続時に問題が発生しました。", infoError);
+		}
+	}
+}
+
+static void signup_dialog(void *arg)
+{
+	dialog d;
+	vertical_placer *placer = new vertical_placer;
+	placer->dual_add(new w_title("LHOWON.ORGサインアップ"), d);
+	placer->add(new w_spacer());
+	
+	table_placer *table = new table_placer(2, get_theme_space(ITEM_WIDGET), true);
+	table->col_flags(0, placeable::kAlignRight);
+	table->col_flags(1, placeable::kAlignLeft);
+	
+	w_text_entry *email_w = new w_text_entry(256, "");
+	email_w->set_identifier(iSIGNUP_EMAIL_W);
+	table->dual_add(email_w->label("Ｅメールアドレス"), d);
+	table->dual_add(email_w, d);
+	
+	w_text_entry *login_w = new w_text_entry(network_preferences_data::kMetaserverLoginLength, network_preferences->metaserver_login);
+	login_w->set_identifier(iSIGNUP_USERNAME_W);
+	table->dual_add(login_w->label("ユーザ名"), d);
+	table->dual_add(login_w, d);
+	
+	w_password_entry *password_w = new w_password_entry(network_preferences_data::kMetaserverLoginLength, network_preferences->metaserver_password);
+	password_w->set_identifier(iSIGNUP_PASSWORD_W);
+	table->dual_add(password_w->label("パスワード"), d);
+	table->dual_add(password_w, d);
+	
+	table->add_row(new w_spacer(), true);
+	placer->add(table, true);
+	
+	horizontal_placer *button_placer = new horizontal_placer;
+	
+	w_button* ok_button = new w_button("サインアップ", signup_dialog_ok, &d);
+	ok_button->set_identifier(iOK);
+	button_placer->dual_add(ok_button, d);
+	button_placer->dual_add(new w_button("キャンセル", dialog_cancel, &d), d);
+	
+	placer->add(button_placer, true);
+	
+	d.set_widget_placer(placer);
+	
+	clear_screen();
+	
+	if (d.run() == 0)
+	{
+		// account was successfully created, update parent fields with new account info
+		dialog *parent = static_cast<dialog *>(arg);
+		w_text_entry *login_w = static_cast<w_text_entry *>(parent->get_widget_by_id(iONLINE_USERNAME_W));
+		login_w->set_text(network_preferences->metaserver_login);
+		w_password_entry *password_w = static_cast<w_password_entry *>(parent->get_widget_by_id(iONLINE_PASSWORD_W));
+		password_w->set_text(network_preferences->metaserver_password);
+	}
+}
+
+static void online_dialog(void *arg)
+{
+	// Create dialog
+	dialog d;
+	vertical_placer *placer = new vertical_placer;
+	placer->dual_add(new w_title("LHOWON.ORGサインアップ"), d);
+	placer->add(new w_spacer());
+	
+	table_placer *table = new table_placer(2, get_theme_space(ITEM_WIDGET), true);
+	table->col_flags(0, placeable::kAlignRight);
+	table->col_flags(1, placeable::kAlignLeft);
+	
+	table->dual_add_row(new w_static_text("lhowon.orgアカウント"), d);
+	
+	w_text_entry *login_w = new w_text_entry(network_preferences_data::kMetaserverLoginLength, network_preferences->metaserver_login);
+	login_w->set_identifier(iONLINE_USERNAME_W);
+	table->dual_add(login_w->label("ユーザ名"), d);
+	table->dual_add(login_w, d);
+	
+	w_password_entry *password_w = new w_password_entry(network_preferences_data::kMetaserverLoginLength, network_preferences->metaserver_password);
+	password_w->set_identifier(iONLINE_PASSWORD_W);
+	table->dual_add(password_w->label("パスワード"), d);
+	table->dual_add(password_w, d);
+	
+	w_hyperlink *account_link_w = new w_hyperlink("", "自分のオンラインアカウントページヘ");
+	account_link_w->set_callback(proc_account_link, &d);
+	table->dual_add_row(account_link_w, d);
+	
+	table->add_row(new w_spacer(), true);
+	
+	w_button *signup_button = new w_button("サインアップ", signup_dialog, &d);
+	table->dual_add_row(signup_button, d);
+	
+	table->add_row(new w_spacer(), true);
+	table->dual_add_row(new w_static_text("ネットワークゲームロビー"), d);
+	
+	w_text_entry *name_w = new w_text_entry(PREFERENCES_NAME_LENGTH, "");
+	name_w->set_identifier(NAME_W);
+	name_w->set_enter_pressed_callback(dialog_try_ok);
+	name_w->set_value_changed_callback(dialog_disable_ok_if_empty);
+	name_w->enable_mac_roman_input();
+	table->dual_add(name_w->label("名前"), d);
+	table->dual_add(name_w, d);
+	
+	w_enabling_toggle *custom_colors_w = new w_enabling_toggle(network_preferences->use_custom_metaserver_colors);
+	table->dual_add(custom_colors_w->label("カスタムチャット色"), d);
+	table->dual_add(custom_colors_w, d);
+	
+	w_color_picker *primary_w = new w_color_picker(network_preferences->metaserver_colors[0]);
+	table->dual_add(primary_w->label("プライマリ"), d);
+	table->dual_add(primary_w, d);
+	
+	w_color_picker *secondary_w = new w_color_picker(network_preferences->metaserver_colors[1]);
+	table->dual_add(secondary_w->label("セカンダリ"), d);
+	table->dual_add(secondary_w, d);
+	
+	custom_colors_w->add_dependent_widget(primary_w);
+	custom_colors_w->add_dependent_widget(secondary_w);
+
+	w_toggle *mute_guests_w = new w_toggle(network_preferences->mute_metaserver_guests);
+	table->dual_add(mute_guests_w->label("全てのゲストのチャットをミュートする"), d);
+	table->dual_add(mute_guests_w, d);
+
+	w_toggle *advertise_on_metaserver_w = new w_toggle(network_preferences->advertise_on_metaserver);
+	table->dual_add(advertise_on_metaserver_w->label("ゲーム集合をアナウンスする"), d);
+	table->dual_add(advertise_on_metaserver_w, d);
+	
+	table->dual_add_row(new w_static_text("アナウンスされたゲームは、ゲームロビーにいる"), d);
+	table->dual_add_row(new w_static_text("全てのユーザに公開されます。"), d);
+
+	table->add_row(new w_spacer(), true);
+	table->dual_add_row(new w_hyperlink(A1_LEADERBOARD_URL, "リーダーボードを見る"), d);
+	
+	table->add_row(new w_spacer(), true);
+	table->dual_add_row(new w_static_text("リーダーボードにゲームの状況を送付するには、"), d);
+	table->dual_add_row(new w_static_text("lhowon.orgアカウントと状況プラグインがインストールされ、"), d);
+	table->dual_add_row(new w_static_text("有効になっている必要があります。"), d);
+	
+	table->add_row(new w_spacer(), true);
+	table->dual_add_row(new w_button("プラグイン", plugins_dialog, &d), d);
+
+	placer->add(table, true);
+	placer->add(new w_spacer(), true);
+
+	horizontal_placer *button_placer = new horizontal_placer;
+	
+	w_button* ok_button = new w_button("了承", dialog_ok, &d);
+	ok_button->set_identifier(iOK);
+	button_placer->dual_add(ok_button, d);
+	button_placer->dual_add(new w_button("キャンセル", dialog_cancel, &d), d);
+	
+	placer->add(button_placer, true);
+	
+	d.set_widget_placer(placer);
+	
+	// We don't do this earlier because it (indirectly) invokes the name_typing callback, which needs iOK
+	copy_pstring_to_text_field(&d, NAME_W, player_preferences->name);
+	
+	// Clear screen
+	clear_screen();
+	
+	// Run dialog
+	if (d.run() == 0) {	// Accepted
+		bool changed = false;
+		
+		const char *name = name_w->get_text();
+		unsigned char theOldNameP[PREFERENCES_NAME_LENGTH+1];
+		pstrncpy(theOldNameP, player_preferences->name, PREFERENCES_NAME_LENGTH+1);
+		char *theOldName = a1_p2cstr(theOldNameP);
+		if (strcmp(name, theOldName)) {
+			copy_pstring_from_text_field(&d, NAME_W, player_preferences->name);
+			changed = true;
+		}
+		
+		const char *metaserver_login = login_w->get_text();
+		if (strcmp(metaserver_login, network_preferences->metaserver_login)) {
+			strncpy(network_preferences->metaserver_login, metaserver_login, network_preferences_data::kMetaserverLoginLength);
+			changed = true;
+		}
+		
+		// clear password if login has been cleared
+		if (!strlen(metaserver_login)) {
+			if (strlen(network_preferences->metaserver_password)) {
+				network_preferences->metaserver_password[0] = '\0';
+				changed = true;
+			}
+		} else {
+			const char *metaserver_password = password_w->get_text();
+			if (strcmp(metaserver_password, network_preferences->metaserver_password)) {
+				strncpy(network_preferences->metaserver_password, metaserver_password, network_preferences_data::kMetaserverLoginLength);
+				changed = true;
+			}
+		}
+		
+		bool use_custom_metaserver_colors = custom_colors_w->get_selection();
+		if (use_custom_metaserver_colors != network_preferences->use_custom_metaserver_colors)
+		{
+			network_preferences->use_custom_metaserver_colors = use_custom_metaserver_colors;
+			changed = true;
+		}
+		
+		if (use_custom_metaserver_colors)
+		{
+			rgb_color primary_color = primary_w->get_selection();
+			if (primary_color.red != network_preferences->metaserver_colors[0].red || primary_color.green != network_preferences->metaserver_colors[0].green || primary_color.blue != network_preferences->metaserver_colors[0].blue)
+			{
+				network_preferences->metaserver_colors[0] = primary_color;
+				changed = true;
+			}
+			
+			rgb_color secondary_color = secondary_w->get_selection();
+			if (secondary_color.red != network_preferences->metaserver_colors[1].red || secondary_color.green != network_preferences->metaserver_colors[1].green || secondary_color.blue != network_preferences->metaserver_colors[1].blue)			{
+				network_preferences->metaserver_colors[1] = secondary_color;
+				changed = true;
+			}
+			
+		}
+		
+		bool mute_metaserver_guests = mute_guests_w->get_selection() == 1;
+		if (mute_metaserver_guests != network_preferences->mute_metaserver_guests)
+		{
+			network_preferences->mute_metaserver_guests = mute_metaserver_guests;
+			changed = true;
+		}
+		
+		bool announce_games = advertise_on_metaserver_w->get_selection() == 1;
+		if (announce_games != network_preferences->advertise_on_metaserver)
+		{
+			network_preferences->advertise_on_metaserver = announce_games;
+			changed = true;
+		}
+		
+		if (changed)
+			write_preferences();
+	}
+}
 
 /*
  *  Handle graphics dialog
@@ -896,7 +1143,11 @@ static void graphics_dialog(void *arg)
 	table->dual_add(fixh_w->label("Limit Vertical View"), d);
 	table->dual_add(fixh_w, d);
     
-	w_select_popup *gamma_w = new w_select_popup();
+	w_toggle *bob_w = new w_toggle(graphics_preferences->screen_mode.camera_bob);
+	table->dual_add(bob_w->label("カメラを歩行に合わせて上下する"), d);
+	table->dual_add(bob_w, d);
+	
+  	w_select_popup *gamma_w = new w_select_popup();
 	gamma_w->set_labels(build_stringvector_from_cstring_array(gamma_labels));
 	gamma_w->set_selection(graphics_preferences->screen_mode.gamma_level);
 	table->dual_add(gamma_w->label("明るさ"), d);
@@ -1027,6 +1278,12 @@ static void graphics_dialog(void *arg)
 			changed = true;
 		}
 	    
+		bool camera_bob = bob_w->get_selection() != 0;
+		if (camera_bob != graphics_preferences->screen_mode.camera_bob) {
+			graphics_preferences->screen_mode.camera_bob = camera_bob;
+			changed = true;
+		}
+		
 	    const SDL_version *version = SDL_Linked_Version();
 	    if (SDL_VERSIONNUM(version->major, version->minor, version->patch) >= SDL_VERSIONNUM(1, 2, 10))
 	    {
@@ -1357,7 +1614,7 @@ static void controls_dialog(void *arg)
 	joystick_w->add_dependent_widget(which_joystick_w);
 
 	joystick->add_row(new w_spacer(), true);
-	joystick->dual_add_row(new w_static_text("スティックのマッピング"), d);
+	joystick->dual_add_row(new w_static_text("軸のマッピング"), d);
 
 	std::vector<std::string> axis_labels;
 	axis_labels.push_back("無し");
@@ -1816,6 +2073,7 @@ static void environment_dialog(void *arg)
 	table_placer *table = new table_placer(2, get_theme_space(ITEM_WIDGET), true);
 	table->col_flags(0, placeable::kAlignRight);
 	
+#ifndef MAC_APP_STORE
 	w_env_select *map_w = new w_env_select(environment_preferences->map_file, "利用可能\なマップ", _typecode_scenario, &d);
 	table->dual_add(map_w->label("マップ"), d);
 	table->dual_add(map_w, d);
@@ -1835,10 +2093,12 @@ static void environment_dialog(void *arg)
 	w_env_select* resources_w = new w_env_select(environment_preferences->resources_file, "利用可能\なフィルム", _typecode_unknown, &d);
 	table->dual_add(resources_w->label("外部スクリプト"), d);
 	table->dual_add(resources_w, d);
+#endif
 
 	table->add_row(new w_spacer, true);
 	table->dual_add_row(new w_button("プラグイン", plugins_dialog, &d), d);
 
+#ifndef MAC_APP_STORE
 	table->add_row(new w_spacer, true);
 	table->dual_add_row(new w_static_text("ソ\ロスクリプト"), d);
 	w_enabling_toggle* use_solo_lua_w = new w_enabling_toggle(environment_preferences->use_solo_lua);
@@ -1850,37 +2110,42 @@ static void environment_dialog(void *arg)
 	table->dual_add(solo_lua_w->label("スクリプトファイル"), d);
 	table->dual_add(solo_lua_w, d);
 	use_solo_lua_w->add_dependent_widget(solo_lua_w);
+#endif
 
 	table->add_row(new w_spacer, true);
-	table->dual_add_row(new w_static_text("Film Playback"), d);
+	table->dual_add_row(new w_static_text("フィルムプレイバック"), d);
 	
 	w_select* film_profile_w = new w_select(environment_preferences->film_profile, film_profile_labels);
-	table->dual_add(film_profile_w->label("Default Playback Profile"), d);
+	table->dual_add(film_profile_w->label("デフォルトのプレイバックのプロフィール"), d);
 	table->dual_add(film_profile_w, d);
 	
+#ifndef MAC_APP_STORE
 	w_enabling_toggle* use_replay_net_lua_w = new w_enabling_toggle(environment_preferences->use_replay_net_lua);
-	table->dual_add(use_replay_net_lua_w->label("Use Netscript in Films"), d);
+	table->dual_add(use_replay_net_lua_w->label("フィルムでネットスクリプトを使う"), d);
 	table->dual_add(use_replay_net_lua_w, d);
 	
-	w_file_chooser *replay_net_lua_w = new w_file_chooser("Choose Script", _typecode_netscript);
+	w_file_chooser *replay_net_lua_w = new w_file_chooser("スクリプトを選択", _typecode_netscript);
 	replay_net_lua_w->set_file(network_preferences->netscript_file);
-	table->dual_add(replay_net_lua_w->label("Netscript File"), d);
+	table->dual_add(replay_net_lua_w->label("ネットスクリプトファイル"), d);
 	table->dual_add(replay_net_lua_w, d);
 	use_replay_net_lua_w->add_dependent_widget(replay_net_lua_w);
+#endif
 	
 	table->add_row(new w_spacer, true);
 	table->dual_add_row(new w_static_text("オプション"), d);
 
+#ifndef MAC_APP_STORE
 	w_toggle *hide_extensions_w = new w_toggle(environment_preferences->hide_extensions);
 	table->dual_add(hide_extensions_w->label("拡張子を隠す"), d);
 	table->dual_add(hide_extensions_w, d);
+#endif
 
 	w_select *max_saves_w = new w_select(0, max_saves_labels);
 	for (int i = 0; max_saves_labels[i] != NULL; ++i) {
 		if (max_saves_values[i] == environment_preferences->maximum_quick_saves)
 			max_saves_w->set_selection(i);
 	}
-	table->dual_add(max_saves_w->label("Unnamed Saves to Keep"), d);
+	table->dual_add(max_saves_w->label("名前が付けられてないセーブを保持する"), d);
 	table->dual_add(max_saves_w, d);
 
 	placer->add(table, true);
@@ -1911,6 +2176,7 @@ static void environment_dialog(void *arg)
 	if (d.run() == 0) {	// Accepted
 		bool changed = false;
 
+#ifndef MAC_APP_STORE
 		const char *path = map_w->get_path();
 		if (strcmp(path, environment_preferences->map_file)) {
 			strcpy(environment_preferences->map_file, path);
@@ -1971,6 +2237,7 @@ static void environment_dialog(void *arg)
 			strcpy(network_preferences->netscript_file, path);
 			changed = true;
 		}
+#endif
 		
 		FileSpecifier new_theme;
 		theme_plugin = Plugins::instance()->find_theme();
@@ -1984,12 +2251,14 @@ static void environment_dialog(void *arg)
 			theme_changed = true;
 		}
 
+#ifndef MAC_APP_STORE
 		bool hide_extensions = hide_extensions_w->get_selection() != 0;
 		if (hide_extensions != environment_preferences->hide_extensions)
 		{
 			environment_preferences->hide_extensions = hide_extensions;
 			changed = true;
 		}
+#endif
 
 		if (film_profile_w->get_selection() != environment_preferences->film_profile)
 		{
@@ -2230,6 +2499,7 @@ void write_preferences(
 	fprintf(F,"  scmode_hud_scale=\"%hd\"\n", graphics_preferences->screen_mode.hud_scale_level);
 	fprintf(F,"  scmode_term_scale=\"%hd\"\n", graphics_preferences->screen_mode.term_scale_level);
 	fprintf(F,"  scmode_translucent_map=\"%s\"\n", BoolString(graphics_preferences->screen_mode.translucent_map));
+	fprintf(F,"  scmode_camera_bob=\"%s\"\n", BoolString(graphics_preferences->screen_mode.camera_bob));
 	fprintf(F,"  scmode_accel=\"%hd\"\n",graphics_preferences->screen_mode.acceleration);
 	fprintf(F,"  scmode_highres=\"%s\"\n",BoolString(graphics_preferences->screen_mode.high_resolution));
 	fprintf(F,"  scmode_fullscreen=\"%s\"\n",BoolString(graphics_preferences->screen_mode.fullscreen));
@@ -2445,6 +2715,7 @@ static void default_graphics_preferences(graphics_preferences_data *preferences)
 	preferences->screen_mode.high_resolution = true;
 	preferences->screen_mode.fullscreen = true;
 	preferences->screen_mode.fix_h_not_v = true;
+	preferences->screen_mode.camera_bob = true;
 	
 	const SDL_version *version = SDL_Linked_Version();
 	if (SDL_VERSIONNUM(version->major, version->minor, version->patch) >= SDL_VERSIONNUM(1, 2, 10))
@@ -3237,6 +3508,10 @@ bool XML_GraphicsPrefsParser::HandleAttribute(const char *Tag, const char *Value
 	else if (StringsEqual(Tag,"scmode_translucent_map"))
 	{
 		return ReadBooleanValue(Value, graphics_preferences->screen_mode.translucent_map);
+	}
+	else if (StringsEqual(Tag,"scmode_camera_bob"))
+	{
+		return ReadBooleanValue(Value, graphics_preferences->screen_mode.camera_bob);
 	}
 	else if (StringsEqual(Tag,"scmode_accel"))
 	{

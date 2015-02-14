@@ -147,6 +147,7 @@ extern TP2PerfGlobals perf_globals;
 #include "Movie.h"
 #include "QuickSave.h"
 #include "Plugins.h"
+#include "Statistics.h"
 
 #ifdef HAVE_SMPEG
 #include <smpeg/smpeg.h>
@@ -833,6 +834,7 @@ bool join_networked_resume_game()
                                 short SavedType, SavedError = get_game_error(&SavedType);
                                 RunLevelScript(dynamic_world->current_level_number);
 				RunScriptChunks();
+				LoadStatsLua();
                                 set_game_error(SavedType,SavedError);
                         }
                         else
@@ -849,6 +851,7 @@ bool join_networked_resume_game()
 				
 				ResetLevelScript();
 				RunScriptChunks();
+				LoadStatsLua();
                         }
                         
                         // set the revert-game info to defaults (for full-auto saving on the local machine)
@@ -953,6 +956,7 @@ bool load_and_start_game(FileSpecifier& File)
 			{
 				LoadSoloLua();
 			}
+			LoadStatsLua();
 			set_game_error(SavedType,SavedError);
 			
 			player_start_data theStarts[MAXIMUM_NUMBER_OF_PLAYERS];
@@ -1874,6 +1878,7 @@ static void display_quit_screens(
 		
 		display_screen(screen_data->screen_base);
 	} else {
+		StatsManager::instance()->Finish();
 		/* No screens. */
 		game_state.state= _quit_game;
 		game_state.phase= 0;
@@ -2038,8 +2043,10 @@ static bool begin_game(
 						show_cursor(); // JTP: Hidden one way or another :p
 						
 						bool prompt_to_export = false;
+#ifndef MAC_APP_STORE
 						SDLMod m = SDL_GetModState();
 						if ((m & KMOD_ALT) || (m & KMOD_META)) prompt_to_export = true;
+#endif
 						
 						success= find_replay_to_use(cheat, ReplayFile);
 						if(success)
@@ -2490,6 +2497,8 @@ static void next_game_screen(
 				break;
 				
 			case _display_quit_screens:
+				StatsManager::instance()->Finish();
+
 				/* Fade out.. */
 				interface_fade_out(data->screen_base+game_state.current_screen, true);
 				game_state.state= _quit_game;
@@ -3323,7 +3332,7 @@ size_t should_restore_game_networked(FileSpecifier& file)
 	horizontal_placer *resume_as_placer = new horizontal_placer;
         w_toggle* theRestoreAsNetgameToggle = new w_toggle(dynamic_world->player_count > 1, 0);
         theRestoreAsNetgameToggle->set_labels_stringset(kSingleOrNetworkStringSetID);
-	resume_as_placer->dual_add(theRestoreAsNetgameToggle->label("Resume as"), d);
+	resume_as_placer->dual_add(theRestoreAsNetgameToggle->label("ÄŠJ"), d);
 	resume_as_placer->dual_add(theRestoreAsNetgameToggle, d);
 
 	placer->add(resume_as_placer, true);
