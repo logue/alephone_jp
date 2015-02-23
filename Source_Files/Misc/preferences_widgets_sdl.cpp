@@ -200,7 +200,7 @@ void w_plugins::draw_item(Plugins::iterator it, SDL_Surface* s, int16 x, int16 y
 	{
 		color = get_theme_color(ITEM_WIDGET, ACTIVE_STATE);
 	} 
-	else if (it->enabled && it->compatible())
+	else if (it->enabled && it->compatible() && it->allowed())
 	{
 		color = get_theme_color(ITEM_WIDGET, DEFAULT_STATE);
 	}
@@ -212,9 +212,13 @@ void w_plugins::draw_item(Plugins::iterator it, SDL_Surface* s, int16 x, int16 y
 	std::string enabled;
 	if (!it->compatible()) 
 	{
-		enabled = " 使用不可";
-	} 
-	else if (it->enabled) 
+		enabled = " 互換なし";
+	}
+	else if (!it->allowed())
+	{
+		enabled = " 許可なし";
+	}
+	else if (it->enabled)
 	{
 		enabled = " 有効";
 	}

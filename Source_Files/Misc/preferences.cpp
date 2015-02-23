@@ -628,8 +628,11 @@ static void proc_account_link(void *arg)
 	
 	HTTPClient conn;
 	HTTPClient::parameter_map params;
-	params["username"] = network_preferences->metaserver_login;
-	params["password"] = network_preferences->metaserver_password;
+	w_text_entry *username_w = static_cast<w_text_entry *>(d->get_widget_by_id(iONLINE_USERNAME_W));
+	w_text_entry *password_w = static_cast<w_text_entry *>(d->get_widget_by_id(iONLINE_PASSWORD_W));
+	
+	params["username"] = username_w->get_text();
+	params["password"] = password_w->get_text();
 	params["salt"] = "";
 	
 	std::string url = A1_METASERVER_SETTINGS_URL;
@@ -699,7 +702,7 @@ static void signup_dialog(void *arg)
 {
 	dialog d;
 	vertical_placer *placer = new vertical_placer;
-	placer->dual_add(new w_title("LHOWON.ORGサインアップ"), d);
+	placer->dual_add(new w_title("LHOWON.ORG SIGN UP"), d);
 	placer->add(new w_spacer());
 	
 	table_placer *table = new table_placer(2, get_theme_space(ITEM_WIDGET), true);
@@ -753,83 +756,121 @@ static void online_dialog(void *arg)
 	// Create dialog
 	dialog d;
 	vertical_placer *placer = new vertical_placer;
-	placer->dual_add(new w_title("LHOWON.ORGサインアップ"), d);
+	placer->dual_add(new w_title("LHOWON.ORGのセットアップ"), d);
 	placer->add(new w_spacer());
 	
-	table_placer *table = new table_placer(2, get_theme_space(ITEM_WIDGET), true);
-	table->col_flags(0, placeable::kAlignRight);
-	table->col_flags(1, placeable::kAlignLeft);
+	tab_placer* tabs = new tab_placer();
 	
-	table->dual_add_row(new w_static_text("lhowon.orgアカウント"), d);
+	std::vector<std::string> labels;
+	labels.push_back("アカウント");
+	labels.push_back("ゲームロビー");
+	labels.push_back("状況");
+	w_tab *tab_w = new w_tab(labels, tabs);
+	
+	placer->dual_add(tab_w, d);
+	placer->add(new w_spacer(), true);
+	
+	vertical_placer *account = new vertical_placer();
+	table_placer *account_table = new table_placer(2, get_theme_space(ITEM_WIDGET), true);
+	account_table->col_flags(0, placeable::kAlignRight);
+	account_table->col_flags(1, placeable::kAlignLeft);
 	
 	w_text_entry *login_w = new w_text_entry(network_preferences_data::kMetaserverLoginLength, network_preferences->metaserver_login);
 	login_w->set_identifier(iONLINE_USERNAME_W);
-	table->dual_add(login_w->label("ユーザ名"), d);
-	table->dual_add(login_w, d);
+	account_table->dual_add(login_w->label("ユーザ名"), d);
+	account_table->dual_add(login_w, d);
 	
 	w_password_entry *password_w = new w_password_entry(network_preferences_data::kMetaserverLoginLength, network_preferences->metaserver_password);
 	password_w->set_identifier(iONLINE_PASSWORD_W);
-	table->dual_add(password_w->label("パスワード"), d);
-	table->dual_add(password_w, d);
+	account_table->dual_add(password_w->label("パスワード"), d);
+	account_table->dual_add(password_w, d);
 	
 	w_hyperlink *account_link_w = new w_hyperlink("", "自分のオンラインアカウントページヘ");
 	account_link_w->set_callback(proc_account_link, &d);
-	table->dual_add_row(account_link_w, d);
+	account_table->dual_add_row(account_link_w, d);
 	
-	table->add_row(new w_spacer(), true);
+	account_table->add_row(new w_spacer(), true);
 	
 	w_button *signup_button = new w_button("サインアップ", signup_dialog, &d);
-	table->dual_add_row(signup_button, d);
+	account_table->dual_add_row(signup_button, d);
 	
-	table->add_row(new w_spacer(), true);
-	table->dual_add_row(new w_static_text("ネットワークゲームロビー"), d);
+	account_table->add_row(new w_spacer(), true);
+	
+	account->add(account_table, true);
+	
+	vertical_placer *lobby = new vertical_placer();
+	table_placer *lobby_table = new table_placer(2, get_theme_space(ITEM_WIDGET), true);
+	lobby_table->col_flags(0, placeable::kAlignRight);
+	lobby_table->col_flags(1, placeable::kAlignLeft);
 	
 	w_text_entry *name_w = new w_text_entry(PREFERENCES_NAME_LENGTH, "");
 	name_w->set_identifier(NAME_W);
 	name_w->set_enter_pressed_callback(dialog_try_ok);
 	name_w->set_value_changed_callback(dialog_disable_ok_if_empty);
 	name_w->enable_mac_roman_input();
-	table->dual_add(name_w->label("名前"), d);
-	table->dual_add(name_w, d);
+	lobby_table->dual_add(name_w->label("名前"), d);
+	lobby_table->dual_add(name_w, d);
 	
 	w_enabling_toggle *custom_colors_w = new w_enabling_toggle(network_preferences->use_custom_metaserver_colors);
-	table->dual_add(custom_colors_w->label("カスタムチャット色"), d);
-	table->dual_add(custom_colors_w, d);
+	lobby_table->dual_add(custom_colors_w->label("カスタムチャット色"), d);
+	lobby_table->dual_add(custom_colors_w, d);
 	
 	w_color_picker *primary_w = new w_color_picker(network_preferences->metaserver_colors[0]);
-	table->dual_add(primary_w->label("プライマリ"), d);
-	table->dual_add(primary_w, d);
+	lobby_table->dual_add(primary_w->label("プライマリ"), d);
+	lobby_table->dual_add(primary_w, d);
 	
 	w_color_picker *secondary_w = new w_color_picker(network_preferences->metaserver_colors[1]);
-	table->dual_add(secondary_w->label("セカンダリ"), d);
-	table->dual_add(secondary_w, d);
+	lobby_table->dual_add(secondary_w->label("セカンダリ"), d);
+	lobby_table->dual_add(secondary_w, d);
 	
 	custom_colors_w->add_dependent_widget(primary_w);
 	custom_colors_w->add_dependent_widget(secondary_w);
 
 	w_toggle *mute_guests_w = new w_toggle(network_preferences->mute_metaserver_guests);
-	table->dual_add(mute_guests_w->label("全てのゲストのチャットをミュートする"), d);
-	table->dual_add(mute_guests_w, d);
+	lobby_table->dual_add(mute_guests_w->label("全てのゲストのチャットをミュートする"), d);
+	lobby_table->dual_add(mute_guests_w, d);
 
 	w_toggle *advertise_on_metaserver_w = new w_toggle(network_preferences->advertise_on_metaserver);
-	table->dual_add(advertise_on_metaserver_w->label("ゲーム集合をアナウンスする"), d);
-	table->dual_add(advertise_on_metaserver_w, d);
+	lobby_table->dual_add(advertise_on_metaserver_w->label("ゲーム集合をアナウンスする"), d);
+	lobby_table->dual_add(advertise_on_metaserver_w, d);
 	
-	table->dual_add_row(new w_static_text("アナウンスされたゲームは、ゲームロビーにいる"), d);
-	table->dual_add_row(new w_static_text("全てのユーザに公開されます。"), d);
+	lobby_table->dual_add_row(new w_static_text("アナウンスされたゲームは、ゲームロビーにいる"), d);
+	lobby_table->dual_add_row(new w_static_text("全てのユーザに公開されます。"), d);
+	
+	lobby_table->add_row(new w_spacer(), true);
+	
+	lobby->add(lobby_table, true);
+	
+	vertical_placer *stats = new vertical_placer();
+	table_placer *stats_table = new table_placer(2, get_theme_space(ITEM_WIDGET), true);
+	stats_table->col_flags(0, placeable::kAlignRight);
+	stats_table->col_flags(1, placeable::kAlignLeft);
 
-	table->add_row(new w_spacer(), true);
-	table->dual_add_row(new w_hyperlink(A1_LEADERBOARD_URL, "リーダーボードを見る"), d);
+	stats_table->dual_add_row(new w_hyperlink(A1_LEADERBOARD_URL, "リーダーボードを見る"), d);
+	stats_table->add_row(new w_spacer(), true);
 	
-	table->add_row(new w_spacer(), true);
-	table->dual_add_row(new w_static_text("リーダーボードにゲームの状況を送付するには、"), d);
-	table->dual_add_row(new w_static_text("lhowon.orgアカウントと状況プラグインがインストールされ、"), d);
-	table->dual_add_row(new w_static_text("有効になっている必要があります。"), d);
+	w_toggle *allow_stats_w = new w_toggle(network_preferences->allow_stats);
+	stats_table->dual_add(allow_stats_w->label("Send Stats to Lhowon.org"), d);
+	stats_table->dual_add(allow_stats_w, d);
 	
-	table->add_row(new w_spacer(), true);
-	table->dual_add_row(new w_button("プラグイン", plugins_dialog, &d), d);
-
-	placer->add(table, true);
+	stats_table->add_row(new w_spacer(), true);
+	
+	stats_table->dual_add_row(new w_static_text("リーダーボードにゲームの状況を送付するには、"), d);
+	stats_table->dual_add_row(new w_static_text("lhowon.orgアカウントと状況プラグインがインストールされ、"), d);
+	stats_table->dual_add_row(new w_static_text("有効になっている必要があります。"), d);
+	
+	stats_table->add_row(new w_spacer(), true);
+	stats_table->dual_add_row(new w_button("プラグイン", plugins_dialog, &d), d);
+	
+	stats_table->add_row(new w_spacer(), true);
+	
+	stats->add(stats_table, true);
+	
+	tabs->add(account, true);
+	tabs->add(lobby, true);
+	tabs->add(stats, true);
+	
+	placer->add(tabs, true);
 	placer->add(new w_spacer(), true);
 
 	horizontal_placer *button_placer = new horizontal_placer;
@@ -919,6 +960,15 @@ static void online_dialog(void *arg)
 			network_preferences->advertise_on_metaserver = announce_games;
 			changed = true;
 		}
+		
+		bool allow_stats = allow_stats_w->get_selection() == 1;
+		if (allow_stats != network_preferences->allow_stats)
+		{
+			network_preferences->allow_stats = allow_stats;
+			Plugins::instance()->invalidate();
+			changed = true;
+		}
+		
 		
 		if (changed)
 			write_preferences();
@@ -2632,6 +2682,7 @@ void write_preferences(
 	fprintf(F, "\"\n");
 	fprintf(F,"  use_custom_metaserver_colors=\"%s\"\n", BoolString(network_preferences->use_custom_metaserver_colors));
 	fprintf(F,"  mute_metaserver_guests=\"%s\"\n", BoolString(network_preferences->mute_metaserver_guests));
+	fprintf(F,"  allow_stats=\"%s\"\n", BoolString(network_preferences->allow_stats));
 	
 	fprintf(F,">\n");
 #ifndef SDL
@@ -2783,6 +2834,7 @@ static void default_network_preferences(network_preferences_data *preferences)
 	preferences->use_custom_metaserver_colors = false;
 	preferences->metaserver_colors[0] = get_interface_color(PLAYER_COLOR_BASE_INDEX);
 	preferences->metaserver_colors[1] = get_interface_color(PLAYER_COLOR_BASE_INDEX);
+	preferences->allow_stats = false;
 }
 
 static void default_player_preferences(player_preferences_data *preferences)
@@ -4248,6 +4300,10 @@ bool XML_NetworkPrefsParser::HandleAttribute(const char *Tag, const char *Value)
 			network_preferences->metaserver_password[i] = (char) c ^ sPasswordMask[i];
 		}
 		return true;
+	}
+	else if (StringsEqual(Tag,"allow_stats"))
+	{
+		return ReadBooleanValue(Value, network_preferences->allow_stats);
 	}
 	return true;
 }
