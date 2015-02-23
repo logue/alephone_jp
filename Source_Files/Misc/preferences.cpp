@@ -702,7 +702,7 @@ static void signup_dialog(void *arg)
 {
 	dialog d;
 	vertical_placer *placer = new vertical_placer;
-	placer->dual_add(new w_title("LHOWON.ORG SIGN UP"), d);
+	placer->dual_add(new w_title("LHOWON.ORGサインアップ"), d);
 	placer->add(new w_spacer());
 	
 	table_placer *table = new table_placer(2, get_theme_space(ITEM_WIDGET), true);
@@ -834,6 +834,12 @@ static void online_dialog(void *arg)
 	lobby_table->dual_add(advertise_on_metaserver_w->label("ゲーム集合をアナウンスする"), d);
 	lobby_table->dual_add(advertise_on_metaserver_w, d);
 	
+	w_toggle *join_meta_w = new w_toggle(network_preferences->join_metaserver_by_default);
+	lobby_table->dual_add(join_meta_w->label("デフォルトでゲーム前のロビーに入る"), d);
+	lobby_table->dual_add(join_meta_w, d);
+	
+	lobby_table->add_row(new w_spacer(), true);
+	
 	lobby_table->dual_add_row(new w_static_text("アナウンスされたゲームは、ゲームロビーにいる"), d);
 	lobby_table->dual_add_row(new w_static_text("全てのユーザに公開されます。"), d);
 	
@@ -850,7 +856,7 @@ static void online_dialog(void *arg)
 	stats_table->add_row(new w_spacer(), true);
 	
 	w_toggle *allow_stats_w = new w_toggle(network_preferences->allow_stats);
-	stats_table->dual_add(allow_stats_w->label("Send Stats to Lhowon.org"), d);
+	stats_table->dual_add(allow_stats_w->label("状況をLhowon.orgに送る"), d);
 	stats_table->dual_add(allow_stats_w, d);
 	
 	stats_table->add_row(new w_spacer(), true);
@@ -2682,6 +2688,7 @@ void write_preferences(
 	fprintf(F, "\"\n");
 	fprintf(F,"  use_custom_metaserver_colors=\"%s\"\n", BoolString(network_preferences->use_custom_metaserver_colors));
 	fprintf(F,"  mute_metaserver_guests=\"%s\"\n", BoolString(network_preferences->mute_metaserver_guests));
+		fprintf(F,"  join_metaserver_by_default=\"%s\"\n", BoolString(network_preferences->join_metaserver_by_default));
 	fprintf(F,"  allow_stats=\"%s\"\n", BoolString(network_preferences->allow_stats));
 	
 	fprintf(F,">\n");
@@ -2834,6 +2841,7 @@ static void default_network_preferences(network_preferences_data *preferences)
 	preferences->use_custom_metaserver_colors = false;
 	preferences->metaserver_colors[0] = get_interface_color(PLAYER_COLOR_BASE_INDEX);
 	preferences->metaserver_colors[1] = get_interface_color(PLAYER_COLOR_BASE_INDEX);
+	preferences->join_metaserver_by_default = false;
 	preferences->allow_stats = false;
 }
 

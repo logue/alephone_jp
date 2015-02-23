@@ -2112,7 +2112,7 @@ void w_select_popup::gotSelected ()
 }
 
 
-static const char* const sFileChooserInvalidFileString = "(no valid selection)";
+static const char* const sFileChooserInvalidFileString = "Åiñ≥å¯Ç»ëIëÇ≈Ç∑Åj";
 
 w_file_chooser::w_file_chooser(const char* inDialogPrompt, Typecode inTypecode)
 	: w_select_button("", NULL, NULL, true), typecode(inTypecode)

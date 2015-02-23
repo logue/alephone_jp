@@ -543,7 +543,7 @@ int network_join(void)
 	return join_dialog_result;
 }
 
-JoinDialog::JoinDialog() : got_gathered(false), skipToMetaserver(false)
+JoinDialog::JoinDialog() : got_gathered(false), skipToMetaserver(network_preferences->join_metaserver_by_default)
 	{ if (!gMetaserverClient) gMetaserverClient = new MetaserverClient (); }
 
 JoinDialog::~JoinDialog ()
@@ -2682,6 +2682,12 @@ public:
 		table_placer *prejoin_table = new table_placer(2, get_theme_space(ITEM_WIDGET), true);
 		prejoin_table->col_flags(0, placeable::kAlignRight);
 		
+		prejoin_table->add_row(new w_spacer(), true);
+		
+		w_button* join_by_metaserver_w = new w_button("インターネットゲームを検索");
+		prejoin_table->dual_add_row(join_by_metaserver_w, m_dialog);
+		prejoin_table->add_row(new w_spacer(), true);
+		
 		w_toggle* hint_w = new w_toggle(false);
 		prejoin_table->dual_add(hint_w->label("アドレス入力で参加"), m_dialog);
 		prejoin_table->dual_add(hint_w, m_dialog);
@@ -2690,6 +2696,11 @@ public:
 		prejoin_table->dual_add(hint_address_w->label("アドレス"), m_dialog);
 		prejoin_table->dual_add(hint_address_w, m_dialog);
 
+		prejoin_table->add_row(new w_spacer(), true);
+
+		w_button* join_w = new w_button("ローカルゲームに参加");
+		prejoin_table->dual_add_row(join_w, m_dialog);
+		
 		prejoin_placer->add(prejoin_table, true);
 		prejoin_placer->add(new w_spacer(), true);
 
@@ -2703,11 +2714,6 @@ public:
 		//       2) widgets in dialog don't update layout position once dialog starts to run
 		//       If we get solutions to these issues, then we can show the join messages.
 
-		prejoin_placer->add(new w_spacer(), true);
-
-		w_button* join_by_metaserver_w = new w_button("インターネットゲームを探す");
-		prejoin_placer->dual_add(join_by_metaserver_w, m_dialog);
-		
 		w_players_in_game2* players_w = new w_players_in_game2(false);
 		postjoin_placer->dual_add(players_w, m_dialog);
 
@@ -2741,9 +2747,6 @@ public:
 
 		horizontal_placer *button_placer = new horizontal_placer;
 		
-		w_button* join_w = new w_button("参加");
-		button_placer->dual_add(join_w, m_dialog);
-
 		w_button* cancel_w = new w_button("キャンセル");
 		button_placer->dual_add(cancel_w, m_dialog);
 
