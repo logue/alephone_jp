@@ -28,9 +28,8 @@ EXTRA_DIST = COPYING.SDL INSTALL.BeOS INSTALL.Unix INSTALL.Windows	\
   docs/alephone.6 examples/lua/Cheats.lua THANKS			\
   data/powered-by-alephone.svg						\
   PBProjects/AlephOne-Xcode4.xcodeproj/project.pbxproj\
-  PBProjects/AlephOne-Xcode4.xcodeproj/project.xcworkspace/contents.xcworkspacedata\
   PBProjects/Info-AlephOne-Xcode4.plist\
-	PBProjects/AppStore/Marathon/Marathon.plist \
+	PBProjects/AppStore/Marathon/Info.plist \
 	PBProjects/AppStore/Marathon/Marathon.icns \
 	PBProjects/AppStore/Marathon/English.lproj/InfoPlist.strings
 
@@ -41,11 +40,11 @@ dist-hook: AlephOne.spec
 	cp "$(srcdir)/Aleph One Classic SDL.mcp" $(distdir)
 	cp "$(srcdir)/Resources/Aleph One Classic SDL.r" $(distdir)/Resources
 	mkdir -p "$(distdir)/PBProjects/AppStore/Marathon 2/English.lproj"
-	cp "$(srcdir)/PBProjects/AppStore/Marathon 2/Marathon 2.plist" "$(distdir)/PBProjects/AppStore/Marathon 2/"
+	cp "$(srcdir)/PBProjects/AppStore/Marathon 2/Info.plist" "$(distdir)/PBProjects/AppStore/Marathon 2/"
 	cp "$(srcdir)/PBProjects/AppStore/Marathon 2/Marathon 2.icns" "$(distdir)/PBProjects/AppStore/Marathon 2/"
 	cp "$(srcdir)/PBProjects/AppStore/Marathon 2/English.lproj/InfoPlist.strings" "$(distdir)/PBProjects/AppStore/Marathon 2/English.lproj/"
 	mkdir -p "$(distdir)/PBProjects/AppStore/Marathon Infinity/English.lproj"
-	cp "$(srcdir)/PBProjects/AppStore/Marathon Infinity/Marathon Infinity.plist" "$(distdir)/PBProjects/AppStore/Marathon Infinity/"
+	cp "$(srcdir)/PBProjects/AppStore/Marathon Infinity/Info.plist" "$(distdir)/PBProjects/AppStore/Marathon Infinity/"
 	cp "$(srcdir)/PBProjects/AppStore/Marathon Infinity/Marathon Infinity.icns" "$(distdir)/PBProjects/AppStore/Marathon Infinity/"
 	cp "$(srcdir)/PBProjects/AppStore/Marathon Infinity/English.lproj/InfoPlist.strings" "$(distdir)/PBProjects/AppStore/Marathon Infinity/English.lproj/"
 
@@ -90,7 +89,7 @@ windist: winzip m1-winzip m2-winzip inf-winzip m1-winup m2-winup inf-winup
 
 define cp_no_svn
 mkdir -p "$(2)"
-tar -c --exclude='.svn' -C "$(1)" . | tar -x -C "$(2)"
+tar -c --exclude='.svn' --exclude='Makefile' --exclude='Makefile.*' -C "$(1)" . | tar -x -C "$(2)"
 endef
 
 define windist_common
@@ -103,7 +102,6 @@ cp $(srcdir)/docs/Lua_HUD.html "$(1)/docs/Lua_HUD.html"
 cp $(srcdir)/docs/MML.html "$(1)/docs/MML.html"
 mkdir "$(1)/Extras"
 cp $(srcdir)/data/Software_Transparent_Liquids.mml "$(1)/Extras"
-cp $(srcdir)/data/Transparent_Liquids.mml "$(1)/Extras"
 cp $(srcdir)/data/Carnage_Messages.mml "$(1)/Extras"
 unix2dos -n $(srcdir)/examples/lua/Cheats.lua "$(1)/Extras/Cheats.lua"
 $(call cp_no_svn,$(srcdir)/Resources/Library Licenses,$(1)/docs/Library Licenses)
@@ -118,6 +116,7 @@ $(WINZIP): Source_Files/AlephOne.exe
 	cp Source_Files/AlephOne.exe $(WINDISTDIR)/
 	unix2dos -n $(srcdir)/INSTALL.Windows "$(WINDISTDIR)/docs/INSTALL.Windows.txt"
 	cp $(srcdir)/data/Transparent_Sprites.mml $(WINDISTDIR)/Extras
+	cp $(srcdir)/data/Transparent_Liquids.mml $(WINDISTDIR)/Extras
 	$(call cp_no_svn,$(srcdir)/data/default_theme,$(WINDISTDIR)/Plugins/Default_Theme)
 	rm -f $(WINZIP)
 	zip -r $(WINZIP) $(WINDISTDIR)
@@ -182,5 +181,42 @@ $(MINF_WINZIP): Source_Files/Marathon2.exe
 	rm -f $(MINF_WINZIP)
 	zip -r $(MINF_WINZIP) "$(WINDISTDIR_MINF)"
 	rm -rf "$(WINDISTDIR_MINF)"
+
+# Rules to build scenario-only zipfiles
+M1_DATAZIP=Marathon-$(VERSION)-Data.zip
+M2_DATAZIP=Marathon2-$(VERSION)-Data.zip
+MINF_DATAZIP=MarathonInfinity-$(VERSION)-Data.zip
+
+m1-datazip: $(M1_DATAZIP)
+m2-datazip: $(M2_DATAZIP)
+inf-datazip: $(MINF_DATAZIP)
+
+datadist: m1-datazip m2-datazip inf-datazip
+
+DATADISTDIR_M1=Marathon
+$(M1_DATAZIP):
+	mkdir "$(DATADISTDIR_M1)"
+	$(call cp_no_svn,$(srcdir)/data/Scenarios/Marathon,$(DATADISTDIR_M1))
+	rm -f $(M1_DATAZIP)
+	zip -r $(M1_DATAZIP) "$(DATADISTDIR_M1)"
+	rm -rf "$(DATADISTDIR_M1)"
+
+DATADISTDIR_M2=Marathon 2
+$(M2_DATAZIP):
+	mkdir "$(DATADISTDIR_M2)"
+	$(call cp_no_svn,$(srcdir)/data/Scenarios/Marathon 2,$(DATADISTDIR_M2))
+	$(call cp_no_svn,$(srcdir)/data/XBLA_HUD,$(DATADISTDIR_M2)/Plugins/XBLA_HUD)
+	rm -f $(M2_DATAZIP)
+	zip -r $(M2_DATAZIP) "$(DATADISTDIR_M2)"
+	rm -rf "$(DATADISTDIR_M2)"
+
+DATADISTDIR_MINF=Marathon Infinity
+$(MINF_DATAZIP):
+	mkdir "$(DATADISTDIR_MINF)"
+	$(call cp_no_svn,$(srcdir)/data/Scenarios/Marathon Infinity,$(DATADISTDIR_MINF))
+	$(call cp_no_svn,$(srcdir)/data/XBLA_HUD,$(DATADISTDIR_MINF)/Plugins/XBLA_HUD)
+	rm -f $(MINF_DATAZIP)
+	zip -r $(MINF_DATAZIP) "$(DATADISTDIR_MINF)"
+	rm -rf "$(DATADISTDIR_MINF)"
 
 FORCE:

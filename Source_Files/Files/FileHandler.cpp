@@ -86,12 +86,13 @@
 #include <boost/bind.hpp>
 #include <boost/function.hpp>
 #include <boost/algorithm/string/predicate.hpp>
+#include <boost/filesystem.hpp>
 
 namespace io = boost::iostreams;
 
 // From shell_sdl.cpp
 extern vector<DirectorySpecifier> data_search_path;
-extern DirectorySpecifier local_data_dir, preferences_dir, saved_games_dir, quick_saves_dir, recordings_dir;
+extern DirectorySpecifier local_data_dir, preferences_dir, saved_games_dir, quick_saves_dir, image_cache_dir, recordings_dir;
 
 extern bool is_applesingle(SDL_RWops *f, bool rsrc_fork, int32 &offset, int32 &length);
 extern bool is_macbinary(SDL_RWops *f, int32 &data_length, int32 &rsrc_length);
@@ -659,6 +660,13 @@ bool FileSpecifier::Delete()
 
 bool FileSpecifier::Rename(const FileSpecifier& Destination)
 {
+#ifdef WIN32
+	// Work around Windows' non-POSIX behavior on rename().
+	// If we fail, go ahead and try to rename anyway.
+	FileSpecifier d2 = Destination;
+	if (d2.Exists() && !d2.IsDir())
+		d2.Delete();
+#endif
 	return rename(GetPath(), Destination.GetPath()) == 0;
 }
 
@@ -684,6 +692,12 @@ void FileSpecifier::SetToSavedGamesDir()
 void FileSpecifier::SetToQuickSavesDir()
 {
 	name = quick_saves_dir.name;
+}
+
+// Set to image cache directory
+void FileSpecifier::SetToImageCacheDir()
+{
+	name = image_cache_dir.name;
 }
 
 // Set to recordings directory
@@ -753,18 +767,7 @@ bool FileSpecifier::SetNameWithPath(const char* NameWithPath, const DirectorySpe
 
 void FileSpecifier::SetTempName(const FileSpecifier& other)
 {
-	name = other.name + "XXXXXX";
-
-	// null terminate it for use with mktemp
-	name.resize(name.size() + 1);
-	name[name.size() - 1] = '\0';
-
-	// yeah, yeah. but this is at least better than the tmpile.dat that
-	// used to be generated for atomic saves, and was unsafe for all the
-	// same reasons. baby steps.
-	mktemp(&name[0]);
-
-	name.resize(name.size() - 1);
+	name = boost::filesystem::unique_path(other.name + "%%%%%%").string();
 }
 
 // Get last element of path

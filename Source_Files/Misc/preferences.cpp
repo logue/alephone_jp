@@ -2545,7 +2545,7 @@ void write_preferences(
 	fprintf(F,"<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n");
 	fprintf(F,"<!-- Preferences file for the Marathon Open Source \"Aleph One\" engine -->\n\n");
 	
-	fprintf(F,"<mara_prefs>\n\n");
+	fprintf(F,"<mara_prefs version=\"%s\">\n\n", A1_DATE_VERSION);
 	
 	fprintf(F,"<graphics\n");
 	fprintf(F,"  scmode_width=\"%hd\"\n", graphics_preferences->screen_mode.width);
@@ -2688,7 +2688,7 @@ void write_preferences(
 	fprintf(F, "\"\n");
 	fprintf(F,"  use_custom_metaserver_colors=\"%s\"\n", BoolString(network_preferences->use_custom_metaserver_colors));
 	fprintf(F,"  mute_metaserver_guests=\"%s\"\n", BoolString(network_preferences->mute_metaserver_guests));
-		fprintf(F,"  join_metaserver_by_default=\"%s\"\n", BoolString(network_preferences->join_metaserver_by_default));
+	fprintf(F,"  join_metaserver_by_default=\"%s\"\n", BoolString(network_preferences->join_metaserver_by_default));
 	fprintf(F,"  allow_stats=\"%s\"\n", BoolString(network_preferences->allow_stats));
 	
 	fprintf(F,">\n");
@@ -4308,6 +4308,10 @@ bool XML_NetworkPrefsParser::HandleAttribute(const char *Tag, const char *Value)
 			network_preferences->metaserver_password[i] = (char) c ^ sPasswordMask[i];
 		}
 		return true;
+	}
+	else if (StringsEqual(Tag,"join_metaserver_by_default"))
+	{
+		return ReadBooleanValue(Value, network_preferences->join_metaserver_by_default);
 	}
 	else if (StringsEqual(Tag,"allow_stats"))
 	{
