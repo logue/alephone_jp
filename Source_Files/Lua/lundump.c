@@ -1,5 +1,5 @@
 /*
-** $Id: lundump.c 4787 2013-04-02 02:08:04Z treellama $
+** $Id: lundump.c 5202 2015-03-27 05:03:36Z jeremiahmorris $
 ** load precompiled Lua chunks
 ** See Copyright Notice in lua.h
 */
@@ -233,6 +233,7 @@ Closure* luaU_undump (lua_State* L, ZIO* Z, Mbuffer* buff, const char* name)
 }
 
 #define MYINT(s)	(s[0]-'0')
+#undef VERSION				/* avoid redefine warnings */
 #define VERSION		MYINT(LUA_VERSION_MAJOR)*16+MYINT(LUA_VERSION_MINOR)
 #define FORMAT		0		/* this is the official format */
 

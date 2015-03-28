@@ -372,6 +372,7 @@ static void crosshair_dialog(void *arg)
 	crosshair_binders.reset(new BinderSet);
 
 	dialog *parent = (dialog *) arg;
+	(void)parent;
 
 	dialog d;
 	vertical_placer *placer = new vertical_placer;
@@ -830,9 +831,7 @@ static void online_dialog(void *arg)
 	lobby_table->dual_add(mute_guests_w->label("全てのゲストのチャットをミュートする"), d);
 	lobby_table->dual_add(mute_guests_w, d);
 
-	w_toggle *advertise_on_metaserver_w = new w_toggle(network_preferences->advertise_on_metaserver);
-	lobby_table->dual_add(advertise_on_metaserver_w->label("ゲーム集合をアナウンスする"), d);
-	lobby_table->dual_add(advertise_on_metaserver_w, d);
+	lobby_table->add_row(new w_spacer(), true);
 	
 	w_toggle *join_meta_w = new w_toggle(network_preferences->join_metaserver_by_default);
 	lobby_table->dual_add(join_meta_w->label("デフォルトでゲーム前のロビーに入る"), d);
@@ -840,37 +839,29 @@ static void online_dialog(void *arg)
 	
 	lobby_table->add_row(new w_spacer(), true);
 	
-	lobby_table->dual_add_row(new w_static_text("アナウンスされたゲームは、ゲームロビーにいる"), d);
-	lobby_table->dual_add_row(new w_static_text("全てのユーザに公開されます。"), d);
-	
-	lobby_table->add_row(new w_spacer(), true);
-	
 	lobby->add(lobby_table, true);
 	
 	vertical_placer *stats = new vertical_placer();
-	table_placer *stats_table = new table_placer(2, get_theme_space(ITEM_WIDGET), true);
-	stats_table->col_flags(0, placeable::kAlignRight);
-	stats_table->col_flags(1, placeable::kAlignLeft);
-
-	stats_table->dual_add_row(new w_hyperlink(A1_LEADERBOARD_URL, "リーダーボードを見る"), d);
-	stats_table->add_row(new w_spacer(), true);
+	stats->dual_add(new w_hyperlink(A1_LEADERBOARD_URL, "リーダーボードを見る"), d);
+	stats->add(new w_spacer(), true);
+	
+	horizontal_placer *stats_box = new horizontal_placer();
 	
 	w_toggle *allow_stats_w = new w_toggle(network_preferences->allow_stats);
-	stats_table->dual_add(allow_stats_w->label("状況をLhowon.orgに送る"), d);
-	stats_table->dual_add(allow_stats_w, d);
+	stats_box->dual_add(allow_stats_w, d);
+	stats_box->dual_add(allow_stats_w->label("状況をLhowon.orgに送る"), d);
 	
-	stats_table->add_row(new w_spacer(), true);
+	stats->add(stats_box, true);
+	stats->add(new w_spacer(), true);
 	
-	stats_table->dual_add_row(new w_static_text("リーダーボードにゲームの状況を送付するには、"), d);
-	stats_table->dual_add_row(new w_static_text("lhowon.orgアカウントと状況プラグインがインストールされ、"), d);
-	stats_table->dual_add_row(new w_static_text("有効になっている必要があります。"), d);
+	stats->dual_add(new w_static_text("リーダーボードにゲームの状況を送付するには、"), d);
+	stats->dual_add(new w_static_text("lhowon.orgアカウントと状況プラグインがインストールされ、"), d);
+	stats->dual_add(new w_static_text("有効になっている必要があります。"), d);
 	
-	stats_table->add_row(new w_spacer(), true);
-	stats_table->dual_add_row(new w_button("プラグイン", plugins_dialog, &d), d);
+	stats->add(new w_spacer(), true);
+	stats->dual_add(new w_button("プラグイン", plugins_dialog, &d), d);
 	
-	stats_table->add_row(new w_spacer(), true);
-	
-	stats->add(stats_table, true);
+	stats->add(new w_spacer(), true);
 	
 	tabs->add(account, true);
 	tabs->add(lobby, true);
@@ -960,10 +951,10 @@ static void online_dialog(void *arg)
 			changed = true;
 		}
 		
-		bool announce_games = advertise_on_metaserver_w->get_selection() == 1;
-		if (announce_games != network_preferences->advertise_on_metaserver)
+		bool join_meta = join_meta_w->get_selection() == 1;
+		if (join_meta != network_preferences->join_metaserver_by_default)
 		{
-			network_preferences->advertise_on_metaserver = announce_games;
+			network_preferences->join_metaserver_by_default = join_meta;
 			changed = true;
 		}
 		
@@ -2588,11 +2579,11 @@ void write_preferences(
 	for (int k=0; k<OGL_NUMBER_OF_TEXTURE_TYPES; k++)
 	{
 		OGL_Texture_Configure& TxtrConfig = graphics_preferences->OGL_Configure.TxtrConfigList[k];
-		fprintf(F,"  <texture index=\"%hd\" near_filter=\"%hd\" far_filter=\"%hd\" resolution=\"%hd\" color_format=\"%d\" max_size=\"%d\"/>\n",
+		fprintf(F,"  <texture index=\"%d\" near_filter=\"%hd\" far_filter=\"%hd\" resolution=\"%hd\" color_format=\"%d\" max_size=\"%d\"/>\n",
 			k, TxtrConfig.NearFilter, TxtrConfig.FarFilter, TxtrConfig.Resolution, TxtrConfig.ColorFormat, TxtrConfig.MaxSize);
 	}
 	OGL_Texture_Configure& TxtrConfig = graphics_preferences->OGL_Configure.ModelConfig;
-	fprintf(F,"  <texture index=\"%hd\" near_filter=\"%hd\" far_filter=\"%hd\" resolution=\"%hd\" color_format=\"%d\" max_size=\"%d\"/>\n",
+	fprintf(F,"  <texture index=\"%u\" near_filter=\"%hd\" far_filter=\"%hd\" resolution=\"%hd\" color_format=\"%d\" max_size=\"%d\"/>\n",
 		OGL_NUMBER_OF_TEXTURE_TYPES, TxtrConfig.NearFilter, TxtrConfig.FarFilter, TxtrConfig.Resolution, TxtrConfig.ColorFormat, TxtrConfig.MaxSize);
 	fprintf(F,"</graphics>\n\n");
 	
@@ -2631,16 +2622,16 @@ void write_preferences(
 
 	fprintf(F,">\n");
 	for (int i = 0; i < MAX_BUTTONS; i++)
-		fprintf(F,"  <mouse_button index=\"%hd\" action=\"%s\"/>\n", i,
+		fprintf(F,"  <mouse_button index=\"%d\" action=\"%s\"/>\n", i,
 			input_preferences->mouse_button_actions[i] == _mouse_button_fires_left_trigger ? "left_trigger" : 
 			input_preferences->mouse_button_actions[i] == _mouse_button_fires_right_trigger ? "right_trigger" : "none");
 	for (int i = 0; i < NUMBER_OF_JOYSTICK_MAPPINGS; ++i)
-		fprintf(F,"  <joystick_axis_mapping index=\"%hd\" axis=\"%hd\" axis_sensitivity=\"%f\" bound=\"%hd\"/>\n", i, input_preferences->joystick_axis_mappings[i], input_preferences->joystick_axis_sensitivities[i], input_preferences->joystick_axis_bounds[i]);
+		fprintf(F,"  <joystick_axis_mapping index=\"%d\" axis=\"%hd\" axis_sensitivity=\"%f\" bound=\"%hd\"/>\n", i, input_preferences->joystick_axis_mappings[i], input_preferences->joystick_axis_sensitivities[i], input_preferences->joystick_axis_bounds[i]);
 	for (int k=0; k<NUMBER_OF_KEYS; k++)
-		fprintf(F,"  <sdl_key index=\"%hd\" value=\"%hd\"/>\n",
+		fprintf(F,"  <sdl_key index=\"%d\" value=\"%hd\"/>\n",
 			k,input_preferences->keycodes[k]);
 	for (int k=0; k<NUMBER_OF_SHELL_KEYS;k++)
-		fprintf(F,"  <sdl_key index=\"%hd\" value=\"%hd\"/>\n",
+		fprintf(F,"  <sdl_key index=\"%d\" value=\"%hd\"/>\n",
 			k + NUMBER_OF_KEYS, input_preferences->shell_keycodes[k]);
 	fprintf(F,"</input>\n\n");
 	
@@ -2834,7 +2825,7 @@ static void default_network_preferences(network_preferences_data *preferences)
 	preferences->advertise_on_metaserver = false;
 	preferences->attempt_upnp = false;
 	preferences->check_for_updates = true;
-	preferences->verify_https = true;
+	preferences->verify_https = false;
 	strcpy(preferences->metaserver_login, "guest");
 	memset(preferences->metaserver_password, 0, 16);
 	preferences->mute_metaserver_guests = false;

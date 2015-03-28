@@ -4978,7 +4978,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "mkdir /tmp/Aleph\nrsync -a \"$TARGET_BUILD_DIR/AlephOne.app\" /tmp/Aleph/\ncp $SRCROOT/../COPYING /tmp/Aleph/COPYING.txt\nmkdir /tmp/Aleph/Documentation\ncp $SRCROOT/../docs/Lua.html /tmp/Aleph/Documentation\ncp $SRCROOT/../docs/Lua_HUD.html /tmp/Aleph/Documentation\ncp $SRCROOT/../docs/MML.html /tmp/Aleph/Documentation\nmkdir \"/tmp/Aleph/Documentation/Library Licenses\"\ntar -c --exclude '.svn' -C \"$SRCROOT/../Resources/Library Licenses\" | tar -x -C \"/tmp/Aleph/Documentation/Library Licenses\"\nmkdir /tmp/Aleph/Extras\ncp $SRCROOT/../data/Transparent_Liquids.mml /tmp/Aleph/Extras\ncp $SRCROOT/../data/Transparent_Sprites.mml /tmp/Aleph/Extras\ncp $SRCROOT/../data/Software_Transparent_Liquids.mml /tmp/Aleph/Extras\ncp $SRCROOT/../data/Carnage_Messages.mml /tmp/Aleph/Extras\ncp $SRCROOT/../examples/lua/Cheats.lua /tmp/Aleph/Extras\nhdiutil create -ov -fs HFS+ -format UDBZ -layout SPUD -srcfolder /tmp/Aleph -volname \"Aleph One\" \"$TARGET_BUILD_DIR/AlephOne-$( grep '^#define A1_DATE_VERSION' $SRCROOT/../Source_Files/Misc/alephversion.h | sed -e 's/\\(.*\\\"\\)\\(.*\\)\\(\\\"\\)/\\2/g' )-Mac.dmg\"\nrm -rf /tmp/Aleph\n";
+			shellScript = "mkdir /tmp/Aleph\nrsync -a \"$TARGET_BUILD_DIR/AlephOne.app\" /tmp/Aleph/\ncp $SRCROOT/../COPYING /tmp/Aleph/COPYING.txt\nmkdir /tmp/Aleph/Documentation\ncp $SRCROOT/../docs/Lua.html /tmp/Aleph/Documentation\ncp $SRCROOT/../docs/Lua_HUD.html /tmp/Aleph/Documentation\ncp $SRCROOT/../docs/MML.html /tmp/Aleph/Documentation\nmkdir \"/tmp/Aleph/Documentation/Library Licenses\"\ntar -c --exclude '.svn' -C \"$SRCROOT/../Resources/Library Licenses\" . | tar -x -C \"/tmp/Aleph/Documentation/Library Licenses\"\nmkdir /tmp/Aleph/Extras\ncp $SRCROOT/../data/Transparent_Liquids.mml /tmp/Aleph/Extras\ncp $SRCROOT/../data/Transparent_Sprites.mml /tmp/Aleph/Extras\ncp $SRCROOT/../data/Software_Transparent_Liquids.mml /tmp/Aleph/Extras\ncp $SRCROOT/../data/Carnage_Messages.mml /tmp/Aleph/Extras\ncp $SRCROOT/../examples/lua/Cheats.lua /tmp/Aleph/Extras\nhdiutil create -ov -fs HFS+ -format UDBZ -layout SPUD -srcfolder /tmp/Aleph -volname \"Aleph One\" \"$TARGET_BUILD_DIR/AlephOne-$( grep '^#define A1_DATE_VERSION' $SRCROOT/../Source_Files/Misc/alephversion.h | sed -e 's/\\(.*\\\"\\)\\(.*\\)\\(\\\"\\)/\\2/g' )-Mac.dmg\"\nrm -rf /tmp/Aleph\n";
 		};
 		AE82ACF914829CFF0066FFB7 /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -4993,7 +4993,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "make_dmg()\n{\nmkdir /tmp/Aleph\n# rsync -a \"$TARGET_BUILD_DIR/AlephOne.app\" /tmp/Aleph/\nrsync -a \"$1\" /tmp/Aleph/\nmkdir /tmp/Aleph/Documentation\ncp $SRCROOT/../COPYING /tmp/Aleph/COPYING.txt\ncp $SRCROOT/../docs/Lua.html /tmp/Aleph/Documentation/\ncp $SRCROOT/../docs/Lua_HUD.html /tmp/Documentation/Aleph/\ncp $SRCROOT/../docs/MML.html /tmp/Aleph/Documentation/\nmkdir \"/tmp/Aleph/Documentation/Library Licenses\"\ntar -c --exclude '.svn' -C \"$SRCROOT/../Resources/Library Licenses\" | tar -x -C \"/tmp/Aleph/Documentation/Library Licenses\"\nmkdir /tmp/Aleph/Extras\ncp $SRCROOT/../data/Software_Transparent_Liquids.mml /tmp/Aleph/Extras\ncp $SRCROOT/../data/Carnage_Messages.mml /tmp/Aleph/Extras\ncp $SRCROOT/../examples/lua/Cheats.lua /tmp/Aleph/Extras\nln -s /Applications /tmp/Aleph/\nhdiutil create -ov -fs HFS+ -format UDBZ -layout SPUD -srcfolder /tmp/Aleph -volname \"$2\" \"$TARGET_BUILD_DIR/$3-$( grep '^#define A1_DATE_VERSION' $SRCROOT/../Source_Files/Misc/alephversion.h | sed -e 's/\\(.*\\\"\\)\\(.*\\)\\(\\\"\\)/\\2/g' )-Mac.dmg\"\nrm -rf /tmp/Aleph\n}\n\nmake_dmg \"$TARGET_BUILD_DIR/Marathon.app\" \"Marathon\" \"Marathon\"\nmake_dmg \"$TARGET_BUILD_DIR/Marathon 2.app\" \"Marathon 2\" \"Marathon2\"\nmake_dmg \"$TARGET_BUILD_DIR/Marathon Infinity.app\" \"Marathon Infinity\" \"MarathonInfinity\"\n";
+			shellScript = "make_dmg()\n{\nmkdir /tmp/Aleph\n# rsync -a \"$TARGET_BUILD_DIR/AlephOne.app\" /tmp/Aleph/\nrsync -a \"$1\" /tmp/Aleph/\nmkdir /tmp/Aleph/Documentation\ncp $SRCROOT/../COPYING /tmp/Aleph/COPYING.txt\ncp $SRCROOT/../docs/Lua.html /tmp/Aleph/Documentation/\ncp $SRCROOT/../docs/Lua_HUD.html /tmp/Aleph/Documentation/\ncp $SRCROOT/../docs/MML.html /tmp/Aleph/Documentation/\nmkdir \"/tmp/Aleph/Documentation/Library Licenses\"\ntar -c --exclude '.svn' -C \"$SRCROOT/../Resources/Library Licenses\" . | tar -x -C \"/tmp/Aleph/Documentation/Library Licenses\"\nmkdir /tmp/Aleph/Extras\ncp $SRCROOT/../data/Software_Transparent_Liquids.mml /tmp/Aleph/Extras\ncp $SRCROOT/../data/Carnage_Messages.mml /tmp/Aleph/Extras\ncp $SRCROOT/../examples/lua/Cheats.lua /tmp/Aleph/Extras\nln -s /Applications /tmp/Aleph/\nhdiutil create -ov -fs HFS+ -format UDBZ -layout SPUD -srcfolder /tmp/Aleph -volname \"$2\" \"$TARGET_BUILD_DIR/$3-$( grep '^#define A1_DATE_VERSION' $SRCROOT/../Source_Files/Misc/alephversion.h | sed -e 's/\\(.*\\\"\\)\\(.*\\)\\(\\\"\\)/\\2/g' )-Mac.dmg\"\nrm -rf /tmp/Aleph\n}\n\nmake_dmg \"$TARGET_BUILD_DIR/Marathon.app\" \"Marathon\" \"Marathon\"\nmake_dmg \"$TARGET_BUILD_DIR/Marathon 2.app\" \"Marathon 2\" \"Marathon2\"\nmake_dmg \"$TARGET_BUILD_DIR/Marathon Infinity.app\" \"Marathon Infinity\" \"MarathonInfinity\"\n";
 		};
 		AEC3C87609AD68AC003258E4 /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -6034,8 +6034,11 @@
 		2718503014392536007CD65B /* Deployment (Universal) */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD_32_64_BIT_PRE_XCODE_3_1)";
-				ARCHS_STANDARD_32_64_BIT_PRE_XCODE_3_1 = "x86_64 i386 ppc";
+				ARCHS = (
+					ppc,
+					i386,
+					x86_64,
+				);
 				COPY_PHASE_STRIP = YES;
 				DEAD_CODE_STRIPPING = YES;
 				DEPLOYMENT_POSTPROCESSING = YES;
@@ -6051,18 +6054,8 @@
 					SCENARIO_IS_BUNDLED,
 					SDL,
 					HAVE_BUNDLE_NAME,
-					HAVE_OPENGL,
 					HAVE_CONFIG_H,
-					HAVE_UNISTD_H,
-					HAVE_PWD_H,
-					HAVE_SYSCTLBYNAME,
-					HAVE_LUA,
 					SPEEX,
-					HAVE_FFMPEG,
-					HAVE_SDL_TTF,
-					HAVE_ZZIP,
-					HAVE_PNG,
-					"HAVE_CURL\n",
 				);
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_CHECK_SWITCH_STATEMENTS = YES;
@@ -6124,18 +6117,8 @@
 					SCENARIO_IS_BUNDLED,
 					SDL,
 					HAVE_BUNDLE_NAME,
-					HAVE_OPENGL,
 					HAVE_CONFIG_H,
-					HAVE_UNISTD_H,
-					HAVE_PWD_H,
-					HAVE_SYSCTLBYNAME,
-					HAVE_LUA,
 					SPEEX,
-					HAVE_FFMPEG,
-					HAVE_SDL_TTF,
-					HAVE_ZZIP,
-					HAVE_PNG,
-					"HAVE_CURL\n",
 				);
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_CHECK_SWITCH_STATEMENTS = YES;
@@ -6196,18 +6179,8 @@
 					SCENARIO_IS_BUNDLED,
 					SDL,
 					HAVE_BUNDLE_NAME,
-					HAVE_OPENGL,
 					HAVE_CONFIG_H,
-					HAVE_UNISTD_H,
-					HAVE_PWD_H,
-					HAVE_SYSCTLBYNAME,
-					HAVE_LUA,
 					SPEEX,
-					HAVE_FFMPEG,
-					HAVE_SDL_TTF,
-					HAVE_ZZIP,
-					HAVE_PNG,
-					"HAVE_CURL\n",
 				);
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_CHECK_SWITCH_STATEMENTS = YES;
@@ -6252,8 +6225,11 @@
 		27185266143931DC007CD65B /* Deployment (Universal) */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD_32_64_BIT_PRE_XCODE_3_1)";
-				ARCHS_STANDARD_32_64_BIT_PRE_XCODE_3_1 = "x86_64 i386 ppc";
+				ARCHS = (
+					ppc,
+					i386,
+					x86_64,
+				);
 				COPY_PHASE_STRIP = YES;
 				DEAD_CODE_STRIPPING = YES;
 				DEPLOYMENT_POSTPROCESSING = YES;
@@ -6269,18 +6245,8 @@
 					SCENARIO_IS_BUNDLED,
 					SDL,
 					HAVE_BUNDLE_NAME,
-					HAVE_OPENGL,
 					HAVE_CONFIG_H,
-					HAVE_UNISTD_H,
-					HAVE_PWD_H,
-					HAVE_SYSCTLBYNAME,
-					HAVE_LUA,
 					SPEEX,
-					HAVE_FFMPEG,
-					HAVE_SDL_TTF,
-					HAVE_ZZIP,
-					HAVE_PNG,
-					"HAVE_CURL\n",
 				);
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_CHECK_SWITCH_STATEMENTS = YES;
@@ -6342,18 +6308,8 @@
 					SCENARIO_IS_BUNDLED,
 					SDL,
 					HAVE_BUNDLE_NAME,
-					HAVE_OPENGL,
 					HAVE_CONFIG_H,
-					HAVE_UNISTD_H,
-					HAVE_PWD_H,
-					HAVE_SYSCTLBYNAME,
-					HAVE_LUA,
 					SPEEX,
-					HAVE_FFMPEG,
-					HAVE_SDL_TTF,
-					HAVE_ZZIP,
-					HAVE_PNG,
-					"HAVE_CURL\n",
 				);
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_CHECK_SWITCH_STATEMENTS = YES;
@@ -6414,18 +6370,8 @@
 					SCENARIO_IS_BUNDLED,
 					SDL,
 					HAVE_BUNDLE_NAME,
-					HAVE_OPENGL,
 					HAVE_CONFIG_H,
-					HAVE_UNISTD_H,
-					HAVE_PWD_H,
-					HAVE_SYSCTLBYNAME,
-					HAVE_LUA,
 					SPEEX,
-					HAVE_FFMPEG,
-					HAVE_SDL_TTF,
-					HAVE_ZZIP,
-					HAVE_PNG,
-					"HAVE_CURL\n",
 				);
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_CHECK_SWITCH_STATEMENTS = YES;
@@ -6470,8 +6416,11 @@
 		2718549914395833007CD65B /* Deployment (Universal) */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD_32_64_BIT_PRE_XCODE_3_1)";
-				ARCHS_STANDARD_32_64_BIT_PRE_XCODE_3_1 = "x86_64 i386 ppc";
+				ARCHS = (
+					ppc,
+					i386,
+					x86_64,
+				);
 				COPY_PHASE_STRIP = YES;
 				DEAD_CODE_STRIPPING = YES;
 				DEPLOYMENT_POSTPROCESSING = YES;
@@ -6487,18 +6436,8 @@
 					SCENARIO_IS_BUNDLED,
 					SDL,
 					HAVE_BUNDLE_NAME,
-					HAVE_OPENGL,
 					HAVE_CONFIG_H,
-					HAVE_UNISTD_H,
-					HAVE_PWD_H,
-					HAVE_SYSCTLBYNAME,
-					HAVE_LUA,
 					SPEEX,
-					HAVE_FFMPEG,
-					HAVE_SDL_TTF,
-					HAVE_ZZIP,
-					HAVE_PNG,
-					HAVE_CURL,
 				);
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_CHECK_SWITCH_STATEMENTS = YES;
@@ -6560,18 +6499,8 @@
 					SCENARIO_IS_BUNDLED,
 					SDL,
 					HAVE_BUNDLE_NAME,
-					HAVE_OPENGL,
 					HAVE_CONFIG_H,
-					HAVE_UNISTD_H,
-					HAVE_PWD_H,
-					HAVE_SYSCTLBYNAME,
-					HAVE_LUA,
 					SPEEX,
-					HAVE_FFMPEG,
-					HAVE_SDL_TTF,
-					HAVE_ZZIP,
-					HAVE_PNG,
-					HAVE_CURL,
 				);
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_CHECK_SWITCH_STATEMENTS = YES;
@@ -6632,18 +6561,8 @@
 					SCENARIO_IS_BUNDLED,
 					SDL,
 					HAVE_BUNDLE_NAME,
-					HAVE_OPENGL,
 					HAVE_CONFIG_H,
-					HAVE_UNISTD_H,
-					HAVE_PWD_H,
-					HAVE_SYSCTLBYNAME,
-					HAVE_LUA,
 					SPEEX,
-					HAVE_FFMPEG,
-					HAVE_SDL_TTF,
-					HAVE_ZZIP,
-					HAVE_PNG,
-					HAVE_CURL,
 				);
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_CHECK_SWITCH_STATEMENTS = YES;
@@ -6701,17 +6620,8 @@
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					SDL,
 					HAVE_BUNDLE_NAME,
-					HAVE_OPENGL,
 					HAVE_CONFIG_H,
-					HAVE_UNISTD_H,
-					HAVE_PWD_H,
-					HAVE_SYSCTLBYNAME,
-					HAVE_LUA,
 					SPEEX,
-					HAVE_FFMPEG,
-					HAVE_SDL_TTF,
-					HAVE_ZZIP,
-					HAVE_PNG,
 				);
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_CHECK_SWITCH_STATEMENTS = YES;
@@ -6791,17 +6701,8 @@
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					SDL,
 					HAVE_BUNDLE_NAME,
-					HAVE_OPENGL,
 					HAVE_CONFIG_H,
-					HAVE_UNISTD_H,
-					HAVE_PWD_H,
-					HAVE_SYSCTLBYNAME,
-					HAVE_LUA,
 					SPEEX,
-					HAVE_FFMPEG,
-					HAVE_SDL_TTF,
-					HAVE_ZZIP,
-					HAVE_PNG,
 				);
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_CHECK_SWITCH_STATEMENTS = YES;
@@ -6889,8 +6790,11 @@
 		AE78B59D09B00C34002CACF8 /* Deployment (Universal) */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD_32_64_BIT_PRE_XCODE_3_1)";
-				ARCHS_STANDARD_32_64_BIT_PRE_XCODE_3_1 = "x86_64 i386 ppc";
+				ARCHS = (
+					ppc,
+					i386,
+					x86_64,
+				);
 				COPY_PHASE_STRIP = YES;
 				DEAD_CODE_STRIPPING = YES;
 				DEPLOYMENT_POSTPROCESSING = YES;
@@ -6904,17 +6808,8 @@
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					SDL,
 					HAVE_BUNDLE_NAME,
-					HAVE_OPENGL,
 					HAVE_CONFIG_H,
-					HAVE_UNISTD_H,
-					HAVE_PWD_H,
-					HAVE_SYSCTLBYNAME,
-					HAVE_LUA,
 					SPEEX,
-					HAVE_FFMPEG,
-					HAVE_SDL_TTF,
-					HAVE_ZZIP,
-					HAVE_PNG,
 				);
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_CHECK_SWITCH_STATEMENTS = YES;

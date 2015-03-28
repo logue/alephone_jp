@@ -400,14 +400,6 @@ static struct terminal_key terminal_keys[]= {
 
 
 // Emulation of MacOS functions
-static void SetRect(Rect *r, int left, int top, int right, int bottom)
-{
-	r->top = top;
-	r->left = left;
-	r->bottom = bottom;
-	r->right = right;
-}
-
 static void InsetRect(Rect *r, int dx, int dy)
 {
 	r->top += dy;
@@ -444,7 +436,7 @@ static void	set_text_face(struct text_face_data *text_face)
 	current_pixel = SDL_MapRGB(/*world_pixels*/draw_surface->format, color.r, color.g, color.b);
 }
 
-
+#include "converter.h"
 static bool calculate_line(char *base_text, short width, short start_index, short text_end_index, short *end_index)
 {
 	bool done = false;
@@ -454,10 +446,12 @@ static bool calculate_line(char *base_text, short width, short start_index, shor
 		
 		// terminal_font no longer a global, since it may change
 		font_info *terminal_font = GetInterfaceFont(_computer_interface_font);
-
+    TTF_Font* font = ((ttf_font_info*)terminal_font)->m_styles[styleNormal];
 		while (running_width < width && base_text[index] && base_text[index] != MAC_LINE_END) {
-			running_width += char_width(base_text[index], terminal_font, current_style);
-			index++;
+      int advance;
+      uint16 c = sjisChar(base_text + index, &index);
+      TTF_GlyphMetrics(font, c, NULL, NULL, NULL, NULL, &advance );
+      running_width += advance;
 		}
 		
 		// Now go backwards, looking for whitespace to split on
@@ -467,8 +461,12 @@ static bool calculate_line(char *base_text, short width, short start_index, shor
 			int break_point = index;
 
 			while (break_point>start_index) {
-				if (base_text[break_point] == ' ')
+        if (base_text[break_point] == ' ' )
 					break; 	// Non printing
+        if( isJChar(base_text[break_point-2]) ) {
+          break_point--;
+          break;
+        }
 				break_point--;	// this needs to be in front of the test
 			}
 			

@@ -630,17 +630,17 @@ int ttf_font_info::_trunc_text(const char *text, int max_width, uint16 style) co
 
 char *ttf_font_info::process_printable(const char *src, int len) const 
 {
-  static char dst[1024];
-  if (len > 1023) len = 1023;
-  char *p = dst;
-  while (*src && len-- > 0)
-  {
-    if ((unsigned char) *src >= ' ') *p++ = *src;
-    *src++;
-  }
+	static char dst[1024];
+	if (len > 1023) len = 1023;
+	char *p = dst;
+	while (*src && len-- > 0)
+	{
+		if ((unsigned char) *src >= ' ') *p++ = *src;
+		src++;
+	}
 
-  *p = '\0';
-  return dst;
+	*p = '\0';
+	return dst;
 }
 
 uint16 *ttf_font_info::process_macroman(const char *src, int len) const 

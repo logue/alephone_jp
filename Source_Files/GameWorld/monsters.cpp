@@ -1591,7 +1591,6 @@ void damage_monster(
 			}
 			else
 			{
-				monster->unused[0]=-1;			//steal an unused for monster death
 				if (!MONSTER_IS_DYING(monster))
 				{
 					short action;
@@ -4159,6 +4158,7 @@ bool XML_MonsterParser::ResetValues()
 {
 	monster_must_be_exterminated.clear();
 	monster_must_be_exterminated.resize(NUMBER_OF_MONSTER_TYPES, false);
+	return true;
 }
 
 static XML_MonsterParser MonsterParser;

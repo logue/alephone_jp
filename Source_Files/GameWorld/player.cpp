@@ -653,7 +653,12 @@ void update_players(ActionQueues* inActionQueuesToUse, bool inPredictive)
 			if(player->reincarnation_delay > 0)
 			{
 				--player->reincarnation_delay;
-				if(((GET_GAME_OPTIONS()&_suicide_is_penalized) || (GET_GAME_OPTIONS()&_dying_is_penalized)) && (player_index == local_player_index))
+				short message_player_index = local_player_index;
+				if((get_game_controller() == _replay) || (get_game_controller() == _demo))
+				{
+					message_player_index = current_player_index;
+				}
+				if(((GET_GAME_OPTIONS()&_suicide_is_penalized) || (GET_GAME_OPTIONS()&_dying_is_penalized)) && (player_index == message_player_index))
 				{
 					if(player->reincarnation_delay == 0)
 						screen_printf("You may rise to fight again");
@@ -717,7 +722,12 @@ void update_players(ActionQueues* inActionQueuesToUse, bool inPredictive)
 					// ZZZ: let the player know why he's not respawning
 					if(player->reincarnation_delay)
 					{
-						if(player_index == local_player_index)
+						short message_player_index = local_player_index;
+						if((get_game_controller() == _replay) || (get_game_controller() == _demo))
+						{
+							message_player_index = current_player_index;
+						}
+						if(player_index == message_player_index)
 						{
 							int theSeconds = player->reincarnation_delay / TICKS_PER_SECOND;
 							// If 3 or less, he'll be getting a countdown anyway, and may start spamming the action key.
@@ -1340,12 +1350,12 @@ static void update_player_teleport(
 	{
 		/* Note that control panels can set the teleporting destination. */
 		if (player->teleporting_destination!=NO_TELEPORTATION_DESTINATION ||
-			((polygon->type==_polygon_is_automatic_exit && calculate_level_completion_state()!=_level_unfinished) || polygon->type==_polygon_is_teleporter) &&
+			(((polygon->type==_polygon_is_automatic_exit && calculate_level_completion_state()!=_level_unfinished) || polygon->type==_polygon_is_teleporter) &&
 				player->variables.position.x==player->variables.last_position.x &&
 				player->variables.position.y==player->variables.last_position.y &&
 				player->variables.position.z==player->variables.last_position.z &&
 				player->variables.last_direction==player->variables.direction &&
-				object->location.z==polygon->floor_height)
+				object->location.z==polygon->floor_height))
 		{
 			if(--player->delay_before_teleport<0)
 			{

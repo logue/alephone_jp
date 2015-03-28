@@ -41,6 +41,7 @@
 #include "tags.h" /* for scenario file type.. */
 #include "network_sound.h"
 #include "mouse.h"
+#include "joystick.h"
 #include "screen_drawing.h"
 #include "computer_interface.h"
 #include "game_wad.h" /* yuck... */
@@ -790,7 +791,6 @@ short get_level_number_from_user(void)
 	} else {
 		// no stringset or no strings in stringset - use default message
 		placer->dual_add(new w_static_text("ここからは、ヴィドマスターの宣誓を誓わないといけないぜ。"), d);
-		placer->dual_add(new w_static_text ("must take the oath of the vidmaster:"), d);
 		placer->add(new w_spacer(), true);
 		placer->dual_add(new w_static_text("『宣誓、"), d);
 		placer->dual_add(new w_static_text("全てのスイッチをこぶしで殴ってオンにし、"), d);
@@ -1365,9 +1365,29 @@ static void process_event(const SDL_Event &event)
 				validate_world_window();
 				set_keyboard_controller_status(true);
 			}
+			else
+			{
+				SDL_Event e2;
+				memset(&e2, 0, sizeof(SDL_Event));
+				e2.type = SDL_KEYDOWN;
+				e2.key.keysym.sym = (SDLKey)(SDLK_BASE_MOUSE_BUTTON + event.button.button - 1);
+				process_game_key(e2);
+			}
 		}
 		else
 			process_screen_click(event);
+		break;
+	
+	case SDL_JOYBUTTONDOWN:
+		if (get_game_state() == _game_in_progress)
+		{
+			SDL_Event e2;
+			memset(&e2, 0, sizeof(SDL_Event));
+			e2.type = SDL_KEYDOWN;
+			e2.key.keysym.sym = (SDLKey)(SDLK_BASE_JOYSTICK_BUTTON + event.button.button);
+			process_game_key(e2);
+			
+		}
 		break;
 		
 	case SDL_KEYDOWN:
