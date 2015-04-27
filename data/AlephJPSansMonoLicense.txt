@@ -123,7 +123,7 @@ Copyright FAQ
       core server) has other mechanisms for font substitution.
 
 M+ FONTS
-Copyright (C) 2002-2011 M+ FONTS PROJECT
+Copyright (C) 2002-2014 M+ FONTS PROJECT
 -
 
 These fonts are free softwares.
