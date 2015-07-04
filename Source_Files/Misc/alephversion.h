@@ -24,9 +24,9 @@ ALEPHVERSION.H
 
 
 #define A1_DISPLAY_NAME "Aleph One"
-#define A1_DISPLAY_VERSION "1.1 JP"
-#define A1_DISPLAY_DATE_VERSION "2014-03-01"
-#define A1_DATE_VERSION "20140301"
+#define A1_DISPLAY_VERSION "1.2.1"
+#define A1_DISPLAY_DATE_VERSION "2015-06-20"
+#define A1_DATE_VERSION "20150620"
 
 #ifdef WIN32
 #define A1_DISPLAY_PLATFORM "Windows"
@@ -66,5 +66,10 @@ ALEPHVERSION.H
 #define A1_HOMEPAGE_URL "http://mjolnir.logue.be/"
 #define A1_UPDATE_HOST "marathon.sourceforge.net"
 #define A1_METASERVER_HOST "metaserver.lhowon.org"
+#define A1_METASERVER_LOGIN_URL "https://metaserver.lhowon.org/metaclient/login"
+#define A1_METASERVER_SIGNUP_URL "https://metaserver.lhowon.org/metaclient/signup"
+#define A1_METASERVER_SETTINGS_URL "https://metaserver.lhowon.org/metaclient/settings"
+#define A1_LEADERBOARD_URL "https://stats.lhowon.org/"
+#define A1_STATSERVER_ADD_URL "https://stats.lhowon.org/statclient/add"
 
 #endif // ALEPHVERSION_H

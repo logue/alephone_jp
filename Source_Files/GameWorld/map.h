@@ -814,7 +814,8 @@ enum /* mission flags */
 	_mission_repair= 0x0008,
 	_mission_rescue= 0x0010,
 	_mission_exploration_m1= 0x0020,
-	_mission_rescue_m1= 0x0040
+	_mission_rescue_m1= 0x0040,
+	_mission_repair_m1= 0x0080
 };
 
 enum /* environment flags */
@@ -830,7 +831,7 @@ enum /* environment flags */
 	_environment_song_index_m1 = 0x0080, // play music
 	_environment_terminals_stop_time = 0x0100, // solo only
 	_environment_activation_ranges = 0x0200, // Marathon 1 monster activation limits
-	_environment_m1_weapon_pickups = 0x0400,    // you can pick up multiple weapons on TC
+	_environment_m1_weapons = 0x0400,    // multiple weapon pickups on TC; low gravity grenades
 
 	_environment_network= 0x2000,	// these two pseudo-environments are used to prevent items 
 	_environment_single_player= 0x4000 // from arriving in the items.c code.
@@ -1068,9 +1069,11 @@ extern vector<map_object> SavedObjectList;
 extern bool game_is_networked; /* true if this is a network game */
 
 #define ADD_LINE_TO_AUTOMAP(i) (automap_lines[(i)>>3] |= (byte) 1<<((i)&0x07))
+#define CLEAR_LINE_FROM_AUTOMAP(i) (automap_lines[(i)>>3] &= ~((byte) 1<<((i&0x07))))
 #define LINE_IS_IN_AUTOMAP(i) ((automap_lines[(i)>>3]&((byte)1<<((i)&0x07)))?(true):(false))
 
 #define ADD_POLYGON_TO_AUTOMAP(i) (automap_polygons[(i)>>3] |= (byte) 1<<((i)&0x07))
+#define CLEAR_POLYGON_FROM_AUTOMAP(i) (automap_polygons[(i)>>3] &= ~((byte) 1<<((i&0x07))))
 #define POLYGON_IS_IN_AUTOMAP(i) ((automap_polygons[(i)>>3]&((byte)1<<((i)&0x07)))?(true):(false))
 
 // Whether or not Marathon 2/oo landscapes had been loaded (switch off for Marathon 1 compatibility)
@@ -1364,7 +1367,7 @@ short new_device(world_point2d *location, short initial_polygon_index,
 	short type, short extra_data, bool active);
 void update_action_key(short player_index, bool triggered);
 
-bool untoggled_repair_switches_on_level(void);
+bool untoggled_repair_switches_on_level(bool only_last_switch = false);
 
 void assume_correct_switch_position(short switch_type, short permutation, bool new_state);
 
@@ -1403,7 +1406,7 @@ bool new_game(short number_of_players, bool network,
 	struct game_data *game_information,
 	struct player_start_data *player_start_information, 
 	struct entry_point *entry_point);
-bool goto_level(struct entry_point *entry, bool new_game);
+bool goto_level(struct entry_point *entry, bool new_game, short number_of_players);
 
 // LP addition: get the parser for the texture-loading control (name "texture_loading")
 XML_ElementParser *TextureLoading_GetParser();

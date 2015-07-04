@@ -1,0 +1,1559 @@
+csstrings.o: csstrings.cpp \
+ /home/local/mxe/usr/i686-w64-mingw32.static/include/stdio.h \
+ /home/local/mxe/usr/i686-w64-mingw32.static/include/crtdefs.h \
+ /home/local/mxe/usr/i686-w64-mingw32.static/include/_mingw.h \
+ /home/local/mxe/usr/i686-w64-mingw32.static/include/_mingw_mac.h \
+ /home/local/mxe/usr/i686-w64-mingw32.static/include/_mingw_secapi.h \
+ /home/local/mxe/usr/i686-w64-mingw32.static/include/vadefs.h \
+ /home/local/mxe/usr/i686-w64-mingw32.static/include/sdks/_mingw_directx.h \
+ /home/local/mxe/usr/i686-w64-mingw32.static/include/sdks/_mingw_ddk.h \
+ /home/local/mxe/usr/i686-w64-mingw32.static/include/_mingw_print_push.h \
+ /home/local/mxe/usr/i686-w64-mingw32.static/include/_mingw_off_t.h \
+ /home/local/mxe/usr/i686-w64-mingw32.static/include/swprintf.inl \
+ /home/local/mxe/usr/i686-w64-mingw32.static/include/sec_api/stdio_s.h \
+ /home/local/mxe/usr/i686-w64-mingw32.static/include/_mingw_print_pop.h \
+ /home/local/mxe/usr/lib/gcc/i686-w64-mingw32.static/5.1.0/include/stdarg.h \
+ /home/local/mxe/usr/i686-w64-mingw32.static/include/stdarg.h \
+ /home/local/mxe/usr/i686-w64-mingw32.static/include/_mingw_stdarg.h \
+ /home/local/mxe/usr/i686-w64-mingw32.static/include/string.h \
+ /home/local/mxe/usr/i686-w64-mingw32.static/include/sec_api/string_s.h \
+ csstrings.h cstypes.h \
+ /home/local/mxe/usr/lib/gcc/i686-w64-mingw32.static/5.1.0/include-fixed/limits.h \
+ /home/local/mxe/usr/lib/gcc/i686-w64-mingw32.static/5.1.0/include-fixed/syslimits.h \
+ /home/local/mxe/usr/i686-w64-mingw32.static/include/limits.h \
+ ../../config.h \
+ /home/local/mxe/usr/i686-w64-mingw32.static/include/SDL/SDL_types.h \
+ /home/local/mxe/usr/i686-w64-mingw32.static/include/SDL/SDL_stdinc.h \
+ /home/local/mxe/usr/i686-w64-mingw32.static/include/SDL/SDL_config.h \
+ /home/local/mxe/usr/i686-w64-mingw32.static/include/SDL/SDL_platform.h \
+ /home/local/mxe/usr/i686-w64-mingw32.static/include/sys/types.h \
+ /home/local/mxe/usr/i686-w64-mingw32.static/include/stdlib.h \
+ /home/local/mxe/usr/i686-w64-mingw32.static/include/sec_api/stdlib_s.h \
+ /home/local/mxe/usr/i686-w64-mingw32.static/include/malloc.h \
+ /home/local/mxe/usr/lib/gcc/i686-w64-mingw32.static/5.1.0/include/stddef.h \
+ /home/local/mxe/usr/i686-w64-mingw32.static/include/stddef.h \
+ /home/local/mxe/usr/i686-w64-mingw32.static/include/strings.h \
+ /home/local/mxe/usr/i686-w64-mingw32.static/include/inttypes.h \
+ /home/local/mxe/usr/lib/gcc/i686-w64-mingw32.static/5.1.0/include/stdint.h \
+ /home/local/mxe/usr/i686-w64-mingw32.static/include/stdint.h \
+ /home/local/mxe/usr/i686-w64-mingw32.static/include/ctype.h \
+ /home/local/mxe/usr/i686-w64-mingw32.static/include/SDL/begin_code.h \
+ /home/local/mxe/usr/i686-w64-mingw32.static/include/SDL/close_code.h \
+ /home/local/mxe/usr/i686-w64-mingw32.static/include/time.h \
+ /home/local/mxe/usr/i686-w64-mingw32.static/include/_timeval.h \
+ /home/local/mxe/usr/i686-w64-mingw32.static/include/sys/timeb.h \
+ /home/local/mxe/usr/i686-w64-mingw32.static/include/sec_api/sys/timeb_s.h \
+ /home/local/mxe/usr/i686-w64-mingw32.static/include/pthread_time.h \
+ /home/local/mxe/usr/lib/gcc/i686-w64-mingw32.static/5.1.0/include/c++/string \
+ /home/local/mxe/usr/lib/gcc/i686-w64-mingw32.static/5.1.0/include/c++/i686-w64-mingw32.static/bits/c++config.h \
+ /home/local/mxe/usr/lib/gcc/i686-w64-mingw32.static/5.1.0/include/c++/i686-w64-mingw32.static/bits/os_defines.h \
+ /home/local/mxe/usr/lib/gcc/i686-w64-mingw32.static/5.1.0/include/c++/i686-w64-mingw32.static/bits/cpu_defines.h \
+ /home/local/mxe/usr/lib/gcc/i686-w64-mingw32.static/5.1.0/include/c++/bits/stringfwd.h \
+ /home/local/mxe/usr/lib/gcc/i686-w64-mingw32.static/5.1.0/include/c++/bits/memoryfwd.h \
+ /home/local/mxe/usr/lib/gcc/i686-w64-mingw32.static/5.1.0/include/c++/bits/char_traits.h \
+ /home/local/mxe/usr/lib/gcc/i686-w64-mingw32.static/5.1.0/include/c++/bits/stl_algobase.h \
+ /home/local/mxe/usr/lib/gcc/i686-w64-mingw32.static/5.1.0/include/c++/bits/functexcept.h \
+ /home/local/mxe/usr/lib/gcc/i686-w64-mingw32.static/5.1.0/include/c++/bits/exception_defines.h \
+ /home/local/mxe/usr/lib/gcc/i686-w64-mingw32.static/5.1.0/include/c++/bits/cpp_type_traits.h \
+ /home/local/mxe/usr/lib/gcc/i686-w64-mingw32.static/5.1.0/include/c++/ext/type_traits.h \
+ /home/local/mxe/usr/lib/gcc/i686-w64-mingw32.static/5.1.0/include/c++/ext/numeric_traits.h \
+ /home/local/mxe/usr/lib/gcc/i686-w64-mingw32.static/5.1.0/include/c++/bits/stl_pair.h \
+ /home/local/mxe/usr/lib/gcc/i686-w64-mingw32.static/5.1.0/include/c++/bits/move.h \
+ /home/local/mxe/usr/lib/gcc/i686-w64-mingw32.static/5.1.0/include/c++/bits/concept_check.h \
+ /home/local/mxe/usr/lib/gcc/i686-w64-mingw32.static/5.1.0/include/c++/bits/stl_iterator_base_types.h \
+ /home/local/mxe/usr/lib/gcc/i686-w64-mingw32.static/5.1.0/include/c++/bits/stl_iterator_base_funcs.h \
+ /home/local/mxe/usr/lib/gcc/i686-w64-mingw32.static/5.1.0/include/c++/debug/debug.h \
+ /home/local/mxe/usr/lib/gcc/i686-w64-mingw32.static/5.1.0/include/c++/bits/stl_iterator.h \
+ /home/local/mxe/usr/lib/gcc/i686-w64-mingw32.static/5.1.0/include/c++/bits/ptr_traits.h \
+ /home/local/mxe/usr/lib/gcc/i686-w64-mingw32.static/5.1.0/include/c++/bits/predefined_ops.h \
+ /home/local/mxe/usr/lib/gcc/i686-w64-mingw32.static/5.1.0/include/c++/bits/postypes.h \
+ /home/local/mxe/usr/lib/gcc/i686-w64-mingw32.static/5.1.0/include/c++/cwchar \
+ /home/local/mxe/usr/i686-w64-mingw32.static/include/wchar.h \
+ /home/local/mxe/usr/i686-w64-mingw32.static/include/_mingw_stat64.h \
+ /home/local/mxe/usr/i686-w64-mingw32.static/include/sec_api/wchar_s.h \
+ /home/local/mxe/usr/lib/gcc/i686-w64-mingw32.static/5.1.0/include/c++/bits/allocator.h \
+ /home/local/mxe/usr/lib/gcc/i686-w64-mingw32.static/5.1.0/include/c++/i686-w64-mingw32.static/bits/c++allocator.h \
+ /home/local/mxe/usr/lib/gcc/i686-w64-mingw32.static/5.1.0/include/c++/ext/new_allocator.h \
+ /home/local/mxe/usr/lib/gcc/i686-w64-mingw32.static/5.1.0/include/c++/new \
+ /home/local/mxe/usr/lib/gcc/i686-w64-mingw32.static/5.1.0/include/c++/exception \
+ /home/local/mxe/usr/lib/gcc/i686-w64-mingw32.static/5.1.0/include/c++/bits/atomic_lockfree_defines.h \
+ /home/local/mxe/usr/lib/gcc/i686-w64-mingw32.static/5.1.0/include/c++/bits/localefwd.h \
+ /home/local/mxe/usr/lib/gcc/i686-w64-mingw32.static/5.1.0/include/c++/i686-w64-mingw32.static/bits/c++locale.h \
+ /home/local/mxe/usr/lib/gcc/i686-w64-mingw32.static/5.1.0/include/c++/clocale \
+ /home/local/mxe/usr/i686-w64-mingw32.static/include/locale.h \
+ /home/local/mxe/usr/lib/gcc/i686-w64-mingw32.static/5.1.0/include/c++/iosfwd \
+ /home/local/mxe/usr/lib/gcc/i686-w64-mingw32.static/5.1.0/include/c++/cctype \
+ /home/local/mxe/usr/lib/gcc/i686-w64-mingw32.static/5.1.0/include/c++/bits/ostream_insert.h \
+ /home/local/mxe/usr/lib/gcc/i686-w64-mingw32.static/5.1.0/include/c++/bits/cxxabi_forced.h \
+ /home/local/mxe/usr/lib/gcc/i686-w64-mingw32.static/5.1.0/include/c++/bits/stl_function.h \
+ /home/local/mxe/usr/lib/gcc/i686-w64-mingw32.static/5.1.0/include/c++/backward/binders.h \
+ /home/local/mxe/usr/lib/gcc/i686-w64-mingw32.static/5.1.0/include/c++/bits/range_access.h \
+ /home/local/mxe/usr/lib/gcc/i686-w64-mingw32.static/5.1.0/include/c++/bits/basic_string.h \
+ /home/local/mxe/usr/lib/gcc/i686-w64-mingw32.static/5.1.0/include/c++/ext/atomicity.h \
+ /home/local/mxe/usr/lib/gcc/i686-w64-mingw32.static/5.1.0/include/c++/i686-w64-mingw32.static/bits/gthr.h \
+ /home/local/mxe/usr/lib/gcc/i686-w64-mingw32.static/5.1.0/include/c++/i686-w64-mingw32.static/bits/gthr-default.h \
+ /home/local/mxe/usr/i686-w64-mingw32.static/include/errno.h \
+ /home/local/mxe/usr/lib/gcc/i686-w64-mingw32.static/5.1.0/include/c++/i686-w64-mingw32.static/bits/atomic_word.h \
+ /home/local/mxe/usr/lib/gcc/i686-w64-mingw32.static/5.1.0/include/c++/ext/alloc_traits.h \
+ /home/local/mxe/usr/lib/gcc/i686-w64-mingw32.static/5.1.0/include/c++/bits/basic_string.tcc \
+ /home/local/mxe/usr/lib/gcc/i686-w64-mingw32.static/5.1.0/include/c++/vector \
+ /home/local/mxe/usr/lib/gcc/i686-w64-mingw32.static/5.1.0/include/c++/bits/stl_construct.h \
+ /home/local/mxe/usr/lib/gcc/i686-w64-mingw32.static/5.1.0/include/c++/bits/stl_uninitialized.h \
+ /home/local/mxe/usr/lib/gcc/i686-w64-mingw32.static/5.1.0/include/c++/bits/stl_vector.h \
+ /home/local/mxe/usr/lib/gcc/i686-w64-mingw32.static/5.1.0/include/c++/bits/stl_bvector.h \
+ /home/local/mxe/usr/lib/gcc/i686-w64-mingw32.static/5.1.0/include/c++/bits/vector.tcc \
+ ../../Source_Files/RenderOther/TextStrings.h \
+ ../../Source_Files/Misc/Logging.h \
+ ../../Source_Files/Misc/Logging_gruntwork.h \
+ ../../Source_Files/Misc/alephversion.h \
+ ../../Source_Files/Misc/Scenario.h \
+ ../../Source_Files/XML/XML_ElementParser.h cseries.h \
+ /home/local/mxe/usr/i686-w64-mingw32.static/include/SDL/SDL.h \
+ /home/local/mxe/usr/i686-w64-mingw32.static/include/SDL/SDL_main.h \
+ /home/local/mxe/usr/i686-w64-mingw32.static/include/SDL/SDL_audio.h \
+ /home/local/mxe/usr/i686-w64-mingw32.static/include/SDL/SDL_error.h \
+ /home/local/mxe/usr/i686-w64-mingw32.static/include/SDL/SDL_endian.h \
+ /home/local/mxe/usr/i686-w64-mingw32.static/include/SDL/SDL_mutex.h \
+ /home/local/mxe/usr/i686-w64-mingw32.static/include/SDL/SDL_thread.h \
+ /home/local/mxe/usr/i686-w64-mingw32.static/include/SDL/SDL_rwops.h \
+ /home/local/mxe/usr/i686-w64-mingw32.static/include/SDL/SDL_cdrom.h \
+ /home/local/mxe/usr/i686-w64-mingw32.static/include/SDL/SDL_cpuinfo.h \
+ /home/local/mxe/usr/i686-w64-mingw32.static/include/SDL/SDL_events.h \
+ /home/local/mxe/usr/i686-w64-mingw32.static/include/SDL/SDL_active.h \
+ /home/local/mxe/usr/i686-w64-mingw32.static/include/SDL/SDL_keyboard.h \
+ /home/local/mxe/usr/i686-w64-mingw32.static/include/SDL/SDL_keysym.h \
+ /home/local/mxe/usr/i686-w64-mingw32.static/include/SDL/SDL_mouse.h \
+ /home/local/mxe/usr/i686-w64-mingw32.static/include/SDL/SDL_video.h \
+ /home/local/mxe/usr/i686-w64-mingw32.static/include/SDL/SDL_joystick.h \
+ /home/local/mxe/usr/i686-w64-mingw32.static/include/SDL/SDL_quit.h \
+ /home/local/mxe/usr/i686-w64-mingw32.static/include/SDL/SDL_loadso.h \
+ /home/local/mxe/usr/i686-w64-mingw32.static/include/SDL/SDL_timer.h \
+ /home/local/mxe/usr/i686-w64-mingw32.static/include/SDL/SDL_version.h \
+ /home/local/mxe/usr/i686-w64-mingw32.static/include/SDL/SDL_byteorder.h \
+ cstypes.h csmacros.h FilmProfile.h cscluts.h csstrings.h csfonts.h \
+ cspixels.h csalerts.h csdialogs.h csmisc.h cstypes.h \
+ /home/local/mxe/usr/lib/gcc/i686-w64-mingw32.static/5.1.0/include/c++/map \
+ /home/local/mxe/usr/lib/gcc/i686-w64-mingw32.static/5.1.0/include/c++/bits/stl_tree.h \
+ /home/local/mxe/usr/lib/gcc/i686-w64-mingw32.static/5.1.0/include/c++/bits/stl_map.h \
+ /home/local/mxe/usr/lib/gcc/i686-w64-mingw32.static/5.1.0/include/c++/bits/stl_multimap.h \
+ /home/local/mxe/usr/i686-w64-mingw32.static/include/boost/algorithm/string/replace.hpp \
+ /home/local/mxe/usr/i686-w64-mingw32.static/include/boost/algorithm/string/config.hpp \
+ /home/local/mxe/usr/i686-w64-mingw32.static/include/boost/config.hpp \
+ /home/local/mxe/usr/i686-w64-mingw32.static/include/boost/config/user.hpp \
+ /home/local/mxe/usr/i686-w64-mingw32.static/include/boost/config/select_compiler_config.hpp \
+ /home/local/mxe/usr/i686-w64-mingw32.static/include/boost/config/compiler/gcc.hpp \
+ /home/local/mxe/usr/i686-w64-mingw32.static/include/boost/config/select_stdlib_config.hpp \
+ /home/local/mxe/usr/lib/gcc/i686-w64-mingw32.static/5.1.0/include/c++/cstddef \
+ /home/local/mxe/usr/i686-w64-mingw32.static/include/boost/config/stdlib/libstdcpp3.hpp \
+ /home/local/mxe/usr/i686-w64-mingw32.static/include/boost/config/select_platform_config.hpp \
+ /home/local/mxe/usr/i686-w64-mingw32.static/include/boost/config/platform/win32.hpp \
+ /home/local/mxe/usr/i686-w64-mingw32.static/include/boost/config/suffix.hpp \
+ /home/local/mxe/usr/i686-w64-mingw32.static/include/boost/detail/workaround.hpp \
+ /home/local/mxe/usr/i686-w64-mingw32.static/include/boost/range/iterator_range_core.hpp \
+ /home/local/mxe/usr/i686-w64-mingw32.static/include/boost/assert.hpp \
+ /home/local/mxe/usr/i686-w64-mingw32.static/include/assert.h \
+ /home/local/mxe/usr/i686-w64-mingw32.static/include/boost/iterator/iterator_traits.hpp \
+ /home/local/mxe/usr/i686-w64-mingw32.static/include/boost/detail/iterator.hpp \
+ /home/local/mxe/usr/lib/gcc/i686-w64-mingw32.static/5.1.0/include/c++/iterator \
+ /home/local/mxe/usr/lib/gcc/i686-w64-mingw32.static/5.1.0/include/c++/ostream \
+ /home/local/mxe/usr/lib/gcc/i686-w64-mingw32.static/5.1.0/include/c++/ios \
+ /home/local/mxe/usr/lib/gcc/i686-w64-mingw32.static/5.1.0/include/c++/bits/ios_base.h \
+ /home/local/mxe/usr/lib/gcc/i686-w64-mingw32.static/5.1.0/include/c++/bits/locale_classes.h \
+ /home/local/mxe/usr/lib/gcc/i686-w64-mingw32.static/5.1.0/include/c++/bits/locale_classes.tcc \
+ /home/local/mxe/usr/lib/gcc/i686-w64-mingw32.static/5.1.0/include/c++/stdexcept \
+ /home/local/mxe/usr/lib/gcc/i686-w64-mingw32.static/5.1.0/include/c++/streambuf \
+ /home/local/mxe/usr/lib/gcc/i686-w64-mingw32.static/5.1.0/include/c++/bits/streambuf.tcc \
+ /home/local/mxe/usr/lib/gcc/i686-w64-mingw32.static/5.1.0/include/c++/bits/basic_ios.h \
+ /home/local/mxe/usr/lib/gcc/i686-w64-mingw32.static/5.1.0/include/c++/bits/locale_facets.h \
+ /home/local/mxe/usr/lib/gcc/i686-w64-mingw32.static/5.1.0/include/c++/cwctype \
+ /home/local/mxe/usr/i686-w64-mingw32.static/include/wctype.h \
+ /home/local/mxe/usr/lib/gcc/i686-w64-mingw32.static/5.1.0/include/c++/i686-w64-mingw32.static/bits/ctype_base.h \
+ /home/local/mxe/usr/lib/gcc/i686-w64-mingw32.static/5.1.0/include/c++/bits/streambuf_iterator.h \
+ /home/local/mxe/usr/lib/gcc/i686-w64-mingw32.static/5.1.0/include/c++/i686-w64-mingw32.static/bits/ctype_inline.h \
+ /home/local/mxe/usr/lib/gcc/i686-w64-mingw32.static/5.1.0/include/c++/bits/locale_facets.tcc \
+ /home/local/mxe/usr/lib/gcc/i686-w64-mingw32.static/5.1.0/include/c++/bits/basic_ios.tcc \
+ /home/local/mxe/usr/lib/gcc/i686-w64-mingw32.static/5.1.0/include/c++/bits/ostream.tcc \
+ /home/local/mxe/usr/lib/gcc/i686-w64-mingw32.static/5.1.0/include/c++/istream \
+ /home/local/mxe/usr/lib/gcc/i686-w64-mingw32.static/5.1.0/include/c++/bits/istream.tcc \
+ /home/local/mxe/usr/lib/gcc/i686-w64-mingw32.static/5.1.0/include/c++/bits/stream_iterator.h \
+ /home/local/mxe/usr/i686-w64-mingw32.static/include/boost/iterator/iterator_facade.hpp \
+ /home/local/mxe/usr/i686-w64-mingw32.static/include/boost/iterator.hpp \
+ /home/local/mxe/usr/i686-w64-mingw32.static/include/boost/iterator/interoperable.hpp \
+ /home/local/mxe/usr/i686-w64-mingw32.static/include/boost/mpl/bool.hpp \
+ /home/local/mxe/usr/i686-w64-mingw32.static/include/boost/mpl/bool_fwd.hpp \
+ /home/local/mxe/usr/i686-w64-mingw32.static/include/boost/mpl/aux_/adl_barrier.hpp \
+ /home/local/mxe/usr/i686-w64-mingw32.static/include/boost/mpl/aux_/config/adl.hpp \
+ /home/local/mxe/usr/i686-w64-mingw32.static/include/boost/mpl/aux_/config/msvc.hpp \
+ /home/local/mxe/usr/i686-w64-mingw32.static/include/boost/mpl/aux_/config/intel.hpp \
+ /home/local/mxe/usr/i686-w64-mingw32.static/include/boost/mpl/aux_/config/gcc.hpp \
+ /home/local/mxe/usr/i686-w64-mingw32.static/include/boost/mpl/aux_/config/workaround.hpp \
+ /home/local/mxe/usr/i686-w64-mingw32.static/include/boost/mpl/integral_c_tag.hpp \
+ /home/local/mxe/usr/i686-w64-mingw32.static/include/boost/mpl/aux_/config/static_constant.hpp \
+ /home/local/mxe/usr/i686-w64-mingw32.static/include/boost/mpl/or.hpp \
+ /home/local/mxe/usr/i686-w64-mingw32.static/include/boost/mpl/aux_/config/use_preprocessed.hpp \
+ /home/local/mxe/usr/i686-w64-mingw32.static/include/boost/mpl/aux_/nested_type_wknd.hpp \
+ /home/local/mxe/usr/i686-w64-mingw32.static/include/boost/mpl/aux_/na_spec.hpp \
+ /home/local/mxe/usr/i686-w64-mingw32.static/include/boost/mpl/lambda_fwd.hpp \
+ /home/local/mxe/usr/i686-w64-mingw32.static/include/boost/mpl/void_fwd.hpp \
+ /home/local/mxe/usr/i686-w64-mingw32.static/include/boost/mpl/aux_/na.hpp \
+ /home/local/mxe/usr/i686-w64-mingw32.static/include/boost/mpl/aux_/na_fwd.hpp \
+ /home/local/mxe/usr/i686-w64-mingw32.static/include/boost/mpl/aux_/config/ctps.hpp \
+ /home/local/mxe/usr/i686-w64-mingw32.static/include/boost/mpl/aux_/config/lambda.hpp \
+ /home/local/mxe/usr/i686-w64-mingw32.static/include/boost/mpl/aux_/config/ttp.hpp \
+ /home/local/mxe/usr/i686-w64-mingw32.static/include/boost/mpl/int.hpp \
+ /home/local/mxe/usr/i686-w64-mingw32.static/include/boost/mpl/int_fwd.hpp \
+ /home/local/mxe/usr/i686-w64-mingw32.static/include/boost/mpl/aux_/nttp_decl.hpp \
+ /home/local/mxe/usr/i686-w64-mingw32.static/include/boost/mpl/aux_/config/nttp.hpp \
+ /home/local/mxe/usr/i686-w64-mingw32.static/include/boost/mpl/aux_/integral_wrapper.hpp \
+ /home/local/mxe/usr/i686-w64-mingw32.static/include/boost/mpl/aux_/static_cast.hpp \
+ /home/local/mxe/usr/i686-w64-mingw32.static/include/boost/preprocessor/cat.hpp \
+ /home/local/mxe/usr/i686-w64-mingw32.static/include/boost/preprocessor/config/config.hpp \
+ /home/local/mxe/usr/i686-w64-mingw32.static/include/boost/mpl/aux_/lambda_arity_param.hpp \
+ /home/local/mxe/usr/i686-w64-mingw32.static/include/boost/mpl/aux_/template_arity_fwd.hpp \
+ /home/local/mxe/usr/i686-w64-mingw32.static/include/boost/mpl/aux_/arity.hpp \
+ /home/local/mxe/usr/i686-w64-mingw32.static/include/boost/mpl/aux_/config/dtp.hpp \
+ /home/local/mxe/usr/i686-w64-mingw32.static/include/boost/mpl/aux_/preprocessor/params.hpp \
+ /home/local/mxe/usr/i686-w64-mingw32.static/include/boost/mpl/aux_/config/preprocessor.hpp \
+ /home/local/mxe/usr/i686-w64-mingw32.static/include/boost/preprocessor/comma_if.hpp \
+ /home/local/mxe/usr/i686-w64-mingw32.static/include/boost/preprocessor/punctuation/comma_if.hpp \
+ /home/local/mxe/usr/i686-w64-mingw32.static/include/boost/preprocessor/control/if.hpp \
+ /home/local/mxe/usr/i686-w64-mingw32.static/include/boost/preprocessor/control/iif.hpp \
+ /home/local/mxe/usr/i686-w64-mingw32.static/include/boost/preprocessor/logical/bool.hpp \
+ /home/local/mxe/usr/i686-w64-mingw32.static/include/boost/preprocessor/facilities/empty.hpp \
+ /home/local/mxe/usr/i686-w64-mingw32.static/include/boost/preprocessor/punctuation/comma.hpp \
+ /home/local/mxe/usr/i686-w64-mingw32.static/include/boost/preprocessor/repeat.hpp \
+ /home/local/mxe/usr/i686-w64-mingw32.static/include/boost/preprocessor/repetition/repeat.hpp \
+ /home/local/mxe/usr/i686-w64-mingw32.static/include/boost/preprocessor/debug/error.hpp \
+ /home/local/mxe/usr/i686-w64-mingw32.static/include/boost/preprocessor/detail/auto_rec.hpp \
+ /home/local/mxe/usr/i686-w64-mingw32.static/include/boost/preprocessor/tuple/eat.hpp \
+ /home/local/mxe/usr/i686-w64-mingw32.static/include/boost/preprocessor/inc.hpp \
+ /home/local/mxe/usr/i686-w64-mingw32.static/include/boost/preprocessor/arithmetic/inc.hpp \
+ /home/local/mxe/usr/i686-w64-mingw32.static/include/boost/mpl/aux_/preprocessor/enum.hpp \
+ /home/local/mxe/usr/i686-w64-mingw32.static/include/boost/mpl/aux_/preprocessor/def_params_tail.hpp \
+ /home/local/mxe/usr/i686-w64-mingw32.static/include/boost/mpl/limits/arity.hpp \
+ /home/local/mxe/usr/i686-w64-mingw32.static/include/boost/preprocessor/logical/and.hpp \
+ /home/local/mxe/usr/i686-w64-mingw32.static/include/boost/preprocessor/logical/bitand.hpp \
+ /home/local/mxe/usr/i686-w64-mingw32.static/include/boost/preprocessor/identity.hpp \
+ /home/local/mxe/usr/i686-w64-mingw32.static/include/boost/preprocessor/facilities/identity.hpp \
+ /home/local/mxe/usr/i686-w64-mingw32.static/include/boost/preprocessor/empty.hpp \
+ /home/local/mxe/usr/i686-w64-mingw32.static/include/boost/preprocessor/arithmetic/add.hpp \
+ /home/local/mxe/usr/i686-w64-mingw32.static/include/boost/preprocessor/arithmetic/dec.hpp \
+ /home/local/mxe/usr/i686-w64-mingw32.static/include/boost/preprocessor/control/while.hpp \
+ /home/local/mxe/usr/i686-w64-mingw32.static/include/boost/preprocessor/list/fold_left.hpp \
+ /home/local/mxe/usr/i686-w64-mingw32.static/include/boost/preprocessor/list/detail/fold_left.hpp \
+ /home/local/mxe/usr/i686-w64-mingw32.static/include/boost/preprocessor/control/expr_iif.hpp \
+ /home/local/mxe/usr/i686-w64-mingw32.static/include/boost/preprocessor/list/adt.hpp \
+ /home/local/mxe/usr/i686-w64-mingw32.static/include/boost/preprocessor/detail/is_binary.hpp \
+ /home/local/mxe/usr/i686-w64-mingw32.static/include/boost/preprocessor/detail/check.hpp \
+ /home/local/mxe/usr/i686-w64-mingw32.static/include/boost/preprocessor/logical/compl.hpp \
+ /home/local/mxe/usr/i686-w64-mingw32.static/include/boost/preprocessor/list/fold_right.hpp \
+ /home/local/mxe/usr/i686-w64-mingw32.static/include/boost/preprocessor/list/detail/fold_right.hpp \
+ /home/local/mxe/usr/i686-w64-mingw32.static/include/boost/preprocessor/list/reverse.hpp \
+ /home/local/mxe/usr/i686-w64-mingw32.static/include/boost/preprocessor/control/detail/while.hpp \
+ /home/local/mxe/usr/i686-w64-mingw32.static/include/boost/preprocessor/tuple/elem.hpp \
+ /home/local/mxe/usr/i686-w64-mingw32.static/include/boost/preprocessor/facilities/expand.hpp \
+ /home/local/mxe/usr/i686-w64-mingw32.static/include/boost/preprocessor/facilities/overload.hpp \
+ /home/local/mxe/usr/i686-w64-mingw32.static/include/boost/preprocessor/variadic/size.hpp \
+ /home/local/mxe/usr/i686-w64-mingw32.static/include/boost/preprocessor/tuple/rem.hpp \
+ /home/local/mxe/usr/i686-w64-mingw32.static/include/boost/preprocessor/tuple/detail/is_single_return.hpp \
+ /home/local/mxe/usr/i686-w64-mingw32.static/include/boost/preprocessor/variadic/elem.hpp \
+ /home/local/mxe/usr/i686-w64-mingw32.static/include/boost/preprocessor/arithmetic/sub.hpp \
+ /home/local/mxe/usr/i686-w64-mingw32.static/include/boost/mpl/aux_/config/eti.hpp \
+ /home/local/mxe/usr/i686-w64-mingw32.static/include/boost/mpl/aux_/config/overload_resolution.hpp \
+ /home/local/mxe/usr/i686-w64-mingw32.static/include/boost/mpl/aux_/lambda_support.hpp \
+ /home/local/mxe/usr/i686-w64-mingw32.static/include/boost/mpl/aux_/include_preprocessed.hpp \
+ /home/local/mxe/usr/i686-w64-mingw32.static/include/boost/mpl/aux_/config/compiler.hpp \
+ /home/local/mxe/usr/i686-w64-mingw32.static/include/boost/preprocessor/stringize.hpp \
+ /home/local/mxe/usr/i686-w64-mingw32.static/include/boost/mpl/aux_/preprocessed/gcc/or.hpp \
+ /home/local/mxe/usr/i686-w64-mingw32.static/include/boost/type_traits/is_convertible.hpp \
+ /home/local/mxe/usr/i686-w64-mingw32.static/include/boost/type_traits/intrinsics.hpp \
+ /home/local/mxe/usr/i686-w64-mingw32.static/include/boost/type_traits/config.hpp \
+ /home/local/mxe/usr/i686-w64-mingw32.static/include/boost/type_traits/is_same.hpp \
+ /home/local/mxe/usr/i686-w64-mingw32.static/include/boost/type_traits/detail/bool_trait_def.hpp \
+ /home/local/mxe/usr/i686-w64-mingw32.static/include/boost/type_traits/detail/template_arity_spec.hpp \
+ /home/local/mxe/usr/i686-w64-mingw32.static/include/boost/type_traits/integral_constant.hpp \
+ /home/local/mxe/usr/i686-w64-mingw32.static/include/boost/mpl/integral_c.hpp \
+ /home/local/mxe/usr/i686-w64-mingw32.static/include/boost/mpl/integral_c_fwd.hpp \
+ /home/local/mxe/usr/i686-w64-mingw32.static/include/boost/type_traits/detail/bool_trait_undef.hpp \
+ /home/local/mxe/usr/i686-w64-mingw32.static/include/boost/type_traits/is_reference.hpp \
+ /home/local/mxe/usr/i686-w64-mingw32.static/include/boost/type_traits/is_lvalue_reference.hpp \
+ /home/local/mxe/usr/i686-w64-mingw32.static/include/boost/type_traits/is_rvalue_reference.hpp \
+ /home/local/mxe/usr/i686-w64-mingw32.static/include/boost/type_traits/ice.hpp \
+ /home/local/mxe/usr/i686-w64-mingw32.static/include/boost/type_traits/detail/yes_no_type.hpp \
+ /home/local/mxe/usr/i686-w64-mingw32.static/include/boost/type_traits/detail/ice_or.hpp \
+ /home/local/mxe/usr/i686-w64-mingw32.static/include/boost/type_traits/detail/ice_and.hpp \
+ /home/local/mxe/usr/i686-w64-mingw32.static/include/boost/type_traits/detail/ice_not.hpp \
+ /home/local/mxe/usr/i686-w64-mingw32.static/include/boost/type_traits/detail/ice_eq.hpp \
+ /home/local/mxe/usr/i686-w64-mingw32.static/include/boost/type_traits/is_volatile.hpp \
+ /home/local/mxe/usr/i686-w64-mingw32.static/include/boost/type_traits/detail/cv_traits_impl.hpp \
+ /home/local/mxe/usr/i686-w64-mingw32.static/include/boost/type_traits/is_array.hpp \
+ /home/local/mxe/usr/i686-w64-mingw32.static/include/boost/type_traits/is_arithmetic.hpp \
+ /home/local/mxe/usr/i686-w64-mingw32.static/include/boost/type_traits/is_integral.hpp \
+ /home/local/mxe/usr/i686-w64-mingw32.static/include/boost/type_traits/is_float.hpp \
+ /home/local/mxe/usr/i686-w64-mingw32.static/include/boost/type_traits/is_void.hpp \
+ /home/local/mxe/usr/i686-w64-mingw32.static/include/boost/type_traits/is_abstract.hpp \
+ /home/local/mxe/usr/i686-w64-mingw32.static/include/boost/type_traits/add_lvalue_reference.hpp \
+ /home/local/mxe/usr/i686-w64-mingw32.static/include/boost/type_traits/add_reference.hpp \
+ /home/local/mxe/usr/i686-w64-mingw32.static/include/boost/type_traits/detail/type_trait_def.hpp \
+ /home/local/mxe/usr/i686-w64-mingw32.static/include/boost/type_traits/detail/type_trait_undef.hpp \
+ /home/local/mxe/usr/i686-w64-mingw32.static/include/boost/type_traits/add_rvalue_reference.hpp \
+ /home/local/mxe/usr/i686-w64-mingw32.static/include/boost/type_traits/is_function.hpp \
+ /home/local/mxe/usr/i686-w64-mingw32.static/include/boost/type_traits/detail/false_result.hpp \
+ /home/local/mxe/usr/i686-w64-mingw32.static/include/boost/type_traits/detail/is_function_ptr_helper.hpp \
+ /home/local/mxe/usr/i686-w64-mingw32.static/include/boost/iterator/detail/config_def.hpp \
+ /home/local/mxe/usr/i686-w64-mingw32.static/include/boost/iterator/detail/config_undef.hpp \
+ /home/local/mxe/usr/i686-w64-mingw32.static/include/boost/iterator/iterator_categories.hpp \
+ /home/local/mxe/usr/i686-w64-mingw32.static/include/boost/mpl/eval_if.hpp \
+ /home/local/mxe/usr/i686-w64-mingw32.static/include/boost/mpl/if.hpp \
+ /home/local/mxe/usr/i686-w64-mingw32.static/include/boost/mpl/aux_/value_wknd.hpp \
+ /home/local/mxe/usr/i686-w64-mingw32.static/include/boost/mpl/aux_/config/integral.hpp \
+ /home/local/mxe/usr/i686-w64-mingw32.static/include/boost/mpl/identity.hpp \
+ /home/local/mxe/usr/i686-w64-mingw32.static/include/boost/mpl/placeholders.hpp \
+ /home/local/mxe/usr/i686-w64-mingw32.static/include/boost/mpl/arg.hpp \
+ /home/local/mxe/usr/i686-w64-mingw32.static/include/boost/mpl/arg_fwd.hpp \
+ /home/local/mxe/usr/i686-w64-mingw32.static/include/boost/mpl/aux_/na_assert.hpp \
+ /home/local/mxe/usr/i686-w64-mingw32.static/include/boost/mpl/assert.hpp \
+ /home/local/mxe/usr/i686-w64-mingw32.static/include/boost/mpl/not.hpp \
+ /home/local/mxe/usr/i686-w64-mingw32.static/include/boost/mpl/aux_/yes_no.hpp \
+ /home/local/mxe/usr/i686-w64-mingw32.static/include/boost/mpl/aux_/config/arrays.hpp \
+ /home/local/mxe/usr/i686-w64-mingw32.static/include/boost/mpl/aux_/config/gpu.hpp \
+ /home/local/mxe/usr/i686-w64-mingw32.static/include/boost/mpl/aux_/config/pp_counter.hpp \
+ /home/local/mxe/usr/i686-w64-mingw32.static/include/boost/mpl/aux_/arity_spec.hpp \
+ /home/local/mxe/usr/i686-w64-mingw32.static/include/boost/mpl/aux_/arg_typedef.hpp \
+ /home/local/mxe/usr/i686-w64-mingw32.static/include/boost/mpl/aux_/preprocessed/gcc/arg.hpp \
+ /home/local/mxe/usr/i686-w64-mingw32.static/include/boost/mpl/aux_/preprocessed/gcc/placeholders.hpp \
+ /home/local/mxe/usr/i686-w64-mingw32.static/include/boost/static_assert.hpp \
+ /home/local/mxe/usr/i686-w64-mingw32.static/include/boost/iterator/detail/facade_iterator_category.hpp \
+ /home/local/mxe/usr/i686-w64-mingw32.static/include/boost/mpl/and.hpp \
+ /home/local/mxe/usr/i686-w64-mingw32.static/include/boost/mpl/aux_/preprocessed/gcc/and.hpp \
+ /home/local/mxe/usr/i686-w64-mingw32.static/include/boost/type_traits/is_const.hpp \
+ /home/local/mxe/usr/i686-w64-mingw32.static/include/boost/detail/indirect_traits.hpp \
+ /home/local/mxe/usr/i686-w64-mingw32.static/include/boost/type_traits/is_pointer.hpp \
+ /home/local/mxe/usr/i686-w64-mingw32.static/include/boost/type_traits/is_member_pointer.hpp \
+ /home/local/mxe/usr/i686-w64-mingw32.static/include/boost/type_traits/is_member_function_pointer.hpp \
+ /home/local/mxe/usr/i686-w64-mingw32.static/include/boost/type_traits/detail/is_mem_fun_pointer_impl.hpp \
+ /home/local/mxe/usr/i686-w64-mingw32.static/include/boost/type_traits/remove_cv.hpp \
+ /home/local/mxe/usr/i686-w64-mingw32.static/include/boost/type_traits/is_class.hpp \
+ /home/local/mxe/usr/i686-w64-mingw32.static/include/boost/type_traits/remove_reference.hpp \
+ /home/local/mxe/usr/i686-w64-mingw32.static/include/boost/type_traits/remove_pointer.hpp \
+ /home/local/mxe/usr/i686-w64-mingw32.static/include/boost/iterator/detail/enable_if.hpp \
+ /home/local/mxe/usr/i686-w64-mingw32.static/include/boost/utility/addressof.hpp \
+ /home/local/mxe/usr/i686-w64-mingw32.static/include/boost/core/addressof.hpp \
+ /home/local/mxe/usr/i686-w64-mingw32.static/include/boost/type_traits/add_const.hpp \
+ /home/local/mxe/usr/i686-w64-mingw32.static/include/boost/type_traits/add_pointer.hpp \
+ /home/local/mxe/usr/i686-w64-mingw32.static/include/boost/type_traits/remove_const.hpp \
+ /home/local/mxe/usr/i686-w64-mingw32.static/include/boost/type_traits/is_pod.hpp \
+ /home/local/mxe/usr/i686-w64-mingw32.static/include/boost/type_traits/is_scalar.hpp \
+ /home/local/mxe/usr/i686-w64-mingw32.static/include/boost/type_traits/is_enum.hpp \
+ /home/local/mxe/usr/i686-w64-mingw32.static/include/boost/mpl/always.hpp \
+ /home/local/mxe/usr/i686-w64-mingw32.static/include/boost/mpl/aux_/preprocessor/default_params.hpp \
+ /home/local/mxe/usr/i686-w64-mingw32.static/include/boost/mpl/apply.hpp \
+ /home/local/mxe/usr/i686-w64-mingw32.static/include/boost/mpl/apply_fwd.hpp \
+ /home/local/mxe/usr/i686-w64-mingw32.static/include/boost/mpl/aux_/preprocessed/gcc/apply_fwd.hpp \
+ /home/local/mxe/usr/i686-w64-mingw32.static/include/boost/mpl/apply_wrap.hpp \
+ /home/local/mxe/usr/i686-w64-mingw32.static/include/boost/mpl/aux_/has_apply.hpp \
+ /home/local/mxe/usr/i686-w64-mingw32.static/include/boost/mpl/has_xxx.hpp \
+ /home/local/mxe/usr/i686-w64-mingw32.static/include/boost/mpl/aux_/type_wrapper.hpp \
+ /home/local/mxe/usr/i686-w64-mingw32.static/include/boost/mpl/aux_/config/has_xxx.hpp \
+ /home/local/mxe/usr/i686-w64-mingw32.static/include/boost/mpl/aux_/config/msvc_typename.hpp \
+ /home/local/mxe/usr/i686-w64-mingw32.static/include/boost/preprocessor/array/elem.hpp \
+ /home/local/mxe/usr/i686-w64-mingw32.static/include/boost/preprocessor/array/data.hpp \
+ /home/local/mxe/usr/i686-w64-mingw32.static/include/boost/preprocessor/array/size.hpp \
+ /home/local/mxe/usr/i686-w64-mingw32.static/include/boost/preprocessor/repetition/enum_params.hpp \
+ /home/local/mxe/usr/i686-w64-mingw32.static/include/boost/preprocessor/repetition/enum_trailing_params.hpp \
+ /home/local/mxe/usr/i686-w64-mingw32.static/include/boost/mpl/aux_/config/has_apply.hpp \
+ /home/local/mxe/usr/i686-w64-mingw32.static/include/boost/mpl/aux_/msvc_never_true.hpp \
+ /home/local/mxe/usr/i686-w64-mingw32.static/include/boost/mpl/aux_/preprocessed/gcc/apply_wrap.hpp \
+ /home/local/mxe/usr/i686-w64-mingw32.static/include/boost/mpl/lambda.hpp \
+ /home/local/mxe/usr/i686-w64-mingw32.static/include/boost/mpl/bind.hpp \
+ /home/local/mxe/usr/i686-w64-mingw32.static/include/boost/mpl/bind_fwd.hpp \
+ /home/local/mxe/usr/i686-w64-mingw32.static/include/boost/mpl/aux_/config/bind.hpp \
+ /home/local/mxe/usr/i686-w64-mingw32.static/include/boost/mpl/aux_/preprocessed/gcc/bind_fwd.hpp \
+ /home/local/mxe/usr/i686-w64-mingw32.static/include/boost/mpl/next.hpp \
+ /home/local/mxe/usr/i686-w64-mingw32.static/include/boost/mpl/next_prior.hpp \
+ /home/local/mxe/usr/i686-w64-mingw32.static/include/boost/mpl/aux_/common_name_wknd.hpp \
+ /home/local/mxe/usr/i686-w64-mingw32.static/include/boost/mpl/protect.hpp \
+ /home/local/mxe/usr/i686-w64-mingw32.static/include/boost/mpl/aux_/preprocessed/gcc/bind.hpp \
+ /home/local/mxe/usr/i686-w64-mingw32.static/include/boost/mpl/aux_/full_lambda.hpp \
+ /home/local/mxe/usr/i686-w64-mingw32.static/include/boost/mpl/quote.hpp \
+ /home/local/mxe/usr/i686-w64-mingw32.static/include/boost/mpl/void.hpp \
+ /home/local/mxe/usr/i686-w64-mingw32.static/include/boost/mpl/aux_/has_type.hpp \
+ /home/local/mxe/usr/i686-w64-mingw32.static/include/boost/mpl/aux_/config/bcc.hpp \
+ /home/local/mxe/usr/i686-w64-mingw32.static/include/boost/mpl/aux_/preprocessed/gcc/quote.hpp \
+ /home/local/mxe/usr/i686-w64-mingw32.static/include/boost/mpl/aux_/template_arity.hpp \
+ /home/local/mxe/usr/i686-w64-mingw32.static/include/boost/mpl/aux_/preprocessed/gcc/template_arity.hpp \
+ /home/local/mxe/usr/i686-w64-mingw32.static/include/boost/mpl/aux_/preprocessed/gcc/full_lambda.hpp \
+ /home/local/mxe/usr/i686-w64-mingw32.static/include/boost/mpl/aux_/preprocessed/gcc/apply.hpp \
+ /home/local/mxe/usr/i686-w64-mingw32.static/include/boost/type_traits/is_base_and_derived.hpp \
+ /home/local/mxe/usr/i686-w64-mingw32.static/include/boost/range/functions.hpp \
+ /home/local/mxe/usr/i686-w64-mingw32.static/include/boost/range/begin.hpp \
+ /home/local/mxe/usr/i686-w64-mingw32.static/include/boost/range/config.hpp \
+ /home/local/mxe/usr/i686-w64-mingw32.static/include/boost/range/iterator.hpp \
+ /home/local/mxe/usr/i686-w64-mingw32.static/include/boost/range/range_fwd.hpp \
+ /home/local/mxe/usr/i686-w64-mingw32.static/include/boost/range/mutable_iterator.hpp \
+ /home/local/mxe/usr/i686-w64-mingw32.static/include/boost/range/detail/extract_optional_type.hpp \
+ /home/local/mxe/usr/lib/gcc/i686-w64-mingw32.static/5.1.0/include/c++/utility \
+ /home/local/mxe/usr/lib/gcc/i686-w64-mingw32.static/5.1.0/include/c++/bits/stl_relops.h \
+ /home/local/mxe/usr/i686-w64-mingw32.static/include/boost/range/detail/msvc_has_iterator_workaround.hpp \
+ /home/local/mxe/usr/i686-w64-mingw32.static/include/boost/range/const_iterator.hpp \
+ /home/local/mxe/usr/i686-w64-mingw32.static/include/boost/range/end.hpp \
+ /home/local/mxe/usr/i686-w64-mingw32.static/include/boost/range/detail/implementation_help.hpp \
+ /home/local/mxe/usr/i686-w64-mingw32.static/include/boost/range/detail/common.hpp \
+ /home/local/mxe/usr/i686-w64-mingw32.static/include/boost/range/detail/sfinae.hpp \
+ /home/local/mxe/usr/i686-w64-mingw32.static/include/boost/range/size.hpp \
+ /home/local/mxe/usr/i686-w64-mingw32.static/include/boost/range/size_type.hpp \
+ /home/local/mxe/usr/i686-w64-mingw32.static/include/boost/range/difference_type.hpp \
+ /home/local/mxe/usr/i686-w64-mingw32.static/include/boost/range/concepts.hpp \
+ /home/local/mxe/usr/i686-w64-mingw32.static/include/boost/concept_check.hpp \
+ /home/local/mxe/usr/i686-w64-mingw32.static/include/boost/concept/assert.hpp \
+ /home/local/mxe/usr/i686-w64-mingw32.static/include/boost/concept/detail/general.hpp \
+ /home/local/mxe/usr/i686-w64-mingw32.static/include/boost/concept/detail/backward_compatibility.hpp \
+ /home/local/mxe/usr/i686-w64-mingw32.static/include/boost/concept/detail/has_constraints.hpp \
+ /home/local/mxe/usr/i686-w64-mingw32.static/include/boost/type_traits/conversion_traits.hpp \
+ /home/local/mxe/usr/i686-w64-mingw32.static/include/boost/concept/usage.hpp \
+ /home/local/mxe/usr/i686-w64-mingw32.static/include/boost/concept/detail/concept_def.hpp \
+ /home/local/mxe/usr/i686-w64-mingw32.static/include/boost/preprocessor/seq/for_each_i.hpp \
+ /home/local/mxe/usr/i686-w64-mingw32.static/include/boost/preprocessor/repetition/for.hpp \
+ /home/local/mxe/usr/i686-w64-mingw32.static/include/boost/preprocessor/repetition/detail/for.hpp \
+ /home/local/mxe/usr/i686-w64-mingw32.static/include/boost/preprocessor/seq/seq.hpp \
+ /home/local/mxe/usr/i686-w64-mingw32.static/include/boost/preprocessor/seq/elem.hpp \
+ /home/local/mxe/usr/i686-w64-mingw32.static/include/boost/preprocessor/seq/size.hpp \
+ /home/local/mxe/usr/i686-w64-mingw32.static/include/boost/preprocessor/seq/enum.hpp \
+ /home/local/mxe/usr/i686-w64-mingw32.static/include/boost/concept/detail/concept_undef.hpp \
+ /home/local/mxe/usr/i686-w64-mingw32.static/include/boost/iterator/iterator_concepts.hpp \
+ /home/local/mxe/usr/i686-w64-mingw32.static/include/boost/limits.hpp \
+ /home/local/mxe/usr/lib/gcc/i686-w64-mingw32.static/5.1.0/include/c++/limits \
+ /home/local/mxe/usr/lib/gcc/i686-w64-mingw32.static/5.1.0/include/c++/algorithm \
+ /home/local/mxe/usr/lib/gcc/i686-w64-mingw32.static/5.1.0/include/c++/bits/stl_algo.h \
+ /home/local/mxe/usr/lib/gcc/i686-w64-mingw32.static/5.1.0/include/c++/cstdlib \
+ /home/local/mxe/usr/lib/gcc/i686-w64-mingw32.static/5.1.0/include/c++/bits/algorithmfwd.h \
+ /home/local/mxe/usr/lib/gcc/i686-w64-mingw32.static/5.1.0/include/c++/bits/stl_heap.h \
+ /home/local/mxe/usr/lib/gcc/i686-w64-mingw32.static/5.1.0/include/c++/bits/stl_tempbuf.h \
+ /home/local/mxe/usr/i686-w64-mingw32.static/include/boost/range/value_type.hpp \
+ /home/local/mxe/usr/i686-w64-mingw32.static/include/boost/range/detail/misc_concept.hpp \
+ /home/local/mxe/usr/i686-w64-mingw32.static/include/boost/utility/enable_if.hpp \
+ /home/local/mxe/usr/i686-w64-mingw32.static/include/boost/core/enable_if.hpp \
+ /home/local/mxe/usr/i686-w64-mingw32.static/include/boost/type_traits/make_unsigned.hpp \
+ /home/local/mxe/usr/i686-w64-mingw32.static/include/boost/type_traits/is_signed.hpp \
+ /home/local/mxe/usr/i686-w64-mingw32.static/include/boost/type_traits/is_unsigned.hpp \
+ /home/local/mxe/usr/i686-w64-mingw32.static/include/boost/type_traits/add_volatile.hpp \
+ /home/local/mxe/usr/i686-w64-mingw32.static/include/boost/range/detail/has_member_size.hpp \
+ /home/local/mxe/usr/i686-w64-mingw32.static/include/boost/cstdint.hpp \
+ /home/local/mxe/usr/i686-w64-mingw32.static/include/boost/utility.hpp \
+ /home/local/mxe/usr/i686-w64-mingw32.static/include/boost/utility/base_from_member.hpp \
+ /home/local/mxe/usr/i686-w64-mingw32.static/include/boost/preprocessor/repetition/enum_binary_params.hpp \
+ /home/local/mxe/usr/i686-w64-mingw32.static/include/boost/preprocessor/repetition/repeat_from_to.hpp \
+ /home/local/mxe/usr/i686-w64-mingw32.static/include/boost/utility/binary.hpp \
+ /home/local/mxe/usr/i686-w64-mingw32.static/include/boost/preprocessor/control/deduce_d.hpp \
+ /home/local/mxe/usr/i686-w64-mingw32.static/include/boost/preprocessor/seq/cat.hpp \
+ /home/local/mxe/usr/i686-w64-mingw32.static/include/boost/preprocessor/seq/fold_left.hpp \
+ /home/local/mxe/usr/i686-w64-mingw32.static/include/boost/preprocessor/seq/transform.hpp \
+ /home/local/mxe/usr/i686-w64-mingw32.static/include/boost/preprocessor/arithmetic/mod.hpp \
+ /home/local/mxe/usr/i686-w64-mingw32.static/include/boost/preprocessor/arithmetic/detail/div_base.hpp \
+ /home/local/mxe/usr/i686-w64-mingw32.static/include/boost/preprocessor/comparison/less_equal.hpp \
+ /home/local/mxe/usr/i686-w64-mingw32.static/include/boost/preprocessor/logical/not.hpp \
+ /home/local/mxe/usr/i686-w64-mingw32.static/include/boost/utility/identity_type.hpp \
+ /home/local/mxe/usr/i686-w64-mingw32.static/include/boost/type_traits/function_traits.hpp \
+ /home/local/mxe/usr/i686-w64-mingw32.static/include/boost/checked_delete.hpp \
+ /home/local/mxe/usr/i686-w64-mingw32.static/include/boost/core/checked_delete.hpp \
+ /home/local/mxe/usr/i686-w64-mingw32.static/include/boost/next_prior.hpp \
+ /home/local/mxe/usr/i686-w64-mingw32.static/include/boost/type_traits/integral_promotion.hpp \
+ /home/local/mxe/usr/i686-w64-mingw32.static/include/boost/type_traits/make_signed.hpp \
+ /home/local/mxe/usr/i686-w64-mingw32.static/include/boost/type_traits/has_plus.hpp \
+ /home/local/mxe/usr/i686-w64-mingw32.static/include/boost/type_traits/detail/has_binary_operator.hpp \
+ /home/local/mxe/usr/i686-w64-mingw32.static/include/boost/type_traits/is_base_of.hpp \
+ /home/local/mxe/usr/i686-w64-mingw32.static/include/boost/type_traits/is_fundamental.hpp \
+ /home/local/mxe/usr/i686-w64-mingw32.static/include/boost/type_traits/has_plus_assign.hpp \
+ /home/local/mxe/usr/i686-w64-mingw32.static/include/boost/type_traits/has_minus.hpp \
+ /home/local/mxe/usr/i686-w64-mingw32.static/include/boost/type_traits/has_minus_assign.hpp \
+ /home/local/mxe/usr/i686-w64-mingw32.static/include/boost/noncopyable.hpp \
+ /home/local/mxe/usr/i686-w64-mingw32.static/include/boost/core/noncopyable.hpp \
+ /home/local/mxe/usr/i686-w64-mingw32.static/include/boost/range/distance.hpp \
+ /home/local/mxe/usr/i686-w64-mingw32.static/include/boost/range/empty.hpp \
+ /home/local/mxe/usr/i686-w64-mingw32.static/include/boost/range/rbegin.hpp \
+ /home/local/mxe/usr/i686-w64-mingw32.static/include/boost/range/reverse_iterator.hpp \
+ /home/local/mxe/usr/i686-w64-mingw32.static/include/boost/iterator/reverse_iterator.hpp \
+ /home/local/mxe/usr/i686-w64-mingw32.static/include/boost/iterator/iterator_adaptor.hpp \
+ /home/local/mxe/usr/i686-w64-mingw32.static/include/boost/range/rend.hpp \
+ /home/local/mxe/usr/i686-w64-mingw32.static/include/boost/range/has_range_iterator.hpp \
+ /home/local/mxe/usr/i686-w64-mingw32.static/include/boost/range/algorithm/equal.hpp \
+ /home/local/mxe/usr/i686-w64-mingw32.static/include/boost/range/detail/safe_bool.hpp \
+ /home/local/mxe/usr/i686-w64-mingw32.static/include/boost/algorithm/string/find_format.hpp \
+ /home/local/mxe/usr/lib/gcc/i686-w64-mingw32.static/5.1.0/include/c++/deque \
+ /home/local/mxe/usr/lib/gcc/i686-w64-mingw32.static/5.1.0/include/c++/bits/stl_deque.h \
+ /home/local/mxe/usr/lib/gcc/i686-w64-mingw32.static/5.1.0/include/c++/bits/deque.tcc \
+ /home/local/mxe/usr/i686-w64-mingw32.static/include/boost/range/as_literal.hpp \
+ /home/local/mxe/usr/i686-w64-mingw32.static/include/boost/range/iterator_range.hpp \
+ /home/local/mxe/usr/i686-w64-mingw32.static/include/boost/range/iterator_range_io.hpp \
+ /home/local/mxe/usr/i686-w64-mingw32.static/include/boost/range/detail/str_types.hpp \
+ /home/local/mxe/usr/lib/gcc/i686-w64-mingw32.static/5.1.0/include/c++/cstring \
+ /home/local/mxe/usr/i686-w64-mingw32.static/include/boost/algorithm/string/concept.hpp \
+ /home/local/mxe/usr/i686-w64-mingw32.static/include/boost/algorithm/string/detail/find_format.hpp \
+ /home/local/mxe/usr/i686-w64-mingw32.static/include/boost/algorithm/string/detail/find_format_store.hpp \
+ /home/local/mxe/usr/i686-w64-mingw32.static/include/boost/algorithm/string/detail/replace_storage.hpp \
+ /home/local/mxe/usr/i686-w64-mingw32.static/include/boost/algorithm/string/sequence_traits.hpp \
+ /home/local/mxe/usr/i686-w64-mingw32.static/include/boost/algorithm/string/yes_no_type.hpp \
+ /home/local/mxe/usr/i686-w64-mingw32.static/include/boost/algorithm/string/detail/sequence.hpp \
+ /home/local/mxe/usr/i686-w64-mingw32.static/include/boost/mpl/logical.hpp \
+ /home/local/mxe/usr/i686-w64-mingw32.static/include/boost/algorithm/string/detail/find_format_all.hpp \
+ /home/local/mxe/usr/i686-w64-mingw32.static/include/boost/algorithm/string/finder.hpp \
+ /home/local/mxe/usr/i686-w64-mingw32.static/include/boost/algorithm/string/constants.hpp \
+ /home/local/mxe/usr/i686-w64-mingw32.static/include/boost/algorithm/string/detail/finder.hpp \
+ /home/local/mxe/usr/i686-w64-mingw32.static/include/boost/algorithm/string/compare.hpp \
+ /home/local/mxe/usr/lib/gcc/i686-w64-mingw32.static/5.1.0/include/c++/locale \
+ /home/local/mxe/usr/lib/gcc/i686-w64-mingw32.static/5.1.0/include/c++/bits/locale_facets_nonio.h \
+ /home/local/mxe/usr/lib/gcc/i686-w64-mingw32.static/5.1.0/include/c++/ctime \
+ /home/local/mxe/usr/lib/gcc/i686-w64-mingw32.static/5.1.0/include/c++/i686-w64-mingw32.static/bits/time_members.h \
+ /home/local/mxe/usr/lib/gcc/i686-w64-mingw32.static/5.1.0/include/c++/i686-w64-mingw32.static/bits/messages_members.h \
+ /home/local/mxe/usr/lib/gcc/i686-w64-mingw32.static/5.1.0/include/c++/bits/codecvt.h \
+ /home/local/mxe/usr/lib/gcc/i686-w64-mingw32.static/5.1.0/include/c++/bits/locale_facets_nonio.tcc \
+ /home/local/mxe/usr/i686-w64-mingw32.static/include/boost/algorithm/string/formatter.hpp \
+ /home/local/mxe/usr/i686-w64-mingw32.static/include/boost/algorithm/string/detail/formatter.hpp \
+ /home/local/mxe/usr/i686-w64-mingw32.static/include/boost/algorithm/string/detail/util.hpp \
+ /home/local/mxe/usr/lib/gcc/i686-w64-mingw32.static/5.1.0/include/c++/functional
+
+/home/local/mxe/usr/i686-w64-mingw32.static/include/stdio.h:
+
+/home/local/mxe/usr/i686-w64-mingw32.static/include/crtdefs.h:
+
+/home/local/mxe/usr/i686-w64-mingw32.static/include/_mingw.h:
+
+/home/local/mxe/usr/i686-w64-mingw32.static/include/_mingw_mac.h:
+
+/home/local/mxe/usr/i686-w64-mingw32.static/include/_mingw_secapi.h:
+
+/home/local/mxe/usr/i686-w64-mingw32.static/include/vadefs.h:
+
+/home/local/mxe/usr/i686-w64-mingw32.static/include/sdks/_mingw_directx.h:
+
+/home/local/mxe/usr/i686-w64-mingw32.static/include/sdks/_mingw_ddk.h:
+
+/home/local/mxe/usr/i686-w64-mingw32.static/include/_mingw_print_push.h:
+
+/home/local/mxe/usr/i686-w64-mingw32.static/include/_mingw_off_t.h:
+
+/home/local/mxe/usr/i686-w64-mingw32.static/include/swprintf.inl:
+
+/home/local/mxe/usr/i686-w64-mingw32.static/include/sec_api/stdio_s.h:
+
+/home/local/mxe/usr/i686-w64-mingw32.static/include/_mingw_print_pop.h:
+
+/home/local/mxe/usr/lib/gcc/i686-w64-mingw32.static/5.1.0/include/stdarg.h:
+
+/home/local/mxe/usr/i686-w64-mingw32.static/include/stdarg.h:
+
+/home/local/mxe/usr/i686-w64-mingw32.static/include/_mingw_stdarg.h:
+
+/home/local/mxe/usr/i686-w64-mingw32.static/include/string.h:
+
+/home/local/mxe/usr/i686-w64-mingw32.static/include/sec_api/string_s.h:
+
+csstrings.h:
+
+cstypes.h:
+
+/home/local/mxe/usr/lib/gcc/i686-w64-mingw32.static/5.1.0/include-fixed/limits.h:
+
+/home/local/mxe/usr/lib/gcc/i686-w64-mingw32.static/5.1.0/include-fixed/syslimits.h:
+
+/home/local/mxe/usr/i686-w64-mingw32.static/include/limits.h:
+
+../../config.h:
+
+/home/local/mxe/usr/i686-w64-mingw32.static/include/SDL/SDL_types.h:
+
+/home/local/mxe/usr/i686-w64-mingw32.static/include/SDL/SDL_stdinc.h:
+
+/home/local/mxe/usr/i686-w64-mingw32.static/include/SDL/SDL_config.h:
+
+/home/local/mxe/usr/i686-w64-mingw32.static/include/SDL/SDL_platform.h:
+
+/home/local/mxe/usr/i686-w64-mingw32.static/include/sys/types.h:
+
+/home/local/mxe/usr/i686-w64-mingw32.static/include/stdlib.h:
+
+/home/local/mxe/usr/i686-w64-mingw32.static/include/sec_api/stdlib_s.h:
+
+/home/local/mxe/usr/i686-w64-mingw32.static/include/malloc.h:
+
+/home/local/mxe/usr/lib/gcc/i686-w64-mingw32.static/5.1.0/include/stddef.h:
+
+/home/local/mxe/usr/i686-w64-mingw32.static/include/stddef.h:
+
+/home/local/mxe/usr/i686-w64-mingw32.static/include/strings.h:
+
+/home/local/mxe/usr/i686-w64-mingw32.static/include/inttypes.h:
+
+/home/local/mxe/usr/lib/gcc/i686-w64-mingw32.static/5.1.0/include/stdint.h:
+
+/home/local/mxe/usr/i686-w64-mingw32.static/include/stdint.h:
+
+/home/local/mxe/usr/i686-w64-mingw32.static/include/ctype.h:
+
+/home/local/mxe/usr/i686-w64-mingw32.static/include/SDL/begin_code.h:
+
+/home/local/mxe/usr/i686-w64-mingw32.static/include/SDL/close_code.h:
+
+/home/local/mxe/usr/i686-w64-mingw32.static/include/time.h:
+
+/home/local/mxe/usr/i686-w64-mingw32.static/include/_timeval.h:
+
+/home/local/mxe/usr/i686-w64-mingw32.static/include/sys/timeb.h:
+
+/home/local/mxe/usr/i686-w64-mingw32.static/include/sec_api/sys/timeb_s.h:
+
+/home/local/mxe/usr/i686-w64-mingw32.static/include/pthread_time.h:
+
+/home/local/mxe/usr/lib/gcc/i686-w64-mingw32.static/5.1.0/include/c++/string:
+
+/home/local/mxe/usr/lib/gcc/i686-w64-mingw32.static/5.1.0/include/c++/i686-w64-mingw32.static/bits/c++config.h:
+
+/home/local/mxe/usr/lib/gcc/i686-w64-mingw32.static/5.1.0/include/c++/i686-w64-mingw32.static/bits/os_defines.h:
+
+/home/local/mxe/usr/lib/gcc/i686-w64-mingw32.static/5.1.0/include/c++/i686-w64-mingw32.static/bits/cpu_defines.h:
+
+/home/local/mxe/usr/lib/gcc/i686-w64-mingw32.static/5.1.0/include/c++/bits/stringfwd.h:
+
+/home/local/mxe/usr/lib/gcc/i686-w64-mingw32.static/5.1.0/include/c++/bits/memoryfwd.h:
+
+/home/local/mxe/usr/lib/gcc/i686-w64-mingw32.static/5.1.0/include/c++/bits/char_traits.h:
+
+/home/local/mxe/usr/lib/gcc/i686-w64-mingw32.static/5.1.0/include/c++/bits/stl_algobase.h:
+
+/home/local/mxe/usr/lib/gcc/i686-w64-mingw32.static/5.1.0/include/c++/bits/functexcept.h:
+
+/home/local/mxe/usr/lib/gcc/i686-w64-mingw32.static/5.1.0/include/c++/bits/exception_defines.h:
+
+/home/local/mxe/usr/lib/gcc/i686-w64-mingw32.static/5.1.0/include/c++/bits/cpp_type_traits.h:
+
+/home/local/mxe/usr/lib/gcc/i686-w64-mingw32.static/5.1.0/include/c++/ext/type_traits.h:
+
+/home/local/mxe/usr/lib/gcc/i686-w64-mingw32.static/5.1.0/include/c++/ext/numeric_traits.h:
+
+/home/local/mxe/usr/lib/gcc/i686-w64-mingw32.static/5.1.0/include/c++/bits/stl_pair.h:
+
+/home/local/mxe/usr/lib/gcc/i686-w64-mingw32.static/5.1.0/include/c++/bits/move.h:
+
+/home/local/mxe/usr/lib/gcc/i686-w64-mingw32.static/5.1.0/include/c++/bits/concept_check.h:
+
+/home/local/mxe/usr/lib/gcc/i686-w64-mingw32.static/5.1.0/include/c++/bits/stl_iterator_base_types.h:
+
+/home/local/mxe/usr/lib/gcc/i686-w64-mingw32.static/5.1.0/include/c++/bits/stl_iterator_base_funcs.h:
+
+/home/local/mxe/usr/lib/gcc/i686-w64-mingw32.static/5.1.0/include/c++/debug/debug.h:
+
+/home/local/mxe/usr/lib/gcc/i686-w64-mingw32.static/5.1.0/include/c++/bits/stl_iterator.h:
+
+/home/local/mxe/usr/lib/gcc/i686-w64-mingw32.static/5.1.0/include/c++/bits/ptr_traits.h:
+
+/home/local/mxe/usr/lib/gcc/i686-w64-mingw32.static/5.1.0/include/c++/bits/predefined_ops.h:
+
+/home/local/mxe/usr/lib/gcc/i686-w64-mingw32.static/5.1.0/include/c++/bits/postypes.h:
+
+/home/local/mxe/usr/lib/gcc/i686-w64-mingw32.static/5.1.0/include/c++/cwchar:
+
+/home/local/mxe/usr/i686-w64-mingw32.static/include/wchar.h:
+
+/home/local/mxe/usr/i686-w64-mingw32.static/include/_mingw_stat64.h:
+
+/home/local/mxe/usr/i686-w64-mingw32.static/include/sec_api/wchar_s.h:
+
+/home/local/mxe/usr/lib/gcc/i686-w64-mingw32.static/5.1.0/include/c++/bits/allocator.h:
+
+/home/local/mxe/usr/lib/gcc/i686-w64-mingw32.static/5.1.0/include/c++/i686-w64-mingw32.static/bits/c++allocator.h:
+
+/home/local/mxe/usr/lib/gcc/i686-w64-mingw32.static/5.1.0/include/c++/ext/new_allocator.h:
+
+/home/local/mxe/usr/lib/gcc/i686-w64-mingw32.static/5.1.0/include/c++/new:
+
+/home/local/mxe/usr/lib/gcc/i686-w64-mingw32.static/5.1.0/include/c++/exception:
+
+/home/local/mxe/usr/lib/gcc/i686-w64-mingw32.static/5.1.0/include/c++/bits/atomic_lockfree_defines.h:
+
+/home/local/mxe/usr/lib/gcc/i686-w64-mingw32.static/5.1.0/include/c++/bits/localefwd.h:
+
+/home/local/mxe/usr/lib/gcc/i686-w64-mingw32.static/5.1.0/include/c++/i686-w64-mingw32.static/bits/c++locale.h:
+
+/home/local/mxe/usr/lib/gcc/i686-w64-mingw32.static/5.1.0/include/c++/clocale:
+
+/home/local/mxe/usr/i686-w64-mingw32.static/include/locale.h:
+
+/home/local/mxe/usr/lib/gcc/i686-w64-mingw32.static/5.1.0/include/c++/iosfwd:
+
+/home/local/mxe/usr/lib/gcc/i686-w64-mingw32.static/5.1.0/include/c++/cctype:
+
+/home/local/mxe/usr/lib/gcc/i686-w64-mingw32.static/5.1.0/include/c++/bits/ostream_insert.h:
+
+/home/local/mxe/usr/lib/gcc/i686-w64-mingw32.static/5.1.0/include/c++/bits/cxxabi_forced.h:
+
+/home/local/mxe/usr/lib/gcc/i686-w64-mingw32.static/5.1.0/include/c++/bits/stl_function.h:
+
+/home/local/mxe/usr/lib/gcc/i686-w64-mingw32.static/5.1.0/include/c++/backward/binders.h:
+
+/home/local/mxe/usr/lib/gcc/i686-w64-mingw32.static/5.1.0/include/c++/bits/range_access.h:
+
+/home/local/mxe/usr/lib/gcc/i686-w64-mingw32.static/5.1.0/include/c++/bits/basic_string.h:
+
+/home/local/mxe/usr/lib/gcc/i686-w64-mingw32.static/5.1.0/include/c++/ext/atomicity.h:
+
+/home/local/mxe/usr/lib/gcc/i686-w64-mingw32.static/5.1.0/include/c++/i686-w64-mingw32.static/bits/gthr.h:
+
+/home/local/mxe/usr/lib/gcc/i686-w64-mingw32.static/5.1.0/include/c++/i686-w64-mingw32.static/bits/gthr-default.h:
+
+/home/local/mxe/usr/i686-w64-mingw32.static/include/errno.h:
+
+/home/local/mxe/usr/lib/gcc/i686-w64-mingw32.static/5.1.0/include/c++/i686-w64-mingw32.static/bits/atomic_word.h:
+
+/home/local/mxe/usr/lib/gcc/i686-w64-mingw32.static/5.1.0/include/c++/ext/alloc_traits.h:
+
+/home/local/mxe/usr/lib/gcc/i686-w64-mingw32.static/5.1.0/include/c++/bits/basic_string.tcc:
+
+/home/local/mxe/usr/lib/gcc/i686-w64-mingw32.static/5.1.0/include/c++/vector:
+
+/home/local/mxe/usr/lib/gcc/i686-w64-mingw32.static/5.1.0/include/c++/bits/stl_construct.h:
+
+/home/local/mxe/usr/lib/gcc/i686-w64-mingw32.static/5.1.0/include/c++/bits/stl_uninitialized.h:
+
+/home/local/mxe/usr/lib/gcc/i686-w64-mingw32.static/5.1.0/include/c++/bits/stl_vector.h:
+
+/home/local/mxe/usr/lib/gcc/i686-w64-mingw32.static/5.1.0/include/c++/bits/stl_bvector.h:
+
+/home/local/mxe/usr/lib/gcc/i686-w64-mingw32.static/5.1.0/include/c++/bits/vector.tcc:
+
+../../Source_Files/RenderOther/TextStrings.h:
+
+../../Source_Files/Misc/Logging.h:
+
+../../Source_Files/Misc/Logging_gruntwork.h:
+
+../../Source_Files/Misc/alephversion.h:
+
+../../Source_Files/Misc/Scenario.h:
+
+../../Source_Files/XML/XML_ElementParser.h:
+
+cseries.h:
+
+/home/local/mxe/usr/i686-w64-mingw32.static/include/SDL/SDL.h:
+
+/home/local/mxe/usr/i686-w64-mingw32.static/include/SDL/SDL_main.h:
+
+/home/local/mxe/usr/i686-w64-mingw32.static/include/SDL/SDL_audio.h:
+
+/home/local/mxe/usr/i686-w64-mingw32.static/include/SDL/SDL_error.h:
+
+/home/local/mxe/usr/i686-w64-mingw32.static/include/SDL/SDL_endian.h:
+
+/home/local/mxe/usr/i686-w64-mingw32.static/include/SDL/SDL_mutex.h:
+
+/home/local/mxe/usr/i686-w64-mingw32.static/include/SDL/SDL_thread.h:
+
+/home/local/mxe/usr/i686-w64-mingw32.static/include/SDL/SDL_rwops.h:
+
+/home/local/mxe/usr/i686-w64-mingw32.static/include/SDL/SDL_cdrom.h:
+
+/home/local/mxe/usr/i686-w64-mingw32.static/include/SDL/SDL_cpuinfo.h:
+
+/home/local/mxe/usr/i686-w64-mingw32.static/include/SDL/SDL_events.h:
+
+/home/local/mxe/usr/i686-w64-mingw32.static/include/SDL/SDL_active.h:
+
+/home/local/mxe/usr/i686-w64-mingw32.static/include/SDL/SDL_keyboard.h:
+
+/home/local/mxe/usr/i686-w64-mingw32.static/include/SDL/SDL_keysym.h:
+
+/home/local/mxe/usr/i686-w64-mingw32.static/include/SDL/SDL_mouse.h:
+
+/home/local/mxe/usr/i686-w64-mingw32.static/include/SDL/SDL_video.h:
+
+/home/local/mxe/usr/i686-w64-mingw32.static/include/SDL/SDL_joystick.h:
+
+/home/local/mxe/usr/i686-w64-mingw32.static/include/SDL/SDL_quit.h:
+
+/home/local/mxe/usr/i686-w64-mingw32.static/include/SDL/SDL_loadso.h:
+
+/home/local/mxe/usr/i686-w64-mingw32.static/include/SDL/SDL_timer.h:
+
+/home/local/mxe/usr/i686-w64-mingw32.static/include/SDL/SDL_version.h:
+
+/home/local/mxe/usr/i686-w64-mingw32.static/include/SDL/SDL_byteorder.h:
+
+cstypes.h:
+
+csmacros.h:
+
+FilmProfile.h:
+
+cscluts.h:
+
+csstrings.h:
+
+csfonts.h:
+
+cspixels.h:
+
+csalerts.h:
+
+csdialogs.h:
+
+csmisc.h:
+
+cstypes.h:
+
+/home/local/mxe/usr/lib/gcc/i686-w64-mingw32.static/5.1.0/include/c++/map:
+
+/home/local/mxe/usr/lib/gcc/i686-w64-mingw32.static/5.1.0/include/c++/bits/stl_tree.h:
+
+/home/local/mxe/usr/lib/gcc/i686-w64-mingw32.static/5.1.0/include/c++/bits/stl_map.h:
+
+/home/local/mxe/usr/lib/gcc/i686-w64-mingw32.static/5.1.0/include/c++/bits/stl_multimap.h:
+
+/home/local/mxe/usr/i686-w64-mingw32.static/include/boost/algorithm/string/replace.hpp:
+
+/home/local/mxe/usr/i686-w64-mingw32.static/include/boost/algorithm/string/config.hpp:
+
+/home/local/mxe/usr/i686-w64-mingw32.static/include/boost/config.hpp:
+
+/home/local/mxe/usr/i686-w64-mingw32.static/include/boost/config/user.hpp:
+
+/home/local/mxe/usr/i686-w64-mingw32.static/include/boost/config/select_compiler_config.hpp:
+
+/home/local/mxe/usr/i686-w64-mingw32.static/include/boost/config/compiler/gcc.hpp:
+
+/home/local/mxe/usr/i686-w64-mingw32.static/include/boost/config/select_stdlib_config.hpp:
+
+/home/local/mxe/usr/lib/gcc/i686-w64-mingw32.static/5.1.0/include/c++/cstddef:
+
+/home/local/mxe/usr/i686-w64-mingw32.static/include/boost/config/stdlib/libstdcpp3.hpp:
+
+/home/local/mxe/usr/i686-w64-mingw32.static/include/boost/config/select_platform_config.hpp:
+
+/home/local/mxe/usr/i686-w64-mingw32.static/include/boost/config/platform/win32.hpp:
+
+/home/local/mxe/usr/i686-w64-mingw32.static/include/boost/config/suffix.hpp:
+
+/home/local/mxe/usr/i686-w64-mingw32.static/include/boost/detail/workaround.hpp:
+
+/home/local/mxe/usr/i686-w64-mingw32.static/include/boost/range/iterator_range_core.hpp:
+
+/home/local/mxe/usr/i686-w64-mingw32.static/include/boost/assert.hpp:
+
+/home/local/mxe/usr/i686-w64-mingw32.static/include/assert.h:
+
+/home/local/mxe/usr/i686-w64-mingw32.static/include/boost/iterator/iterator_traits.hpp:
+
+/home/local/mxe/usr/i686-w64-mingw32.static/include/boost/detail/iterator.hpp:
+
+/home/local/mxe/usr/lib/gcc/i686-w64-mingw32.static/5.1.0/include/c++/iterator:
+
+/home/local/mxe/usr/lib/gcc/i686-w64-mingw32.static/5.1.0/include/c++/ostream:
+
+/home/local/mxe/usr/lib/gcc/i686-w64-mingw32.static/5.1.0/include/c++/ios:
+
+/home/local/mxe/usr/lib/gcc/i686-w64-mingw32.static/5.1.0/include/c++/bits/ios_base.h:
+
+/home/local/mxe/usr/lib/gcc/i686-w64-mingw32.static/5.1.0/include/c++/bits/locale_classes.h:
+
+/home/local/mxe/usr/lib/gcc/i686-w64-mingw32.static/5.1.0/include/c++/bits/locale_classes.tcc:
+
+/home/local/mxe/usr/lib/gcc/i686-w64-mingw32.static/5.1.0/include/c++/stdexcept:
+
+/home/local/mxe/usr/lib/gcc/i686-w64-mingw32.static/5.1.0/include/c++/streambuf:
+
+/home/local/mxe/usr/lib/gcc/i686-w64-mingw32.static/5.1.0/include/c++/bits/streambuf.tcc:
+
+/home/local/mxe/usr/lib/gcc/i686-w64-mingw32.static/5.1.0/include/c++/bits/basic_ios.h:
+
+/home/local/mxe/usr/lib/gcc/i686-w64-mingw32.static/5.1.0/include/c++/bits/locale_facets.h:
+
+/home/local/mxe/usr/lib/gcc/i686-w64-mingw32.static/5.1.0/include/c++/cwctype:
+
+/home/local/mxe/usr/i686-w64-mingw32.static/include/wctype.h:
+
+/home/local/mxe/usr/lib/gcc/i686-w64-mingw32.static/5.1.0/include/c++/i686-w64-mingw32.static/bits/ctype_base.h:
+
+/home/local/mxe/usr/lib/gcc/i686-w64-mingw32.static/5.1.0/include/c++/bits/streambuf_iterator.h:
+
+/home/local/mxe/usr/lib/gcc/i686-w64-mingw32.static/5.1.0/include/c++/i686-w64-mingw32.static/bits/ctype_inline.h:
+
+/home/local/mxe/usr/lib/gcc/i686-w64-mingw32.static/5.1.0/include/c++/bits/locale_facets.tcc:
+
+/home/local/mxe/usr/lib/gcc/i686-w64-mingw32.static/5.1.0/include/c++/bits/basic_ios.tcc:
+
+/home/local/mxe/usr/lib/gcc/i686-w64-mingw32.static/5.1.0/include/c++/bits/ostream.tcc:
+
+/home/local/mxe/usr/lib/gcc/i686-w64-mingw32.static/5.1.0/include/c++/istream:
+
+/home/local/mxe/usr/lib/gcc/i686-w64-mingw32.static/5.1.0/include/c++/bits/istream.tcc:
+
+/home/local/mxe/usr/lib/gcc/i686-w64-mingw32.static/5.1.0/include/c++/bits/stream_iterator.h:
+
+/home/local/mxe/usr/i686-w64-mingw32.static/include/boost/iterator/iterator_facade.hpp:
+
+/home/local/mxe/usr/i686-w64-mingw32.static/include/boost/iterator.hpp:
+
+/home/local/mxe/usr/i686-w64-mingw32.static/include/boost/iterator/interoperable.hpp:
+
+/home/local/mxe/usr/i686-w64-mingw32.static/include/boost/mpl/bool.hpp:
+
+/home/local/mxe/usr/i686-w64-mingw32.static/include/boost/mpl/bool_fwd.hpp:
+
+/home/local/mxe/usr/i686-w64-mingw32.static/include/boost/mpl/aux_/adl_barrier.hpp:
+
+/home/local/mxe/usr/i686-w64-mingw32.static/include/boost/mpl/aux_/config/adl.hpp:
+
+/home/local/mxe/usr/i686-w64-mingw32.static/include/boost/mpl/aux_/config/msvc.hpp:
+
+/home/local/mxe/usr/i686-w64-mingw32.static/include/boost/mpl/aux_/config/intel.hpp:
+
+/home/local/mxe/usr/i686-w64-mingw32.static/include/boost/mpl/aux_/config/gcc.hpp:
+
+/home/local/mxe/usr/i686-w64-mingw32.static/include/boost/mpl/aux_/config/workaround.hpp:
+
+/home/local/mxe/usr/i686-w64-mingw32.static/include/boost/mpl/integral_c_tag.hpp:
+
+/home/local/mxe/usr/i686-w64-mingw32.static/include/boost/mpl/aux_/config/static_constant.hpp:
+
+/home/local/mxe/usr/i686-w64-mingw32.static/include/boost/mpl/or.hpp:
+
+/home/local/mxe/usr/i686-w64-mingw32.static/include/boost/mpl/aux_/config/use_preprocessed.hpp:
+
+/home/local/mxe/usr/i686-w64-mingw32.static/include/boost/mpl/aux_/nested_type_wknd.hpp:
+
+/home/local/mxe/usr/i686-w64-mingw32.static/include/boost/mpl/aux_/na_spec.hpp:
+
+/home/local/mxe/usr/i686-w64-mingw32.static/include/boost/mpl/lambda_fwd.hpp:
+
+/home/local/mxe/usr/i686-w64-mingw32.static/include/boost/mpl/void_fwd.hpp:
+
+/home/local/mxe/usr/i686-w64-mingw32.static/include/boost/mpl/aux_/na.hpp:
+
+/home/local/mxe/usr/i686-w64-mingw32.static/include/boost/mpl/aux_/na_fwd.hpp:
+
+/home/local/mxe/usr/i686-w64-mingw32.static/include/boost/mpl/aux_/config/ctps.hpp:
+
+/home/local/mxe/usr/i686-w64-mingw32.static/include/boost/mpl/aux_/config/lambda.hpp:
+
+/home/local/mxe/usr/i686-w64-mingw32.static/include/boost/mpl/aux_/config/ttp.hpp:
+
+/home/local/mxe/usr/i686-w64-mingw32.static/include/boost/mpl/int.hpp:
+
+/home/local/mxe/usr/i686-w64-mingw32.static/include/boost/mpl/int_fwd.hpp:
+
+/home/local/mxe/usr/i686-w64-mingw32.static/include/boost/mpl/aux_/nttp_decl.hpp:
+
+/home/local/mxe/usr/i686-w64-mingw32.static/include/boost/mpl/aux_/config/nttp.hpp:
+
+/home/local/mxe/usr/i686-w64-mingw32.static/include/boost/mpl/aux_/integral_wrapper.hpp:
+
+/home/local/mxe/usr/i686-w64-mingw32.static/include/boost/mpl/aux_/static_cast.hpp:
+
+/home/local/mxe/usr/i686-w64-mingw32.static/include/boost/preprocessor/cat.hpp:
+
+/home/local/mxe/usr/i686-w64-mingw32.static/include/boost/preprocessor/config/config.hpp:
+
+/home/local/mxe/usr/i686-w64-mingw32.static/include/boost/mpl/aux_/lambda_arity_param.hpp:
+
+/home/local/mxe/usr/i686-w64-mingw32.static/include/boost/mpl/aux_/template_arity_fwd.hpp:
+
+/home/local/mxe/usr/i686-w64-mingw32.static/include/boost/mpl/aux_/arity.hpp:
+
+/home/local/mxe/usr/i686-w64-mingw32.static/include/boost/mpl/aux_/config/dtp.hpp:
+
+/home/local/mxe/usr/i686-w64-mingw32.static/include/boost/mpl/aux_/preprocessor/params.hpp:
+
+/home/local/mxe/usr/i686-w64-mingw32.static/include/boost/mpl/aux_/config/preprocessor.hpp:
+
+/home/local/mxe/usr/i686-w64-mingw32.static/include/boost/preprocessor/comma_if.hpp:
+
+/home/local/mxe/usr/i686-w64-mingw32.static/include/boost/preprocessor/punctuation/comma_if.hpp:
+
+/home/local/mxe/usr/i686-w64-mingw32.static/include/boost/preprocessor/control/if.hpp:
+
+/home/local/mxe/usr/i686-w64-mingw32.static/include/boost/preprocessor/control/iif.hpp:
+
+/home/local/mxe/usr/i686-w64-mingw32.static/include/boost/preprocessor/logical/bool.hpp:
+
+/home/local/mxe/usr/i686-w64-mingw32.static/include/boost/preprocessor/facilities/empty.hpp:
+
+/home/local/mxe/usr/i686-w64-mingw32.static/include/boost/preprocessor/punctuation/comma.hpp:
+
+/home/local/mxe/usr/i686-w64-mingw32.static/include/boost/preprocessor/repeat.hpp:
+
+/home/local/mxe/usr/i686-w64-mingw32.static/include/boost/preprocessor/repetition/repeat.hpp:
+
+/home/local/mxe/usr/i686-w64-mingw32.static/include/boost/preprocessor/debug/error.hpp:
+
+/home/local/mxe/usr/i686-w64-mingw32.static/include/boost/preprocessor/detail/auto_rec.hpp:
+
+/home/local/mxe/usr/i686-w64-mingw32.static/include/boost/preprocessor/tuple/eat.hpp:
+
+/home/local/mxe/usr/i686-w64-mingw32.static/include/boost/preprocessor/inc.hpp:
+
+/home/local/mxe/usr/i686-w64-mingw32.static/include/boost/preprocessor/arithmetic/inc.hpp:
+
+/home/local/mxe/usr/i686-w64-mingw32.static/include/boost/mpl/aux_/preprocessor/enum.hpp:
+
+/home/local/mxe/usr/i686-w64-mingw32.static/include/boost/mpl/aux_/preprocessor/def_params_tail.hpp:
+
+/home/local/mxe/usr/i686-w64-mingw32.static/include/boost/mpl/limits/arity.hpp:
+
+/home/local/mxe/usr/i686-w64-mingw32.static/include/boost/preprocessor/logical/and.hpp:
+
+/home/local/mxe/usr/i686-w64-mingw32.static/include/boost/preprocessor/logical/bitand.hpp:
+
+/home/local/mxe/usr/i686-w64-mingw32.static/include/boost/preprocessor/identity.hpp:
+
+/home/local/mxe/usr/i686-w64-mingw32.static/include/boost/preprocessor/facilities/identity.hpp:
+
+/home/local/mxe/usr/i686-w64-mingw32.static/include/boost/preprocessor/empty.hpp:
+
+/home/local/mxe/usr/i686-w64-mingw32.static/include/boost/preprocessor/arithmetic/add.hpp:
+
+/home/local/mxe/usr/i686-w64-mingw32.static/include/boost/preprocessor/arithmetic/dec.hpp:
+
+/home/local/mxe/usr/i686-w64-mingw32.static/include/boost/preprocessor/control/while.hpp:
+
+/home/local/mxe/usr/i686-w64-mingw32.static/include/boost/preprocessor/list/fold_left.hpp:
+
+/home/local/mxe/usr/i686-w64-mingw32.static/include/boost/preprocessor/list/detail/fold_left.hpp:
+
+/home/local/mxe/usr/i686-w64-mingw32.static/include/boost/preprocessor/control/expr_iif.hpp:
+
+/home/local/mxe/usr/i686-w64-mingw32.static/include/boost/preprocessor/list/adt.hpp:
+
+/home/local/mxe/usr/i686-w64-mingw32.static/include/boost/preprocessor/detail/is_binary.hpp:
+
+/home/local/mxe/usr/i686-w64-mingw32.static/include/boost/preprocessor/detail/check.hpp:
+
+/home/local/mxe/usr/i686-w64-mingw32.static/include/boost/preprocessor/logical/compl.hpp:
+
+/home/local/mxe/usr/i686-w64-mingw32.static/include/boost/preprocessor/list/fold_right.hpp:
+
+/home/local/mxe/usr/i686-w64-mingw32.static/include/boost/preprocessor/list/detail/fold_right.hpp:
+
+/home/local/mxe/usr/i686-w64-mingw32.static/include/boost/preprocessor/list/reverse.hpp:
+
+/home/local/mxe/usr/i686-w64-mingw32.static/include/boost/preprocessor/control/detail/while.hpp:
+
+/home/local/mxe/usr/i686-w64-mingw32.static/include/boost/preprocessor/tuple/elem.hpp:
+
+/home/local/mxe/usr/i686-w64-mingw32.static/include/boost/preprocessor/facilities/expand.hpp:
+
+/home/local/mxe/usr/i686-w64-mingw32.static/include/boost/preprocessor/facilities/overload.hpp:
+
+/home/local/mxe/usr/i686-w64-mingw32.static/include/boost/preprocessor/variadic/size.hpp:
+
+/home/local/mxe/usr/i686-w64-mingw32.static/include/boost/preprocessor/tuple/rem.hpp:
+
+/home/local/mxe/usr/i686-w64-mingw32.static/include/boost/preprocessor/tuple/detail/is_single_return.hpp:
+
+/home/local/mxe/usr/i686-w64-mingw32.static/include/boost/preprocessor/variadic/elem.hpp:
+
+/home/local/mxe/usr/i686-w64-mingw32.static/include/boost/preprocessor/arithmetic/sub.hpp:
+
+/home/local/mxe/usr/i686-w64-mingw32.static/include/boost/mpl/aux_/config/eti.hpp:
+
+/home/local/mxe/usr/i686-w64-mingw32.static/include/boost/mpl/aux_/config/overload_resolution.hpp:
+
+/home/local/mxe/usr/i686-w64-mingw32.static/include/boost/mpl/aux_/lambda_support.hpp:
+
+/home/local/mxe/usr/i686-w64-mingw32.static/include/boost/mpl/aux_/include_preprocessed.hpp:
+
+/home/local/mxe/usr/i686-w64-mingw32.static/include/boost/mpl/aux_/config/compiler.hpp:
+
+/home/local/mxe/usr/i686-w64-mingw32.static/include/boost/preprocessor/stringize.hpp:
+
+/home/local/mxe/usr/i686-w64-mingw32.static/include/boost/mpl/aux_/preprocessed/gcc/or.hpp:
+
+/home/local/mxe/usr/i686-w64-mingw32.static/include/boost/type_traits/is_convertible.hpp:
+
+/home/local/mxe/usr/i686-w64-mingw32.static/include/boost/type_traits/intrinsics.hpp:
+
+/home/local/mxe/usr/i686-w64-mingw32.static/include/boost/type_traits/config.hpp:
+
+/home/local/mxe/usr/i686-w64-mingw32.static/include/boost/type_traits/is_same.hpp:
+
+/home/local/mxe/usr/i686-w64-mingw32.static/include/boost/type_traits/detail/bool_trait_def.hpp:
+
+/home/local/mxe/usr/i686-w64-mingw32.static/include/boost/type_traits/detail/template_arity_spec.hpp:
+
+/home/local/mxe/usr/i686-w64-mingw32.static/include/boost/type_traits/integral_constant.hpp:
+
+/home/local/mxe/usr/i686-w64-mingw32.static/include/boost/mpl/integral_c.hpp:
+
+/home/local/mxe/usr/i686-w64-mingw32.static/include/boost/mpl/integral_c_fwd.hpp:
+
+/home/local/mxe/usr/i686-w64-mingw32.static/include/boost/type_traits/detail/bool_trait_undef.hpp:
+
+/home/local/mxe/usr/i686-w64-mingw32.static/include/boost/type_traits/is_reference.hpp:
+
+/home/local/mxe/usr/i686-w64-mingw32.static/include/boost/type_traits/is_lvalue_reference.hpp:
+
+/home/local/mxe/usr/i686-w64-mingw32.static/include/boost/type_traits/is_rvalue_reference.hpp:
+
+/home/local/mxe/usr/i686-w64-mingw32.static/include/boost/type_traits/ice.hpp:
+
+/home/local/mxe/usr/i686-w64-mingw32.static/include/boost/type_traits/detail/yes_no_type.hpp:
+
+/home/local/mxe/usr/i686-w64-mingw32.static/include/boost/type_traits/detail/ice_or.hpp:
+
+/home/local/mxe/usr/i686-w64-mingw32.static/include/boost/type_traits/detail/ice_and.hpp:
+
+/home/local/mxe/usr/i686-w64-mingw32.static/include/boost/type_traits/detail/ice_not.hpp:
+
+/home/local/mxe/usr/i686-w64-mingw32.static/include/boost/type_traits/detail/ice_eq.hpp:
+
+/home/local/mxe/usr/i686-w64-mingw32.static/include/boost/type_traits/is_volatile.hpp:
+
+/home/local/mxe/usr/i686-w64-mingw32.static/include/boost/type_traits/detail/cv_traits_impl.hpp:
+
+/home/local/mxe/usr/i686-w64-mingw32.static/include/boost/type_traits/is_array.hpp:
+
+/home/local/mxe/usr/i686-w64-mingw32.static/include/boost/type_traits/is_arithmetic.hpp:
+
+/home/local/mxe/usr/i686-w64-mingw32.static/include/boost/type_traits/is_integral.hpp:
+
+/home/local/mxe/usr/i686-w64-mingw32.static/include/boost/type_traits/is_float.hpp:
+
+/home/local/mxe/usr/i686-w64-mingw32.static/include/boost/type_traits/is_void.hpp:
+
+/home/local/mxe/usr/i686-w64-mingw32.static/include/boost/type_traits/is_abstract.hpp:
+
+/home/local/mxe/usr/i686-w64-mingw32.static/include/boost/type_traits/add_lvalue_reference.hpp:
+
+/home/local/mxe/usr/i686-w64-mingw32.static/include/boost/type_traits/add_reference.hpp:
+
+/home/local/mxe/usr/i686-w64-mingw32.static/include/boost/type_traits/detail/type_trait_def.hpp:
+
+/home/local/mxe/usr/i686-w64-mingw32.static/include/boost/type_traits/detail/type_trait_undef.hpp:
+
+/home/local/mxe/usr/i686-w64-mingw32.static/include/boost/type_traits/add_rvalue_reference.hpp:
+
+/home/local/mxe/usr/i686-w64-mingw32.static/include/boost/type_traits/is_function.hpp:
+
+/home/local/mxe/usr/i686-w64-mingw32.static/include/boost/type_traits/detail/false_result.hpp:
+
+/home/local/mxe/usr/i686-w64-mingw32.static/include/boost/type_traits/detail/is_function_ptr_helper.hpp:
+
+/home/local/mxe/usr/i686-w64-mingw32.static/include/boost/iterator/detail/config_def.hpp:
+
+/home/local/mxe/usr/i686-w64-mingw32.static/include/boost/iterator/detail/config_undef.hpp:
+
+/home/local/mxe/usr/i686-w64-mingw32.static/include/boost/iterator/iterator_categories.hpp:
+
+/home/local/mxe/usr/i686-w64-mingw32.static/include/boost/mpl/eval_if.hpp:
+
+/home/local/mxe/usr/i686-w64-mingw32.static/include/boost/mpl/if.hpp:
+
+/home/local/mxe/usr/i686-w64-mingw32.static/include/boost/mpl/aux_/value_wknd.hpp:
+
+/home/local/mxe/usr/i686-w64-mingw32.static/include/boost/mpl/aux_/config/integral.hpp:
+
+/home/local/mxe/usr/i686-w64-mingw32.static/include/boost/mpl/identity.hpp:
+
+/home/local/mxe/usr/i686-w64-mingw32.static/include/boost/mpl/placeholders.hpp:
+
+/home/local/mxe/usr/i686-w64-mingw32.static/include/boost/mpl/arg.hpp:
+
+/home/local/mxe/usr/i686-w64-mingw32.static/include/boost/mpl/arg_fwd.hpp:
+
+/home/local/mxe/usr/i686-w64-mingw32.static/include/boost/mpl/aux_/na_assert.hpp:
+
+/home/local/mxe/usr/i686-w64-mingw32.static/include/boost/mpl/assert.hpp:
+
+/home/local/mxe/usr/i686-w64-mingw32.static/include/boost/mpl/not.hpp:
+
+/home/local/mxe/usr/i686-w64-mingw32.static/include/boost/mpl/aux_/yes_no.hpp:
+
+/home/local/mxe/usr/i686-w64-mingw32.static/include/boost/mpl/aux_/config/arrays.hpp:
+
+/home/local/mxe/usr/i686-w64-mingw32.static/include/boost/mpl/aux_/config/gpu.hpp:
+
+/home/local/mxe/usr/i686-w64-mingw32.static/include/boost/mpl/aux_/config/pp_counter.hpp:
+
+/home/local/mxe/usr/i686-w64-mingw32.static/include/boost/mpl/aux_/arity_spec.hpp:
+
+/home/local/mxe/usr/i686-w64-mingw32.static/include/boost/mpl/aux_/arg_typedef.hpp:
+
+/home/local/mxe/usr/i686-w64-mingw32.static/include/boost/mpl/aux_/preprocessed/gcc/arg.hpp:
+
+/home/local/mxe/usr/i686-w64-mingw32.static/include/boost/mpl/aux_/preprocessed/gcc/placeholders.hpp:
+
+/home/local/mxe/usr/i686-w64-mingw32.static/include/boost/static_assert.hpp:
+
+/home/local/mxe/usr/i686-w64-mingw32.static/include/boost/iterator/detail/facade_iterator_category.hpp:
+
+/home/local/mxe/usr/i686-w64-mingw32.static/include/boost/mpl/and.hpp:
+
+/home/local/mxe/usr/i686-w64-mingw32.static/include/boost/mpl/aux_/preprocessed/gcc/and.hpp:
+
+/home/local/mxe/usr/i686-w64-mingw32.static/include/boost/type_traits/is_const.hpp:
+
+/home/local/mxe/usr/i686-w64-mingw32.static/include/boost/detail/indirect_traits.hpp:
+
+/home/local/mxe/usr/i686-w64-mingw32.static/include/boost/type_traits/is_pointer.hpp:
+
+/home/local/mxe/usr/i686-w64-mingw32.static/include/boost/type_traits/is_member_pointer.hpp:
+
+/home/local/mxe/usr/i686-w64-mingw32.static/include/boost/type_traits/is_member_function_pointer.hpp:
+
+/home/local/mxe/usr/i686-w64-mingw32.static/include/boost/type_traits/detail/is_mem_fun_pointer_impl.hpp:
+
+/home/local/mxe/usr/i686-w64-mingw32.static/include/boost/type_traits/remove_cv.hpp:
+
+/home/local/mxe/usr/i686-w64-mingw32.static/include/boost/type_traits/is_class.hpp:
+
+/home/local/mxe/usr/i686-w64-mingw32.static/include/boost/type_traits/remove_reference.hpp:
+
+/home/local/mxe/usr/i686-w64-mingw32.static/include/boost/type_traits/remove_pointer.hpp:
+
+/home/local/mxe/usr/i686-w64-mingw32.static/include/boost/iterator/detail/enable_if.hpp:
+
+/home/local/mxe/usr/i686-w64-mingw32.static/include/boost/utility/addressof.hpp:
+
+/home/local/mxe/usr/i686-w64-mingw32.static/include/boost/core/addressof.hpp:
+
+/home/local/mxe/usr/i686-w64-mingw32.static/include/boost/type_traits/add_const.hpp:
+
+/home/local/mxe/usr/i686-w64-mingw32.static/include/boost/type_traits/add_pointer.hpp:
+
+/home/local/mxe/usr/i686-w64-mingw32.static/include/boost/type_traits/remove_const.hpp:
+
+/home/local/mxe/usr/i686-w64-mingw32.static/include/boost/type_traits/is_pod.hpp:
+
+/home/local/mxe/usr/i686-w64-mingw32.static/include/boost/type_traits/is_scalar.hpp:
+
+/home/local/mxe/usr/i686-w64-mingw32.static/include/boost/type_traits/is_enum.hpp:
+
+/home/local/mxe/usr/i686-w64-mingw32.static/include/boost/mpl/always.hpp:
+
+/home/local/mxe/usr/i686-w64-mingw32.static/include/boost/mpl/aux_/preprocessor/default_params.hpp:
+
+/home/local/mxe/usr/i686-w64-mingw32.static/include/boost/mpl/apply.hpp:
+
+/home/local/mxe/usr/i686-w64-mingw32.static/include/boost/mpl/apply_fwd.hpp:
+
+/home/local/mxe/usr/i686-w64-mingw32.static/include/boost/mpl/aux_/preprocessed/gcc/apply_fwd.hpp:
+
+/home/local/mxe/usr/i686-w64-mingw32.static/include/boost/mpl/apply_wrap.hpp:
+
+/home/local/mxe/usr/i686-w64-mingw32.static/include/boost/mpl/aux_/has_apply.hpp:
+
+/home/local/mxe/usr/i686-w64-mingw32.static/include/boost/mpl/has_xxx.hpp:
+
+/home/local/mxe/usr/i686-w64-mingw32.static/include/boost/mpl/aux_/type_wrapper.hpp:
+
+/home/local/mxe/usr/i686-w64-mingw32.static/include/boost/mpl/aux_/config/has_xxx.hpp:
+
+/home/local/mxe/usr/i686-w64-mingw32.static/include/boost/mpl/aux_/config/msvc_typename.hpp:
+
+/home/local/mxe/usr/i686-w64-mingw32.static/include/boost/preprocessor/array/elem.hpp:
+
+/home/local/mxe/usr/i686-w64-mingw32.static/include/boost/preprocessor/array/data.hpp:
+
+/home/local/mxe/usr/i686-w64-mingw32.static/include/boost/preprocessor/array/size.hpp:
+
+/home/local/mxe/usr/i686-w64-mingw32.static/include/boost/preprocessor/repetition/enum_params.hpp:
+
+/home/local/mxe/usr/i686-w64-mingw32.static/include/boost/preprocessor/repetition/enum_trailing_params.hpp:
+
+/home/local/mxe/usr/i686-w64-mingw32.static/include/boost/mpl/aux_/config/has_apply.hpp:
+
+/home/local/mxe/usr/i686-w64-mingw32.static/include/boost/mpl/aux_/msvc_never_true.hpp:
+
+/home/local/mxe/usr/i686-w64-mingw32.static/include/boost/mpl/aux_/preprocessed/gcc/apply_wrap.hpp:
+
+/home/local/mxe/usr/i686-w64-mingw32.static/include/boost/mpl/lambda.hpp:
+
+/home/local/mxe/usr/i686-w64-mingw32.static/include/boost/mpl/bind.hpp:
+
+/home/local/mxe/usr/i686-w64-mingw32.static/include/boost/mpl/bind_fwd.hpp:
+
+/home/local/mxe/usr/i686-w64-mingw32.static/include/boost/mpl/aux_/config/bind.hpp:
+
+/home/local/mxe/usr/i686-w64-mingw32.static/include/boost/mpl/aux_/preprocessed/gcc/bind_fwd.hpp:
+
+/home/local/mxe/usr/i686-w64-mingw32.static/include/boost/mpl/next.hpp:
+
+/home/local/mxe/usr/i686-w64-mingw32.static/include/boost/mpl/next_prior.hpp:
+
+/home/local/mxe/usr/i686-w64-mingw32.static/include/boost/mpl/aux_/common_name_wknd.hpp:
+
+/home/local/mxe/usr/i686-w64-mingw32.static/include/boost/mpl/protect.hpp:
+
+/home/local/mxe/usr/i686-w64-mingw32.static/include/boost/mpl/aux_/preprocessed/gcc/bind.hpp:
+
+/home/local/mxe/usr/i686-w64-mingw32.static/include/boost/mpl/aux_/full_lambda.hpp:
+
+/home/local/mxe/usr/i686-w64-mingw32.static/include/boost/mpl/quote.hpp:
+
+/home/local/mxe/usr/i686-w64-mingw32.static/include/boost/mpl/void.hpp:
+
+/home/local/mxe/usr/i686-w64-mingw32.static/include/boost/mpl/aux_/has_type.hpp:
+
+/home/local/mxe/usr/i686-w64-mingw32.static/include/boost/mpl/aux_/config/bcc.hpp:
+
+/home/local/mxe/usr/i686-w64-mingw32.static/include/boost/mpl/aux_/preprocessed/gcc/quote.hpp:
+
+/home/local/mxe/usr/i686-w64-mingw32.static/include/boost/mpl/aux_/template_arity.hpp:
+
+/home/local/mxe/usr/i686-w64-mingw32.static/include/boost/mpl/aux_/preprocessed/gcc/template_arity.hpp:
+
+/home/local/mxe/usr/i686-w64-mingw32.static/include/boost/mpl/aux_/preprocessed/gcc/full_lambda.hpp:
+
+/home/local/mxe/usr/i686-w64-mingw32.static/include/boost/mpl/aux_/preprocessed/gcc/apply.hpp:
+
+/home/local/mxe/usr/i686-w64-mingw32.static/include/boost/type_traits/is_base_and_derived.hpp:
+
+/home/local/mxe/usr/i686-w64-mingw32.static/include/boost/range/functions.hpp:
+
+/home/local/mxe/usr/i686-w64-mingw32.static/include/boost/range/begin.hpp:
+
+/home/local/mxe/usr/i686-w64-mingw32.static/include/boost/range/config.hpp:
+
+/home/local/mxe/usr/i686-w64-mingw32.static/include/boost/range/iterator.hpp:
+
+/home/local/mxe/usr/i686-w64-mingw32.static/include/boost/range/range_fwd.hpp:
+
+/home/local/mxe/usr/i686-w64-mingw32.static/include/boost/range/mutable_iterator.hpp:
+
+/home/local/mxe/usr/i686-w64-mingw32.static/include/boost/range/detail/extract_optional_type.hpp:
+
+/home/local/mxe/usr/lib/gcc/i686-w64-mingw32.static/5.1.0/include/c++/utility:
+
+/home/local/mxe/usr/lib/gcc/i686-w64-mingw32.static/5.1.0/include/c++/bits/stl_relops.h:
+
+/home/local/mxe/usr/i686-w64-mingw32.static/include/boost/range/detail/msvc_has_iterator_workaround.hpp:
+
+/home/local/mxe/usr/i686-w64-mingw32.static/include/boost/range/const_iterator.hpp:
+
+/home/local/mxe/usr/i686-w64-mingw32.static/include/boost/range/end.hpp:
+
+/home/local/mxe/usr/i686-w64-mingw32.static/include/boost/range/detail/implementation_help.hpp:
+
+/home/local/mxe/usr/i686-w64-mingw32.static/include/boost/range/detail/common.hpp:
+
+/home/local/mxe/usr/i686-w64-mingw32.static/include/boost/range/detail/sfinae.hpp:
+
+/home/local/mxe/usr/i686-w64-mingw32.static/include/boost/range/size.hpp:
+
+/home/local/mxe/usr/i686-w64-mingw32.static/include/boost/range/size_type.hpp:
+
+/home/local/mxe/usr/i686-w64-mingw32.static/include/boost/range/difference_type.hpp:
+
+/home/local/mxe/usr/i686-w64-mingw32.static/include/boost/range/concepts.hpp:
+
+/home/local/mxe/usr/i686-w64-mingw32.static/include/boost/concept_check.hpp:
+
+/home/local/mxe/usr/i686-w64-mingw32.static/include/boost/concept/assert.hpp:
+
+/home/local/mxe/usr/i686-w64-mingw32.static/include/boost/concept/detail/general.hpp:
+
+/home/local/mxe/usr/i686-w64-mingw32.static/include/boost/concept/detail/backward_compatibility.hpp:
+
+/home/local/mxe/usr/i686-w64-mingw32.static/include/boost/concept/detail/has_constraints.hpp:
+
+/home/local/mxe/usr/i686-w64-mingw32.static/include/boost/type_traits/conversion_traits.hpp:
+
+/home/local/mxe/usr/i686-w64-mingw32.static/include/boost/concept/usage.hpp:
+
+/home/local/mxe/usr/i686-w64-mingw32.static/include/boost/concept/detail/concept_def.hpp:
+
+/home/local/mxe/usr/i686-w64-mingw32.static/include/boost/preprocessor/seq/for_each_i.hpp:
+
+/home/local/mxe/usr/i686-w64-mingw32.static/include/boost/preprocessor/repetition/for.hpp:
+
+/home/local/mxe/usr/i686-w64-mingw32.static/include/boost/preprocessor/repetition/detail/for.hpp:
+
+/home/local/mxe/usr/i686-w64-mingw32.static/include/boost/preprocessor/seq/seq.hpp:
+
+/home/local/mxe/usr/i686-w64-mingw32.static/include/boost/preprocessor/seq/elem.hpp:
+
+/home/local/mxe/usr/i686-w64-mingw32.static/include/boost/preprocessor/seq/size.hpp:
+
+/home/local/mxe/usr/i686-w64-mingw32.static/include/boost/preprocessor/seq/enum.hpp:
+
+/home/local/mxe/usr/i686-w64-mingw32.static/include/boost/concept/detail/concept_undef.hpp:
+
+/home/local/mxe/usr/i686-w64-mingw32.static/include/boost/iterator/iterator_concepts.hpp:
+
+/home/local/mxe/usr/i686-w64-mingw32.static/include/boost/limits.hpp:
+
+/home/local/mxe/usr/lib/gcc/i686-w64-mingw32.static/5.1.0/include/c++/limits:
+
+/home/local/mxe/usr/lib/gcc/i686-w64-mingw32.static/5.1.0/include/c++/algorithm:
+
+/home/local/mxe/usr/lib/gcc/i686-w64-mingw32.static/5.1.0/include/c++/bits/stl_algo.h:
+
+/home/local/mxe/usr/lib/gcc/i686-w64-mingw32.static/5.1.0/include/c++/cstdlib:
+
+/home/local/mxe/usr/lib/gcc/i686-w64-mingw32.static/5.1.0/include/c++/bits/algorithmfwd.h:
+
+/home/local/mxe/usr/lib/gcc/i686-w64-mingw32.static/5.1.0/include/c++/bits/stl_heap.h:
+
+/home/local/mxe/usr/lib/gcc/i686-w64-mingw32.static/5.1.0/include/c++/bits/stl_tempbuf.h:
+
+/home/local/mxe/usr/i686-w64-mingw32.static/include/boost/range/value_type.hpp:
+
+/home/local/mxe/usr/i686-w64-mingw32.static/include/boost/range/detail/misc_concept.hpp:
+
+/home/local/mxe/usr/i686-w64-mingw32.static/include/boost/utility/enable_if.hpp:
+
+/home/local/mxe/usr/i686-w64-mingw32.static/include/boost/core/enable_if.hpp:
+
+/home/local/mxe/usr/i686-w64-mingw32.static/include/boost/type_traits/make_unsigned.hpp:
+
+/home/local/mxe/usr/i686-w64-mingw32.static/include/boost/type_traits/is_signed.hpp:
+
+/home/local/mxe/usr/i686-w64-mingw32.static/include/boost/type_traits/is_unsigned.hpp:
+
+/home/local/mxe/usr/i686-w64-mingw32.static/include/boost/type_traits/add_volatile.hpp:
+
+/home/local/mxe/usr/i686-w64-mingw32.static/include/boost/range/detail/has_member_size.hpp:
+
+/home/local/mxe/usr/i686-w64-mingw32.static/include/boost/cstdint.hpp:
+
+/home/local/mxe/usr/i686-w64-mingw32.static/include/boost/utility.hpp:
+
+/home/local/mxe/usr/i686-w64-mingw32.static/include/boost/utility/base_from_member.hpp:
+
+/home/local/mxe/usr/i686-w64-mingw32.static/include/boost/preprocessor/repetition/enum_binary_params.hpp:
+
+/home/local/mxe/usr/i686-w64-mingw32.static/include/boost/preprocessor/repetition/repeat_from_to.hpp:
+
+/home/local/mxe/usr/i686-w64-mingw32.static/include/boost/utility/binary.hpp:
+
+/home/local/mxe/usr/i686-w64-mingw32.static/include/boost/preprocessor/control/deduce_d.hpp:
+
+/home/local/mxe/usr/i686-w64-mingw32.static/include/boost/preprocessor/seq/cat.hpp:
+
+/home/local/mxe/usr/i686-w64-mingw32.static/include/boost/preprocessor/seq/fold_left.hpp:
+
+/home/local/mxe/usr/i686-w64-mingw32.static/include/boost/preprocessor/seq/transform.hpp:
+
+/home/local/mxe/usr/i686-w64-mingw32.static/include/boost/preprocessor/arithmetic/mod.hpp:
+
+/home/local/mxe/usr/i686-w64-mingw32.static/include/boost/preprocessor/arithmetic/detail/div_base.hpp:
+
+/home/local/mxe/usr/i686-w64-mingw32.static/include/boost/preprocessor/comparison/less_equal.hpp:
+
+/home/local/mxe/usr/i686-w64-mingw32.static/include/boost/preprocessor/logical/not.hpp:
+
+/home/local/mxe/usr/i686-w64-mingw32.static/include/boost/utility/identity_type.hpp:
+
+/home/local/mxe/usr/i686-w64-mingw32.static/include/boost/type_traits/function_traits.hpp:
+
+/home/local/mxe/usr/i686-w64-mingw32.static/include/boost/checked_delete.hpp:
+
+/home/local/mxe/usr/i686-w64-mingw32.static/include/boost/core/checked_delete.hpp:
+
+/home/local/mxe/usr/i686-w64-mingw32.static/include/boost/next_prior.hpp:
+
+/home/local/mxe/usr/i686-w64-mingw32.static/include/boost/type_traits/integral_promotion.hpp:
+
+/home/local/mxe/usr/i686-w64-mingw32.static/include/boost/type_traits/make_signed.hpp:
+
+/home/local/mxe/usr/i686-w64-mingw32.static/include/boost/type_traits/has_plus.hpp:
+
+/home/local/mxe/usr/i686-w64-mingw32.static/include/boost/type_traits/detail/has_binary_operator.hpp:
+
+/home/local/mxe/usr/i686-w64-mingw32.static/include/boost/type_traits/is_base_of.hpp:
+
+/home/local/mxe/usr/i686-w64-mingw32.static/include/boost/type_traits/is_fundamental.hpp:
+
+/home/local/mxe/usr/i686-w64-mingw32.static/include/boost/type_traits/has_plus_assign.hpp:
+
+/home/local/mxe/usr/i686-w64-mingw32.static/include/boost/type_traits/has_minus.hpp:
+
+/home/local/mxe/usr/i686-w64-mingw32.static/include/boost/type_traits/has_minus_assign.hpp:
+
+/home/local/mxe/usr/i686-w64-mingw32.static/include/boost/noncopyable.hpp:
+
+/home/local/mxe/usr/i686-w64-mingw32.static/include/boost/core/noncopyable.hpp:
+
+/home/local/mxe/usr/i686-w64-mingw32.static/include/boost/range/distance.hpp:
+
+/home/local/mxe/usr/i686-w64-mingw32.static/include/boost/range/empty.hpp:
+
+/home/local/mxe/usr/i686-w64-mingw32.static/include/boost/range/rbegin.hpp:
+
+/home/local/mxe/usr/i686-w64-mingw32.static/include/boost/range/reverse_iterator.hpp:
+
+/home/local/mxe/usr/i686-w64-mingw32.static/include/boost/iterator/reverse_iterator.hpp:
+
+/home/local/mxe/usr/i686-w64-mingw32.static/include/boost/iterator/iterator_adaptor.hpp:
+
+/home/local/mxe/usr/i686-w64-mingw32.static/include/boost/range/rend.hpp:
+
+/home/local/mxe/usr/i686-w64-mingw32.static/include/boost/range/has_range_iterator.hpp:
+
+/home/local/mxe/usr/i686-w64-mingw32.static/include/boost/range/algorithm/equal.hpp:
+
+/home/local/mxe/usr/i686-w64-mingw32.static/include/boost/range/detail/safe_bool.hpp:
+
+/home/local/mxe/usr/i686-w64-mingw32.static/include/boost/algorithm/string/find_format.hpp:
+
+/home/local/mxe/usr/lib/gcc/i686-w64-mingw32.static/5.1.0/include/c++/deque:
+
+/home/local/mxe/usr/lib/gcc/i686-w64-mingw32.static/5.1.0/include/c++/bits/stl_deque.h:
+
+/home/local/mxe/usr/lib/gcc/i686-w64-mingw32.static/5.1.0/include/c++/bits/deque.tcc:
+
+/home/local/mxe/usr/i686-w64-mingw32.static/include/boost/range/as_literal.hpp:
+
+/home/local/mxe/usr/i686-w64-mingw32.static/include/boost/range/iterator_range.hpp:
+
+/home/local/mxe/usr/i686-w64-mingw32.static/include/boost/range/iterator_range_io.hpp:
+
+/home/local/mxe/usr/i686-w64-mingw32.static/include/boost/range/detail/str_types.hpp:
+
+/home/local/mxe/usr/lib/gcc/i686-w64-mingw32.static/5.1.0/include/c++/cstring:
+
+/home/local/mxe/usr/i686-w64-mingw32.static/include/boost/algorithm/string/concept.hpp:
+
+/home/local/mxe/usr/i686-w64-mingw32.static/include/boost/algorithm/string/detail/find_format.hpp:
+
+/home/local/mxe/usr/i686-w64-mingw32.static/include/boost/algorithm/string/detail/find_format_store.hpp:
+
+/home/local/mxe/usr/i686-w64-mingw32.static/include/boost/algorithm/string/detail/replace_storage.hpp:
+
+/home/local/mxe/usr/i686-w64-mingw32.static/include/boost/algorithm/string/sequence_traits.hpp:
+
+/home/local/mxe/usr/i686-w64-mingw32.static/include/boost/algorithm/string/yes_no_type.hpp:
+
+/home/local/mxe/usr/i686-w64-mingw32.static/include/boost/algorithm/string/detail/sequence.hpp:
+
+/home/local/mxe/usr/i686-w64-mingw32.static/include/boost/mpl/logical.hpp:
+
+/home/local/mxe/usr/i686-w64-mingw32.static/include/boost/algorithm/string/detail/find_format_all.hpp:
+
+/home/local/mxe/usr/i686-w64-mingw32.static/include/boost/algorithm/string/finder.hpp:
+
+/home/local/mxe/usr/i686-w64-mingw32.static/include/boost/algorithm/string/constants.hpp:
+
+/home/local/mxe/usr/i686-w64-mingw32.static/include/boost/algorithm/string/detail/finder.hpp:
+
+/home/local/mxe/usr/i686-w64-mingw32.static/include/boost/algorithm/string/compare.hpp:
+
+/home/local/mxe/usr/lib/gcc/i686-w64-mingw32.static/5.1.0/include/c++/locale:
+
+/home/local/mxe/usr/lib/gcc/i686-w64-mingw32.static/5.1.0/include/c++/bits/locale_facets_nonio.h:
+
+/home/local/mxe/usr/lib/gcc/i686-w64-mingw32.static/5.1.0/include/c++/ctime:
+
+/home/local/mxe/usr/lib/gcc/i686-w64-mingw32.static/5.1.0/include/c++/i686-w64-mingw32.static/bits/time_members.h:
+
+/home/local/mxe/usr/lib/gcc/i686-w64-mingw32.static/5.1.0/include/c++/i686-w64-mingw32.static/bits/messages_members.h:
+
+/home/local/mxe/usr/lib/gcc/i686-w64-mingw32.static/5.1.0/include/c++/bits/codecvt.h:
+
+/home/local/mxe/usr/lib/gcc/i686-w64-mingw32.static/5.1.0/include/c++/bits/locale_facets_nonio.tcc:
+
+/home/local/mxe/usr/i686-w64-mingw32.static/include/boost/algorithm/string/formatter.hpp:
+
+/home/local/mxe/usr/i686-w64-mingw32.static/include/boost/algorithm/string/detail/formatter.hpp:
+
+/home/local/mxe/usr/i686-w64-mingw32.static/include/boost/algorithm/string/detail/util.hpp:
+
+/home/local/mxe/usr/lib/gcc/i686-w64-mingw32.static/5.1.0/include/c++/functional:

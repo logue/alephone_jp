@@ -1,0 +1,397 @@
+csmisc_sdl.o: csmisc_sdl.cpp cseries.h ../../config.h \
+ /home/local/mxe/usr/i686-w64-mingw32.static/include/SDL/SDL.h \
+ /home/local/mxe/usr/i686-w64-mingw32.static/include/SDL/SDL_main.h \
+ /home/local/mxe/usr/i686-w64-mingw32.static/include/SDL/SDL_stdinc.h \
+ /home/local/mxe/usr/i686-w64-mingw32.static/include/SDL/SDL_config.h \
+ /home/local/mxe/usr/i686-w64-mingw32.static/include/SDL/SDL_platform.h \
+ /home/local/mxe/usr/i686-w64-mingw32.static/include/sys/types.h \
+ /home/local/mxe/usr/i686-w64-mingw32.static/include/crtdefs.h \
+ /home/local/mxe/usr/i686-w64-mingw32.static/include/_mingw.h \
+ /home/local/mxe/usr/i686-w64-mingw32.static/include/_mingw_mac.h \
+ /home/local/mxe/usr/i686-w64-mingw32.static/include/_mingw_secapi.h \
+ /home/local/mxe/usr/i686-w64-mingw32.static/include/vadefs.h \
+ /home/local/mxe/usr/i686-w64-mingw32.static/include/sdks/_mingw_directx.h \
+ /home/local/mxe/usr/i686-w64-mingw32.static/include/sdks/_mingw_ddk.h \
+ /home/local/mxe/usr/i686-w64-mingw32.static/include/_mingw_off_t.h \
+ /home/local/mxe/usr/i686-w64-mingw32.static/include/stdio.h \
+ /home/local/mxe/usr/i686-w64-mingw32.static/include/_mingw_print_push.h \
+ /home/local/mxe/usr/i686-w64-mingw32.static/include/swprintf.inl \
+ /home/local/mxe/usr/i686-w64-mingw32.static/include/sec_api/stdio_s.h \
+ /home/local/mxe/usr/i686-w64-mingw32.static/include/_mingw_print_pop.h \
+ /home/local/mxe/usr/i686-w64-mingw32.static/include/stdlib.h \
+ /home/local/mxe/usr/lib/gcc/i686-w64-mingw32.static/5.1.0/include-fixed/limits.h \
+ /home/local/mxe/usr/lib/gcc/i686-w64-mingw32.static/5.1.0/include-fixed/syslimits.h \
+ /home/local/mxe/usr/i686-w64-mingw32.static/include/limits.h \
+ /home/local/mxe/usr/i686-w64-mingw32.static/include/sec_api/stdlib_s.h \
+ /home/local/mxe/usr/i686-w64-mingw32.static/include/malloc.h \
+ /home/local/mxe/usr/lib/gcc/i686-w64-mingw32.static/5.1.0/include/stddef.h \
+ /home/local/mxe/usr/i686-w64-mingw32.static/include/stddef.h \
+ /home/local/mxe/usr/lib/gcc/i686-w64-mingw32.static/5.1.0/include/stdarg.h \
+ /home/local/mxe/usr/i686-w64-mingw32.static/include/stdarg.h \
+ /home/local/mxe/usr/i686-w64-mingw32.static/include/_mingw_stdarg.h \
+ /home/local/mxe/usr/i686-w64-mingw32.static/include/string.h \
+ /home/local/mxe/usr/i686-w64-mingw32.static/include/sec_api/string_s.h \
+ /home/local/mxe/usr/i686-w64-mingw32.static/include/strings.h \
+ /home/local/mxe/usr/i686-w64-mingw32.static/include/inttypes.h \
+ /home/local/mxe/usr/lib/gcc/i686-w64-mingw32.static/5.1.0/include/stdint.h \
+ /home/local/mxe/usr/i686-w64-mingw32.static/include/stdint.h \
+ /home/local/mxe/usr/i686-w64-mingw32.static/include/ctype.h \
+ /home/local/mxe/usr/i686-w64-mingw32.static/include/SDL/begin_code.h \
+ /home/local/mxe/usr/i686-w64-mingw32.static/include/SDL/close_code.h \
+ /home/local/mxe/usr/i686-w64-mingw32.static/include/SDL/SDL_audio.h \
+ /home/local/mxe/usr/i686-w64-mingw32.static/include/SDL/SDL_error.h \
+ /home/local/mxe/usr/i686-w64-mingw32.static/include/SDL/SDL_endian.h \
+ /home/local/mxe/usr/i686-w64-mingw32.static/include/SDL/SDL_mutex.h \
+ /home/local/mxe/usr/i686-w64-mingw32.static/include/SDL/SDL_thread.h \
+ /home/local/mxe/usr/i686-w64-mingw32.static/include/SDL/SDL_rwops.h \
+ /home/local/mxe/usr/i686-w64-mingw32.static/include/SDL/SDL_cdrom.h \
+ /home/local/mxe/usr/i686-w64-mingw32.static/include/SDL/SDL_cpuinfo.h \
+ /home/local/mxe/usr/i686-w64-mingw32.static/include/SDL/SDL_events.h \
+ /home/local/mxe/usr/i686-w64-mingw32.static/include/SDL/SDL_active.h \
+ /home/local/mxe/usr/i686-w64-mingw32.static/include/SDL/SDL_keyboard.h \
+ /home/local/mxe/usr/i686-w64-mingw32.static/include/SDL/SDL_keysym.h \
+ /home/local/mxe/usr/i686-w64-mingw32.static/include/SDL/SDL_mouse.h \
+ /home/local/mxe/usr/i686-w64-mingw32.static/include/SDL/SDL_video.h \
+ /home/local/mxe/usr/i686-w64-mingw32.static/include/SDL/SDL_joystick.h \
+ /home/local/mxe/usr/i686-w64-mingw32.static/include/SDL/SDL_quit.h \
+ /home/local/mxe/usr/i686-w64-mingw32.static/include/SDL/SDL_loadso.h \
+ /home/local/mxe/usr/i686-w64-mingw32.static/include/SDL/SDL_timer.h \
+ /home/local/mxe/usr/i686-w64-mingw32.static/include/SDL/SDL_version.h \
+ /home/local/mxe/usr/i686-w64-mingw32.static/include/SDL/SDL_byteorder.h \
+ /home/local/mxe/usr/i686-w64-mingw32.static/include/time.h \
+ /home/local/mxe/usr/i686-w64-mingw32.static/include/_timeval.h \
+ /home/local/mxe/usr/i686-w64-mingw32.static/include/sys/timeb.h \
+ /home/local/mxe/usr/i686-w64-mingw32.static/include/sec_api/sys/timeb_s.h \
+ /home/local/mxe/usr/i686-w64-mingw32.static/include/pthread_time.h \
+ /home/local/mxe/usr/lib/gcc/i686-w64-mingw32.static/5.1.0/include/c++/string \
+ /home/local/mxe/usr/lib/gcc/i686-w64-mingw32.static/5.1.0/include/c++/i686-w64-mingw32.static/bits/c++config.h \
+ /home/local/mxe/usr/lib/gcc/i686-w64-mingw32.static/5.1.0/include/c++/i686-w64-mingw32.static/bits/os_defines.h \
+ /home/local/mxe/usr/lib/gcc/i686-w64-mingw32.static/5.1.0/include/c++/i686-w64-mingw32.static/bits/cpu_defines.h \
+ /home/local/mxe/usr/lib/gcc/i686-w64-mingw32.static/5.1.0/include/c++/bits/stringfwd.h \
+ /home/local/mxe/usr/lib/gcc/i686-w64-mingw32.static/5.1.0/include/c++/bits/memoryfwd.h \
+ /home/local/mxe/usr/lib/gcc/i686-w64-mingw32.static/5.1.0/include/c++/bits/char_traits.h \
+ /home/local/mxe/usr/lib/gcc/i686-w64-mingw32.static/5.1.0/include/c++/bits/stl_algobase.h \
+ /home/local/mxe/usr/lib/gcc/i686-w64-mingw32.static/5.1.0/include/c++/bits/functexcept.h \
+ /home/local/mxe/usr/lib/gcc/i686-w64-mingw32.static/5.1.0/include/c++/bits/exception_defines.h \
+ /home/local/mxe/usr/lib/gcc/i686-w64-mingw32.static/5.1.0/include/c++/bits/cpp_type_traits.h \
+ /home/local/mxe/usr/lib/gcc/i686-w64-mingw32.static/5.1.0/include/c++/ext/type_traits.h \
+ /home/local/mxe/usr/lib/gcc/i686-w64-mingw32.static/5.1.0/include/c++/ext/numeric_traits.h \
+ /home/local/mxe/usr/lib/gcc/i686-w64-mingw32.static/5.1.0/include/c++/bits/stl_pair.h \
+ /home/local/mxe/usr/lib/gcc/i686-w64-mingw32.static/5.1.0/include/c++/bits/move.h \
+ /home/local/mxe/usr/lib/gcc/i686-w64-mingw32.static/5.1.0/include/c++/bits/concept_check.h \
+ /home/local/mxe/usr/lib/gcc/i686-w64-mingw32.static/5.1.0/include/c++/bits/stl_iterator_base_types.h \
+ /home/local/mxe/usr/lib/gcc/i686-w64-mingw32.static/5.1.0/include/c++/bits/stl_iterator_base_funcs.h \
+ /home/local/mxe/usr/lib/gcc/i686-w64-mingw32.static/5.1.0/include/c++/debug/debug.h \
+ /home/local/mxe/usr/lib/gcc/i686-w64-mingw32.static/5.1.0/include/c++/bits/stl_iterator.h \
+ /home/local/mxe/usr/lib/gcc/i686-w64-mingw32.static/5.1.0/include/c++/bits/ptr_traits.h \
+ /home/local/mxe/usr/lib/gcc/i686-w64-mingw32.static/5.1.0/include/c++/bits/predefined_ops.h \
+ /home/local/mxe/usr/lib/gcc/i686-w64-mingw32.static/5.1.0/include/c++/bits/postypes.h \
+ /home/local/mxe/usr/lib/gcc/i686-w64-mingw32.static/5.1.0/include/c++/cwchar \
+ /home/local/mxe/usr/i686-w64-mingw32.static/include/wchar.h \
+ /home/local/mxe/usr/i686-w64-mingw32.static/include/_mingw_stat64.h \
+ /home/local/mxe/usr/i686-w64-mingw32.static/include/sec_api/wchar_s.h \
+ /home/local/mxe/usr/lib/gcc/i686-w64-mingw32.static/5.1.0/include/c++/bits/allocator.h \
+ /home/local/mxe/usr/lib/gcc/i686-w64-mingw32.static/5.1.0/include/c++/i686-w64-mingw32.static/bits/c++allocator.h \
+ /home/local/mxe/usr/lib/gcc/i686-w64-mingw32.static/5.1.0/include/c++/ext/new_allocator.h \
+ /home/local/mxe/usr/lib/gcc/i686-w64-mingw32.static/5.1.0/include/c++/new \
+ /home/local/mxe/usr/lib/gcc/i686-w64-mingw32.static/5.1.0/include/c++/exception \
+ /home/local/mxe/usr/lib/gcc/i686-w64-mingw32.static/5.1.0/include/c++/bits/atomic_lockfree_defines.h \
+ /home/local/mxe/usr/lib/gcc/i686-w64-mingw32.static/5.1.0/include/c++/bits/localefwd.h \
+ /home/local/mxe/usr/lib/gcc/i686-w64-mingw32.static/5.1.0/include/c++/i686-w64-mingw32.static/bits/c++locale.h \
+ /home/local/mxe/usr/lib/gcc/i686-w64-mingw32.static/5.1.0/include/c++/clocale \
+ /home/local/mxe/usr/i686-w64-mingw32.static/include/locale.h \
+ /home/local/mxe/usr/lib/gcc/i686-w64-mingw32.static/5.1.0/include/c++/iosfwd \
+ /home/local/mxe/usr/lib/gcc/i686-w64-mingw32.static/5.1.0/include/c++/cctype \
+ /home/local/mxe/usr/lib/gcc/i686-w64-mingw32.static/5.1.0/include/c++/bits/ostream_insert.h \
+ /home/local/mxe/usr/lib/gcc/i686-w64-mingw32.static/5.1.0/include/c++/bits/cxxabi_forced.h \
+ /home/local/mxe/usr/lib/gcc/i686-w64-mingw32.static/5.1.0/include/c++/bits/stl_function.h \
+ /home/local/mxe/usr/lib/gcc/i686-w64-mingw32.static/5.1.0/include/c++/backward/binders.h \
+ /home/local/mxe/usr/lib/gcc/i686-w64-mingw32.static/5.1.0/include/c++/bits/range_access.h \
+ /home/local/mxe/usr/lib/gcc/i686-w64-mingw32.static/5.1.0/include/c++/bits/basic_string.h \
+ /home/local/mxe/usr/lib/gcc/i686-w64-mingw32.static/5.1.0/include/c++/ext/atomicity.h \
+ /home/local/mxe/usr/lib/gcc/i686-w64-mingw32.static/5.1.0/include/c++/i686-w64-mingw32.static/bits/gthr.h \
+ /home/local/mxe/usr/lib/gcc/i686-w64-mingw32.static/5.1.0/include/c++/i686-w64-mingw32.static/bits/gthr-default.h \
+ /home/local/mxe/usr/i686-w64-mingw32.static/include/errno.h \
+ /home/local/mxe/usr/lib/gcc/i686-w64-mingw32.static/5.1.0/include/c++/i686-w64-mingw32.static/bits/atomic_word.h \
+ /home/local/mxe/usr/lib/gcc/i686-w64-mingw32.static/5.1.0/include/c++/ext/alloc_traits.h \
+ /home/local/mxe/usr/lib/gcc/i686-w64-mingw32.static/5.1.0/include/c++/bits/basic_string.tcc \
+ cstypes.h \
+ /home/local/mxe/usr/i686-w64-mingw32.static/include/SDL/SDL_types.h \
+ csmacros.h FilmProfile.h cscluts.h csstrings.h \
+ /home/local/mxe/usr/lib/gcc/i686-w64-mingw32.static/5.1.0/include/c++/vector \
+ /home/local/mxe/usr/lib/gcc/i686-w64-mingw32.static/5.1.0/include/c++/bits/stl_construct.h \
+ /home/local/mxe/usr/lib/gcc/i686-w64-mingw32.static/5.1.0/include/c++/bits/stl_uninitialized.h \
+ /home/local/mxe/usr/lib/gcc/i686-w64-mingw32.static/5.1.0/include/c++/bits/stl_vector.h \
+ /home/local/mxe/usr/lib/gcc/i686-w64-mingw32.static/5.1.0/include/c++/bits/stl_bvector.h \
+ /home/local/mxe/usr/lib/gcc/i686-w64-mingw32.static/5.1.0/include/c++/bits/vector.tcc \
+ csfonts.h cspixels.h csalerts.h csdialogs.h csmisc.h
+
+cseries.h:
+
+../../config.h:
+
+/home/local/mxe/usr/i686-w64-mingw32.static/include/SDL/SDL.h:
+
+/home/local/mxe/usr/i686-w64-mingw32.static/include/SDL/SDL_main.h:
+
+/home/local/mxe/usr/i686-w64-mingw32.static/include/SDL/SDL_stdinc.h:
+
+/home/local/mxe/usr/i686-w64-mingw32.static/include/SDL/SDL_config.h:
+
+/home/local/mxe/usr/i686-w64-mingw32.static/include/SDL/SDL_platform.h:
+
+/home/local/mxe/usr/i686-w64-mingw32.static/include/sys/types.h:
+
+/home/local/mxe/usr/i686-w64-mingw32.static/include/crtdefs.h:
+
+/home/local/mxe/usr/i686-w64-mingw32.static/include/_mingw.h:
+
+/home/local/mxe/usr/i686-w64-mingw32.static/include/_mingw_mac.h:
+
+/home/local/mxe/usr/i686-w64-mingw32.static/include/_mingw_secapi.h:
+
+/home/local/mxe/usr/i686-w64-mingw32.static/include/vadefs.h:
+
+/home/local/mxe/usr/i686-w64-mingw32.static/include/sdks/_mingw_directx.h:
+
+/home/local/mxe/usr/i686-w64-mingw32.static/include/sdks/_mingw_ddk.h:
+
+/home/local/mxe/usr/i686-w64-mingw32.static/include/_mingw_off_t.h:
+
+/home/local/mxe/usr/i686-w64-mingw32.static/include/stdio.h:
+
+/home/local/mxe/usr/i686-w64-mingw32.static/include/_mingw_print_push.h:
+
+/home/local/mxe/usr/i686-w64-mingw32.static/include/swprintf.inl:
+
+/home/local/mxe/usr/i686-w64-mingw32.static/include/sec_api/stdio_s.h:
+
+/home/local/mxe/usr/i686-w64-mingw32.static/include/_mingw_print_pop.h:
+
+/home/local/mxe/usr/i686-w64-mingw32.static/include/stdlib.h:
+
+/home/local/mxe/usr/lib/gcc/i686-w64-mingw32.static/5.1.0/include-fixed/limits.h:
+
+/home/local/mxe/usr/lib/gcc/i686-w64-mingw32.static/5.1.0/include-fixed/syslimits.h:
+
+/home/local/mxe/usr/i686-w64-mingw32.static/include/limits.h:
+
+/home/local/mxe/usr/i686-w64-mingw32.static/include/sec_api/stdlib_s.h:
+
+/home/local/mxe/usr/i686-w64-mingw32.static/include/malloc.h:
+
+/home/local/mxe/usr/lib/gcc/i686-w64-mingw32.static/5.1.0/include/stddef.h:
+
+/home/local/mxe/usr/i686-w64-mingw32.static/include/stddef.h:
+
+/home/local/mxe/usr/lib/gcc/i686-w64-mingw32.static/5.1.0/include/stdarg.h:
+
+/home/local/mxe/usr/i686-w64-mingw32.static/include/stdarg.h:
+
+/home/local/mxe/usr/i686-w64-mingw32.static/include/_mingw_stdarg.h:
+
+/home/local/mxe/usr/i686-w64-mingw32.static/include/string.h:
+
+/home/local/mxe/usr/i686-w64-mingw32.static/include/sec_api/string_s.h:
+
+/home/local/mxe/usr/i686-w64-mingw32.static/include/strings.h:
+
+/home/local/mxe/usr/i686-w64-mingw32.static/include/inttypes.h:
+
+/home/local/mxe/usr/lib/gcc/i686-w64-mingw32.static/5.1.0/include/stdint.h:
+
+/home/local/mxe/usr/i686-w64-mingw32.static/include/stdint.h:
+
+/home/local/mxe/usr/i686-w64-mingw32.static/include/ctype.h:
+
+/home/local/mxe/usr/i686-w64-mingw32.static/include/SDL/begin_code.h:
+
+/home/local/mxe/usr/i686-w64-mingw32.static/include/SDL/close_code.h:
+
+/home/local/mxe/usr/i686-w64-mingw32.static/include/SDL/SDL_audio.h:
+
+/home/local/mxe/usr/i686-w64-mingw32.static/include/SDL/SDL_error.h:
+
+/home/local/mxe/usr/i686-w64-mingw32.static/include/SDL/SDL_endian.h:
+
+/home/local/mxe/usr/i686-w64-mingw32.static/include/SDL/SDL_mutex.h:
+
+/home/local/mxe/usr/i686-w64-mingw32.static/include/SDL/SDL_thread.h:
+
+/home/local/mxe/usr/i686-w64-mingw32.static/include/SDL/SDL_rwops.h:
+
+/home/local/mxe/usr/i686-w64-mingw32.static/include/SDL/SDL_cdrom.h:
+
+/home/local/mxe/usr/i686-w64-mingw32.static/include/SDL/SDL_cpuinfo.h:
+
+/home/local/mxe/usr/i686-w64-mingw32.static/include/SDL/SDL_events.h:
+
+/home/local/mxe/usr/i686-w64-mingw32.static/include/SDL/SDL_active.h:
+
+/home/local/mxe/usr/i686-w64-mingw32.static/include/SDL/SDL_keyboard.h:
+
+/home/local/mxe/usr/i686-w64-mingw32.static/include/SDL/SDL_keysym.h:
+
+/home/local/mxe/usr/i686-w64-mingw32.static/include/SDL/SDL_mouse.h:
+
+/home/local/mxe/usr/i686-w64-mingw32.static/include/SDL/SDL_video.h:
+
+/home/local/mxe/usr/i686-w64-mingw32.static/include/SDL/SDL_joystick.h:
+
+/home/local/mxe/usr/i686-w64-mingw32.static/include/SDL/SDL_quit.h:
+
+/home/local/mxe/usr/i686-w64-mingw32.static/include/SDL/SDL_loadso.h:
+
+/home/local/mxe/usr/i686-w64-mingw32.static/include/SDL/SDL_timer.h:
+
+/home/local/mxe/usr/i686-w64-mingw32.static/include/SDL/SDL_version.h:
+
+/home/local/mxe/usr/i686-w64-mingw32.static/include/SDL/SDL_byteorder.h:
+
+/home/local/mxe/usr/i686-w64-mingw32.static/include/time.h:
+
+/home/local/mxe/usr/i686-w64-mingw32.static/include/_timeval.h:
+
+/home/local/mxe/usr/i686-w64-mingw32.static/include/sys/timeb.h:
+
+/home/local/mxe/usr/i686-w64-mingw32.static/include/sec_api/sys/timeb_s.h:
+
+/home/local/mxe/usr/i686-w64-mingw32.static/include/pthread_time.h:
+
+/home/local/mxe/usr/lib/gcc/i686-w64-mingw32.static/5.1.0/include/c++/string:
+
+/home/local/mxe/usr/lib/gcc/i686-w64-mingw32.static/5.1.0/include/c++/i686-w64-mingw32.static/bits/c++config.h:
+
+/home/local/mxe/usr/lib/gcc/i686-w64-mingw32.static/5.1.0/include/c++/i686-w64-mingw32.static/bits/os_defines.h:
+
+/home/local/mxe/usr/lib/gcc/i686-w64-mingw32.static/5.1.0/include/c++/i686-w64-mingw32.static/bits/cpu_defines.h:
+
+/home/local/mxe/usr/lib/gcc/i686-w64-mingw32.static/5.1.0/include/c++/bits/stringfwd.h:
+
+/home/local/mxe/usr/lib/gcc/i686-w64-mingw32.static/5.1.0/include/c++/bits/memoryfwd.h:
+
+/home/local/mxe/usr/lib/gcc/i686-w64-mingw32.static/5.1.0/include/c++/bits/char_traits.h:
+
+/home/local/mxe/usr/lib/gcc/i686-w64-mingw32.static/5.1.0/include/c++/bits/stl_algobase.h:
+
+/home/local/mxe/usr/lib/gcc/i686-w64-mingw32.static/5.1.0/include/c++/bits/functexcept.h:
+
+/home/local/mxe/usr/lib/gcc/i686-w64-mingw32.static/5.1.0/include/c++/bits/exception_defines.h:
+
+/home/local/mxe/usr/lib/gcc/i686-w64-mingw32.static/5.1.0/include/c++/bits/cpp_type_traits.h:
+
+/home/local/mxe/usr/lib/gcc/i686-w64-mingw32.static/5.1.0/include/c++/ext/type_traits.h:
+
+/home/local/mxe/usr/lib/gcc/i686-w64-mingw32.static/5.1.0/include/c++/ext/numeric_traits.h:
+
+/home/local/mxe/usr/lib/gcc/i686-w64-mingw32.static/5.1.0/include/c++/bits/stl_pair.h:
+
+/home/local/mxe/usr/lib/gcc/i686-w64-mingw32.static/5.1.0/include/c++/bits/move.h:
+
+/home/local/mxe/usr/lib/gcc/i686-w64-mingw32.static/5.1.0/include/c++/bits/concept_check.h:
+
+/home/local/mxe/usr/lib/gcc/i686-w64-mingw32.static/5.1.0/include/c++/bits/stl_iterator_base_types.h:
+
+/home/local/mxe/usr/lib/gcc/i686-w64-mingw32.static/5.1.0/include/c++/bits/stl_iterator_base_funcs.h:
+
+/home/local/mxe/usr/lib/gcc/i686-w64-mingw32.static/5.1.0/include/c++/debug/debug.h:
+
+/home/local/mxe/usr/lib/gcc/i686-w64-mingw32.static/5.1.0/include/c++/bits/stl_iterator.h:
+
+/home/local/mxe/usr/lib/gcc/i686-w64-mingw32.static/5.1.0/include/c++/bits/ptr_traits.h:
+
+/home/local/mxe/usr/lib/gcc/i686-w64-mingw32.static/5.1.0/include/c++/bits/predefined_ops.h:
+
+/home/local/mxe/usr/lib/gcc/i686-w64-mingw32.static/5.1.0/include/c++/bits/postypes.h:
+
+/home/local/mxe/usr/lib/gcc/i686-w64-mingw32.static/5.1.0/include/c++/cwchar:
+
+/home/local/mxe/usr/i686-w64-mingw32.static/include/wchar.h:
+
+/home/local/mxe/usr/i686-w64-mingw32.static/include/_mingw_stat64.h:
+
+/home/local/mxe/usr/i686-w64-mingw32.static/include/sec_api/wchar_s.h:
+
+/home/local/mxe/usr/lib/gcc/i686-w64-mingw32.static/5.1.0/include/c++/bits/allocator.h:
+
+/home/local/mxe/usr/lib/gcc/i686-w64-mingw32.static/5.1.0/include/c++/i686-w64-mingw32.static/bits/c++allocator.h:
+
+/home/local/mxe/usr/lib/gcc/i686-w64-mingw32.static/5.1.0/include/c++/ext/new_allocator.h:
+
+/home/local/mxe/usr/lib/gcc/i686-w64-mingw32.static/5.1.0/include/c++/new:
+
+/home/local/mxe/usr/lib/gcc/i686-w64-mingw32.static/5.1.0/include/c++/exception:
+
+/home/local/mxe/usr/lib/gcc/i686-w64-mingw32.static/5.1.0/include/c++/bits/atomic_lockfree_defines.h:
+
+/home/local/mxe/usr/lib/gcc/i686-w64-mingw32.static/5.1.0/include/c++/bits/localefwd.h:
+
+/home/local/mxe/usr/lib/gcc/i686-w64-mingw32.static/5.1.0/include/c++/i686-w64-mingw32.static/bits/c++locale.h:
+
+/home/local/mxe/usr/lib/gcc/i686-w64-mingw32.static/5.1.0/include/c++/clocale:
+
+/home/local/mxe/usr/i686-w64-mingw32.static/include/locale.h:
+
+/home/local/mxe/usr/lib/gcc/i686-w64-mingw32.static/5.1.0/include/c++/iosfwd:
+
+/home/local/mxe/usr/lib/gcc/i686-w64-mingw32.static/5.1.0/include/c++/cctype:
+
+/home/local/mxe/usr/lib/gcc/i686-w64-mingw32.static/5.1.0/include/c++/bits/ostream_insert.h:
+
+/home/local/mxe/usr/lib/gcc/i686-w64-mingw32.static/5.1.0/include/c++/bits/cxxabi_forced.h:
+
+/home/local/mxe/usr/lib/gcc/i686-w64-mingw32.static/5.1.0/include/c++/bits/stl_function.h:
+
+/home/local/mxe/usr/lib/gcc/i686-w64-mingw32.static/5.1.0/include/c++/backward/binders.h:
+
+/home/local/mxe/usr/lib/gcc/i686-w64-mingw32.static/5.1.0/include/c++/bits/range_access.h:
+
+/home/local/mxe/usr/lib/gcc/i686-w64-mingw32.static/5.1.0/include/c++/bits/basic_string.h:
+
+/home/local/mxe/usr/lib/gcc/i686-w64-mingw32.static/5.1.0/include/c++/ext/atomicity.h:
+
+/home/local/mxe/usr/lib/gcc/i686-w64-mingw32.static/5.1.0/include/c++/i686-w64-mingw32.static/bits/gthr.h:
+
+/home/local/mxe/usr/lib/gcc/i686-w64-mingw32.static/5.1.0/include/c++/i686-w64-mingw32.static/bits/gthr-default.h:
+
+/home/local/mxe/usr/i686-w64-mingw32.static/include/errno.h:
+
+/home/local/mxe/usr/lib/gcc/i686-w64-mingw32.static/5.1.0/include/c++/i686-w64-mingw32.static/bits/atomic_word.h:
+
+/home/local/mxe/usr/lib/gcc/i686-w64-mingw32.static/5.1.0/include/c++/ext/alloc_traits.h:
+
+/home/local/mxe/usr/lib/gcc/i686-w64-mingw32.static/5.1.0/include/c++/bits/basic_string.tcc:
+
+cstypes.h:
+
+/home/local/mxe/usr/i686-w64-mingw32.static/include/SDL/SDL_types.h:
+
+csmacros.h:
+
+FilmProfile.h:
+
+cscluts.h:
+
+csstrings.h:
+
+/home/local/mxe/usr/lib/gcc/i686-w64-mingw32.static/5.1.0/include/c++/vector:
+
+/home/local/mxe/usr/lib/gcc/i686-w64-mingw32.static/5.1.0/include/c++/bits/stl_construct.h:
+
+/home/local/mxe/usr/lib/gcc/i686-w64-mingw32.static/5.1.0/include/c++/bits/stl_uninitialized.h:
+
+/home/local/mxe/usr/lib/gcc/i686-w64-mingw32.static/5.1.0/include/c++/bits/stl_vector.h:
+
+/home/local/mxe/usr/lib/gcc/i686-w64-mingw32.static/5.1.0/include/c++/bits/stl_bvector.h:
+
+/home/local/mxe/usr/lib/gcc/i686-w64-mingw32.static/5.1.0/include/c++/bits/vector.tcc:
+
+csfonts.h:
+
+cspixels.h:
+
+csalerts.h:
+
+csdialogs.h:
+
+csmisc.h:

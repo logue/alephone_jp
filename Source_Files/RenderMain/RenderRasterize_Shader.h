@@ -24,9 +24,9 @@ class RenderRasterize_Shader : public RenderRasterizerClass {
 	int objectCount;
 	world_distance objectY;
 	float weaponFlare;
-	world_point3d cam_pos;
-	angle cam_yaw;
-	angle cam_pitch;
+	float selfLuminosity;
+	
+	long_vector2d leftmost_clip, rightmost_clip;
 
 protected:
 	virtual void render_node(sorted_node_data *node, bool SeeThruLiquids, RenderStep renderStep);	
@@ -52,7 +52,7 @@ public:
 
 	virtual void render_tree(void);
 
-	TextureManager setupWallTexture(const shape_descriptor& Texture, short transferMode, float wobble, float intensity, float offset, RenderStep renderStep);
+	TextureManager setupWallTexture(const shape_descriptor& Texture, short transferMode, float pulsate, float wobble, float intensity, float offset, RenderStep renderStep);
 	TextureManager setupSpriteTexture(const rectangle_definition& rect, short type, float offset, RenderStep renderStep);
 };
 

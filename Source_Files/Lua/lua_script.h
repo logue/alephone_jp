@@ -29,6 +29,9 @@ LUA_SCRIPT.H
 #include "ActionQueues.h"
 #include "shape_descriptors.h"
 
+#include <map>
+#include <string>
+
 void L_Error(const char *message);
 void L_Call_Init(bool fRestoringSaved);
 void L_Call_Cleanup();
@@ -52,6 +55,7 @@ void L_Call_Monster_Killed(short monster_index, short aggressor_player_index, sh
 void L_Call_Monster_Damaged(short monster_index, short aggressor_monster_index, int16 damage_type, short damage_amount, short projectile_index);
 void L_Call_Player_Damaged(short player_index, short aggressor_player_index, short aggressor_monster_index, int16 damage_type, short damage_amount, short projectile_index);
 void L_Call_Projectile_Detonated(short type, short owner_index, short polygon, world_point3d location);
+void L_Call_Projectile_Created(short projectile_index);
 void L_Call_Item_Created(short item_index);
 
 void L_Invalidate_Effect(short effect_index);
@@ -62,7 +66,8 @@ void L_Invalidate_Object(short object_index);
 enum ScriptType {
 	_embedded_lua_script,
 	_lua_netscript,
-	_solo_lua_script
+	_solo_lua_script,
+	_stats_lua_script
 };
 
 void *L_Persistent_Table_Key();
@@ -74,6 +79,10 @@ void ResetPassedLua();
 
 void ExecuteLuaString(const std::string&);
 void LoadSoloLua();
+void LoadReplayNetLua();
+
+void LoadStatsLua();
+bool CollectLuaStats(std::map<std::string, std::string>& table, std::map<std::string, std::string>& parameters);
 
 void ToggleLuaMute();
 void ResetLuaMute();
