@@ -595,7 +595,7 @@ const int JoinDialog::JoinNetworkGameByRunning ()
 	BoolPref joinByAddressPref (network_preferences->join_by_address);
 	binders.insert<bool> (m_joinByAddressWidget, &joinByAddressPref);
 	
-	PStringPref namePref (player_preferences->name, MAX_NET_PLAYER_NAME_LENGTH);
+	CStringPref namePref (player_preferences->name, MAX_NET_PLAYER_NAME_LENGTH);
 	binders.insert<std::string> (m_nameWidget, &namePref);
 	Int16Pref colourPref (player_preferences->color);
 	binders.insert<int> (m_colourWidget, &colourPref);
@@ -638,7 +638,7 @@ void JoinDialog::attemptJoin ()
 	}
 	
 	player_info myPlayerInfo;
-	copy_string_to_pstring (m_nameWidget->get_text (), myPlayerInfo.name, MAX_NET_PLAYER_NAME_LENGTH);
+	copy_string_to_cstring (m_nameWidget->get_text (), myPlayerInfo.name, MAX_NET_PLAYER_NAME_LENGTH);
 	myPlayerInfo.team = m_teamWidget->get_value ();
 	myPlayerInfo.desired_color = m_colourWidget->get_value ();
 	
@@ -1129,7 +1129,7 @@ bool SetupNetgameDialog::SetupNetworkGameByRunning (
 	
 	BinderSet binders;
 	
-	PStringPref namePref (player_preferences->name, MAX_NET_PLAYER_NAME_LENGTH);
+	CStringPref namePref (player_preferences->name, MAX_NET_PLAYER_NAME_LENGTH);
 	binders.insert<std::string> (m_nameWidget, &namePref);
 	Int16Pref colourPref (player_preferences->color);
 	binders.insert<int> (m_colourWidget, &colourPref);
@@ -1226,7 +1226,7 @@ bool SetupNetgameDialog::SetupNetworkGameByRunning (
 		// migrate widget settings to preferences structure
 		binders.migrate_all_first_to_second ();
 	
-		pstrcpy (player_information->name, player_preferences->name);
+		strcpy (player_information->name, player_preferences->name);
 		player_information->color = player_preferences->color;
 		player_information->team = player_preferences->team;
 
@@ -1382,9 +1382,6 @@ void SetupNetgameDialog::setupForGameType ()
 			
 			m_deadPlayersDropItemsWidget->set_value (true);
 			m_aliensWidget->set_value (true);
-			
-			getpstr (ptemporary, strSETUP_NET_GAME_MESSAGES, killsString);
-//			m_scoreLimitWidget->set_label (pstring_to_string (ptemporary));
 			break;
 			
 		case _game_of_kill_monsters:
@@ -1395,9 +1392,6 @@ void SetupNetgameDialog::setupForGameType ()
 			m_allowTeamsWidget->activate ();
 			m_deadPlayersDropItemsWidget->activate ();
 			m_aliensWidget->activate ();
-			
-			getpstr (ptemporary, strSETUP_NET_GAME_MESSAGES, killsString);
-//			m_scoreLimitWidget->set_label (pstring_to_string (ptemporary));
 			break;
 
 		case _game_of_capture_the_flag:
@@ -1407,9 +1401,6 @@ void SetupNetgameDialog::setupForGameType ()
 			
 			m_allowTeamsWidget->set_value (true);
 			m_teamWidget->activate ();
-			
-			getpstr (ptemporary, strSETUP_NET_GAME_MESSAGES, flagsString);
-//			m_scoreLimitWidget->set_label (pstring_to_string (ptemporary));
 			break;
 			
 		case _game_of_rugby:
@@ -1419,9 +1410,6 @@ void SetupNetgameDialog::setupForGameType ()
 			
 			m_allowTeamsWidget->set_value (true);
 			m_teamWidget->activate ();
-			
-			getpstr (ptemporary, strSETUP_NET_GAME_MESSAGES, pointsString);
-//			m_scoreLimitWidget->set_label (pstring_to_string (ptemporary));
 			break;
 			
 		default:
@@ -2065,11 +2053,11 @@ void draw_team_total_scores_graph(
     
 		if (team_is_valid) {
 			ranks[team_count].kills = kills;
-			ranks[team_index].deaths = deaths;
+			ranks[team_count].deaths = deaths;
 			ranks[team_count].player_index = NONE;
 			ranks[team_count].color = team_index;
 			ranks[team_count].game_ranking = ranking;
-			ranks[team_count].friendly_fire_kills = team_friendly_fire[NUMBER_OF_TEAM_COLORS].kills;
+			ranks[team_count].friendly_fire_kills = team_friendly_fire[team_index].kills;
 			team_count++;
 		}
 	}
@@ -2131,15 +2119,11 @@ void update_carnage_summary(
 	if (minutes > 0) kpm = total_kills / minutes;
 	else kpm = 0;
 	getcstr(kill_string_format, strNET_STATS_STRINGS, strTOTAL_KILLS_STRING);
-	psprintf(ptemporary, kill_string_format, total_kills, kpm);
+	csprintf(temporary, kill_string_format, total_kills, kpm);
 //	GetDialogItem(dialog, iTOTAL_KILLS, &item_type, &item_handle, &item_rect);
 //	SetDialogItemText(item_handle, ptemporary);
     
-#ifdef USES_NIBS
-    SetStaticPascalText(outcome.KillsTextCtrl, ptemporary);
-#else
-    copy_pstring_to_static_text(outcome, iTOTAL_KILLS, ptemporary);
-#endif
+    copy_cstring_to_static_text(outcome, iTOTAL_KILLS, temporary);
 
 	if (minutes > 0) dpm = total_deaths / minutes;
 	else dpm = 0;
@@ -2152,18 +2136,14 @@ void update_carnage_summary(
 		else
 			getcstr(suicide_string_format, strNET_STATS_STRINGS, strINCLUDING_SUICIDES_STRING);
 		strcat(death_string_format, suicide_string_format);
-		psprintf(ptemporary, death_string_format, total_deaths, dpm, num_suicides);
+		csprintf(temporary, death_string_format, total_deaths, dpm, num_suicides);
 	}
 	else
-		psprintf(ptemporary, death_string_format, total_deaths, dpm);
+		csprintf(temporary, death_string_format, total_deaths, dpm);
 //	GetDialogItem(dialog, iTOTAL_DEATHS, &item_type, &item_handle, &item_rect);
 //	SetDialogItemText(item_handle, ptemporary);
 
-#ifdef USES_NIBS
-    SetStaticPascalText(outcome.DeathsTextCtrl, ptemporary);
-#else
-    copy_pstring_to_static_text(outcome, iTOTAL_DEATHS, ptemporary);
-#endif
+    copy_cstring_to_static_text(outcome, iTOTAL_DEATHS, temporary);
 }
 
 
@@ -2403,9 +2383,8 @@ draw_score_bars(DialogPtr &dialog, struct net_rank *ranks, short bar_count) {
     wpig2->set_graph_data(ranks, bar_count, NONE, (ranks[0].player_index == NONE) ? true : false, true);
 
     // clear the summary text
-    unsigned char theEmptyString = '\0';
-    copy_pstring_to_static_text(dialog, iTOTAL_KILLS, &theEmptyString);
-    copy_pstring_to_static_text(dialog, iTOTAL_DEATHS, &theEmptyString);
+    copy_cstring_to_static_text(dialog, iTOTAL_KILLS, "");
+    copy_cstring_to_static_text(dialog, iTOTAL_DEATHS, "");
 }
 
 // User clicked on a postgame carnage report element.  If it was a player and we're showing Total Carnage
@@ -2651,7 +2630,7 @@ public:
 	SdlJoinDialog() : m_tabs(0)
 	{
 		SDLMod m = SDL_GetModState();
-		if ((m & KMOD_ALT) || (m & KMOD_META)) skipToMetaserver = true;
+		if ((m & KMOD_ALT) || (m & KMOD_META)) skipToMetaserver = !skipToMetaserver;
 
 		vertical_placer *placer = new vertical_placer;
 		placer->dual_add(new w_title("ネットワークゲームに参加"), m_dialog);

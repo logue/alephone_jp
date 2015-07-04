@@ -940,7 +940,7 @@ hub_received_game_data_packet_v1(AIStream& ps, int inSenderIndex)
 				     << thePlayer.mStats.latency 
 				     << "/"
 				     << thePlayer.mStats.jitter
-				     << " " << pstring_to_string(reinterpret_cast<player_info*>(NetGetPlayerData(inSenderIndex))->name)
+				     << " " << reinterpret_cast<player_info*>(NetGetPlayerData(inSenderIndex))->name
 				     << std::endl;
 				dout << "S";
 				for (int i = 0; i < 20; ++i)
@@ -1443,7 +1443,7 @@ send_packets()
 {
 	// Currently, at most one lossy data descriptor is used per trip through this function.  So,
 	// we do some processing here outside the loop since the results'd be the same every time.
-	HubLossyByteStreamChunkDescriptor theDescriptor;
+	HubLossyByteStreamChunkDescriptor theDescriptor = { 0, 0, 0, 0 };
 	bool haveLossyData = false;
 	if(sOutgoingLossyByteStreamDescriptors.getCountOfElements() > 0)
 	{

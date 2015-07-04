@@ -45,7 +45,8 @@ inline bool DisableClipVertex() {
 #else
 inline bool DisableClipVertex() { 
 	const GLubyte* renderer = glGetString(GL_RENDERER);
-	return (renderer && strncmp(reinterpret_cast<const char*>(renderer), "Mesa", 4) == 0);
+//	return (renderer && strncmp(reinterpret_cast<const char*>(renderer), "Mesa", 4) == 0);
+	return false;
 }
 #endif
 

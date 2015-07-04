@@ -163,8 +163,7 @@ void
 w_found_players::draw_item(vector<prospective_joiner_info>::const_iterator i, SDL_Surface *s, int16 x, int16 y, uint16 width, bool selected) const {
 	char	theNameBuffer[SSLP_MAX_NAME_LENGTH + 12];
 
-	pstrncpy((unsigned char*)theNameBuffer, (unsigned char*)(*i).name, SSLP_MAX_NAME_LENGTH - 1);
-	a1_p2cstr((unsigned char *) theNameBuffer);
+	strncpy(theNameBuffer, (*i).name, SSLP_MAX_NAME_LENGTH - 1);
 	if ((*i).gathering) {
 	  strcat(theNameBuffer, " (gathering)");
 	}
@@ -323,15 +322,9 @@ w_players_in_game2::update_display(bool inFromDynamicWorld /* default=false */) 
                     // Get player information from topology
                     player_info*	thePlayerInfo	= (player_info*)NetGetPlayerData(i);
                     
-                    // Alias the player entry's name field as a pstring
-                    unsigned char* thePlayerEntryNameP = (unsigned char*) thePlayerEntry.player_name;
-                    
                     // Copy the player name.  We will store it as a cstring...
-                    pstrncpy(thePlayerEntryNameP, thePlayerInfo->name, MAXIMUM_PLAYER_NAME_LENGTH + 1);
-    
-                    // In-place conversion.
-                    a1_p2cstr(thePlayerEntryNameP);
-                    
+                    strncpy(thePlayerEntry.player_name, thePlayerInfo->name, MAXIMUM_PLAYER_NAME_LENGTH + 1);
+
                     // Look up colors
                     thePlayerTeam	= thePlayerInfo->team;
                     thePlayerColor	= thePlayerInfo->color;
@@ -645,7 +638,7 @@ w_players_in_game2::draw_bar_or_bars(SDL_Surface* s, size_t rank_index, int cent
             // Draw suicides/friendly-fires
             bar_info    theBarInfo;
 
-            char*	theSuicidesFormat = TS_GetCString(strNET_STATS_STRINGS, strSUICIDES_STRING);
+            const char*	theSuicidesFormat = TS_GetCString(strNET_STATS_STRINGS, strSUICIDES_STRING);
             int		theNumberOfSuicides = net_rankings[rank_index].kills;
             sprintf(temporary, theSuicidesFormat, theNumberOfSuicides);
             theBarInfo.label_text = temporary;  // this makes a copy

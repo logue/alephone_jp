@@ -26,26 +26,17 @@
 	These functions replace the getting of MacOS STR# resources,
 	and are called in much the same fashion.
 	
-	Each string is a MacOS Pascal string (length byte + characters)
-	with a null byte at the end, so it can also be treated as a C string.
-	[length] [characters] [null]
-	
 	They are referenced by resource-ID number, which defines a string set,
 	and an index inside that string set, which starts from 0.
 */
 
 // Set up a string in the repository; a repeated call will replace an old string
-void TS_PutString(short ID, short Index, unsigned char *String);
-// ZZZ: as you might expect... just like TS_PutString but takes a C-style (NULL-terminated) string instead.
 void TS_PutCString(short ID, short Index, const char *String);
 
-// Returns a pointer to a string in Pascal form;
+// Returns a pointer to a string;
 // if the ID and the index do not point to a valid string,
 // this function will then return NULL
-unsigned char *TS_GetString(short ID, size_t Index);
-
-// Here is that string in C form
-char *TS_GetCString(short ID, size_t Index);
+const char *TS_GetCString(short ID, short Index);
 
 // Checks on the presence of a string set
 bool TS_IsPresent(short ID);

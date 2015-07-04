@@ -536,8 +536,7 @@ static void construct_single_player_start(player_start_data* outStartArray, shor
         outStartArray[0].team = player_preferences->color;
         outStartArray[0].color = player_preferences->color;
         outStartArray[0].identifier = 0;
-        memcpy(outStartArray[0].name, &(player_preferences->name[1]), player_preferences->name[0]);
-        outStartArray[0].name[player_preferences->name[0]] = '\0';
+        strcpy(outStartArray[0].name, player_preferences->name);
 				
         set_player_start_doesnt_auto_recenter_status(&outStartArray[0], dont_auto_recenter());
         set_player_start_doesnt_auto_switch_weapons_status(&outStartArray[0], dont_switch_to_new_weapon());
@@ -559,11 +558,7 @@ static void construct_multiplayer_starts(player_start_data* outStartArray, short
                 outStartArray[player_index].team = player_information->team;
                 outStartArray[player_index].color= player_information->color;
                 outStartArray[player_index].identifier = NetGetPlayerIdentifier(player_index);
-    
-                /* Copy and translate from pascal string to cstring */
-                memcpy(outStartArray[player_index].name, &player_information->name[1],
-                        player_information->name[0]);
-                outStartArray[player_index].name[player_information->name[0]]= 0;
+                strcpy(outStartArray[player_index].name, player_information->name);
         }
 }
 #endif // !defined(DISABLE_NETWORKING)
@@ -1799,6 +1794,7 @@ static void display_about_dialog()
 	authors.push_back("Bo Lindbergh");
 	authors.push_back("Chris Lovell");
 	authors.push_back("Jesse Luehrs");
+	authors.push_back("Marshall (darealshinji)");
 	authors.push_back("Derek Moeller");
 	authors.push_back("Jeremiah Morris");
 	authors.push_back("Sam Morris");
@@ -3327,13 +3323,13 @@ size_t should_restore_game_networked(FileSpecifier& file)
         dialog d;
 
 	vertical_placer *placer = new vertical_placer;
-	placer->dual_add(new w_title("ゲーム再開"), d);
+	placer->dual_add(new w_title("RESUME GAME"), d);
 	placer->add(new w_spacer, true);
 
 	horizontal_placer *resume_as_placer = new horizontal_placer;
         w_toggle* theRestoreAsNetgameToggle = new w_toggle(dynamic_world->player_count > 1, 0);
         theRestoreAsNetgameToggle->set_labels_stringset(kSingleOrNetworkStringSetID);
-	resume_as_placer->dual_add(theRestoreAsNetgameToggle->label("再開"), d);
+	resume_as_placer->dual_add(theRestoreAsNetgameToggle->label("Resume as"), d);
 	resume_as_placer->dual_add(theRestoreAsNetgameToggle, d);
 
 	placer->add(resume_as_placer, true);
@@ -3342,8 +3338,8 @@ size_t should_restore_game_networked(FileSpecifier& file)
 	placer->add(new w_spacer(), true);
 
 	horizontal_placer *button_placer = new horizontal_placer;
-	button_placer->dual_add(new w_button("再開", dialog_ok, &d), d);
-	button_placer->dual_add(new w_button("キャンセル", dialog_cancel, &d), d);
+	button_placer->dual_add(new w_button("RESUME", dialog_ok, &d), d);
+	button_placer->dual_add(new w_button("CANCEL", dialog_cancel, &d), d);
 
 	placer->add(button_placer, true);
 

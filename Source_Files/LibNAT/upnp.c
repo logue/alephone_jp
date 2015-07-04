@@ -1,5 +1,5 @@
 /* Copyright (c) 2006 Adam Warrington
-** $Id: upnp.c 5184 2015-03-21 16:06:54Z jeremiahmorris $
+** $Id: upnp.c 5227 2015-06-28 00:02:07Z jeremiahmorris $
 **
 ** Permission is hereby granted, free of charge, to any person obtaining a copy
 ** of this software and associated documentation files (the "Software"), to deal
@@ -180,7 +180,7 @@ int LNat_Upnp_Discover(UpnpController ** c)
 {
   int ret;
   char * ssdp_response;
-  char * desc_url;
+  char * desc_url = NULL;
   char * description;
 
   /* allocate space for our controller object, and initialize it's members */
@@ -685,7 +685,6 @@ int LNat_Upnp_Set_Port_Mapping(const UpnpController * c,
   char * response;
   char * params;
   char * local_ip = NULL;
-  int retreived_local_ip = 0;
 
   /* if ipMap is null, attempt to get own ip address */
   if(ip_map == NULL) {
@@ -693,7 +692,6 @@ int LNat_Upnp_Set_Port_Mapping(const UpnpController * c,
       return ret;
     }
     ip_map = local_ip;
-    retreived_local_ip = 1;
   }
 
   params = (char *)malloc(strlen(SET_PORT_MAPPING_PARAMS) + 

@@ -1373,7 +1373,7 @@ void w_password_entry::draw(SDL_Surface *s) const
  *  Key name widget
  */
 
-static const char *WAITING_TEXT = "ÉLÅ[ì¸óÕë“Çø";
+static const char *WAITING_TEXT = "waiting for new key";
 
 w_key::w_key(SDLKey key) : widget(LABEL_WIDGET), binding(false)
 {
@@ -2170,7 +2170,7 @@ const string w_items_in_room_get_name_of_item (GameListMessage::GameListEntry it
 
 const string w_items_in_room_get_name_of_item (prospective_joiner_info item)
 {
-	return pstring_to_string (item.name);
+	return std::string(item.name);
 }
 
 const string w_items_in_room_get_name_of_item (MetaserverPlayerInfo item)

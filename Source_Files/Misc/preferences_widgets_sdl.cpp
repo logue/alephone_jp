@@ -212,11 +212,11 @@ void w_plugins::draw_item(Plugins::iterator it, SDL_Surface* s, int16 x, int16 y
 	std::string enabled;
 	if (!it->compatible()) 
 	{
-		enabled = " ŒİŠ·‚È‚µ";
+		enabled = " ”ñŒİŠ·";
 	}
 	else if (!it->allowed())
 	{
-		enabled = " ‹–‰Â‚È‚µ";
+		enabled = " ”ñ‹–‰Â";
 	}
 	else if (it->enabled)
 	{

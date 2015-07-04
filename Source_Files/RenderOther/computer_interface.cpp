@@ -901,7 +901,7 @@ static void _draw_computer_text(
 	short current_line)
 {
 	bool done= false;
-	short line_count, start_index;
+	short start_index;
 	struct terminal_groupings *current_group= get_indexed_grouping(terminal_text, group_index);
 	// LP change: just in case...
 	if (!current_group) return;
@@ -921,7 +921,6 @@ static void _draw_computer_text(
 	// current_style = _get_font_spec(_computer_interface_font)->style;
 #endif
 
-	line_count= 0;
 	start_index= current_group->start_index;
 	end_index= current_group->length+current_group->start_index;
 	
@@ -1380,7 +1379,7 @@ extern SDL_PixelFormat pixel_format_32;
 template <>
 inline uint32 randomize_pixel(uint16 pixel)
 {
-	return (uint32)pixel^(((uint32)pixel)<<8) | pixel_format_32.Amask;
+	return ((uint32)pixel^(((uint32)pixel)<<8)) | pixel_format_32.Amask;
 }
 
 template <typename T>
@@ -2194,6 +2193,7 @@ public:
 		success_group.type = 0;
 		failure_group.type = 0;
 		unfinished_group.type = 0;
+		group.type = NONE;
 	}
 	terminal_text_t* Compile();
 

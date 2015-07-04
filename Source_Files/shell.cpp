@@ -76,6 +76,7 @@
 #include "sdl_fonts.h"
 #include "sdl_widgets.h"
 
+#include "DefaultStringSets.h"
 #include "TextStrings.h"
 
 #ifdef HAVE_CONFIG_H
@@ -235,7 +236,7 @@ static void usage(const char *prg_name)
 	"データディレクトリを指定することができます。\n";
 
 #ifdef __WIN32__
-	MessageBox(NULL, msg, "使用方法", MB_OK | MB_ICONINFORMATION);
+	MessageBox(NULL, msg, "Usage", MB_OK | MB_ICONINFORMATION);
 #else
 	printf(msg, prg_name);
 #endif
@@ -354,7 +355,7 @@ int main(int argc, char **argv)
 				arg_files.push_back(*argv);
 			}
 		} else {
-			printf("不明なスイッチ指定です：'%s'.\n", *argv);
+			printf("Unrecognized argument '%s'.\n", *argv);
 			usage(prg_name);
 		}
 		argc--;
@@ -412,6 +413,7 @@ static void initialize_application(void)
 #endif
 
 	// Find data directories, construct search path
+	InitDefaultStringSets();
 
 #if defined(unix) || defined(__NetBSD__) || defined(__OpenBSD__) || (defined(__APPLE__) && defined(__MACH__) && !defined(HAVE_BUNDLE_NAME))
 
@@ -775,7 +777,7 @@ short get_level_number_from_user(void)
 
 		for (size_t i = 0; i < num_lines; i++) {
 			bool message_font_title_color = true;
-			char *string = TS_GetCString(vidmasterStringSetID, i);
+			const char *string = TS_GetCString(vidmasterStringSetID, i);
 			if (!strncmp(string, "[QUOTE]", 7)) {
 				string = string + 7;
 				message_font_title_color = false;

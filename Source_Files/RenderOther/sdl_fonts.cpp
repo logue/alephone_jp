@@ -450,11 +450,22 @@ font_info *load_font(const TextSpec &spec) {
 				
 			return info;
 		}
+/*		else if (spec.font != -1)
+		{
+			return static_cast<font_info *>(load_sdl_font(spec));
+		}
+*/
 		else
 			return 0;
 	}
 	else
 #endif
+/*	if (spec.font != -1)
+	{
+		return static_cast<font_info *>(load_sdl_font(spec));
+	}
+	else
+*/
 		return 0;
 }
 
@@ -586,7 +597,7 @@ uint16 ttf_font_info::_text_width(const char *text, uint16 style, bool utf8) con
 {
 	return _text_width(text, strlen(text), style, utf8);
 }
-#include "converter.h"
+
 uint16 ttf_font_info::_text_width(const char *text, size_t length, uint16 style, bool utf8) const
 {
 	int width = 0;
@@ -645,9 +656,21 @@ char *ttf_font_info::process_printable(const char *src, int len) const
 
 uint16 *ttf_font_info::process_macroman(const char *src, int len) const 
 {
-  printf("THIS CANNOT HAPPEN\n");
-  exit(1);
-  return sjis2utf16(src, len);
+/*
+	uint16 *p = dst;
+	while (*src && len-- > 0)
+	{
+		if ((unsigned char) *src >= ' ') *p++ = mac_roman_to_unicode(*src);
+		else if ((unsigned char) *src == '\t')
+			*p++ = ' ';
+		
+		src++;
+	}
+
+	*p = 0x0;
+	return dst;
+*/
+	return sjis2utf16(src, len);
 }
 #endif
 

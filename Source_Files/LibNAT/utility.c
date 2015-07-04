@@ -1,5 +1,5 @@
 /* Copyright (c) 2006 Adam Warrington
-** $Id$
+** $Id: utility.c 4729 2012-06-09 17:15:54Z jeremiahmorris $
 **
 ** Permission is hereby granted, free of charge, to any person obtaining a copy
 ** of this software and associated documentation files (the "Software"), to deal

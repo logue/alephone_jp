@@ -1,5 +1,5 @@
 /* Copyright (c) 2006 Adam Warrington
-** $Id$
+** $Id: os_common.h 4730 2012-06-09 23:16:21Z jeremiahmorris $
 **
 ** Permission is hereby granted, free of charge, to any person obtaining a copy
 ** of this software and associated documentation files (the "Software"), to deal

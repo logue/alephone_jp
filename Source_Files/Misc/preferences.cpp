@@ -169,7 +169,7 @@ static void *get_environment_pref_data(void);
 #endif
 
 static bool ethernet_active(void);
-static void get_name_from_system(unsigned char *name);
+static std::string get_name_from_system(void);
 
 // LP: getting rid of the (void *) mechanism as inelegant and non-type-safe
 static void default_graphics_preferences(graphics_preferences_data *preferences);
@@ -200,16 +200,13 @@ static void keyboard_dialog(void *arg);
  *  Get user name
  */
 
-static void get_name_from_system(unsigned char *outName)
+static std::string get_name_from_system()
 {
-    // Skipping usual string safety pickiness, I'm tired tonight.
-    // Hope caller's buffer is big enough.
-    char* name = (char*) outName;
-
 #if defined(unix) || defined(__BEOS__) || (defined (__APPLE__) && defined (__MACH__)) || defined(__NetBSD__) || defined(__OpenBSD__)
 
-	char *login = getlogin();
-	strcpy(name, login ? login : "Bob User");
+	std::string login = getlogin();
+	if (login.length())
+		return login;
 
 #elif defined(__WIN32__)
 
@@ -218,16 +215,13 @@ static void get_name_from_system(unsigned char *outName)
 
 	bool hasName = (GetUserName((LPSTR)login, &len) == TRUE);
 	if (hasName && strpbrk(login, "\\/:*?\"<>|") == NULL) // Ignore illegal names
-		strcpy(name, login);
-	else
-		strcpy(name, "Bob User");
+		return login;
 
 #else
 //#error get_name_from_system() not implemented for this platform
 #endif
 
-    // In-place conversion to pstring
-    a1_c2pstr(name);
+	return "Bob User";
 }
 
 
@@ -562,9 +556,6 @@ static void player_dialog(void *arg)
 
 	d.set_widget_placer(placer);
 
-	// We don't do this earlier because it (indirectly) invokes the name_typing callback, which needs iOK
-	copy_pstring_to_text_field(&d, NAME_W, player_preferences->name);
-
 	// Clear screen
 	clear_screen();
 
@@ -573,11 +564,9 @@ static void player_dialog(void *arg)
 		bool changed = false;
 
 		const char *name = name_w->get_text();
-		unsigned char theOldNameP[PREFERENCES_NAME_LENGTH+1];
-		pstrncpy(theOldNameP, player_preferences->name, PREFERENCES_NAME_LENGTH+1);
-		char *theOldName = a1_p2cstr(theOldNameP);
-		if (strcmp(name, theOldName)) {
-			copy_pstring_from_text_field(&d, NAME_W, player_preferences->name);
+		if (strcmp(name, player_preferences->name)) {
+			strncpy(player_preferences->name, name, PREFERENCES_NAME_LENGTH);
+			player_preferences->name[PREFERENCES_NAME_LENGTH] = '\0';
 			changed = true;
 		}
 
@@ -703,7 +692,7 @@ static void signup_dialog(void *arg)
 {
 	dialog d;
 	vertical_placer *placer = new vertical_placer;
-	placer->dual_add(new w_title("LHOWON.ORGサインアップ"), d);
+	placer->dual_add(new w_title("アカウントサインアップ"), d);
 	placer->add(new w_spacer());
 	
 	table_placer *table = new table_placer(2, get_theme_space(ITEM_WIDGET), true);
@@ -757,7 +746,7 @@ static void online_dialog(void *arg)
 	// Create dialog
 	dialog d;
 	vertical_placer *placer = new vertical_placer;
-	placer->dual_add(new w_title("LHOWON.ORGのセットアップ"), d);
+	placer->dual_add(new w_title("インターネットゲームのセットアップ"), d);
 	placer->add(new w_spacer());
 	
 	tab_placer* tabs = new tab_placer();
@@ -804,7 +793,7 @@ static void online_dialog(void *arg)
 	lobby_table->col_flags(0, placeable::kAlignRight);
 	lobby_table->col_flags(1, placeable::kAlignLeft);
 	
-	w_text_entry *name_w = new w_text_entry(PREFERENCES_NAME_LENGTH, "");
+	w_text_entry *name_w = new w_text_entry(PREFERENCES_NAME_LENGTH, player_preferences->name);
 	name_w->set_identifier(NAME_W);
 	name_w->set_enter_pressed_callback(dialog_try_ok);
 	name_w->set_value_changed_callback(dialog_disable_ok_if_empty);
@@ -855,7 +844,7 @@ static void online_dialog(void *arg)
 	stats->add(new w_spacer(), true);
 	
 	stats->dual_add(new w_static_text("リーダーボードにゲームの状況を送付するには、"), d);
-	stats->dual_add(new w_static_text("lhowon.orgアカウントと状況プラグインがインストールされ、"), d);
+	stats->dual_add(new w_static_text("オンラインアカウントと状況プラグインがインストールされ、"), d);
 	stats->dual_add(new w_static_text("有効になっている必要があります。"), d);
 	
 	stats->add(new w_spacer(), true);
@@ -881,9 +870,6 @@ static void online_dialog(void *arg)
 	
 	d.set_widget_placer(placer);
 	
-	// We don't do this earlier because it (indirectly) invokes the name_typing callback, which needs iOK
-	copy_pstring_to_text_field(&d, NAME_W, player_preferences->name);
-	
 	// Clear screen
 	clear_screen();
 	
@@ -892,17 +878,16 @@ static void online_dialog(void *arg)
 		bool changed = false;
 		
 		const char *name = name_w->get_text();
-		unsigned char theOldNameP[PREFERENCES_NAME_LENGTH+1];
-		pstrncpy(theOldNameP, player_preferences->name, PREFERENCES_NAME_LENGTH+1);
-		char *theOldName = a1_p2cstr(theOldNameP);
-		if (strcmp(name, theOldName)) {
-			copy_pstring_from_text_field(&d, NAME_W, player_preferences->name);
+		if (strcmp(name, player_preferences->name)) {
+			strncpy(player_preferences->name, name, PREFERENCES_NAME_LENGTH);
+			player_preferences->name[PREFERENCES_NAME_LENGTH] = '\0';
 			changed = true;
 		}
 		
 		const char *metaserver_login = login_w->get_text();
 		if (strcmp(metaserver_login, network_preferences->metaserver_login)) {
-			strncpy(network_preferences->metaserver_login, metaserver_login, network_preferences_data::kMetaserverLoginLength);
+			strncpy(network_preferences->metaserver_login, metaserver_login, network_preferences_data::kMetaserverLoginLength-1);
+			network_preferences->metaserver_login[network_preferences_data::kMetaserverLoginLength-1] = '\0';
 			changed = true;
 		}
 		
@@ -915,7 +900,8 @@ static void online_dialog(void *arg)
 		} else {
 			const char *metaserver_password = password_w->get_text();
 			if (strcmp(metaserver_password, network_preferences->metaserver_password)) {
-				strncpy(network_preferences->metaserver_password, metaserver_password, network_preferences_data::kMetaserverLoginLength);
+				strncpy(network_preferences->metaserver_password, metaserver_password, network_preferences_data::kMetaserverLoginLength-1);
+				network_preferences->metaserver_password[network_preferences_data::kMetaserverLoginLength-1] = '\0';
 				changed = true;
 			}
 		}
@@ -1177,7 +1163,7 @@ static void graphics_dialog(void *arg)
 	table->dual_add(size_w->label("画面の大きさ"), d);
 	table->dual_add(size_w, d);
 
-	w_toggle *fill_screen_w;
+	w_toggle *fill_screen_w = NULL;
 	const SDL_version *version = SDL_Linked_Version();
 	if (SDL_VERSIONNUM(version->major, version->minor, version->patch) >= SDL_VERSIONNUM(1, 2, 10))
 	{
@@ -1331,8 +1317,7 @@ static void graphics_dialog(void *arg)
 			changed = true;
 		}
 		
-	    const SDL_version *version = SDL_Linked_Version();
-	    if (SDL_VERSIONNUM(version->major, version->minor, version->patch) >= SDL_VERSIONNUM(1, 2, 10))
+	    if (fill_screen_w)
 	    {
 		    bool fill_the_screen = fill_screen_w->get_selection() != 0;
 		    if (fill_the_screen != graphics_preferences->screen_mode.fill_the_screen) {
@@ -2360,10 +2345,9 @@ template<class CType> void WriteColorWithIndex(FILE *F,
 		Prefix,Index,CNorm*Color.red,CNorm*Color.green,CNorm*Color.blue,Suffix);
 }
 
-// For writing out text strings: have both Pascal and C versions
+// For writing out text strings
 // These special routines are necessary in order to make the writing-out XML-friendly,
 // converting XML's reserved characters into appropriate strings.
-void WriteXML_PasString(FILE *F, const char *Prefix, const unsigned char *String, const char *Suffix);
 void WriteXML_CString(FILE *F, const char *Prefix, const char *String, int MaxLen, const char *Suffix);
 void WriteXML_Pathname(FILE *F, const char *Prefix, const char *String, const char *Suffix);
 void WriteXML_Char(FILE *F, unsigned char c);
@@ -2588,7 +2572,7 @@ void write_preferences(
 	fprintf(F,"</graphics>\n\n");
 	
 	fprintf(F,"<player\n");
-	fprintf(F, "  name=\"%s\"\n", mac_roman_to_utf8(pstring_to_string(player_preferences->name)).c_str());
+	fprintf(F, "  name=\"%s\"\n", mac_roman_to_utf8(player_preferences->name).c_str());
 	fprintf(F,"  color=\"%hd\"\n",player_preferences->color);
 	fprintf(F,"  team=\"%hd\"\n",player_preferences->team);
 	fprintf(F,"  last_time_ran=\"%u\"\n",player_preferences->last_time_ran);
@@ -2841,7 +2825,7 @@ static void default_player_preferences(player_preferences_data *preferences)
 	obj_clear(*preferences);
 
 	preferences->difficulty_level= 2;
-	get_name_from_system(preferences->name);
+	strcpy(preferences->name, get_name_from_system().c_str());
 	
 	// LP additions for new fields:
 	
@@ -3186,17 +3170,9 @@ dont_auto_recenter() {
 }
 
 
-// For writing out text strings: have both Pascal and C versions
+// For writing out text strings
 // These special routines are necessary in order to make the writing-out XML-friendly,
 // converting XML's reserved characters into appropriate strings.
-
-void WriteXML_PasString(FILE *F, const char *Prefix, const unsigned char *String, const char *Suffix)
-{
-	fprintf(F,"%s",Prefix);
-	for (int k=1; k<=String[0]; k++)
-		WriteXML_Char(F,String[k]);
-	fprintf(F,"%s",Suffix);
-}
 
 void WriteXML_CString(FILE *F, const char *Prefix, const char *String, int MaxLen, const char *Suffix)
 {
@@ -3774,8 +3750,7 @@ bool XML_PlayerPrefsParser::HandleAttribute(const char *Tag, const char *Value)
 {
 	if (StringsEqual(Tag,"name"))
 	{
-		// Copy in as Pascal string
-		DeUTF8_Pas(Value,strlen(Value),player_preferences->name,PREFERENCES_NAME_LENGTH);
+		DeUTF8_C(Value,strlen(Value),player_preferences->name,PREFERENCES_NAME_LENGTH);
 		return true;
 	}
 	else if (StringsEqual(Tag,"color"))

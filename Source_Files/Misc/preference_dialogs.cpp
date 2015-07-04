@@ -477,7 +477,7 @@ public:
 //		advanced_table->dual_add_row(new w_static_text("but cause problems on some machines."), m_dialog);
 		advanced_table->dual_add_row(new w_static_text("非２乗テスクチャは、メモリの使用量を抑制します。"), m_dialog);
 		advanced_table->dual_add_row(new w_static_text("ただし、マシンによっては問題が発生することがあります。"), m_dialog);
-	
+
 		advanced_table->add_row(new w_spacer(), true);
 //		advanced_table->dual_add_row(new w_static_text("Texture Filtering"), m_dialog);
 		advanced_table->dual_add_row(new w_static_text("テスクチャのフィルタリング"), m_dialog);

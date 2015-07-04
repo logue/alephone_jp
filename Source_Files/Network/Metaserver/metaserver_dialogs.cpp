@@ -52,10 +52,7 @@ void
 setupAndConnectClient(MetaserverClient& client)
 {
 	{
-		unsigned char* playerNameCStringStorage = pstrdup(player_preferences->name);
-		char* playerNameCString = a1_p2cstr(playerNameCStringStorage);
-		client.setPlayerName(playerNameCString);
-		free(playerNameCStringStorage);
+		client.setPlayerName(player_preferences->name);
 	}
 
 	// Check the updates URL for updates
@@ -92,8 +89,9 @@ setupAndConnectClient(MetaserverClient& client)
 			placer->dual_add(new w_static_text("新しいバージョンのAleph Oneがあります。"), d);
 			placer->dual_add(new w_static_text("オンラインでプレイする前に"), d);
 #ifdef MAC_APP_STORE
-			placer->dual_add(new w_static_text("App Store"), d);
+			placer->dual_add(new w_static_text("Please download it from the App Store"), d);
 #else
+			placer->dual_add(new w_static_text("Please download it from"), d);
 			placer->dual_add(new w_hyperlink(A1_HOMEPAGE_URL), d);
 #endif
 			placer->dual_add(new w_static_text("から最新版を確認して下さい。"), d);

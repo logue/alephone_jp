@@ -879,7 +879,7 @@ RingGameProtocol::DistributeInformation(
 
  called at interrupt time; will send an acknowledgement and (if not the server node) forward the
  ring packet and spawn a time manager task to verify that it was acknowledged.  because these all
- work off global data structures, we can only have one ring packet ‘in the air’ (i.e., waiting to
+ work off global data structures, we can only have one ring packet ‘in the air E(i.e., waiting to
 										 be acknowledged) at a time.
  */
 
