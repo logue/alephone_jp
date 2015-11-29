@@ -37,6 +37,7 @@ public:
 		U_Texture2,
 		U_Texture3,
 		U_Time,
+		U_Pulsate,
 		U_Wobble,
 		U_Flare,
 		U_BloomScale,
@@ -56,6 +57,7 @@ public:
 		U_ScaleY,
 		U_Yaw,
 		U_Pitch,
+		U_SelfLuminosity,
 		NUMBER_OF_UNIFORM_LOCATIONS
 	};
 
@@ -104,7 +106,7 @@ public:
 	static void loadAll();
 	static void unloadAll();
 	
-	Shader() : _programObj(NULL), _passes(-1), _loaded(false) {}
+	Shader() : _programObj(0), _passes(-1), _loaded(false) {}
 	Shader(const std::string& name);
 	Shader(const std::string& name, FileSpecifier& vert, FileSpecifier& frag, int16& passes);
 	~Shader();

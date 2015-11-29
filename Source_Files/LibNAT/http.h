@@ -1,5 +1,5 @@
 /* Copyright (c) 2006 Adam Warrington
-** $Id: http.h 2615 2006-03-12 06:14:59Z ghs $
+** $Id: http.h 5184 2015-03-21 16:06:54Z jeremiahmorris $
 **
 ** Permission is hereby granted, free of charge, to any person obtaining a copy
 ** of this software and associated documentation files (the "Software"), to deal
@@ -43,7 +43,7 @@ typedef struct PostMessage PostMessage;
 */
 int LNat_Generate_Http_Get(const char * host,
                            const char * resource,
-                           short int port,
+                           unsigned short int port,
                            GetMessage ** gm);
 
 /* Destroys a GetMessage structure that was allocated by
@@ -61,7 +61,7 @@ int LNat_Destroy_Http_Get(GetMessage ** gm);
 */
 int LNat_Generate_Http_Post(const char * host,
                             const char * resource,
-                            short int port,
+                            unsigned short int port,
                             const char * body,
                             PostMessage ** pm);
 

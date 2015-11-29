@@ -48,6 +48,11 @@ extern "C"
 }
 #endif
 
+// FFmpeg compatibility
+#ifndef AVCODEC_MAX_AUDIO_FRAME_SIZE
+#define AVCODEC_MAX_AUDIO_FRAME_SIZE 192000
+#endif
+
 #include "SDL_ffmpeg.h"
 
 #ifdef MSVC
@@ -169,12 +174,12 @@ const SDL_ffmpegCodec SDL_ffmpegCodecAUTO =
 
 const SDL_ffmpegCodec SDL_ffmpegCodecPALDVD =
 {
-    CODEC_ID_MPEG2VIDEO,
+    AV_CODEC_ID_MPEG2VIDEO,
     720, 576,
     1, 25,
     6000000,
     -1, -1,
-    CODEC_ID_MP2,
+    AV_CODEC_ID_MP2,
     2, 48000,
     192000,
     -1, -1
@@ -182,12 +187,12 @@ const SDL_ffmpegCodec SDL_ffmpegCodecPALDVD =
 
 const SDL_ffmpegCodec SDL_ffmpegCodecPALDV =
 {
-    CODEC_ID_DVVIDEO,
+    AV_CODEC_ID_DVVIDEO,
     720, 576,
     1, 25,
     6553600,
     -1, -1,
-    CODEC_ID_DVAUDIO,
+    AV_CODEC_ID_DVAUDIO,
     2, 48000,
     256000,
     -1, -1
@@ -324,7 +329,11 @@ void SDL_ffmpegFree( SDL_ffmpegFile *file )
     {
         if ( file->type == SDL_ffmpegInputStream )
         {
+#if LIBAVFORMAT_VERSION_INT < AV_VERSION_INT(53,17,0)
             av_close_input_file( file->_ffmpeg );
+#else
+            avformat_close_input( &file->_ffmpeg );
+#endif
         }
         else if ( file->type == SDL_ffmpegOutputStream )
         {
@@ -448,7 +457,11 @@ SDL_ffmpegFile* SDL_ffmpegOpen( const char* filename )
                 {
                     stream->mutex = SDL_CreateMutex();
 
+#if LIBAVCODEC_VERSION_INT < AV_VERSION_INT(55,28,0)
                     stream->decodeFrame = avcodec_alloc_frame();
+#else
+                    stream->decodeFrame = av_frame_alloc();
+#endif
 
                     SDL_ffmpegStream **s = &file->vs;
                     while ( *s )
@@ -1301,11 +1314,19 @@ float SDL_ffmpegGetFrameRate( SDL_ffmpegStream *stream, int *nominator, int *den
 {
     if ( stream && stream->_ffmpeg && stream->_ffmpeg->codec )
     {
-        if ( nominator ) *nominator = stream->_ffmpeg->r_frame_rate.num;
+        AVRational frate;
+#if LIBAVFORMAT_VERSION_INT < AV_VERSION_INT(55,12,100)
+        frate = stream->_ffmpeg->r_frame_rate;
+#elif defined(av_stream_get_r_frame_rate)
+        frate = av_stream_get_r_frame_rate(stream->_ffmpeg);
+#else
+        frate = stream->_ffmpeg->avg_frame_rate;
+#endif
+        if ( nominator ) *nominator = frate.num;
 
-        if ( denominator ) *denominator = stream->_ffmpeg->r_frame_rate.den;
+        if ( denominator ) *denominator = frate.den;
 
-        return ( float )stream->_ffmpeg->r_frame_rate.num / stream->_ffmpeg->r_frame_rate.den;
+        return ( float )frate.num / frate.den;
     }
     else
     {
@@ -1587,13 +1608,13 @@ SDL_ffmpegStream* SDL_ffmpegAddVideoStream( SDL_ffmpegFile *file, SDL_ffmpegCode
     stream->codec->pix_fmt = PIX_FMT_YUV420P;
 
     /* set mpeg2 codec parameters */
-    if ( stream->codec->codec_id == CODEC_ID_MPEG2VIDEO )
+    if ( stream->codec->codec_id == AV_CODEC_ID_MPEG2VIDEO )
     {
         stream->codec->max_b_frames = 2;
     }
 
     /* set mpeg1 codec parameters */
-    if ( stream->codec->codec_id == CODEC_ID_MPEG1VIDEO )
+    if ( stream->codec->codec_id == AV_CODEC_ID_MPEG1VIDEO )
     {
         /* needed to avoid using macroblocks in which some coeffs overflow
            this doesnt happen with normal video, it just happens here as the
@@ -1757,10 +1778,10 @@ SDL_ffmpegStream* SDL_ffmpegAddAudioStream( SDL_ffmpegFile *file, SDL_ffmpegCode
 
             switch ( stream->codec->codec_id )
             {
-                case CODEC_ID_PCM_S16LE:
-                case CODEC_ID_PCM_S16BE:
-                case CODEC_ID_PCM_U16LE:
-                case CODEC_ID_PCM_U16BE:
+                case AV_CODEC_ID_PCM_S16LE:
+                case AV_CODEC_ID_PCM_S16BE:
+                case AV_CODEC_ID_PCM_U16LE:
+                case AV_CODEC_ID_PCM_U16BE:
                     str->encodeAudioInputSize >>= 1;
                     break;
                 default:
@@ -2032,18 +2053,43 @@ int SDL_ffmpegDecodeAudioFrame( SDL_ffmpegFile *file, AVPacket *pack, SDL_ffmpeg
     while ( size > 0 )
     {
         /* Decode the packet */
-
-#if ( LIBAVCODEC_VERSION_MAJOR <= 52 && LIBAVCODEC_VERSION_MINOR <= 20 )
-        int len = avcodec_decode_audio2( file->audioStream->_ffmpeg->codec, ( int16_t* )file->audioStream->sampleBuffer, &audioSize, pack->data, pack->size );
+        AVCodecContext *avctx = file->audioStream->_ffmpeg->codec;
+        AVFrame dframe;
+#if LIBAVCODEC_VERSION_INT < AV_VERSION_INT(55,28,1)
+        avcodec_get_frame_defaults(&dframe);
 #else
-        int len = avcodec_decode_audio3( file->audioStream->_ffmpeg->codec, ( int16_t* )file->audioStream->sampleBuffer, &audioSize, pack );
+	memset(&dframe, 0, sizeof(AVFrame));
+	av_frame_unref(&dframe);
 #endif
-
-        /* if an error occured, we skip the frame */
-        if ( len <= 0 || !audioSize )
+        int got_frame = 0;
+        int len = avcodec_decode_audio4( avctx, &dframe, &got_frame, pack );
+        
+        if (len < 0 || !got_frame)
         {
             SDL_ffmpegSetError( "error decoding audio frame" );
             break;
+        }
+        
+        int planar = av_sample_fmt_is_planar( avctx->sample_fmt );
+        int plane_size;
+        int data_size = av_samples_get_buffer_size( &plane_size, avctx->channels, dframe.nb_samples, avctx->sample_fmt, 1 );
+        if ( data_size > 10000 )
+        {
+            SDL_ffmpegSetError( "too much data in decoded audio frame" );
+            break;
+        }
+        memcpy( file->audioStream->sampleBuffer, dframe.extended_data[0], plane_size );
+        audioSize = plane_size;
+        if ( planar && avctx->channels > 1 )
+        {
+            int8_t *out = file->audioStream->sampleBuffer + plane_size;
+            int ch;
+            for ( ch = 1; ch < avctx->channels; ch++ )
+            {
+                memcpy( out, dframe.extended_data[ch], plane_size );
+                out += plane_size;
+                audioSize += plane_size;
+            }
         }
 
         /* change pointers */

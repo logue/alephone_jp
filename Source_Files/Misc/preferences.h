@@ -123,6 +123,7 @@ struct network_preferences_data
 	bool advertise_on_metaserver;
 	bool attempt_upnp;
 	bool check_for_updates;
+	bool verify_https;
 
 	enum {
 		kMetaserverLoginLength = 16
@@ -133,6 +134,8 @@ struct network_preferences_data
 	bool use_custom_metaserver_colors;
 	rgb_color metaserver_colors[2];
 	bool mute_metaserver_guests;
+	bool join_metaserver_by_default;
+	bool allow_stats;
 };
 
 struct player_preferences_data
@@ -241,14 +244,16 @@ struct environment_preferences_data
 
 	char solo_lua_file[256];
 	bool use_solo_lua;
-	char hud_lua_file[256];
-	bool use_hud_lua;
+	bool use_replay_net_lua;
 	bool hide_extensions;
 
 	FilmProfileType film_profile;
 
 	// Marathon 1 resources from the application itself
 	char resources_file[256];
+
+	// how many auto-named save files to keep around (0 is unlimited)
+	uint32 maximum_quick_saves;
 };
 
 /* New preferences.. (this sorta defeats the purpose of this system, but not really) */

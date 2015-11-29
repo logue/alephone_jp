@@ -275,6 +275,8 @@ public:
 	bool SetNameWithPath(const char *NameWithPath);
 	bool SetNameWithPath(const char* NameWithPath, const DirectorySpecifier& Directory);
 
+	void SetTempName(const FileSpecifier& other);
+
 	// Move the directory specification
 	void ToDirectory(DirectorySpecifier& Dir);
 	void FromDirectory(DirectorySpecifier& Dir);
@@ -316,10 +318,6 @@ public:
 	// Copy file contents
 	bool CopyContents(FileSpecifier& File);
 	
-	// Exchange contents with another filespec;
-	// good for doing safe saves
-	bool Exchange(FileSpecifier& File);
-	
 	// Delete file
 	bool Delete();
 
@@ -345,6 +343,8 @@ public:
 	void SetToLocalDataDir();		// Per-user directory (for temporary files)
 	void SetToPreferencesDir();		// Directory for preferences (per-user)
 	void SetToSavedGamesDir();		// Directory for saved games (per-user)
+	void SetToQuickSavesDir();		// Directory for auto-named saved games (per-user)
+	void SetToImageCacheDir();		// Directory for image cache (per-user)
 	void SetToRecordingsDir();		// Directory for recordings (per-user)
 
 	void AddPart(const string &part);

@@ -117,6 +117,9 @@ Feb 8, 2003 (Woody Zenfell):
 
 #include "Console.h"
 #include "Movie.h"
+#include "Statistics.h"
+
+#include "motion_sensor.h"
 
 #include <limits.h>
 
@@ -419,6 +422,8 @@ update_world_elements_one_tick()
 		
 		AnimTxtr_Update();
 		ChaseCam_Update();
+		motion_sensor_scan();
+		check_m1_exploration();
 		
 #if !defined(DISABLE_NETWORKING)
 		update_net_game();
@@ -584,6 +589,16 @@ void leaving_map(
 	MarkLuaCollections(false);
     MarkLuaHUDCollections(false);
 	L_Call_Cleanup ();
+
+	// don't send stats on film replay
+	// don't call player_controlling_game() since game_state.state has changed
+	short user = get_game_controller();
+	if (user == _single_player || user == _network_player)
+	{
+		// upload the stats!
+		StatsManager::instance()->Process();
+	}
+
 	//Close and unload the Lua state
 	CloseLuaScript();
 #if !defined(DISABLE_NETWORKING)
@@ -753,7 +768,8 @@ short calculate_level_completion_state(
 	}
 	
 	/* if there are any polygons which must be explored and have not been entered, we’re not done */
-	if (static_world->mission_flags&_mission_exploration)
+	if ((static_world->mission_flags&_mission_exploration) ||
+	    (static_world->mission_flags&_mission_exploration_m1))
 	{
 		short polygon_index;
 		struct polygon_data *polygon;
@@ -768,24 +784,6 @@ short calculate_level_completion_state(
 		}
 	}
 	
-	/* if there are any polygons which must be seen and have not been mapped, we’re not done */
-	if ((static_world->mission_flags&_mission_exploration_m1) &&
-	    dynamic_world->player_count == 1)
-	{
-		short polygon_index;
-		struct polygon_data *polygon;
-		
-		for (polygon_index= 0, polygon= map_polygons; polygon_index<dynamic_world->polygon_count; ++polygon_index, ++polygon)
-		{
-			if (polygon->type==_polygon_must_be_explored &&
-			    !POLYGON_IS_IN_AUTOMAP(polygon_index))
-			{
-				completion_state= _level_unfinished;
-				break;
-			}
-		}
-	}
-	
 	/* if there are any items left on this map, we’re not done */
 	if (static_world->mission_flags&_mission_retrieval)
 	{
@@ -793,9 +791,12 @@ short calculate_level_completion_state(
 	}
 	
 	/* if there are any untoggled repair switches on this level then we’re not there */
-	if (static_world->mission_flags&_mission_repair)
+	if ((static_world->mission_flags&_mission_repair) ||
+	    (static_world->mission_flags&_mission_repair_m1))
 	{
-		if (untoggled_repair_switches_on_level()) completion_state= _level_unfinished;
+		/* M1 only required last repair switch to be toggled */
+		bool only_last_switch = (film_profile.m1_buggy_repair_goal && (static_world->mission_flags&_mission_repair_m1));
+		if (untoggled_repair_switches_on_level(only_last_switch)) completion_state= _level_unfinished;
 	}
 
 	/* if we’ve finished the level, check failure conditions */

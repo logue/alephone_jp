@@ -1,5 +1,5 @@
 /*
-** $Id: luaconf.h 4787 2013-04-02 02:08:04Z treellama $
+** $Id: luaconf.h 5011 2014-11-23 18:23:14Z jeremiahmorris $
 ** Configuration file for Lua
 ** See Copyright Notice in lua.h
 */
@@ -11,6 +11,9 @@
 #include <limits.h>
 #include <stddef.h>
 
+#ifdef HAVE_CONFIG_H
+#include "config.h"
+#endif
 
 /*
 ** ==================================================================

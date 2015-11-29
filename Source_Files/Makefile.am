@@ -19,7 +19,7 @@ alephone_LDADD = \
   TCPMess/libtcpmess.a Files/libfiles.a XML/libxml.a Misc/libmisc.a FFmpeg/libffmpeg.a  \
    Input/libinput.a    CSeries/libcseries.a Expat/libexpat.a 
 
-INCLUDES = -I$(top_srcdir)/Source_Files/CSeries -I$(top_srcdir)/Source_Files/Files \
+AM_CPPFLAGS = -I$(top_srcdir)/Source_Files/CSeries -I$(top_srcdir)/Source_Files/Files \
   -I$(top_srcdir)/Source_Files/GameWorld -I$(top_srcdir)/Source_Files/Input \
   -I$(top_srcdir)/Source_Files/Lua -I$(top_srcdir)/Source_Files/Misc \
   -I$(top_srcdir)/Source_Files/ModelView -I$(top_srcdir)/Source_Files/Network \
